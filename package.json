@@ -1,0 +1,17 @@
+{
+  "name": "learningpath-frontend",
+  "version": "0.0.1",
+  "description": "NDLA Learing Path Front-End",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.knowit.no:7999/ndla/learningpath-frontend.git"
+  },
+  "engines": {
+    "node": "~4.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kristofer <kw@knowit.no>",
+  "license": "Beerware"
+}
