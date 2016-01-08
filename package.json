@@ -10,7 +10,7 @@
     "node": "~4.2"
   },
   "scripts": {
-    "test": "babel-tape-runner 'test/**/*.js'|faucet",
+    "test": "babel-tape-runner 'src/**/*-test.js'|faucet",
     "build": "webpack --progress",
     "start": "webpack-dev-server --inline",
     "lint": "eslint src"

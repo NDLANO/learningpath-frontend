@@ -2,7 +2,7 @@ import test from 'tape';
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import shallowHelpers from 'react-shallow-renderer-helpers';
-import LoginProviders from '../../src/components/LoginProviders';
+import LoginProviders from './LoginProviders';
 
 function setup (props={}) {
   const renderer = TestUtils.createRenderer();
