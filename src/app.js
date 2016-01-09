@@ -3,7 +3,7 @@ const ReactDOM = require('react-dom');
 const { createStore, combineReducers } = require('redux');
 const { Provider } = require('react-redux');
 const { Router, Route, IndexRoute } = require('react-router');
-const createHistory = require('history/lib/createHashHistory');
+const createHistory = require('history/lib/createBrowserHistory');
 const { syncReduxAndRouter, routeReducer } = require('redux-simple-router');
 
 const reducers = require('./reducers');

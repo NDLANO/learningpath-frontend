@@ -9,7 +9,8 @@ module.exports = {
   },
 
   devServer: {
-    contentBase: './htdocs'
+    contentBase: './htdocs',
+    historyApiFallback: true
   },
 
   module: {
