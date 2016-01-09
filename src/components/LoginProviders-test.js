@@ -1,7 +1,11 @@
-import test from 'tape';
+import tape from 'tape';
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
-import shallowHelpers from 'react-shallow-renderer-helpers';
+import jsxAssertions from '@kwltrs/tape-jsx-assertions';
+import addAssertions from 'extend-tape';
+
+const test = addAssertions(tape, jsxAssertions);
+
 import LoginProviders from './LoginProviders';
 
 function setup (props={}) {
@@ -16,11 +20,9 @@ test('component/LoginProviders', t => {
   const { output } = setup();
   t.ok(output, 'renders');
 
-  const links = shallowHelpers.filterType(output, 'a');
-  t.equal(links.length, 2, 'two links');
-
-  t.ok(links.find(link => link.props.href === '/login/facebook'), 'facebook link');
-  t.ok(links.find(link => link.props.href === '/login/google'), 'google link');
+  ['facebook', 'google', 'twitter'].forEach(provider =>
+    t.jsxIncludes(output, `href="/auth/${provider}/login"`, `Link to ${provider} provider`)
+  );
 
   t.end();
 });

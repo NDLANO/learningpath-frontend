@@ -5,8 +5,9 @@ export default class LoginProviders extends React.Component {
     return (
         <div>
           Logg inn i NDLA med
-          <a href='/login/facebook'>Google</a>
-          <a href='/login/google'>Facebook</a>
+          <a href='/auth/google/login'>Google</a>
+          <a href='/auth/facebook/login'>Facebook</a>
+          <a href='/auth/twitter/login'>Twitter</a>
         </div>
     );
   }
