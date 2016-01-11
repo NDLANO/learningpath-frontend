@@ -1,3 +1,4 @@
-const count = require('./count');
+import authToken from './authToken';
+import user from './user';
 
-module.exports = { count };
+module.exports = { authToken, user };
