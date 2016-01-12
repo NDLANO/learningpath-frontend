@@ -1,6 +1,5 @@
-const App = require('./App');
-const Home = require('./Home');
-const Foo = require('./Foo');
-const Bar = require('./Bar');
+import Welcome from './Welcome';
+import LoginProviders from './LoginProviders';
+import AuthTokenSetter from './AuthTokenSetter';
 
-module.exports = { App, Home, Foo, Bar };
+module.exports = { Welcome, LoginProviders, AuthTokenSetter };

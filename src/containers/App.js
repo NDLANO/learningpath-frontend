@@ -1,25 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { loggedIn: false };
-  }
-
-  render() {
-    return (
+export function App({children}) {
+  return (
+    <div>
+      <h1>
+        NDLA <small><Link to='/'>Læringsstier</Link></small>
+      </h1>
       <div>
-        <h1>Lær noe nytt!</h1>
-
-        {this.state.loggedIn ? (
-          <Link to="/logout">Logg ut</Link>
-        ) : (
-          <Link to="/login">Logg inn</Link>
-        )}
-
-        {this.props.children}
+        {children}
       </div>
-    );
-  }
+    </div>
+  );
 }
+
+export default connect(state => state)(App);

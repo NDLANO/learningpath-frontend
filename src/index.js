@@ -1,25 +1,36 @@
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, combineReducers } from 'redux';
+import { syncReduxAndRouter, routeReducer } from 'redux-simple-router';
+import { Router, Route, IndexRoute } from 'react-router';
+import createHistory from 'history/lib/createBrowserHistory';
 
-class TheApp extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>Lær noe nytt!</h1>
+import reducers from './reducers';
 
-        <div>
-          <a href="/login">Logg inn</a>
-        </div>
+const history = createHistory();
+const reducer = combineReducers(Object.assign({}, reducers, {
+  routing: routeReducer
+}));
+const store = createStore(reducer, {
+  authToken: '',
+  user: {}
+});
 
-        <div>
-          <h2>Hei Kristofer!</h2>
-          <div>
-            <a href="/logout">Logg ut</a>
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
+syncReduxAndRouter(history, store);
 
-render(<TheApp />, document.getElementById('appContainer'));
+import App from './containers/App';
+import { Welcome, LoginProviders, AuthTokenSetter } from './components';
+
+ReactDOM.render(
+  <Provider store={store}>
+    <Router history={history}>
+      <Route path='/' component={App}>
+        <IndexRoute component={Welcome} />
+        <Route path='login' component={LoginProviders} />
+        <Route path='login/success/:authToken' component={AuthTokenSetter} />
+      </Route>
+    </Router>
+  </Provider>,
+  document.getElementById('appContainer')
+);

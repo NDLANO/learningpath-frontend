@@ -1,14 +1,14 @@
 import React from 'react';
 
-export default class LoginProviders extends React.Component {
-  render () {
-    return (
-        <div>
-          Logg inn i NDLA med
-          <a href='/auth/google/login'>Google</a>
-          <a href='/auth/facebook/login'>Facebook</a>
-          <a href='/auth/twitter/login'>Twitter</a>
-        </div>
-    );
-  }
+export default function LoginProviders() {
+  return (
+    <div>
+      Logg inn i NDLA med
+      <ul>
+        <li><a href='/auth/google/login'>Google</a></li>
+        <li><a href='/auth/facebook/login'>Facebook</a></li>
+        <li><a href='/auth/twitter/login'>Twitter</a></li>
+      </ul>
+    </div>
+  );
 }
