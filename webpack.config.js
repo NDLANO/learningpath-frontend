@@ -4,7 +4,7 @@ module.exports = {
 
   output: {
     path: __dirname + '/htdocs/assets',
-    publicPath: '/assets',
+    publicPath: '/learningpath/assets',
     filename: 'app.js'
   },
 

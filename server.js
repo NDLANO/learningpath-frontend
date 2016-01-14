@@ -23,7 +23,7 @@ function sendUser(req, res) {
 app.use('/auth/me', sendUser);
 
 function sendAuthCode(req, res) {
-  res.writeHead(302, { 'Location': '/login/success/abcdefghijklmn' });
+  res.writeHead(302, { 'Location': '/learningpath/login/success/abcdefghijklmn' });
   res.end('redirect');
 }
 app.use('/auth/google/login', sendAuthCode);

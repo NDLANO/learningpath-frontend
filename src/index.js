@@ -5,11 +5,12 @@ import { syncReduxAndRouter } from 'redux-simple-router';
 import { Router, Route, IndexRoute } from 'react-router';
 import es6promise from 'es6-promise';
 import createHistory from 'history/lib/createBrowserHistory';
+import useBasename from 'history/lib/useBasename';
 
 es6promise.polyfill();
 
 import store from './store';
-const history = createHistory();
+const history = useBasename(createHistory)({ basename: '/learningpath' });
 syncReduxAndRouter(history, store);
 
 import App from './containers/App';
