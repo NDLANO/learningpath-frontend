@@ -1,22 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
-import { syncReduxAndRouter, routeReducer } from 'redux-simple-router';
+import { syncReduxAndRouter } from 'redux-simple-router';
 import { Router, Route, IndexRoute } from 'react-router';
 import createHistory from 'history/lib/createBrowserHistory';
 
-import reducers from './reducers';
-
+import store from './store';
 const history = createHistory();
-const reducer = combineReducers(Object.assign({}, reducers, {
-  routing: routeReducer
-}));
-const store = createStore(reducer, {
-  authToken: '',
-  user: {}
-});
-
 syncReduxAndRouter(history, store);
 
 import App from './containers/App';
