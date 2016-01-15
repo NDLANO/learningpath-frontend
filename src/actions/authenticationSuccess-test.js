@@ -3,7 +3,6 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 
-import { replacePath } from 'redux-simple-router';
 import actions from '.';
 
 const middleware = [ thunk ];
@@ -19,8 +18,7 @@ test('actions/authenticationSuccess', (t) => {
   const expectedActions = [
     actions.setAuthenticated(true),
     actions.setAuthToken(authToken),
-    actions.setUserData({first_name: 'Alice', email: 'alice@example.com'}),
-    replacePath('/')
+    actions.setUserData({first_name: 'Alice', email: 'alice@example.com'})
   ];
 
   const store = mockStore({user: {}, authToken: ''}, expectedActions, (res) => {
