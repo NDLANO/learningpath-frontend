@@ -41,6 +41,7 @@
     "webpack-dev-server": "^1.14.0"
   },
   "dependencies": {
+    "defined": "^1.0.0",
     "es6-promise": "^3.0.2",
     "history": "^1.17.0",
     "isomorphic-fetch": "^2.2.0",

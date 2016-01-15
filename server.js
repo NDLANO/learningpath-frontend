@@ -11,6 +11,15 @@ const currenUser = JSON.stringify({
   email: 'kw@knowit.no'
 });
 
+function denyAccess(req, res) {
+  res.writeHead(403, {
+    'Content-Type': 'application/json'
+  });
+  res.end(JSON.stringify({
+    message: 'Invalid authentication credentials'
+  }));
+}
+
 function sendUser(req, res) {
   console.log(req.headers);
   res.writeHead(200, {
@@ -21,6 +30,7 @@ function sendUser(req, res) {
 }
 
 app.use('/auth/me', sendUser);
+//app.use('/auth/me', denyAccess);
 
 function sendAuthCode(req, res) {
   res.writeHead(302, { 'Location': '/learningpath/login/success/abcdefghijklmn' });
