@@ -14,7 +14,7 @@ const history = useBasename(createHistory)({ basename: '/learningpath' });
 syncReduxAndRouter(history, store);
 
 import App from './containers/App';
-import { Welcome, LoginProviders, AuthTokenSetter } from './components';
+import { Welcome, LoginProviders, AuthTokenSetter, LoginFailure } from './components';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -23,6 +23,7 @@ ReactDOM.render(
         <IndexRoute component={Welcome} />
         <Route path='login' component={LoginProviders} />
         <Route path='login/success/:authToken' component={AuthTokenSetter} />
+        <Route path='login/failure' component={LoginFailure} />
       </Route>
     </Router>
   </Provider>,

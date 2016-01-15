@@ -27,6 +27,12 @@ function sendAuthCode(req, res) {
   res.end('redirect');
 }
 
+function sendAuthFailure(req, res) {
+  res.writeHead(302, { 'Location': '/learningpath/login/failure' });
+  res.end('redirect');
+}
+
+app.use('/auth/login/twitter', sendAuthFailure);
 app.use('/auth/login', sendAuthCode);
 
 app.use(function (req, res) {
