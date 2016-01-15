@@ -5,9 +5,9 @@ export default function LoginProviders() {
     <div>
       Logg inn i NDLA med
       <ul>
-        <li><a href='/auth/google/login'>Google</a></li>
-        <li><a href='/auth/facebook/login'>Facebook</a></li>
-        <li><a href='/auth/twitter/login'>Twitter</a></li>
+        <li><a href='/auth/login/google'>Google</a></li>
+        <li><a href='/auth/login/facebook'>Facebook</a></li>
+        <li><a href='/auth/login/twitter'>Twitter</a></li>
       </ul>
     </div>
   );

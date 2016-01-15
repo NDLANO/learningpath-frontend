@@ -26,9 +26,8 @@ function sendAuthCode(req, res) {
   res.writeHead(302, { 'Location': '/learningpath/login/success/abcdefghijklmn' });
   res.end('redirect');
 }
-app.use('/auth/google/login', sendAuthCode);
-app.use('/auth/facebook/login', sendAuthCode);
-app.use('/auth/twitter/login', sendAuthCode);
+
+app.use('/auth/login', sendAuthCode);
 
 app.use(function (req, res) {
   res.writeHead(404);
