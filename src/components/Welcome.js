@@ -1,13 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import { logout } from '../actions';
 
-export function Welcome ({ authenticated, userName }) {
-  const loginLink = authenticated ? '' : (<Link to='/login'>Logg inn</Link>);
+export function Welcome ({ authenticated, userName, dispatch }) {
+  const loginOrOutLink = authenticated ?
+    (<button onClick={() => dispatch(logout())}>Logg ut</button>) :
+    (<Link to='/login'>Logg inn</Link>);
   return (
     <div>
       <h2>Hei {userName}!</h2>
-      {loginLink}
+      {loginOrOutLink}
     </div>
   );
 }

@@ -1,5 +1,10 @@
 import session from '../sources/session';
-import { authenticationSuccess } from '../actions';
+import {
+  authenticationSuccess,
+  setUserData,
+  setAuthToken,
+  setAuthenticated
+} from '../actions';
 
 const restoreSession = store => next => action => {
   switch (action.type) {
@@ -11,6 +16,14 @@ const restoreSession = store => next => action => {
       }
     });
     break;
+
+  case 'LOGOUT':
+    session.removeToken().then(() => [
+      setAuthenticated(false),
+      setAuthToken(''),
+      setUserData({})
+    ].forEach(action => store.dispatch(action)));
+    return next(action);
 
   case 'SET_AUTH_TOKEN':
     if (!action.error) {
