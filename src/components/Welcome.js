@@ -2,22 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-export function  Welcome ({ authToken, userName }) {
-  const text = (authToken) ? (<div>Your auth token is <code>{authToken}</code>.</div>) : '';
+export function Welcome ({ authenticated, userName }) {
+  const loginLink = authenticated ? '' : (<Link to='/login'>Logg inn</Link>);
   return (
-  <div>
-    <h2>Hei {userName}</h2>
-    {text}
-    <Link to='/login'>Logg inn</Link>
-  </div>
+    <div>
+      <h2>Hei {userName}!</h2>
+      {loginLink}
+    </div>
   );
 }
 
-const selectUserName = (user) => (user) ? [user.first_name, user.middle_name, user.last_name].join(' ') : '';
+const userName = user => [user.first_name, user.middle_name, user.last_name].join(' ');
+const selectUserName = state => state.authenticated ? userName(state.user) : 'Stranger';
 
-const select = (state) => ({
-  authToken: state.authToken,
-  userName: selectUserName(state.user)
+const select = (state) => Object.assign({}, state, {
+  userName: selectUserName(state)
 });
 
 export default connect(select)(Welcome);

@@ -14,6 +14,7 @@ const errorReporter = store => next => action => {
 const createStoreWithMiddleware = applyMiddleware(thunkMiddleware, errorReporter)(createStore);
 
 const store = createStoreWithMiddleware(reducers, {
+  authenticated: false,
   authToken: '',
   user: {}
 });

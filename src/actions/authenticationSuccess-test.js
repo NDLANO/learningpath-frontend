@@ -17,6 +17,7 @@ test('actions/authenticationSuccess', (t) => {
     .reply(200, {first_name: 'Alice', email: 'alice@example.com'});
 
   const expectedActions = [
+    actions.setAuthenticated(true),
     actions.setAuthToken(authToken),
     actions.setUserData({first_name: 'Alice', email: 'alice@example.com'}),
     replacePath('/')
