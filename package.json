@@ -36,6 +36,7 @@
     "react-addons-test-utils": "^0.14.3",
     "react-shallow-renderer-helpers": "^2.0.2",
     "redux-mock-store": "0.0.6",
+    "sinon": "^1.17.2",
     "tape": "^4.2.2",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.0"
