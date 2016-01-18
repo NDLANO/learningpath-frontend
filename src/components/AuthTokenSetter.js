@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { replacePath } from 'redux-simple-router';
 import { authenticationSuccess } from '../actions';
@@ -18,5 +18,9 @@ export class AuthTokenSetter extends React.Component {
   }
 }
 
+AuthTokenSetter.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  params: PropTypes.shape({ authToken: PropTypes.string }).isRequired
+};
 
 export default connect(state => state)(AuthTokenSetter);

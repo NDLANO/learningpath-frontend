@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { logout } from '../actions';
@@ -14,6 +14,12 @@ export function Welcome ({ authenticated, userName, dispatch }) {
     </div>
   );
 }
+
+Welcome.propTypes = {
+  authenticated: PropTypes.bool.isRequired,
+  userName: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired
+};
 
 const userName = user => [user.first_name, user.middle_name, user.last_name].join(' ');
 const selectUserName = state => state.authenticated ? userName(state.user) : 'Stranger';
