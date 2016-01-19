@@ -1,4 +1,3 @@
-import 'isomorphic-fetch';
 import { setUserData, setAuthToken, setAuthenticated, applicationError } from '.';
 import fetchAboutMe from '../sources/fetchAboutMe';
 
