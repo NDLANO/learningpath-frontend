@@ -13,6 +13,7 @@ const createStoreWithMiddleware = applyMiddleware(
 const store = createStoreWithMiddleware(reducers, {
   authenticated: false,
   authToken: '',
+  lang: 'nb',
   user: {}
 });
 

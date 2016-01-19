@@ -7,10 +7,12 @@ export function Welcome ({ authenticated, userName, dispatch }) {
   const loginOrOutLink = authenticated ?
     (<button onClick={() => dispatch(logout())}>Logg ut</button>) :
     (<Link to='/login'>Logg inn</Link>);
+  const gotoMyPage = authenticated ? (<Link to='/minside'>Min side</Link>) : '';
   return (
     <div>
       <h2>Hei {userName}!</h2>
-      {loginOrOutLink}
+      <p>{loginOrOutLink}</p>
+      <p>{gotoMyPage}</p>
     </div>
   );
 }

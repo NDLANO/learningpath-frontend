@@ -8,6 +8,7 @@ import user from './user';
 const rootReducers = combineReducers({
   authenticated,
   authToken,
+  lang: (state = 'nb', action) => state,
   user,
   routing: routeReducer
 });
