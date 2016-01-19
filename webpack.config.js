@@ -12,7 +12,8 @@ module.exports = {
     contentBase: './htdocs',
     historyApiFallback: true,
     proxy: {
-      '/auth/*': 'http://localhost:3000'
+      '/auth/*': 'http://localhost:3000',
+      '/paths/?*': 'http://localhost:3000'
     }
   },
 

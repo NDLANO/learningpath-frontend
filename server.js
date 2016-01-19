@@ -1,49 +1,60 @@
+/* eslint no-console:0 */
 'use strict';
 
 const connect = require('connect');
 const app = connect();
 
-const currenUser = JSON.stringify({
+const AUTH_TOKEN = '12345abcde';
+const data = require('./server-data');
+const currenUser = {
   id: '1',
   first_name: 'Kristofer',
   middle_name: null,
   last_name: 'Walters',
   email: 'kw@knowit.no'
-});
+};
 
-function denyAccess(req, res) {
-  res.writeHead(403, {
-    'Content-Type': 'application/json'
-  });
-  res.end(JSON.stringify({
-    message: 'Invalid authentication credentials'
-  }));
+function sendJsonData(statusCode, data) {
+  const json = JSON.stringify(data);
+
+  return function (req, res) {
+    console.log('%s %s', req.method, req.originalUrl);
+    res.writeHead(statusCode, { 'Content-Type': 'application/json' });
+    res.end(json);
+  };
 }
 
-function sendUser(req, res) {
-  console.log(req.headers);
-  res.writeHead(200, {
-    'Content-Length': currenUser.length,
-    'Content-Type': 'application/json'
-  });
-  res.end(currenUser);
+function sendRedirect(location) {
+  return function sendAuthCode(req, res) {
+    res.writeHead(302, { 'Location': location });
+    res.end('redirect');
+  };
 }
 
-app.use('/auth/me', sendUser);
-//app.use('/auth/me', denyAccess);
 
-function sendAuthCode(req, res) {
-  res.writeHead(302, { 'Location': '/learningpath/login/success/abcdefghijklmn' });
-  res.end('redirect');
+function withAppKeyCheck (cb) {
+  const sendAccessDenied = sendJsonData(403, { message: 'Invalid authentication credentials' });
+
+  return function checkAppKeyHeader (req, res) {
+    if (req.headers['app-key'] === AUTH_TOKEN) {
+      console.log('%s %s app-key %s granted', req.method, req.originalUrl, req.headers['app-key']);
+      return cb(req, res);
+    }
+
+    console.log('%s %s app-key %s denied', req.method, req.originalUrl, req.headers['app-key']);
+    sendAccessDenied(req, res);
+  };
 }
 
-function sendAuthFailure(req, res) {
-  res.writeHead(302, { 'Location': '/learningpath/login/failure' });
-  res.end('redirect');
-}
 
-app.use('/auth/login/twitter', sendAuthFailure);
-app.use('/auth/login', sendAuthCode);
+
+app.use('/auth/me', withAppKeyCheck(sendJsonData(200, currenUser)));
+
+app.use('/auth/login/twitter', sendRedirect('/learningpath/login/failure'));
+app.use('/auth/login', sendRedirect('/learningpath/login/success/' + AUTH_TOKEN));
+
+app.use('/paths/private', withAppKeyCheck(sendJsonData(200, data.private)));
+app.use('/paths', sendJsonData(200, data.public));
 
 app.use(function (req, res) {
   res.writeHead(404);
