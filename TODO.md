@@ -1,0 +1,3 @@
+- Send logout request to server
+- Polyfills
+- Crossdomain fetching of data from api server
