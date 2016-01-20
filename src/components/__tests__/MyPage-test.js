@@ -62,6 +62,9 @@ test('component/MyPage', t => {
   t.jsxIncludes(output, <Link to='/path/2'>Leselighet og skrift</Link>, 'link');
   t.jsxIncludes(output, 'Uttrykkene "leselighet" og "lesbarhet" brukes om hverandre i norsk fagterminologi', 'description');
 
+  t.jsxIncludes(output, 'PUBLISHED', 'status');
+  t.jsxIncludes(output, '18 timer', 'duration');
+
   t.end();
 });
 

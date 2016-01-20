@@ -12,6 +12,8 @@ export function MyPage ({learningPaths, lang}) {
           <Link to={`/path/${lp.id}`}>{title}</Link>
         </h5>
         <p>{description}</p>
+        <p>{Math.round(lp.duration/60)} timer</p>
+        <p>{lp.status}</p>
       </div>
     );
   });
