@@ -9,7 +9,7 @@ export class AuthTokenSetter extends React.Component {
 
     if (authToken) {
       dispatch( authenticationSuccess(authToken) )
-        .then(() => dispatch(replacePath('/')) );
+        .then(() => dispatch(replacePath('/minside')) );
     }
   }
 
