@@ -4,7 +4,7 @@ import TestUtils from 'react-addons-test-utils';
 import sinon from 'sinon';
 import { replacePath } from 'redux-simple-router';
 
-import { AuthTokenSetter } from './AuthTokenSetter';
+import { AuthTokenSetter } from '../AuthTokenSetter';
 
 function setup (props={}) {
   const renderer = TestUtils.createRenderer();

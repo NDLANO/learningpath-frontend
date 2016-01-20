@@ -7,7 +7,7 @@ import addAssertions from 'extend-tape';
 
 const test = addAssertions(tape, jsxAssertions);
 
-import { Masthead } from './Masthead';
+import { Masthead } from '../Masthead';
 
 function setup (props={}) {
   const renderer = TestUtils.createRenderer();

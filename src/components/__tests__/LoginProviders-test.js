@@ -6,7 +6,7 @@ import addAssertions from 'extend-tape';
 
 const test = addAssertions(tape, jsxAssertions);
 
-import LoginProviders from './LoginProviders';
+import LoginProviders from '../LoginProviders';
 
 function setup (props={}) {
   const renderer = TestUtils.createRenderer();

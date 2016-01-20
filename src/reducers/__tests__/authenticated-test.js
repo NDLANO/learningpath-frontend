@@ -1,6 +1,6 @@
 import test from 'tape';
 
-import reducer from './authenticated';
+import reducer from '../authenticated';
 
 test('reducers/authenticated', (t) => {
   t.equal(

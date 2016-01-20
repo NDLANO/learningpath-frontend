@@ -42,7 +42,7 @@ const learningPaths = [
   }
 ];
 
-import { MyPage } from './MyPage';
+import { MyPage } from '../MyPage';
 
 function setup (props={}) {
   const renderer = TestUtils.createRenderer();

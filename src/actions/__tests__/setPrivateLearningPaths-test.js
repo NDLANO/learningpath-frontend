@@ -1,6 +1,6 @@
 import test from 'tape';
 import { isFSA } from 'flux-standard-action';
-import actions from '.';
+import actions from '..';
 
 
 test('actions/setPrivateLearningPaths', (t) => {

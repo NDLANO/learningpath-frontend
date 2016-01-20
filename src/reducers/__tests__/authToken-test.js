@@ -1,6 +1,6 @@
 import test from 'tape';
 
-import reducer from './authToken';
+import reducer from '../authToken';
 
 test('reducers/authToken', (t) => {
   t.equal(

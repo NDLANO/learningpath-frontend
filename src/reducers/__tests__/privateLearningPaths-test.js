@@ -1,6 +1,6 @@
 import test from 'tape';
 
-import reducer from './privateLearningPaths';
+import reducer from '../privateLearningPaths';
 
 const payload = [ { id: '123' }, { id: '456' } ];
 

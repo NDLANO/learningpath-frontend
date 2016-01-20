@@ -1,6 +1,6 @@
 import test from 'tape';
 
-import reducer from './user';
+import reducer from '../user';
 
 const name = 'Alice';
 const email = 'user@example.com';
