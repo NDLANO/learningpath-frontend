@@ -33,5 +33,11 @@ test('reducers/authToken', (t) => {
     'ignore errors'
   );
 
+  t.equal(
+    reducer('12345', { type: 'LOGOUT' }),
+    '',
+    'logout'
+  );
+
   t.end();
 });

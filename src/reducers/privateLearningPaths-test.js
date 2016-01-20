@@ -23,5 +23,8 @@ test('reducers/privateLearningPaths', (t) => {
   actual = reducer([{id: 'abc'}, {id: 'xyz'}], { type: 'SET_PRIVATE_LEARNING_PATHS', payload: new Error('fail'), error: true });
   t.deepEqual(actual, [{id: 'abc'}, {id: 'xyz'}], 'ignore errors');
 
+  actual = reducer([{id: 'abc'}, {id: 'xyz'}], { type: 'LOGOUT' });
+  t.deepEqual(actual, [], 'logout');
+
   t.end();
 });

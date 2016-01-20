@@ -15,9 +15,7 @@ const history = useBasename(createHistory)({ basename: '/learningpath' });
 syncReduxAndRouter(history, store);
 
 import actions from './actions';
-const { restoreSession, fetchPrivateLearningPaths } = bindActionCreators(actions, store.dispatch);
-
-restoreSession();
+const { fetchPrivateLearningPaths } = bindActionCreators(actions, store.dispatch);
 
 function ifAuthenticated (cb) {
   return function () {

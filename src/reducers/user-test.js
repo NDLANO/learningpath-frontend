@@ -25,5 +25,8 @@ test('reducers/user', (t) => {
   actual = reducer({name, email}, { type: 'SET_USER_DATA', payload: new Error('fail'), error: true });
   t.equal(actual.name, name, 'ignore errors');
 
+  actual = reducer({name: 'Bob'}, { type: 'LOGOUT' });
+  t.deepEqual(actual, {}, 'logout');
+
   t.end();
 });

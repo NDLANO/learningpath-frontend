@@ -33,5 +33,11 @@ test('reducers/authenticated', (t) => {
     'ignore errors'
   );
 
+  t.equal(
+    reducer(true, { type: 'LOGOUT' }),
+    false,
+    'logout'
+  );
+
   t.end();
 });
