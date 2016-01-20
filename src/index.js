@@ -57,6 +57,7 @@ function ifAuthenticated (cb) {
 
 import App from './containers/App';
 import { Welcome, LoginProviders, AuthTokenSetter, LoginFailure, MyPage } from './components';
+import requireAuthentication from './components/requireAuthentication';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -66,7 +67,7 @@ ReactDOM.render(
         <Route path='login' component={LoginProviders} />
         <Route path='login/success/:authToken' component={AuthTokenSetter} />
         <Route path='login/failure' component={LoginFailure} />
-        <Route path='minside' component={MyPage} onEnter={ifAuthenticated(fetchPrivateLearningPaths)} />
+        <Route path='minside' component={requireAuthentication(MyPage)} onEnter={ifAuthenticated(fetchPrivateLearningPaths)} />
       </Route>
     </Router>
   </Provider>,
