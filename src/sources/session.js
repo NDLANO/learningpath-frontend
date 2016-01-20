@@ -9,9 +9,13 @@ export function getToken () {
   return Promise.resolve(localStorage.getItem(TOKEN_KEY));
 }
 
+export function getTokenSync () {
+  return localStorage.getItem(TOKEN_KEY);
+}
+
 export function removeToken () {
   localStorage.removeItem(TOKEN_KEY);
   return Promise.resolve(true);
 }
 
-export default { storeToken, getToken, removeToken };
+export default { storeToken, getToken, getTokenSync, removeToken };

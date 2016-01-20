@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { bindActionCreators } from 'redux';
 import { Provider } from 'react-redux';
 import { syncReduxAndRouter } from 'redux-simple-router';
 import { Router, Route, IndexRoute } from 'react-router';
-import { createAction } from 'redux-actions';
 import es6promise from 'es6-promise';
 import createHistory from 'history/lib/createBrowserHistory';
 import useBasename from 'history/lib/useBasename';
@@ -14,7 +14,18 @@ import store from './store';
 const history = useBasename(createHistory)({ basename: '/learningpath' });
 syncReduxAndRouter(history, store);
 
-store.dispatch( createAction('RESTORE_SESSION')() );
+import actions from './actions';
+const { restoreSession, fetchPrivateLearningPaths } = bindActionCreators(actions, store.dispatch);
+
+restoreSession();
+
+function ifAuthenticated (cb) {
+  return function () {
+    if (store.getState().authenticated) {
+      return cb();
+    }
+  };
+}
 
 import App from './containers/App';
 import { Welcome, LoginProviders, AuthTokenSetter, LoginFailure, MyPage } from './components';
@@ -27,7 +38,7 @@ ReactDOM.render(
         <Route path='login' component={LoginProviders} />
         <Route path='login/success/:authToken' component={AuthTokenSetter} />
         <Route path='login/failure' component={LoginFailure} />
-        <Route path='minside' component={MyPage} />
+        <Route path='minside' component={MyPage} onEnter={ifAuthenticated(fetchPrivateLearningPaths)} />
       </Route>
     </Router>
   </Provider>,

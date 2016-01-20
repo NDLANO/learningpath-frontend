@@ -26,4 +26,8 @@ MyPage.propTypes = {
 
 MyPage.defaultProps = { learningPaths: [] };
 
-export default connect(state => state)(MyPage);
+const select = (state) => Object.assign({}, state, {
+  learningPaths: state.privateLearningPaths
+});
+
+export default connect(select)(MyPage);

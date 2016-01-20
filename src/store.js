@@ -1,7 +1,9 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { errorReporter, restoreSession } from './middleware';
+import defined from 'defined';
 
+import { getTokenSync } from './sources/session';
 import reducers from './reducers';
 
 const createStoreWithMiddleware = applyMiddleware(
@@ -12,9 +14,10 @@ const createStoreWithMiddleware = applyMiddleware(
 
 const store = createStoreWithMiddleware(reducers, {
   authenticated: false,
-  authToken: '',
+  authToken: defined(getTokenSync(), ''),
   lang: 'nb',
-  user: {}
+  user: {},
+  privateLearningPaths: []
 });
 
 export default store;
