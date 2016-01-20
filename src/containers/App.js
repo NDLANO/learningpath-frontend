@@ -1,13 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import Masthead from './Masthead';
 
 export function App({children}) {
   return (
     <div>
-      <h1>
-        NDLA <small><Link to='/'>Læringsstier</Link></small>
-      </h1>
+      <Masthead />
+      <hr/>
       <div>
         {children}
       </div>
