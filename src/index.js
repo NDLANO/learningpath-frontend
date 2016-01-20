@@ -1,18 +1,48 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { bindActionCreators } from 'redux';
+import { compose, createStore, applyMiddleware, bindActionCreators } from 'redux';
 import { Provider } from 'react-redux';
-import { syncReduxAndRouter } from 'redux-simple-router';
 import { Router, Route, IndexRoute } from 'react-router';
-import es6promise from 'es6-promise';
-import createHistory from 'history/lib/createBrowserHistory';
-import useBasename from 'history/lib/useBasename';
+import { syncHistory } from 'redux-simple-router';
+import { browserHistory } from 'react-router';
+import thunkMiddleware from 'redux-thunk';
+import persistState from 'redux-localstorage';
 
+import es6promise from 'es6-promise';
 es6promise.polyfill();
 
-import store from './store';
-const history = useBasename(createHistory)({ basename: '/learningpath' });
-syncReduxAndRouter(history, store);
+import { errorReporter } from './middleware';
+import reducers from './reducers';
+
+const createPersistentStore = compose(
+  persistState(
+    ['authenticated', 'authToken', 'user', 'lang'],
+    {
+      key: 'ndla:sti',
+      slicer: function (paths) {
+        // custom slicer because default slicer does not store falsy values
+        return (state) => paths.reduce((acc, path) => {
+          acc[path] = state[path];
+          return acc;
+        }, {});
+      }
+    }
+  )
+)(createStore);
+
+const createStoreWithMiddleware = applyMiddleware(
+    thunkMiddleware,
+    errorReporter,
+    syncHistory(browserHistory)
+)(createPersistentStore);
+
+const store = createStoreWithMiddleware(reducers, {
+  authenticated: false,
+  authToken: '',
+  lang: 'nb',
+  user: {},
+  privateLearningPaths: []
+});
 
 import actions from './actions';
 const { fetchPrivateLearningPaths } = bindActionCreators(actions, store.dispatch);
@@ -30,7 +60,7 @@ import { Welcome, LoginProviders, AuthTokenSetter, LoginFailure, MyPage } from '
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
+    <Router history={browserHistory}>
       <Route path='/' component={App}>
         <IndexRoute component={Welcome} />
         <Route path='login' component={LoginProviders} />

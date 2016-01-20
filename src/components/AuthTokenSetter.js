@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { replacePath } from 'redux-simple-router';
+import { routeActions } from 'redux-simple-router';
 import { authenticationSuccess } from '../actions';
 
 export class AuthTokenSetter extends React.Component {
@@ -9,7 +9,7 @@ export class AuthTokenSetter extends React.Component {
 
     if (authToken) {
       dispatch( authenticationSuccess(authToken) )
-        .then(() => dispatch(replacePath('/minside')) );
+        .then(() => dispatch(routeActions.replace('/minside')) );
     }
   }
 

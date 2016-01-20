@@ -2,7 +2,7 @@ import test from 'tape';
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import sinon from 'sinon';
-import { replacePath } from 'redux-simple-router';
+import { routeActions } from 'redux-simple-router';
 
 import { AuthTokenSetter } from '../AuthTokenSetter';
 
@@ -24,12 +24,15 @@ test('component/AuthTokenSetter', t => {
   setup({dispatch, params});
 
   p.then(() => {
-    t.ok(dispatch.calledTwice);
+    t.equals(dispatch.callCount, 2, 'called twice');
     t.equals(typeof dispatch.firstCall.args[0], 'function', 'authenticationSuccess thunk');
-    t.deepEquals(dispatch.secondCall.args[0], replacePath('/minside'));
+    t.deepEquals(dispatch.secondCall.args[0], routeActions.replace('/minside'));
 
     t.end();
-  }).catch((reason) => t.fail(reason));
+  }).catch((reason) => {
+    t.fail(reason);
+    t.end();
+  });
 });
 
 test('component/AuthTokenSetter without authToken', t => {
