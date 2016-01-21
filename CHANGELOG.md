@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3 - 2016-01-21
+
+* Refactoring.
+
 ## 0.1.2 - 2016-01-20
 
 * Page with private learning paths.
