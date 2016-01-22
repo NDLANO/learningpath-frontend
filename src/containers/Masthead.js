@@ -8,20 +8,28 @@ export function Masthead ({authenticated, userName, handleLogOut}) {
   let navBar;
 
   if (authenticated) {
-    navBar = (<div>
-        {userName} - <Link to='/minside'>Min side</Link> - <button onClick={handleLogOut}>Logg ut</button>
-    </div>);
+    navBar = (
+      <ul>
+        <li><Link to='/'>Læringsstier</Link></li>
+        <li>{userName}</li>
+        <li><Link to='/minside'>Min side</Link></li>
+        <li><button onClick={handleLogOut}>Logg ut</button></li>
+      </ul>
+    );
   } else {
-    navBar = (<div><Link to='/login'>Logg inn</Link></div>);
+    navBar = (
+      <ul>
+        <li><Link to='/'>Læringsstier</Link></li>
+        <li><Link to='/login'>Logg inn</Link></li>
+      </ul>
+    );
   }
 
   return (
-    <div className='masthead'>
-      <h1>
-        NDLA <small><Link to='/'>Læringsstier</Link></small>
-      </h1>
+    <nav className='shadow'>
+      <img src='/assets/logo.png' alt='Nasjonal digital læringsarena' className='logo' />
       {navBar}
-    </div>
+    </nav>
   );
 }
 

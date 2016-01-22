@@ -6,10 +6,9 @@ export function App({children}) {
   return (
     <div>
       <Masthead />
-      <hr/>
-      <div>
+      <content>
         {children}
-      </div>
+      </content>
     </div>
   );
 }

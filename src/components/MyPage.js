@@ -7,7 +7,7 @@ export function MyPage ({learningPaths, lang}) {
     const title = lp.title.find(d => d.language === lang).title;
     const description = lp.description.find(d => d.language === lang).description;
     return (
-      <div key={lp.id}>
+      <div key={lp.id} className='box shadow'>
         <h5>
           <Link to={`/path/${lp.id}`}>{title}</Link>
         </h5>
@@ -18,7 +18,7 @@ export function MyPage ({learningPaths, lang}) {
     );
   });
 
-  return (<div>{items}</div>);
+  return (<div className='row'>{items}</div>);
 }
 
 MyPage.propTypes = {
