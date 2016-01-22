@@ -1,5 +1,9 @@
 # Changelog
 
+## HEAD
+
+* User root path instead of context path /learningpath in url.
+
 ## 0.1.3 - 2016-01-21
 
 * Refactoring.
