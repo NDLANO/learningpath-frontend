@@ -1,0 +1,307 @@
+* {
+  box-sizing: border-box;
+}
+
+.shadow{
+    box-shadow: 0 2px 4px #cdcdcd;
+}
+
+body{
+	color: #222222;
+	font-family: 'Open Sans', helvetica, arial, sans-serif;
+	margin: 0px;
+	margin-top: 140px;
+}
+
+content{
+	max-width: 1200px;
+	margin: 0 auto;
+	display: block;
+}
+
+p{
+	font-family: 'Open Sans', helvetica, arial, sans-serif;
+	font-size: .8em;
+	font-weight: normal;
+}
+
+.logo{
+  height: 20px;
+  float: left;
+  margin-top: 1em;
+  margin-right: 1em;
+}
+
+.negative{
+  background-color: #20588f;
+  padding: 2em;
+  margin-top: 1em;
+}
+
+.row{
+	display: block;
+	float: left;
+	background-color: #f3f3f3;
+	padding: 3em 3em 3em 3em;
+	margin-bottom: 3em;
+}
+
+.box{
+	width: 31.8%;
+	float: left;
+	margin-right: 1em;
+	padding: 1em 2.5em 3.5em 2.5em;
+	background-color: white;
+	margin-bottom: 1em;
+}
+
+.box:last-child{
+	margin-right: 0px;
+}
+
+button, input[type=submit], input[type=button]{
+  padding: 1.1em;
+  border: none;
+  border-radius: .5em;
+  font-family: 'Open Sans', helvetica, arial, sans-serif;
+  font-size: .8em;
+}
+
+button:hover, input[type=submit]:hover, input[type=button]:hover{
+	background-color: rgb(70, 70, 70);
+	color: white;
+}
+
+button{
+	background-color: #20588f !important;
+}
+
+button:hover{
+	background-color: rgb(33, 62, 92);
+	color: white;
+}
+
+input[type=text], select {
+  border: 1px solid #e6e6e6;
+  border-radius: .313em;
+  background: #ffffff;
+  min-height: 1.5em;
+  font-size: 1em;
+}
+
+input[type=text]:focus, select:focus {
+  outline: none;
+}
+
+input[type=text] {
+  padding: .6em 1em;
+  box-shadow: inset 1px 1px rgba(0, 0, 0, 0.03);
+}
+
+input[type=text].success {w
+  border-color: #6fce72;
+  box-shadow: 0 0 6px rgba(111, 206, 114, 0.2);
+}
+
+input[type=text].alert {
+  border-color: #e4655f;
+  box-shadow: 0 0 6px rgba(228, 101, 95, 0.2);
+}
+
+input[type=text]:focus {
+  border-color: #20588F;
+  box-shadow: 0 0 6px rgba(95, 142, 228, 0.2);
+}
+
+input[type=radio],
+input[type=checkbox] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+}
+
+label{
+  display: block;
+  margin: 1em 0em .5em 0em;
+}
+
+/* Grid
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box; }
+.column,
+.columns {
+  width: 100%;
+  float: left;
+  box-sizing: border-box; }
+
+/* For devices larger than 400px */
+@media (min-width: 400px) {
+  .container {
+    width: 85%;
+    padding: 0; }
+}
+
+/* For devices larger than 550px */
+@media (min-width: 550px) {
+  .container {
+    width: 80%; }
+  .column,
+  .columns {
+    margin-left: 4%; }
+  .column:first-child,
+  .columns:first-child {
+    margin-left: 0; }
+
+  .one.column,
+  .one.columns                    { width: 4.66666666667%; }
+  .two.columns                    { width: 13.3333333333%; }
+  .three.columns                  { width: 22%;            }
+  .four.columns                   { width: 30.6666666667%; }
+  .five.columns                   { width: 39.3333333333%; }
+  .six.columns                    { width: 48%;            }
+  .seven.columns                  { width: 56.6666666667%; }
+  .eight.columns                  { width: 65.3333333333%; }
+  .nine.columns                   { width: 74.0%;          }
+  .ten.columns                    { width: 82.6666666667%; }
+  .eleven.columns                 { width: 91.3333333333%; }
+  .twelve.columns                 { width: 100%; margin-left: 0; }
+
+  .one-third.column               { width: 30.6666666667%; }
+  .two-thirds.column              { width: 65.3333333333%; }
+
+  .one-half.column                { width: 48%; }
+
+  /* Offsets */
+  .offset-by-one.column,
+  .offset-by-one.columns          { margin-left: 8.66666666667%; }
+  .offset-by-two.column,
+  .offset-by-two.columns          { margin-left: 17.3333333333%; }
+  .offset-by-three.column,
+  .offset-by-three.columns        { margin-left: 26%;            }
+  .offset-by-four.column,
+  .offset-by-four.columns         { margin-left: 34.6666666667%; }
+  .offset-by-five.column,
+  .offset-by-five.columns         { margin-left: 43.3333333333%; }
+  .offset-by-six.column,
+  .offset-by-six.columns          { margin-left: 52%;            }
+  .offset-by-seven.column,
+  .offset-by-seven.columns        { margin-left: 60.6666666667%; }
+  .offset-by-eight.column,
+  .offset-by-eight.columns        { margin-left: 69.3333333333%; }
+  .offset-by-nine.column,
+  .offset-by-nine.columns         { margin-left: 78.0%;          }
+  .offset-by-ten.column,
+  .offset-by-ten.columns          { margin-left: 86.6666666667%; }
+  .offset-by-eleven.column,
+  .offset-by-eleven.columns       { margin-left: 95.3333333333%; }
+
+  .offset-by-one-third.column,
+  .offset-by-one-third.columns    { margin-left: 34.6666666667%; }
+  .offset-by-two-thirds.column,
+  .offset-by-two-thirds.columns   { margin-left: 69.3333333333%; }
+
+  .offset-by-one-half.column,
+  .offset-by-one-half.columns     { margin-left: 52%; }
+
+}
+
+a{
+	color: #20588f;
+	font-size: 1em;
+}
+
+.cta {
+	background-color:#20588f;
+	color: white;
+	text-decoration: none;
+	display: inline-block;
+	padding: 1em;
+	border-radius: 5px;
+}
+
+.cta_negative {
+	background-color: white;
+	color: #20588f;
+}
+
+.cta_secondary{
+	background-color: transparent;
+	color: #20588f;
+	border: 2px solid #20588f;
+}
+
+.cta_secondary_negative{
+	border: 2px solid white;
+	color: white;
+}
+
+.ctaGl{
+	background-color: #F44336;
+}
+
+.ctaGl:hover{
+	background-color: rgb(194, 63, 54);
+}
+
+.ctaFb{
+	background-color: #3b5998 ;
+}
+
+.ctaFb:hover{
+	background-color: rgb(59, 72, 102);
+}
+
+.ctaTw{
+	background-color: #0084b4;
+}
+
+.ctaTw:hover{
+	background-color: rgb(0, 95, 130);
+}
+
+nav{
+  padding: 1em 2em;
+  width: 100%;
+  position: fixed;
+  background-color: white;
+  top: 0;
+}
+
+nav ul{
+	text-align: right;
+}
+
+nav ul li{
+  display: inline;
+  padding-right: 1em;
+}
+
+nav a{
+	color: black;
+	text-decoration: none;
+}
+
+nav a:hover{
+	text-decoration: underline;
+}
+
+body{
+	color: #222222;
+}
+
+h1, h2, h3{ 
+  font-family: 'signika', helvetica, arial, sans-serif;
+}
+
+.negative_text{
+	color: white;
+}
