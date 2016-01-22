@@ -1,4 +1,3 @@
-- Send logout request to server
 - Confirm logout
 - Redirect somewhere useful after logout
 - Polyfills

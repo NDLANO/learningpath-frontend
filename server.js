@@ -52,6 +52,7 @@ app.use('/auth/me', withAppKeyCheck(sendJsonData(200, currenUser)));
 
 app.use('/auth/login/twitter', sendRedirect('/login/failure'));
 app.use('/auth/login', sendRedirect('/login/success/' + AUTH_TOKEN));
+app.use('/auth/logout', withAppKeyCheck(sendJsonData(200, {})));
 
 app.use('/paths/private', withAppKeyCheck(sendJsonData(200, data.private)));
 app.use('/paths', sendJsonData(200, data.public));
