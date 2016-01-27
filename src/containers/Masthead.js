@@ -11,8 +11,8 @@ export function Masthead ({authenticated, userName, handleLogOut}) {
     navBar = (
       <ul>
         <li><Link to='/'>Læringsstier</Link></li>
-        <li>{userName}</li>
         <li><Link to='/minside'>Min side</Link></li>
+        <li>{userName}</li>
         <li><button onClick={handleLogOut}>Logg ut</button></li>
       </ul>
     );
