@@ -13,12 +13,14 @@ module.exports = {
     historyApiFallback: true
   },
 
+  'if-loader': process.env.NODE_ENV || 'development',
+
   module: {
     loaders: [
       {
         test: /.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader?presets[]=react,presets[]=es2015'
+        loader: 'if!babel-loader?presets[]=react,presets[]=es2015'
       }
     ]
   }

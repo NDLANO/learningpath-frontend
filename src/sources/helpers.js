@@ -1,7 +1,13 @@
 import 'isomorphic-fetch';
 import defined from 'defined';
 
-const expandPath = (path) => 'http://localhost:3000' + path;
+let apiBaseUrl = 'http://api.test.ndla.no';
+
+/* #if development */
+apiBaseUrl = 'http://localhost:3000';
+/* #end */
+
+export function expandPath (path) { return apiBaseUrl + path; }
 
 export function resolveJsonOrRejectWithError (res) {
   return new Promise((resolve, reject) => (res.ok) ?
