@@ -21,7 +21,7 @@ test('component/LoginProviders', t => {
   t.ok(output, 'renders');
 
   ['facebook', 'google', 'twitter'].forEach(provider =>
-    t.jsxIncludes(output, `href="/auth/login/${provider}?`, `Link to ${provider} provider`)
+    t.jsxIncludes(output, `/auth/login/${provider}?`, `Link to ${provider} provider`)
   );
 
   t.end();

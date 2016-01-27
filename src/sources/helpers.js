@@ -1,9 +1,7 @@
 import 'isomorphic-fetch';
 import defined from 'defined';
 
-const expandPath = (typeof window === 'undefined') ?
-  (path) => 'http://localhost:8080' + path :
-  (path) => path;
+const expandPath = (path) => 'http://localhost:3000' + path;
 
 export function resolveJsonOrRejectWithError (res) {
   return new Promise((resolve, reject) => (res.ok) ?

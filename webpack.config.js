@@ -10,11 +10,7 @@ module.exports = {
 
   devServer: {
     contentBase: './htdocs',
-    historyApiFallback: true,
-    proxy: {
-      '/auth/*': 'http://localhost:3000',
-      '/paths/?*': 'http://localhost:3000'
-    }
+    historyApiFallback: true
   },
 
   module: {

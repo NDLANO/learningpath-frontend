@@ -26,7 +26,7 @@ function sendJsonData(statusCode, data) {
 
 function sendRedirect(location) {
   return function sendAuthCode(req, res) {
-    res.writeHead(302, { 'Location': location });
+    res.writeHead(302, { 'Location': 'http://localhost:8080'+location });
     res.end('redirect');
   };
 }
@@ -47,6 +47,18 @@ function withAppKeyCheck (cb) {
 }
 
 
+app.use(function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, App-Key');
+
+  if (req.method === 'OPTIONS') {
+    res.statusCode = 200;
+    res.end();
+    return;
+  }
+
+  next();
+});
 
 app.use('/auth/me', withAppKeyCheck(sendJsonData(200, currenUser)));
 

@@ -11,7 +11,7 @@ const mockStore = configureMockStore(middleware);
 test('actions/authenticationSuccess', (t) => {
   const authToken = '123345';
 
-  const apiMock = nock('http://localhost:8080', { reqheaders: { 'app-key': authToken } })
+  const apiMock = nock('http://localhost:3000', { reqheaders: { 'app-key': authToken } })
     .get('/auth/me')
     .reply(200, {first_name: 'Alice', email: 'alice@example.com'});
 
@@ -34,7 +34,7 @@ test('actions/authenticationSuccess', (t) => {
 test('actions/authenticationSuccess access denied', (t) => {
   const authToken = '123345';
 
-  const apiMock = nock('http://localhost:8080', { reqheaders: { 'app-key': authToken } })
+  const apiMock = nock('http://localhost:3000', { reqheaders: { 'app-key': authToken } })
     .get('/auth/me')
     .reply(403, {message: 'Invalid'});
 
