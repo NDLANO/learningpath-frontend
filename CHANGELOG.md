@@ -1,8 +1,9 @@
 # Changelog
 
-## HEAD
+## 0.1.4 - 2016-01-27
 
 * User root path instead of context path /learningpath in url.
+* Set up for api on different host.
 
 ## 0.1.3 - 2016-01-21
 
