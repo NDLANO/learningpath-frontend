@@ -12,8 +12,8 @@ const query = '?successUrl=' + baseReturnUrl + '/login/success/{appkey}' +
 
 export default function LoginProviders() {
   return (
-    <div>
-      Logg inn i NDLA med
+    <div id='login'>
+      <h3>Logg inn i NDLA med</h3>
       <ul>
         <li><a className='cta ctaGl' href={expandPath('/auth/login/google' + query)}>Google</a></li>
         <li><a className='cta ctaFb' href={expandPath('/auth/login/facebook' + query)}>Facebook</a></li>

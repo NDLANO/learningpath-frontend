@@ -3,50 +3,14 @@
 }
 
 .shadow{
-    box-shadow: 0 2px 4px #cdcdcd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 body{
-	color: #222222;
 	font-family: 'Open Sans', helvetica, arial, sans-serif;
 	margin: 0px;
-	margin-top: 140px;
-}
-
-.logo{
-  height: 20px;
-  float: left;
-  margin-top: 1em;
-  margin-right: 1em;
-}
-
-.negative{
-  background-color: #20588f;
-  padding: 2em;
-  margin-top: 1em;
-}
-
-content{
-	max-width: 900px;
-	margin: 0 auto;
-	display: block;
-	padding: 1em;
-}
-
-.note{
-	background-color: #fbf9e3;
-	border: 1px solid #f4eea4;
-	padding: 1em;
-	border-radius: 3px;
-}
-
-.note h4{
-	margin: 0em 0em .5em 0em;
-}
-
-.note p{
-	font-size: 0.8em;
-	margin: 0px;
+	margin-top: 80px;
+	background-color: #f2f2f2;
 }
 
 body{
@@ -66,8 +30,8 @@ h1, h2, h3{
 	color: white;
 }
 button, input[type=submit], input[type=button]{
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
+  -webkit-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
   padding: 1.1em;
   border: none;
   border-radius: .5em;
@@ -137,15 +101,15 @@ label{
   margin: 1em 0em .5em 0em;
 }
 a{
-	-webkit-transition: all 0.3s ease;
-	transition: all 0.3s ease;
+	-webkit-transition: background-color 0.3s ease;
+	transition: background-color 0.3s ease;
 	color: #20588f;
 	font-size: 1em;
 }
 
 .cta {
-	-webkit-transition: all 0.3s ease;
-	transition: all 0.3s ease;
+	-webkit-transition: background-color 0.3s ease;
+	transition: background-color 0.3s ease;
 	background-color: #20588f;
 	color: white;
 	text-decoration: none;
@@ -216,7 +180,14 @@ a{
 	background-color: rgb(0, 95, 130);
 	border: none;
 }
+.logo{
+  height: 20px;
+  float: left;
+  margin-top: 1em;
+  margin-right: 1em;
+}
 .container{
+	max-width: none;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -ms-flexbox;
@@ -225,19 +196,35 @@ a{
 	-webkit-flex-wrap: wrap;
 	    -ms-flex-wrap: wrap;
 	        flex-wrap: wrap;
-	padding: 1em;
+	padding: 1em 5em;
 }
 
 .box{
-  	width: calc(33.33333% - 20px);
-  	margin: 10px;
-	float: left;
+  	width: calc(33.33333% - 2.4em);
+  	margin: 1.2em;
 	padding: 1em 2.5em 3.5em 2.5em;
 	background-color: white;
+	min-height: 23em;
+	-webkit-flex-wrap: wrap;
+	    -ms-flex-wrap: wrap;
+	        flex-wrap: wrap;
+	min-width: 30px;
 }
 
 .box:last-child{
 	margin-right: 0px;
+}
+
+
+@media (max-width: 600px) {
+  .container{
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+ 
+  }
 }
 nav{
   padding: 1em 2em;
@@ -249,6 +236,7 @@ nav{
 
 nav ul{
 	text-align: right;
+  margin: 0;
 }
 
 nav ul li{
@@ -272,4 +260,23 @@ nav a{
 nav a:hover{
 	text-decoration: underline;
 }
+#login{
+	text-align: center;
+	padding-top: 3em;
+	max-width: 300px;
+	margin: 0 auto;
+}
 
+#login ul{
+	padding: 0px;
+}
+
+#login ul li{
+	list-style: none;
+}
+
+#login ul li a.cta{
+	display: inline-block;
+	width: 100%;
+	margin-top: 1em;
+}
