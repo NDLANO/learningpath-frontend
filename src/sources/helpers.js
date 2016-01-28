@@ -11,6 +11,8 @@ export function expandPath (path) { return apiBaseUrl + path; }
 
 export function resolveJsonOrRejectWithError (res) {
   return new Promise((resolve, reject) => (res.ok) ?
+    res.status === 204 ?
+    resolve() :
     resolve(res.json()) :
     res.json()
       .then(d => new Error(defined(d.message, res.statusText)))

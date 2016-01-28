@@ -14,13 +14,25 @@ const currenUser = {
   email: 'kw@knowit.no'
 };
 
+function log (req) {
+  console.log('%s %s', req.method, req.originalUrl);
+}
+
 function sendJsonData(statusCode, data) {
   const json = JSON.stringify(data);
 
   return function (req, res) {
-    console.log('%s %s', req.method, req.originalUrl);
+    log(req);
     res.writeHead(statusCode, { 'Content-Type': 'application/json' });
     res.end(json);
+  };
+}
+
+function sendNoContent() {
+  return function (req, res) {
+    log(req);
+    res.writeHead(204);
+    res.end();
   };
 }
 
@@ -64,7 +76,7 @@ app.use('/auth/me', withAppKeyCheck(sendJsonData(200, currenUser)));
 
 app.use('/auth/login/twitter', sendRedirect('/login/failure'));
 app.use('/auth/login', sendRedirect('/login/success/' + AUTH_TOKEN));
-app.use('/auth/logout', withAppKeyCheck(sendJsonData(200, {})));
+app.use('/auth/logout', withAppKeyCheck(sendNoContent()));
 
 app.use('/paths/private', withAppKeyCheck(sendJsonData(200, data.private)));
 app.use('/paths', sendJsonData(200, data.public));
