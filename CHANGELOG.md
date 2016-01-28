@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.6 - 2016-01-28
+
+* Bugfix: No parse errors after xhr 204 No Content responses.
+
 ## 0.1.5 - 2016-01-28
 
 * CSS update
