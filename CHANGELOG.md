@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.5 - 2016-01-28
+
+* CSS update
+
 ## 0.1.4 - 2016-01-27
 
 * User root path instead of context path /learningpath in url.
