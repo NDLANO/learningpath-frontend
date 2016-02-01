@@ -12,7 +12,7 @@ test('actions/fetchPrivateLearningPaths', (t) => {
   const authToken = '123345';
 
   const apiMock = nock('http://localhost:3000', { reqheaders: { 'app-key': authToken } })
-    .get('/paths/private')
+    .get('/learningpaths/private')
     .reply(200, [ {id: '123'}, {id: '456'} ]);
 
   const expectedActions = [
@@ -33,7 +33,7 @@ test('actions/fetchPrivateLearningPaths access denied', (t) => {
   const authToken = '123345';
 
   const apiMock = nock('http://localhost:3000', { reqheaders: { 'app-key': authToken } })
-    .get('/paths/private')
+    .get('/learningpaths/private')
     .reply(403, {message: 'Invalid'});
 
   const expectedActions = [

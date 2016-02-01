@@ -1,5 +1,5 @@
 import { setPrivateLearningPaths, applicationError } from '.';
-import { fetchPrivatePaths } from '../sources/paths';
+import { fetchPrivatePaths } from '../sources/learningpaths';
 
 export default function fetchPrivateLearningPaths () {
   return (dispatch, getState) => fetchPrivatePaths( getState().authToken )

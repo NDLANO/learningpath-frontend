@@ -9,7 +9,7 @@ export function MyPage ({learningPaths, lang}) {
     return (
       <div key={lp.id} className='box shadow'>
         <h3>
-          <Link to={`/path/${lp.id}`}>{title}</Link>
+          <Link to={`/learningpaths/${lp.id}`}>{title}</Link>
         </h3>
         <p>{description}</p>
         <p>{Math.round(lp.duration/60)} timer</p>

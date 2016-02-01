@@ -78,8 +78,8 @@ app.use('/auth/login/twitter', sendRedirect('/login/failure'));
 app.use('/auth/login', sendRedirect('/login/success/' + AUTH_TOKEN));
 app.use('/auth/logout', withAppKeyCheck(sendNoContent()));
 
-app.use('/paths/private', withAppKeyCheck(sendJsonData(200, data.private)));
-app.use('/paths', sendJsonData(200, data.public));
+app.use('/learningpaths/private', withAppKeyCheck(sendJsonData(200, data.private)));
+app.use('/learningpaths', sendJsonData(200, data.public));
 
 app.use(function (req, res) {
   res.writeHead(404);

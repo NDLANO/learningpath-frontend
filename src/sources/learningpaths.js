@@ -1,6 +1,6 @@
 import { fetchAuthorized } from './helpers';
 
-const fetchPrivatePaths = fetchAuthorized('/paths/private');
+const fetchPrivatePaths = fetchAuthorized('/learningpaths/private');
 
 
 export {

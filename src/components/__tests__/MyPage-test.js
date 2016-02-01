@@ -20,7 +20,7 @@ const learningPaths = [
       { description: 'Kurset dekker innføring og vil gje deg grunnleggjande forståing for vanlege omgrep i kunst og kultur verda. Kurset fokuserer på kunst og kultur på eit verdsperspektiv.', language: 'nn' },
       { description: 'The course covers the introduction and will give you a basic understanding of common concepts in the arts world. The course focuses on art and culture in a world perspective', language: 'en' }
     ],
-    metaUrl: 'http://api.test.ndla.no/paths/1',
+    metaUrl: 'http://api.test.ndla.no/learningpaths/1',
     duration: 1080,
     status: 'PUBLISHED',
     author: { type: 'Forfatter', name: 'Snurre Sprett' }
@@ -35,7 +35,7 @@ const learningPaths = [
       { description: 'Uttrykkene "leselighet" og "lesbarhet" brukes om hverandre i norsk fagterminologi, og ofte uten klare forestillinger om hva begrepene står for.', language: 'nb' },
       { description: 'Uttrykka "leselighet" og "lesbarhet" vert brukt om kvarandre i norsk fagterminologi, og ofte utan klåre førestillingar om kva omgrepa står for.', language: 'nn' }
     ],
-    metaUrl: 'http://api.test.ndla.no/paths/2',
+    metaUrl: 'http://api.test.ndla.no/learningpaths/2',
     duration: 1080,
     status: 'PUBLISHED',
     author: { type: 'Forfatter', name: 'Kaptein Sabeltann' }
@@ -56,10 +56,10 @@ test('component/MyPage', t => {
   const { output } = setup({lang: 'nb', learningPaths});
   t.ok(output, 'renders');
 
-  t.jsxIncludes(output, <Link to='/path/1'>Hva er kunst og kultur?</Link>, 'link');
+  t.jsxIncludes(output, <Link to='/learningpaths/1'>Hva er kunst og kultur?</Link>, 'link');
   t.jsxIncludes(output, 'Kurset dekker innføring og vil gi deg grunnleggende forståelse', 'description');
 
-  t.jsxIncludes(output, <Link to='/path/2'>Leselighet og skrift</Link>, 'link');
+  t.jsxIncludes(output, <Link to='/learningpaths/2'>Leselighet og skrift</Link>, 'link');
   t.jsxIncludes(output, 'Uttrykkene "leselighet" og "lesbarhet" brukes om hverandre i norsk fagterminologi', 'description');
 
   t.jsxIncludes(output, 'PUBLISHED', 'status');
