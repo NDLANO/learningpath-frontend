@@ -5,6 +5,7 @@ import authenticated from './authenticated';
 import authToken from './authToken';
 import user from './user';
 import privateLearningPaths from './privateLearningPaths';
+import privateLearningPathsSortBy from './privateLearningPathsSortBy';
 
 const rootReducers = combineReducers({
   authenticated,
@@ -12,6 +13,7 @@ const rootReducers = combineReducers({
   lang: (state = 'nb', action) => state,
   user,
   privateLearningPaths,
+  privateLearningPathsSortBy,
   routing: routeReducer
 });
 
