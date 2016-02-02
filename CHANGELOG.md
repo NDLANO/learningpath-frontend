@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.7 - 2016-02-02
+
+* Use API at /learningpath instead of /paths.
+* My learningpaths are sortable
+* CSS update
+
 ## 0.1.6 - 2016-01-28
 
 * Bugfix: No parse errors after xhr 204 No Content responses.
