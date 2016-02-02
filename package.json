@@ -15,8 +15,8 @@
     "start": "webpack-dev-server --inline",
     "lint": "eslint src"
   },
-  "author": "Kristofer <kw@knowit.no>",
-  "license": "Beerware",
+  "author": "ndla@knowit.no",
+  "license": "GPL-3.0",
   "devDependencies": {
     "@kwltrs/tape-jsx-assertions": "0.0.1",
     "babel-core": "^6.3.15",
