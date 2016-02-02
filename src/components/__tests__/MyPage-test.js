@@ -28,8 +28,10 @@ test('component/MyPage', t => {
   t.jsxIncludes(output, <Link to='/learningpaths/2'>Leselighet og skrift</Link>, 'link');
   t.jsxIncludes(output, 'Uttrykkene "leselighet" og "lesbarhet" brukes om hverandre i norsk fagterminologi', 'description');
 
-  t.jsxIncludes(output, 'PUBLISHED', 'status');
-  t.jsxIncludes(output, '18 timer', 'duration');
+  t.jsxIncludes(output, 'PUBLISHED', 'status 1');
+  t.jsxIncludes(output, 'PRIVATE', 'status 2');
+  t.jsxIncludes(output, '18 timer', 'duration 1');
+  t.jsxIncludes(output, '45 minutter', 'duration 2');
 
   t.end();
 });

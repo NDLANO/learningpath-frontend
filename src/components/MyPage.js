@@ -14,13 +14,17 @@ export function MyPage ({dispatch, learningPaths, lang, sortBy}) {
   const items = learningPaths.map(lp => {
     const title = titleI18N(lp, lang);
     const description = descriptionI18N(lp, lang);
+    const duration = lp.duration < 60 ?
+      lp.duration + ' minutter' :
+      Math.round(lp.duration / 60) + ' timer';
+
     return (
       <div key={lp.id} className='box shadow'>
         <h3>
           <Link to={`/learningpaths/${lp.id}`}>{title}</Link>
         </h3>
         <p>{description}</p>
-        <p>{Math.round(lp.duration/60)} timer</p>
+        <p>{duration}</p>
         <p>{lp.status}</p>
       </div>
     );
