@@ -1,6 +1,9 @@
 # Changelog
 
+## 0.1.8 - 2016-02-03
+
 * Configure url to backend as variable in index.html.
+* Set licence to GPL-3.0.
 
 ## 0.1.7 - 2016-02-02
 
