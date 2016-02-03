@@ -1,3 +1,19 @@
+var webpack = require('webpack');
+
+var plugins = [];
+
+if (process.env.NODE_ENV === 'production') {
+  plugins.push( new webpack.optimize.UglifyJsPlugin() );
+}
+
+if (process.env.npm_package_version) {
+  plugins.push(new webpack.BannerPlugin(
+     process.env.npm_package_name +
+     ' ' +
+     process.env.npm_package_version
+  ));
+}
+
 module.exports = {
   entry: './src/index.js',
   target: 'web',
@@ -23,5 +39,7 @@ module.exports = {
         loader: 'if!babel-loader?presets[]=react,presets[]=es2015'
       }
     ]
-  }
+  },
+
+  plugins: plugins
 };
