@@ -1,14 +1,8 @@
 import React from 'react';
-import { expandPath } from '../sources/helpers';
+import { expandPath, locationOrigin } from '../sources/helpers';
 
-let baseReturnUrl = 'http://api.test.ndla.no:8080';
-
-/* #if development */
-baseReturnUrl = 'http://localhost:3000';
-/* #end */
-
-const query = '?successUrl=' + baseReturnUrl + '/login/success/{appkey}' +
-              '&failureUrl=' + baseReturnUrl + '/login/failure';
+const query = '?successUrl=' + locationOrigin + '/login/success/{appkey}' +
+              '&failureUrl=' + locationOrigin + '/login/failure';
 
 export default function LoginProviders() {
   return (

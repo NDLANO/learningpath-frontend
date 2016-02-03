@@ -1,11 +1,27 @@
 import 'isomorphic-fetch';
 import defined from 'defined';
 
+const locationOrigin = (() => {
+  /* #if development */
+  if (typeof window === 'undefined') {
+    // Value when running as unit test.
+    return 'http://localhost:1234';
+  }
+  /* #end */
+  if (typeof location.origin === 'undefined') {
+    location.origin = [location.protocol, '//', location.host, ':', location.port].join('');
+  }
+
+  return location.origin;
+})();
+
 let apiBaseUrl = 'http://api.test.ndla.no';
 
 /* #if development */
 apiBaseUrl = 'http://localhost:3000';
 /* #end */
+
+export { locationOrigin };
 
 export function expandPath (path) { return apiBaseUrl + path; }
 
