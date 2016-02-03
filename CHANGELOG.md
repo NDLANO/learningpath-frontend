@@ -1,5 +1,7 @@
 # Changelog
 
+* Configure url to backend as variable in index.html.
+
 ## 0.1.7 - 2016-02-02
 
 * Use API at /learningpath instead of /paths.

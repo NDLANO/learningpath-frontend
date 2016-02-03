@@ -2,4 +2,3 @@
 - Redirect somewhere useful after logout
 - Polyfills
 - Handle error at logout
-- Better method to configure api-url for prod/test/staging/dev
