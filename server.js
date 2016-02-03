@@ -2,6 +2,7 @@
 'use strict';
 
 const connect = require('connect');
+const qs = require('qs');
 const app = connect();
 
 const AUTH_TOKEN = '12345abcde';
@@ -38,7 +39,7 @@ function sendNoContent() {
 
 function sendRedirect(location) {
   return function sendAuthCode(req, res) {
-    res.writeHead(302, { 'Location': 'http://localhost:8080'+location });
+    res.writeHead(302, { 'Location': location });
     res.end('redirect');
   };
 }
@@ -72,10 +73,21 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use(function(req, res, next) {
+  req.query = qs.parse(req.url.split('?')[1]);
+  next();
+});
+
 app.use('/auth/me', withAppKeyCheck(sendJsonData(200, currenUser)));
 
-app.use('/auth/login/twitter', sendRedirect('/login/failure'));
-app.use('/auth/login', sendRedirect('/login/success/' + AUTH_TOKEN));
+app.use('/auth/login/twitter', function (req, res) {
+  var url = req.query.failureUrl || '/failure';
+  sendRedirect(url)(req, res);
+});
+app.use('/auth/login', function (req, res) {
+  var url = req.query.successUrl ? req.query.successUrl.replace('{appkey}', AUTH_TOKEN) : '/success';
+  sendRedirect(url)(req, res);
+});
 app.use('/auth/logout', withAppKeyCheck(sendNoContent()));
 
 app.use('/learningpaths/private', withAppKeyCheck(sendJsonData(200, data.private)));
