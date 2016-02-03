@@ -1,12 +1,13 @@
 import 'isomorphic-fetch';
 import defined from 'defined';
 
+/* #if development */
+const isUnitTest = typeof window === 'undefined';
+/* #end */
+
 const locationOrigin = (() => {
   /* #if development */
-  if (typeof window === 'undefined') {
-    // Value when running as unit test.
-    return 'http://localhost:1234';
-  }
+  if (isUnitTest) { return 'http://ndla-frontend'; }
   /* #end */
   if (typeof location.origin === 'undefined') {
     location.origin = [location.protocol, '//', location.host, ':', location.port].join('');
@@ -15,15 +16,17 @@ const locationOrigin = (() => {
   return location.origin;
 })();
 
-let apiBaseUrl = 'http://api.test.ndla.no';
+const apiUrl = (() => {
+  /* #if development */
+  if (isUnitTest) { return 'http://ndla-api'; }
+  /* #end */
+  return defined(window.NDLA_API_URL, locationOrigin);
+})();
 
-/* #if development */
-apiBaseUrl = 'http://localhost:3000';
-/* #end */
 
-export { locationOrigin };
+export { locationOrigin, apiUrl };
 
-export function expandPath (path) { return apiBaseUrl + path; }
+export function expandPath (path) { return apiUrl + path; }
 
 export function resolveJsonOrRejectWithError (res) {
   return new Promise((resolve, reject) => (res.ok) ?
