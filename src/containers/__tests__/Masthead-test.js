@@ -21,21 +21,21 @@ test('containers/Masthead default', t => {
   const { output } = setup({authenticated: false, userName: '' });
   t.ok(output, 'renders');
 
-  t.jsxIncludes(output, <Link to='/login'>Logg inn</Link>, 'login link');
+  t.jsxIncludes(output, <Link to='/login' className='site-nav_link'>Logg inn</Link>, 'login link');
   t.jsxNotIncludes(output, 'Logg ut', 'logout button');
-  t.jsxNotIncludes(output, <Link to='/minside'>Min side</Link>, 'my page link');
+  t.jsxNotIncludes(output, <Link to='/minside' className='site-nav_link'>Min side</Link>, 'my page link');
 
   t.end();
 });
 
-test('component/Masthead logged in', t => {
+test('containers/Masthead logged in', t => {
   const { output } = setup({authenticated: true, userName: 'Alice' });
   t.ok(output, 'renders');
 
   t.jsxIncludes(output, 'Alice', 'user name');
   t.jsxIncludes(output, 'Logg ut', 'logout button');
-  t.jsxIncludes(output, <Link to='/minside'>Min side</Link>, 'my page link');
-  t.jsxNotIncludes(output, <Link to='/login'>Logg inn</Link>, 'login link');
+  t.jsxIncludes(output, <Link to='/minside' className='site-nav_link'>Min side</Link>, 'my page link');
+  t.jsxNotIncludes(output, <Link to='/login' className='site-nav_link'>Logg inn</Link>, 'login link');
 
   t.end();
 });

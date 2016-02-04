@@ -9,9 +9,9 @@ export default function LoginProviders() {
     <div id='login'>
       <h3>Logg inn i NDLA med</h3>
       <ul>
-        <li><a className='cta ctaGl' href={expandPath('/auth/login/google' + query)}>Google</a></li>
-        <li><a className='cta ctaFb' href={expandPath('/auth/login/facebook' + query)}>Facebook</a></li>
-        <li><a className='cta ctaTw' href={expandPath('/auth/login/twitter' + query)}>Twitter</a></li>
+        <li><a className='cta-link cta-link--gl' href={expandPath('/auth/login/google' + query)}>Google</a></li>
+        <li><a className='cta-link cta-link--fb' href={expandPath('/auth/login/facebook' + query)}>Facebook</a></li>
+        <li><a className='cta-link cta-link--tw' href={expandPath('/auth/login/twitter' + query)}>Twitter</a></li>
       </ul>
     </div>
   );

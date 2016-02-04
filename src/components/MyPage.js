@@ -19,13 +19,17 @@ export function MyPage ({dispatch, learningPaths, lang, sortBy}) {
       Math.round(lp.duration / 60) + ' timer';
 
     return (
-      <div key={lp.id} className='box shadow'>
-        <h3>
+      <div key={lp.id} className='tile'>
+        <h3 className='tile_hd'>
           <Link to={`/learningpaths/${lp.id}`}>{title}</Link>
         </h3>
-        <p>{description}</p>
-        <p>{duration}</p>
-        <p>{lp.status}</p>
+        <div className='tile_bd'>
+          <p>{description}</p>
+        </div>
+        <div className='tile_ft'>
+          <p>{duration}</p>
+          <p>{lp.status}</p>
+        </div>
       </div>
     );
   });
@@ -39,11 +43,13 @@ export function MyPage ({dispatch, learningPaths, lang, sortBy}) {
   );
 
   return (<div>
-    <div className='site_header'>
-      <h1>Mine læringsstier</h1>
-      {sortOrderSelect}
+    <div className='page-header'>
+      <h2 className='page-header_name'>Mine læringsstier</h2>
+      <div className='page-header_ctrls'>
+        {sortOrderSelect}
+      </div>
     </div>
-    <div className='container'>{items}</div>
+    <div className='tiles'>{items}</div>
   </div>);
 }
 

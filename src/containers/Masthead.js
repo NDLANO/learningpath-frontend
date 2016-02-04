@@ -9,27 +9,58 @@ export function Masthead ({authenticated, userName, handleLogOut}) {
 
   if (authenticated) {
     navBar = (
-      <ul>
-        <li><Link to='/'>Læringsstier</Link></li>
-        <li><Link to='/minside'>Min side</Link></li>
-        <li>{userName}</li>
-        <li><button onClick={handleLogOut}>Logg ut</button></li>
-      </ul>
+      <div className='site-nav'>
+        <ul className='site-nav_list'>
+          <li className='site-nav_item'>
+            <Link to='/' className='site-nav_link'>Læringsstier</Link>
+          </li>
+          <li className='site-nav_item'>
+            <Link to='/minside' className='site-nav_link'>Min side</Link>
+          </li>
+          <li className='site-nav_item'>{userName}</li>
+          <li className='site-nav_item'>
+            <button onClick={handleLogOut} className='site-nav_bt'>Logg ut</button>
+          </li>
+        </ul>
+      </div>
     );
   } else {
     navBar = (
-      <ul>
-        <li><Link to='/'>Læringsstier</Link></li>
-        <li><Link to='/login'>Logg inn</Link></li>
-      </ul>
+      <div className='site-nav'>
+        <ul className='site-nav_list'>
+          <li className='site-nav_item'>
+            <Link to='/' className='site-nav_link'>Læringsstier</Link>
+          </li>
+          <li className='site-nav_item'>
+            <Link to='/login' className='site-nav_link'>Logg inn</Link>
+          </li>
+        </ul>
+      </div>
     );
   }
 
+  let logo = (
+    <div className='logo'>
+      <Link to='/' className='logo_link'>
+        <img src='/assets/logo.png' alt='Nasjonal digital læringsarena' className='logo_img' />
+      </Link>
+    </div>
+  );
+
   return (
-    <nav className='shadow'>
-      <img src='/assets/logo.png' alt='Nasjonal digital læringsarena' className='logo' />
-      {navBar}
-    </nav>
+    <div className='masthead'>
+      <div className='masthead_left'>
+        {logo}
+      </div>
+
+      <div className='masthead_center'>
+        <input type='search' placeholder='Søk' />
+      </div>
+
+      <div className='masthead_right'>
+        {navBar}
+      </div>
+    </div>
   );
 }
 

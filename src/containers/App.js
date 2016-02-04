@@ -6,9 +6,9 @@ export function App({children}) {
   return (
     <div>
       <Masthead />
-      <content>
+      <div className='content'>
         {children}
-      </content>
+      </div>
     </div>
   );
 }
