@@ -135,4 +135,29 @@ const learningPath = {
   }
 };
 
-export { learningPaths, learningPath };
+const learningStep = {
+  id: 8,
+  seqNo: 2,
+  title: [
+    {
+      title: 'En annen tittel her',
+      language: 'nb'
+    }
+  ],
+  description: [
+    {
+      description: 'Beskrivelse',
+      language: 'nb'
+    }
+  ],
+  embedUrl: [
+    {
+      url: 'http://www.vg.no',
+      language: 'nb'
+    }
+  ],
+  type: 'TEXT',
+  metaUrl: 'http://api.test.ndla.no/learningpaths/private/4/learningsteps/8'
+};
+
+export { learningPaths, learningPath, learningStep };
