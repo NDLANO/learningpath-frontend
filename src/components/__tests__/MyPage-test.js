@@ -22,10 +22,10 @@ test('component/MyPage', t => {
   const { output } = setup({lang: 'nb', learningPaths});
   t.ok(output, 'renders');
 
-  t.jsxIncludes(output, <Link to='/learningpaths/1'>Hva er kunst og kultur?</Link>, 'link');
+  t.jsxIncludes(output, <Link to='/learningpaths/private/1'>Hva er kunst og kultur?</Link>, 'link');
   t.jsxIncludes(output, 'Kurset dekker innføring og vil gi deg grunnleggende forståelse', 'description');
 
-  t.jsxIncludes(output, <Link to='/learningpaths/2'>Leselighet og skrift</Link>, 'link');
+  t.jsxIncludes(output, <Link to='/learningpaths/private/2'>Leselighet og skrift</Link>, 'link');
   t.jsxIncludes(output, 'Uttrykkene "leselighet" og "lesbarhet" brukes om hverandre i norsk fagterminologi', 'description');
 
   t.jsxIncludes(output, 'PUBLISHED', 'status 1');

@@ -21,7 +21,7 @@ export function MyPage ({dispatch, learningPaths, lang, sortBy}) {
     return (
       <div key={lp.id} className='tile'>
         <h3 className='tile_hd'>
-          <Link to={`/learningpaths/${lp.id}`}>{title}</Link>
+          <Link to={`/learningpaths/private/${lp.id}`}>{title}</Link>
         </h3>
         <div className='tile_bd'>
           <p>{description}</p>
