@@ -1,8 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import createFieldByLanguageFinder from '../util/createFieldByLanguageFinder';
-
-const titleI18N = createFieldByLanguageFinder('title');
+import { titleI18N } from '../util/i18nFieldFinder';
 
 export default function LearningPathToc ({learningPath, isPrivate, lang}) {
   const base = `/learningpaths${isPrivate ? '/private' : ''}/${learningPath.id}`;

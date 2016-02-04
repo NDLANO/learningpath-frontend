@@ -131,7 +131,7 @@ const learningPath = {
   ],
   author: {
     type: 'Forfatter',
-    name: 'Kristofer'
+    name: 'KristoferForfatter'
   }
 };
 
