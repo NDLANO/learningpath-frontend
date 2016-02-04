@@ -7,7 +7,7 @@ const payload = [ { id: '123' }, { id: '456' } ];
 test('reducers/privateLearningPaths', (t) => {
   t.equal(
       JSON.stringify(reducer(undefined, {})),
-      '{}',
+      '[]',
       'empty action on undefined state'
   );
 
