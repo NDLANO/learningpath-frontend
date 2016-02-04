@@ -5,10 +5,10 @@ import sortBy from 'lodash/sortBy';
 import reverse from 'lodash/reverse';
 import { sortPrivateLearningPaths } from '../actions';
 
-const byLanguageFinder = fieldName => (obj, lang) => obj[fieldName].find(d => d.language === lang)[fieldName];
+import createFieldByLanguageFinder from '../util/createFieldByLanguageFinder';
 
-const titleI18N = byLanguageFinder('title');
-const descriptionI18N = byLanguageFinder('description');
+const titleI18N = createFieldByLanguageFinder('title');
+const descriptionI18N = createFieldByLanguageFinder('description');
 
 export function MyPage ({dispatch, learningPaths, lang, sortBy}) {
   const items = learningPaths.map(lp => {
