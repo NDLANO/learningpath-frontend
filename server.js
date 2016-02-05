@@ -24,7 +24,7 @@ function sendJsonData(statusCode, data) {
 
   return function (req, res) {
     log(req);
-    res.writeHead(statusCode, { 'Content-Type': 'application/json' });
+    res.writeHead(statusCode, { 'Content-Type': 'application/json; charset=utf-8' });
     res.end(json);
   };
 }
@@ -90,8 +90,33 @@ app.use('/auth/login', function (req, res) {
 });
 app.use('/auth/logout', withAppKeyCheck(sendNoContent()));
 
-app.use('/learningpaths/private', withAppKeyCheck(sendJsonData(200, data.private)));
-app.use('/learningpaths', sendJsonData(200, data.public));
+app.use('/learningpaths/private', withAppKeyCheck(function (req, res) {
+  var urlChunks = req.url.split('/').filter(function (chunk) { return chunk !== ''; });
+
+  switch (urlChunks.length) {
+  case 0:
+    return sendJsonData(200, data.private)(req, res);
+  case 1:
+    return sendJsonData(200, data.private[0])(req, res);
+  default:
+    res.writeHead(404);
+    res.end('404');
+  }
+}));
+
+app.use('/learningpaths', function (req, res) {
+  var urlChunks = req.url.split('/').filter(function (chunk) { return chunk !== ''; });
+
+  switch (urlChunks.length) {
+  case 0:
+    return sendJsonData(200, data.public)(req, res);
+  case 1:
+    return sendJsonData(200, data.public[0])(req, res);
+  default:
+    res.writeHead(404);
+    res.end('404');
+  }
+});
 
 app.use(function (req, res) {
   res.writeHead(404);
@@ -100,3 +125,4 @@ app.use(function (req, res) {
 
 
 app.listen(3000);
+console.log('running');
