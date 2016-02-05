@@ -41,22 +41,23 @@ const store = createStoreWithMiddleware(reducers, {
   authToken: '',
   lang: 'nb',
   user: {},
+  privateLearningPath: {},
   privateLearningPaths: []
 });
 
 import actions from './actions';
-const { fetchPrivateLearningPaths } = bindActionCreators(actions, store.dispatch);
+const { fetchPrivateLearningPaths, fetchPrivateLearningPath } = bindActionCreators(actions, store.dispatch);
 
 function ifAuthenticated (cb) {
-  return function () {
+  return function (...args) {
     if (store.getState().authenticated) {
-      return cb();
+      return cb(...args);
     }
   };
 }
 
 import App from './containers/App';
-import { Welcome, NotFound, LoginProviders, AuthTokenSetter, LoginFailure, MyPage } from './components';
+import { Welcome, NotFound, LoginProviders, AuthTokenSetter, LoginFailure, MyPage, LearningPath, LearningPathSummary, ThisPageIntentionallyLeftBlank  } from './components';
 import requireAuthentication from './components/requireAuthentication';
 
 ReactDOM.render(
@@ -68,6 +69,11 @@ ReactDOM.render(
         <Route path='login/success/:authToken' component={AuthTokenSetter} />
         <Route path='login/failure' component={LoginFailure} />
         <Route path='minside' component={requireAuthentication(MyPage)} onEnter={ifAuthenticated(fetchPrivateLearningPaths)} />
+        <Route path='learningpaths/private/:pathId' component={requireAuthentication(LearningPath)} isPrivate={true}
+          onEnter={ifAuthenticated(({params}) => fetchPrivateLearningPath(params.pathId))}>
+          <IndexRoute component={LearningPathSummary} isPrivate={true} />
+          <Route path='step/:stepId' component={ThisPageIntentionallyLeftBlank} />
+        </Route>
         <Route path='*' component={NotFound} />
       </Route>
     </Router>

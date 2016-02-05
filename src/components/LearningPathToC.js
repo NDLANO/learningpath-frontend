@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
+import defined from 'defined';
 import { titleI18N } from '../util/i18nFieldFinder';
 
 export default function LearningPathToc ({learningPath, isPrivate, lang}) {
@@ -16,7 +17,7 @@ export default function LearningPathToc ({learningPath, isPrivate, lang}) {
             {titleI18N(step, lang)}
           </Link>
         </li>
-      )))(learningPath.learningsteps)}
+      )))(defined(learningPath.learningsteps, []))}
     </ul>
   );
 }

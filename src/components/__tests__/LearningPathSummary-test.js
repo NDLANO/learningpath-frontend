@@ -7,7 +7,7 @@ import addAssertions from 'extend-tape';
 const test = addAssertions(tape, jsxAssertions);
 
 import { learningPath } from './mockData';
-import LearningPathSummary from '../LearningPathSummary';
+import { LearningPathSummary } from '../LearningPathSummary';
 
 function setup (props={}) {
   const renderer = TestUtils.createRenderer();
