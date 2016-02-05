@@ -1,4 +1,5 @@
 import 'isomorphic-fetch';
+import { formatPattern } from 'react-router/lib/PatternUtils';
 import defined from 'defined';
 
 /* #if development */
@@ -16,7 +17,7 @@ const locationOrigin = (() => {
   return location.origin;
 })();
 
-const apiUrl = (() => {
+const apiBaseUrl = (() => {
   /* #if development */
   if (isUnitTest) { return 'http://ndla-api'; }
   /* #end */
@@ -24,9 +25,9 @@ const apiUrl = (() => {
 })();
 
 
-export { locationOrigin, apiUrl };
+export { locationOrigin };
 
-export function expandPath (path) { return apiUrl + path; }
+export function apiResourceUrl (path) { return apiBaseUrl + path; }
 
 export function resolveJsonOrRejectWithError (res) {
   return new Promise((resolve, reject) => (res.ok) ?
@@ -39,12 +40,11 @@ export function resolveJsonOrRejectWithError (res) {
   );
 }
 
+
 export function fetchAuthorized (path, method = 'GET') {
-  const url = expandPath(path);
-  return function (authToken) {
-    return fetch(url, {
-      method,
-      headers: {'APP-KEY': authToken}
-    }).then( resolveJsonOrRejectWithError );
-  };
+  const url = params => apiResourceUrl(formatPattern(path, params));
+
+  return (authToken, params = {}) => fetch(url(params), {
+    method, headers: {'APP-KEY': authToken}
+  }).then( resolveJsonOrRejectWithError );
 }
