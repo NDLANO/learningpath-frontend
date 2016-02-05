@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.9 - 2016-02-05
+
+* Private Learning Path page
+
 ## 0.1.8 - 2016-02-03
 
 * Configure url to backend as variable in index.html.
