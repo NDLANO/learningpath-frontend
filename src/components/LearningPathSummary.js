@@ -14,7 +14,7 @@ export function LearningPathSummary ({learningPath, lang}) {
   return (
     <div className='learning-path'>
       <div className='learning-path_hd'>
-        <h2 className='learning-path_title'>{titleI18N(learningPath, lang)}</h2>
+        <h1 className='learning-path_title'>{titleI18N(learningPath, lang)}</h1>
         <div className='learning-path_meta'>
           <div className='learning-path_author'>{get(learningPath, 'author.name')}</div>
           <div className='learning-path_updated-at'>Sist endret {lastUpdated}</div>

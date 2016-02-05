@@ -2,14 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import LearningPathToc from './LearningPathToC';
+import { titleI18N } from '../util/i18nFieldFinder';
 
 export function LearningPath(props) {
-  const {params, children} = props;
+  const {children, learningPath, lang} = props;
 
   return (
-    <div>
-      <LearningPathToc {...props} />
-      {children}
+    <div className='learning-path-wrapper'>
+      <aside className='learning-path-primary-nav'>
+        <h3>{titleI18N(learningPath, lang)}</h3>
+        <LearningPathToc {...props} />
+      </aside>
+      <main className='learning-path-content'>
+        {children}
+      </main>
     </div>
   );
 }
