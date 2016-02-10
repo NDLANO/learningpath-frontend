@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { routeActions } from 'redux-simple-router';
 import { initializeSession } from '../actions';
 
-export class AuthTokenSetter extends React.Component {
+export class SessionInitializer extends React.Component {
   componentWillMount() {
     let { dispatch, params: { authToken } } = this.props;
 
@@ -18,9 +18,9 @@ export class AuthTokenSetter extends React.Component {
   }
 }
 
-AuthTokenSetter.propTypes = {
+SessionInitializer.propTypes = {
   dispatch: PropTypes.func.isRequired,
   params: PropTypes.shape({ authToken: PropTypes.string }).isRequired
 };
 
-export default connect(state => state)(AuthTokenSetter);
+export default connect(state => state)(SessionInitializer);

@@ -4,17 +4,17 @@ import TestUtils from 'react-addons-test-utils';
 import sinon from 'sinon';
 import { routeActions } from 'redux-simple-router';
 
-import { AuthTokenSetter } from '../AuthTokenSetter';
+import { SessionInitializer } from '../SessionInitializer';
 
 function setup (props={}) {
   const renderer = TestUtils.createRenderer();
-  renderer.render(<AuthTokenSetter {...props} />);
+  renderer.render(<SessionInitializer {...props} />);
   const output = renderer.getRenderOutput();
   return { props, output, renderer };
 }
 
 
-test('component/AuthTokenSetter', t => {
+test('component/SessionInitializer', t => {
   const p = Promise.resolve();
 
   const dispatch = sinon.spy(() => p);
@@ -35,7 +35,7 @@ test('component/AuthTokenSetter', t => {
   });
 });
 
-test('component/AuthTokenSetter without authToken', t => {
+test('component/SessionInitializer without authToken', t => {
   const dispatch = sinon.spy(() => Promise.resolve());
 
   setup({dispatch, params: {}});
