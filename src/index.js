@@ -41,6 +41,8 @@ const store = createStoreWithMiddleware(reducers, {
   authToken: '',
   lang: 'nb',
   user: {},
+  learningPaths: [],
+  learningPathQuery: {},
   privateLearningPath: {},
   privateLearningPaths: []
 });
