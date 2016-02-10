@@ -8,7 +8,7 @@ import actions from '..';
 const middleware = [ thunk ];
 const mockStore = configureMockStore(middleware);
 
-test('actions/authenticationSuccess', (t) => {
+test('actions/initializeSession', (t) => {
   const authToken = '123345';
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
@@ -28,10 +28,10 @@ test('actions/authenticationSuccess', (t) => {
     nock.cleanAll();
   });
 
-  store.dispatch( actions.authenticationSuccess(authToken) );
+  store.dispatch( actions.initializeSession(authToken) );
 });
 
-test('actions/authenticationSuccess access denied', (t) => {
+test('actions/initializeSession access denied', (t) => {
   const authToken = '123345';
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
@@ -49,5 +49,5 @@ test('actions/authenticationSuccess access denied', (t) => {
     nock.cleanAll();
   });
 
-  store.dispatch( actions.authenticationSuccess(authToken) );
+  store.dispatch( actions.initializeSession(authToken) );
 });

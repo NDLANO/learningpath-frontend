@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 
-import authenticationSuccess from './authenticationSuccess';
+import initializeSession from './initializeSession';
 import fetchPrivateLearningPath from './fetchPrivateLearningPath';
 import fetchPrivateLearningPaths from './fetchPrivateLearningPaths';
 import logout from './logout';
@@ -12,7 +12,7 @@ export var setPrivateLearningPath = createAction('SET_PRIVATE_LEARNING_PATH');
 export var setPrivateLearningPaths = createAction('SET_PRIVATE_LEARNING_PATHS');
 export var sortPrivateLearningPaths = createAction('SORT_PRIVATE_LEARNING_PATHS');
 export var setUserData = createAction('SET_USER_DATA');
-export { authenticationSuccess, fetchPrivateLearningPaths, logout };
+export { initializeSession, fetchPrivateLearningPaths, logout };
 
 export default {
   applicationError,
@@ -23,7 +23,7 @@ export default {
   sortPrivateLearningPaths,
   setUserData,
   logout,
-  authenticationSuccess,
+  initializeSession,
   fetchPrivateLearningPath,
   fetchPrivateLearningPaths
 };

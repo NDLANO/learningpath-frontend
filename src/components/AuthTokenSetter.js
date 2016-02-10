@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { routeActions } from 'redux-simple-router';
-import { authenticationSuccess } from '../actions';
+import { initializeSession } from '../actions';
 
 export class AuthTokenSetter extends React.Component {
   componentWillMount() {
     let { dispatch, params: { authToken } } = this.props;
 
     if (authToken) {
-      dispatch( authenticationSuccess(authToken) )
+      dispatch( initializeSession(authToken) )
         .then(() => dispatch(routeActions.replace('/minside')) );
     }
   }

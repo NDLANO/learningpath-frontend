@@ -25,7 +25,7 @@ test('component/AuthTokenSetter', t => {
 
   p.then(() => {
     t.equals(dispatch.callCount, 2, 'called twice');
-    t.equals(typeof dispatch.firstCall.args[0], 'function', 'authenticationSuccess thunk');
+    t.equals(typeof dispatch.firstCall.args[0], 'function', 'initializeSession thunk');
     t.deepEquals(dispatch.secondCall.args[0], routeActions.replace('/minside'));
 
     t.end();

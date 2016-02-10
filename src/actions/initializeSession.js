@@ -1,7 +1,7 @@
 import { setUserData, setAuthToken, setAuthenticated, applicationError } from '.';
 import fetchAboutMe from '../sources/fetchAboutMe';
 
-export default function authenticationSuccess (authToken) {
+export default function initializeSession (authToken) {
   return dispatch => fetchAboutMe(authToken).then(user => [
     setAuthenticated(true),
     setAuthToken(authToken),
