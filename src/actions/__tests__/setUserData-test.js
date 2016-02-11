@@ -12,8 +12,10 @@ test('actions/setUserData', (t) => {
 
   t.equal(actual.type, 'SET_USER_DATA');
   t.ok(actual.payload);
-  t.equal(actual.payload.name, 'Alice');
-  t.equal(actual.payload.email, 'alice@example.com');
+  t.deepEqual(actual.payload, {
+    name: 'Alice',
+    email: 'alice@example.com'
+  });
   t.notOk(actual.error);
 
   t.end();

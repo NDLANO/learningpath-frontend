@@ -4,9 +4,9 @@ import reducer from '../authenticated';
 
 test('reducers/authenticated', (t) => {
   t.equal(
-      reducer(undefined, {}),
-      false,
-      'initial state'
+    reducer(undefined, {}),
+    false,
+    'initial state'
   );
 
   t.equal(

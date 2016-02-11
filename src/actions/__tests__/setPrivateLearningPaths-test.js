@@ -11,10 +11,7 @@ test('actions/setPrivateLearningPaths', (t) => {
   t.ok(isFSA(actual), 'FSA compliant action');
 
   t.equal(actual.type, 'SET_PRIVATE_LEARNING_PATHS');
-  t.ok(actual.payload);
-  t.equal(actual.payload.length, 2);
-  t.equal(actual.payload[0].id, '12345');
-  t.equal(actual.payload[1].id, '67890');
+  t.deepEqual(actual.payload, [{ id: '12345' }, { id: '67890' }]);
   t.notOk(actual.error);
 
   t.end();

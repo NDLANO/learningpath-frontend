@@ -4,9 +4,9 @@ import reducer from '../authToken';
 
 test('reducers/authToken', (t) => {
   t.equal(
-      reducer(undefined, {}),
-      '',
-      'initial state'
+    reducer(undefined, {}),
+    '',
+    'initial state'
   );
 
   t.equal(

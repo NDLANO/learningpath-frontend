@@ -8,25 +8,42 @@ const payload = { name, email };
 
 test('reducers/user', (t) => {
   t.equal(
-      JSON.stringify(reducer(undefined, {})),
-      '{}',
-      'empty action on undefined state'
+    JSON.stringify(reducer(undefined, {})),
+    '{}',
+    'empty action on undefined state'
   );
 
-  let actual = reducer(undefined, { type: 'SET_USER_DATA', payload });
-  t.equal(actual.name, name, 'set state');
+  t.deepEqual(
+    reducer(undefined, { type: 'SET_USER_DATA', payload }),
+    name,
+    'set state'
+  );
 
-  actual = reducer({name: 'Bob'}, { type: 'SET_USER_DATA', payload });
-  t.equal(actual.name, name, 'change state');
+  t.deepEqual(
+    reducer({name: 'Bob'}, { type: 'SET_USER_DATA', payload }),
+    name,
+    'change state'
+  );
 
-  actual = reducer({name: 'Bob'}, { type: 'DO_NOT_SET_USER_DATA', payload });
-  t.equal(actual.name, 'Bob', 'non-actionable action type');
+  t.deepEqual(
+    reducer({name: 'Bob'},
+      { type: 'DO_NOT_SET_USER_DATA', payload }),
+    'Bob',
+    'non-actionable action type'
+  );
 
-  actual = reducer({name, email}, { type: 'SET_USER_DATA', payload: new Error('fail'), error: true });
-  t.equal(actual.name, name, 'ignore errors');
+  t.deepEqual(
+    reducer({name, email},
+      { type: 'SET_USER_DATA', payload: new Error('fail'), error: true }),
+    name,
+    'ignore errors'
+  );
 
-  actual = reducer({name: 'Bob'}, { type: 'LOGOUT' });
-  t.deepEqual(actual, {}, 'logout');
+  t.deepEqual(
+    reducer({name: 'Bob'}, { type: 'LOGOUT' }),
+    {},
+    'logout'
+  );
 
   t.end();
 });
