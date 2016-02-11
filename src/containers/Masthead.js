@@ -12,7 +12,10 @@ export function Masthead ({authenticated, userName, handleLogOut}) {
       <div className='site-nav'>
         <ul className='site-nav_list'>
           <li className='site-nav_item'>
-            <Link to='/' className='site-nav_link'>Læringsstier</Link>
+            <Link to='/' className='site-nav_link'>Forside</Link>
+          </li>
+          <li className='site-nav_item'>
+            <Link to='/learningpaths' className='site-nav_link'>Søk</Link>
           </li>
           <li className='site-nav_item'>
             <Link to='/minside' className='site-nav_link'>Min side</Link>
@@ -29,7 +32,10 @@ export function Masthead ({authenticated, userName, handleLogOut}) {
       <div className='site-nav'>
         <ul className='site-nav_list'>
           <li className='site-nav_item'>
-            <Link to='/' className='site-nav_link'>Læringsstier</Link>
+            <Link to='/' className='site-nav_link'>Forside</Link>
+          </li>
+          <li className='site-nav_item'>
+            <Link to='/learningpaths' className='site-nav_link'>Søk</Link>
           </li>
           <li className='site-nav_item'>
             <Link to='/login' className='site-nav_link'>Logg inn</Link>
@@ -51,10 +57,6 @@ export function Masthead ({authenticated, userName, handleLogOut}) {
     <div className='masthead'>
       <div className='masthead_left'>
         {logo}
-      </div>
-
-      <div className='masthead_center'>
-        <input type='search' placeholder='Søk' />
       </div>
 
       <div className='masthead_right'>
