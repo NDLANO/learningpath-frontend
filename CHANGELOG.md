@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.10 - 2016-02-11
+
+* Public Learning Path page. Sortable, but search and pagination missing.
+
 ## 0.1.9 - 2016-02-05
 
 * Private Learning Path page
