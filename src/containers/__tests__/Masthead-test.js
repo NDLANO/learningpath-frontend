@@ -23,7 +23,7 @@ test('containers/Masthead default', t => {
 
   t.jsxIncludes(output, <Link to='/login' className='site-nav_link'>Logg inn</Link>, 'login link');
   t.jsxNotIncludes(output, 'Logg ut', 'logout button');
-  t.jsxNotIncludes(output, <Link to='/minside' className='site-nav_link'>Min side</Link>, 'my page link');
+  t.jsxNotIncludes(output, <Link to='/minside' className='site-nav_link'>Min læringsstier</Link>, 'my page link');
 
   t.end();
 });
@@ -34,7 +34,7 @@ test('containers/Masthead logged in', t => {
 
   t.jsxIncludes(output, 'Alice', 'user name');
   t.jsxIncludes(output, 'Logg ut', 'logout button');
-  t.jsxIncludes(output, <Link to='/minside' className='site-nav_link'>Min side</Link>, 'my page link');
+  t.jsxIncludes(output, <Link to='/minside' className='site-nav_link'>Min læringsstier</Link>, 'my page link');
   t.jsxNotIncludes(output, <Link to='/login' className='site-nav_link'>Logg inn</Link>, 'login link');
 
   t.end();

@@ -21,11 +21,11 @@ test('component/LearningPathToC', t => {
   const { output } = setup({lang: 'nb', learningPath});
   t.ok(output, 'renders');
 
-  t.jsxIncludes(output, <Link to='/learningpaths/4'>Introduksjon</Link>,
+  t.jsxIncludes(output, <Link to='/learningpaths/4' className='step-nav_link'>Introduksjon</Link>,
       'link to learningpath');
-  t.jsxIncludes(output, <Link to='/learningpaths/4/step/7'>Tittel her</Link>,
+  t.jsxIncludes(output, <Link to='/learningpaths/4/step/7' className='step-nav_link'>Tittel her</Link>,
       'link to learningstep 1');
-  t.jsxIncludes(output, <Link to='/learningpaths/4/step/8'>En annen tittel her</Link>,
+  t.jsxIncludes(output, <Link to='/learningpaths/4/step/8' className='step-nav_link'>En annen tittel her</Link>,
       'link to learningpath 2');
 
   t.end();
@@ -36,11 +36,11 @@ test('component/LearningPathToC private', t => {
   const { output } = setup({lang: 'nb', isPrivate: true, learningPath});
   t.ok(output, 'renders');
 
-  t.jsxIncludes(output, <Link to='/learningpaths/private/4'>Introduksjon</Link>,
+  t.jsxIncludes(output, <Link to='/learningpaths/private/4' className='step-nav_link'>Introduksjon</Link>,
       'link to learningpath');
-  t.jsxIncludes(output, <Link to='/learningpaths/private/4/step/7'>Tittel her</Link>,
+  t.jsxIncludes(output, <Link to='/learningpaths/private/4/step/7' className='step-nav_link'>Tittel her</Link>,
       'link to learningstep 1');
-  t.jsxIncludes(output, <Link to='/learningpaths/private/4/step/8'>En annen tittel her</Link>,
+  t.jsxIncludes(output, <Link to='/learningpaths/private/4/step/8' className='step-nav_link'>En annen tittel her</Link>,
       'link to learningpath 2');
 
   t.end();

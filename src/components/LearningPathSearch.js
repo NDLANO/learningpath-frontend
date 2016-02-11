@@ -26,7 +26,7 @@ export function LearningPathSearch(props) {
   };
 
   let searchForm = (
-    <form className='one-column--third one-column__center search-layout'>
+    <form className='one-column--third one-column__center search--layout'>
       <input type='text' className='input-search' placeholder='Søk etter læringsstier' />
       <button className='btn-search btn-search--negative'>Søk</button>
 
@@ -73,7 +73,7 @@ export function LearningPathSearch(props) {
   ));
 
   return (
-    <div className='one-column'>
+    <div>
       <div className='page-header'>
         {searchForm}
       </div>
