@@ -98,6 +98,10 @@ app.use('/learningpaths/private', withAppKeyCheck(function (req, res) {
     return sendJsonData(200, data.private)(req, res);
   case 1:
     return sendJsonData(200, data.private[0])(req, res);
+  case 2:
+    return sendJsonData(200, data.private[0].learningsteps)(req, res);
+  case 3:
+    return sendJsonData(200, data.private[0].learningsteps[0])(req, res);
   default:
     res.writeHead(404);
     res.end('404');
