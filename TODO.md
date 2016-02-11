@@ -3,3 +3,4 @@
 - Polyfills
 - Handle error at logout
 - Clear stale sessions
+- f(duration) => timer/minutter

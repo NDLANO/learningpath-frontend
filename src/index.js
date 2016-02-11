@@ -7,6 +7,7 @@ import { syncHistory } from 'redux-simple-router';
 import { browserHistory } from 'react-router';
 import thunkMiddleware from 'redux-thunk';
 import persistState from 'redux-localstorage';
+import get from 'lodash/get';
 
 import es6promise from 'es6-promise';
 es6promise.polyfill();
@@ -42,13 +43,20 @@ const store = createStoreWithMiddleware(reducers, {
   lang: 'nb',
   user: {},
   learningPaths: [],
-  learningPathQuery: {},
+  learningPathQuery: {
+    page: 1,
+    pageSize: 50,
+    sort: '-lastUpdated'
+  },
   privateLearningPath: {},
   privateLearningPaths: []
 });
 
 import actions from './actions';
-const { fetchPrivateLearningPaths, fetchPrivateLearningPath } = bindActionCreators(actions, store.dispatch);
+const {
+  fetchPrivateLearningPaths, fetchPrivateLearningPath, fetchLearningPaths,
+  changeLearningPathQuery
+} = bindActionCreators(actions, store.dispatch);
 
 function ifAuthenticated (cb) {
   return function (...args) {
@@ -59,7 +67,7 @@ function ifAuthenticated (cb) {
 }
 
 import App from './containers/App';
-import { Welcome, NotFound, LoginProviders, SessionInitializer, LoginFailure, MyPage, LearningPath, LearningPathSummary, ThisPageIntentionallyLeftBlank  } from './components';
+import { Welcome, NotFound, LoginProviders, SessionInitializer, LoginFailure, MyPage, LearningPath, LearningPathSummary, LearningPathSearch, ThisPageIntentionallyLeftBlank  } from './components';
 import requireAuthentication from './components/requireAuthentication';
 
 ReactDOM.render(
@@ -76,6 +84,12 @@ ReactDOM.render(
           <IndexRoute component={LearningPathSummary} isPrivate={true} />
           <Route path='step/:stepId' component={ThisPageIntentionallyLeftBlank} />
         </Route>
+        <Route path='learningpaths' component={LearningPathSearch} onEnter={ctx => {
+          //console.log(ctx.location);
+          let page = parseInt(get(ctx, 'location.query.page', 1));
+          changeLearningPathQuery({page});
+          fetchLearningPaths();
+        }} />
         <Route path='*' component={NotFound} />
       </Route>
     </Router>
