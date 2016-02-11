@@ -6,8 +6,8 @@ import LoginFailure from './LoginFailure';
 import MyPage from './MyPage';
 import LearningPath from './LearningPath';
 import LearningPathSummary from './LearningPathSummary';
-import LearningStep from './LearningStep';
+import LearningPathStep from './LearningPathStep';
 import LearningPathSearch from './LearningPathSearch';
 import ThisPageIntentionallyLeftBlank from './ThisPageIntentionallyLeftBlank';
 
-module.exports = { Welcome, NotFound, LoginProviders, SessionInitializer, LoginFailure, MyPage, LearningPath, LearningPathSummary, LearningStep, LearningPathSearch, ThisPageIntentionallyLeftBlank };
+module.exports = { Welcome, NotFound, LoginProviders, SessionInitializer, LoginFailure, MyPage, LearningPath, LearningPathSummary, LearningPathStep, LearningPathSearch, ThisPageIntentionallyLeftBlank };
