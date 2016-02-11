@@ -9,17 +9,19 @@ import learningPathQuery from './learningPathQuery';
 import privateLearningPath from './privateLearningPath';
 import privateLearningPaths from './privateLearningPaths';
 import privateLearningPathsSortBy from './privateLearningPathsSortBy';
+import privateLearningPathStep from './privateLearningPathStep';
 
 const rootReducers = combineReducers({
   authenticated,
   authToken,
-  lang: (state = 'nb', action) => state,
+  lang: (state = 'nb') => state,
   user,
   learningPaths,
   learningPathQuery,
   privateLearningPath,
   privateLearningPaths,
   privateLearningPathsSortBy,
+  privateLearningPathStep,
   routing: routeReducer
 });
 
