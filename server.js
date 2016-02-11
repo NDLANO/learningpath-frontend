@@ -109,11 +109,16 @@ app.use('/learningpaths/private', withAppKeyCheck(function (req, res) {
 }));
 
 app.use('/learningpaths', function (req, res) {
-  var urlChunks = req.url.split('/').filter(function (chunk) { return chunk !== ''; });
+  var urlChunks = req.url.split('?').shift().split('/').filter(function (chunk) { return chunk !== ''; });
 
   switch (urlChunks.length) {
   case 0:
-    return sendJsonData(200, data.public)(req, res);
+    return sendJsonData(200, {
+      totalCount: data.public.length,
+      page: 1,
+      pageSize: 10,
+      results: data.public
+    })(req, res);
   case 1:
     return sendJsonData(200, data.public[0])(req, res);
   default:
