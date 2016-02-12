@@ -26,6 +26,10 @@ const fetchPaths = (query) => {
       q['page-size'] = q.pageSize;
       delete q.pageSize;
     }
+    if (q.query === '') {
+      delete q.query;
+    }
+
     url += '?' + queryString.stringify(q);
   }
   return fetch(url).then( resolveJsonOrRejectWithError );
