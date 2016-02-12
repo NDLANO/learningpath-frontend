@@ -1,3 +1,4 @@
+- Loading indicator
 - Confirm logout
 - Redirect somewhere useful after logout
 - Polyfills
