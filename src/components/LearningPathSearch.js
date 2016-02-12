@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { routeActions } from 'redux-simple-router';
 import get from 'lodash/get';
+import Icon from './Icon';
 
 import formatDate from '../util/formatDate';
 import formatDuration from '../util/formatDuration';
@@ -77,7 +78,6 @@ LearningPathSearchCtrl.defaultProps = {
   sort: '-lastUpdated', query: ''
 };
 
-
 function SearchResultTile ({path, lang}) {
   return (
     <div className='tile-vertical tile-vertical--shadowbox'>
@@ -90,19 +90,13 @@ function SearchResultTile ({path, lang}) {
         </h2>
         <div className='search-list--meta'>
 
-          <svg className='icon icon--person icon--gray icon__offset'>
-            <use xlinkHref='/assets/symbol-defs.svg#icon-person' />
-          </svg>
+          <Icon.Person className='icon--gray icon__offset' />
           <a rel='author' href='#'>{get(path, 'author.name')}</a>
 
-          <svg className='icon icon--today icon--gray icon__offset'>
-            <use xlinkHref='/assets/symbol-defs.svg#icon-today' />
-          </svg>
+          <Icon.Today className='icon--gray icon__offset' />
           <time>{formatDate(path.lastUpdated, lang)}</time>
 
-          <svg className='icon icon--query-builder icon--gray icon__offset'>
-            <use xlinkHref='/assets/symbol-defs.svg#icon-query_builder' />
-          </svg>
+          <Icon.QueryBuilder className='icon--gray icon__offset' />
           <time>{formatDuration(path.duration, lang)}</time>
         </div>
         <div dangerouslySetInnerHTML={{__html: descriptionI18N(path, lang)}}></div>
