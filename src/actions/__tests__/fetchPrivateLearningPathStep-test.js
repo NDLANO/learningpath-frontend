@@ -10,7 +10,7 @@ const mockStore = configureMockStore(middleware);
 
 const authToken = '123345';
 const pathId = 123;
-const stepId = 123;
+const stepId = 456;
 
 test('actions/fetchPrivateLearningPathStep', t => {
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { routeActions } from 'redux-simple-router';
 import moment from 'moment';
@@ -47,7 +48,9 @@ export function LearningPathSearch(props) {
         (<img className='tile-vertical__img' src={path.coverPhotoUrl} />) : ''
       )()}
       <div className='tile-vertical__sorting'>
-        <h2 className='tile-vertical__title'>{titleI18N(path, lang)}</h2>
+        <h2 className='tile-vertical__title'>
+          <Link to={`/learningpaths/${path.id}`}>{titleI18N(path, lang)}</Link>
+        </h2>
         <div className='search-list--meta'>
 
           <svg className='icon icon--person icon--gray icon__offset'>

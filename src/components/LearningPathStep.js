@@ -19,8 +19,12 @@ LearningPathStep.propTypes = {
   lang: PropTypes.string.isRequired
 };
 
-const mapStateToProps = state => Object.assign({}, state, {
-  step: state.privateLearningPathStep
-});
+const mapStateToProps = (state, ownProps) => {
+  let isPrivate = ownProps.route.isPrivate;
+  return Object.assign({}, state, {
+    step: isPrivate ? state.privateLearningPathStep : state.learningPathStep,
+    isPrivate: isPrivate
+  });
+};
 
 export default connect(mapStateToProps)(LearningPathStep);

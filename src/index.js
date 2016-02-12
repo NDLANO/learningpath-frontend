@@ -42,6 +42,8 @@ const store = createStoreWithMiddleware(reducers, {
   authToken: '',
   lang: 'nb',
   user: {},
+  learningPath: {},
+  learningPathStep: {},
   learningPaths: [],
   learningPathQuery: {
     page: 1,
@@ -49,6 +51,7 @@ const store = createStoreWithMiddleware(reducers, {
     sort: '-lastUpdated'
   },
   privateLearningPath: {},
+  privateLearningPathStep: {},
   privateLearningPaths: []
 });
 
@@ -58,6 +61,8 @@ const {
   fetchPrivateLearningPath,
   fetchPrivateLearningPathStep,
   fetchLearningPaths,
+  fetchLearningPath,
+  fetchLearningPathStep,
   changeLearningPathQuery
 } = bindActionCreators(actions, store.dispatch);
 
@@ -84,10 +89,12 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path='/' component={App}>
         <IndexRoute component={Welcome} />
+
         <Route path='login' component={LoginProviders} />
         <Route path='login/success/:authToken' component={SessionInitializer} />
         <Route path='login/failure' component={LoginFailure} />
         <Route path='minside' component={requireAuthentication(MyPage)} onEnter={ifAuthenticated(fetchPrivateLearningPaths)} />
+
         <Route path='learningpaths/private/:pathId' component={requireAuthentication(LearningPath)} isPrivate={true}
           onEnter={ifAuthenticated(({params}) => fetchPrivateLearningPath(params.pathId))}>
           <IndexRoute component={LearningPathSummary} isPrivate={true} />
@@ -96,12 +103,20 @@ ReactDOM.render(
               ({params}) => fetchPrivateLearningPathStep(params.pathId, params.stepId)
             )}/>
         </Route>
+
         <Route path='learningpaths' component={LearningPathSearch} onEnter={ctx => {
-          //console.log(ctx.location);
           let page = parseInt(get(ctx, 'location.query.page', 1));
           changeLearningPathQuery({page});
           fetchLearningPaths();
         }} />
+
+        <Route path='learningpaths/:pathId' component={LearningPath}
+          onEnter={({params}) => fetchLearningPath(params.pathId)}>
+          <IndexRoute component={LearningPathSummary} />
+          <Route path='step/:stepId' component={LearningPathStep}
+            onEnter={({params}) => fetchLearningPathStep(params.pathId, params.stepId)} />
+        </Route>
+
         <Route path='*' component={NotFound} />
       </Route>
     </Router>

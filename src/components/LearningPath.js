@@ -20,11 +20,15 @@ export function LearningPath(props) {
   );
 }
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
-  learningPath: state.privateLearningPath,
-  isPrivate: ownProps.route.isPrivate,
-  activePathname: ownProps.location.pathname
-});
+const mapStateToProps = (state, ownProps) => {
+  let isPrivate = ownProps.route.isPrivate;
+
+  return Object.assign({}, state, {
+    learningPath: isPrivate ? state.privateLearningPath : state.learningPath,
+    isPrivate: isPrivate,
+    activePathname: ownProps.location.pathname
+  });
+};
 
 export default connect(mapStateToProps)(LearningPath);
 

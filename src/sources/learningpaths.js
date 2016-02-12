@@ -9,6 +9,15 @@ const fetchPrivatePathStep = fetchAuthorized(
 const fetchPrivatePaths = fetchAuthorized('/learningpaths/private');
 
 const learningPathsUrl = apiResourceUrl('/learningpaths');
+
+const fetchPath = pathId =>
+  fetch(apiResourceUrl('/learningpaths/' + pathId))
+  .then( resolveJsonOrRejectWithError );
+
+const fetchPathStep = (pathId, stepId) =>
+  fetch(apiResourceUrl('/learningpaths/' + pathId + '/step/' + stepId))
+  .then( resolveJsonOrRejectWithError );
+
 const fetchPaths = (query) => {
   let url = learningPathsUrl;
   if (query) {
@@ -23,6 +32,8 @@ const fetchPaths = (query) => {
 };
 
 export {
+  fetchPath,
+  fetchPathStep,
   fetchPaths,
   fetchPrivatePath,
   fetchPrivatePathStep,
