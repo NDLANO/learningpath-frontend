@@ -113,14 +113,13 @@ app.use('/learningpaths', function (req, res) {
 
   switch (urlChunks.length) {
   case 0:
-    return sendJsonData(200, {
-      totalCount: data.public.length,
-      page: 1,
-      pageSize: 10,
-      results: data.public
-    })(req, res);
+    return sendJsonData(200, data.public)(req, res);
   case 1:
-    return sendJsonData(200, data.public[0])(req, res);
+    return sendJsonData(200, data.private[0])(req, res);
+  case 2:
+    return sendJsonData(200, data.private[0].learningsteps)(req, res);
+  case 3:
+    return sendJsonData(200, data.private[0].learningsteps[0])(req, res);
   default:
     res.writeHead(404);
     res.end('404');
