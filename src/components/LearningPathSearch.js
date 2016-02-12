@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { routeActions } from 'redux-simple-router';
@@ -12,38 +12,77 @@ const calcDuration = duration => duration < 60 ?
     duration + ' minutter' :
     Math.round(duration / 60) + ' timer';
 
-export function LearningPathSearch(props) {
-  const {learningPaths, learningPathQuery, lang, location, dispatch} = props;
-  const sortBy = learningPathQuery.sort; 
 
-  const changeSortOrder = (evt) => {
-    let query = Object.assign({}, learningPathQuery, {
-      sort: evt.target.value
+class LearningPathSearchCtrl extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      query: props.query,
+      sort: props.sort
+    };
+  }
+
+  handleSortChange(evt) {
+    this.setState({sort: evt.target.value}, () => {
+      this.props.onSortOrderChange(this.state.sort);
     });
+  }
 
-    dispatch(changeLearningPathQuery(query));
-    dispatch(fetchLearningPaths());
-    dispatch(routeActions.push({pathname: location.pathname, query}));
-  };
+  handleQueryChange(evt) {
+    this.setState({query: evt.target.value});
+  }
 
-  let searchForm = (
-    <form className='one-column--third one-column__center search--layout'>
-      <input type='text' className='input-search' placeholder='Søk etter læringsstier' />
-      <button className='btn-search btn-search--negative'>Søk</button>
+  handleSubmit(evt) {
+    evt.preventDefault();
+    this.props.onSearchQuerySubmit(this.state.query);
+  }
 
-      <select className='search-filter' value={sortBy} onChange={changeSortOrder}>
-        <option value='relevance'>Relevans</option>
-        <option value='-lastUpdated'>Nyeste</option>
-        <option value='lastUpdated'>Eldste</option>
-        <option value='-duration'>Lengste</option>
-        <option value='duration'>Korteste</option>
-        <option value='title'>Alfabetisk</option>
-      </select>
-    </form>
-  );
+  render() {
+    const handleSortChange = this.handleSortChange.bind(this);
+    const handleQueryChange = this.handleQueryChange.bind(this);
+    const handleSubmit = this.handleSubmit.bind(this);
 
-  let tiles = learningPaths.map(path => (
-    <div key={path.id} className='tile-vertical tile-vertical--shadowbox'>
+    return (
+      <form onSubmit={handleSubmit}
+          className='one-column--third one-column__center search--layout'>
+
+        <input type='text' className='input-search'
+            onChange={handleQueryChange}
+            value={this.state.query}
+            placeholder='Søk etter læringsstier' />
+
+        <button className='btn-search btn-search--negative'>Søk</button>
+
+        <select className='search-filter'
+            onChange={handleSortChange}
+            value={this.state.sort}>
+          <option value='relevance'>Relevans</option>
+          <option value='-lastUpdated'>Nyeste</option>
+          <option value='lastUpdated'>Eldste</option>
+          <option value='-duration'>Lengste</option>
+          <option value='duration'>Korteste</option>
+          <option value='title'>Alfabetisk</option>
+        </select>
+      </form>
+    );
+  }
+}
+
+LearningPathSearchCtrl.propTypes = {
+  sort: PropTypes.string,
+  query: PropTypes.string,
+  onSearchQuerySubmit: PropTypes.func.isRequired,
+  onSortOrderChange: PropTypes.func.isRequired
+};
+
+LearningPathSearchCtrl.defaultProps = {
+  sort: '-lastUpdated', query: ''
+};
+
+
+function SearchResultTile ({path, lang}) {
+  return (
+    <div className='tile-vertical tile-vertical--shadowbox'>
       {(() => path.coverPhotoUrl ?
         (<img className='tile-vertical__img' src={path.coverPhotoUrl} />) : ''
       )()}
@@ -73,16 +112,45 @@ export function LearningPathSearch(props) {
         </div>
       </div>
     </div>
-  ));
+  );
+}
+
+SearchResultTile.propTypes = {
+  path: PropTypes.object.isRequired,
+  lang: PropTypes.string.isRequired
+};
+
+export function LearningPathSearch(props) {
+  const {learningPaths, learningPathQuery, lang, location:{pathname}, dispatch} = props;
+
+  const navigateTo = query => {
+    dispatch(changeLearningPathQuery(query));
+    dispatch(fetchLearningPaths());
+    dispatch(routeActions.push({pathname: pathname, query}));
+  };
+
+  const submitSearchQuery = query => navigateTo(Object.assign({},
+        learningPathQuery,
+        { query, page: 1 }));
+
+  const changeSortOrder = sort => navigateTo(Object.assign({},
+        learningPathQuery,
+        { sort }));
 
   return (
     <div>
       <div className='page-header'>
-        {searchForm}
+        <LearningPathSearchCtrl
+          {...learningPathQuery}
+          onSortOrderChange={changeSortOrder}
+          onSearchQuerySubmit={submitSearchQuery}
+        />
       </div>
 
       <div className='one-column--third'>
-        {tiles}
+        {learningPaths.map(path =>
+          (<SearchResultTile key={path.id} path={path} lang={lang} />)
+        )}
       </div>
     </div>
   );
