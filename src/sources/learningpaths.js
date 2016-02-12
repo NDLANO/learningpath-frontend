@@ -5,7 +5,7 @@ import { fetchAuthorized, resolveJsonOrRejectWithError, apiResourceUrl } from '.
 
 const fetchPrivatePath = fetchAuthorized('/learningpaths/private/:pathId');
 const fetchPrivatePathStep = fetchAuthorized(
-    '/learningpaths/private/:pathId/step/:stepId');
+    '/learningpaths/private/:pathId/learningsteps/:stepId');
 const fetchPrivatePaths = fetchAuthorized('/learningpaths/private');
 
 const learningPathsUrl = apiResourceUrl('/learningpaths');
@@ -15,7 +15,7 @@ const fetchPath = pathId =>
   .then( resolveJsonOrRejectWithError );
 
 const fetchPathStep = (pathId, stepId) =>
-  fetch(apiResourceUrl('/learningpaths/' + pathId + '/step/' + stepId))
+  fetch(apiResourceUrl('/learningpaths/' + pathId + '/learningsteps/' + stepId))
   .then( resolveJsonOrRejectWithError );
 
 const fetchPaths = (query) => {

@@ -14,7 +14,7 @@ const stepId = 456;
 
 test('actions/fetchPrivateLearningPathStep', t => {
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .get(`/learningpaths/private/${pathId}/step/${stepId}`)
+    .get(`/learningpaths/private/${pathId}/learningsteps/${stepId}`)
     .reply(200, {id: stepId, seqNo: 3});
 
   const expectedActions = [
@@ -33,7 +33,7 @@ test('actions/fetchPrivateLearningPathStep', t => {
 
 test('actions/fetchPrivateLearningPathStep cache hit', t => {
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .get(`/learningpaths/private/${pathId}/step/${stepId}`)
+    .get(`/learningpaths/private/${pathId}/learningsteps/${stepId}`)
     .reply(200, {id: stepId, seqNo: 3, cached: false});
 
   const initialState = {
@@ -64,7 +64,7 @@ test('actions/fetchPrivateLearningPathStep cache hit', t => {
 
 test('actions/fetchPrivateLearningPathStep access denied', t => {
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .get(`/learningpaths/private/${pathId}/step/${stepId}`)
+    .get(`/learningpaths/private/${pathId}/learningsteps/${stepId}`)
     .reply(403, {message: 'Invalid'});
 
   const expectedActions = [
