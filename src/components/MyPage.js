@@ -33,9 +33,9 @@ export function MyPage ({dispatch, learningPaths, lang, sortBy}) {
 
   const sortOrderSelect = (
     <select value={sortBy} onChange={(evt) => dispatch(sortPrivateLearningPaths(evt.target.value))}>
-      <option value='title'>titel</option>
-      <option value='lastUpdated'>dato</option>
-      <option value='status'>status</option>
+      <option value='title'>Tittel</option>
+      <option value='lastUpdated'>Dato</option>
+      <option value='status'>Status</option>
     </select>
   );
 
