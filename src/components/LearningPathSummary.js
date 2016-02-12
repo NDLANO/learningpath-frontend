@@ -18,9 +18,7 @@ export function LearningPathSummary ({learningPath, lang}) {
           <div className='learning-path_duration'>{formatDuration(learningPath.duration, lang)}</div>
         </div>
       </div>
-      <div className='learning-path_bd'>
-        {descriptionI18N(learningPath, lang)}
-      </div>
+      <div className='learning-path_bd' dangerouslySetInnerHTML={{__html:descriptionI18N(learningPath, lang)}}></div>
     </div>
   );
 }

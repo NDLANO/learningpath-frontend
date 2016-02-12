@@ -6,9 +6,7 @@ export function LearningPathStep ({step, lang}) {
   return (
     <div className='learning-step'>
       <h2 className='learning-step_title'>{titleI18N(step, lang)}</h2>
-      <div className='learing-step_description'>
-        {descriptionI18N(step, lang)}
-      </div>
+      <div className='learing-step_description' dangerouslySetInnerHTML={{__html:descriptionI18N(step, lang)}}></div>
       <pre><code>{JSON.stringify(step, null, 2)}</code></pre>
     </div>
   );

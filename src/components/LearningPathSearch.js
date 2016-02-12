@@ -105,9 +105,7 @@ function SearchResultTile ({path, lang}) {
           </svg>
           <time>{formatDuration(path.duration, lang)}</time>
         </div>
-        <div>
-          {descriptionI18N(path, lang)}
-        </div>
+        <div dangerouslySetInnerHTML={{__html: descriptionI18N(path, lang)}}></div>
       </div>
     </div>
   );
