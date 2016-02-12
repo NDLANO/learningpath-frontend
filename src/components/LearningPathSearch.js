@@ -2,15 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { routeActions } from 'redux-simple-router';
-import moment from 'moment';
 import get from 'lodash/get';
+
+import formatDate from '../util/formatDate';
+import formatDuration from '../util/formatDuration';
 
 import {fetchLearningPaths, changeLearningPathQuery} from '../actions';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
-
-const calcDuration = duration => duration < 60 ?
-    duration + ' minutter' :
-    Math.round(duration / 60) + ' timer';
 
 
 class LearningPathSearchCtrl extends Component {
@@ -100,12 +98,12 @@ function SearchResultTile ({path, lang}) {
           <svg className='icon icon--today icon--gray icon__offset'>
             <use xlinkHref='/assets/symbol-defs.svg#icon-today' />
           </svg>
-          <time>{moment(path.lastUpdated).format('DD.MM.YY')}</time>
+          <time>{formatDate(path.lastUpdated, lang)}</time>
 
           <svg className='icon icon--query-builder icon--gray icon__offset'>
             <use xlinkHref='/assets/symbol-defs.svg#icon-query_builder' />
           </svg>
-          <time>{calcDuration(path.duration)}</time>
+          <time>{formatDuration(path.duration, lang)}</time>
         </div>
         <div>
           {descriptionI18N(path, lang)}

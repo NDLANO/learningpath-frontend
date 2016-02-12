@@ -5,15 +5,16 @@ import sortBy from 'lodash/sortBy';
 import reverse from 'lodash/reverse';
 import { sortPrivateLearningPaths } from '../actions';
 
+import formatDate from '../util/formatDate';
+import formatDuration from '../util/formatDuration';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 
 export function MyPage ({dispatch, learningPaths, lang, sortBy}) {
   const items = learningPaths.map(lp => {
     const title = titleI18N(lp, lang);
     const description = descriptionI18N(lp, lang);
-    const duration = lp.duration < 60 ?
-      lp.duration + ' minutter' :
-      Math.round(lp.duration / 60) + ' timer';
+    const duration = formatDuration(lp.duration, lang);
+    const lastUpdated = formatDate(lp.lastUpdated, lang);
 
     return (
       <div key={lp.id} className='tile'>
@@ -25,6 +26,7 @@ export function MyPage ({dispatch, learningPaths, lang, sortBy}) {
         </div>
         <div className='tile_ft'>
           <p>{duration}</p>
+          <p>Sist endret {lastUpdated}</p>
           <p>{lp.status}</p>
         </div>
       </div>
