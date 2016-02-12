@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.11 - 2016-02-12
+
+* List of Public Learning Paths with search, but still without pagination.
+* Page for single public learning paths, including a rudimentary page for steps.
+
+
 ## 0.1.10 - 2016-02-11
 
 * Public Learning Path page. Sortable, but search and pagination missing.
