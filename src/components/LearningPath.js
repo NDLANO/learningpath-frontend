@@ -2,19 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import LearningPathToc from './LearningPathToC';
-import { titleI18N } from '../util/i18nFieldFinder';
 
 export function LearningPath(props) {
-  const {children, learningPath, lang } = props;
-
   return (
     <div className='two-column'>
       <aside className='two-column_col'>
-        <h3 className='step-nav_h'>{titleI18N(learningPath, lang)}</h3>
         <LearningPathToc {...props} />
       </aside>
       <main className='two-column_col'>
-        {children}
+        {props.children}
       </main>
     </div>
   );

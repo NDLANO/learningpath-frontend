@@ -428,7 +428,7 @@ th {
 
 body {
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-  margin: 2em 0 0;
+  margin: 3.125em 0 0;
   color: #222;
   background-color: #f8f8f8;
 }
@@ -457,10 +457,10 @@ h1, h2, h3 {
 input[type=text], select {
   border: 1px solid #e6e6e6;
   border-radius: .313em;
-  background: #ffffff;
+  background: white;
   min-height: 1.5em;
   font-size: 1em;
-  color: #444444;
+  color: #444;
 }
 
 input[type=text]:focus, select:focus {
@@ -483,8 +483,8 @@ input[type=text].alert {
 }
 
 input[type=text]:focus {
-  border-color: #20588F;
-  box-shadow: 0 0 6px rgba(95, 142, 228, 0.2);
+  border-color: #20588f;
+  box-shadow: 0 0 6px rgba(32, 88, 143, 0.2);
 }
 
 input[type=radio],
@@ -588,7 +588,7 @@ button:hover {
 }
 
 .cta-link--gl:link, .cta-link--gl:visited {
-	background-color: #F44336;
+	background-color: #f44336;
 	border: none;
 }
 
@@ -678,8 +678,8 @@ Example showing how to change the color/size of the icons:
 }
 .tile-vertical{
   width: 100%;
-  margin: 1em 1em 1em 0em;
-  padding: 0em 0em 3em 0em;
+  margin: 1em 1em 1em 0;
+  padding: 0 0 3em 0;
   min-height: 23em;
   display: -webkit-box;
   display: -webkit-flex;
@@ -712,7 +712,7 @@ Example showing how to change the color/size of the icons:
 }
 
 .tile-vertical__sorting{
-	padding: 0.5em 2em;
+	padding: .5em 2em;
 	height: auto;
 }
 
@@ -749,17 +749,14 @@ Example showing how to change the color/size of the icons:
   color: #666;
 }
 .masthead {
-  padding: 1em 2em 0;
-  width: 100%;
-  padding: 10px 0;
-  border-bottom: 1px solid #d8d8d8;
-  background-color: #fff;
-  padding: 10px 0;
-  border-bottom: 1px solid #d8d8d8;
-  background-color: #fff;
   position: fixed;
   top: 0;
   z-index: 999;
+  width: 100%;
+  height: 3.125em;
+  padding: 10px 0 0;
+  border-bottom: 1px solid #d8d8d8;
+  background-color: white;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -856,8 +853,22 @@ Example showing how to change the color/size of the icons:
   }
 }
 
+.step-nav_learningpath-general-info{
+  background-color: white;
+  padding: 2em 1em 2em 0.5em;
+  text-align: center;
+  margin-right: 1.9em;
+  background-color: #eee;
+}
+
+
 .step-nav_h {
-  margin-left: 35px;
+  margin-bottom: .5em;
+}
+
+.step-nav_meta{
+  color: gray;
+  font-size: 0.8em;
 }
 
 .step-nav_list {
@@ -1003,7 +1014,6 @@ Example showing how to change the color/size of the icons:
           flex-grow: 0;
   background: -webkit-linear-gradient(right, white 0, white 2em, transparent 2em, transparent 100%);
   background: linear-gradient(to left, white 0, white 2em, transparent 2em, transparent 100%);
-  padding-top: 40px;
   position: relative;
 }
 
