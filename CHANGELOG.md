@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.12 - 2016-02-12
+
+* Bugfixes and css
+
 ## 0.1.11 - 2016-02-12
 
 * List of Public Learning Paths with search, but still without pagination.
