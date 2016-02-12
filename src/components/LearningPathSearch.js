@@ -54,17 +54,17 @@ export function LearningPathSearch(props) {
         <div className='search-list--meta'>
 
           <svg className='icon icon--person icon--gray icon__offset'>
-            <use xlinkHref='assets/symbol-defs.svg#icon-person' />
+            <use xlinkHref='/assets/symbol-defs.svg#icon-person' />
           </svg>
           <a rel='author' href='#'>{get(path, 'author.name')}</a>
 
           <svg className='icon icon--today icon--gray icon__offset'>
-            <use xlinkHref='assets/symbol-defs.svg#icon-today' />
+            <use xlinkHref='/assets/symbol-defs.svg#icon-today' />
           </svg>
           <time>{moment(path.lastUpdated).format('DD.MM.YY')}</time>
 
           <svg className='icon icon--query-builder icon--gray icon__offset'>
-            <use xlinkHref='assets/symbol-defs.svg#icon-query_builder' />
+            <use xlinkHref='/assets/symbol-defs.svg#icon-query_builder' />
           </svg>
           <time>{calcDuration(path.duration)}</time>
         </div>
