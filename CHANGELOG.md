@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.14 - 2016-02-15
+
+* Resize height of iframes with source http://ndla.no/node/.
+
 ## 0.1.13 - 2016-02-15
 
 * Embed learning path step as iframe.
