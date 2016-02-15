@@ -12,7 +12,7 @@ import {fetchLearningPaths, changeLearningPathQuery} from '../actions';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 
 
-class LearningPathSearchCtrl extends Component {
+class SearchForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,16 +43,16 @@ class LearningPathSearchCtrl extends Component {
 
     return (
       <form onSubmit={handleSubmit}
-          className='one-column--third one-column__center search--layout'>
+          className='search-form search-form--dark'>
 
-        <input type='text' className='input-search'
+        <input type='text' className='search-form_query'
             onChange={handleQueryChange}
             value={this.state.query}
             placeholder='Søk etter læringsstier' />
 
-        <button className='btn-search btn-search--negative'>Søk</button>
+        <button className='search-form_btn'>Søk</button>
 
-        <select className='search-filter'
+        <select className='search-form_sort-order'
             onChange={handleSortChange}
             value={this.state.sort}>
           <option value='relevance'>Relevans</option>
@@ -67,45 +67,51 @@ class LearningPathSearchCtrl extends Component {
   }
 }
 
-LearningPathSearchCtrl.propTypes = {
+SearchForm.propTypes = {
   sort: PropTypes.string,
   query: PropTypes.string,
   onSearchQuerySubmit: PropTypes.func.isRequired,
   onSortOrderChange: PropTypes.func.isRequired
 };
 
-LearningPathSearchCtrl.defaultProps = {
+SearchForm.defaultProps = {
   sort: '-lastUpdated', query: ''
 };
 
-function SearchResultTile ({path, lang}) {
+function SearchResult ({path, lang}) {
   return (
-    <div className='tile-vertical tile-vertical--shadowbox'>
+    <div className='search-result'>
       {(() => path.coverPhotoUrl ?
-        (<img className='tile-vertical__img' src={path.coverPhotoUrl} />) : ''
+        (<img className='search-result_img' src={path.coverPhotoUrl} />) : ''
       )()}
-      <div className='tile-vertical__sorting'>
-        <h2 className='tile-vertical__title'>
+      <div className='search-result_bd'>
+        <h2 className='search-result_title'>
           <Link to={`/learningpaths/${path.id}`}>{titleI18N(path, lang)}</Link>
         </h2>
-        <div className='search-list--meta'>
+        <div className='search-result_meta'>
+          <span className='search-result_author'>
+            <Icon.Person className='icon--gray' />
+            <a rel='author' href='#'>{get(path, 'author.name')}</a>
+          </span>
 
-          <Icon.Person className='icon--gray icon__offset' />
-          <a rel='author' href='#'>{get(path, 'author.name')}</a>
+          <span className='search-result_changed-date'>
+            <Icon.Today className='icon--gray' />
+            <time>{formatDate(path.lastUpdated, lang)}</time>
+          </span>
 
-          <Icon.Today className='icon--gray icon__offset' />
-          <time>{formatDate(path.lastUpdated, lang)}</time>
-
-          <Icon.QueryBuilder className='icon--gray icon__offset' />
-          <time>{formatDuration(path.duration, lang)}</time>
+          <span className='search-result_duration'>
+            <Icon.QueryBuilder className='icon--gray' />
+            <time>{formatDuration(path.duration, lang)}</time>
+          </span>
         </div>
-        <div dangerouslySetInnerHTML={{__html: descriptionI18N(path, lang)}}></div>
+        <div className='search-result_description'
+          dangerouslySetInnerHTML={{__html: descriptionI18N(path, lang)}}></div>
       </div>
     </div>
   );
 }
 
-SearchResultTile.propTypes = {
+SearchResult.propTypes = {
   path: PropTypes.object.isRequired,
   lang: PropTypes.string.isRequired
 };
@@ -130,16 +136,16 @@ export function LearningPathSearch(props) {
   return (
     <div>
       <div className='page-header'>
-        <LearningPathSearchCtrl
+        <SearchForm
           {...learningPathQuery}
           onSortOrderChange={changeSortOrder}
           onSearchQuerySubmit={submitSearchQuery}
         />
       </div>
 
-      <div className='one-column--third'>
+      <div className='search-results'>
         {learningPaths.map(path =>
-          (<SearchResultTile key={path.id} path={path} lang={lang} />)
+          (<SearchResult key={path.id} path={path} lang={lang} />)
         )}
       </div>
     </div>

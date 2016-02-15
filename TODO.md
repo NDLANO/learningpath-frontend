@@ -1,4 +1,5 @@
 - Loading indicator
+- Scroll to top in routing https://github.com/reactjs/react-router/issues/2019
 - Confirm logout
 - Redirect somewhere useful after logout
 - Polyfills

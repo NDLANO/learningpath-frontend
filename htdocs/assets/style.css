@@ -1,3 +1,18 @@
+.ex-gray { padding: 5px; margin: 0; }
+.ex-gray-1  { color: rgb(196, 196, 196); background-color: rgb(34, 34, 34); }
+.ex-gray-2  { color: rgb(214, 214, 214); background-color: rgb(68, 68, 68); }
+.ex-gray-3  { color: rgb(222, 222, 222); background-color: rgb(77, 77, 77); }
+.ex-gray-4  { color: rgb(242, 242, 242); background-color: rgb(102, 102, 102); }
+.ex-gray-5  { color: rgb(255, 255, 255); background-color: rgb(121, 121, 121); }
+.ex-gray-6  { color: rgb(255, 255, 255); background-color: rgb(136, 136, 136); }
+.ex-gray-7  { color: rgb(46, 46, 46); background-color: rgb(216, 216, 216); }
+.ex-gray-8  { color: rgb(48, 48, 48); background-color: rgb(221, 221, 221); }
+.ex-gray-9  { color: rgb(51, 51, 51); background-color: rgb(230, 230, 230); }
+.ex-gray-10 { color: rgb(54, 54, 54); background-color: rgb(234, 234, 234); }
+.ex-gray-11 { color: rgb(54, 54, 54); background-color: rgb(238, 238, 238); }
+.ex-gray-12 { color: rgb(59, 59, 59); background-color: rgb(248, 248, 248); }
+
+
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 
 /**
@@ -429,8 +444,8 @@ th {
 body {
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
   margin: 3.125em 0 0;
-  color: #222;
-  background-color: #f8f8f8;
+  color: rgb(34, 34, 34);
+  background-color: rgb(248, 248, 248);
 }
 
 a:link, a:visited {
@@ -447,7 +462,7 @@ a:hover, a:active {
 p {
   line-height: 1.625em;
   font-size: 16px;
-  color: #4d4d4d;
+  color: rgb(77, 77, 77);
 }
 
 h1, h2, h3 {
@@ -455,12 +470,12 @@ h1, h2, h3 {
   font-weight: 800;
 }
 input[type=text], select {
-  border: 1px solid #e6e6e6;
+  border: 1px solid rgb(230, 230, 230);
   border-radius: .313em;
   background: white;
   min-height: 1.5em;
   font-size: 1em;
-  color: #444;
+  color: rgb(68, 68, 68);
 }
 
 input[type=text]:focus, select:focus {
@@ -511,7 +526,7 @@ button, input[type=submit], input[type=button] {
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   font-size: .8em;
   color: white;
-  background-color: #888;
+  background-color: rgb(136, 136, 136);
   cursor: pointer;
 }
 
@@ -622,6 +637,7 @@ button:hover {
   height: 1em;
   fill: currentColor;
   font-size: 1em;
+  vertical-align: bottom;
 }
 
 .icon--m {
@@ -632,13 +648,8 @@ button:hover {
   font-size: 2em;
 }
 
-.icon--gray{
-	color: gray;
-}
-
-.icon__offsett{
-	margin: 0em 0em 0em .5em;
-	margin-bottom: -.25em;
+.icon--gray {
+  color: rgb(136, 136, 136);
 }
 
 /* =======================================================================================
@@ -676,50 +687,6 @@ Example showing how to change the color/size of the icons:
   font-weight: normal;
   font-size: 1.6em;
 }
-.tile-vertical{
-  width: 100%;
-  margin: 1em 1em 1em 0;
-  padding: 0 0 3em 0;
-  min-height: 23em;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
-  -webkit-flex-flow: row;
-      -ms-flex-flow: row;
-          flex-flow: row;
-  min-height: auto;
-}
-
-.title-vertical__title{
-	margin-bottom: .2em
-}
-
-.tile-vertical:first-child{
-	margin-top: 2em;
-}
-
-.tile-vertical:last-child{
-	margin-bottom: 10em;
-}
-
-
-.tile-vertical--shadowbox{
-	border-bottom: 1px solid #ddd;
-}
-
-.tile-vertical__sorting{
-	padding: .5em 2em;
-	height: auto;
-}
-
-.tile-vertical__img{
-	margin-top: 1.5em;
-	max-height: 200px;
-}
 .tile {
   width: 22%;
   margin: 1.5% 1.5% 1em;
@@ -746,7 +713,16 @@ Example showing how to change the color/size of the icons:
 .learning-path_meta {
   font-size: 0.7em;
   line-height: 1.6em;
-  color: #666;
+  color: rgb(102, 102, 102);
+}
+.learning-step {
+  height: 100%;
+}
+
+.learning-step_embeded {
+  width: 100%;
+  height: 100%;
+  border: 0 none;
 }
 .masthead {
   position: fixed;
@@ -755,7 +731,7 @@ Example showing how to change the color/size of the icons:
   width: 100%;
   height: 3.125em;
   padding: 10px 0 0;
-  border-bottom: 1px solid #d8d8d8;
+  border-bottom: 1px solid rgb(216, 216, 216);
   background-color: white;
   display: -webkit-box;
   display: -webkit-flex;
@@ -780,41 +756,91 @@ Example showing how to change the color/size of the icons:
             flex-direction: column;
   }
 }
+.search-form {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  max-width: 920px;
+  padding: 2em 0;
+  margin: 0 auto;
+}
+
+.search-form--dark {
+  color: white;
+  background-color: #20588f;
+}
+
+input[type=text].search-form_query {
+  -webkit-box-flex: 2;
+  -webkit-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+  width: 100%;
+  height: 3.5em
+}
+
+input[type=text].search-form_query:focus { box-shadow: none; }
+
+.search-form--dark input[type=text].search-form_query:focus { border-color: white; }
+
+.search-form_btn {
+  margin-left: -4.5em
+}
+
+.search-form--dark .search-form_btn { border: 3px solid white; }
+
+.search-form_sort-order {
+  margin-left: 1em;
+  min-width: 6em;
+  height: 3.5em;
+}
 .search-list--meta{
 	margin-left: -.5em;
 	border-radius: 3em;
 	font-size: 0.8em;
 }
-.search--layout{
-	padding: 2em 0em 2em 0em;
+.search-results {
+  padding: 2em 0 10em;
+  max-width: 920px;
+  margin: 0 auto;
 }
 
-.input-search:focus{
-	box-shadow: none !important;
-	border-color: white !important;
+.search-result {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 1em 1em 1em 0;
+  padding: 0 0 3em 0;
+  border-bottom: 1px solid rgb(221, 221, 221);
 }
 
-.input-search{
-	-webkit-box-flex: 2;
-	-webkit-flex: 2;
-	    -ms-flex: 2;
-	        flex: 2;
-	width: 100%;
-	height: 3.5em;
+.search-result_img {
+  margin-top: 1.5em;
+  max-height: 200px;
 }
 
-.btn-search{
-	margin-left: -4.5em;
+.search-result_bd {
+  padding: .5em 2em;
 }
 
-.btn-search--negative{
-	border: 3px solid white;
+.search-result_title {
+  margin-bottom: .2em
 }
 
-.search-filter{
-	margin-left: 1em;
-	min-width: 6em;
-	height: 3.5em;
+.search-result_meta {
+  font-size: .9em;
+}
+
+.search-result_author, .search-result_changed-date, .search-result_duration {
+  display: inline-block;
+  margin-right: .5em;
 }
 .site-nav{
   margin-right: 1em;
@@ -834,7 +860,7 @@ Example showing how to change the color/size of the icons:
 }
 
 .site-nav_link:link, .site-nav_link:visited {
-  color: #222;
+  color: rgb(34, 34, 34);
   text-decoration: none;
 }
 
@@ -858,7 +884,7 @@ Example showing how to change the color/size of the icons:
   padding: 2em 1em 2em 0.5em;
   text-align: center;
   margin-right: 1.9em;
-  background-color: #eee;
+  background-color: rgb(238, 238, 238);
 }
 
 
@@ -866,9 +892,14 @@ Example showing how to change the color/size of the icons:
   margin-bottom: .5em;
 }
 
-.step-nav_meta{
-  color: gray;
-  font-size: 0.8em;
+.step-nav_meta {
+  color: rgb(136, 136, 136);
+  font-size: 0.9em;
+}
+
+.step-nav_author, .step-nav_changed-date, .step-nav_duration {
+  display: inline-block;
+  margin-right: .5em;
 }
 
 .step-nav_list {
@@ -907,7 +938,7 @@ Example showing how to change the color/size of the icons:
 
 .step-nav_link:link, .step-nav_link:visited {
   text-decoration: none;
-  color: #797979;
+  color: rgb(121, 121, 121);
 }
 
 .step-nav_link:hover, .step-nav_link:active {
@@ -916,11 +947,11 @@ Example showing how to change the color/size of the icons:
 
 
 .step-nav_item.step-nav_item--active:after {
-  border-left-color: #eaeaea;
+  border-left-color: rgb(234, 234, 234);
 }
 
 .step-nav_item--active .step-nav_link {
-  background-color: #eaeaea;
+  background-color: rgb(234, 234, 234);
 }
 .tiles {
   display: -webkit-box;
@@ -959,30 +990,6 @@ Example showing how to change the color/size of the icons:
 .one-column--narrow {
   max-width: 300px;
   margin: 0 auto;
-}
-
-.one-column--third{
-  max-width: 920px;
-  margin: 0 auto;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
-}
-
-.one-column__center{
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 100%;
 }
 .two-column {
   display: -webkit-box;

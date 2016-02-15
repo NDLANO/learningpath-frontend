@@ -23,14 +23,20 @@ export default function LearningPathToc ({learningPath, isPrivate, lang, activeP
       <div className='step-nav_learningpath-general-info'>
         <h3 className='step-nav_h'>{titleI18N(learningPath, lang)}</h3>
         <div className='step-nav_meta'>
-          <Icon.Person className='icon--gray icon__offset' />
-          <a rel='author' href='#'>{get(learningPath, 'author.name')}</a>
+          <span className='step-nav_author'>
+            <Icon.Person className='icon--gray' />
+            <a rel='author' href='#'>{get(learningPath, 'author.name')}</a>
+          </span>
 
-          <Icon.Today className='icon--gray icon__offset' />
-          <time>{formatDate(learningPath.lastUpdated, lang)}</time>
+          <span className='step-nav_changed-date'>
+            <Icon.Today className='icon--gray' />
+            <time>{formatDate(learningPath.lastUpdated, lang)}</time>
+          </span>
 
-          <Icon.QueryBuilder className='icon--gray icon__offset' />
-          <time>{formatDuration(learningPath.duration, lang)}</time>
+          <span className='step-nav_duration'>
+            <Icon.QueryBuilder className='icon--gray' />
+            <time>{formatDuration(learningPath.duration, lang)}</time>
+          </span>
         </div>
       </div>
       <ul className='step-nav_list'>
