@@ -1,13 +1,14 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
+import { embedUrlI18N } from '../util/i18nFieldFinder';
 
 export function LearningPathStep ({step, lang}) {
+  let embedUrl = embedUrlI18N(step, lang);
   return (
     <div className='learning-step'>
-      <h2 className='learning-step_title'>{titleI18N(step, lang)}</h2>
-      <div className='learing-step_description' dangerouslySetInnerHTML={{__html:descriptionI18N(step, lang)}}></div>
-      <pre><code>{JSON.stringify(step, null, 2)}</code></pre>
+      {(() => embedUrl ?
+          (<iframe className='learning-step_embeded' src={embedUrl}></iframe>) :
+          'no url to embed')()}
     </div>
   );
 }
