@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.13 - 2016-02-15
+
+* Embed learning path step as iframe.
+* Style update.
+
 ## 0.1.12 - 2016-02-12
 
 * Bugfixes and css
