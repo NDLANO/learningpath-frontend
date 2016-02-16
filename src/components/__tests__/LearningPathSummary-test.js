@@ -22,9 +22,6 @@ test('component/LearningPathSummary', t => {
 
   t.jsxIncludes(output, 'Kristofers private bokmål', 'title');
   t.jsxIncludes(output, 'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden.', 'description');
-  t.jsxIncludes(output, 'Sist endret 02.02.16', 'lastUpdated');
-  t.jsxIncludes(output, 'KristoferForfatter', 'author.name');
-  t.jsxIncludes(output, '18 timer', 'duration');
 
   t.end();
 });

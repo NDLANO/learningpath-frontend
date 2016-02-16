@@ -20,8 +20,10 @@ test('component/LearningPathStep', t => {
   const { output } = setup({lang: 'nb', step: learningStep});
   t.ok(output, 'renders');
 
-  t.jsxIncludes(output, 'En annen tittel her', 'title');
-  t.jsxIncludes(output, 'Beskrivelse', 'description');
+  //t.jsxIncludes(output, 'En annen tittel her', 'title');
+  //t.jsxIncludes(output, 'Beskrivelse', 'description');
+  t.jsxIncludes(output, 'iframe', 'iframe');
+  t.jsxIncludes(output, 'src="'+ learningStep.embedUrl[0].url +'"', 'src');
 
   t.end();
 });

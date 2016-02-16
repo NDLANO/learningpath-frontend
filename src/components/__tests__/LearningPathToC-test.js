@@ -21,6 +21,11 @@ test('component/LearningPathToC', t => {
   const { output } = setup({lang: 'nb', learningPath});
   t.ok(output, 'renders');
 
+  t.jsxIncludes(output, 'Kristofers private bokmål', 'title');
+  t.jsxIncludes(output, '02.02.16', 'lastUpdated');
+  t.jsxIncludes(output, 'KristoferForfatter', 'author.name');
+  t.jsxIncludes(output, '18 timer', 'duration');
+
   t.jsxIncludes(output, <Link to='/learningpaths/4' className='step-nav_link'>Introduksjon</Link>,
       'link to learningpath');
   t.jsxIncludes(output, <Link to='/learningpaths/4/step/7' className='step-nav_link'>Tittel her</Link>,
