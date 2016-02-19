@@ -12,10 +12,13 @@ module.exports = {
     'browser': true
   },
   'extends': 'eslint:recommended',
-  'ecmaFeatures': {
-    'jsx': true,
-    'modules': true,
-    'experimentalObjectRestSpread': true
+  'parser': 'babel-eslint',
+  'parserOptions': {
+    'sourceType': 'module',
+    'ecmaVersion': 6,
+    'ecmaFeatures': {
+      'jsx': true
+    }
   },
   'plugins': [
     'react'
