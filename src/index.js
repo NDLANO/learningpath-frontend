@@ -80,7 +80,8 @@ import {
   LoginProviders, SessionInitializer, LoginFailure,
   MyPage,
   LearningPath, LearningPathSummary, LearningPathStep,
-  LearningPathSearch
+  LearningPathSearch,
+  EditLearningPath
 } from './components';
 import requireAuthentication from './components/requireAuthentication';
 
@@ -103,6 +104,8 @@ ReactDOM.render(
               ({params}) => fetchPrivateLearningPathStep(params.pathId, params.stepId)
             )}/>
         </Route>
+        <Route path='learningpaths/private/:pathId/edit' component={requireAuthentication(EditLearningPath)}
+           onEnter={ifAuthenticated(({params}) => fetchPrivateLearningPath(params.pathId))} />
 
         <Route path='learningpaths' component={LearningPathSearch} onEnter={ctx => {
           let page = parseInt(get(ctx, 'location.query.page', 1));
