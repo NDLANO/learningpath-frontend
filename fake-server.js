@@ -6,7 +6,7 @@ const qs = require('qs');
 const app = connect();
 
 const AUTH_TOKEN = '12345abcde';
-const data = require('./server-data');
+const data = require('./fake-server-data');
 const currenUser = {
   id: '1',
   first_name: 'Kristofer',
