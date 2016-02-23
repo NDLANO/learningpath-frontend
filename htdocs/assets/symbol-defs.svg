@@ -12,13 +12,25 @@
 <title>import_export</title>
 <path class="path1" d="M682 726h128l-170 170-170-170h128v-300h84v300zM384 128l170 170h-128v300h-84v-300h-128z"></path>
 </symbol>
+<symbol id="icon-add_circle_outline" viewBox="0 0 1024 1024">
+<title>add_circle_outline</title>
+<path class="path1" d="M512 854q140 0 241-101t101-241-101-241-241-101-241 101-101 241 101 241 241 101zM512 86q176 0 301 125t125 301-125 301-301 125-301-125-125-301 125-301 301-125zM554 298v172h172v84h-172v172h-84v-172h-172v-84h172v-172h84z"></path>
+</symbol>
 <symbol id="icon-clear" viewBox="0 0 1024 1024">
 <title>clear</title>
 <path class="path1" d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
 </symbol>
+<symbol id="icon-save" viewBox="0 0 1024 1024">
+<title>save</title>
+<path class="path1" d="M640 384v-170h-426v170h426zM512 810q52 0 90-38t38-90-38-90-90-38-90 38-38 90 38 90 90 38zM726 128l170 170v512q0 34-26 60t-60 26h-596q-36 0-61-26t-25-60v-596q0-34 25-60t61-26h512z"></path>
+</symbol>
 <symbol id="icon-attach_file" viewBox="0 0 1024 1024">
 <title>attach_file</title>
 <path class="path1" d="M704 256h64v490q0 98-68 167t-166 69-167-69-69-167v-532q0-70 51-121t121-51 120 51 50 121v448q0 44-31 75t-75 31-76-31-32-75v-406h64v406q0 18 13 30t31 12 30-12 12-30v-448q0-44-31-76t-75-32-76 32-32 76v532q0 70 51 121t121 51 120-51 50-121v-490z"></path>
+</symbol>
+<symbol id="icon-collections" viewBox="0 0 1024 1024">
+<title>collections</title>
+<path class="path1" d="M86 256h84v598h598v84h-598q-34 0-59-25t-25-59v-598zM470 512l-128 170h512l-172-212-126 158zM938 682q0 34-25 60t-59 26h-512q-34 0-60-26t-26-60v-512q0-34 26-59t60-25h512q34 0 59 25t25 59v512z"></path>
 </symbol>
 <symbol id="icon-apps" viewBox="0 0 1024 1024">
 <title>apps</title>
