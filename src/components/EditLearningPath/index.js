@@ -1,27 +1,35 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
-import { createNewEditingPathStep, updateEditingPathStep } from '../../actions';
 import Icon from '../Icon';
 import Navigation from './Navigation';
 import PathStep from './PathStep';
 import PathIntroduction from './PathIntroduction';
 
+import {
+  createNewEditingPathStep,
+  updateEditingPathStep,
+  updateEditingLearningPath
+} from '../../actions';
+
 export function EditLearningPath (props) {
-  let { dispatch, learningSteps } = props;
+  let { dispatch, learningSteps, learningPath, saveAction } = props;
 
   let pathSteps = learningSteps.map(step => (
     <PathStep key={step.seqNo} {...props} step={step}
       onSubmit={s => dispatch(updateEditingPathStep(s))} />
   ));
 
+  let saveLearningPath = () => dispatch(saveAction(learningPath));
+
   return (<div className='two-column'>
       <aside className='two-column_col'>
         <Navigation {...props} />
         <div className='vertical-menu'>
-          <button className='cta cta-link cta-link--block'>
+          <button className='cta cta-link cta-link--block'
+            onClick={saveLearningPath}>
             <Icon.Save />
-            <span className="icon--space">Lagre og lukk</span>
+            <span className="icon--space">Lagre</span>
           </button>
         </div>
       </aside>
@@ -37,10 +45,16 @@ export function EditLearningPath (props) {
   </div>);
 }
 
+EditLearningPath.propTypes = {
+  learningPath: PropTypes.object.isRequired,
+  learningSteps: PropTypes.array.isRequired,
+  saveAction: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => Object.assign({}, state, {
   learningPath: get(state, 'editingLearningPath', {}),
-  learningSteps: get(state, 'editingLearningPath.learningsteps', [])
+  learningSteps: get(state, 'editingLearningPath.learningsteps', []),
+  saveAction: lp => updateEditingLearningPath(lp.id, lp)
 });
 
 export default connect(mapStateToProps)(EditLearningPath);
