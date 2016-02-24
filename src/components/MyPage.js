@@ -19,7 +19,7 @@ export function MyPage ({dispatch, learningPaths, lang, sortBy}) {
     return (
       <div key={lp.id} className='tile'>
         <h3 className='tile_hd'>
-          <Link to={`/learningpaths/private/${lp.id}`}>{title}</Link>
+          <Link to={`/learningpaths/private/${lp.id}/edit`}>{title}</Link>
         </h3>
         <div className='tile_bd' dangerouslySetInnerHTML={{__html:description}}></div>
         <div className='tile_ft'>
