@@ -52,7 +52,8 @@ const store = createStoreWithMiddleware(reducers, {
   },
   privateLearningPath: {},
   privateLearningPathStep: {},
-  privateLearningPaths: []
+  privateLearningPaths: [],
+  editingLearningPath: {}
 });
 
 import actions from './actions';
@@ -63,6 +64,7 @@ const {
   fetchLearningPaths,
   fetchLearningPath,
   fetchLearningPathStep,
+  fetchEditingLearningPath,
   changeLearningPathQuery
 } = bindActionCreators(actions, store.dispatch);
 
@@ -105,7 +107,7 @@ ReactDOM.render(
             )}/>
         </Route>
         <Route path='learningpaths/private/:pathId/edit' component={requireAuthentication(EditLearningPath)}
-           onEnter={ifAuthenticated(({params}) => fetchPrivateLearningPath(params.pathId))} />
+           onEnter={ifAuthenticated(({params}) => fetchEditingLearningPath(params.pathId))} />
 
         <Route path='learningpaths' component={LearningPathSearch} onEnter={ctx => {
           let page = parseInt(get(ctx, 'location.query.page', 1));

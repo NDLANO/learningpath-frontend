@@ -12,6 +12,7 @@ import privateLearningPath from './privateLearningPath';
 import privateLearningPaths from './privateLearningPaths';
 import privateLearningPathsSortBy from './privateLearningPathsSortBy';
 import privateLearningPathStep from './privateLearningPathStep';
+import editingLearningPath from './editingLearningPath';
 
 const rootReducers = combineReducers({
   authenticated,
@@ -26,6 +27,7 @@ const rootReducers = combineReducers({
   privateLearningPaths,
   privateLearningPathsSortBy,
   privateLearningPathStep,
+  editingLearningPath,
   routing: routeReducer
 });
 

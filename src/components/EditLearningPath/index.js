@@ -30,7 +30,7 @@ export function EditLearningPath (props) {
 
 
 const mapStateToProps = state => Object.assign({}, state, {
-  learningPath: state.privateLearningPath
+  learningPath: state.editingLearningPath
 });
 
 export default connect(mapStateToProps)(EditLearningPath);

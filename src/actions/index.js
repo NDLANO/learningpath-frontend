@@ -8,6 +8,7 @@ import fetchLearningPaths from './fetchLearningPaths';
 import fetchPrivateLearningPath from './fetchPrivateLearningPath';
 import fetchPrivateLearningPathStep from './fetchPrivateLearningPathStep';
 import fetchPrivateLearningPaths from './fetchPrivateLearningPaths';
+import fetchEditingLearningPath from './fetchEditingLearningPath';
 
 export var applicationError = createAction('APPLICATION_ERROR');
 export var setAuthenticated = createAction('SET_AUTHENTICATED');
@@ -20,6 +21,7 @@ export var setPrivateLearningPath = createAction('SET_PRIVATE_LEARNING_PATH');
 export var setPrivateLearningPathStep = createAction('SET_PRIVATE_LEARNING_PATH_STEP');
 export var setPrivateLearningPaths = createAction('SET_PRIVATE_LEARNING_PATHS');
 export var sortPrivateLearningPaths = createAction('SORT_PRIVATE_LEARNING_PATHS');
+export var setEditingLearningPath = createAction('SET_EDITING_LEARNING_PATH');
 export var setUserData = createAction('SET_USER_DATA');
 
 export {
@@ -30,7 +32,8 @@ export {
   fetchLearningPaths,
   fetchPrivateLearningPath,
   fetchPrivateLearningPathStep,
-  fetchPrivateLearningPaths
+  fetchPrivateLearningPaths,
+  fetchEditingLearningPath
 };
 
 export default {
@@ -45,6 +48,7 @@ export default {
   setPrivateLearningPathStep,
   setPrivateLearningPaths,
   sortPrivateLearningPaths,
+  setEditingLearningPath,
   setUserData,
   initializeSession,
   logout,
@@ -53,5 +57,6 @@ export default {
   fetchLearningPaths,
   fetchPrivateLearningPath,
   fetchPrivateLearningPathStep,
-  fetchPrivateLearningPaths
+  fetchPrivateLearningPaths,
+  fetchEditingLearningPath
 };
