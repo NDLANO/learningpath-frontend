@@ -46,3 +46,48 @@ test('reducers/editingLearningPath', (t) => {
   t.end();
 });
 
+test('reducers/editingLearningPath create new step', (t) => {
+  let nextState = reducer({learningsteps: []}, { type: 'CREATE_NEW_EDITING_LEARNING_PATH_STEP' });
+
+  t.deepEqual(nextState.learningsteps,
+    [{
+      seqNo: 1,
+      title: [],
+      description: [],
+      embedUrl: [],
+      type: '',
+      license: ''
+    }],
+    'add first');
+ 
+  nextState = reducer(nextState, { type: 'CREATE_NEW_EDITING_LEARNING_PATH_STEP' });
+
+  t.equal(nextState.learningsteps.length, 2, 'add second length');
+
+  t.deepEqual(nextState.learningsteps,
+    [{
+      seqNo: 1,
+      title: [],
+      description: [],
+      embedUrl: [],
+      type: '',
+      license: ''
+    }, {
+      seqNo: 2,
+      title: [],
+      description: [],
+      embedUrl: [],
+      type: '',
+      license: ''
+    }],
+    'add second');
+
+  t.deepEqual(
+    reducer({learningsteps: ['hello']},
+      { type: 'CREATE_NEW_EDITING_LEARNING_PATH_STEP', payload: new Error('fail'), error: true }),
+    {learningsteps: ['hello']},
+    'ignore errors'
+  );
+  t.end();
+});
+
