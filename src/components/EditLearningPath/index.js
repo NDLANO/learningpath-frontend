@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
+import { createNewEditingPathStep } from '../../actions';
 import Icon from '../Icon';
 import Navigation from './Navigation';
 import PathStep from './PathStep';
@@ -9,7 +10,9 @@ import PathIntroduction from './PathIntroduction';
 export function EditLearningPath (props) {
   const onStepChange = step => console.log(step);
 
-  let pathSteps = get(props, 'learningPath.learningsteps', []).map(step => (
+  let { dispatch, learningSteps } = props;
+
+  let pathSteps = learningSteps.map(step => (
     <PathStep key={step.seqNo} {...props} step={step} onSubmit={onStepChange} />
   ));
 
@@ -20,17 +23,19 @@ export function EditLearningPath (props) {
       <main className='two-column_col'>
         <PathIntroduction {...props} />
         {pathSteps}
-        <a className='cta cta-link cta-link--block' href='#'>
+        <button className='cta cta-link cta-link--block'
+            onClick={() => dispatch(createNewEditingPathStep())}>
           <Icon.Add />
           <span className="icon--space">Legg til nytt læringssteg</span>
-        </a>
+        </button>
       </main>
   </div>);
 }
 
 
 const mapStateToProps = state => Object.assign({}, state, {
-  learningPath: state.editingLearningPath
+  learningPath: get(state, 'editingLearningPath', {}),
+  learningSteps: get(state, 'editingLearningPath.learningsteps', [])
 });
 
 export default connect(mapStateToProps)(EditLearningPath);

@@ -3,8 +3,8 @@ import get from 'lodash/get';
 import Icon from '../Icon';
 import { titleI18N } from '../../util/i18nFieldFinder';
 
-export default function Navigation({learningPath, lang}) {
-  let stepNavItems = get(learningPath, 'learningsteps', []).map(step => (
+export default function Navigation({learningPath, learningSteps, lang}) {
+  let stepNavItems = learningSteps.map(step => (
     <li className='step-nav_item' key={step.seqNo}>
       <a className='step-nav_link' href={'#step' + step.seqNo}>{titleI18N(step, lang)}</a>
     </li>
