@@ -1,19 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
-import { createNewEditingPathStep } from '../../actions';
+import { createNewEditingPathStep, updateEditingPathStep } from '../../actions';
 import Icon from '../Icon';
 import Navigation from './Navigation';
 import PathStep from './PathStep';
 import PathIntroduction from './PathIntroduction';
 
 export function EditLearningPath (props) {
-  const onStepChange = step => console.log(step);
-
   let { dispatch, learningSteps } = props;
 
   let pathSteps = learningSteps.map(step => (
-    <PathStep key={step.seqNo} {...props} step={step} onSubmit={onStepChange} />
+    <PathStep key={step.seqNo} {...props} step={step}
+      onSubmit={s => dispatch(updateEditingPathStep(s))} />
   ));
 
   return (<div className='two-column'>

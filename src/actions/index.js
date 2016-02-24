@@ -23,6 +23,7 @@ export var setPrivateLearningPaths = createAction('SET_PRIVATE_LEARNING_PATHS');
 export var sortPrivateLearningPaths = createAction('SORT_PRIVATE_LEARNING_PATHS');
 export var setEditingLearningPath = createAction('SET_EDITING_LEARNING_PATH');
 export var createNewEditingPathStep = createAction('CREATE_NEW_EDITING_LEARNING_PATH_STEP');
+export var updateEditingPathStep = createAction('UPDATE_EDITING_LEARNING_PATH_STEP');
 export var setUserData = createAction('SET_USER_DATA');
 
 export {
@@ -51,6 +52,7 @@ export default {
   sortPrivateLearningPaths,
   setEditingLearningPath,
   createNewEditingPathStep,
+  updateEditingPathStep,
   setUserData,
   initializeSession,
   logout,

@@ -91,3 +91,40 @@ test('reducers/editingLearningPath create new step', (t) => {
   t.end();
 });
 
+test('reducers/editingLearningPath update learning step', (t) => {
+  let nextState = reducer({learningsteps: [
+    { seqNo: 1, id: 12, license: 'any' },
+    { seqNo: 2, id: 34, license: 'public domain' },
+    { seqNo: 3, id: 56, license: 'none' }
+  ]}, {
+    type: 'UPDATE_EDITING_LEARNING_PATH_STEP',
+    payload: {
+      seqNo: 2,
+      license: 'GPL'
+    }
+  });
+
+  t.equal(nextState.learningsteps.length, 3);
+  t.deepEqual(
+    nextState.learningsteps[1],
+    {
+      seqNo: 2,
+      id: 34,
+      license: 'GPL'
+    }
+  );
+
+  nextState = reducer(nextState, {
+    type: 'UPDATE_EDITING_LEARNING_PATH_STEP',
+    payload: {
+      seqNo: 4,
+      license: 'o_O'
+    }
+  });
+
+  t.equal(nextState.learningsteps.length, 3);
+  t.deepEqual(nextState.learningsteps.map(s => s.id), [12, 34, 56]);
+
+  t.end();
+});
+
