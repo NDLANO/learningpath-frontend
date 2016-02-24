@@ -16,7 +16,7 @@ export default class PathStep extends Component {
       type: evt.target.value
     });
 
-    this.setState({ step }, this.notifyOnChange);
+    this.setState({ step });
   }
 
   handleEmbedUrlChange(evt) {
@@ -28,11 +28,18 @@ export default class PathStep extends Component {
       }
     });
 
-    this.setState({ step }, this.notifyOnChange);
+    this.setState({ step });
   }
 
-  notifyOnChange() {
-    this.props.onChange(this.state.step);
+  isValid() {
+    return true;
+  }
+
+  handleSubmit(evt) {
+    evt.preventDefault();
+    if ( this.isValid() ) {
+      this.props.onSubmit(this.state.step);
+    }
   }
 
   render() {
@@ -45,6 +52,7 @@ export default class PathStep extends Component {
     const fieldIdAttr = value => `${fieldNameAttr}_type_${value}`;
     const changeType = this.handleTypeChange.bind(this);
     const changeEmbedUrl = this.handleEmbedUrlChange.bind(this);
+    const handleSubmit = this.handleSubmit.bind(this);
 
     let embedUrlPreview = '';
     /*
@@ -60,10 +68,26 @@ export default class PathStep extends Component {
     }
     */
 
+    let embedSourceInput = '';
+
+    if (step.type) {
+      embedSourceInput =(
+        <div className='learningsourde-from'>
+          <div>
+            <label className='mediatype-menu__label'>Lim in lenke (URL) fra ndla.no eller youtube.com</label>
+            <input type='url' style={{display: 'inline-block', width: '100%'}}
+                value={embedUrl} onChange={changeEmbedUrl}
+                placeholder='Lim in lenke' />
+            {embedUrlPreview}
+          </div>
+        </div>
+      );
+    }
+
     return (
-      <div className='learning-path-step'>
+      <form onSubmit={handleSubmit} className='learning-path-step'>
         <div className='learning-path_hd'>
-         <h1 className='learing-path_title'>{title}</h1>
+          <h1 className='learing-path_title'>{title}</h1>
         </div>
         <div className='learning-path_bd'>
           <div dangerouslySetInnerHTML={{__html: htmlDescription}}></div>
@@ -116,23 +140,19 @@ export default class PathStep extends Component {
                 </label>
               </div>
             </div>
-            <div className='learningsourde-from'>
-              <div>
-                <label className='mediatype-menu__label'>Lim in lenke (URL) fra ndla.no eller youtube.com</label>
-                <input type='url' style={{display: 'inline-block', width: '100%'}}
-                    value={embedUrl} onChange={changeEmbedUrl}
-                    placeholder='Lim in lenke' />
-                {embedUrlPreview}
-              </div>
-            </div>
+            {embedSourceInput}
+          </div>
+          <div>
+            <input className='button' type='submit' value='Lagre' disabled={ !this.isValid() } />
+            <input className='button' type='button' value='Slett' disabled={true} />
           </div>
         </div>
-      </div>
+      </form>
     );
   }
 }
 
 PathStep.propTypes = {
-  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
   lang: PropTypes.string.isRequired
 };

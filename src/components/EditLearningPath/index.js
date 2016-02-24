@@ -10,7 +10,7 @@ export function EditLearningPath (props) {
   const onStepChange = step => console.log(step);
 
   let pathSteps = get(props, 'learningPath.learningsteps', []).map(step => (
-    <PathStep key={step.seqNo} {...props} step={step} onChange={onStepChange} />
+    <PathStep key={step.seqNo} {...props} step={step} onSubmit={onStepChange} />
   ));
 
   return (<div className='two-column'>
