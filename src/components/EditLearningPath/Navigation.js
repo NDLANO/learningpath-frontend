@@ -1,12 +1,10 @@
 import React from 'react';
-import get from 'lodash/get';
-import Icon from '../Icon';
 import { titleI18N } from '../../util/i18nFieldFinder';
 
 export default function Navigation({learningPath, learningSteps, lang}) {
   let stepNavItems = learningSteps.map(step => (
     <li className='step-nav_item' key={step.seqNo}>
-      <a className='step-nav_link' href={'#step' + step.seqNo}>{titleI18N(step, lang)}</a>
+      <a className='step-nav_link' href={'#step' + step.seqNo}>{titleI18N(step, lang) || '(unnamed)'}</a>
     </li>
   ));
 
@@ -19,12 +17,6 @@ export default function Navigation({learningPath, learningSteps, lang}) {
         <li className='step-nav_item'><a className='step-nav_link' href='#intro'>Introdukjson</a></li>
         {stepNavItems}
       </ul>
-      <div className='vertical-menu'>
-        <a className='cta cta-link cta-link--block' href='#'>
-          <Icon.Save />
-          <span className="icon--space">Lagre og lukk</span>
-        </a>
-      </div>
     </div>
   );
 }

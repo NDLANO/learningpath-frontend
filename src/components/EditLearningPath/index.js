@@ -18,6 +18,12 @@ export function EditLearningPath (props) {
   return (<div className='two-column'>
       <aside className='two-column_col'>
         <Navigation {...props} />
+        <div className='vertical-menu'>
+          <button className='cta cta-link cta-link--block'>
+            <Icon.Save />
+            <span className="icon--space">Lagre og lukk</span>
+          </button>
+        </div>
       </aside>
       <main className='two-column_col'>
         <PathIntroduction {...props} />
