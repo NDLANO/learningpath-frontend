@@ -16,19 +16,16 @@ import { errorReporter } from './middleware';
 import reducers from './reducers';
 
 const createPersistentStore = compose(
-  persistState(
-    ['authenticated', 'authToken', 'user', 'lang'],
-    {
-      key: 'ndla:sti',
-      slicer: function (paths) {
-        // custom slicer because default slicer does not store falsy values
-        return (state) => paths.reduce((acc, path) => {
-          acc[path] = state[path];
-          return acc;
-        }, {});
-      }
+  persistState(['authenticated', 'authToken', 'user', 'lang'], {
+    key: 'ndla:sti',
+    slicer: function (paths) {
+      // custom slicer because default slicer does not store falsy values
+      return (state) => paths.reduce((acc, path) => {
+        acc[path] = state[path];
+        return acc;
+      }, {});
     }
-  )
+  })
 )(createStore);
 
 const createStoreWithMiddleware = applyMiddleware(
