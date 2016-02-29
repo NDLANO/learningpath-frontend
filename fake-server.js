@@ -114,6 +114,9 @@ app.use('/learningpaths', function (req, res) {
 
   switch (urlChunks.length) {
   case 0:
+    if (req.method === 'POST') {
+      return sendJsonData(200, data.private[0])(req, res);
+    }
     return sendJsonData(200, data.public)(req, res);
   case 1:
     return sendJsonData(200, data.private[0])(req, res);
