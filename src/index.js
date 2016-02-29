@@ -91,41 +91,44 @@ import requireAuthentication from './components/requireAuthentication';
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path='/' component={App}>
+      <Route path='/'>
         <IndexRoute component={Welcome} />
 
-        <Route path='login' component={LoginProviders} />
-        <Route path='login/success/:authToken' component={SessionInitializer} />
-        <Route path='login/failure' component={LoginFailure} />
-        <Route path='minside' component={requireAuthentication(MyPage)} onEnter={ifAuthenticated(fetchPrivateLearningPaths)} />
+        <Route component={App}>
+          <Route path='login' component={LoginProviders} />
+          <Route path='login/success/:authToken' component={SessionInitializer} />
+          <Route path='login/failure' component={LoginFailure} />
+          <Route path='minside' component={requireAuthentication(MyPage)} onEnter={ifAuthenticated(fetchPrivateLearningPaths)} />
 
-        <Route path='learningpaths/private/new' component={requireAuthentication(CreateLearningPath)}
-          onEnter={ifAuthenticated(createEmptyEditingPath)}/>
-        <Route path='learningpaths/private/:pathId' component={requireAuthentication(LearningPath)} isPrivate={true}
-          onEnter={ifAuthenticated(({params}) => fetchPrivateLearningPath(params.pathId))}>
-          <IndexRoute component={LearningPathSummary} isPrivate={true} />
-          <Route path='step/:stepId' component={requireAuthentication(LearningPathStep)}
-            onEnter={ifAuthenticated(
-              ({params}) => fetchPrivateLearningPathStep(params.pathId, params.stepId)
-            )}/>
+          <Route path='learningpaths/private/new' component={requireAuthentication(CreateLearningPath)}
+            onEnter={ifAuthenticated(createEmptyEditingPath)}/>
+          <Route path='learningpaths/private/:pathId' component={requireAuthentication(LearningPath)} isPrivate={true}
+            onEnter={ifAuthenticated(({params}) => fetchPrivateLearningPath(params.pathId))}>
+            <IndexRoute component={LearningPathSummary} isPrivate={true} />
+            <Route path='step/:stepId' component={requireAuthentication(LearningPathStep)}
+              onEnter={ifAuthenticated(
+                ({params}) => fetchPrivateLearningPathStep(params.pathId, params.stepId)
+              )}/>
+          </Route>
+          <Route path='learningpaths/private/:pathId/edit' component={requireAuthentication(EditLearningPath)}
+             onEnter={ifAuthenticated(({params}) => fetchEditingLearningPath(params.pathId))} />
+
+          <Route path='learningpaths' component={LearningPathSearch} onEnter={ctx => {
+            let query = get(ctx, 'location.query.query', '');
+            let page = parseInt(get(ctx, 'location.query.page', 1));
+            changeLearningPathQuery({query, page});
+            fetchLearningPaths();
+          }} />
+
+          <Route path='learningpaths/:pathId' component={LearningPath}
+            onEnter={({params}) => fetchLearningPath(params.pathId)}>
+            <IndexRoute component={LearningPathSummary} />
+            <Route path='step/:stepId' component={LearningPathStep}
+              onEnter={({params}) => fetchLearningPathStep(params.pathId, params.stepId)} />
+          </Route>
+
+          <Route path='*' component={NotFound} />
         </Route>
-        <Route path='learningpaths/private/:pathId/edit' component={requireAuthentication(EditLearningPath)}
-           onEnter={ifAuthenticated(({params}) => fetchEditingLearningPath(params.pathId))} />
-
-        <Route path='learningpaths' component={LearningPathSearch} onEnter={ctx => {
-          let page = parseInt(get(ctx, 'location.query.page', 1));
-          changeLearningPathQuery({page});
-          fetchLearningPaths();
-        }} />
-
-        <Route path='learningpaths/:pathId' component={LearningPath}
-          onEnter={({params}) => fetchLearningPath(params.pathId)}>
-          <IndexRoute component={LearningPathSummary} />
-          <Route path='step/:stepId' component={LearningPathStep}
-            onEnter={({params}) => fetchLearningPathStep(params.pathId, params.stepId)} />
-        </Route>
-
-        <Route path='*' component={NotFound} />
       </Route>
     </Router>
   </Provider>,

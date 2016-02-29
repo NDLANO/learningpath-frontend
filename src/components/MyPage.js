@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import sortBy from 'lodash/sortBy';
 import reverse from 'lodash/reverse';
 import { sortPrivateLearningPaths } from '../actions';
+import Icon from './Icon';
 
 import formatDate from '../util/formatDate';
 import formatDuration from '../util/formatDuration';
@@ -48,7 +49,10 @@ export function MyPage ({dispatch, learningPaths, lang, sortBy}) {
     </div>
     <div className='tiles'>{items}</div>
     <div>
-      <Link to='/learningpaths/private/new'>Oprett ny lærringssti</Link>
+      <Link className='cta-link new-learningpath-button' to='/learningpaths/private/new'>
+        <Icon.Add />
+        <span className='icon--space'>Opprett ny lærringssti</span>
+      </Link>
     </div>
   </div>);
 }
