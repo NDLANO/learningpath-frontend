@@ -128,3 +128,38 @@ test('reducers/editingLearningPath update learning step', (t) => {
   t.end();
 });
 
+test('reducers/editingLearningPath update title', t => {
+  let nextState = reducer({title: [
+    { title: 'title no', language: 'nb' },
+    { title: 'title en', language: 'en' },
+    { title: 'title nn', language: 'nn' }
+  ]}, {
+    type: 'UPDATE_EDITING_LEARNING_PATH_TITLE',
+    payload: {
+      title: 'new title en',
+      language: 'en'
+    }
+  });
+
+  t.equal(nextState.title.length, 3);
+  t.deepEqual(
+    nextState.title[1],
+    {
+      title: 'new title en',
+      language: 'en'
+    }
+  );
+
+  nextState = reducer(nextState, {
+    type: 'UPDATE_EDITING_LEARNING_PATH_TITLE',
+    payload: {
+      title: 'new title sv',
+      language: 'sv'
+    }
+  });
+
+  t.equal(nextState.title.length, 4);
+  t.deepEqual(nextState.title.map(s => s.language), ['nb', 'en', 'nn', 'sv']);
+
+  t.end();
+});

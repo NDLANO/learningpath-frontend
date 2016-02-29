@@ -46,6 +46,26 @@ export default handleActions({
     throw(state) { return state; }
   },
 
+  UPDATE_EDITING_LEARNING_PATH_TITLE: {
+    next(state, action) {
+      let nextState = cloneDeep(state);
+      let titles = get(nextState, 'title', []);
+      let index = findIndex(titles, ['language', action.payload.language]);
+
+      if (index === -1) {
+        titles.push(action.payload);
+      } else {
+        assign(titles[index], action.payload);
+      }
+
+      nextState.title = titles;
+
+      return nextState;
+    },
+
+    throw(state) { return state; }
+  },
+
   LOGOUT: () => ({})
 }, {});
 

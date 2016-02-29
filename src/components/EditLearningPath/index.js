@@ -5,26 +5,39 @@ import Icon from '../Icon';
 import Navigation from './Navigation';
 import PathStep from './PathStep';
 import PathIntroduction from './PathIntroduction';
+import TitleEditor from './TitleEditor';
+import { titleI18N } from '../../util/i18nFieldFinder';
 
 import {
   createNewEditingPathStep,
   updateEditingPathStep,
+  updateEditingPathTitle,
   updateEditingLearningPath
 } from '../../actions';
 
 export function EditLearningPath (props) {
-  let { dispatch, learningSteps, learningPath, saveAction } = props;
+  let { dispatch, learningSteps, learningPath, saveAction, lang } = props;
 
   let pathSteps = learningSteps.map(step => (
     <PathStep key={step.seqNo} {...props} step={step}
       onSubmit={s => dispatch(updateEditingPathStep(s))} />
   ));
 
+  let titleText = titleI18N(learningPath, lang);
+  let updateTitle = (nextTitle) => dispatch(updateEditingPathTitle(nextTitle));
+
   let saveLearningPath = () => dispatch(saveAction(learningPath));
 
   return (<div className='two-column'>
       <aside className='two-column_col'>
-        <Navigation {...props} />
+        <div className='step-nav'>
+          <div className='step-nav_learningpath-general-info'>
+            <h2 className='step-nav_h'>
+              <TitleEditor lang={lang} value={titleText} onChange={updateTitle} />
+            </h2>
+          </div>
+          <Navigation {...props} />
+        </div>
         <div className='vertical-menu'>
           <button className='cta cta-link cta-link--block'
             onClick={saveLearningPath}>

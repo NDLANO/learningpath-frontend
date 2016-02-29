@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
+import cloneDeep from 'lodash/cloneDeep';
 import { titleI18N, descriptionI18N, embedUrlI18N } from '../../util/i18nFieldFinder';
 import Icon from '../Icon';
+import TitleEditor from './TitleEditor';
 
 export default class PathStep extends Component {
   constructor(props) {
@@ -10,6 +12,18 @@ export default class PathStep extends Component {
       lang: props.lang
     };
   }
+
+  handleTitleChange(value) {
+    let step = Object.assign({}, this.state.step);
+    step.title.forEach(title => {
+      if (title.language === value.language) {
+        title.title = value.title;
+      }
+    });
+
+    this.setState({ step });
+  }
+
 
   handleTypeChange(evt) {
     let step = Object.assign({}, this.state.step, {
@@ -50,6 +64,7 @@ export default class PathStep extends Component {
 
     const fieldNameAttr = `step_${step.seqNo}_type`;
     const fieldIdAttr = value => `${fieldNameAttr}_type_${value}`;
+    const changeTitle = this.handleTitleChange.bind(this);
     const changeType = this.handleTypeChange.bind(this);
     const changeEmbedUrl = this.handleEmbedUrlChange.bind(this);
     const handleSubmit = this.handleSubmit.bind(this);
@@ -87,7 +102,9 @@ export default class PathStep extends Component {
     return (
       <form onSubmit={handleSubmit} className='learning-path-step'>
         <div className='learning-path_hd'>
-          <h1 className='learing-path_title'>{title}</h1>
+          <h1 className='learing-path_title'>
+            <TitleEditor lang={lang} value={title} onChange={changeTitle} />
+          </h1>
         </div>
         <div className='learning-path_bd'>
           <div dangerouslySetInnerHTML={{__html: htmlDescription}}></div>
