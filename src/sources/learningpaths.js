@@ -1,13 +1,14 @@
 import 'isomorphic-fetch';
 import queryString from 'query-string';
 import cloneDeep from 'lodash/cloneDeep';
-import { fetchAuthorized, putAuthorized, resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';
+import { fetchAuthorized, postAuthorized, putAuthorized, resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';
 
 const fetchPrivatePath = fetchAuthorized('/learningpaths/private/:pathId');
 const fetchPrivatePathStep = fetchAuthorized(
     '/learningpaths/private/:pathId/learningsteps/:stepId');
 const fetchPrivatePaths = fetchAuthorized('/learningpaths/private');
-const updatePrivatePath = putAuthorized('/learningpaths/private/:pathId');
+const createPrivatePath = postAuthorized('/learningpaths');
+const updatePrivatePath = putAuthorized('/learningpaths/:pathId');
 
 const learningPathsUrl = apiResourceUrl('/learningpaths');
 
@@ -41,6 +42,7 @@ export {
   fetchPathStep,
   fetchPaths,
   fetchPrivatePath,
+  createPrivatePath,
   updatePrivatePath,
   fetchPrivatePathStep,
   fetchPrivatePaths

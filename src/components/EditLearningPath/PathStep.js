@@ -1,8 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import cloneDeep from 'lodash/cloneDeep';
+import get from 'lodash/get';
+import assign from 'lodash/assign';
+import findIndex from 'lodash/findIndex';
 import { titleI18N, descriptionI18N, embedUrlI18N } from '../../util/i18nFieldFinder';
 import Icon from '../Icon';
 import TitleEditor from './TitleEditor';
+
+
 
 export default class PathStep extends Component {
   constructor(props) {
@@ -14,33 +19,47 @@ export default class PathStep extends Component {
   }
 
   handleTitleChange(value) {
-    let step = Object.assign({}, this.state.step);
-    step.title.forEach(title => {
-      if (title.language === value.language) {
-        title.title = value.title;
-      }
-    });
+    let step = cloneDeep(this.state.step);
+    let titles = get(step, 'title', []);
+    let index = findIndex(titles, ['language', value.language]);
+
+    if (index === -1) {
+      titles.push(value);
+    } else {
+      assign(titles[index], value);
+    }
+
+    step.title = titles;
 
     this.setState({ step });
   }
 
 
   handleTypeChange(evt) {
-    let step = Object.assign({}, this.state.step, {
-      type: evt.target.value
-    });
+    let step = cloneDeep(this.state.step);
+
+    Object.assign(step, { type: evt.target.value });
 
     this.setState({ step });
   }
 
   handleEmbedUrlChange(evt) {
-    let lang = this.state.lang;
-    let step = Object.assign({}, this.state.step);
-    step.embedUrl.forEach(embedUrl => {
-      if (embedUrl.language === lang) {
-        embedUrl.url = evt.target.value;
-      }
-    });
+    let value = {
+      url: evt.target.value,
+      language: this.state.lang
+    };
+
+    let step = cloneDeep(this.state.step);
+    let embedUrls = get(step, 'embedUrl', []);
+    let index = findIndex(embedUrls, ['language', value.language]);
+
+    if (index === -1) {
+      embedUrls.push(value);
+    } else {
+      assign(embedUrls[index], value);
+    }
+
+    step.embedUrl = embedUrls;
 
     this.setState({ step });
   }
@@ -171,5 +190,6 @@ export default class PathStep extends Component {
 
 PathStep.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  step: PropTypes.object.isRequired,
   lang: PropTypes.string.isRequired
 };

@@ -49,6 +49,16 @@ export function fetchAuthorized (path, method = 'GET') {
   }).then( resolveJsonOrRejectWithError );
 }
 
+export function postAuthorized (path) {
+  const url = params => apiResourceUrl(formatPattern(path, params));
+
+  return (authToken, params = {}, body) => fetch(url(params), {
+    headers: {'APP-KEY': authToken},
+    method: 'POST', 
+    body: JSON.stringify(body)
+  }).then( resolveJsonOrRejectWithError );
+}
+
 export function putAuthorized (path) {
   const url = params => apiResourceUrl(formatPattern(path, params));
 

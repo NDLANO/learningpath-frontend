@@ -34,10 +34,11 @@ export default handleActions({
       let index = findIndex(steps, ['seqNo', action.payload.seqNo]);
 
       if (index === -1) {
-        return state;
+        steps.push(action.payload);
+      } else {
+        assign(steps[index], action.payload);
       }
 
-      assign(steps[index], action.payload);
       nextState.learningsteps = steps;
 
       return nextState;

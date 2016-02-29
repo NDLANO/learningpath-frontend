@@ -47,6 +47,9 @@ export function MyPage ({dispatch, learningPaths, lang, sortBy}) {
       </div>
     </div>
     <div className='tiles'>{items}</div>
+    <div>
+      <Link to='/learningpaths/private/new'>Oprett ny lærringssti</Link>
+    </div>
   </div>);
 }
 

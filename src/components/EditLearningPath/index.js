@@ -23,7 +23,7 @@ export function EditLearningPath (props) {
       onSubmit={s => dispatch(updateEditingPathStep(s))} />
   ));
 
-  let titleText = titleI18N(learningPath, lang);
+  let titleText = titleI18N(learningPath, lang) || '';
   let updateTitle = (nextTitle) => dispatch(updateEditingPathTitle(nextTitle));
 
   let saveLearningPath = () => dispatch(saveAction(learningPath));

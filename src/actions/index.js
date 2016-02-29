@@ -10,6 +10,8 @@ import fetchPrivateLearningPathStep from './fetchPrivateLearningPathStep';
 import fetchPrivateLearningPaths from './fetchPrivateLearningPaths';
 import fetchEditingLearningPath from './fetchEditingLearningPath';
 import updateEditingLearningPath from './updateEditingLearningPath';
+import createEditingLearningPath from './createEditingLearningPath';
+import createEmptyEditingPath from './createEmptyEditingPath';
 
 export var applicationError = createAction('APPLICATION_ERROR');
 export var setAuthenticated = createAction('SET_AUTHENTICATED');
@@ -38,7 +40,9 @@ export {
   fetchPrivateLearningPathStep,
   fetchPrivateLearningPaths,
   fetchEditingLearningPath,
-  updateEditingLearningPath
+  updateEditingLearningPath,
+  createEditingLearningPath,
+  createEmptyEditingPath
 };
 
 export default {
@@ -67,5 +71,7 @@ export default {
   fetchPrivateLearningPathStep,
   fetchPrivateLearningPaths,
   fetchEditingLearningPath,
-  updateEditingLearningPath
+  updateEditingLearningPath,
+  createEditingLearningPath,
+  createEmptyEditingPath
 };

@@ -13,7 +13,7 @@ const pathId = 123;
 
 test('actions/updateEditingLearningPath', t => {
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .put('/learningpaths/private/' + pathId, {
+    .put('/learningpaths/' + pathId, {
       id: pathId, isRequest: true
     })
     .reply(200, {id: pathId, isResponse: true});
@@ -34,7 +34,7 @@ test('actions/updateEditingLearningPath', t => {
 
 test('actions/updateEditingLearningPath access denied', (t) => {
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .put('/learningpaths/private/' + pathId, {
+    .put('/learningpaths/' + pathId, {
       id: pathId,
       foo: 'bar'
     })

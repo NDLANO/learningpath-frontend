@@ -53,6 +53,8 @@ const store = createStoreWithMiddleware(reducers, {
   editingLearningPath: {}
 });
 
+//store.subscribe(() => console.log(store.getState().editingLearningPath));
+
 import actions from './actions';
 const {
   fetchPrivateLearningPaths,
@@ -62,7 +64,8 @@ const {
   fetchLearningPath,
   fetchLearningPathStep,
   fetchEditingLearningPath,
-  changeLearningPathQuery
+  changeLearningPathQuery,
+  createEmptyEditingPath
 } = bindActionCreators(actions, store.dispatch);
 
 function ifAuthenticated (cb) {
@@ -80,7 +83,8 @@ import {
   MyPage,
   LearningPath, LearningPathSummary, LearningPathStep,
   LearningPathSearch,
-  EditLearningPath
+  EditLearningPath,
+  CreateLearningPath
 } from './components';
 import requireAuthentication from './components/requireAuthentication';
 
@@ -95,6 +99,8 @@ ReactDOM.render(
         <Route path='login/failure' component={LoginFailure} />
         <Route path='minside' component={requireAuthentication(MyPage)} onEnter={ifAuthenticated(fetchPrivateLearningPaths)} />
 
+        <Route path='learningpaths/private/new' component={requireAuthentication(CreateLearningPath)}
+          onEnter={ifAuthenticated(createEmptyEditingPath)}/>
         <Route path='learningpaths/private/:pathId' component={requireAuthentication(LearningPath)} isPrivate={true}
           onEnter={ifAuthenticated(({params}) => fetchPrivateLearningPath(params.pathId))}>
           <IndexRoute component={LearningPathSummary} isPrivate={true} />

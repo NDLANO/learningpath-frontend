@@ -117,13 +117,14 @@ test('reducers/editingLearningPath update learning step', (t) => {
   nextState = reducer(nextState, {
     type: 'UPDATE_EDITING_LEARNING_PATH_STEP',
     payload: {
+      id: 78,
       seqNo: 4,
       license: 'o_O'
     }
   });
 
-  t.equal(nextState.learningsteps.length, 3);
-  t.deepEqual(nextState.learningsteps.map(s => s.id), [12, 34, 56]);
+  t.equal(nextState.learningsteps.length, 4);
+  t.deepEqual(nextState.learningsteps.map(s => s.id), [12, 34, 56, 78]);
 
   t.end();
 });
