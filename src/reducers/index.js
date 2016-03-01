@@ -8,6 +8,7 @@ import learningPath from './learningPath';
 import learningPathStep from './learningPathStep';
 import learningPaths from './learningPaths';
 import learningPathQuery from './learningPathQuery';
+import learningPathsTotalCount from './learningPathsTotalCount';
 import privateLearningPath from './privateLearningPath';
 import privateLearningPaths from './privateLearningPaths';
 import privateLearningPathsSortBy from './privateLearningPathsSortBy';
@@ -23,6 +24,7 @@ const rootReducers = combineReducers({
   learningPathStep,
   learningPaths,
   learningPathQuery,
+  learningPathsTotalCount,
   privateLearningPath,
   privateLearningPaths,
   privateLearningPathsSortBy,

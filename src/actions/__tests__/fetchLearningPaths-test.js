@@ -20,6 +20,7 @@ test('actions/fetchLearningPaths', t => {
     });
 
   const expectedActions = [
+    actions.setLearningPathsTotalCount(2),
     actions.setLearningPaths([ {id: '123'}, {id: '456'} ]),
     actions.changeLearningPathQuery({page: 3, pageSize: 25})
   ];
@@ -47,6 +48,7 @@ test('actions/fetchLearningPaths with query', t => {
     });
 
   const expectedActions = [
+    actions.setLearningPathsTotalCount(400),
     actions.setLearningPaths([ {id: '123'}, {id: '456'} ]),
     actions.changeLearningPathQuery({page: 4, pageSize: 15})
   ];
@@ -87,6 +89,7 @@ test('actions/fetchLearningPaths with empty query', t => {
     });
 
   const expectedActions = [
+    actions.setLearningPathsTotalCount(400),
     actions.setLearningPaths([ {id: '123'}, {id: '456'} ]),
     actions.changeLearningPathQuery({page, pageSize})
   ];

@@ -1,14 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { routeActions } from 'redux-simple-router';
 import get from 'lodash/get';
+import isEqual from 'lodash/isEqual';
 import Icon from './Icon';
+import SearchResultPager from './SearchResultPager';
 
 import formatDate from '../util/formatDate';
 import formatDuration from '../util/formatDuration';
 
-import {fetchLearningPaths, changeLearningPathQuery} from '../actions';
+import {fetchLearningPaths } from '../actions';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 
 
@@ -116,40 +119,59 @@ SearchResult.propTypes = {
   lang: PropTypes.string.isRequired
 };
 
-export function LearningPathSearch(props) {
-  const {learningPaths, learningPathQuery, lang, location:{pathname}, dispatch} = props;
+export class LearningPathSearch extends Component {
 
-  const navigateTo = query => {
-    dispatch(changeLearningPathQuery(query));
-    dispatch(fetchLearningPaths());
-    dispatch(routeActions.push({pathname: pathname, query}));
-  };
+  componentWillMount () {
+    this.props.fetchLearningPaths();
+  }
 
-  const submitSearchQuery = query => navigateTo(Object.assign({},
-        learningPathQuery,
-        { query, page: 1 }));
+  componentWillReceiveProps (newProps) {
+    if (!isEqual(newProps.query, this.props.query)) {
+      newProps.fetchLearningPaths();
+    }
+  }
 
-  const changeSortOrder = sort => navigateTo(Object.assign({},
-        learningPathQuery,
-        { sort }));
+  render () {
+    const { learningPaths, query, lastPage, lang, location: { pathname }, pushRoute } = this.props;
+    let { page } = query;
 
-  return (
-    <div>
-      <div className='page-header'>
-        <SearchForm
-          {...learningPathQuery}
-          onSortOrderChange={changeSortOrder}
-          onSearchQuerySubmit={submitSearchQuery}
-        />
+    const navigateTo = (q) => {
+      pushRoute({pathname, query: q});
+    };
+
+    const submitSearchQuery = q => navigateTo(Object.assign({}, query, { query: q, page: 1 }));
+
+    const changeSortOrder = sort => navigateTo(Object.assign({}, query, { sort }));
+
+    return (
+      <div>
+        <div className='page-header'>
+          <SearchForm {...query}
+            onSortOrderChange={changeSortOrder}
+            onSearchQuerySubmit={submitSearchQuery}
+          />
+        </div>
+
+        <div className='search-results'>
+          {learningPaths.map(path =>
+            (<SearchResult key={path.id} path={path} lang={lang} />)
+          )}
+          <SearchResultPager page={page} lastPage={lastPage} query={query} />
+        </div>
       </div>
-
-      <div className='search-results'>
-        {learningPaths.map(path =>
-          (<SearchResult key={path.id} path={path} lang={lang} />)
-        )}
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
-export default connect(state => state)(LearningPathSearch);
+const mapStateToProps = (state) => {
+  let query = state.learningPathQuery;
+  let lastPage = Math.ceil(state.learningPathsTotalCount / (query.pageSize || 1));
+  return Object.assign({}, state, { query, lastPage });
+};
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  fetchLearningPaths,
+  pushRoute: (route) => routeActions.push(route)
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(LearningPathSearch);

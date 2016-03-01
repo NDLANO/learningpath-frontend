@@ -117,7 +117,10 @@ app.use('/learningpaths', function (req, res) {
     if (req.method === 'POST') {
       return sendJsonData(200, data.private[0])(req, res);
     }
-    return sendJsonData(200, data.public)(req, res);
+    var pageSize = parseInt(req.query['page-size']) || 10;
+    var page = parseInt(req.query['page']) || 1;
+    var result = Object.assign({}, data.public, { totalCount: 123, page: page, pageSize: pageSize });
+    return sendJsonData(200, result)(req, res);
   case 1:
     return sendJsonData(200, data.private[0])(req, res);
   case 2:

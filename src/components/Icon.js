@@ -22,5 +22,7 @@ Icon.TypeTask = Icon.TypeText;
 Icon.TypeSummary = Icon.TypeText;
 Icon.Save = props => (<Icon {...props} className={'icon--save '+props.className} svgDefId='icon-save' />);
 Icon.Add = props => (<Icon {...props} className={'icon--add-circle-outline '+props.className} svgDefId='icon-add_circle_outline' />);
+Icon.Back = props => (<Icon {...props} className={'icon--arrow-back '+props.className} svgDefId='icon-arrow_back' />);
+Icon.Forward = props => (<Icon {...props} className={'icon--arrow-forward '+props.className} svgDefId='icon-arrow_forward' />);
 
 export default Icon;
