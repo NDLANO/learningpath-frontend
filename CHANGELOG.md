@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.15 - 2016-03-02
+
+* Edit and create learning path.
+* New frontpage.
+
 ## 0.1.14 - 2016-02-15
 
 * Resize height of iframes with source http://ndla.no/node/.
