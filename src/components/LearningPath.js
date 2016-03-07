@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import LearningPathToc from './LearningPathToC';
+import LearningPathGeneralInfo from './LearningPathGeneralInfo';
 
 export function LearningPath(props) {
   return (
     <div className='two-column'>
       <aside className='two-column_col'>
+        <LearningPathGeneralInfo {...props} />
         <LearningPathToc {...props} />
       </aside>
       <main className='two-column_col'>
@@ -15,6 +17,11 @@ export function LearningPath(props) {
     </div>
   );
 }
+
+LearningPath.propTypes = {
+  learningPath: PropTypes.object.isRequired,
+  lang: PropTypes.string.isRequired
+};
 
 const mapStateToProps = (state, ownProps) => {
   let isPrivate = ownProps.route.isPrivate;

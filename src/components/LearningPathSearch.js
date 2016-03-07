@@ -6,6 +6,7 @@ import { routeActions } from 'redux-simple-router';
 import get from 'lodash/get';
 import isEqual from 'lodash/isEqual';
 import Icon from './Icon';
+import LabeledIcon from './LabeledIcon';
 import SearchResultPager from './SearchResultPager';
 
 import formatDate from '../util/formatDate';
@@ -46,7 +47,7 @@ class SearchForm extends Component {
 
     return (
       <form onSubmit={handleSubmit}
-          className='search-form search-form--dark'>
+          className='search-form search-form--on-dark'>
 
         <input type='text' className='search-form_query'
             onChange={handleQueryChange}
@@ -92,20 +93,9 @@ function SearchResult ({path, lang}) {
           <Link to={`/learningpaths/${path.id}`}>{titleI18N(path, lang)}</Link>
         </h2>
         <div className='search-result_meta'>
-          <span className='search-result_author'>
-            <Icon.Person className='icon--gray' />
-            <a rel='author' href='#'>{get(path, 'author.name')}</a>
-          </span>
-
-          <span className='search-result_changed-date'>
-            <Icon.Today className='icon--gray' />
-            <time>{formatDate(path.lastUpdated, lang)}</time>
-          </span>
-
-          <span className='search-result_duration'>
-            <Icon.QueryBuilder className='icon--gray' />
-            <time>{formatDuration(path.duration, lang)}</time>
-          </span>
+          <LabeledIcon.Person labelText={get(path, 'author.name')} />
+          <LabeledIcon.Today labelText={formatDate(path.lastUpdated, lang)} tagName='time' />
+          <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName='time' />
         </div>
         <div className='search-result_description'
           dangerouslySetInnerHTML={{__html: descriptionI18N(path, lang)}}></div>

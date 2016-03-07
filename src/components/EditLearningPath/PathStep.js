@@ -106,7 +106,7 @@ export default class PathStep extends Component {
 
     if (step.type) {
       embedSourceInput =(
-        <div className='learningsourde-from'>
+        <div className='learningsource-form'>
           <div>
             <label className='mediatype-menu__label'>Lim in lenke (URL) fra ndla.no eller youtube.com</label>
             <input type='url' style={{display: 'inline-block', width: '100%'}}

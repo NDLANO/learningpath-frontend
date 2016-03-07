@@ -41,9 +41,7 @@ export function Masthead ({authenticated, userName, handleLogOut}) {
 
   let logo = (
     <div className='logo'>
-      <Link to='/' className='logo_link'>
-        <img src='/assets/logo.png' alt='Nasjonal digital læringsarena' className='logo_img' />
-      </Link>
+      <Link to='/' className='logo_link'>Nasjonal digital læringsarena</Link>
     </div>
   );
 

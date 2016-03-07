@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
-import Icon from '../Icon';
+import LabeledIcon from '../LabeledIcon';
 import Navigation from './Navigation';
 import PathStep from './PathStep';
 import PathIntroduction from './PathIntroduction';
@@ -31,28 +31,28 @@ export function EditLearningPath (props) {
   return (<div className='two-column'>
       <aside className='two-column_col'>
         <div className='step-nav'>
-          <div className='step-nav_learningpath-general-info'>
-            <h2 className='step-nav_h'>
+          <div className='learningpath-general-info'>
+            <h2 className='learningpath-general-info_h'>
               <TitleEditor lang={lang} value={titleText} onChange={updateTitle} />
             </h2>
           </div>
           <Navigation {...props} />
         </div>
-        <div className='vertical-menu'>
-          <button className='cta cta-link cta-link--block'
-            onClick={saveLearningPath}>
-            <Icon.Save />
-            <span className="icon--space">Lagre</span>
-          </button>
-        </div>
+        <ul className='vertical-menu'>
+          <li className='vertical-menu_item'>
+            <button className='cta cta-link cta-link--block'
+              onClick={saveLearningPath}>
+              <LabeledIcon.Save labelText='Lagre' />
+            </button>
+          </li>
+        </ul>
       </aside>
       <main className='two-column_col'>
         <PathIntroduction {...props} />
         {pathSteps}
-        <button className='cta cta-link cta-link--block'
+        <button className='cta-link cta-link--block'
             onClick={() => dispatch(createNewEditingPathStep())}>
-          <Icon.Add />
-          <span className="icon--space">Legg til nytt læringssteg</span>
+          <LabeledIcon.Add labelText='Legg til nytt læringssteg' />
         </button>
       </main>
   </div>);
