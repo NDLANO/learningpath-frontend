@@ -37,7 +37,7 @@ export default function Welcome () {
           </div>
         </div>
 
-        <h1 className='hero_title'>Læringssier</h1>
+        <h1 className='hero_title'>Læringsstier</h1>
         <h3 className='hero_title'>Nasjonal digital læringsarena</h3>
 
         <Form to='/learningpaths' method='GET' className='search-form search-form--on-dark'>
