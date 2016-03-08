@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import get from 'lodash/get';
 
 import { titleI18N } from '../util/i18nFieldFinder';
@@ -8,10 +9,14 @@ import formatDuration from '../util/formatDuration';
 import LabeledIcon from './LabeledIcon';
 
 
-export default function LearningPathGeneralInfo ({learningPath, lang}) {
+export default function LearningPathGeneralInfo ({learningPath, lang, isPrivate}) {
+  const href = `/learningpaths${isPrivate ? '/private' : ''}/${learningPath.id}`;
+
   return (
     <div className='learningpath-general-info'>
-      <h3 className='learningpath-general-info_h'>{titleI18N(learningPath, lang)}</h3>
+      <h3 className='learningpath-general-info_h'>
+        <Link to={href}>{titleI18N(learningPath, lang)}</Link>
+      </h3>
       <div className='learningpath-general-info_b'>
         <LabeledIcon.Person labelText={get(learningPath, 'author.name')} />
         <LabeledIcon.Today labelText={formatDate(learningPath.lastUpdated, lang)} tagName='time' />
@@ -23,5 +28,10 @@ export default function LearningPathGeneralInfo ({learningPath, lang}) {
 
 LearningPathGeneralInfo.propTypes = {
   learningPath: PropTypes.object.isRequired,
+  isPrivate: PropTypes.bool,
   lang: PropTypes.string.isRequired
+};
+
+LearningPathGeneralInfo.defaultProps = {
+  isPrivate: false
 };

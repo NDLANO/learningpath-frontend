@@ -97,8 +97,7 @@ function SearchResult ({path, lang}) {
           <LabeledIcon.Today labelText={formatDate(path.lastUpdated, lang)} tagName='time' />
           <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName='time' />
         </div>
-        <div className='search-result_description'
-          dangerouslySetInnerHTML={{__html: descriptionI18N(path, lang)}}></div>
+        <div className='search-result_description'>{descriptionI18N(path, lang)}</div>
       </div>
     </div>
   );

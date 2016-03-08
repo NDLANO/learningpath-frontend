@@ -10,7 +10,6 @@ export default function Navigation({learningSteps, lang}) {
 
   return (
     <ul className='step-nav_list'>
-      <li className='step-nav_item'><a className='step-nav_link' href='#intro'>Introdukjson</a></li>
       {stepNavItems}
     </ul>
   );

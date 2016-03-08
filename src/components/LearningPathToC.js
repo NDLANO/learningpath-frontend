@@ -15,9 +15,6 @@ export default function LearningPathToc ({learningPath, isPrivate, lang, activeP
   return (
     <div className='step-nav'>
       <ul className='step-nav_list'>
-        <li className={itemClassName(base)}>
-          <Link to={base} className='step-nav_link'>Introduksjon</Link>
-        </li>
         {((steps) => steps.map(step => (
           <li key={step.id}
             className={itemClassName(`${base}/step/${step.id}`)}>

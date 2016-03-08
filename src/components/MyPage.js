@@ -22,7 +22,7 @@ export function MyPage ({dispatch, learningPaths, lang, sortBy}) {
         <h3 className='tile_hd'>
           <Link to={`/learningpaths/private/${lp.id}/edit`}>{title}</Link>
         </h3>
-        <div className='tile_bd' dangerouslySetInnerHTML={{__html:description}}></div>
+        <div className='tile_bd'>{description}</div>
         <div className='tile_ft'>
           <p>{duration}</p>
           <p>Sist endret {lastUpdated}</p>
