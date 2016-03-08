@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.16 - 2016-03-08
+
+* Use 150-char description instead of html introduction to preview learning paths.
+* CSS upgrade
+
 ## 0.1.15 - 2016-03-02
 
 * Edit and create learning path.
