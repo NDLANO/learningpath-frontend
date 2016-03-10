@@ -85,6 +85,7 @@ const store = createStoreWithMiddleware(reducers, {
 //store.subscribe(() => console.log(store.getState().editingLearningPath));
 
 const {
+  logout,
   fetchPrivateLearningPaths,
   fetchPrivateLearningPath,
   fetchPrivateLearningPathStep,
@@ -126,6 +127,7 @@ ReactDOM.render(
           <Route path='login' component={LoginProviders} />
           <Route path='login/success/:authToken' component={SessionInitializer} />
           <Route path='login/failure' component={LoginFailure} />
+          <Route path='logout' onEnter={ifAuthenticated(logout)} component={LoginProviders} />
           <Route path='minside' component={requireAuthentication(MyPage)} onEnter={ifAuthenticated(fetchPrivateLearningPaths)} />
 
           <Route path='learningpaths/private/new' component={requireAuthentication(CreateLearningPath)}
