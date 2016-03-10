@@ -105,7 +105,7 @@ function ifAuthenticated (cb) {
   };
 }
 
-import App from './containers/App';
+import App from './components/App';
 import {
   Welcome, NotFound,
   LoginProviders, SessionInitializer, LoginFailure,
