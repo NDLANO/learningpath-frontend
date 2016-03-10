@@ -50,7 +50,7 @@ export function MyPage ({dispatch, learningPaths, lang, sortBy}) {
     <div className='tiles'>{items}</div>
     <div>
       <Link className='cta-link new-learningpath-button' to='/learningpaths/private/new'>
-        <LabeledIcon.Add labelTekst='Opprett ny lærringssti' />
+        <LabeledIcon.Add labelText='Opprett ny lærringssti' />
       </Link>
     </div>
   </div>);
