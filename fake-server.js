@@ -5,7 +5,7 @@ const connect = require('connect');
 const qs = require('qs');
 const app = connect();
 
-const AUTH_TOKEN = '12345abcde';
+const AUTH_TOKEN = process.env.AUTH_TOKEN || '12345abcde';
 const data = require('./fake-server-data');
 const currenUser = {
   id: '1',
