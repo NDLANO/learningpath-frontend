@@ -24,5 +24,8 @@ Icon.Save = props => (<Icon {...props} className={'icon--save '+props.className}
 Icon.Add = props => (<Icon {...props} className={'icon--add-circle-outline '+props.className} svgDefId='icon-add_circle_outline' />);
 Icon.Back = props => (<Icon {...props} className={'icon--arrow-back '+props.className} svgDefId='icon-arrow_back' />);
 Icon.Forward = props => (<Icon {...props} className={'icon--arrow-forward '+props.className} svgDefId='icon-arrow_forward' />);
+Icon.Search = props => (<Icon {...props} className={'icon--search '+props.className} svgDefId='icon-search' />);
+Icon.Exit = props => (<Icon {...props} className={'icon--exit-to-app '+props.className} svgDefId='icon-exit_to_app' />);
+Icon.Apps = props => (<Icon {...props} className={'icon--apps '+props.className} svgDefId='icon-apps' />);
 
 export default Icon;

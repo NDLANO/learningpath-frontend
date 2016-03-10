@@ -27,6 +27,7 @@
     "babel-register": "^6.3.13",
     "babel-tape-runner": "^2.0.0",
     "connect": "^3.4.0",
+    "enzyme": "^2.1.0",
     "eslint": "^2.1.0",
     "eslint-plugin-react": "^3.16.1",
     "extend-tape": "^1.1.0",
