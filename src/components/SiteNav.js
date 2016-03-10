@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import classNames from 'classnames';
 
 import LabeledIcon from './LabeledIcon';
 
-export function SiteNav ({authenticated, userName}) {
+export function SiteNav ({authenticated, userName, cssModifier}) {
   let myPage, logInOut;
 
   if (authenticated) {
@@ -33,8 +34,13 @@ export function SiteNav ({authenticated, userName}) {
     );
   }
 
+  let rootClasses = classNames({
+    'site-nav': true,
+    [`site-nav--${cssModifier}`]: cssModifier,
+  });
+
   return (
-    <div className='site-nav'>
+    <div className={rootClasses}>
       <ul className='site-nav_list'>
         <li className='site-nav_item'>
           <Link to='/learningpaths' className='site-nav_link'>
@@ -50,7 +56,8 @@ export function SiteNav ({authenticated, userName}) {
 
 SiteNav.propTypes = {
   authenticated: PropTypes.bool,
-  userName: PropTypes.string
+  userName: PropTypes.string,
+  cssModifier: PropTypes.string
 };
 
 SiteNav.defaultProps = {

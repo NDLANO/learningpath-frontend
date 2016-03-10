@@ -1,28 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
 import Form from 'react-router-form';
-
-function Logo () {
-  return (
-    <h1 className='logo logo--on-dark'>
-      <Link to='/' className='logo_link'>Nasjonal digital læringsarena</Link>
-    </h1>
-  );
-}
-
-function SiteNav () {
-  return (<div className='site-nav site-nav--on-dark'>
-      <ul className='site-nav_list'>
-        <li className='site-nav_item'>
-          <Link to='/learningpaths' className='site-nav_link'>Finn læringssti</Link>
-        </li>
-        <li className='site-nav_item'>
-          <Link to='/login' className='site-nav_link'>Logg inn</Link>
-        </li>
-      </ul>
-    </div>
-  );
-}
+import Logo from './Logo';
+import SiteNav from './SiteNav';
 
 export default function Welcome () {
   return (
@@ -30,10 +10,10 @@ export default function Welcome () {
       <div className='hero'>
         <div className='frontpage-masthead'>
           <div className='frontpage-masthead_left'>
-            <Logo />
+            <Logo cssModifier='on-dark' />
           </div>
           <div className='frontpage-masthead_right'>
-            <SiteNav />
+            <SiteNav cssModifier='on-dark' />
           </div>
         </div>
 
