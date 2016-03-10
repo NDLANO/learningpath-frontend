@@ -2,6 +2,7 @@ import test from 'tape';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
+import payload403invalid from './payload403invalid';
 
 import actions from '..';
 
@@ -68,7 +69,7 @@ test('actions/fetchPrivateLearningPathStep access denied', t => {
     .reply(403, {message: 'Invalid'});
 
   const expectedActions = [
-    actions.applicationError(new Error('Invalid'))
+    actions.applicationError(payload403invalid())
   ];
 
   const store = mockStore({ authToken }, expectedActions, (res) => {

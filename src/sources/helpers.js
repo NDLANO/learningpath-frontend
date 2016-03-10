@@ -29,13 +29,17 @@ export { locationOrigin };
 
 export function apiResourceUrl (path) { return apiBaseUrl + path; }
 
+export function createErrorPayload (status, message, json) {
+  return Object.assign(new Error(message), { status, json });
+}
+
 export function resolveJsonOrRejectWithError (res) {
   return new Promise((resolve, reject) => (res.ok) ?
     res.status === 204 ?
     resolve() :
     resolve(res.json()) :
     res.json()
-      .then(d => new Error(defined(d.message, res.statusText)))
+      .then(json => createErrorPayload(res.status, defined(json.message, res.statusText), json))
       .then( reject )
   );
 }
