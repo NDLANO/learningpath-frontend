@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 import LabeledIcon from './LabeledIcon';
 
-export default function SiteNav ({authenticated, userName}) {
+export function SiteNav ({authenticated, userName}) {
   let myPage, logInOut;
 
   if (authenticated) {
@@ -56,3 +57,12 @@ SiteNav.defaultProps = {
   authenticated: false,
   userName: ''
 };
+
+const userName = user => [user.first_name, user.middle_name, user.last_name].join(' ');
+const selectUserName = state => state.authenticated ? userName(state.user) : '';
+
+const mapStateToProps = (state) => Object.assign({}, state, {
+  userName: selectUserName(state)
+});
+
+export default connect(mapStateToProps)(SiteNav);
