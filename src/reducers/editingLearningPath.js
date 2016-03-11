@@ -4,6 +4,24 @@ import get from 'lodash/get';
 import assign from 'lodash/assign';
 import findIndex from 'lodash/findIndex';
 
+function mergeI18nProperty (propertyName) {
+  return function next(state, action) {
+    let nextState = cloneDeep(state);
+    let properties = get(nextState, propertyName, []);
+    let index = findIndex(properties, ['language', action.payload.language]);
+
+    if (index === -1) {
+      properties.push(action.payload);
+    } else {
+      assign(properties[index], action.payload);
+    }
+
+    nextState[propertyName] = properties;
+
+    return nextState;
+  };
+}
+
 export default handleActions({
   SET_EDITING_LEARNING_PATH: {
     next(state, action) { return action.payload; },
@@ -48,22 +66,12 @@ export default handleActions({
   },
 
   UPDATE_EDITING_LEARNING_PATH_TITLE: {
-    next(state, action) {
-      let nextState = cloneDeep(state);
-      let titles = get(nextState, 'title', []);
-      let index = findIndex(titles, ['language', action.payload.language]);
+    next: mergeI18nProperty('title'),
+    throw(state) { return state; }
+  },
 
-      if (index === -1) {
-        titles.push(action.payload);
-      } else {
-        assign(titles[index], action.payload);
-      }
-
-      nextState.title = titles;
-
-      return nextState;
-    },
-
+  UPDATE_EDITING_LEARNING_PATH_DESCRIPTION: {
+    next: mergeI18nProperty('description'),
     throw(state) { return state; }
   },
 
