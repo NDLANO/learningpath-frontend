@@ -1,54 +1,13 @@
 import React, { PropTypes } from 'react';
-import { Editor, EditorState, ContentState } from 'draft-js';
+import OneLineEditor from './OneLineEditor';
 
-export default class DescriptionEditor extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { editorState: EditorState.createEmpty() };
-
-    let { onChange } = props;
-
-    this.onChange = (editorState) => this.setState({editorState}, () => {
-      if (editorState.getSelection().getHasFocus()) {
-        return;
-      }
-
-      let { lang } = this.props;
-      let newDescriptionText = editorState.getCurrentContent().getPlainText();
-
-      onChange({
-        description: newDescriptionText,
-        language: lang
-      });
-    });
-  }
-
-  updateEditorContentStateFromText(text) {
-    if (text !== undefined) {
-      let editorState = EditorState.createWithContent( ContentState.createFromText(text) );
-      this.setState({ editorState });
-    }
-  }
-
-  componentWillMount() {
-    this.updateEditorContentStateFromText(this.props.value);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.updateEditorContentStateFromText(nextProps.value);
-  }
-
-  render() {
-    return (
-      <Editor
-        editorState={this.state.editorState}
-        onChange={this.onChange}
-        placeholder='Skriv her'
-        ref='editor'
-      />
-    );
-  }
+export default function DescriptionEditor ({lang, value, onChange}) {
+  const _onChange = (newValue) => onChange({description: newValue, language: lang});
+  return (<OneLineEditor
+    onChange={_onChange}
+    value={value||''}
+    placeholder='Skriv kort beskrivelse (max 150 teng)'
+  />);
 }
 
 DescriptionEditor.propTypes = {

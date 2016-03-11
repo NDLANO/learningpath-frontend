@@ -6,12 +6,14 @@ import Navigation from './Navigation';
 import PathStep from './PathStep';
 import PathIntroduction from './PathIntroduction';
 import TitleEditor from './TitleEditor';
-import { titleI18N } from '../../util/i18nFieldFinder';
+import DescriptionEditor from './DescriptionEditor';
+import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
 
 import {
   createNewEditingPathStep,
   updateEditingPathStep,
   updateEditingPathTitle,
+  updateEditingPathDescription,
   updateEditingLearningPath
 } from '../../actions';
 
@@ -24,9 +26,18 @@ export function EditLearningPath (props) {
   ));
 
   let titleText = titleI18N(learningPath, lang) || '';
-  let updateTitle = (nextTitle) => dispatch(updateEditingPathTitle(nextTitle));
+  let updateTitle = (nextTitle) => {
+    return dispatch(updateEditingPathTitle(nextTitle));
+  };
 
-  let saveLearningPath = () => dispatch(saveAction(learningPath));
+  let descriptionText = descriptionI18N(learningPath, lang) || '';
+  let updateDescription = (nextDescription) => {
+    return dispatch(updateEditingPathDescription(nextDescription));
+  };
+
+  let saveLearningPath = () => {
+    dispatch(saveAction(learningPath))
+  };
 
   return (<div className='two-column'>
       <aside className='two-column_col'>
@@ -40,15 +51,16 @@ export function EditLearningPath (props) {
         </div>
         <ul className='vertical-menu'>
           <li className='vertical-menu_item'>
-            <button className='cta cta-link cta-link--block'
-              onClick={saveLearningPath}>
+            <button className='cta cta-link cta-link--block' onClick={saveLearningPath}>
               <LabeledIcon.Save labelText='Lagre' />
             </button>
           </li>
         </ul>
       </aside>
       <main className='two-column_col'>
-        <PathIntroduction {...props} />
+        <h2>
+          <DescriptionEditor lang={lang} value={descriptionText} onChange={updateDescription} />
+        </h2>
         {pathSteps}
         <button className='cta-link cta-link--block'
             onClick={() => dispatch(createNewEditingPathStep())}>
