@@ -1,6 +1,9 @@
 var webpack = require('webpack');
 
-var plugins = [];
+var plugins = [
+  new webpack.EnvironmentPlugin(['NODE_ENV'])
+];
+
 
 if (process.env.NODE_ENV === 'production') {
   plugins.push( new webpack.optimize.UglifyJsPlugin() );
