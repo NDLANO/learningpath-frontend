@@ -5,6 +5,7 @@ import nock from 'nock';
 import payload403invalid from './payload403invalid';
 
 import actions from '..';
+import { routeActions } from 'redux-simple-router';
 
 const middleware = [ thunk ];
 const mockStore = configureMockStore(middleware);
@@ -20,7 +21,8 @@ test('actions/updateEditingLearningPath', t => {
     .reply(200, {id: pathId, isResponse: true});
 
   const expectedActions = [
-    actions.setEditingLearningPath({id: pathId, isResponse: true})
+    actions.setEditingLearningPath({id: pathId, isResponse: true}),
+    routeActions.push({ pathname: `/learningpaths/private/${pathId}` })
   ];
 
   const store = mockStore({ authToken }, expectedActions, (res) => {
