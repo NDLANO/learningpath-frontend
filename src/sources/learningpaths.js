@@ -1,6 +1,9 @@
 import 'isomorphic-fetch';
 import queryString from 'query-string';
 import cloneDeep from 'lodash/cloneDeep';
+import map from 'lodash/map';
+
+import assureSequenceOrder from '../util/assureSequenceOrder';
 import { fetchAuthorized, postAuthorized, putAuthorized, resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';
 
 const fetchPrivatePath = fetchAuthorized('/learningpaths/private/:pathId');
@@ -8,7 +11,19 @@ const fetchPrivatePathStep = fetchAuthorized(
     '/learningpaths/private/:pathId/learningsteps/:stepId');
 const fetchPrivatePaths = fetchAuthorized('/learningpaths/private');
 const createPrivatePath = postAuthorized('/learningpaths');
-const updatePrivatePath = putAuthorized('/learningpaths/:pathId');
+
+const putLearningPath = putAuthorized('/learningpaths/:pathId');
+const putLearningPathStep = putAuthorized('/learningpaths/:pathId/learningsteps/:stepId');
+
+const updatePrivatePath = (authToken, { pathId }, body) =>
+  putLearningPath(authToken, { pathId }, body)
+  .then(lpath => Promise.all(map(body.learningsteps, step =>
+      putLearningPathStep(authToken, { pathId, stepId: step.id }, step )
+    )).then(steps => Object.assign({}, lpath, {
+        learningsteps: assureSequenceOrder(steps)
+    }))
+  )
+;
 
 const learningPathsUrl = apiResourceUrl('/learningpaths');
 
