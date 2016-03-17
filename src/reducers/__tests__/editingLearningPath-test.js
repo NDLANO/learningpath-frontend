@@ -13,13 +13,13 @@ test('reducers/editingLearningPath', (t) => {
 
   t.deepEqual(
     reducer(undefined, { type: 'SET_EDITING_LEARNING_PATH', payload }),
-    {id: '123'},
+    {id: '123', learningsteps: []},
     'set state'
   );
 
   t.deepEqual(
     reducer({id: 'abc'}, { type: 'SET_EDITING_LEARNING_PATH', payload }),
-    {id: '123'},
+    {id: '123', learningsteps: []},
     'change state'
   );
 

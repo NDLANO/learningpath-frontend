@@ -2,7 +2,7 @@ import test from 'tape';
 
 import reducer from '../learningPath';
 
-const payload = { id: '123' };
+const payload = { id: '123', learningsteps: [] };
 
 test('reducers/learningPath', (t) => {
   t.equal(
@@ -13,13 +13,13 @@ test('reducers/learningPath', (t) => {
 
   t.deepEqual(
     reducer(undefined, { type: 'SET_LEARNING_PATH', payload }),
-    {id: '123'},
+    {id: '123', learningsteps: []},
     'set state'
   );
 
   t.deepEqual(
     reducer({id: 'abc'}, { type: 'SET_LEARNING_PATH', payload }),
-    {id: '123'},
+    {id: '123', learningsteps: []},
     'change state'
   );
 

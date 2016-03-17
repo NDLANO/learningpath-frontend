@@ -3,6 +3,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import get from 'lodash/get';
 import assign from 'lodash/assign';
 import findIndex from 'lodash/findIndex';
+import assureSequenceOrder from '../util/assureSequenceOrder';
 
 function mergeI18nProperty (propertyName) {
   return function next(state, action) {
@@ -24,7 +25,12 @@ function mergeI18nProperty (propertyName) {
 
 export default handleActions({
   SET_EDITING_LEARNING_PATH: {
-    next(state, action) { return action.payload; },
+    next(state, action) {
+      return Object.assign({},
+        action.payload,
+        { learningsteps: assureSequenceOrder(action.payload.learningsteps) }
+      );
+    },
     throw(state) { return state; }
   },
 
