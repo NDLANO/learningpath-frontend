@@ -135,7 +135,7 @@ ReactDOM.render(
           <Route path='learningpaths/private/:pathId' component={requireAuthentication(LearningPath)} isPrivate={true}
             onEnter={ifAuthenticated(({params}) => fetchPrivateLearningPath(params.pathId))}>
             <IndexRoute component={LearningPathSummary} isPrivate={true} />
-            <Route path='step/:stepId' component={requireAuthentication(LearningPathStep)}
+            <Route path='step/:stepId' component={requireAuthentication(LearningPathStep)} isPrivate={true} 
               onEnter={ifAuthenticated(
                 ({params}) => fetchPrivateLearningPathStep(params.pathId, params.stepId)
               )}/>
