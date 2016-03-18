@@ -36,7 +36,7 @@ export function EditLearningPath (props) {
   };
 
   let saveLearningPath = () => {
-    dispatch(saveAction(learningPath))
+    dispatch(saveAction(learningPath));
   };
 
   return (<div className='two-column'>
