@@ -10,7 +10,19 @@ const fetchPrivatePath = fetchAuthorized('/learningpaths/private/:pathId');
 const fetchPrivatePathStep = fetchAuthorized(
     '/learningpaths/private/:pathId/learningsteps/:stepId');
 const fetchPrivatePaths = fetchAuthorized('/learningpaths/private');
-const createPrivatePath = postAuthorized('/learningpaths');
+
+
+const postLearningPath = postAuthorized('/learningpaths');
+const postLearningPathStep = postAuthorized('/learningpaths/:pathId/learningsteps');
+const createPrivatePath = (authToken, props, body) =>
+  postLearningPath(authToken, props, body)
+  .then(lpath => Promise.all(map(body.learningsteps, step =>
+      postLearningPathStep(authToken, { pathId: lpath.id }, step )
+    )).then(steps => Object.assign({}, lpath, {
+        learningsteps: assureSequenceOrder(steps)
+    }))
+  )
+;
 
 const putLearningPath = putAuthorized('/learningpaths/:pathId');
 const putLearningPathStep = putAuthorized('/learningpaths/:pathId/learningsteps/:stepId');
