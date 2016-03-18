@@ -16,7 +16,8 @@ const pathId = 123;
 test('actions/updateEditingLearningPath', t => {
   const learningsteps = [
     { id: 34, seqNo: 1 },
-    { id: 12, seqNo: 0 }
+    { id: 12, seqNo: 0 },
+    { seqNo: 2 }
   ];
 
   const putPathApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
@@ -33,13 +34,18 @@ test('actions/updateEditingLearningPath', t => {
     .put('/learningpaths/' + pathId + '/learningsteps/34', { id: 34, seqNo: 1 })
     .reply(200, {id: 34, seqNo: 1, isResponse: true});
 
+  const postStep3Api = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+    .post('/learningpaths/' + pathId + '/learningsteps', { seqNo: 2 })
+    .reply(200, {id: 56, seqNo: 2, isResponse: true});
+
   const expectedActions = [
     actions.setEditingLearningPath({
       id: pathId,
       isResponse: true,
       learningsteps: [
         {id: 12, seqNo: 0, isResponse: true},
-        {id: 34, seqNo: 1, isResponse: true}
+        {id: 34, seqNo: 1, isResponse: true},
+        {id: 56, seqNo: 2, isResponse: true}
       ]
     }),
     routeActions.push({ pathname: `/learningpaths/private/${pathId}` })
@@ -49,6 +55,7 @@ test('actions/updateEditingLearningPath', t => {
     t.doesNotThrow(() => putPathApi.done());
     t.doesNotThrow(() => putStep1Api.done());
     t.doesNotThrow(() => putStep2Api.done());
+    t.doesNotThrow(() => postStep3Api.done());
     t.end(res);
 
     nock.cleanAll();
