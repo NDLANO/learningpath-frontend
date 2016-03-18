@@ -188,8 +188,12 @@ export default class PathStep extends Component {
             {embedSourceInput}
           </div>
           <div>
-            <input className='button' type='submit' value='Lagre' disabled={ !this.isValid() } />
-            <input className='button' type='button' value='Slett' disabled={true} />
+            <button className='un-button' type='submit' disabled={ !this.isValid() }>
+              <Icon.Check className='icon--l' />
+            </button>
+            <button className='un-button' type='button' disabled={true}>
+              <Icon.Clear className='icon--l' />
+            </button>
           </div>
         </div>
       </form>
