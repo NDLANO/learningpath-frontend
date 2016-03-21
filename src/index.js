@@ -1,72 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { compose, createStore, applyMiddleware, bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute } from 'react-router';
-import { syncHistory } from 'redux-simple-router';
-import { browserHistory } from 'react-router';
-import thunkMiddleware from 'redux-thunk';
-import persistState from 'redux-localstorage';
 import isEmpty from 'lodash/isEmpty';
 
 import es6promise from 'es6-promise';
 es6promise.polyfill();
 
-import { errorReporter } from './middleware';
-import reducers from './reducers';
 import actions from './actions';
+import { defaultSearchQuery, parseSearchQuery } from './middleware/searchQuery';
+import configureStore, { browserHistory } from './configureStore';
 
-const createPersistentStore = compose(
-  persistState(['authenticated', 'authToken', 'user'], {
-    key: 'ndla:sti',
-    slicer: function (paths) {
-      // custom slicer because default slicer does not store falsy values
-      return (state) => paths.reduce((acc, path) => {
-        acc[path] = state[path];
-        return acc;
-      }, {});
-    }
-  })
-)(createStore);
-
-const defaultSearchQuery = {
-  page: 1,
-  pageSize: 10,
-  sort: '-lastUpdated',
-  query: ''
-};
-
-const fixupQuery = (query) => Object.keys(query).reduce((obj, key) => {
-  switch (key) {
-  case 'page':
-  case 'pageSize':
-    obj[key] = parseInt(query[key]);
-    break;
-  default:
-    obj[key] = query[key];
-  }
-  return obj;
-}, {});
-
-const changeLearningPathQueryFromLocation = store => next => action => {
-  if (action.type === '@@router/UPDATE_LOCATION' && action.payload.pathname === '/learningpaths') {
-    let query = fixupQuery(action.payload.query);
-    if (isEmpty(query)) {
-      query = defaultSearchQuery;
-    }
-    store.dispatch(actions.changeLearningPathQuery(query));
-  }
-  return next(action);
-};
-
-const createStoreWithMiddleware = applyMiddleware(
-    thunkMiddleware,
-    changeLearningPathQueryFromLocation,
-    errorReporter,
-    syncHistory(browserHistory)
-)(createPersistentStore);
-
-const store = createStoreWithMiddleware(reducers, {
+const store = configureStore({
   authenticated: false,
   authToken: '',
   user: {},
@@ -143,7 +89,7 @@ ReactDOM.render(
              onEnter={ifAuthenticated(({params}) => fetchEditingLearningPath(params.pathId))} />
 
           <Route path='learningpaths' component={LearningPathSearch} onEnter={ctx => {
-            let query = Object.assign({}, fixupQuery( ctx.location.query ));
+            let query = parseSearchQuery( ctx.location.query );
             if (isEmpty(query)) {
               query = defaultSearchQuery;
             }
