@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { routeActions } from 'redux-simple-router';
 import get from 'lodash/get';
 import isEqual from 'lodash/isEqual';
-import Icon from './Icon';
 import LabeledIcon from './LabeledIcon';
 import SearchResultPager from './SearchResultPager';
 
@@ -154,6 +153,15 @@ export class LearningPathSearch extends Component {
     );
   }
 }
+
+LearningPathSearch.propTypes = {
+  fetchLearningPaths: PropTypes.func.isRequired,
+  query: PropTypes.object.isRequired,
+  learningPaths: PropTypes.arrayOf(PropTypes.object).isRequired,
+  location: PropTypes.shape({ pathname: PropTypes.string.isRequired }),
+  lastPage: PropTypes.number.isRequired,
+  pushRoute: PropTypes.func.isRequired
+};
 
 const mapStateToProps = (state) => {
   let query = state.learningPathQuery;

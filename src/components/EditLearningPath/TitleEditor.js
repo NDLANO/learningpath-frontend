@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import OneLineEditor from './OneLineEditor';
-import { Editor, EditorState, ContentState } from 'draft-js';
 
 export default function TitleEditor ({value, onChange}, {lang}) {
   const _onChange = (newValue) => onChange({title: newValue, language: lang});

@@ -12,7 +12,7 @@ import { MyPage, mapStateToProps } from '../MyPage';
 
 function setup (props={}) {
   const renderer = TestUtils.createRenderer();
-  renderer.render(<MyPage {...props} />, {lang: 'nb'});
+  renderer.render(<MyPage {...props} dispatch={() => true} />, {lang: 'nb'});
   const output = renderer.getRenderOutput();
   return { props, output, renderer };
 }

@@ -70,6 +70,7 @@ export function EditLearningPath (props, {lang}) {
 }
 
 EditLearningPath.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   learningPath: PropTypes.object.isRequired,
   learningSteps: PropTypes.array.isRequired,
   saveAction: PropTypes.func.isRequired

@@ -15,6 +15,10 @@ export default function Navigation({learningSteps}, {lang}) {
   );
 }
 
+Navigation.propTypes = {
+  learningSteps: PropTypes.array.isRequired
+};
+
 Navigation.contextTypes = {
   lang: PropTypes.string.isRequired
 };

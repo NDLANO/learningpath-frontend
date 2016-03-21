@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 import Form from 'react-router-form';
 import Logo from './Logo';
 import SiteNav from './SiteNav';

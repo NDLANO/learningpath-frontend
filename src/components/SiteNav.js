@@ -36,7 +36,7 @@ export function SiteNav ({authenticated, userName, cssModifier}) {
 
   let rootClasses = classNames({
     'site-nav': true,
-    [`site-nav--${cssModifier}`]: cssModifier,
+    [`site-nav--${cssModifier}`]: cssModifier
   });
 
   return (
