@@ -10,11 +10,11 @@ import TitleEditor from './TitleEditor';
 
 
 export default class PathStep extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
     this.state = {
       step: props.step,
-      lang: props.lang
+      lang: context.lang
     };
   }
 
@@ -203,6 +203,9 @@ export default class PathStep extends Component {
 
 PathStep.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  step: PropTypes.object.isRequired,
+  step: PropTypes.object.isRequired
+};
+
+PathStep.contextTypes = {
   lang: PropTypes.string.isRequired
 };

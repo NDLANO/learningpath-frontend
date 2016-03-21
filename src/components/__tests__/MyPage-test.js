@@ -12,14 +12,14 @@ import { MyPage, mapStateToProps } from '../MyPage';
 
 function setup (props={}) {
   const renderer = TestUtils.createRenderer();
-  renderer.render(<MyPage {...props} />);
+  renderer.render(<MyPage {...props} />, {lang: 'nb'});
   const output = renderer.getRenderOutput();
   return { props, output, renderer };
 }
 
 
 test('component/MyPage', t => {
-  const { output } = setup({lang: 'nb', learningPaths});
+  const { output } = setup({learningPaths});
   t.ok(output, 'renders');
 
   t.jsxIncludes(output, <Link to='/learningpaths/private/1/edit'>Hva er kunst og kultur?</Link>, 'link');
@@ -37,7 +37,7 @@ test('component/MyPage', t => {
 });
 
 test('component/MyPage without learning paths', t => {
-  const { output } = setup({lang: 'nb'});
+  const { output } = setup();
   t.ok(output, 'renders');
   t.end();
 });

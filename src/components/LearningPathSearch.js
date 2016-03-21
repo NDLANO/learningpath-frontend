@@ -82,7 +82,7 @@ SearchForm.defaultProps = {
   sort: '-lastUpdated', query: ''
 };
 
-function SearchResult ({path, lang}) {
+function SearchResult ({path}, {lang}) {
   return (
     <div className='search-result'>
       {(() => path.coverPhotoUrl ?
@@ -104,7 +104,10 @@ function SearchResult ({path, lang}) {
 }
 
 SearchResult.propTypes = {
-  path: PropTypes.object.isRequired,
+  path: PropTypes.object.isRequired
+};
+
+SearchResult.contextTypes = {
   lang: PropTypes.string.isRequired
 };
 
@@ -121,7 +124,7 @@ export class LearningPathSearch extends Component {
   }
 
   render () {
-    const { learningPaths, query, lastPage, lang, location: { pathname }, pushRoute } = this.props;
+    const { learningPaths, query, lastPage, location: { pathname }, pushRoute } = this.props;
     let { page } = query;
 
     const navigateTo = (q) => {
@@ -143,7 +146,7 @@ export class LearningPathSearch extends Component {
 
         <div className='search-results'>
           {learningPaths.map(path =>
-            (<SearchResult key={path.id} path={path} lang={lang} />)
+            (<SearchResult key={path.id} path={path} />)
           )}
           <SearchResultPager page={page} lastPage={lastPage} query={query} />
         </div>

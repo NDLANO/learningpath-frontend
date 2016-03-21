@@ -11,13 +11,13 @@ import { LearningPathStep } from '../LearningPathStep';
 
 function setup (props={}) {
   const renderer = TestUtils.createRenderer();
-  renderer.render(<LearningPathStep {...props} />);
+  renderer.render(<LearningPathStep {...props} />, {lang:'nb'});
   const output = renderer.getRenderOutput();
   return { props, output, renderer };
 }
 
 test('component/LearningPathStep', t => {
-  const { output } = setup({lang: 'nb', step: learningStep});
+  const { output } = setup({step: learningStep});
   t.ok(output, 'renders');
 
   //t.jsxIncludes(output, 'En annen tittel her', 'title');

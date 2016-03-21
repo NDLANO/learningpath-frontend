@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 
-export function LearningPathSummary ({learningPath, lang}) {
+export function LearningPathSummary ({learningPath}, {lang}) {
   return (
     <div className='learning-path'>
       <div className='learning-path_hd'>
@@ -16,6 +16,10 @@ export function LearningPathSummary ({learningPath, lang}) {
 
 LearningPathSummary.propTypes = {
   learningPath: PropTypes.object.isRequired,
+  lang: PropTypes.string.isRequired
+};
+
+LearningPathSummary.contextTypes = {
   lang: PropTypes.string.isRequired
 };
 

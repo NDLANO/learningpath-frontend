@@ -12,13 +12,13 @@ import LearningPathToC from '../LearningPathToC';
 
 function setup (props={}) {
   const renderer = TestUtils.createRenderer();
-  renderer.render(<LearningPathToC {...props} />);
+  renderer.render(<LearningPathToC {...props} />, {lang: 'nb'});
   const output = renderer.getRenderOutput();
   return { props, output, renderer };
 }
 
 test('component/LearningPathToC', t => {
-  const { output } = setup({lang: 'nb', learningPath});
+  const { output } = setup({learningPath});
   t.ok(output, 'renders');
 
   t.jsxIncludes(output, <Link to='/learningpaths/4/step/7' className='step-nav_link'>Tittel her</Link>,
@@ -31,7 +31,7 @@ test('component/LearningPathToC', t => {
 
 
 test('component/LearningPathToC private', t => {
-  const { output } = setup({lang: 'nb', isPrivate: true, learningPath});
+  const { output } = setup({isPrivate: true, learningPath});
   t.ok(output, 'renders');
 
   t.jsxIncludes(output, <Link to='/learningpaths/private/4/step/7' className='step-nav_link'>Tittel her</Link>,

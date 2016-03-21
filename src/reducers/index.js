@@ -18,7 +18,6 @@ import editingLearningPath from './editingLearningPath';
 const rootReducers = combineReducers({
   authenticated,
   authToken,
-  lang: (state = 'nb') => state,
   user,
   learningPath,
   learningPathStep,

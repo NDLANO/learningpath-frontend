@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import { titleI18N } from '../util/i18nFieldFinder';
 
-export default function LearningPathToC ({learningPath, isPrivate, lang, activePathname}) {
+export default function LearningPathToC ({learningPath, isPrivate, activePathname}, {lang}) {
   const base = `/learningpaths${isPrivate ? '/private' : ''}/${learningPath.id}`;
   const itemClassName = (path) => classNames({
     'step-nav_item': true,
@@ -30,9 +30,12 @@ export default function LearningPathToC ({learningPath, isPrivate, lang, activeP
 
 LearningPathToC.propTypes = {
   learningPath: PropTypes.object.isRequired,
-  lang: PropTypes.string.isRequired,
   activePathname: PropTypes.string,
   isPrivate: PropTypes.bool
+};
+
+LearningPathToC.contextTypes = {
+  lang: PropTypes.string.isRequired
 };
 
 LearningPathToC.defaultProps = {
