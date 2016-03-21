@@ -4,7 +4,6 @@ import get from 'lodash/get';
 import LabeledIcon from '../LabeledIcon';
 import Navigation from './Navigation';
 import PathStep from './PathStep';
-import PathIntroduction from './PathIntroduction';
 import TitleEditor from './TitleEditor';
 import DescriptionEditor from './DescriptionEditor';
 import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
