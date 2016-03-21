@@ -17,7 +17,7 @@ import reducers from './reducers';
 import actions from './actions';
 
 const createPersistentStore = compose(
-  persistState(['authenticated', 'authToken', 'user', 'lang'], {
+  persistState(['authenticated', 'authToken', 'user'], {
     key: 'ndla:sti',
     slicer: function (paths) {
       // custom slicer because default slicer does not store falsy values
@@ -69,7 +69,6 @@ const createStoreWithMiddleware = applyMiddleware(
 const store = createStoreWithMiddleware(reducers, {
   authenticated: false,
   authToken: '',
-  lang: 'nb',
   user: {},
   learningPath: {},
   learningPathStep: {},

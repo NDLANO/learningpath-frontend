@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { embedUrlI18N } from '../util/i18nFieldFinder';
 
-export function LearningPathStep ({step, lang}) {
+export function LearningPathStep ({step}, {lang}) {
   let embedUrl = embedUrlI18N(step, lang);
   return (
     <div className='learning-step'>
@@ -14,7 +14,10 @@ export function LearningPathStep ({step, lang}) {
 }
 
 LearningPathStep.propTypes = {
-  step: PropTypes.object.isRequired,
+  step: PropTypes.object.isRequired
+};
+
+LearningPathStep.contextTypes = {
   lang: PropTypes.string.isRequired
 };
 

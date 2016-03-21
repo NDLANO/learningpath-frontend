@@ -16,8 +16,8 @@ import {
   updateEditingLearningPath
 } from '../../actions';
 
-export function EditLearningPath (props) {
-  let { dispatch, learningSteps, learningPath, saveAction, lang } = props;
+export function EditLearningPath (props, {lang}) {
+  let { dispatch, learningSteps, learningPath, saveAction } = props;
 
   let pathSteps = learningSteps.map(step => (
     <PathStep key={step.seqNo} {...props} step={step}
@@ -43,7 +43,7 @@ export function EditLearningPath (props) {
         <div className='step-nav'>
           <div className='learningpath-general-info'>
             <h2 className='learningpath-general-info_h'>
-              <TitleEditor lang={lang} value={titleText} onChange={updateTitle} />
+              <TitleEditor value={titleText} onChange={updateTitle} />
             </h2>
           </div>
           <Navigation {...props} />
@@ -58,7 +58,7 @@ export function EditLearningPath (props) {
       </aside>
       <main className='two-column_col'>
         <h2>
-          <DescriptionEditor lang={lang} value={descriptionText} onChange={updateDescription} />
+          <DescriptionEditor value={descriptionText} onChange={updateDescription} />
         </h2>
         {pathSteps}
         <button className='cta-link cta-link--block'
@@ -73,6 +73,10 @@ EditLearningPath.propTypes = {
   learningPath: PropTypes.object.isRequired,
   learningSteps: PropTypes.array.isRequired,
   saveAction: PropTypes.func.isRequired
+};
+
+EditLearningPath.contextTypes = {
+  lang: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => Object.assign({}, state, {

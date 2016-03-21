@@ -11,13 +11,13 @@ import { LearningPathSummary } from '../LearningPathSummary';
 
 function setup (props={}) {
   const renderer = TestUtils.createRenderer();
-  renderer.render(<LearningPathSummary {...props} />);
+  renderer.render(<LearningPathSummary {...props} />, {lang: 'nb'});
   const output = renderer.getRenderOutput();
   return { props, output, renderer };
 }
 
 test('component/LearningPathSummary', t => {
-  const { output } = setup({lang: 'nb', learningPath});
+  const { output } = setup({learningPath});
   t.ok(output, 'renders');
 
   t.jsxIncludes(output, 'Kristofers private bokmål', 'title');
