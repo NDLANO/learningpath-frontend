@@ -15,8 +15,7 @@ export function LearningPathSummary ({learningPath}, {lang}) {
 }
 
 LearningPathSummary.propTypes = {
-  learningPath: PropTypes.object.isRequired,
-  lang: PropTypes.string.isRequired
+  learningPath: PropTypes.object.isRequired
 };
 
 LearningPathSummary.contextTypes = {
