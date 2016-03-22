@@ -14,7 +14,7 @@ export default function fetchPrivateLearningPathStep (pathId, stepId) {
       }
     }
 
-    fetchPrivatePathStep(authToken, { pathId, stepId })
+    return fetchPrivatePathStep(authToken, { pathId, stepId })
     .then(step => dispatch(setPrivateLearningPathStep(step)))
     .catch(err => dispatch(applicationError(err)));
   };

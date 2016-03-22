@@ -1,14 +1,18 @@
 import test from 'tape';
-import configureMockStore from 'redux-mock-store';
+import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 
 import actions from '..';
 
-const createMockStore = () => configureMockStore([thunk]);
+const middleware = [ thunk ];
+const mockStore = configureStore(middleware);
 
 test('actions/fetchLearningPaths', t => {
-  const mockStore = createMockStore();
+  const done = res => {
+    t.end(res);
+    nock.cleanAll();
+  };
 
   const apiMock = nock('http://ndla-api')
     .get('/learningpaths')
@@ -19,23 +23,28 @@ test('actions/fetchLearningPaths', t => {
       results: [{id: '123'}, {id: '456'}]
     });
 
-  const expectedActions = [
-    actions.setLearningPathsTotalCount(2),
-    actions.setLearningPaths([ {id: '123'}, {id: '456'} ]),
-    actions.changeLearningPathQuery({page: 3, pageSize: 25})
-  ];
+  const store = mockStore({});
 
-  mockStore({}, expectedActions, (res) => {
-    t.doesNotThrow(() => apiMock.done());
-    t.end(res);
+  store.dispatch( actions.fetchLearningPaths() )
+    .then(() => {
+      t.deepEqual(store.getActions(), [
+        actions.setLearningPathsTotalCount(2),
+        actions.setLearningPaths([ {id: '123'}, {id: '456'} ]),
+        actions.changeLearningPathQuery({page: 3, pageSize: 25})
+      ]);
 
-    nock.cleanAll();
-  })
-  .dispatch( actions.fetchLearningPaths() );
+      t.doesNotThrow(() => apiMock.done());
+      done();
+    })
+    .catch(done);
 });
 
 test('actions/fetchLearningPaths with query', t => {
-  const mockStore = createMockStore();
+  const done = res => {
+    t.end(res);
+    nock.cleanAll();
+  };
+
 
   const apiMock = nock('http://ndla-api')
     .get('/learningpaths')
@@ -47,12 +56,6 @@ test('actions/fetchLearningPaths with query', t => {
       results: [{id: '123'}, {id: '456'}]
     });
 
-  const expectedActions = [
-    actions.setLearningPathsTotalCount(400),
-    actions.setLearningPaths([ {id: '123'}, {id: '456'} ]),
-    actions.changeLearningPathQuery({page: 4, pageSize: 15})
-  ];
-
   const initialState = {
     learningPathQuery: {
       query: 'foobar',
@@ -62,19 +65,30 @@ test('actions/fetchLearningPaths with query', t => {
     }
   };
 
-  mockStore(initialState, expectedActions, (res) => {
-    t.doesNotThrow(() => apiMock.done());
-    t.equal(initialState.learningPathQuery.pageSize, 15, 'side effect 1');
-    t.notOk(initialState.learningPathQuery['page-size'], 'side effect 2');
-    t.end(res);
+  const store = mockStore(initialState);
 
-    nock.cleanAll();
-  })
-  .dispatch( actions.fetchLearningPaths() );
+  store.dispatch( actions.fetchLearningPaths() )
+    .then(() => {
+      t.deepEqual(store.getActions(), [
+        actions.setLearningPathsTotalCount(400),
+        actions.setLearningPaths([ {id: '123'}, {id: '456'} ]),
+        actions.changeLearningPathQuery({page: 4, pageSize: 15})
+      ]);
+
+      t.doesNotThrow(() => apiMock.done());
+      t.equal(initialState.learningPathQuery.pageSize, 15, 'side effect 1');
+      t.notOk(initialState.learningPathQuery['page-size'], 'side effect 2');
+
+      done();
+    })
+    .catch(done);
 });
 
-test('actions/fetchLearningPaths with empty query', t => {
-  const mockStore = createMockStore();
+test('actions/fetchLearningPaths with query without search term', t => {
+  const done = res => {
+    t.end(res);
+    nock.cleanAll();
+  };
 
   const page = 3;
   const pageSize = 10;
@@ -88,22 +102,23 @@ test('actions/fetchLearningPaths with empty query', t => {
       results: [{id: '123'}, {id: '456'}]
     });
 
-  const expectedActions = [
-    actions.setLearningPathsTotalCount(400),
-    actions.setLearningPaths([ {id: '123'}, {id: '456'} ]),
-    actions.changeLearningPathQuery({page, pageSize})
-  ];
-
   const initialState = {
     learningPathQuery: { sort, page, pageSize, query: '' }
   };
 
-  mockStore(initialState, expectedActions, (res) => {
-    t.doesNotThrow(() => apiMock.done());
-    t.equal(initialState.learningPathQuery.query, '', 'side effect');
-    t.end(res);
+  const store = mockStore(initialState);
 
-    nock.cleanAll();
-  })
-  .dispatch( actions.fetchLearningPaths() );
+  store.dispatch( actions.fetchLearningPaths() )
+    .then(() => {
+      t.deepEqual(store.getActions(), [
+        actions.setLearningPathsTotalCount(400),
+        actions.setLearningPaths([ {id: '123'}, {id: '456'} ]),
+        actions.changeLearningPathQuery({page, pageSize})
+      ]);
+
+      t.doesNotThrow(() => apiMock.done());
+      t.equal(initialState.learningPathQuery.query, '', 'side effect');
+      done();
+    })
+    .catch(done);
 });
