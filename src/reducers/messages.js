@@ -4,8 +4,8 @@ import cloneDeep from 'lodash/cloneDeep';
 export default handleActions({
   ADD_MESSAGE: {
     next(state, action) {
-      let nextState = cloneDeep(state)
-      nextState.push(action.payload)
+      let nextState = cloneDeep(state);
+      nextState.push(action.payload);
       return nextState;
     },
     throw(state) {return state;}
@@ -20,10 +20,10 @@ export default handleActions({
 
   APPLICATION_ERROR: {
     throw(state, action) {
-      let nextState = cloneDeep(state)
+      let nextState = cloneDeep(state);
       action.payload.json.messages.forEach(function (m) {
-        nextState.push({message: m.field + ": " + m.message, severity: "danger"})
-      })
+        nextState.push({message: m.field + ': ' + m.message, severity: 'danger'});
+      });
       return nextState;
     }
   },

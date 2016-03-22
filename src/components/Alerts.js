@@ -8,15 +8,15 @@ import {clearMessages} from '../actions';
 export function Alerts({dispatch, messages}) {
 
   let isHidden = messages.length == 0;
-  let severities = messages.map(m => m.severity)
+  let severities = messages.map(m => m.severity);
 
   let removeMessages = () => {
     dispatch(clearMessages());
   };
 
   let severitiesContains = function (severity) {
-    return severities.indexOf(severity) > -1
-  }
+    return severities.indexOf(severity) > -1;
+  };
 
   let overlayClasses = classNames({
     'alert-overlay': true,
@@ -26,9 +26,9 @@ export function Alerts({dispatch, messages}) {
   let alertClasses = classNames({
     'alert': true,
     'alert--info' : true,
-    'alert--success' : severitiesContains("success"),
-    'alert--warning' : severitiesContains("warning"),
-    'alert--danger' : severitiesContains("danger")
+    'alert--success' : severitiesContains('success'),
+    'alert--warning' : severitiesContains('warning'),
+    'alert--danger' : severitiesContains('danger')
   });
 
   let renderedMessages = (
@@ -51,6 +51,7 @@ export function Alerts({dispatch, messages}) {
 
 Alerts.propTypes = {
   messages: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {

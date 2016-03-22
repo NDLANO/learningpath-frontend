@@ -1,17 +1,14 @@
 import tape from 'tape';
 import React from 'react';
-import { Link } from 'react-router';
 import jsxAssertions from '@kwltrs/tape-jsx-assertions';
 import addAssertions from 'extend-tape';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import { shallow, expect } from 'enzyme';
+import { shallow } from 'enzyme';
 import { Alerts } from '../Alerts';
 
 const test = addAssertions(tape, jsxAssertions);
 
 test('component/Alerts default severity', t => {
-  let alertMessages = [{message: "Testmessage"}];
+  let alertMessages = [{message: 'Testmessage'}];
   const elements = shallow(<Alerts messages={alertMessages} dispatch={{}} />);
 
   const listElements = elements.find('li');
@@ -25,7 +22,7 @@ test('component/Alerts default severity', t => {
 });
 
 test('component/Alerts info severity', t => {
-  let alertMessages = [{message: "Testmessage", severity: "success"}];
+  let alertMessages = [{message: 'Testmessage', severity: 'success'}];
   const elements = shallow(<Alerts messages={alertMessages} dispatch={{}} />);
 
   const listElements = elements.find('li');
@@ -38,8 +35,8 @@ test('component/Alerts info severity', t => {
 });
 
 test('component/Alerts info and danger severity', t => {
-  let alertMessages = [{message: "Testmessage", severity: "info"}, {message: "Testmessage", severity: "danger"}];
-  const elements = shallow(<Alerts messages={alertMessages} dispatch={{}} />)
+  let alertMessages = [{message: 'Testmessage', severity: 'info'}, {message: 'Testmessage', severity: 'danger'}];
+  const elements = shallow(<Alerts messages={alertMessages} dispatch={{}} />);
 
   const listElements = elements.find('li');
   const dangerElement = elements.find('.alert--danger');
