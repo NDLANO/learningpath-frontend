@@ -57,8 +57,7 @@ import {
   LearningPath, LearningPathSummary, LearningPathStep,
   LearningPathSearch,
   EditLearningPath,
-  CreateLearningPath,
-  ThisPageIntentionallyLeftBlank
+  CreateLearningPath
 } from './components';
 import requireAuthentication from './components/requireAuthentication';
 
@@ -104,8 +103,6 @@ ReactDOM.render(
             <Route path='step/:stepId' component={LearningPathStep}
               onEnter={({params}) => fetchLearningPathStep(params.pathId, params.stepId)} />
           </Route>
-
-          <Route path='messages' component={ThisPageIntentionallyLeftBlank} />
 
           <Route path='*' component={NotFound} />
         </Route>
