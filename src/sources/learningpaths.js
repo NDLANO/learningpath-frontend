@@ -21,7 +21,7 @@ const createPrivatePath = (authToken, props, body) =>
   .then(lpath => Promise.all(map(body.learningsteps, step =>
       postLearningPathStep(authToken, { pathId: lpath.id }, step )
     )).then(steps => Object.assign({}, lpath, {
-        learningsteps: assureSequenceOrder(steps)
+      learningsteps: assureSequenceOrder(steps)
     }))
   )
 ;
@@ -36,7 +36,7 @@ const updatePrivatePath = (authToken, { pathId }, body) =>
         putLearningPathStep(authToken, { pathId, stepId: step.id }, step ) :
         postLearningPathStep(authToken, { pathId }, step )
     )).then(steps => Object.assign({}, lpath, {
-        learningsteps: assureSequenceOrder(steps)
+      learningsteps: assureSequenceOrder(steps)
     }))
   )
 ;

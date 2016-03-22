@@ -1,19 +1,9 @@
-import tape from 'tape';
+import test from 'tape';
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
-import jsxAssertions from '@kwltrs/tape-jsx-assertions';
-import addAssertions from 'extend-tape';
-
-const test = addAssertions(tape, jsxAssertions);
+import { shallow } from 'enzyme';
+import { Link } from 'react-router';
 
 import SearchResultPager, { getRange, stepNumbers } from '../SearchResultPager';
-
-function setup (props={}) {
-  const renderer = TestUtils.createRenderer();
-  renderer.render(<SearchResultPager {...props} query={{}} />);
-  const output = renderer.getRenderOutput();
-  return { props, output, renderer };
-}
 
 test('component/SearchResultPager.getRange', t => {
   t.deepEquals(getRange(1,5), [1,5], '1,5');
@@ -54,63 +44,70 @@ test('component/SearchResultPager.stepNumbers', t => {
 });
 
 
-test('component/SearchResultPager page 1/1', t => {
-  let props = { page: 1, lastPage: 1 };
-  const { output } = setup(props);
-  t.ok(output, 'renders');
 
-  t.jsxIncludes(output, <span className='search-stepper_step search-stepper_step--active'>1</span>, 'current page');
-  t.jsxNotIncludes(output, 'search-stepper_step--back', 'back icon');
-  t.jsxNotIncludes(output, 'search-stepper_step--forward', 'forward icon');
 
-  t.end();
+
+function pagerTest ({setup, expected}) {
+  test(`component/SearchResultPager page ${setup.page}/${setup.lastPage}`, t => {
+
+    const steps = shallow(<SearchResultPager query={{}} {...setup} />)
+      .find('.search-stepper_step');
+
+    let prev = setup.page - 1;
+    let next = setup.page + 1;
+
+    t.equal(steps.length, expected.length, 'steppers length');
+
+    expected.forEach((value, i) => {
+      let n = i+1;
+      let step = steps.at(i);
+
+      switch (value) {
+      case 'current':
+        t.ok(step.is('.search-stepper_step--active'), 'Current page active');
+        t.equal(step.text(), setup.page + '', 'Current page text');
+        t.notOk(step.is(Link), 'Current page not linked');
+        break;
+      case 'back':
+        t.ok(step.is('Link.search-stepper_step--back'), 'Back link');
+        t.equal(step.props().to.query.page, prev, `Back link links to page ${prev}`);
+        break;
+      case 'forward':
+        t.ok(step.is('Link.search-stepper_step--forward'), 'Forward link');
+        t.equal(step.props().to.query.page, next, `Forward link links to page ${next}`);
+        break;
+      default:
+        t.ok(step.is(Link), `stepper ${n} is Link`);
+        t.equal(step.props().to.query.page, value, `Stepper ${n} links to page ${value}`);
+        t.equal(step.props().children, value, `Stepper ${n} has text ${value}`);
+      }
+    });
+
+    t.end();
+  });
+}
+
+pagerTest({
+  setup: { page: 1, lastPage: 1 },
+  expected: ['current']
 });
 
-test('component/SearchResultPager page 3/5', t => {
-  let props = { page: 3, lastPage: 5 };
-  const { output } = setup(props);
-
-  t.jsxIncludes(output, <span className='search-stepper_step search-stepper_step--active'>3</span>, 'current page');
-  t.jsxIncludes(output, 'search-stepper_step--back', 'back icon');
-  t.jsxIncludes(output, 'search-stepper_step--forward', 'forward icon');
-  t.jsxIncludes(output, '1', 'page 1');
-  t.jsxIncludes(output, '2', 'page 2');
-  t.jsxIncludes(output, '4', 'page 4');
-  t.jsxIncludes(output, '5', 'page 5');
-  t.jsxNotIncludes(output, '6', 'page 6');
-
-  t.end();
+pagerTest({
+  setup: { page: 3, lastPage: 5 },
+  expected: ['back', 1, 2, 'current', 4, 5, 'forward']
 });
 
-
-test('component/SearchResultPager page 19/19', t => {
-  let props = { page: 19, lastPage: 19 };
-  const { output } = setup(props);
-
-  t.jsxIncludes(output, <span className='search-stepper_step search-stepper_step--active'>19</span>, 'current page');
-  t.jsxIncludes(output, 'search-stepper_step--back', 'back icon');
-  t.jsxNotIncludes(output, 'search-stepper_step--forward', 'forward icon');
-  t.jsxIncludes(output, '15', 'page 15');
-  t.jsxIncludes(output, '16', 'page 16');
-  t.jsxIncludes(output, '17', 'page 17');
-  t.jsxIncludes(output, '18', 'page 18');
-  t.jsxNotIncludes(output, '20', 'page 20');
-
-  t.end();
+pagerTest({
+  setup: { page: 1, lastPage: 5 },
+  expected: ['current', 2, 3, 4, 5, 'forward']
 });
 
-test('component/SearchResultPager page 4/10', t => {
-  let props = { page: 4, lastPage: 10 };
-  const { output } = setup(props);
+pagerTest({
+  setup: { page: 19, lastPage: 19 },
+  expected: ['back', 15, 16, 17, 18, 'current']
+});
 
-  t.jsxIncludes(output, <span className='search-stepper_step search-stepper_step--active'>4</span>, 'current page');
-  t.jsxIncludes(output, 'search-stepper_step--back', 'back icon');
-  t.jsxIncludes(output, 'search-stepper_step--forward', 'forward icon');
-  t.jsxIncludes(output, '2', 'page 2');
-  t.jsxIncludes(output, '3', 'page 3');
-  t.jsxIncludes(output, '5', 'page 5');
-  t.jsxIncludes(output, '6', 'page 6');
-  t.jsxNotIncludes(output, '1', 'page 1');
-
-  t.end();
+pagerTest({
+  setup: { page: 4, lastPage: 10 },
+  expected: ['back', 2, 3, 'current', 5, 6, 'forward']
 });

@@ -47,12 +47,24 @@ Test framework: tap/tape with enzyme.
 ```
 $ npm test
 ```
+### Code style
+
+*tl;dr*: Use eslint! Rules: indent with 2 spaces, no tabs; single quotes.
+
+Lint code with [eslint](http://eslint.org/), including [eslint react plugin](https://github.com/yannickcr/eslint-plugin-react).
+Beside linting with globally installed eslint, eslint can be invoked with `npm`:
+
+```
+$ npm run lint
+```
+
+Rules are configured in `./.eslintrc.js`. If feeling brave, try `eslint --fix`.
+
 
 ## Other npm scripts
 
 ```
 $ npm run build
-$ npm run lint
 $ ./build.sh
 $ ./release.sh
 ```

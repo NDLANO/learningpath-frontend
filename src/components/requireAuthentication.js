@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 export default function requireAuthentication(Component) {
 
   function AuthenticatedComponent (props) {
-    return props.authenticated ?
+    return props.authenticated ?  // eslint-disable-line react/prop-types
       (<Component {...props} />) :
       (<div>Authentication required</div>);
   }

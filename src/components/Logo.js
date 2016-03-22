@@ -5,7 +5,7 @@ import classNames from 'classnames';
 export default function Logo ({cssModifier}) {
   let rootClasses = classNames({
     'logo': true,
-    [`logo--${cssModifier}`]: cssModifier,
+    [`logo--${cssModifier}`]: cssModifier
   });
 
   return (

@@ -19,7 +19,6 @@ import messages from './messages';
 const rootReducers = combineReducers({
   authenticated,
   authToken,
-  lang: (state = 'nb') => state,
   user,
   learningPath,
   learningPathStep,

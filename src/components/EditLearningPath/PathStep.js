@@ -10,11 +10,11 @@ import TitleEditor from './TitleEditor';
 
 
 export default class PathStep extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
     this.state = {
       step: props.step,
-      lang: props.lang
+      lang: context.lang
     };
   }
 
@@ -133,19 +133,28 @@ export default class PathStep extends Component {
               <div className='icon-select_item'>
                 <input type='radio' className='icon-select_input'
                     id={fieldIdAttr('text')} name={fieldNameAttr}
+                    value='INTRODUCTION' checked={step.type==='INTRODUCTION'} onChange={changeType} />
+                <label htmlFor={fieldIdAttr('text')} className='icon-select_label'>
+                  <Icon.TypeText />
+                  <span className='icon-select_label-text'>Introduksjon</span>
+                </label>
+              </div>
+              <div className='icon-select_item'>
+                <input type='radio' className='icon-select_input'
+                    id={fieldIdAttr('text')} name={fieldNameAttr}
                     value='TEXT' checked={step.type==='TEXT'} onChange={changeType} />
                 <label htmlFor={fieldIdAttr('text')} className='icon-select_label'>
                   <Icon.TypeText />
-                  <span className='icon-select_label-text'>Teori</span>
+                  <span className='icon-select_label-text'>Tekst</span>
                 </label>
               </div>
               <div className='icon-select_item'>
                 <input type='radio' className='icon-select_input'
                     id={fieldIdAttr('video')} name={fieldNameAttr}
-                    value='VIDEO' checked={step.type==='VIDEO'} onChange={changeType} />
+                    value='MULTIMEDIA' checked={step.type==='MULTIMEDIA'} onChange={changeType} />
                 <label htmlFor={fieldIdAttr('video')} className='icon-select_label'>
                   <Icon.TypeMedia />
-                  <span className='icon-select_label-text'>Video</span>
+                  <span className='icon-select_label-text'>Multimedia</span>
                 </label>
               </div>
               <div className='icon-select_item'>
@@ -179,8 +188,12 @@ export default class PathStep extends Component {
             {embedSourceInput}
           </div>
           <div>
-            <input className='button' type='submit' value='Lagre' disabled={ !this.isValid() } />
-            <input className='button' type='button' value='Slett' disabled={true} />
+            <button className='un-button' type='submit' disabled={ !this.isValid() }>
+              <Icon.Check className='icon--l' />
+            </button>
+            <button className='un-button' type='button' disabled={true}>
+              <Icon.Clear className='icon--l' />
+            </button>
           </div>
         </div>
       </form>
@@ -190,6 +203,9 @@ export default class PathStep extends Component {
 
 PathStep.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  step: PropTypes.object.isRequired,
+  step: PropTypes.object.isRequired
+};
+
+PathStep.contextTypes = {
   lang: PropTypes.string.isRequired
 };

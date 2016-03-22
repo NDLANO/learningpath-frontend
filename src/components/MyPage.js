@@ -10,7 +10,7 @@ import formatDate from '../util/formatDate';
 import formatDuration from '../util/formatDuration';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 
-export function MyPage ({dispatch, learningPaths, lang, sortBy}) {
+export function MyPage ({dispatch, learningPaths, sortBy}, {lang}) {
   const items = learningPaths.map(lp => {
     const title = titleI18N(lp, lang);
     const description = descriptionI18N(lp, lang);
@@ -57,12 +57,16 @@ export function MyPage ({dispatch, learningPaths, lang, sortBy}) {
 }
 
 MyPage.propTypes = {
-  lang: PropTypes.string.isRequired,
   sortBy: PropTypes.oneOf(['title', 'lastUpdated', 'status']).isRequired,
+  dispatch: PropTypes.func.isRequired,
   learningPaths: PropTypes.array
 };
 
 MyPage.defaultProps = { learningPaths: [], sortBy: 'title' };
+
+MyPage.contextTypes = {
+  lang: PropTypes.string.isRequired
+};
 
 const sortPaths = (paths, field, state) => {
   switch (field) {
