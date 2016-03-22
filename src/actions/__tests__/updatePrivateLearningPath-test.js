@@ -13,7 +13,7 @@ const mockStore = configureStore(middleware);
 const authToken = '123345';
 const pathId = 123;
 
-test('actions/updateEditingLearningPath', t => {
+test('actions/updatePrivateLearningPath', t => {
   const done = res => {
     t.end(res);
     nock.cleanAll();
@@ -45,12 +45,12 @@ test('actions/updateEditingLearningPath', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.updateEditingLearningPath(pathId, {
+  store.dispatch( actions.updatePrivateLearningPath(pathId, {
     id: pathId, isRequest: true, learningsteps
   }) )
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.setEditingLearningPath({
+        actions.setLearningPath({
           id: pathId,
           isResponse: true,
           learningsteps: [
@@ -72,7 +72,7 @@ test('actions/updateEditingLearningPath', t => {
     .catch(done);
 });
 
-test('actions/updateEditingLearningPath access denied', (t) => {
+test('actions/updatePrivateLearningPath access denied', (t) => {
   const done = res => {
     t.end(res);
     nock.cleanAll();
@@ -87,7 +87,7 @@ test('actions/updateEditingLearningPath access denied', (t) => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.updateEditingLearningPath(pathId, { id: pathId, foo: 'bar' }) )
+  store.dispatch( actions.updatePrivateLearningPath(pathId, { id: pathId, foo: 'bar' }) )
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.applicationError(payload403invalid())

@@ -10,7 +10,6 @@ import learningPaths from './learningPaths';
 import learningPathQuery from './learningPathQuery';
 import learningPathsTotalCount from './learningPathsTotalCount';
 import privateLearningPathsSortBy from './privateLearningPathsSortBy';
-import editingLearningPath from './editingLearningPath';
 
 const rootReducers = combineReducers({
   authenticated,
@@ -22,7 +21,6 @@ const rootReducers = combineReducers({
   learningPathQuery,
   learningPathsTotalCount,
   privateLearningPathsSortBy,
-  editingLearningPath,
   routing: routeReducer
 });
 

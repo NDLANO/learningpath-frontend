@@ -8,10 +8,9 @@ import fetchLearningPaths from './fetchLearningPaths';
 import fetchPrivateLearningPath from './fetchPrivateLearningPath';
 import fetchPrivateLearningPathStep from './fetchPrivateLearningPathStep';
 import fetchPrivateLearningPaths from './fetchPrivateLearningPaths';
-import fetchEditingLearningPath from './fetchEditingLearningPath';
-import updateEditingLearningPath from './updateEditingLearningPath';
-import createEditingLearningPath from './createEditingLearningPath';
-import createEmptyEditingPath from './createEmptyEditingPath';
+import updatePrivateLearningPath from './updatePrivateLearningPath';
+import createPrivateLearningPath from './createPrivateLearningPath';
+import createEmptyLearningPath from './createEmptyLearningPath';
 
 export var applicationError = createAction('APPLICATION_ERROR');
 export var setAuthenticated = createAction('SET_AUTHENTICATED');
@@ -22,11 +21,10 @@ export var setLearningPaths = createAction('SET_LEARNING_PATHS');
 export var changeLearningPathQuery = createAction('CHANGE_LEARNING_PATH_QUERY');
 export var setLearningPathsTotalCount = createAction('SET_LEARNING_PATHS_TOTAL_COUNT');
 export var sortPrivateLearningPaths = createAction('SORT_PRIVATE_LEARNING_PATHS');
-export var setEditingLearningPath = createAction('SET_EDITING_LEARNING_PATH');
-export var createNewEditingPathStep = createAction('CREATE_NEW_EDITING_LEARNING_PATH_STEP');
-export var updateEditingPathStep = createAction('UPDATE_EDITING_LEARNING_PATH_STEP');
-export var updateEditingPathTitle = createAction('UPDATE_EDITING_LEARNING_PATH_TITLE');
-export var updateEditingPathDescription = createAction('UPDATE_EDITING_LEARNING_PATH_DESCRIPTION');
+export var createLearningPathStep = createAction('CREATE_LEARNING_PATH_STEP');
+export var updateLearningPathStep = createAction('UPDATE_LEARNING_PATH_STEP');
+export var updateLearningPathTitle = createAction('UPDATE_LEARNING_PATH_TITLE');
+export var updateLearningPathDescription = createAction('UPDATE_LEARNING_PATH_DESCRIPTION');
 export var setUserData = createAction('SET_USER_DATA');
 
 export {
@@ -38,10 +36,9 @@ export {
   fetchPrivateLearningPath,
   fetchPrivateLearningPathStep,
   fetchPrivateLearningPaths,
-  fetchEditingLearningPath,
-  updateEditingLearningPath,
-  createEditingLearningPath,
-  createEmptyEditingPath
+  updatePrivateLearningPath,
+  createPrivateLearningPath,
+  createEmptyLearningPath
 };
 
 export default {
@@ -54,11 +51,10 @@ export default {
   changeLearningPathQuery,
   setLearningPathsTotalCount, 
   sortPrivateLearningPaths,
-  setEditingLearningPath,
-  createNewEditingPathStep,
-  updateEditingPathStep,
-  updateEditingPathTitle,
-  updateEditingPathDescription,
+  createLearningPathStep,
+  updateLearningPathStep,
+  updateLearningPathTitle,
+  updateLearningPathDescription,
   setUserData,
   initializeSession,
   logout,
@@ -68,8 +64,7 @@ export default {
   fetchPrivateLearningPath,
   fetchPrivateLearningPathStep,
   fetchPrivateLearningPaths,
-  fetchEditingLearningPath,
-  updateEditingLearningPath,
-  createEditingLearningPath,
-  createEmptyEditingPath
+  updatePrivateLearningPath,
+  createPrivateLearningPath,
+  createEmptyLearningPath
 };

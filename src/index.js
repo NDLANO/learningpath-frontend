@@ -20,11 +20,8 @@ const store = configureStore({
   learningPathStep: {},
   learningPaths: [],
   learningPathQuery: defaultSearchQuery,
-  learningPathsTotalCount: 1,
-  editingLearningPath: {}
+  learningPathsTotalCount: 1
 });
-
-//store.subscribe(() => console.log(store.getState().editingLearningPath));
 
 const {
   logout,
@@ -34,9 +31,8 @@ const {
   fetchLearningPaths,
   fetchLearningPath,
   fetchLearningPathStep,
-  fetchEditingLearningPath,
   changeLearningPathQuery,
-  createEmptyEditingPath
+  createEmptyLearningPath
 } = bindActionCreators(actions, store.dispatch);
 
 function ifAuthenticated (cb) {
@@ -73,7 +69,7 @@ ReactDOM.render(
           <Route path='minside' component={requireAuthentication(MyPage)} onEnter={ifAuthenticated(fetchPrivateLearningPaths)} />
 
           <Route path='learningpaths/private/new' component={requireAuthentication(CreateLearningPath)}
-            onEnter={ifAuthenticated(createEmptyEditingPath)}/>
+            onEnter={ifAuthenticated(createEmptyLearningPath)}/>
           <Route path='learningpaths/private/:pathId' component={requireAuthentication(LearningPath)} isPrivate={true}
             onEnter={ifAuthenticated(({params}) => fetchPrivateLearningPath(params.pathId))}>
             <IndexRoute component={LearningPathSummary} isPrivate={true} />
@@ -83,7 +79,7 @@ ReactDOM.render(
               )}/>
           </Route>
           <Route path='learningpaths/private/:pathId/edit' component={requireAuthentication(EditLearningPath)}
-             onEnter={ifAuthenticated(({params}) => fetchEditingLearningPath(params.pathId))} />
+             onEnter={ifAuthenticated(({params}) => fetchPrivateLearningPath(params.pathId))} />
 
           <Route path='learningpaths' component={LearningPathSearch} onEnter={ctx => {
             let query = parseSearchQuery( ctx.location.query );
