@@ -21,9 +21,6 @@ const store = configureStore({
   learningPaths: [],
   learningPathQuery: defaultSearchQuery,
   learningPathsTotalCount: 1,
-  privateLearningPath: {},
-  privateLearningPathStep: {},
-  privateLearningPaths: [],
   editingLearningPath: {}
 });
 

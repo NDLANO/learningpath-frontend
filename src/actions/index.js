@@ -21,9 +21,6 @@ export var setLearningPathStep = createAction('SET_LEARNING_PATH_STEP');
 export var setLearningPaths = createAction('SET_LEARNING_PATHS');
 export var changeLearningPathQuery = createAction('CHANGE_LEARNING_PATH_QUERY');
 export var setLearningPathsTotalCount = createAction('SET_LEARNING_PATHS_TOTAL_COUNT');
-export var setPrivateLearningPath = createAction('SET_PRIVATE_LEARNING_PATH');
-export var setPrivateLearningPathStep = createAction('SET_PRIVATE_LEARNING_PATH_STEP');
-export var setPrivateLearningPaths = createAction('SET_PRIVATE_LEARNING_PATHS');
 export var sortPrivateLearningPaths = createAction('SORT_PRIVATE_LEARNING_PATHS');
 export var setEditingLearningPath = createAction('SET_EDITING_LEARNING_PATH');
 export var createNewEditingPathStep = createAction('CREATE_NEW_EDITING_LEARNING_PATH_STEP');
@@ -56,9 +53,6 @@ export default {
   setLearningPaths,
   changeLearningPathQuery,
   setLearningPathsTotalCount, 
-  setPrivateLearningPath,
-  setPrivateLearningPathStep,
-  setPrivateLearningPaths,
   sortPrivateLearningPaths,
   setEditingLearningPath,
   createNewEditingPathStep,

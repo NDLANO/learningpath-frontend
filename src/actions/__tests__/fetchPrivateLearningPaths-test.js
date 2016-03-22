@@ -26,7 +26,7 @@ test('actions/fetchPrivateLearningPaths', (t) => {
   store.dispatch( actions.fetchPrivateLearningPaths() )
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.setPrivateLearningPaths([ {id: '123'}, {id: '456'} ])
+        actions.setLearningPaths([ {id: '123'}, {id: '456'} ])
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();
