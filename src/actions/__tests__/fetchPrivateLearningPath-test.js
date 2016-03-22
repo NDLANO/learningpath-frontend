@@ -1,5 +1,5 @@
 import test from 'tape';
-import configureMockStore from 'redux-mock-store';
+import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 import payload403invalid from './payload403invalid';
@@ -7,49 +7,54 @@ import payload403invalid from './payload403invalid';
 import actions from '..';
 
 const middleware = [ thunk ];
-const mockStore = configureMockStore(middleware);
+const mockStore = configureStore(middleware);
+
+const authToken = '123345';
+const pathId = 123;
 
 test('actions/fetchPrivateLearningPath', t => {
-  const authToken = '123345';
-  const pathId = 123;
-
+  const done = res => {
+    t.end(res);
+    nock.cleanAll();
+  };
+  
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get('/learningpaths/private/' + pathId)
     .reply(200, {id: pathId});
 
-  const expectedActions = [
-    actions.setPrivateLearningPath({id: pathId})
-  ];
+  const store = mockStore({ authToken });
 
-  const store = mockStore({ authToken }, expectedActions, (res) => {
-    t.doesNotThrow(() => apiMock.done());
-    t.end(res);
-
-    nock.cleanAll();
-  });
-
-  store.dispatch( actions.fetchPrivateLearningPath( pathId ) );
+  store.dispatch( actions.fetchPrivateLearningPath( pathId ) )
+    .then(() => {
+      t.deepEqual(store.getActions(), [
+        actions.setPrivateLearningPath({id: pathId})
+      ]);
+      t.doesNotThrow(() => apiMock.done());
+      done();
+    })
+    .catch(done);
 });
 
 test('actions/fetchPrivateLearningPath access denied', (t) => {
-  const authToken = '123345';
-  const pathId = 123;
+  const done = res => {
+    t.end(res);
+    nock.cleanAll();
+  };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get('/learningpaths/private/' + pathId)
     .reply(403, {message: 'Invalid'});
 
-  const expectedActions = [
-    actions.applicationError(payload403invalid())
-  ];
+  const store = mockStore({ authToken });
 
-  const store = mockStore({ authToken }, expectedActions, (res) => {
-    t.doesNotThrow(() => apiMock.done());
-    t.end(res);
-
-    nock.cleanAll();
-  });
-
-  store.dispatch( actions.fetchPrivateLearningPath(pathId) );
+  store.dispatch( actions.fetchPrivateLearningPath(pathId) )
+    .then(() => {
+      t.deepEqual(store.getActions(), [
+        actions.applicationError(payload403invalid())
+      ]);
+      t.doesNotThrow(() => apiMock.done());
+      done();
+    })
+    .catch(done);
 });
 

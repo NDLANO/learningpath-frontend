@@ -14,7 +14,7 @@ export default function fetchLearningPathStep (pathId, stepId) {
       }
     }
 
-    fetchPathStep(pathId, stepId)
+    return fetchPathStep(pathId, stepId)
     .then(step => dispatch(setLearningPathStep(step)))
     .catch(err => dispatch(applicationError(err)));
   };
