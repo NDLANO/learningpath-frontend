@@ -1,46 +1,32 @@
-import tape from 'tape';
+import test from 'tape';
 import React from 'react';
+import { shallow } from 'enzyme';
 import { Link } from 'react-router';
-import TestUtils from 'react-addons-test-utils';
-import jsxAssertions from '@kwltrs/tape-jsx-assertions';
-import addAssertions from 'extend-tape';
-
-const test = addAssertions(tape, jsxAssertions);
 
 import { learningPaths } from './mockData';
 import { MyPage, mapStateToProps } from '../MyPage';
 
-function setup (props={}) {
-  const renderer = TestUtils.createRenderer();
-  renderer.render(<MyPage {...props} dispatch={() => true} />, {lang: 'nb'});
-  const output = renderer.getRenderOutput();
-  return { props, output, renderer };
-}
-
 
 test('component/MyPage', t => {
-  const { output } = setup({learningPaths});
-  t.ok(output, 'renders');
+  const component = shallow(<MyPage learningPaths={learningPaths}
+      dispatch={()=>{}} />,
+      {context: {lang:'nb'}});
 
-  t.jsxIncludes(output, <Link to='/learningpaths/private/1/edit'>Hva er kunst og kultur?</Link>, 'link');
-  t.jsxIncludes(output, 'Kurset dekker innføring og vil gi deg grunnleggende forståelse', 'description');
+  const links = component.find('.tile_hd').find(Link);
 
-  t.jsxIncludes(output, <Link to='/learningpaths/private/2/edit'>Leselighet og skrift</Link>, 'link');
-  t.jsxIncludes(output, 'Uttrykkene "leselighet" og "lesbarhet" brukes om hverandre i norsk fagterminologi', 'description');
+  t.deepEqual(links.map(n => n.prop('to')), [
+    '/learningpaths/private/1/edit',
+    '/learningpaths/private/2/edit'
+  ]);
 
-  t.jsxIncludes(output, 'PUBLISHED', 'status 1');
-  t.jsxIncludes(output, 'PRIVATE', 'status 2');
-  t.jsxIncludes(output, '18 timer', 'duration 1');
-  t.jsxIncludes(output, '45 minutter', 'duration 2');
+  t.deepEqual(links.map(n => n.prop('children')), [
+    'Hva er kunst og kultur?',
+    'Leselighet og skrift'
+  ]);
 
   t.end();
 });
 
-test('component/MyPage without learning paths', t => {
-  const { output } = setup();
-  t.ok(output, 'renders');
-  t.end();
-});
 
 test('component/MyPage mapStateToProps', t => {
   t.ok(mapStateToProps instanceof Function);
