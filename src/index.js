@@ -79,10 +79,9 @@ const store = createStoreWithMiddleware(reducers, {
   privateLearningPath: {},
   privateLearningPathStep: {},
   privateLearningPaths: [],
-  editingLearningPath: {}
+  editingLearningPath: {},
+  messages: []
 });
-
-//store.subscribe(() => console.log(store.getState().editingLearningPath));
 
 const {
   logout,

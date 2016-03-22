@@ -31,6 +31,8 @@ export var updateEditingPathStep = createAction('UPDATE_EDITING_LEARNING_PATH_ST
 export var updateEditingPathTitle = createAction('UPDATE_EDITING_LEARNING_PATH_TITLE');
 export var updateEditingPathDescription = createAction('UPDATE_EDITING_LEARNING_PATH_DESCRIPTION');
 export var setUserData = createAction('SET_USER_DATA');
+export var addMessage = createAction('ADD_MESSAGE');
+export var clearMessages = createAction('CLEAR_MESSAGES');
 
 export {
   initializeSession,
@@ -77,5 +79,7 @@ export default {
   fetchEditingLearningPath,
   updateEditingLearningPath,
   createEditingLearningPath,
-  createEmptyEditingPath
+  createEmptyEditingPath,
+  addMessage,
+  clearMessages
 };
