@@ -5,6 +5,8 @@ import Icon from './Icon';
 import classNames from 'classnames';
 import {clearMessages} from '../actions';
 
+const priorities = {'info': 0, 'success': 1, 'warning': 2,  'danger': 3 };
+
 export function Alerts({dispatch, messages}) {
 
   let isHidden = messages.length == 0;
@@ -13,25 +15,20 @@ export function Alerts({dispatch, messages}) {
     'alert-overlay--hidden': isHidden
   });
 
-  let severities = messages.map(m => m.severity);
-  let priorities = {'info': 0, 'success': 1, 'warning': 2,  'danger': 3 };
-  let highestAlert = severities.reduce((prev, current) => priorities[current] > priorities[prev] ? current : prev, 'info');
-  let alertClasses = classNames([`alert alert--${highestAlert}`]);
-
-  let renderedMessages = (
-    <ul>
-      {messages.map(function (message) {
-        return <li>{message.message}</li>;
-      })}
-    </ul>
-  );
+  let highestAlert = messages
+    .map(m => m.severity)
+    .reduce((prev, current) => priorities[current] > priorities[prev] ? current : prev, 'info');
 
   return (<div className={overlayClasses}>
-    <div className={alertClasses}>
+    <div className={`alert alert--${highestAlert}`}>
       <button className='alert_dismiss un-button' onClick={() => dispatch(clearMessages())}>
         <Icon.Clear />
       </button>
-      <div className='alert_msg'>{renderedMessages}</div>
+      <div className='alert_msg'>
+        <ul>
+          {messages.map(message => (<li key={message.message}>{message.message}</li>))}
+        </ul>
+      </div>
     </div>
   </div>);
 }

@@ -5,55 +5,53 @@ import sinon from 'sinon';
 import { Alerts } from '../Alerts';
 import { clearMessages } from '../../actions';
 
+const noop = () => {};
+
 test('component/Alerts default severity', t => {
   let alertMessages = [{message: 'Testmessage'}];
-  const elements = shallow(<Alerts messages={alertMessages} dispatch={() => {}} />);
+  const component = shallow(<Alerts messages={alertMessages} dispatch={noop} />);
 
-  const listElements = elements.find('li');
-  const infoElement = elements.find('.alert--info');
-  const dangerElement = elements.find('.alert--danger');
+  const messageElements = component.find('.alert_msg').find('li');
+  t.equals(messageElements.length, 1);
+  t.equals(messageElements.text(), 'Testmessage');
 
-  t.equals(listElements.length, 1);
-  t.equals(infoElement.length, 1);
-  t.equals(dangerElement.length, 0);
+  const alertElement = component.find('.alert');
+  t.equal(alertElement.prop('className'), 'alert alert--info');
+
   t.end();
 });
 
 test('component/Alerts info severity', t => {
   let messages = ['Testmessage', 'TEST'];
   let alertMessages = [{message: messages[0], severity: 'success'}, {message: messages[1]}];
-  const elements = shallow(<Alerts messages={alertMessages} dispatch={() => {}} />);
+  const component = shallow(<Alerts messages={alertMessages} dispatch={noop} />);
 
-  const messageList = elements.find('.alert_msg');
-  const listElements = messageList.find('li');
-  const infoElement = elements.find('.alert--success');
+  const messageElements = component.find('.alert_msg').find('li');
+  t.deepEquals(messageElements.map(el => el.text()), messages);
 
-  t.equals(listElements.length, 2);
-  for (let i = 0; i < listElements.length; ++i) {
-    t.equals(listElements.get(i).props.children, messages[i]);
-  }
+  const alertElement = component.find('.alert');
+  t.equal(alertElement.prop('className'), 'alert alert--success');
 
-  t.equals(infoElement.length, 1);
   t.end();
 });
 
 test('component/Alerts info and danger severity', t => {
   let messages = ['Test one', 'Test two'];
   let alertMessages = [{message: messages[0], severity: 'info'}, {message: messages[1], severity: 'danger'}];
-  const elements = shallow(<Alerts messages={alertMessages} dispatch={() => {}} />);
+  const component = shallow(<Alerts messages={alertMessages} dispatch={noop} />);
 
-  const messagesList = elements.find('.alert_msg');
-  const listElements = messagesList.find('li');
-  const dangerElement = elements.find('.alert--danger');
-  const infoElement = elements.find('.alert--info');
+  const messageElements = component.find('.alert_msg').find('li');
+  t.deepEquals(messageElements.map(el => el.text()), messages);
 
-  t.equals(listElements.length, 2);
-  for (let i = 0; i < listElements.length; ++i) {
-    t.equals(listElements.get(i).props.children, messages[i]);
-  }
+  const alertElement = component.find('.alert');
+  t.equal(alertElement.prop('className'), 'alert alert--danger');
 
-  t.equals(dangerElement.length, 1);
-  t.equals(infoElement.length, 0);
+  t.end();
+});
+
+test('component/Alerts without messages', t => {
+  const component = shallow(<Alerts messages={[]} dispatch={noop} />);
+  t.ok(component.hasClass('alert-overlay--hidden'));
   t.end();
 });
 
