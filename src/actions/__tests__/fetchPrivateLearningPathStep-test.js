@@ -28,7 +28,7 @@ test('actions/fetchPrivateLearningPathStep', t => {
   store.dispatch( actions.fetchPrivateLearningPathStep(pathId, stepId) )
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.setPrivateLearningPathStep({id: stepId, seqNo: 3})
+        actions.setLearningPathStep({id: stepId, seqNo: 3})
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();
@@ -47,7 +47,7 @@ test('actions/fetchPrivateLearningPathStep cache hit', t => {
     .reply(200, {id: stepId, seqNo: 3, cached: false});
 
   const initialState = {
-    privateLearningPath: {
+    learningPath: {
       id: pathId,
       learningsteps: [
         { id: 'not-stepId', seqNo: 2 },
@@ -62,8 +62,8 @@ test('actions/fetchPrivateLearningPathStep cache hit', t => {
   store.dispatch( actions.fetchPrivateLearningPathStep(pathId, stepId) )
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.setPrivateLearningPathStep({id: stepId, seqNo: 3, cached: true}),
-        actions.setPrivateLearningPathStep({id: stepId, seqNo: 3, cached: false})
+        actions.setLearningPathStep({id: stepId, seqNo: 3, cached: true}),
+        actions.setLearningPathStep({id: stepId, seqNo: 3, cached: false})
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();

@@ -13,30 +13,28 @@ const mockStore = configureStore(middleware);
 const authToken = '123345';
 const pathId = 123;
 
-test('actions/updateEditingLearningPath', t => {
+test('actions/createPrivateLearningPath', t => {
   const done = res => {
     t.end(res);
     nock.cleanAll();
   };
 
   const learningsteps = [
-    { id: 34, seqNo: 1 },
-    { id: 12, seqNo: 0 },
+    { seqNo: 1 },
+    { seqNo: 0 },
     { seqNo: 2 }
   ];
 
-  const putPathApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .put('/learningpaths/' + pathId, {
-      id: pathId, isRequest: true, learningsteps
-    })
+  const postPathApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+    .post('/learningpaths', { isRequest: true, learningsteps })
     .reply(200, {id: pathId, isResponse: true});
 
-  const putStep1Api = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .put('/learningpaths/' + pathId + '/learningsteps/12', { id: 12, seqNo: 0 })
+  const postStep1Api = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+    .post('/learningpaths/' + pathId + '/learningsteps', { seqNo: 0 })
     .reply(200, {id: 12, seqNo: 0, isResponse: true});
 
-  const putStep2Api = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .put('/learningpaths/' + pathId + '/learningsteps/34', { id: 34, seqNo: 1 })
+  const postStep2Api = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+    .post('/learningpaths/' + pathId + '/learningsteps', { seqNo: 1 })
     .reply(200, {id: 34, seqNo: 1, isResponse: true});
 
   const postStep3Api = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
@@ -45,12 +43,12 @@ test('actions/updateEditingLearningPath', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.updateEditingLearningPath(pathId, {
-    id: pathId, isRequest: true, learningsteps
-  }) )
+  store.dispatch(
+    actions.createPrivateLearningPath({ isRequest: true, learningsteps })
+  )
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.setEditingLearningPath({
+        actions.setLearningPath({
           id: pathId,
           isResponse: true,
           learningsteps: [
@@ -62,9 +60,9 @@ test('actions/updateEditingLearningPath', t => {
         routeActions.push({ pathname: `/learningpaths/private/${pathId}` })
       ]);
 
-      t.doesNotThrow(() => putPathApi.done());
-      t.doesNotThrow(() => putStep1Api.done());
-      t.doesNotThrow(() => putStep2Api.done());
+      t.doesNotThrow(() => postPathApi.done());
+      t.doesNotThrow(() => postStep1Api.done());
+      t.doesNotThrow(() => postStep2Api.done());
       t.doesNotThrow(() => postStep3Api.done());
 
       done();
@@ -72,22 +70,21 @@ test('actions/updateEditingLearningPath', t => {
     .catch(done);
 });
 
-test('actions/updateEditingLearningPath access denied', (t) => {
+test('actions/createPrivateLearningPath access denied', (t) => {
   const done = res => {
     t.end(res);
     nock.cleanAll();
   };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .put('/learningpaths/' + pathId, {
-      id: pathId,
+    .post('/learningpaths', {
       foo: 'bar'
     })
     .reply(403, {message: 'Invalid'});
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.updateEditingLearningPath(pathId, { id: pathId, foo: 'bar' }) )
+  store.dispatch( actions.createPrivateLearningPath({ foo: 'bar' }) )
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.applicationError(payload403invalid())

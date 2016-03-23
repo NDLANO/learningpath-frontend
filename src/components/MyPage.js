@@ -83,7 +83,7 @@ const sortPaths = (paths, field, state) => {
 
 const mapStateToProps = (state) => {
   const sortBy = state.privateLearningPathsSortBy || 'title';
-  const learningPaths = sortPaths(state.privateLearningPaths, sortBy, state);
+  const learningPaths = sortPaths(state.learningPaths, sortBy, state);
   return Object.assign({}, state, { learningPaths, sortBy });
 };
 
