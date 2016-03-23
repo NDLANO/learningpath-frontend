@@ -1,16 +1,13 @@
 import test from 'tape';
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
 import sinon from 'sinon';
+import { shallow } from 'enzyme';
 import { routeActions } from 'redux-simple-router';
 
 import { SessionInitializer } from '../SessionInitializer';
 
-function setup (props={}) {
-  const renderer = TestUtils.createRenderer();
-  renderer.render(<SessionInitializer {...props} />);
-  const output = renderer.getRenderOutput();
-  return { props, output, renderer };
+function renderComponent (props={}) {
+  return shallow(<SessionInitializer {...props} />);
 }
 
 
@@ -21,10 +18,11 @@ test('component/SessionInitializer', t => {
 
   const params = { authToken: '12345' };
 
-  setup({dispatch, params});
+  renderComponent({dispatch, params});
 
   p.then(() => {
     t.equals(dispatch.callCount, 2, 'called twice');
+    // TODO better test for initializeSession thunk
     t.equals(typeof dispatch.firstCall.args[0], 'function', 'initializeSession thunk');
     t.deepEquals(dispatch.secondCall.args[0], routeActions.replace('/minside'));
 
@@ -38,7 +36,7 @@ test('component/SessionInitializer', t => {
 test('component/SessionInitializer without authToken', t => {
   const dispatch = sinon.spy(() => Promise.resolve());
 
-  setup({dispatch, params: {}});
+  renderComponent({dispatch, params: {}});
 
   t.notOk(dispatch.called);
   t.end();
