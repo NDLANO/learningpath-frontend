@@ -26,7 +26,5 @@ export default handleActions({
       });
       return nextState;
     }
-  },
-
-  LOGOUT: () => []
+  }
 }, []);

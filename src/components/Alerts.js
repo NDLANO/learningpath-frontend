@@ -8,28 +8,15 @@ import {clearMessages} from '../actions';
 export function Alerts({dispatch, messages}) {
 
   let isHidden = messages.length == 0;
-  let severities = messages.map(m => m.severity);
-
-  let removeMessages = () => {
-    dispatch(clearMessages());
-  };
-
-  let severitiesContains = function (severity) {
-    return severities.indexOf(severity) > -1;
-  };
-
   let overlayClasses = classNames({
     'alert-overlay': true,
     'alert-overlay--hidden': isHidden
   });
 
-  let alertClasses = classNames({
-    'alert': true,
-    'alert--info' : true,
-    'alert--success' : severitiesContains('success'),
-    'alert--warning' : severitiesContains('warning'),
-    'alert--danger' : severitiesContains('danger')
-  });
+  let severities = messages.map(m => m.severity);
+  let priorities = {'info': 0, 'success': 1, 'warning': 2,  'danger': 3 };
+  let highestAlert = severities.reduce((prev, current) => priorities[current] > priorities[prev] ? current : prev, 'info');
+  let alertClasses = classNames([`alert alert--${highestAlert}`]);
 
   let renderedMessages = (
     <ul>
@@ -41,7 +28,7 @@ export function Alerts({dispatch, messages}) {
 
   return (<div className={overlayClasses}>
     <div className={alertClasses}>
-      <button className='alert_dismiss un-button' onClick={removeMessages}>
+      <button className='alert_dismiss un-button' onClick={() => dispatch(clearMessages())}>
         <Icon.Clear />
       </button>
       <div className='alert_msg'>{renderedMessages}</div>
@@ -54,10 +41,4 @@ Alerts.propTypes = {
   dispatch: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state) => {
-  return Object.assign({}, state, {
-    messages: state.messages
-  });
-};
-
-export default connect(mapStateToProps)(Alerts);
+export default connect(state => state)(Alerts);
