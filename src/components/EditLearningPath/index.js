@@ -9,11 +9,11 @@ import DescriptionEditor from './DescriptionEditor';
 import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
 
 import {
-  createNewEditingPathStep,
-  updateEditingPathStep,
-  updateEditingPathTitle,
-  updateEditingPathDescription,
-  updateEditingLearningPath
+  createLearningPathStep,
+  updateLearningPathStep,
+  updateLearningPathTitle,
+  updateLearningPathDescription,
+  updatePrivateLearningPath
 } from '../../actions';
 
 export function EditLearningPath (props, {lang}) {
@@ -21,17 +21,17 @@ export function EditLearningPath (props, {lang}) {
 
   let pathSteps = learningSteps.map(step => (
     <PathStep key={step.seqNo} {...props} step={step}
-      onSubmit={s => dispatch(updateEditingPathStep(s))} />
+      onSubmit={s => dispatch(updateLearningPathStep(s))} />
   ));
 
   let titleText = titleI18N(learningPath, lang) || '';
   let updateTitle = (nextTitle) => {
-    return dispatch(updateEditingPathTitle(nextTitle));
+    return dispatch(updateLearningPathTitle(nextTitle));
   };
 
   let descriptionText = descriptionI18N(learningPath, lang) || '';
   let updateDescription = (nextDescription) => {
-    return dispatch(updateEditingPathDescription(nextDescription));
+    return dispatch(updateLearningPathDescription(nextDescription));
   };
 
   let saveLearningPath = () => {
@@ -62,7 +62,7 @@ export function EditLearningPath (props, {lang}) {
         </h2>
         {pathSteps}
         <button className='cta-link cta-link--block'
-            onClick={() => dispatch(createNewEditingPathStep())}>
+            onClick={() => dispatch(createLearningPathStep())}>
           <LabeledIcon.Add labelText='Legg til nytt læringssteg' />
         </button>
       </main>
@@ -81,9 +81,9 @@ EditLearningPath.contextTypes = {
 };
 
 const mapStateToProps = state => Object.assign({}, state, {
-  learningPath: get(state, 'editingLearningPath', {}),
-  learningSteps: get(state, 'editingLearningPath.learningsteps', []),
-  saveAction: lp => updateEditingLearningPath(lp.id, lp)
+  learningPath: get(state, 'learningPath', {}),
+  learningSteps: get(state, 'learningPath.learningsteps', []),
+  saveAction: lp => updatePrivateLearningPath(lp.id, lp)
 });
 
 export default connect(mapStateToProps)(EditLearningPath);

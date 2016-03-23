@@ -1,11 +1,11 @@
-import { setEditingLearningPath, applicationError } from '.';
+import { setLearningPath, applicationError } from '.';
 import { updatePrivatePath } from '../sources/learningpaths';
 import { routeActions } from 'redux-simple-router';
 
-export default function updateEditingLearningPath (pathId, learningPath) {
+export default function updatePrivateLearningPath (pathId, learningPath) {
   return (dispatch, getState) => updatePrivatePath(getState().authToken, { pathId }, learningPath)
     .then(lpath => {
-      dispatch(setEditingLearningPath(lpath));
+      dispatch(setLearningPath(lpath));
       dispatch(routeActions.push({
         pathname: `/learningpaths/private/${lpath.id}`
       }));

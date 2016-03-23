@@ -21,10 +21,6 @@ const store = configureStore({
   learningPaths: [],
   learningPathQuery: defaultSearchQuery,
   learningPathsTotalCount: 1,
-  privateLearningPath: {},
-  privateLearningPathStep: {},
-  privateLearningPaths: [],
-  editingLearningPath: {},
   messages: []
 });
 
@@ -36,9 +32,8 @@ const {
   fetchLearningPaths,
   fetchLearningPath,
   fetchLearningPathStep,
-  fetchEditingLearningPath,
   changeLearningPathQuery,
-  createEmptyEditingPath
+  createEmptyLearningPath
 } = bindActionCreators(actions, store.dispatch);
 
 function ifAuthenticated (cb) {
@@ -57,8 +52,7 @@ import {
   LearningPath, LearningPathSummary, LearningPathStep,
   LearningPathSearch,
   EditLearningPath,
-  CreateLearningPath,
-  ThisPageIntentionallyLeftBlank
+  CreateLearningPath
 } from './components';
 import requireAuthentication from './components/requireAuthentication';
 
@@ -76,7 +70,7 @@ ReactDOM.render(
           <Route path='minside' component={requireAuthentication(MyPage)} onEnter={ifAuthenticated(fetchPrivateLearningPaths)} />
 
           <Route path='learningpaths/private/new' component={requireAuthentication(CreateLearningPath)}
-            onEnter={ifAuthenticated(createEmptyEditingPath)}/>
+            onEnter={ifAuthenticated(createEmptyLearningPath)}/>
           <Route path='learningpaths/private/:pathId' component={requireAuthentication(LearningPath)} isPrivate={true}
             onEnter={ifAuthenticated(({params}) => fetchPrivateLearningPath(params.pathId))}>
             <IndexRoute component={LearningPathSummary} isPrivate={true} />
@@ -86,7 +80,7 @@ ReactDOM.render(
               )}/>
           </Route>
           <Route path='learningpaths/private/:pathId/edit' component={requireAuthentication(EditLearningPath)}
-             onEnter={ifAuthenticated(({params}) => fetchEditingLearningPath(params.pathId))} />
+             onEnter={ifAuthenticated(({params}) => fetchPrivateLearningPath(params.pathId))} />
 
           <Route path='learningpaths' component={LearningPathSearch} onEnter={ctx => {
             let query = parseSearchQuery( ctx.location.query );
@@ -104,8 +98,6 @@ ReactDOM.render(
             <Route path='step/:stepId' component={LearningPathStep}
               onEnter={({params}) => fetchLearningPathStep(params.pathId, params.stepId)} />
           </Route>
-
-          <Route path='messages' component={ThisPageIntentionallyLeftBlank} />
 
           <Route path='*' component={NotFound} />
         </Route>

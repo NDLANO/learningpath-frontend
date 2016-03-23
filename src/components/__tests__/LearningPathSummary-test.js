@@ -1,27 +1,23 @@
-import tape from 'tape';
+import test from 'tape';
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
-import jsxAssertions from '@kwltrs/tape-jsx-assertions';
-import addAssertions from 'extend-tape';
-
-const test = addAssertions(tape, jsxAssertions);
+import { shallow } from 'enzyme';
 
 import { learningPath } from './mockData';
 import { LearningPathSummary } from '../LearningPathSummary';
 
-function setup (props={}) {
-  const renderer = TestUtils.createRenderer();
-  renderer.render(<LearningPathSummary {...props} />, {lang: 'nb'});
-  const output = renderer.getRenderOutput();
-  return { props, output, renderer };
-}
-
 test('component/LearningPathSummary', t => {
-  const { output } = setup({learningPath});
-  t.ok(output, 'renders');
+  const component = shallow(<LearningPathSummary learningPath={learningPath} />,
+      {context: {lang:'nb'}});
 
-  t.jsxIncludes(output, 'Kristofers private bokmål', 'title');
-  t.jsxIncludes(output, 'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden.', 'description');
+  let titleNode = component.find('.learning-path_title');
+
+  t.equal(titleNode.length, 1, 'one title node');
+  t.equal(titleNode.text(), 'Kristofers private bokmål');
+
+  let bodyNode = component.find('.learning-path_bd');
+  t.equal(bodyNode.length, 1, 'one body node');
+  t.equal(bodyNode.text().substring(0, 50),
+     'Kurset dekker innføring og vil gi deg grunnleggend');
 
   t.end();
 });

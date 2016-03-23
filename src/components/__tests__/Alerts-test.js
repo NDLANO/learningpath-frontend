@@ -1,7 +1,9 @@
 import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
+import sinon from 'sinon';
 import { Alerts } from '../Alerts';
+import { clearMessages } from '../../actions';
 
 test('component/Alerts default severity', t => {
   let alertMessages = [{message: 'Testmessage'}];
@@ -52,5 +54,19 @@ test('component/Alerts info and danger severity', t => {
 
   t.equals(dangerElement.length, 1);
   t.equals(infoElement.length, 0);
+  t.end();
+});
+
+test('component/Alerts dismiss', t => {
+  const dispatch = sinon.spy(() => {});
+
+  const dismissBt = shallow(<Alerts messages={[{message: 'whatever', severity: 'info'}]}
+      dispatch={dispatch} />).find('.alert_dismiss');
+
+  dismissBt.simulate('click');
+
+  t.ok(dispatch.calledOnce);
+  t.deepEquals(dispatch.firstCall.args, [ clearMessages() ]);
+
   t.end();
 });

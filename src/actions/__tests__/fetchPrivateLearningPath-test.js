@@ -27,7 +27,7 @@ test('actions/fetchPrivateLearningPath', t => {
   store.dispatch( actions.fetchPrivateLearningPath( pathId ) )
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.setPrivateLearningPath({id: pathId})
+        actions.setLearningPath({id: pathId})
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();
@@ -57,4 +57,3 @@ test('actions/fetchPrivateLearningPath access denied', (t) => {
     })
     .catch(done);
 });
-

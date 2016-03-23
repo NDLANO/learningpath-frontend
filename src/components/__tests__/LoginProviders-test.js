@@ -1,28 +1,23 @@
-import tape from 'tape';
+import test from 'tape';
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
-import jsxAssertions from '@kwltrs/tape-jsx-assertions';
-import addAssertions from 'extend-tape';
-
-const test = addAssertions(tape, jsxAssertions);
+import { shallow } from 'enzyme';
 
 import LoginProviders from '../LoginProviders';
 
-function setup (props={}) {
-  const renderer = TestUtils.createRenderer();
-  renderer.render(<LoginProviders {...props} />);
-  const output = renderer.getRenderOutput();
-  return { props, output, renderer };
-}
-
 
 test('component/LoginProviders', t => {
-  const { output } = setup();
-  t.ok(output, 'renders');
+  const component = shallow(<LoginProviders />);
 
-  ['facebook', 'google', 'twitter'].forEach(provider =>
-    t.jsxIncludes(output, `/auth/login/${provider}?`, `Link to ${provider} provider`)
-  );
+  const links = component.find('.cta-link');
+
+  t.equals(links.length, 3);
+
+  t.deepEquals(links.map(n => n.text()), ['Google', 'Facebook', 'Twitter']);
+
+  links.map(n => n.prop('href')).forEach(href => {
+    t.ok(/successUrl=/.test(href), `successUrl param in ${href}`);
+    t.ok(/failureUrl=/.test(href), `failureUrl param in ${href}`);
+  });
 
   t.end();
 });
