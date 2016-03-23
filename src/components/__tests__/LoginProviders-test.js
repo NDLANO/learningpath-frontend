@@ -15,8 +15,8 @@ test('component/LoginProviders', t => {
   t.deepEquals(links.map(n => n.text()), ['Google', 'Facebook', 'Twitter']);
 
   links.map(n => n.prop('href')).forEach(href => {
-    t.ok(/successUrl=/.test(href), `successUrl param in ${href}`);
-    t.ok(/failureUrl=/.test(href), `failureUrl param in ${href}`);
+    t.ok(/successUrl=/.test(href), 'successUrl param');
+    t.ok(/failureUrl=/.test(href), 'failureUrl param');
   });
 
   t.end();
