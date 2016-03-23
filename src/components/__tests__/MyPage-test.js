@@ -47,7 +47,7 @@ test('component/MyPage mapStateToProps', t => {
 
   let state = {
     lang: 'nb',
-    privateLearningPaths: learningPaths,
+    learningPaths,
     privateLearningPathsSortBy: 'title'
   };
 
