@@ -26,6 +26,8 @@ export var updateLearningPathStep = createAction('UPDATE_LEARNING_PATH_STEP');
 export var updateLearningPathTitle = createAction('UPDATE_LEARNING_PATH_TITLE');
 export var updateLearningPathDescription = createAction('UPDATE_LEARNING_PATH_DESCRIPTION');
 export var setUserData = createAction('SET_USER_DATA');
+export var addMessage = createAction('ADD_MESSAGE');
+export var clearMessages = createAction('CLEAR_MESSAGES');
 
 export {
   initializeSession,
@@ -66,5 +68,7 @@ export default {
   fetchPrivateLearningPaths,
   updatePrivateLearningPath,
   createPrivateLearningPath,
-  createEmptyLearningPath
+  createEmptyLearningPath,
+  addMessage,
+  clearMessages
 };

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import Logo from './Logo';
 import SiteNav from './SiteNav';
+import Alerts from './Alerts';
 
 export class App extends React.Component {
   getChildContext () {
@@ -25,6 +26,8 @@ export class App extends React.Component {
         <div className='content'>
           {this.props.children}
         </div>
+
+        <Alerts />
       </div>
     );
   }

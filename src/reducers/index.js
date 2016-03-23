@@ -10,6 +10,7 @@ import learningPaths from './learningPaths';
 import learningPathQuery from './learningPathQuery';
 import learningPathsTotalCount from './learningPathsTotalCount';
 import privateLearningPathsSortBy from './privateLearningPathsSortBy';
+import messages from './messages';
 
 const rootReducers = combineReducers({
   authenticated,
@@ -21,6 +22,7 @@ const rootReducers = combineReducers({
   learningPathQuery,
   learningPathsTotalCount,
   privateLearningPathsSortBy,
+  messages,
   routing: routeReducer
 });
 

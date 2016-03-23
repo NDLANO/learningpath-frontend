@@ -20,7 +20,8 @@ const store = configureStore({
   learningPathStep: {},
   learningPaths: [],
   learningPathQuery: defaultSearchQuery,
-  learningPathsTotalCount: 1
+  learningPathsTotalCount: 1,
+  messages: []
 });
 
 const {
