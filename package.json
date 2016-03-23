@@ -29,7 +29,6 @@
     "enzyme": "^2.1.0",
     "eslint": "^2.4.0",
     "eslint-plugin-react": "^4.2.3",
-    "extend-tape": "^1.1.0",
     "faucet": "0.0.1",
     "flux-standard-action": "^0.6.0",
     "if-loader": "^1.0.1",
