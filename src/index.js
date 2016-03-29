@@ -58,7 +58,7 @@ import requireAuthentication from './components/requireAuthentication';
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={browserHistory}>
+    <Router history={browserHistory} onUpdate={() => window.scrollTo(0, 0)}>
       <Route path='/'>
         <IndexRoute component={Welcome} />
 
