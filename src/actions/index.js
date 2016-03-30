@@ -11,6 +11,7 @@ import fetchPrivateLearningPaths from './fetchPrivateLearningPaths';
 import updatePrivateLearningPath from './updatePrivateLearningPath';
 import createPrivateLearningPath from './createPrivateLearningPath';
 import createEmptyLearningPath from './createEmptyLearningPath';
+import checkValidSession from './checkValidSession.js';
 
 export var applicationError = createAction('APPLICATION_ERROR');
 export var setAuthenticated = createAction('SET_AUTHENTICATED');
@@ -28,6 +29,7 @@ export var updateLearningPathDescription = createAction('UPDATE_LEARNING_PATH_DE
 export var setUserData = createAction('SET_USER_DATA');
 export var addMessage = createAction('ADD_MESSAGE');
 export var clearMessages = createAction('CLEAR_MESSAGES');
+export var logoutAction = createAction('LOGOUT');
 
 export {
   initializeSession,
@@ -70,5 +72,7 @@ export default {
   createPrivateLearningPath,
   createEmptyLearningPath,
   addMessage,
-  clearMessages
+  clearMessages,
+  checkValidSession,
+  logoutAction
 };
