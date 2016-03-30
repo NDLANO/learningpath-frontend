@@ -57,9 +57,8 @@ export function EditLearningPath (props, {lang}) {
         </ul>
       </aside>
       <main className='two-column_col'>
-        <h2>
-          <DescriptionEditor value={descriptionText} onChange={updateDescription} />
-        </h2>
+        <h2>Introduksjon</h2>
+        <DescriptionEditor value={descriptionText} onChange={updateDescription} />
         {pathSteps}
         <button className='cta-link cta-link--block'
             onClick={() => dispatch(createLearningPathStep())}>
