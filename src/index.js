@@ -33,7 +33,8 @@ const {
   fetchLearningPath,
   fetchLearningPathStep,
   changeLearningPathQuery,
-  createEmptyLearningPath
+  createEmptyLearningPath,
+  checkValidSession,
 } = bindActionCreators(actions, store.dispatch);
 
 function ifAuthenticated (cb) {
@@ -59,7 +60,7 @@ import requireAuthentication from './components/requireAuthentication';
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path='/'>
+      <Route path='/' onEnter={ifAuthenticated(checkValidSession)}>
         <IndexRoute component={Welcome} />
 
         <Route component={App}>
