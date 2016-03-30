@@ -34,7 +34,7 @@ const {
   fetchLearningPathStep,
   changeLearningPathQuery,
   createEmptyLearningPath,
-  checkValidSession,
+  checkValidSession
 } = bindActionCreators(actions, store.dispatch);
 
 function ifAuthenticated (cb) {

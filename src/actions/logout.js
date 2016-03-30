@@ -1,5 +1,3 @@
-import { createAction } from 'redux-actions';
-
 import { applicationError, logoutAction } from '.';
 import sendLogout from '../sources/sendLogout';
 

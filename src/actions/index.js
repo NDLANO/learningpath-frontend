@@ -11,7 +11,7 @@ import fetchPrivateLearningPaths from './fetchPrivateLearningPaths';
 import updatePrivateLearningPath from './updatePrivateLearningPath';
 import createPrivateLearningPath from './createPrivateLearningPath';
 import createEmptyLearningPath from './createEmptyLearningPath';
-import checkValidSession from './checkValidSession.js'
+import checkValidSession from './checkValidSession.js';
 
 export var applicationError = createAction('APPLICATION_ERROR');
 export var setAuthenticated = createAction('SET_AUTHENTICATED');
