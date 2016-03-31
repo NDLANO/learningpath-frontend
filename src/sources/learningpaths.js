@@ -5,7 +5,7 @@ import map from 'lodash/map';
 import has from 'lodash/has';
 
 import assureSequenceOrder from '../util/assureSequenceOrder';
-import { fetchAuthorized, postAuthorized, putAuthorized, resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';
+import { fetchAuthorized, postAuthorized, putAuthorized, deleteAuthorized, resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';
 
 const fetchPrivatePath = fetchAuthorized('/learningpaths/private/:pathId');
 const fetchPrivatePathStep = fetchAuthorized(
@@ -41,6 +41,10 @@ const updatePrivatePath = (authToken, { pathId }, body) =>
   )
 ;
 
+const deletePrivateLearningPath = deleteAuthorized('/learningpaths/:pathId');
+const deletePrivatePath = (authToken, { pathId }) =>
+  deletePrivateLearningPath(authToken, {pathId });
+
 const learningPathsUrl = apiResourceUrl('/learningpaths');
 
 const fetchPath = pathId =>
@@ -75,6 +79,7 @@ export {
   fetchPrivatePath,
   createPrivatePath,
   updatePrivatePath,
+  deletePrivatePath,
   fetchPrivatePathStep,
   fetchPrivatePaths
 };
