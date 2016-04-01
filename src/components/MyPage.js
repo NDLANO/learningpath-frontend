@@ -68,7 +68,7 @@ export function MyPage ({dispatch, learningPaths, sortBy}, {lang}) {
 MyPage.propTypes = {
   sortBy: PropTypes.oneOf(['title', 'lastUpdated', 'status']).isRequired,
   dispatch: PropTypes.func.isRequired,
-  learningPaths: PropTypes.array,
+  learningPaths: PropTypes.array
 };
 
 MyPage.defaultProps = { learningPaths: [], sortBy: 'title' };

@@ -39,9 +39,9 @@ test('reducers/learningPaths', (t) => {
 });
 
 test('reducers/learningPaths remove learning path', (t) => {
-  let path1 = {id: 123, title: [{title: "testTitle", language: "nb"}]};
-  let path2 = {id: 124, title: [{title: "another Title", language: "nb"}]};
-  let path3 = {id: 125, title: [{title: "another Title", language: "nb"}]};
+  let path1 = {id: 123, title: [{title: 'testTitle', language: 'nb'}]};
+  let path2 = {id: 124, title: [{title: 'another Title', language: 'nb'}]};
+  let path3 = {id: 125, title: [{title: 'another Title', language: 'nb'}]};
 
   t.deepEqual(
     reducer(undefined, {type: 'REMOVE_PRIVATE_LEARNING_PATH'}),

@@ -43,7 +43,7 @@ const updatePrivatePath = (authToken, { pathId }, body) =>
 
 const deletePrivateLearningPath = deleteAuthorized('/learningpaths/:pathId');
 const deletePrivatePath = (authToken, { pathId }) =>
-  deletePrivateLearningPath(authToken, {pathId });
+  deletePrivateLearningPath(authToken, {pathId});
 
 const learningPathsUrl = apiResourceUrl('/learningpaths');
 

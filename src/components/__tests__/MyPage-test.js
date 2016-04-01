@@ -6,7 +6,7 @@ import sinon from 'sinon';
 
 import { learningPaths } from './mockData';
 import { MyPage, mapStateToProps } from '../MyPage';
-import deletePrivateLearningPath from "../../actions/deletePrivateLearningPath";
+import deletePrivateLearningPath from '../../actions/deletePrivateLearningPath';
 
 test('component/MyPage', t => {
   const component = shallow(<MyPage learningPaths={learningPaths}

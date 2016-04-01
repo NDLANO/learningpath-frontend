@@ -78,5 +78,5 @@ export function deleteAuthorized(path) {
   return (authToken, params = {}) => fetch(url(params), {
     headers: {'APP-KEY': authToken},
     method: 'DELETE'
-  })
+  });
 }

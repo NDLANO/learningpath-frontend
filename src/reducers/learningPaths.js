@@ -20,5 +20,5 @@ export default handleActions({
       return nextState;
     },
     throw: (state) => state
-  },
+  }
 }, []);
