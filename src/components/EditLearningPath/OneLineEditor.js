@@ -7,7 +7,7 @@ export default class OneLineEditor extends React.Component {
 
     this.state = { editorState: EditorState.createEmpty() };
 
-    let { onChange } = props;
+    let { onChange, maxlength } = props;
 
     this.onChange = (editorState) => this.setState({editorState}, () => {
       if (editorState.getSelection().getHasFocus()) {
@@ -23,6 +23,18 @@ export default class OneLineEditor extends React.Component {
       this.refs.editor.blur();
       return true;
     };
+
+    this.handleBeforeInput = () => false;
+    
+    if (maxlength >= 0) {
+      this.handleBeforeInput = () => {
+        let plainText = this.state.editorState.getCurrentContent().getPlainText();
+        return plainText.length >= maxlength;
+      };
+    }
+
+    /* TODO implement this when Editor.handlePastedText lands in draft-js@latest */
+    this.handlePastedText = (text, html) => false;
   }
 
   updateEditorContentStateFromText(text) {
@@ -45,6 +57,8 @@ export default class OneLineEditor extends React.Component {
       <Editor
         editorState={this.state.editorState}
         onChange={this.onChange}
+        handleBeforeInput={this.handleBeforeInput}
+        handlePastedText={this.handlePastedText}
         handleReturn={this.handleReturn.bind(this)}
         placeholder={this.props.placeholder}
         ref='editor'
@@ -56,9 +70,11 @@ export default class OneLineEditor extends React.Component {
 OneLineEditor.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  maxlength: PropTypes.number
 };
 
 OneLineEditor.defaultProps = {
-  placeholder: 'Skriv her'
+  placeholder: 'Skriv her',
+  maxlength: -1
 };
