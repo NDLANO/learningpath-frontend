@@ -3,7 +3,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import { Alerts } from '../Alerts';
-import { clearMessages } from '../../actions';
+import { clearAllMessages } from '../../actions';
 
 const noop = () => {};
 
@@ -64,7 +64,7 @@ test('component/Alerts dismiss', t => {
   dismissBt.simulate('click');
 
   t.ok(dispatch.calledOnce);
-  t.deepEquals(dispatch.firstCall.args, [ clearMessages() ]);
+  t.deepEquals(dispatch.firstCall.args, [ clearAllMessages() ]);
 
   t.end();
 });

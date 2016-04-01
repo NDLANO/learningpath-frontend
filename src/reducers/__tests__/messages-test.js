@@ -43,9 +43,9 @@ test('reducers/messages add message', t => {
   t.end();
 });
 
-test('reducers/messages clear messages', t => {
+test('reducers/messages clear all messages', t => {
   let nextState = reducer([], {
-    type: 'CLEAR_MESSAGES'
+    type: 'CLEAR_ALL_MESSAGES'
   });
   t.equal(nextState.length, 0);
 
@@ -61,7 +61,7 @@ test('reducers/messages clear messages', t => {
   t.equal(nextState.length, 10);
 
   nextState = reducer([], {
-    type: 'CLEAR_MESSAGES'
+    type: 'CLEAR_ALL_MESSAGES'
   });
   t.equal(nextState.length, 0);
 

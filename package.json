@@ -61,6 +61,7 @@
     "redux-localstorage": "^0.4.0",
     "redux-simple-router": "^2.0.4",
     "redux-thunk": "^1.0.3",
-    "sanitize-html": "^1.11.3"
+    "sanitize-html": "^1.11.3",
+    "node-uuid": "1.4.7"
   }
 }

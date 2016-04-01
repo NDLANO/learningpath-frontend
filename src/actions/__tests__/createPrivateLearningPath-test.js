@@ -48,6 +48,7 @@ test('actions/createPrivateLearningPath', t => {
   )
     .then(() => {
       t.deepEqual(store.getActions(), [
+        actions.addMessage({message: "Lagret OK"}),
         actions.setLearningPath({
           id: pathId,
           isResponse: true,
