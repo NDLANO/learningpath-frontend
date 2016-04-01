@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions';
-import cloneDeep from 'lodash/cloneDeep';
 import findIndex from 'lodash/findIndex';
+import cloneDeep from 'lodash/cloneDeep';
+import pullAt from 'lodash/pullAt';
 
 export default handleActions({
   SET_LEARNING_PATHS: {
@@ -10,8 +11,13 @@ export default handleActions({
 
   REMOVE_PRIVATE_LEARNING_PATH: {
     next (state, action) {
-      let index = findIndex(state, {id: action.payload});
-      return [...state.slice(0, index), ...state.slice(index + 1)];
+      let nextState = cloneDeep(state);
+      let index = findIndex(nextState, {id: action.payload});
+
+      if (index > -1)
+        pullAt(nextState, index);
+
+      return nextState;
     },
     throw: (state) => state
   },

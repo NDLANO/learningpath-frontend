@@ -16,7 +16,7 @@ import formatDate from '../util/formatDate';
 import formatDuration from '../util/formatDuration';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 
-export function MyPage ({dispatch, learningPaths, sortBy, deleteAction}, {lang}) {
+export function MyPage ({dispatch, learningPaths, sortBy}, {lang}) {
   const items = learningPaths.map(lp => {
     const title = titleI18N(lp, lang);
     const description = descriptionI18N(lp, lang);
@@ -25,7 +25,7 @@ export function MyPage ({dispatch, learningPaths, sortBy, deleteAction}, {lang})
 
     return (
       <div key={lp.id} className='tile'>
-        <button className='alert_dismiss un-button' onClick={() => dispatch(deleteAction(lp))}>
+        <button className='alert_dismiss un-button' onClick={() => dispatch(deletePrivateLearningPath(lp.id))}>
           <Icon.Clear />
         </button>
         <h3 className='tile_hd'>
@@ -69,7 +69,6 @@ MyPage.propTypes = {
   sortBy: PropTypes.oneOf(['title', 'lastUpdated', 'status']).isRequired,
   dispatch: PropTypes.func.isRequired,
   learningPaths: PropTypes.array,
-  deleteAction: PropTypes.func.isRequired
 };
 
 MyPage.defaultProps = { learningPaths: [], sortBy: 'title' };
@@ -94,7 +93,7 @@ const sortPaths = (paths, field, state) => {
 const mapStateToProps = (state) => {
   const sortBy = state.privateLearningPathsSortBy || 'title';
   const learningPaths = sortPaths(state.learningPaths, sortBy, state);
-  return Object.assign({}, state, { learningPaths, sortBy, deleteAction: lp => deletePrivateLearningPath(lp.id) });
+  return Object.assign({}, state, { learningPaths, sortBy });
 };
 
 export { mapStateToProps };

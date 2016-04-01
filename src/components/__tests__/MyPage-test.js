@@ -2,10 +2,11 @@ import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Link } from 'react-router';
+import sinon from 'sinon';
 
 import { learningPaths } from './mockData';
 import { MyPage, mapStateToProps } from '../MyPage';
-
+import deletePrivateLearningPath from "../../actions/deletePrivateLearningPath";
 
 test('component/MyPage', t => {
   const component = shallow(<MyPage learningPaths={learningPaths}
@@ -27,6 +28,19 @@ test('component/MyPage', t => {
   t.end();
 });
 
+test('component/MyPage remove', t => {
+  const dispatch = sinon.spy(() => {});
+  const component = shallow(<MyPage learningPaths={learningPaths}
+    dispatch={dispatch} />,
+    {context: {lang:'nb'}});
+
+  component.find('.alert_dismiss').first().simulate('click');
+
+  t.ok(dispatch.calledOnce);
+  t.deepEquals(dispatch.firstCall.args, [ deletePrivateLearningPath() ]);
+
+  t.end();
+});
 
 test('component/MyPage mapStateToProps', t => {
   t.ok(mapStateToProps instanceof Function);
