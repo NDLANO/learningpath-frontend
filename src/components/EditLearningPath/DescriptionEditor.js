@@ -6,8 +6,8 @@ export default function DescriptionEditor ({value, onChange}, {lang}) {
   return (<OneLineEditor
     onChange={_onChange}
     value={value||''}
-    maxlength = {150}
-    placeholder='Skriv kort beskrivelse (max 150 teng)'
+    maxlength = {155}
+    placeholder='Skriv kort beskrivelse (max 155 teng)'
   />);
 }
 
