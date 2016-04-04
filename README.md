@@ -144,6 +144,10 @@ https://lodash.com/
 Parse, validate, manipulate, and display dates
 http://momentjs.com
 
+**node-polyglot**
+Give your JavaScript the ability to speak many languages
+https://github.com/airbnb/polyglot.js#readme
+
 **qs:**
 A querystring parser that supports nesting and arrays, with a depth limit.
 https://github.com/ljharb/qs
