@@ -10,7 +10,6 @@ import {
   deletePrivateLearningPath
 } from '../actions';
 
-import {deleteLearningPath} from '../actions';
 import Icon from './Icon';
 import formatDate from '../util/formatDate';
 import formatDuration from '../util/formatDuration';

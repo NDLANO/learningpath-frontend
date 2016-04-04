@@ -1,4 +1,3 @@
-import { routeActions } from 'redux-simple-router';
 import { deletePrivatePath } from '../sources/learningpaths';
 import { removePrivateLearningPath } from '.';
 

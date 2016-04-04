@@ -6,7 +6,6 @@ import sinon from 'sinon';
 
 import { learningPaths } from './mockData';
 import { MyPage, mapStateToProps } from '../MyPage';
-import deletePrivateLearningPath from '../../actions/deletePrivateLearningPath';
 
 test('component/MyPage', t => {
   const component = shallow(<MyPage learningPaths={learningPaths}
@@ -37,7 +36,6 @@ test('component/MyPage remove', t => {
   component.find('.alert_dismiss').first().simulate('click');
 
   t.ok(dispatch.calledOnce);
-  t.deepEquals(dispatch.firstCall.args, [ deletePrivateLearningPath() ]);
 
   t.end();
 });
