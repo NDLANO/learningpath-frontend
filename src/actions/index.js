@@ -12,6 +12,7 @@ import updatePrivateLearningPath from './updatePrivateLearningPath';
 import createPrivateLearningPath from './createPrivateLearningPath';
 import createEmptyLearningPath from './createEmptyLearningPath';
 import checkValidSession from './checkValidSession.js';
+import updatePrivateLearningPathStatus from './updatePrivateLearningPath';
 
 export var applicationError = createAction('APPLICATION_ERROR');
 export var setAuthenticated = createAction('SET_AUTHENTICATED');
@@ -41,8 +42,9 @@ export {
   fetchPrivateLearningPathStep,
   fetchPrivateLearningPaths,
   updatePrivateLearningPath,
+  updatePrivateLearningPathStatus,
   createPrivateLearningPath,
-  createEmptyLearningPath
+  createEmptyLearningPath,
 };
 
 export default {

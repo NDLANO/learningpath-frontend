@@ -6,6 +6,7 @@ import Navigation from './Navigation';
 import PathStep from './PathStep';
 import TitleEditor from './TitleEditor';
 import DescriptionEditor from './DescriptionEditor';
+import updatePrivateLearningPathStatus from "../../actions/updatePrivateLearningPathStatus";
 import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
 
 import {
@@ -38,6 +39,14 @@ export function EditLearningPath (props, {lang}) {
     dispatch(saveAction(learningPath));
   };
 
+  let publishLearningPath = () => {
+    dispatch(updatePrivateLearningPathStatus(learningPath.id, 'PUBLISHED'));
+  };
+
+  let unPublishLearningPath = () => {
+    dispatch(updatePrivateLearningPathStatus(learningPath.id, 'PRIVATE'));
+  };
+
   return (<div className='two-column'>
       <aside className='two-column_col'>
         <div className='step-nav'>
@@ -52,6 +61,16 @@ export function EditLearningPath (props, {lang}) {
           <li className='vertical-menu_item'>
             <button className='cta cta-link cta-link--block' onClick={saveLearningPath}>
               <LabeledIcon.Save labelText='Lagre' />
+            </button>
+          </li>
+          <li className='vertical-menu_item'>
+            <button className='cta cta-link cta-link--block' onClick={publishLearningPath}>
+              <LabeledIcon.Save labelText='Publiser' />
+            </button>
+          </li>
+          <li className='vertical-menu_item'>
+            <button className='cta cta-link cta-link--block' onClick={unPublishLearningPath}>
+              <LabeledIcon.Save labelText='De-publiser' />
             </button>
           </li>
         </ul>

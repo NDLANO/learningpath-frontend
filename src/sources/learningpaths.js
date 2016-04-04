@@ -41,6 +41,11 @@ const updatePrivatePath = (authToken, { pathId }, body) =>
   )
 ;
 
+const putLearningPathStatus = putAuthorized('/learningpaths/:pathId/status');
+
+const updateLearningPathStatus = (authToken, { pathId }, body) =>
+  putLearningPathStatus(authToken, {pathId}, body);
+
 const learningPathsUrl = apiResourceUrl('/learningpaths');
 
 const fetchPath = pathId =>
@@ -75,6 +80,7 @@ export {
   fetchPrivatePath,
   createPrivatePath,
   updatePrivatePath,
+  updateLearningPathStatus,
   fetchPrivatePathStep,
   fetchPrivatePaths
 };
