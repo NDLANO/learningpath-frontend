@@ -77,6 +77,7 @@ export default {
   addMessage,
   clearAllMessages,
   clearMessage,
+  timeoutMessage,
   checkValidSession,
   logoutAction
 };
