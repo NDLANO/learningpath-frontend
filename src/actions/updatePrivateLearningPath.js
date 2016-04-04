@@ -5,7 +5,7 @@ import { routeActions } from 'redux-simple-router';
 export default function updatePrivateLearningPath (pathId, learningPath) {
   return (dispatch, getState) => updatePrivatePath(getState().authToken, { pathId }, learningPath)
     .then(lpath => {
-      dispatch(addMessage({message: "Lagret OK"}));
+      dispatch(addMessage({message: 'Lagret OK'}));
       dispatch(setLearningPath(lpath));
       dispatch(routeActions.push({
         pathname: `/learningpaths/private/${lpath.id}`

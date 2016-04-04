@@ -19,7 +19,7 @@ export function Alerts({dispatch, messages}) {
     .map(m => m.severity)
     .reduce((prev, current) => priorities[current] > priorities[prev] ? current : prev, 'info');
 
-  messages.filter(m => m.timeToLive > 0).forEach(function(item, index) {
+  messages.filter(m => m.timeToLive > 0).forEach(function(item) {
     dispatch(timeoutMessage(item));
   });
 

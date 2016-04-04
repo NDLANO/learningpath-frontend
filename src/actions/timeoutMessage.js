@@ -6,5 +6,5 @@ export default function timeoutMessage (message) {
       dispatch(clearMessage(message.id));
     },
     message.timeToLive);
-  }
+  };
 }
