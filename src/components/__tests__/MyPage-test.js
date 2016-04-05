@@ -36,6 +36,7 @@ test('component/MyPage remove', t => {
   component.find('.alert_dismiss').first().simulate('click');
 
   t.ok(dispatch.calledOnce);
+  // TODO: finne god en måte å teste thunks på. e.i teste at dispatch blir kalt med rett action (deletePrivateLearningPath)
 
   t.end();
 });
