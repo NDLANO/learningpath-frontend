@@ -29,7 +29,6 @@ const learningPaths = [
     ],
     metaUrl: 'http://api.test.ndla.no/learningpaths/2',
     duration: 45,
-    status: 'PRIVATE',
     author: { type: 'Forfatter', name: 'Kaptein Sabeltann' },
     lastUpdated: new Date('2016-02-01T12:00:00+01:00')
   }
@@ -65,7 +64,7 @@ const learningPath = {
       language: 'en'
     }
   ],
-  metaUrl: 'http://api.test.ndla.no/learningpaths/private/4',
+  metaUrl: 'http://api.test.ndla.no/learningpaths/4',
   learningsteps: [
     {
       id: 7,
@@ -90,7 +89,7 @@ const learningPath = {
       ],
       type: 'TEXT',
       license: 'by-nc-sa',
-      metaUrl: 'http://api.test.ndla.no/learningpaths/private/4/learningsteps/7'
+      metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/7'
     },
     {
       id: 8,
@@ -114,13 +113,12 @@ const learningPath = {
         }
       ],
       type: 'TEXT',
-      metaUrl: 'http://api.test.ndla.no/learningpaths/private/4/learningsteps/8'
+      metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/8'
     }
   ],
-  learningstepUrl: 'http://api.test.ndla.no/learningpaths/private/4/learningsteps',
+  learningstepUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps',
   coverPhotoUrl: 'http://api.ndla.no/images/full/sy2fe75b.jpg',
   duration: 1080,
-  status: 'PRIVATE',
   verificationStatus: 'VERIFIED_BY_NDLA',
   lastUpdated: '2016-02-02T10:44:06Z',
   tags: [
@@ -157,7 +155,7 @@ const learningStep = {
     }
   ],
   type: 'TEXT',
-  metaUrl: 'http://api.test.ndla.no/learningpaths/private/4/learningsteps/8'
+  metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/8'
 };
 
 export { learningPaths, learningPath, learningStep };

@@ -4,7 +4,7 @@ import get from 'lodash/get';
 
 export default function fetchLearningPathStep (pathId, stepId) {
   return (dispatch, getState) => {
-    let { learningPath } = getState();
+    let { authToken, learningPath } = getState();
 
     if (get(learningPath, 'id') === pathId) {
       let step = get(learningPath, 'learningsteps', [])
@@ -14,7 +14,7 @@ export default function fetchLearningPathStep (pathId, stepId) {
       }
     }
 
-    return fetchPathStep(pathId, stepId)
+    return fetchPathStep(authToken, {pathId, stepId})
     .then(step => dispatch(setLearningPathStep(step)))
     .catch(err => dispatch(applicationError(err)));
   };

@@ -13,7 +13,7 @@ import {
   updateLearningPathStep,
   updateLearningPathTitle,
   updateLearningPathDescription,
-  updatePrivateLearningPath
+  updateLearningPath
 } from '../../actions';
 
 export function EditLearningPath (props, {lang}) {
@@ -82,7 +82,7 @@ EditLearningPath.contextTypes = {
 const mapStateToProps = state => Object.assign({}, state, {
   learningPath: get(state, 'learningPath', {}),
   learningSteps: get(state, 'learningPath.learningsteps', []),
-  saveAction: lp => updatePrivateLearningPath(lp.id, lp)
+  saveAction: lp => updateLearningPath(lp.id, lp)
 });
 
 export default connect(mapStateToProps)(EditLearningPath);

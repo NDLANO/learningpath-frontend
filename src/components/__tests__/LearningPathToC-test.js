@@ -24,19 +24,3 @@ test('component/LearningPathToC', t => {
 
   t.end();
 });
-
-
-test('component/LearningPathToC private', t => {
-  const component = shallow(<LearningPathToC learningPath={learningPath}
-      isPrivate={true}/>,
-      {context: {lang:'nb'}});
-
-  const links = component.find(Link);
-
-  t.equal(links.length, 2, 'has two links');
-
-  t.equal(links.at(0).prop('to'), '/learningpaths/private/4/step/7');
-  t.equal(links.at(1).prop('to'), '/learningpaths/private/4/step/8');
-
-  t.end();
-});

@@ -17,6 +17,13 @@ const locationOrigin = (() => {
   return location.origin;
 })();
 
+export const defaultApiKey = (() => {
+  /* #if development */
+  if (isUnitTest) { return 'ndlatestapikey'; }
+  /* #end */
+  return defined(window.NDLA_DEFAULT_API_KEY);
+})();
+
 const apiBaseUrl = (() => {
   /* #if development */
   if (isUnitTest) { return 'http://ndla-api'; }

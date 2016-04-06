@@ -5,11 +5,9 @@ import logout from './logout';
 import fetchLearningPath from './fetchLearningPath';
 import fetchLearningPathStep from './fetchLearningPathStep';
 import fetchLearningPaths from './fetchLearningPaths';
-import fetchPrivateLearningPath from './fetchPrivateLearningPath';
-import fetchPrivateLearningPathStep from './fetchPrivateLearningPathStep';
-import fetchPrivateLearningPaths from './fetchPrivateLearningPaths';
-import updatePrivateLearningPath from './updatePrivateLearningPath';
-import createPrivateLearningPath from './createPrivateLearningPath';
+import fetchMyLearningPaths from './fetchMyLearningPaths';
+import updateLearningPath from './updateLearningPath';
+import createLearningPath from './createLearningPath';
 import createEmptyLearningPath from './createEmptyLearningPath';
 import checkValidSession from './checkValidSession.js';
 import timeoutMessage from './timeoutMessage.js';
@@ -39,11 +37,9 @@ export {
   fetchLearningPath,
   fetchLearningPathStep,
   fetchLearningPaths,
-  fetchPrivateLearningPath,
-  fetchPrivateLearningPathStep,
-  fetchPrivateLearningPaths,
-  updatePrivateLearningPath,
-  createPrivateLearningPath,
+  fetchMyLearningPaths,
+  updateLearningPath,
+  createLearningPath,
   createEmptyLearningPath,
   timeoutMessage
 };
@@ -68,11 +64,9 @@ export default {
   fetchLearningPath,
   fetchLearningPathStep,
   fetchLearningPaths,
-  fetchPrivateLearningPath,
-  fetchPrivateLearningPathStep,
-  fetchPrivateLearningPaths,
-  updatePrivateLearningPath,
-  createPrivateLearningPath,
+  fetchMyLearningPaths,
+  updateLearningPath,
+  createLearningPath,
   createEmptyLearningPath,
   addMessage,
   clearAllMessages,

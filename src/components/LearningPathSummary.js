@@ -22,6 +22,6 @@ LearningPathSummary.contextTypes = {
   lang: PropTypes.string.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({isPrivate: ownProps.route.isPrivate}, state);
+const mapStateToProps = (state, ownProps) => Object.assign({}, state);
 
 export default connect(mapStateToProps)(LearningPathSummary);
