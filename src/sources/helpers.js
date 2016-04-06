@@ -72,3 +72,11 @@ export function putAuthorized (path) {
     body: JSON.stringify(body)
   }).then( resolveJsonOrRejectWithError );
 }
+
+export function deleteAuthorized(path) {
+  const url = params => apiResourceUrl(formatPattern(path, params));
+  return (authToken, params = {}) => fetch(url(params), {
+    headers: {'APP-KEY': authToken},
+    method: 'DELETE'
+  });
+}
