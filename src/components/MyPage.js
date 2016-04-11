@@ -7,7 +7,7 @@ import LabeledIcon from './LabeledIcon';
 
 import {
   sortPrivateLearningPaths,
-  deletePrivateLearningPath
+  deleteLearningPath
 } from '../actions';
 
 import Icon from './Icon';
@@ -24,7 +24,7 @@ export function MyPage ({dispatch, learningPaths, sortBy}, {lang}) {
 
     return (
       <div key={lp.id} className='tile'>
-        <button className='alert_dismiss un-button' onClick={() => dispatch(deletePrivateLearningPath(lp.id))}>
+        <button className='alert_dismiss un-button' onClick={() => dispatch(deleteLearningPath(lp.id))}>
           <Icon.Clear />
         </button>
         <h3 className='tile_hd'>

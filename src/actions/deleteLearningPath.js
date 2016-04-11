@@ -1,7 +1,7 @@
-import { deletePrivatePath } from '../sources/learningpaths';
-import { removePrivateLearningPath } from '.';
+import { deletePath } from '../sources/learningpaths';
+import { removeLearningPath } from '.';
 
-export default function deletePrivateLearningPath(pathId) {
-  return (dispatch, getState) => deletePrivatePath(getState().authToken, { pathId })
-    .then(dispatch(removePrivateLearningPath(pathId)));
+export default function deleteLearningPath(pathId) {
+  return (dispatch, getState) => deletePath(getState().authToken, { pathId })
+    .then(dispatch(removeLearningPath(pathId)));
 }
