@@ -3,9 +3,14 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import sortBy from 'lodash/sortBy';
 import reverse from 'lodash/reverse';
-import { sortPrivateLearningPaths } from '../actions';
 import LabeledIcon from './LabeledIcon';
 
+import {
+  sortPrivateLearningPaths,
+  deletePrivateLearningPath
+} from '../actions';
+
+import Icon from './Icon';
 import formatDate from '../util/formatDate';
 import formatDuration from '../util/formatDuration';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
@@ -19,6 +24,9 @@ export function MyPage ({dispatch, learningPaths, sortBy}, {lang}) {
 
     return (
       <div key={lp.id} className='tile'>
+        <button className='alert_dismiss un-button' onClick={() => dispatch(deletePrivateLearningPath(lp.id))}>
+          <Icon.Clear />
+        </button>
         <h3 className='tile_hd'>
           <Link to={`/learningpaths/${lp.id}/edit`}>{title}</Link>
         </h3>
