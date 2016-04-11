@@ -15,8 +15,8 @@ test('component/MyPage', t => {
   const links = component.find('.tile_hd').find(Link);
 
   t.deepEqual(links.map(n => n.prop('to')), [
-    '/learningpaths/private/1/edit',
-    '/learningpaths/private/2/edit'
+    '/learningpaths/1/edit',
+    '/learningpaths/2/edit'
   ]);
 
   t.deepEqual(links.map(n => n.prop('children')), [

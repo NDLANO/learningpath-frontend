@@ -9,7 +9,7 @@ export default handleActions({
     throw: (state) => state
   },
 
-  REMOVE_PRIVATE_LEARNING_PATH: {
+  REMOVE_LEARNING_PATH: {
     next (state, action) {
       let nextState = cloneDeep(state);
       let index = findIndex(nextState, {id: action.payload});

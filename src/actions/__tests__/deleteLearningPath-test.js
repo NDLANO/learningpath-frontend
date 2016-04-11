@@ -10,7 +10,7 @@ const mockStore = configureStore(middleware);
 
 const authToken = '123345';
 
-test('actions/deletePrivateLearningPath', t => {
+test('actions/deleteLearningPath', t => {
   const done = res => {
     t.end(res);
     nock.cleanAll();
@@ -22,10 +22,10 @@ test('actions/deletePrivateLearningPath', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.deletePrivateLearningPath(123) )
+  store.dispatch( actions.deleteLearningPath(123) )
     .then(() => {
       t.deepEqual(store.getActions(), [
-        {type: 'REMOVE_PRIVATE_LEARNING_PATH', payload: 123}
+        {type: 'REMOVE_LEARNING_PATH', payload: 123}
       ]);
 
       t.doesNotThrow(() => apiMock.done());

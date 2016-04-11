@@ -9,6 +9,7 @@ import actions from '..';
 const middleware = [ thunk ];
 const mockStore = configureStore(middleware);
 
+const authToken = '123345';
 const pathId = 123;
 const stepId = 456;
 
@@ -18,11 +19,11 @@ test('actions/fetchLearningPathStep', t => {
     nock.cleanAll();
   };
   
-  const apiMock = nock('http://ndla-api')
+  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get(`/learningpaths/${pathId}/learningsteps/${stepId}`)
     .reply(200, {id: stepId, seqNo: 3});
 
-  const store = mockStore({});
+  const store = mockStore({ authToken });
 
   store.dispatch( actions.fetchLearningPathStep(pathId, stepId) )
     .then(() => {
@@ -41,7 +42,7 @@ test('actions/fetchLearningPathStep cache hit', t => {
     nock.cleanAll();
   };
   
-  const apiMock = nock('http://ndla-api')
+  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get(`/learningpaths/${pathId}/learningsteps/${stepId}`)
     .reply(200, {id: stepId, seqNo: 3, cached: false});
 
@@ -52,7 +53,8 @@ test('actions/fetchLearningPathStep cache hit', t => {
         { id: 'not-stepId', seqNo: 2 },
         { id: stepId, seqNo: 3, cached: true }
       ]
-    }
+    },
+    authToken
   };
 
   const store = mockStore(initialState);
@@ -75,11 +77,11 @@ test('actions/fetchLearningPathStep access denied', t => {
     nock.cleanAll();
   };
   
-  const apiMock = nock('http://ndla-api')
+  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get(`/learningpaths/${pathId}/learningsteps/${stepId}`)
     .reply(403, {message: 'Invalid'});
 
-  const store = mockStore({});
+  const store = mockStore({ authToken });
 
   store.dispatch( actions.fetchLearningPathStep(pathId, stepId) )
     .then(() => {

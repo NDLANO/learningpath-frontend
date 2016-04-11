@@ -7,16 +7,16 @@ import has from 'lodash/has';
 import assureSequenceOrder from '../util/assureSequenceOrder';
 import { fetchAuthorized, postAuthorized, putAuthorized, deleteAuthorized, resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';
 
-const fetchPrivatePath = fetchAuthorized('/learningpaths/private/:pathId');
-const fetchPrivatePathStep = fetchAuthorized(
-    '/learningpaths/private/:pathId/learningsteps/:stepId');
-const fetchPrivatePaths = fetchAuthorized('/learningpaths/private');
+const fetchPath = fetchAuthorized('/learningpaths/:pathId');
+const fetchPathStep = fetchAuthorized(
+    '/learningpaths/:pathId/learningsteps/:stepId');
+const fetchMyPaths = fetchAuthorized('/learningpaths/mine');
 
 
 const postLearningPath = postAuthorized('/learningpaths');
 const postLearningPathStep = postAuthorized('/learningpaths/:pathId/learningsteps');
 
-const createPrivatePath = (authToken, props, body) =>
+const createPath = (authToken, props, body) =>
   postLearningPath(authToken, props, body)
   .then(lpath => Promise.all(map(body.learningsteps, step =>
       postLearningPathStep(authToken, { pathId: lpath.id }, step )
@@ -29,7 +29,7 @@ const createPrivatePath = (authToken, props, body) =>
 const putLearningPath = putAuthorized('/learningpaths/:pathId');
 const putLearningPathStep = putAuthorized('/learningpaths/:pathId/learningsteps/:stepId');
 
-const updatePrivatePath = (authToken, { pathId }, body) =>
+const updatePath = (authToken, { pathId }, body) =>
   putLearningPath(authToken, { pathId }, body)
   .then(lpath => Promise.all(map(body.learningsteps, step =>
       has(step, 'id') ?
@@ -41,21 +41,13 @@ const updatePrivatePath = (authToken, { pathId }, body) =>
   )
 ;
 
-const deletePrivateLearningPath = deleteAuthorized('/learningpaths/:pathId');
-const deletePrivatePath = (authToken, { pathId }) =>
-  deletePrivateLearningPath(authToken, {pathId});
+const deleteLearningPath = deleteAuthorized('/learningpaths/:pathId');
+const deletePath = (authToken, { pathId }) =>
+  deleteLearningPath(authToken, {pathId});
 
 const learningPathsUrl = apiResourceUrl('/learningpaths');
 
-const fetchPath = pathId =>
-  fetch(apiResourceUrl('/learningpaths/' + pathId))
-  .then( resolveJsonOrRejectWithError );
-
-const fetchPathStep = (pathId, stepId) =>
-  fetch(apiResourceUrl('/learningpaths/' + pathId + '/learningsteps/' + stepId))
-  .then( resolveJsonOrRejectWithError );
-
-const fetchPaths = (query) => {
+const fetchPaths = (authToken, query) => {
   let url = learningPathsUrl;
   if (query) {
     let q = cloneDeep(query);
@@ -69,17 +61,15 @@ const fetchPaths = (query) => {
 
     url += '?' + queryString.stringify(q);
   }
-  return fetch(url).then( resolveJsonOrRejectWithError );
+  return fetch(url, {headers: {'APP-KEY': authToken}}).then( resolveJsonOrRejectWithError );
 };
 
 export {
   fetchPath,
   fetchPathStep,
   fetchPaths,
-  fetchPrivatePath,
-  createPrivatePath,
-  updatePrivatePath,
-  deletePrivatePath,
-  fetchPrivatePathStep,
-  fetchPrivatePaths
+  createPath,
+  updatePath,
+  fetchMyPaths,
+  deletePath
 };

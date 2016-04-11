@@ -5,8 +5,8 @@ import classNames from 'classnames';
 
 import { titleI18N } from '../util/i18nFieldFinder';
 
-export default function LearningPathToC ({learningPath, isPrivate, activePathname}, {lang}) {
-  const base = `/learningpaths${isPrivate ? '/private' : ''}/${learningPath.id}`;
+export default function LearningPathToC ({learningPath, activePathname}, {lang}) {
+  const base = `/learningpaths/${learningPath.id}`;
   const itemClassName = (path) => classNames({
     'step-nav_item': true,
     'step-nav_item--active': path === activePathname
@@ -30,8 +30,7 @@ export default function LearningPathToC ({learningPath, isPrivate, activePathnam
 
 LearningPathToC.propTypes = {
   learningPath: PropTypes.object.isRequired,
-  activePathname: PropTypes.string,
-  isPrivate: PropTypes.bool
+  activePathname: PropTypes.string
 };
 
 LearningPathToC.contextTypes = {
@@ -39,6 +38,5 @@ LearningPathToC.contextTypes = {
 };
 
 LearningPathToC.defaultProps = {
-  activePathname: '',
-  isPrivate: false
+  activePathname: ''
 };
