@@ -10,25 +10,20 @@ export default function LearningPathPrevNext ({learningPath, isPrivate, activePa
 
   const base = `/learningpaths${isPrivate ? '/private' : ''}/${learningPath.id}`;
 
-  const itemClassName = (path) => classNames({
-    'step-nav_item': true,
-    'step-nav_item--active': path === activePathname
-  });
-
   const stepperClassName = (object) => classNames({
     'stepper-nav-btn': true,
     'stepper-nav-btn_disabled': object === undefined
   });
 
-  const nextName = 'Neste >>'
-  const prevName = '<< Forrige'
+  const nextName = 'Neste >>';
+  const prevName = '<< Forrige';
 
   const stepperUrl = (object) => {
     if (object === undefined){
-      return "#";
+      return '#';
     }
     return `${base}/step/${object.id}`;
-  }
+  };
 
 
   return (
@@ -49,7 +44,9 @@ export default function LearningPathPrevNext ({learningPath, isPrivate, activePa
 LearningPathPrevNext.propTypes = {
   learningPath: PropTypes.object.isRequired,
   activePathname: PropTypes.string,
-  isPrivate: PropTypes.bool
+  isPrivate: PropTypes.bool,
+  nextUrl: PropTypes.object,
+  prevUrl: PropTypes.object
 };
 
 LearningPathPrevNext.contextTypes = {
@@ -73,7 +70,6 @@ const mapStateToProps = (state) => {
       prevUrl: learningsteps[currentSeqNo - 1]
     });
   }
-  return Object.assign({}, state, { null });
 };
 
 export { mapStateToProps };
