@@ -30,7 +30,7 @@ export default function LearningPathToC ({learningPath, activePathname}, {lang})
 
 LearningPathToC.propTypes = {
   learningPath: PropTypes.object.isRequired,
-  activePathname: PropTypes.string,
+  activePathname: PropTypes.string
 };
 
 LearningPathToC.contextTypes = {
@@ -38,5 +38,5 @@ LearningPathToC.contextTypes = {
 };
 
 LearningPathToC.defaultProps = {
-  activePathname: '',
+  activePathname: ''
 };

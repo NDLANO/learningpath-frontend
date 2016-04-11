@@ -27,7 +27,7 @@ export default function LearningPathGeneralInfo ({learningPath}, {lang}) {
 }
 
 LearningPathGeneralInfo.propTypes = {
-  learningPath: PropTypes.object.isRequired,
+  learningPath: PropTypes.object.isRequired
 };
 
 LearningPathGeneralInfo.defaultProps = {

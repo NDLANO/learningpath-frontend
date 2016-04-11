@@ -10,15 +10,12 @@ import formatDate from '../util/formatDate';
 import formatDuration from '../util/formatDuration';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 
-export function MyPage ({dispatch, learningPaths, sortBy, state}, {lang}) {
+export function MyPage ({dispatch, learningPaths, sortBy}, {lang}) {
   const items = learningPaths.map(lp => {
     const title = titleI18N(lp, lang);
     const description = descriptionI18N(lp, lang);
     const duration = formatDuration(lp.duration, lang);
     const lastUpdated = formatDate(lp.lastUpdated, lang);
-
-    console.log("stae is:");
-    console.log(state);
 
     return (
       <div key={lp.id} className='tile'>
