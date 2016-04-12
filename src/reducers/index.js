@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { routeReducer } from 'redux-simple-router';
+import { reducer as formReducer } from 'redux-form';
 
 import authenticated from './authenticated';
 import authToken from './authToken';
@@ -23,7 +24,8 @@ const rootReducers = combineReducers({
   learningPathsTotalCount,
   privateLearningPathsSortBy,
   messages,
-  routing: routeReducer
+  routing: routeReducer,
+  form: formReducer
 });
 
 export default rootReducers;
