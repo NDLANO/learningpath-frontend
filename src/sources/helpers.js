@@ -21,14 +21,14 @@ export const defaultApiKey = (() => {
   /* #if development */
   if (isUnitTest) { return 'ndlatestapikey'; }
   /* #end */
-  return defined(window.NDLA_DEFAULT_API_KEY);
+  return window.NDLA_DEFAULT_API_KEY;
 })();
 
 const apiBaseUrl = (() => {
   /* #if development */
   if (isUnitTest) { return 'http://ndla-api'; }
   /* #end */
-  return window.NDLA_API_URL, locationOrigin;
+  return defined(window.NDLA_API_URL, locationOrigin);
 })();
 
 
