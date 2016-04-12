@@ -19,7 +19,7 @@ export function LearningPath(props) {
         </main>
       </div>
       <div>
-        <LearningPathPrevNext {...props} />
+        <LearningPathPrevNext/>
       </div>
     </div>
   );
