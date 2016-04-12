@@ -31,7 +31,6 @@ LearningPath.propTypes = {
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
   learningPath: state.learningPath,
-  isPrivate: ownProps.route.isPrivate,
   activePathname: ownProps.location.pathname
 });
 

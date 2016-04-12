@@ -3,9 +3,14 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import sortBy from 'lodash/sortBy';
 import reverse from 'lodash/reverse';
-import { sortPrivateLearningPaths } from '../actions';
 import LabeledIcon from './LabeledIcon';
 
+import {
+  sortPrivateLearningPaths,
+  deleteLearningPath
+} from '../actions';
+
+import Icon from './Icon';
 import formatDate from '../util/formatDate';
 import formatDuration from '../util/formatDuration';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
@@ -19,8 +24,11 @@ export function MyPage ({dispatch, learningPaths, sortBy}, {lang}) {
 
     return (
       <div key={lp.id} className='tile'>
+        <button className='alert_dismiss un-button' onClick={() => dispatch(deleteLearningPath(lp.id))}>
+          <Icon.Clear />
+        </button>
         <h3 className='tile_hd'>
-          <Link to={`/learningpaths/private/${lp.id}/edit`}>{title}</Link>
+          <Link to={`/learningpaths/${lp.id}/edit`}>{title}</Link>
         </h3>
         <div className='tile_bd'>{description}</div>
         <div className='tile_ft'>
@@ -49,7 +57,7 @@ export function MyPage ({dispatch, learningPaths, sortBy}, {lang}) {
     </div>
     <div className='tiles'>{items}</div>
     <div>
-      <Link className='cta-link new-learningpath-button' to='/learningpaths/private/new'>
+      <Link className='cta-link new-learningpath-button' to='/learningpaths/new'>
         <LabeledIcon.Add labelText='Opprett ny lærringssti' />
       </Link>
     </div>

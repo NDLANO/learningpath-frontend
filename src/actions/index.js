@@ -5,14 +5,13 @@ import logout from './logout';
 import fetchLearningPath from './fetchLearningPath';
 import fetchLearningPathStep from './fetchLearningPathStep';
 import fetchLearningPaths from './fetchLearningPaths';
-import fetchPrivateLearningPath from './fetchPrivateLearningPath';
-import fetchPrivateLearningPathStep from './fetchPrivateLearningPathStep';
-import fetchPrivateLearningPaths from './fetchPrivateLearningPaths';
-import updatePrivateLearningPath from './updatePrivateLearningPath';
-import createPrivateLearningPath from './createPrivateLearningPath';
+import fetchMyLearningPaths from './fetchMyLearningPaths';
+import updateLearningPath from './updateLearningPath';
+import createLearningPath from './createLearningPath';
 import createEmptyLearningPath from './createEmptyLearningPath';
 import checkValidSession from './checkValidSession.js';
 import timeoutMessage from './timeoutMessage.js';
+import deleteLearningPath from './deleteLearningPath';
 
 export var applicationError = createAction('APPLICATION_ERROR');
 export var setAuthenticated = createAction('SET_AUTHENTICATED');
@@ -27,6 +26,7 @@ export var createLearningPathStep = createAction('CREATE_LEARNING_PATH_STEP');
 export var updateLearningPathStep = createAction('UPDATE_LEARNING_PATH_STEP');
 export var updateLearningPathTitle = createAction('UPDATE_LEARNING_PATH_TITLE');
 export var updateLearningPathDescription = createAction('UPDATE_LEARNING_PATH_DESCRIPTION');
+export var removeLearningPath = createAction('REMOVE_LEARNING_PATH');
 export var setUserData = createAction('SET_USER_DATA');
 export var addMessage = createAction('ADD_MESSAGE');
 export var clearAllMessages = createAction('CLEAR_ALL_MESSAGES');
@@ -39,13 +39,12 @@ export {
   fetchLearningPath,
   fetchLearningPathStep,
   fetchLearningPaths,
-  fetchPrivateLearningPath,
-  fetchPrivateLearningPathStep,
-  fetchPrivateLearningPaths,
-  updatePrivateLearningPath,
-  createPrivateLearningPath,
+  fetchMyLearningPaths,
+  updateLearningPath,
+  createLearningPath,
   createEmptyLearningPath,
-  timeoutMessage
+  timeoutMessage,
+  deleteLearningPath
 };
 
 export default {
@@ -62,17 +61,17 @@ export default {
   updateLearningPathStep,
   updateLearningPathTitle,
   updateLearningPathDescription,
+  removeLearningPath,
+  deleteLearningPath,
   setUserData,
   initializeSession,
   logout,
   fetchLearningPath,
   fetchLearningPathStep,
   fetchLearningPaths,
-  fetchPrivateLearningPath,
-  fetchPrivateLearningPathStep,
-  fetchPrivateLearningPaths,
-  updatePrivateLearningPath,
-  createPrivateLearningPath,
+  fetchMyLearningPaths,
+  updateLearningPath,
+  createLearningPath,
   createEmptyLearningPath,
   addMessage,
   clearAllMessages,
