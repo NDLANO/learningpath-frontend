@@ -11,6 +11,7 @@
   },
   "scripts": {
     "test": "babel-tape-runner 'src/**/*-test.js'|faucet",
+    "postinstall": "cp -v node_modules/ndla-styleguide/assets/* htdocs/assets/",
     "build": "webpack --progress",
     "start": "webpack-dev-server --inline",
     "lint": "eslint src"
@@ -52,6 +53,7 @@
     "json-loader": "^0.5.4",
     "lodash": "^4.1.0",
     "moment": "^2.11.2",
+    "ndla-styleguide": "git+ssh://git@stash.knowit.no:7999/ndla/ndla-styleguide.git#0.0.1",
     "node-polyglot": "^2.0.0",
     "node-uuid": "^1.4.7",
     "query-string": "^4.1.0",
