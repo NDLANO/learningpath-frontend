@@ -43,7 +43,7 @@ export function EditLearningPath (props, {lang}) {
         <div className='step-nav'>
           <div className='learningpath-general-info'>
             <h2 className='learningpath-general-info_h'>
-              <TitleEditor value={titleText} onChange={updateTitle} />
+              <TitleEditor value={titleText} onChange={updateTitle} lang={lang} />
             </h2>
           </div>
           <Navigation {...props} />
@@ -58,7 +58,7 @@ export function EditLearningPath (props, {lang}) {
       </aside>
       <main className='two-column_col'>
         <h2>Introduksjon</h2>
-        <DescriptionEditor value={descriptionText} onChange={updateDescription} />
+        <DescriptionEditor value={descriptionText} onChange={updateDescription} lang={lang} />
         {pathSteps}
         <button className='cta-link cta-link--block'
             onClick={() => dispatch(createLearningPathStep())}>
