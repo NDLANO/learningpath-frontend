@@ -28,7 +28,7 @@ const apiBaseUrl = (() => {
   /* #if development */
   if (isUnitTest) { return 'http://ndla-api'; }
   /* #end */
-  return defined(window.NDLA_API_URL, locationOrigin);
+  return window.NDLA_API_URL, locationOrigin;
 })();
 
 

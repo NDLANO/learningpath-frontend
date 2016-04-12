@@ -70,14 +70,7 @@ ReactDOM.render(
 
           <Route path='learningpaths/new' component={requireAuthentication(CreateLearningPath)}
             onEnter={ifAuthenticated(createEmptyLearningPath)}/>
-          <Route path='learningpaths/:pathId' component={requireAuthentication(LearningPath)}
-            onEnter={ifAuthenticated(({params}) => fetchLearningPath(params.pathId))}>
-            <IndexRoute component={LearningPathSummary} />
-            <Route path='step/:stepId' component={requireAuthentication(LearningPathStep)}
-              onEnter={ifAuthenticated(
-                ({params}) => fetchLearningPathStep(params.pathId, params.stepId)
-              )}/>
-          </Route>
+
           <Route path='learningpaths/:pathId/edit' component={requireAuthentication(EditLearningPath)}
              onEnter={ifAuthenticated(({params}) => fetchLearningPath(params.pathId))} />
 
