@@ -9,8 +9,8 @@ import formatDuration from '../util/formatDuration';
 import LabeledIcon from './LabeledIcon';
 
 
-export default function LearningPathGeneralInfo ({learningPath, isPrivate}, {lang}) {
-  const href = `/learningpaths${isPrivate ? '/private' : ''}/${learningPath.id}`;
+export default function LearningPathGeneralInfo ({learningPath}, {lang}) {
+  const href = `/learningpaths/${learningPath.id}`;
 
   return (
     <div className='learningpath-general-info'>
@@ -27,12 +27,10 @@ export default function LearningPathGeneralInfo ({learningPath, isPrivate}, {lan
 }
 
 LearningPathGeneralInfo.propTypes = {
-  learningPath: PropTypes.object.isRequired,
-  isPrivate: PropTypes.bool
+  learningPath: PropTypes.object.isRequired
 };
 
 LearningPathGeneralInfo.defaultProps = {
-  isPrivate: false
 };
 
 LearningPathGeneralInfo.contextTypes = {

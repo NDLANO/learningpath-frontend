@@ -44,25 +44,25 @@ test('reducers/learningPaths remove learning path', (t) => {
   let path3 = {id: 125, title: [{title: 'another Title', language: 'nb'}]};
 
   t.deepEqual(
-    reducer(undefined, {type: 'REMOVE_PRIVATE_LEARNING_PATH'}),
+    reducer(undefined, {type: 'REMOVE_LEARNING_PATH'}),
     [],
     'initial state'
   );
 
   t.deepEqual(
-    reducer([path1, path2, path3], {type: 'REMOVE_PRIVATE_LEARNING_PATH', payload: 0}),
+    reducer([path1, path2, path3], {type: 'REMOVE_LEARNING_PATH', payload: 0}),
     [path1, path2, path3],
     'id mismatch'
   );
 
   t.deepEqual(
-    reducer([path1, path2, path3], {type: 'REMOVE_PRIVATE_LEARNING_PATH', payload: 123}),
+    reducer([path1, path2, path3], {type: 'REMOVE_LEARNING_PATH', payload: 123}),
     [path2, path3],
     'remove state'
   );
 
   t.deepEqual(
-    reducer([], {type: 'REMOVE_PRIVATE_LEARNING_PATH', payload: 123}),
+    reducer([], {type: 'REMOVE_LEARNING_PATH', payload: 123}),
     [],
     'empty state'
   );
