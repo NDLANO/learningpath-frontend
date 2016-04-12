@@ -1,14 +1,12 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import defined from 'defined';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
-import isEmpty from 'lodash/isEmpty';
 import get from 'lodash/get';
 
 import { titleI18N } from '../util/i18nFieldFinder';
 
-export function LearningPathPrevNext ({learningPath, learningsteps, activePathname, nextUrl, prevUrl}, {lang}) {
+export function LearningPathPrevNext ({learningPath, learningsteps, nextUrl, prevUrl}, {lang}) {
 
   const base = `/learningpaths/${learningPath.id}`;
 
@@ -39,18 +37,15 @@ export function LearningPathPrevNext ({learningPath, learningsteps, activePathna
 
 LearningPathPrevNext.propTypes = {
   learningPath: PropTypes.object.isRequired,
-  activePathname: PropTypes.string,
   nextUrl: PropTypes.object,
-  prevUrl: PropTypes.object
+  prevUrl: PropTypes.object,
+  learningsteps: PropTypes.array.isRequired
 };
 
 LearningPathPrevNext.contextTypes = {
   lang: PropTypes.string.isRequired
 };
 
-LearningPathPrevNext.defaultProps = {
-  activePathname: '',
-};
 
 const mapStateToProps = (state) => {
   const learningsteps = get(state.learningPath, 'learningsteps', []);
