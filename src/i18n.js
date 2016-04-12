@@ -12,6 +12,16 @@ const phrases = {
       shortest: 'Korteste',
       title: 'Alfabetisk'
     }
+  },
+  loginFailure: {
+    errormessage: 'Beklager. Innlogging feilet.',
+    login: 'Logg inn'
+  },
+  loginProviders: {
+    description: 'Logg inn i NDLA med'
+  },
+  logo: {
+    altText: 'Nasjonal digital læringsarena'
   }
 };
 
