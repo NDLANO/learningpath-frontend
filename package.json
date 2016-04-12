@@ -44,8 +44,10 @@
   "dependencies": {
     "classnames": "^2.2.3",
     "defined": "^1.0.0",
-    "draft-js": "^0.3.0",
+    "draft-js": "^0.4.0",
+    "draft-js-export-html": "^0.1.9",
     "es6-promise": "^3.0.2",
+    "immutable": "^3.7.6",
     "isomorphic-fetch": "^2.2.0",
     "json-loader": "^0.5.4",
     "lodash": "^4.1.0",

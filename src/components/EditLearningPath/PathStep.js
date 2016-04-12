@@ -6,6 +6,7 @@ import findIndex from 'lodash/findIndex';
 import { titleI18N, descriptionI18N, embedUrlI18N } from '../../util/i18nFieldFinder';
 import Icon from '../Icon';
 import TitleEditor from './TitleEditor';
+import DescriptionHTMLEditor from './DescriptionHTMLEditor';
 
 
 
@@ -34,6 +35,21 @@ export default class PathStep extends Component {
     this.setState({ step });
   }
 
+  handleDescriptionChange(value) {
+    let step = cloneDeep(this.state.step);
+    let descriptions = get(step, 'description', []);
+    let index = findIndex(descriptions, ['language', value.language]);
+
+    if (index === -1) {
+      descriptions.push(value);
+    } else {
+      assign(descriptions[index], value);
+    }
+
+    step.description = descriptions;
+
+    this.setState({ step });
+  }
 
   handleTypeChange(evt) {
     let step = cloneDeep(this.state.step);
@@ -86,6 +102,7 @@ export default class PathStep extends Component {
     const changeTitle = this.handleTitleChange.bind(this);
     const changeType = this.handleTypeChange.bind(this);
     const changeEmbedUrl = this.handleEmbedUrlChange.bind(this);
+    const changeDescription = this.handleDescriptionChange.bind(this);
     const handleSubmit = this.handleSubmit.bind(this);
 
     let embedUrlPreview = '';
@@ -126,7 +143,13 @@ export default class PathStep extends Component {
           </h1>
         </div>
         <div className='learning-path_bd'>
-          <div dangerouslySetInnerHTML={{__html: htmlDescription}}></div>
+          <div>
+            <DescriptionHTMLEditor
+              lang={lang}
+              value={htmlDescription}
+              onChange={changeDescription}
+            />
+          </div>
 
           <div className='mediatype-wrapper'>
             <div className='icon-select'>
