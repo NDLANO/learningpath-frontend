@@ -63,7 +63,12 @@ const phrases = {
     search: 'Finn læringssti',
     myPage: 'Mine læringsstier',
     logout: 'Logg ut %{name}'
+  },
+  duration: {
+    zero: 'Ukjent lengde',
+    hours: '%{smart_count} time |||| %{smart_count} timer',
+    minutes: '%{smart_count} minutt |||| %{smart_count} minutter'
   }
 };
 
-export default new Polyglot({ locale: 'no_NB', phrases });
+export default new Polyglot({ locale: 'no', phrases });
