@@ -41,6 +41,20 @@ const phrases = {
     title2: 'Nasjonal digital læringsarena',
     explanationBtn: 'Hva er en læringssti?',
     newBtn: 'Lag din egen læringssti'
+  },
+  editPage: {
+    learningpathShortDescriptionTitle: 'Introduksjon'
+  },
+  editPathStep: {
+    urlLabel: 'Lim in lenke (URL) fra ndla.no eller youtube.com',
+    mediatype: {
+      introduction: 'Introduksjon',
+      text: 'Tekst',
+      multimedia: 'Multimedia',
+      quiz: 'Quiz',
+      task: 'Oppgave',
+      summary: 'Oppsummering'
+    }
   }
 };
 

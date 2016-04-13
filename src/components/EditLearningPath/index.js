@@ -7,6 +7,7 @@ import PathStep from './PathStep';
 import TitleEditor from './TitleEditor';
 import DescriptionEditor from './DescriptionEditor';
 import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
+import polyglot from '../../i18n';
 
 import {
   createLearningPathStep,
@@ -57,7 +58,7 @@ export function EditLearningPath (props, {lang}) {
         </ul>
       </aside>
       <main className='two-column_col'>
-        <h2>Introduksjon</h2>
+        <h2>{polyglot.t('editPage.learningpathShortDescriptionTitle')}</h2>
         <DescriptionEditor value={descriptionText} onChange={updateDescription} lang={lang} />
         {pathSteps}
         <button className='cta-link cta-link--block'
