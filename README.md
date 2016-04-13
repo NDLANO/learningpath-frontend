@@ -85,6 +85,10 @@ Hint: Running `npm ls --long --depth 0` prints a list of dependencies including 
 A React framework for building text editors.
 https://facebook.github.io/draft-js
 
+**draft-js-export-html**
+DraftJS: Export ContentState to HTML.
+https://github.com/sstur/draft-js-export-html#readme
+
 **react:**
 React is a JavaScript library for building user interfaces.
 https://facebook.github.io/react/
@@ -143,6 +147,10 @@ https://lodash.com/
 **moment:**
 Parse, validate, manipulate, and display dates
 http://momentjs.com
+
+**node-polyglot**
+Give your JavaScript the ability to speak many languages
+https://github.com/airbnb/polyglot.js#readme
 
 **qs:**
 A querystring parser that supports nesting and arrays, with a depth limit.

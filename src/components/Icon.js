@@ -29,5 +29,6 @@ Icon.Exit = props => (<Icon {...props} className={'icon--exit-to-app '+props.cla
 Icon.Apps = props => (<Icon {...props} className={'icon--apps '+props.className} svgDefId='icon-apps' />);
 Icon.Check = props => (<Icon {...props} className={'icon--check '+props.className} svgDefId='icon-check' />);
 Icon.Clear = props => (<Icon {...props} className={'icon--clear '+props.className} svgDefId='icon-clear' />);
+Icon.MoreVert = props => (<Icon {...props} className={'icon--more-vert '+props.className} svgDefId='icon-more_vert' />);
 
 export default Icon;

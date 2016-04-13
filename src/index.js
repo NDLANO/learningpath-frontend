@@ -11,10 +11,11 @@ es6promise.polyfill();
 import actions from './actions';
 import { defaultSearchQuery, parseSearchQuery } from './middleware/searchQuery';
 import configureStore, { browserHistory } from './configureStore';
+import {defaultApiKey} from "./sources/helpers";
 
 const store = configureStore({
   authenticated: false,
-  authToken: '',
+  authToken: defaultApiKey,
   user: {},
   learningPath: {},
   learningPathStep: {},
@@ -26,9 +27,7 @@ const store = configureStore({
 
 const {
   logout,
-  fetchPrivateLearningPaths,
-  fetchPrivateLearningPath,
-  fetchPrivateLearningPathStep,
+  fetchMyLearningPaths,
   fetchLearningPaths,
   fetchLearningPath,
   fetchLearningPathStep,
@@ -68,20 +67,13 @@ ReactDOM.render(
           <Route path='login/success/:authToken' component={SessionInitializer} />
           <Route path='login/failure' component={LoginFailure} />
           <Route path='logout' onEnter={ifAuthenticated(logout)} component={LoginProviders} />
-          <Route path='minside' component={requireAuthentication(MyPage)} onEnter={ifAuthenticated(fetchPrivateLearningPaths)} />
+          <Route path='minside' component={requireAuthentication(MyPage)} onEnter={ifAuthenticated(fetchMyLearningPaths)} />
 
-          <Route path='learningpaths/private/new' component={requireAuthentication(CreateLearningPath)}
+          <Route path='learningpaths/new' component={requireAuthentication(CreateLearningPath)}
             onEnter={ifAuthenticated(createEmptyLearningPath)}/>
-          <Route path='learningpaths/private/:pathId' component={requireAuthentication(LearningPath)} isPrivate={true}
-            onEnter={ifAuthenticated(({params}) => fetchPrivateLearningPath(params.pathId))}>
-            <IndexRoute component={LearningPathSummary} isPrivate={true} />
-            <Route path='step/:stepId' component={requireAuthentication(LearningPathStep)} isPrivate={true} 
-              onEnter={ifAuthenticated(
-                ({params}) => fetchPrivateLearningPathStep(params.pathId, params.stepId)
-              )}/>
-          </Route>
-          <Route path='learningpaths/private/:pathId/edit' component={requireAuthentication(EditLearningPath)}
-             onEnter={ifAuthenticated(({params}) => fetchPrivateLearningPath(params.pathId))} />
+
+          <Route path='learningpaths/:pathId/edit' component={requireAuthentication(EditLearningPath)}
+             onEnter={ifAuthenticated(({params}) => fetchLearningPath(params.pathId))} />
 
           <Route path='learningpaths' component={LearningPathSearch} onEnter={ctx => {
             let query = parseSearchQuery( ctx.location.query );

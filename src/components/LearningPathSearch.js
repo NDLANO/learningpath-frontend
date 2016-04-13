@@ -14,6 +14,7 @@ import formatDuration from '../util/formatDuration';
 import {fetchLearningPaths } from '../actions';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 
+import polyglot from '../i18n';
 
 class SearchForm extends Component {
   constructor(props) {
@@ -51,19 +52,19 @@ class SearchForm extends Component {
         <input type='text' className='search-form_query'
             onChange={handleQueryChange}
             value={this.state.query}
-            placeholder='Søk etter læringsstier' />
+            placeholder={polyglot.t('searchForm.placeholder')} />
 
-        <button className='search-form_btn'>Søk</button>
+        <button className='search-form_btn'>{polyglot.t('searchForm.btn')}</button>
 
         <select className='search-form_sort-order'
             onChange={handleSortChange}
             value={this.state.sort}>
-          <option value='relevance'>Relevans</option>
-          <option value='-lastUpdated'>Nyeste</option>
-          <option value='lastUpdated'>Eldste</option>
-          <option value='-duration'>Lengste</option>
-          <option value='duration'>Korteste</option>
-          <option value='title'>Alfabetisk</option>
+          <option value='relevance'>{polyglot.t('searchForm.order.relevance')}</option>
+          <option value='-lastUpdated'>{polyglot.t('searchForm.order.newest')}</option>
+          <option value='lastUpdated'>{polyglot.t('searchForm.order.oldest')}</option>
+          <option value='-duration'>{polyglot.t('searchForm.order.longest')}</option>
+          <option value='duration'>{polyglot.t('searchForm.order.shortest')}</option>
+          <option value='title'>{polyglot.t('searchForm.order.title')}</option>
         </select>
       </form>
     );

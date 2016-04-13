@@ -13,7 +13,7 @@ const mockStore = configureStore(middleware);
 const authToken = '123345';
 const pathId = 123;
 
-test('actions/updatePrivateLearningPath', t => {
+test('actions/updateLearningPath', t => {
   const done = res => {
     t.end(res);
     nock.cleanAll();
@@ -45,11 +45,12 @@ test('actions/updatePrivateLearningPath', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.updatePrivateLearningPath(pathId, {
+  store.dispatch( actions.updateLearningPath(pathId, {
     id: pathId, isRequest: true, learningsteps
   }) )
     .then(() => {
       t.deepEqual(store.getActions(), [
+        actions.addMessage({message: 'Lagret OK'}),
         actions.setLearningPath({
           id: pathId,
           isResponse: true,
@@ -59,7 +60,7 @@ test('actions/updatePrivateLearningPath', t => {
             {id: 56, seqNo: 2, isResponse: true}
           ]
         }),
-        routeActions.push({ pathname: `/learningpaths/private/${pathId}` })
+        routeActions.push({ pathname: `/learningpaths/${pathId}` })
       ]);
 
       t.doesNotThrow(() => putPathApi.done());
@@ -72,7 +73,7 @@ test('actions/updatePrivateLearningPath', t => {
     .catch(done);
 });
 
-test('actions/updatePrivateLearningPath access denied', (t) => {
+test('actions/updateLearningPath access denied', (t) => {
   const done = res => {
     t.end(res);
     nock.cleanAll();
@@ -87,7 +88,7 @@ test('actions/updatePrivateLearningPath access denied', (t) => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.updatePrivateLearningPath(pathId, { id: pathId, foo: 'bar' }) )
+  store.dispatch( actions.updateLearningPath(pathId, { id: pathId, foo: 'bar' }) )
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.applicationError(payload403invalid())

@@ -5,7 +5,7 @@ import reducer from '../authToken';
 test('reducers/authToken', (t) => {
   t.equal(
     reducer(undefined, {}),
-    '',
+    'ndlatestapikey',
     'initial state'
   );
 
@@ -35,7 +35,7 @@ test('reducers/authToken', (t) => {
 
   t.equal(
     reducer('12345', { type: 'LOGOUT' }),
-    '',
+    'ndlatestapikey',
     'logout'
   );
 

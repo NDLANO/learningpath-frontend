@@ -6,7 +6,7 @@ import Navigation from './Navigation';
 import PathStep from './PathStep';
 import TitleEditor from './TitleEditor';
 import DescriptionEditor from './DescriptionEditor';
-import updatePrivateLearningPathStatus from "../../actions/updatePrivateLearningPathStatus";
+import updateLearningPathStatus from "../../actions/updateLearningPathStatus";
 import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
 
 import {
@@ -14,7 +14,7 @@ import {
   updateLearningPathStep,
   updateLearningPathTitle,
   updateLearningPathDescription,
-  updatePrivateLearningPath
+  updateLearningPath
 } from '../../actions';
 
 export function EditLearningPath (props, {lang}) {
@@ -39,20 +39,12 @@ export function EditLearningPath (props, {lang}) {
     dispatch(saveAction(learningPath));
   };
 
-  let publishLearningPath = () => {
-    dispatch(updatePrivateLearningPathStatus(learningPath.id, 'PUBLISHED'));
-  };
-
-  let unPublishLearningPath = () => {
-    dispatch(updatePrivateLearningPathStatus(learningPath.id, 'PRIVATE'));
-  };
-
   return (<div className='two-column'>
       <aside className='two-column_col'>
         <div className='step-nav'>
           <div className='learningpath-general-info'>
             <h2 className='learningpath-general-info_h'>
-              <TitleEditor value={titleText} onChange={updateTitle} />
+              <TitleEditor value={titleText} onChange={updateTitle} lang={lang} />
             </h2>
           </div>
           <Navigation {...props} />
@@ -63,21 +55,11 @@ export function EditLearningPath (props, {lang}) {
               <LabeledIcon.Save labelText='Lagre' />
             </button>
           </li>
-          <li className='vertical-menu_item'>
-            <button className='cta cta-link cta-link--block' onClick={publishLearningPath}>
-              <LabeledIcon.Save labelText='Publiser' />
-            </button>
-          </li>
-          <li className='vertical-menu_item'>
-            <button className='cta cta-link cta-link--block' onClick={unPublishLearningPath}>
-              <LabeledIcon.Save labelText='De-publiser' />
-            </button>
-          </li>
         </ul>
       </aside>
       <main className='two-column_col'>
         <h2>Introduksjon</h2>
-        <DescriptionEditor value={descriptionText} onChange={updateDescription} />
+        <DescriptionEditor value={descriptionText} onChange={updateDescription} lang={lang} />
         {pathSteps}
         <button className='cta-link cta-link--block'
             onClick={() => dispatch(createLearningPathStep())}>
@@ -101,7 +83,7 @@ EditLearningPath.contextTypes = {
 const mapStateToProps = state => Object.assign({}, state, {
   learningPath: get(state, 'learningPath', {}),
   learningSteps: get(state, 'learningPath.learningsteps', []),
-  saveAction: lp => updatePrivateLearningPath(lp.id, lp)
+  saveAction: lp => updateLearningPath(lp.id, lp)
 });
 
 export default connect(mapStateToProps)(EditLearningPath);

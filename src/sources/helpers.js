@@ -17,6 +17,13 @@ const locationOrigin = (() => {
   return location.origin;
 })();
 
+export const defaultApiKey = (() => {
+  /* #if development */
+  if (isUnitTest) { return 'ndlatestapikey'; }
+  /* #end */
+  return window.NDLA_DEFAULT_API_KEY;
+})();
+
 const apiBaseUrl = (() => {
   /* #if development */
   if (isUnitTest) { return 'http://ndla-api'; }
@@ -71,4 +78,12 @@ export function putAuthorized (path) {
     method: 'PUT', 
     body: JSON.stringify(body)
   }).then( resolveJsonOrRejectWithError );
+}
+
+export function deleteAuthorized(path) {
+  const url = params => apiResourceUrl(formatPattern(path, params));
+  return (authToken, params = {}) => fetch(url(params), {
+    headers: {'APP-KEY': authToken},
+    method: 'DELETE'
+  });
 }

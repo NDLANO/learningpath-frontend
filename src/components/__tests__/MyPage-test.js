@@ -2,10 +2,10 @@ import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Link } from 'react-router';
+import sinon from 'sinon';
 
 import { learningPaths } from './mockData';
 import { MyPage, mapStateToProps } from '../MyPage';
-
 
 test('component/MyPage', t => {
   const component = shallow(<MyPage learningPaths={learningPaths}
@@ -15,8 +15,8 @@ test('component/MyPage', t => {
   const links = component.find('.tile_hd').find(Link);
 
   t.deepEqual(links.map(n => n.prop('to')), [
-    '/learningpaths/private/1/edit',
-    '/learningpaths/private/2/edit'
+    '/learningpaths/1/edit',
+    '/learningpaths/2/edit'
   ]);
 
   t.deepEqual(links.map(n => n.prop('children')), [
@@ -27,6 +27,19 @@ test('component/MyPage', t => {
   t.end();
 });
 
+test('component/MyPage remove', t => {
+  const dispatch = sinon.spy(() => {});
+  const component = shallow(<MyPage learningPaths={learningPaths}
+    dispatch={dispatch} />,
+    {context: {lang:'nb'}});
+
+  component.find('.alert_dismiss').first().simulate('click');
+
+  t.ok(dispatch.calledOnce);
+  // TODO: finne god en måte å teste thunks på. e.i teste at dispatch blir kalt med rett action (deletePrivateLearningPath)
+
+  t.end();
+});
 
 test('component/MyPage mapStateToProps', t => {
   t.ok(mapStateToProps instanceof Function);

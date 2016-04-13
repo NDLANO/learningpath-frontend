@@ -3,12 +3,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import { Alerts } from '../Alerts';
-import { clearMessages } from '../../actions';
+import { clearAllMessages } from '../../actions';
+import uuid from 'node-uuid';
 
 const noop = () => {};
 
 test('component/Alerts default severity', t => {
-  let alertMessages = [{message: 'Testmessage'}];
+  let alertMessages = [{id: uuid.v4(), message: 'Testmessage'}];
   const component = shallow(<Alerts messages={alertMessages} dispatch={noop} />);
 
   const messageElements = component.find('.alert_msg').find('li');
@@ -23,7 +24,7 @@ test('component/Alerts default severity', t => {
 
 test('component/Alerts info severity', t => {
   let messages = ['Testmessage', 'TEST'];
-  let alertMessages = [{message: messages[0], severity: 'success'}, {message: messages[1]}];
+  let alertMessages = [{id: uuid.v4(), message: messages[0], severity: 'success'}, {id: uuid.v4(), message: messages[1]}];
   const component = shallow(<Alerts messages={alertMessages} dispatch={noop} />);
 
   const messageElements = component.find('.alert_msg').find('li');
@@ -37,7 +38,7 @@ test('component/Alerts info severity', t => {
 
 test('component/Alerts info and danger severity', t => {
   let messages = ['Test one', 'Test two'];
-  let alertMessages = [{message: messages[0], severity: 'info'}, {message: messages[1], severity: 'danger'}];
+  let alertMessages = [{id: uuid.v4(), message: messages[0], severity: 'info'}, {id: uuid.v4(), message: messages[1], severity: 'danger'}];
   const component = shallow(<Alerts messages={alertMessages} dispatch={noop} />);
 
   const messageElements = component.find('.alert_msg').find('li');
@@ -58,13 +59,13 @@ test('component/Alerts without messages', t => {
 test('component/Alerts dismiss', t => {
   const dispatch = sinon.spy(() => {});
 
-  const dismissBt = shallow(<Alerts messages={[{message: 'whatever', severity: 'info'}]}
+  const dismissBt = shallow(<Alerts messages={[{id: uuid.v4(), message: 'whatever', severity: 'info'}]}
       dispatch={dispatch} />).find('.alert_dismiss');
 
   dismissBt.simulate('click');
 
   t.ok(dispatch.calledOnce);
-  t.deepEquals(dispatch.firstCall.args, [ clearMessages() ]);
+  t.deepEquals(dispatch.firstCall.args, [ clearAllMessages() ]);
 
   t.end();
 });
