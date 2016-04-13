@@ -1,6 +1,6 @@
 import polyglot from '../i18n';
 
-export default function formatDuration(duration, locale) {
+export default function formatDuration(duration) {
   if (duration <= 0 || isNaN(duration)) {
     return polyglot.t('duration.zero');
   }
