@@ -43,7 +43,9 @@ const phrases = {
     newBtn: 'Lag din egen læringssti'
   },
   editPage: {
-    learningpathShortDescriptionTitle: 'Introduksjon'
+    learningpathShortDescriptionTitle: 'Introduksjon',
+    savePathBtn: 'Lagre',
+    addStepBtn: 'Legg til nytt læringssteg'
   },
   editPathStep: {
     urlLabel: 'Lim in lenke (URL) fra ndla.no eller youtube.com',
@@ -55,6 +57,12 @@ const phrases = {
       task: 'Oppgave',
       summary: 'Oppsummering'
     }
+  },
+  siteNav: {
+    login: 'Logg inn',
+    search: 'Finn læringssti',
+    myPage: 'Mine læringsstier',
+    logout: 'Logg ut %{name}'
   }
 };
 

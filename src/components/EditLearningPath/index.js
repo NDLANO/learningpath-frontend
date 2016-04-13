@@ -52,7 +52,7 @@ export function EditLearningPath (props, {lang}) {
         <ul className='vertical-menu'>
           <li className='vertical-menu_item'>
             <button className='cta cta-link cta-link--block' onClick={saveLearningPath}>
-              <LabeledIcon.Save labelText='Lagre' />
+              <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
             </button>
           </li>
         </ul>
@@ -63,7 +63,7 @@ export function EditLearningPath (props, {lang}) {
         {pathSteps}
         <button className='cta-link cta-link--block'
             onClick={() => dispatch(createLearningPathStep())}>
-          <LabeledIcon.Add labelText='Legg til nytt læringssteg' />
+          <LabeledIcon.Add labelText={polyglot.t('editPage.addStepBtn')} />
         </button>
       </main>
   </div>);
