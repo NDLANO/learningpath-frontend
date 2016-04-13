@@ -5,6 +5,6 @@ export default function createEmptyLearningPath () {
     title: [],
     description: [],
     learningsteps: [],
-    duration: 1 // TODO: implement way for the user to set this value when creating a path
+    duration: 1 // https://support.knowit.no/support/browse/NDLA-198
   });
 }

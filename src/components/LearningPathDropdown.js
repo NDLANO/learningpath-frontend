@@ -11,10 +11,10 @@ export function LearningPathDropdown ({dispatch, learningPath}) {
           <button className='un-button'><Icon.MoreVert color="gray" /></button>
           <ul className='dropdown-items'>
             {(() => learningPath.status === 'PRIVATE'
-              ? <li className='dropdown-item'><a href="#" onClick={() => dispatch(updateLearningPathStatus(learningPath.id, 'PUBLISHED'))}>Publiser</a></li>
-              : <li className='dropdown-item'><a href="#" onClick={() => dispatch(updateLearningPathStatus(learningPath.id, 'PRIVATE'))}>De-publiser</a></li>
+              ? <li className='dropdown-item'><a href="#" onClick={() => dispatch(updateLearningPathStatus(learningPath.id, 'PUBLISHED'))}><Icon.Input color="gray" /> Publiser</a></li>
+              : <li className='dropdown-item'><a href="#" onClick={() => dispatch(updateLearningPathStatus(learningPath.id, 'PRIVATE'))}><Icon.Input color="gray" /> De-publiser</a></li>
             )()}
-            <li className='dropdown-item'><a href="#" onClick={() => dispatch(deleteLearningPath(learningPath.id))}>Slett</a></li>
+            <li className='dropdown-item'><a href="#" onClick={() => dispatch(deleteLearningPath(learningPath.id))}><Icon.Delete color="gray" /> Slett</a></li>
           </ul>
         </li>
       </ul>

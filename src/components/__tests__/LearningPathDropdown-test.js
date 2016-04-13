@@ -16,7 +16,6 @@ test('component/LearningPathDropdown remove', t => {
   component.find('.dropdown-item').last().find('a').simulate('click');
 
   t.ok(dispatch.calledOnce);
-  // TODO: finne god en måte å teste thunks på. e.i teste at dispatch blir kalt med rett action (deletePrivateLearningPath)
 
   t.end();
 });
@@ -30,7 +29,6 @@ test('component/LearningPathDropdown (de)publish', t => {
   component.find('.dropdown-item').first().find('a').simulate('click');
 
   t.ok(dispatch.calledOnce);
-  // TODO: finne god en måte å teste thunks på. e.i teste at dispatch blir kalt med rett action (deletePrivateLearningPath)
 
   t.end();
 });
