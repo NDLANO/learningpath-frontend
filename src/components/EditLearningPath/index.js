@@ -6,7 +6,6 @@ import Navigation from './Navigation';
 import PathStep from './PathStep';
 import TitleEditor from './TitleEditor';
 import DescriptionEditor from './DescriptionEditor';
-import updateLearningPathStatus from "../../actions/updateLearningPathStatus";
 import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
 
 import {
