@@ -32,12 +32,6 @@ Start webpack-dev-server listening on port 8080.
 $ npm start
 ```
 
-Start mock api server (port 3000).
-
-```
-$ node fake-server.js
-```
-
 To use a different api, change `NDLA_API_URL` in `./htdocs/index.html` accordingly.
 
 ### Unit tests
@@ -152,11 +146,6 @@ http://momentjs.com
 Give your JavaScript the ability to speak many languages
 https://github.com/airbnb/polyglot.js#readme
 
-**qs:**
-A querystring parser that supports nesting and arrays, with a depth limit.
-https://github.com/ljharb/qs
-(used in `fake-server.js`)
-
 **query-string:**
 Parse and stringify URL query strings.
 https://github.com/sindresorhus/query-string#readme
@@ -208,6 +197,10 @@ https://github.com/webpack/json-loader#readme
 **webpack:**
 Packs CommonJs/AMD modules for the browser. Allows to split your codebase into multiple bundles, which can be loaded on demand. Support loaders to preprocess files, i.e. json, jade, coffee, css, less, ... and your custom stuff.
 https://github.com/webpack/webpack
+
+**webpack-dev-server:**
+Serves a webpack app. Updates the browser on changes.
+http://github.com/webpack/webpack-dev-server
 
 
 ### Testing
@@ -263,14 +256,4 @@ http://eslint.org
 **eslint-plugin-react:**
 React specific linting rules for ESLint.
 https://github.com/yannickcr/eslint-plugin-react
-
-### Development server
-
-**connect:**
-High performance middleware framework.
-https://github.com/senchalabs/connect#readme
-
-**webpack-dev-server:**
-Serves a webpack app. Updates the browser on changes.
-http://github.com/webpack/webpack-dev-server
 
