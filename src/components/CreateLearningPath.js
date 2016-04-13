@@ -1,12 +1,13 @@
-import { connect } from 'react-redux';
-import get from 'lodash/get';
-import { createLearningPath } from '../actions';
-import { EditLearningPath } from './EditLearningPath';
+import React from 'react';
+import { reduxForm } from 'redux-form';
+//import get from 'lodash/get';
+//import { createLearningPath } from '../actions';
 
-const mapStateToProps = state => Object.assign({}, state, {
-  learningPath: get(state, 'learningPath', {}),
-  learningSteps: get(state, 'learningPath.learningsteps', []),
-  saveAction: createLearningPath
-});
+export function CreateLearningPath () {
+  return <div>paula brillant!</div>;
+}
 
-export default connect(mapStateToProps)(EditLearningPath);
+export default reduxForm({
+  form: 'create-learning-path',
+  fields: ['title', 'description']
+})(CreateLearningPath);
