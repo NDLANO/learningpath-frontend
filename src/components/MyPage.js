@@ -35,7 +35,7 @@ export function MyPage ({dispatch, learningPaths, sortBy}, {lang}) {
         <div className='tile_ft'>
           <p>{duration}</p>
           <p>{polyglot.t('myPage.lastUpdated')} {lastUpdated}</p>
-          <p>{lp.status}</p>
+          <p>{polyglot.t('myPage.statusValue.' + lp.status)}</p>
         </div>
       </div>
     );

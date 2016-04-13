@@ -31,7 +31,12 @@ const phrases = {
       status: 'Status'
     },
     pageHeader: 'Mine læringsstier',
-    newBtn: 'Opprett ny læringssti'
+    newBtn: 'Opprett ny læringssti',
+    statusValue: {
+      PRIVATE: 'Privat',
+      PUBLISHED: 'Søkbar',
+      NOT_LISTED: 'Åpen'
+    }
   },
   requireAuthentication: {
     errorMessage: 'Denne siden krever innlogging.'
