@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import sortBy from 'lodash/sortBy';
 import reverse from 'lodash/reverse';
 import LabeledIcon from './LabeledIcon';
+import polyglot from '../i18n';
 
 import {
   sortPrivateLearningPaths,
@@ -33,7 +34,7 @@ export function MyPage ({dispatch, learningPaths, sortBy}, {lang}) {
         <div className='tile_bd'>{description}</div>
         <div className='tile_ft'>
           <p>{duration}</p>
-          <p>Sist endret {lastUpdated}</p>
+          <p>{polyglot.t('myPage.lastUpdated')} {lastUpdated}</p>
           <p>{lp.status}</p>
         </div>
       </div>
@@ -42,15 +43,15 @@ export function MyPage ({dispatch, learningPaths, sortBy}, {lang}) {
 
   const sortOrderSelect = (
     <select value={sortBy} onChange={(evt) => dispatch(sortPrivateLearningPaths(evt.target.value))}>
-      <option value='title'>Tittel</option>
-      <option value='lastUpdated'>Dato</option>
-      <option value='status'>Status</option>
+      <option value='title'>{polyglot.t('myPage.order.title')}</option>
+      <option value='lastUpdated'>{polyglot.t('myPage.order.lastUpdated')}</option>
+      <option value='status'>{polyglot.t('myPage.order.status')}</option>
     </select>
   );
 
   return (<div>
     <div className='page-header'>
-      <h2 className='page-header_name'>Mine læringsstier</h2>
+      <h2 className='page-header_name'>{polyglot.t('myPage.pageHeader')}</h2>
       <div className='page-header_ctrls'>
         {sortOrderSelect}
       </div>
@@ -58,7 +59,7 @@ export function MyPage ({dispatch, learningPaths, sortBy}, {lang}) {
     <div className='tiles'>{items}</div>
     <div>
       <Link className='cta-link new-learningpath-button' to='/learningpaths/new'>
-        <LabeledIcon.Add labelText='Opprett ny lærringssti' />
+        <LabeledIcon.Add labelText={polyglot.t('myPage.newBtn')} />
       </Link>
     </div>
   </div>);

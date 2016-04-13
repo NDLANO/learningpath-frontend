@@ -2,6 +2,7 @@ import React from 'react';
 import Form from 'react-router-form';
 import Logo from './Logo';
 import SiteNav from './SiteNav';
+import polyglot from '../i18n';
 
 export default class Welcome extends React.Component {
   getChildContext () {
@@ -23,16 +24,16 @@ export default class Welcome extends React.Component {
             </div>
           </div>
 
-          <h1 className='hero_title'>Læringsstier</h1>
-          <h3 className='hero_title'>Nasjonal digital læringsarena</h3>
+          <h1 className='hero_title'>{polyglot.t('welcomePage.title1')}</h1>
+          <h3 className='hero_title'>{polyglot.t('welcomePage.title2')}</h3>
 
           <Form to='/learningpaths' method='GET' className='search-form search-form--on-dark'>
             <input type='text' name='query' placeholder='Søk etter læringsstier' className='search-form_query' />
             <input type='submit' className='search-form_btn button' value='Søk' />
           </Form>
 
-          <a href='#' className='hero_link cta-link cta-link--negative'>Hva er en læringssti?</a>
-          <a href='#' className='hero_link cta-link cta-link-secondary cta-link--secondary-negative'>Lag din egen læringssti »</a>
+          <a href='#' className='hero_link cta-link cta-link--negative'>{polyglot.t('welcomePage.explanationBtn')}</a>
+          <a href='#' className='hero_link cta-link cta-link-secondary cta-link--secondary-negative'>{polyglot.t('welcomePage.newBtn')} »</a>
         </div>
         <div className='infoblock'>
           <div className='infoblock'>

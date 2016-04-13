@@ -14,14 +14,33 @@ const phrases = {
     }
   },
   loginFailure: {
-    errormessage: 'Beklager. Innlogging feilet.',
-    login: 'Logg inn'
+    errorMessage: 'Beklager. Innlogging feilet.',
+    loginLink: 'Logg inn'
   },
   loginProviders: {
     description: 'Logg inn i NDLA med'
   },
   logo: {
     altText: 'Nasjonal digital læringsarena'
+  },
+  myPage: {
+    lastUpdated: 'Sist endret',
+    order: {
+      title: 'Tittel',
+      lastUpdated: 'Dato',
+      status: 'Status'
+    },
+    pageHeader: 'Mine læringsstier',
+    newBtn: 'Opprett ny læringssti'
+  },
+  requireAuthentication: {
+    errorMessage: 'Denne siden krever innlogging.'
+  },
+  welcomePage: {
+    title1: 'Læringsstier',
+    title2: 'Nasjonal digital læringsarena',
+    explanationBtn: 'Hva er en læringssti?',
+    newBtn: 'Lag din egen læringssti'
   }
 };
 

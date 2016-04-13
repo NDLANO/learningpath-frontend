@@ -4,6 +4,6 @@ import polyglot from '../i18n';
 
 export default function LoginFailure () {
   return (
-    <div>{polyglot.t('loginFailure.errormessage')} <br/><br/>  <Link to='/login'>{polyglot.t('loginFailure.login')}</Link>.</div>
+    <div>{polyglot.t('loginFailure.errorMessage')} <br/><br/>  <Link to='/login'>{polyglot.t('loginFailure.loginLink')}</Link>.</div>
   );
 }
