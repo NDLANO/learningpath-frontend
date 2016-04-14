@@ -28,7 +28,7 @@ export default class Welcome extends React.Component {
           <h3 className='hero_title'>{polyglot.t('welcomePage.title2')}</h3>
 
           <Form to='/learningpaths' method='GET' className='search-form search-form--on-dark'>
-            <input type='text' name='query' placeholder='Søk etter læringsstier' className='search-form_query' />
+            <input type='text' name='query' placeholder={polyglot.t('welcomePage.placeholder')} className='search-form_query' />
             <input type='submit' className='search-form_btn button' value='Søk' />
           </Form>
 

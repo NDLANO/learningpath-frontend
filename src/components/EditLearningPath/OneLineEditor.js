@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Editor, EditorState, ContentState } from 'draft-js';
+import polyglot from '../../i18n';
 
 export default class OneLineEditor extends React.Component {
   constructor(props) {
@@ -75,6 +76,6 @@ OneLineEditor.propTypes = {
 };
 
 OneLineEditor.defaultProps = {
-  placeholder: 'Skriv her',
+  placeholder: polyglot.t('editPage.oneLineEditorDefaultPlaceholder'),
   maxlength: -1
 };

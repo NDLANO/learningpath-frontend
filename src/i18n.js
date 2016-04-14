@@ -42,6 +42,7 @@ const phrases = {
     errorMessage: 'Denne siden krever innlogging.'
   },
   welcomePage: {
+    placeholder: 'Søk etter læringsstier',
     title1: 'Læringsstier',
     title2: 'Nasjonal digital læringsarena',
     explanationBtn: 'Hva er en læringssti?',
@@ -50,10 +51,12 @@ const phrases = {
   editPage: {
     learningpathShortDescriptionTitle: 'Introduksjon',
     savePathBtn: 'Lagre',
-    addStepBtn: 'Legg til nytt læringssteg'
+    addStepBtn: 'Legg til nytt læringssteg',
+    shortDescriptionPlaceholder:  'Skriv kort beskrivelse (max 155 tegn)',
+    oneLineEditorDefaultPlaceholder: 'Skriv her'
   },
   editPathStep: {
-    urlLabel: 'Lim in lenke (URL) fra ndla.no eller youtube.com',
+    urlLabel: 'Lim inn lenke (URL) fra ndla.no eller youtube.com',
     mediatype: {
       introduction: 'Introduksjon',
       text: 'Tekst',
@@ -61,7 +64,9 @@ const phrases = {
       quiz: 'Quiz',
       task: 'Oppgave',
       summary: 'Oppsummering'
-    }
+    },
+    urlPlaceholder: 'Lim inn lenke',
+    stepDescriptionPlaceholder: 'Skriv her'
   },
   siteNav: {
     login: 'Logg inn',
