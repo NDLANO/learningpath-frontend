@@ -1,15 +1,15 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { embedUrlI18N } from '../util/i18nFieldFinder';
+import { oembedI18N } from '../util/i18nFieldFinder';
+
+
 
 export function LearningPathStep ({step}, {lang}) {
-  let embedUrl = embedUrlI18N(step, lang);
+  let iframe = oembedI18N(step, lang);
+
+  console.log(step);
   return (
-    <div className='learning-step'>
-      {(() => embedUrl ?
-          (<iframe className='learning-step_embeded' src={embedUrl}></iframe>) :
-          'no url to embed')()}
-    </div>
+    <div className='learning-step' dangerouslySetInnerHTML={{__html: iframe}}/>
   );
 }
 
