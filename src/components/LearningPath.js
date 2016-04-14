@@ -3,17 +3,24 @@ import { connect } from 'react-redux';
 
 import LearningPathToC from './LearningPathToC';
 import LearningPathGeneralInfo from './LearningPathGeneralInfo';
+import LearningPathPrevNext from './LearningPathPrevNext';
 
 export function LearningPath(props) {
+
   return (
-    <div className='two-column'>
-      <aside className='two-column_col'>
-        <LearningPathGeneralInfo {...props} />
-        <LearningPathToC {...props} />
-      </aside>
-      <main className='two-column_col'>
-        {props.children}
-      </main>
+    <div>
+      <div className='two-column'>
+        <aside className='two-column_col'>
+          <LearningPathGeneralInfo {...props} />
+          <LearningPathToC {...props} />
+        </aside>
+        <main className='two-column_col'>
+          {props.children}
+        </main>
+      </div>
+      <div>
+        <LearningPathPrevNext/>
+      </div>
     </div>
   );
 }
