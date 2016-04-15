@@ -46,13 +46,14 @@ const phrases = {
     title1: 'Læringsstier',
     title2: 'Nasjonal digital læringsarena',
     explanationBtn: 'Hva er en læringssti?',
-    newBtn: 'Lag din egen læringssti'
+    newBtn: 'Lag din egen læringssti',
+    searchBtn: 'Søk'
   },
   editPage: {
     learningpathShortDescriptionTitle: 'Introduksjon',
     savePathBtn: 'Lagre',
     addStepBtn: 'Legg til nytt læringssteg',
-    shortDescriptionPlaceholder:  'Skriv kort beskrivelse (max 155 tegn)',
+    shortDescriptionPlaceholder:  'Skriv en kort beskrivelse (max 155 tegn)',
     oneLineEditorDefaultPlaceholder: 'Skriv her'
   },
   editPathStep: {
@@ -78,6 +79,12 @@ const phrases = {
     zero: 'Ukjent lengde',
     hours: '%{smart_count} time |||| %{smart_count} timer',
     minutes: '%{smart_count} minutt |||| %{smart_count} minutter'
+  },
+  createLearningPath: {
+    createdMsg: 'Lagret OK'
+  },
+  updateLearningPath: {
+    updatedMsg: 'Lagret OK'
   }
 };
 
