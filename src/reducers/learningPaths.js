@@ -11,9 +11,7 @@ export default handleActions({
   },
 
   REMOVE_LEARNING_PATH: {
-    next (state, action) {
-      return reject(cloneDeep(state), {id: action.payload});
-    },
+    next: (state, action) => reject(cloneDeep(state), {id: action.payload}),
     throw: (state) => state
   },
 
