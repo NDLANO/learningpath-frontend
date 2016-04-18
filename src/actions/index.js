@@ -26,6 +26,7 @@ export var createLearningPathStep = createAction('CREATE_LEARNING_PATH_STEP');
 export var updateLearningPathStep = createAction('UPDATE_LEARNING_PATH_STEP');
 export var updateLearningPathTitle = createAction('UPDATE_LEARNING_PATH_TITLE');
 export var updateLearningPathDescription = createAction('UPDATE_LEARNING_PATH_DESCRIPTION');
+export var updateLearningPathTags = createAction('UPDATE_LEARNING_PATH_TAGS');
 export var removeLearningPath = createAction('REMOVE_LEARNING_PATH');
 export var setUserData = createAction('SET_USER_DATA');
 export var addMessage = createAction('ADD_MESSAGE');
@@ -61,6 +62,7 @@ export default {
   updateLearningPathStep,
   updateLearningPathTitle,
   updateLearningPathDescription,
+  updateLearningPathTags,
   removeLearningPath,
   deleteLearningPath,
   setUserData,

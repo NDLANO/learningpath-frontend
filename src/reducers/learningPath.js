@@ -80,6 +80,12 @@ export default handleActions({
     next: mergeI18nProperty('description'),
     throw(state) { return state; }
   },
+
+  UPDATE_LEARNING_PATH_TAGS: {
+    next(state, action){ return Object.assign({}, state, {tags: action.payload}); },
+    throw(state) { return state; }
+  },
+
   LOGOUT: () => ({})
 }, {});
 

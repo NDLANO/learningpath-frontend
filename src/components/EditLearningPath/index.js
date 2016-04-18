@@ -6,14 +6,16 @@ import Navigation from './Navigation';
 import PathStep from './PathStep';
 import TitleEditor from './TitleEditor';
 import DescriptionEditor from './DescriptionEditor';
-import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
+import TagsEditor from './TagsEditor';
+import { titleI18N, descriptionI18N, tagsI18N } from '../../util/i18nFieldFinder';
 
 import {
   createLearningPathStep,
   updateLearningPathStep,
   updateLearningPathTitle,
   updateLearningPathDescription,
-  updateLearningPath
+  updateLearningPath,
+  updateLearningPathTags
 } from '../../actions';
 
 export function EditLearningPath (props, {lang}) {
@@ -38,6 +40,11 @@ export function EditLearningPath (props, {lang}) {
     dispatch(saveAction(learningPath));
   };
 
+  let tags = learningPath.tags || [];
+  let updateTags = (tags) => {
+    dispatch(updateLearningPathTags(tags));
+  };
+
   return (<div className='two-column'>
       <aside className='two-column_col'>
         <div className='step-nav'>
@@ -59,6 +66,7 @@ export function EditLearningPath (props, {lang}) {
       <main className='two-column_col'>
         <h2>Introduksjon</h2>
         <DescriptionEditor value={descriptionText} onChange={updateDescription} lang={lang} />
+        <TagsEditor onUpdate={updateTags} value={tags} lang={lang} />
         {pathSteps}
         <button className='cta-link cta-link--block'
             onClick={() => dispatch(createLearningPathStep())}>
