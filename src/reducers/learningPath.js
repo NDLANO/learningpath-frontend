@@ -82,4 +82,3 @@ export default handleActions({
   },
   LOGOUT: () => ({})
 }, {});
-

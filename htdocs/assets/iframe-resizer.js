@@ -17,11 +17,10 @@
           return iframes[i];
         }
       }
-    }(document.getElementsByTagName('iframe')));
+    }(document.querySelectorAll('.no-defined-height-width iframe')));
 
     if (!iframe) { return; }
 
     iframe.style.height = (evt.data.height + 25) + 'px';
   }, false);
 }());
-
