@@ -20,7 +20,9 @@ export function MyPage ({dispatch, learningPaths, sortBy}, {lang}) {
 
     return (
       <div key={lp.id} className='tile'>
-        <LearningPathDropdown dispatch={dispatch} learningPath={lp} />
+        <div className='tile_context-menu'>
+          <LearningPathDropdown dispatch={dispatch} learningPath={lp} />
+        </div>
         <h3 className='tile_hd'>
           <Link to={`/learningpaths/${lp.id}/edit`}>{title}</Link>
         </h3>
