@@ -13,7 +13,7 @@ test('component/LearningPathDropdown remove', t => {
                                     dispatch={dispatch} />,
     {context: {lang:'nb'}});
 
-  component.find('.dropdown-item').last().find('a').simulate('click');
+  component.find('.dropdown-menu_item').last().find('a').simulate('click');
 
   t.ok(dispatch.calledOnce);
 
@@ -26,7 +26,7 @@ test('component/LearningPathDropdown (de)publish', t => {
                                                   dispatch={dispatch} />,
     {context: {lang:'nb'}});
 
-  component.find('.dropdown-item').first().find('a').simulate('click');
+  component.find('.dropdown-menu_item').first().find('a').simulate('click');
 
   t.ok(dispatch.calledOnce);
 
