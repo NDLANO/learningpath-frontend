@@ -1,7 +1,8 @@
 import { handleActions } from 'redux-actions';
-import findIndex from 'lodash/findIndex';
 import cloneDeep from 'lodash/cloneDeep';
-import pullAt from 'lodash/pullAt';
+import find from 'lodash/find';
+import reject from 'lodash/reject';
+import set from 'lodash/set';
 
 export default handleActions({
   SET_LEARNING_PATHS: {
@@ -11,28 +12,18 @@ export default handleActions({
 
   REMOVE_LEARNING_PATH: {
     next (state, action) {
-      let nextState = cloneDeep(state);
-      let index = findIndex(nextState, {id: action.payload});
-
-      if (index > -1)
-        pullAt(nextState, index);
-
-      return nextState;
+      return reject(cloneDeep(state), {id: action.payload});
     },
     throw: (state) => state
   },
 
   UPDATE_LEARNING_PATH_STATUS: {
     next(state, action) {
+      let {id, status} = action.payload;
       let nextState = cloneDeep(state);
-      let index = findIndex(nextState, {id: action.payload.id});
-
-      if (index < 0 ) {
-        return nextState;
-      }
-
-      nextState[index].status = action.payload.status;
+      set(find(nextState, {id}), 'status', status);
       return nextState;
-    }
+    },
+    throw: (state) => state
   }
 }, []);
