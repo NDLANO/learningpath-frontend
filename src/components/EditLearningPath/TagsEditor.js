@@ -70,6 +70,8 @@ export default class TagsEditor extends React.Component {
     this.applyTag = (start, end, content = this.state.editorState.getCurrentContent()) => {
       let blockKey = content.getBlocksAsArray()[0].getKey();
 
+      console.log("Applying tag to %d, %d (%s)", start, end, blockKey);
+
       // apply entity to the tag
       const entityKey = Entity.create('TAG', 'IMMUTABLE', {start: start, end: end});
       let targetRange = this.newSelection(start, end, blockKey);
@@ -126,10 +128,6 @@ export default class TagsEditor extends React.Component {
   }
 
   componentWillMount() {
-    this.updateEditorContentStateFromText(this.props.value);
-  }
-
-  componentWillReceiveProps() {
     this.updateEditorContentStateFromText(this.props.value);
   }
 
