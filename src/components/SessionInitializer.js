@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { routeActions } from 'react-router-redux';
+import { routerActions } from 'react-router-redux';
 import { initializeSession } from '../actions';
 
 export class SessionInitializer extends React.Component {
@@ -9,7 +9,7 @@ export class SessionInitializer extends React.Component {
 
     if (authToken) {
       dispatch( initializeSession(authToken) )
-        .then(() => dispatch(routeActions.replace('/minside')) );
+        .then(() => dispatch(routerActions.replace('/minside')) );
     }
   }
 

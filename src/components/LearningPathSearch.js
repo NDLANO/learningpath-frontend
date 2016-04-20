@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { routeActions } from 'react-router-redux';
+import { routerActions } from 'react-router-redux';
 import get from 'lodash/get';
 import isEqual from 'lodash/isEqual';
 import LabeledIcon from './LabeledIcon';
@@ -172,7 +172,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   fetchLearningPaths,
-  pushRoute: (route) => routeActions.push(route)
+  pushRoute: (route) => routerActions.push(route)
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(LearningPathSearch);
