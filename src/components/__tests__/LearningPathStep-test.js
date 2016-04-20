@@ -14,6 +14,7 @@ test('component/LearningPathStep', t => {
     {context: {lang:'nb'}});
 
   t.deepEqual(component.prop('dangerouslySetInnerHTML'), {__html: learningStep.embedContent[0].html});
+  t.deepEqual(ndlaComponent.prop('dangerouslySetInnerHTML'), {__html: ndlaLearningStep.embedContent[0].html});
   t.equal(ndlaComponent.prop('className'), 'learning-step no-defined-height-width');
   t.equal(component.prop('className'), 'learning-step');
 
