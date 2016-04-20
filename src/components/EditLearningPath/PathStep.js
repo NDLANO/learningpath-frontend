@@ -5,9 +5,10 @@ import assign from 'lodash/assign';
 import findIndex from 'lodash/findIndex';
 import { titleI18N, descriptionI18N, embedUrlI18N } from '../../util/i18nFieldFinder';
 import Icon from '../Icon';
-import TitleEditor from './TitleEditor';
-import DescriptionHTMLEditor from './DescriptionHTMLEditor';
+import TitleEditor from '../editors/TitleEditor';
+import DescriptionHTMLEditor from '../editors/DescriptionHTMLEditor';
 import polyglot from '../../i18n';
+
 
 
 export default class PathStep extends Component {

@@ -4,8 +4,8 @@ import get from 'lodash/get';
 import LabeledIcon from '../LabeledIcon';
 import Navigation from './Navigation';
 import PathStep from './PathStep';
-import TitleEditor from './TitleEditor';
-import DescriptionEditor from './DescriptionEditor';
+import TitleEditor from '../editors/TitleEditor';
+import DescriptionEditor from '../editors/DescriptionEditor';
 import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
 import polyglot from '../../i18n';
 
