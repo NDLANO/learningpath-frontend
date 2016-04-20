@@ -48,12 +48,12 @@ test('reducers/learningPath create new step', (t) => {
       seqNo: 1,
       title: [],
       description: [],
-      embedUrl: [],
+      embedContent: [],
       type: '',
       license: ''
     }],
     'add first');
- 
+
   nextState = reducer(nextState, { type: 'CREATE_LEARNING_PATH_STEP' });
 
   t.equal(nextState.learningsteps.length, 2, 'add second length');
@@ -63,14 +63,14 @@ test('reducers/learningPath create new step', (t) => {
       seqNo: 1,
       title: [],
       description: [],
-      embedUrl: [],
+      embedContent: [],
       type: '',
       license: ''
     }, {
       seqNo: 2,
       title: [],
       description: [],
-      embedUrl: [],
+      embedContent: [],
       type: '',
       license: ''
     }],

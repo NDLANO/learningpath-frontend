@@ -65,7 +65,7 @@ export function postAuthorized (path) {
 
   return (authToken, params = {}, body) => fetch(url(params), {
     headers: {'APP-KEY': authToken},
-    method: 'POST', 
+    method: 'POST',
     body: JSON.stringify(body)
   }).then( resolveJsonOrRejectWithError );
 }
@@ -75,7 +75,7 @@ export function putAuthorized (path) {
 
   return (authToken, params = {}, body) => fetch(url(params), {
     headers: {'APP-KEY': authToken},
-    method: 'PUT', 
+    method: 'PUT',
     body: JSON.stringify(body)
   }).then( resolveJsonOrRejectWithError );
 }

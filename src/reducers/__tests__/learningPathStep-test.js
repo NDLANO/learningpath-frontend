@@ -37,6 +37,23 @@ test('reducers/learningPathStep', (t) => {
     'ignore errors'
   );
 
+  t.deepEqual(
+    reducer(undefined, { type: 'SET_OEMBED_OBJECT', payload }),
+    {oembed: {id: '123'}},
+    'set state'
+  );
+
+  t.deepEqual(
+    reducer({id: 'abc'}, { type: 'SET_OEMBED_OBJECT', payload }),
+    {id: 'abc', oembed: {id: '123'}},
+    'change state'
+  );
+  t.deepEqual(
+    reducer({id: 'abc'},
+      { type: 'SET_OEMBED_OBJECT', payload: new Error('fail'), error: true}),
+    {id: 'abc'},
+    'ignore errors'
+  );
+
   t.end();
 });
-

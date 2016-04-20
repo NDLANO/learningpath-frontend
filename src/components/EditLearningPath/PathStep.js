@@ -66,16 +66,16 @@ export default class PathStep extends Component {
     };
 
     let step = cloneDeep(this.state.step);
-    let embedUrls = get(step, 'embedUrl', []);
-    let index = findIndex(embedUrls, ['language', value.language]);
+    let embedContents = get(step, 'embedContent', []);
+    let index = findIndex(embedContents, ['language', value.language]);
 
     if (index === -1) {
-      embedUrls.push(value);
+      embedContents.push(value);
     } else {
-      assign(embedUrls[index], value);
+      assign(embedContents[index], value);
     }
 
-    step.embedUrl = embedUrls;
+    step.embedContent = embedContents;
 
     this.setState({ step });
   }
@@ -95,7 +95,7 @@ export default class PathStep extends Component {
     let { step, lang } = this.state;
     let title = titleI18N(step, lang);
     let htmlDescription = descriptionI18N(step, lang);
-    let embedUrl = embedUrlI18N(step, lang);
+    let embedContent = embedUrlI18N(step, lang);
 
     const fieldNameAttr = `step_${step.seqNo}_type`;
     const fieldIdAttr = value => `${fieldNameAttr}_type_${value}`;
@@ -105,19 +105,6 @@ export default class PathStep extends Component {
     const changeDescription = this.handleDescriptionChange.bind(this);
     const handleSubmit = this.handleSubmit.bind(this);
 
-    let embedUrlPreview = '';
-    /*
-    if (embedUrl) {
-      embedUrlPreview = (
-        <div className='learningsource--wrapper'>
-          <iframe className='learningsource__frame' src={embedUrl} frameBorder='0'></iframe>
-          <a className='learningsource__expand' href='#'>
-            <span className='button button--outline'>Forhåndsvis hele artikkelen</span>
-          </a>
-        </div>
-      );
-    }
-    */
 
     let embedSourceInput = '';
 
@@ -129,7 +116,6 @@ export default class PathStep extends Component {
             <input type='url' style={{display: 'inline-block', width: '100%'}}
                 value={embedUrl} onChange={changeEmbedUrl}
                 placeholder={polyglot.t('editPathStep.urlPlaceholder')} />
-            {embedUrlPreview}
           </div>
         </div>
       );

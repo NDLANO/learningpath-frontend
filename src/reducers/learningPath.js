@@ -41,7 +41,7 @@ export default handleActions({
         seqNo: nextState.learningsteps.length + 1,
         title: [],
         description: [],
-        embedUrl: [],
+        embedContent: [],
         type: '',
         license: ''
       });
@@ -82,4 +82,3 @@ export default handleActions({
   },
   LOGOUT: () => ({})
 }, {});
-
