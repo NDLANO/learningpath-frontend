@@ -10,6 +10,7 @@
     "node": "~4.2"
   },
   "scripts": {
+    "pretest": "eslint src",
     "test": "babel-tape-runner 'src/**/*-test.js'|faucet",
     "postinstall": "cp -v node_modules/ndla-styleguide/assets/* htdocs/assets/",
     "build": "webpack --progress",
