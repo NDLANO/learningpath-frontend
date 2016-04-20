@@ -54,7 +54,7 @@ import {
   MyPage,
   LearningPath, LearningPathSummary, LearningPathStep,
   LearningPathSearch,
-  EditLearningPath,
+  EditLearningPath, EditLearningPathStep,
   CreateLearningPath
 } from './components';
 import requireAuthentication from './components/requireAuthentication';
@@ -90,6 +90,8 @@ ReactDOM.render(
           <Route path='learningpaths/:pathId' component={LearningPath}
             onEnter={({params}) => fetchLearningPath(params.pathId)}>
             <IndexRoute component={LearningPathSummary} />
+            <Route path='step/:stepId/edit' component={EditLearningPathStep}
+              onEnter={({params}) => fetchLearningPathStep(params.pathId, params.stepId)} />
             <Route path='step/:stepId' component={LearningPathStep}
               onEnter={({params}) => fetchLearningPathStep(params.pathId, params.stepId)} />
           </Route>

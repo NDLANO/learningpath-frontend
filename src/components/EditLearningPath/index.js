@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import get from 'lodash/get';
 import LabeledIcon from '../LabeledIcon';
 import Navigation from './Navigation';
-import PathStep from './PathStep';
 import TitleEditor from '../editors/TitleEditor';
 import DescriptionEditor from '../editors/DescriptionEditor';
 import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
@@ -11,19 +10,13 @@ import polyglot from '../../i18n';
 
 import {
   createLearningPathStep,
-  updateLearningPathStep,
   updateLearningPathTitle,
   updateLearningPathDescription,
   updateLearningPath
 } from '../../actions';
 
 export function EditLearningPath (props, {lang}) {
-  let { dispatch, learningSteps, learningPath, saveAction } = props;
-
-  let pathSteps = learningSteps.map(step => (
-    <PathStep key={step.seqNo} {...props} step={step}
-      onSubmit={s => dispatch(updateLearningPathStep(s))} />
-  ));
+  let { dispatch, learningPath, saveAction } = props;
 
   let titleText = titleI18N(learningPath, lang) || '';
   let updateTitle = (nextTitle) => {
@@ -60,7 +53,6 @@ export function EditLearningPath (props, {lang}) {
       <main className='two-column_col'>
         <h2>{polyglot.t('editPage.learningpathShortDescriptionTitle')}</h2>
         <DescriptionEditor value={descriptionText} onChange={updateDescription} lang={lang} />
-        {pathSteps}
         <button className='cta-link cta-link--block'
             onClick={() => dispatch(createLearningPathStep())}>
           <LabeledIcon.Add labelText={polyglot.t('editPage.addStepBtn')} />

@@ -36,6 +36,7 @@ export var clearMessage = createAction('CLEAR_MESSAGE');
 export var logoutAction = createAction('LOGOUT');
 export var setOembedObject = createAction('SET_OEMBED_OBJECT');
 export var setLearningPathStatus = createAction('UPDATE_LEARNING_PATH_STATUS');
+export var doStuff = createAction('DO_STUFF');
 
 export {
   initializeSession,
@@ -86,5 +87,6 @@ export default {
   checkValidSession,
   logoutAction,
   fetchOembed,
-  setLearningPathStatus
+  setLearningPathStatus,
+  doStuff
 };
