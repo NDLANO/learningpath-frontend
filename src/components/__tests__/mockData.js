@@ -29,6 +29,7 @@ const learningPaths = [
     ],
     metaUrl: 'http://api.test.ndla.no/learningpaths/2',
     duration: 45,
+    status: 'PRIVATE',
     author: { type: 'Forfatter', name: 'Kaptein Sabeltann' },
     lastUpdated: new Date('2016-02-01T12:00:00+01:00')
   }
