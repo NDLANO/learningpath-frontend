@@ -7,6 +7,7 @@ import PathStep from './PathStep';
 import TitleEditor from './TitleEditor';
 import DescriptionEditor from './DescriptionEditor';
 import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
+import polyglot from '../../i18n';
 
 import {
   createLearningPathStep,
@@ -51,18 +52,18 @@ export function EditLearningPath (props, {lang}) {
         <ul className='vertical-menu'>
           <li className='vertical-menu_item'>
             <button className='cta cta-link cta-link--block' onClick={saveLearningPath}>
-              <LabeledIcon.Save labelText='Lagre' />
+              <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
             </button>
           </li>
         </ul>
       </aside>
       <main className='two-column_col'>
-        <h2>Introduksjon</h2>
+        <h2>{polyglot.t('editPage.learningpathShortDescriptionTitle')}</h2>
         <DescriptionEditor value={descriptionText} onChange={updateDescription} lang={lang} />
         {pathSteps}
         <button className='cta-link cta-link--block'
             onClick={() => dispatch(createLearningPathStep())}>
-          <LabeledIcon.Add labelText='Legg til nytt læringssteg' />
+          <LabeledIcon.Add labelText={polyglot.t('editPage.addStepBtn')} />
         </button>
       </main>
   </div>);

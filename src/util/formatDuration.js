@@ -1,33 +1,11 @@
+import polyglot from '../i18n';
 
-function formatMinutes (minutes, locale) {
-  switch (minutes) {
-  case 0:
-    return '';
-  case 1:
-    return '1 minutt';
-  default:
-    return minutes +' minutter';
-  }
-}
-
-function formatHours (hours, locale) {
-  switch (hours) {
-  case 0:
-    return '';
-  case 1:
-    return '1 time';
-  default:
-    return hours +' timer';
-  }
-}
-
-export default function formatDuration(duration, locale) {
+export default function formatDuration(duration) {
   if (duration <= 0 || isNaN(duration)) {
-    return 'ukjent lenge';
+    return polyglot.t('duration.zero');
   }
 
-  return [
-    formatHours(Math.floor(duration / 60), locale),
-    formatMinutes(duration % 60, locale)
-  ].filter(s => s !== '').join(' ').trim();
+  return [polyglot.t('duration.hours', {smart_count: Math.floor(duration / 60)}),
+      polyglot.t('duration.minutes', {smart_count: duration % 60})
+      ].filter(s => s.indexOf('0') !== 0).join(' ').trim();
 }
