@@ -17,7 +17,7 @@ test('actions/fetchLearningPath', t => {
     t.end(res);
     nock.cleanAll();
   };
-  
+
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get('/learningpaths/' + pathId)
     .reply(200, {id: pathId});
