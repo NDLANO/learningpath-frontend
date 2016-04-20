@@ -11,10 +11,11 @@ es6promise.polyfill();
 import actions from './actions';
 import { defaultSearchQuery, parseSearchQuery } from './middleware/searchQuery';
 import configureStore, { browserHistory } from './configureStore';
+import {defaultApiKey} from './sources/helpers';
 
 const store = configureStore({
   authenticated: false,
-  authToken: '',
+  authToken: defaultApiKey,
   user: {},
   learningPath: {},
   learningPathStep: {},

@@ -45,6 +45,10 @@ const deleteLearningPath = deleteAuthorized('/learningpaths/:pathId');
 const deletePath = (authToken, { pathId }) =>
   deleteLearningPath(authToken, {pathId});
 
+const putLearningPathStatus = putAuthorized('/learningpaths/:pathId/status');
+const updateStatus = (authToken, { pathId }, body) =>
+  putLearningPathStatus(authToken, {pathId}, body);
+
 const learningPathsUrl = apiResourceUrl('/learningpaths');
 
 const fetchPaths = (authToken, query) => {
@@ -74,5 +78,6 @@ export {
   updatePath,
   fetchMyPaths,
   deletePath,
-  fetchOembedUrl
+  fetchOembedUrl,
+  updateStatus
 };
