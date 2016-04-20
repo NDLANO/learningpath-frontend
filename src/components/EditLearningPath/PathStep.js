@@ -7,7 +7,7 @@ import { titleI18N, descriptionI18N, embedUrlI18N } from '../../util/i18nFieldFi
 import Icon from '../Icon';
 import TitleEditor from './TitleEditor';
 import DescriptionHTMLEditor from './DescriptionHTMLEditor';
-
+import polyglot from '../../i18n';
 
 
 export default class PathStep extends Component {
@@ -112,11 +112,10 @@ export default class PathStep extends Component {
       embedSourceInput =(
         <div className='learningsource-form'>
           <div>
-            <label className='mediatype-menu__label'>Lim in lenke (URL) fra ndla.no eller youtube.com</label>
+            <label className='mediatype-menu__label'>{polyglot.t('editPathStep.urlLabel')}</label>
             <input type='url' style={{display: 'inline-block', width: '100%'}}
-                value={embedContent} onChange={changeEmbedUrl}
-                placeholder='Lim in lenke' />
-
+                value={embedUrl} onChange={changeEmbedUrl}
+                placeholder={polyglot.t('editPathStep.urlPlaceholder')} />
           </div>
         </div>
       );
@@ -146,7 +145,7 @@ export default class PathStep extends Component {
                     value='INTRODUCTION' checked={step.type==='INTRODUCTION'} onChange={changeType} />
                 <label htmlFor={fieldIdAttr('text')} className='icon-select_label'>
                   <Icon.TypeText />
-                  <span className='icon-select_label-text'>Introduksjon</span>
+                  <span className='icon-select_label-text'>{polyglot.t('editPathStep.mediatype.introduction')}</span>
                 </label>
               </div>
               <div className='icon-select_item'>
@@ -155,7 +154,7 @@ export default class PathStep extends Component {
                     value='TEXT' checked={step.type==='TEXT'} onChange={changeType} />
                 <label htmlFor={fieldIdAttr('text')} className='icon-select_label'>
                   <Icon.TypeText />
-                  <span className='icon-select_label-text'>Tekst</span>
+                  <span className='icon-select_label-text'>{polyglot.t('editPathStep.mediatype.text')}</span>
                 </label>
               </div>
               <div className='icon-select_item'>
@@ -164,7 +163,7 @@ export default class PathStep extends Component {
                     value='MULTIMEDIA' checked={step.type==='MULTIMEDIA'} onChange={changeType} />
                 <label htmlFor={fieldIdAttr('video')} className='icon-select_label'>
                   <Icon.TypeMedia />
-                  <span className='icon-select_label-text'>Multimedia</span>
+                  <span className='icon-select_label-text'>{polyglot.t('editPathStep.mediatype.multimedia')}</span>
                 </label>
               </div>
               <div className='icon-select_item'>
@@ -173,7 +172,7 @@ export default class PathStep extends Component {
                     value='QUIZ' checked={step.type==='QUIZ'} onChange={changeType} />
                 <label htmlFor={fieldIdAttr('quiz')} className='icon-select_label'>
                   <Icon.TypeQuiz />
-                  <span className='icon-select_label-text'>Quiz</span>
+                  <span className='icon-select_label-text'>{polyglot.t('editPathStep.mediatype.quiz')}</span>
                 </label>
               </div>
               <div className='icon-select_item'>
@@ -182,7 +181,7 @@ export default class PathStep extends Component {
                     value='TASK' checked={step.type==='TASK'} onChange={changeType} />
                 <label htmlFor={fieldIdAttr('task')} className='icon-select_label'>
                   <Icon.TypeTask />
-                  <span className='icon-select_label-text'>Oppgave</span>
+                  <span className='icon-select_label-text'>{polyglot.t('editPathStep.mediatype.task')}</span>
                 </label>
               </div>
               <div className='icon-select_item'>
@@ -191,7 +190,7 @@ export default class PathStep extends Component {
                     value='SUMMARY' checked={step.type==='SUMMARY'} onChange={changeType} />
                 <label htmlFor={fieldIdAttr('summary')} className='icon-select_label'>
                   <Icon.TypeSummary />
-                  <span className='icon-select_label-text'>Oppsummering</span>
+                  <span className='icon-select_label-text'>{polyglot.t('editPathStep.mediatype.summary')}</span>
                 </label>
               </div>
             </div>

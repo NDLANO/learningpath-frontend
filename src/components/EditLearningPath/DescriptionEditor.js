@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import OneLineEditor from './OneLineEditor';
+import polyglot from '../../i18n';
 
 export default function DescriptionEditor ({value, onChange, lang}) {
   const _onChange = (newValue) => onChange({description: newValue, language: lang});
@@ -7,7 +8,7 @@ export default function DescriptionEditor ({value, onChange, lang}) {
     onChange={_onChange}
     value={value||''}
     maxlength = {155}
-    placeholder='Skriv kort beskrivelse (max 155 teng)'
+    placeholder={polyglot.t('editPage.shortDescriptionPlaceholder')}
   />);
 }
 

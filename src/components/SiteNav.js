@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import classNames from 'classnames';
+import polyglot from '../i18n';
 
 import LabeledIcon from './LabeledIcon';
 
@@ -12,7 +13,7 @@ export function SiteNav ({authenticated, userName, cssModifier}) {
     myPage = (
       <li className='site-nav_item'>
         <Link to='/minside' className='site-nav_link'>
-          <LabeledIcon.Apps labelText='Mine læringsstier' />
+          <LabeledIcon.Apps labelText={polyglot.t('siteNav.myPage')} />
         </Link>
       </li>
     );
@@ -20,7 +21,7 @@ export function SiteNav ({authenticated, userName, cssModifier}) {
     logInOut = (
       <li className='site-nav_item'>
         <Link to='/logout' className='site-nav_link'>
-          <LabeledIcon.Exit labelText={`Logg ut ${userName}`} />
+          <LabeledIcon.Exit labelText={polyglot.t('siteNav.logout', {name: userName})} />
         </Link>
       </li>
     );
@@ -28,7 +29,7 @@ export function SiteNav ({authenticated, userName, cssModifier}) {
     logInOut = (
       <li className='site-nav_item'>
         <Link to='/login' className='site-nav_link'>
-          <LabeledIcon.Exit labelText='Logg inn' />
+          <LabeledIcon.Exit labelText={polyglot.t('siteNav.login')} />
         </Link>
       </li>
     );
@@ -44,7 +45,7 @@ export function SiteNav ({authenticated, userName, cssModifier}) {
       <ul className='site-nav_list'>
         <li className='site-nav_item'>
           <Link to='/learningpaths' className='site-nav_link'>
-            <LabeledIcon.Search labelText='Finn læringssti' />
+            <LabeledIcon.Search labelText={polyglot.t('siteNav.search')} />
           </Link>
         </li>
         {myPage}
