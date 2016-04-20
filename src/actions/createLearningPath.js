@@ -1,6 +1,6 @@
 import { setLearningPath, applicationError, addMessage } from '.';
 import { createPath } from '../sources/learningpaths';
-import { routeActions } from 'redux-simple-router';
+import { routeActions } from 'react-router-redux';
 import polyglot from '../i18n';
 
 export default function createLearningPath (learningPath) {

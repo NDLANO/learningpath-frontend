@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { routeReducer } from 'redux-simple-router';
+import { routerReducer } from 'react-router-redux';
 
 import authenticated from './authenticated';
 import authToken from './authToken';
@@ -23,7 +23,7 @@ const rootReducers = combineReducers({
   learningPathsTotalCount,
   privateLearningPathsSortBy,
   messages,
-  routing: routeReducer
+  routing: routerReducer
 });
 
 export default rootReducers;
