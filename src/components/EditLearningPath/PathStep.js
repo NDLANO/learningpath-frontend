@@ -114,7 +114,7 @@ export default class PathStep extends Component {
           <div>
             <label className='mediatype-menu__label'>{polyglot.t('editPathStep.urlLabel')}</label>
             <input type='url' style={{display: 'inline-block', width: '100%'}}
-                value={embedUrl} onChange={changeEmbedUrl}
+                value={embedContent} onChange={changeEmbedUrl}
                 placeholder={polyglot.t('editPathStep.urlPlaceholder')} />
           </div>
         </div>

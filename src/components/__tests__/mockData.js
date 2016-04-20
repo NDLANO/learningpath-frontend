@@ -84,9 +84,9 @@ const learningPath = {
       ],
       embedContent: [
         {
-          url: "http://ndla.no/nb/node/24049",
+          url: 'http://ndla.no/nb/node/24049',
           language: 'nb',
-          html: "<iframe src='http://ndla.no/nb/node/24049/oembed' allowfullscreen></iframe>"
+          html: '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>'
         }
       ],
       type: 'TEXT',
@@ -110,9 +110,9 @@ const learningPath = {
       ],
       embedContent: [
         {
-          url: "http://ndla.no/nb/node/24049",
+          url: 'http://ndla.no/nb/node/24049',
           language: 'nb',
-          html: "<iframe src='http://ndla.no/nb/node/24049/oembed' allowfullscreen></iframe>"
+          html: '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>'
         }
       ],
       type: 'TEXT',
@@ -155,7 +155,7 @@ const learningStep = {
     {
       url: 'https://www.youtube.com/watch?v=RYLlSFmGfm0',
       language: 'nb',
-      html: "<iframe width=\"480\" height=\"270\" src=\"https://www.youtube.com/embed/RYLlSFmGfm0?feature=oembed\" frameborder=\"0\" allowfullscreen></iframe>"
+      html: '<iframe width="480" height="270" src="https://www.youtube.com/embed/RYLlSFmGfm0?feature=oembed" frameborder="0" allowfullscreen></iframe>'
     }
   ],
   type: 'TEXT',
@@ -179,9 +179,9 @@ const ndlaLearningStep = {
   ],
   embedContent: [
     {
-      url: "http://ndla.no/nb/node/24049",
+      url: 'http://ndla.no/nb/node/24049',
       language: 'nb',
-      html: "<iframe src='http://ndla.no/nb/node/24049/oembed' allowfullscreen></iframe>"
+      html: '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>'
     }
   ],
   type: 'TEXT',
