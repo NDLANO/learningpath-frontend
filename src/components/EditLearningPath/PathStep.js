@@ -104,18 +104,6 @@ export default class PathStep extends Component {
     const changeEmbedUrl = this.handleEmbedUrlChange.bind(this);
     const changeDescription = this.handleDescriptionChange.bind(this);
     const handleSubmit = this.handleSubmit.bind(this);
-    let embedUrlPreview = '';
-
-    /*if (embedContent) {
-      embedUrlPreview = (
-        <div className='learningsource--wrapper'>
-          //<iframe className='learningsource__frame' src={embedContent} frameBorder='0'></iframe>
-          <a className='learningsource__expand' href='#' onClick={dispat}>
-            <span className='button button--outline'>Forhåndsvis hele artikkelen</span>
-          </a>
-        </div>
-      );
-    }*/
 
 
     let embedSourceInput = '';
@@ -129,7 +117,6 @@ export default class PathStep extends Component {
                 value={embedContent} onChange={changeEmbedUrl}
                 placeholder='Lim in lenke' />
 
-            {embedUrlPreview}
           </div>
         </div>
       );
