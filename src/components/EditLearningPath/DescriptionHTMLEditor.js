@@ -3,7 +3,7 @@ import { Editor, EditorState, ContentState, RichUtils, convertFromHTML } from 'd
 import Icon from '../Icon';
 import classNames from 'classnames';
 import { stateToHTML } from 'draft-js-export-html';
-
+import polyglot from '../../i18n';
 
 class StyleButton extends React.Component {
   constructor() {
@@ -200,7 +200,7 @@ export default class DescriptionHTMLEditor extends React.Component {
             editorState={editorState}
             handleKeyCommand={this.handleKeyCommand}
             onChange={this.onChange}
-            placeholder='Skriv her'
+            placeholder={polyglot.t('editPathStep.stepDescriptionPlaceholder')}
             ref='editor'
             spellCheck={true}
           />

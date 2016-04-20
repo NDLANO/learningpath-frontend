@@ -45,6 +45,10 @@ const deleteLearningPath = deleteAuthorized('/learningpaths/:pathId');
 const deletePath = (authToken, { pathId }) =>
   deleteLearningPath(authToken, {pathId});
 
+const putLearningPathStatus = putAuthorized('/learningpaths/:pathId/status');
+const updateStatus = (authToken, { pathId }, body) =>
+  putLearningPathStatus(authToken, {pathId}, body);
+
 const learningPathsUrl = apiResourceUrl('/learningpaths');
 
 const fetchPaths = (authToken, query) => {
@@ -64,6 +68,8 @@ const fetchPaths = (authToken, query) => {
   return fetch(url, {headers: {'APP-KEY': authToken}}).then( resolveJsonOrRejectWithError );
 };
 
+const fetchOembedUrl = fetchAuthorized('/oembed/?url=:url');
+
 export {
   fetchPath,
   fetchPathStep,
@@ -71,5 +77,7 @@ export {
   createPath,
   updatePath,
   fetchMyPaths,
-  deletePath
+  deletePath,
+  fetchOembedUrl,
+  updateStatus
 };

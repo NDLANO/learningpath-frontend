@@ -12,6 +12,8 @@ import createEmptyLearningPath from './createEmptyLearningPath';
 import checkValidSession from './checkValidSession.js';
 import timeoutMessage from './timeoutMessage.js';
 import deleteLearningPath from './deleteLearningPath';
+import fetchOembed from './fetchOembed';
+import updateLearningPathStatus from './updateLearningPath';
 
 export var applicationError = createAction('APPLICATION_ERROR');
 export var setAuthenticated = createAction('SET_AUTHENTICATED');
@@ -32,6 +34,8 @@ export var addMessage = createAction('ADD_MESSAGE');
 export var clearAllMessages = createAction('CLEAR_ALL_MESSAGES');
 export var clearMessage = createAction('CLEAR_MESSAGE');
 export var logoutAction = createAction('LOGOUT');
+export var setOembedObject = createAction('SET_OEMBED_OBJECT');
+export var setLearningPathStatus = createAction('UPDATE_LEARNING_PATH_STATUS');
 
 export {
   initializeSession,
@@ -44,7 +48,9 @@ export {
   createLearningPath,
   createEmptyLearningPath,
   timeoutMessage,
-  deleteLearningPath
+  deleteLearningPath,
+  fetchOembed,
+  updateLearningPathStatus
 };
 
 export default {
@@ -78,5 +84,7 @@ export default {
   clearMessage,
   timeoutMessage,
   checkValidSession,
-  logoutAction
+  logoutAction,
+  fetchOembed,
+  setLearningPathStatus
 };

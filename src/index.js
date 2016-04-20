@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { Provider } from 'react-redux';
-import { Router, Route, IndexRoute } from 'react-router';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
 import isEmpty from 'lodash/isEmpty';
 
 import es6promise from 'es6-promise';
@@ -10,11 +11,12 @@ es6promise.polyfill();
 
 import actions from './actions';
 import { defaultSearchQuery, parseSearchQuery } from './middleware/searchQuery';
-import configureStore, { browserHistory } from './configureStore';
+import configureStore from './configureStore';
+import {defaultApiKey} from './sources/helpers';
 
 const store = configureStore({
   authenticated: false,
-  authToken: '',
+  authToken: defaultApiKey,
   user: {},
   learningPath: {},
   learningPathStep: {},
@@ -23,6 +25,8 @@ const store = configureStore({
   learningPathsTotalCount: 1,
   messages: []
 });
+
+const history = syncHistoryWithStore(browserHistory, store);
 
 const {
   logout,
@@ -57,7 +61,7 @@ import requireAuthentication from './components/requireAuthentication';
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={browserHistory} onUpdate={() => window.scrollTo(0, 0)}>
+    <Router history={history} onUpdate={() => window.scrollTo(0, 0)}>
       <Route path='/' onEnter={ifAuthenticated(checkValidSession)}>
         <IndexRoute component={Welcome} />
 
@@ -82,8 +86,7 @@ ReactDOM.render(
 
             changeLearningPathQuery(query);
             fetchLearningPaths();
-          }}/>
-
+          }}/> 
           <Route path='learningpaths/:pathId' component={LearningPath}
             onEnter={({params}) => fetchLearningPath(params.pathId)}>
             <IndexRoute component={LearningPathSummary} />

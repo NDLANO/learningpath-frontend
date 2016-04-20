@@ -44,12 +44,6 @@ test('reducers/learningPaths remove learning path', (t) => {
   let path3 = {id: 125, title: [{title: 'another Title', language: 'nb'}]};
 
   t.deepEqual(
-    reducer(undefined, {type: 'REMOVE_LEARNING_PATH'}),
-    [],
-    'initial state'
-  );
-
-  t.deepEqual(
     reducer([path1, path2, path3], {type: 'REMOVE_LEARNING_PATH', payload: 0}),
     [path1, path2, path3],
     'id mismatch'
@@ -63,6 +57,39 @@ test('reducers/learningPaths remove learning path', (t) => {
 
   t.deepEqual(
     reducer([], {type: 'REMOVE_LEARNING_PATH', payload: 123}),
+    [],
+    'empty state'
+  );
+
+  t.end();
+});
+
+test('reducers/learningPaths update learning path status', (t) => {
+  let paths = [
+    {id: 123, status: 'PUBLIC'},
+    {id: 124, status: 'PRIVATE'},
+    {id: 125, status: 'PRIVATE'}
+  ];
+
+  let actual = reducer(paths, {
+    type: 'UPDATE_LEARNING_PATH_STATUS',
+    payload: { id: 125, status: 'PUBLIC' }
+  });
+
+  t.equal(paths[2].status, 'PRIVATE', 'publish');
+
+  actual = reducer(paths, {
+    type: 'UPDATE_LEARNING_PATH_STATUS',
+    payload: { id: 666, status: 'PUBLIC' }
+  });
+
+  t.deepEqual(actual, paths, 'publish unkown id');
+
+  t.deepEqual(
+    reducer([], {
+      type: 'UPDATE_LEARNING_PATH_STATUS',
+      payload: { id: 1, status: 'PUBLIC' }
+    }),
     [],
     'empty state'
   );

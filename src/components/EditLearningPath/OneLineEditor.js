@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Editor, EditorState, ContentState } from 'draft-js';
+import polyglot from '../../i18n';
 
 export default class OneLineEditor extends React.Component {
   constructor(props) {
@@ -34,7 +35,7 @@ export default class OneLineEditor extends React.Component {
     }
 
     /* TODO implement this when Editor.handlePastedText lands in draft-js@latest */
-    this.handlePastedText = (text, html) => false;
+    this.handlePastedText = (text, html) => false; // eslint-disable-line no-unused-vars
   }
 
   updateEditorContentStateFromText(text) {
@@ -75,6 +76,6 @@ OneLineEditor.propTypes = {
 };
 
 OneLineEditor.defaultProps = {
-  placeholder: 'Skriv her',
+  placeholder: polyglot.t('editPage.oneLineEditorDefaultPlaceholder'),
   maxlength: -1
 };
