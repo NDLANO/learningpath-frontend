@@ -5,7 +5,7 @@ import nock from 'nock';
 import payload403invalid from './payload403invalid';
 
 import actions from '..';
-import { routeActions } from 'redux-simple-router';
+import { routerActions } from 'react-router-redux';
 
 const middleware = [ thunk ];
 const mockStore = configureStore(middleware);
@@ -60,7 +60,7 @@ test('actions/updateLearningPath', t => {
             {id: 56, seqNo: 2, isResponse: true}
           ]
         }),
-        routeActions.push({ pathname: `/learningpaths/${pathId}` })
+        routerActions.push({ pathname: `/learningpaths/${pathId}` })
       ]);
 
       t.doesNotThrow(() => putPathApi.done());
