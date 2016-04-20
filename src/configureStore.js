@@ -5,7 +5,7 @@ import persistState from 'redux-localstorage';
 import reducers from './reducers';
 import { errorReporter, searchQueryMiddleware } from './middleware';
 
-import { routerMiddleware, push } from 'react-router-redux'
+import { routerMiddleware, push } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 
 
@@ -17,7 +17,7 @@ const slicer = function (paths) {
   }, {});
 };
 
-const middleware = routerMiddleware(browserHistory)
+const middleware = routerMiddleware(browserHistory);
 const createFinalStore = compose(
   applyMiddleware(
     thunkMiddleware,
