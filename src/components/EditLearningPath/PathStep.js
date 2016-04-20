@@ -66,16 +66,16 @@ export default class PathStep extends Component {
     };
 
     let step = cloneDeep(this.state.step);
-    let embedUrls = get(step, 'embedUrl', []);
-    let index = findIndex(embedUrls, ['language', value.language]);
+    let embedContents = get(step, 'embedContent', []);
+    let index = findIndex(embedContents, ['language', value.language]);
 
     if (index === -1) {
-      embedUrls.push(value);
+      embedContents.push(value);
     } else {
-      assign(embedUrls[index], value);
+      assign(embedContents[index], value);
     }
 
-    step.embedUrl = embedUrls;
+    step.embedContent = embedContents;
 
     this.setState({ step });
   }
@@ -95,7 +95,7 @@ export default class PathStep extends Component {
     let { step, lang } = this.state;
     let title = titleI18N(step, lang);
     let htmlDescription = descriptionI18N(step, lang);
-    let embedUrl = embedUrlI18N(step, lang);
+    let embedContent = embedUrlI18N(step, lang);
 
     const fieldNameAttr = `step_${step.seqNo}_type`;
     const fieldIdAttr = value => `${fieldNameAttr}_type_${value}`;
@@ -104,20 +104,19 @@ export default class PathStep extends Component {
     const changeEmbedUrl = this.handleEmbedUrlChange.bind(this);
     const changeDescription = this.handleDescriptionChange.bind(this);
     const handleSubmit = this.handleSubmit.bind(this);
-
     let embedUrlPreview = '';
-    /*
-    if (embedUrl) {
+
+    /*if (embedContent) {
       embedUrlPreview = (
         <div className='learningsource--wrapper'>
-          <iframe className='learningsource__frame' src={embedUrl} frameBorder='0'></iframe>
-          <a className='learningsource__expand' href='#'>
+          //<iframe className='learningsource__frame' src={embedContent} frameBorder='0'></iframe>
+          <a className='learningsource__expand' href='#' onClick={dispat}>
             <span className='button button--outline'>Forhåndsvis hele artikkelen</span>
           </a>
         </div>
       );
-    }
-    */
+    }*/
+
 
     let embedSourceInput = '';
 
@@ -127,8 +126,9 @@ export default class PathStep extends Component {
           <div>
             <label className='mediatype-menu__label'>Lim in lenke (URL) fra ndla.no eller youtube.com</label>
             <input type='url' style={{display: 'inline-block', width: '100%'}}
-                value={embedUrl} onChange={changeEmbedUrl}
+                value={embedContent} onChange={changeEmbedUrl}
                 placeholder='Lim in lenke' />
+
             {embedUrlPreview}
           </div>
         </div>

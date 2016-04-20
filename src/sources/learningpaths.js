@@ -64,6 +64,8 @@ const fetchPaths = (authToken, query) => {
   return fetch(url, {headers: {'APP-KEY': authToken}}).then( resolveJsonOrRejectWithError );
 };
 
+const fetchOembedUrl = fetchAuthorized('/oembed/?url=:url');
+
 export {
   fetchPath,
   fetchPathStep,
@@ -71,5 +73,6 @@ export {
   createPath,
   updatePath,
   fetchMyPaths,
-  deletePath
+  deletePath,
+  fetchOembedUrl
 };
