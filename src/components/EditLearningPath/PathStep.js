@@ -113,14 +113,12 @@ export default class PathStep extends Component {
         <div className='learningsource-form'>
           <div>
             <label className='mediatype-menu__label'>{polyglot.t('editPathStep.urlLabel')}</label>
-            <input type='url' style={{display: 'inline-block', width: '100%'}}
-                value={embedContent} onChange={changeEmbedUrl}
+            <input type='url' value={embedContent} onChange={changeEmbedUrl}
                 placeholder={polyglot.t('editPathStep.urlPlaceholder')} />
           </div>
         </div>
       );
     }
-
     return (
       <form onSubmit={handleSubmit} className='learning-path-step'>
         <div className='learning-path_hd'>
