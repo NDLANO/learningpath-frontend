@@ -3,7 +3,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import get from 'lodash/get';
 import assign from 'lodash/assign';
 import findIndex from 'lodash/findIndex';
-import { titleI18N, descriptionI18N, embedUrlI18N } from '../../util/i18nFieldFinder';
+import { titleI18N, descriptionI18N, oembedUrlI18N } from '../../util/i18nFieldFinder';
 import Icon from '../Icon';
 import TitleEditor from './TitleEditor';
 import DescriptionHTMLEditor from './DescriptionHTMLEditor';
@@ -95,7 +95,7 @@ export default class PathStep extends Component {
     let { step, lang } = this.state;
     let title = titleI18N(step, lang);
     let htmlDescription = descriptionI18N(step, lang);
-    let embedContent = embedUrlI18N(step, lang);
+    let embedContent = oembedUrlI18N(step, lang);
 
     const fieldNameAttr = `step_${step.seqNo}_type`;
     const fieldIdAttr = value => `${fieldNameAttr}_type_${value}`;

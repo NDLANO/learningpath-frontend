@@ -24,9 +24,9 @@ let resizeIframe = (iframes) => {
   };
 };
 
+let resizeIframeFunc;
 
 export class LearningPathStep extends React.Component {
-
   checkIframe (props) {
     let {step} = props;
     let {lang} = this.context;
@@ -35,7 +35,7 @@ export class LearningPathStep extends React.Component {
     const ndlaIsSource = url != undefined ? ((/http:\/\/ndla.no/).test(url)) : false;
     if (ndlaIsSource && ReactDOM.findDOMNode(this) != null){
       if (ReactDOM.findDOMNode(this).children){
-        let resizeIframeFunc = resizeIframe(ReactDOM.findDOMNode(this).children);
+        resizeIframeFunc = resizeIframe(ReactDOM.findDOMNode(this).children);
         window.addEventListener('message', resizeIframeFunc);
       }
     }
@@ -48,8 +48,6 @@ export class LearningPathStep extends React.Component {
     this.checkIframe(this.props);
   }
   componentWillUnmount () {
-    let resizeIframeFunc = resizeIframe(ReactDOM.findDOMNode(this).children);
-
     window.removeEventListener('message', resizeIframeFunc);
   }
 
