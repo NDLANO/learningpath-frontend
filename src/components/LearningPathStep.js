@@ -35,7 +35,7 @@ export class LearningPathStep extends React.Component {
 
     const ndlaIsSource = url != undefined ? ((/http:\/\/ndla.no/).test(url)) : false;
     if (ndlaIsSource && ReactDOM.findDOMNode(this) != null){
-      if (ReactDOM.findDOMNode(this).children){
+      if (ReactDOM.findDOMNode(this).children && !this.resizeIframeFunc){
         this.resizeIframeFunc = resizeIframe(ReactDOM.findDOMNode(this).children);
         window.addEventListener('message', this.resizeIframeFunc);
       }
