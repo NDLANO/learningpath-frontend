@@ -15,7 +15,6 @@ import {
   updateLearningPathStepEmbedUrl
 } from '../../actions';
 
-
 export function EditLearningPathStep (props, {lang}) {
   const {
     step,
@@ -91,12 +90,12 @@ EditLearningPathStep.contextTypes = {
   lang: PropTypes.string.isRequired
 };
 
-const mapStateToProps = state => assign({}, state, {
+export const mapStateToProps = state => assign({}, state, {
   step: state.learningPathStep,
   learningPathId: state.learningPath.id
 });
 
-const mapDispatchToProps = {
+export const mapDispatchToProps = {
   // actions som endrer learningPathStep i redux store:
   updateTitle: updateLearningPathStepTitle,
   updateType: updateLearningPathStepType,

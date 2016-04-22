@@ -41,6 +41,7 @@ export var updateLearningPathStepTitle = createAction('UPDATE_LEARNING_PATH_STEP
 export var updateLearningPathStepEmbedUrl = createAction('UPDATE_LEARNING_PATH_STEP_EMBED_URL');
 export var updateLearningPathStepType= createAction('UPDATE_LEARNING_PATH_STEP_TYPE');
 export var doStuff = createAction('DO_STUFF');
+export var createEmptyLearningPathStep = createAction('CREATE_EMPTY_LEARNING_PATH_STEP');
 
 export {
   initializeSession,
@@ -93,6 +94,7 @@ export default {
   logoutAction,
   fetchOembed,
   setLearningPathStatus,
+  createEmptyLearningPathStep,
   updateLearningPathStepDescription,
   updateLearningPathStepTitle,
   updateLearningPathStepEmbedUrl,

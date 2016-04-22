@@ -55,5 +55,19 @@ export default handleActions({
     next: mergeI18nProperty('embedContent'),
     throw(state) { return state; }
   },
+
+  CREATE_EMPTY_LEARNING_PATH_STEP: {
+    next() {
+      console.log("createing learning path step");
+      return {
+        title: [],
+        description: [],
+        embedContent: [],
+        type: '',
+        license: ''
+      };
+    },
+    throw(state) { return state; }
+  },
   LOGOUT: () => ({})
 }, {});

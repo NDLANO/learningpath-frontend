@@ -8,11 +8,11 @@ import isEmpty from 'lodash/isEmpty';
 
 import es6promise from 'es6-promise';
 es6promise.polyfill();
-
 import actions from './actions';
 import { defaultSearchQuery, parseSearchQuery } from './middleware/searchQuery';
 import configureStore from './configureStore';
 import {defaultApiKey} from './sources/helpers';
+import {emptyStep} from './actions/fetchLearningPathStep';
 
 const store = configureStore({
   authenticated: false,
@@ -36,7 +36,8 @@ const {
   fetchLearningPathStep,
   changeLearningPathQuery,
   createEmptyLearningPath,
-  checkValidSession
+  checkValidSession,
+  createEmptyLearningPathStep
 } = bindActionCreators(actions, store.dispatch);
 
 function ifAuthenticated (cb) {
@@ -90,7 +91,9 @@ ReactDOM.render(
             <IndexRoute component={LearningPathSummary} />
             <Route path='edit' component={requireAuthentication(EditLearningPath)}
                onEnter={ifAuthenticated(({params}) => fetchLearningPath(params.pathId))} />
-            <Route path='step/new' component={ThisPageIntentionallyLeftBlank} />
+            
+            <Route path='step/new' component={EditLearningPathStep} onEnter={() => ifAuthenticated(createEmptyLearningPathStep) }/>
+            
             <Route path='step/:stepId/edit' component={EditLearningPathStep}
               onEnter={({params}) => fetchLearningPathStep(params.pathId, params.stepId)} />
             <Route path='step/:stepId' component={LearningPathStep}

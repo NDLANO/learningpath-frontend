@@ -36,6 +36,7 @@ export default handleActions({
   },
   CREATE_LEARNING_PATH_STEP: {
     next(state) {
+      console.log("createing learning path step");
       let nextState = cloneDeep(state);
       nextState.learningsteps.push({
         seqNo: nextState.learningsteps.length + 1,

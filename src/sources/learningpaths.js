@@ -33,7 +33,9 @@ const updatePath = (authToken, { pathId }, body) =>
   putLearningPath(authToken, { pathId }, body);
 
 const updateStep = (authToken, { pathId, stepId }, body) =>
-  putLearningPathStep(authToken, {pathId, stepId}, body);
+  stepId
+  ? putLearningPathStep(authToken, {pathId, stepId}, body)
+  : postLearningPathStep(authToken, { pathId }, body);
 
 const deleteLearningPath = deleteAuthorized('/learningpaths/:pathId');
 const deletePath = (authToken, { pathId }) =>

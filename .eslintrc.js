@@ -7,7 +7,8 @@ module.exports = {
     'no-unused-vars': [ 1 ],
     'react/display-name': [ 0 ],
     'react/no-danger': [ 1 ],
-    'react/prop-types': [ 2, {'ignore': ['children','className'] }]
+    'react/prop-types': [ 2, {'ignore': ['children','className'] }],
+    'no-console': 0
   },
   'env': {
     'es6': true,
