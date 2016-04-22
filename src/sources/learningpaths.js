@@ -30,16 +30,10 @@ const putLearningPath = putAuthorized('/learningpaths/:pathId');
 const putLearningPathStep = putAuthorized('/learningpaths/:pathId/learningsteps/:stepId');
 
 const updatePath = (authToken, { pathId }, body) =>
-  putLearningPath(authToken, { pathId }, body)
-  .then(lpath => Promise.all(map(body.learningsteps, step =>
-      has(step, 'id') ?
-        putLearningPathStep(authToken, { pathId, stepId: step.id }, step ) :
-        postLearningPathStep(authToken, { pathId }, step )
-    )).then(steps => Object.assign({}, lpath, {
-      learningsteps: assureSequenceOrder(steps)
-    }))
-  )
-;
+  putLearningPath(authToken, { pathId }, body);
+
+const updateStep = (authToken, { pathId, stepId }, body) =>
+  putLearningPathStep(authToken, {pathId, stepId}, body);
 
 const deleteLearningPath = deleteAuthorized('/learningpaths/:pathId');
 const deletePath = (authToken, { pathId }) =>
@@ -79,5 +73,6 @@ export {
   fetchMyPaths,
   deletePath,
   fetchOembedUrl,
-  updateStatus
+  updateStatus,
+  updateStep
 };

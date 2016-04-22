@@ -14,6 +14,7 @@ import timeoutMessage from './timeoutMessage.js';
 import deleteLearningPath from './deleteLearningPath';
 import fetchOembed from './fetchOembed';
 import updateLearningPathStatus from './updateLearningPath';
+import updateLearningPathStep from './updateLearningPathStep';
 
 export var applicationError = createAction('APPLICATION_ERROR');
 export var setAuthenticated = createAction('SET_AUTHENTICATED');
@@ -25,7 +26,6 @@ export var changeLearningPathQuery = createAction('CHANGE_LEARNING_PATH_QUERY');
 export var setLearningPathsTotalCount = createAction('SET_LEARNING_PATHS_TOTAL_COUNT');
 export var sortPrivateLearningPaths = createAction('SORT_PRIVATE_LEARNING_PATHS');
 export var createLearningPathStep = createAction('CREATE_LEARNING_PATH_STEP');
-export var updateLearningPathStep = createAction('UPDATE_LEARNING_PATH_STEP');
 export var updateLearningPathTitle = createAction('UPDATE_LEARNING_PATH_TITLE');
 export var updateLearningPathDescription = createAction('UPDATE_LEARNING_PATH_DESCRIPTION');
 export var removeLearningPath = createAction('REMOVE_LEARNING_PATH');
@@ -51,7 +51,8 @@ export {
   timeoutMessage,
   deleteLearningPath,
   fetchOembed,
-  updateLearningPathStatus
+  updateLearningPathStatus,
+  updateLearningPathStep
 };
 
 export default {

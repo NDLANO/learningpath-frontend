@@ -7,7 +7,10 @@ import TitleEditor from '../editors/TitleEditor';
 import DescriptionHTMLEditor from '../editors/DescriptionHTMLEditor';
 import polyglot from '../../i18n';
 import MediaTypeSelect from './MediaTypeSelect';
-import { doStuff } from '../../actions';
+import {
+  updateLearningPathStep,
+  doStuff
+} from '../../actions';
 
 
 export function EditLearningPathStep (props, {lang}) {
@@ -17,19 +20,18 @@ export function EditLearningPathStep (props, {lang}) {
     updateType,
     updateEmbedUrl,
     updateDescription,
+    learningPathId,
     saveAction
   } = props;
 
   const isValid = () => true;
-
-  let saveLearningStep = () => saveAction(step);
-
+  
+  let saveLearningStep = () => saveAction(learningPathId, step);
   let title = titleI18N(step, lang) || '';
   let htmlDescription = descriptionI18N(step, lang) || '';
   let embedContent = embedUrlI18N(step, lang);
 
   let embedSourceInput = '';
-
   if (step.type) {
     embedSourceInput =(
       <div className='learningsource-form'>
@@ -88,7 +90,8 @@ EditLearningPathStep.contextTypes = {
 };
 
 const mapStateToProps = state => assign({}, state, {
-  step: state.learningPathStep
+  step: state.learningPathStep,
+  learningPathId: state.learningPath.id
 });
 
 const mapDispatchToProps = {
@@ -98,7 +101,7 @@ const mapDispatchToProps = {
   updateEmbedUrl: doStuff,
   updateDescription: doStuff,
   // action til persistere learningPathStep
-  saveAction: doStuff
+  saveAction: (learningPathId, lps) => updateLearningPathStep(learningPathId, lps.id, lps)
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditLearningPathStep);

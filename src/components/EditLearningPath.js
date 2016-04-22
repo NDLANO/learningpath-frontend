@@ -11,6 +11,7 @@ import polyglot from '../i18n';
 import {
   updateLearningPathTitle,
   updateLearningPathDescription,
+  updateLearningPath,
   doStuff
 } from '../actions';
 
@@ -65,7 +66,7 @@ const mapStateToProps = state => Object.assign({}, state, {
 const mapDispatchToProps = {
   updateTitle: updateLearningPathTitle,
   updateDescription: updateLearningPathDescription,
-  saveAction: doStuff
+  saveAction: lp => updateLearningPath(lp.id, lp)
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditLearningPath);
