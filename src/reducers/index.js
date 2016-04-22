@@ -25,7 +25,7 @@ const rootReducers = combineReducers({
   learningPathsTotalCount,
   privateLearningPathsSortBy,
   messages,
-  routing: routeReducer,
+  routing: routerReducer,
   form: formReducer
 });
 

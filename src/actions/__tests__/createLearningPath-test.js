@@ -59,7 +59,7 @@ test('actions/createLearningPath', t => {
             {id: 56, seqNo: 2, isResponse: true}
           ]
         }),
-        routerActions.push({ pathname: `/learningpaths/${pathId}` })
+        routerActions.push({ pathname: `/learningpaths/${pathId}/edit` })
       ]);
 
       t.doesNotThrow(() => postPathApi.done());
