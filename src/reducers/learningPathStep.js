@@ -58,7 +58,6 @@ export default handleActions({
 
   CREATE_EMPTY_LEARNING_PATH_STEP: {
     next() {
-      console.log("createing learning path step");
       return {
         title: [],
         description: [],

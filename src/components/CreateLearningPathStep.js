@@ -1,14 +1,17 @@
 import { connect } from 'react-redux';
 import get from 'lodash/get';
-import { createLearningPath } from '../actions';
-import { EditLearningPathStep, mapStateToProps,  mapDispatchToProps} from './EditLearningPathStep';
+import assign from 'lodash/assign';
+import { createLearningPathStep } from '../actions';
+import { EditLearningPathStep, mapStateToProps, mapDispatchToProps} from './EditLearningPathStep/index.js';
 
-const mapDispatch = Object.assign({}, mapDispatchToProps, {
-  saveAction: (learningPathId, lps) => createLearningPathStep(learningPathId, lps.id, lps)
+const _mapStateToProps = state => assign({}, mapStateToProps, {
+  step: get(state, 'learningPathStep', {}),
+  learningPathId: ''
 });
 
-const mapStateToPropss = Object.assign({}, mapStateToProps, {
-  step: get(state, 'learningPathStep', {})
+const _mapDispatchToProps = assign({}, mapDispatchToProps, {
+  saveAction: (learningPathId, lps) => createLearningPathStep(lps)
 });
 
-export default connect(mapStateToPropss, mapDispatch)(EditLearningPathStep);
+export default connect(_mapStateToProps, _mapDispatchToProps)(EditLearningPathStep);
+

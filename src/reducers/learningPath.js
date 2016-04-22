@@ -35,17 +35,11 @@ export default handleActions({
     throw(state) { return state; }
   },
   CREATE_LEARNING_PATH_STEP: {
-    next(state) {
-      console.log("createing learning path step");
+    next(state, action) {
       let nextState = cloneDeep(state);
-      nextState.learningsteps.push({
-        seqNo: nextState.learningsteps.length + 1,
-        title: [],
-        description: [],
-        embedContent: [],
-        type: '',
-        license: ''
-      });
+      nextState.learningsteps.push(Object.assign({}, action.payload, {
+        seqNo: nextState.learningsteps.length + 1
+      }));
 
       return nextState;
     },

@@ -1,7 +1,7 @@
 import { setLearningPathStep, applicationError } from '.';
 import { fetchPathStep } from '../sources/learningpaths';
 import get from 'lodash/get';
-import {createLearningPathStep} from "./";
+import {createLearningPathStep} from './';
 
 export default function fetchLearningPathStep (pathId, stepId) {
   return (dispatch, getState) => {
@@ -19,12 +19,4 @@ export default function fetchLearningPathStep (pathId, stepId) {
     .then(step => dispatch(setLearningPathStep(step)))
     .catch(err => dispatch(applicationError(err)));
   };
-}
-
-export function emptyStep(pathId) {
-  console.log("PAPJAPD " + pathId);
-  return (dispatch, getState) => {
-    console.log("alksjdflkasdfj");
-    dispatch(createLearningPathStep);
-  }
 }

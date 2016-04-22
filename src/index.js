@@ -12,7 +12,6 @@ import actions from './actions';
 import { defaultSearchQuery, parseSearchQuery } from './middleware/searchQuery';
 import configureStore from './configureStore';
 import {defaultApiKey} from './sources/helpers';
-import {emptyStep} from './actions/fetchLearningPathStep';
 
 const store = configureStore({
   authenticated: false,
@@ -55,7 +54,7 @@ import {
   MyPage,
   LearningPath, LearningPathSummary, LearningPathStep,
   LearningPathSearch,
-  EditLearningPath, EditLearningPathStep,
+  EditLearningPath, EditLearningPathStep, CreateLearningPathStep,
   CreateLearningPath,
   ThisPageIntentionallyLeftBlank
 } from './components';
@@ -92,7 +91,7 @@ ReactDOM.render(
             <Route path='edit' component={requireAuthentication(EditLearningPath)}
                onEnter={ifAuthenticated(({params}) => fetchLearningPath(params.pathId))} />
             
-            <Route path='step/new' component={EditLearningPathStep} onEnter={() => ifAuthenticated(createEmptyLearningPathStep) }/>
+            <Route path='step/new' component={requireAuthentication(CreateLearningPathStep)} onEnter={ifAuthenticated(createEmptyLearningPathStep)}/>
             
             <Route path='step/:stepId/edit' component={EditLearningPathStep}
               onEnter={({params}) => fetchLearningPathStep(params.pathId, params.stepId)} />

@@ -83,6 +83,7 @@ EditLearningPathStep.propTypes = {
   updateType: PropTypes.func.isRequired,
   updateEmbedUrl: PropTypes.func.isRequired,
   updateDescription: PropTypes.func.isRequired,
+  learningPathId: PropTypes.string.isRequired,
   saveAction: PropTypes.func.isRequired
 };
 

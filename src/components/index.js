@@ -11,6 +11,7 @@ import LearningPathSearch from './LearningPathSearch';
 import EditLearningPath from './EditLearningPath';
 import EditLearningPathStep from './EditLearningPathStep';
 import CreateLearningPath from './CreateLearningPath';
+import CreateLearningPathStep from './CreateLearningPathStep';
 import ThisPageIntentionallyLeftBlank from './ThisPageIntentionallyLeftBlank';
 
 module.exports = {
@@ -22,5 +23,6 @@ module.exports = {
   EditLearningPath,
   EditLearningPathStep,
   CreateLearningPath,
+  CreateLearningPathStep,
   ThisPageIntentionallyLeftBlank
 };
