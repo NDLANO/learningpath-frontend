@@ -9,7 +9,10 @@ import polyglot from '../../i18n';
 import MediaTypeSelect from './MediaTypeSelect';
 import {
   updateLearningPathStep,
-  doStuff
+  updateLearningPathStepDescription,
+  updateLearningPathStepTitle,
+  updateLearningPathStepType,
+  updateLearningPathStepEmbedUrl
 } from '../../actions';
 
 
@@ -23,9 +26,8 @@ export function EditLearningPathStep (props, {lang}) {
     learningPathId,
     saveAction
   } = props;
-
   const isValid = () => true;
-  
+
   let saveLearningStep = () => saveAction(learningPathId, step);
   let title = titleI18N(step, lang) || '';
   let htmlDescription = descriptionI18N(step, lang) || '';
@@ -96,10 +98,10 @@ const mapStateToProps = state => assign({}, state, {
 
 const mapDispatchToProps = {
   // actions som endrer learningPathStep i redux store:
-  updateTitle: doStuff,
-  updateType: doStuff,
-  updateEmbedUrl: doStuff,
-  updateDescription: doStuff,
+  updateTitle: updateLearningPathStepTitle,
+  updateType: updateLearningPathStepType,
+  updateEmbedUrl: updateLearningPathStepEmbedUrl,
+  updateDescription: updateLearningPathStepDescription,
   // action til persistere learningPathStep
   saveAction: (learningPathId, lps) => updateLearningPathStep(learningPathId, lps.id, lps)
 };

@@ -36,6 +36,10 @@ export var clearMessage = createAction('CLEAR_MESSAGE');
 export var logoutAction = createAction('LOGOUT');
 export var setOembedObject = createAction('SET_OEMBED_OBJECT');
 export var setLearningPathStatus = createAction('UPDATE_LEARNING_PATH_STATUS');
+export var updateLearningPathStepDescription = createAction('UPDATE_LEARNING_PATH_STEP_DESCRIPTION');
+export var updateLearningPathStepTitle = createAction('UPDATE_LEARNING_PATH_STEP_TITLE');
+export var updateLearningPathStepEmbedUrl = createAction('UPDATE_LEARNING_PATH_STEP_EMBED_URL');
+export var updateLearningPathStepType= createAction('UPDATE_LEARNING_PATH_STEP_TYPE');
 export var doStuff = createAction('DO_STUFF');
 
 export {
@@ -89,5 +93,9 @@ export default {
   logoutAction,
   fetchOembed,
   setLearningPathStatus,
+  updateLearningPathStepDescription,
+  updateLearningPathStepTitle,
+  updateLearningPathStepEmbedUrl,
+  updateLearningPathStepType,
   doStuff
 };
