@@ -1,5 +1,5 @@
 import { setLearningPathStep, applicationError, addMessage, fetchLearningPath } from '.';
-import { createStep, updateStep } from '../sources/learningpaths';
+import { createStep } from '../sources/learningpaths';
 import { routerActions } from 'react-router-redux';
 import polyglot from '../i18n';
 
