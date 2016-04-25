@@ -17,8 +17,7 @@ test('component/LearningPathStepDescription', t => {
 
   let bodyNode = component.find('.learning-step_bd');
   t.equal(bodyNode.length, 1, 'one body node');
-  t.equal(bodyNode.render(), '<h1>Beskrivelse</h1>');
-  t.deepEqual(component.prop(''), {__html: '<h1>Beskrivelse</h1>'});
+  t.deepEqual(bodyNode.prop('dangerouslySetInnerHTML'), {__html: learningStep.description[0].description});
 
   t.end();
 });
