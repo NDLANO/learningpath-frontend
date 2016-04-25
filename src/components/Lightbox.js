@@ -4,18 +4,11 @@ import Icon from './Icon';
 export default class Lightbox extends React.Component {
   constructor(props) {
     super(props);
-    const { display } = props;
-    this.state = {
-      display: display
-    };
-
-    this._onCloseButtonClick = this._onCloseButtonClick.bind(this);
+    this.state = { display: props.display };
   }
 
   _onCloseButtonClick() {
-    const {onClose} = this.props;
-    this.setState({display: false});
-    onClose();
+    this.setState({display: false}, () => this.props.onClose());
   }
 
   componentWillReceiveProps (props) {
@@ -25,18 +18,24 @@ export default class Lightbox extends React.Component {
 
   render() {
     const {children} = this.props;
+    const onClose  = this._onCloseButtonClick.bind(this);
 
     return this.state.display ? <div className='lightbox'>
       <div className='lightbox_content'>
-        <a href="#" className='close-dialog' onClick={this._onCloseButtonClick}>
+        <a href="#" className='close-dialog' onClick={onClose}>
           <Icon.Clear />
         </a>
         {children}
       </div>
-    </div> : <div></div>;
+    </div> : null;
   }
 }
 
 Lightbox.propTypes = {
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func,
+  display: PropTypes.bool
+};
+
+Lightbox.defaultProps = {
+  display: true
 };
