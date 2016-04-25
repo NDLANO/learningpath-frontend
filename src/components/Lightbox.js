@@ -37,5 +37,6 @@ Lightbox.propTypes = {
 };
 
 Lightbox.defaultProps = {
-  display: true
+  display: true,
+  onClose: () => {}
 };
