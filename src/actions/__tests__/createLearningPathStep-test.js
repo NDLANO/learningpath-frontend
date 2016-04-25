@@ -34,7 +34,6 @@ test('actions/createLearningPathStep', t => {
   
   const store = mockStore({ authToken });
 
-  // { payload: { message: 'Lagret OK' }, type: 'ADD_MESSAGE' }, { payload: { args: [ { pathname: '/learningpaths/123/step/1234' } ], method: 'push' }, type: '@@router/CALL_HISTORY_METHOD' }
   store.dispatch( actions.createLearningPathStep(pathId, learningStep) )
     .then(() => {
       t.deepEqual(store.getActions(), [
