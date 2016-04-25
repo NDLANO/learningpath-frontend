@@ -33,7 +33,7 @@ const updatePath = (authToken, { pathId }, body) =>
   putLearningPath(authToken, { pathId }, body);
 
 const updateStep = (authToken, { pathId, stepId }, body) =>
-  putLearningPathStep(authToken, {pathId, stepId}, body)
+  putLearningPathStep(authToken, {pathId, stepId}, body);
 
 const createStep = (authToken, {pathId}, body) =>
   postLearningPathStep(authToken, { pathId }, body);
