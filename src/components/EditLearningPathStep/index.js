@@ -35,25 +35,10 @@ export function EditLearningPathStep (props, {lang}) {
   let embedSourceInput = '';
   if (step.type) {
     embedSourceInput =(
-      <div className='learningsource-form'>
-        <div>
-          <label className='mediatype-menu__label'>{polyglot.t('editPathStep.urlLabel')}</label>
-          <input type='url' value={embedContent}
-              onChange={(evt) => updateEmbedUrl({ url: evt.target.value, language: lang })}
-              placeholder={polyglot.t('editPathStep.urlPlaceholder')} />
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className='learning-path-step'>
-      <div className='learning-path_hd'>
+      <div className='learning-path_bd'>
         <h1 className='learing-path_title'>
           <TitleEditor lang={lang} value={title} onChange={updateTitle} />
         </h1>
-      </div>
-      <div className='learning-path_bd'>
         <div>
           <DescriptionHTMLEditor
             lang={lang}
@@ -62,10 +47,13 @@ export function EditLearningPathStep (props, {lang}) {
           />
         </div>
 
-        <div className='mediatype-wrapper'>
-          <MediaTypeSelect value={step.type} onChange={updateType} />
-
-          {embedSourceInput}
+        <div className='learningsource-form'>
+          <div>
+            <label className='mediatype-menu__label'>{polyglot.t('editPathStep.urlLabel')}</label>
+            <input type='url' value={embedContent}
+                onChange={(evt) => updateEmbedUrl({ url: evt.target.value, language: lang })}
+                placeholder={polyglot.t('editPathStep.urlPlaceholder')} />
+          </div>
         </div>
         <div>
           <button className='cta cta-link' onClick={saveLearningStep} disabled={ !isValid() }>
@@ -73,6 +61,17 @@ export function EditLearningPathStep (props, {lang}) {
           </button>
         </div>
       </div>
+    );
+  }
+
+  return (
+    <div className='learning-path-step'>
+      <div className='learning-path_hd'>
+        <div className='mediatype-wrapper'>
+          <MediaTypeSelect value={step.type} onChange={updateType} />
+        </div>
+      </div>
+    {embedSourceInput}
     </div>
   );
 }
