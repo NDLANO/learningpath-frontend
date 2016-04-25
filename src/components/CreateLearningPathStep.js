@@ -6,11 +6,11 @@ import { EditLearningPathStep, mapStateToProps, mapDispatchToProps} from './Edit
 
 const _mapStateToProps = state => assign({}, mapStateToProps, {
   step: get(state, 'learningPathStep', {}),
-  learningPathId: ''
+  learningPathId: '' + state.learningPath.id
 });
 
 const _mapDispatchToProps = assign({}, mapDispatchToProps, {
-  saveAction: (learningPathId, lps) => createLearningPathStep(lps)
+  saveAction: (learningPathId, lps) => createLearningPathStep(learningPathId, lps)
 });
 
 export default connect(_mapStateToProps, _mapDispatchToProps)(EditLearningPathStep);

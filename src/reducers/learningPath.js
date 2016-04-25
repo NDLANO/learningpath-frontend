@@ -34,17 +34,6 @@ export default handleActions({
     },
     throw(state) { return state; }
   },
-  CREATE_LEARNING_PATH_STEP: {
-    next(state, action) {
-      let nextState = cloneDeep(state);
-      nextState.learningsteps.push(Object.assign({}, action.payload, {
-        seqNo: nextState.learningsteps.length + 1
-      }));
-
-      return nextState;
-    },
-    throw(state) { return state; }
-  },
 
   UPDATE_LEARNING_PATH_STEP: {
     next(state, action) {
