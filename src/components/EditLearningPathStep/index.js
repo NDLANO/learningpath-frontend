@@ -36,9 +36,6 @@ export function EditLearningPathStep (props, {lang}) {
   if (step.type) {
     embedSourceInput =(
       <div className='learning-path_bd'>
-        <h1 className='learing-path_title'>
-          <TitleEditor lang={lang} value={title} onChange={updateTitle} />
-        </h1>
         <div>
           <DescriptionHTMLEditor
             lang={lang}
@@ -67,6 +64,9 @@ export function EditLearningPathStep (props, {lang}) {
   return (
     <div className='learning-path-step'>
       <div className='learning-path_hd'>
+        <h1 className='learing-path_title'>
+          <TitleEditor lang={lang} value={title} onChange={updateTitle} />
+        </h1>
         <div className='mediatype-wrapper'>
           <MediaTypeSelect value={step.type} onChange={updateType} />
         </div>
