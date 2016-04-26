@@ -3,7 +3,7 @@ import { formatPattern } from 'react-router/lib/PatternUtils';
 import defined from 'defined';
 
 /* #if development */
-const isUnitTest = typeof window === 'undefined';
+export const isUnitTest = (() => typeof window === 'undefined')();
 /* #end */
 
 const locationOrigin = (() => {
@@ -32,7 +32,7 @@ const apiBaseUrl = (() => {
 })();
 
 
-export { locationOrigin };
+export { locationOrigin, apiBaseUrl };
 
 export function apiResourceUrl (path) { return apiBaseUrl + path; }
 
