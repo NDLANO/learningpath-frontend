@@ -13,6 +13,7 @@ import checkValidSession from './checkValidSession.js';
 import timeoutMessage from './timeoutMessage.js';
 import deleteLearningPath from './deleteLearningPath';
 import fetchOembed from './fetchOembed';
+import validateOembed from './validateOembed';
 import updateLearningPathStatus from './updateLearningPath';
 import updateLearningPathStep from './updateLearningPathStep';
 import createLearningPathStep from './createLearningPathStep';
@@ -42,7 +43,7 @@ export var updateLearningPathStepEmbedUrl = createAction('UPDATE_LEARNING_PATH_S
 export var updateLearningPathStepType= createAction('UPDATE_LEARNING_PATH_STEP_TYPE');
 export var doStuff = createAction('DO_STUFF');
 export var createEmptyLearningPathStep = createAction('CREATE_EMPTY_LEARNING_PATH_STEP');
-
+export var setIsValidOembed = createAction('SET_IS_VALID_OEMBED');
 export {
   initializeSession,
   logout,
@@ -56,6 +57,7 @@ export {
   timeoutMessage,
   deleteLearningPath,
   fetchOembed,
+  validateOembed,
   updateLearningPathStatus,
   updateLearningPathStep,
   createLearningPathStep
@@ -95,11 +97,13 @@ export default {
   checkValidSession,
   logoutAction,
   fetchOembed,
+  validateOembed,
   setLearningPathStatus,
   createEmptyLearningPathStep,
   updateLearningPathStepDescription,
   updateLearningPathStepTitle,
   updateLearningPathStepEmbedUrl,
   updateLearningPathStepType,
+  setIsValidOembed,
   doStuff
 };

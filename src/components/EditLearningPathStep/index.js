@@ -12,7 +12,8 @@ import {
   updateLearningPathStepDescription,
   updateLearningPathStepTitle,
   updateLearningPathStepType,
-  updateLearningPathStepEmbedUrl
+  updateLearningPathStepEmbedUrl,
+  validateOembed
 } from '../../actions';
 
 export function EditLearningPathStep (props, {lang}) {
@@ -27,6 +28,12 @@ export function EditLearningPathStep (props, {lang}) {
   } = props;
   const isValid = () => true;
 
+  const isOembedValid = (evt) => {
+    console.log("GLGLGL");
+    console.log(props);
+    /*validateOembed*/
+  };
+
   let saveLearningStep = () => saveAction(learningPathId, step);
   let title = titleI18N(step, lang) || '';
   let htmlDescription = descriptionI18N(step, lang) || '';
@@ -38,7 +45,7 @@ export function EditLearningPathStep (props, {lang}) {
       <div className='learningsource-form'>
         <div>
           <label className='mediatype-menu__label'>{polyglot.t('editPathStep.urlLabel')}</label>
-          <input type='url' value={embedContent}
+          <input type='url' value={embedContent} onBlur={(evt) => isOembedValid(evt)}
               onChange={(evt) => updateEmbedUrl({ url: evt.target.value, language: lang })}
               placeholder={polyglot.t('editPathStep.urlPlaceholder')} />
         </div>
@@ -83,7 +90,7 @@ EditLearningPathStep.propTypes = {
   updateType: PropTypes.func.isRequired,
   updateEmbedUrl: PropTypes.func.isRequired,
   updateDescription: PropTypes.func.isRequired,
-  learningPathId: PropTypes.string.isRequired,
+  learningPathId: PropTypes.number.isRequired,
   saveAction: PropTypes.func.isRequired
 };
 
