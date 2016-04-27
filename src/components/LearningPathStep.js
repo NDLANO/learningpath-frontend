@@ -34,10 +34,18 @@ export class LearningPathStep extends React.Component {
     let url = oembedUrlI18N(step, lang);
 
     const ndlaIsSource = url != undefined ? ((/http:\/\/ndla.no/).test(url)) : false;
-    if (ndlaIsSource && ReactDOM.findDOMNode(this) != null){
-      if (ReactDOM.findDOMNode(this).children && !this.resizeIframeFunc){
+    if (ReactDOM.findDOMNode(this) != null){
+      if(!this.resizeIframeFunc){
         this.resizeIframeFunc = resizeIframe(ReactDOM.findDOMNode(this).children);
+      }
+
+      if (ndlaIsSource && ReactDOM.findDOMNode(this).children){
         window.addEventListener('message', this.resizeIframeFunc);
+      }
+      else {
+        if (this.resizeIframeFunc != undefined){
+          window.removeEventListener('message', this.resizeIframeFunc);
+        }
       }
     }
   }
