@@ -90,8 +90,8 @@ EditLearningPathStep.propTypes = {
   updateDescription: PropTypes.func.isRequired,
   learningPathId: PropTypes.number.isRequired,
   saveAction: PropTypes.func.isRequired,
-  oembedIsValid: PropTypes.bool.isRequired
-
+  oembedIsValid: PropTypes.bool.isRequired,
+  validateOembedUrl: PropTypes.func.isRequired
 };
 
 EditLearningPathStep.contextTypes = {

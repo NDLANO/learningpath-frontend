@@ -3,7 +3,7 @@ import { fetchOembedUrl } from '../sources/learningpaths';
 
 export default function validateOembed (url) {
   if (!url || url.length === 0){
-    return ((dispatch, getState) => {
+    return ((dispatch) => {
       dispatch(removeLearningPathStepEmbedContent());
       dispatch(setIsValidOembed(true));
     });
