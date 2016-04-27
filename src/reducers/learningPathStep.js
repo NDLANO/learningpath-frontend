@@ -55,6 +55,14 @@ export default handleActions({
     next: mergeI18nProperty('embedContent'),
     throw(state) { return state; }
   },
+  REMOVE_LEARNING_PATH_STEP_EMBED_CONTENT: {
+    next(state, action) {
+      let nextState = cloneDeep(state);
+      nextState.embedContent = [];
+      return nextState;
+    },
+    throw(state) { return state; }
+  },
 
   CREATE_EMPTY_LEARNING_PATH_STEP: {
     next() {

@@ -12,7 +12,8 @@ import {
   updateLearningPathStepDescription,
   updateLearningPathStepTitle,
   updateLearningPathStepType,
-  updateLearningPathStepEmbedUrl
+  updateLearningPathStepEmbedUrl,
+  validateOembed
 } from '../../actions';
 
 export function EditLearningPathStep (props, {lang}) {
@@ -23,9 +24,13 @@ export function EditLearningPathStep (props, {lang}) {
     updateEmbedUrl,
     updateDescription,
     learningPathId,
-    saveAction
+    validateOembedUrl,
+    saveAction,
+    oembedIsValid
   } = props;
   const isValid = () => true;
+
+  //const isOembedValid = isOembedValid === undefined ? true : step.isOembedValid;
 
   let saveLearningStep = () => saveAction(learningPathId, step);
   let title = titleI18N(step, lang) || '';
@@ -38,7 +43,7 @@ export function EditLearningPathStep (props, {lang}) {
       <div className='learningsource-form'>
         <div>
           <label className='mediatype-menu__label'>{polyglot.t('editPathStep.urlLabel')}</label>
-          <input type='url' value={embedContent}
+          <input type='url' value={embedContent} onBlur={() => validateOembedUrl(embedContent)}
               onChange={(evt) => updateEmbedUrl({ url: evt.target.value, language: lang })}
               placeholder={polyglot.t('editPathStep.urlPlaceholder')} />
         </div>
@@ -68,7 +73,7 @@ export function EditLearningPathStep (props, {lang}) {
           {embedSourceInput}
         </div>
         <div>
-          <button className='cta cta-link' onClick={saveLearningStep} disabled={ !isValid() }>
+          <button className='cta cta-link' onClick={saveLearningStep} disabled={ !isValid() || !oembedIsValid }>
             <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
           </button>
         </div>
@@ -83,8 +88,10 @@ EditLearningPathStep.propTypes = {
   updateType: PropTypes.func.isRequired,
   updateEmbedUrl: PropTypes.func.isRequired,
   updateDescription: PropTypes.func.isRequired,
-  learningPathId: PropTypes.string.isRequired,
-  saveAction: PropTypes.func.isRequired
+  learningPathId: PropTypes.number.isRequired,
+  saveAction: PropTypes.func.isRequired,
+  oembedIsValid: PropTypes.bool.isRequired
+
 };
 
 EditLearningPathStep.contextTypes = {
@@ -94,6 +101,7 @@ EditLearningPathStep.contextTypes = {
 export const mapStateToProps = state => assign({}, state, {
   step: state.learningPathStep,
   learningPathId: state.learningPath.id
+
 });
 
 export const mapDispatchToProps = {
@@ -103,7 +111,9 @@ export const mapDispatchToProps = {
   updateEmbedUrl: updateLearningPathStepEmbedUrl,
   updateDescription: updateLearningPathStepDescription,
   // action til persistere learningPathStep
-  saveAction: (learningPathId, lps) => updateLearningPathStep(learningPathId, lps.id, lps)
+  saveAction: (learningPathId, lps) => updateLearningPathStep(learningPathId, lps.id, lps),
+
+  validateOembedUrl: (embedContent) => validateOembed(embedContent)
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditLearningPathStep);
