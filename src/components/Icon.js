@@ -34,7 +34,7 @@ Icon.Delete = props => (<Icon {...props} className={'icon--delete ' + props.clas
 Icon.Input = props => (<Icon {...props} className={'icon--input ' + props.className} svgDefId='icon-input' />);
 Icon.Bold = props => (<Icon {...props} className={'icon--format-bold ' + props.className} svgDefId='icon-format_bold' />);
 Icon.Italic = props => (<Icon {...props} className={'icon--format-italic ' + props.className} svgDefId='icon-format_italic' />);
-Icon.Underline = props => (<Icon {...props} className={'icon--delete ' + props.className} svgDefId='icon-format_underline' />);
+Icon.Underline = props => (<Icon {...props} className={'icon--format-underlined ' + props.className} svgDefId='icon-format_underlined' />);
 Icon.Bulleted = props => (<Icon {...props} className={'icon--format-list-bulleted ' + props.className} svgDefId='icon-format_list_bulleted' />);
 Icon.Numbered = props => (<Icon {...props} className={'icon--format-list-numbered ' + props.className} svgDefId='icon-format_list_numbered' />);
 
