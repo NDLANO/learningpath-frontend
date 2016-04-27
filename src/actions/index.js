@@ -44,6 +44,8 @@ export var updateLearningPathStepType= createAction('UPDATE_LEARNING_PATH_STEP_T
 export var doStuff = createAction('DO_STUFF');
 export var createEmptyLearningPathStep = createAction('CREATE_EMPTY_LEARNING_PATH_STEP');
 export var setIsValidOembed = createAction('SET_IS_VALID_OEMBED');
+export var removeLearningPathStepEmbedContent = createAction('REMOVE_LEARNING_PATH_STEP_EMBED_CONTENT');
+
 export {
   initializeSession,
   logout,
@@ -105,5 +107,6 @@ export default {
   updateLearningPathStepEmbedUrl,
   updateLearningPathStepType,
   setIsValidOembed,
+  removeLearningPathStepEmbedContent,
   doStuff
 };

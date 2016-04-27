@@ -55,10 +55,10 @@ export default handleActions({
     next: mergeI18nProperty('embedContent'),
     throw(state) { return state; }
   },
-  SET_IS_VALID_OEMBED: {
-    next (state, action) {
+  REMOVE_LEARNING_PATH_STEP_EMBED_CONTENT: {
+    next(state, action) {
       let nextState = cloneDeep(state);
-      nextState.isOembedValid = action.payload;
+      nextState.embedContent = [];
       return nextState;
     },
     throw(state) { return state; }
