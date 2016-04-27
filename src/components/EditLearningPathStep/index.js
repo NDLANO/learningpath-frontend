@@ -16,70 +16,80 @@ import {
   validateOembed
 } from '../../actions';
 
-export function EditLearningPathStep (props, {lang}) {
-  const {
-    step,
-    updateTitle,
-    updateType,
-    updateEmbedUrl,
-    updateDescription,
-    learningPathId,
-    validateOembedUrl,
-    saveAction,
-    oembedIsValid
-  } = props;
-  const isValid = () => true;
+export class EditLearningPathStep extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    return true;
+    return nextProps !== this.props;
+  }
 
-  //const isOembedValid = isOembedValid === undefined ? true : step.isOembedValid;
+  render() {
+    const {
+      step,
+      updateTitle,
+      updateType,
+      updateEmbedUrl,
+      updateDescription,
+      learningPathId,
+      validateOembedUrl,
+      saveAction,
+      oembedIsValid
+    } = this.props;
+    const isValid = () => true;
+    const {lang} = this.context;
 
-  let saveLearningStep = () => saveAction(learningPathId, step);
-  let title = titleI18N(step, lang) || '';
-  let htmlDescription = descriptionI18N(step, lang) || '';
-  let embedContent = embedUrlI18N(step, lang);
+    //const isOembedValid = isOembedValid === undefined ? true : step.isOembedValid;
 
-  let embedSourceInput = '';
-  if (step.type) {
-    embedSourceInput =(
-      <div className='learningsource-form'>
-        <div>
-          <label className='mediatype-menu__label'>{polyglot.t('editPathStep.urlLabel')}</label>
-          <input type='url' value={embedContent} onBlur={() => validateOembedUrl(embedContent)}
-              onChange={(evt) => updateEmbedUrl({ url: evt.target.value, language: lang })}
-              placeholder={polyglot.t('editPathStep.urlPlaceholder')} />
+    let saveLearningStep = () => saveAction(learningPathId, step);
+
+    let title = titleI18N(step, lang) || '';
+    let htmlDescription = descriptionI18N(step, lang) || '';
+    let embedContent = embedUrlI18N(step, lang);
+
+    let embedSourceInput = '';
+    if (step.type) {
+      embedSourceInput = (
+        <div className='learningsource-form'>
+          <div>
+            <label className='mediatype-menu__label'>{polyglot.t('editPathStep.urlLabel')}</label>
+            <input type='url' value={embedContent} onBlur={() => validateOembedUrl(embedContent)}
+                   onChange={(evt) => updateEmbedUrl({ url: evt.target.value, language: lang })}
+                   placeholder={polyglot.t('editPathStep.urlPlaceholder')}/>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className='learning-path-step'>
+        <div className='learning-path_hd'>
+          <h1 className='learing-path_title'>
+            <TitleEditor lang={lang} value={title} onChange={updateTitle}/>
+          </h1>
+        </div>
+        <div className='learning-path_bd'>
+          <div>
+            <DescriptionHTMLEditor
+              lang={lang}
+              value={htmlDescription}
+              onChange={updateDescription}
+            />
+          </div>
+
+
+          <div className='mediatype-wrapper'>
+            <MediaTypeSelect value={step.type} onChange={updateType}/>
+
+            {embedSourceInput}
+          </div>
+          <div>
+            <button className='cta cta-link' onClick={saveLearningStep} disabled={ !isValid() || !oembedIsValid }>
+              <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')}/>
+            </button>
+          </div>
         </div>
       </div>
     );
   }
-
-  return (
-    <div className='learning-path-step'>
-      <div className='learning-path_hd'>
-        <h1 className='learing-path_title'>
-          <TitleEditor lang={lang} value={title} onChange={updateTitle} />
-        </h1>
-      </div>
-      <div className='learning-path_bd'>
-        <div>
-          <DescriptionHTMLEditor
-            lang={lang}
-            value={htmlDescription}
-            onChange={updateDescription}
-          />
-        </div>
-
-        <div className='mediatype-wrapper'>
-          <MediaTypeSelect value={step.type} onChange={updateType} />
-
-          {embedSourceInput}
-        </div>
-        <div>
-          <button className='cta cta-link' onClick={saveLearningStep} disabled={ !isValid() || !oembedIsValid }>
-            <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
-          </button>
-        </div>
-      </div>
-    </div>
-  );
 }
 
 EditLearningPathStep.propTypes = {
