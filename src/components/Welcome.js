@@ -29,7 +29,7 @@ export default class Welcome extends React.Component {
 
           <Form to='/learningpaths' method='GET' className='search-form search-form--on-dark'>
             <input type='text' name='query' placeholder={polyglot.t('welcomePage.placeholder')} className='search-form_query' />
-            <input type='submit' className='search-form_btn button' value={polyglot.t('welcomePage.searchBtn')} />
+            <button type='submit' className='search-form_btn'>{polyglot.t('welcomePage.searchBtn')}</button>
           </Form>
 
           <a href='#feature' className='hero_link cta-link cta-link--negative'>{polyglot.t('welcomePage.explanationBtn')}</a>
