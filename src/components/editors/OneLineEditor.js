@@ -35,7 +35,7 @@ export default class OneLineEditor extends React.Component {
     }
 
     /* TODO implement this when Editor.handlePastedText lands in draft-js@latest */
-    this.handlePastedText = (text, html) => false;
+    this.handlePastedText = (text, html) => false; // eslint-disable-line no-unused-vars
   }
 
   updateEditorContentStateFromText(text) {

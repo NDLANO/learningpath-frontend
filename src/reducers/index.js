@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { routeReducer } from 'redux-simple-router';
+import { routerReducer } from 'react-router-redux';
 
 import authenticated from './authenticated';
 import authToken from './authToken';
@@ -10,6 +10,7 @@ import learningPaths from './learningPaths';
 import learningPathQuery from './learningPathQuery';
 import learningPathsTotalCount from './learningPathsTotalCount';
 import privateLearningPathsSortBy from './privateLearningPathsSortBy';
+import oembedIsValid from './oembedIsValid';
 import messages from './messages';
 
 const rootReducers = combineReducers({
@@ -23,7 +24,8 @@ const rootReducers = combineReducers({
   learningPathsTotalCount,
   privateLearningPathsSortBy,
   messages,
-  routing: routeReducer
+  oembedIsValid,
+  routing: routerReducer
 });
 
 export default rootReducers;

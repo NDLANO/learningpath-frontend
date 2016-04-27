@@ -34,22 +34,6 @@ export default handleActions({
     },
     throw(state) { return state; }
   },
-  CREATE_LEARNING_PATH_STEP: {
-    next(state) {
-      let nextState = cloneDeep(state);
-      nextState.learningsteps.push({
-        seqNo: nextState.learningsteps.length + 1,
-        title: [],
-        description: [],
-        embedUrl: [],
-        type: '',
-        license: ''
-      });
-
-      return nextState;
-    },
-    throw(state) { return state; }
-  },
 
   UPDATE_LEARNING_PATH_STEP: {
     next(state, action) {
@@ -82,4 +66,3 @@ export default handleActions({
   },
   LOGOUT: () => ({})
 }, {});
-

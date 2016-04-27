@@ -40,51 +40,6 @@ test('reducers/learningPath', (t) => {
   t.end();
 });
 
-test('reducers/learningPath create new step', (t) => {
-  let nextState = reducer({learningsteps: []}, { type: 'CREATE_LEARNING_PATH_STEP' });
-
-  t.deepEqual(nextState.learningsteps,
-    [{
-      seqNo: 1,
-      title: [],
-      description: [],
-      embedUrl: [],
-      type: '',
-      license: ''
-    }],
-    'add first');
- 
-  nextState = reducer(nextState, { type: 'CREATE_LEARNING_PATH_STEP' });
-
-  t.equal(nextState.learningsteps.length, 2, 'add second length');
-
-  t.deepEqual(nextState.learningsteps,
-    [{
-      seqNo: 1,
-      title: [],
-      description: [],
-      embedUrl: [],
-      type: '',
-      license: ''
-    }, {
-      seqNo: 2,
-      title: [],
-      description: [],
-      embedUrl: [],
-      type: '',
-      license: ''
-    }],
-    'add second');
-
-  t.deepEqual(
-    reducer({learningsteps: ['hello']},
-      { type: 'CREATE_LEARNING_PATH_STEP', payload: new Error('fail'), error: true }),
-    {learningsteps: ['hello']},
-    'ignore errors'
-  );
-  t.end();
-});
-
 test('reducers/learningPath update learning step', (t) => {
   let nextState = reducer({learningsteps: [
     { seqNo: 1, id: 12, license: 'any' },

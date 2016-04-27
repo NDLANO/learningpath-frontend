@@ -2,7 +2,6 @@ import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
-import payload403invalid from './payload403invalid';
 
 import actions from '..';
 
@@ -10,50 +9,71 @@ const middleware = [ thunk ];
 const mockStore = configureStore(middleware);
 
 const authToken = '123345';
-const pathId = 123;
 
-test('actions/fetchLearningPath', t => {
+test('actions/validiateOembed valid url', t => {
   const done = res => {
     t.end(res);
     nock.cleanAll();
   };
+  const url = 'https://www.youtube.com/watch?v=BTqu9iMiPIU';
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .get('/learningpaths/' + pathId)
-    .reply(200, {id: pathId});
+    .get('/oembed/?url=' + encodeURIComponent(url))
+    .reply(200, {type: 'introduction', title: 'sup'});
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.fetchLearningPath( pathId ) )
+  store.dispatch( actions.validateOembed(url) )
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.setLearningPath({id: pathId})
+        actions.setIsValidOembed(true)
       ]);
+
       t.doesNotThrow(() => apiMock.done());
+
       done();
     })
     .catch(done);
 });
 
-test('actions/fetchLearningPath access denied', (t) => {
+test('actions/validiateOembed invalid url', t => {
   const done = res => {
     t.end(res);
     nock.cleanAll();
   };
+  const url = 'thisIsAnInvalidUrl';
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .get('/learningpaths/' + pathId)
-    .reply(403, {message: 'Invalid'});
+    .get('/oembed/?url=' + url)
+    .reply(501, {type: 'introduction', title: 'sup'});
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.fetchLearningPath(pathId) )
+  store.dispatch( actions.validateOembed(url) )
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.applicationError(payload403invalid())
+        actions.setIsValidOembed(false)
       ]);
+
       t.doesNotThrow(() => apiMock.done());
+
       done();
     })
     .catch(done);
+});
+
+test('actions/validiateOembed', t => {
+  const done = res => {
+    t.end(res);
+  };
+
+  const store = mockStore({ authToken });
+
+  store.dispatch( actions.validateOembed('') );
+  t.deepEqual(store.getActions(), [
+    actions.removeLearningPathStepEmbedContent(),
+    actions.setIsValidOembed(true)
+  ]);
+
+  done();
 });

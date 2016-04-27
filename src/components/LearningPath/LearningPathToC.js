@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import defined from 'defined';
 import classNames from 'classnames';
 
-import { titleI18N } from '../util/i18nFieldFinder';
+import { titleI18N } from '../../util/i18nFieldFinder';
 
 export default function LearningPathToC ({learningPath, activePathname}, {lang}) {
   const base = `/learningpaths/${learningPath.id}`;
