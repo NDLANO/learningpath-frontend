@@ -1,7 +1,7 @@
 import React, {PropTypes } from 'react';
-import { reduxForm, Field, reset } from 'redux-form';
+import { reduxForm, reset } from 'redux-form';
 
-export const fields = ['title', 'description'];
+const fields = ['title', 'description'];
 
 export class CreateLearningPath extends React.Component {
   render() {
@@ -34,6 +34,7 @@ export class CreateLearningPath extends React.Component {
 }
 
 CreateLearningPath.propTypes = {
+  fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired
 };

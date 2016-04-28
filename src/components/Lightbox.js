@@ -7,8 +7,9 @@ export default class Lightbox extends React.Component {
     this.state = { display: props.display };
   }
 
-  _onCloseButtonClick() {
+  _onCloseButtonClick(evt) {
     this.setState({display: false}, () => this.props.onClose());
+    evt.preventDefault();
   }
 
   componentWillReceiveProps (props) {
