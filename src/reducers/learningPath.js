@@ -64,5 +64,18 @@ export default handleActions({
     next: mergeI18nProperty('description'),
     throw(state) { return state; }
   },
+
+  SORT_LEARNING_PATH_STEPS: {
+    next(state, action) {
+      let nextState = cloneDeep(state);
+      action.payload.reduce((prev, curr, currentIndex, array) => curr.seqNo = currentIndex)
+      nextState.learningsteps = action.payload;
+
+      return nextState
+    },
+
+    throw(state) { return state; }
+  },
+
   LOGOUT: () => ({})
 }, {});

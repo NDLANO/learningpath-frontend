@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 
 export function LearningPathSummary ({learningPath}, {lang}) {
@@ -17,6 +16,7 @@ export function LearningPathSummary ({learningPath}, {lang}) {
         <Link to={editPathTarget}>Edit</Link>
       </div>
     </div>
+
   );
 }
 

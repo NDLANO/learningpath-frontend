@@ -7,6 +7,7 @@ import TitleEditor from './editors/TitleEditor';
 import DescriptionEditor from './editors/DescriptionEditor';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 import polyglot from '../i18n';
+import Container from './SortableTest/Container';
 
 import {
   updateLearningPathTitle,
@@ -32,7 +33,9 @@ export function EditLearningPath (props, {lang}) {
       <TitleEditor value={titleText} onChange={updateTitle} lang={lang} />
     </h2>
     <DescriptionEditor value={descriptionText} onChange={updateDescription} lang={lang} />
-
+    <div>
+      <Container />
+    </div>
     <button className='cta cta-link' onClick={saveLearningPath}>
       <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
     </button>
