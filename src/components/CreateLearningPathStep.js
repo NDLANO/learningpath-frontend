@@ -6,7 +6,7 @@ import { EditLearningPathStep, mapStateToProps, mapDispatchToProps} from './Edit
 
 const _mapStateToProps = state => assign({}, mapStateToProps, {
   step: get(state, 'learningPathStep', {}),
-  learningPathId: '' + state.learningPath.id
+  learningPathId: state.learningPath.id
 });
 
 const _mapDispatchToProps = assign({}, mapDispatchToProps, {
