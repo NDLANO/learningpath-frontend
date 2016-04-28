@@ -17,6 +17,7 @@ import validateOembed from './validateOembed';
 import updateLearningPathStatus from './updateLearningPath';
 import updateLearningPathStep from './updateLearningPathStep';
 import createLearningPathStep from './createLearningPathStep';
+import updateStepSequenceNumber from './updateStepSequenceNumber';
 
 export var applicationError = createAction('APPLICATION_ERROR');
 export var setAuthenticated = createAction('SET_AUTHENTICATED');
@@ -62,7 +63,8 @@ export {
   validateOembed,
   updateLearningPathStatus,
   updateLearningPathStep,
-  createLearningPathStep
+  createLearningPathStep,
+  updateStepSequenceNumber
 
 };
 
@@ -109,5 +111,6 @@ export default {
   setIsValidOembed,
   removeLearningPathStepEmbedContent,
   sortLearningPathSteps,
+  updateStepSequenceNumber,
   doStuff
 };

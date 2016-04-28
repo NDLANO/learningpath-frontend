@@ -1,8 +1,14 @@
+import { connect } from 'react-redux';
+
 import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import ItemTypes from './ItemTypes';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
+import get from 'lodash/get';
+import {
+  updateStepSequenceNumber
+} from '../../actions';
 
 const style = {
   border: '1px dashed gray',
@@ -16,84 +22,79 @@ const cardSource = {
   beginDrag(props) {
     return {
       id: props.id,
-      index: props.index
+      originalIndex: props.findCard(props.id, props.cards).index
     };
-  }
-};
-const cardTarget = {
-  drop(props, monitor, component) {
-    console.log(monitor.didDrop())
   },
 
-  hover(props, monitor, component) {
-    const dragIndex = monitor.getItem().index;
-    const hoverIndex = props.index;
-    //console.log(monitor.didDrop());
-    // Don't replace items with themselves
-    if (dragIndex === hoverIndex) {
-      return;
+  endDrag(props, monitor) {
+    const { id: droppedId, originalIndex } = monitor.getItem();
+    const didDrop = monitor.didDrop();
+    if (!didDrop) {
+      props.moveCard(droppedId, originalIndex, props.cards);
     }
+    else{
 
-    // Determine rectangle on screen
-    const hoverBoundingRect = findDOMNode(component).getBoundingClientRect();
-
-    // Get vertical middle
-    const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-
-    // Determine mouse position
-    const clientOffset = monitor.getClientOffset();
-
-    // Get pixels to the top
-    const hoverClientY = clientOffset.y - hoverBoundingRect.top;
-
-    // Only perform the move when the mouse has crossed half of the items height
-    // When dragging downwards, only move when the cursor is below 50%
-    // When dragging upwards, only move when the cursor is above 50%
-
-    // Dragging downwards
-    if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-      return;
+      const cards = props.cards
+      const newIndex = props.findCard(props.id, props.cards).index
+      console.log(cards)
+      if(newIndex === originalIndex){
+        return;
+      }
+      if (newIndex === (cards.length - 1)){
+        props.updateSeqNo(props.pathId, props.id, cards[newIndex - 1].seqNo);
+      }
+      else if (newIndex === 0){
+        props.updateSeqNo(props.pathId, props.id, cards[newIndex + 1].seqNo);
+      }
+      else if (newIndex > 0 && newIndex < (cards.length - 1)){
+        props.updateSeqNo(props.pathId, props.id, cards[newIndex - 1].seqNo);
+      }
     }
-
-    // Dragging upwards
-    if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-      return;
-    }
-
-    // Time to actually perform the action
-    props.moveCard(dragIndex, hoverIndex, props.cards);
-
-    // Note: we're mutating the monitor item here!
-    // Generally it's better to avoid mutations,
-    // but it's good here for the sake of performance
-    // to avoid expensive index searches.
-    monitor.getItem().index = hoverIndex;
   }
 };
 
+const cardTarget = {
+  canDrop() {
+    return false;
+  },
 
+  hover(props, monitor) {
+    const { id: draggedId } = monitor.getItem();
+    const { id: overId } = props;
 
-class Card extends Component{
+    if (draggedId !== overId) {
+      const { index: overIndex } = props.findCard(overId,props.cards);
+      props.moveCard(draggedId, overIndex, props.cards);
+    }
+  }
+};
+
+class Card extends Component {
+
   render() {
-    const { text, isDragging, connectDropTarget, connectDragSource } = this.props;
+    const { text, isDragging, connectDragSource, connectDropTarget } = this.props;
     const opacity = isDragging ? 0 : 1;
-
-    return connectDragSource(
-      <li className='step-nav_item'>
-        { connectDropTarget(
-          <a className='step-nav_link' style={{ opacity }}>
-            {text}
-          </a>
-        )}
-      </li>
-    );
+    return connectDragSource(connectDropTarget(
+      <div style={{ style, opacity }}>
+        {text}
+      </div>
+    ));
   }
 }
 
+export const mapDispatchToProps = {
+  updateSeqNo: updateStepSequenceNumber
+};
+const mapStateToProps = state => Object.assign({}, state, {});
+
+
 export default flow(
-  DragSource(ItemTypes.LEARNING_PATH_STEP, cardSource, ((connect, monitor) => ({connectDragSource: connect.dragSource(), isDragging: monitor.isDragging()}))),
-  DropTarget(ItemTypes.LEARNING_PATH_STEP, cardTarget, (connect => ({connectDropTarget: connect.dropTarget()})))
+  DropTarget(ItemTypes.CARD, cardTarget, connect => ({connectDropTarget: connect.dropTarget()})),
+  DragSource(ItemTypes.CARD, cardSource, (connect, monitor) => ({connectDragSource: connect.dragSource(),isDragging: monitor.isDragging()})),
+  connect(mapStateToProps, mapDispatchToProps)
 )(Card);
+
+
 Card.propTypes = {
   index: PropTypes.number.isRequired,
   id: PropTypes.any.isRequired,
