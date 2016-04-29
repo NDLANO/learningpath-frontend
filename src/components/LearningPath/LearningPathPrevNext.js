@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
 
-import { titleI18N } from '../util/i18nFieldFinder';
+import { titleI18N } from '../../util/i18nFieldFinder';
 
 export function LearningPathPrevNext ({learningPath, learningsteps, nextUrl, prevUrl}, {lang}) {
 
