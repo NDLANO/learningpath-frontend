@@ -2,11 +2,11 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import get from 'lodash/get';
 
-import { titleI18N } from '../util/i18nFieldFinder';
-import formatDate from '../util/formatDate';
-import formatDuration from '../util/formatDuration';
+import { titleI18N } from '../../util/i18nFieldFinder';
+import formatDate from '../../util/formatDate';
+import formatDuration from '../../util/formatDuration';
 
-import LabeledIcon from './LabeledIcon';
+import LabeledIcon from '../LabeledIcon';
 
 
 export default function LearningPathGeneralInfo ({learningPath}, {lang}) {
@@ -28,9 +28,6 @@ export default function LearningPathGeneralInfo ({learningPath}, {lang}) {
 
 LearningPathGeneralInfo.propTypes = {
   learningPath: PropTypes.object.isRequired
-};
-
-LearningPathGeneralInfo.defaultProps = {
 };
 
 LearningPathGeneralInfo.contextTypes = {

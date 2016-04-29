@@ -8,7 +8,6 @@ import isEmpty from 'lodash/isEmpty';
 
 import es6promise from 'es6-promise';
 es6promise.polyfill();
-
 import actions from './actions';
 import { defaultSearchQuery, parseSearchQuery } from './middleware/searchQuery';
 import configureStore from './configureStore';
@@ -36,7 +35,8 @@ const {
   fetchLearningPathStep,
   changeLearningPathQuery,
   createEmptyLearningPath,
-  checkValidSession
+  checkValidSession,
+  createEmptyLearningPathStep
 } = bindActionCreators(actions, store.dispatch);
 
 function ifAuthenticated (cb) {
@@ -54,7 +54,7 @@ import {
   MyPage,
   LearningPath, LearningPathSummary, LearningPathStep,
   LearningPathSearch,
-  EditLearningPath,
+  EditLearningPath, EditLearningPathStep, CreateLearningPathStep,
   CreateLearningPath
 } from './components';
 import requireAuthentication from './components/requireAuthentication';
@@ -75,9 +75,6 @@ ReactDOM.render(
           <Route path='learningpaths/new' component={requireAuthentication(CreateLearningPath)}
             onEnter={ifAuthenticated(createEmptyLearningPath)}/>
 
-          <Route path='learningpaths/:pathId/edit' component={requireAuthentication(EditLearningPath)}
-             onEnter={ifAuthenticated(({params}) => fetchLearningPath(params.pathId))} />
-
           <Route path='learningpaths' component={LearningPathSearch} onEnter={ctx => {
             let query = parseSearchQuery( ctx.location.query );
             if (isEmpty(query)) {
@@ -90,6 +87,13 @@ ReactDOM.render(
           <Route path='learningpaths/:pathId' component={LearningPath}
             onEnter={({params}) => fetchLearningPath(params.pathId)}>
             <IndexRoute component={LearningPathSummary} />
+            <Route path='edit' component={requireAuthentication(EditLearningPath)}
+               onEnter={ifAuthenticated(({params}) => fetchLearningPath(params.pathId))} />
+            
+            <Route path='step/new' component={requireAuthentication(CreateLearningPathStep)} onEnter={ifAuthenticated(createEmptyLearningPathStep)}/>
+            
+            <Route path='step/:stepId/edit' component={requireAuthentication(EditLearningPathStep)}
+              onEnter={ifAuthenticated(({params}) => fetchLearningPathStep(params.pathId, params.stepId))} />
             <Route path='step/:stepId' component={LearningPathStep}
               onEnter={({params}) => fetchLearningPathStep(params.pathId, params.stepId)} />
           </Route>
