@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import ReactDOM from 'react-dom';
+import { oembedUrlI18N } from '../util/i18nFieldFinder';
 
 let resizeIframe = (iframes) => {
   return (evt) => {
@@ -29,11 +30,9 @@ export default class Oembed extends React.Component {
     if ( !ReactDOM.findDOMNode(this) ) {
       return;
     }
-    let {step} = props;
-    let {lang} = this.context;
-    let url = oembedUrlI18N(step, lang);
+    const oembedContent = props.oembedContent;
+    const ndlaIsSource = oembedContent.url != undefined ? ((/http:\/\/ndla.no/).test(oembedContent.url)) : false;
 
-    const ndlaIsSource = url != undefined ? ((/http:\/\/ndla.no/).test(url)) : false;
     if(!this.resizeIframeFunc){
       this.resizeIframeFunc = resizeIframe(ReactDOM.findDOMNode(this).children);
     }
