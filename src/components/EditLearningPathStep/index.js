@@ -30,12 +30,11 @@ export function EditLearningPathStep (props, {lang}) {
   } = props;
   const isValid = () => true;
 
-  //const isOembedValid = isOembedValid === undefined ? true : step.isOembedValid;
-
   let saveLearningStep = () => saveAction(learningPathId, step);
   let title = titleI18N(step, lang) || '';
   let htmlDescription = descriptionI18N(step, lang) || '';
   let embedContent = oembedUrlI18N(step, lang);
+  let embedIframe = oembedI18N(step, lang);
 
   let embedSourceInput = '';
   if (step.type) {
