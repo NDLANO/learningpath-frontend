@@ -83,7 +83,7 @@ export default class DescriptionHTMLEditor extends React.Component {
     this.focus = () => this.refs.editor.focus();
     this.blur = () => this.refs.editor.blur();
     this.onChange = editorState => this.setState({editorState});
-    this.onSubmit = () => {
+    this.onDone = () => {
       this.blur();
       let contentState = this.state.editorState.getCurrentContent();
       onChange({
@@ -173,7 +173,7 @@ export default class DescriptionHTMLEditor extends React.Component {
             spellCheck={true}
           />
         </div>
-        <button className='un-button' onClick={this.onSubmit}>
+        <button className='un-button' onClick={this.onDone}>
           <Icon.Check className='icon--l' />
         </button>
       </div>

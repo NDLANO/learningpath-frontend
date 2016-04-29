@@ -19,4 +19,3 @@ export default function fetchLearningPathStep (pathId, stepId) {
     .catch(err => dispatch(applicationError(err)));
   };
 }
-

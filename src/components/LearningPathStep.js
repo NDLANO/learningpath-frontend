@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { oembedI18N, oembedUrlI18N } from '../util/i18nFieldFinder';
-import classNames from 'classnames';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
+import { Link } from 'react-router';
+import classNames from 'classnames';
+import { oembedI18N, oembedUrlI18N } from '../util/i18nFieldFinder';
 
 let resizeIframe = (iframes) => {
   return (evt) => {
@@ -25,6 +26,8 @@ let resizeIframe = (iframes) => {
 };
 
 
+const isNDLASource = (url) => /http:\/\/ndla.no/.test(url);
+
 export class LearningPathStep extends React.Component {
 
   checkIframe (props) {
@@ -32,8 +35,7 @@ export class LearningPathStep extends React.Component {
     let {lang} = this.context;
     let url = oembedUrlI18N(step, lang);
 
-    const ndlaIsSource = url != undefined ? ((/http:\/\/ndla.no/).test(url)) : false;
-    if (ndlaIsSource && ReactDOM.findDOMNode(this) != null){
+    if (isNDLASource(url) && ReactDOM.findDOMNode(this) != null){
       if (ReactDOM.findDOMNode(this).children){
         let resizeIframeFunc = resizeIframe(ReactDOM.findDOMNode(this).children);
         window.addEventListener('message', resizeIframeFunc);
@@ -53,24 +55,29 @@ export class LearningPathStep extends React.Component {
     window.removeEventListener('message', resizeIframeFunc);
   }
 
-  render (){
-    let {step} = this.props;
+  render () {
+    let {step, path} = this.props;
     let {lang} = this.context;
     let iframe = oembedI18N(step, lang);
     let url = oembedUrlI18N(step, lang);
-    const ndlaIsSource = url != undefined ? ((/http:\/\/ndla.no/).test(url)) : false;
 
-    const divClassname = (ndlaIsSource) => classNames({
+    const divClassNames = classNames({
       'learning-step': true,
-      'no-defined-height-width': ndlaIsSource === true
+      'no-defined-height-width': isNDLASource(url)
     });
+
+    let editStepTarget = `/learningpaths/${path.id}/step/${step.id}/edit`;
     return (
-      <div className={divClassname(ndlaIsSource)} dangerouslySetInnerHTML={{__html: iframe}}/>
+      <div>
+        <div className={divClassNames} dangerouslySetInnerHTML={{__html: iframe}}/>
+        <Link to={editStepTarget}>Edit</Link>
+      </div>
     );
   }
 }
 
 LearningPathStep.propTypes = {
+  path: PropTypes.object.isRequired,
   step: PropTypes.object.isRequired
 };
 
@@ -79,6 +86,7 @@ LearningPathStep.contextTypes = {
 };
 
 const mapStateToProps = (state) => Object.assign({}, state, {
+  path: state.learningPath,
   step: state.learningPathStep
 });
 
