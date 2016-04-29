@@ -4,11 +4,18 @@ import { connect } from 'react-redux';
 import LearningPathStepDescription from './LearningPathStepDescription';
 import Oembed from './Oembed';
 
-export function LearningPathStep(props) {
+import { titleI18N, descriptionI18N, oembedContentI18N } from '../util/i18nFieldFinder';
+
+export function LearningPathStep({learningPathStep}, {lang}) {
+
+  let stepTitle = titleI18N(learningPathStep, lang);
+  let stepDescription = descriptionI18N(learningPathStep, lang);
+  let oembedContent = oembedContentI18N(learningPathStep, lang);
+
   return (
     <div>
-      <LearningPathStepDescription {...props} />
-      <Oembed {...props} />
+      <LearningPathStepDescription stepTitle={stepTitle} stepDescription={stepDescription} />
+      <Oembed oembedContent={oembedContent} />
     </div>
   );
 }

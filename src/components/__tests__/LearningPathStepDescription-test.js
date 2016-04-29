@@ -7,8 +7,7 @@ import { learningStep } from './mockData';
 import { LearningPathStepDescription } from '../LearningPathStepDescription';
 
 test('component/LearningPathStepDescription', t => {
-  const component = shallow(<LearningPathStepDescription learningPathStep={learningStep} />,
-      {context: {lang:'nb'}});
+  const component = shallow(<LearningPathStepDescription stepTitle={learningStep.title[0].title} stepDescription={learningStep.description[0].description} />);
 
   let titleNode = component.find('.learning-step_title');
 

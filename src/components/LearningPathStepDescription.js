@@ -1,25 +1,22 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 
-
-export function LearningPathStepDescription ({learningPathStep}, {lang}) {
+export default function LearningPathStepDescription ({stepTitle, stepDescription}) {
   return (
     <div className='learning-step'>
       <div className='learning-step_hd'>
-        <h1 className='learning-step_title'>{titleI18N(learningPathStep, lang)}</h1>
+        <h1 className='learning-step_title'>{stepTitle}</h1>
       </div>
-      <div className='learning-step_bd' dangerouslySetInnerHTML={{__html: descriptionI18N(learningPathStep, lang)}}/>
+      <div className='learning-step_bd' dangerouslySetInnerHTML={{__html: stepDescription}}/>
     </div>
   );
 }
 
 LearningPathStepDescription.propTypes = {
-  learningPathStep: PropTypes.object.isRequired
+  stepTitle: PropTypes.string.isRequired,
+  stepDescription: PropTypes.string.isRequired
 };
 
-LearningPathStepDescription.contextTypes = {
-  lang: PropTypes.string.isRequired
+LearningPathStepDescription.defaultProps = {
+  stepTitle: '',
+  stepDescription: ''
 };
-
-export default connect(state => state)(LearningPathStepDescription);

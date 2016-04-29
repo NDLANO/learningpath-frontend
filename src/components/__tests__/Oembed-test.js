@@ -8,10 +8,10 @@ import { ndlaLearningStep } from './mockData';
 import { Oembed } from '../Oembed';
 
 test('component/Oembed', t => {
-  const component = shallow(<Oembed learningPathStep={learningStep} />,
-      {context: {lang:'nb'}});
-  const ndlaComponent = shallow(<Oembed learningPathStep={ndlaLearningStep} />,
-    {context: {lang:'nb'}});
+  let oembed = {url:learningStep.embedContent[0].url, html:learningStep.embedContent[0].html};
+  let ndlaOembed = {url:ndlaLearningStep.embedContent[0].url, html:ndlaLearningStep.embedContent[0].html};
+  const component = shallow(<Oembed oembedContent={oembed} />);
+  const ndlaComponent = shallow(<Oembed oembedContent={ndlaOembed} />);
 
   t.deepEqual(component.prop('dangerouslySetInnerHTML'), {__html: learningStep.embedContent[0].html});
   t.deepEqual(ndlaComponent.prop('dangerouslySetInnerHTML'), {__html: ndlaLearningStep.embedContent[0].html});

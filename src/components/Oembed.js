@@ -1,6 +1,4 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { oembedI18N, oembedUrlI18N} from '../util/i18nFieldFinder';
 import classNames from 'classnames';
 import ReactDOM from 'react-dom';
 
@@ -25,14 +23,10 @@ let resizeIframe = (iframes) => {
 };
 
 
-export class Oembed extends React.Component {
+export default class Oembed extends React.Component {
 
-  checkIframe (props) {
-    let {learningPathStep} = props;
-    let {lang} = this.context;
-    let url = oembedUrlI18N(learningPathStep, lang);
-
-    const ndlaIsSource = url != undefined ? ((/http:\/\/ndla.no/).test(url)) : false;
+  checkIframe ({oembedContent}) {
+    const ndlaIsSource = oembedContent.url != undefined ? ((/http:\/\/ndla.no/).test(oembedContent.url)) : false;
     if (ndlaIsSource && ReactDOM.findDOMNode(this) != null){
       if (ReactDOM.findDOMNode(this).children){
         let resizeIframeFunc = resizeIframe(ReactDOM.findDOMNode(this).children);
@@ -54,28 +48,19 @@ export class Oembed extends React.Component {
   }
 
   render (){
-    let {learningPathStep} = this.props;
-    let {lang} = this.context;
-    let iframe = oembedI18N(learningPathStep, lang);
-    let url = oembedUrlI18N(learningPathStep, lang);
-    const ndlaIsSource = url != undefined ? ((/http:\/\/ndla.no/).test(url)) : false;
+    let {oembedContent} = this.props;
+    const ndlaIsSource = oembedContent.url != undefined ? ((/http:\/\/ndla.no/).test(oembedContent.url)) : false;
 
     const divClassname = (ndlaIsSource) => classNames({
       'learning-step': true,
       'learning-step--without-dimensions': ndlaIsSource === true
     });
     return (
-      <div className={divClassname(ndlaIsSource)} dangerouslySetInnerHTML={{__html: iframe}}/>
+      <div className={divClassname(ndlaIsSource)} dangerouslySetInnerHTML={{__html: oembedContent.html}}/>
     );
   }
 }
 
 Oembed.propTypes = {
-  learningPathStep: PropTypes.object.isRequired
+  oembedContent: PropTypes.object.isRequired
 };
-
-Oembed.contextTypes = {
-  lang: PropTypes.string.isRequired
-};
-
-export default connect(state => state)(Oembed);
