@@ -147,7 +147,7 @@ const learningStep = {
   ],
   description: [
     {
-      description: 'Beskrivelse',
+      description: '<h1>Beskrivelse</h1>',
       language: 'nb'
     }
   ],
