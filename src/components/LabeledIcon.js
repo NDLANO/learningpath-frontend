@@ -31,4 +31,4 @@ export default LabeledIcon;
 
 LabeledIcon.defaultProps = {
   labelText: ''
-}
+};
