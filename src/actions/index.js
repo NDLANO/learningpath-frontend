@@ -106,5 +106,5 @@ export default {
   updateLearningPathStepEmbedUrl,
   updateLearningPathStepType,
   setIsValidOembed,
-  removeLearningPathStepEmbedContent,
+  removeLearningPathStepEmbedContent
 };

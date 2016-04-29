@@ -2,7 +2,7 @@ import test from 'tape';
 
 import reducer from '../learningPathStep';
 
-const payload = { id: '123' };
+const payload = {id: '123'};
 
 test('reducers/learningPathStep', (t) => {
   t.equal(
@@ -12,46 +12,46 @@ test('reducers/learningPathStep', (t) => {
   );
 
   t.deepEqual(
-    reducer(undefined, { type: 'SET_LEARNING_PATH_STEP', payload }),
+    reducer(undefined, {type: 'SET_LEARNING_PATH_STEP', payload}),
     {id: '123'},
     'set state'
   );
 
   t.deepEqual(
-    reducer({id: 'abc'}, { type: 'SET_LEARNING_PATH_STEP', payload }),
+    reducer({id: 'abc'}, {type: 'SET_LEARNING_PATH_STEP', payload}),
     {id: '123'},
     'change state'
   );
 
   t.deepEqual(
     reducer({id: 'abc'},
-      { type: 'DO_NOT_SET_LEARNING_PATH_STEP', payload }),
+      {type: 'DO_NOT_SET_LEARNING_PATH_STEP', payload}),
     {id: 'abc'},
     'non-actionable action type'
   );
 
   t.deepEqual(
     reducer({id: 'abc'},
-      { type: 'SET_LEARNING_PATH_STEP', payload: new Error('fail'), error: true }),
+      {type: 'SET_LEARNING_PATH_STEP', payload: new Error('fail'), error: true}),
     {id: 'abc'},
     'ignore errors'
   );
 
   t.deepEqual(
-    reducer(undefined, { type: 'SET_OEMBED_OBJECT', payload }),
+    reducer(undefined, {type: 'SET_OEMBED_OBJECT', payload}),
     {oembed: {id: '123'}},
     'set state'
   );
 
   t.deepEqual(
-    reducer({id: 'abc'}, { type: 'SET_OEMBED_OBJECT', payload }),
+    reducer({id: 'abc'}, {type: 'SET_OEMBED_OBJECT', payload}),
     {id: 'abc', oembed: {id: '123'}},
     'change state'
   );
 
   t.deepEqual(
     reducer({id: 'abc'},
-      { type: 'SET_OEMBED_OBJECT', payload: new Error('fail'), error: true}),
+      {type: 'SET_OEMBED_OBJECT', payload: new Error('fail'), error: true}),
     {id: 'abc'},
     'ignore errors'
   );
@@ -66,11 +66,11 @@ test('reducers/learningPathStep remove learning path step embed content', (t) =>
   t.deepEqual(nextState.embedContent, []);
 
   nextState = reducer({
-      embedContent: [
-        {html: 'http://links'},
-        {html: 'http://more_links'}
-      ]
-    },
+    embedContent: [
+      {html: 'http://links'},
+      {html: 'http://more_links'}
+    ]
+  },
     {type: 'REMOVE_LEARNING_PATH_STEP_EMBED_CONTENT'}
   );
 
@@ -83,10 +83,11 @@ test('reducers/learningPathStep remove learning path step embed content', (t) =>
 
 test('reducers/learningPathStep update embed url', t => {
   let nextState = reducer({
-      embedContent: [
-        {html: 'http://links', language: 'nb'},
-        {html: 'http://more_links', language: 'nn'}
-      ]},
+    embedContent: [
+      {html: 'http://links', language: 'nb'},
+      {html: 'http://more_links', language: 'nn'}
+    ]
+  },
     {type: 'UPDATE_LEARNING_PATH_STEP_EMBED_URL', payload: {html: 'http://lolcats', language: 'nb'}}
   );
 
@@ -153,10 +154,11 @@ test('reducers/learningPathStep update description', t => {
   ]);
 
   nextState = reducer({
-      description: [
-        {description: 'dette er en tittel', language: 'nb'},
-        {description: 'dette er ein tittel', language: 'nn'}
-      ]},
+    description: [
+      {description: 'dette er en tittel', language: 'nb'},
+      {description: 'dette er ein tittel', language: 'nn'}
+    ]
+  },
     {type: 'UPDATE_LEARNING_PATH_STEP_DESCRIPTION', payload: {description: 'dette er en ny tittel', language: 'nb'}}
   );
 

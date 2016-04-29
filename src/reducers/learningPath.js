@@ -4,7 +4,7 @@ import get from 'lodash/get';
 import assign from 'lodash/assign';
 import findIndex from 'lodash/findIndex';
 import assureSequenceOrder from '../util/assureSequenceOrder';
-import assignOrPushPropReducer from '../util/assignOrPushPropReducer'
+import assignOrPushPropReducer from '../util/assignOrPushPropReducer';
 
 export default handleActions({
   SET_LEARNING_PATH: {
