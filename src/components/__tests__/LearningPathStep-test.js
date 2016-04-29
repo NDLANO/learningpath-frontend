@@ -2,21 +2,32 @@ import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { learningStep } from './mockData';
-import { ndlaLearningStep } from './mockData';
+import { learningStep, ndlaLearningStep } from './mockData';
 
 import { LearningPathStep } from '../LearningPathStep';
 
+
+const path = { id: 123 };
+
 test('component/LearningPathStep', t => {
-  const component = shallow(<LearningPathStep step={learningStep} />,
+  const component = shallow(<LearningPathStep step={learningStep} path={path} />,
       {context: {lang:'nb'}});
-  const ndlaComponent = shallow(<LearningPathStep step={ndlaLearningStep} />,
+
+  const sourceContainer = component.find('.learning-step');
+  t.equal(sourceContainer.length, 1);
+
+  t.deepEqual(sourceContainer.prop('dangerouslySetInnerHTML'),
+      {__html: learningStep.embedContent[0].html});
+
+  t.end();
+});
+
+test('component/LearningPathStep with NDLA content', t => {
+  const component = shallow(<LearningPathStep step={ndlaLearningStep} path={path} />,
     {context: {lang:'nb'}});
 
-  t.deepEqual(component.prop('dangerouslySetInnerHTML'), {__html: learningStep.embedContent[0].html});
-  t.deepEqual(ndlaComponent.prop('dangerouslySetInnerHTML'), {__html: ndlaLearningStep.embedContent[0].html});
-  t.equal(ndlaComponent.prop('className'), 'learning-step no-defined-height-width');
-  t.equal(component.prop('className'), 'learning-step');
+  const sourceContainer = component.find('.learning-step');
+  t.ok(sourceContainer.is('.no-defined-height-width'));
 
   t.end();
 });
