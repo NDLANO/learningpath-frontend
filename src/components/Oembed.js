@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import ReactDOM from 'react-dom';
-import { oembedUrlI18N } from '../util/i18nFieldFinder';
 
 let resizeIframe = (iframes) => {
   return (evt) => {
