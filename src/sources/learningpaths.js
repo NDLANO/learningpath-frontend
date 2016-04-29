@@ -50,7 +50,7 @@ const updateStatus = (authToken, { pathId }, body) =>
 
 const learningPathsUrl = apiResourceUrl('/learningpaths');
 
-const updateSequenceNumber = (authToken, { pathId, stepId }, body) =>
+const updateSeqNo = (authToken, { pathId, stepId }, body) =>
   putSequenceNumber(authToken, { pathId, stepId }, body);
 
 const fetchPaths = (authToken, query) => {
@@ -84,5 +84,5 @@ export {
   updateStatus,
   createStep,
   updateStep,
-  updateSequenceNumber
+  updateSeqNo
 };

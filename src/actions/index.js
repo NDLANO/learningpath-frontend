@@ -47,6 +47,7 @@ export var createEmptyLearningPathStep = createAction('CREATE_EMPTY_LEARNING_PAT
 export var setIsValidOembed = createAction('SET_IS_VALID_OEMBED');
 export var removeLearningPathStepEmbedContent = createAction('REMOVE_LEARNING_PATH_STEP_EMBED_CONTENT');
 export var sortLearningPathSteps = createAction('SORT_LEARNING_PATH_STEPS');
+export var updateLearningPathStepSeqNo = createAction('UPDATE_LEARNING_PATH_STEP_SEQ_NO');
 export {
   initializeSession,
   logout,
@@ -112,5 +113,6 @@ export default {
   removeLearningPathStepEmbedContent,
   sortLearningPathSteps,
   updateStepSequenceNumber,
+  updateLearningPathStepSeqNo,
   doStuff
 };
