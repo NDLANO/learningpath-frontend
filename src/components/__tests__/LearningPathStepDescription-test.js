@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 
 import { learningStep } from './mockData';
 
-import { LearningPathStepDescription } from '../LearningPathStepDescription';
+import LearningPathStepDescription from '../LearningPathStepDescription';
 
 test('component/LearningPathStepDescription', t => {
   const component = shallow(<LearningPathStepDescription stepTitle={learningStep.title[0].title} stepDescription={learningStep.description[0].description} />);

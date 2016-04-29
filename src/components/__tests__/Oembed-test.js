@@ -5,7 +5,7 @@ import { shallow } from 'enzyme';
 import { learningStep } from './mockData';
 import { ndlaLearningStep } from './mockData';
 
-import { Oembed } from '../Oembed';
+import Oembed from '../Oembed';
 
 test('component/Oembed', t => {
   let oembed = {url:learningStep.embedContent[0].url, html:learningStep.embedContent[0].html};

@@ -9,7 +9,7 @@ export default function createLearningPath (learningPath) {
       dispatch(addMessage({message: polyglot.t('createLearningPath.createdMsg')}));
       dispatch(setLearningPath(lpath));
       dispatch(routerActions.push({
-        pathname: `/learningpaths/${lpath.id}`
+        pathname: `/learningpaths/${lpath.id}/edit`
       }));
     })
     .catch(err => dispatch(applicationError(err)));
