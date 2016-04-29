@@ -111,6 +111,10 @@ http://rackt.github.io/redux
 Flux Standard Action utlities for Redux
 https://github.com/acdlite/redux-actions
 
+**redux-form**
+A higher order component decorator for forms using Redux and React.
+https://redux-form.com/
+
 **redux-localstorage:**
 Store enhancer that syncs (a subset of) your redux store state to localstorage.
 https://github.com/elgerlambert/redux-localstorage#readme

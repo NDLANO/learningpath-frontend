@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
+import { reducer as formReducer } from 'redux-form';
 
 import authenticated from './authenticated';
 import authToken from './authToken';
@@ -25,7 +26,8 @@ const rootReducers = combineReducers({
   privateLearningPathsSortBy,
   messages,
   oembedIsValid,
-  routing: routerReducer
+  routing: routerReducer,
+  form: formReducer
 });
 
 export default rootReducers;
