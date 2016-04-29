@@ -28,3 +28,7 @@ LabeledIcon.Exit = props => (<LabeledIcon {...props} iconName='Exit' />);
 LabeledIcon.Apps = props => (<LabeledIcon {...props} iconName='Apps' />);
 
 export default LabeledIcon;
+
+LabeledIcon.defaultProps = {
+  labelText: ''
+};

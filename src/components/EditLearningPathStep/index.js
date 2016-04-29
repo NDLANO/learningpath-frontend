@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import assign from 'lodash/assign';
-import { titleI18N, descriptionI18N, embedUrlI18N, oembedI18N } from '../../util/i18nFieldFinder';
+import { titleI18N, descriptionI18N, oembedUrlI18N, oembedI18N } from '../../util/i18nFieldFinder';
 import LabeledIcon from '../LabeledIcon';
 import TitleEditor from '../editors/TitleEditor';
 import DescriptionHTMLEditor from '../editors/DescriptionHTMLEditor';
@@ -16,7 +16,7 @@ import {
   validateOembed
 } from '../../actions';
 
-export function EditLearningPathStep(props, {lang}) {
+export function EditLearningPathStep (props, {lang}) {
   const {
     step,
     updateTitle,
@@ -30,16 +30,16 @@ export function EditLearningPathStep(props, {lang}) {
   } = props;
   const isValid = () => true;
 
-  let saveLearningStep = () => saveAction(learningPathId, step);
+  //const isOembedValid = isOembedValid === undefined ? true : step.isOembedValid;
 
+  let saveLearningStep = () => saveAction(learningPathId, step);
   let title = titleI18N(step, lang) || '';
   let htmlDescription = descriptionI18N(step, lang) || '';
-  let embedContent = embedUrlI18N(step, lang);
-  let embedIframe = oembedI18N(step, lang);
+  let embedContent = oembedUrlI18N(step, lang);
 
   let embedSourceInput = '';
   if (step.type) {
-    embedSourceInput = (
+    embedSourceInput =(
       <div className='learningsource-form'>
         <div>
           <label className='mediatype-menu__label'>{polyglot.t('editPathStep.urlLabel')}</label>
@@ -55,7 +55,7 @@ export function EditLearningPathStep(props, {lang}) {
     <div className='learning-path-step'>
       <div className='learning-path_hd'>
         <h1 className='learing-path_title'>
-          <TitleEditor lang={lang} value={title} onChange={updateTitle}/>
+          <TitleEditor lang={lang} value={title} onChange={updateTitle} />
         </h1>
       </div>
       <div className='learning-path_bd'>
@@ -67,9 +67,8 @@ export function EditLearningPathStep(props, {lang}) {
           />
         </div>
 
-
         <div className='mediatype-wrapper'>
-          <MediaTypeSelect value={step.type} onChange={updateType}/>
+          <MediaTypeSelect value={step.type} onChange={updateType} />
 
           {embedIframe && oembedIsValid
            ? <div dangerouslySetInnerHTML={{__html: embedIframe}} />
@@ -80,7 +79,7 @@ export function EditLearningPathStep(props, {lang}) {
         </div>
         <div>
           <button className='cta cta-link' onClick={saveLearningStep} disabled={ !isValid() || !oembedIsValid }>
-            <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')}/>
+            <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
           </button>
         </div>
       </div>
