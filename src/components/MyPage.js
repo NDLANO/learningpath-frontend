@@ -46,7 +46,7 @@ export class MyPage extends React.Component {
             <LearningPathDropdown dispatch={dispatch} learningPath={lp}/>
           </div>
           <h3 className='tile_hd'>
-            <Link to={`/learningpaths/${lp.id}/edit`}>{title}</Link>
+            <Link to={`/learningpaths/${lp.id}`}>{title}</Link>
           </h3>
           <div className='tile_bd'>{description}</div>
           <div className='tile_ft'>
