@@ -11,8 +11,7 @@ import polyglot from '../i18n';
 import {
   updateLearningPathTitle,
   updateLearningPathDescription,
-  updateLearningPath,
-  doStuff
+  updateLearningPath
 } from '../actions';
 
 export function EditLearningPath (props, {lang}) {

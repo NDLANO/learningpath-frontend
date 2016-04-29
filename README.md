@@ -221,6 +221,10 @@ https://github.com/substack/faucet
 A human-friendly standard for Flux action objects.
 https://www.npmjs.com/package/flux-standard-action
 
+**jsdom:**
+A JavaScript implementation of the DOM and HTML standards.
+https://github.com/tmpvar/jsdom#readme
+
 **nock:**
 HTTP Server mocking for Node.js.
 https://github.com/node-nock/nock#readme

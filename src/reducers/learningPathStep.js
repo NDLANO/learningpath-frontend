@@ -1,26 +1,7 @@
 import { handleActions } from 'redux-actions';
 import cloneDeep from 'lodash/cloneDeep';
-import get from 'lodash/get';
 import assign from 'lodash/assign';
-import findIndex from 'lodash/findIndex';
-
-function mergeI18nProperty (propertyName) {
-  return function next(state, action) {
-    let nextState = cloneDeep(state);
-    let properties = get(nextState, propertyName, []);
-    let index = findIndex(properties, ['language', action.payload.language]);
-
-    if (index === -1) {
-      properties.push(action.payload);
-    } else {
-      assign(properties[index], action.payload);
-    }
-
-    nextState[propertyName] = properties;
-
-    return nextState;
-  };
-}
+import assignOrPushPropReducer from '../util/assignOrPushPropReducer';
 
 export default handleActions({
   SET_LEARNING_PATH_STEP: {
@@ -36,23 +17,29 @@ export default handleActions({
     throw(state) { return state; }
   },
   UPDATE_LEARNING_PATH_STEP_DESCRIPTION: {
-    next: mergeI18nProperty('description'),
+    next: assignOrPushPropReducer('description'),
     throw(state) { return state; }
   },
   UPDATE_LEARNING_PATH_STEP_TITLE: {
-    next: mergeI18nProperty('title'),
+    next: assignOrPushPropReducer('title'),
     throw(state) { return state; }
   },
   UPDATE_LEARNING_PATH_STEP_TYPE: {
     next (state, action) {
-      let nextState = cloneDeep(state);
-      nextState.type = action.payload;
-      return nextState;
+      return assign(cloneDeep(state), {type: action.payload});
     },
     throw(state) { return state; }
   },
   UPDATE_LEARNING_PATH_STEP_EMBED_URL: {
-    next: mergeI18nProperty('embedContent'),
+    next: assignOrPushPropReducer('embedContent'),
+    throw(state) { return state; }
+  },
+  REMOVE_LEARNING_PATH_STEP_EMBED_CONTENT: {
+    next(state, action) {
+      let nextState = cloneDeep(state);
+      nextState.embedContent = [];
+      return nextState;
+    },
     throw(state) { return state; }
   },
 

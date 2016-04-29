@@ -55,8 +55,7 @@ import {
   LearningPath, LearningPathSummary, LearningPathStep,
   LearningPathSearch,
   EditLearningPath, EditLearningPathStep, CreateLearningPathStep,
-  CreateLearningPath,
-  ThisPageIntentionallyLeftBlank
+  CreateLearningPath
 } from './components';
 import requireAuthentication from './components/requireAuthentication';
 
@@ -93,8 +92,8 @@ ReactDOM.render(
             
             <Route path='step/new' component={requireAuthentication(CreateLearningPathStep)} onEnter={ifAuthenticated(createEmptyLearningPathStep)}/>
             
-            <Route path='step/:stepId/edit' component={EditLearningPathStep}
-              onEnter={({params}) => fetchLearningPathStep(params.pathId, params.stepId)} />
+            <Route path='step/:stepId/edit' component={requireAuthentication(EditLearningPathStep)}
+              onEnter={ifAuthenticated(({params}) => fetchLearningPathStep(params.pathId, params.stepId))} />
             <Route path='step/:stepId' component={LearningPathStep}
               onEnter={({params}) => fetchLearningPathStep(params.pathId, params.stepId)} />
           </Route>
