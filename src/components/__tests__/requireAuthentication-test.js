@@ -40,7 +40,12 @@ test('component/requireAuthentication not authenticated', t => {
     );
 
     t.equal(root.find('.whatever').length, 0);
-    t.ok(root.contains(<LoginProviders />), 'has login provider');
+
+    const providers = root.find(LoginProviders);
+
+    t.equal(providers.length, 1, 'has login provider');
+    t.ok(providers.props().message, 'has message');
   });
+
   t.end();
 });
