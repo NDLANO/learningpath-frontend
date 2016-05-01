@@ -6,9 +6,18 @@ import { Link } from 'react-router';
 import { learningPaths } from './mockData';
 import { MyPage, mapStateToProps } from '../MyPage';
 
+
 test('component/MyPage', t => {
-  const component = shallow(<MyPage learningPaths={learningPaths}
-      setSortKey={()=>{}} />,
+  const noop = () => {};
+
+  const requiredProps = {
+    setSortKey: noop,
+    createPath: noop,
+    deletePath: noop,
+    updatePathStatus: noop
+  };
+
+  const component = shallow(<MyPage {...requiredProps} learningPaths={learningPaths} />,
       {context: {lang:'nb'}});
 
   const links = component.find('.tile_hd').find(Link);
