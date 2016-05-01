@@ -8,7 +8,7 @@ import { MyPage, mapStateToProps } from '../MyPage';
 
 test('component/MyPage', t => {
   const component = shallow(<MyPage learningPaths={learningPaths}
-      dispatch={()=>{}} />,
+      setSortKey={()=>{}} />,
       {context: {lang:'nb'}});
 
   const links = component.find('.tile_hd').find(Link);
@@ -39,7 +39,7 @@ test('component/MyPage mapStateToProps', t => {
 
   t.ok(actual.learningPaths instanceof Array);
   t.equal(actual.lang, state.lang);
-  t.equal(actual.sortBy, 'title');
+  t.equal(actual.sortKey, 'title');
   t.deepEqual(actual.learningPaths.map(d => d.id), ['1', '2']);
 
 
@@ -49,14 +49,14 @@ test('component/MyPage mapStateToProps', t => {
     state, { myLearningPathsSortOrder: '-lastUpdated' }
   ));
 
-  t.equal(actual.sortBy, '-lastUpdated');
+  t.equal(actual.sortKey, '-lastUpdated');
   t.deepEqual(actual.learningPaths.map(d => d.id), ['2', '1']);
 
   actual = mapStateToProps(Object.assign({},
     state, { myLearningPathsSortOrder: 'lastUpdated' }
   ));
 
-  t.equal(actual.sortBy, 'lastUpdated');
+  t.equal(actual.sortKey, 'lastUpdated');
   t.deepEqual(actual.learningPaths.map(d => d.id), ['1', '2']);
 
   t.end();

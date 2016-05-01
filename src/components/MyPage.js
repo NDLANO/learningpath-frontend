@@ -31,7 +31,7 @@ export class MyPage extends React.Component {
   }
 
   render() {
-    const {learningPaths, dispatch} = this.props;
+    const {learningPaths, dispatch, sortKey, setSortKey} = this.props;
     const {lang} = this.context;
     const onCreateLearningPathClick = this.onCreateLearningPathClick.bind(this);
     const items = learningPaths.map(lp => {
@@ -59,7 +59,7 @@ export class MyPage extends React.Component {
     });
 
     const sortOrderSelect = (
-      <select value={sortBy} onChange={(evt) => dispatch(setMyLearningPathsSortOrder(evt.target.value))}>
+      <select value={sortKey} onChange={(evt) => setSortKey(evt.target.value)}>
         <option value='title'>{polyglot.t('myPage.order.title')}</option>
         <option value='-lastUpdated'>{polyglot.t('myPage.order.newest')}</option>
         <option value='lastUpdated'>{polyglot.t('myPage.order.oldest')}</option>
@@ -97,12 +97,13 @@ export class MyPage extends React.Component {
 }
 
 MyPage.propTypes = {
-  sortBy: PropTypes.oneOf(['title', 'lastUpdated', '-lastUpdated', 'status']).isRequired,
+  sortKey: PropTypes.oneOf(['title', 'lastUpdated', '-lastUpdated', 'status']),
+  setSortKey: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
   learningPaths: PropTypes.array
 };
 
-MyPage.defaultProps = { learningPaths: [], sortBy: 'title' };
+MyPage.defaultProps = { learningPaths: [], sortKey: 'title' };
 
 MyPage.contextTypes = {
   lang: PropTypes.string.isRequired
@@ -125,11 +126,11 @@ const sortPaths = (paths, field, state) => {
 };
 
 const mapStateToProps = (state) => {
-  const sortBy = state.myLearningPathsSortOrder || 'title';
-  const learningPaths = sortPaths(state.learningPaths, sortBy, state);
-  return Object.assign({}, state, { learningPaths, sortBy });
+  const sortKey = state.myLearningPathsSortOrder || 'title';
+  const learningPaths = sortPaths(state.learningPaths, sortKey, state);
+  return Object.assign({}, state, { learningPaths, sortKey });
 };
 
 export { mapStateToProps };
 
-export default connect(mapStateToProps)(MyPage);
+export default connect(mapStateToProps, {setSortKey: setMyLearningPathsSortOrder})(MyPage);
