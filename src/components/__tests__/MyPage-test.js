@@ -44,12 +44,20 @@ test('component/MyPage mapStateToProps', t => {
 
 
   t.ok(learningPaths[0].lastUpdated < learningPaths[1].lastUpdated, 'self-test');
+
+  actual = mapStateToProps(Object.assign({},
+    state, { myLearningPathsSortOrder: '-lastUpdated' }
+  ));
+
+  t.equal(actual.sortBy, '-lastUpdated');
+  t.deepEqual(actual.learningPaths.map(d => d.id), ['2', '1']);
+
   actual = mapStateToProps(Object.assign({},
     state, { myLearningPathsSortOrder: 'lastUpdated' }
   ));
 
   t.equal(actual.sortBy, 'lastUpdated');
-  t.deepEqual(actual.learningPaths.map(d => d.id), ['2', '1']);
+  t.deepEqual(actual.learningPaths.map(d => d.id), ['1', '2']);
 
   t.end();
 });

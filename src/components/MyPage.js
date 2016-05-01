@@ -61,7 +61,8 @@ export class MyPage extends React.Component {
     const sortOrderSelect = (
       <select value={sortBy} onChange={(evt) => dispatch(setMyLearningPathsSortOrder(evt.target.value))}>
         <option value='title'>{polyglot.t('myPage.order.title')}</option>
-        <option value='lastUpdated'>{polyglot.t('myPage.order.lastUpdated')}</option>
+        <option value='-lastUpdated'>{polyglot.t('myPage.order.newest')}</option>
+        <option value='lastUpdated'>{polyglot.t('myPage.order.oldest')}</option>
         <option value='status'>{polyglot.t('myPage.order.status')}</option>
       </select>
     );
@@ -96,7 +97,7 @@ export class MyPage extends React.Component {
 }
 
 MyPage.propTypes = {
-  sortBy: PropTypes.oneOf(['title', 'lastUpdated', 'status']).isRequired,
+  sortBy: PropTypes.oneOf(['title', 'lastUpdated', '-lastUpdated', 'status']).isRequired,
   dispatch: PropTypes.func.isRequired,
   learningPaths: PropTypes.array
 };
@@ -113,7 +114,10 @@ const sortPaths = (paths, field, state) => {
     return sortBy(paths, (p) => titleI18N(p, state.lang));
 
   case 'lastUpdated':
-    return reverse(sortBy(paths, field));
+    return sortBy(paths, field);
+    
+  case '-lastUpdated':
+    return reverse(sortBy(paths, 'lastUpdated'));
 
   default:
     return sortBy(paths, field);

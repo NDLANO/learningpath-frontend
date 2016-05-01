@@ -26,9 +26,10 @@ const phrases = {
   myPage: {
     lastUpdated: 'Sist endret',
     order: {
-      title: 'Tittel',
-      lastUpdated: 'Dato',
-      status: 'Status'
+      title: 'Alfabetisk',
+      newest: 'Nyeste',
+      oldest: 'Eldste',
+      status: 'Publisert'
     },
     pageHeader: 'Mine læringsstier',
     newBtn: 'Opprett ny læringssti',
