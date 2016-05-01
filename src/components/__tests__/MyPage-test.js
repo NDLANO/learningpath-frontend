@@ -32,7 +32,7 @@ test('component/MyPage mapStateToProps', t => {
   let state = {
     lang: 'nb',
     learningPaths,
-    privateLearningPathsSortBy: 'title'
+    myLearningPathsSortOrder: 'title'
   };
 
   let actual = mapStateToProps(state);
@@ -45,7 +45,7 @@ test('component/MyPage mapStateToProps', t => {
 
   t.ok(learningPaths[0].lastUpdated < learningPaths[1].lastUpdated, 'self-test');
   actual = mapStateToProps(Object.assign({},
-    state, { privateLearningPathsSortBy: 'lastUpdated' }
+    state, { myLearningPathsSortOrder: 'lastUpdated' }
   ));
 
   t.equal(actual.sortBy, 'lastUpdated');

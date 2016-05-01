@@ -1,8 +1,8 @@
 import test from 'tape';
 
-import reducer from '../privateLearningPathsSortBy';
+import reducer from '../myLearningPathsSortOrder';
 
-test('reducers/privateLearningPathsSortBy', (t) => {
+test('reducers/myLearningPathsSortOrder', t => {
   /*
   t.equal(
       JSON.stringify(reducer(undefined, {})),
@@ -11,13 +11,13 @@ test('reducers/privateLearningPathsSortBy', (t) => {
   );
   */
 
-  let actual = reducer(undefined, { type: 'SORT_PRIVATE_LEARNING_PATHS', payload: 'status' });
+  let actual = reducer(undefined, { type: 'SET_MY_LEARNING_PATHS_SORT_ORDER', payload: 'status' });
   t.equal(actual, 'status', 'set state');
 
-  actual = reducer('status', { type: 'SORT_PRIVATE_LEARNING_PATHS', payload: 'title' });
+  actual = reducer('status', { type: 'SET_MY_LEARNING_PATHS_SORT_ORDER', payload: 'title' });
   t.equal(actual, 'title', 'change state');
 
-  actual = reducer('status', { type: 'DO_NOT_SORT_PRIVATE_LEARNING_PATHS', payload: 'title' });
+  actual = reducer('status', { type: 'DO_NOT_SET_MY_LEARNING_PATHS_SORT_ORDER', payload: 'title' });
   t.deepEqual(actual, 'status', 'non-actionable action type');
 
   actual = reducer('status', { type: 'LOGOUT' });

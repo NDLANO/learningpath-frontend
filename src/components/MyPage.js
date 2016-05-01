@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import sortBy from 'lodash/sortBy';
 import reverse from 'lodash/reverse';
-import { sortPrivateLearningPaths } from '../actions';
+import { setMyLearningPathsSortOrder } from '../actions';
 import LabeledIcon from './LabeledIcon';
 import polyglot from '../i18n';
 
@@ -59,7 +59,7 @@ export class MyPage extends React.Component {
     });
 
     const sortOrderSelect = (
-      <select value={sortBy} onChange={(evt) => dispatch(sortPrivateLearningPaths(evt.target.value))}>
+      <select value={sortBy} onChange={(evt) => dispatch(setMyLearningPathsSortOrder(evt.target.value))}>
         <option value='title'>{polyglot.t('myPage.order.title')}</option>
         <option value='lastUpdated'>{polyglot.t('myPage.order.lastUpdated')}</option>
         <option value='status'>{polyglot.t('myPage.order.status')}</option>
@@ -121,7 +121,7 @@ const sortPaths = (paths, field, state) => {
 };
 
 const mapStateToProps = (state) => {
-  const sortBy = state.privateLearningPathsSortBy || 'title';
+  const sortBy = state.myLearningPathsSortOrder || 'title';
   const learningPaths = sortPaths(state.learningPaths, sortBy, state);
   return Object.assign({}, state, { learningPaths, sortBy });
 };
