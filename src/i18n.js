@@ -39,6 +39,11 @@ const phrases = {
       NOT_LISTED: 'Åpen'
     }
   },
+  pathDropDown: {
+    publish: 'Publiser',
+    unpublish: 'Gjør privat',
+    delete: 'Slett'
+  },
   requireAuthentication: {
     errorMessage: 'Denne siden krever innlogging.'
   },

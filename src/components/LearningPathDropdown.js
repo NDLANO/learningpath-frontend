@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import polyglot from '../i18n';
 import Icon from './Icon';
 
 export function LearningPathDropdown ({onSelect, learningPath}) {
@@ -8,7 +9,9 @@ export function LearningPathDropdown ({onSelect, learningPath}) {
   };
 
   const publishAction = makeOnClick(learningPath.status === 'PRIVATE' ? 'publish' : 'unpublish');
-  const publishActionText = learningPath.status === 'PRIVATE' ? 'Publiser' : 'Gjør privat';
+  const publishActionText = polyglot.t(
+    `pathDropDown.${learningPath.status === 'PRIVATE' ? 'publish' : 'unpublish'}`
+  );
 
   return (
     <div className='dropdown-menu'>
@@ -21,7 +24,7 @@ export function LearningPathDropdown ({onSelect, learningPath}) {
         </li>
         <li className='dropdown-menu_item'>
           <a href="#" className='dropdown-menu_link' onClick={makeOnClick('delete')}>
-            <Icon.Delete /> Slett
+            <Icon.Delete /> {polyglot.t('pathDropDown.delete')}
           </a>
         </li>
       </ul>
