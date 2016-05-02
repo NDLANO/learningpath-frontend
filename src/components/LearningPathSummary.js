@@ -6,7 +6,7 @@ import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 import polyglot from '../i18n';
 
 export function LearningPathSummary ({learningPath}, {lang}) {
-  let editPathTarget = `/learningpaths/${learningPath.id}/edit`;
+  const editPathTarget = `/learningpaths/${learningPath.id}/edit`;
   const edit = learningPath.canEdit ? <Link to={editPathTarget}>{polyglot.t('editPage.edit')}</Link> : '';
 
   return (
