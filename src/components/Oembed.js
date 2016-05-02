@@ -39,18 +39,14 @@ export default class Oembed extends React.Component {
 
   enableIframeResizing() {
     if (!this.state.listeningToResize) {
-      this.setState({ listeningToResize: true }, () => {
-        window.addEventListener('message', this.handleResizeMessage);
-      });
+      window.addEventListener('message', this.handleResizeMessage);
+      this.setState({ listeningToResize: true });
     }
   }
 
   disableIframeResizing() {
-    if (this.state.listeningToResize) {
-      this.setState({ listeningToResize: false }, () => {
-        window.removeEventListener('message', this.handleResizeMessage);
-      });
-    }
+    window.removeEventListener('message', this.handleResizeMessage);
+    this.setState({ listeningToResize: false });
   }
 
   handleResizeMessage (evt) {
