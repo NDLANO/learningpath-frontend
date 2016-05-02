@@ -20,7 +20,7 @@ class SortableStepsContainer extends Component {
 
   moveLearningStep(id, atIndex, learningsteps) {
     const { step, index } = this.findLearningStep(id, learningsteps);
-    const {sortSteps} = this.props
+    const { sortSteps } = this.props;
     learningsteps.splice(index, 1);
     learningsteps.splice(atIndex, 0, step);
     sortSteps(learningsteps);
@@ -89,7 +89,8 @@ export default flow(
 SortableStepsContainer.propTypes = {
   learningPath: PropTypes.object.isRequired,
   connectDropTarget: PropTypes.func.isRequired,
-  sortSteps: PropTypes.func.isRequired
+  sortSteps: PropTypes.func.isRequired,
+  learningsteps: PropTypes.array.isRequired
 };
 
 SortableStepsContainer.contextTypes = {

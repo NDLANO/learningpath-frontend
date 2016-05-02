@@ -3,7 +3,6 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 import payload403invalid from './payload403invalid';
-import { isFSA } from 'flux-standard-action';
 
 import actions from '..';
 

@@ -80,7 +80,7 @@ SortableLearningStep.propTypes = {
   title: PropTypes.string.isRequired,
   moveLearningStep: PropTypes.func.isRequired,
   findLearningStep: PropTypes.func.isRequired,
-  learningsteps: PropTypes.any.isRequired,
+  learningsteps: PropTypes.array.isRequired,
   isDragging: PropTypes.bool.isRequired,
   connectDragSource: PropTypes.func.isRequired,
   connectDropTarget: PropTypes.func.isRequired

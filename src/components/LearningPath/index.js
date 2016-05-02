@@ -26,7 +26,10 @@ export function LearningPath(props) {
 }
 
 LearningPath.propTypes = {
-  learningPath: PropTypes.object.isRequired
+  learningPath: PropTypes.object.isRequired,
+  toc: PropTypes.object.isRequired,
+  main: PropTypes.object.isRequired
+
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
