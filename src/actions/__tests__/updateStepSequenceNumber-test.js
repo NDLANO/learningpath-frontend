@@ -83,27 +83,3 @@ test('actions/updateStepSequenceNumber access denied', t => {
     })
     .catch(done);
 });
-
-test('actions/sortSteps', t => {
-  const actual = actions.updateLearningPathStepSeqNo({ title: 'whatever', language: 'eo' });
-
-  t.ok(isFSA(actual), 'FSA compliant action');
-
-  t.equal(actual.type, 'UPDATE_LEARNING_PATH_STEP_SEQ_NO');
-  t.deepEqual(actual.payload, { title: 'whatever', language: 'eo' });
-  t.notOk(actual.error);
-
-  t.end();
-});
-
-test('actions/sortSteps with error', t => {
-  const actual = actions.updateLearningPathStepSeqNo(new Error('fail!'));
-
-  t.ok(isFSA(actual), 'FSA compliant action');
-
-  t.equal(actual.type, 'UPDATE_LEARNING_PATH_STEP_SEQ_NO');
-  t.equal(actual.payload.message, 'fail!');
-  t.ok(actual.error);
-
-  t.end();
-});

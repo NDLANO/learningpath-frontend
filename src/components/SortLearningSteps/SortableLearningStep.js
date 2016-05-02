@@ -71,7 +71,7 @@ class SortableLearningStep extends Component {
 export const mapDispatchToProps = {
   updateSeqNo: updateStepSequenceNumber
 };
-const mapStateToProps = state => Object.assign({}, state, {});
+const mapStateToProps = state => state;
 
 
 export default flow(

@@ -1,7 +1,6 @@
 import { handleActions } from 'redux-actions';
 import cloneDeep from 'lodash/cloneDeep';
 import get from 'lodash/get';
-import reject from 'lodash/reject';
 import assign from 'lodash/assign';
 import findIndex from 'lodash/findIndex';
 import assureSequenceOrder from '../util/assureSequenceOrder';
@@ -55,14 +54,6 @@ export default handleActions({
       }
       let nextState = cloneDeep(state);
       nextState.learningsteps = action.payload;
-      return nextState;
-    },
-    throw(state) { return state; }
-  },
-
-  UPDATE_LEARNING_PATH_STEP_SEQ_NO: {
-    next(state, action) {
-      let nextState = cloneDeep(state);
       return nextState;
     },
     throw(state) { return state; }

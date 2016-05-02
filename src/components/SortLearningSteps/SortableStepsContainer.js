@@ -22,31 +22,35 @@ class SortableStepsContainer extends Component {
 
   moveLearningStep(id, atIndex, learningsteps) {
     const { step, index } = this.findLearningStep(id, learningsteps);
+    const {sortSteps} = this.props
     learningsteps.splice(index, 1);
     learningsteps.splice(atIndex, 0, step);
-    this.state = learningsteps;
-    this.props.sortSteps(learningsteps);
+    sortSteps(learningsteps);
   }
 
   findLearningStep(id, learningsteps) {
-    const step = learningsteps.filter(c => c.id === id)[0];
+    const step = learningsteps.find(c => c.id === id);
 
     return {
       step,
       index: learningsteps.indexOf(step)
     };
   }
-  render() {
+
+  constructor(props) {
+    super(props);
     this.moveLearningStep = this.moveLearningStep.bind(this);
     this.findLearningStep = this.findLearningStep.bind(this);
-    let {lang} = this.context;
+  }
 
-    if( this.props.learningPath.learningsteps === undefined){
-      return <div></div>;
+  render() {
+
+    let {lang} = this.context;
+    let {learningsteps, learningPath, connectDropTarget} = this.props;
+
+    if(!learningsteps){
+      return null;
     }
-    const learningsteps  = this.props.learningPath.learningsteps;
-    this.state = learningsteps;
-    const { connectDropTarget } = this.props;
 
     return connectDropTarget(
       <div className='step-nav step-nav_editable'>
@@ -60,7 +64,7 @@ class SortableStepsContainer extends Component {
                     title={titleI18N(step, lang)}
                     moveLearningStep={this.moveLearningStep}
                     findLearningStep={this.findLearningStep}
-                    learningsteps={this.state}
+                    learningsteps={learningsteps}
               />
             );
           })}
@@ -72,7 +76,8 @@ class SortableStepsContainer extends Component {
 
 
 const mapStateToProps = state => Object.assign({}, state, {
-  learningPath: get(state, 'learningPath', {})
+  learningPath: get(state, 'learningPath', {}),
+  learningsteps: state.learningPath.learningsteps
 });
 export const mapDispatchToProps = {
   sortSteps: sortLearningPathSteps
