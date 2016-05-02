@@ -44,7 +44,7 @@ test('component/LearningPathDropdown de-publish', t => {
   t.end();
 });
 
-test('component/LearningPathDropdown de-publish', t => {
+test('component/LearningPathDropdown publish', t => {
   const onSelect = spy();
   const preventDefault = spy();
 
