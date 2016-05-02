@@ -10,7 +10,7 @@ import learningPathStep from './learningPathStep';
 import learningPaths from './learningPaths';
 import learningPathQuery from './learningPathQuery';
 import learningPathsTotalCount from './learningPathsTotalCount';
-import privateLearningPathsSortBy from './privateLearningPathsSortBy';
+import myLearningPathsSortOrder from './myLearningPathsSortOrder';
 import oembedIsValid from './oembedIsValid';
 import messages from './messages';
 
@@ -23,7 +23,7 @@ const rootReducers = combineReducers({
   learningPaths,
   learningPathQuery,
   learningPathsTotalCount,
-  privateLearningPathsSortBy,
+  myLearningPathsSortOrder,
   messages,
   oembedIsValid,
   routing: routerReducer,

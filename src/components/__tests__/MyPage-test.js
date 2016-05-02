@@ -6,9 +6,18 @@ import { Link } from 'react-router';
 import { learningPaths } from './mockData';
 import { MyPage, mapStateToProps } from '../MyPage';
 
+
 test('component/MyPage', t => {
-  const component = shallow(<MyPage learningPaths={learningPaths}
-      dispatch={()=>{}} />,
+  const noop = () => {};
+
+  const requiredProps = {
+    setSortKey: noop,
+    createPath: noop,
+    deletePath: noop,
+    updatePathStatus: noop
+  };
+
+  const component = shallow(<MyPage {...requiredProps} learningPaths={learningPaths} />,
       {context: {lang:'nb'}});
 
   const links = component.find('.tile_hd').find(Link);
@@ -32,24 +41,32 @@ test('component/MyPage mapStateToProps', t => {
   let state = {
     lang: 'nb',
     learningPaths,
-    privateLearningPathsSortBy: 'title'
+    myLearningPathsSortOrder: 'title'
   };
 
   let actual = mapStateToProps(state);
 
   t.ok(actual.learningPaths instanceof Array);
   t.equal(actual.lang, state.lang);
-  t.equal(actual.sortBy, 'title');
+  t.equal(actual.sortKey, 'title');
   t.deepEqual(actual.learningPaths.map(d => d.id), ['1', '2']);
 
 
   t.ok(learningPaths[0].lastUpdated < learningPaths[1].lastUpdated, 'self-test');
+
   actual = mapStateToProps(Object.assign({},
-    state, { privateLearningPathsSortBy: 'lastUpdated' }
+    state, { myLearningPathsSortOrder: '-lastUpdated' }
   ));
 
-  t.equal(actual.sortBy, 'lastUpdated');
+  t.equal(actual.sortKey, '-lastUpdated');
   t.deepEqual(actual.learningPaths.map(d => d.id), ['2', '1']);
+
+  actual = mapStateToProps(Object.assign({},
+    state, { myLearningPathsSortOrder: 'lastUpdated' }
+  ));
+
+  t.equal(actual.sortKey, 'lastUpdated');
+  t.deepEqual(actual.learningPaths.map(d => d.id), ['1', '2']);
 
   t.end();
 });
