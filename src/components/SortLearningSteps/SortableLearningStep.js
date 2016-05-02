@@ -8,13 +8,6 @@ import {
   updateStepSequenceNumber
 } from '../../actions';
 
-const style = {
-  border: '1px dashed gray',
-  padding: '0.5rem 1rem',
-  marginBottom: '.5rem',
-  backgroundColor: 'white',
-  cursor: 'move'
-};
 
 const stepSource = {
   beginDrag(props) {
@@ -44,11 +37,11 @@ const stepTarget = {
 
   hover(props, monitor) {
     const { id: draggedId } = monitor.getItem();
-    const { id: overId } = props;
+    const { id: overId, learningsteps } = props;
 
     if (draggedId !== overId) {
-      const { index: overIndex } = props.findLearningStep(overId,props.learningsteps);
-      props.moveLearningStep(draggedId, overIndex, props.learningsteps);
+      const { index: overIndex } = props.findLearningStep(overId, learningsteps);
+      props.moveLearningStep(draggedId, overIndex, learningsteps);
     }
   }
 };
@@ -60,7 +53,7 @@ class SortableLearningStep extends Component {
     const opacity = isDragging ? 0 : 1;
     return connectDragSource(connectDropTarget(
       <li className='step-nav_item'>
-        <a className='step-nav_link' style={{ style, opacity }}>
+        <a className='step-nav_link' style={{ opacity }}>
           {title}
         </a>
       </li>
