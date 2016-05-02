@@ -26,9 +26,10 @@ const phrases = {
   myPage: {
     lastUpdated: 'Sist endret',
     order: {
-      title: 'Tittel',
-      lastUpdated: 'Dato',
-      status: 'Status'
+      title: 'Alfabetisk',
+      newest: 'Nyeste',
+      oldest: 'Eldste',
+      status: 'Publisert'
     },
     pageHeader: 'Mine læringsstier',
     newBtn: 'Opprett ny læringssti',
@@ -37,6 +38,11 @@ const phrases = {
       PUBLISHED: 'Søkbar',
       NOT_LISTED: 'Åpen'
     }
+  },
+  pathDropDown: {
+    publish: 'Publiser',
+    unpublish: 'Gjør privat',
+    delete: 'Slett'
   },
   requireAuthentication: {
     errorMessage: 'Denne siden krever innlogging.'
@@ -47,7 +53,11 @@ const phrases = {
     title2: 'Nasjonal digital læringsarena',
     explanationBtn: 'Hva er en læringssti?',
     newBtn: 'Lag din egen læringssti',
-    searchBtn: 'Søk'
+    searchBtn: 'Søk',
+    feature1Title: 'Enklere å følge',
+    feature2Title: 'Enda enklere å følge',
+    feature1Content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.',
+    feature2Content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.'
   },
   editPage: {
     learningpathShortDescriptionTitle: 'Introduksjon',

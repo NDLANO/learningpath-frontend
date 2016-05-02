@@ -16,14 +16,14 @@ class StyleButton extends React.Component {
 
   render() {
     let className = classNames(
-        [ 'un-button', 'RichEditor-styleButton' ],
-        {' RichEditor-activeButton': this.props.active}
+        [ 'texformat-menu-item' ],
+        {' texformat-menu-item__selected': this.props.active}
     );
 
     return (
-      <button className={className} onClick={this.onToggle}>
-        [{this.props.label}]
-      </button>
+      <li className={className} onMouseDown={this.onToggle}>
+        {this.props.icon}
+      </li>
     );
   }
 }
@@ -32,75 +32,46 @@ StyleButton.propTypes = {
   style: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   active: PropTypes.bool.isRequired,
-  onToggle: PropTypes.func.isRequired
+  onToggle: PropTypes.func.isRequired,
+  icon: PropTypes.element.isRequired
 };
 
-
-
-const BLOCK_TYPES = [
-  {label: 'UL', style: 'unordered-list-item'},
-  {label: 'OL', style: 'ordered-list-item'}
+const STYLES = [
+  {label: 'Bold', style: 'BOLD', isInline: true, icon: <Icon.Bold />},
+  {label: 'Italic', style: 'ITALIC', isInline: true, icon: <Icon.Italic />},
+  {label: 'Underline', style: 'UNDERLINE', isInline: true ,icon: <Icon.Underline />},
+  {label: 'UL', style: 'unordered-list-item', isInline: false, icon: <Icon.Bulleted />},
+  {label: 'OL', style: 'ordered-list-item', isInline: false, icon: <Icon.Numbered />}
 ];
 
-const BlockStyleControls = props => {
+const StyleControls = props => {
   const {editorState} = props;
   const selection = editorState.getSelection();
-  const blockType = editorState
-    .getCurrentContent()
-    .getBlockForKey(selection.getStartKey())
-    .getType();
+  const blockType = editorState.getCurrentContent().getBlockForKey(selection.getStartKey()).getType();
+
+  let currentInlineStyle = editorState.getCurrentInlineStyle();
 
   return (
-    <div className="RichEditor-controls">
-      {BLOCK_TYPES.map(type =>
+    <ul className='textformat-menu'>
+      {STYLES.map(type =>
         <StyleButton
           key={type.label}
-          active={type.style === blockType}
+          active={(type.isInline && currentInlineStyle.has(type.style)) || (!type.isInline && type.style == blockType)}
           label={type.label}
-          onToggle={props.onToggle}
+          onToggle={type.isInline ? props.onToggleInline : props.onToggleBlock}
           style={type.style}
+          icon={type.icon}
         />
       )}
-    </div>
+    </ul>
   );
 };
 
-BlockStyleControls.propTypes = {
+StyleControls.propTypes = {
   editorState: PropTypes.object.isRequired,
-  onToggle: PropTypes.func.isRequired
+  onToggleInline: PropTypes.func.isRequired,
+  onToggleBlock: PropTypes.func.isRequired
 };
-
-
-
-const INLINE_STYLES = [
-  {label: 'Bold', style: 'BOLD'},
-  {label: 'Italic', style: 'ITALIC'},
-  {label: 'Underline', style: 'UNDERLINE'}
-];
-
-const InlineStyleControls = props => {
-  let currentStyle = props.editorState.getCurrentInlineStyle();
-  return (
-    <div className='RichEditor-controls'>
-      {INLINE_STYLES.map(type =>
-        <StyleButton
-          key={type.label}
-          active={currentStyle.has(type.style)}
-          label={type.label}
-          onToggle={props.onToggle}
-          style={type.style}
-        />
-      )}
-    </div>
-  );
-};
-
-InlineStyleControls.propTypes = {
-  editorState: PropTypes.object.isRequired,
-  onToggle: PropTypes.func.isRequired
-};
-
-
 
 export default class DescriptionHTMLEditor extends React.Component {
   constructor(props) {
@@ -111,15 +82,16 @@ export default class DescriptionHTMLEditor extends React.Component {
 
     this.focus = () => this.refs.editor.focus();
     this.blur = () => this.refs.editor.blur();
-    this.onChange = editorState => this.setState({editorState});
-    this.onDone = () => {
-      this.blur();
-      let contentState = this.state.editorState.getCurrentContent();
+    this.onChange = editorState => this.setState({editorState}, () => {
+      if (editorState.getSelection().getHasFocus()) {
+        return;
+      }
+      let contentState = editorState.getCurrentContent();
       onChange({
         description: stateToHTML(contentState),
         language: props.lang
       });
-    };
+    });
 
     this.handleKeyCommand = command => this._handleKeyCommand(command);
     this.toggleBlockType = type => this._toggleBlockType(type);
@@ -187,27 +159,20 @@ export default class DescriptionHTMLEditor extends React.Component {
 
     return (
       <div className="RichEditor-root">
-        <BlockStyleControls
+        <StyleControls
           editorState={editorState}
-          onToggle={this.toggleBlockType}
-        />
-        <InlineStyleControls
-          editorState={editorState}
-          onToggle={this.toggleInlineStyle}
+          onToggleInline={this.toggleInlineStyle}
+          onToggleBlock={this.toggleBlockType}
         />
         <div className={className} onClick={this.focus}>
           <Editor
             editorState={editorState}
-            handleKeyCommand={this.handleKeyCommand}
             onChange={this.onChange}
             placeholder={polyglot.t('editPathStep.stepDescriptionPlaceholder')}
             ref='editor'
             spellCheck={true}
           />
         </div>
-        <button className='un-button' onClick={this.onDone}>
-          <Icon.Check className='icon--l' />
-        </button>
       </div>
     );
   }

@@ -27,7 +27,7 @@ export var setLearningPathStep = createAction('SET_LEARNING_PATH_STEP');
 export var setLearningPaths = createAction('SET_LEARNING_PATHS');
 export var changeLearningPathQuery = createAction('CHANGE_LEARNING_PATH_QUERY');
 export var setLearningPathsTotalCount = createAction('SET_LEARNING_PATHS_TOTAL_COUNT');
-export var sortPrivateLearningPaths = createAction('SORT_PRIVATE_LEARNING_PATHS');
+export var setMyLearningPathsSortOrder = createAction('SET_MY_LEARNING_PATHS_SORT_ORDER');
 export var updateLearningPathTitle = createAction('UPDATE_LEARNING_PATH_TITLE');
 export var updateLearningPathDescription = createAction('UPDATE_LEARNING_PATH_DESCRIPTION');
 export var removeLearningPath = createAction('REMOVE_LEARNING_PATH');
@@ -42,7 +42,6 @@ export var updateLearningPathStepDescription = createAction('UPDATE_LEARNING_PAT
 export var updateLearningPathStepTitle = createAction('UPDATE_LEARNING_PATH_STEP_TITLE');
 export var updateLearningPathStepEmbedUrl = createAction('UPDATE_LEARNING_PATH_STEP_EMBED_URL');
 export var updateLearningPathStepType= createAction('UPDATE_LEARNING_PATH_STEP_TYPE');
-export var doStuff = createAction('DO_STUFF');
 export var createEmptyLearningPathStep = createAction('CREATE_EMPTY_LEARNING_PATH_STEP');
 export var setIsValidOembed = createAction('SET_IS_VALID_OEMBED');
 export var removeLearningPathStepEmbedContent = createAction('REMOVE_LEARNING_PATH_STEP_EMBED_CONTENT');
@@ -78,7 +77,7 @@ export default {
   setLearningPaths,
   changeLearningPathQuery,
   setLearningPathsTotalCount,
-  sortPrivateLearningPaths,
+  setMyLearningPathsSortOrder,
   createLearningPathStep,
   updateLearningPathStep,
   updateLearningPathTitle,
@@ -114,5 +113,6 @@ export default {
   sortLearningPathSteps,
   updateStepSequenceNumber,
   updateLearningPathStepSeqNo,
-  doStuff
+  doStuff,
+  removeLearningPathStepEmbedContent
 };
