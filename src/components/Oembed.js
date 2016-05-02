@@ -1,79 +1,91 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import ReactDOM from 'react-dom';
+import get from 'lodash/get';
 
-let resizeIframe = (iframes) => {
-  return (evt) => {
-    if (iframes === undefined) { return; }
-    if (!evt.data.height) { return; }
-    let iframe = (function (iframes) {
-      for (let i=0, len=iframes.length; i < len; i++) {
-        if (iframes[i].contentWindow === evt.source) {
-          return iframes[i];
-        }
-      }
-    }(iframes));
-
-    if (!iframe) { return; }
-
-    if ((evt.data.height + 25) > parseInt(iframe.style.height, 10) || iframe.style.height === '') {
-      iframe.style.height = (evt.data.height + 35) + 'px';
-    }
-  };
-};
+export const urlIsNDLA = url => (/http:\/\/ndla.no/).test(url);
 
 
 export default class Oembed extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      isNDLAResource: false,
+      listeningToResize: false
+    };
 
-  checkIframe (props) {
-    if ( !ReactDOM.findDOMNode(this) ) {
-      return;
-    }
-    const oembedContent = props.oembedContent;
-    const ndlaIsSource = oembedContent.url != undefined ? ((/http:\/\/ndla.no/).test(oembedContent.url)) : false;
-
-    if(!this.resizeIframeFunc){
-      this.resizeIframeFunc = resizeIframe(ReactDOM.findDOMNode(this).children);
-    }
-
-    if (ndlaIsSource) {
-      window.addEventListener('message', this.resizeIframeFunc);
-    }
-    else {
-      this.removeEventListener();
-    }
-
-  }
-
-  removeEventListener() {
-    if(this.resizeIframeFunc) {
-      window.removeEventListener('message', this.resizeIframeFunc);
-    }
+    this.handleResizeMessage = this.handleResizeMessage.bind(this);
   }
 
   componentWillReceiveProps (props){
-    this.checkIframe(props);
+    this.handleIframeResizing(props);
   }
 
-  componentWillMount() {
-    this.checkIframe(this.props);
+  componentDidMount() {
+    this.handleIframeResizing(this.props);
   }
 
-  componentWillUnmount () {
-    this.removeEventListener();
+  componentWillUnmount() {
+    this.disableIframeResizing();
   }
 
-  render (){
-    let {oembedContent} = this.props;
-    const ndlaIsSource = oembedContent.url != undefined ? ((/http:\/\/ndla.no/).test(oembedContent.url)) : false;
+  handleIframeResizing ({oembedContent: {url}}) {
+    if ( urlIsNDLA(url) ) {
+      this.setState({isNDLAResource: true}, this.enableIframeResizing);
+    } else {
+      this.setState({isNDLAResource: false}, this.disableIframeResizing);
+    }
+  }
 
-    const divClassname = (ndlaIsSource) => classNames({
+  enableIframeResizing() {
+    if (!this.state.listeningToResize) {
+      this.setState({ listeningToResize: true }, () => {
+        window.addEventListener('message', this.handleResizeMessage);
+      });
+    }
+  }
+
+  disableIframeResizing() {
+    if (this.state.listeningToResize) {
+      this.setState({ listeningToResize: false }, () => {
+        window.removeEventListener('message', this.handleResizeMessage);
+      });
+    }
+  }
+
+  handleResizeMessage (evt) {
+    if (!this.state.listeningToResize) {
+      return;
+    }
+
+    const iframe = this.getIframeDOM();
+
+    if (iframe.contentWindow !== get(evt, 'source')) {
+      return;
+    }
+
+    let newHeight = parseInt(get(evt, 'data.height', 0)) + 35;
+    let currentHeight = parseInt(get(iframe, 'style.height')||0);
+
+    if (newHeight > currentHeight) {
+      iframe.style.height = newHeight + 'px';
+    }
+  }
+
+  getIframeDOM () {
+    return ReactDOM.findDOMNode(this).children[0];
+  }
+
+
+  render() {
+    const {oembedContent: {html}} = this.props;
+
+    return <div className={classNames({
       'learning-step': true,
-      'learning-step--without-dimensions': ndlaIsSource === true
-    });
-    return (
-      <div className={divClassname(ndlaIsSource)} dangerouslySetInnerHTML={{__html: oembedContent.html}}/>
-    );
+      'learning-step--without-dimensions': this.state.isNDLAResource
+    })}
+    dangerouslySetInnerHTML={{__html: html}}
+    />;
   }
 }
 
