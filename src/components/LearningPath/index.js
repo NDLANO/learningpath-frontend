@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import LearningPathToC from './LearningPathToC';
+//import LearningPathToC from './LearningPathToC';
 import LearningPathGeneralInfo from './LearningPathGeneralInfo';
 import LearningPathPrevNext from './LearningPathPrevNext';
 
@@ -12,10 +12,10 @@ export function LearningPath(props) {
       <div className='two-column'>
         <aside className='two-column_col'>
           <LearningPathGeneralInfo {...props} />
-          <LearningPathToC {...props} />
+          {props.toc}
         </aside>
         <main className='two-column_col'>
-          {props.children}
+          {props.main}
         </main>
       </div>
       <div>

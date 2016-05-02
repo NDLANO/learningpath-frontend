@@ -2,15 +2,20 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import defined from 'defined';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
+import polyglot from '../../i18n';
 
 import { titleI18N } from '../../util/i18nFieldFinder';
 
-export default function LearningPathToC ({learningPath, activePathname}, {lang}) {
+export function LearningPathToC ({learningPath, activePathname}, {lang}) {
   const base = `/learningpaths/${learningPath.id}`;
   const itemClassName = (path) => classNames({
     'step-nav_item': true,
     'step-nav_item--active': path === activePathname
   });
+
+  let sortPathTarget = `/learningpaths/${learningPath.id}/sort`;
+  const sort = learningPath.canEdit ? <Link className='cta-link' to={sortPathTarget}>{polyglot.t('sortSteps.sort')}</Link> : '';
 
   return (
     <div className='step-nav'>
@@ -24,6 +29,7 @@ export default function LearningPathToC ({learningPath, activePathname}, {lang})
           </li>
         )))(defined(learningPath.learningsteps, []))}
       </ul>
+      {sort}
     </div>
   );
 }
@@ -40,3 +46,9 @@ LearningPathToC.contextTypes = {
 LearningPathToC.defaultProps = {
   activePathname: ''
 };
+const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
+  learningPath: state.learningPath,
+  activePathname: ownProps.location.pathname
+});
+
+export default connect(mapStateToProps)(LearningPathToC);

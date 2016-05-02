@@ -79,6 +79,10 @@ const phrases = {
     urlPlaceholder: 'Lim inn lenke',
     stepDescriptionPlaceholder: 'Skriv her'
   },
+  sortSteps: {
+    sort: 'Sorter steg',
+    finish: 'Avslutt sortering'
+  },
   siteNav: {
     login: 'Logg inn',
     search: 'Finn læringssti',

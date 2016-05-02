@@ -113,6 +113,5 @@ export default {
   sortLearningPathSteps,
   updateStepSequenceNumber,
   updateLearningPathStepSeqNo,
-  doStuff,
   removeLearningPathStepEmbedContent
 };
