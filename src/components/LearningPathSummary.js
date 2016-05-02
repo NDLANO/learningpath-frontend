@@ -15,7 +15,10 @@ export function LearningPathSummary ({learningPath}, {lang}) {
       </div>
       <div className='learning-path_bd'>{descriptionI18N(learningPath, lang)}</div>
       <div>
-        <Link to={editPathTarget}>{polyglot.t('editPage.edit')}</Link>
+        {learningPath.canEdit
+          ? <Link to={editPathTarget}>{polyglot.t('editPage.edit')}</Link>
+          : null
+        }
       </div>
     </div>
   );

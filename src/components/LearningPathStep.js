@@ -17,12 +17,16 @@ export function LearningPathStep({learningPathStep, learningPath}, {lang}) {
     <div>
       <LearningPathStepDescription stepTitle={stepTitle} stepDescription={stepDescription} />
       <Oembed oembedContent={oembedContent} />
-      <Link to={editStepTarget}>{polyglot.t('editPage.edit')}</Link>
+      {learningPath.canEdit
+        ? <Link to={editStepTarget}>{polyglot.t('editPage.edit')}</Link>
+        : null
+      }
     </div>
   );
 }
 
 LearningPathStep.propTypes = {
+  learningPath: PropTypes.object.isRequired,
   learningPathStep: PropTypes.object.isRequired
 };
 
