@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions';
 import cloneDeep from 'lodash/cloneDeep';
 import assign from 'lodash/assign';
-import assignOrPushPropReducer from '../util/assignOrPushPropReducer'
+import assignOrPushPropReducer from '../util/assignOrPushPropReducer';
 
 export default handleActions({
   SET_LEARNING_PATH_STEP: {
