@@ -16,16 +16,19 @@ test('actions/validiateOembed valid url', t => {
     nock.cleanAll();
   };
   const url = 'https://www.youtube.com/watch?v=BTqu9iMiPIU';
+  const oEmbedReply = {'url': url, language: 'nb'};
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get('/oembed/?url=' + encodeURIComponent(url))
-    .reply(200, {type: 'introduction', title: 'sup'});
+    .reply(200, oEmbedReply);
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.validateOembed(url) )
+  store.dispatch( actions.validateOembed(url, 'nb') )
     .then(() => {
       t.deepEqual(store.getActions(), [
+        actions.removeLearningPathStepEmbedContent(),
+        actions.updateLearningPathStepEmbedUrl(oEmbedReply),
         actions.setIsValidOembed(true)
       ]);
 

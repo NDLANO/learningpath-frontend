@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import assign from 'lodash/assign';
-import { titleI18N, descriptionI18N, oembedUrlI18N } from '../../util/i18nFieldFinder';
+import { titleI18N, descriptionI18N, oembedUrlI18N, oembedI18N } from '../../util/i18nFieldFinder';
 import LabeledIcon from '../LabeledIcon';
 import TitleEditor from '../editors/TitleEditor';
 import DescriptionHTMLEditor from '../editors/DescriptionHTMLEditor';
@@ -34,6 +34,7 @@ export function EditLearningPathStep (props, {lang}) {
   let title = titleI18N(step, lang) || '';
   let htmlDescription = descriptionI18N(step, lang) || '';
   let embedContent = oembedUrlI18N(step, lang);
+  let embedIframe = oembedI18N(step, lang);
 
   let embedSourceInput = '';
   if (step.type) {
@@ -41,9 +42,9 @@ export function EditLearningPathStep (props, {lang}) {
       <div className='learningsource-form'>
         <div>
           <label className='mediatype-menu__label'>{polyglot.t('editPathStep.urlLabel')}</label>
-          <input type='url' value={embedContent} onBlur={() => validateOembedUrl(embedContent)}
-              onChange={(evt) => updateEmbedUrl({ url: evt.target.value, language: lang })}
-              placeholder={polyglot.t('editPathStep.urlPlaceholder')} />
+          <input type='url' value={embedContent} onBlur={() => validateOembedUrl(embedContent, lang)}
+                 onChange={(evt) => updateEmbedUrl({ url: evt.target.value, language: lang })}
+                 placeholder={polyglot.t('editPathStep.urlPlaceholder')}/>
         </div>
       </div>
     );
@@ -67,6 +68,11 @@ export function EditLearningPathStep (props, {lang}) {
 
         <div className='mediatype-wrapper'>
           <MediaTypeSelect value={step.type} onChange={updateType} />
+
+          {embedIframe && oembedIsValid
+           ? <div dangerouslySetInnerHTML={{__html: embedIframe}} />
+           : null
+          }
 
           {embedSourceInput}
         </div>
@@ -111,7 +117,7 @@ export const mapDispatchToProps = {
   // action til persistere learningPathStep
   saveAction: (learningPathId, lps) => updateLearningPathStep(learningPathId, lps.id, lps),
 
-  validateOembedUrl: (embedContent) => validateOembed(embedContent)
+  validateOembedUrl: (embedContent, lang) => validateOembed(embedContent, lang)
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditLearningPathStep);
