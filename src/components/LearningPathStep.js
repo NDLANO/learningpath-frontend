@@ -12,15 +12,13 @@ export function LearningPathStep({learningPathStep, learningPath}, {lang}) {
   let stepDescription = descriptionI18N(learningPathStep, lang);
   let oembedContent = oembedContentI18N(learningPathStep, lang);
   let editStepTarget = `/learningpaths/${learningPath.id}/step/${learningPathStep.id}/edit`;
+  let edit = learningPath.canEdit ? <Link to={editStepTarget}>{polyglot.t('editPage.edit')}</Link> : '';
 
   return (
     <div>
       <LearningPathStepDescription stepTitle={stepTitle} stepDescription={stepDescription} />
       <Oembed oembedContent={oembedContent} />
-      {learningPath.canEdit
-        ? <Link to={editStepTarget}>{polyglot.t('editPage.edit')}</Link>
-        : null
-      }
+      {edit}
     </div>
   );
 }

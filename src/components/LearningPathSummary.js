@@ -7,6 +7,7 @@ import polyglot from '../i18n';
 
 export function LearningPathSummary ({learningPath}, {lang}) {
   let editPathTarget = `/learningpaths/${learningPath.id}/edit`;
+  let edit = learningPath.canEdit ? <Link to={editPathTarget}>{polyglot.t('editPage.edit')}</Link> : '';
 
   return (
     <div className='learning-path'>
@@ -15,10 +16,7 @@ export function LearningPathSummary ({learningPath}, {lang}) {
       </div>
       <div className='learning-path_bd'>{descriptionI18N(learningPath, lang)}</div>
       <div>
-        {learningPath.canEdit
-          ? <Link to={editPathTarget}>{polyglot.t('editPage.edit')}</Link>
-          : null
-        }
+        {edit}
       </div>
     </div>
   );
