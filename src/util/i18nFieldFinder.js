@@ -1,3 +1,5 @@
+import find from 'lodash/find';
+
 import createFieldByLanguageFinder from './createFieldByLanguageFinder';
 
 const titleI18N = createFieldByLanguageFinder('title');
@@ -7,5 +9,5 @@ const oembedUrlI18N = createFieldByLanguageFinder('embedContent', 'url');
 export { titleI18N, descriptionI18N, oembedUrlI18N, oembedI18N};
 
 export function oembedContentI18N (learningPathStep, lang) {
-  return {url: oembedUrlI18N(learningPathStep, lang), html:oembedI18N(learningPathStep, lang)};
+  return find(learningPathStep.embedContent, {language: lang});
 }

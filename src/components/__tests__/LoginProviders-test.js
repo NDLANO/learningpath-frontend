@@ -21,3 +21,11 @@ test('component/LoginProviders', t => {
 
   t.end();
 });
+
+test('component/LoginProviders with message', t => {
+  const component = shallow(<LoginProviders message='A message to you, rudy' />);
+
+  t.ok(component.findWhere(n => n.text() === 'A message to you, rudy').length, 'has message');
+
+  t.end();
+});
