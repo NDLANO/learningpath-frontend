@@ -14,7 +14,7 @@ import timeoutMessage from './timeoutMessage.js';
 import deleteLearningPath from './deleteLearningPath';
 import fetchOembed from './fetchOembed';
 import validateOembed from './validateOembed';
-import updateLearningPathStatus from './updateLearningPath';
+import updateLearningPathStatus from './updateLearningPathStatus';
 import updateLearningPathStep from './updateLearningPathStep';
 import createLearningPathStep from './createLearningPathStep';
 
@@ -106,5 +106,5 @@ export default {
   updateLearningPathStepEmbedUrl,
   updateLearningPathStepType,
   setIsValidOembed,
-  removeLearningPathStepEmbedContent,
+  removeLearningPathStepEmbedContent
 };

@@ -6,6 +6,8 @@ import LearningPathGeneralInfo from './LearningPathGeneralInfo';
 import LearningPathPrevNext from './LearningPathPrevNext';
 
 export function LearningPath(props) {
+  const saveButtons = props.saveButtons ? props.saveButtons : null;
+  const children = props.main ? props.main : props.children;
 
   return (
     <div>
@@ -13,9 +15,10 @@ export function LearningPath(props) {
         <aside className='two-column_col'>
           <LearningPathGeneralInfo {...props} />
           <LearningPathToC {...props} />
+          {saveButtons}
         </aside>
         <main className='two-column_col'>
-          {props.children}
+          {children}
         </main>
       </div>
       <div>
@@ -26,12 +29,15 @@ export function LearningPath(props) {
 }
 
 LearningPath.propTypes = {
-  learningPath: PropTypes.object.isRequired
+  learningPath: PropTypes.object.isRequired,
+  saveButtons: PropTypes.object,
+  main: PropTypes.object
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
   learningPath: state.learningPath,
-  activePathname: ownProps.location.pathname
+  activePathname: ownProps.location.pathname,
+  isPreview: ownProps.route.isPreview
 });
 
 export default connect(mapStateToProps)(LearningPath);
