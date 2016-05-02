@@ -15,21 +15,25 @@ export function LearningPathToC ({learningPath, activePathname}, {lang}) {
   });
 
   let sortPathTarget = `/learningpaths/${learningPath.id}/sort`;
-  const sort = learningPath.canEdit ? <Link className='cta-link' to={sortPathTarget}>{polyglot.t('sortSteps.sort')}</Link> : '';
+  const sort = learningPath.canEdit ? <Link className='cta-link--block' to={sortPathTarget}>{polyglot.t('sortSteps.sort')}</Link> : '';
 
   return (
-    <div className='step-nav'>
-      <ul className='step-nav_list'>
-        {((steps) => steps.map(step => (
-          <li key={step.id}
-            className={itemClassName(`${base}/step/${step.id}`)}>
-            <Link to={`${base}/step/${step.id}`} className='step-nav_link'>
-              {titleI18N(step, lang)}
-            </Link>
-          </li>
-        )))(defined(learningPath.learningsteps, []))}
-      </ul>
-      {sort}
+    <div>
+      <div className='step-nav'>
+        <ul className='step-nav_list'>
+          {((steps) => steps.map(step => (
+            <li key={step.id}
+              className={itemClassName(`${base}/step/${step.id}`)}>
+              <Link to={`${base}/step/${step.id}`} className='step-nav_link'>
+                {titleI18N(step, lang)}
+              </Link>
+            </li>
+          )))(defined(learningPath.learningsteps, []))}
+        </ul>
+      </div>
+      <div>
+        {sort}
+      </div>
     </div>
   );
 }

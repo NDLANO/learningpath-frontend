@@ -11,9 +11,7 @@ import { titleI18N } from '../../util/i18nFieldFinder';
 import {
   sortLearningPathSteps
 } from '../../actions';
-const style = {
-  width: 400
-};
+
 const stepTarget = {
   drop() {
   }
@@ -54,7 +52,7 @@ class SortableStepsContainer extends Component {
 
     return connectDropTarget(
       <div className='step-nav step-nav_editable'>
-        <ul style={style} className='step-nav_list'>
+        <ul className='step-nav_list'>
           {learningsteps.map((step, i) => {
             return(
               <SortableLearningStep key={step.id}

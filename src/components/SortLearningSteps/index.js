@@ -7,7 +7,7 @@ import polyglot from '../../i18n';
 
 export function SortLearningSteps(props) {
   let finishPathTarget = `/learningpaths/${props.learningPath.id}`;
-  const finish = props.learningPath.canEdit ? <Link className='cta-link' to={finishPathTarget}>{polyglot.t('sortSteps.finish')}</Link> : '';
+  const finish = props.learningPath.canEdit ? <Link className='cta-link--block' to={finishPathTarget}>{polyglot.t('sortSteps.finish')}</Link> : '';
 
   return (
     <div>
