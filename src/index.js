@@ -55,10 +55,9 @@ import {
   LearningPath, LearningPathSummary, LearningPathStep,
   LearningPathSearch,
   EditLearningPath, EditLearningPathStep, CreateLearningPathStep,
-  CreateLearningPath
+  CreateLearningPath, LearningPathToCButtons
 } from './components';
 import requireAuthentication from './components/requireAuthentication';
-import LearningPathToCButtons from './components/LearningPath/LearningPathToCButtons';
 
 ReactDOM.render(
   <Provider store={store}>
