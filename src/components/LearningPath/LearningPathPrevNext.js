@@ -50,8 +50,9 @@ LearningPathPrevNext.contextTypes = {
 const mapStateToProps = (state) => {
   const learningsteps = get(state.learningPath, 'learningsteps', []);
 
-  const currentSeqNo = get(state.learningPathStep, 'seqNo', -1) - 1;
-
+  const currentSeqNo = get(state.learningPathStep, 'seqNo', -1);
+  console.log(learningsteps);
+  console.log(currentSeqNo)
   return Object.assign({}, state, {
     nextUrl: learningsteps[currentSeqNo + 1],
     prevUrl: learningsteps[currentSeqNo - 1],
