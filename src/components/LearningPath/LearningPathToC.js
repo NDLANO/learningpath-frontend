@@ -15,7 +15,7 @@ export function LearningPathToC ({learningPath, activePathname}, {lang}) {
   });
 
   let sortPathTarget = `/learningpaths/${learningPath.id}/sort`;
-  const sort = learningPath.canEdit ? <Link className='cta-link--block' to={sortPathTarget}>{polyglot.t('sortSteps.sort')}</Link> : '';
+  const sort = learningPath.canEdit ? <Link className='cta-link cta-link--block' to={sortPathTarget}>{polyglot.t('sortSteps.sort')}</Link> : '';
 
   return (
     <div>
