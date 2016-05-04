@@ -65,6 +65,8 @@ const phrases = {
     addStepBtn: 'Legg til nytt læringssteg',
     shortDescriptionPlaceholder:  'Skriv en kort beskrivelse (max 155 tegn)',
     oneLineEditorDefaultPlaceholder: 'Skriv her',
+    saveDraft: 'Lagre som utkast',
+    saveAndPublish: 'Lagre og publiser',
     edit: 'Endre'
   },
   editPathStep: {
@@ -96,6 +98,9 @@ const phrases = {
   },
   updateLearningPath: {
     updatedMsg: 'Lagret OK'
+  },
+  updateLearningPathStatus: {
+    updateStatusMsg: 'Oppdatert status OK'
   }
 };
 
