@@ -82,15 +82,16 @@ export default class DescriptionHTMLEditor extends React.Component {
 
     this.focus = () => this.refs.editor.focus();
     this.blur = () => this.refs.editor.blur();
-    this.onChange = editorState => this.setState({editorState});
-    this.onDone = () => {
-      this.blur();
-      let contentState = this.state.editorState.getCurrentContent();
+    this.onChange = editorState => this.setState({editorState}, () => {
+      if (editorState.getSelection().getHasFocus()) {
+        return;
+      }
+      let contentState = editorState.getCurrentContent();
       onChange({
         description: stateToHTML(contentState),
         language: props.lang
       });
-    };
+    });
 
     this.handleKeyCommand = command => this._handleKeyCommand(command);
     this.toggleBlockType = type => this._toggleBlockType(type);
@@ -166,16 +167,12 @@ export default class DescriptionHTMLEditor extends React.Component {
         <div className={className} onClick={this.focus}>
           <Editor
             editorState={editorState}
-            handleKeyCommand={this.handleKeyCommand}
             onChange={this.onChange}
             placeholder={polyglot.t('editPathStep.stepDescriptionPlaceholder')}
             ref='editor'
             spellCheck={true}
           />
         </div>
-        <button className='un-button' onClick={this.onDone}>
-          <Icon.Check className='icon--l' />
-        </button>
       </div>
     );
   }

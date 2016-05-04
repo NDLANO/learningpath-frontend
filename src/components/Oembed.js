@@ -64,3 +64,7 @@ export default class Oembed extends React.Component {
 Oembed.propTypes = {
   oembedContent: PropTypes.object.isRequired
 };
+
+Oembed.defaultProps = {
+  oembedContent: {}
+};

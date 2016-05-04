@@ -33,7 +33,7 @@ export default class Welcome extends React.Component {
           </Form>
 
           <a href='#feature' className='hero_link cta-link cta-link--negative'>{polyglot.t('welcomePage.explanationBtn')}</a>
-          <a href='/login' className='hero_link cta-link cta-link-secondary cta-link--secondary-negative'>{polyglot.t('welcomePage.newBtn')} »</a>
+          <a href='/minside' className='hero_link cta-link cta-link-secondary cta-link--secondary-negative'>{polyglot.t('welcomePage.newBtn')} »</a>
         </div>
         <div className='infoblock'>
           <div className='infoblock'>

@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
+import { reducer as formReducer } from 'redux-form';
 
 import authenticated from './authenticated';
 import authToken from './authToken';
@@ -9,7 +10,7 @@ import learningPathStep from './learningPathStep';
 import learningPaths from './learningPaths';
 import learningPathQuery from './learningPathQuery';
 import learningPathsTotalCount from './learningPathsTotalCount';
-import privateLearningPathsSortBy from './privateLearningPathsSortBy';
+import myLearningPathsSortOrder from './myLearningPathsSortOrder';
 import oembedIsValid from './oembedIsValid';
 import messages from './messages';
 
@@ -22,10 +23,11 @@ const rootReducers = combineReducers({
   learningPaths,
   learningPathQuery,
   learningPathsTotalCount,
-  privateLearningPathsSortBy,
+  myLearningPathsSortOrder,
   messages,
   oembedIsValid,
-  routing: routerReducer
+  routing: routerReducer,
+  form: formReducer
 });
 
 export default rootReducers;

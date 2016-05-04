@@ -2,7 +2,6 @@ import 'isomorphic-fetch';
 import queryString from 'query-string';
 import cloneDeep from 'lodash/cloneDeep';
 import map from 'lodash/map';
-import has from 'lodash/has';
 
 import assureSequenceOrder from '../util/assureSequenceOrder';
 import { fetchAuthorized, postAuthorized, putAuthorized, deleteAuthorized, resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';

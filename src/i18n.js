@@ -26,9 +26,10 @@ const phrases = {
   myPage: {
     lastUpdated: 'Sist endret',
     order: {
-      title: 'Tittel',
-      lastUpdated: 'Dato',
-      status: 'Status'
+      title: 'Alfabetisk',
+      newest: 'Nyeste',
+      oldest: 'Eldste',
+      status: 'Publisert'
     },
     pageHeader: 'Mine læringsstier',
     newBtn: 'Opprett ny læringssti',
@@ -37,6 +38,11 @@ const phrases = {
       PUBLISHED: 'Søkbar',
       NOT_LISTED: 'Åpen'
     }
+  },
+  pathDropDown: {
+    publish: 'Publiser',
+    unpublish: 'Gjør privat',
+    delete: 'Slett'
   },
   requireAuthentication: {
     errorMessage: 'Denne siden krever innlogging.'
@@ -58,7 +64,8 @@ const phrases = {
     savePathBtn: 'Lagre',
     addStepBtn: 'Legg til nytt læringssteg',
     shortDescriptionPlaceholder:  'Skriv en kort beskrivelse (max 155 tegn)',
-    oneLineEditorDefaultPlaceholder: 'Skriv her'
+    oneLineEditorDefaultPlaceholder: 'Skriv her',
+    edit: 'Endre'
   },
   editPathStep: {
     urlLabel: 'Lim inn lenke (URL) fra ndla.no eller youtube.com',

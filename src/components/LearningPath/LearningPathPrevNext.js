@@ -23,7 +23,7 @@ export function LearningPathPrevNext ({learningPath, learningsteps, nextUrl, pre
     <Link to={`${stepperUrl(object)}`} className={stepperClassName(object)}> {text} </Link>;
 
   return (
-    <div className='stepper-nav'>
+    <div className='stepper-nav stepper-nav_fixed'>
 
       {stepperTag(prevUrl, '<< Forrige')}
       {learningsteps.map(step => (
