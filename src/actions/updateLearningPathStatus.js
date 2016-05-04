@@ -3,7 +3,7 @@ import { updateStatus } from '../sources/learningpaths';
 import { routerActions } from 'react-router-redux';
 import polyglot from '../i18n';
 
-export default function updateLearningPathStatus (pathId, status, redirectUrl='') {
+export default function updateLearningPathStatus (pathId, status, redirectUrl=false) {
   return (dispatch, getState) => updateStatus(getState().authToken, { pathId }, {'status': status})
     .then(() => {
       dispatch(setLearningPathStatus({id: pathId, status: status}));

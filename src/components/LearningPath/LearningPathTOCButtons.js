@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 import polyglot from '../../i18n';
 import Icon from '../Icon';
@@ -17,19 +18,19 @@ export function LearningPathToCButtons({learningPath, saveAction, saveAndPublish
   return (<div>
     <ul className='vertical-menu'>
       <li className='vertical-menu_item'>
-        <a href={newStepTarget} className='cta-link cta-link--block labeled-icon'>
+        <Link to={newStepTarget} className='cta-link cta-link--block labeled-icon'>
           <Icon.Add /> {polyglot.t('editPage.addStepBtn')}
-        </a>
+        </Link>
       </li>
       <li className='vertical-menu_item'>
-        <a href='#' className='cta-link cta-link--block labeled-icon' onClick={saveLearningPath}>
+        <button className='cta-link cta-link--block labeled-icon' onClick={saveLearningPath}>
           <Icon.Save /> {polyglot.t('editPage.saveDraft')}
-        </a>
+        </button>
       </li>
       <li className='vertical-menu_item' onClick={saveAndPublishLearningPath}>
-        <a href='#' className='button button--outline cta-link--block labeled-icon'>
+        <button className='button button--outline cta-link--block labeled-icon'>
           {polyglot.t('editPage.saveAndPublish')} <Icon.Forward />
-        </a>
+        </button>
       </li>
     </ul>
   </div>);

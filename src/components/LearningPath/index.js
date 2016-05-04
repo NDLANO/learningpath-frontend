@@ -1,13 +1,14 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import defined from 'defined';
 
 import LearningPathToC from './LearningPathToC';
 import LearningPathGeneralInfo from './LearningPathGeneralInfo';
 import LearningPathPrevNext from './LearningPathPrevNext';
 
 export function LearningPath(props) {
-  const saveButtons = props.saveButtons ? props.saveButtons : null;
-  const children = props.main ? props.main : props.children;
+  const saveButtons = defined(props.saveButtons, null);
+  const children = defined(props.main, props.children);
 
   return (
     <div>
