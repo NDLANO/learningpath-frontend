@@ -24,7 +24,6 @@ const phrases = {
     altText: 'Nasjonal digital læringsarena'
   },
   myPage: {
-    lastUpdated: 'Sist endret',
     order: {
       title: 'Alfabetisk',
       newest: 'Nyeste',
@@ -33,10 +32,14 @@ const phrases = {
     },
     pageHeader: 'Mine læringsstier',
     newBtn: 'Opprett ny læringssti',
-    statusValue: {
-      PRIVATE: 'Privat',
-      PUBLISHED: 'Søkbar',
-      NOT_LISTED: 'Åpen'
+    path: {
+      duration: 'Varighet',
+      status: 'Synlighet',
+      statusValue: {
+        PRIVATE: 'Privat',
+        PUBLISHED: 'Søkbar',
+        NOT_LISTED: 'Åpen'
+      }
     }
   },
   pathDropDown: {

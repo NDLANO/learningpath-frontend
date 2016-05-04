@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import sortBy from 'lodash/sortBy';
 import reverse from 'lodash/reverse';
 import { setMyLearningPathsSortOrder, updateLearningPathStatus, deleteLearningPath, createLearningPath } from '../actions';
+import Icon from './Icon';
 import LabeledIcon from './LabeledIcon';
 import polyglot from '../i18n';
 
@@ -55,17 +56,27 @@ export class MyPage extends React.Component {
 
       return (
         <div key={lp.id} className='tile'>
-          <div className='tile_context-menu'>
-            <LearningPathDropdown onSelect={onDropDownSelect} learningPath={lp}/>
+          <div className='tile_hd'>
+            <div className='tile_date'>{lastUpdated}</div>
+            <div className='tile_context-menu'>
+              <LearningPathDropdown onSelect={onDropDownSelect} learningPath={lp}/>
+            </div>
           </div>
-          <h3 className='tile_hd'>
-            <Link to={`/learningpaths/${lp.id}`}>{title}</Link>
-          </h3>
-          <div className='tile_bd'>{description}</div>
+          <Link className='tile_bd' to={`/learningpaths/${lp.id}`}>
+            <h3 className='tile_title'>{title}</h3>
+            <p>{description}</p>
+          </Link>
           <div className='tile_ft'>
-            <p>{duration}</p>
-            <p>{polyglot.t('myPage.lastUpdated')} {lastUpdated}</p>
-            <p>{polyglot.t('myPage.statusValue.' + lp.status)}</p>
+            <div className='tile_property'>
+              <div className='tile_property-icon'><Icon.Duration/></div>
+              <p className='tile_property-description'>{polyglot.t('myPage.path.duration')}</p>
+              <p>{duration}</p>
+            </div>
+            <div className='tile_property'>
+              <div className='tile_property-icon'><Icon.Visibility/></div>
+              <p className='tile_property-description'>{polyglot.t('myPage.path.status')}</p>
+              <p>{polyglot.t('myPage.path.statusValue.' + lp.status)}</p>
+            </div>
           </div>
         </div>
       );
