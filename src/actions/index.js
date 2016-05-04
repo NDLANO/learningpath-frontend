@@ -17,6 +17,8 @@ import validateOembed from './validateOembed';
 import updateLearningPathStatus from './updateLearningPathStatus';
 import updateLearningPathStep from './updateLearningPathStep';
 import createLearningPathStep from './createLearningPathStep';
+import deletePersistedLearningPathStep from './deletePersistedLearningPathStep';
+import deleteUnPersistedLearningPathStep from './deleteUnPersistedLearningPathStep';
 
 export var applicationError = createAction('APPLICATION_ERROR');
 export var setAuthenticated = createAction('SET_AUTHENTICATED');
@@ -44,7 +46,7 @@ export var updateLearningPathStepType= createAction('UPDATE_LEARNING_PATH_STEP_T
 export var createEmptyLearningPathStep = createAction('CREATE_EMPTY_LEARNING_PATH_STEP');
 export var setIsValidOembed = createAction('SET_IS_VALID_OEMBED');
 export var removeLearningPathStepEmbedContent = createAction('REMOVE_LEARNING_PATH_STEP_EMBED_CONTENT');
-
+export var removeLearningPathStep = createAction('REMOVE_LEARNING_PATH_STEP');
 export {
   initializeSession,
   logout,
@@ -61,8 +63,9 @@ export {
   validateOembed,
   updateLearningPathStatus,
   updateLearningPathStep,
-  createLearningPathStep
-
+  createLearningPathStep,
+  deletePersistedLearningPathStep,
+  deleteUnPersistedLearningPathStep
 };
 
 export default {
@@ -106,5 +109,8 @@ export default {
   updateLearningPathStepEmbedUrl,
   updateLearningPathStepType,
   setIsValidOembed,
-  removeLearningPathStepEmbedContent
+  removeLearningPathStepEmbedContent,
+  removeLearningPathStep,
+  deletePersistedLearningPathStep,
+  deleteUnPersistedLearningPathStep
 };

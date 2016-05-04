@@ -65,7 +65,8 @@ const phrases = {
     addStepBtn: 'Legg til nytt læringssteg',
     shortDescriptionPlaceholder:  'Skriv en kort beskrivelse (max 155 tegn)',
     oneLineEditorDefaultPlaceholder: 'Skriv her',
-    edit: 'Endre'
+    edit: 'Endre',
+    deletePathBtn: 'Slett'
   },
   editPathStep: {
     urlLabel: 'Lim inn lenke (URL) fra ndla.no eller youtube.com',

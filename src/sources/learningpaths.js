@@ -41,6 +41,10 @@ const deleteLearningPath = deleteAuthorized('/learningpaths/:pathId');
 const deletePath = (authToken, { pathId }) =>
   deleteLearningPath(authToken, {pathId});
 
+const deleteLearningPathStep = deleteAuthorized('/learningpaths/:pathId/learningsteps/:stepId');
+const deleteStep = (authToken, {pathId, stepId} ) =>
+  deleteLearningPathStep(authToken, {pathId, stepId});
+
 const putLearningPathStatus = putAuthorized('/learningpaths/:pathId/status');
 const updateStatus = (authToken, { pathId }, body) =>
   putLearningPathStatus(authToken, {pathId}, body);
@@ -77,5 +81,6 @@ export {
   fetchOembedUrl,
   updateStatus,
   createStep,
-  updateStep
+  updateStep,
+  deleteStep
 };
