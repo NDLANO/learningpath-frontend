@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
-
+import polyglot from '../../i18n';
 import Oembed from '../Oembed';
 
 export class PreviewOembed extends React.Component {
@@ -35,7 +35,7 @@ export class PreviewOembed extends React.Component {
 
     let previewButton = !this.state.previewOembed
     ? (<a className='learningsource__expand' onClick={onPreviewClick}>
-      <span className='button button--outline'>Forhåndsvis hele artikkelen</span>
+      <span className='button button--outline'>{polyglot.t('editPathStep.previewOembed')}</span>
       </a>)
     : null;
 
