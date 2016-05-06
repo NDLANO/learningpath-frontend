@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import get from 'lodash/get';
 import LabeledIcon from './LabeledIcon';
 import TitleEditor from './editors/TitleEditor';
@@ -41,13 +40,7 @@ export function EditLearningPath (props, {lang}) {
     <button className='cta cta-link' onClick={saveLearningPath}>
       <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
     </button>
-
-    <div>
-      <Link to={`/learningpaths/${learningPath.id}/step/new`}>
-        <LabeledIcon.Add labelText={polyglot.t('editPage.addStepBtn')} />
-      </Link>
-    </div>
-  </div>);
+  </div>;
 }
 
 EditLearningPath.propTypes = {

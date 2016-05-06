@@ -24,7 +24,6 @@ const phrases = {
     altText: 'Nasjonal digital læringsarena'
   },
   myPage: {
-    lastUpdated: 'Sist endret',
     order: {
       title: 'Alfabetisk',
       newest: 'Nyeste',
@@ -33,10 +32,14 @@ const phrases = {
     },
     pageHeader: 'Mine læringsstier',
     newBtn: 'Opprett ny læringssti',
-    statusValue: {
-      PRIVATE: 'Privat',
-      PUBLISHED: 'Søkbar',
-      NOT_LISTED: 'Åpen'
+    path: {
+      duration: 'Varighet',
+      status: 'Synlighet',
+      statusValue: {
+        PRIVATE: 'Privat',
+        PUBLISHED: 'Søkbar',
+        NOT_LISTED: 'Åpen'
+      }
     }
   },
   pathDropDown: {
@@ -66,6 +69,8 @@ const phrases = {
     shortDescriptionPlaceholder:  'Skriv en kort beskrivelse (max 155 tegn)',
     titlePlaceHolder: 'Skriv  tittel her',
     oneLineEditorDefaultPlaceholder: 'Skriv her',
+    saveDraft: 'Lagre som utkast',
+    saveAndPublish: 'Lagre og publiser',
     edit: 'Endre'
   },
   editPathStep: {
@@ -98,6 +103,9 @@ const phrases = {
   },
   updateLearningPath: {
     updatedMsg: 'Lagret OK'
+  },
+  updateLearningPathStatus: {
+    updateStatusMsg: 'Oppdatert status OK'
   }
 };
 
