@@ -8,6 +8,8 @@ import DescriptionEditor from './editors/DescriptionEditor';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 import polyglot from '../i18n';
 
+import Icon from './Icon';
+
 import {
   updateLearningPathTitle,
   updateLearningPathDescription,
@@ -27,11 +29,14 @@ export function EditLearningPath (props, {lang}) {
 
   let saveLearningPath = () => saveAction(learningPath);
 
-  return <div>
+  return (<div>
+    <span className='editable'><Icon.Create /></span>
     <h2>
-      <TitleEditor value={titleText} onChange={updateTitle} lang={lang} />
+      <TitleEditor value={titleText} onChange={updateTitle} lang={lang} placeholder={polyglot.t('editPage.titlePlaceHolder')} />
     </h2>
-    <DescriptionEditor value={descriptionText} onChange={updateDescription} lang={lang} />
+
+    <span className='editable'><Icon.Create /></span>
+    <DescriptionEditor value={descriptionText} onChange={updateDescription} lang={lang} placeholder={polyglot.t('editPage.shortDescriptionPlaceholder')} />
 
     <button className='cta cta-link' onClick={saveLearningPath}>
       <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
@@ -42,7 +47,7 @@ export function EditLearningPath (props, {lang}) {
         <LabeledIcon.Add labelText={polyglot.t('editPage.addStepBtn')} />
       </Link>
     </div>
-  </div>;
+  </div>);
 }
 
 EditLearningPath.propTypes = {

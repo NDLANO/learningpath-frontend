@@ -37,5 +37,6 @@ Icon.Italic = props => (<Icon {...props} className={'icon--format-italic ' + pro
 Icon.Underline = props => (<Icon {...props} className={'icon--format-underlined ' + props.className} svgDefId='icon-format_underlined' />);
 Icon.Bulleted = props => (<Icon {...props} className={'icon--format-list-bulleted ' + props.className} svgDefId='icon-format_list_bulleted' />);
 Icon.Numbered = props => (<Icon {...props} className={'icon--format-list-numbered ' + props.className} svgDefId='icon-format_list_numbered' />);
+Icon.Create = props => (<Icon {...props} className={'icon--create ' + props.className} svgDefId='icon-create' />);
 
 export default Icon;
