@@ -110,23 +110,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('appContainer')
 );
-
-
-/*
-<<<<<<< HEAD
-          }}/>
-          <Route path='learningpaths/:pathId' component={LearningPath}
-            onEnter={({params}) => fetchLearningPath(params.pathId)}>
-            <IndexRoute components={{main: LearningPathSummary, toc: LearningPathToc}} />
-
-
-            <Route path='edit' components={{main: requireAuthentication(EditLearningPath), toc: LearningPathToc}}
-               onEnter={ifAuthenticated(({params}) => fetchLearningPath(params.pathId))} />
-
-            <Route path='step/new' components={{main: requireAuthentication(CreateLearningPathStep), toc: LearningPathToc}} onEnter={ifAuthenticated(createEmptyLearningPathStep)}/>
-
-            <Route path='step/:stepId/edit' components={ {main: requireAuthentication(EditLearningPathStep), toc: LearningPathToc}}
-              onEnter={ifAuthenticated(({params}) => fetchLearningPathStep(params.pathId, params.stepId))} />
-            <Route path='step/:stepId' components={{main: LearningPathStep, toc: LearningPathToc}}
-=======
-*/
