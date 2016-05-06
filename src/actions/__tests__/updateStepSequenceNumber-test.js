@@ -30,10 +30,12 @@ test('actions/updateStepSequenceNumber sucessfully', t => {
   const learningStepReply = Object.assign({}, body, {});
 
 
-  const updateSeqNo = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  // updateSeqNo
+  nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .put('/learningpaths/' + pathId + '/learningsteps/' + stepId + '/seqNo', body)
     .reply(200, learningStepReply);
-  const fetchLearningPath = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  // fetchLearningPath
+  nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get('/learningpaths/' + pathId)
     .reply(200, {id: pathId});
 
@@ -61,11 +63,13 @@ test('actions/updateStepSequenceNumber access denied', t => {
     seqNo: 3
   };
 
-  const updateSeqNo = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  // updateSeqNo
+  nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .put('/learningpaths/' + pathId + '/learningsteps/' + stepId + '/seqNo', body)
     .reply(403, {message: 'Invalid'});
 
-  const fetchLearningPath = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  // fetchLearningPath
+  nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get('/learningpaths/' + pathId)
     .reply(200, {id: pathId});
 
