@@ -44,12 +44,30 @@ export function EditLearningPathStep (props, {lang}) {
   let embedSourceInput = '';
   if (step.type) {
     embedSourceInput =(
-      <div className='learningsource-form'>
+      <div className='learning-path_bd'>
         <div>
-          <label className='mediatype-menu__label'>{polyglot.t('editPathStep.urlLabel')}</label>
-          <input type='url' value={embedContent} onBlur={() => validateOembedUrl(embedContent, lang)}
-                 onChange={(evt) => updateEmbedUrl({ url: evt.target.value, language: lang })}
-                 placeholder={polyglot.t('editPathStep.urlPlaceholder')}/>
+          <DescriptionHTMLEditor
+            lang={lang}
+            value={htmlDescription}
+            onChange={updateDescription}
+          />
+        </div>
+
+        <div className='learningsource-form'>
+          <div>
+            <label className='mediatype-menu__label'>{polyglot.t('editPathStep.urlLabel')}</label>
+            <input type='url' value={embedContent} onBlur={() => validateOembedUrl(embedContent)}
+                onChange={(evt) => updateEmbedUrl({ url: evt.target.value, language: lang })}
+                placeholder={polyglot.t('editPathStep.urlPlaceholder')} />
+          </div>
+        </div>
+        <div>
+          <button className='cta cta-link' onClick={saveLearningStep} disabled={ !isValid() || !oembedIsValid }>
+            <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
+          </button>
+          <button className='cta cta-link--secondary' onClick={deleteLearningStep}>
+            <LabeledIcon.Delete labelText={polyglot.t('editPage.deletePathBtn')} />
+          </button>
         </div>
       </div>
     );
@@ -61,16 +79,6 @@ export function EditLearningPathStep (props, {lang}) {
         <h1 className='learing-path_title'>
           <TitleEditor lang={lang} value={title} onChange={updateTitle} />
         </h1>
-      </div>
-      <div className='learning-path_bd'>
-        <div>
-          <DescriptionHTMLEditor
-            lang={lang}
-            value={htmlDescription}
-            onChange={updateDescription}
-          />
-        </div>
-
         <div className='mediatype-wrapper'>
           <MediaTypeSelect value={step.type} onChange={updateType} />
 
@@ -78,18 +86,9 @@ export function EditLearningPathStep (props, {lang}) {
            ? <div dangerouslySetInnerHTML={{__html: embedIframe}} />
            : null
           }
-
-          {embedSourceInput}
-        </div>
-        <div>
-          <button className='cta cta-link' onClick={saveLearningStep} disabled={ !isValid() || !oembedIsValid }>
-            <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
-          </button>
-          <button className='cta cta-link--secondary' onClick={deleteLearningStep}>
-            <LabeledIcon.Delete labelText={polyglot.t('editPage.deletePathBtn')} />
-          </button>
         </div>
       </div>
+    {embedSourceInput}
     </div>
   );
 }

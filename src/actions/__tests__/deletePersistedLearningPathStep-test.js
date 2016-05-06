@@ -3,6 +3,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 import actions from '..';
+import { routerActions } from 'react-router-redux';
 
 const middleware = [ thunk ];
 const mockStore = configureStore(middleware);
@@ -46,7 +47,8 @@ test('actions/deletePersistedLearningPathStep with id', t => {
     .then(() => {
       //console.log(store.getActions());
       t.deepEqual(store.getActions(), [
-        {type: 'REMOVE_LEARNING_PATH', payload: pathId}
+        {type: 'REMOVE_LEARNING_PATH', payload: pathId},
+        routerActions.push({ pathname: `/learningpaths/${pathId}` })
       ]);
 
       t.doesNotThrow(() => nock.isDone());

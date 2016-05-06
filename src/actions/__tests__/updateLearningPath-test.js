@@ -47,6 +47,32 @@ test('actions/updateLearningPath', t => {
     .catch(done);
 });
 
+test('actions/updateLearningPath with redirect', t => {
+  const done = res => {
+    t.end(res);
+    nock.cleanAll();
+  };
+
+  const putPathApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+    .put('/learningpaths/' + pathId, { id: pathId })
+    .reply(200, {id: pathId});
+
+  const store = mockStore({ authToken });
+
+  store.dispatch( actions.updateLearningPath(pathId, {id: pathId}, '/goto/dev/null') )
+    .then(() => {
+      const actual = store.getActions();
+
+      t.equal(actual.length, 3, 'three actions');
+      t.deepEqual(actual[2], routerActions.push({ pathname: '/goto/dev/null' }));
+
+      t.doesNotThrow(() => putPathApi.done());
+
+      done();
+    })
+    .catch(done);
+});
+
 test('actions/updateLearningPath access denied', (t) => {
   const done = res => {
     t.end(res);
