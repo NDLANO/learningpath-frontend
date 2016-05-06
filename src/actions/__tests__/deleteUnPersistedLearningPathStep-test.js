@@ -10,20 +10,12 @@ const mockStore = configureStore(middleware);
 
 const authToken = '123345';
 const pathId = 123;
-const stepId = 321;
 
 const learningStep = {
   title: [{language: 'nb', title: 'Goat1'}],
   seqNo: 0,
   description: [{language: 'nb', description: 'this is a description1'}],
   embedContent: [{language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY'}]
-};
-const learningPath = {
-  id: pathId,
-  title: [{language: 'nb', title: 'Goat1'}],
-  seqNo: 2,
-  description: [{language: 'nb', description: 'this is a description1'}],
-  learningsteps: [learningStep]
 };
 
 test('actions/deleteUnPersistedLearningPathStep without id', t => {

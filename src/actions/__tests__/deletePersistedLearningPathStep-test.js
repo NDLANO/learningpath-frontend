@@ -19,13 +19,6 @@ const learningStep = {
   description: [{language: 'nb', description: 'this is a description1'}],
   embedContent: [{language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY'}]
 };
-const learningPath = {
-  id: pathId,
-  title: [{language: 'nb', title: 'Goat1'}],
-  seqNo: 2,
-  description: [{language: 'nb', description: 'this is a description1'}],
-  learningsteps: [learningStep]
-};
 
 test('actions/deletePersistedLearningPathStep with id', t => {
   const done = res => {
