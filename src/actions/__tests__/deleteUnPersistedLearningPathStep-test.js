@@ -44,13 +44,3 @@ test('actions/deleteUnPersistedLearningPathStep without id', t => {
 
   done();
 });
-
-/*
-store.dispatch( actions.validateOembed('') );
-t.deepEqual(store.getActions(), [
-  actions.removeLearningPathStepEmbedContent(),
-  actions.setIsValidOembed(true)
-]);
-
-done();
-*/
