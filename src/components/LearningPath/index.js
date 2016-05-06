@@ -1,21 +1,25 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import defined from 'defined';
 
-//import LearningPathToC from './LearningPathToC';
 import LearningPathGeneralInfo from './LearningPathGeneralInfo';
 import LearningPathPrevNext from './LearningPathPrevNext';
+import LearningPathToC from './LearningPathToC';
 
 export function LearningPath(props) {
-
+  const saveButtons = defined(props.saveButtons, null);
+  const children = defined(props.main, props.children);
+  const sortableTableOfContent = defined(props.sortLearningSteps, <LearningPathToC {...props}/>);
   return (
     <div>
       <div className='two-column'>
         <aside className='two-column_col'>
           <LearningPathGeneralInfo {...props} />
-          {props.toc}
+          {sortableTableOfContent}
+          {saveButtons}
         </aside>
         <main className='two-column_col'>
-          {props.main}
+          {children}
         </main>
       </div>
       <div>
@@ -27,14 +31,15 @@ export function LearningPath(props) {
 
 LearningPath.propTypes = {
   learningPath: PropTypes.object.isRequired,
-  toc: PropTypes.object.isRequired,
-  main: PropTypes.object.isRequired
-
+  saveButtons: PropTypes.object,
+  main: PropTypes.object,
+  sortLearningSteps: PropTypes.object
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
   learningPath: state.learningPath,
-  activePathname: ownProps.location.pathname
+  activePathname: ownProps.location.pathname,
+  isPreview: ownProps.route.isPreview
 });
 
 export default connect(mapStateToProps)(LearningPath);

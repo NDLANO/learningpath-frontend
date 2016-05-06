@@ -12,7 +12,11 @@ export function SortLearningSteps(props) {
   return (
     <div>
       <SortableStepsContainer />
-      {finish}
+      <ul className='vertical-menu'>
+        <li className='vertical-menu_item'>
+          {finish}
+        </li>
+      </ul>
     </div>
   );
 }

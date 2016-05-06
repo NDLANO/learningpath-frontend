@@ -7,7 +7,7 @@ import polyglot from '../../i18n';
 
 import { titleI18N } from '../../util/i18nFieldFinder';
 
-export function LearningPathToC ({learningPath, activePathname}, {lang}) {
+export default function LearningPathToC ({learningPath, activePathname}, {lang}) {
   const base = `/learningpaths/${learningPath.id}`;
   const itemClassName = (path) => classNames({
     'step-nav_item': true,
@@ -32,7 +32,11 @@ export function LearningPathToC ({learningPath, activePathname}, {lang}) {
         </ul>
       </div>
       <div>
-        {sort}
+        <ul className='vertical-menu'>
+          <li className='vertical-menu_item'>
+          {sort}
+          </li>
+        </ul>
       </div>
     </div>
   );
@@ -50,9 +54,3 @@ LearningPathToC.contextTypes = {
 LearningPathToC.defaultProps = {
   activePathname: ''
 };
-const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
-  learningPath: state.learningPath,
-  activePathname: ownProps.location.pathname
-});
-
-export default connect(mapStateToProps)(LearningPathToC);

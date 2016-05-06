@@ -55,11 +55,10 @@ import {
   LearningPath, LearningPathSummary, LearningPathStep,
   LearningPathSearch,
   EditLearningPath, EditLearningPathStep, CreateLearningPathStep,
-  CreateLearningPath,
+  CreateLearningPath, LearningPathToCButtons,
   SortLearningSteps
 } from './components';
 import requireAuthentication from './components/requireAuthentication';
-import LearningPathToc from './components/LearningPath/LearningPathToc';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -85,22 +84,22 @@ ReactDOM.render(
 
             changeLearningPathQuery(query);
             fetchLearningPaths();
+
           }}/>
-          <Route path='learningpaths/:pathId' component={LearningPath}
-            onEnter={({params}) => fetchLearningPath(params.pathId)}>
-            <IndexRoute components={{main: LearningPathSummary, toc: LearningPathToc}} />
-
-            <Route path='sort' components={{main: LearningPathSummary, toc: SortLearningSteps}}
-              onEnter={ifAuthenticated(({params}) => fetchLearningPath(params.pathId))} />
-
-            <Route path='edit' components={{main: requireAuthentication(EditLearningPath), toc: LearningPathToc}}
+          <Route path='learningpaths/:pathId'
+            onEnter={({params}) => fetchLearningPath(params.pathId)} component={LearningPath} >
+            <IndexRoute components={{main: LearningPathSummary, saveButtons: LearningPathToCButtons}} />
+            <Route path='edit' component={requireAuthentication(EditLearningPath)}
                onEnter={ifAuthenticated(({params}) => fetchLearningPath(params.pathId))} />
 
-            <Route path='step/new' components={{main: requireAuthentication(CreateLearningPathStep), toc: LearningPathToc}} onEnter={ifAuthenticated(createEmptyLearningPathStep)}/>
+            <Route path='step/new' component={requireAuthentication(CreateLearningPathStep)} onEnter={ifAuthenticated(createEmptyLearningPathStep)}/>
 
-            <Route path='step/:stepId/edit' components={ {main: requireAuthentication(EditLearningPathStep), toc: LearningPathToc}}
+            <Route path='sort' components={{main: LearningPathSummary, sortLearningSteps: SortLearningSteps}}
+              onEnter={ifAuthenticated(({params}) => fetchLearningPath(params.pathId))} />
+
+            <Route path='step/:stepId/edit' component={requireAuthentication(EditLearningPathStep)}
               onEnter={ifAuthenticated(({params}) => fetchLearningPathStep(params.pathId, params.stepId))} />
-            <Route path='step/:stepId' components={{main: LearningPathStep, toc: LearningPathToc}}
+            <Route path='step/:stepId' components={{main: LearningPathStep, saveButtons: LearningPathToCButtons}}
               onEnter={({params}) => fetchLearningPathStep(params.pathId, params.stepId)} />
           </Route>
 
@@ -111,3 +110,23 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('appContainer')
 );
+
+
+/*
+<<<<<<< HEAD
+          }}/>
+          <Route path='learningpaths/:pathId' component={LearningPath}
+            onEnter={({params}) => fetchLearningPath(params.pathId)}>
+            <IndexRoute components={{main: LearningPathSummary, toc: LearningPathToc}} />
+
+
+            <Route path='edit' components={{main: requireAuthentication(EditLearningPath), toc: LearningPathToc}}
+               onEnter={ifAuthenticated(({params}) => fetchLearningPath(params.pathId))} />
+
+            <Route path='step/new' components={{main: requireAuthentication(CreateLearningPathStep), toc: LearningPathToc}} onEnter={ifAuthenticated(createEmptyLearningPathStep)}/>
+
+            <Route path='step/:stepId/edit' components={ {main: requireAuthentication(EditLearningPathStep), toc: LearningPathToc}}
+              onEnter={ifAuthenticated(({params}) => fetchLearningPathStep(params.pathId, params.stepId))} />
+            <Route path='step/:stepId' components={{main: LearningPathStep, toc: LearningPathToc}}
+=======
+*/
