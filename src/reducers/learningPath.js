@@ -9,7 +9,6 @@ import assignOrPushPropReducer from '../util/assignOrPushPropReducer';
 export default handleActions({
   SET_LEARNING_PATH: {
     next(state, action) {
-      ("hei")
       return Object.assign({},
         action.payload,
         { learningsteps: assureSequenceOrder(action.payload.learningsteps) }

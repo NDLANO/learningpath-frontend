@@ -54,7 +54,6 @@ export function resolveJsonOrRejectWithError (res) {
 
 export function fetchAuthorized (path, method = 'GET') {
   const url = params => apiResourceUrl(formatPattern(path, params));
-  (path)
   return (authToken, params = {}) => fetch(url(params), {
     method, headers: {'APP-KEY': authToken}
   }).then( resolveJsonOrRejectWithError );

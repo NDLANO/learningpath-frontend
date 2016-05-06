@@ -6,6 +6,5 @@ export default function deletePersistedLearningPathStep(pathIde, learningPathSte
   return (dispatch, getState) => deleteStep(getState().authToken, {pathId: pathIde, stepId: learningPathStep.id})
     .then(() => dispatch(fetchLearningPath(pathIde)))
     .then(() => dispatch(routerActions.push({
-      pathname: `/learningpaths/${pathIde}`})))
-    .catch(err => dispatch(applicationError(err)));
+      pathname: `/learningpaths/${pathIde}`})));
 }
