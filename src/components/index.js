@@ -5,6 +5,7 @@ import SessionInitializer from './SessionInitializer';
 import LoginFailure from './LoginFailure';
 import MyPage from './MyPage';
 import LearningPath from './LearningPath';
+import LearningPathToCButtons from './LearningPath/LearningPathTOCButtons';
 import LearningPathSummary from './LearningPathSummary';
 import LearningPathStep from './LearningPathStep';
 import LearningPathSearch from './LearningPathSearch';
@@ -21,6 +22,7 @@ module.exports = {
   LearningPath, LearningPathSummary, LearningPathStep,
   LearningPathSearch,
   EditLearningPath,
+  LearningPathToCButtons,
   EditLearningPathStep,
   CreateLearningPath,
   CreateLearningPathStep,
