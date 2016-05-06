@@ -2,7 +2,7 @@ import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
 import { spy } from 'sinon';
-import { PreviewOembed } from '../PreviewOembed';
+import PreviewOembed from '../PreviewOembed';
 
 test('component/PreviewOembed click button', t => {
   const preventDefault = spy();
@@ -10,7 +10,7 @@ test('component/PreviewOembed click button', t => {
   const component = shallow(<PreviewOembed content={content} />);
 
   let frame = component.find('.learningsource__frame');
-  t.equals(frame.prop('className'), 'learningsource__frame learningsource__frame-hide');
+  t.equals(frame.prop('className'), 'learningsource__frame learningsource__frame--hidden');
 
   frame.find('a').simulate('click', { preventDefault });
 

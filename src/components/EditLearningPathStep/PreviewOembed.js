@@ -1,10 +1,9 @@
 import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
 import classNames from 'classnames';
 import polyglot from '../../i18n';
 import Oembed from '../Oembed';
 
-export class PreviewOembed extends React.Component {
+export default class PreviewOembed extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,7 +29,7 @@ export class PreviewOembed extends React.Component {
 
     let frameClasses = classNames({
       'learningsource__frame': true,
-      'learningsource__frame-hide': !this.state.previewOembed
+      'learningsource__frame--hidden': !this.state.previewOembed
     });
 
     let previewButton = !this.state.previewOembed
@@ -51,5 +50,3 @@ export class PreviewOembed extends React.Component {
 PreviewOembed.propTypes = {
   content: PropTypes.object.isRequired
 };
-
-export default connect(state => state)(PreviewOembed);
