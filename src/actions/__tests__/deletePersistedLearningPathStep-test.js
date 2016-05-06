@@ -24,7 +24,7 @@ const learningPath = {
   title: [{language: 'nb', title: 'Goat1'}],
   seqNo: 2,
   description: [{language: 'nb', description: 'this is a description1'}],
-  learningsteps: []
+  learningsteps: [learningStep]
 };
 
 test('actions/deletePersistedLearningPathStep with id', t => {
@@ -45,7 +45,7 @@ test('actions/deletePersistedLearningPathStep with id', t => {
 
   store.dispatch( actions.deletePersistedLearningPathStep(pathId, learningStep) )
     .then(() => {
-      //console.log(store.getActions());
+      //(store.getActions());
       t.deepEqual(store.getActions(), [
         {type: 'REMOVE_LEARNING_PATH', payload: pathId},
         routerActions.push({ pathname: `/learningpaths/${pathId}` })
