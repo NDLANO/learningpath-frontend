@@ -17,6 +17,10 @@ export class PreviewOembed extends React.Component {
     evt.preventDefault();
   }
 
+  componentWillReceiveProps() {
+    this.setState({previewOembed: false});
+  }
+
   render() {
     const onPreviewClick = this.onPreviewClick.bind(this);
     const {content} = this.props;
