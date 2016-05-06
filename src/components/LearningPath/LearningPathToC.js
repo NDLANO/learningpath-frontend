@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import defined from 'defined';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
 import polyglot from '../../i18n';
 
 import { titleI18N } from '../../util/i18nFieldFinder';

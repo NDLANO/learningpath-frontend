@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import get from 'lodash/get';
 import flow from 'lodash/flow';
 import ItemTypes from './ItemTypes';
 
@@ -44,7 +43,7 @@ class SortableStepsContainer extends Component {
   render() {
 
     let {lang} = this.context;
-    let {learningsteps, learningPath, connectDropTarget} = this.props;
+    let {learningsteps, connectDropTarget} = this.props;
 
     if(!learningsteps){
       return null;
@@ -74,7 +73,6 @@ class SortableStepsContainer extends Component {
 
 
 const mapStateToProps = state => Object.assign({}, state, {
-  learningPath: get(state, 'learningPath', {}),
   learningsteps: state.learningPath.learningsteps
 });
 export const mapDispatchToProps = {
