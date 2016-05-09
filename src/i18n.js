@@ -67,6 +67,7 @@ const phrases = {
     savePathBtn: 'Lagre',
     addStepBtn: 'Legg til nytt læringssteg',
     shortDescriptionPlaceholder:  'Skriv en kort beskrivelse (max 155 tegn)',
+    titlePlaceHolder: 'Skriv  tittel her',
     oneLineEditorDefaultPlaceholder: 'Skriv her',
     deletePathBtn: 'Slett',
     saveDraft: 'Lagre som utkast',
@@ -84,7 +85,13 @@ const phrases = {
       summary: 'Oppsummering'
     },
     urlPlaceholder: 'Lim inn lenke',
-    stepDescriptionPlaceholder: 'Skriv her'
+    stepDescriptionPlaceholder: 'Skriv en beskrivelse her',
+    titlePlaceHolder: 'Skriv en tittel her',
+    previewOembed: 'Forhåndsvis hele artikkelen'
+  },
+  sortSteps: {
+    sort: 'Sorter steg',
+    finish: 'Avslutt sortering'
   },
   siteNav: {
     login: 'Logg inn',

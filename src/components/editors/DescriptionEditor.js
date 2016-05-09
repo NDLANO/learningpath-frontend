@@ -4,12 +4,15 @@ import polyglot from '../../i18n';
 
 export default function DescriptionEditor ({value, onChange, lang}) {
   const _onChange = (newValue) => onChange({description: newValue, language: lang});
-  return (<OneLineEditor
+  return (<div>
+    <OneLineEditor
     onChange={_onChange}
     value={value||''}
     maxlength = {155}
     placeholder={polyglot.t('editPage.shortDescriptionPlaceholder')}
-  />);
+    />
+    <div className='editor_input-underline'></div>
+  </div>);
 }
 
 DescriptionEditor.propTypes = {

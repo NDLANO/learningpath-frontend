@@ -55,5 +55,17 @@ export default handleActions({
     },
     throw(state) { return state; }
   },
+
+  SORT_LEARNING_PATH_STEPS: {
+    next(state, action) {
+      if (state.learningsteps.length != action.payload.length){
+        return state;
+      }
+      let nextState = cloneDeep(state);
+      nextState.learningsteps = action.payload;
+      return nextState;
+    },
+    throw(state) { return state; }
+  },
   LOGOUT: () => ({})
 }, {});
