@@ -20,14 +20,14 @@ test('component/MyPage', t => {
   const component = shallow(<MyPage {...requiredProps} learningPaths={learningPaths} />,
       {context: {lang:'nb'}});
 
-  const links = component.find('.tile_hd').find(Link);
+  const links = component.find('.tile_bd').find(Link);
 
   t.deepEqual(links.map(n => n.prop('to')), [
     '/learningpaths/1',
     '/learningpaths/2'
   ]);
 
-  t.deepEqual(links.map(n => n.prop('children')), [
+  t.deepEqual(links.find('.tile_title').map(n => n.prop('children')), [
     'Hva er kunst og kultur?',
     'Leselighet og skrift'
   ]);

@@ -83,7 +83,8 @@ const phrases = {
       summary: 'Oppsummering'
     },
     urlPlaceholder: 'Lim inn lenke',
-    stepDescriptionPlaceholder: 'Skriv her'
+    stepDescriptionPlaceholder: 'Skriv her',
+    previewOembed: 'Forhåndsvis hele artikkelen'
   },
   sortSteps: {
     sort: 'Sorter steg',
