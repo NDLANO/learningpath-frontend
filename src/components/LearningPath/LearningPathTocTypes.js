@@ -1,3 +1,5 @@
 export default {
-  TEXT_TYPE: ['INTRODUCTION', 'TEST']
+  TEXT_TYPE: ['INTRODUCTION', 'TEXT', 'TASK', 'SUMMARY'],
+  MULTIMEDIA: ['MULTIMEDIA'],
+  QUIZ: ['QUIZ']
 };

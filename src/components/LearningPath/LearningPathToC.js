@@ -17,16 +17,17 @@ export default function LearningPathToC ({learningPath, activePathname}, {lang})
     'step-nav_item--active': path === activePathname
   });
   const iconClassName = (type) => {
-    /*Icon.TypeText = props => (<Icon {...props} className={'icon--menu '+props.className} svgDefId='icon-menu' />);
-    Icon.TypeMedia = props => (<Icon {...props} className={'icon--play-circle-outline '+props.className} svgDefId='icon-play_circle_outline' />);
-    Icon.TypeQuiz = props => (<Icon {...props} className={'icon--contacts '+props.className} svgDefId='icon-contacts' />);
-    Icon.TypeTask = Icon.TypeText;
-    Icon.TypeSummary = Icon.TypeText;*/
-    return '<Icon.type />'
-    /*return <Icon.TypeText />
+    console.log(type)
     if (indexOf(LearningPathTocTypes.TEXT_TYPE, type) != -1){
+      return <Icon.TypeText />;
     }
-    return '';*/
+    else if (indexOf(LearningPathTocTypes.MULTIMEDIA, type) != -1){
+      return <Icon.TypeMedia />;
+    }
+    else if(indexOf(LearningPathTocTypes.QUIZ, type) != -1){
+      return <Icon.TypeQuiz />;
+    }
+    return <Icon.TypeText />;
   };
   let sortPathTarget = `/learningpaths/${learningPath.id}/sort`;
   const sort = learningPath.canEdit ? <Link className='cta-link cta-link--block' to={sortPathTarget}>{polyglot.t('sortSteps.sort')}</Link> : '';
@@ -38,7 +39,6 @@ export default function LearningPathToC ({learningPath, activePathname}, {lang})
           {((steps) => steps.map(step => (
             <li key={step.id}
               className={itemClassName(`${base}/step/${step.id}`)}>
-
               <Link to={`${base}/step/${step.id}`} className='step-nav_link'>
                 <span className='step-nav_circle'>
                   {iconClassName(step.type)}
