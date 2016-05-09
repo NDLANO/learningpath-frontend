@@ -26,6 +26,7 @@ LabeledIcon.Add = props => (<LabeledIcon {...props} iconName='Add' />);
 LabeledIcon.Search = props => (<LabeledIcon {...props} iconName='Search' />);
 LabeledIcon.Exit = props => (<LabeledIcon {...props} iconName='Exit' />);
 LabeledIcon.Apps = props => (<LabeledIcon {...props} iconName='Apps' />);
+LabeledIcon.Delete = props => (<LabeledIcon {...props} iconName='Delete' />);
 
 export default LabeledIcon;
 
