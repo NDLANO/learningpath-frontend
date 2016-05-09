@@ -1,13 +1,15 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import assign from 'lodash/assign';
-import { titleI18N, descriptionI18N, oembedUrlI18N, oembedI18N } from '../../util/i18nFieldFinder';
+import { titleI18N, descriptionI18N, oembedUrlI18N, oembedContentI18N } from '../../util/i18nFieldFinder';
 import LabeledIcon from '../LabeledIcon';
 import TitleEditor from '../editors/TitleEditor';
 import DescriptionHTMLEditor from '../editors/DescriptionHTMLEditor';
 import polyglot from '../../i18n';
 import MediaTypeSelect from './MediaTypeSelect';
 import Icon from '../Icon';
+
+import PreviewOembed from './PreviewOembed';
 
 import {
   updateLearningPathStep,
@@ -35,8 +37,8 @@ export function EditLearningPathStep (props, {lang}) {
   let saveLearningStep = () => saveAction(learningPathId, step);
   let title = titleI18N(step, lang) || '';
   let htmlDescription = descriptionI18N(step, lang) || '';
-  let embedContent = oembedUrlI18N(step, lang);
-  let embedIframe = oembedI18N(step, lang);
+  let embedContent = oembedContentI18N(step, lang);
+  let embedContentUrl = oembedUrlI18N(step, lang);
 
   let embedSourceInput = '';
   if (step.type) {
@@ -53,9 +55,10 @@ export function EditLearningPathStep (props, {lang}) {
         <div className='learningsource-form'>
           <div>
             <label className='mediatype-menu__label'>{polyglot.t('editPathStep.urlLabel')}</label>
-            <input type='url' value={embedContent} onBlur={() => validateOembedUrl(embedContent)}
+            <input type='url' value={embedContentUrl} onBlur={() => validateOembedUrl(embedContentUrl, lang)}
                 onChange={(evt) => updateEmbedUrl({ url: evt.target.value, language: lang })}
                 placeholder={polyglot.t('editPathStep.urlPlaceholder')} />
+            <PreviewOembed content={embedContent} />
           </div>
         </div>
         <div>
@@ -76,14 +79,9 @@ export function EditLearningPathStep (props, {lang}) {
         </h1>
         <div className='mediatype-wrapper'>
           <MediaTypeSelect value={step.type} onChange={updateType} />
-
-          {embedIframe && oembedIsValid
-           ? <div dangerouslySetInnerHTML={{__html: embedIframe}} />
-           : null
-          }
         </div>
       </div>
-    {embedSourceInput}
+      {embedSourceInput}
     </div>
   );
 }

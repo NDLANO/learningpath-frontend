@@ -85,7 +85,12 @@ const phrases = {
     },
     urlPlaceholder: 'Lim inn lenke',
     stepDescriptionPlaceholder: 'Skriv en beskrivelse her',
-    titlePlaceHolder: 'Skriv en tittel her'
+    titlePlaceHolder: 'Skriv en tittel her',
+    previewOembed: 'Forhåndsvis hele artikkelen'
+  },
+  sortSteps: {
+    sort: 'Sorter steg',
+    finish: 'Avslutt sortering'
   },
   siteNav: {
     login: 'Logg inn',

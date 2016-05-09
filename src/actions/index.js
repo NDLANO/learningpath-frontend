@@ -17,6 +17,7 @@ import validateOembed from './validateOembed';
 import updateLearningPathStatus from './updateLearningPathStatus';
 import updateLearningPathStep from './updateLearningPathStep';
 import createLearningPathStep from './createLearningPathStep';
+import updateStepSequenceNumber from './updateStepSequenceNumber';
 
 export var applicationError = createAction('APPLICATION_ERROR');
 export var setAuthenticated = createAction('SET_AUTHENTICATED');
@@ -44,7 +45,7 @@ export var updateLearningPathStepType= createAction('UPDATE_LEARNING_PATH_STEP_T
 export var createEmptyLearningPathStep = createAction('CREATE_EMPTY_LEARNING_PATH_STEP');
 export var setIsValidOembed = createAction('SET_IS_VALID_OEMBED');
 export var removeLearningPathStepEmbedContent = createAction('REMOVE_LEARNING_PATH_STEP_EMBED_CONTENT');
-
+export var sortLearningPathSteps = createAction('SORT_LEARNING_PATH_STEPS');
 export {
   initializeSession,
   logout,
@@ -61,7 +62,8 @@ export {
   validateOembed,
   updateLearningPathStatus,
   updateLearningPathStep,
-  createLearningPathStep
+  createLearningPathStep,
+  updateStepSequenceNumber
 
 };
 
@@ -106,5 +108,7 @@ export default {
   updateLearningPathStepEmbedUrl,
   updateLearningPathStepType,
   setIsValidOembed,
+  sortLearningPathSteps,
+  updateStepSequenceNumber,
   removeLearningPathStepEmbedContent
 };

@@ -28,27 +28,16 @@ export function EditLearningPath (props, {lang}) {
 
   let saveLearningPath = () => saveAction(learningPath);
 
-  return (
-    <div>
-      <div className='learning-path_hd'>
-        <span className='editable'><Icon.Create /></span>
-        <h1 className='learning-path-input learning-path-input__title'>
-          <TitleEditor value={titleText} onChange={updateTitle} lang={lang} placeholder={polyglot.t('editPage.titlePlaceHolder')} />
-        </h1>
-      </div>
-      <div className='learning-path_bd'>
-        <div>
-          <span className='editable'><Icon.Create /></span>
-          <div className='learning-path-input learning-path-input__paragraph'>
-            <DescriptionEditor value={descriptionText} onChange={updateDescription} lang={lang} placeholder={polyglot.t('editPage.shortDescriptionPlaceholder')}/>
-          </div>
-        </div>
-        <button className='cta cta-link' onClick={saveLearningPath}>
-          <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
-        </button>
-      </div>
-    </div>
-);
+
+  return <div>
+    <h2>
+      <TitleEditor value={titleText} onChange={updateTitle} lang={lang} />
+    </h2>
+    <DescriptionEditor value={descriptionText} onChange={updateDescription} lang={lang} />
+    <button className='cta cta-link' onClick={saveLearningPath}>
+      <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
+    </button>
+  </div>;
 }
 
 EditLearningPath.propTypes = {

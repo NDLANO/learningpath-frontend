@@ -28,6 +28,8 @@ const createPath = (authToken, props, body) =>
 const putLearningPath = putAuthorized('/learningpaths/:pathId');
 const putLearningPathStep = putAuthorized('/learningpaths/:pathId/learningsteps/:stepId');
 
+const putSequenceNumber = putAuthorized('/learningpaths/:pathId/learningsteps/:stepId/seqNo');
+
 const updatePath = (authToken, { pathId }, body) =>
   putLearningPath(authToken, { pathId }, body);
 
@@ -46,6 +48,9 @@ const updateStatus = (authToken, { pathId }, body) =>
   putLearningPathStatus(authToken, {pathId}, body);
 
 const learningPathsUrl = apiResourceUrl('/learningpaths');
+
+const updateSeqNo = (authToken, { pathId, stepId }, body) =>
+  putSequenceNumber(authToken, { pathId, stepId }, body);
 
 const fetchPaths = (authToken, query) => {
   let url = learningPathsUrl;
@@ -77,5 +82,6 @@ export {
   fetchOembedUrl,
   updateStatus,
   createStep,
-  updateStep
+  updateStep,
+  updateSeqNo
 };
