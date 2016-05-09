@@ -17,7 +17,6 @@ export default function LearningPathToC ({learningPath, activePathname}, {lang})
     'step-nav_item--active': path === activePathname
   });
   const iconClassName = (type) => {
-    console.log(type)
     if (indexOf(LearningPathTocTypes.TEXT_TYPE, type) != -1){
       return <Icon.TypeText />;
     }

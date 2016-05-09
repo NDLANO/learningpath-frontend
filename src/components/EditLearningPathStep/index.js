@@ -27,14 +27,14 @@ export function EditLearningPathStep (props, {lang}) {
     updateType,
     updateEmbedUrl,
     updateDescription,
-    learningPathId,
+    learningPath,
     validateOembedUrl,
     saveAction,
     oembedIsValid
   } = props;
   const isValid = () => true;
 
-  let saveLearningStep = () => saveAction(learningPathId, step);
+  let saveLearningStep = () => saveAction(learningPath, step);
   let title = titleI18N(step, lang) || '';
   let htmlDescription = descriptionI18N(step, lang) || '';
   let embedContent = oembedContentI18N(step, lang);
@@ -92,7 +92,7 @@ EditLearningPathStep.propTypes = {
   updateType: PropTypes.func.isRequired,
   updateEmbedUrl: PropTypes.func.isRequired,
   updateDescription: PropTypes.func.isRequired,
-  learningPathId: PropTypes.number.isRequired,
+  learningPath: PropTypes.number.isRequired,
   saveAction: PropTypes.func.isRequired,
   oembedIsValid: PropTypes.bool.isRequired,
   validateOembedUrl: PropTypes.func.isRequired
@@ -104,7 +104,7 @@ EditLearningPathStep.contextTypes = {
 
 export const mapStateToProps = state => assign({}, state, {
   step: state.learningPathStep,
-  learningPathId: state.learningPath.id
+  learningPath: state.learningPath
 
 });
 
@@ -115,7 +115,7 @@ export const mapDispatchToProps = {
   updateEmbedUrl: updateLearningPathStepEmbedUrl,
   updateDescription: updateLearningPathStepDescription,
   // action til persistere learningPathStep
-  saveAction: (learningPathId, lps) => updateLearningPathStep(learningPathId, lps.id, lps),
+  saveAction: (learningPath, lps) => updateLearningPathStep(learningPath.id, lps.id, lps, learningPath),
 
   validateOembedUrl: (embedContent, lang) => validateOembed(embedContent, lang)
 };
