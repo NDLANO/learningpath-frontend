@@ -3,74 +3,132 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import sortBy from 'lodash/sortBy';
 import reverse from 'lodash/reverse';
-import LabeledIcon from './LabeledIcon';
-
-import {
-  sortPrivateLearningPaths,
-  deleteLearningPath
-} from '../actions';
-
+import { setMyLearningPathsSortOrder, updateLearningPathStatus, deleteLearningPath, createLearningPath } from '../actions';
 import Icon from './Icon';
+import LabeledIcon from './LabeledIcon';
+import polyglot from '../i18n';
+
+import { LearningPathDropdown } from './LearningPathDropdown';
 import formatDate from '../util/formatDate';
 import formatDuration from '../util/formatDuration';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
+import Lightbox from './Lightbox';
+import CreateLearningPath from './CreateLearningPath';
 
-export function MyPage ({dispatch, learningPaths, sortBy}, {lang}) {
-  const items = learningPaths.map(lp => {
-    const title = titleI18N(lp, lang);
-    const description = descriptionI18N(lp, lang);
-    const duration = formatDuration(lp.duration, lang);
-    const lastUpdated = formatDate(lp.lastUpdated, lang);
+export class MyPage extends React.Component {
+  constructor(props) {
+    super(props);
 
-    return (
-      <div key={lp.id} className='tile'>
-        <button className='alert_dismiss un-button' onClick={() => dispatch(deleteLearningPath(lp.id))}>
-          <Icon.Clear />
-        </button>
-        <h3 className='tile_hd'>
-          <Link to={`/learningpaths/${lp.id}/edit`}>{title}</Link>
-        </h3>
-        <div className='tile_bd'>{description}</div>
-        <div className='tile_ft'>
-          <p>{duration}</p>
-          <p>Sist endret {lastUpdated}</p>
-          <p>{lp.status}</p>
+    this.state = {
+      displayCreatePath: false
+    };
+  }
+
+  onCreateLearningPathClick() {
+    this.setState({
+      displayCreatePath: true
+    });
+  }
+
+  render() {
+    const {learningPaths, sortKey, setSortKey, deletePath, updatePathStatus, createPath} = this.props;
+    const {lang} = this.context;
+    const onCreateLearningPathClick = this.onCreateLearningPathClick.bind(this);
+    const items = learningPaths.map(lp => {
+      const title = titleI18N(lp, lang);
+      const description = descriptionI18N(lp, lang);
+      const duration = formatDuration(lp.duration, lang);
+      const lastUpdated = formatDate(lp.lastUpdated, lang);
+
+      const onDropDownSelect = actionType => {
+        switch (actionType) {
+        case 'delete':
+          deletePath(lp.id);
+          break;
+        case 'publish':
+          updatePathStatus(lp.id, 'PUBLISHED');
+          break;
+        case 'unpublish':
+          updatePathStatus(lp.id, 'PRIVATE');
+          break;
+        }
+      };
+
+      return (
+        <div key={lp.id} className='tile'>
+          <div className='tile_hd'>
+            <div className='tile_date'>{lastUpdated}</div>
+            <div className='tile_context-menu'>
+              <LearningPathDropdown onSelect={onDropDownSelect} learningPath={lp}/>
+            </div>
+          </div>
+          <Link className='tile_bd' to={`/learningpaths/${lp.id}`}>
+            <h3 className='tile_title'>{title}</h3>
+            <p>{description}</p>
+          </Link>
+          <div className='tile_ft'>
+            <div className='tile_property'>
+              <div className='tile_property-icon'><Icon.Duration/></div>
+              <p className='tile_property-description'>{polyglot.t('myPage.path.duration')}</p>
+              <p>{duration}</p>
+            </div>
+            <div className='tile_property'>
+              <div className='tile_property-icon'><Icon.Visibility/></div>
+              <p className='tile_property-description'>{polyglot.t('myPage.path.status')}</p>
+              <p>{polyglot.t('myPage.path.statusValue.' + lp.status)}</p>
+            </div>
+          </div>
+        </div>
+      );
+    });
+
+    const sortOrderSelect = (
+      <select value={sortKey} onChange={(evt) => setSortKey(evt.target.value)}>
+        <option value='title'>{polyglot.t('myPage.order.title')}</option>
+        <option value='-lastUpdated'>{polyglot.t('myPage.order.newest')}</option>
+        <option value='lastUpdated'>{polyglot.t('myPage.order.oldest')}</option>
+        <option value='status'>{polyglot.t('myPage.order.status')}</option>
+      </select>
+    );
+
+    let onCreateLearningPathSubmit = values => createPath({
+      title: [{title: values.title, language: lang}],
+      description: [{description: values.description, language: lang}],
+      duration: 1
+    });
+
+    let onLightboxClose = () => this.setState({displayCreatePath: false});
+
+    return (<div>
+      <div className='page-header'>
+        <h2 className='page-header_name'>{polyglot.t('myPage.pageHeader')}</h2>
+        <div className='page-header_ctrls'>
+          {sortOrderSelect}
         </div>
       </div>
-    );
-  });
-
-  const sortOrderSelect = (
-    <select value={sortBy} onChange={(evt) => dispatch(sortPrivateLearningPaths(evt.target.value))}>
-      <option value='title'>Tittel</option>
-      <option value='lastUpdated'>Dato</option>
-      <option value='status'>Status</option>
-    </select>
-  );
-
-  return (<div>
-    <div className='page-header'>
-      <h2 className='page-header_name'>Mine læringsstier</h2>
-      <div className='page-header_ctrls'>
-        {sortOrderSelect}
+      <div className='tiles'>{items}</div>
+      <div>
+        <button className='cta-link new-learningpath-button' onClick={onCreateLearningPathClick}>
+          <LabeledIcon.Add labelText={polyglot.t('myPage.newBtn')}/>
+        </button>
+        <Lightbox display={this.state.displayCreatePath} onClose={onLightboxClose}>
+          <CreateLearningPath onSubmit={onCreateLearningPathSubmit} />
+        </Lightbox>
       </div>
-    </div>
-    <div className='tiles'>{items}</div>
-    <div>
-      <Link className='cta-link new-learningpath-button' to='/learningpaths/new'>
-        <LabeledIcon.Add labelText='Opprett ny lærringssti' />
-      </Link>
-    </div>
-  </div>);
+    </div>);
+  }
 }
 
 MyPage.propTypes = {
-  sortBy: PropTypes.oneOf(['title', 'lastUpdated', 'status']).isRequired,
-  dispatch: PropTypes.func.isRequired,
+  sortKey: PropTypes.oneOf(['title', 'lastUpdated', '-lastUpdated', 'status']),
+  setSortKey: PropTypes.func.isRequired,
+  deletePath: PropTypes.func.isRequired,
+  updatePathStatus: PropTypes.func.isRequired,
+  createPath: PropTypes.func.isRequired,
   learningPaths: PropTypes.array
 };
 
-MyPage.defaultProps = { learningPaths: [], sortBy: 'title' };
+MyPage.defaultProps = { learningPaths: [], sortKey: 'title' };
 
 MyPage.contextTypes = {
   lang: PropTypes.string.isRequired
@@ -82,19 +140,27 @@ const sortPaths = (paths, field, state) => {
     return sortBy(paths, (p) => titleI18N(p, state.lang));
 
   case 'lastUpdated':
-    return reverse(sortBy(paths, field));
+    return sortBy(paths, field);
+    
+  case '-lastUpdated':
+    return reverse(sortBy(paths, 'lastUpdated'));
 
   default:
     return sortBy(paths, field);
   }
 };
 
-const mapStateToProps = (state) => {
-  const sortBy = state.privateLearningPathsSortBy || 'title';
-  const learningPaths = sortPaths(state.learningPaths, sortBy, state);
-  return Object.assign({}, state, { learningPaths, sortBy });
+export function mapStateToProps (state) {
+  const sortKey = state.myLearningPathsSortOrder || 'title';
+  const learningPaths = sortPaths(state.learningPaths, sortKey, state);
+  return Object.assign({}, state, { learningPaths, sortKey });
+}
+
+const mapDispatchToProps = {
+  setSortKey: setMyLearningPathsSortOrder,
+  deletePath: deleteLearningPath,
+  updatePathStatus: updateLearningPathStatus,
+  createPath: createLearningPath
 };
 
-export { mapStateToProps };
-
-export default connect(mapStateToProps)(MyPage);
+export default connect(mapStateToProps, mapDispatchToProps)(MyPage);

@@ -111,6 +111,10 @@ http://rackt.github.io/redux
 Flux Standard Action utlities for Redux
 https://github.com/acdlite/redux-actions
 
+**redux-form**
+A higher order component decorator for forms using Redux and React.
+https://redux-form.com/
+
 **redux-localstorage:**
 Store enhancer that syncs (a subset of) your redux store state to localstorage.
 https://github.com/elgerlambert/redux-localstorage#readme
@@ -220,6 +224,10 @@ https://github.com/substack/faucet
 **flux-standard-action:**
 A human-friendly standard for Flux action objects.
 https://www.npmjs.com/package/flux-standard-action
+
+**jsdom:**
+A JavaScript implementation of the DOM and HTML standards.
+https://github.com/tmpvar/jsdom#readme
 
 **nock:**
 HTTP Server mocking for Node.js.

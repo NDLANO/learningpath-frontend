@@ -4,25 +4,7 @@ import get from 'lodash/get';
 import assign from 'lodash/assign';
 import findIndex from 'lodash/findIndex';
 import assureSequenceOrder from '../util/assureSequenceOrder';
-
-function mergeI18nProperty (propertyName) {
-  return function next(state, action) {
-    let nextState = cloneDeep(state);
-    let properties = get(nextState, propertyName, []);
-    let index = findIndex(properties, ['language', action.payload.language]);
-
-    if (index === -1) {
-      properties.push(action.payload);
-    } else {
-      assign(properties[index], action.payload);
-    }
-
-    nextState[propertyName] = properties;
-
-    return nextState;
-  };
-}
-
+import assignOrPushPropReducer from '../util/assignOrPushPropReducer';
 
 export default handleActions({
   SET_LEARNING_PATH: {
@@ -31,22 +13,6 @@ export default handleActions({
         action.payload,
         { learningsteps: assureSequenceOrder(action.payload.learningsteps) }
       );
-    },
-    throw(state) { return state; }
-  },
-  CREATE_LEARNING_PATH_STEP: {
-    next(state) {
-      let nextState = cloneDeep(state);
-      nextState.learningsteps.push({
-        seqNo: nextState.learningsteps.length + 1,
-        title: [],
-        description: [],
-        embedUrl: [],
-        type: '',
-        license: ''
-      });
-
-      return nextState;
     },
     throw(state) { return state; }
   },
@@ -72,12 +38,33 @@ export default handleActions({
   },
 
   UPDATE_LEARNING_PATH_TITLE: {
-    next: mergeI18nProperty('title'),
+    next: assignOrPushPropReducer('title'),
     throw(state) { return state; }
   },
 
   UPDATE_LEARNING_PATH_DESCRIPTION: {
-    next: mergeI18nProperty('description'),
+    next: assignOrPushPropReducer('description'),
+    throw(state) { return state; }
+  },
+  REMOVE_LEARNING_PATH_STEP: {
+    next(state, action) {
+      let nextState = cloneDeep(state);
+      let steps = get(nextState, 'learningsteps', []);
+      nextState.learningsteps = steps.filter(m => m.seqNo != action.payload.seqNo);
+      return nextState;
+    },
+    throw(state) { return state; }
+  },
+
+  SORT_LEARNING_PATH_STEPS: {
+    next(state, action) {
+      if (state.learningsteps.length != action.payload.length){
+        return state;
+      }
+      let nextState = cloneDeep(state);
+      nextState.learningsteps = action.payload;
+      return nextState;
+    },
     throw(state) { return state; }
   },
 
@@ -88,4 +75,3 @@ export default handleActions({
 
   LOGOUT: () => ({})
 }, {});
-

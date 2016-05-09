@@ -3,7 +3,7 @@ import { formatPattern } from 'react-router/lib/PatternUtils';
 import defined from 'defined';
 
 /* #if development */
-const isUnitTest = typeof window === 'undefined';
+export const isUnitTest = (() => typeof window === 'undefined')();
 /* #end */
 
 const locationOrigin = (() => {
@@ -32,7 +32,7 @@ const apiBaseUrl = (() => {
 })();
 
 
-export { locationOrigin };
+export { locationOrigin, apiBaseUrl };
 
 export function apiResourceUrl (path) { return apiBaseUrl + path; }
 
@@ -54,7 +54,6 @@ export function resolveJsonOrRejectWithError (res) {
 
 export function fetchAuthorized (path, method = 'GET') {
   const url = params => apiResourceUrl(formatPattern(path, params));
-
   return (authToken, params = {}) => fetch(url(params), {
     method, headers: {'APP-KEY': authToken}
   }).then( resolveJsonOrRejectWithError );
@@ -65,7 +64,7 @@ export function postAuthorized (path) {
 
   return (authToken, params = {}, body) => fetch(url(params), {
     headers: {'APP-KEY': authToken},
-    method: 'POST', 
+    method: 'POST',
     body: JSON.stringify(body)
   }).then( resolveJsonOrRejectWithError );
 }
@@ -75,7 +74,7 @@ export function putAuthorized (path) {
 
   return (authToken, params = {}, body) => fetch(url(params), {
     headers: {'APP-KEY': authToken},
-    method: 'PUT', 
+    method: 'PUT',
     body: JSON.stringify(body)
   }).then( resolveJsonOrRejectWithError );
 }

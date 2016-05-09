@@ -29,6 +29,7 @@ const learningPaths = [
     ],
     metaUrl: 'http://api.test.ndla.no/learningpaths/2',
     duration: 45,
+    status: 'PRIVATE',
     author: { type: 'Forfatter', name: 'Kaptein Sabeltann' },
     lastUpdated: new Date('2016-02-01T12:00:00+01:00')
   }
@@ -81,10 +82,11 @@ const learningPath = {
           language: 'nb'
         }
       ],
-      embedUrl: [
+      embedContent: [
         {
-          url: 'http://www.vg.no',
-          language: 'nb'
+          url: 'http://ndla.no/nb/node/24049',
+          language: 'nb',
+          html: '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>'
         }
       ],
       type: 'TEXT',
@@ -106,10 +108,11 @@ const learningPath = {
           language: 'nb'
         }
       ],
-      embedUrl: [
+      embedContent: [
         {
-          url: 'http://www.vg.no',
-          language: 'nb'
+          url: 'http://ndla.no/nb/node/24049',
+          language: 'nb',
+          html: '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>'
         }
       ],
       type: 'TEXT',
@@ -144,18 +147,45 @@ const learningStep = {
   ],
   description: [
     {
-      description: 'Beskrivelse',
+      description: '<h1>Beskrivelse</h1>',
       language: 'nb'
     }
   ],
-  embedUrl: [
+  embedContent: [
     {
-      url: 'http://www.vg.no',
-      language: 'nb'
+      url: 'https://www.youtube.com/watch?v=RYLlSFmGfm0',
+      language: 'nb',
+      html: '<iframe width="480" height="270" src="https://www.youtube.com/embed/RYLlSFmGfm0?feature=oembed" frameborder="0" allowfullscreen></iframe>'
     }
   ],
   type: 'TEXT',
   metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/8'
 };
 
-export { learningPaths, learningPath, learningStep };
+const ndlaLearningStep = {
+  id: 9,
+  seqNo: 3,
+  title: [
+    {
+      title: 'En annen tittel her',
+      language: 'nb'
+    }
+  ],
+  description: [
+    {
+      description: 'Beskrivelse',
+      language: 'nb'
+    }
+  ],
+  embedContent: [
+    {
+      url: 'http://ndla.no/nb/node/24049',
+      language: 'nb',
+      html: '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>'
+    }
+  ],
+  type: 'TEXT',
+  metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/9'
+};
+
+export { learningPaths, learningPath, learningStep, ndlaLearningStep };

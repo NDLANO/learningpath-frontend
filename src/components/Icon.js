@@ -29,5 +29,16 @@ Icon.Exit = props => (<Icon {...props} className={'icon--exit-to-app '+props.cla
 Icon.Apps = props => (<Icon {...props} className={'icon--apps '+props.className} svgDefId='icon-apps' />);
 Icon.Check = props => (<Icon {...props} className={'icon--check '+props.className} svgDefId='icon-check' />);
 Icon.Clear = props => (<Icon {...props} className={'icon--clear '+props.className} svgDefId='icon-clear' />);
+Icon.MoreVert = props => (<Icon {...props} svgDefId='icon-more_vert' />);
+Icon.Delete = props => (<Icon {...props} className={'icon--delete ' + props.className} svgDefId='icon-delete' />);
+Icon.Input = props => (<Icon {...props} className={'icon--input ' + props.className} svgDefId='icon-input' />);
+Icon.Bold = props => (<Icon {...props} className={'icon--format-bold ' + props.className} svgDefId='icon-format_bold' />);
+Icon.Italic = props => (<Icon {...props} className={'icon--format-italic ' + props.className} svgDefId='icon-format_italic' />);
+Icon.Underline = props => (<Icon {...props} className={'icon--format-underlined ' + props.className} svgDefId='icon-format_underlined' />);
+Icon.Bulleted = props => (<Icon {...props} className={'icon--format-list-bulleted ' + props.className} svgDefId='icon-format_list_bulleted' />);
+Icon.Numbered = props => (<Icon {...props} className={'icon--format-list-numbered ' + props.className} svgDefId='icon-format_list_numbered' />);
+Icon.Create = props => (<Icon {...props} className={'icon--create ' + props.className} svgDefId='icon-create' />);
+Icon.Duration = props => (<Icon {...props} className={'icon--query-builder' + props.className} svgDefId='icon-query_builder' />);
+Icon.Visibility = props => (<Icon {...props} className={'icon--remove-red-eye' + props.className} svgDefId='icon-remove_red_eye' />);
 
 export default Icon;

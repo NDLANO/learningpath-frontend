@@ -1,30 +1,81 @@
 import test from 'tape';
-import { isFSA } from 'flux-standard-action';
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import nock from 'nock';
+import payload403invalid from './payload403invalid';
+
 import actions from '..';
+import { routerActions } from 'react-router-redux';
+
+const middleware = [ thunk ];
+const mockStore = configureStore(middleware);
+
+const authToken = '123345';
+const pathId = 123;
+const stepId = 321;
 
 
 test('actions/updateLearningPathStep', t => {
-  const actual = actions.updateLearningPathStep({ id: 123, seqNo: 4 });
+  const done = res => {
+    t.end(res);
+    nock.cleanAll();
+  };
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  const learningStep = {
+    title: [{language: 'nb', title: 'Goat'}],
+    description: [{language: 'nb', description: 'this is a description'}],
+    embedContent: [{language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY'}]
+  };
 
-  t.equal(actual.type, 'UPDATE_LEARNING_PATH_STEP');
-  t.deepEqual(actual.payload, { seqNo: 4, id: 123 });
-  t.notOk(actual.error);
+  const learningStepReply = Object.assign({}, learningStep, {id: stepId});
 
-  t.end();
+  const postPathStepApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+    .put('/learningpaths/' + pathId + '/learningsteps/' + stepId, learningStep)
+    .reply(200, learningStepReply);
+
+  const store = mockStore({ authToken });
+
+  store.dispatch( actions.updateLearningPathStep(pathId, stepId, learningStep) )
+    .then(() => {
+      t.deepEqual(store.getActions(), [
+        actions.addMessage({message: 'Lagret OK'}),
+        actions.setLearningPathStep(learningStepReply),
+        routerActions.push({ pathname: `/learningpaths/${pathId}/step/${stepId}` })
+      ]);
+
+      t.doesNotThrow(() => postPathStepApi.done());
+
+      done();
+    })
+    .catch(done);
 });
 
-test('actions/updateLearningPathStep with error', t => {
-  const actual = actions.updateLearningPathStep(new Error('fail!'));
+test('actions/updateLearningPathStep access denied', (t) => {
+  const done = res => {
+    t.end(res);
+    nock.cleanAll();
+  };
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  const learningStep = {
+    title: [{language: 'nb', title: 'Goat'}],
+    description: [{language: 'nb', description: 'this is a description'}],
+    embedContent: [{language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY'}]
+  };
 
-  t.equal(actual.type, 'UPDATE_LEARNING_PATH_STEP');
-  t.equal(actual.payload.message, 'fail!');
-  t.ok(actual.error);
+  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+    .put('/learningpaths/' + pathId + '/learningsteps/' + stepId, learningStep)
+    .reply(403, {message: 'Invalid'});
 
-  t.end();
+  const store = mockStore({ authToken });
+
+  store.dispatch( actions.updateLearningPathStep(pathId, stepId, learningStep) )
+    .then(() => {
+      t.deepEqual(store.getActions(), [
+        actions.applicationError(payload403invalid())
+      ]);
+      t.doesNotThrow(() => apiMock.done());
+
+      done();
+    })
+    .catch(done);
 });
-
-

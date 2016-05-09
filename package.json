@@ -10,6 +10,7 @@
     "node": "~4.2"
   },
   "scripts": {
+    "pretest": "eslint src",
     "test": "babel-tape-runner 'src/**/*-test.js'|faucet",
     "postinstall": "cp -v node_modules/ndla-styleguide/assets/* htdocs/assets/",
     "build": "webpack --progress",
@@ -32,6 +33,7 @@
     "faucet": "0.0.1",
     "flux-standard-action": "^0.6.0",
     "if-loader": "^1.0.1",
+    "jsdom": "^8.4.0",
     "nock": "^8.0.0",
     "react-addons-test-utils": "^15.0.1",
     "redux-mock-store": "^1.0.2",
@@ -43,15 +45,16 @@
   "dependencies": {
     "classnames": "^2.2.3",
     "defined": "^1.0.0",
-    "draft-js": "^0.4.0",
+    "draft-js": "^0.5.0",
     "draft-js-export-html": "^0.1.9",
     "es6-promise": "^3.0.2",
+    "eslint-plugin-react": "^5.0.1",
     "immutable": "^3.7.6",
     "isomorphic-fetch": "^2.2.0",
     "json-loader": "^0.5.4",
     "lodash": "^4.1.0",
     "moment": "^2.11.2",
-    "ndla-styleguide": "git+ssh://git@stash.knowit.no:7999/ndla/ndla-styleguide.git#0.0.1",
+    "ndla-styleguide": "^0.1.4",
     "node-polyglot": "^2.0.0",
     "node-uuid": "^1.4.7",
     "query-string": "^4.1.0",
@@ -60,11 +63,14 @@
     "react-redux": "^4.0.6",
     "react-router": "^2.0.0-rc5",
     "react-router-form": "^2.0.0-rc.0",
+    "react-router-redux": "^4.0.2",
     "redux": "^3.0.5",
     "redux-actions": "^0.9.0",
+    "redux-form": "^5.2.1",
     "redux-localstorage": "^0.4.0",
-    "redux-simple-router": "^2.0.4",
     "redux-thunk": "^2.0.1",
-    "sanitize-html": "^1.11.3"
+    "sanitize-html": "^1.11.3",
+    "react-dnd": "^2.1.4",
+    "react-dnd-html5-backend": "^2.1.2"
   }
 }

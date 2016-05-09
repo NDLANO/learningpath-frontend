@@ -12,6 +12,14 @@ import createEmptyLearningPath from './createEmptyLearningPath';
 import checkValidSession from './checkValidSession.js';
 import timeoutMessage from './timeoutMessage.js';
 import deleteLearningPath from './deleteLearningPath';
+import fetchOembed from './fetchOembed';
+import validateOembed from './validateOembed';
+import updateLearningPathStatus from './updateLearningPathStatus';
+import updateLearningPathStep from './updateLearningPathStep';
+import createLearningPathStep from './createLearningPathStep';
+import deletePersistedLearningPathStep from './deletePersistedLearningPathStep';
+import deleteUnPersistedLearningPathStep from './deleteUnPersistedLearningPathStep';
+import updateStepSequenceNumber from './updateStepSequenceNumber';
 
 export var applicationError = createAction('APPLICATION_ERROR');
 export var setAuthenticated = createAction('SET_AUTHENTICATED');
@@ -21,9 +29,7 @@ export var setLearningPathStep = createAction('SET_LEARNING_PATH_STEP');
 export var setLearningPaths = createAction('SET_LEARNING_PATHS');
 export var changeLearningPathQuery = createAction('CHANGE_LEARNING_PATH_QUERY');
 export var setLearningPathsTotalCount = createAction('SET_LEARNING_PATHS_TOTAL_COUNT');
-export var sortPrivateLearningPaths = createAction('SORT_PRIVATE_LEARNING_PATHS');
-export var createLearningPathStep = createAction('CREATE_LEARNING_PATH_STEP');
-export var updateLearningPathStep = createAction('UPDATE_LEARNING_PATH_STEP');
+export var setMyLearningPathsSortOrder = createAction('SET_MY_LEARNING_PATHS_SORT_ORDER');
 export var updateLearningPathTitle = createAction('UPDATE_LEARNING_PATH_TITLE');
 export var updateLearningPathDescription = createAction('UPDATE_LEARNING_PATH_DESCRIPTION');
 export var updateLearningPathTags = createAction('UPDATE_LEARNING_PATH_TAGS');
@@ -33,7 +39,17 @@ export var addMessage = createAction('ADD_MESSAGE');
 export var clearAllMessages = createAction('CLEAR_ALL_MESSAGES');
 export var clearMessage = createAction('CLEAR_MESSAGE');
 export var logoutAction = createAction('LOGOUT');
-
+export var setOembedObject = createAction('SET_OEMBED_OBJECT');
+export var setLearningPathStatus = createAction('UPDATE_LEARNING_PATH_STATUS');
+export var updateLearningPathStepDescription = createAction('UPDATE_LEARNING_PATH_STEP_DESCRIPTION');
+export var updateLearningPathStepTitle = createAction('UPDATE_LEARNING_PATH_STEP_TITLE');
+export var updateLearningPathStepEmbedUrl = createAction('UPDATE_LEARNING_PATH_STEP_EMBED_URL');
+export var updateLearningPathStepType= createAction('UPDATE_LEARNING_PATH_STEP_TYPE');
+export var createEmptyLearningPathStep = createAction('CREATE_EMPTY_LEARNING_PATH_STEP');
+export var setIsValidOembed = createAction('SET_IS_VALID_OEMBED');
+export var removeLearningPathStepEmbedContent = createAction('REMOVE_LEARNING_PATH_STEP_EMBED_CONTENT');
+export var removeLearningPathStep = createAction('REMOVE_LEARNING_PATH_STEP');
+export var sortLearningPathSteps = createAction('SORT_LEARNING_PATH_STEPS');
 export {
   initializeSession,
   logout,
@@ -45,7 +61,15 @@ export {
   createLearningPath,
   createEmptyLearningPath,
   timeoutMessage,
-  deleteLearningPath
+  deleteLearningPath,
+  fetchOembed,
+  validateOembed,
+  updateLearningPathStatus,
+  updateLearningPathStep,
+  createLearningPathStep,
+  deletePersistedLearningPathStep,
+  deleteUnPersistedLearningPathStep,
+  updateStepSequenceNumber
 };
 
 export default {
@@ -57,7 +81,7 @@ export default {
   setLearningPaths,
   changeLearningPathQuery,
   setLearningPathsTotalCount,
-  sortPrivateLearningPaths,
+  setMyLearningPathsSortOrder,
   createLearningPathStep,
   updateLearningPathStep,
   updateLearningPathTitle,
@@ -80,5 +104,20 @@ export default {
   clearMessage,
   timeoutMessage,
   checkValidSession,
-  logoutAction
+  logoutAction,
+  fetchOembed,
+  validateOembed,
+  setLearningPathStatus,
+  createEmptyLearningPathStep,
+  updateLearningPathStepDescription,
+  updateLearningPathStepTitle,
+  updateLearningPathStepEmbedUrl,
+  updateLearningPathStepType,
+  setIsValidOembed,
+  removeLearningPathStepEmbedContent,
+  removeLearningPathStep,
+  deletePersistedLearningPathStep,
+  deleteUnPersistedLearningPathStep,
+  sortLearningPathSteps,
+  updateStepSequenceNumber
 };

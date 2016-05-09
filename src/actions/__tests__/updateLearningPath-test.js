@@ -5,7 +5,7 @@ import nock from 'nock';
 import payload403invalid from './payload403invalid';
 
 import actions from '..';
-import { routeActions } from 'redux-simple-router';
+import { routerActions } from 'react-router-redux';
 
 const middleware = [ thunk ];
 const mockStore = configureStore(middleware);
@@ -19,54 +19,54 @@ test('actions/updateLearningPath', t => {
     nock.cleanAll();
   };
 
-  const learningsteps = [
-    { id: 34, seqNo: 1 },
-    { id: 12, seqNo: 0 },
-    { seqNo: 2 }
-  ];
-
   const putPathApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .put('/learningpaths/' + pathId, {
-      id: pathId, isRequest: true, learningsteps
+      id: pathId, isRequest: true
     })
     .reply(200, {id: pathId, isResponse: true});
-
-  const putStep1Api = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .put('/learningpaths/' + pathId + '/learningsteps/12', { id: 12, seqNo: 0 })
-    .reply(200, {id: 12, seqNo: 0, isResponse: true});
-
-  const putStep2Api = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .put('/learningpaths/' + pathId + '/learningsteps/34', { id: 34, seqNo: 1 })
-    .reply(200, {id: 34, seqNo: 1, isResponse: true});
-
-  const postStep3Api = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .post('/learningpaths/' + pathId + '/learningsteps', { seqNo: 2 })
-    .reply(200, {id: 56, seqNo: 2, isResponse: true});
 
   const store = mockStore({ authToken });
 
   store.dispatch( actions.updateLearningPath(pathId, {
-    id: pathId, isRequest: true, learningsteps
+    id: pathId, isRequest: true
   }) )
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.addMessage({message: 'Lagret OK'}),
         actions.setLearningPath({
           id: pathId,
-          isResponse: true,
-          learningsteps: [
-            {id: 12, seqNo: 0, isResponse: true},
-            {id: 34, seqNo: 1, isResponse: true},
-            {id: 56, seqNo: 2, isResponse: true}
-          ]
+          isResponse: true
         }),
-        routeActions.push({ pathname: `/learningpaths/${pathId}` })
+        routerActions.push({ pathname: `/learningpaths/${pathId}` })
       ]);
 
       t.doesNotThrow(() => putPathApi.done());
-      t.doesNotThrow(() => putStep1Api.done());
-      t.doesNotThrow(() => putStep2Api.done());
-      t.doesNotThrow(() => postStep3Api.done());
+
+      done();
+    })
+    .catch(done);
+});
+
+test('actions/updateLearningPath with redirect', t => {
+  const done = res => {
+    t.end(res);
+    nock.cleanAll();
+  };
+
+  const putPathApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+    .put('/learningpaths/' + pathId, { id: pathId })
+    .reply(200, {id: pathId});
+
+  const store = mockStore({ authToken });
+
+  store.dispatch( actions.updateLearningPath(pathId, {id: pathId}, '/goto/dev/null') )
+    .then(() => {
+      const actual = store.getActions();
+
+      t.equal(actual.length, 3, 'three actions');
+      t.deepEqual(actual[2], routerActions.push({ pathname: '/goto/dev/null' }));
+
+      t.doesNotThrow(() => putPathApi.done());
 
       done();
     })
