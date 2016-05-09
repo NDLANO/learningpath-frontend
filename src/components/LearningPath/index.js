@@ -25,6 +25,7 @@ export function LearningPath(props) {
       <div>
         <LearningPathPrevNext/>
       </div>
+      <div className='learning-path_margin' />
     </div>
   );
 }
