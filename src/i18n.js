@@ -86,6 +86,10 @@ const phrases = {
     stepDescriptionPlaceholder: 'Skriv her',
     previewOembed: 'Forhåndsvis hele artikkelen'
   },
+  sortSteps: {
+    sort: 'Sorter steg',
+    finish: 'Avslutt sortering'
+  },
   siteNav: {
     login: 'Logg inn',
     search: 'Finn læringssti',

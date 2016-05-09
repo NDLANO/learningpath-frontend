@@ -69,6 +69,8 @@
     "redux-form": "^5.2.1",
     "redux-localstorage": "^0.4.0",
     "redux-thunk": "^2.0.1",
-    "sanitize-html": "^1.11.3"
+    "sanitize-html": "^1.11.3",
+    "react-dnd": "^2.1.4",
+    "react-dnd-html5-backend": "^2.1.2"
   }
 }

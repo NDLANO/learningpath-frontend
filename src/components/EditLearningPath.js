@@ -31,7 +31,6 @@ export function EditLearningPath (props, {lang}) {
       <TitleEditor value={titleText} onChange={updateTitle} lang={lang} />
     </h2>
     <DescriptionEditor value={descriptionText} onChange={updateDescription} lang={lang} />
-
     <button className='cta cta-link' onClick={saveLearningPath}>
       <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
     </button>

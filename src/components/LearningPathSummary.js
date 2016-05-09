@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 import polyglot from '../i18n';
 
@@ -19,6 +18,7 @@ export function LearningPathSummary ({learningPath}, {lang}) {
         {edit}
       </div>
     </div>
+
   );
 }
 
