@@ -153,7 +153,7 @@ export default class DescriptionHTMLEditor extends React.Component {
       contentState.getBlockMap().first().getType() !== 'unstyled';
 
     let className = classNames({
-      'RichEditor-editor': true,
+      'RichEditor-editor learning-path-input learning-path-input__paragraph': true,
       'RichEditor-hidePlaceholder': commentAboveApplies
     });
 
@@ -164,11 +164,12 @@ export default class DescriptionHTMLEditor extends React.Component {
           onToggleInline={this.toggleInlineStyle}
           onToggleBlock={this.toggleBlockType}
         />
+        <span className='editable'><Icon.Create /></span>
         <div className={className} onClick={this.focus}>
           <Editor
             editorState={editorState}
             onChange={this.onChange}
-            placeholder={polyglot.t('editPathStep.stepDescriptionPlaceholder')}
+            placeholder={this.props.placeholder}
             ref='editor'
             spellCheck={true}
           />
@@ -182,5 +183,10 @@ export default class DescriptionHTMLEditor extends React.Component {
 DescriptionHTMLEditor.propTypes = {
   lang: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string
+};
+
+DescriptionHTMLEditor.defaultProps = {
+  placeholder: polyglot.t('editPathStep.stepDescriptionPlaceholder')
 };
