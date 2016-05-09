@@ -31,5 +31,13 @@ test('component/LearningPath', t => {
       />
     ).find(FooBar).length, 1, 'renders props.main');
 
+  t.equal(
+    shallow(
+      <LearningPath
+        learningPath={learningPath}
+        sortLearningSteps={React.createElement(FooBar)}
+      />
+    ).find(FooBar).length, 1, 'renders props.sortLearningSteps');
+
   t.end();
 });
