@@ -125,8 +125,8 @@ export default class TagsEditor extends React.Component {
     };
   }
 
-  componentWillMount() {
-    this.updateEditorContentStateFromText(this.props.value);
+  componentWillReceiveProps(nextProps) {
+    this.updateEditorContentStateFromText(nextProps.value);
   }
 
   render() {
@@ -147,6 +147,6 @@ export default class TagsEditor extends React.Component {
 
 TagsEditor.propTypes = {
   lang: PropTypes.string.isRequired,
-  value: PropTypes.array.isRequired,
-  onChange: PropTypes.func.isRequired
+  value: PropTypes.array.isRequired
+  // onChange: PropTypes.func.isRequired
 };

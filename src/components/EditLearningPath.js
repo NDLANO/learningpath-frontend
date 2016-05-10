@@ -4,6 +4,7 @@ import get from 'lodash/get';
 import LabeledIcon from './LabeledIcon';
 import TitleEditor from './editors/TitleEditor';
 import DescriptionEditor from './editors/DescriptionEditor';
+import TagsEditor from './editors/TagsEditor';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 import polyglot from '../i18n';
 
@@ -12,14 +13,17 @@ import Icon from './Icon';
 import {
   updateLearningPathTitle,
   updateLearningPathDescription,
-  updateLearningPath
+  updateLearningPath,
+  updateLearningPathTags
 } from '../actions';
 
 export function EditLearningPath (props, {lang}) {
   let {
+    tags,
     learningPath,
     updateTitle,
     updateDescription,
+    updateTags,
     saveAction
   } = props;
 
@@ -41,6 +45,9 @@ export function EditLearningPath (props, {lang}) {
       <div className='learning-path-input learning-path-input__paragraph'>
         <DescriptionEditor value={descriptionText} onChange={updateDescription} lang={lang} />
       </div>
+      <div className='learning-path-input learning-path-input__paragraph'>
+        <TagsEditor onUpdate={updateTags} value={tags} lang={lang} />
+      </div>
       <button className='cta cta-link' onClick={saveLearningPath}>
         <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
       </button>
@@ -52,6 +59,8 @@ EditLearningPath.propTypes = {
   learningPath: PropTypes.object.isRequired,
   learningSteps: PropTypes.array.isRequired,
   updateTitle: PropTypes.func.isRequired,
+  updateTags: PropTypes.func.isRequired,
+  tags: PropTypes.array.isRequired,
   updateDescription: PropTypes.func.isRequired,
   saveAction: PropTypes.func.isRequired
 };
@@ -62,12 +71,14 @@ EditLearningPath.contextTypes = {
 
 const mapStateToProps = state => Object.assign({}, state, {
   learningPath: get(state, 'learningPath', {}),
-  learningSteps: get(state, 'learningPath.learningsteps', [])
+  learningSteps: get(state, 'learningPath.learningsteps', []),
+  tags: get(state, 'learningPath.tags', [])
 });
 
 const mapDispatchToProps = {
   updateTitle: updateLearningPathTitle,
   updateDescription: updateLearningPathDescription,
+  updateTags: updateLearningPathTags,
   saveAction: lp => updateLearningPath(lp.id, lp)
 };
 
