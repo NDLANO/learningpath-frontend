@@ -124,13 +124,8 @@ export const mapDispatchToProps = {
   updateEmbedUrl: updateLearningPathStepEmbedUrl,
   updateDescription: updateLearningPathStepDescription,
   // action til persistere learningPathStep
-<<<<<<< HEAD
   saveAction: (learningPath, lps) => updateLearningPathStep(learningPath.id, lps.id, lps, learningPath),
-
-=======
-  saveAction: (learningPathId, lps) => updateLearningPathStep(learningPathId, lps.id, lps),
   deleteAction: (learningPathId, lps) => lps.id ? deletePersistedLearningPathStep(learningPathId, lps) : deleteUnPersistedLearningPathStep(learningPathId, {lps}),
->>>>>>> master
   validateOembedUrl: (embedContent, lang) => validateOembed(embedContent, lang)
 };
 
