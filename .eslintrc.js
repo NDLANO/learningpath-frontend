@@ -20,7 +20,8 @@ module.exports = {
     'sourceType': 'module',
     'ecmaVersion': 6,
     'ecmaFeatures': {
-      'jsx': true
+      'jsx': true,
+      'experimentalObjectRestSpread': true
     }
   },
   'plugins': [
