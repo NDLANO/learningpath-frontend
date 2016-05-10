@@ -69,6 +69,7 @@ const phrases = {
     shortDescriptionPlaceholder:  'Skriv en kort beskrivelse (max 155 tegn)',
     titlePlaceHolder: 'Skriv  tittel her',
     oneLineEditorDefaultPlaceholder: 'Skriv her',
+    deletePathBtn: 'Slett',
     saveDraft: 'Lagre som utkast',
     saveAndPublish: 'Lagre og publiser',
     edit: 'Endre'

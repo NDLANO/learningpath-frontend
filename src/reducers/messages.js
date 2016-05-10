@@ -18,7 +18,7 @@ export default handleActions({
     },
     throw(state) {return state;}
   },
-  
+
   CLEAR_ALL_MESSAGES: {
     next(state, action) {
       return [];

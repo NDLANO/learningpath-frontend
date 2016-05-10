@@ -17,7 +17,9 @@ import {
   updateLearningPathStepTitle,
   updateLearningPathStepType,
   updateLearningPathStepEmbedUrl,
-  validateOembed
+  validateOembed,
+  deletePersistedLearningPathStep,
+  deleteUnPersistedLearningPathStep
 } from '../../actions';
 
 export function EditLearningPathStep (props, {lang}) {
@@ -30,11 +32,14 @@ export function EditLearningPathStep (props, {lang}) {
     learningPath,
     validateOembedUrl,
     saveAction,
-    oembedIsValid
+    oembedIsValid,
+    deleteAction
+
   } = props;
   const isValid = () => true;
 
   let saveLearningStep = () => saveAction(learningPath, step);
+  let deleteLearningStep = () => deleteAction(learningPathId, step);
   let title = titleI18N(step, lang) || '';
   let htmlDescription = descriptionI18N(step, lang) || '';
   let embedContent = oembedContentI18N(step, lang);
@@ -64,6 +69,9 @@ export function EditLearningPathStep (props, {lang}) {
         <div>
           <button className='cta cta-link' onClick={saveLearningStep} disabled={ !isValid() || !oembedIsValid }>
             <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
+          </button>
+          <button className='cta cta-link--secondary' onClick={deleteLearningStep}>
+            <LabeledIcon.Delete labelText={polyglot.t('editPage.deletePathBtn')} />
           </button>
         </div>
       </div>
@@ -95,7 +103,8 @@ EditLearningPathStep.propTypes = {
   learningPath: PropTypes.number.isRequired,
   saveAction: PropTypes.func.isRequired,
   oembedIsValid: PropTypes.bool.isRequired,
-  validateOembedUrl: PropTypes.func.isRequired
+  validateOembedUrl: PropTypes.func.isRequired,
+  deleteAction: PropTypes.func.isRequired
 };
 
 EditLearningPathStep.contextTypes = {
@@ -115,8 +124,13 @@ export const mapDispatchToProps = {
   updateEmbedUrl: updateLearningPathStepEmbedUrl,
   updateDescription: updateLearningPathStepDescription,
   // action til persistere learningPathStep
+<<<<<<< HEAD
   saveAction: (learningPath, lps) => updateLearningPathStep(learningPath.id, lps.id, lps, learningPath),
 
+=======
+  saveAction: (learningPathId, lps) => updateLearningPathStep(learningPathId, lps.id, lps),
+  deleteAction: (learningPathId, lps) => lps.id ? deletePersistedLearningPathStep(learningPathId, lps) : deleteUnPersistedLearningPathStep(learningPathId, {lps}),
+>>>>>>> master
   validateOembedUrl: (embedContent, lang) => validateOembed(embedContent, lang)
 };
 
