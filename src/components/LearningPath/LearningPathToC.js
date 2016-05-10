@@ -16,6 +16,7 @@ export default function LearningPathToC ({learningPath, activePathname}, {lang})
     'step-nav_item': true,
     'step-nav_item--active': path === activePathname
   });
+
   const iconClassName = (type) => {
     if (indexOf(LearningPathTocTypes.TEXT_TYPE, type) != -1){
       return <Icon.TypeText />;
@@ -28,6 +29,12 @@ export default function LearningPathToC ({learningPath, activePathname}, {lang})
     }
     return <Icon.TypeText />;
   };
+
+  const formattedTitle = (step, lang) => {
+    const title = titleI18N(step, lang);
+    return title.length < 100 ? title : title.substring(0, 70) + '...';
+  }
+
   let sortPathTarget = `/learningpaths/${learningPath.id}/sort`;
   const sort = learningPath.canEdit ? <Link className='cta-link cta-link--block' to={sortPathTarget}>{polyglot.t('sortSteps.sort')}</Link> : '';
 
@@ -39,10 +46,13 @@ export default function LearningPathToC ({learningPath, activePathname}, {lang})
             <li key={step.id}
               className={itemClassName(`${base}/step/${step.id}`)}>
               <Link to={`${base}/step/${step.id}`} className='step-nav_link'>
+                <div className='step-nav_line' />
                 <span className='step-nav_circle'>
                   {iconClassName(step.type)}
                 </span>
-                {titleI18N(step, lang)}
+                <div className='step-nav_title'>
+                  {formattedTitle(step, lang)}
+                </div>
               </Link>
             </li>
           )))(defined(learningPath.learningsteps, []))}
