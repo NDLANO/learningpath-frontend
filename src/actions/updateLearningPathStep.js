@@ -3,7 +3,7 @@ import { updateStep } from '../sources/learningpaths';
 import { routerActions } from 'react-router-redux';
 import polyglot from '../i18n';
 
-export default function updateLearningPathStep (pathId, stepId, learningPathStep, learningPath) {
+export default function updateLearningPathStep (pathId, stepId, learningPathStep) {
   return (dispatch, getState) => updateStep(getState().authToken, { pathId, stepId }, learningPathStep)
     .then( (lpspath) => {
       dispatch(addMessage({message: polyglot.t('updateLearningPath.updatedMsg')}));

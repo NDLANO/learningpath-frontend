@@ -11,7 +11,7 @@ test('component/LearningPathStepIcon', t => {
 
   let iconNode = component.find('.step-nav_circle');
 
-  t.equal(iconNode, 1, 'one icon node');
+  t.equal(iconNode.length, 1, 'one icon node');
 
   t.end();
 });

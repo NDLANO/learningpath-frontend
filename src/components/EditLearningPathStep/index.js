@@ -29,7 +29,7 @@ export function EditLearningPathStep (props, {lang}) {
     updateType,
     updateEmbedUrl,
     updateDescription,
-    learningPath,
+    learningPathId,
     validateOembedUrl,
     saveAction,
     oembedIsValid,
@@ -38,8 +38,8 @@ export function EditLearningPathStep (props, {lang}) {
   } = props;
   const isValid = () => true;
 
-  let saveLearningStep = () => saveAction(learningPath, step);
-  let deleteLearningStep = () => deleteAction(learningPath.id, step);
+  let saveLearningStep = () => saveAction(learningPathId, step);
+  let deleteLearningStep = () => deleteAction(learningPathId, step);
   let title = titleI18N(step, lang) || '';
   let htmlDescription = descriptionI18N(step, lang) || '';
   let embedContent = oembedContentI18N(step, lang);
@@ -100,7 +100,7 @@ EditLearningPathStep.propTypes = {
   updateType: PropTypes.func.isRequired,
   updateEmbedUrl: PropTypes.func.isRequired,
   updateDescription: PropTypes.func.isRequired,
-  learningPath: PropTypes.number.isRequired,
+  learningPathId: PropTypes.number.isRequired,
   saveAction: PropTypes.func.isRequired,
   oembedIsValid: PropTypes.bool.isRequired,
   validateOembedUrl: PropTypes.func.isRequired,
@@ -113,7 +113,7 @@ EditLearningPathStep.contextTypes = {
 
 export const mapStateToProps = state => assign({}, state, {
   step: state.learningPathStep,
-  learningPath: state.learningPath
+  learningPathId: state.learningPath.id
 
 });
 
@@ -124,7 +124,7 @@ export const mapDispatchToProps = {
   updateEmbedUrl: updateLearningPathStepEmbedUrl,
   updateDescription: updateLearningPathStepDescription,
   // action til persistere learningPathStep
-  saveAction: (learningPath, lps) => updateLearningPathStep(learningPath.id, lps.id, lps, learningPath),
+  saveAction: (learningPathId, lps) => updateLearningPathStep(learningPathId, lps.id, lps),
   deleteAction: (learningPathId, lps) => lps.id ? deletePersistedLearningPathStep(learningPathId, lps) : deleteUnPersistedLearningPathStep(learningPathId, {lps}),
   validateOembedUrl: (embedContent, lang) => validateOembed(embedContent, lang)
 };
