@@ -3,10 +3,20 @@ import { Link } from 'react-router';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
-
+import { setLearningPathStep } from '../../actions';
+import Icon from '../Icon';
 import { titleI18N } from '../../util/i18nFieldFinder';
 
-export function LearningPathPrevNext ({learningPath, learningsteps, nextUrl, prevUrl}, {lang}) {
+export function LearningPathPrevNext (props, {lang}) {
+
+  const {
+    learningPath,
+    learningsteps,
+    nextUrl,
+    prevUrl,
+    currentSeqNo,
+    setEmptyStep
+  } = props;
 
   const base = `/learningpaths/${learningPath.id}`;
 
@@ -15,21 +25,31 @@ export function LearningPathPrevNext ({learningPath, learningsteps, nextUrl, pre
     'stepper-nav-btn_disabled': object === undefined
   });
 
-  const stepperUrl = (object) => (object === undefined) ? '#' : `${base}/step/${object.id}`;
+  const stepperUrl = (object) => (object === undefined) ? `${base}` : `${base}/step/${object.id}`;
 
 
-  const stepperTag = (object, text) => (object === undefined) ?
-    <span className={stepperClassName(object)}> {text} </span> :
-    <Link to={`${stepperUrl(object)}`} className={stepperClassName(object)}> {text} </Link>;
+  const stepperTag = (object, currentSeqNo, text) => {
+    if (object != undefined){
+      return <Link to={`${stepperUrl(object)}`} className={stepperClassName(object)}> {text} </Link>;
+    }
+    else if (currentSeqNo === 0){
+      return <Link to={`${base}`} onClick={setEmptyStep} className='stepper-nav-btn'> {text} </Link>;
+    }
+    else {
+      return <span className={stepperClassName(object)}> {text} </span>;
+    }
+  }
+
+  const formattedText = (text, icon, forward) => {
+    return forward ? <span>{text} {icon} </span> : <span> {icon} {text} </span>;
+  }
 
   return (
     <div className='stepper-nav stepper-nav_fixed'>
 
-      {stepperTag(prevUrl, '<< Forrige')}
-      {learningsteps.map(step => (
-        <Link to={`${base}/step/${step.id}`} key={step.id} className='stepper-nav-stepp' data-value={titleI18N(step, lang)} />
-      ))}
-      {stepperTag(nextUrl, 'Neste >>')}
+      {stepperTag(prevUrl, currentSeqNo, formattedText('Forrige', <Icon.ArrowBack/>, false))}
+
+      {stepperTag(nextUrl, currentSeqNo, formattedText('Neste', <Icon.ArrowForward/>, true))}
 
     </div>
   );
@@ -52,6 +72,7 @@ const mapStateToProps = (state) => {
 
   const currentSeqNo = get(state.learningPathStep, 'seqNo', -1);
   return Object.assign({}, state, {
+    currentSeqNo: currentSeqNo,
     nextUrl: learningsteps[currentSeqNo + 1],
     prevUrl: learningsteps[currentSeqNo - 1],
     learningsteps
@@ -60,4 +81,8 @@ const mapStateToProps = (state) => {
 
 export { mapStateToProps };
 
-export default connect(mapStateToProps)(LearningPathPrevNext);
+export const mapDispatchToProps = {
+  setEmptyStep: setLearningPathStep
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LearningPathPrevNext);

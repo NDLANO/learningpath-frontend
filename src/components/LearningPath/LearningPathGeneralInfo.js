@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import get from 'lodash/get';
 
@@ -8,14 +9,15 @@ import formatDuration from '../../util/formatDuration';
 
 import LabeledIcon from '../LabeledIcon';
 
+import { setLearningPathStep } from '../../actions';
 
-export default function LearningPathGeneralInfo ({learningPath}, {lang}) {
+export function LearningPathGeneralInfo ({learningPath, setEmptyStep}, {lang}) {
+
   const href = `/learningpaths/${learningPath.id}`;
-
   return (
     <div className='learningpath-general-info'>
       <h3 className='learningpath-general-info_h'>
-        <Link to={href}>{titleI18N(learningPath, lang)}</Link>
+        <Link to={href} onClick={setEmptyStep}>{titleI18N(learningPath, lang) }</Link>
       </h3>
       <div className='learningpath-general-info_b'>
         <LabeledIcon.Person labelText={get(learningPath, 'author.name')} />
@@ -27,9 +29,21 @@ export default function LearningPathGeneralInfo ({learningPath}, {lang}) {
 }
 
 LearningPathGeneralInfo.propTypes = {
-  learningPath: PropTypes.object.isRequired
+  learningPath: PropTypes.object.isRequired,
+  setEmptyStep: PropTypes.func.isRequired
 };
 
 LearningPathGeneralInfo.contextTypes = {
   lang: PropTypes.string.isRequired
 };
+
+
+
+
+export const mapStateToProps = state => state;
+
+export const mapDispatchToProps = {
+  setEmptyStep: setLearningPathStep
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LearningPathGeneralInfo);
