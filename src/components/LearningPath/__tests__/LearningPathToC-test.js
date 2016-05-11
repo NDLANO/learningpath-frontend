@@ -16,11 +16,9 @@ test('component/LearningPathToC', t => {
 
   t.ok(links.at(0).is('.step-nav_link'), 'link 1 is nav_link');
   t.equal(links.at(0).prop('to'), '/learningpaths/4/step/7');
-  t.equal(links.at(0).prop('children')[1], 'Tittel her');
 
   t.ok(links.at(1).is('.step-nav_link'), 'link 2 is nav_link');
   t.equal(links.at(1).prop('to'), '/learningpaths/4/step/8');
-  t.equal(links.at(1).prop('children')[1], 'En annen tittel her');
 
   t.end();
 });

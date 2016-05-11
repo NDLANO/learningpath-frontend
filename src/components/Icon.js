@@ -42,5 +42,4 @@ Icon.Duration = props => (<Icon {...props} className={'icon--query-builder' + pr
 Icon.Visibility = props => (<Icon {...props} className={'icon--remove-red-eye' + props.className} svgDefId='icon-remove_red_eye' />);
 
 
-Icon.INTRODUCTION = Icon.TypeText;
 export default Icon;

@@ -39,7 +39,7 @@ export function EditLearningPathStep (props, {lang}) {
   const isValid = () => true;
 
   let saveLearningStep = () => saveAction(learningPath, step);
-  let deleteLearningStep = () => deleteAction(learningPathId, step);
+  let deleteLearningStep = () => deleteAction(learningPath.id, step);
   let title = titleI18N(step, lang) || '';
   let htmlDescription = descriptionI18N(step, lang) || '';
   let embedContent = oembedContentI18N(step, lang);
