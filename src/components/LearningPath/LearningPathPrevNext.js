@@ -5,13 +5,11 @@ import { connect } from 'react-redux';
 import get from 'lodash/get';
 import { setLearningPathStep } from '../../actions';
 import Icon from '../Icon';
-import { titleI18N } from '../../util/i18nFieldFinder';
 
-export function LearningPathPrevNext (props, {lang}) {
+export function LearningPathPrevNext (props) {
 
   const {
     learningPath,
-    learningsteps,
     nextUrl,
     prevUrl,
     currentSeqNo,
@@ -38,11 +36,11 @@ export function LearningPathPrevNext (props, {lang}) {
     else {
       return <span className={stepperClassName(object)}> {text} </span>;
     }
-  }
+  };
 
   const formattedText = (text, icon, forward) => {
     return forward ? <span>{text} {icon} </span> : <span> {icon} {text} </span>;
-  }
+  };
 
   return (
     <div className='stepper-nav stepper-nav_fixed'>
@@ -59,11 +57,8 @@ LearningPathPrevNext.propTypes = {
   learningPath: PropTypes.object.isRequired,
   nextUrl: PropTypes.object,
   prevUrl: PropTypes.object,
-  learningsteps: PropTypes.array.isRequired
-};
-
-LearningPathPrevNext.contextTypes = {
-  lang: PropTypes.string.isRequired
+  currentSeqNo: PropTypes.number,
+  setEmptyStep: PropTypes.func.isRequired
 };
 
 
