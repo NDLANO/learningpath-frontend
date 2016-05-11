@@ -2,7 +2,7 @@ import LearningPathTocTypes from './LearningPath/LearningPathTocTypes';
 import indexOf from 'lodash/indexOf';
 import React, { PropTypes } from 'react';
 import Icon from './Icon';
-export default function LearningPathStepIcon ({learningPathStep}) {
+export default function LearningPathStepIcon ({learningPathStepType}) {
 
   const iconClassName = (type) => {
     if (indexOf(LearningPathTocTypes.TEXT_TYPE, type) != -1){
@@ -18,13 +18,13 @@ export default function LearningPathStepIcon ({learningPathStep}) {
   };
   return (
     <div className='step-nav_circle'>
-      {iconClassName(learningPathStep.type)}
+      {iconClassName(learningPathStepType)}
     </div>
   );
 }
 LearningPathStepIcon.propTypes = {
-  learningPathStep: PropTypes.object.isRequired
+  learningPathStepType: PropTypes.string.isRequired
 };
 LearningPathStepIcon.defaultProps = {
-  learningPathStep: {type: ''}
+  learningPathStepType: ''
 };

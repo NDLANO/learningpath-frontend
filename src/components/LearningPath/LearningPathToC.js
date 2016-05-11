@@ -31,7 +31,7 @@ export default function LearningPathToC ({learningPath, activePathname}, {lang})
               className={itemClassName(`${base}/step/${step.id}`)}>
               <Link to={`${base}/step/${step.id}`} className='step-nav_link'>
                 <div className='step-nav_line' />
-                <LearningPathStepIcon learningPathStep={step} />
+                <LearningPathStepIcon learningPathStepType={step.type} />
                 <div className='step-nav_title'>
                   {formattedTitle(step, lang)}
                 </div>
