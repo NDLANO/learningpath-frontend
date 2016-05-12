@@ -35,7 +35,7 @@ export default handleActions({
     throw(state) { return state; }
   },
   REMOVE_LEARNING_PATH_STEP_EMBED_CONTENT: {
-    next(state, action) {
+    next(state) {
       let nextState = cloneDeep(state);
       nextState.embedContent = [];
       return nextState;
