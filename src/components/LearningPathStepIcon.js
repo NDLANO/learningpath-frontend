@@ -1,20 +1,21 @@
-import LearningPathTocTypes from './LearningPath/LearningPathTocTypes';
-import indexOf from 'lodash/indexOf';
 import React, { PropTypes } from 'react';
 import Icon from './Icon';
 export default function LearningPathStepIcon ({learningPathStepType}) {
 
   const iconClassName = (type) => {
-    if (indexOf(LearningPathTocTypes.TEXT_TYPE, type) != -1){
+    switch (type){
+    case 'INTRODUCTION':
+    case 'TEXT':
+    case 'TASK':
+    case 'SUMMARY':
+      return <Icon.TypeText />;
+    case 'MULTIMEDIA':
+      return <Icon.TypeMedia />;
+    case 'QUIZ':
+      return <Icon.TypeQuiz />;
+    default:
       return <Icon.TypeText />;
     }
-    else if (indexOf(LearningPathTocTypes.MULTIMEDIA, type) != -1){
-      return <Icon.TypeMedia />;
-    }
-    else if(indexOf(LearningPathTocTypes.QUIZ, type) != -1){
-      return <Icon.TypeQuiz />;
-    }
-    return <Icon.TypeText />;
   };
   return (
     <div className='step-nav_circle'>
@@ -24,7 +25,4 @@ export default function LearningPathStepIcon ({learningPathStepType}) {
 }
 LearningPathStepIcon.propTypes = {
   learningPathStepType: PropTypes.string.isRequired
-};
-LearningPathStepIcon.defaultProps = {
-  learningPathStepType: ''
 };

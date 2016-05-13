@@ -1,5 +1,0 @@
-export default {
-  TEXT_TYPE: ['INTRODUCTION', 'TEXT', 'TASK', 'SUMMARY'],
-  MULTIMEDIA: ['MULTIMEDIA'],
-  QUIZ: ['QUIZ']
-};

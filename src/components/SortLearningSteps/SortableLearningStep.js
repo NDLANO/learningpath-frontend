@@ -51,7 +51,7 @@ class SortableLearningStep extends Component {
   render() {
     const { title, isDragging, connectDragSource, connectDropTarget, type } = this.props;
     const opacity = isDragging ? 0 : 1;
-    const step = {type: ''}
+    const step = {type: ''};
     return connectDragSource(connectDropTarget(
       <li className='step-nav_item'>
         <a className='step-nav_link' style={{ opacity }}>
