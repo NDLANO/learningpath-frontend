@@ -72,7 +72,7 @@ const phrases = {
     deletePathBtn: 'Slett',
     saveDraft: 'Lagre som utkast',
     saveAndPublish: 'Lagre og publiser',
-    edit: 'Endre'
+    edit: 'Rediger læringssti'
   },
   editPathStep: {
     urlLabel: 'Lim inn lenke (URL) fra ndla.no eller youtube.com',
@@ -84,6 +84,7 @@ const phrases = {
       task: 'Oppgave',
       summary: 'Oppsummering'
     },
+    edit: 'Rediger læringssteg',
     urlPlaceholder: 'Lim inn lenke',
     stepDescriptionPlaceholder: 'Skriv en beskrivelse her',
     titlePlaceHolder: 'Skriv en tittel her',
