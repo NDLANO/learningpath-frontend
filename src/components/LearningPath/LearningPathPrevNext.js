@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import get from 'lodash/get';
 import { setLearningPathStep } from '../../actions';
 import Icon from '../Icon';
+import polyglot from '../../i18n';
 
 export function LearningPathPrevNext (props) {
 
@@ -31,13 +32,13 @@ export function LearningPathPrevNext (props) {
       return <span className={stepperClassName(stepObject)}> {leftText} {rightText} </span>;
     }
   };
-
+{}
   return (
     <div className='stepper-nav stepper-nav--fixed'>
 
-      {stepperTag(prevStep, <Icon.ArrowBack/>, 'Forrige', false)}
+      {stepperTag(prevStep, <Icon.ArrowBack/>, polyglot.t('learningPath.previous'), false)}
 
-      {stepperTag(nextStep, 'Neste', <Icon.ArrowForward/>, true)}
+      {stepperTag(nextStep, polyglot.t('learningPath.next'), <Icon.ArrowForward/>, true)}
 
     </div>
   );
