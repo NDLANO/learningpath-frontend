@@ -84,13 +84,15 @@ SearchForm.defaultProps = {
 
 function SearchResult ({path}, {lang}) {
   return (
+    <div>
+    <Link to={`/learningpaths/${path.id}`}>
     <div className='search-result'>
       {(() => path.coverPhotoUrl ?
         (<img className='search-result_img' src={path.coverPhotoUrl} />) : ''
       )()}
       <div className='search-result_bd'>
         <h2 className='search-result_title'>
-          <Link to={`/learningpaths/${path.id}`}>{titleI18N(path, lang)}</Link>
+          {titleI18N(path, lang)}
         </h2>
         <div className='search-result_meta'>
           <LabeledIcon.Person labelText={get(path, 'author.name')} />
@@ -99,6 +101,8 @@ function SearchResult ({path}, {lang}) {
         </div>
         <div className='search-result_description'>{descriptionI18N(path, lang)}</div>
       </div>
+    </div>
+    </Link>
     </div>
   );
 }
