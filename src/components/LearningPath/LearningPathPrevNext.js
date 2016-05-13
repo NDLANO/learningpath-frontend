@@ -9,7 +9,6 @@ import Icon from '../Icon';
 export function LearningPathPrevNext (props) {
 
   const {
-    learningPath,
     nextStep,
     prevStep,
     setEmptyStep,
@@ -45,11 +44,11 @@ export function LearningPathPrevNext (props) {
 }
 
 LearningPathPrevNext.propTypes = {
-  learningPath: PropTypes.object.isRequired,
   nextStep: PropTypes.string,
   prevStep: PropTypes.string,
   currentSeqNo: PropTypes.number,
-  setEmptyStep: PropTypes.func.isRequired
+  setEmptyStep: PropTypes.func.isRequired,
+  isFirstStep: PropTypes.bool.isRequired
 };
 
 
@@ -65,8 +64,8 @@ const mapStateToProps = (state) => {
     nextUrl = learningsteps.length > 0 ? base + '/step/' + learningsteps[0].id : undefined;
   }
   else {
-     prevUrl = learningsteps[currentSeqNo - 1] ? base + '/step/' + learningsteps[currentSeqNo - 1].id : undefined
-     nextUrl = learningsteps[currentSeqNo + 1] ? base + '/step/' + learningsteps[currentSeqNo + 1].id : undefined
+    prevUrl = learningsteps[currentSeqNo - 1] ? base + '/step/' + learningsteps[currentSeqNo - 1].id : undefined;
+    nextUrl = learningsteps[currentSeqNo + 1] ? base + '/step/' + learningsteps[currentSeqNo + 1].id : undefined;
   }
   prevUrl = currentSeqNo === 0 ? base : prevUrl;
 
