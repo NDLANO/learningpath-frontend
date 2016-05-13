@@ -32,7 +32,7 @@ export function LearningPathPrevNext (props) {
       return <span className={stepperClassName(stepObject)}> {leftText} {rightText} </span>;
     }
   };
-{}
+
   return (
     <div className='stepper-nav stepper-nav--fixed'>
 
