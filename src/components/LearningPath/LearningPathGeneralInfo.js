@@ -17,7 +17,7 @@ export function LearningPathGeneralInfo ({learningPath, setEmptyStep}, {lang}) {
   return (
     <div className='learningpath-general-info'>
       <h3 className='learningpath-general-info_h'>
-        <Link to={href} onClick={setEmptyStep}>{titleI18N(learningPath, lang) }</Link>
+        <Link to={href} onClick={() => (setEmptyStep({}))}>{titleI18N(learningPath, lang) }</Link>
       </h3>
       <div className='learningpath-general-info_b'>
         <LabeledIcon.Person labelText={get(learningPath, 'author.name')} />
@@ -36,9 +36,6 @@ LearningPathGeneralInfo.propTypes = {
 LearningPathGeneralInfo.contextTypes = {
   lang: PropTypes.string.isRequired
 };
-
-
-
 
 export const mapStateToProps = state => state;
 

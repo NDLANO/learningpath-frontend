@@ -10,44 +10,35 @@ export function LearningPathPrevNext (props) {
 
   const {
     learningPath,
-    nextUrl,
-    prevUrl,
-    currentSeqNo,
-    setEmptyStep
+    nextStep,
+    prevStep,
+    setEmptyStep,
+    isFirstStep
   } = props;
-
-  const base = `/learningpaths/${learningPath.id}`;
 
   const stepperClassName = (object) => classNames({
     'stepper-nav-btn': true,
     'stepper-nav-btn_disabled': object === undefined
   });
 
-  const stepperUrl = (object) => (object === undefined) ? `${base}` : `${base}/step/${object.id}`;
-
-
-  const stepperTag = (object, currentSeqNo, text) => {
-    if (object != undefined){
-      return <Link to={`${stepperUrl(object)}`} className={stepperClassName(object)}> {text} </Link>;
+  const stepperTag = (stepObject, leftText, rightText) => {
+    if (stepObject && isFirstStep){
+      return <Link to={stepObject} onClick={() => (setEmptyStep({}))} className={stepperClassName(stepObject)}> {leftText} {rightText} </Link>;
     }
-    else if (currentSeqNo === 0){
-      return <Link to={`${base}`} onClick={setEmptyStep} className='stepper-nav-btn'> {text} </Link>;
+    else if (stepObject){
+      return <Link to={stepObject} className={stepperClassName(stepObject)}> {leftText} {rightText} </Link>;
     }
     else {
-      return <span className={stepperClassName(object)}> {text} </span>;
+      return <span className={stepperClassName(stepObject)}> {leftText} {rightText} </span>;
     }
-  };
-
-  const formattedText = (text, icon, forward) => {
-    return forward ? <span>{text} {icon} </span> : <span> {icon} {text} </span>;
   };
 
   return (
-    <div className='stepper-nav stepper-nav_fixed'>
+    <div className='stepper-nav stepper-nav--fixed'>
 
-      {stepperTag(prevUrl, currentSeqNo, formattedText('Forrige', <Icon.ArrowBack/>, false))}
+      {stepperTag(prevStep, <Icon.ArrowBack/>, 'Forrige', false)}
 
-      {stepperTag(nextUrl, currentSeqNo, formattedText('Neste', <Icon.ArrowForward/>, true))}
+      {stepperTag(nextStep, 'Neste', <Icon.ArrowForward/>, true)}
 
     </div>
   );
@@ -55,8 +46,8 @@ export function LearningPathPrevNext (props) {
 
 LearningPathPrevNext.propTypes = {
   learningPath: PropTypes.object.isRequired,
-  nextUrl: PropTypes.object,
-  prevUrl: PropTypes.object,
+  nextStep: PropTypes.string,
+  prevStep: PropTypes.string,
   currentSeqNo: PropTypes.number,
   setEmptyStep: PropTypes.func.isRequired
 };
@@ -64,13 +55,26 @@ LearningPathPrevNext.propTypes = {
 
 const mapStateToProps = (state) => {
   const learningsteps = get(state.learningPath, 'learningsteps', []);
-
+  const learningPathId = get(state.learningPath, 'id', -1);
+  const base = `/learningpaths/${learningPathId}`;
   const currentSeqNo = get(state.learningPathStep, 'seqNo', -1);
+  let prevUrl, nextUrl;
+
+  if (currentSeqNo === -1){
+    prevUrl = undefined;
+    nextUrl = learningsteps.length > 0 ? base + '/step/' + learningsteps[0].id : undefined;
+  }
+  else {
+     prevUrl = learningsteps[currentSeqNo - 1] ? base + '/step/' + learningsteps[currentSeqNo - 1].id : undefined
+     nextUrl = learningsteps[currentSeqNo + 1] ? base + '/step/' + learningsteps[currentSeqNo + 1].id : undefined
+  }
+  prevUrl = currentSeqNo === 0 ? base : prevUrl;
+
   return Object.assign({}, state, {
-    currentSeqNo: currentSeqNo,
-    nextUrl: learningsteps[currentSeqNo + 1],
-    prevUrl: learningsteps[currentSeqNo - 1],
-    learningsteps
+    nextStep: nextUrl,
+    prevStep: prevUrl,
+    learningsteps,
+    isFirstStep: currentSeqNo === 0
   });
 };
 
