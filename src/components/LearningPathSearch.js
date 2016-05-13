@@ -85,24 +85,24 @@ SearchForm.defaultProps = {
 function SearchResult ({path}, {lang}) {
   return (
     <div>
-    <Link to={`/learningpaths/${path.id}`}>
-    <div className='search-result'>
-      {(() => path.coverPhotoUrl ?
-        (<img className='search-result_img' src={path.coverPhotoUrl} />) : ''
-      )()}
-      <div className='search-result_bd'>
-        <h2 className='search-result_title'>
-          {titleI18N(path, lang)}
-        </h2>
-        <div className='search-result_meta'>
-          <LabeledIcon.Person labelText={get(path, 'author.name')} />
-          <LabeledIcon.Today labelText={formatDate(path.lastUpdated, lang)} tagName='time' />
-          <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName='time' />
+      <Link to={`/learningpaths/${path.id}`}>
+        <div className='search-result'>
+          {(() => path.coverPhotoUrl ?
+            (<img className='search-result_img' src={path.coverPhotoUrl} />) : ''
+          )()}
+          <div className='search-result_bd'>
+            <h2 className='search-result_title'>
+              {titleI18N(path, lang)}
+            </h2>
+            <div className='search-result_meta'>
+              <LabeledIcon.Person labelText={get(path, 'author.name')} />
+              <LabeledIcon.Today labelText={formatDate(path.lastUpdated, lang)} tagName='time' />
+              <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName='time' />
+            </div>
+            <div className='search-result_description'>{descriptionI18N(path, lang)}</div>
+          </div>
         </div>
-        <div className='search-result_description'>{descriptionI18N(path, lang)}</div>
-      </div>
-    </div>
-    </Link>
+      </Link>
     </div>
   );
 }
