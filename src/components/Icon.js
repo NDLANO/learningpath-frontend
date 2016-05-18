@@ -40,5 +40,8 @@ Icon.Numbered = props => (<Icon {...props} className={'icon--format-list-numbere
 Icon.Create = props => (<Icon {...props} className={'icon--create ' + props.className} svgDefId='icon-create' />);
 Icon.Duration = props => (<Icon {...props} className={'icon--query-builder' + props.className} svgDefId='icon-query_builder' />);
 Icon.Visibility = props => (<Icon {...props} className={'icon--remove-red-eye' + props.className} svgDefId='icon-remove_red_eye' />);
+Icon.ArrowBack = props => (<Icon {...props} className={'icon--arrow-back' + props.className} svgDefId='icon-arrow_back' />);
+Icon.ArrowForward = props => (<Icon {...props} className={'icon--arrow-forward' + props.className} svgDefId='icon-arrow_forward' />);
+
 
 export default Icon;
