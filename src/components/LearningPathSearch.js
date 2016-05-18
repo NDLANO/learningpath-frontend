@@ -87,9 +87,11 @@ function SearchResult ({path}, {lang}) {
     <div>
       <Link to={`/learningpaths/${path.id}`}>
         <div className='search-result'>
-          {(() => path.coverPhotoUrl ?
-            (<img className='search-result_img' src={path.coverPhotoUrl} />) : ''
-          )()}
+          <div className='search-result_img_container'>
+            {(() => path.coverPhotoUrl ?
+              (<img className='search-result_img' src={path.coverPhotoUrl} />) : (<img className='search-result_img' src={'https://placeholdit.imgix.net/~text?txtsize=33&txt=NDLA&w=190&h=120'} />)
+            )()}
+          </div>
           <div className='search-result_bd'>
             <h2 className='search-result_title'>
               {titleI18N(path, lang)}
