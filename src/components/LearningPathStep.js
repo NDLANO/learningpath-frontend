@@ -17,7 +17,7 @@ export function LearningPathStep({learningPathStep, learningPath}, {lang}) {
   if (learningPath.canEdit){
     edit =(
       <div className='block-container_fixed block-container_fixed--bottom--right'>
-        <Link className='cta-link cta-link_rounded' to={editStepTarget}><Icon.Create />{polyglot.t('editPathStep.edit')}</Link>
+        <Link className='cta-link cta-link--round' to={editStepTarget}><Icon.Create />{polyglot.t('editPathStep.edit')}</Link>
       </div>
     );
   }
