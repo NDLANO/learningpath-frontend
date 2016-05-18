@@ -20,10 +20,8 @@ export default handleActions({
   },
 
   CLEAR_ALL_MESSAGES: {
-    next(state, action) {
-      return [];
-    },
-    throw(state) {return state;}
+    next: () => [],
+    throw: state => state
   },
 
   CLEAR_MESSAGE: {

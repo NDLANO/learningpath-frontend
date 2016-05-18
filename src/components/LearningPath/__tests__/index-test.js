@@ -10,7 +10,7 @@ const FooBar = () => <div></div>;
 test('component/LearningPath', t => {
   t.equal(
     shallow(
-      <LearningPath learningPath={learningPath}>
+      <LearningPath learningPath={learningPath} params={{}}>
         <FooBar />
       </LearningPath>
     ).find(FooBar).length, 1, 'renders props.children');
@@ -18,7 +18,7 @@ test('component/LearningPath', t => {
   t.equal(
     shallow(
       <LearningPath
-        learningPath={learningPath}
+        learningPath={learningPath} params={{}}
         saveButtons={React.createElement(FooBar)}
       />
     ).find(FooBar).length, 1, 'renders props.saveButtons');
@@ -26,7 +26,7 @@ test('component/LearningPath', t => {
   t.equal(
     shallow(
       <LearningPath
-        learningPath={learningPath}
+        learningPath={learningPath} params={{}}
         main={React.createElement(FooBar)}
       />
     ).find(FooBar).length, 1, 'renders props.main');
@@ -34,7 +34,7 @@ test('component/LearningPath', t => {
   t.equal(
     shallow(
       <LearningPath
-        learningPath={learningPath}
+        learningPath={learningPath} params={{}}
         sortLearningSteps={React.createElement(FooBar)}
       />
     ).find(FooBar).length, 1, 'renders props.sortLearningSteps');

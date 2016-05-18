@@ -25,11 +25,14 @@ test('actions/deletePersistedLearningPathStep with id', t => {
     t.end(res);
     nock.cleanAll();
   };
-  const apiGetMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+
+  // GET /learningpaths/:pathId
+  nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get('/learningpaths/' + pathId)
     .reply(200, {id: pathId});
 
-  const apiDeleteMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  // DELETE /learningpaths/:pathId/learningsteps/:stepId
+  nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .delete('/learningpaths/' + pathId + '/learningsteps/' + stepId)
     .reply(204);
 
