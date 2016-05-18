@@ -9,15 +9,13 @@ import formatDuration from '../../util/formatDuration';
 
 import LabeledIcon from '../LabeledIcon';
 
-import { setLearningPathStep } from '../../actions';
-
-export function LearningPathGeneralInfo ({learningPath, setEmptyStep}, {lang}) {
+export function LearningPathGeneralInfo ({learningPath}, {lang}) {
 
   const href = `/learningpaths/${learningPath.id}`;
   return (
     <div className='learningpath-general-info'>
       <h3 className='learningpath-general-info_h'>
-        <Link to={href} onClick={() => (setEmptyStep({}))}>{titleI18N(learningPath, lang) }</Link>
+        <Link to={href}>{titleI18N(learningPath, lang) }</Link>
       </h3>
       <div className='learningpath-general-info_b'>
         <LabeledIcon.Person labelText={get(learningPath, 'author.name')} />
@@ -29,8 +27,7 @@ export function LearningPathGeneralInfo ({learningPath, setEmptyStep}, {lang}) {
 }
 
 LearningPathGeneralInfo.propTypes = {
-  learningPath: PropTypes.object.isRequired,
-  setEmptyStep: PropTypes.func.isRequired
+  learningPath: PropTypes.object.isRequired
 };
 
 LearningPathGeneralInfo.contextTypes = {
@@ -39,8 +36,4 @@ LearningPathGeneralInfo.contextTypes = {
 
 export const mapStateToProps = state => state;
 
-export const mapDispatchToProps = {
-  setEmptyStep: setLearningPathStep
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(LearningPathGeneralInfo);
+export default connect(mapStateToProps)(LearningPathGeneralInfo);

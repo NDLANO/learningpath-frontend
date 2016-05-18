@@ -3,7 +3,6 @@ import { Link } from 'react-router';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
-import { setLearningPathStep } from '../../actions';
 import Icon from '../Icon';
 import polyglot from '../../i18n';
 
@@ -11,9 +10,7 @@ export function LearningPathPrevNext (props) {
 
   const {
     nextStep,
-    prevStep,
-    setEmptyStep,
-    isFirstStep
+    prevStep
   } = props;
 
   const stepperClassName = (object) => classNames({
@@ -22,66 +19,51 @@ export function LearningPathPrevNext (props) {
   });
 
   const stepperTag = (stepObject, leftText, rightText) => {
-    if (stepObject && isFirstStep){
-      return <Link to={stepObject} onClick={() => (setEmptyStep({}))} className={stepperClassName(stepObject)}> {leftText} {rightText} </Link>;
-    }
-    else if (stepObject){
+    if (stepObject){
       return <Link to={stepObject} className={stepperClassName(stepObject)}> {leftText} {rightText} </Link>;
-    }
-    else {
+    } else {
       return <span className={stepperClassName(stepObject)}> {leftText} {rightText} </span>;
     }
   };
 
   return (
     <div className='stepper-nav stepper-nav--fixed'>
-
       {stepperTag(prevStep, <Icon.ArrowBack/>, polyglot.t('learningPath.previous'), false)}
-
       {stepperTag(nextStep, polyglot.t('learningPath.next'), <Icon.ArrowForward/>, true)}
-
     </div>
   );
 }
 
 LearningPathPrevNext.propTypes = {
+  currentStepId: PropTypes.string,
   nextStep: PropTypes.string,
   prevStep: PropTypes.string,
-  currentSeqNo: PropTypes.number,
-  setEmptyStep: PropTypes.func.isRequired,
-  isFirstStep: PropTypes.bool.isRequired
+  currentSeqNo: PropTypes.number
 };
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
+  const { currentStepId } = props;
   const learningsteps = get(state.learningPath, 'learningsteps', []);
   const learningPathId = get(state.learningPath, 'id', -1);
+  const currentStep = learningsteps.find(step => step.id.toString() === currentStepId);
+  const currentSeqNo = get(currentStep, 'seqNo', -1);
+
   const base = `/learningpaths/${learningPathId}`;
-  const currentSeqNo = get(state.learningPathStep, 'seqNo', -1);
-  let prevUrl, nextUrl;
 
   if (currentSeqNo === -1){
-    prevUrl = undefined;
-    nextUrl = learningsteps.length > 0 ? base + '/step/' + learningsteps[0].id : undefined;
+    return Object.assign({}, state,  {
+      prevStep: undefined,
+      nextStep: learningsteps.length > 0 ? base + '/step/' + learningsteps[0].id : undefined
+    });
+  } else {
+    const prevUrl = learningsteps[currentSeqNo - 1] ? base + '/step/' + learningsteps[currentSeqNo - 1].id : undefined;
+    const nextUrl = learningsteps[currentSeqNo + 1] ? base + '/step/' + learningsteps[currentSeqNo + 1].id : undefined;
+    return Object.assign({}, state,  {
+      prevStep: currentSeqNo === 0 ? base : prevUrl,
+      nextStep: nextUrl
+    });
   }
-  else {
-    prevUrl = learningsteps[currentSeqNo - 1] ? base + '/step/' + learningsteps[currentSeqNo - 1].id : undefined;
-    nextUrl = learningsteps[currentSeqNo + 1] ? base + '/step/' + learningsteps[currentSeqNo + 1].id : undefined;
-  }
-  prevUrl = currentSeqNo === 0 ? base : prevUrl;
-
-  return Object.assign({}, state, {
-    nextStep: nextUrl,
-    prevStep: prevUrl,
-    learningsteps,
-    isFirstStep: currentSeqNo === 0
-  });
 };
 
-export { mapStateToProps };
-
-export const mapDispatchToProps = {
-  setEmptyStep: setLearningPathStep
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(LearningPathPrevNext);
+export default connect(mapStateToProps)(LearningPathPrevNext);
