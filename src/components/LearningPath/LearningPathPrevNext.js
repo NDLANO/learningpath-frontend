@@ -3,61 +3,67 @@ import { Link } from 'react-router';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
+import Icon from '../Icon';
+import polyglot from '../../i18n';
 
-import { titleI18N } from '../../util/i18nFieldFinder';
+export function LearningPathPrevNext (props) {
 
-export function LearningPathPrevNext ({learningPath, learningsteps, nextUrl, prevUrl}, {lang}) {
-
-  const base = `/learningpaths/${learningPath.id}`;
+  const {
+    nextStep,
+    prevStep
+  } = props;
 
   const stepperClassName = (object) => classNames({
     'stepper-nav-btn': true,
     'stepper-nav-btn_disabled': object === undefined
   });
 
-  const stepperUrl = (object) => (object === undefined) ? '#' : `${base}/step/${object.id}`;
-
-
-  const stepperTag = (object, text) => (object === undefined) ?
-    <span className={stepperClassName(object)}> {text} </span> :
-    <Link to={`${stepperUrl(object)}`} className={stepperClassName(object)}> {text} </Link>;
+  const stepperTag = (stepObject, leftText, rightText) => {
+    if (stepObject){
+      return <Link to={stepObject} className={stepperClassName(stepObject)}> {leftText} {rightText} </Link>;
+    } else {
+      return <span className={stepperClassName(stepObject)}> {leftText} {rightText} </span>;
+    }
+  };
 
   return (
-    <div className='stepper-nav stepper-nav_fixed'>
-
-      {stepperTag(prevUrl, '<< Forrige')}
-      {learningsteps.map(step => (
-        <Link to={`${base}/step/${step.id}`} key={step.id} className='stepper-nav-stepp' data-value={titleI18N(step, lang)} />
-      ))}
-      {stepperTag(nextUrl, 'Neste >>')}
-
+    <div className='stepper-nav stepper-nav--fixed'>
+      {stepperTag(prevStep, <Icon.ArrowBack/>, polyglot.t('learningPath.previous'), false)}
+      {stepperTag(nextStep, polyglot.t('learningPath.next'), <Icon.ArrowForward/>, true)}
     </div>
   );
 }
 
 LearningPathPrevNext.propTypes = {
-  learningPath: PropTypes.object.isRequired,
-  nextUrl: PropTypes.object,
-  prevUrl: PropTypes.object,
-  learningsteps: PropTypes.array.isRequired
-};
-
-LearningPathPrevNext.contextTypes = {
-  lang: PropTypes.string.isRequired
+  currentStepId: PropTypes.string,
+  nextStep: PropTypes.string,
+  prevStep: PropTypes.string,
+  currentSeqNo: PropTypes.number
 };
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
+  const { currentStepId } = props;
   const learningsteps = get(state.learningPath, 'learningsteps', []);
+  const learningPathId = get(state.learningPath, 'id', -1);
+  const currentStep = learningsteps.find(step => step.id.toString() === currentStepId);
+  const currentSeqNo = get(currentStep, 'seqNo', -1);
 
-  const currentSeqNo = get(state.learningPathStep, 'seqNo', -1);
-  return Object.assign({}, state, {
-    nextUrl: learningsteps[currentSeqNo + 1],
-    prevUrl: learningsteps[currentSeqNo - 1],
-    learningsteps
-  });
+  const base = `/learningpaths/${learningPathId}`;
+
+  if (currentSeqNo === -1){
+    return Object.assign({}, state,  {
+      prevStep: undefined,
+      nextStep: learningsteps.length > 0 ? base + '/step/' + learningsteps[0].id : undefined
+    });
+  } else {
+    const prevUrl = learningsteps[currentSeqNo - 1] ? base + '/step/' + learningsteps[currentSeqNo - 1].id : undefined;
+    const nextUrl = learningsteps[currentSeqNo + 1] ? base + '/step/' + learningsteps[currentSeqNo + 1].id : undefined;
+    return Object.assign({}, state,  {
+      prevStep: currentSeqNo === 0 ? base : prevUrl,
+      nextStep: nextUrl
+    });
+  }
 };
-
-export { mapStateToProps };
 
 export default connect(mapStateToProps)(LearningPathPrevNext);

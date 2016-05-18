@@ -7,6 +7,7 @@ import LearningPathPrevNext from './LearningPathPrevNext';
 import LearningPathToC from './LearningPathToC';
 
 export function LearningPath(props) {
+  const { params: { stepId } } = props;
   const saveButtons = defined(props.saveButtons, null);
   const children = defined(props.main, props.children);
   const sortableTableOfContent = defined(props.sortLearningSteps, <LearningPathToC {...props}/>);
@@ -23,8 +24,9 @@ export function LearningPath(props) {
         </main>
       </div>
       <div>
-        <LearningPathPrevNext/>
+        <LearningPathPrevNext currentStepId={stepId} />
       </div>
+      <div className='learning-path_margin' />
     </div>
   );
 }
@@ -33,6 +35,9 @@ LearningPath.propTypes = {
   learningPath: PropTypes.object.isRequired,
   saveButtons: PropTypes.object,
   main: PropTypes.object,
+  params: PropTypes.shape({
+    stepId: PropTypes.string
+  }).isRequired,
   sortLearningSteps: PropTypes.object
 };
 
