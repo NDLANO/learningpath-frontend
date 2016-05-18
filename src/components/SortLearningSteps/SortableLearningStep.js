@@ -7,7 +7,7 @@ import flow from 'lodash/flow';
 import {
   updateStepSequenceNumber
 } from '../../actions';
-
+import LearningPathStepIcon from '../LearningPathStepIcon';
 
 const stepSource = {
   beginDrag(props) {
@@ -49,17 +49,25 @@ const stepTarget = {
 class SortableLearningStep extends Component {
 
   render() {
-    const { title, isDragging, connectDragSource, connectDropTarget } = this.props;
+    const { title, isDragging, connectDragSource, connectDropTarget, type } = this.props;
     const opacity = isDragging ? 0 : 1;
+    const step = {type: ''};
     return connectDragSource(connectDropTarget(
       <li className='step-nav_item'>
         <a className='step-nav_link' style={{ opacity }}>
-          {title}
+          <div className='step-nav_line' />
+          <LearningPathStepIcon learningPathStepType={type} />
+          <div className='step-nav_title'>
+            {title}
+          </div>
         </a>
       </li>
     ));
   }
 }
+
+
+
 
 export const mapDispatchToProps = {
   updateSeqNo: updateStepSequenceNumber
@@ -83,5 +91,6 @@ SortableLearningStep.propTypes = {
   learningsteps: PropTypes.array.isRequired,
   isDragging: PropTypes.bool.isRequired,
   connectDragSource: PropTypes.func.isRequired,
-  connectDropTarget: PropTypes.func.isRequired
+  connectDropTarget: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired
 };

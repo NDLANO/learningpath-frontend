@@ -62,6 +62,7 @@ class SortableStepsContainer extends Component {
                     moveLearningStep={this.moveLearningStep}
                     findLearningStep={this.findLearningStep}
                     learningsteps={learningsteps}
+                    type={step.type}
               />
             );
           })}

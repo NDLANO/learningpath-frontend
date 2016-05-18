@@ -44,4 +44,5 @@ Icon.ArrowBack = props => (<Icon {...props} className={'icon--arrow-back' + prop
 Icon.ArrowForward = props => (<Icon {...props} className={'icon--arrow-forward' + props.className} svgDefId='icon-arrow_forward' />);
 
 
+
 export default Icon;

@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import defined from 'defined';
 import classNames from 'classnames';
 import polyglot from '../../i18n';
+import LearningPathStepIcon from '../LearningPathStepIcon';
 
 import { titleI18N } from '../../util/i18nFieldFinder';
 
@@ -24,7 +25,11 @@ export default function LearningPathToC ({learningPath, activePathname}, {lang})
             <li key={step.id}
               className={itemClassName(`${base}/step/${step.id}`)}>
               <Link to={`${base}/step/${step.id}`} className='step-nav_link'>
-                {titleI18N(step, lang)}
+                <div className='step-nav_line' />
+                <LearningPathStepIcon learningPathStepType={step.type} />
+                <div className='step-nav_title'>
+                  {titleI18N(step, lang)}
+                </div>
               </Link>
             </li>
           )))(defined(learningPath.learningsteps, []))}
@@ -33,7 +38,7 @@ export default function LearningPathToC ({learningPath, activePathname}, {lang})
       <div>
         <ul className='vertical-menu'>
           <li className='vertical-menu_item'>
-          {sort}
+            {sort}
           </li>
         </ul>
       </div>
