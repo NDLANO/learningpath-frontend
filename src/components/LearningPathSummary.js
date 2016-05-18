@@ -7,8 +7,14 @@ import Icon from './Icon';
 
 export function LearningPathSummary ({learningPath}, {lang}) {
   const editPathTarget = `/learningpaths/${learningPath.id}/edit`;
-  const edit = learningPath.canEdit ? <Link className='button-create-edit button-create-edit--fixed' to={editPathTarget}> <Icon.Create />{polyglot.t('editPage.edit')}</Link> : '';
-
+  let edit = '';
+  if (learningPath.canEdit){
+    edit =(
+      <div className='block-container_fixed block-container_fixed--bottom--right'>
+        <Link className='cta-link cta-link_rounded' to={editPathTarget}><Icon.Create />{polyglot.t('editPage.edit')}</Link>
+      </div>
+    );
+  }
   return (
     <div className='learning-path'>
       <div className='learning-path_hd'>
