@@ -4,8 +4,8 @@ import get from 'lodash/get';
 import LabeledIcon from './LabeledIcon';
 import TitleEditor from './editors/TitleEditor';
 import DescriptionEditor from './editors/DescriptionEditor';
-import TagsEditor from './editors/TagsEditor';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
+import TagsInput from './editors/TagsInput';
 import polyglot from '../i18n';
 
 import Icon from './Icon';
@@ -46,7 +46,7 @@ export function EditLearningPath (props, {lang}) {
         <DescriptionEditor value={descriptionText} onChange={updateDescription} lang={lang} />
       </div>
       <div className='learning-path-input learning-path-input__paragraph'>
-        <TagsEditor onUpdate={updateTags} value={tags} lang={lang} />
+        <TagsInput onChange={updateTags} value={tags} lang={lang}/>
       </div>
       <button className='cta cta-link' onClick={saveLearningPath}>
         <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
