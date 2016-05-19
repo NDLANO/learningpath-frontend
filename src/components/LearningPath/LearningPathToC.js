@@ -11,7 +11,7 @@ export default function LearningPathToC ({learningPath, activePathname}, {lang})
   const base = `/learningpaths/${learningPath.id}`;
   const itemClassName = (path) => classNames({
     'step-nav_item': true,
-    'step-nav_item--active': path === activePathname
+    'step-nav_item--active': activePathname ? activePathname.startsWith(path) : false
   });
 
   let sortPathTarget = `/learningpaths/${learningPath.id}/sort`;
