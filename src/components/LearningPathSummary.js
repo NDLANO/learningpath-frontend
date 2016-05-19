@@ -3,11 +3,18 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 import polyglot from '../i18n';
+import Icon from './Icon';
 
 export function LearningPathSummary ({learningPath}, {lang}) {
   const editPathTarget = `/learningpaths/${learningPath.id}/edit`;
-  const edit = learningPath.canEdit ? <Link to={editPathTarget}>{polyglot.t('editPage.edit')}</Link> : '';
-
+  let edit = '';
+  if (learningPath.canEdit){
+    edit =(
+      <div className='block-container_fixed block-container_fixed--bottom--right'>
+        <Link className='cta-link cta-link--round cta-link--scale' to={editPathTarget}><Icon.Create/> {polyglot.t('editPage.edit')}</Link>
+      </div>
+    );
+  }
   return (
     <div className='learning-path'>
       <div className='learning-path_hd'>

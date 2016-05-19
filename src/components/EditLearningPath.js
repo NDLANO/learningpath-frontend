@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import get from 'lodash/get';
 import LabeledIcon from './LabeledIcon';
 import TitleEditor from './editors/TitleEditor';
@@ -41,9 +42,16 @@ export function EditLearningPath (props, {lang}) {
       <div className='learning-path-input learning-path-input__paragraph'>
         <DescriptionEditor value={descriptionText} onChange={updateDescription} lang={lang} />
       </div>
-      <button className='cta cta-link' onClick={saveLearningPath}>
-        <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
-      </button>
+      <div className='block-container_fixed block-container_fixed--bottom--right'>
+        <div className="button-group">
+          <Link to={`/learningpaths/${learningPath.id}`} className="button button--secondary">
+            <LabeledIcon.Clear labelText={polyglot.t('editPage.cancelBtn')} />
+          </Link>
+          <button className='button button--primary' onClick={saveLearningPath}>
+            <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
+          </button>
+        </div>
+      </div>
     </div>
   </div>;
 }
