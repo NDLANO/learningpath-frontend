@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import assign from 'lodash/assign';
 import { titleI18N, descriptionI18N, oembedUrlI18N, oembedContentI18N } from '../../util/i18nFieldFinder';
@@ -66,10 +67,17 @@ export function EditLearningPathStep (props, {lang}) {
             <PreviewOembed content={embedContent} />
           </div>
         </div>
+        <div className='block-container_fixed block-container_fixed--bottom--right'>
+          <div className="button-group">
+            <Link to={`/learningpaths/${learningPathId}/step/${step.id}`} className="button button--secondary">
+              <LabeledIcon.Clear labelText={polyglot.t('editPage.cancelBtn')} />
+            </Link>
+            <button className='button button--primary' onClick={saveLearningStep} disabled={ !isValid() || !oembedIsValid }>
+              <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
+            </button>
+          </div>
+        </div>
         <div>
-          <button className='cta cta-link' onClick={saveLearningStep} disabled={ !isValid() || !oembedIsValid }>
-            <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
-          </button>
           <button className='cta cta-link--secondary' onClick={deleteLearningStep}>
             <LabeledIcon.Delete labelText={polyglot.t('editPage.deletePathBtn')} />
           </button>

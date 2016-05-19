@@ -74,6 +74,7 @@ const phrases = {
     titlePlaceHolder: 'Skriv  tittel her',
     oneLineEditorDefaultPlaceholder: 'Skriv her',
     deletePathBtn: 'Slett',
+    cancelBtn: 'Avbryt',
     saveDraft: 'Lagre som utkast',
     saveAndPublish: 'Lagre og publiser',
     edit: 'Rediger læringssti'
