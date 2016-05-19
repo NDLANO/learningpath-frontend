@@ -100,7 +100,6 @@ export class SearchResult extends Component {
     const { path, errored } = this.props;
     const { lang } = this.context;
     const image = () => {
-
       if (path.coverPhotoUrl && !this.state.imageError){
         return <img className='search-result_img' src={path.coverPhotoUrl} onError={this.handleImageError}/>;
       }
