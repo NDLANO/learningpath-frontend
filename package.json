@@ -12,7 +12,7 @@
   "scripts": {
     "pretest": "eslint src",
     "test": "babel-tape-runner 'src/**/*-test.js'|faucet",
-    "postinstall": "cp -v node_modules/ndla-styleguide/assets/* htdocs/assets/",
+    "postinstall": "cp -vr node_modules/ndla-styleguide/assets/* htdocs/assets/",
     "build": "webpack --progress",
     "start": "webpack-dev-server --inline",
     "lint": "eslint src"
