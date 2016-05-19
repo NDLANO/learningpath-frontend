@@ -13,11 +13,11 @@ export function LearningPathStep({learningPathStep, learningPath}, {lang}) {
   let stepDescription = descriptionI18N(learningPathStep, lang);
   let oembedContent = oembedContentI18N(learningPathStep, lang);
   const editStepTarget = `/learningpaths/${learningPath.id}/step/${learningPathStep.id}/edit`;
-  let edit = ''
+  let edit = '';
   if (learningPath.canEdit){
     edit =(
       <div className='block-container_fixed block-container_fixed--bottom--right'>
-        <Link className='cta-link cta-link--round' to={editStepTarget}><Icon.Create />{polyglot.t('editPathStep.edit')}</Link>
+        <Link className='cta-link cta-link--round cta-link--scale' to={editStepTarget}><Icon.Create /> {polyglot.t('editPathStep.edit')}</Link>
       </div>
     );
   }
