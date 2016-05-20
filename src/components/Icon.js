@@ -38,10 +38,11 @@ Icon.Underline = props => (<Icon {...props} className={'icon--format-underlined 
 Icon.Bulleted = props => (<Icon {...props} className={'icon--format-list-bulleted ' + props.className} svgDefId='icon-format_list_bulleted' />);
 Icon.Numbered = props => (<Icon {...props} className={'icon--format-list-numbered ' + props.className} svgDefId='icon-format_list_numbered' />);
 Icon.Create = props => (<Icon {...props} className={'icon--create ' + props.className} svgDefId='icon-create' />);
-Icon.Duration = props => (<Icon {...props} className={'icon--query-builder' + props.className} svgDefId='icon-query_builder' />);
-Icon.Visibility = props => (<Icon {...props} className={'icon--remove-red-eye' + props.className} svgDefId='icon-remove_red_eye' />);
-Icon.ArrowBack = props => (<Icon {...props} className={'icon--arrow-back' + props.className} svgDefId='icon-arrow_back' />);
-Icon.ArrowForward = props => (<Icon {...props} className={'icon--arrow-forward' + props.className} svgDefId='icon-arrow_forward' />);
+Icon.Duration = props => (<Icon {...props} className={'icon--query-builder ' + props.className} svgDefId='icon-query_builder' />);
+Icon.Visibility = props => (<Icon {...props} className={'icon--remove-red-eye ' + props.className} svgDefId='icon-remove_red_eye' />);
+Icon.ArrowBack = props => (<Icon {...props} className={'icon--arrow-back ' + props.className} svgDefId='icon-arrow_back' />);
+Icon.ArrowForward = props => (<Icon {...props} className={'icon--arrow-forward ' + props.className} svgDefId='icon-arrow_forward' />);
+Icon.ImportExport = props => (<Icon {...props} className={'icon--import_export ' + props.className} svgDefId='icon-import_export' />);
 
 
 

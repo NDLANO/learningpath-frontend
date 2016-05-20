@@ -50,8 +50,8 @@ class SortableStepsContainer extends Component {
     }
 
     return connectDropTarget(
-      <div className='step-nav step-nav_editable'>
-        <ul className='step-nav_list'>
+      <div className='sortable'>
+        <ul className='sortable_list'>
           {learningsteps.map((step, i) => {
             return(
               <SortableLearningStep key={step.id}
@@ -59,10 +59,10 @@ class SortableStepsContainer extends Component {
                     pathId={this.props.learningPath.id}
                     id={step.id}
                     title={titleI18N(step, lang)}
+                    placeholderClassName="sortable_placeholder"
                     moveLearningStep={this.moveLearningStep}
                     findLearningStep={this.findLearningStep}
                     learningsteps={learningsteps}
-                    type={step.type}
               />
             );
           })}

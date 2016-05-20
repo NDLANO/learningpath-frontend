@@ -4,10 +4,12 @@ import React, { Component, PropTypes } from 'react';
 import ItemTypes from './ItemTypes';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
+
+import Icon from '../Icon';
+
 import {
   updateStepSequenceNumber
 } from '../../actions';
-import LearningPathStepIcon from '../LearningPathStepIcon';
 
 const stepSource = {
   beginDrag(props) {
@@ -49,18 +51,28 @@ const stepTarget = {
 class SortableLearningStep extends Component {
 
   render() {
-    const { title, isDragging, connectDragSource, connectDropTarget, type } = this.props;
+    const { title, isDragging, connectDragSource, connectDropTarget, placeholderStyle, placeholderClassName } = this.props;
     const opacity = isDragging ? 0 : 1;
-    const step = {type: ''};
+
+    if (isDragging && (placeholderStyle || placeholderClassName)) {
+      return connectDragSource(connectDropTarget(
+        <div className={placeholderClassName} style={placeholderStyle}></div>
+      ));
+    }
+
     return connectDragSource(connectDropTarget(
-      <li className='step-nav_item'>
-        <a className='step-nav_link' style={{ opacity }}>
-          <div className='step-nav_line' />
-          <LearningPathStepIcon learningPathStepType={type} />
-          <div className='step-nav_title'>
-            {title}
-          </div>
-        </a>
+      <li className='sortable_item' style={{ opacity }}>
+        <div className='sortable_handle'>
+          <Icon.ImportExport className="icon--m"/>
+        </div>
+        <div className='sortable_title'>
+          {title}
+        </div>
+        <div className='sortable_action'>
+          <button className="un-button">
+            <Icon.Clear className="icon--m"/>
+          </button>
+        </div>
       </li>
     ));
   }
@@ -88,9 +100,10 @@ SortableLearningStep.propTypes = {
   title: PropTypes.string.isRequired,
   moveLearningStep: PropTypes.func.isRequired,
   findLearningStep: PropTypes.func.isRequired,
+  placeholderStyle: PropTypes.object,
+  placeholderClassName: PropTypes.string,
   learningsteps: PropTypes.array.isRequired,
   isDragging: PropTypes.bool.isRequired,
   connectDragSource: PropTypes.func.isRequired,
-  connectDropTarget: PropTypes.func.isRequired,
-  type: PropTypes.string.isRequired
+  connectDropTarget: PropTypes.func.isRequired
 };
