@@ -13,7 +13,8 @@ import Icon from './Icon';
 import {
   updateLearningPathTitle,
   updateLearningPathDescription,
-  updateLearningPath
+  updateLearningPath,
+  updateLearningPathDescriptionLength
 } from '../actions';
 
 export function EditLearningPath (props, {lang}) {
@@ -29,19 +30,20 @@ export function EditLearningPath (props, {lang}) {
 
   let saveLearningPath = () => saveAction(learningPath);
 
-
+  const descriptionTextRemain = descriptionText ? 150 - descriptionText.length : 150;
   return <div>
     <div className='learning-path_hd'>
-      <span className='editable'><Icon.Create /></span>
+      <label className='label--bold label--medium'>Tittel på læringssti</label>
       <h1 className='learning-path-input learning-path-input__title'>
         <TitleEditor value={titleText} onChange={updateTitle} lang={lang} />
       </h1>
     </div>
     <div className='learning-path_bd'>
-      <span className='editable'><Icon.Create /></span>
+      <label className='label--bold label--medium'>Beskrivelse</label>
       <div className='learning-path-input learning-path-input__paragraph'>
         <DescriptionEditor value={descriptionText} onChange={updateDescription} lang={lang} />
       </div>
+      <p className='learning-path-input__paragraph_info'>Maks 150 tegn og du har {descriptionTextRemain} igen. Beskrivelsen blir synlig i søk </p>
       <div className='block-container_fixed block-container_fixed--bottom--right'>
         <div className="button-group">
           <Link to={`/learningpaths/${learningPath.id}`} className="button button--secondary">
@@ -52,6 +54,17 @@ export function EditLearningPath (props, {lang}) {
           </button>
         </div>
       </div>
+      <div className='learning-path-image'>
+        <label className='label--bold label--medium'>Illustrerende bilde</label>
+        <div className='learning-path-image-drop'>
+          <img src='https://d30y9cdsu7xlg0.cloudfront.net/png/49665-200.png'/>
+          <h2>Klikk for å velge</h2>
+        </div>
+      </div>
+      <div className='learning-path-duration'>
+        <label className='label--bold label--medium'>Varighet</label>
+      </div>
+
     </div>
   </div>;
 }
@@ -70,13 +83,13 @@ EditLearningPath.contextTypes = {
 
 const mapStateToProps = state => Object.assign({}, state, {
   learningPath: get(state, 'learningPath', {}),
-  learningSteps: get(state, 'learningPath.learningsteps', [])
+  learningSteps: get(state, 'learningPath.learningsteps', []),
 });
 
 const mapDispatchToProps = {
   updateTitle: updateLearningPathTitle,
   updateDescription: updateLearningPathDescription,
-  saveAction: lp => updateLearningPath(lp.id, lp)
+  saveAction: lp => updateLearningPath(lp.id, lp),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditLearningPath);

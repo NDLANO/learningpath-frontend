@@ -8,7 +8,7 @@ export default function DescriptionEditor ({value, onChange, lang}) {
     <OneLineEditor
     onChange={_onChange}
     value={value||''}
-    maxlength = {155}
+    maxlength = {150}
     placeholder={polyglot.t('editPage.shortDescriptionPlaceholder')}
     />
     <div className='editor_input-underline'></div>

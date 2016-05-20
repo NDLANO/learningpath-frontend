@@ -9,7 +9,7 @@ import LearningPathToCButtons from './LearningPath/LearningPathTOCButtons';
 import LearningPathSummary from './LearningPathSummary';
 import LearningPathStep from './LearningPathStep';
 import LearningPathSearch from './LearningPathSearch';
-import EditLearningPath from './EditLearningPath';
+import EditLearningPath2 from './EditLearningPath2';
 import EditLearningPathStep from './EditLearningPathStep';
 import CreateLearningPath from './CreateLearningPath';
 import CreateLearningPathStep from './CreateLearningPathStep';
@@ -21,7 +21,7 @@ module.exports = {
   MyPage,
   LearningPath, LearningPathSummary, LearningPathStep,
   LearningPathSearch,
-  EditLearningPath,
+  EditLearningPath2,
   LearningPathToCButtons,
   EditLearningPathStep,
   CreateLearningPath,

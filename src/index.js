@@ -54,7 +54,7 @@ import {
   MyPage,
   LearningPath, LearningPathSummary, LearningPathStep,
   LearningPathSearch,
-  EditLearningPath, EditLearningPathStep, CreateLearningPathStep,
+  EditLearningPath2, EditLearningPathStep, CreateLearningPathStep,
   CreateLearningPath, LearningPathToCButtons,
   SortLearningSteps
 } from './components';
@@ -89,7 +89,7 @@ ReactDOM.render(
           <Route path='learningpaths/:pathId'
             onEnter={({params}) => fetchLearningPath(params.pathId)} component={LearningPath} >
             <IndexRoute components={{main: LearningPathSummary, saveButtons: LearningPathToCButtons}} />
-            <Route path='edit' component={requireAuthentication(EditLearningPath)}
+            <Route path='edit' component={requireAuthentication(EditLearningPath2)}
                onEnter={ifAuthenticated(({params}) => fetchLearningPath(params.pathId))} />
 
             <Route path='step/new' component={requireAuthentication(CreateLearningPathStep)} onEnter={ifAuthenticated(createEmptyLearningPathStep)}/>

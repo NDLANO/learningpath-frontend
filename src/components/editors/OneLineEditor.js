@@ -26,7 +26,7 @@ export default class OneLineEditor extends React.Component {
     };
 
     this.handleBeforeInput = () => false;
-    
+
     if (maxlength >= 0) {
       this.handleBeforeInput = () => {
         let plainText = this.state.editorState.getCurrentContent().getPlainText();
