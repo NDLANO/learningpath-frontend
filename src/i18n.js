@@ -97,7 +97,8 @@ const phrases = {
   },
   sortSteps: {
     sort: 'Sorter steg',
-    finish: 'Avslutt sortering'
+    finish: 'Avslutt sortering',
+    cancel: 'Avbryt'
   },
   siteNav: {
     login: 'Logg inn',

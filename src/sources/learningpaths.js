@@ -28,7 +28,7 @@ const createPath = (authToken, props, body) =>
 const putLearningPath = putAuthorized('/learningpaths/:pathId');
 const putLearningPathStep = putAuthorized('/learningpaths/:pathId/learningsteps/:stepId');
 
-const putSequenceNumber = putAuthorized('/learningpaths/:pathId/learningsteps/:stepId/seqNo');
+const putSequenceNumber = putAuthorized('/learningpaths/:pathId/seqNo');
 
 const updatePath = (authToken, { pathId }, body) =>
   putLearningPath(authToken, { pathId }, body);
