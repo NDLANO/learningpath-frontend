@@ -23,7 +23,7 @@ const stepSource = {
     if (!didDrop) {
       props.moveLearningStep(droppedId, originalIndex, props.learningsteps);
     }
-    else{
+    else {
       const newIndex = props.findLearningStep(props.id, props.learningsteps).index;
       newIndex === originalIndex ? '' : props.updateSeqNo(props.pathId, props.id, newIndex);
     }
@@ -53,11 +53,11 @@ class SortableLearningStep extends Component {
     const opacity = isDragging ? 0 : 1;
     const step = {type: ''};
     return connectDragSource(connectDropTarget(
-      <li className='step-nav_item'>
-        <a className='step-nav_link' style={{ opacity }}>
-          <div className='step-nav_line' />
+      <li className="step-nav_item">
+        <a className="step-nav_link" style={{ opacity }}>
+          <div className="step-nav_line" />
           <LearningPathStepIcon learningPathStepType={type} />
-          <div className='step-nav_title'>
+          <div className="step-nav_title">
             {title}
           </div>
         </a>
@@ -66,9 +66,6 @@ class SortableLearningStep extends Component {
   }
 }
 
-
-
-
 export const mapDispatchToProps = {
   updateSeqNo: updateStepSequenceNumber
 };
@@ -76,8 +73,8 @@ const mapStateToProps = state => state;
 
 
 export default flow(
-  DropTarget(ItemTypes.LEARNING_STEP, stepTarget, connect => ({connectDropTarget: connect.dropTarget()})),
-  DragSource(ItemTypes.LEARNING_STEP, stepSource, (connect, monitor) => ({connectDragSource: connect.dragSource(),isDragging: monitor.isDragging()})),
+  DropTarget(ItemTypes.LEARNING_STEP, stepTarget, c => ({connectDropTarget: c.dropTarget()})),
+  DragSource(ItemTypes.LEARNING_STEP, stepSource, (c, monitor) => ({connectDragSource: c.dragSource(), isDragging: monitor.isDragging()})),
   connect(mapStateToProps, mapDispatchToProps)
 )(SortableLearningStep);
 

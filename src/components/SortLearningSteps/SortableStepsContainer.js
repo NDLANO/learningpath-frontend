@@ -45,24 +45,24 @@ class SortableStepsContainer extends Component {
     let {lang} = this.context;
     let {learningsteps, connectDropTarget} = this.props;
 
-    if(!learningsteps){
+    if (!learningsteps) {
       return null;
     }
 
     return connectDropTarget(
-      <div className='step-nav step-nav_editable'>
-        <ul className='step-nav_list'>
+      <div className="step-nav step-nav_editable">
+        <ul className="step-nav_list">
           {learningsteps.map((step, i) => {
-            return(
+            return (
               <SortableLearningStep key={step.id}
-                    index={i}
-                    pathId={this.props.learningPath.id}
-                    id={step.id}
-                    title={titleI18N(step, lang)}
-                    moveLearningStep={this.moveLearningStep}
-                    findLearningStep={this.findLearningStep}
-                    learningsteps={learningsteps}
-                    type={step.type}
+                index={i}
+                pathId={this.props.learningPath.id}
+                id={step.id}
+                title={titleI18N(step, lang)}
+                moveLearningStep={this.moveLearningStep}
+                findLearningStep={this.findLearningStep}
+                learningsteps={learningsteps}
+                type={step.type}
               />
             );
           })}
@@ -80,7 +80,7 @@ export const mapDispatchToProps = {
   sortSteps: sortLearningPathSteps
 };
 export default flow(
-  DropTarget(ItemTypes.LEARNING_STEP, stepTarget, connect => ({connectDropTarget: connect.dropTarget()})),
+  DropTarget(ItemTypes.LEARNING_STEP, stepTarget, c => ({connectDropTarget: c.dropTarget()})),
   DragDropContext(HTML5Backend),
   connect(mapStateToProps, mapDispatchToProps)
 )(SortableStepsContainer);
