@@ -3,7 +3,6 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 import payload403invalid from './payload403invalid';
-import { routerActions } from 'react-router-redux';
 
 import actions from '..';
 
@@ -12,11 +11,8 @@ const mockStore = configureStore(middleware);
 
 const authToken = '123345';
 const pathId = 123;
-const steps = [
-  { id: 10, seqNo: 0 },
-  { id: 21, seqNo: 1 },
-  { id: 13, seqNo: 2 }
-];
+const stepId = 321;
+const seqNo = 3;
 
 
 test('actions/updateStepSequenceNumber sucessfully', t => {
@@ -25,10 +21,16 @@ test('actions/updateStepSequenceNumber sucessfully', t => {
     nock.cleanAll();
   };
 
+  const body = {
+    seqNo: 3
+  };
+
+  const learningStepReply = Object.assign({}, body, {});
+
   // updateSeqNo
   nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .put(`/learningpaths/${pathId}/seqNo`, steps)
-    .reply(200, steps);
+    .put(`/learningpaths/${pathId}/learningsteps/${stepId}/seqNo`, body)
+    .reply(200, learningStepReply);
   // fetchLearningPath
   nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get(`/learningpaths/${pathId}`)
@@ -36,10 +38,9 @@ test('actions/updateStepSequenceNumber sucessfully', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch(actions.updateStepSequenceNumber(pathId, steps))
+  store.dispatch(actions.updateStepSequenceNumber(pathId, stepId, seqNo))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        routerActions.push(`/learningpaths/${pathId}`)
       ]);
       t.doesNotThrow(() => nock.isDone());
 
@@ -54,9 +55,13 @@ test('actions/updateStepSequenceNumber access denied', t => {
     nock.cleanAll();
   };
 
+  const body = {
+    seqNo: 3
+  };
+
   // updateSeqNo
   nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .put(`/learningpaths/${pathId}/seqNo`, steps)
+    .put(`/learningpaths/${pathId}/learningsteps/${stepId}/seqNo`, body)
     .reply(403, {message: 'Invalid'});
 
   // fetchLearningPath
@@ -66,7 +71,7 @@ test('actions/updateStepSequenceNumber access denied', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch(actions.updateStepSequenceNumber(pathId, steps))
+  store.dispatch(actions.updateStepSequenceNumber(pathId, stepId, seqNo))
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.applicationError(payload403invalid())
