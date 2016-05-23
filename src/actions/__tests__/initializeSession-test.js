@@ -6,7 +6,7 @@ import payload403invalid from './payload403invalid';
 
 import actions from '..';
 
-const middleware = [ thunk ];
+const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
 const authToken = '123345';
@@ -16,14 +16,14 @@ test('actions/initializeSession', (t) => {
     t.end(res);
     nock.cleanAll();
   };
-  
+
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get('/auth/me')
     .reply(200, {first_name: 'Alice', email: 'alice@example.com'});
 
   const store = mockStore({user: {}, authToken: ''});
 
-  store.dispatch( actions.initializeSession(authToken) )
+  store.dispatch(actions.initializeSession(authToken))
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.setAuthenticated(true),
@@ -48,7 +48,7 @@ test('actions/initializeSession access denied', (t) => {
 
   const store = mockStore({user: {}, authToken: ''});
 
-  store.dispatch( actions.initializeSession(authToken) )
+  store.dispatch(actions.initializeSession(authToken))
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.applicationError(payload403invalid())

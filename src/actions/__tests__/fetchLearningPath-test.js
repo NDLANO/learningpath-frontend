@@ -6,7 +6,7 @@ import payload403invalid from './payload403invalid';
 
 import actions from '..';
 
-const middleware = [ thunk ];
+const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
 const authToken = '123345';
@@ -24,7 +24,7 @@ test('actions/fetchLearningPath', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.fetchLearningPath( pathId ) )
+  store.dispatch(actions.fetchLearningPath(pathId))
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.setLearningPath({id: pathId})
@@ -47,7 +47,7 @@ test('actions/fetchLearningPath access denied', (t) => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.fetchLearningPath(pathId) )
+  store.dispatch(actions.fetchLearningPath(pathId))
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.applicationError(payload403invalid())

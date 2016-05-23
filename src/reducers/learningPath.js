@@ -58,7 +58,7 @@ export default handleActions({
 
   SORT_LEARNING_PATH_STEPS: {
     next(state, action) {
-      if (state.learningsteps.length != action.payload.length){
+      if (state.learningsteps.length != action.payload.length) {
         return state;
       }
       let nextState = cloneDeep(state);

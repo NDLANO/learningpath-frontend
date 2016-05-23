@@ -153,7 +153,7 @@ test('reducers/learningPath update description', t => {
 test('reducers/learningPaths remove learning path step', (t) => {
   let step1 = {id: 123, seqNo: 0, title: [{title: 'testTitle', language: 'nb'}]};
   let step2 = {id: 124, seqNo: 1, title: [{title: 'another Title', language: 'nb'}]};
-  let step3 = {id: 125, seqNo: 2,title: [{title: 'another Title', language: 'nb'}]};
+  let step3 = {id: 125, seqNo: 2, title: [{title: 'another Title', language: 'nb'}]};
 
   let path = {learningsteps: [step1, step2, step3]};
   t.deepEqual(

@@ -23,7 +23,7 @@ import {
   deleteUnPersistedLearningPathStep
 } from '../../actions';
 
-export function EditLearningPathStep (props, {lang}) {
+export function EditLearningPathStep(props, {lang}) {
   const {
     step,
     updateTitle,
@@ -48,8 +48,8 @@ export function EditLearningPathStep (props, {lang}) {
 
   let embedSourceInput = '';
   if (step.type) {
-    embedSourceInput =(
-      <div className='learning-path_bd'>
+    embedSourceInput = (
+      <div className="learning-path_bd">
         <div>
           <DescriptionHTMLEditor
             lang={lang}
@@ -58,27 +58,28 @@ export function EditLearningPathStep (props, {lang}) {
           />
         </div>
 
-        <div className='learningsource-form'>
+        <div className="learningsource-form">
           <div>
-            <label className='mediatype-menu__label'>{polyglot.t('editPathStep.urlLabel')}</label>
-            <input type='url' value={embedContentUrl} onBlur={() => validateOembedUrl(embedContentUrl, lang)}
-                onChange={(evt) => updateEmbedUrl({ url: evt.target.value, language: lang })}
-                placeholder={polyglot.t('editPathStep.urlPlaceholder')} />
+            <label className="mediatype-menu__label">{polyglot.t('editPathStep.urlLabel')}</label>
+            <input type="url" value={embedContentUrl} onBlur={() => validateOembedUrl(embedContentUrl, lang)}
+              onChange={(evt) => updateEmbedUrl({ url: evt.target.value, language: lang })}
+              placeholder={polyglot.t('editPathStep.urlPlaceholder')}
+    />
             <PreviewOembed content={embedContent} />
           </div>
         </div>
-        <div className='block-container_fixed block-container_fixed--bottom--right'>
+        <div className="block-container_fixed block-container_fixed--bottom--right">
           <div className="button-group">
             <Link to={`/learningpaths/${learningPathId}/step/${step.id}`} className="button button--secondary">
               <LabeledIcon.Clear labelText={polyglot.t('editPage.cancelBtn')} />
             </Link>
-            <button className='button button--primary' onClick={saveLearningStep} disabled={ !isValid() || !oembedIsValid }>
+            <button className="button button--primary" onClick={saveLearningStep} disabled={!isValid() || !oembedIsValid}>
               <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
             </button>
           </div>
         </div>
         <div>
-          <button className='cta cta-link--secondary' onClick={deleteLearningStep}>
+          <button className="cta cta-link--secondary" onClick={deleteLearningStep}>
             <LabeledIcon.Delete labelText={polyglot.t('editPage.deletePathBtn')} />
           </button>
         </div>
@@ -87,13 +88,13 @@ export function EditLearningPathStep (props, {lang}) {
   }
 
   return (
-    <div className='learning-path-step'>
-      <div className='learning-path_hd'>
-        <span className='editable'><Icon.Create /></span>
-        <h1 className='learning-path-input learning-path-input__title'>
+    <div className="learning-path-step">
+      <div className="learning-path_hd">
+        <span className="editable"><Icon.Create /></span>
+        <h1 className="learning-path-input learning-path-input__title">
           <TitleEditor lang={lang} value={title} onChange={updateTitle} placeholder={polyglot.t('editPathStep.titlePlaceHolder')} />
         </h1>
-        <div className='mediatype-wrapper'>
+        <div className="mediatype-wrapper">
           <MediaTypeSelect value={step.type} onChange={updateType} />
         </div>
       </div>

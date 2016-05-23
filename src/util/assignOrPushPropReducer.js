@@ -3,7 +3,7 @@ import findIndex from 'lodash/findIndex';
 import assign from 'lodash/assign';
 import get from 'lodash/get';
 
-export default function assignOrPushPropReducer (propertyName) {
+export default function assignOrPushPropReducer(propertyName) {
   return function next(state, action) {
     let nextState = cloneDeep(state);
     let properties = get(nextState, propertyName, []);

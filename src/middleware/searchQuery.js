@@ -10,12 +10,12 @@ const defaultSearchQuery = {
 
 const parseSearchQuery = (query) => Object.keys(query).reduce((obj, key) => {
   switch (key) {
-  case 'page':
-  case 'pageSize':
-    obj[key] = parseInt(query[key]);
-    break;
-  default:
-    obj[key] = query[key];
+    case 'page':
+    case 'pageSize':
+      obj[key] = parseInt(query[key]);
+      break;
+    default:
+      obj[key] = query[key];
   }
   return obj;
 }, {});

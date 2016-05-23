@@ -34,4 +34,3 @@ test('actions/changeLearningPathQuery with error', (t) => {
 
   t.end();
 });
-

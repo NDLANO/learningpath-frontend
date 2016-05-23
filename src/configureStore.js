@@ -26,10 +26,10 @@ const createFinalStore = compose(
     middleware
   ),
   persistState(['authenticated', 'authToken', 'user'], { key: 'ndla:sti', slicer }),
-  window && window.devToolsExtension ?  window.devToolsExtension() : f => f
+  window && window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore);
 
 
-export default function configureStore (initialState) {
+export default function configureStore(initialState) {
   return createFinalStore(reducers, initialState);
 }

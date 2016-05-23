@@ -7,7 +7,7 @@ import payload403invalid from './payload403invalid';
 import actions from '..';
 import { routerActions } from 'react-router-redux';
 
-const middleware = [ thunk ];
+const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
 const authToken = '123345';
@@ -86,7 +86,7 @@ test('actions/createLearningPath access denied', (t) => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.createLearningPath({ foo: 'bar' }) )
+  store.dispatch(actions.createLearningPath({ foo: 'bar' }))
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.applicationError(payload403invalid())

@@ -6,7 +6,7 @@ import payload403invalid from './payload403invalid';
 
 import actions from '..';
 
-const middleware = [ thunk ];
+const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
 const authToken = '123345';
@@ -18,14 +18,14 @@ test('actions/fetchLearningPathStep', t => {
     t.end(res);
     nock.cleanAll();
   };
-  
+
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get(`/learningpaths/${pathId}/learningsteps/${stepId}`)
     .reply(200, {id: stepId, seqNo: 3});
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.fetchLearningPathStep(pathId, stepId) )
+  store.dispatch(actions.fetchLearningPathStep(pathId, stepId))
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.setLearningPathStep({id: stepId, seqNo: 3})
@@ -41,7 +41,7 @@ test('actions/fetchLearningPathStep cache hit', t => {
     t.end(res);
     nock.cleanAll();
   };
-  
+
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get(`/learningpaths/${pathId}/learningsteps/${stepId}`)
     .reply(200, {id: stepId, seqNo: 3, cached: false});
@@ -59,7 +59,7 @@ test('actions/fetchLearningPathStep cache hit', t => {
 
   const store = mockStore(initialState);
 
-  store.dispatch( actions.fetchLearningPathStep(pathId, stepId) )
+  store.dispatch(actions.fetchLearningPathStep(pathId, stepId))
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.setLearningPathStep({id: stepId, seqNo: 3, cached: true}),
@@ -76,14 +76,14 @@ test('actions/fetchLearningPathStep access denied', t => {
     t.end(res);
     nock.cleanAll();
   };
-  
+
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get(`/learningpaths/${pathId}/learningsteps/${stepId}`)
     .reply(403, {message: 'Invalid'});
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.fetchLearningPathStep(pathId, stepId) )
+  store.dispatch(actions.fetchLearningPathStep(pathId, stepId))
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.applicationError(payload403invalid())

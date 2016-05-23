@@ -5,7 +5,7 @@ import nock from 'nock';
 import actions from '..';
 import { routerActions } from 'react-router-redux';
 
-const middleware = [ thunk ];
+const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
 const authToken = '123345';
@@ -27,7 +27,7 @@ test('actions/deleteUnPersistedLearningPathStep without id', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.deleteUnPersistedLearningPathStep(pathId, learningStep) );
+  store.dispatch(actions.deleteUnPersistedLearningPathStep(pathId, learningStep));
 
   t.deepEqual(store.getActions(), [
     {type: 'REMOVE_LEARNING_PATH_STEP', payload: learningStep},

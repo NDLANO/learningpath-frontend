@@ -119,10 +119,10 @@ module.exports = {
 
    // specify the maximum length of a line in your program
    // http://eslint.org/docs/rules/max-len
-   'max-len': [1, 100, 2, {
-     ignoreUrls: true,
-     ignoreComments: false
-   }],
+  //  'max-len': [1, 100, 2, {
+  //    ignoreUrls: true,
+  //    ignoreComments: false
+  //  }],
 
    // specify the maximum depth callbacks can be nested
    'max-nested-callbacks': 0,

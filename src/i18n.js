@@ -70,7 +70,7 @@ const phrases = {
     learningpathShortDescriptionTitle: 'Introduksjon',
     savePathBtn: 'Lagre',
     addStepBtn: 'Legg til nytt læringssteg',
-    shortDescriptionPlaceholder:  'Skriv en kort beskrivelse (max 155 tegn)',
+    shortDescriptionPlaceholder: 'Skriv en kort beskrivelse (max 155 tegn)',
     titlePlaceHolder: 'Skriv  tittel her',
     oneLineEditorDefaultPlaceholder: 'Skriv her',
     deletePathBtn: 'Slett',

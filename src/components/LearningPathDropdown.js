@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import polyglot from '../i18n';
 import Icon from './Icon';
 
-export function LearningPathDropdown ({onSelect, learningPath}) {
+export function LearningPathDropdown({onSelect, learningPath}) {
   const makeOnClick = (actionType) => (evt) => {
     evt.preventDefault();
     onSelect(actionType, learningPath);
@@ -14,16 +14,16 @@ export function LearningPathDropdown ({onSelect, learningPath}) {
   );
 
   return (
-    <div className='dropdown-menu'>
-      <span className='dropdown-menu_icon'><Icon.MoreVert /></span>
-      <ul className='dropdown-menu_items'>
-        <li className='dropdown-menu_item'>
-          <a href="#" className='dropdown-menu_link' onClick={publishAction}>
+    <div className="dropdown-menu">
+      <span className="dropdown-menu_icon"><Icon.MoreVert /></span>
+      <ul className="dropdown-menu_items">
+        <li className="dropdown-menu_item">
+          <a href="#" className="dropdown-menu_link" onClick={publishAction}>
             <Icon.Input /> {publishActionText}
-          </a>  
+          </a>
         </li>
-        <li className='dropdown-menu_item'>
-          <a href="#" className='dropdown-menu_link' onClick={makeOnClick('delete')}>
+        <li className="dropdown-menu_item">
+          <a href="#" className="dropdown-menu_link" onClick={makeOnClick('delete')}>
             <Icon.Delete /> {polyglot.t('pathDropDown.delete')}
           </a>
         </li>
