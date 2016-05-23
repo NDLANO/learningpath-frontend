@@ -25,7 +25,7 @@ class SortableLearningStepList extends Component {
     const { sortSteps } = this.props;
     learningsteps.splice(index, 1);
     learningsteps.splice(atIndex, 0, step);
-    const updated = learningsteps.map( (step, i) => Object.assign(step, { seqNo: i }));
+    const updated = learningsteps.map((s, i) => Object.assign(s, { seqNo: i }));
     sortSteps(updated);
   }
 
@@ -39,37 +39,36 @@ class SortableLearningStepList extends Component {
   }
 
   render() {
-
     const { lang } = this.context;
     const { SortableItem } = this.state;
     const { learningsteps } = this.props;
 
-    if (!learningsteps){
+    if (!learningsteps) {
       return null;
     }
 
     return (
-      <div className='sortable'>
-        <ul className='sortable_list'>
+      <div className="sortable">
+        <ul className="sortable_list">
           {learningsteps.map((step, i) =>
-            (
-              <SortableItem id={step.id} index={i} key={step.id} moveItem={this.moveLearningStep}
-                placeholderClassName="sortable_placeholder">
-                <li className='sortable_item'>
-                  <div className='sortable_handle'>
-                    <Icon.ImportExport className="icon--m"/>
-                  </div>
-                  <div className='sortable_title'>
-                    {titleI18N(step, lang)}
-                  </div>
-                  <div className='sortable_action'>
-                    <button className="un-button">
-                      <Icon.Clear className="icon--m"/>
-                    </button>
-                  </div>
-                </li>
-              </SortableItem>
-            )
+            (<SortableItem
+              id={step.id} index={i} key={step.id} moveItem={this.moveLearningStep}
+              placeholderClassName="sortable_placeholder"
+            >
+              <li className="sortable_item">
+                <div className="sortable_handle">
+                  <Icon.ImportExport className="icon--m" />
+                </div>
+                <div className="sortable_title">
+                  {titleI18N(step, lang)}
+                </div>
+                <div className="sortable_action">
+                  <button className="un-button">
+                    <Icon.Clear className="icon--m" />
+                  </button>
+                </div>
+              </li>
+            </SortableItem>)
           )}
         </ul>
       </div>
@@ -85,7 +84,7 @@ export const mapDispatchToProps = {
 };
 
 export default flow(
-  DragDropContext(HTML5Backend),
+  new DragDropContext(HTML5Backend),
   connect(mapStateToProps, mapDispatchToProps)
 )(SortableLearningStepList);
 
