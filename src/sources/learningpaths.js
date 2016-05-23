@@ -18,7 +18,7 @@ const postLearningPathStep = postAuthorized('/learningpaths/:pathId/learningstep
 const createPath = (authToken, props, body) =>
   postLearningPath(authToken, props, body)
   .then(lpath => Promise.all(map(body.learningsteps, step =>
-      postLearningPathStep(authToken, { pathId: lpath.id }, step )
+      postLearningPathStep(authToken, { pathId: lpath.id }, step)
     )).then(steps => Object.assign({}, lpath, {
       learningsteps: assureSequenceOrder(steps)
     }))
@@ -28,7 +28,7 @@ const createPath = (authToken, props, body) =>
 const putLearningPath = putAuthorized('/learningpaths/:pathId');
 const putLearningPathStep = putAuthorized('/learningpaths/:pathId/learningsteps/:stepId');
 
-const putSequenceNumber = putAuthorized('/learningpaths/:pathId/seqNo');
+const putSequenceNumber = putAuthorized('/learningpaths/:pathId/learningsteps/:stepId/seqNo');
 
 const updatePath = (authToken, { pathId }, body) =>
   putLearningPath(authToken, { pathId }, body);
@@ -44,7 +44,7 @@ const deletePath = (authToken, { pathId }) =>
   deleteLearningPath(authToken, {pathId});
 
 const deleteLearningPathStep = deleteAuthorized('/learningpaths/:pathId/learningsteps/:stepId');
-const deleteStep = (authToken, {pathId, stepId} ) =>
+const deleteStep = (authToken, {pathId, stepId}) =>
   deleteLearningPathStep(authToken, {pathId, stepId});
 
 const putLearningPathStatus = putAuthorized('/learningpaths/:pathId/status');
@@ -70,7 +70,7 @@ const fetchPaths = (authToken, query) => {
 
     url += '?' + queryString.stringify(q);
   }
-  return fetch(url, {headers: {'APP-KEY': authToken}}).then( resolveJsonOrRejectWithError );
+  return fetch(url, {headers: {'APP-KEY': authToken}}).then(resolveJsonOrRejectWithError);
 };
 
 const fetchOembedUrl = fetchAuthorized('/oembed/?url=:url');

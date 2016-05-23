@@ -9,13 +9,22 @@ const itemSource = {
       id: props.id,
       originalIndex: props.index
     };
+  },
+
+  endDrag(props, monitor) {
+    if (!monitor.didDrop()) {
+      return;
+    }
+
+    const { id, originalIndex, newIndex } = monitor.getDropResult();
+    props.onDrop(id, originalIndex, newIndex);
   }
 };
 
 const itemTarget = {
 
   canDrop() {
-    return false;
+    return true;
   },
 
   hover(props, monitor) {
@@ -25,6 +34,16 @@ const itemTarget = {
     if (draggedId !== overId) {
       props.moveItem(draggedId, props.index);
     }
+  },
+
+  drop(props, monitor) {
+    if (monitor.didDrop()) {
+      return undefined;
+    }
+    const { id, originalIndex } = monitor.getItem();
+    const { index: newIndex } = props;
+
+    return { id, originalIndex, newIndex };
   }
 };
 
@@ -72,6 +91,7 @@ SortableItem.propTypes = {
   isDragging: PropTypes.bool.isRequired,
   id: PropTypes.any.isRequired,
   moveItem: PropTypes.func.isRequired,
+  onDrop: PropTypes.func,
   index: PropTypes.number.isRequired
 };
 
@@ -80,7 +100,7 @@ SortableItem.propTypes = {
 export default (customType) => {
   const type = customType || guid();
   return flow(
-    DragSource(type, itemSource, collectSource),
-    DropTarget(type, itemTarget, collectTarget)
+    new DragSource(type, itemSource, collectSource),
+    new DropTarget(type, itemTarget, collectTarget)
   )(SortableItem);
 };
