@@ -6,29 +6,30 @@ import polyglot from '../i18n';
 
 import LabeledIcon from './LabeledIcon';
 
-export function SiteNav ({authenticated, userName, cssModifier}) {
-  let myPage, logInOut;
+export function SiteNav({ authenticated, userName, cssModifier }) {
+  let myPage;
+  let logInOut;
 
   if (authenticated) {
     myPage = (
-      <li className='site-nav_item'>
-        <Link to='/minside' className='site-nav_link'>
+      <li className="site-nav_item">
+        <Link to="/minside" className="site-nav_link">
           <LabeledIcon.Apps labelText={polyglot.t('siteNav.myPage')} />
         </Link>
       </li>
     );
 
     logInOut = (
-      <li className='site-nav_item'>
-        <Link to='/logout' className='site-nav_link'>
+      <li className="site-nav_item">
+        <Link to="/logout" className="site-nav_link">
           <LabeledIcon.Exit labelText={polyglot.t('siteNav.logout', {name: userName})} />
         </Link>
       </li>
     );
   } else {
     logInOut = (
-      <li className='site-nav_item'>
-        <Link to='/login' className='site-nav_link'>
+      <li className="site-nav_item">
+        <Link to="/login" className="site-nav_link">
           <LabeledIcon.Exit labelText={polyglot.t('siteNav.login')} />
         </Link>
       </li>
@@ -42,9 +43,9 @@ export function SiteNav ({authenticated, userName, cssModifier}) {
 
   return (
     <div className={rootClasses}>
-      <ul className='site-nav_list'>
-        <li className='site-nav_item'>
-          <Link to='/learningpaths' className='site-nav_link'>
+      <ul className="site-nav_list">
+        <li className="site-nav_item">
+          <Link to="/learningpaths" className="site-nav_link">
             <LabeledIcon.Search labelText={polyglot.t('siteNav.search')} />
           </Link>
         </li>

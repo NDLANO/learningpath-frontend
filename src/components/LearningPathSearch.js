@@ -47,24 +47,27 @@ class SearchForm extends Component {
 
     return (
       <form onSubmit={handleSubmit}
-          className='search-form search-form--on-dark'>
+        className='search-form search-form--on-dark'
+    >
 
-        <input type='text' className='search-form_query'
-            onChange={handleQueryChange}
-            value={this.state.query}
-            placeholder={polyglot.t('searchForm.placeholder')} />
+        <input type="text" className="search-form_query"
+          onChange={handleQueryChange}
+          value={this.state.query}
+          placeholder={polyglot.t('searchForm.placeholder')}
+    />
 
-        <button className='search-form_btn'>{polyglot.t('searchForm.btn')}</button>
+        <button className="search-form_btn">{polyglot.t('searchForm.btn')}</button>
 
-        <select className='search-form_sort-order'
-            onChange={handleSortChange}
-            value={this.state.sort}>
-          <option value='relevance'>{polyglot.t('searchForm.order.relevance')}</option>
-          <option value='-lastUpdated'>{polyglot.t('searchForm.order.newest')}</option>
-          <option value='lastUpdated'>{polyglot.t('searchForm.order.oldest')}</option>
-          <option value='-duration'>{polyglot.t('searchForm.order.longest')}</option>
-          <option value='duration'>{polyglot.t('searchForm.order.shortest')}</option>
-          <option value='title'>{polyglot.t('searchForm.order.title')}</option>
+        <select className="search-form_sort-order"
+          onChange={handleSortChange}
+          value={this.state.sort}
+    >
+          <option value="relevance">{polyglot.t('searchForm.order.relevance')}</option>
+          <option value="-lastUpdated">{polyglot.t('searchForm.order.newest')}</option>
+          <option value="lastUpdated">{polyglot.t('searchForm.order.oldest')}</option>
+          <option value="-duration">{polyglot.t('searchForm.order.longest')}</option>
+          <option value="duration">{polyglot.t('searchForm.order.shortest')}</option>
+          <option value="title">{polyglot.t('searchForm.order.title')}</option>
         </select>
       </form>
     );
@@ -85,47 +88,46 @@ SearchForm.defaultProps = {
 
 
 export class SearchResult extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {imageError: false};
     this.handleImageError = this.handleImageError.bind(this);
   }
 
-  handleImageError () {
+  handleImageError() {
     this.setState({imageError: true});
   }
 
-  render () {
+  render() {
 
-    const { path, errored } = this.props;
+    const { path } = this.props;
     const { lang } = this.context;
     const image = () => {
-      if (path.coverPhotoUrl && !this.state.imageError){
-        return <img className='search-result_img' src={path.coverPhotoUrl} onError={this.handleImageError}/>;
+      if (path.coverPhotoUrl && !this.state.imageError) {
+        return <img className="search-result_img" src={path.coverPhotoUrl} onError={this.handleImageError} />;
+      } else {
+        return <img className="search-result_img" src={'https://placeholdit.imgix.net/~text?txtsize=33&txt=NDLA&w=190&h=120'} />;
       }
-      else {
-        return <img className='search-result_img' src={'https://placeholdit.imgix.net/~text?txtsize=33&txt=NDLA&w=190&h=120'} />;
-      }
-    }
+    };
 
     return (
 
       <div>
         <Link to={`/learningpaths/${path.id}`}>
-          <div className='search-result'>
-            <div className='search-result_img_container'>
+          <div className="search-result">
+            <div className="search-result_img_container">
               {image()}
             </div>
-            <div className='search-result_bd'>
-              <h2 className='search-result_title'>
+            <div className="search-result_bd">
+              <h2 className="search-result_title">
                 {titleI18N(path, lang)}
               </h2>
-              <div className='search-result_meta'>
+              <div className="search-result_meta">
                 <LabeledIcon.Person labelText={get(path, 'author.name')} />
-                <LabeledIcon.Today labelText={formatDate(path.lastUpdated, lang)} tagName='time' />
-                <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName='time' />
+                <LabeledIcon.Today labelText={formatDate(path.lastUpdated, lang)} tagName="time" />
+                <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName="time" />
               </div>
-              <div className='search-result_description'>{descriptionI18N(path, lang)}</div>
+              <div className="search-result_description">{descriptionI18N(path, lang)}</div>
             </div>
           </div>
         </Link>
@@ -145,18 +147,18 @@ SearchResult.contextTypes = {
 export class LearningPathSearch extends Component {
 
 
-  componentWillMount () {
+  componentWillMount() {
     this.props.fetchLearningPaths();
   }
 
-  componentWillReceiveProps (newProps) {
+  componentWillReceiveProps(newProps) {
     if (!isEqual(newProps.query, this.props.query)) {
       newProps.fetchLearningPaths();
     }
   }
 
 
-  render () {
+  render() {
     const { learningPaths, query, lastPage, location: { pathname }, pushRoute } = this.props;
     let { page } = query;
 
@@ -170,16 +172,17 @@ export class LearningPathSearch extends Component {
 
     return (
       <div>
-        <div className='page-header'>
-          <SearchForm {...query}
+        <div className="page-header">
+          <SearchForm
+            {...query}
             onSortOrderChange={changeSortOrder}
             onSearchQuerySubmit={submitSearchQuery}
           />
         </div>
 
-        <div className='search-results'>
+        <div className="search-results">
           {learningPaths.map(path =>
-            (<SearchResult key={path.id} path={path}/>)
+            (<SearchResult key={path.id} path={path} />)
           )}
           <SearchResultPager page={page} lastPage={lastPage} query={query} />
         </div>

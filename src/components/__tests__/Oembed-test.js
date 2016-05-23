@@ -4,8 +4,7 @@ import { mount } from 'enzyme';
 import { spy } from 'sinon';
 import './jsdomEnv';
 
-import { learningStep } from './mockData';
-import { ndlaLearningStep } from './mockData';
+import { learningStep, ndlaLearningStep } from './mockData';
 
 import Oembed, { urlIsNDLA } from '../Oembed';
 
@@ -69,19 +68,19 @@ test('component/Oembed resize message listener', t => {
   // initialize with ndla resource
   const component = mount(<Oembed oembedContent={ndlaOembed1} />);
 
-  t.equal(add.callCount,    1, '1st addEventListener');
+  t.equal(add.callCount, 1, '1st addEventListener');
   t.equal(remove.callCount, 0, '1st removeEventListener');
 
   // update with other ndla resource
   component.setProps({oembedContent: ndlaOembed2});
 
-  t.equal(add.callCount,    1, '2nd addEventListener');
+  t.equal(add.callCount, 1, '2nd addEventListener');
   t.equal(remove.callCount, 0, '2nd removeEventListener');
- 
+
   // update with non-ndla resource
   component.setProps({oembedContent: oembed});
 
-  t.equal(add.callCount,    1, '3rd addEventListener');
+  t.equal(add.callCount, 1, '3rd addEventListener');
   t.equal(remove.callCount, 1, '3rd removeEventListener');
 
   t.notOk(component.state('isNDLAResource'), 'state.isNDLAResource');
@@ -94,7 +93,7 @@ test('component/Oembed resize message listener', t => {
   // update with other ndla resource
   component.setProps({oembedContent: ndlaOembed3});
 
-  t.equal(add.callCount,    2, '4th addEventListener');
+  t.equal(add.callCount, 2, '4th addEventListener');
   t.equal(remove.callCount, 1, '4th removeEventListener');
 
   t.end();
