@@ -1,61 +1,76 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import get from 'lodash/get';
 import LabeledIcon from './LabeledIcon';
-import TitleEditor from './editors/TitleEditor';
-import DescriptionEditor from './editors/DescriptionEditor';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 import polyglot from '../i18n';
-
-import Icon from './Icon';
-import { reduxForm, reset } from 'redux-form';
-
-const fields = ['title', 'description'];
+import classNames from 'classnames';
+import { reduxForm } from 'redux-form';
+import LearningPathDuration from './LearningPathDuration';
+const fields = ['title', 'description', 'duration'];
 
 const validate = values => {
-  const errors = {}
-  console.log(values)
-  if (!values.description.length > 150) {
-    errors.description = 'Teksten er for lang'
+  const errors = {};
+  if (!values.description) {
+    errors.description = polyglot.t('errors.description');
+  }
+
+  if (!values.title){
+    errors.title = polyglot.t('errors.title');
+  }
+
+  if (!values.duration && !isNaN(values.duration)){
+    errors.duration = polyglot.t('errors.duration');
+  }
+  else if (values.duration <= 0){
+    errors.duration = polyglot.t('errors.durationMinus');
+  }
+  else if (values.duration && isNaN(values.duration.replace(/,/g , '.')) && isNaN(values.duration)){
+    errors.duration = polyglot.t('errors.durationNaN');
+  }
+  else if (!(/^\d+(\.|\,)?\d{0,2}$/.test(values.duration + ''))){
+    errors.duration = polyglot.t('errors.durationDecimals');
   }
   return errors;
 };
 
 export class LearningPathForm extends React.Component {
   render() {
-    console.log(this.props)
-
     const {
-      fields: { title, description },
+      fields: { title, description, duration },
       handleSubmit,
       learningPath,
       lang
     } = this.props;
 
 
+    const inputClassName = (hasError, isTextArea) => classNames({
+      'input--alert': hasError,
+      'textarea textarea--resize-vertical' : isTextArea
+    });
 
-    let titleText = titleI18N(learningPath, lang) || '';
-    let descriptionText = descriptionI18N(learningPath, lang) || '';
+
+    const remainingDescriptionLength = description.value ? 150 - description.value.length : 150;
 
     return (
       <form onSubmit={handleSubmit}>
         <div className='learning-path_hd'>
-          <label className='label--bold label--medium'>Tittel på læringssti</label>
-          <h1 className='learning-path-input learning-path-input__title'>
-            <input type="text" required{...title} lang={lang} />
-          </h1>
+          <h1>{polyglot.t('learningPath.pageName')}</h1>
+          <label className='label--medium-bold  label--medium'>{polyglot.t('learningPath.title')}</label>
+          <div className='learning-path-input learning-path-input__title'>
+            <input className={inputClassName(title.touched && title.error, false)} type="text" required{...title} lang={lang} />
+            {title.touched && title.error && <span className='error_message error_message--red'>{title.error}</span>}
+          </div>
         </div>
+
         <div className='learning-path_bd'>
-          <label className='label--bold label--medium'>Beskrivelse</label>
+          <label className='label--medium-bold  label--medium'>{polyglot.t('learningPath.description')}</label>
           <div className='learning-path-input learning-path-input__paragraph'>
-            <textarea rows="4" cols="50" placeholder="Skriv en kort beskrivelse av læringsstien." maxLength="155"
-                      className="textarea" {...description} />
+            <textarea rows="4" cols="50" placeholder={polyglot.t('learningPath.descriptionPlaceholder')} maxLength='150'
+                      className={inputClassName(description.touched && description.error, true)} {...description} />
+            {description.touched && description.error && <span className='error_message error_message--red'>{description.error}</span>}
+            <p className='learning-path_input-information'>{polyglot.t('learningPath.descriptionInformation', {remainingDescriptionLength: remainingDescriptionLength})}</p>
           </div>
 
-          {description.touched && description.error && <span className='red'>{description.error}</span>}
-
-          <p className='learning-path-input__paragraph_info'>Maks 150 tegn og du har {150 - description.value.length } igen. Beskrivelsen blir synlig i søk.</p>
           <div className='block-container_fixed block-container_fixed--bottom--right'>
             <div className="button-group">
               <Link to={`/learningpaths/${learningPath.id}`} className="button button--secondary">
@@ -66,15 +81,20 @@ export class LearningPathForm extends React.Component {
               </button>
             </div>
           </div>
+
           <div className='learning-path-image'>
-            <label className='label--bold label--medium'>Illustrerende bilde</label>
+            <label className='label--medium-bold  label--medium'>{polyglot.t('learningPath.image')}</label>
             <div className='learning-path-image-drop'>
               <img src='https://d30y9cdsu7xlg0.cloudfront.net/png/49665-200.png'/>
-              <h2>Klikk for å velge</h2>
+              <h2>{polyglot.t('learningPath.imagePick')}</h2>
             </div>
+            <p className='learning-path_input-information'>{polyglot.t('learningPath.imageInformation')}</p>
           </div>
+          
           <div className='learning-path-duration'>
-            <label className='label--bold label--medium'>Varighet</label>
+            <label className='label--medium-bold  label--medium'>{polyglot.t('learningPath.duration')}</label>
+            <LearningPathDuration {...duration}/>
+            {duration.touched && duration.error && <span className='error_message error_message--red'>{duration.error}</span>}
           </div>
         </div>
       </form>
@@ -82,70 +102,24 @@ export class LearningPathForm extends React.Component {
   }
 }
 
-
-
-
-
-/*export function EditLearningPath (props, {lang}) {
-  let {
-    learningPath,
-    updateTitle,
-    updateDescription,
-    saveAction
-  } = props;
-
-  let titleText = titleI18N(learningPath, lang) || '';
-  let descriptionText = descriptionI18N(learningPath, lang) || '';
-
-  let saveLearningPath = () => saveAction(learningPath);
-
-  const descriptionTextRemain = descriptionText ? 150 - descriptionText.length : 150;
-  return <div>
-    <div className='learning-path_hd'>
-      <label className='label--bold label--medium'>Tittel på læringssti</label>
-      <h1 className='learning-path-input learning-path-input__title'>
-        <TitleEditor value={titleText} onChange={updateTitle} lang={lang} />
-      </h1>
-    </div>
-    <div className='learning-path_bd'>
-      <label className='label--bold label--medium'>Beskrivelse</label>
-      <div className='learning-path-input learning-path-input__paragraph'>
-        <DescriptionEditor value={descriptionText} onChange={updateDescription} lang={lang} />
-      </div>
-      <p className='learning-path-input__paragraph_info'>Maks 150 tegn og du har {descriptionTextRemain} igen. Beskrivelsen blir synlig i søk </p>
-      <div className='block-container_fixed block-container_fixed--bottom--right'>
-        <div className="button-group">
-          <Link to={`/learningpaths/${learningPath.id}`} className="button button--secondary">
-            <LabeledIcon.Clear labelText={polyglot.t('editPage.cancelBtn')} />
-          </Link>
-          <button className='button button--primary' onClick={saveLearningPath}>
-            <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
-          </button>
-        </div>
-      </div>
-      <div className='learning-path-image'>
-        <label className='label--bold label--medium'>Illustrerende bilde</label>
-        <div className='learning-path-image-drop'>
-          <img src='https://d30y9cdsu7xlg0.cloudfront.net/png/49665-200.png'/>
-          <h2>Klikk for å velge</h2>
-        </div>
-      </div>
-      <div className='learning-path-duration'>
-        <label className='label--bold label--medium'>Varighet</label>
-      </div>
-
-    </div>
-  </div>;
-}*/
-
 LearningPathForm.propTypes = {
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  learningPath: PropTypes.object.isRequired,
+  lang: PropTypes.string.isRequired
 };
+
+const mapStateToProps = (state, props) => ({
+  initialValues: {
+    title:titleI18N(props.learningPath, props.lang),
+    description: descriptionI18N(props.learningPath, props.lang),
+    duration: props.learningPath.duration ? (props.learningPath.duration/60).toString() : undefined
+  }
+});
 
 export default reduxForm({
   form: 'edit-learning-path',
   fields,
   validate
-})(LearningPathForm);
+}, mapStateToProps)(LearningPathForm);

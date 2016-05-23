@@ -1,6 +1,4 @@
 
-
-
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
@@ -19,7 +17,7 @@ export function EditLearningPath2 (props, {lang}) {
     title: [{title: values.title, language: lang}],
     description: [{description: values.description, language: lang}],
     revision: learningPath.revision,
-    duration: 1
+    duration: (values.duration.replace(/,/g , '.')) * 60
   });
 
   return (
