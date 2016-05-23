@@ -7,15 +7,12 @@ import {
   updateStepSequenceNumber
 } from '../../actions';
 
-
-
 const SortLearningSteps = ({ learningPath, localUpdateStepSequenceNumber }) => {
-
   const handleUpdateSeqNo = () => localUpdateStepSequenceNumber(learningPath.id, learningPath.learningsteps);
 
   return (
     <div>
-      <SortableLearningStepList learningsteps={learningPath.learningsteps} />
+      <SortableLearningStepList learningPathId={learningPath.id} learningsteps={learningPath.learningsteps} />
       <ul className="vertical-menu">
         <li className="vertical-menu_item">
           <button className="button button--primary cta-link--block"onClick={handleUpdateSeqNo}>

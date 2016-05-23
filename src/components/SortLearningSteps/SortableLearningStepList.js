@@ -8,6 +8,7 @@ import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { titleI18N } from '../../util/i18nFieldFinder';
 import {
+  deleteLearningPathStep,
   sortLearningPathSteps
 } from '../../actions';
 
@@ -41,9 +42,9 @@ class SortableLearningStepList extends Component {
   render() {
     const { lang } = this.context;
     const { SortableItem } = this.state;
-    const { learningsteps } = this.props;
+    const { learningPathId, learningsteps, deleteStep } = this.props;
 
-    if (!learningsteps) {
+    if (!learningsteps || !learningPathId) {
       return null;
     }
 
@@ -63,7 +64,7 @@ class SortableLearningStepList extends Component {
                   {titleI18N(step, lang)}
                 </div>
                 <div className="sortable_action">
-                  <button className="un-button">
+                  <button onClick={() => deleteStep(learningPathId, step.id)} className="un-button">
                     <Icon.Clear className="icon--m" />
                   </button>
                 </div>
@@ -80,7 +81,8 @@ class SortableLearningStepList extends Component {
 const mapStateToProps = state => state;
 
 export const mapDispatchToProps = {
-  sortSteps: sortLearningPathSteps
+  sortSteps: sortLearningPathSteps,
+  deleteStep: deleteLearningPathStep
 };
 
 export default flow(
@@ -90,6 +92,8 @@ export default flow(
 
 SortableLearningStepList.propTypes = {
   sortSteps: PropTypes.func.isRequired,
+  deleteStep: PropTypes.func.isRequired,
+  learningPathId: PropTypes.string,
   learningsteps: PropTypes.array
 };
 
