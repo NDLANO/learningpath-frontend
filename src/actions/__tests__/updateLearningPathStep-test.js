@@ -7,7 +7,7 @@ import payload403invalid from './payload403invalid';
 import actions from '..';
 import { routerActions } from 'react-router-redux';
 
-const middleware = [ thunk ];
+const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
 const authToken = '123345';
@@ -30,12 +30,12 @@ test('actions/updateLearningPathStep', t => {
   const learningStepReply = Object.assign({}, learningStep, {id: stepId});
 
   const postPathStepApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .put('/learningpaths/' + pathId + '/learningsteps/' + stepId, learningStep)
+    .put(`/learningpaths/${pathId}/learningsteps/${stepId}`, learningStep)
     .reply(200, learningStepReply);
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.updateLearningPathStep(pathId, stepId, learningStep) )
+  store.dispatch(actions.updateLearningPathStep(pathId, stepId, learningStep))
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.addMessage({message: 'Lagret OK'}),
@@ -63,12 +63,12 @@ test('actions/updateLearningPathStep access denied', (t) => {
   };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .put('/learningpaths/' + pathId + '/learningsteps/' + stepId, learningStep)
+    .put(`/learningpaths/${pathId}/learningsteps/${stepId}`, learningStep)
     .reply(403, {message: 'Invalid'});
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.updateLearningPathStep(pathId, stepId, learningStep) )
+  store.dispatch(actions.updateLearningPathStep(pathId, stepId, learningStep))
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.applicationError(payload403invalid())

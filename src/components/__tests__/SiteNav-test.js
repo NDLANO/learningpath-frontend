@@ -18,7 +18,7 @@ test('component/SiteNav not authenticated', t => {
 });
 
 test('component/SiteNav authenticated', t => {
-  const navLinks = shallow(<SiteNav authenticated={true} userName='Alice' />).find(Link);
+  const navLinks = shallow(<SiteNav authenticated userName="Alice" />).find(Link);
 
   t.equals(navLinks.length, 3, 'three links');
 

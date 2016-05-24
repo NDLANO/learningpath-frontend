@@ -6,7 +6,7 @@ import { routerActions } from 'react-router-redux';
 
 import { SessionInitializer } from '../SessionInitializer';
 
-function renderComponent (props={}) {
+function renderComponent(props = {}) {
   return shallow(<SessionInitializer {...props} />);
 }
 
@@ -41,4 +41,3 @@ test('component/SessionInitializer without authToken', t => {
   t.notOk(dispatch.called);
   t.end();
 });
-

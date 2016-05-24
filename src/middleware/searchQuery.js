@@ -9,20 +9,21 @@ const defaultSearchQuery = {
 };
 
 const parseSearchQuery = (query) => Object.keys(query).reduce((obj, key) => {
+  const copy = Object.assign({}, obj);
   switch (key) {
-  case 'page':
-  case 'pageSize':
-    obj[key] = parseInt(query[key]);
-    break;
-  default:
-    obj[key] = query[key];
+    case 'page':
+    case 'pageSize':
+      copy[key] = parseInt(query[key], 10);
+      break;
+    default:
+      copy[key] = query[key];
   }
-  return obj;
+  return copy;
 }, {});
 
 
 const searchQueryMiddleware = store => next => action => {
-  if (action.type === '@@router/UPDATE_LOCATION' && action.payload.pathname === '/learningpaths') {
+  if (action.type === '@@router/LOCATION_CHANGE' && action.payload.pathname === '/learningpaths') {
     let query = parseSearchQuery(action.payload.query);
     if (isEmpty(query)) {
       query = defaultSearchQuery;

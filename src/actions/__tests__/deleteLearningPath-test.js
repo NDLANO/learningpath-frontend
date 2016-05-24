@@ -5,7 +5,7 @@ import nock from 'nock';
 
 import actions from '..';
 
-const middleware = [ thunk ];
+const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
 const authToken = '123345';
@@ -22,7 +22,7 @@ test('actions/deleteLearningPath', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.deleteLearningPath(123) )
+  store.dispatch(actions.deleteLearningPath(123))
     .then(() => {
       t.deepEqual(store.getActions(), [
         {type: 'REMOVE_LEARNING_PATH', payload: 123}
@@ -32,5 +32,4 @@ test('actions/deleteLearningPath', t => {
       done();
     })
     .catch(done);
-
 });

@@ -7,7 +7,7 @@ import payload403invalid from './payload403invalid';
 import actions from '..';
 import { routerActions } from 'react-router-redux';
 
-const middleware = [ thunk ];
+const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
 const authToken = '123345';
@@ -30,15 +30,15 @@ test('actions/createLearningPath', t => {
     .reply(200, {id: pathId, isResponse: true});
 
   const postStep1Api = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .post('/learningpaths/' + pathId + '/learningsteps', { seqNo: 0 })
+    .post(`/learningpaths/${pathId}/learningsteps`, { seqNo: 0 })
     .reply(200, {id: 12, seqNo: 0, isResponse: true});
 
   const postStep2Api = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .post('/learningpaths/' + pathId + '/learningsteps', { seqNo: 1 })
+    .post(`/learningpaths/${pathId}/learningsteps`, { seqNo: 1 })
     .reply(200, {id: 34, seqNo: 1, isResponse: true});
 
   const postStep3Api = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .post('/learningpaths/' + pathId + '/learningsteps', { seqNo: 2 })
+    .post(`/learningpaths/${pathId}/learningsteps`, { seqNo: 2 })
     .reply(200, {id: 56, seqNo: 2, isResponse: true});
 
   const store = mockStore({ authToken });
@@ -86,7 +86,7 @@ test('actions/createLearningPath access denied', (t) => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.createLearningPath({ foo: 'bar' }) )
+  store.dispatch(actions.createLearningPath({ foo: 'bar' }))
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.applicationError(payload403invalid())

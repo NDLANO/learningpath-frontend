@@ -19,9 +19,9 @@ export default handleActions({
 
   UPDATE_LEARNING_PATH_STEP: {
     next(state, action) {
-      let nextState = cloneDeep(state);
-      let steps = get(nextState, 'learningsteps', []);
-      let index = findIndex(steps, ['seqNo', action.payload.seqNo]);
+      const nextState = cloneDeep(state);
+      const steps = get(nextState, 'learningsteps', []);
+      const index = findIndex(steps, ['seqNo', action.payload.seqNo]);
 
       if (index === -1) {
         steps.push(action.payload);
@@ -46,22 +46,13 @@ export default handleActions({
     next: assignOrPushPropReducer('description'),
     throw(state) { return state; }
   },
-  REMOVE_LEARNING_PATH_STEP: {
-    next(state, action) {
-      let nextState = cloneDeep(state);
-      let steps = get(nextState, 'learningsteps', []);
-      nextState.learningsteps = steps.filter(m => m.seqNo != action.payload.seqNo);
-      return nextState;
-    },
-    throw(state) { return state; }
-  },
 
   SORT_LEARNING_PATH_STEPS: {
     next(state, action) {
-      if (state.learningsteps.length != action.payload.length){
+      if (state.learningsteps.length !== action.payload.length) {
         return state;
       }
-      let nextState = cloneDeep(state);
+      const nextState = cloneDeep(state);
       nextState.learningsteps = action.payload;
       return nextState;
     },

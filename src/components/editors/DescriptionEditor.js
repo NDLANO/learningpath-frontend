@@ -2,16 +2,16 @@ import React, { PropTypes } from 'react';
 import OneLineEditor from './OneLineEditor';
 import polyglot from '../../i18n';
 
-export default function DescriptionEditor ({value, onChange, lang}) {
-  const _onChange = (newValue) => onChange({description: newValue, language: lang});
+export default function DescriptionEditor({value, onChange, lang}) {
+  const handleChange = (newValue) => onChange({description: newValue, language: lang});
   return (<div>
     <OneLineEditor
-    onChange={_onChange}
-    value={value||''}
-    maxlength = {155}
-    placeholder={polyglot.t('editPage.shortDescriptionPlaceholder')}
+      onChange={handleChange}
+      value={value || ''}
+      maxlength={150}
+      placeholder={polyglot.t('editPage.shortDescriptionPlaceholder')}
     />
-    <div className='editor_input-underline'></div>
+    <div className="editor_input-underline"></div>
   </div>);
 }
 

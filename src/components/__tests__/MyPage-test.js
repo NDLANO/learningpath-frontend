@@ -18,7 +18,7 @@ test('component/MyPage', t => {
   };
 
   const component = shallow(<MyPage {...requiredProps} learningPaths={learningPaths} />,
-      {context: {lang:'nb'}});
+      {context: {lang: 'nb'}});
 
   const links = component.find('.tile_bd').find(Link);
 
@@ -38,7 +38,7 @@ test('component/MyPage', t => {
 test('component/MyPage mapStateToProps', t => {
   t.ok(mapStateToProps instanceof Function);
 
-  let state = {
+  const state = {
     lang: 'nb',
     learningPaths,
     myLearningPathsSortOrder: 'title'

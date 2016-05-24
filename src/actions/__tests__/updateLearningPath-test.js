@@ -7,7 +7,7 @@ import payload403invalid from './payload403invalid';
 import actions from '..';
 import { routerActions } from 'react-router-redux';
 
-const middleware = [ thunk ];
+const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
 const authToken = '123345';
@@ -20,16 +20,16 @@ test('actions/updateLearningPath', t => {
   };
 
   const putPathApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .put('/learningpaths/' + pathId, {
+    .put(`/learningpaths/${pathId}`, {
       id: pathId, isRequest: true
     })
     .reply(200, {id: pathId, isResponse: true});
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.updateLearningPath(pathId, {
+  store.dispatch(actions.updateLearningPath(pathId, {
     id: pathId, isRequest: true
-  }) )
+  }))
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.addMessage({message: 'Lagret OK'}),
@@ -54,12 +54,12 @@ test('actions/updateLearningPath with redirect', t => {
   };
 
   const putPathApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .put('/learningpaths/' + pathId, { id: pathId })
+    .put(`/learningpaths/${pathId}`, { id: pathId })
     .reply(200, {id: pathId});
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.updateLearningPath(pathId, {id: pathId}, '/goto/dev/null') )
+  store.dispatch(actions.updateLearningPath(pathId, {id: pathId}, '/goto/dev/null'))
     .then(() => {
       const actual = store.getActions();
 
@@ -80,7 +80,7 @@ test('actions/updateLearningPath access denied', (t) => {
   };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .put('/learningpaths/' + pathId, {
+    .put(`/learningpaths/${pathId}`, {
       id: pathId,
       foo: 'bar'
     })
@@ -88,7 +88,7 @@ test('actions/updateLearningPath access denied', (t) => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.updateLearningPath(pathId, { id: pathId, foo: 'bar' }) )
+  store.dispatch(actions.updateLearningPath(pathId, { id: pathId, foo: 'bar' }))
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.applicationError(payload403invalid())

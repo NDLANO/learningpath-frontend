@@ -6,7 +6,7 @@ import SiteNav from './SiteNav';
 import Alerts from './Alerts';
 
 export class App extends React.Component {
-  getChildContext () {
+  getChildContext() {
     return {
       lang: 'nb'
     };
@@ -15,15 +15,15 @@ export class App extends React.Component {
   render() {
     return (
       <div>
-        <div className='masthead'>
-          <div className='masthead_left'>
+        <div className="masthead">
+          <div className="masthead_left">
             <Logo />
           </div>
-          <div className='masthead_right'>
+          <div className="masthead_right">
             <SiteNav />
           </div>
         </div>
-        <div className='content'>
+        <div className="content">
           {this.props.children}
         </div>
 

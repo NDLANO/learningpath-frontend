@@ -16,19 +16,19 @@ export function LearningPathToCButtons({learningPath, saveAction, saveAndPublish
   let saveAndPublishLearningPath = () => saveAndPublishAction(learningPath);
 
   return (<div>
-    <ul className='vertical-menu'>
-      <li className='vertical-menu_item'>
-        <Link to={newStepTarget} className='cta-link cta-link--block labeled-icon'>
+    <ul className="vertical-menu">
+      <li className="vertical-menu_item">
+        <Link to={newStepTarget} className="cta-link cta-link--block labeled-icon">
           <Icon.Add /> {polyglot.t('editPage.addStepBtn')}
         </Link>
       </li>
-      <li className='vertical-menu_item'>
-        <button className='cta-link cta-link--block labeled-icon' onClick={saveLearningPath}>
+      <li className="vertical-menu_item">
+        <button className="cta-link cta-link--block labeled-icon" onClick={saveLearningPath}>
           <Icon.Save /> {polyglot.t('editPage.saveDraft')}
         </button>
       </li>
-      <li className='vertical-menu_item' onClick={saveAndPublishLearningPath}>
-        <button className='button button--outline cta-link--block labeled-icon'>
+      <li className="vertical-menu_item" onClick={saveAndPublishLearningPath}>
+        <button className="button button--outline cta-link--block labeled-icon">
           {polyglot.t('editPage.saveAndPublish')} <Icon.Forward />
         </button>
       </li>
