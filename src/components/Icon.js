@@ -20,6 +20,7 @@ Icon.TypeMedia = props => (<Icon {...props} className={'icon--play-circle-outlin
 Icon.TypeQuiz = props => (<Icon {...props} className={'icon--contacts ' + props.className} svgDefId="icon-contacts" />);
 Icon.TypeTask = Icon.TypeText;
 Icon.TypeSummary = Icon.TypeText;
+
 Icon.Save = props => (<Icon {...props} className={'icon--save ' + props.className} svgDefId="icon-save" />);
 Icon.Add = props => (<Icon {...props} className={'icon--add-circle-outline ' + props.className} svgDefId="icon-add_circle_outline" />);
 Icon.Back = props => (<Icon {...props} className={'icon--arrow-back ' + props.className} svgDefId="icon-arrow_back" />);
@@ -42,7 +43,6 @@ Icon.Duration = props => (<Icon {...props} className={'icon--query-builder' + pr
 Icon.Visibility = props => (<Icon {...props} className={'icon--remove-red-eye' + props.className} svgDefId="icon-remove_red_eye" />);
 Icon.ArrowBack = props => (<Icon {...props} className={'icon--arrow-back' + props.className} svgDefId="icon-arrow_back" />);
 Icon.ArrowForward = props => (<Icon {...props} className={'icon--arrow-forward' + props.className} svgDefId="icon-arrow_forward" />);
-
-
+Icon.ImportExport = props => (<Icon {...props} className={'icon--import_export ' + props.className} svgDefId='icon-import_export' />);
 
 export default Icon;

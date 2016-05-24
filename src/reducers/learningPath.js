@@ -46,15 +46,6 @@ export default handleActions({
     next: assignOrPushPropReducer('description'),
     throw(state) { return state; }
   },
-  REMOVE_LEARNING_PATH_STEP: {
-    next(state, action) {
-      let nextState = cloneDeep(state);
-      let steps = get(nextState, 'learningsteps', []);
-      nextState.learningsteps = steps.filter(m => m.seqNo !== action.payload.seqNo);
-      return nextState;
-    },
-    throw(state) { return state; }
-  },
 
   SORT_LEARNING_PATH_STEPS: {
     next(state, action) {
