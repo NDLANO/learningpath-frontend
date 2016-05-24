@@ -3,23 +3,12 @@ import { connect } from 'react-redux';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 
 export function LearningPathSummary({learningPath}, {lang}) {
-  let edit = '';
-  if (learningPath.canEdit) {
-    edit = (
-      <div className="block-container_fixed block-container_fixed--bottom--right">
-
-      </div>
-    );
-  }
   return (
     <div className="learning-path">
       <div className="learning-path_hd">
         <h1 className="learning-path_title">{titleI18N(learningPath, lang)}</h1>
       </div>
       <div className="learning-path_bd">{descriptionI18N(learningPath, lang)}</div>
-      <div>
-        {edit}
-      </div>
     </div>
 
   );
