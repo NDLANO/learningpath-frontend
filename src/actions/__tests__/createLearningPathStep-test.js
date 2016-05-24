@@ -29,7 +29,7 @@ test('actions/createLearningPathStep', t => {
   const learningStepReply = Object.assign({}, learningStep, {id: 1234});
 
   const postPathStepApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .post('/learningpaths/' + pathId + '/learningsteps', learningStep)
+    .post(`/learningpaths/${pathId}/learningsteps`, learningStep)
     .reply(200, learningStepReply);
 
   const store = mockStore({ authToken });
@@ -61,7 +61,7 @@ test('actions/createLearningPathStep access denied', (t) => {
   };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .post('/learningpaths/' + pathId + '/learningsteps', learningStep)
+    .post(`/learningpaths/${pathId}/learningsteps`, learningStep)
     .reply(403, {message: 'Invalid'});
 
   const store = mockStore({ authToken });

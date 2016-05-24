@@ -5,11 +5,10 @@ import Icon from './Icon';
 import classNames from 'classnames';
 import {timeoutMessage, clearAllMessages} from '../actions';
 
-const priorities = {'info': 0, 'success': 1, 'warning': 2, 'danger': 3 };
+const priorities = {info: 0, success: 1, warning: 2, danger: 3 };
 
 export function Alerts({dispatch, messages}) {
-
-  let isHidden = messages.length == 0;
+  let isHidden = messages.length === 0;
   let overlayClasses = classNames({
     'alert-overlay': true,
     'alert-overlay--hidden': isHidden
@@ -17,7 +16,12 @@ export function Alerts({dispatch, messages}) {
 
   let highestAlert = messages
     .map(m => m.severity)
-    .reduce((prev, current) => priorities[current] > priorities[prev] ? current : prev, 'info');
+    .reduce((prev, current) => {
+      if (priorities[current] > priorities[prev]) {
+        return current;
+      }
+      return prev;
+    }, 'info');
 
   messages.filter(m => m.timeToLive > 0).forEach(item => dispatch(timeoutMessage(item)));
 

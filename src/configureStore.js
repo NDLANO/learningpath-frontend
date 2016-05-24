@@ -9,13 +9,13 @@ import { routerMiddleware } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 
 
-const slicer = function (paths) {
+const slicer = (paths) =>
   // custom slicer because default slicer does not store falsy values
-  return (state) => paths.reduce((acc, path) => {
+  (state) => paths.reduce((acc, path) => {
+    // eslint-disable-next-line no-param-reassign
     acc[path] = state[path];
     return acc;
   }, {});
-};
 
 const middleware = routerMiddleware(browserHistory);
 const createFinalStore = compose(

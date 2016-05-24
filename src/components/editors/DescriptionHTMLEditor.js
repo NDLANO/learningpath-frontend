@@ -5,32 +5,25 @@ import classNames from 'classnames';
 import { stateToHTML } from 'draft-js-export-html';
 import polyglot from '../../i18n';
 
-class StyleButton extends React.Component {
-  constructor() {
-    super();
-    this.onToggle = e => {
-      e.preventDefault();
-      this.props.onToggle(this.props.style);
-    };
-  }
+const StyleButton = ({ active, icon, style, onToggle }) => {
+  const handleToggle = e => {
+    e.preventDefault();
+    onToggle(style);
+  };
+  const className = classNames(
+      ['texformat-menu-item'],
+      {' texformat-menu-item__selected': active}
+  );
 
-  render() {
-    let className = classNames(
-        ['texformat-menu-item'],
-        {' texformat-menu-item__selected': this.props.active}
-    );
-
-    return (
-      <li className={className} onMouseDown={this.onToggle}>
-        {this.props.icon}
-      </li>
-    );
-  }
-}
+  return (
+    <li className={className} onMouseDown={handleToggle}>
+      {icon}
+    </li>
+  );
+};
 
 StyleButton.propTypes = {
   style: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
   active: PropTypes.bool.isRequired,
   onToggle: PropTypes.func.isRequired,
   icon: PropTypes.element.isRequired
@@ -56,7 +49,7 @@ const StyleControls = props => {
       {STYLES.map(type =>
         <StyleButton
           key={type.label}
-          active={(type.isInline && currentInlineStyle.has(type.style)) || (!type.isInline && type.style == blockType)}
+          active={(type.isInline && currentInlineStyle.has(type.style)) || (!type.isInline && type.style === blockType)}
           label={type.label}
           onToggle={type.isInline ? props.onToggleInline : props.onToggleBlock}
           style={type.style}
@@ -93,22 +86,28 @@ export default class DescriptionHTMLEditor extends React.Component {
       });
     });
 
-    this.handleKeyCommand = command => this._handleKeyCommand(command);
-    this.toggleBlockType = type => this._toggleBlockType(type);
-    this.toggleInlineStyle = style => this._toggleInlineStyle(style);
+    this.handleKeyCommand = this.handleKeyCommand.bind(this);
+    this.toggleBlockType = this.toggleBlockType.bind(this);
+    this.toggleInlineStyle = this.toggleInlineStyle.bind(this);
   }
 
-  _handleKeyCommand(command) {
-    const { editorState } = this.state;
-    const newState = RichUtils.handleKeyCommand(editorState, command);
-    if (newState) {
-      this.onChange(newState);
-      return true;
+  componentWillMount() {
+    this.setEditorContentStateFromHTML(this.props.value);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setEditorContentStateFromHTML(nextProps.value);
+  }
+
+  setEditorContentStateFromHTML(htmlStr) {
+    if (htmlStr !== undefined) {
+      let contentState = ContentState.createFromBlockArray(convertFromHTML(htmlStr));
+      let editorState = EditorState.createWithContent(contentState);
+      this.setState({editorState});
     }
-    return false;
   }
 
-  _toggleBlockType(blockType) {
+  toggleBlockType(blockType) {
     this.onChange(
       RichUtils.toggleBlockType(
         this.state.editorState,
@@ -117,7 +116,7 @@ export default class DescriptionHTMLEditor extends React.Component {
     );
   }
 
-  _toggleInlineStyle(inlineStyle) {
+  toggleInlineStyle(inlineStyle) {
     this.onChange(
       RichUtils.toggleInlineStyle(
         this.state.editorState,
@@ -126,20 +125,14 @@ export default class DescriptionHTMLEditor extends React.Component {
     );
   }
 
-  _setEditorContentStateFromHTML(htmlStr) {
-    if (htmlStr !== undefined) {
-      let contentState = ContentState.createFromBlockArray(convertFromHTML(htmlStr));
-      let editorState = EditorState.createWithContent(contentState);
-      this.setState({editorState});
+  handleKeyCommand(command) {
+    const { editorState } = this.state;
+    const newState = RichUtils.handleKeyCommand(editorState, command);
+    if (newState) {
+      this.onChange(newState);
+      return true;
     }
-  }
-
-  componentWillMount() {
-    this._setEditorContentStateFromHTML(this.props.value);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this._setEditorContentStateFromHTML(nextProps.value);
+    return false;
   }
 
   render() {

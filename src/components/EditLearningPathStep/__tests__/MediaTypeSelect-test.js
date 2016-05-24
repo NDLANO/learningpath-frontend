@@ -11,14 +11,14 @@ test('component/MediaTypeSelect', t => {
 
   let inputs = component.find('.icon-select_input');
 
-  t.deepEqual(inputs.map(input => input.prop('value')), 
+  t.deepEqual(inputs.map(input => input.prop('value')),
         ['INTRODUCTION', 'TEXT', 'MULTIMEDIA', 'QUIZ', 'TASK', 'SUMMARY']);
 
   t.end();
 });
 
 test('component/MediaTypeSelect for given value', t => {
-  const component = shallow(<MediaTypeSelect value='MULTIMEDIA' onChange={noop} />);
+  const component = shallow(<MediaTypeSelect value="MULTIMEDIA" onChange={noop} />);
 
   let inputs = component.find('.icon-select_input');
 
@@ -26,11 +26,11 @@ test('component/MediaTypeSelect for given value', t => {
       Object.assign(acc, {[input.prop('value')]: input.prop('checked')}), {}),
     {
       INTRODUCTION: false,
-      TEXT:         false,
-      MULTIMEDIA:   true,
-      QUIZ:         false,
-      TASK:         false,
-      SUMMARY:      false
+      TEXT: false,
+      MULTIMEDIA: true,
+      QUIZ: false,
+      TASK: false,
+      SUMMARY: false
     }
   );
 
@@ -38,7 +38,7 @@ test('component/MediaTypeSelect for given value', t => {
 });
 
 test('component/MediaTypeSelect onChange', t => {
-  const onChangeSpy = sinon.spy(()=>{});
+  const onChangeSpy = sinon.spy(() => {});
 
   const component = shallow(<MediaTypeSelect onChange={onChangeSpy} />);
 

@@ -51,6 +51,7 @@ export class MyPage extends React.Component {
           case 'unpublish':
             updatePathStatus(lp.id, 'PRIVATE');
             break;
+          default:
         }
       };
 
@@ -75,7 +76,7 @@ export class MyPage extends React.Component {
             <div className="tile_property">
               <div className="tile_property-icon"><Icon.Visibility /></div>
               <p className="tile_property-description">{polyglot.t('myPage.path.status')}</p>
-              <p>{polyglot.t('myPage.path.statusValue.' + lp.status)}</p>
+              <p>{polyglot.t(`myPage.path.statusValue.${lp.status}`)}</p>
             </div>
           </div>
         </div>

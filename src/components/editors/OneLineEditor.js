@@ -24,6 +24,7 @@ export default class OneLineEditor extends React.Component {
       this.refs.editor.blur();
       return true;
     };
+    this.handleReturn = this.handleReturn.bind(this);
 
     this.handleBeforeInput = () => false;
 
@@ -38,19 +39,19 @@ export default class OneLineEditor extends React.Component {
     this.handlePastedText = (text, html) => false; // eslint-disable-line no-unused-vars
   }
 
-  updateEditorContentStateFromText(text) {
-    if (text !== undefined) {
-      let editorState = EditorState.createWithContent(ContentState.createFromText(text));
-      this.setState({ editorState });
-    }
-  }
-
   componentWillMount() {
     this.updateEditorContentStateFromText(this.props.value);
   }
 
   componentWillReceiveProps(nextProps) {
     this.updateEditorContentStateFromText(nextProps.value);
+  }
+
+  updateEditorContentStateFromText(text) {
+    if (text !== undefined) {
+      let editorState = EditorState.createWithContent(ContentState.createFromText(text));
+      this.setState({ editorState });
+    }
   }
 
   render() {
@@ -60,7 +61,7 @@ export default class OneLineEditor extends React.Component {
         onChange={this.onChange}
         handleBeforeInput={this.handleBeforeInput}
         handlePastedText={this.handlePastedText}
-        handleReturn={this.handleReturn.bind(this)}
+        handleReturn={this.handleReturn}
         placeholder={this.props.placeholder}
         ref="editor"
       />

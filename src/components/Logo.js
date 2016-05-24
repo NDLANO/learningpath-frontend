@@ -5,7 +5,7 @@ import polyglot from '../i18n';
 
 export default function Logo({cssModifier}) {
   let rootClasses = classNames({
-    'logo': true,
+    logo: true,
     [`logo--${cssModifier}`]: cssModifier
   });
 

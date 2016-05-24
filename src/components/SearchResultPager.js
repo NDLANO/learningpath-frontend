@@ -39,27 +39,29 @@ export default function SearchResultPager(props) {
   });
   const handleClickToPage = pageNumber => evt => onLinkClick(evt, queryToPage(pageNumber));
 
-  let pageLinks = steps.map(n => n === page ?
-      <span key={n} className="search-stepper_step search-stepper_step--active">{n}</span> :
-      <Link key={n} className="search-stepper_step" to={linkToPage(n)} onClick={handleClickToPage(n)}>{n}</Link>
-  );
+  let pageLinks = steps.map(n => {
+    if (n === page) {
+      return <span key={n} className="search-stepper_step search-stepper_step--active">{n}</span>;
+    }
+    return <Link key={n} className="search-stepper_step" to={linkToPage(n)} onClick={handleClickToPage(n)}>{n}</Link>;
+  });
   let prevPageLink = '';
   let nextPageLink = '';
 
   if (steps[0] < page) {
-    prevPageLink = (<Link className="search-stepper_step search-stepper_step--back"
-      to={linkToPage(page - 1)} onClick={handleClickToPage(page - 1)}
-    >
-      <Icon.Back />
-    </Link>);
+    prevPageLink = (
+      <Link className="search-stepper_step search-stepper_step--back" to={linkToPage(page - 1)} onClick={handleClickToPage(page - 1)} >
+        <Icon.Back />
+      </Link>
+    );
   }
 
   if (page < lastPage) {
-    nextPageLink = (<Link className="search-stepper_step search-stepper_step--forward"
-      to={linkToPage(page + 1)} onClick={handleClickToPage(page + 1)}
-    >
-      <Icon.Forward />
-    </Link>);
+    nextPageLink = (
+      <Link className="search-stepper_step search-stepper_step--forward" to={linkToPage(page + 1)} onClick={handleClickToPage(page + 1)} >
+        <Icon.Forward />
+      </Link>
+    );
   }
 
   return (<div className="search-stepper">
@@ -77,5 +79,5 @@ SearchResultPager.propTypes = {
 };
 
 SearchResultPager.defaultProps = {
-  onLinkClick: function () {}
+  onLinkClick: () => {}
 };

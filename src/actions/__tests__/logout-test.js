@@ -33,7 +33,6 @@ test('actions/logout', t => {
       done();
     })
     .catch(done);
-
 });
 
 test('actions/logout access denied', t => {
