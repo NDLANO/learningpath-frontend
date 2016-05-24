@@ -146,7 +146,7 @@ export default class DescriptionHTMLEditor extends React.Component {
       contentState.getBlockMap().first().getType() !== 'unstyled';
 
     let className = classNames({
-      'RichEditor-editor learning-path-input learning-path-input__paragraph': true,
+      'RichEditor-editor learning-path-input learning-step-input__paragraph': true,
       'RichEditor-hidePlaceholder': commentAboveApplies
     });
 

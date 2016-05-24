@@ -80,9 +80,9 @@ export function EditLearningPathStep(props, {lang}) {
 
   return (
     <div className="learning-path-step">
-      <div className="learning-path_hd">
+      <div className="learning-step_hd">
         <span className="editable"><Icon.Create /></span>
-        <h1 className="learning-path-input learning-path-input__title">
+        <h1 className="learning-step-input learning-step-input__title">
           <TitleEditor lang={lang} value={title} onChange={updateTitle} placeholder={polyglot.t('editPathStep.titlePlaceHolder')} />
         </h1>
         <div className="mediatype-wrapper">

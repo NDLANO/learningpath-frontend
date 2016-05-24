@@ -8,7 +8,6 @@ import SearchForm from './LearningPathSearchForm';
 import SearchResult from './LearningPathSearchResult';
 import { fetchLearningPaths } from '../actions';
 
-
 export class LearningPathSearch extends Component {
 
 
