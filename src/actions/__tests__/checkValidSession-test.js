@@ -20,7 +20,7 @@ test('actions/checkValidSession', (t) => {
     .get('/auth/me')
     .reply(200, {first_name: 'alice', email: 'alice@example.com'});
 
-  const store = mockStore({authToken: authToken});
+  const store = mockStore({authToken});
 
   store.dispatch(actions.checkValidSession())
     .then(() => {
@@ -41,7 +41,7 @@ test('actions/checkValidSession invalid authToken', (t) => {
     .get('/auth/me')
     .reply(403, {message: 'Invalid'});
 
-  const store = mockStore({authToken: authToken});
+  const store = mockStore({authToken});
 
   store.dispatch(actions.checkValidSession())
     .then(() => {

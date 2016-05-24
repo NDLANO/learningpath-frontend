@@ -6,7 +6,7 @@ import polyglot from '../i18n';
 export default function updateLearningPathStatus(pathId, status, redirectUrl = false) {
   return (dispatch, getState) => updateStatus(getState().authToken, { pathId }, {status})
     .then(() => {
-      dispatch(setLearningPathStatus({id: pathId, status: status}));
+      dispatch(setLearningPathStatus({id: pathId, status}));
       dispatch(addMessage({message: polyglot.t('updateLearningPathStatus.updateStatusMsg')}));
       if (redirectUrl) {
         dispatch(routerActions.push({

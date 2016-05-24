@@ -17,8 +17,8 @@ export default handleActions({
 
   UPDATE_LEARNING_PATH_STATUS: {
     next(state, action) {
-      let {id, status} = action.payload;
-      let nextState = cloneDeep(state);
+      const {id, status} = action.payload;
+      const nextState = cloneDeep(state);
       set(find(nextState, {id}), 'status', status);
       return nextState;
     },

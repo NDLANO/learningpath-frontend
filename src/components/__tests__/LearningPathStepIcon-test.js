@@ -9,7 +9,7 @@ import LearningPathStepIcon from '../LearningPathStepIcon';
 test('component/LearningPathStepIcon', t => {
   const component = shallow(<LearningPathStepIcon learningPathStep={learningStep} />);
 
-  let iconNode = component.find('.step-nav_circle');
+  const iconNode = component.find('.step-nav_circle');
 
   t.equal(iconNode.length, 1, 'one icon node');
 

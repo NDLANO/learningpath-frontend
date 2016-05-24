@@ -64,8 +64,8 @@ export default class Oembed extends React.Component {
       return;
     }
 
-    let newHeight = parseInt(get(evt, 'data.height', 0), 10) + 35;
-    let currentHeight = parseInt(get(iframe, 'style.height') || 0, 10);
+    const newHeight = parseInt(get(evt, 'data.height', 0), 10) + 35;
+    const currentHeight = parseInt(get(iframe, 'style.height') || 0, 10);
 
     if (newHeight > currentHeight) {
       iframe.style.height = `${newHeight}px`;

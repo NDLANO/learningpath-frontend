@@ -8,13 +8,13 @@ import {timeoutMessage, clearAllMessages} from '../actions';
 const priorities = {info: 0, success: 1, warning: 2, danger: 3 };
 
 export function Alerts({dispatch, messages}) {
-  let isHidden = messages.length === 0;
+  const isHidden = messages.length === 0;
   let overlayClasses = classNames({
     'alert-overlay': true,
     'alert-overlay--hidden': isHidden
   });
 
-  let highestAlert = messages
+  const highestAlert = messages
     .map(m => m.severity)
     .reduce((prev, current) => {
       if (priorities[current] > priorities[prev]) {

@@ -38,7 +38,7 @@ test('component/MyPage', t => {
 test('component/MyPage mapStateToProps', t => {
   t.ok(mapStateToProps instanceof Function);
 
-  let state = {
+  const state = {
     lang: 'nb',
     learningPaths,
     myLearningPathsSortOrder: 'title'

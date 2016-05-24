@@ -10,7 +10,7 @@ export default function LearningPathDuration(props) {
   const inputChange = (evt) => {
     props.onChange(evt.target.value);
   };
-  let durationClassName = (value) => classNames({
+  const durationClassName = (value) => classNames({
     'duration-menu-item': true,
     'duration-menu-item__selected': props.value === value.toString()
   });

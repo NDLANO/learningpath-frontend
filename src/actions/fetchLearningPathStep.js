@@ -4,10 +4,10 @@ import get from 'lodash/get';
 
 export default function fetchLearningPathStep(pathId, stepId) {
   return (dispatch, getState) => {
-    let { authToken, learningPath } = getState();
+    const { authToken, learningPath } = getState();
 
     if (get(learningPath, 'id') === pathId) {
-      let step = get(learningPath, 'learningsteps', [])
+      const step = get(learningPath, 'learningsteps', [])
         .find(s => s.id === stepId);
       if (step) {
         dispatch(setLearningPathStep(step));

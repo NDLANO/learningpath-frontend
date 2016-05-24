@@ -5,14 +5,14 @@ import uuid from 'node-uuid';
 export default handleActions({
   ADD_MESSAGE: {
     next(state, action) {
-      let message = {
+      const message = {
         id: uuid.v4(),
         message: action.payload.message,
         severity: action.payload.severity,
         timeToLive: (typeof action.payload.timeToLive === 'undefined') ? 1500 : action.payload.timeToLive
       };
 
-      let nextState = cloneDeep(state);
+      const nextState = cloneDeep(state);
       nextState.push(message);
       return nextState;
     },
@@ -33,7 +33,7 @@ export default handleActions({
 
   APPLICATION_ERROR: {
     throw(state, action) {
-      let nextState = cloneDeep(state);
+      const nextState = cloneDeep(state);
       action.payload.json.messages.forEach((m) => {
         nextState.push({id: uuid.v4(), message: `${m.field}: ${m.message}`, severity: 'danger', timeToLive: 0});
       });

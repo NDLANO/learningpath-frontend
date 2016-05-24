@@ -151,25 +151,25 @@ test('reducers/learningPath update description', t => {
 });
 
 test('redurcers/learningPath drag and drop sort learning steps', t => {
-  let step1 = {id: 123, title: [{title: 'testTitle', language: 'nb'}]};
-  let step2 = {id: 124, title: [{title: 'another Title', language: 'nb'}]};
-  let step3 = {id: 125, title: [{title: 'another Title', language: 'nb'}]};
+  const step1 = {id: 123, title: [{title: 'testTitle', language: 'nb'}]};
+  const step2 = {id: 124, title: [{title: 'another Title', language: 'nb'}]};
+  const step3 = {id: 125, title: [{title: 'another Title', language: 'nb'}]};
 
-  let nextState1 = reducer({learningsteps: [step1, step2, step3]}, {type: 'SORT_LEARNING_PATH_STEPS', payload: []});
+  const nextState1 = reducer({learningsteps: [step1, step2, step3]}, {type: 'SORT_LEARNING_PATH_STEPS', payload: []});
   t.deepEqual(
     nextState1.learningsteps,
     [step1, step2, step3],
     'set empty state'
   );
 
-  let nextState2 = reducer({learningsteps: [step1, step2, step3]}, {type: 'SORT_LEARNING_PATH_STEPS', payload: [step3, step2, step1]});
+  const nextState2 = reducer({learningsteps: [step1, step2, step3]}, {type: 'SORT_LEARNING_PATH_STEPS', payload: [step3, step2, step1]});
   t.deepEqual(
     nextState2.learningsteps,
     [step3, step2, step1],
     'change state'
   );
 
-  let nextState3 = reducer({learningsteps: []}, {type: 'SORT_LEARNING_PATH_STEPS', payload: [step2, step3, step1]});
+  const nextState3 = reducer({learningsteps: []}, {type: 'SORT_LEARNING_PATH_STEPS', payload: [step2, step3, step1]});
   t.deepEqual(
     nextState3.learningsteps,
     [],

@@ -65,8 +65,8 @@ LearningPathSearch.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  let query = state.learningPathQuery;
-  let lastPage = Math.ceil(state.learningPathsTotalCount / (query.pageSize || 1));
+  const query = state.learningPathQuery;
+  const lastPage = Math.ceil(state.learningPathsTotalCount / (query.pageSize || 1));
   return Object.assign({}, state, { query, lastPage });
 };
 

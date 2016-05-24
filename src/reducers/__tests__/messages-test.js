@@ -44,12 +44,12 @@ test('reducers/messages add message', t => {
 });
 
 test('reducers/messages clear message', t => {
-  let currentState = [
+  const currentState = [
     {id: '1', message: 'melding', severity: 'info', timeToLive: 1000},
     {id: '2', message: 'melding', severity: 'info', timeToLive: 1000}
   ];
 
-  let nextState = reducer(currentState, {
+  const nextState = reducer(currentState, {
     type: 'CLEAR_MESSAGE',
     payload: '1'
   });
@@ -84,7 +84,7 @@ test('reducers/messages clear all messages', t => {
 });
 
 test('reducers/messages application error', t => {
-  let nextState = reducer([], {
+  const nextState = reducer([], {
     type: 'APPLICATION_ERROR',
     error: true,
     payload: {

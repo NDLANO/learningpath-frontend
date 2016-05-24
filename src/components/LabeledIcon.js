@@ -3,8 +3,8 @@ import get from 'lodash/get';
 import Icon from './Icon';
 
 function LabeledIcon(props) {
-  let { iconName, labelText } = props;
-  let tagName = get(props, 'tagName', 'span');
+  const { iconName, labelText } = props;
+  const tagName = get(props, 'tagName', 'span');
   let icon = React.createElement(Icon[iconName], {className: 'icon--with-label'});
   let label = React.createElement(tagName, {className: 'labeled-icon_text'}, labelText);
 

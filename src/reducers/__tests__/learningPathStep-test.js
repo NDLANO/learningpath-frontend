@@ -82,7 +82,7 @@ test('reducers/learningPathStep remove learning path step embed content', (t) =>
 });
 
 test('reducers/learningPathStep update embed url', t => {
-  let nextState = reducer({
+  const nextState = reducer({
     embedContent: [
       {html: 'http://links', language: 'nb'},
       {html: 'http://more_links', language: 'nn'}

@@ -8,14 +8,14 @@ export default class OneLineEditor extends React.Component {
 
     this.state = { editorState: EditorState.createEmpty() };
 
-    let { onChange, maxlength } = props;
+    const { onChange, maxlength } = props;
 
     this.onChange = (editorState) => this.setState({editorState}, () => {
       if (editorState.getSelection().getHasFocus()) {
         return;
       }
 
-      let newValue = editorState.getCurrentContent().getPlainText();
+      const newValue = editorState.getCurrentContent().getPlainText();
 
       onChange(newValue);
     });
@@ -30,7 +30,7 @@ export default class OneLineEditor extends React.Component {
 
     if (maxlength >= 0) {
       this.handleBeforeInput = () => {
-        let plainText = this.state.editorState.getCurrentContent().getPlainText();
+        const plainText = this.state.editorState.getCurrentContent().getPlainText();
         return plainText.length >= maxlength;
       };
     }
@@ -49,7 +49,7 @@ export default class OneLineEditor extends React.Component {
 
   updateEditorContentStateFromText(text) {
     if (text !== undefined) {
-      let editorState = EditorState.createWithContent(ContentState.createFromText(text));
+      const editorState = EditorState.createWithContent(ContentState.createFromText(text));
       this.setState({ editorState });
     }
   }

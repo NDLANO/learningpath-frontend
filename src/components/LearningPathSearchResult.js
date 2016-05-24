@@ -25,9 +25,9 @@ export default class SearchResult extends Component {
     const { lang } = this.context;
     const image = () => {
       if (path.coverPhotoUrl && !this.state.imageError) {
-        return <img className="search-result_img" src={path.coverPhotoUrl} onError={this.handleImageError} />;
+        return <img className="search-result_img" role="presentation" src={path.coverPhotoUrl} onError={this.handleImageError} />;
       }
-      return <img className="search-result_img" src={'https://placeholdit.imgix.net/~text?txtsize=33&txt=NDLA&w=190&h=120'} />;
+      return <img className="search-result_img" role="presentation" src={'https://placeholdit.imgix.net/~text?txtsize=33&txt=NDLA&w=190&h=120'} />;
     };
 
     return (

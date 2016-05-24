@@ -65,7 +65,7 @@ const LearningPathForm = (props) => {
         <div className="learning-path-input learning-path-input__paragraph">
           <textarea rows="4" cols="50" placeholder={polyglot.t('learningPath.descriptionPlaceholder')} maxLength="150" className={inputClassName(description.touched && description.error, true)} />
           {description.touched && description.error && <span className="error_message error_message--red">{description.error}</span>}
-          <p className="learning-path_input-information">{polyglot.t('learningPath.descriptionInformation', {remainingDescriptionLength: remainingDescriptionLength})}</p>
+          <p className="learning-path_input-information">{polyglot.t('learningPath.descriptionInformation', {remainingDescriptionLength})}</p>
         </div>
 
         <div className="block-container_fixed block-container_fixed--bottom--right">
@@ -82,7 +82,7 @@ const LearningPathForm = (props) => {
         <div className="learning-path-image">
           <label className="label--medium-bold  label--medium">{polyglot.t('learningPath.image')}</label>
           <div className="learning-path-image-drop">
-            <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/49665-200.png" />
+            <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/49665-200.png" role="presentation" />
             <h2>{polyglot.t('learningPath.imagePick')}</h2>
           </div>
           <p className="learning-path_input-information">{polyglot.t('learningPath.imageInformation')}</p>

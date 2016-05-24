@@ -9,7 +9,7 @@ import {
 } from '../actions';
 
 export function EditLearningPath(props, {lang}) {
-  let {
+  const {
     learningPath,
     saveAction
   } = props;

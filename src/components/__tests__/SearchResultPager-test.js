@@ -49,14 +49,14 @@ function pagerTest({setup, expected}) {
     const steps = shallow(<SearchResultPager query={{}} {...setup} />)
       .find('.search-stepper_step');
 
-    let prev = setup.page - 1;
-    let next = setup.page + 1;
+    const prev = setup.page - 1;
+    const next = setup.page + 1;
 
     t.equal(steps.length, expected.length, 'steppers length');
 
     expected.forEach((value, i) => {
-      let n = i + 1;
-      let step = steps.at(i);
+      const n = i + 1;
+      const step = steps.at(i);
 
       switch (value) {
         case 'current':

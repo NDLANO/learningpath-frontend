@@ -39,9 +39,9 @@ test('reducers/learningPaths', (t) => {
 });
 
 test('reducers/learningPaths remove learning path', (t) => {
-  let path1 = {id: 123, title: [{title: 'testTitle', language: 'nb'}]};
-  let path2 = {id: 124, title: [{title: 'another Title', language: 'nb'}]};
-  let path3 = {id: 125, title: [{title: 'another Title', language: 'nb'}]};
+  const path1 = {id: 123, title: [{title: 'testTitle', language: 'nb'}]};
+  const path2 = {id: 124, title: [{title: 'another Title', language: 'nb'}]};
+  const path3 = {id: 125, title: [{title: 'another Title', language: 'nb'}]};
 
   t.deepEqual(
     reducer([path1, path2, path3], {type: 'REMOVE_LEARNING_PATH', payload: 0}),
@@ -65,7 +65,7 @@ test('reducers/learningPaths remove learning path', (t) => {
 });
 
 test('reducers/learningPaths update learning path status', (t) => {
-  let paths = [
+  const paths = [
     {id: 123, status: 'PUBLIC'},
     {id: 124, status: 'PRIVATE'},
     {id: 125, status: 'PRIVATE'}

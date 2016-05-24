@@ -10,7 +10,7 @@ export default handleActions({
   },
   SET_OEMBED_OBJECT: {
     next(state, action) {
-      let nextState = cloneDeep(state);
+      const nextState = cloneDeep(state);
       nextState.oembed = action.payload;
       return nextState;
     },
@@ -36,7 +36,7 @@ export default handleActions({
   },
   REMOVE_LEARNING_PATH_STEP_EMBED_CONTENT: {
     next(state) {
-      let nextState = cloneDeep(state);
+      const nextState = cloneDeep(state);
       nextState.embedContent = [];
       return nextState;
     },

@@ -59,7 +59,7 @@ const updateSeqNo = (authToken, { pathId, stepId }, body) =>
 const fetchPaths = (authToken, query) => {
   let url = learningPathsUrl;
   if (query) {
-    let q = cloneDeep(query);
+    const q = cloneDeep(query);
     if (q.pageSize !== undefined) {
       q['page-size'] = q.pageSize;
       delete q.pageSize;

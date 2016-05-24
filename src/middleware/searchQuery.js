@@ -9,7 +9,7 @@ const defaultSearchQuery = {
 };
 
 const parseSearchQuery = (query) => Object.keys(query).reduce((obj, key) => {
-  let copy = Object.assign({}, obj);
+  const copy = Object.assign({}, obj);
   switch (key) {
     case 'page':
     case 'pageSize':

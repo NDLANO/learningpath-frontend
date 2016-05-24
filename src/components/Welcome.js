@@ -41,7 +41,7 @@ export default class Welcome extends React.Component {
               <h2 id="feature">{polyglot.t('welcomePage.feature1Title')}</h2>
               <p>{polyglot.t('welcomePage.feature1Content')}</p>
             </div>
-            <img src="http://placehold.it/300x200" className="infoblock_img" />
+            <img src="http://placehold.it/300x200" alt="Placeholder" className="infoblock_img" />
           </div>
         </div>
         <div className="infoblock">
@@ -50,7 +50,7 @@ export default class Welcome extends React.Component {
               <h2>{polyglot.t('welcomePage.feature2Title')}</h2>
               <p>{polyglot.t('welcomePage.feature2Content')}</p>
             </div>
-            <img src="http://placehold.it/300x200" className="infoblock_img infoblock_img--left" />
+            <img src="http://placehold.it/300x200" alt="Placeholder" className="infoblock_img infoblock_img--left" />
           </div>
         </div>
       </div>

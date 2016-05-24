@@ -42,7 +42,7 @@ const StyleControls = props => {
   const selection = editorState.getSelection();
   const blockType = editorState.getCurrentContent().getBlockForKey(selection.getStartKey()).getType();
 
-  let currentInlineStyle = editorState.getCurrentInlineStyle();
+  const currentInlineStyle = editorState.getCurrentInlineStyle();
 
   return (
     <ul className="textformat-menu">
@@ -79,7 +79,7 @@ export default class DescriptionHTMLEditor extends React.Component {
       if (editorState.getSelection().getHasFocus()) {
         return;
       }
-      let contentState = editorState.getCurrentContent();
+      const contentState = editorState.getCurrentContent();
       onChange({
         description: stateToHTML(contentState),
         language: props.lang
@@ -101,8 +101,8 @@ export default class DescriptionHTMLEditor extends React.Component {
 
   setEditorContentStateFromHTML(htmlStr) {
     if (htmlStr !== undefined) {
-      let contentState = ContentState.createFromBlockArray(convertFromHTML(htmlStr));
-      let editorState = EditorState.createWithContent(contentState);
+      const contentState = ContentState.createFromBlockArray(convertFromHTML(htmlStr));
+      const editorState = EditorState.createWithContent(contentState);
       this.setState({editorState});
     }
   }
@@ -138,11 +138,11 @@ export default class DescriptionHTMLEditor extends React.Component {
   render() {
     const { editorState } = this.state;
 
-    let contentState = editorState.getCurrentContent();
+    const contentState = editorState.getCurrentContent();
 
     // If the user changes block type before entering any text, we can
     // either style the placeholder or hide it. Let's just hide it now.
-    let commentAboveApplies = !contentState.hasText() &&
+    const commentAboveApplies = !contentState.hasText() &&
       contentState.getBlockMap().first().getType() !== 'unstyled';
 
     let className = classNames({

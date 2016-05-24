@@ -23,7 +23,7 @@ test('component/Alerts default severity', t => {
 });
 
 test('component/Alerts info severity', t => {
-  let messages = ['Testmessage', 'TEST'];
+  const messages = ['Testmessage', 'TEST'];
   let alertMessages = [{id: uuid.v4(), message: messages[0], severity: 'success'}, {id: uuid.v4(), message: messages[1]}];
   const component = shallow(<Alerts messages={alertMessages} dispatch={noop} />);
 
@@ -37,7 +37,7 @@ test('component/Alerts info severity', t => {
 });
 
 test('component/Alerts info and danger severity', t => {
-  let messages = ['Test one', 'Test two'];
+  const messages = ['Test one', 'Test two'];
   let alertMessages = [{id: uuid.v4(), message: messages[0], severity: 'info'}, {id: uuid.v4(), message: messages[1], severity: 'danger'}];
   const component = shallow(<Alerts messages={alertMessages} dispatch={noop} />);
 

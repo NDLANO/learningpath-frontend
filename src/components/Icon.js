@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
 function Icon(props) {
-  let { svgDefId } = props;
+  const { svgDefId } = props;
 
   return (
     <svg {...props} className={classNames('icon', props.className)}>

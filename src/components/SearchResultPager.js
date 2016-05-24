@@ -18,10 +18,10 @@ export function getRange(current, last) {
 }
 
 export function stepNumbers(currentStep, lastStep) {
-  let [llim, rlim] = getRange(currentStep, lastStep);
+  const [llim, rlim] = getRange(currentStep, lastStep);
 
-  let offset = llim;
-  let length = rlim - llim + 1;
+  const offset = llim;
+  const length = rlim - llim + 1;
 
   const indexToStep = i => i + offset;
   return Array(length).fill().map((_, i) => indexToStep(i));
@@ -29,8 +29,8 @@ export function stepNumbers(currentStep, lastStep) {
 
 
 export default function SearchResultPager(props) {
-  let { page, lastPage, query, onLinkClick } = props;
-  let steps = stepNumbers(page, lastPage);
+  const { page, lastPage, query, onLinkClick } = props;
+  const steps = stepNumbers(page, lastPage);
 
   const queryToPage = pageNumber => Object.assign({}, query, {page: pageNumber});
   const linkToPage = pageNumber => ({
