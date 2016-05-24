@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import { reduxForm } from 'redux-form';
 import LearningPathDuration from './LearningPathDuration';
 const fields = ['title', 'description', 'duration'];
+import isInteger from 'lodash/isInteger';
 
 const validate = values => {
   const errors = {};
@@ -110,11 +111,21 @@ LearningPathForm.propTypes = {
   lang: PropTypes.string.isRequired
 };
 
+const convertedDuration = (value) => {
+  if (!value){
+    return undefined;
+  }
+  const hours = value/60;
+  return !isInteger(hours) ? (hours).toFixed(2).toString() : (hours).toString();
+};
+
 const mapStateToProps = (state, props) => ({
+
+  //props.learningPath.duration ? (props.learningPath.duration/60).toFixed(2).toString() : undefined
   initialValues: {
     title:titleI18N(props.learningPath, props.lang),
     description: descriptionI18N(props.learningPath, props.lang),
-    duration: props.learningPath.duration ? (props.learningPath.duration/60).toString() : undefined
+    duration: convertedDuration(props.learningPath.duration)
   }
 });
 
