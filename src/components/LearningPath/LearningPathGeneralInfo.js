@@ -8,10 +8,13 @@ import formatDate from '../../util/formatDate';
 import formatDuration from '../../util/formatDuration';
 
 import LabeledIcon from '../LabeledIcon';
+import Icon from '../Icon';
+import polyglot from '../../i18n';
 
 export function LearningPathGeneralInfo ({learningPath}, {lang}) {
 
   const href = `/learningpaths/${learningPath.id}`;
+  const editPathTarget = `/learningpaths/${learningPath.id}/edit`;
   return (
     <div className='learningpath-general-info'>
       <h3 className='learningpath-general-info_h'>
@@ -22,6 +25,7 @@ export function LearningPathGeneralInfo ({learningPath}, {lang}) {
         <LabeledIcon.Today labelText={formatDate(learningPath.lastUpdated, lang)} tagName='time' />
         <LabeledIcon.QueryBuilder labelText={formatDuration(learningPath.duration, lang)} tagName='time' />
       </div>
+      <Link className='cta-link cta-link--round edit_learningpath--button' to={editPathTarget}>{polyglot.t('editPage.edit')}</Link>
     </div>
   );
 }

@@ -90,7 +90,7 @@ export class LearningPathForm extends React.Component {
             </div>
             <p className='learning-path_input-information'>{polyglot.t('learningPath.imageInformation')}</p>
           </div>
-          
+
           <div className='learning-path-duration'>
             <label className='label--medium-bold  label--medium'>{polyglot.t('learningPath.duration')}</label>
             <LearningPathDuration {...duration}/>
