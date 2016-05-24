@@ -59,9 +59,9 @@ test('component/Alerts without messages', t => {
 test('component/Alerts dismiss', t => {
   const dispatch = sinon.spy(() => {});
 
-  const dismissBt = shallow(<Alerts messages={[{id: uuid.v4(), message: 'whatever', severity: 'info'}]}
-    dispatch={dispatch}
-  />).find('.alert_dismiss');
+  const dismissBt = shallow(
+    <Alerts messages={[{id: uuid.v4(), message: 'whatever', severity: 'info'}]} dispatch={dispatch} />
+  ).find('.alert_dismiss');
 
   dismissBt.simulate('click');
 

@@ -15,10 +15,12 @@ test('component/LearningPathDropdown remove', t => {
   const onSelect = spy();
 
   const component = shallow(
-      <LearningPathDropdown learningPath={learningPath} onSelect={onSelect} />,
-      {context: {lang:'nb'}});
+    <LearningPathDropdown learningPath={learningPath} onSelect={onSelect} />,
+    {context: {lang: 'nb'}}
+  );
 
-  component.find('.dropdown-menu_item').last().find('a').simulate('click', { preventDefault });
+  component.find('.dropdown-menu_item').last().find('a')
+           .simulate('click', { preventDefault });
 
   t.ok(preventDefault.calledOnce);
   t.ok(onSelect.calledOnce);
@@ -32,10 +34,12 @@ test('component/LearningPathDropdown de-publish', t => {
   const preventDefault = spy();
 
   const component = shallow(
-      <LearningPathDropdown learningPath={learningPath} onSelect={onSelect} />,
-      {context: {lang:'nb'}});
+    <LearningPathDropdown learningPath={learningPath} onSelect={onSelect} />,
+    {context: {lang: 'nb'}}
+  );
 
-  component.find('.dropdown-menu_item').first().find('a').simulate('click', { preventDefault });
+  component.find('.dropdown-menu_item').first().find('a')
+           .simulate('click', { preventDefault });
 
   t.ok(preventDefault.calledOnce);
   t.ok(onSelect.calledOnce);
@@ -49,10 +53,12 @@ test('component/LearningPathDropdown publish', t => {
   const preventDefault = spy();
 
   const component = shallow(
-      <LearningPathDropdown learningPath={privateLearningPath} onSelect={onSelect} />,
-      {context: {lang:'nb'}});
+    <LearningPathDropdown learningPath={privateLearningPath} onSelect={onSelect} />,
+    {context: {lang: 'nb'}}
+  );
 
-  component.find('.dropdown-menu_item').first().find('a').simulate('click', { preventDefault });
+  component.find('.dropdown-menu_item').first().find('a')
+           .simulate('click', { preventDefault });
 
   t.ok(preventDefault.calledOnce);
   t.ok(onSelect.calledOnce);

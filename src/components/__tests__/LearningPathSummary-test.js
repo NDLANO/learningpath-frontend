@@ -7,7 +7,7 @@ import { LearningPathSummary } from '../LearningPathSummary';
 
 test('component/LearningPathSummary', t => {
   const component = shallow(<LearningPathSummary learningPath={learningPath} />,
-      {context: {lang:'nb'}});
+      {context: {lang: 'nb'}});
 
   let titleNode = component.find('.learning-path_title');
 

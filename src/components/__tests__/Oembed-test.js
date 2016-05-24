@@ -62,8 +62,8 @@ test('component/Oembed resize message listener', t => {
 
   const oembed = learningStep.embedContent[0];
   const ndlaOembed1 = ndlaLearningStep.embedContent[0];
-  const ndlaOembed2 = Object.assign({}, ndlaOembed1, { url: ndlaOembed1.url + '?another' });
-  const ndlaOembed3 = Object.assign({}, ndlaOembed1, { url: ndlaOembed1.url + '?yetanother' });
+  const ndlaOembed2 = Object.assign({}, ndlaOembed1, { url: `${ndlaOembed1.url}?another` });
+  const ndlaOembed3 = Object.assign({}, ndlaOembed1, { url: `${ndlaOembed1.url}?yetanother` });
 
   // initialize with ndla resource
   const component = mount(<Oembed oembedContent={ndlaOembed1} />);

@@ -30,15 +30,15 @@ test('actions/createLearningPath', t => {
     .reply(200, {id: pathId, isResponse: true});
 
   const postStep1Api = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .post('/learningpaths/' + pathId + '/learningsteps', { seqNo: 0 })
+    .post(`/learningpaths/${pathId}/learningsteps`, { seqNo: 0 })
     .reply(200, {id: 12, seqNo: 0, isResponse: true});
 
   const postStep2Api = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .post('/learningpaths/' + pathId + '/learningsteps', { seqNo: 1 })
+    .post(`/learningpaths/${pathId}/learningsteps`, { seqNo: 1 })
     .reply(200, {id: 34, seqNo: 1, isResponse: true});
 
   const postStep3Api = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .post('/learningpaths/' + pathId + '/learningsteps', { seqNo: 2 })
+    .post(`/learningpaths/${pathId}/learningsteps`, { seqNo: 2 })
     .reply(200, {id: 56, seqNo: 2, isResponse: true});
 
   const store = mockStore({ authToken });

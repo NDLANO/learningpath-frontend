@@ -44,12 +44,8 @@ test('component/SearchResultPager.stepNumbers', t => {
 });
 
 
-
-
-
 function pagerTest({setup, expected}) {
   test(`component/SearchResultPager page ${setup.page}/${setup.lastPage}`, t => {
-
     const steps = shallow(<SearchResultPager query={{}} {...setup} />)
       .find('.search-stepper_step');
 
@@ -65,7 +61,7 @@ function pagerTest({setup, expected}) {
       switch (value) {
         case 'current':
           t.ok(step.is('.search-stepper_step--active'), 'Current page active');
-          t.equal(step.text(), setup.page + '', 'Current page text');
+          t.equal(step.text(), setup.page.toString(), 'Current page text');
           t.notOk(step.is(Link), 'Current page not linked');
           break;
         case 'back':
