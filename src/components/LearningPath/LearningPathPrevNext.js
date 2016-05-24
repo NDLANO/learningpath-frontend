@@ -6,8 +6,7 @@ import get from 'lodash/get';
 import Icon from '../Icon';
 import polyglot from '../../i18n';
 
-export function LearningPathPrevNext (props) {
-
+export function LearningPathPrevNext(props) {
   const {
     nextStep,
     prevStep
@@ -19,17 +18,16 @@ export function LearningPathPrevNext (props) {
   });
 
   const stepperTag = (stepObject, leftText, rightText) => {
-    if (stepObject){
+    if (stepObject) {
       return <Link to={stepObject} className={stepperClassName(stepObject)}> {leftText} {rightText} </Link>;
-    } else {
-      return <span className={stepperClassName(stepObject)}> {leftText} {rightText} </span>;
     }
+    return <span className={stepperClassName(stepObject)}> {leftText} {rightText} </span>;
   };
 
   return (
-    <div className='stepper-nav stepper-nav--fixed'>
-      {stepperTag(prevStep, <Icon.ArrowBack/>, polyglot.t('learningPath.previous'), false)}
-      {stepperTag(nextStep, polyglot.t('learningPath.next'), <Icon.ArrowForward/>, true)}
+    <div className="stepper-nav stepper-nav--fixed">
+      {stepperTag(prevStep, <Icon.ArrowBack />, polyglot.t('learningPath.previous'), false)}
+      {stepperTag(nextStep, polyglot.t('learningPath.next'), <Icon.ArrowForward />, true)}
     </div>
   );
 }
@@ -51,19 +49,19 @@ const mapStateToProps = (state, props) => {
 
   const base = `/learningpaths/${learningPathId}`;
 
-  if (currentSeqNo === -1){
-    return Object.assign({}, state,  {
+  if (currentSeqNo === -1) {
+    return Object.assign({}, state, {
       prevStep: undefined,
-      nextStep: learningsteps.length > 0 ? base + '/step/' + learningsteps[0].id : undefined
-    });
-  } else {
-    const prevUrl = learningsteps[currentSeqNo - 1] ? base + '/step/' + learningsteps[currentSeqNo - 1].id : undefined;
-    const nextUrl = learningsteps[currentSeqNo + 1] ? base + '/step/' + learningsteps[currentSeqNo + 1].id : undefined;
-    return Object.assign({}, state,  {
-      prevStep: currentSeqNo === 0 ? base : prevUrl,
-      nextStep: nextUrl
+      nextStep: learningsteps.length > 0 ? `${base}/step/${learningsteps[0].id}` : undefined
     });
   }
+
+  const prevUrl = learningsteps[currentSeqNo - 1] ? `${base}/step/${learningsteps[currentSeqNo - 1].id}` : undefined;
+  const nextUrl = learningsteps[currentSeqNo + 1] ? `${base}/step/${learningsteps[currentSeqNo + 1].id}` : undefined;
+  return Object.assign({}, state, {
+    prevStep: currentSeqNo === 0 ? base : prevUrl,
+    nextStep: nextUrl
+  });
 };
 
 export default connect(mapStateToProps)(LearningPathPrevNext);

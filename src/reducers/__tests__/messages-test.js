@@ -56,7 +56,6 @@ test('reducers/messages clear message', t => {
   t.equal(nextState.length, 1);
 
   t.end();
-
 });
 
 test('reducers/messages clear all messages', t => {

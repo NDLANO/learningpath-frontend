@@ -7,7 +7,7 @@ export const urlIsNDLA = url => (/http:\/\/ndla.no/).test(url);
 
 
 export default class Oembed extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       isNDLAResource: false,
@@ -17,20 +17,24 @@ export default class Oembed extends React.Component {
     this.handleResizeMessage = this.handleResizeMessage.bind(this);
   }
 
-  componentWillReceiveProps (props){
-    this.handleIframeResizing(props);
-  }
-
   componentDidMount() {
     this.handleIframeResizing(this.props);
+  }
+
+  componentWillReceiveProps(props) {
+    this.handleIframeResizing(props);
   }
 
   componentWillUnmount() {
     this.disableIframeResizing();
   }
 
-  handleIframeResizing ({oembedContent: {url}}) {
-    if ( urlIsNDLA(url) ) {
+  getIframeDOM() {
+    return ReactDOM.findDOMNode(this).children[0];
+  }
+
+  handleIframeResizing({oembedContent: {url}}) {
+    if (urlIsNDLA(url)) {
       this.setState({isNDLAResource: true}, this.enableIframeResizing);
     } else {
       this.setState({isNDLAResource: false}, this.disableIframeResizing);
@@ -49,7 +53,7 @@ export default class Oembed extends React.Component {
     this.setState({ listeningToResize: false });
   }
 
-  handleResizeMessage (evt) {
+  handleResizeMessage(evt) {
     if (!this.state.listeningToResize) {
       return;
     }
@@ -60,28 +64,26 @@ export default class Oembed extends React.Component {
       return;
     }
 
-    let newHeight = parseInt(get(evt, 'data.height', 0)) + 35;
-    let currentHeight = parseInt(get(iframe, 'style.height')||0);
+    let newHeight = parseInt(get(evt, 'data.height', 0), 10) + 35;
+    let currentHeight = parseInt(get(iframe, 'style.height') || 0, 10);
 
     if (newHeight > currentHeight) {
-      iframe.style.height = newHeight + 'px';
+      iframe.style.height = `${newHeight}px`;
     }
   }
-
-  getIframeDOM () {
-    return ReactDOM.findDOMNode(this).children[0];
-  }
-
 
   render() {
     const {oembedContent: {html}} = this.props;
 
-    return <div className={classNames({
-      'learning-step': true,
-      'learning-step--without-dimensions': this.state.isNDLAResource
-    })}
-    dangerouslySetInnerHTML={{__html: html}}
-    />;
+    return (
+      <div
+        className={classNames({
+          'learning-step': true,
+          'learning-step--without-dimensions': this.state.isNDLAResource
+        })}
+        dangerouslySetInnerHTML={{__html: html}}
+      />
+    );
   }
 }
 

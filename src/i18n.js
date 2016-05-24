@@ -68,7 +68,7 @@ const phrases = {
     next: 'Neste',
     description: 'Beskrivelse',
     descriptionPlaceholder: 'Skriv en kort beskrivelse av læringsstien.',
-    descriptionInformation:'Maks 150 tegn og du har %{remainingDescriptionLength} igen. Beskrivelsen blir synlig i søk.',
+    descriptionInformation: 'Maks 150 tegn og du har %{remainingDescriptionLength} igen. Beskrivelsen blir synlig i søk.',
     title: 'Tittel på læringssti',
     image: 'Illustrerende bilde',
     imagePick: 'Klikk for å velge',
@@ -79,7 +79,7 @@ const phrases = {
     learningpathShortDescriptionTitle: 'Introduksjon',
     savePathBtn: 'Lagre',
     addStepBtn: 'Legg til nytt læringssteg',
-    shortDescriptionPlaceholder:  'Skriv en kort beskrivelse (max 150 tegn)',
+    shortDescriptionPlaceholder: 'Skriv en kort beskrivelse (max 150 tegn)',
     titlePlaceHolder: 'Skriv  tittel her',
     oneLineEditorDefaultPlaceholder: 'Skriv her',
     deletePathBtn: 'Slett',
@@ -106,7 +106,8 @@ const phrases = {
   },
   sortSteps: {
     sort: 'Sorter steg',
-    finish: 'Avslutt sortering'
+    finish: 'Avslutt sortering',
+    cancel: 'Avbryt'
   },
   siteNav: {
     login: 'Logg inn',

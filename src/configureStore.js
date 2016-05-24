@@ -9,13 +9,13 @@ import { routerMiddleware } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 
 
-const slicer = function (paths) {
+const slicer = (paths) =>
   // custom slicer because default slicer does not store falsy values
-  return (state) => paths.reduce((acc, path) => {
+  (state) => paths.reduce((acc, path) => {
+    // eslint-disable-next-line no-param-reassign
     acc[path] = state[path];
     return acc;
   }, {});
-};
 
 const middleware = routerMiddleware(browserHistory);
 const createFinalStore = compose(
@@ -26,10 +26,10 @@ const createFinalStore = compose(
     middleware
   ),
   persistState(['authenticated', 'authToken', 'user'], { key: 'ndla:sti', slicer }),
-  window && window.devToolsExtension ?  window.devToolsExtension() : f => f
+  window && window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore);
 
 
-export default function configureStore (initialState) {
+export default function configureStore(initialState) {
   return createFinalStore(reducers, initialState);
 }

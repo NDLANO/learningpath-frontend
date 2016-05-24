@@ -42,40 +42,41 @@ export class MyPage extends React.Component {
 
       const onDropDownSelect = actionType => {
         switch (actionType) {
-        case 'delete':
-          deletePath(lp.id);
-          break;
-        case 'publish':
-          updatePathStatus(lp.id, 'PUBLISHED');
-          break;
-        case 'unpublish':
-          updatePathStatus(lp.id, 'PRIVATE');
-          break;
+          case 'delete':
+            deletePath(lp.id);
+            break;
+          case 'publish':
+            updatePathStatus(lp.id, 'PUBLISHED');
+            break;
+          case 'unpublish':
+            updatePathStatus(lp.id, 'PRIVATE');
+            break;
+          default:
         }
       };
 
       return (
-        <div key={lp.id} className='tile'>
-          <div className='tile_hd'>
-            <div className='tile_date'>{lastUpdated}</div>
-            <div className='tile_context-menu'>
-              <LearningPathDropdown onSelect={onDropDownSelect} learningPath={lp}/>
+        <div key={lp.id} className="tile">
+          <div className="tile_hd">
+            <div className="tile_date">{lastUpdated}</div>
+            <div className="tile_context-menu">
+              <LearningPathDropdown onSelect={onDropDownSelect} learningPath={lp} />
             </div>
           </div>
-          <Link className='tile_bd' to={`/learningpaths/${lp.id}`}>
-            <h3 className='tile_title'>{title}</h3>
+          <Link className="tile_bd" to={`/learningpaths/${lp.id}`}>
+            <h3 className="tile_title">{title}</h3>
             <p>{description}</p>
           </Link>
-          <div className='tile_ft'>
-            <div className='tile_property'>
-              <div className='tile_property-icon'><Icon.Duration/></div>
-              <p className='tile_property-description'>{polyglot.t('myPage.path.duration')}</p>
+          <div className="tile_ft">
+            <div className="tile_property">
+              <div className="tile_property-icon"><Icon.Duration /></div>
+              <p className="tile_property-description">{polyglot.t('myPage.path.duration')}</p>
               <p>{duration}</p>
             </div>
-            <div className='tile_property'>
-              <div className='tile_property-icon'><Icon.Visibility/></div>
-              <p className='tile_property-description'>{polyglot.t('myPage.path.status')}</p>
-              <p>{polyglot.t('myPage.path.statusValue.' + lp.status)}</p>
+            <div className="tile_property">
+              <div className="tile_property-icon"><Icon.Visibility /></div>
+              <p className="tile_property-description">{polyglot.t('myPage.path.status')}</p>
+              <p>{polyglot.t(`myPage.path.statusValue.${lp.status}`)}</p>
             </div>
           </div>
         </div>
@@ -84,10 +85,10 @@ export class MyPage extends React.Component {
 
     const sortOrderSelect = (
       <select value={sortKey} onChange={(evt) => setSortKey(evt.target.value)}>
-        <option value='title'>{polyglot.t('myPage.order.title')}</option>
-        <option value='-lastUpdated'>{polyglot.t('myPage.order.newest')}</option>
-        <option value='lastUpdated'>{polyglot.t('myPage.order.oldest')}</option>
-        <option value='status'>{polyglot.t('myPage.order.status')}</option>
+        <option value="title">{polyglot.t('myPage.order.title')}</option>
+        <option value="-lastUpdated">{polyglot.t('myPage.order.newest')}</option>
+        <option value="lastUpdated">{polyglot.t('myPage.order.oldest')}</option>
+        <option value="status">{polyglot.t('myPage.order.status')}</option>
       </select>
     );
 
@@ -100,16 +101,16 @@ export class MyPage extends React.Component {
     let onLightboxClose = () => this.setState({displayCreatePath: false});
 
     return (<div>
-      <div className='page-header'>
-        <h2 className='page-header_name'>{polyglot.t('myPage.pageHeader')}</h2>
-        <div className='page-header_ctrls'>
+      <div className="page-header">
+        <h2 className="page-header_name">{polyglot.t('myPage.pageHeader')}</h2>
+        <div className="page-header_ctrls">
           {sortOrderSelect}
         </div>
       </div>
-      <div className='tiles'>{items}</div>
+      <div className="tiles">{items}</div>
       <div>
-        <button className='cta-link new-learningpath-button' onClick={onCreateLearningPathClick}>
-          <LabeledIcon.Add labelText={polyglot.t('myPage.newBtn')}/>
+        <button className="cta-link new-learningpath-button" onClick={onCreateLearningPathClick}>
+          <LabeledIcon.Add labelText={polyglot.t('myPage.newBtn')} />
         </button>
         <Lightbox display={this.state.displayCreatePath} onClose={onLightboxClose}>
           <CreateLearningPath onSubmit={onCreateLearningPathSubmit} />
@@ -136,21 +137,21 @@ MyPage.contextTypes = {
 
 const sortPaths = (paths, field, state) => {
   switch (field) {
-  case 'title':
-    return sortBy(paths, (p) => titleI18N(p, state.lang));
+    case 'title':
+      return sortBy(paths, (p) => titleI18N(p, state.lang));
 
-  case 'lastUpdated':
-    return sortBy(paths, field);
-    
-  case '-lastUpdated':
-    return reverse(sortBy(paths, 'lastUpdated'));
+    case 'lastUpdated':
+      return sortBy(paths, field);
 
-  default:
-    return sortBy(paths, field);
+    case '-lastUpdated':
+      return reverse(sortBy(paths, 'lastUpdated'));
+
+    default:
+      return sortBy(paths, field);
   }
 };
 
-export function mapStateToProps (state) {
+export function mapStateToProps(state) {
   const sortKey = state.myLearningPathsSortOrder || 'title';
   const learningPaths = sortPaths(state.learningPaths, sortKey, state);
   return Object.assign({}, state, { learningPaths, sortKey });

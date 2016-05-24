@@ -11,8 +11,8 @@ const mockStore = configureStore([thunk]);
 
 import requireAuthentication from '../requireAuthentication';
 
-function Whatever () {
-  return <div className='whatever'>whatever</div>;
+function Whatever() {
+  return <div className="whatever">whatever</div>;
 }
 
 
@@ -21,7 +21,7 @@ test('component/requireAuthentication', t => {
     const root = mount(
       React.createElement(
         Provider, { store: mockStore({ authenticated: true }) },
-        React.createElement( requireAuthentication(Whatever) )
+        React.createElement(requireAuthentication(Whatever))
       )
     );
 
@@ -35,7 +35,7 @@ test('component/requireAuthentication not authenticated', t => {
     const root = mount(
       React.createElement(
         Provider, { store: mockStore({ authenticated: false }) },
-        React.createElement( requireAuthentication(Whatever) )
+        React.createElement(requireAuthentication(Whatever))
       )
     );
 

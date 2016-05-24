@@ -5,32 +5,32 @@ import polyglot from '../i18n';
 const fields = ['title', 'description'];
 
 export class CreateLearningPath extends React.Component {
+
+
+  componentWillUnmount() {
+    const {dispatch} = this.props;
+    dispatch(reset('create-learning-path'));
+  }
   render() {
     const {
       fields: { title, description },
       handleSubmit
     } = this.props;
-    return (<form onSubmit={handleSubmit}>
+    return (
+      <form onSubmit={handleSubmit}>
         <h1>{polyglot.t('createLearningPath.createNew')}</h1>
-          <div>
-            <label>{polyglot.t('createLearningPath.title')}</label>
-            <input type="text" required {...title} />
-          </div>
-
-          <div>
-            <label>{polyglot.t('createLearningPath.description')}</label>
-            <textarea rows="4" cols="50" placeholder={polyglot.t('createLearningPath.descriptionPlaceholder')} maxLength="155"
-                      className="textarea" {...description} />
-          </div>
+        <div>
+          <label>{polyglot.t('createLearningPath.title')}</label>
+          <input type="text" required {...title} />
+        </div>
+        <div>
+          <label>{polyglot.t('createLearningPath.description')}</label>
+          <textarea rows="4" cols="50" placeholder={polyglot.t('createLearningPath.descriptionPlaceholder')} maxLength="150" className="textarea" {...description} />
+        </div>
         <p className="hint-text">{polyglot.t('createLearningPath.descriptionMaxLength')}</p>
-        <button className='button cta-link cta-link--block' type="submit">{polyglot.t('createLearningPath.createButton')}</button>
+        <button className="button cta-link cta-link--block" type="submit">{polyglot.t('createLearningPath.createButton')}</button>
       </form>
     );
-  }
-
-  componentWillUnmount() {
-    const {dispatch} = this.props;
-    dispatch(reset('create-learning-path'));
   }
 }
 

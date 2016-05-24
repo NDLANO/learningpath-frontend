@@ -33,14 +33,14 @@ export default class PreviewOembed extends React.Component {
     });
 
     let previewButton = !this.state.previewOembed
-    ? (<a className='learningsource__expand' onClick={onPreviewClick}>
-      <span className='button button--outline'>{polyglot.t('editPathStep.previewOembed')}</span>
+    ? (<a className="learningsource__expand" onClick={onPreviewClick}>
+      <span className="button button--outline">{polyglot.t('editPathStep.previewOembed')}</span>
       </a>)
     : null;
 
-    return (<div className='learningsource--wrapper'>
+    return (<div className="learningsource--wrapper">
       <div className={frameClasses}>
-        <Oembed oembedContent={content}/>
+        <Oembed oembedContent={content} />
         {previewButton}
       </div>
     </div>);

@@ -5,7 +5,7 @@ import nock from 'nock';
 
 import actions from '..';
 
-const middleware = [ thunk ];
+const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
 const authToken = '123345';
@@ -22,7 +22,7 @@ test('actions/checkValidSession', (t) => {
 
   const store = mockStore({authToken: authToken});
 
-  store.dispatch( actions.checkValidSession() )
+  store.dispatch(actions.checkValidSession())
     .then(() => {
       t.deepEqual(store.getActions(), []);
       t.doesNotThrow(() => apiMock.done());
@@ -43,7 +43,7 @@ test('actions/checkValidSession invalid authToken', (t) => {
 
   const store = mockStore({authToken: authToken});
 
-  store.dispatch( actions.checkValidSession() )
+  store.dispatch(actions.checkValidSession())
     .then(() => {
       t.deepEqual(store.getActions(), [
         { type: 'LOGOUT', payload: undefined }

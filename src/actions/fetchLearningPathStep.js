@@ -2,13 +2,13 @@ import { setLearningPathStep, applicationError } from '.';
 import { fetchPathStep } from '../sources/learningpaths';
 import get from 'lodash/get';
 
-export default function fetchLearningPathStep (pathId, stepId) {
+export default function fetchLearningPathStep(pathId, stepId) {
   return (dispatch, getState) => {
     let { authToken, learningPath } = getState();
 
     if (get(learningPath, 'id') === pathId) {
       let step = get(learningPath, 'learningsteps', [])
-        .find(step => step.id === stepId);
+        .find(s => s.id === stepId);
       if (step) {
         dispatch(setLearningPathStep(step));
       }

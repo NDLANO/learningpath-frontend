@@ -34,49 +34,49 @@ const apiBaseUrl = (() => {
 
 export { locationOrigin, apiBaseUrl };
 
-export function apiResourceUrl (path) { return apiBaseUrl + path; }
+export function apiResourceUrl(path) { return apiBaseUrl + path; }
 
-export function createErrorPayload (status, message, json) {
+export function createErrorPayload(status, message, json) {
   return Object.assign(new Error(message), { status, json });
 }
 
-export function resolveJsonOrRejectWithError (res) {
-  return new Promise((resolve, reject) => (res.ok) ?
-    res.status === 204 ?
-    resolve() :
-    resolve(res.json()) :
-    res.json()
+export function resolveJsonOrRejectWithError(res) {
+  return new Promise((resolve, reject) => {
+    if (res.ok) {
+      return res.status === 204 ? resolve() : resolve(res.json());
+    }
+    return res.json()
       .then(json => createErrorPayload(res.status, defined(json.message, res.statusText), json))
-      .then( reject )
-  );
+      .then(reject);
+  });
 }
 
 
-export function fetchAuthorized (path, method = 'GET') {
+export function fetchAuthorized(path, method = 'GET') {
   const url = params => apiResourceUrl(formatPattern(path, params));
   return (authToken, params = {}) => fetch(url(params), {
     method, headers: {'APP-KEY': authToken}
-  }).then( resolveJsonOrRejectWithError );
+  }).then(resolveJsonOrRejectWithError);
 }
 
-export function postAuthorized (path) {
+export function postAuthorized(path) {
   const url = params => apiResourceUrl(formatPattern(path, params));
 
   return (authToken, params = {}, body) => fetch(url(params), {
     headers: {'APP-KEY': authToken},
     method: 'POST',
     body: JSON.stringify(body)
-  }).then( resolveJsonOrRejectWithError );
+  }).then(resolveJsonOrRejectWithError);
 }
 
-export function putAuthorized (path) {
+export function putAuthorized(path) {
   const url = params => apiResourceUrl(formatPattern(path, params));
 
   return (authToken, params = {}, body) => fetch(url(params), {
     headers: {'APP-KEY': authToken},
     method: 'PUT',
     body: JSON.stringify(body)
-  }).then( resolveJsonOrRejectWithError );
+  }).then(resolveJsonOrRejectWithError);
 }
 
 export function deleteAuthorized(path) {

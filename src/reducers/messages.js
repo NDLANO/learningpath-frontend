@@ -16,7 +16,7 @@ export default handleActions({
       nextState.push(message);
       return nextState;
     },
-    throw(state) {return state;}
+    throw(state) { return state; }
   },
 
   CLEAR_ALL_MESSAGES: {
@@ -26,16 +26,16 @@ export default handleActions({
 
   CLEAR_MESSAGE: {
     next(state, action) {
-      return state.filter(m => m.id != action.payload);
+      return state.filter(m => m.id !== action.payload);
     },
-    throw(state) {return state;}
+    throw(state) { return state; }
   },
 
   APPLICATION_ERROR: {
     throw(state, action) {
       let nextState = cloneDeep(state);
-      action.payload.json.messages.forEach(function (m) {
-        nextState.push({id: uuid.v4(), message: m.field + ': ' + m.message, severity: 'danger', timeToLive: 0});
+      action.payload.json.messages.forEach((m) => {
+        nextState.push({id: uuid.v4(), message: `${m.field}: ${m.message}`, severity: 'danger', timeToLive: 0});
       });
       return nextState;
     }

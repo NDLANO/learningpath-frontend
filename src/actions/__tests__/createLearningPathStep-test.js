@@ -7,7 +7,7 @@ import payload403invalid from './payload403invalid';
 import actions from '..';
 import { routerActions } from 'react-router-redux';
 
-const middleware = [ thunk ];
+const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
 const authToken = '123345';
@@ -25,16 +25,16 @@ test('actions/createLearningPathStep', t => {
     description: [{language: 'nb', description: 'this is a description'}],
     embedContent: [{language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY'}]
   };
-  
+
   const learningStepReply = Object.assign({}, learningStep, {id: 1234});
 
   const postPathStepApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .post('/learningpaths/' + pathId + '/learningsteps', learningStep)
+    .post(`/learningpaths/${pathId}/learningsteps`, learningStep)
     .reply(200, learningStepReply);
-  
+
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.createLearningPathStep(pathId, learningStep) )
+  store.dispatch(actions.createLearningPathStep(pathId, learningStep))
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.addMessage({message: 'Lagret OK'}),
@@ -53,7 +53,7 @@ test('actions/createLearningPathStep access denied', (t) => {
     t.end(res);
     nock.cleanAll();
   };
-  
+
   const learningStep = {
     title: [{language: 'nb', title: 'Goat'}],
     description: [{language: 'nb', description: 'this is a description'}],
@@ -61,12 +61,12 @@ test('actions/createLearningPathStep access denied', (t) => {
   };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .post('/learningpaths/' + pathId + '/learningsteps', learningStep)
+    .post(`/learningpaths/${pathId}/learningsteps`, learningStep)
     .reply(403, {message: 'Invalid'});
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.createLearningPathStep(pathId, learningStep) )
+  store.dispatch(actions.createLearningPathStep(pathId, learningStep))
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.applicationError(payload403invalid())
@@ -77,5 +77,3 @@ test('actions/createLearningPathStep access denied', (t) => {
     })
     .catch(done);
 });
-
-

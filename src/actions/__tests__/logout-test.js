@@ -6,7 +6,7 @@ import payload403invalid from './payload403invalid';
 
 import actions from '..';
 
-const middleware = [ thunk ];
+const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
 const authToken = '123345';
@@ -23,7 +23,7 @@ test('actions/logout', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.logout() )
+  store.dispatch(actions.logout())
     .then(() => {
       t.deepEqual(store.getActions(), [
         { type: 'LOGOUT', payload: undefined }
@@ -33,7 +33,6 @@ test('actions/logout', t => {
       done();
     })
     .catch(done);
-
 });
 
 test('actions/logout access denied', t => {
@@ -47,7 +46,7 @@ test('actions/logout access denied', t => {
     .reply(403, {message: 'Invalid'});
 
   const store = mockStore({ authToken });
-  store.dispatch( actions.logout() )
+  store.dispatch(actions.logout())
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.applicationError(payload403invalid())

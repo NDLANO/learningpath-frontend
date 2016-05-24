@@ -25,4 +25,3 @@ test('reducers/myLearningPathsSortOrder', t => {
 
   t.end();
 });
-

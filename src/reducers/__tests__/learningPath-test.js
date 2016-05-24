@@ -150,26 +150,6 @@ test('reducers/learningPath update description', t => {
   t.end();
 });
 
-test('reducers/learningPaths remove learning path step', (t) => {
-  let step1 = {id: 123, seqNo: 0, title: [{title: 'testTitle', language: 'nb'}]};
-  let step2 = {id: 124, seqNo: 1, title: [{title: 'another Title', language: 'nb'}]};
-  let step3 = {id: 125, seqNo: 2,title: [{title: 'another Title', language: 'nb'}]};
-
-  let path = {learningsteps: [step1, step2, step3]};
-  t.deepEqual(
-    reducer(path, {type: 'REMOVE_LEARNING_PATH_STEP', payload: {seqNo: 0}}),
-    {learningsteps: [step2, step3]},
-    'seqno removed'
-  );
-
-  t.deepEqual(
-    reducer(path, {type: 'REMOVE_LEARNING_PATH_STEP', payload: {seqNo: 99}}),
-    path,
-    'no seqno'
-  );
-  t.end();
-});
-
 test('redurcers/learningPath drag and drop sort learning steps', t => {
   let step1 = {id: 123, title: [{title: 'testTitle', language: 'nb'}]};
   let step2 = {id: 124, title: [{title: 'another Title', language: 'nb'}]};
