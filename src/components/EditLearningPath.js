@@ -8,7 +8,7 @@ import {
   updateLearningPath
 } from '../actions';
 
-export function EditLearningPath (props, {lang}) {
+export function EditLearningPath(props, {lang}) {
   let {
     learningPath,
     saveAction
@@ -17,7 +17,7 @@ export function EditLearningPath (props, {lang}) {
     title: [{title: values.title, language: lang}],
     description: [{description: values.description, language: lang}],
     revision: learningPath.revision,
-    duration: (values.duration.replace(/,/g , '.')) * 60
+    duration: (values.duration.replace(/,/g, '.')) * 60
   });
 
   return (
@@ -25,8 +25,8 @@ export function EditLearningPath (props, {lang}) {
       <LearningPathForm learningPath={learningPath} onSubmit={onSaveLearningPathSubmit} lang={lang} />
     </div>
   );
-
 }
+
 EditLearningPath.propTypes = {
   learningPath: PropTypes.object.isRequired,
   learningSteps: PropTypes.array.isRequired,

@@ -7,7 +7,7 @@ import LearningPathStepIcon from '../LearningPathStepIcon';
 
 import { titleI18N } from '../../util/i18nFieldFinder';
 
-export default function LearningPathToC ({learningPath, activePathname}, {lang}) {
+export default function LearningPathToC({learningPath, activePathname}, {lang}) {
   const base = `/learningpaths/${learningPath.id}`;
   const itemClassName = (path) => classNames({
     'step-nav_item': true,
@@ -15,19 +15,18 @@ export default function LearningPathToC ({learningPath, activePathname}, {lang})
   });
 
   let sortPathTarget = `/learningpaths/${learningPath.id}/sort`;
-  const sort = learningPath.canEdit ? <Link className='cta-link cta-link--block' to={sortPathTarget}>{polyglot.t('sortSteps.sort')}</Link> : '';
+  const sort = learningPath.canEdit ? <Link className="cta-link cta-link--block" to={sortPathTarget}>{polyglot.t('sortSteps.sort')}</Link> : '';
 
   return (
     <div>
-      <div className='step-nav'>
-        <ul className='step-nav_list'>
+      <div className="step-nav">
+        <ul className="step-nav_list">
           {((steps) => steps.map(step => (
-            <li key={step.id}
-              className={itemClassName(`${base}/step/${step.id}`)}>
-              <Link to={`${base}/step/${step.id}`} className='step-nav_link'>
-                <div className='step-nav_line' />
+            <li key={step.id} className={itemClassName(`${base}/step/${step.id}`)} >
+              <Link to={`${base}/step/${step.id}`} className="step-nav_link">
+                <div className="step-nav_line" />
                 <LearningPathStepIcon learningPathStepType={step.type} />
-                <div className='step-nav_title'>
+                <div className="step-nav_title">
                   {titleI18N(step, lang)}
                 </div>
               </Link>
@@ -36,8 +35,8 @@ export default function LearningPathToC ({learningPath, activePathname}, {lang})
         </ul>
       </div>
       <div>
-        <ul className='vertical-menu'>
-          <li className='vertical-menu_item'>
+        <ul className="vertical-menu">
+          <li className="vertical-menu_item">
             {sort}
           </li>
         </ul>
