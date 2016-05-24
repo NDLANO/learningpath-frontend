@@ -8,7 +8,6 @@ import formatDate from '../../util/formatDate';
 import formatDuration from '../../util/formatDuration';
 
 import LabeledIcon from '../LabeledIcon';
-import Icon from '../Icon';
 import polyglot from '../../i18n';
 
 export function LearningPathGeneralInfo ({learningPath}, {lang}) {

@@ -8,7 +8,7 @@ import LearningPathPrevNext from './LearningPathPrevNext';
 import LearningPathToC from './LearningPathToC';
 
 export function LearningPath(props) {
-  const { learningStep, params: { stepId } } = props;
+  const { params: { stepId } } = props;
   const saveButtons = defined(props.saveButtons, null);
   const children = defined(props.main, props.children);
   const sortableTableOfContent = defined(props.sortLearningSteps, <LearningPathToC {...props}/>);
@@ -16,7 +16,7 @@ export function LearningPath(props) {
   const columnClassName = (object) => classNames({
     'two-column_col': true,
     'two-column_col--white-bg': object != undefined,
-    'two-column_col--center': object === undefined,
+    'two-column_col--center': object === undefined
   });
   return (
     <div>

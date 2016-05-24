@@ -97,7 +97,7 @@ export class SearchResult extends Component {
 
   render () {
 
-    const { path, errored } = this.props;
+    const { path } = this.props;
     const { lang } = this.context;
     const image = () => {
       if (path.coverPhotoUrl && !this.state.imageError){
@@ -106,7 +106,7 @@ export class SearchResult extends Component {
       else {
         return <img className='search-result_img' src={'https://placeholdit.imgix.net/~text?txtsize=33&txt=NDLA&w=190&h=120'} />;
       }
-    }
+    };
 
     return (
 
