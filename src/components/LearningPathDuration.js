@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 import classNames from 'classnames';
 
-export default function LearningPathDuration (props) {
+export default function LearningPathDuration(props) {
   const durations = [1, 2, 3, 4, 5];
   const onChange = (value) => {
     props.onChange(value.toString());
@@ -16,12 +16,12 @@ export default function LearningPathDuration (props) {
   });
   return (
     <div>
-      <ul className='duration-menu'>
-        {durations.map( newDuration => (
+      <ul className="duration-menu">
+        {durations.map(newDuration => (
           <li key={newDuration} className={durationClassName(newDuration)} onClick={() => onChange(newDuration)}> {newDuration}</li>
         ))}
       </ul>
-      <input className='input-duration' {...props} onChange={(evt) => inputChange(evt)}></input>
+      <input className="input-duration" {...props} onChange={(evt) => inputChange(evt)}></input>
       <span>{'time(r)'}</span>
     </div>
   );
