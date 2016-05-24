@@ -68,7 +68,7 @@ const fetchPaths = (authToken, query) => {
       delete q.query;
     }
 
-    url += '?' + queryString.stringify(q);
+    url += `?${queryString.stringify(q)}`;
   }
   return fetch(url, {headers: {'APP-KEY': authToken}}).then(resolveJsonOrRejectWithError);
 };

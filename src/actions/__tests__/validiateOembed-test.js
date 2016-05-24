@@ -5,7 +5,7 @@ import nock from 'nock';
 
 import actions from '..';
 
-const middleware = [ thunk ];
+const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
 const authToken = '123345';
@@ -24,7 +24,7 @@ test('actions/validiateOembed valid url', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.validateOembed(url, 'nb') )
+  store.dispatch(actions.validateOembed(url, 'nb'))
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.removeLearningPathStepEmbedContent(),
@@ -52,7 +52,7 @@ test('actions/validiateOembed invalid url', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.validateOembed(url) )
+  store.dispatch(actions.validateOembed(url))
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.setIsValidOembed(false)
@@ -72,7 +72,7 @@ test('actions/validiateOembed', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.validateOembed('') );
+  store.dispatch(actions.validateOembed(''));
   t.deepEqual(store.getActions(), [
     actions.removeLearningPathStepEmbedContent(),
     actions.setIsValidOembed(true)

@@ -5,7 +5,7 @@ import nock from 'nock';
 
 import actions from '..';
 
-const middleware = [ thunk ];
+const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
 test('actions/fetchLearningPaths', t => {
@@ -25,11 +25,11 @@ test('actions/fetchLearningPaths', t => {
 
   const store = mockStore({});
 
-  store.dispatch( actions.fetchLearningPaths() )
+  store.dispatch(actions.fetchLearningPaths())
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.setLearningPathsTotalCount(2),
-        actions.setLearningPaths([ {id: '123'}, {id: '456'} ]),
+        actions.setLearningPaths([{id: '123'}, {id: '456'}]),
         actions.changeLearningPathQuery({page: 3, pageSize: 25})
       ]);
 
@@ -67,11 +67,11 @@ test('actions/fetchLearningPaths with query', t => {
 
   const store = mockStore(initialState);
 
-  store.dispatch( actions.fetchLearningPaths() )
+  store.dispatch(actions.fetchLearningPaths())
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.setLearningPathsTotalCount(400),
-        actions.setLearningPaths([ {id: '123'}, {id: '456'} ]),
+        actions.setLearningPaths([{id: '123'}, {id: '456'}]),
         actions.changeLearningPathQuery({page: 4, pageSize: 15})
       ]);
 
@@ -108,11 +108,11 @@ test('actions/fetchLearningPaths with query without search term', t => {
 
   const store = mockStore(initialState);
 
-  store.dispatch( actions.fetchLearningPaths() )
+  store.dispatch(actions.fetchLearningPaths())
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.setLearningPathsTotalCount(400),
-        actions.setLearningPaths([ {id: '123'}, {id: '456'} ]),
+        actions.setLearningPaths([{id: '123'}, {id: '456'}]),
         actions.changeLearningPathQuery({page, pageSize})
       ]);
 

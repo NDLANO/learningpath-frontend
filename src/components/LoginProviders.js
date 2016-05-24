@@ -12,13 +12,13 @@ export default function LoginProviders({message}) {
   }
 
   return (
-    <div className='one-column one-column--narrow'>
+    <div className="one-column one-column--narrow">
       <h3>{polyglot.t('loginProviders.description')}</h3>
       {messageEl}
-      <ul className='vertical-menu'>
-        <li className='vertical-menu_item'><a className='cta-link cta-link--block cta-link--gl' href={apiResourceUrl('/auth/login/google' + query)}>Google</a></li>
-        <li className='vertical-menu_item'><a className='cta-link cta-link--block cta-link--fb' href={apiResourceUrl('/auth/login/facebook' + query)}>Facebook</a></li>
-        <li className='vertical-menu_item'><a className='cta-link cta-link--block cta-link--tw' href={apiResourceUrl('/auth/login/twitter' + query)}>Twitter</a></li>
+      <ul className="vertical-menu">
+        <li className="vertical-menu_item"><a className="cta-link cta-link--block cta-link--gl" href={apiResourceUrl('/auth/login/google' + query)}>Google</a></li>
+        <li className="vertical-menu_item"><a className="cta-link cta-link--block cta-link--fb" href={apiResourceUrl('/auth/login/facebook' + query)}>Facebook</a></li>
+        <li className="vertical-menu_item"><a className="cta-link cta-link--block cta-link--tw" href={apiResourceUrl('/auth/login/twitter' + query)}>Twitter</a></li>
       </ul>
     </div>
   );

@@ -6,7 +6,7 @@ import payload403invalid from './payload403invalid';
 
 import actions from '..';
 
-const middleware = [ thunk ];
+const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
 const authToken = '123345';
@@ -16,17 +16,17 @@ test('actions/fetchMyLearningPaths', (t) => {
     t.end(res);
     nock.cleanAll();
   };
-  
+
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get('/learningpaths/mine')
-    .reply(200, [ {id: '123'}, {id: '456'} ]);
+    .reply(200, [{id: '123'}, {id: '456'}]);
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.fetchMyLearningPaths() )
+  store.dispatch(actions.fetchMyLearningPaths())
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.setLearningPaths([ {id: '123'}, {id: '456'} ])
+        actions.setLearningPaths([{id: '123'}, {id: '456'}])
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();
@@ -39,14 +39,14 @@ test('actions/fetchLearningPaths access denied', (t) => {
     t.end(res);
     nock.cleanAll();
   };
-  
+
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get('/learningpaths/mine')
     .reply(403, {message: 'Invalid'});
 
   const store = mockStore({ authToken });
 
-  store.dispatch( actions.fetchMyLearningPaths() )
+  store.dispatch(actions.fetchMyLearningPaths())
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.applicationError(payload403invalid())

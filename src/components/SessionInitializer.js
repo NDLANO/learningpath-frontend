@@ -8,8 +8,8 @@ export class SessionInitializer extends React.Component {
     let { dispatch, params: { authToken } } = this.props;
 
     if (authToken) {
-      dispatch( initializeSession(authToken) )
-        .then(() => dispatch(routerActions.replace('/minside')) );
+      dispatch(initializeSession(authToken))
+        .then(() => dispatch(routerActions.replace('/minside')));
     }
   }
 

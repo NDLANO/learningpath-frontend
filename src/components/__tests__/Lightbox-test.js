@@ -5,7 +5,7 @@ import { shallow } from 'enzyme';
 import Lightbox from '../Lightbox';
 
 test('component/Lightbox', t => {
-  const component = shallow(<Lightbox display={true} onClose={() => {}}><h1>enlighted!</h1></Lightbox>);
+  const component = shallow(<Lightbox display onClose={() => {}}><h1>enlighted!</h1></Lightbox>);
   t.ok(component.hasClass('lightbox'), 'has .lightbox');
 
   const contentContainer = component.find('.lightbox_content');

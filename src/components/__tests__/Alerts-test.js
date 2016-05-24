@@ -60,12 +60,13 @@ test('component/Alerts dismiss', t => {
   const dispatch = sinon.spy(() => {});
 
   const dismissBt = shallow(<Alerts messages={[{id: uuid.v4(), message: 'whatever', severity: 'info'}]}
-      dispatch={dispatch} />).find('.alert_dismiss');
+    dispatch={dispatch}
+  />).find('.alert_dismiss');
 
   dismissBt.simulate('click');
 
   t.ok(dispatch.calledOnce);
-  t.deepEquals(dispatch.firstCall.args, [ clearAllMessages() ]);
+  t.deepEquals(dispatch.firstCall.args, [clearAllMessages()]);
 
   t.end();
 });

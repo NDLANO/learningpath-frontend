@@ -6,11 +6,11 @@ import './jsdomEnv';
 import { isUnitTest, locationOrigin, apiBaseUrl, defaultApiKey } from '../../sources/helpers';
 
 class Selfie extends Component {
-  componentDidMount () {
+  componentDidMount() {
   }
 
   render() {
-    return <div className='selfie-content'>{this.props.foo}</div>;
+    return <div className="selfie-content">{this.props.foo}</div>;
   }
 }
 
@@ -28,17 +28,17 @@ test('components/TestSetup selftest', tt => {
   });
 
   tt.test('- Enzyme shallow rendering', t => {
-    t.doesNotThrow(() => shallow(<Selfie />) );
+    t.doesNotThrow(() => shallow(<Selfie />));
     t.end();
   });
 
   tt.test('- Enzyme full dom rendering', t => {
-    t.doesNotThrow(() => mount(<Selfie />) );
+    t.doesNotThrow(() => mount(<Selfie />));
     t.end();
   });
 
   tt.test('- Enzyme static rendering', t => {
-    t.doesNotThrow(() => render(<Selfie />) );
+    t.doesNotThrow(() => render(<Selfie />));
     t.end();
   });
 });

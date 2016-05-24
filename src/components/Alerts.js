@@ -5,7 +5,7 @@ import Icon from './Icon';
 import classNames from 'classnames';
 import {timeoutMessage, clearAllMessages} from '../actions';
 
-const priorities = {'info': 0, 'success': 1, 'warning': 2,  'danger': 3 };
+const priorities = {'info': 0, 'success': 1, 'warning': 2, 'danger': 3 };
 
 export function Alerts({dispatch, messages}) {
 
@@ -23,10 +23,10 @@ export function Alerts({dispatch, messages}) {
 
   return (<div className={overlayClasses}>
     <div className={`alert alert--${highestAlert}`}>
-      <button className='alert_dismiss un-button' onClick={() => dispatch(clearAllMessages())}>
+      <button className="alert_dismiss un-button" onClick={() => dispatch(clearAllMessages())}>
         <Icon.Clear />
       </button>
-      <div className='alert_msg'>
+      <div className="alert_msg">
         <ul>
           {messages.map(message => (<li key={message.id}>{message.message}</li>))}
         </ul>

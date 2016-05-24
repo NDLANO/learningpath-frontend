@@ -27,5 +27,3 @@ test('actions/setLearningPath with error', t => {
 
   t.end();
 });
-
-

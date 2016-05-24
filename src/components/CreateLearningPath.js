@@ -19,10 +19,11 @@ export class CreateLearningPath extends React.Component {
           <div>
             <label>Beskrivelse</label>
             <textarea rows="4" cols="50" placeholder="Skriv en kort beskrivelse av læringsstien." maxLength="155"
-                      className="textarea" {...description} />
+              className="textarea"
+    />
           </div>
         <p className="hint-text">Max 155 tegn</p>
-        <button className='button cta-link cta-link--block' type="submit">Opprett ny læringssti</button>
+        <button className="button cta-link cta-link--block" type="submit">Opprett ny læringssti</button>
       </form>
     );
   }

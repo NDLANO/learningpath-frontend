@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
 import OneLineEditor from './OneLineEditor';
 
-export default function TitleEditor ({value, onChange, placeholder, lang}) {
+export default function TitleEditor({value, onChange, placeholder, lang}) {
   const _onChange = (newValue) => onChange({title: newValue, language: lang});
   return (
     <OneLineEditor
-    onChange={_onChange}
-    value={value||''}
-    placeholder={placeholder}
+      onChange={_onChange}
+      value={value || ''}
+      placeholder={placeholder}
     />);
 }
 

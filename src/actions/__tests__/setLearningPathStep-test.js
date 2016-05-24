@@ -27,6 +27,3 @@ test('actions/setLearningPathStep with error', t => {
 
   t.end();
 });
-
-
-

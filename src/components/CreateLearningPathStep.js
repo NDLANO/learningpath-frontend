@@ -14,4 +14,3 @@ const _mapDispatchToProps = assign({}, mapDispatchToProps, {
 });
 
 export default connect(_mapStateToProps, _mapDispatchToProps)(EditLearningPathStep);
-

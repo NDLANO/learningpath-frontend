@@ -26,7 +26,7 @@ export default class OneLineEditor extends React.Component {
     };
 
     this.handleBeforeInput = () => false;
-    
+
     if (maxlength >= 0) {
       this.handleBeforeInput = () => {
         let plainText = this.state.editorState.getCurrentContent().getPlainText();
@@ -40,7 +40,7 @@ export default class OneLineEditor extends React.Component {
 
   updateEditorContentStateFromText(text) {
     if (text !== undefined) {
-      let editorState = EditorState.createWithContent( ContentState.createFromText(text) );
+      let editorState = EditorState.createWithContent(ContentState.createFromText(text));
       this.setState({ editorState });
     }
   }
@@ -62,7 +62,7 @@ export default class OneLineEditor extends React.Component {
         handlePastedText={this.handlePastedText}
         handleReturn={this.handleReturn.bind(this)}
         placeholder={this.props.placeholder}
-        ref='editor'
+        ref="editor"
       />
     );
   }

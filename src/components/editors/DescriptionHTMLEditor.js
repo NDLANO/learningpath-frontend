@@ -16,7 +16,7 @@ class StyleButton extends React.Component {
 
   render() {
     let className = classNames(
-        [ 'texformat-menu-item' ],
+        ['texformat-menu-item'],
         {' texformat-menu-item__selected': this.props.active}
     );
 
@@ -39,7 +39,7 @@ StyleButton.propTypes = {
 const STYLES = [
   {label: 'Bold', style: 'BOLD', isInline: true, icon: <Icon.Bold />},
   {label: 'Italic', style: 'ITALIC', isInline: true, icon: <Icon.Italic />},
-  {label: 'Underline', style: 'UNDERLINE', isInline: true ,icon: <Icon.Underline />},
+  {label: 'Underline', style: 'UNDERLINE', isInline: true, icon: <Icon.Underline />},
   {label: 'UL', style: 'unordered-list-item', isInline: false, icon: <Icon.Bulleted />},
   {label: 'OL', style: 'ordered-list-item', isInline: false, icon: <Icon.Numbered />}
 ];
@@ -52,7 +52,7 @@ const StyleControls = props => {
   let currentInlineStyle = editorState.getCurrentInlineStyle();
 
   return (
-    <ul className='textformat-menu'>
+    <ul className="textformat-menu">
       {STYLES.map(type =>
         <StyleButton
           key={type.label}
@@ -129,7 +129,7 @@ export default class DescriptionHTMLEditor extends React.Component {
   _setEditorContentStateFromHTML(htmlStr) {
     if (htmlStr !== undefined) {
       let contentState = ContentState.createFromBlockArray(convertFromHTML(htmlStr));
-      let editorState = EditorState.createWithContent( contentState );
+      let editorState = EditorState.createWithContent(contentState);
       this.setState({editorState});
     }
   }
@@ -164,14 +164,14 @@ export default class DescriptionHTMLEditor extends React.Component {
           onToggleInline={this.toggleInlineStyle}
           onToggleBlock={this.toggleBlockType}
         />
-        <span className='editable'><Icon.Create /></span>
+        <span className="editable"><Icon.Create /></span>
         <div className={className} onClick={this.focus}>
           <Editor
             editorState={editorState}
             onChange={this.onChange}
             placeholder={this.props.placeholder}
-            ref='editor'
-            spellCheck={true}
+            ref="editor"
+            spellCheck
           />
         </div>
       </div>
