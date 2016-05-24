@@ -25,7 +25,7 @@ const validate = values => {
     errors.duration = polyglot.t('errors.durationMinus');
   } else if (values.duration && isNaN(values.duration.replace(/,/g, '.')) && isNaN(values.duration)) {
     errors.duration = polyglot.t('errors.durationNaN');
-  } else if (!(/^\d+(\.|,)?\d{0,2}$/.test(values.duration.toString()))) {
+  } else if (values.duration && !(/^\d+(\.|,)?\d{0,2}$/.test(values.duration.toString()))) {
     errors.duration = polyglot.t('errors.durationDecimals');
   }
   return errors;
