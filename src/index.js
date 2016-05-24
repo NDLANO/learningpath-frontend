@@ -40,10 +40,11 @@ const {
 } = bindActionCreators(actions, store.dispatch);
 
 function ifAuthenticated(cb) {
-  return function (...args) {
+  return (...args) => {
     if (store.getState().authenticated) {
       return cb(...args);
     }
+    return undefined;
   };
 }
 
@@ -72,44 +73,32 @@ ReactDOM.render(
           <Route path="login/failure" component={LoginFailure} />
           <Route path="logout" onEnter={ifAuthenticated(logout)} component={LoginProviders} />
           <Route path="minside" component={requireAuthentication(MyPage)} onEnter={ifAuthenticated(fetchMyLearningPaths)} />
+          <Route path="learningpaths/new" component={requireAuthentication(CreateLearningPath)} onEnter={ifAuthenticated(createEmptyLearningPath)} />
+          <Route
+            path="learningpaths" component={LearningPathSearch} onEnter={ctx => {
+              let query = parseSearchQuery(ctx.location.query);
+              if (isEmpty(query)) {
+                query = defaultSearchQuery;
+              }
 
-          <Route path="learningpaths/new" component={requireAuthentication(CreateLearningPath)}
-            onEnter={ifAuthenticated(createEmptyLearningPath)}
-/>
-
-          <Route path="learningpaths" component={LearningPathSearch} onEnter={ctx => {
-            let query = parseSearchQuery(ctx.location.query);
-            if (isEmpty(query)) {
-              query = defaultSearchQuery;
-            }
-
-            changeLearningPathQuery(query);
-            fetchLearningPaths();
-
-          }}
-/>
-          <Route path="learningpaths/:pathId"
-            onEnter={({params}) => fetchLearningPath(params.pathId)} component={LearningPath}
->
+              changeLearningPathQuery(query);
+              fetchLearningPaths();
+            }}
+          />
+          <Route path="learningpaths/:pathId" onEnter={({params}) => fetchLearningPath(params.pathId)} component={LearningPath} >
             <IndexRoute components={{main: LearningPathSummary, saveButtons: LearningPathToCButtons}} />
-            <Route path="edit" component={requireAuthentication(EditLearningPath)}
-              onEnter={ifAuthenticated(({params}) => fetchLearningPath(params.pathId))}
-/>
+            <Route path="edit" component={requireAuthentication(EditLearningPath)} onEnter={ifAuthenticated(({params}) => fetchLearningPath(params.pathId))} />
 
             <Route path="step/new" component={requireAuthentication(CreateLearningPathStep)} onEnter={ifAuthenticated(createEmptyLearningPathStep)} />
 
-            <Route path="sort" components={{main: LearningPathSummary, sortLearningSteps: SortLearningSteps}}
-              onEnter={ifAuthenticated(({params}) => fetchLearningPath(params.pathId))}
-/>
+            <Route path="sort" components={{main: LearningPathSummary, sortLearningSteps: SortLearningSteps}} onEnter={ifAuthenticated(({params}) => fetchLearningPath(params.pathId))} />
 
-            <Route path="step/:stepId/edit" component={requireAuthentication(EditLearningPathStep)}
-              onEnter={ifAuthenticated(({params}) => fetchLearningPathStep(params.pathId, params.stepId))}
-/>
-            <Route path="step/:stepId" components={{main: LearningPathStep, saveButtons: LearningPathToCButtons}}
+            <Route path="step/:stepId/edit" component={requireAuthentication(EditLearningPathStep)} onEnter={ifAuthenticated(({params}) => fetchLearningPathStep(params.pathId, params.stepId))} />
+            <Route
+              path="step/:stepId" components={{main: LearningPathStep, saveButtons: LearningPathToCButtons}}
               onEnter={({params}) => fetchLearningPathStep(params.pathId, params.stepId)}
-/>
+            />
           </Route>
-
           <Route path="*" component={NotFound} />
         </Route>
       </Route>

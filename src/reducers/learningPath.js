@@ -50,7 +50,7 @@ export default handleActions({
     next(state, action) {
       let nextState = cloneDeep(state);
       let steps = get(nextState, 'learningsteps', []);
-      nextState.learningsteps = steps.filter(m => m.seqNo != action.payload.seqNo);
+      nextState.learningsteps = steps.filter(m => m.seqNo !== action.payload.seqNo);
       return nextState;
     },
     throw(state) { return state; }
@@ -58,7 +58,7 @@ export default handleActions({
 
   SORT_LEARNING_PATH_STEPS: {
     next(state, action) {
-      if (state.learningsteps.length != action.payload.length) {
+      if (state.learningsteps.length !== action.payload.length) {
         return state;
       }
       let nextState = cloneDeep(state);

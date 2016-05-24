@@ -68,7 +68,12 @@ SiteNav.defaultProps = {
 };
 
 const userName = user => [user.first_name, user.middle_name, user.last_name].join(' ');
-const selectUserName = state => state.authenticated ? userName(state.user) : '';
+const selectUserName = (state) => {
+  if (state.authenticated) {
+    return userName(state.user);
+  }
+  return '';
+};
 
 const mapStateToProps = (state) => Object.assign({}, state, {
   userName: selectUserName(state)

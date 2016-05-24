@@ -41,14 +41,14 @@ export function createErrorPayload(status, message, json) {
 }
 
 export function resolveJsonOrRejectWithError(res) {
-  return new Promise((resolve, reject) => (res.ok) ?
-    res.status === 204 ?
-    resolve() :
-    resolve(res.json()) :
-    res.json()
+  return new Promise((resolve, reject) => {
+    if (res.ok) {
+      return res.status === 204 ? resolve() : resolve(res.json());
+    }
+    return res.json()
       .then(json => createErrorPayload(res.status, defined(json.message, res.statusText), json))
-      .then(reject)
-  );
+      .then(reject);
+  });
 }
 
 
