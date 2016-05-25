@@ -33,8 +33,9 @@ class TagsInput extends Component {
     };
 
     const handleChange = (values) => {
-      const mapped = values.map(tag => ({tag, language: lang}));
-      onChange(mapped);
+      const otherLangValues = value.filter(element => element.language !== lang);
+      const currentLangValues = values.map(tag => ({tag, language: lang}));
+      onChange(currentLangValues.concat(otherLangValues));
     };
 
     const handleSearch = (searchTerm) => {
