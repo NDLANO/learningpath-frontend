@@ -13,7 +13,7 @@ export default function MediaTypeSelect({value, onChange}) {
       <h1>{polyglot.t('editPathStep.mediatypeTitle')}</h1>
       <p>{polyglot.t('editPathStep.mediatypeInformation')}</p>
       <div className="icon-select">
-        <div className="row">
+        <div>
           <div className="icon-select_item">
             <input
               type="radio" className="icon-select_input"
@@ -48,7 +48,7 @@ export default function MediaTypeSelect({value, onChange}) {
             </label>
           </div>
         </div>
-        <div className="row">
+        <div>
           <div className="icon-select_item">
             <input
               type="radio" className="icon-select_input"
