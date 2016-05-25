@@ -100,8 +100,8 @@ const LearningPathForm = (props) => {
           {duration.touched && duration.error && <span className="error_message error_message--red">{duration.error}</span>}
         </div>
 
-        <label className="label--medium-bold  label--medium">{polyglot.t('learningPath.tags')}</label>
-        <div className="learning-path-input learning-path-input__paragraph">
+        <div className="learning-path-tags">
+          <label className="label--medium-bold  label--medium">{polyglot.t('learningPath.tags')}</label>
           <TagsInput lang={lang} {...tags} />
         </div>
       </div>
@@ -126,8 +126,6 @@ const convertedDuration = (value) => {
 };
 
 const mapStateToProps = (state, props) => ({
-
-  // props.learningPath.duration ? (props.learningPath.duration/60).toFixed(2).toString() : undefined
   initialValues: {
     title: titleI18N(props.learningPath, props.lang),
     description: descriptionI18N(props.learningPath, props.lang),
