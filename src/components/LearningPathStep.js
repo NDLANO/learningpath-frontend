@@ -23,11 +23,11 @@ export function LearningPathStep({learningPathStep, learningPath}, {lang}) {
   }
 
   return (
-    <div>
+    <main className="two-column_col two-column_col--white-bg">
       <LearningPathStepDescription stepTitle={stepTitle} stepDescription={stepDescription} />
       <Oembed oembedContent={oembedContent} />
       {edit}
-    </div>
+    </main>
   );
 }
 

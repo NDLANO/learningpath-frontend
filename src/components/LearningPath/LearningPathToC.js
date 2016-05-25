@@ -25,7 +25,7 @@ export default function LearningPathToC({learningPath, activePathname}, {lang}) 
             <li key={step.id} className={itemClassName(`${base}/step/${step.id}`)} >
               <Link to={`${base}/step/${step.id}`} className="step-nav_link">
                 <div className="step-nav_line" />
-                <LearningPathStepIcon learningPathStepType={step.type} />
+                <LearningPathStepIcon learningPathStepType={step.type} isCircle />
                 <div className="step-nav_title">
                   {titleI18N(step, lang)}
                 </div>

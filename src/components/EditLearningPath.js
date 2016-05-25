@@ -21,9 +21,9 @@ export function EditLearningPath(props, {lang}) {
   });
 
   return (
-    <div>
+    <main className="two-column_col two-column_col--center">
       <LearningPathForm learningPath={learningPath} onSubmit={onSaveLearningPathSubmit} lang={lang} />
-    </div>
+    </main>
   );
 }
 
