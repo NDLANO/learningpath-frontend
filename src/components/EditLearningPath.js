@@ -17,7 +17,8 @@ export function EditLearningPath(props, {lang}) {
     title: [{title: values.title, language: lang}],
     description: [{description: values.description, language: lang}],
     revision: learningPath.revision,
-    duration: (values.duration.replace(/,/g, '.')) * 60
+    duration: (values.duration.replace(/,/g, '.')) * 60,
+    tags: values.tags
   });
 
   return (

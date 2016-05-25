@@ -2,12 +2,14 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import LabeledIcon from './LabeledIcon';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
+import TagsInput from './common/TagsInput';
 import polyglot from '../i18n';
 import classNames from 'classnames';
 import { reduxForm } from 'redux-form';
 import LearningPathDuration from './LearningPathDuration';
-const fields = ['title', 'description', 'duration'];
 import isInteger from 'lodash/isInteger';
+
+const fields = ['title', 'description', 'duration', 'tags'];
 
 const validate = values => {
   const errors = {};
@@ -34,7 +36,7 @@ const validate = values => {
 
 const LearningPathForm = (props) => {
   const {
-    fields: { title, description, duration },
+    fields: { title, description, duration, tags },
     handleSubmit,
     learningPath,
     lang
@@ -93,6 +95,11 @@ const LearningPathForm = (props) => {
           <LearningPathDuration {...duration} />
           {duration.touched && duration.error && <span className="error_message error_message--red">{duration.error}</span>}
         </div>
+
+        <label className="label--medium-bold  label--medium">{polyglot.t('learningPath.tags')}</label>
+        <div className="learning-path-input learning-path-input__paragraph">
+          <TagsInput lang={lang} {...tags} />
+        </div>
       </div>
     </form>
   );
@@ -120,12 +127,13 @@ const mapStateToProps = (state, props) => ({
   initialValues: {
     title: titleI18N(props.learningPath, props.lang),
     description: descriptionI18N(props.learningPath, props.lang),
-    duration: convertedDuration(props.learningPath.duration)
+    duration: convertedDuration(props.learningPath.duration),
+    tags: props.learningPath.tags ? props.learningPath.tags : []
   }
 });
 
 export default reduxForm({
   form: 'edit-learning-path',
   fields,
-  validate
+  validate,
 }, mapStateToProps)(LearningPathForm);

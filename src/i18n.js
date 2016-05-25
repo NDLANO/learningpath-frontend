@@ -77,6 +77,7 @@ const phrases = {
     image: 'Illustrerende bilde',
     imagePick: 'Klikk for å velge',
     duration: 'Varighet',
+    tags: 'Tagger',
     imageInformation: 'Bildet blir synlig i søk på læringssti.'
   },
   editPage: {
@@ -135,6 +136,11 @@ const phrases = {
   },
   updateLearningPath: {
     updatedMsg: 'Lagret OK'
+  },
+  tagInput: {
+    createNew: 'Opprett ny tag',
+    emptyList: 'Det er ingen tagger i denne listen',
+    emptyFilter: 'Fant ingen passende tagger'
   },
   updateLearningPathStatus: {
     updateStatusMsg: 'Oppdatert status OK'
