@@ -65,7 +65,11 @@ const LearningPathForm = (props) => {
       <div className="learning-path_bd">
         <label className="label--medium-bold  label--medium">{polyglot.t('learningPath.description')}</label>
         <div className="learning-path-input learning-path-input__paragraph">
-          <textarea rows="4" cols="50" placeholder={polyglot.t('learningPath.descriptionPlaceholder')} maxLength="150" className={inputClassName(description.touched && description.error, true)} />
+          <textarea
+            {...description} rows="4" cols="50"
+            placeholder={polyglot.t('learningPath.descriptionPlaceholder')} maxLength="150"
+            className={inputClassName(description.touched && description.error, true)}
+          />
           {description.touched && description.error && <span className="error_message error_message--red">{description.error}</span>}
           <p className="learning-path_input-information">{polyglot.t('learningPath.descriptionInformation', {remainingDescriptionLength})}</p>
         </div>
