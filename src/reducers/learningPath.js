@@ -60,7 +60,7 @@ export default handleActions({
   },
 
   UPDATE_LEARNING_PATH_TAGS: {
-    next(state, action){ return Object.assign({}, state, {tags: action.payload}); },
+    next(state, action) { return Object.assign({}, state, {tags: action.payload}); },
     throw(state) { return state; }
   },
 
