@@ -55,17 +55,18 @@ const LearningPathForm = (props) => {
     <form onSubmit={handleSubmit}>
       <div className="learning-path_hd">
         <h1>{polyglot.t('learningPath.pageName')}</h1>
-        <label className="label--medium-bold  label--medium">{polyglot.t('learningPath.title')}</label>
+        <label htmlFor="title" className="label--medium-bold  label--medium">{polyglot.t('learningPath.title')}</label>
         <div className="learning-path-input learning-path-input__title">
-          <input className={inputClassName(title.touched && title.error, false)} type="text" required{...title} lang={lang} />
+          <input id="title" className={inputClassName(title.touched && title.error, false)} type="text" required{...title} lang={lang} />
           {title.touched && title.error && <span className="error_message error_message--red">{title.error}</span>}
         </div>
       </div>
 
       <div className="learning-path_bd">
-        <label className="label--medium-bold  label--medium">{polyglot.t('learningPath.description')}</label>
+        <label htmlFor="description" className="label--medium-bold  label--medium">{polyglot.t('learningPath.description')}</label>
         <div className="learning-path-input learning-path-input__paragraph">
           <textarea
+            id="description"
             {...description} rows="4" cols="50"
             placeholder={polyglot.t('learningPath.descriptionPlaceholder')} maxLength="150"
             className={inputClassName(description.touched && description.error, true)}
@@ -95,14 +96,14 @@ const LearningPathForm = (props) => {
         </div>
 
         <div className="learning-path-duration">
-          <label className="label--medium-bold  label--medium">{polyglot.t('learningPath.duration')}</label>
-          <LearningPathDuration {...duration} />
+          <label htmlFor="duration" className="label--medium-bold  label--medium">{polyglot.t('learningPath.duration')}</label>
+          <LearningPathDuration id="duration" {...duration} />
           {duration.touched && duration.error && <span className="error_message error_message--red">{duration.error}</span>}
         </div>
 
         <div className="learning-path-tags">
-          <label className="label--medium-bold  label--medium">{polyglot.t('learningPath.tags')}</label>
-          <TagsInput lang={lang} {...tags} />
+          <label htmlFor="tags" className="label--medium-bold  label--medium">{polyglot.t('learningPath.tags')}</label>
+          <TagsInput id="tags" lang={lang} {...tags} />
         </div>
       </div>
     </form>

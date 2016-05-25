@@ -21,12 +21,13 @@ export default function LearningPathDuration(props) {
           <li key={newDuration} className={durationClassName(newDuration)} onClick={() => onChange(newDuration)}> {newDuration}</li>
         ))}
       </ul>
-      <input className="input-duration" {...props} onChange={(evt) => inputChange(evt)}></input>
+      <input id={props.id} className="input-duration" {...props} onChange={(evt) => inputChange(evt)}></input>
       <span>{'time(r)'}</span>
     </div>
   );
 }
 
 LearningPathDuration.propTypes = {
-  value: PropTypes.string.isRequired
+  value: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired
 };
