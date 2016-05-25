@@ -58,5 +58,11 @@ export default handleActions({
     },
     throw(state) { return state; }
   },
+
+  UPDATE_LEARNING_PATH_TAGS: {
+    next(state, action){ return Object.assign({}, state, {tags: action.payload}); },
+    throw(state) { return state; }
+  },
+
   LOGOUT: () => ({})
 }, {});
