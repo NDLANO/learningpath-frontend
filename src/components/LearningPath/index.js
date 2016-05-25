@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import defined from 'defined';
-import classNames from 'classnames';
 
 import LearningPathGeneralInfo from './LearningPathGeneralInfo';
 import LearningPathPrevNext from './LearningPathPrevNext';
@@ -13,11 +12,6 @@ export function LearningPath(props) {
   const children = defined(props.main, props.children);
   const sortableTableOfContent = defined(props.sortLearningSteps, <LearningPathToC {...props} />);
 
-  const columnClassName = (object) => classNames({
-    'two-column_col': true,
-    'two-column_col--white-bg': object !== undefined,
-    'two-column_col--center': object === undefined
-  });
   return (
     <div>
       <div className="two-column">
@@ -26,9 +20,7 @@ export function LearningPath(props) {
           {sortableTableOfContent}
           {saveButtons}
         </aside>
-        <main className={columnClassName(stepId)}>
-          {children}
-        </main>
+        {children}
       </div>
       <div>
         <LearningPathPrevNext currentStepId={stepId} />

@@ -48,5 +48,5 @@ export default class PreviewOembed extends React.Component {
 }
 
 PreviewOembed.propTypes = {
-  content: PropTypes.object.isRequired
+  content: PropTypes.object
 };
