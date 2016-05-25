@@ -112,8 +112,8 @@ const phrases = {
     previewOembed: 'Forhåndsvis hele artikkelen'
   },
   sortSteps: {
-    sort: 'Sorter steg',
-    finish: 'Avslutt sortering',
+    sortOrDelete: 'Sorter eller slett læringssteg',
+    finish: 'Lagre sortering',
     cancel: 'Avbryt'
   },
   siteNav: {
