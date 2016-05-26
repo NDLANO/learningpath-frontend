@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Icon from '../../components/Icon';
+import Icon from '../components/Icon';
 import { Link } from 'react-router';
 
 export function getRange(current, last) {

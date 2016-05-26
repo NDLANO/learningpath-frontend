@@ -1,4 +1,3 @@
-
 import React, { Component, PropTypes } from 'react';
 import polyglot from '../../i18n';
 

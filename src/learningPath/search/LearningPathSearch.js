@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { routerActions } from 'react-router-redux';
 import isEqual from 'lodash/isEqual';
-import SearchResultPager from './SearchResultPager';
+import SearchResultPager from '../../common/SearchResultPager';
 import SearchForm from './LearningPathSearchForm';
 import SearchResult from './LearningPathSearchResult';
 import { fetchLearningPaths } from '../../actions';
