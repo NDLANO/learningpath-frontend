@@ -1,6 +1,6 @@
 
 import React, { Component, PropTypes } from 'react';
-import polyglot from '../i18n';
+import polyglot from '../../i18n';
 
 export default class SearchForm extends Component {
   constructor(props) {

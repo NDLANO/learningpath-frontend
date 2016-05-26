@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import get from 'lodash/get';
-import LabeledIcon from './LabeledIcon';
+import LabeledIcon from '../../components/LabeledIcon';
 
-import formatDate from '../util/formatDate';
-import formatDuration from '../util/formatDuration';
+import formatDate from '../../util/formatDate';
+import formatDuration from '../../util/formatDuration';
 
-import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
+import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
 
 
 export default class SearchResult extends Component {

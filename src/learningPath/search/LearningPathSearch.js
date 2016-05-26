@@ -6,9 +6,9 @@ import isEqual from 'lodash/isEqual';
 import SearchResultPager from './SearchResultPager';
 import SearchForm from './LearningPathSearchForm';
 import SearchResult from './LearningPathSearchResult';
-import { fetchLearningPaths } from '../actions';
+import { fetchLearningPaths } from '../../actions';
 
-export class LearningPathSearch extends Component {
+class LearningPathSearch extends Component {
 
 
   componentWillMount() {

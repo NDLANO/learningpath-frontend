@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import { bindActionCreators } from 'redux';
-import isEmpty from 'lodash/isEmpty';
 
 import App from '../components/App';
 import {
@@ -9,7 +8,6 @@ import {
   LoginProviders, SessionInitializer, LoginFailure,
   MyPage,
   LearningPath, LearningPathSummary, LearningPathStep,
-  LearningPathSearch,
   EditLearningPath, EditLearningPathStep, CreateLearningPathStep,
   CreateLearningPath, LearningPathToCButtons,
   SortLearningSteps
@@ -17,8 +15,7 @@ import {
 
 import actions from '../actions';
 import requireAuthentication from '../components/requireAuthentication';
-import { defaultSearchQuery, parseSearchQuery } from '../middleware/searchQuery';
-
+import configureLearningPathRoutes from '../learningPath/routes';
 
 export default function (store) {
   function ifAuthenticated(cb) {
@@ -33,14 +30,13 @@ export default function (store) {
   const {
     logout,
     fetchMyLearningPaths,
-    fetchLearningPaths,
     fetchLearningPath,
     fetchLearningPathStep,
-    changeLearningPathQuery,
     createEmptyLearningPath,
     checkValidSession,
     createEmptyLearningPathStep
   } = bindActionCreators(actions, store.dispatch);
+  const learningPathRoutes = configureLearningPathRoutes(store);
 
   return (
     <Route path="/" onEnter={ifAuthenticated(checkValidSession)}>
@@ -52,17 +48,7 @@ export default function (store) {
         <Route path="logout" onEnter={ifAuthenticated(logout)} component={LoginProviders} />
         <Route path="minside" component={requireAuthentication(MyPage)} onEnter={ifAuthenticated(fetchMyLearningPaths)} />
         <Route path="learningpaths/new" component={requireAuthentication(CreateLearningPath)} onEnter={ifAuthenticated(createEmptyLearningPath)} />
-        <Route
-          path="learningpaths" component={LearningPathSearch} onEnter={ctx => {
-            let query = parseSearchQuery(ctx.location.query);
-            if (isEmpty(query)) {
-              query = defaultSearchQuery;
-            }
-
-            changeLearningPathQuery(query);
-            fetchLearningPaths();
-          }}
-        />
+        {learningPathRoutes}
         <Route path="learningpaths/:pathId" onEnter={({params}) => fetchLearningPath(params.pathId)} component={LearningPath} >
           <IndexRoute components={{main: LearningPathSummary, saveButtons: LearningPathToCButtons}} />
           <Route path="edit" component={requireAuthentication(EditLearningPath)} onEnter={ifAuthenticated(({params}) => fetchLearningPath(params.pathId))} />
