@@ -1,10 +1,10 @@
 import React, {PropTypes } from 'react';
 import { reduxForm, reset } from 'redux-form';
-import polyglot from '../i18n';
+import polyglot from '../../i18n';
 
 const fields = ['title', 'description'];
 
-export class CreateLearningPath extends React.Component {
+class CreateLearningPath extends React.Component {
 
 
   componentWillUnmount() {

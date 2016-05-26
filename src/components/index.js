@@ -10,7 +10,6 @@ import LearningPathSummary from './LearningPathSummary';
 import LearningPathStep from './LearningPathStep';
 import EditLearningPath from './EditLearningPath';
 import EditLearningPathStep from './EditLearningPathStep';
-import CreateLearningPath from './CreateLearningPath';
 import CreateLearningPathStep from './CreateLearningPathStep';
 import ThisPageIntentionallyLeftBlank from './ThisPageIntentionallyLeftBlank';
 import SortLearningSteps from './SortLearningSteps';
@@ -22,7 +21,6 @@ module.exports = {
   EditLearningPath,
   LearningPathToCButtons,
   EditLearningPathStep,
-  CreateLearningPath,
   CreateLearningPathStep,
   ThisPageIntentionallyLeftBlank,
   SortLearningSteps
