@@ -5,7 +5,8 @@ import defined from 'defined';
 import LearningPathGeneralInfo from './LearningPathGeneralInfo';
 import LearningPathPrevNext from './LearningPathPrevNext';
 import LearningPathToC from './LearningPathToC';
-
+import Masthead from '../Masthead';
+import Icon from '../Icon';
 export function LearningPath(props) {
   const { params: { stepId } } = props;
   const saveButtons = defined(props.saveButtons, null);
@@ -14,6 +15,12 @@ export function LearningPath(props) {
 
   return (
     <div>
+      <Masthead>
+        <div className="masthead-button--left">
+          <Icon.MoreVert />
+          <span>Læringssti</span>
+        </div>
+      </Masthead>
       <div className="two-column">
         <aside className="two-column_col">
           <LearningPathGeneralInfo {...props} />

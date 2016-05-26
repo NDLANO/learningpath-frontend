@@ -45,5 +45,6 @@ Icon.Visibility = props => (<Icon {...props} className={classNames('icon--remove
 Icon.ArrowBack = props => (<Icon {...props} className={classNames('icon--arrow-back', props.className)} svgDefId="icon-arrow_back" />);
 Icon.ArrowForward = props => (<Icon {...props} className={classNames('icon--arrow-forward', props.className)} svgDefId="icon-arrow_forward" />);
 Icon.ImportExport = props => (<Icon {...props} className={classNames('icon--import_export', props.className)} svgDefId="icon-import_export" />);
+Icon.Menu = props => (<Icon {...props} className={classNames('icon--menu', props.className)} svgDefId="icon-menu" />);
 
 export default Icon;
