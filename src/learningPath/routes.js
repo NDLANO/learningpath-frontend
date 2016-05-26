@@ -4,13 +4,14 @@ import { bindActionCreators } from 'redux';
 
 import LearningPathSearch from './search/LearningPathSearch';
 import CreateLearningPath from './new/CreateLearningPath';
+import EditLearningPath from './edit/EditLearningPath';
 import actions from '../actions';
 import { defaultSearchQuery, parseSearchQuery } from '../middleware/searchQuery';
 import isEmpty from 'lodash/isEmpty';
 import requireAuthentication from '../components/requireAuthentication';
 import {
   LearningPath, LearningPathSummary, LearningPathStep,
-  EditLearningPath, EditLearningPathStep, CreateLearningPathStep,
+  EditLearningPathStep, CreateLearningPathStep,
   LearningPathToCButtons,
   SortLearningSteps
 } from '../components';

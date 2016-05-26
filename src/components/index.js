@@ -8,7 +8,6 @@ import LearningPath from './LearningPath';
 import LearningPathToCButtons from './LearningPath/LearningPathTOCButtons';
 import LearningPathSummary from './LearningPathSummary';
 import LearningPathStep from './LearningPathStep';
-import EditLearningPath from './EditLearningPath';
 import EditLearningPathStep from './EditLearningPathStep';
 import CreateLearningPathStep from './CreateLearningPathStep';
 import ThisPageIntentionallyLeftBlank from './ThisPageIntentionallyLeftBlank';
@@ -18,7 +17,6 @@ module.exports = {
   LoginProviders, SessionInitializer, LoginFailure,
   MyPage,
   LearningPath, LearningPathSummary, LearningPathStep,
-  EditLearningPath,
   LearningPathToCButtons,
   EditLearningPathStep,
   CreateLearningPathStep,

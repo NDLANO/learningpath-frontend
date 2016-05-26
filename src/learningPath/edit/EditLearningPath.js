@@ -6,9 +6,9 @@ import LearningPathForm from './LearningPathForm';
 
 import {
   updateLearningPath
-} from '../actions';
+} from '../../actions';
 
-export function EditLearningPath(props, {lang}) {
+function EditLearningPath(props, {lang}) {
   const {
     learningPath,
     saveAction

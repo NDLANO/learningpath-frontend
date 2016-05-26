@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import LabeledIcon from './LabeledIcon';
-import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
-import TagsInput from './common/TagsInput';
-import polyglot from '../i18n';
+import LabeledIcon from '../../components/LabeledIcon';
+import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
+import TagsInput from '../../common/TagsInput';
+import polyglot from '../../i18n';
 import classNames from 'classnames';
 import { reduxForm } from 'redux-form';
 import LearningPathDuration from './LearningPathDuration';
