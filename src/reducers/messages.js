@@ -34,9 +34,13 @@ export default handleActions({
   APPLICATION_ERROR: {
     throw(state, action) {
       const nextState = cloneDeep(state);
-      action.payload.json.messages.forEach((m) => {
-        nextState.push({id: uuid.v4(), message: `${m.field}: ${m.message}`, severity: 'danger', timeToLive: 0});
-      });
+
+      if (action.payload.json) {
+        action.payload.json.messages.forEach((m) => {
+          nextState.push({id: uuid.v4(), message: `${m.field}: ${m.message}`, severity: 'danger', timeToLive: 0});
+        });
+      }
+
       return nextState;
     }
   }

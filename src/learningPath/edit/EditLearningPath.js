@@ -8,12 +8,8 @@ import {
   updateLearningPath
 } from '../../actions';
 
-function EditLearningPath(props, {lang}) {
-  const {
-    learningPath,
-    saveAction
-  } = props;
-  let onSaveLearningPathSubmit = values => saveAction(learningPath.id, {
+const EditLearningPath = ({ learningPath, localUpdateLearningPath }, {lang}) => {
+  const handleSubmit = values => localUpdateLearningPath(learningPath.id, {
     title: [{title: values.title, language: lang}],
     description: [{description: values.description, language: lang}],
     revision: learningPath.revision,
@@ -23,15 +19,15 @@ function EditLearningPath(props, {lang}) {
 
   return (
     <main className="two-column_col two-column_col--center">
-      <LearningPathForm learningPath={learningPath} onSubmit={onSaveLearningPathSubmit} lang={lang} />
+      <LearningPathForm learningPath={learningPath} onSubmit={handleSubmit} lang={lang} />
     </main>
   );
-}
+};
 
 EditLearningPath.propTypes = {
   learningPath: PropTypes.object.isRequired,
   learningSteps: PropTypes.array.isRequired,
-  saveAction: PropTypes.func.isRequired
+  localUpdateLearningPath: PropTypes.func.isRequired
 };
 
 EditLearningPath.contextTypes = {
@@ -44,7 +40,7 @@ const mapStateToProps = state => Object.assign({}, state, {
 });
 
 const mapDispatchToProps = {
-  saveAction: updateLearningPath
+  localUpdateLearningPath: updateLearningPath
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditLearningPath);
