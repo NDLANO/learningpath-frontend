@@ -103,7 +103,6 @@ export class MyPage extends React.Component {
     return (
       <div>
         <Masthead />
-
         <div className="page-header">
           <h2 className="page-header_name">{polyglot.t('myPage.pageHeader')}</h2>
           <div className="page-header_ctrls">

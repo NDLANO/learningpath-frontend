@@ -8,14 +8,14 @@ import LearningPathToC from './LearningPathToC';
 import Masthead from '../Masthead';
 import Icon from '../Icon';
 export function LearningPath(props) {
-  const { params: { stepId } } = props;
+  const { activePathname, params: { stepId } } = props;
   const saveButtons = defined(props.saveButtons, null);
   const children = defined(props.main, props.children);
   const sortableTableOfContent = defined(props.sortLearningSteps, <LearningPathToC {...props} />);
 
   return (
     <div>
-      <Masthead>
+      <Masthead saveButtons={saveButtons} activePathname={activePathname}>
         <div className="masthead-button--left">
           <Icon.MoreVert />
           <span>Læringssti</span>

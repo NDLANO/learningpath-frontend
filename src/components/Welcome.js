@@ -3,7 +3,7 @@ import Form from 'react-router-form';
 import Logo from './Logo';
 import SiteNav from './SiteNav';
 import polyglot from '../i18n';
-
+import Masthead from './Masthead';
 export default class Welcome extends React.Component {
   getChildContext() {
     return {
@@ -23,6 +23,7 @@ export default class Welcome extends React.Component {
               <SiteNav cssModifier="on-dark" />
             </div>
           </div>
+          <Masthead />
 
           <h1 className="hero_title">{polyglot.t('welcomePage.title1')}</h1>
           <h3 className="hero_title">{polyglot.t('welcomePage.title2')}</h3>

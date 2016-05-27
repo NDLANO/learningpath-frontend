@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 
-import Masthead from './Masthead';
 import Alerts from './Alerts';
 
 export class App extends React.Component {
