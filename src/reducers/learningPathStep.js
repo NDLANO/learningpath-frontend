@@ -1,7 +1,5 @@
 import { handleActions } from 'redux-actions';
 import cloneDeep from 'lodash/cloneDeep';
-import assign from 'lodash/assign';
-import assignOrPushPropReducer from '../util/assignOrPushPropReducer';
 
 export default handleActions({
   SET_LEARNING_PATH_STEP: {
@@ -16,33 +14,6 @@ export default handleActions({
     },
     throw(state) { return state; }
   },
-  UPDATE_LEARNING_PATH_STEP_DESCRIPTION: {
-    next: assignOrPushPropReducer('description'),
-    throw(state) { return state; }
-  },
-  UPDATE_LEARNING_PATH_STEP_TITLE: {
-    next: assignOrPushPropReducer('title'),
-    throw(state) { return state; }
-  },
-  UPDATE_LEARNING_PATH_STEP_TYPE: {
-    next(state, action) {
-      return assign(cloneDeep(state), {type: action.payload});
-    },
-    throw(state) { return state; }
-  },
-  UPDATE_LEARNING_PATH_STEP_EMBED_URL: {
-    next: assignOrPushPropReducer('embedContent'),
-    throw(state) { return state; }
-  },
-  REMOVE_LEARNING_PATH_STEP_EMBED_CONTENT: {
-    next(state) {
-      const nextState = cloneDeep(state);
-      nextState.embedContent = [];
-      return nextState;
-    },
-    throw(state) { return state; }
-  },
-
   CREATE_EMPTY_LEARNING_PATH_STEP: {
     next() {
       return {

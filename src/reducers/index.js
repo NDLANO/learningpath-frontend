@@ -11,7 +11,7 @@ import learningPaths from './learningPaths';
 import learningPathQuery from './learningPathQuery';
 import learningPathsTotalCount from './learningPathsTotalCount';
 import myLearningPathsSortOrder from './myLearningPathsSortOrder';
-import oembedIsValid from './oembedIsValid';
+import oembedPreview from './oembedPreview';
 import messages from './messages';
 
 const rootReducers = combineReducers({
@@ -25,7 +25,7 @@ const rootReducers = combineReducers({
   learningPathsTotalCount,
   myLearningPathsSortOrder,
   messages,
-  oembedIsValid,
+  oembedPreview,
   routing: routerReducer,
   form: formReducer
 });

@@ -35,7 +35,7 @@ export default handleActions({
     throw(state, action) {
       const nextState = cloneDeep(state);
 
-      if (action.payload.json) {
+      if (action.payload.json && action.payload.json.messages) {
         action.payload.json.messages.forEach((m) => {
           nextState.push({id: uuid.v4(), message: `${m.field}: ${m.message}`, severity: 'danger', timeToLive: 0});
         });

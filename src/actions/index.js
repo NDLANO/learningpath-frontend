@@ -39,13 +39,7 @@ export const clearMessage = createAction('CLEAR_MESSAGE');
 export const logoutAction = createAction('LOGOUT');
 export const setOembedObject = createAction('SET_OEMBED_OBJECT');
 export const setLearningPathStatus = createAction('UPDATE_LEARNING_PATH_STATUS');
-export const updateLearningPathStepDescription = createAction('UPDATE_LEARNING_PATH_STEP_DESCRIPTION');
-export const updateLearningPathStepTitle = createAction('UPDATE_LEARNING_PATH_STEP_TITLE');
-export const updateLearningPathStepEmbedUrl = createAction('UPDATE_LEARNING_PATH_STEP_EMBED_URL');
-export const updateLearningPathStepType = createAction('UPDATE_LEARNING_PATH_STEP_TYPE');
 export const createEmptyLearningPathStep = createAction('CREATE_EMPTY_LEARNING_PATH_STEP');
-export const setIsValidOembed = createAction('SET_IS_VALID_OEMBED');
-export const removeLearningPathStepEmbedContent = createAction('REMOVE_LEARNING_PATH_STEP_EMBED_CONTENT');
 export const sortLearningPathSteps = createAction('SORT_LEARNING_PATH_STEPS');
 
 export {
@@ -105,12 +99,6 @@ export default {
   validateOembed,
   setLearningPathStatus,
   createEmptyLearningPathStep,
-  updateLearningPathStepDescription,
-  updateLearningPathStepTitle,
-  updateLearningPathStepEmbedUrl,
-  updateLearningPathStepType,
-  setIsValidOembed,
-  removeLearningPathStepEmbedContent,
   deleteLearningPathStep,
   sortLearningPathSteps,
   updateStepSequenceNumber
