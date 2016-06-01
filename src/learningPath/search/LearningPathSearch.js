@@ -23,7 +23,7 @@ class LearningPathSearch extends Component {
 
 
   render() {
-    const { learningPaths, query, lastPage, location: { pathname }, pushRoute, closeBothSidebars } = this.props;
+    const { learningPaths, query, lastPage, location: { pathname }, pushRoute, localCloseSidebars } = this.props;
     let { page } = query;
 
     const navigateTo = (q) => {
@@ -37,7 +37,7 @@ class LearningPathSearch extends Component {
     return (
       <div>
         <Masthead />
-        <div className="page-header" onClick={closeBothSidebars}>
+        <div className="page-header" onClick={localCloseSidebars}>
           <SearchForm
             {...query}
             onSortOrderChange={changeSortOrder}
@@ -45,7 +45,7 @@ class LearningPathSearch extends Component {
           />
         </div>
 
-        <div className="search-results" onClick={closeBothSidebars}>
+        <div className="search-results" onClick={localCloseSidebars}>
           {learningPaths.map(path =>
             (<SearchResult key={path.id} path={path} />)
           )}
@@ -63,7 +63,7 @@ LearningPathSearch.propTypes = {
   location: PropTypes.shape({ pathname: PropTypes.string.isRequired }),
   lastPage: PropTypes.number.isRequired,
   pushRoute: PropTypes.func.isRequired,
-  closeBothSidebars: PropTypes.func.isRequired,
+  localCloseSidebars: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -74,7 +74,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   fetchLearningPaths,
-  closeBothSidebars: closeSidebars,
+  localCloseSidebars: closeSidebars,
   pushRoute: (route) => routerActions.push(route)
 }, dispatch);
 

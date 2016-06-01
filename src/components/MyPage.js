@@ -32,7 +32,7 @@ export class MyPage extends React.Component {
   }
 
   render() {
-    const {learningPaths, sortKey, setSortKey, deletePath, updatePathStatus, createPath, closeBothSidebars} = this.props;
+    const {learningPaths, sortKey, setSortKey, deletePath, updatePathStatus, createPath, localCloseSidebars} = this.props;
     const {lang} = this.context;
     const onCreateLearningPathClick = this.onCreateLearningPathClick.bind(this);
     const items = learningPaths.map(lp => {
@@ -104,14 +104,14 @@ export class MyPage extends React.Component {
     return (
       <div>
         <Masthead />
-        <div className="page-header" onClick={closeBothSidebars}>
+        <div className="page-header" onClick={localCloseSidebars}>
           <h2 className="page-header_name">{polyglot.t('myPage.pageHeader')}</h2>
           <div className="page-header_ctrls">
             {sortOrderSelect}
           </div>
         </div>
-        <div className="tiles" onClick={closeBothSidebars}>{items}</div>
-        <div onClick={closeBothSidebars}>
+        <div className="tiles" onClick={localCloseSidebars}>{items}</div>
+        <div onClick={localCloseSidebars}>
           <button className="cta-link new-learningpath-button" onClick={onCreateLearningPathClick}>
             <LabeledIcon.Add labelText={polyglot.t('myPage.newBtn')} />
           </button>
@@ -131,7 +131,7 @@ MyPage.propTypes = {
   updatePathStatus: PropTypes.func.isRequired,
   createPath: PropTypes.func.isRequired,
   learningPaths: PropTypes.array,
-  closeBothSidebars: PropTypes.func.isRequired,
+  localCloseSidebars: PropTypes.func.isRequired,
 };
 
 MyPage.defaultProps = { learningPaths: [], sortKey: 'title' };
@@ -167,7 +167,7 @@ const mapDispatchToProps = {
   deletePath: deleteLearningPath,
   updatePathStatus: updateLearningPathStatus,
   createPath: createLearningPath,
-  closeBothSidebars: closeSidebars,
+  localCloseSidebars: closeSidebars,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyPage);

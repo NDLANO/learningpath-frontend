@@ -14,15 +14,15 @@ import {
 
 
 export function LearningPath(props) {
-  const { learningPath, closeBothSidebars, isTableOfContentOpen, activePathname, params: { stepId } } = props;
+  const { learningPath, localCloseSidebars, isTableOfContentOpen, activePathname, params: { stepId } } = props;
   const saveButtons = defined(props.saveButtons, null);
   const children = defined(props.main, props.children);
   const sortableTableOfContent = defined(props.sortLearningSteps, <LearningPathToC {...props} />);
   const sortableTableOfContentButton = !props.sortLearningSteps ? <SortLearningStepsButton learningPath={learningPath} /> : null;
   const collapseClassName = () => classNames({
     'two-column_col table-of-content': true,
-    collapsed: !isTableOfContentOpen,
-    in: isTableOfContentOpen,
+    'sidebar--collapsed': !isTableOfContentOpen,
+    'sidebar--open': isTableOfContentOpen,
   });
   return (
     <div>
@@ -41,7 +41,7 @@ export function LearningPath(props) {
         </aside>
         {children}
       </div>
-      <div onClick={closeBothSidebars}>
+      <div onClick={localCloseSidebars}>
         <LearningPathPrevNext currentStepId={stepId} />
       </div>
       <div className="learning-path_margin" />
@@ -59,7 +59,7 @@ LearningPath.propTypes = {
   sortLearningSteps: PropTypes.object,
   activePathname: PropTypes.string,
   isTableOfContentOpen: PropTypes.bool.isRequired,
-  closeBothSidebars: PropTypes.func.isRequired,
+  localCloseSidebars: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
@@ -71,7 +71,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
 });
 
 const mapDispatchToProps = {
-  closeBothSidebars: closeSidebars,
+  localCloseSidebars: closeSidebars,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LearningPath);

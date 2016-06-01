@@ -6,9 +6,9 @@ import {
 
 
 export function Main(props) {
-  const { children, closeBothSidebars, className } = props;
+  const { children, localCloseSidebars, className } = props;
   return (
-    <main onClick={closeBothSidebars} className={className}>
+    <main onClick={localCloseSidebars} className={className}>
       {children}
     </main>
   );
@@ -17,12 +17,12 @@ export function Main(props) {
 Main.propTypes = {
   learningPath: PropTypes.object.isRequired,
   children: PropTypes.node,
-  closeBothSidebars: PropTypes.func.isRequired,
+  localCloseSidebars: PropTypes.func.isRequired,
 };
 
 
 const mapDispatchToProps = {
-  closeBothSidebars: closeSidebars,
+  localCloseSidebars: closeSidebars,
 };
 
 export default connect(state => state, mapDispatchToProps)(Main);

@@ -6,7 +6,7 @@ import polyglot from '../../i18n';
 import Icon from '../Icon';
 import { updateLearningPath, updateLearningPathStatus, closeSidebars } from '../../actions';
 
-export function LearningPathToCButtons({learningPath, saveAction, saveAndPublishAction, closeBothSidebars}) {
+export function LearningPathToCButtons({learningPath, saveAction, saveAndPublishAction, localCloseSidebars}) {
   if (!learningPath.canEdit) {
     return null;
   }
@@ -14,18 +14,16 @@ export function LearningPathToCButtons({learningPath, saveAction, saveAndPublish
   const newStepTarget = `/learningpaths/${learningPath.id}/step/new`;
 
   const onClickSaveLearningPath = () => {
-    closeBothSidebars();
-    saveAction(learningPath);
+    saveAction(learningPath).then(localCloseSidebars);
   };
   const onClickSaveAndPublishLearningPath = () => {
-    closeBothSidebars();
-    saveAndPublishAction(learningPath);
+    saveAndPublishAction(learningPath).then(localCloseSidebars);
   };
 
   return (<div>
     <ul className="vertical-menu">
       <li className="vertical-menu_item">
-        <Link to={newStepTarget} className="cta-link cta-link--block labeled-icon" onClick={closeBothSidebars}>
+        <Link to={newStepTarget} className="cta-link cta-link--block labeled-icon" onClick={localCloseSidebars}>
           <Icon.Add /> {polyglot.t('editPage.addStepBtn')}
         </Link>
       </li>
@@ -47,13 +45,13 @@ LearningPathToCButtons.propTypes = {
   learningPath: PropTypes.object.isRequired,
   saveAction: PropTypes.func.isRequired,
   saveAndPublishAction: PropTypes.func.isRequired,
-  closeBothSidebars: PropTypes.func.isRequired,
+  localCloseSidebars: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = {
   saveAction: (lp) => updateLearningPath(lp.id, lp, '/minside'),
   saveAndPublishAction: (lp) => updateLearningPathStatus(lp.id, 'PUBLISHED', '/minside'),
-  closeBothSidebars: closeSidebars,
+  localCloseSidebars: closeSidebars,
 
 };
 

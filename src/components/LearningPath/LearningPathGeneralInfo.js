@@ -10,19 +10,19 @@ import { closeSidebars } from '../../actions';
 import LabeledIcon from '../LabeledIcon';
 import polyglot from '../../i18n';
 
-export function LearningPathGeneralInfo({learningPath, closeBothSidebars}, {lang}) {
+export function LearningPathGeneralInfo({learningPath, localCloseSidebars}, {lang}) {
   const href = `/learningpaths/${learningPath.id}`;
   const editPathTarget = `/learningpaths/${learningPath.id}/edit`;
   let edit = '';
   if (learningPath.canEdit) {
     edit = (
-      <Link className="cta-link cta-link--round edit_learningpath--button" to={editPathTarget} onClick={closeBothSidebars}>{polyglot.t('editPage.edit')}</Link>
+      <Link className="cta-link cta-link--round edit_learningpath--button" to={editPathTarget} onClick={localCloseSidebars}>{polyglot.t('editPage.edit')}</Link>
     );
   }
   return (
     <div className="learningpath-general-info">
       <h3 className="learningpath-general-info_h">
-        <Link to={href} onClick={closeBothSidebars}>{titleI18N(learningPath, lang)}</Link>
+        <Link to={href} onClick={localCloseSidebars}>{titleI18N(learningPath, lang)}</Link>
       </h3>
       <div className="learningpath-general-info_b">
         <LabeledIcon.Person labelText={get(learningPath, 'author.name')} />
@@ -36,7 +36,7 @@ export function LearningPathGeneralInfo({learningPath, closeBothSidebars}, {lang
 
 LearningPathGeneralInfo.propTypes = {
   learningPath: PropTypes.object.isRequired,
-  closeBothSidebars: PropTypes.func.isRequired,
+  localCloseSidebars: PropTypes.func.isRequired,
 };
 
 LearningPathGeneralInfo.contextTypes = {
@@ -46,7 +46,7 @@ LearningPathGeneralInfo.contextTypes = {
 export const mapStateToProps = state => state;
 
 const mapDispatchToProps = {
-  closeBothSidebars: closeSidebars,
+  localCloseSidebars: closeSidebars,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LearningPathGeneralInfo);

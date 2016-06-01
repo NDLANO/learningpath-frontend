@@ -17,7 +17,7 @@ export function Masthead(props) {
   const {
     isRightSidebarOpen,
     isLeftSideBarOpen,
-    closeBothSidebars,
+    localCloseSidebars,
     openRight,
     openLeft,
     children,
@@ -25,14 +25,14 @@ export function Masthead(props) {
   } = props;
   const leftNavButtonClicked = () => {
     if (isLeftSideBarOpen) {
-      closeBothSidebars();
+      localCloseSidebars();
     } else {
       openLeft();
     }
   };
   const rightNavButtonClicked = () => {
     if (isRightSidebarOpen) {
-      closeBothSidebars();
+      localCloseSidebars();
     } else {
       openRight();
     }
@@ -45,8 +45,8 @@ export function Masthead(props) {
 
   const collapseClassName = (isOpen) => classNames({
     'masthead--desktop': true,
-    collapsed: !isOpen,
-    in: isOpen,
+    'sidebar--collapsed': !isOpen,
+    'sidebar--open': isOpen,
   });
   const cloneChildren = children ? React.cloneElement(children, {className: activeButtonClassName(true, isLeftSideBarOpen), onClick: () => leftNavButtonClicked()}) : null;
 
@@ -62,7 +62,7 @@ export function Masthead(props) {
           </div>
         </div>
         <div className={collapseClassName(isRightSidebarOpen)}>
-          <div className="masthead-left--desktop" onClick={closeBothSidebars}>
+          <div className="masthead-left--desktop" onClick={localCloseSidebars}>
             {logo}
           </div>
           <div className="masthead-right--desktop">
@@ -85,7 +85,7 @@ Masthead.propTypes = {
   sortableTableOfContentButton: PropTypes.object,
   isLeftSideBarOpen: PropTypes.bool.isRequired,
   isRightSidebarOpen: PropTypes.bool.isRequired,
-  closeBothSidebars: PropTypes.func.isRequired,
+  localCloseSidebars: PropTypes.func.isRequired,
   openLeft: PropTypes.func.isRequired,
   openRight: PropTypes.func.isRequired,
 };
@@ -99,7 +99,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
   logo: get(ownProps, 'logo', <Logo />),
 });
 const mapDispatchToProps = {
-  closeBothSidebars: closeSidebars,
+  localCloseSidebars: closeSidebars,
   openLeft: openLeftSidebar,
   openRight: openRightSidebar,
 };

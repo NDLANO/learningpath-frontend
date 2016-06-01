@@ -6,14 +6,14 @@ import polyglot from '../i18n';
 
 import LabeledIcon from './LabeledIcon';
 import { closeSidebars } from '../actions';
-export function SiteNav({ authenticated, userName, cssModifier, closeBothSidebars}) {
+export function SiteNav({ authenticated, userName, cssModifier, localCloseSidebars}) {
   let myPage;
   let logInOut;
 
   if (authenticated) {
     myPage = (
       <li className="site-nav_item">
-        <Link to="/minside" className="site-nav_link" onClick={closeBothSidebars}>
+        <Link to="/minside" className="site-nav_link" onClick={localCloseSidebars}>
           <LabeledIcon.Apps labelText={polyglot.t('siteNav.myPage')} />
         </Link>
       </li>
@@ -21,7 +21,7 @@ export function SiteNav({ authenticated, userName, cssModifier, closeBothSidebar
 
     logInOut = (
       <li className="site-nav_item">
-        <Link to="/logout" className="site-nav_link" onClick={closeBothSidebars}>
+        <Link to="/logout" className="site-nav_link" onClick={localCloseSidebars}>
           <LabeledIcon.Exit labelText={polyglot.t('siteNav.logout', {name: userName})} />
         </Link>
       </li>
@@ -29,7 +29,7 @@ export function SiteNav({ authenticated, userName, cssModifier, closeBothSidebar
   } else {
     logInOut = (
       <li className="site-nav_item">
-        <Link to="/login" className="site-nav_link" onClick={closeBothSidebars}>
+        <Link to="/login" className="site-nav_link" onClick={localCloseSidebars}>
           <LabeledIcon.Exit labelText={polyglot.t('siteNav.login')} />
         </Link>
       </li>
@@ -45,7 +45,7 @@ export function SiteNav({ authenticated, userName, cssModifier, closeBothSidebar
     <div className={rootClasses}>
       <ul className="site-nav_list">
         <li className="site-nav_item">
-          <Link to="/learningpaths" className="site-nav_link" onClick={closeBothSidebars}>
+          <Link to="/learningpaths" className="site-nav_link" onClick={localCloseSidebars}>
             <LabeledIcon.Search labelText={polyglot.t('siteNav.search')} />
           </Link>
         </li>
@@ -80,7 +80,7 @@ const mapStateToProps = (state) => Object.assign({}, state, {
 });
 
 const mapDispatchToProps = {
-  closeBothSidebars: closeSidebars,
+  localCloseSidebars: closeSidebars,
 };
 
 
