@@ -103,6 +103,9 @@ const phrases = {
       task: 'Oppgave',
       summary: 'Oppsummering'
     },
+    validation: {
+      oneOfDescriptionOrUrlIsRequired: 'Enten Beskrivelse eller Url feltet må fylles ut.'
+    },
     mediatypeTitle: 'Velg innholdstype',
     mediatypeInformation: 'Hvilket type innhold skal læringssteget inneholde?',
     edit: 'Rediger læringssteg',
@@ -146,6 +149,13 @@ const phrases = {
   },
   updateLearningPathStatus: {
     updateStatusMsg: 'Oppdatert status OK'
+  },
+  validation: {
+    required: 'Feltet er påkrevd.',
+    integer: 'Må være et tall.',
+    max: 'Må ikke være mer enn maks %{max} tegn.',
+    min: 'Må bestå av minst %{min} tegn.',
+    oembed: 'Feltet har en ugyldig url.',
   },
   errors: {
     title: 'Tittel mangler.',

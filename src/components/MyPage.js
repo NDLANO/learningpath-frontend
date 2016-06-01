@@ -13,8 +13,9 @@ import formatDate from '../util/formatDate';
 import formatDuration from '../util/formatDuration';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 import Lightbox from './Lightbox';
-import CreateLearningPath from './CreateLearningPath';
 import Masthead from './Masthead';
+import CreateLearningPath from '../learningPath/new/CreateLearningPath';
+
 export class MyPage extends React.Component {
   constructor(props) {
     super(props);

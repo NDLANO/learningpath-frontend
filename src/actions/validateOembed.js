@@ -1,19 +1,26 @@
-import { setIsValidOembed, removeLearningPathStepEmbedContent, updateLearningPathStepEmbedUrl } from '.';
-import { fetchOembedUrl } from '../sources/learningpaths';
+import { createAction } from 'redux-actions';
 
-export default function validateOembed(url, lang) {
+import { fetchOembedUrl } from '../sources/learningpaths';
+import polyglot from '../i18n';
+
+export const removeOembedPreview = createAction('REMOVE_OEMBED_PREVIEW');
+export const setOembedPreview = createAction('SET_OEMBED_PREVIEW');
+
+export default function validateOembed(url, lang, fieldName = 'url', msgKey = 'validation.oembed') {
   if (!url || url.length === 0) {
-    return ((dispatch) => {
-      dispatch(removeLearningPathStepEmbedContent());
-      dispatch(setIsValidOembed(true));
-    });
+    return ((dispatch) => new Promise((resolve) => {
+      dispatch(removeOembedPreview());
+      resolve();
+    }));
   }
 
-  return (dispatch, getState) => fetchOembedUrl(getState().authToken, {url})
+  return (dispatch, getState) => new Promise((resolve, reject) => fetchOembedUrl(getState().authToken, {url})
     .then((oembed) => {
-      dispatch(removeLearningPathStepEmbedContent());
-      dispatch(updateLearningPathStepEmbedUrl(Object.assign({}, oembed, {url, language: lang})));
-      dispatch(setIsValidOembed(true));
+      dispatch(setOembedPreview(Object.assign({}, oembed, {url, language: lang})));
+      resolve();
     })
-    .catch(() => dispatch(setIsValidOembed(false)));
+    .catch(
+      () => reject({ [fieldName]: polyglot.t(msgKey, lang) })
+    )
+  );
 }

@@ -3,13 +3,13 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { routerActions } from 'react-router-redux';
 import isEqual from 'lodash/isEqual';
-import SearchResultPager from './SearchResultPager';
+import SearchResultPager from '../../common/SearchResultPager';
 import SearchForm from './LearningPathSearchForm';
 import SearchResult from './LearningPathSearchResult';
-import { fetchLearningPaths, closeSidebars } from '../actions';
-import Masthead from './Masthead';
-export class LearningPathSearch extends Component {
+import Masthead from '../../components/Masthead';
+import { fetchLearningPaths, closeSidebars } from '../../actions';
 
+class LearningPathSearch extends Component {
 
   componentWillMount() {
     this.props.fetchLearningPaths();

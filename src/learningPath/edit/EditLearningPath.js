@@ -3,18 +3,14 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
 import LearningPathForm from './LearningPathForm';
+import Main from '../../components/Main';
 
 import {
   updateLearningPath
-} from '../actions';
-import Main from './Main';
+} from '../../actions';
 
-export function EditLearningPath(props, {lang}) {
-  const {
-    learningPath,
-    saveAction
-  } = props;
-  let onSaveLearningPathSubmit = values => saveAction(learningPath.id, {
+const EditLearningPath = ({ learningPath, localUpdateLearningPath }, {lang}) => {
+  const handleSubmit = values => localUpdateLearningPath(learningPath.id, {
     title: [{title: values.title, language: lang}],
     description: [{description: values.description, language: lang}],
     revision: learningPath.revision,
@@ -24,15 +20,15 @@ export function EditLearningPath(props, {lang}) {
 
   return (
     <Main className="two-column_col two-column_col--center">
-      <LearningPathForm learningPath={learningPath} onSubmit={onSaveLearningPathSubmit} lang={lang} />
+      <LearningPathForm learningPath={learningPath} onSubmit={handleSubmit} lang={lang} />
     </Main>
   );
-}
+};
 
 EditLearningPath.propTypes = {
   learningPath: PropTypes.object.isRequired,
   learningSteps: PropTypes.array.isRequired,
-  saveAction: PropTypes.func.isRequired
+  localUpdateLearningPath: PropTypes.func.isRequired
 };
 
 EditLearningPath.contextTypes = {
@@ -45,7 +41,7 @@ const mapStateToProps = state => Object.assign({}, state, {
 });
 
 const mapDispatchToProps = {
-  saveAction: updateLearningPath
+  localUpdateLearningPath: updateLearningPath
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditLearningPath);

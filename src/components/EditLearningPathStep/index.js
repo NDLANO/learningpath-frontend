@@ -1,31 +1,42 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import assign from 'lodash/assign';
-import MediaTypeSelect from './MediaTypeSelect';
 import LearningPathStepForm from './LearningPathStepForm';
 import Main from '../Main';
 
 import {
-  updateLearningPathStepType
+  updateLearningPathStep,
+  createLearningPathStep
 } from '../../actions';
+import { pushOrAssignLanguageValue } from '../../util/i18nFieldFinder';
 
-export function EditLearningPathStep(props) {
+export function EditLearningPathStep(props, { lang: language }) {
   const {
     step,
-    updateType
+    saveLearningPathStep,
+    learningPathId,
   } = props;
 
-  const currentView = () => {
-    if (step.type) {
-      return <LearningPathStepForm {...props} />;
-    }
-    return <MediaTypeSelect value={step.type} onChange={updateType} />;
+  const handleSubmit = (values) => {
+    const toSave = Object.assign({}, step, {
+      type: values.type,
+      title: pushOrAssignLanguageValue(step.title, 'title', values.title, language),
+      description: pushOrAssignLanguageValue(step.description, 'description', values.description, language),
+      embedContent: pushOrAssignLanguageValue(step.embedContent, 'url', values.url, language),
+    });
+    return saveLearningPathStep(learningPathId, toSave);
   };
+
 
   return (
     <Main className="two-column_col two-column_col--white-bg">
       <div className="learning-path-step">
-        {currentView()}
+        <LearningPathStepForm
+          step={step}
+          learningPathId={learningPathId}
+          onSubmit={handleSubmit}
+          lang={language}
+        />
       </div>
     </Main>
   );
@@ -33,7 +44,8 @@ export function EditLearningPathStep(props) {
 
 EditLearningPathStep.propTypes = {
   step: PropTypes.object.isRequired,
-  updateType: PropTypes.func.isRequired
+  saveLearningPathStep: PropTypes.func.isRequired,
+  learningPathId: PropTypes.number.isRequired,
 };
 
 EditLearningPathStep.contextTypes = {
@@ -41,14 +53,12 @@ EditLearningPathStep.contextTypes = {
 };
 
 export const mapStateToProps = state => assign({}, state, {
-  step: state.learningPathStep
-
+  step: state.learningPathStep,
+  learningPathId: state.learningPath.id,
 });
 
 export const mapDispatchToProps = {
-  // actions som endrer learningPathStep i redux store:
-  updateType: updateLearningPathStepType
-  // action til persistere learningPathStep
+  saveLearningPathStep: (learningPathId, lps) => (lps.id ? updateLearningPathStep(learningPathId, lps.id, lps) : createLearningPathStep(learningPathId, lps)),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditLearningPathStep);

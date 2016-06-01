@@ -16,7 +16,7 @@ export function Main(props) {
 
 Main.propTypes = {
   learningPath: PropTypes.object.isRequired,
-  children: PropTypes.object,
+  children: PropTypes.node,
   closeBothSidebars: PropTypes.func.isRequired,
 };
 
