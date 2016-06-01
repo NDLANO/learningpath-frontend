@@ -47,6 +47,9 @@ export const createEmptyLearningPathStep = createAction('CREATE_EMPTY_LEARNING_P
 export const setIsValidOembed = createAction('SET_IS_VALID_OEMBED');
 export const removeLearningPathStepEmbedContent = createAction('REMOVE_LEARNING_PATH_STEP_EMBED_CONTENT');
 export const sortLearningPathSteps = createAction('SORT_LEARNING_PATH_STEPS');
+export const closeSidebars = createAction('CLOSE_SIDEBARS');
+export const openLeftSidebar = createAction('OPEN_LEFT_SIDEBAR');
+export const openRightSidebar = createAction('OPEN_RIGHT_SIDEBAR');
 
 export {
   initializeSession,
@@ -113,5 +116,8 @@ export default {
   removeLearningPathStepEmbedContent,
   deleteLearningPathStep,
   sortLearningPathSteps,
-  updateStepSequenceNumber
+  updateStepSequenceNumber,
+  closeSidebars,
+  openLeftSidebar,
+  openRightSidebar,
 };

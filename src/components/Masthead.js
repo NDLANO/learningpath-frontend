@@ -5,113 +5,103 @@ import Logo from './Logo';
 import SiteNav from './SiteNav';
 import Icon from './Icon';
 import classNames from 'classnames';
-import ReactDOM from 'react-dom';
-import LearningPathToC from './LearningPath/LearningPathToC';
-import LearningPathGeneralInfo from './LearningPath/LearningPathGeneralInfo';
-import defined from 'defined';
 import get from 'lodash/get';
-export class Masthead extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {isRightOpen: false, isLeftOpen: false};
-    this.documentClickHandler = this.documentClickHandler.bind(this);
-  }
 
-  componentDidMount() {
-    document.addEventListener('click', this.documentClickHandler);
-  }
+import {
+  closeSidebars,
+  openLeftSidebar,
+  openRightSidebar,
+} from '../actions';
 
-  componentWillUnmount() {
-    document.removeEventListener('click', this.documentClickHandler);
-  }
-
-  documentClickHandler(evt) {
-    const mastheadArea = ReactDOM.findDOMNode(this.refs.masthead);
-    const tocArea = ReactDOM.findDOMNode(this.refs.toc);
-
-
-    if (this.state.isRightOpen && !mastheadArea.contains(evt.target)) {
-      this.setState({isRightOpen: false});
-    } else if (this.state.isLeftOpen && (tocArea.contains(evt.target) || !mastheadArea.contains(evt.target))) {
-      this.setState({isLeftOpen: false});
+export function Masthead(props) {
+  const {
+    isRightSidebarOpen,
+    isLeftSideBarOpen,
+    closeBothSidebars,
+    openRight,
+    openLeft,
+    children,
+    logo,
+  } = props;
+  const leftNavButtonClicked = () => {
+    if (isLeftSideBarOpen) {
+      closeBothSidebars();
+    } else {
+      openLeft();
     }
-  }
-
-  leftNavButtonClicked() {
-    this.setState({isRightOpen: !this.state.isRightOpen});
-
-    if (this.state.isLeftOpen) {
-      this.setState({isLeftOpen: false});
+  };
+  const rightNavButtonClicked = () => {
+    if (isRightSidebarOpen) {
+      closeBothSidebars();
+    } else {
+      openRight();
     }
-  }
+  };
+  const activeButtonClassName = (isLeft, isActive) => classNames({
+    active: isActive,
+    'masthead-button--right': !isLeft,
+    'masthead-button--left': isLeft,
+  });
 
-  rightNavButtonClicked() {
-    this.setState({isLeftOpen: !this.state.isLeftOpen});
-    if (this.state.isRightOpen) {
-      this.setState({isRightOpen: false});
-    }
-  }
+  const collapseClassName = (isOpen) => classNames({
+    'masthead--desktop': true,
+    collapsed: !isOpen,
+    in: isOpen,
+  });
+  const cloneChildren = children ? React.cloneElement(children, {className: activeButtonClassName(true, isLeftSideBarOpen), onClick: () => leftNavButtonClicked()}) : null;
 
-  render() {
-
-    const children = this.props.children ? React.cloneElement(this.props.children, {onClick: () => this.rightNavButtonClicked()}) : null;
-
-    const collapseClassName = (isLeft, isOpen) => classNames({
-      'masthead-big-screen': !isLeft,
-      'masthead-toc': isLeft,
-      collapsed: !isOpen,
-      in: isOpen,
-    });
-    const tableOfContent = () => {
-      if (children) {
-        const saveButtons = defined(this.props.saveButtons, null);
-        return (
-          <div>
-            <LearningPathGeneralInfo {...this.props} />
-            <LearningPathToC {...this.props} />
-            {saveButtons}
-          </div>
-        );
-      }
-      return null;
-    };
-    return (
-      <div>
-        <div className="masthead" ref="masthead">
-          <div className="masthead-small-screen">
-            {children}
-            <Logo />
-            <div className="masthead-button--right" onClick={() => this.leftNavButtonClicked()}>
-              <Icon.Menu />
-              <span>Meny</span>
-            </div>
-          </div>
-          <div className={collapseClassName(true, this.state.isLeftOpen)} ref="toc" >
-            {tableOfContent()}
-          </div>
-          <div className={collapseClassName(false, this.state.isRightOpen)} ref="siteNav">
-            <div className="masthead_left">
-              <Logo />
-            </div>
-            <div className="masthead_right">
-              <SiteNav />
-            </div>
+  return (
+    <div>
+      <div className="masthead">
+        <div className="masthead--mobile">
+          {cloneChildren}
+          {logo}
+          <div className={activeButtonClassName(false, isRightSidebarOpen)} onClick={() => rightNavButtonClicked()}>
+            <Icon.Menu />
+            <span>Meny</span>
           </div>
         </div>
-        <div className="masthead_bottom--margin" />
+        <div className={collapseClassName(isRightSidebarOpen)}>
+          <div className="masthead-left--desktop" onClick={closeBothSidebars}>
+            {logo}
+          </div>
+          <div className="masthead-right--desktop">
+            <SiteNav />
+          </div>
+        </div>
       </div>
-    );
-  }
+      <div className="masthead--margin-bottom" />
+    </div>
+  );
 }
 
 Masthead.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  logo: PropTypes.object,
+  saveButtons: PropTypes.object,
+  sortableTableOfContent: PropTypes.object,
+  sortLearningSteps: PropTypes.object,
+  learningPath: PropTypes.object,
+  sortableTableOfContentButton: PropTypes.object,
+  isLeftSideBarOpen: PropTypes.bool.isRequired,
+  isRightSidebarOpen: PropTypes.bool.isRequired,
+  closeBothSidebars: PropTypes.func.isRequired,
+  openLeft: PropTypes.func.isRequired,
+  openRight: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
   learningPath: state.learningPath,
   activePathname: get(ownProps, 'activePathname', ''),
-  saveButtons: get(ownProps, 'saveButtons', ''),
+  saveButtons: get(ownProps, 'saveButtons', null),
+  isLeftSideBarOpen: get(state, 'sidebar.isLeftSideBarOpen', false),
+  isRightSidebarOpen: get(state, 'sidebar.isRightSidebarOpen', false),
+  logo: get(ownProps, 'logo', <Logo />),
 });
+const mapDispatchToProps = {
+  closeBothSidebars: closeSidebars,
+  openLeft: openLeftSidebar,
+  openRight: openRightSidebar,
+};
 
-export default connect(mapStateToProps)(Masthead);
+export default connect(mapStateToProps, mapDispatchToProps)(Masthead);

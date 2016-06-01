@@ -6,8 +6,8 @@ import isEqual from 'lodash/isEqual';
 import SearchResultPager from './SearchResultPager';
 import SearchForm from './LearningPathSearchForm';
 import SearchResult from './LearningPathSearchResult';
-import { fetchLearningPaths } from '../actions';
-
+import { fetchLearningPaths, closeSidebars } from '../actions';
+import Masthead from './Masthead';
 export class LearningPathSearch extends Component {
 
 
@@ -23,7 +23,7 @@ export class LearningPathSearch extends Component {
 
 
   render() {
-    const { learningPaths, query, lastPage, location: { pathname }, pushRoute } = this.props;
+    const { learningPaths, query, lastPage, location: { pathname }, pushRoute, closeBothSidebars } = this.props;
     let { page } = query;
 
     const navigateTo = (q) => {
@@ -36,7 +36,8 @@ export class LearningPathSearch extends Component {
 
     return (
       <div>
-        <div className="page-header">
+        <Masthead />
+        <div className="page-header" onClick={closeBothSidebars}>
           <SearchForm
             {...query}
             onSortOrderChange={changeSortOrder}
@@ -44,7 +45,7 @@ export class LearningPathSearch extends Component {
           />
         </div>
 
-        <div className="search-results">
+        <div className="search-results" onClick={closeBothSidebars}>
           {learningPaths.map(path =>
             (<SearchResult key={path.id} path={path} />)
           )}
@@ -61,7 +62,8 @@ LearningPathSearch.propTypes = {
   learningPaths: PropTypes.arrayOf(PropTypes.object).isRequired,
   location: PropTypes.shape({ pathname: PropTypes.string.isRequired }),
   lastPage: PropTypes.number.isRequired,
-  pushRoute: PropTypes.func.isRequired
+  pushRoute: PropTypes.func.isRequired,
+  closeBothSidebars: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -72,6 +74,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   fetchLearningPaths,
+  closeBothSidebars: closeSidebars,
   pushRoute: (route) => routerActions.push(route)
 }, dispatch);
 

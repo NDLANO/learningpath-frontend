@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import sortBy from 'lodash/sortBy';
 import reverse from 'lodash/reverse';
-import { setMyLearningPathsSortOrder, updateLearningPathStatus, deleteLearningPath, createLearningPath } from '../actions';
+import { setMyLearningPathsSortOrder, updateLearningPathStatus, deleteLearningPath, createLearningPath, closeSidebars } from '../actions';
 import Icon from './Icon';
 import LabeledIcon from './LabeledIcon';
 import polyglot from '../i18n';
@@ -31,7 +31,7 @@ export class MyPage extends React.Component {
   }
 
   render() {
-    const {learningPaths, sortKey, setSortKey, deletePath, updatePathStatus, createPath} = this.props;
+    const {learningPaths, sortKey, setSortKey, deletePath, updatePathStatus, createPath, closeBothSidebars} = this.props;
     const {lang} = this.context;
     const onCreateLearningPathClick = this.onCreateLearningPathClick.bind(this);
     const items = learningPaths.map(lp => {
@@ -103,14 +103,14 @@ export class MyPage extends React.Component {
     return (
       <div>
         <Masthead />
-        <div className="page-header">
+        <div className="page-header" onClick={closeBothSidebars}>
           <h2 className="page-header_name">{polyglot.t('myPage.pageHeader')}</h2>
           <div className="page-header_ctrls">
             {sortOrderSelect}
           </div>
         </div>
-        <div className="tiles">{items}</div>
-        <div>
+        <div className="tiles" onClick={closeBothSidebars}>{items}</div>
+        <div onClick={closeBothSidebars}>
           <button className="cta-link new-learningpath-button" onClick={onCreateLearningPathClick}>
             <LabeledIcon.Add labelText={polyglot.t('myPage.newBtn')} />
           </button>
@@ -129,7 +129,8 @@ MyPage.propTypes = {
   deletePath: PropTypes.func.isRequired,
   updatePathStatus: PropTypes.func.isRequired,
   createPath: PropTypes.func.isRequired,
-  learningPaths: PropTypes.array
+  learningPaths: PropTypes.array,
+  closeBothSidebars: PropTypes.func.isRequired,
 };
 
 MyPage.defaultProps = { learningPaths: [], sortKey: 'title' };
@@ -164,7 +165,8 @@ const mapDispatchToProps = {
   setSortKey: setMyLearningPathsSortOrder,
   deletePath: deleteLearningPath,
   updatePathStatus: updateLearningPathStatus,
-  createPath: createLearningPath
+  createPath: createLearningPath,
+  closeBothSidebars: closeSidebars,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyPage);

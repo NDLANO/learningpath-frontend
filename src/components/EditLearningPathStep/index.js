@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import assign from 'lodash/assign';
 import MediaTypeSelect from './MediaTypeSelect';
 import LearningPathStepForm from './LearningPathStepForm';
+import Main from '../Main';
 
 import {
   updateLearningPathStepType
@@ -22,11 +23,11 @@ export function EditLearningPathStep(props) {
   };
 
   return (
-    <main className="two-column_col two-column_col--white-bg">
+    <Main className="two-column_col two-column_col--white-bg">
       <div className="learning-path-step">
         {currentView()}
       </div>
-    </main>
+    </Main>
   );
 }
 

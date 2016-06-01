@@ -7,6 +7,7 @@ import LearningPathForm from './LearningPathForm';
 import {
   updateLearningPath
 } from '../actions';
+import Main from './Main';
 
 export function EditLearningPath(props, {lang}) {
   const {
@@ -22,9 +23,9 @@ export function EditLearningPath(props, {lang}) {
   });
 
   return (
-    <main className="two-column_col two-column_col--center">
+    <Main className="two-column_col two-column_col--center">
       <LearningPathForm learningPath={learningPath} onSubmit={onSaveLearningPathSubmit} lang={lang} />
-    </main>
+    </Main>
   );
 }
 

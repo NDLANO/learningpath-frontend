@@ -50,7 +50,7 @@ class SortableLearningStepList extends Component {
     }
 
     return (
-      <div className="sortable">
+      <div className="sortable" ref="sortable">
         <ul className="sortable_list">
           {learningsteps.map((step, i) =>
             (<SortableItem

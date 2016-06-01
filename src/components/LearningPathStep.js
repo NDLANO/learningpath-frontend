@@ -7,6 +7,7 @@ import Oembed from './Oembed';
 import { titleI18N, descriptionI18N, oembedContentI18N } from '../util/i18nFieldFinder';
 import polyglot from '../i18n';
 import Icon from './Icon';
+import Main from './Main';
 
 export function LearningPathStep({learningPathStep, learningPath}, {lang}) {
   let stepTitle = titleI18N(learningPathStep, lang);
@@ -23,11 +24,11 @@ export function LearningPathStep({learningPathStep, learningPath}, {lang}) {
   }
 
   return (
-    <main className="two-column_col two-column_col--white-bg">
+    <Main className="two-column_col two-column_col--white-bg">
       <LearningPathStepDescription stepTitle={stepTitle} stepDescription={stepDescription} />
       <Oembed oembedContent={oembedContent} />
       {edit}
-    </main>
+    </Main>
   );
 }
 
