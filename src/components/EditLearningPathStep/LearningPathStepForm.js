@@ -8,6 +8,7 @@ import DescriptionHTMLEditor from '../editors/DescriptionHTMLEditor';
 import MediaTypeSelect from './MediaTypeSelect';
 import polyglot from '../../i18n';
 import Icon from '../Icon';
+import OnClickCheckbox from './OnClickCheckbox';
 import OneLineEditor from '../editors/OneLineEditor';
 
 import PreviewOembed from './PreviewOembed';
@@ -16,14 +17,13 @@ import {
   validateOembed,
 } from '../../actions';
 
-
 const LearningPathStepForm = (props) => {
   const {
     step,
     lang,
     oembedPreview,
     error,
-    fields: { title, description, type, url },
+    fields: { title, description, type, url, showTitle },
     handleSubmit,
     submitting,
     learningPathId,
@@ -55,6 +55,7 @@ const LearningPathStepForm = (props) => {
       <div className="learning-step-form_group">
         <div className="learning-step-form_left">
           <span className="learning-step-form_icon-bg"><Icon.Create /></span>
+          <OnClickCheckbox {...showTitle} />
         </div>
         <div className="learning-step-form_right">
           <div className="learning-step-form_input learning-step-form_title">
@@ -109,6 +110,7 @@ LearningPathStepForm.propTypes = {
 const mapStateToProps = (state, props) => ({
   oembedPreview: state.oembedPreview.oembedContent,
   initialValues: {
+    showTitle: props.step.showTitle,
     title: titleI18N(props.step, props.lang),
     description: descriptionI18N(props.step, props.lang),
     url: oembedUrlI18N(props.step, props.lang),
@@ -133,7 +135,7 @@ const validate = createValidator({
 
 export default reduxForm({
   form: 'learning-path-step',
-  fields: ['title', 'description', 'url', 'type'],
+  fields: ['title', 'description', 'url', 'type', 'showTitle'],
   asyncValidate,
   validate,
   asyncBlurFields: ['url'],

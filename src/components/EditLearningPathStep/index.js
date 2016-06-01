@@ -19,6 +19,7 @@ export function EditLearningPathStep(props, { lang: language }) {
   const handleSubmit = (values) => {
     const toSave = Object.assign({}, step, {
       type: values.type,
+      showTitle: values.showTitle,
       title: pushOrAssignLanguageValue(step.title, 'title', values.title, language),
       description: pushOrAssignLanguageValue(step.description, 'description', values.description, language),
       embedContent: pushOrAssignLanguageValue(step.embedContent, 'url', values.url, language),
