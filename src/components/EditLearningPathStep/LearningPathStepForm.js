@@ -38,12 +38,12 @@ const LearningPathStepForm = (props) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="learning-step_hd">
-        <span className="mediatype-icon">
+    <form onSubmit={handleSubmit} className="learning-step-form">
+      <div className="learning-step-form_group">
+        <span className="learning-step-form_mediatype-icon">
           <LearningPathStepIcon learningPathStepType={type.value} isCircle={false} />
         </span>
-        <select className="mediatype-dd" {...type} >
+        <select className="learning-step-form_mediatype-dd" {...type} >
           <option value="INTRODUCTION">{polyglot.t('editPathStep.mediatype.introduction')}</option>
           <option value="TEXT">{polyglot.t('editPathStep.mediatype.text')}</option>
           <option value="MULTIMEDIA">{polyglot.t('editPathStep.mediatype.multimedia')}</option>
@@ -52,20 +52,19 @@ const LearningPathStepForm = (props) => {
           <option value="SUMMARY">{polyglot.t('editPathStep.mediatype.summary')}</option>
         </select>
       </div>
-      <div className="learning-step_hd">
-        <span className="editable"><Icon.Create /></span>
-        <h1 className="learning-step-input learning-step-input__title">
-          <OneLineEditor lang={lang} {...title} placeholder={polyglot.t('editPathStep.titlePlaceHolder')} />
-        </h1>
-        {title.touched && title.error && <span className="error_message error_message--red">{title.error}</span>}
-      </div>
-      <div className="learning-path_bd">
-        <div>
-          <DescriptionHTMLEditor
-            lang={lang}
-            {...description}
-          />
+      <div className="learning-step-form_group">
+        <div className="learning-step-form_left">
+          <span className="learning-step-form_icon-bg"><Icon.Create /></span>
         </div>
+        <div className="learning-step-form_right">
+          <div className="learning-step-form_input learning-step-form_title">
+            <OneLineEditor lang={lang} {...title} placeholder={polyglot.t('editPathStep.titlePlaceHolder')} />
+          </div>
+          {title.touched && title.error && <span className="error_message error_message--red">{title.error}</span>}
+        </div>
+      </div>
+      <DescriptionHTMLEditor lang={lang} {...description} />
+      <div className="learning-step-form_group">
         <div className="learningsource-form">
           <div>
             <label className="mediatype-menu__label">{polyglot.t('editPathStep.urlLabel')}</label>

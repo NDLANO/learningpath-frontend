@@ -143,26 +143,34 @@ export default class DescriptionHTMLEditor extends React.Component {
       contentState.getBlockMap().first().getType() !== 'unstyled';
 
     let className = classNames({
-      'RichEditor-editor learning-path-input learning-step-input__paragraph': true,
+      'RichEditor-editor learning-step-form_input learning-step-form_paragraph': true,
       'RichEditor-hidePlaceholder': commentAboveApplies
     });
 
     return (
       <div className="RichEditor-root">
-        <StyleControls
-          editorState={editorState}
-          onToggleInline={this.toggleInlineStyle}
-          onToggleBlock={this.toggleBlockType}
-        />
-        <span className="editable"><Icon.Create /></span>
-        <div className={className} onClick={this.focus}>
-          <Editor
+        <div className="learning-step-form_group">
+          <StyleControls
             editorState={editorState}
-            onChange={this.onChange}
-            placeholder={this.props.placeholder}
-            ref="editor"
-            spellCheck
+            onToggleInline={this.toggleInlineStyle}
+            onToggleBlock={this.toggleBlockType}
           />
+        </div>
+        <div className="learning-step-form_group">
+          <div className="learning-step-form_left">
+            <span className="learning-step-form_icon-bg"><Icon.Create /></span>
+          </div>
+          <div className="learning-step-form_right">
+            <div className={className} onClick={this.focus}>
+              <Editor
+                editorState={editorState}
+                onChange={this.onChange}
+                placeholder={this.props.placeholder}
+                ref="editor"
+                spellCheck
+              />
+            </div>
+          </div>
         </div>
       </div>
     );
