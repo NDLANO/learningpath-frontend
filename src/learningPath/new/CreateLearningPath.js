@@ -14,6 +14,7 @@ class CreateLearningPath extends React.Component {
   render() {
     const {
       fields: { title, description },
+      submitting,
       handleSubmit
     } = this.props;
     return (
@@ -28,7 +29,9 @@ class CreateLearningPath extends React.Component {
           <textarea rows="4" cols="50" placeholder={polyglot.t('createLearningPath.descriptionPlaceholder')} maxLength="150" className="textarea" {...description} />
         </div>
         <p className="hint-text">{polyglot.t('createLearningPath.descriptionMaxLength')}</p>
-        <button className="button cta-link cta-link--block" type="submit">{polyglot.t('createLearningPath.createButton')}</button>
+        <button className="button cta-link cta-link--block" disabled={submitting} type="submit">
+          {polyglot.t('createLearningPath.createButton')}
+        </button>
       </form>
     );
   }
@@ -37,6 +40,7 @@ class CreateLearningPath extends React.Component {
 CreateLearningPath.propTypes = {
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired
 };
 

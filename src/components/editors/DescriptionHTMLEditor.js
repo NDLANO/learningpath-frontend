@@ -80,10 +80,7 @@ export default class DescriptionHTMLEditor extends React.Component {
         return;
       }
       const contentState = editorState.getCurrentContent();
-      onChange({
-        description: stateToHTML(contentState),
-        language: props.lang
-      });
+      onChange(stateToHTML(contentState));
     });
 
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
@@ -174,7 +171,6 @@ export default class DescriptionHTMLEditor extends React.Component {
 
 
 DescriptionHTMLEditor.propTypes = {
-  lang: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string

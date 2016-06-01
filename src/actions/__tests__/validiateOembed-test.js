@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 import nock from 'nock';
 
 import actions from '..';
+import {removeOembedPreview, setOembedPreview} from '../validateOembed';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
@@ -27,9 +28,7 @@ test('actions/validiateOembed valid url', t => {
   store.dispatch(actions.validateOembed(url, 'nb'))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.removeLearningPathStepEmbedContent(),
-        actions.updateLearningPathStepEmbedUrl(oEmbedReply),
-        actions.setIsValidOembed(true)
+        setOembedPreview(oEmbedReply),
       ]);
 
       t.doesNotThrow(() => apiMock.done());
@@ -52,17 +51,17 @@ test('actions/validiateOembed invalid url', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch(actions.validateOembed(url))
+  store.dispatch(actions.validateOembed(url, 'nb', 'url', 'feil'))
     .then(() => {
-      t.deepEqual(store.getActions(), [
-        actions.setIsValidOembed(false)
-      ]);
-
       t.doesNotThrow(() => apiMock.done());
-
+      t.fail('Promise should be rejected.');
       done();
     })
-    .catch(done);
+    .catch((error) => {
+      t.doesNotThrow(() => apiMock.done());
+      t.deepEqual({ url: 'feil'}, error);
+      done();
+    });
 });
 
 test('actions/validiateOembed', t => {
@@ -74,8 +73,7 @@ test('actions/validiateOembed', t => {
 
   store.dispatch(actions.validateOembed(''));
   t.deepEqual(store.getActions(), [
-    actions.removeLearningPathStepEmbedContent(),
-    actions.setIsValidOembed(true)
+    removeOembedPreview()
   ]);
 
   done();

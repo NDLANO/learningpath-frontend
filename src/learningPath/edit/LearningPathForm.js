@@ -38,6 +38,7 @@ const LearningPathForm = (props) => {
   const {
     fields: { title, description, duration, tags },
     handleSubmit,
+    submitting,
     learningPath,
     lang
   } = props;
@@ -75,17 +76,6 @@ const LearningPathForm = (props) => {
           <p className="learning-path_input-information">{polyglot.t('learningPath.descriptionInformation', {remainingDescriptionLength})}</p>
         </div>
 
-        <div className="block-container_fixed block-container_fixed--bottom--right">
-          <div className="button-group">
-            <Link to={`/learningpaths/${learningPath.id}`} className="button button--secondary">
-              <LabeledIcon.Clear labelText={polyglot.t('editPage.cancelBtn')} />
-            </Link>
-            <button className="button button--primary" type="submit">
-              <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
-            </button>
-          </div>
-        </div>
-
         <div className="learning-path-image">
           <label className="label--medium-bold  label--medium">{polyglot.t('learningPath.image')}</label>
           <div className="learning-path-image-drop">
@@ -105,6 +95,17 @@ const LearningPathForm = (props) => {
           <label htmlFor="tags" className="label--medium-bold  label--medium">{polyglot.t('learningPath.tags')}</label>
           <TagsInput id="tags" lang={lang} {...tags} />
         </div>
+
+        <div className="block-container_fixed block-container_fixed--bottom--right">
+          <div className="button-group">
+            <Link to={`/learningpaths/${learningPath.id}`} className="button button--secondary">
+              <LabeledIcon.Clear labelText={polyglot.t('editPage.cancelBtn')} />
+            </Link>
+            <button disabled={submitting} className="button button--primary" type="submit">
+              <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
+            </button>
+          </div>
+        </div>
       </div>
     </form>
   );
@@ -114,6 +115,7 @@ LearningPathForm.propTypes = {
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
   learningPath: PropTypes.object.isRequired,
   lang: PropTypes.string.isRequired
 };
