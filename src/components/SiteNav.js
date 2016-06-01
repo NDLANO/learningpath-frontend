@@ -59,6 +59,7 @@ export function SiteNav({ authenticated, userName, cssModifier, localCloseSideba
 SiteNav.propTypes = {
   authenticated: PropTypes.bool,
   userName: PropTypes.string,
+  localCloseSidebars: PropTypes.func.isRequired,
   cssModifier: PropTypes.string
 };
 
