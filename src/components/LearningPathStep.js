@@ -7,9 +7,8 @@ import Oembed from './Oembed';
 import { titleI18N, descriptionI18N, oembedContentI18N } from '../util/i18nFieldFinder';
 import polyglot from '../i18n';
 import Icon from './Icon';
-import Main from './Main';
 
-export function LearningPathStep({learningPathStep, learningPath}, {lang}) {
+export function LearningPathStep({learningPathStep, learningPath, closeSidebars}, {lang}) {
   let stepTitle = titleI18N(learningPathStep, lang);
   let stepDescription = descriptionI18N(learningPathStep, lang);
   let oembedContent = oembedContentI18N(learningPathStep, lang);
@@ -24,16 +23,17 @@ export function LearningPathStep({learningPathStep, learningPath}, {lang}) {
   }
 
   return (
-    <Main className="two-column_col two-column_col--white-bg">
+    <main className="two-column_col two-column_col--white-bg" onClick={closeSidebars}>
       <LearningPathStepDescription stepTitle={stepTitle} stepDescription={stepDescription} />
       <Oembed oembedContent={oembedContent} />
       {edit}
-    </Main>
+    </main>
   );
 }
 
 LearningPathStep.propTypes = {
   learningPath: PropTypes.object.isRequired,
+  closeSidebars: PropTypes.func.isRequired,
   learningPathStep: PropTypes.object.isRequired
 };
 

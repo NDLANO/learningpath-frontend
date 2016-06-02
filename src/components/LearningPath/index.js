@@ -16,7 +16,7 @@ import {
 export function LearningPath(props) {
   const { learningPath, localCloseSidebars, isTableOfContentOpen, activePathname, params: { stepId } } = props;
   const saveButtons = defined(props.saveButtons, null);
-  const children = defined(props.main, props.children);
+  const children = React.cloneElement(defined(props.main, props.children), { closeSidebars: localCloseSidebars});
   const sortableTableOfContent = defined(props.sortLearningSteps, <LearningPathToC {...props} />);
   const sortableTableOfContentButton = !props.sortLearningSteps ? <SortLearningStepsButton learningPath={learningPath} /> : null;
   const collapseClassName = () => classNames({

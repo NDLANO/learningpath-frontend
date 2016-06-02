@@ -3,13 +3,12 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
 import LearningPathForm from './LearningPathForm';
-import Main from '../../components/Main';
 
 import {
   updateLearningPath
 } from '../../actions';
 
-const EditLearningPath = ({ learningPath, localUpdateLearningPath }, {lang}) => {
+const EditLearningPath = ({ learningPath, localUpdateLearningPath, closeSidebars }, {lang}) => {
   const handleSubmit = values => localUpdateLearningPath(learningPath.id, {
     title: [{title: values.title, language: lang}],
     description: [{description: values.description, language: lang}],
@@ -19,15 +18,16 @@ const EditLearningPath = ({ learningPath, localUpdateLearningPath }, {lang}) => 
   });
 
   return (
-    <Main className="two-column_col two-column_col--center">
+    <main className="two-column_col two-column_col--center" onClick={closeSidebars}>
       <LearningPathForm learningPath={learningPath} onSubmit={handleSubmit} lang={lang} />
-    </Main>
+    </main>
   );
 };
 
 EditLearningPath.propTypes = {
   learningPath: PropTypes.object.isRequired,
-  learningSteps: PropTypes.array.isRequired,
+  learnngSteps: PropTypes.array.isRequired,
+  closeSidebars: PropTypes.func.isRequired,
   localUpdateLearningPath: PropTypes.func.isRequired
 };
 

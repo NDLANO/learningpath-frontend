@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import assign from 'lodash/assign';
 import LearningPathStepForm from './LearningPathStepForm';
-import Main from '../Main';
 
 import {
   updateLearningPathStep,
@@ -13,6 +12,7 @@ import { pushOrAssignLanguageValue } from '../../util/i18nFieldFinder';
 export function EditLearningPathStep(props, { lang: language }) {
   const {
     step,
+    closeSidebars,
     saveLearningPathStep,
     learningPathId,
   } = props;
@@ -29,7 +29,7 @@ export function EditLearningPathStep(props, { lang: language }) {
 
 
   return (
-    <Main className="two-column_col two-column_col--white-bg">
+    <main className="two-column_col two-column_col--white-bg" onClick={closeSidebars}>
       <div className="learning-path-step">
         <LearningPathStepForm
           step={step}
@@ -38,13 +38,14 @@ export function EditLearningPathStep(props, { lang: language }) {
           lang={language}
         />
       </div>
-    </Main>
+    </main>
   );
 }
 
 EditLearningPathStep.propTypes = {
   step: PropTypes.object.isRequired,
   saveLearningPathStep: PropTypes.func.isRequired,
+  closeSidebars: PropTypes.func.isRequired,
   learningPathId: PropTypes.number.isRequired,
 };
 
