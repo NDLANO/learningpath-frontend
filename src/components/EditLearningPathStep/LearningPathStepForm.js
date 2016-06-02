@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
+import defined from 'defined';
 import { reduxForm } from 'redux-form';
 import { titleI18N, descriptionI18N, oembedUrlI18N, oembedContentI18N } from '../../util/i18nFieldFinder';
 import { createValidator, required, oneOfIsRequired } from '../../util/validation';
@@ -110,7 +111,7 @@ LearningPathStepForm.propTypes = {
 const mapStateToProps = (state, props) => ({
   oembedPreview: state.oembedPreview.oembedContent,
   initialValues: {
-    showTitle: props.step.showTitle,
+    showTitle: defined(props.step.showTitle, false),
     title: titleI18N(props.step, props.lang),
     description: descriptionI18N(props.step, props.lang),
     url: oembedUrlI18N(props.step, props.lang),
