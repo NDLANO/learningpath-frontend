@@ -7,7 +7,8 @@ import SearchResultPager from '../../common/SearchResultPager';
 import SearchForm from './LearningPathSearchForm';
 import SearchResult from './LearningPathSearchResult';
 import Masthead from '../../components/Masthead';
-import { fetchLearningPaths, closeSidebars } from '../../actions';
+import Content from '../../main/Content';
+import { fetchLearningPaths } from '../../actions';
 
 class LearningPathSearch extends Component {
 
@@ -23,7 +24,7 @@ class LearningPathSearch extends Component {
 
 
   render() {
-    const { learningPaths, query, lastPage, location: { pathname }, pushRoute, localCloseSidebars } = this.props;
+    const { learningPaths, query, lastPage, location: { pathname }, pushRoute } = this.props;
     let { page } = query;
 
     const navigateTo = (q) => {
@@ -37,20 +38,22 @@ class LearningPathSearch extends Component {
     return (
       <div>
         <Masthead />
-        <div className="page-header" onClick={localCloseSidebars}>
-          <SearchForm
-            {...query}
-            onSortOrderChange={changeSortOrder}
-            onSearchQuerySubmit={submitSearchQuery}
-          />
-        </div>
+        <Content>
+          <div className="page-header">
+            <SearchForm
+              {...query}
+              onSortOrderChange={changeSortOrder}
+              onSearchQuerySubmit={submitSearchQuery}
+            />
+          </div>
 
-        <div className="search-results" onClick={localCloseSidebars}>
-          {learningPaths.map(path =>
-            (<SearchResult key={path.id} path={path} />)
-          )}
-          <SearchResultPager page={page} lastPage={lastPage} query={query} />
-        </div>
+          <div className="search-results">
+            {learningPaths.map(path =>
+              (<SearchResult key={path.id} path={path} />)
+            )}
+            <SearchResultPager page={page} lastPage={lastPage} query={query} />
+          </div>
+        </Content>
       </div>
     );
   }
@@ -63,7 +66,6 @@ LearningPathSearch.propTypes = {
   location: PropTypes.shape({ pathname: PropTypes.string.isRequired }),
   lastPage: PropTypes.number.isRequired,
   pushRoute: PropTypes.func.isRequired,
-  localCloseSidebars: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -74,7 +76,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   fetchLearningPaths,
-  localCloseSidebars: closeSidebars,
   pushRoute: (route) => routerActions.push(route)
 }, dispatch);
 

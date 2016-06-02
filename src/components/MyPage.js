@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import sortBy from 'lodash/sortBy';
 import reverse from 'lodash/reverse';
-import { setMyLearningPathsSortOrder, updateLearningPathStatus, deleteLearningPath, createLearningPath, closeSidebars } from '../actions';
+import { setMyLearningPathsSortOrder, updateLearningPathStatus, deleteLearningPath, createLearningPath } from '../actions';
 import Icon from './Icon';
 import LabeledIcon from './LabeledIcon';
 import polyglot from '../i18n';
@@ -14,6 +14,7 @@ import formatDuration from '../util/formatDuration';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 import Lightbox from './Lightbox';
 import Masthead from './Masthead';
+import Content from '../main/Content';
 import CreateLearningPath from '../learningPath/new/CreateLearningPath';
 
 export class MyPage extends React.Component {
@@ -32,7 +33,7 @@ export class MyPage extends React.Component {
   }
 
   render() {
-    const {learningPaths, sortKey, setSortKey, deletePath, updatePathStatus, createPath, localCloseSidebars} = this.props;
+    const {learningPaths, sortKey, setSortKey, deletePath, updatePathStatus, createPath} = this.props;
     const {lang} = this.context;
     const onCreateLearningPathClick = this.onCreateLearningPathClick.bind(this);
     const items = learningPaths.map(lp => {
@@ -104,21 +105,21 @@ export class MyPage extends React.Component {
     return (
       <div>
         <Masthead />
-        <div className="page-header" onClick={localCloseSidebars}>
-          <h2 className="page-header_name">{polyglot.t('myPage.pageHeader')}</h2>
-          <div className="page-header_ctrls">
-            {sortOrderSelect}
+        <Content>
+          <div className="page-header">
+            <h2 className="page-header_name">{polyglot.t('myPage.pageHeader')}</h2>
+            <div className="page-header_ctrls">
+              {sortOrderSelect}
+            </div>
           </div>
-        </div>
-        <div className="tiles" onClick={localCloseSidebars}>{items}</div>
-        <div onClick={localCloseSidebars}>
+          <div className="tiles">{items}</div>
           <button className="cta-link new-learningpath-button" onClick={onCreateLearningPathClick}>
             <LabeledIcon.Add labelText={polyglot.t('myPage.newBtn')} />
           </button>
           <Lightbox display={this.state.displayCreatePath} onClose={onLightboxClose}>
             <CreateLearningPath onSubmit={onCreateLearningPathSubmit} />
           </Lightbox>
-        </div>
+        </Content>
       </div>
   );
   }
@@ -131,7 +132,6 @@ MyPage.propTypes = {
   updatePathStatus: PropTypes.func.isRequired,
   createPath: PropTypes.func.isRequired,
   learningPaths: PropTypes.array,
-  localCloseSidebars: PropTypes.func.isRequired,
 };
 
 MyPage.defaultProps = { learningPaths: [], sortKey: 'title' };
@@ -167,7 +167,6 @@ const mapDispatchToProps = {
   deletePath: deleteLearningPath,
   updatePathStatus: updateLearningPathStatus,
   createPath: createLearningPath,
-  localCloseSidebars: closeSidebars,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyPage);
