@@ -27,7 +27,7 @@ export function LearningPath(props) {
   return (
     <div>
       <Masthead saveButtons={saveButtons} activePathname={activePathname} sortLearningSteps={props.sortLearningSteps} sortableTableOfContentButton={sortableTableOfContentButton}>
-        <div className="masthead-button--left">
+        <div className="masthead_button masthead_button--left">
           <Icon.MoreVert />
           <span>Læringssti</span>
         </div>

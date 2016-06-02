@@ -39,8 +39,9 @@ export function Masthead(props) {
   };
   const activeButtonClassName = (isLeft, isActive) => classNames({
     active: isActive,
-    'masthead-button--right': !isLeft,
-    'masthead-button--left': isLeft,
+    masthead_button: true,
+    'masthead_button--right': !isLeft,
+    'masthead_button--left': isLeft,
   });
 
   const collapseClassName = (isOpen) => classNames({
@@ -62,10 +63,10 @@ export function Masthead(props) {
           </div>
         </div>
         <div className={collapseClassName(isRightSidebarOpen)}>
-          <div className="masthead-left--desktop" onClick={localCloseSidebars}>
+          <div className="masthead_left--desktop" onClick={localCloseSidebars}>
             {logo}
           </div>
-          <div className="masthead-right--desktop">
+          <div className="masthead_right--desktop">
             <SiteNav />
           </div>
         </div>
