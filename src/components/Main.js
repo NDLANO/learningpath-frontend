@@ -1,14 +1,11 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import {
-  closeSidebars,
-} from '../actions';
+import withCloseSidebars from '../common/withCloseSidebars';
 
 
 export function Main(props) {
-  const { children, localCloseSidebars, className } = props;
+  const { children, closeSidebars, className } = props;
   return (
-    <main onClick={localCloseSidebars} className={className}>
+    <main onClick={closeSidebars} className={className}>
       {children}
     </main>
   );
@@ -17,12 +14,8 @@ export function Main(props) {
 Main.propTypes = {
   learningPath: PropTypes.object.isRequired,
   children: PropTypes.node,
-  localCloseSidebars: PropTypes.func.isRequired,
+  closeSidebars: PropTypes.func.isRequired,
 };
 
 
-const mapDispatchToProps = {
-  localCloseSidebars: closeSidebars,
-};
-
-export default connect(state => state, mapDispatchToProps)(Main);
+export default withCloseSidebars(Main);
