@@ -49,6 +49,11 @@ export function Masthead(props) {
     'sidebar--collapsed': !isOpen,
     'sidebar--open': isOpen,
   });
+
+  const overlayClassName = () => classNames({
+    'masthead_page-overlay': true,
+    'masthead_page-overlay--open': (isLeftSideBarOpen || isRightSidebarOpen)
+  });
   const cloneChildren = children ? React.cloneElement(children, {className: activeButtonClassName(true, isLeftSideBarOpen), onClick: () => leftNavButtonClicked()}) : null;
 
   return (
@@ -71,6 +76,7 @@ export function Masthead(props) {
           </div>
         </div>
       </div>
+      <div className={overlayClassName()} onClick={localCloseSidebars} />
       <div className="masthead--margin-bottom" />
     </div>
   );

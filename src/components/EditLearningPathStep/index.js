@@ -12,7 +12,6 @@ import { pushOrAssignLanguageValue } from '../../util/i18nFieldFinder';
 export function EditLearningPathStep(props, { lang: language }) {
   const {
     step,
-    closeSidebars,
     saveLearningPathStep,
     learningPathId,
   } = props;
@@ -29,7 +28,7 @@ export function EditLearningPathStep(props, { lang: language }) {
 
 
   return (
-    <main className="two-column_col two-column_col--white-bg" onClick={closeSidebars}>
+    <main className="two-column_col two-column_col--white-bg">
       <div className="learning-path-step">
         <LearningPathStepForm
           step={step}
@@ -45,7 +44,6 @@ export function EditLearningPathStep(props, { lang: language }) {
 EditLearningPathStep.propTypes = {
   step: PropTypes.object.isRequired,
   saveLearningPathStep: PropTypes.func.isRequired,
-  closeSidebars: PropTypes.func.isRequired,
   learningPathId: PropTypes.number.isRequired,
 };
 

@@ -8,15 +8,11 @@ import LearningPathToC from './LearningPathToC';
 import Masthead from '../Masthead';
 import Icon from '../Icon';
 import SortLearningStepsButton from './SortLearningStepsButton';
-import {
-  closeSidebars,
-} from '../../actions';
-
 
 export function LearningPath(props) {
-  const { learningPath, localCloseSidebars, isTableOfContentOpen, activePathname, params: { stepId } } = props;
+  const { learningPath, isTableOfContentOpen, activePathname, params: { stepId } } = props;
   const saveButtons = defined(props.saveButtons, null);
-  const children = React.cloneElement(defined(props.main, props.children), { closeSidebars: localCloseSidebars});
+  const children = defined(props.main, props.children);
   const sortableTableOfContent = defined(props.sortLearningSteps, <LearningPathToC {...props} />);
   const sortableTableOfContentButton = !props.sortLearningSteps ? <SortLearningStepsButton learningPath={learningPath} /> : null;
   const collapseClassName = () => classNames({
@@ -41,9 +37,7 @@ export function LearningPath(props) {
         </aside>
         {children}
       </div>
-      <div onClick={localCloseSidebars}>
-        <LearningPathPrevNext currentStepId={stepId} />
-      </div>
+      <LearningPathPrevNext currentStepId={stepId} />
       <div className="learning-path_margin" />
     </div>
   );
@@ -59,7 +53,6 @@ LearningPath.propTypes = {
   sortLearningSteps: PropTypes.object,
   activePathname: PropTypes.string,
   isTableOfContentOpen: PropTypes.bool.isRequired,
-  localCloseSidebars: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
@@ -70,8 +63,4 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
   isTableOfContentOpen: state.sidebar.isLeftSideBarOpen,
 });
 
-const mapDispatchToProps = {
-  localCloseSidebars: closeSidebars,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(LearningPath);
+export default connect(mapStateToProps)(LearningPath);

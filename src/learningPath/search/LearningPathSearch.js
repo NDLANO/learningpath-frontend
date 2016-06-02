@@ -7,7 +7,6 @@ import SearchResultPager from '../../common/SearchResultPager';
 import SearchForm from './LearningPathSearchForm';
 import SearchResult from './LearningPathSearchResult';
 import Masthead from '../../components/Masthead';
-import Content from '../../main/Content';
 import { fetchLearningPaths } from '../../actions';
 
 class LearningPathSearch extends Component {
@@ -38,22 +37,20 @@ class LearningPathSearch extends Component {
     return (
       <div>
         <Masthead />
-        <Content>
-          <div className="page-header">
-            <SearchForm
-              {...query}
-              onSortOrderChange={changeSortOrder}
-              onSearchQuerySubmit={submitSearchQuery}
-            />
-          </div>
+        <div className="page-header">
+          <SearchForm
+            {...query}
+            onSortOrderChange={changeSortOrder}
+            onSearchQuerySubmit={submitSearchQuery}
+          />
+        </div>
 
-          <div className="search-results">
-            {learningPaths.map(path =>
-              (<SearchResult key={path.id} path={path} />)
-            )}
-            <SearchResultPager page={page} lastPage={lastPage} query={query} />
-          </div>
-        </Content>
+        <div className="search-results">
+          {learningPaths.map(path =>
+            (<SearchResult key={path.id} path={path} />)
+          )}
+          <SearchResultPager page={page} lastPage={lastPage} query={query} />
+        </div>
       </div>
     );
   }

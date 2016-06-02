@@ -8,7 +8,7 @@ import {
   updateLearningPath
 } from '../../actions';
 
-const EditLearningPath = ({ learningPath, localUpdateLearningPath, closeSidebars }, {lang}) => {
+const EditLearningPath = ({ learningPath, localUpdateLearningPath }, {lang}) => {
   const handleSubmit = values => localUpdateLearningPath(learningPath.id, {
     title: [{title: values.title, language: lang}],
     description: [{description: values.description, language: lang}],
@@ -18,7 +18,7 @@ const EditLearningPath = ({ learningPath, localUpdateLearningPath, closeSidebars
   });
 
   return (
-    <main className="two-column_col two-column_col--center" onClick={closeSidebars}>
+    <main className="two-column_col two-column_col--center">
       <LearningPathForm learningPath={learningPath} onSubmit={handleSubmit} lang={lang} />
     </main>
   );
@@ -27,7 +27,6 @@ const EditLearningPath = ({ learningPath, localUpdateLearningPath, closeSidebars
 EditLearningPath.propTypes = {
   learningPath: PropTypes.object.isRequired,
   learnngSteps: PropTypes.array.isRequired,
-  closeSidebars: PropTypes.func.isRequired,
   localUpdateLearningPath: PropTypes.func.isRequired
 };
 
