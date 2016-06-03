@@ -33,7 +33,7 @@ export default class SearchResult extends Component {
     return (
 
       <div>
-        <Link to={`/learningpaths/${path.id}`}>
+        <Link to={`/learningpaths/${path.id}/first-step/`}>
           <div className="search-result">
             <div className="search-result_img_container">
               {image()}

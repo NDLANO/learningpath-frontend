@@ -63,7 +63,7 @@ export class MyPage extends React.Component {
               <LearningPathDropdown onSelect={onDropDownSelect} learningPath={lp} />
             </div>
           </div>
-          <Link className="tile_bd" to={`/learningpaths/${lp.id}`}>
+          <Link className="tile_bd" to={`/learningpaths/${lp.id}/first-step`}>
             <h3 className="tile_title">{title}</h3>
             <p>{description}</p>
           </Link>
