@@ -13,6 +13,7 @@ import formatDate from '../util/formatDate';
 import formatDuration from '../util/formatDuration';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 import Lightbox from './Lightbox';
+import Masthead from './Masthead';
 import CreateLearningPath from '../learningPath/new/CreateLearningPath';
 
 export class MyPage extends React.Component {
@@ -63,7 +64,7 @@ export class MyPage extends React.Component {
               <LearningPathDropdown onSelect={onDropDownSelect} learningPath={lp} />
             </div>
           </div>
-          <Link className="tile_bd" to={`/learningpaths/${lp.id}`}>
+          <Link className="tile_bd" to={`/learningpaths/${lp.id}/first-step`}>
             <h3 className="tile_title">{title}</h3>
             <p>{description}</p>
           </Link>
@@ -100,15 +101,16 @@ export class MyPage extends React.Component {
 
     let onLightboxClose = () => this.setState({displayCreatePath: false});
 
-    return (<div>
-      <div className="page-header">
-        <h2 className="page-header_name">{polyglot.t('myPage.pageHeader')}</h2>
-        <div className="page-header_ctrls">
-          {sortOrderSelect}
-        </div>
-      </div>
-      <div className="tiles">{items}</div>
+    return (
       <div>
+        <Masthead />
+        <div className="page-header">
+          <h2 className="page-header_name">{polyglot.t('myPage.pageHeader')}</h2>
+          <div className="page-header_ctrls">
+            {sortOrderSelect}
+          </div>
+        </div>
+        <div className="tiles">{items}</div>
         <button className="cta-link new-learningpath-button" onClick={onCreateLearningPathClick}>
           <LabeledIcon.Add labelText={polyglot.t('myPage.newBtn')} />
         </button>
@@ -116,7 +118,7 @@ export class MyPage extends React.Component {
           <CreateLearningPath onSubmit={onCreateLearningPathSubmit} />
         </Lightbox>
       </div>
-    </div>);
+  );
   }
 }
 
@@ -126,7 +128,7 @@ MyPage.propTypes = {
   deletePath: PropTypes.func.isRequired,
   updatePathStatus: PropTypes.func.isRequired,
   createPath: PropTypes.func.isRequired,
-  learningPaths: PropTypes.array
+  learningPaths: PropTypes.array,
 };
 
 MyPage.defaultProps = { learningPaths: [], sortKey: 'title' };
@@ -161,7 +163,7 @@ const mapDispatchToProps = {
   setSortKey: setMyLearningPathsSortOrder,
   deletePath: deleteLearningPath,
   updatePathStatus: updateLearningPathStatus,
-  createPath: createLearningPath
+  createPath: createLearningPath,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyPage);

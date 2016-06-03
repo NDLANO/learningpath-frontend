@@ -1,8 +1,8 @@
 import React from 'react';
 import Form from 'react-router-form';
 import Logo from './Logo';
-import SiteNav from './SiteNav';
 import polyglot from '../i18n';
+import Masthead from './Masthead';
 
 export default class Welcome extends React.Component {
   getChildContext() {
@@ -14,16 +14,10 @@ export default class Welcome extends React.Component {
   render() {
     return (
       <div>
+        <div className="frontpage-masthead">
+          <Masthead logo={<Logo cssModifier="on-dark" />} />
+        </div>
         <div className="hero">
-          <div className="frontpage-masthead">
-            <div className="frontpage-masthead_left">
-              <Logo cssModifier="on-dark" />
-            </div>
-            <div className="frontpage-masthead_right">
-              <SiteNav cssModifier="on-dark" />
-            </div>
-          </div>
-
           <h1 className="hero_title">{polyglot.t('welcomePage.title1')}</h1>
           <h3 className="hero_title">{polyglot.t('welcomePage.title2')}</h3>
 

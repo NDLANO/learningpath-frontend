@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Logo from './Logo';
-import SiteNav from './SiteNav';
+
 import Alerts from './Alerts';
 
 export class App extends React.Component {
@@ -15,18 +14,7 @@ export class App extends React.Component {
   render() {
     return (
       <div>
-        <div className="masthead">
-          <div className="masthead_left">
-            <Logo />
-          </div>
-          <div className="masthead_right">
-            <SiteNav />
-          </div>
-        </div>
-        <div className="content">
-          {this.props.children}
-        </div>
-
+        {this.props.children}
         <Alerts />
       </div>
     );

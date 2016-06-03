@@ -5,15 +5,15 @@ import classNames from 'classnames';
 import polyglot from '../i18n';
 
 import LabeledIcon from './LabeledIcon';
-
-export function SiteNav({ authenticated, userName, cssModifier }) {
+import { closeSidebars } from '../actions';
+export function SiteNav({ authenticated, userName, cssModifier, localCloseSidebars}) {
   let myPage;
   let logInOut;
 
   if (authenticated) {
     myPage = (
       <li className="site-nav_item">
-        <Link to="/minside" className="site-nav_link">
+        <Link to="/minside" className="site-nav_link" onClick={localCloseSidebars}>
           <LabeledIcon.Apps labelText={polyglot.t('siteNav.myPage')} />
         </Link>
       </li>
@@ -21,7 +21,7 @@ export function SiteNav({ authenticated, userName, cssModifier }) {
 
     logInOut = (
       <li className="site-nav_item">
-        <Link to="/logout" className="site-nav_link">
+        <Link to="/logout" className="site-nav_link" onClick={localCloseSidebars}>
           <LabeledIcon.Exit labelText={polyglot.t('siteNav.logout', {name: userName})} />
         </Link>
       </li>
@@ -29,7 +29,7 @@ export function SiteNav({ authenticated, userName, cssModifier }) {
   } else {
     logInOut = (
       <li className="site-nav_item">
-        <Link to="/login" className="site-nav_link">
+        <Link to="/login" className="site-nav_link" onClick={localCloseSidebars}>
           <LabeledIcon.Exit labelText={polyglot.t('siteNav.login')} />
         </Link>
       </li>
@@ -45,7 +45,7 @@ export function SiteNav({ authenticated, userName, cssModifier }) {
     <div className={rootClasses}>
       <ul className="site-nav_list">
         <li className="site-nav_item">
-          <Link to="/learningpaths" className="site-nav_link">
+          <Link to="/learningpaths" className="site-nav_link" onClick={localCloseSidebars}>
             <LabeledIcon.Search labelText={polyglot.t('siteNav.search')} />
           </Link>
         </li>
@@ -59,6 +59,7 @@ export function SiteNav({ authenticated, userName, cssModifier }) {
 SiteNav.propTypes = {
   authenticated: PropTypes.bool,
   userName: PropTypes.string,
+  localCloseSidebars: PropTypes.func.isRequired,
   cssModifier: PropTypes.string
 };
 
@@ -79,4 +80,9 @@ const mapStateToProps = (state) => Object.assign({}, state, {
   userName: selectUserName(state)
 });
 
-export default connect(mapStateToProps)(SiteNav);
+const mapDispatchToProps = {
+  localCloseSidebars: closeSidebars,
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(SiteNav);
