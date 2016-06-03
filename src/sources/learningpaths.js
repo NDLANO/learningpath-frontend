@@ -25,6 +25,8 @@ const createPath = (authToken, props, body) =>
   )
 ;
 
+const copyPath = postAuthorized('/learningpaths/?copy-from=:copyfrom');
+
 const putLearningPath = putAuthorized('/learningpaths/:pathId');
 const putLearningPathStep = putAuthorized('/learningpaths/:pathId/learningsteps/:stepId');
 
@@ -88,5 +90,6 @@ export {
   createStep,
   updateStep,
   deleteStep,
-  updateSeqNo
+  updateSeqNo,
+  copyPath
 };

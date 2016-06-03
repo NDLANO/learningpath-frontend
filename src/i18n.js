@@ -45,7 +45,8 @@ const phrases = {
   pathDropDown: {
     publish: 'Publiser',
     unpublish: 'Gjør privat',
-    delete: 'Slett'
+    delete: 'Slett',
+    makeCopy: 'Lag kopi'
   },
   requireAuthentication: {
     errorMessage: 'Denne siden krever innlogging.'

@@ -19,6 +19,7 @@ import updateLearningPathStep from './updateLearningPathStep';
 import createLearningPathStep from './createLearningPathStep';
 import { deleteLearningPathStep } from './deleteLearningPathStep';
 import updateStepSequenceNumber from './updateStepSequenceNumber';
+import copyLearningPath from './copyLearningPath';
 
 export const applicationError = createAction('APPLICATION_ERROR');
 export const setAuthenticated = createAction('SET_AUTHENTICATED');
@@ -60,7 +61,8 @@ export {
   updateLearningPathStep,
   createLearningPathStep,
   deleteLearningPathStep,
-  updateStepSequenceNumber
+  updateStepSequenceNumber,
+  copyLearningPath
 };
 
 export default {
@@ -101,5 +103,6 @@ export default {
   createEmptyLearningPathStep,
   deleteLearningPathStep,
   sortLearningPathSteps,
-  updateStepSequenceNumber
+  updateStepSequenceNumber,
+  copyLearningPath
 };

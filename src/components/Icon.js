@@ -47,5 +47,7 @@ Icon.ArrowBack = props => (<Icon {...props} className={classNames('icon--arrow-b
 Icon.ArrowForward = props => (<Icon {...props} className={classNames('icon--arrow-forward', props.className)} svgDefId="icon-arrow_forward" />);
 Icon.ImportExport = props => (<Icon {...props} className={classNames('icon--import_export', props.className)} svgDefId="icon-import_export" />);
 Icon.RemoveRedEye = props => (<Icon {...props} className={classNames('icon--remove-red-eye', props.className)} svgDefId="icon-remove_red_eye" />);
+Icon.ContentCopy = props => (<Icon {...props} className={classNames('icon--content_copy', props.className)} svgDefId="icon-content_copy" />);
+
 
 export default Icon;

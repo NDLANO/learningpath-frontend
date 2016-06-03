@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import sortBy from 'lodash/sortBy';
 import reverse from 'lodash/reverse';
-import { setMyLearningPathsSortOrder, updateLearningPathStatus, deleteLearningPath, createLearningPath } from '../actions';
+import { setMyLearningPathsSortOrder, updateLearningPathStatus, deleteLearningPath, createLearningPath, copyLearningPath } from '../actions';
 import Icon from './Icon';
 import LabeledIcon from './LabeledIcon';
 import polyglot from '../i18n';
@@ -31,7 +31,7 @@ export class MyPage extends React.Component {
   }
 
   render() {
-    const {learningPaths, sortKey, setSortKey, deletePath, updatePathStatus, createPath} = this.props;
+    const {learningPaths, sortKey, setSortKey, deletePath, updatePathStatus, createPath, copyPath} = this.props;
     const {lang} = this.context;
     const onCreateLearningPathClick = this.onCreateLearningPathClick.bind(this);
     const items = learningPaths.map(lp => {
@@ -50,6 +50,9 @@ export class MyPage extends React.Component {
             break;
           case 'unpublish':
             updatePathStatus(lp.id, 'PRIVATE');
+            break;
+          case 'makecopy':
+            copyPath(lp.id);
             break;
           default:
         }
@@ -126,7 +129,8 @@ MyPage.propTypes = {
   deletePath: PropTypes.func.isRequired,
   updatePathStatus: PropTypes.func.isRequired,
   createPath: PropTypes.func.isRequired,
-  learningPaths: PropTypes.array
+  learningPaths: PropTypes.array,
+  copyPath: PropTypes.func.isRequired,
 };
 
 MyPage.defaultProps = { learningPaths: [], sortKey: 'title' };
@@ -161,7 +165,8 @@ const mapDispatchToProps = {
   setSortKey: setMyLearningPathsSortOrder,
   deletePath: deleteLearningPath,
   updatePathStatus: updateLearningPathStatus,
-  createPath: createLearningPath
+  createPath: createLearningPath,
+  copyPath: copyLearningPath,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyPage);
