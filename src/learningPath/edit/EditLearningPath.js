@@ -26,7 +26,7 @@ const EditLearningPath = ({ learningPath, localUpdateLearningPath }, {lang}) => 
 
 EditLearningPath.propTypes = {
   learningPath: PropTypes.object.isRequired,
-  learningSteps: PropTypes.array.isRequired,
+  learnngSteps: PropTypes.array.isRequired,
   localUpdateLearningPath: PropTypes.func.isRequired
 };
 

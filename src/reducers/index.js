@@ -13,6 +13,7 @@ import learningPathsTotalCount from './learningPathsTotalCount';
 import myLearningPathsSortOrder from './myLearningPathsSortOrder';
 import oembedPreview from './oembedPreview';
 import messages from './messages';
+import sidebar from './sidebar';
 
 const rootReducers = combineReducers({
   authenticated,
@@ -25,9 +26,10 @@ const rootReducers = combineReducers({
   learningPathsTotalCount,
   myLearningPathsSortOrder,
   messages,
+  sidebar,
   oembedPreview,
   routing: routerReducer,
-  form: formReducer
+  form: formReducer,
 });
 
 export default rootReducers;

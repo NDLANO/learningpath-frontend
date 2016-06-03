@@ -1,8 +1,6 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
-
-export function LearningPathSummary({learningPath}, {lang}) {
+export default function LearningPathSummary({learningPath}, {lang}) {
   return (
     <main className="two-column_col two-column_col--center">
       <div className="learning-path">
@@ -23,5 +21,3 @@ LearningPathSummary.propTypes = {
 LearningPathSummary.contextTypes = {
   lang: PropTypes.string.isRequired
 };
-
-export default connect(state => state)(LearningPathSummary);
