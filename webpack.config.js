@@ -6,7 +6,7 @@ var plugins = [
 
 
 if (process.env.NODE_ENV === 'production') {
-  plugins.push( new webpack.optimize.UglifyJsPlugin() );
+  plugins.push(new webpack.optimize.UglifyJsPlugin());
 }
 
 if (process.env.npm_package_version) {
@@ -37,7 +37,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /.js$/,
+        test: /\.jsx?|\.js?$/,
         exclude: /node_modules/,
         loader: 'if!babel-loader?presets[]=react,presets[]=es2015'
       },
@@ -48,5 +48,9 @@ module.exports = {
     ]
   },
 
-  plugins: plugins
+  plugins: plugins,
+  resolve: {
+    extensions: ['', '.js', '.json', '.jsx']
+  }
+
 };
