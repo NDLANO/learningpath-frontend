@@ -56,7 +56,7 @@ const LearningPathStepForm = (props) => {
       <div className="learning-step-form_group">
         <div className="learning-step-form_left">
           <span className="learning-step-form_icon-bg"><Icon.Create /></span>
-          <OnClickCheckbox {...showTitle} />
+            <OnClickCheckbox {...showTitle} />
         </div>
         <div className="learning-step-form_right">
           <div className="learning-step-form_input learning-step-form_title">
