@@ -42,9 +42,11 @@ Icon.Numbered = props => (<Icon {...props} className={classNames('icon--format-l
 Icon.Create = props => (<Icon {...props} className={classNames('icon--create', props.className)} svgDefId="icon-create" />);
 Icon.Duration = props => (<Icon {...props} className={classNames('icon--query-builder', props.className)} svgDefId="icon-query_builder" />);
 Icon.Visibility = props => (<Icon {...props} className={classNames('icon--remove-red-eye', props.className)} svgDefId="icon-remove_red_eye" />);
+Icon.VisibilityOff = props => (<Icon {...props} className={classNames('icon--visibility-off', props.className)} svgDefId="icon-visibility_off" />);
 Icon.ArrowBack = props => (<Icon {...props} className={classNames('icon--arrow-back', props.className)} svgDefId="icon-arrow_back" />);
 Icon.ArrowForward = props => (<Icon {...props} className={classNames('icon--arrow-forward', props.className)} svgDefId="icon-arrow_forward" />);
 Icon.ImportExport = props => (<Icon {...props} className={classNames('icon--import_export', props.className)} svgDefId="icon-import_export" />);
 Icon.Menu = props => (<Icon {...props} className={classNames('icon--menu', props.className)} svgDefId="icon-menu" />);
+Icon.RemoveRedEye = props => (<Icon {...props} className={classNames('icon--remove-red-eye', props.className)} svgDefId="icon-remove_red_eye" />);
 
 export default Icon;

@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
+import defined from 'defined';
 import { reduxForm } from 'redux-form';
 import { titleI18N, descriptionI18N, oembedUrlI18N, oembedContentI18N } from '../../util/i18nFieldFinder';
 import { createValidator, required, oneOfIsRequired } from '../../util/validation';
@@ -8,6 +9,7 @@ import DescriptionHTMLEditor from '../editors/DescriptionHTMLEditor';
 import MediaTypeSelect from './MediaTypeSelect';
 import polyglot from '../../i18n';
 import Icon from '../Icon';
+import OnClickCheckbox from './OnClickCheckbox';
 import OneLineEditor from '../editors/OneLineEditor';
 
 import PreviewOembed from './PreviewOembed';
@@ -16,14 +18,13 @@ import {
   validateOembed,
 } from '../../actions';
 
-
 const LearningPathStepForm = (props) => {
   const {
     step,
     lang,
     oembedPreview,
     error,
-    fields: { title, description, type, url },
+    fields: { title, description, type, url, showTitle },
     handleSubmit,
     submitting,
     learningPathId,
@@ -38,12 +39,12 @@ const LearningPathStepForm = (props) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="learning-step_hd">
-        <span className="mediatype-icon">
+    <form onSubmit={handleSubmit} className="learning-step-form">
+      <div className="learning-step-form_group">
+        <span className="learning-step-form_mediatype-icon">
           <LearningPathStepIcon learningPathStepType={type.value} isCircle={false} />
         </span>
-        <select className="mediatype-dd" {...type} >
+        <select className="learning-step-form_mediatype-dd" {...type} >
           <option value="INTRODUCTION">{polyglot.t('editPathStep.mediatype.introduction')}</option>
           <option value="TEXT">{polyglot.t('editPathStep.mediatype.text')}</option>
           <option value="MULTIMEDIA">{polyglot.t('editPathStep.mediatype.multimedia')}</option>
@@ -52,20 +53,20 @@ const LearningPathStepForm = (props) => {
           <option value="SUMMARY">{polyglot.t('editPathStep.mediatype.summary')}</option>
         </select>
       </div>
-      <div className="learning-step_hd">
-        <span className="editable"><Icon.Create /></span>
-        <h1 className="learning-step-input learning-step-input__title">
-          <OneLineEditor lang={lang} {...title} placeholder={polyglot.t('editPathStep.titlePlaceHolder')} />
-        </h1>
-        {title.touched && title.error && <span className="error_message error_message--red">{title.error}</span>}
-      </div>
-      <div className="learning-path_bd">
-        <div>
-          <DescriptionHTMLEditor
-            lang={lang}
-            {...description}
-          />
+      <div className="learning-step-form_group">
+        <div className="learning-step-form_left">
+          <span className="learning-step-form_icon-bg"><Icon.Create /></span>
+          <OnClickCheckbox {...showTitle} />
         </div>
+        <div className="learning-step-form_right">
+          <div className="learning-step-form_input learning-step-form_title">
+            <OneLineEditor lang={lang} {...title} placeholder={polyglot.t('editPathStep.titlePlaceHolder')} />
+          </div>
+          {title.touched && title.error && <span className="error_message error_message--red">{title.error}</span>}
+        </div>
+      </div>
+      <DescriptionHTMLEditor lang={lang} {...description} />
+      <div className="learning-step-form_group">
         <div className="learningsource-form">
           <div>
             <label className="mediatype-menu__label">{polyglot.t('editPathStep.urlLabel')}</label>
@@ -110,6 +111,7 @@ LearningPathStepForm.propTypes = {
 const mapStateToProps = (state, props) => ({
   oembedPreview: state.oembedPreview.oembedContent,
   initialValues: {
+    showTitle: defined(props.step.showTitle, false),
     title: titleI18N(props.step, props.lang),
     description: descriptionI18N(props.step, props.lang),
     url: oembedUrlI18N(props.step, props.lang),
@@ -134,7 +136,7 @@ const validate = createValidator({
 
 export default reduxForm({
   form: 'learning-path-step',
-  fields: ['title', 'description', 'url', 'type'],
+  fields: ['title', 'description', 'url', 'type', 'showTitle'],
   asyncValidate,
   validate,
   asyncBlurFields: ['url'],
