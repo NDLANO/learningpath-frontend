@@ -5,7 +5,7 @@ import defined from 'defined';
 import LearningPathGeneralInfo from './LearningPathGeneralInfo';
 import LearningPathPrevNext from './LearningPathPrevNext';
 import LearningPathToC from './LearningPathToC';
-
+import { copyLearningPath } from '../../actions';
 export function LearningPath(props) {
   const { params: { stepId } } = props;
   const saveButtons = defined(props.saveButtons, null);
@@ -37,7 +37,7 @@ LearningPath.propTypes = {
   params: PropTypes.shape({
     stepId: PropTypes.string
   }).isRequired,
-  sortLearningSteps: PropTypes.object
+  sortLearningSteps: PropTypes.object,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
@@ -46,4 +46,9 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
   isPreview: ownProps.route.isPreview
 });
 
-export default connect(mapStateToProps)(LearningPath);
+const mapDispatchToProps = {
+  copyPath: copyLearningPath
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(LearningPath);

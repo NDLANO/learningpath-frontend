@@ -52,7 +52,7 @@ export class MyPage extends React.Component {
             updatePathStatus(lp.id, 'PRIVATE');
             break;
           case 'makecopy':
-            copyPath(lp.id);
+            copyPath(lp);
             break;
           default:
         }

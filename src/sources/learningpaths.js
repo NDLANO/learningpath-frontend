@@ -14,6 +14,7 @@ const fetchMyPaths = fetchAuthorized('/learningpaths/mine');
 
 const postLearningPath = postAuthorized('/learningpaths');
 const postLearningPathStep = postAuthorized('/learningpaths/:pathId/learningsteps');
+const copyLearningPath = postAuthorized('/learningpaths/?copy-from=:copyfrom');
 
 const createPath = (authToken, props, body) =>
   postLearningPath(authToken, props, body)
@@ -25,7 +26,8 @@ const createPath = (authToken, props, body) =>
   )
 ;
 
-const copyPath = postAuthorized('/learningpaths/?copy-from=:copyfrom');
+const copyPath = (authToken, {copyfrom}, body) =>
+  copyLearningPath(authToken, {copyfrom}, body);
 
 const putLearningPath = putAuthorized('/learningpaths/:pathId');
 const putLearningPathStep = putAuthorized('/learningpaths/:pathId/learningsteps/:stepId');

@@ -140,6 +140,13 @@ const phrases = {
     descriptionMaxLength: 'Max 150 tegn',
     createButton: 'Opprett ny læringssti'
   },
+  copyLearningPath: {
+    makeCopy: 'Lag kopi',
+    copyText: 'Ønsker du å ta utgangspunkt i denne læringsstien for å lage en ny læringssti? Vi åpner en kopi og blir lagret sammen med dine andre læringsstier.',
+    createCopy: 'Kopier læringssti',
+    abortCopy: 'Avbryt',
+    copyTitle: 'Kopier annens læringssti'
+  },
   updateLearningPath: {
     updatedMsg: 'Lagret OK'
   },
