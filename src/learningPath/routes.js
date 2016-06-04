@@ -10,12 +10,10 @@ import { defaultSearchQuery, parseSearchQuery } from '../middleware/searchQuery'
 import isEmpty from 'lodash/isEmpty';
 import requireAuthentication from '../components/requireAuthentication';
 import {
-  LearningPath, LearningPathSummary, LearningPathStep,
-  EditLearningPathStep, CreateLearningPathStep,
-  LearningPathToCButtons,
-  SortLearningSteps
+  LearningPath, LearningPathSummary, LearningPathToCButtons,
 } from '../components';
 
+import configureLearningPathStepRoutes from './step/routes';
 const redirectToFirstStep = (store, fetchLearningPath) =>
   (nextState, replace, callback) => {
     const { params: { pathId } } = nextState;
@@ -38,13 +36,12 @@ export default function (store, ifAuthenticated) {
   const {
     fetchLearningPaths,
     fetchLearningPath,
-    fetchLearningPathStep,
-    createEmptyLearningPathStep,
     createEmptyLearningPath,
     changeLearningPathQuery
   } = bindActionCreators(actions, store.dispatch);
 
 
+  const learningPathStepRoutes = configureLearningPathStepRoutes(store, ifAuthenticated);
   return (
     <Route path="learningpaths(/)">
       <IndexRoute
@@ -63,14 +60,7 @@ export default function (store, ifAuthenticated) {
         <IndexRoute components={{main: LearningPathSummary, saveButtons: LearningPathToCButtons}} />
         <Route path="first-step" component={requireAuthentication(EditLearningPath)} onEnter={redirectToFirstStep(store, fetchLearningPath)} />
         <Route path="edit" component={requireAuthentication(EditLearningPath)} onEnter={ifAuthenticated()} />
-
-        <Route path="step/new" component={requireAuthentication(CreateLearningPathStep)} onEnter={ifAuthenticated(createEmptyLearningPathStep)} />
-        <Route path="sort" components={{main: LearningPathSummary, sortLearningSteps: SortLearningSteps}} onEnter={ifAuthenticated()} />
-        <Route path="step/:stepId/edit" component={requireAuthentication(EditLearningPathStep)} onEnter={ifAuthenticated(({params}) => fetchLearningPathStep(params.pathId, params.stepId))} />
-        <Route
-          path="step/:stepId" components={{main: LearningPathStep, saveButtons: LearningPathToCButtons}}
-          onEnter={({params}) => fetchLearningPathStep(params.pathId, params.stepId)}
-        />
+        {learningPathStepRoutes}
       </Route>
     </Route>
   );

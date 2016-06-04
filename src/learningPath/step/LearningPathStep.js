@@ -2,10 +2,10 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-import Oembed from './Oembed';
-import { titleI18N, descriptionI18N, oembedContentI18N } from '../util/i18nFieldFinder';
-import polyglot from '../i18n';
-import Icon from './Icon';
+import Oembed from './oembed/Oembed';
+import { titleI18N, descriptionI18N, oembedContentI18N } from '../../util/i18nFieldFinder';
+import polyglot from '../../i18n';
+import Icon from '../../components/Icon';
 
 export function LearningPathStep({learningPathStep, learningPath}, {lang}) {
   const stepTitle = titleI18N(learningPathStep, lang);

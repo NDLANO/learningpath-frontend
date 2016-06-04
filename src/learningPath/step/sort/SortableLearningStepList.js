@@ -2,16 +2,16 @@ import { connect } from 'react-redux';
 import flow from 'lodash/flow';
 
 import React, { Component, PropTypes } from 'react';
-import Icon from '../Icon';
+import Icon from '../../../components/Icon';
 import createSortableItem from './SortableItem';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-import { titleI18N } from '../../util/i18nFieldFinder';
+import { titleI18N } from '../../../util/i18nFieldFinder';
 import {
   updateStepSequenceNumber,
   deleteLearningPathStep,
   sortLearningPathSteps
-} from '../../actions';
+} from '../../../actions';
 
 class SortableLearningStepList extends Component {
   constructor(props) {

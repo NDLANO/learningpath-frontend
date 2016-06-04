@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import Icon from '../Icon';
-import Tooltip from '../../common/tooltip/Tooltip';
-import OverlayTrigger from '../../common/tooltip/OverlayTrigger';
+import Icon from '../../../components/Icon';
+import Tooltip from '../../../common/tooltip/Tooltip';
+import OverlayTrigger from '../../../common/tooltip/OverlayTrigger';
 import noop from 'lodash/noop';
 
 const OnClickCheckbox = (field) => {

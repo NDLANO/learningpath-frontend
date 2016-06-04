@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Icon from './Icon';
+import Icon from '../../components/Icon';
 import classNames from 'classnames';
 
 export default function LearningPathStepIcon({learningPathStepType, isCircle}) {

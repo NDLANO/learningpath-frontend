@@ -2,21 +2,21 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import defined from 'defined';
 import { reduxForm } from 'redux-form';
-import { titleI18N, descriptionI18N, oembedUrlI18N, oembedContentI18N } from '../../util/i18nFieldFinder';
-import { createValidator, required, oneOfIsRequired } from '../../util/validation';
-import LabeledIcon from '../LabeledIcon';
-import DescriptionHTMLEditor from '../editors/DescriptionHTMLEditor';
+import { titleI18N, descriptionI18N, oembedUrlI18N, oembedContentI18N } from '../../../util/i18nFieldFinder';
+import { createValidator, required, oneOfIsRequired } from '../../../util/validation';
+import LabeledIcon from '../../../components/LabeledIcon';
+import DescriptionHTMLEditor from '../../../components/editors/DescriptionHTMLEditor';
 import MediaTypeSelect from './MediaTypeSelect';
-import polyglot from '../../i18n';
-import Icon from '../Icon';
+import polyglot from '../../../i18n';
+import Icon from '../../../components/Icon';
 import OnClickCheckbox from './OnClickCheckbox';
-import OneLineEditor from '../editors/OneLineEditor';
+import OneLineEditor from '../../../components/editors/OneLineEditor';
 
-import PreviewOembed from './PreviewOembed';
+import PreviewOembed from '../oembed/PreviewOembed';
 import LearningPathStepIcon from '../LearningPathStepIcon';
 import {
   validateOembed,
-} from '../../actions';
+} from '../../../actions';
 
 const LearningPathStepForm = (props) => {
   const {

@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import classNames from 'classnames';
-import polyglot from '../../i18n';
-import Oembed from '../Oembed';
+import polyglot from '../../../i18n';
+import Oembed from './Oembed';
 
 export default class PreviewOembed extends React.Component {
   constructor(props) {

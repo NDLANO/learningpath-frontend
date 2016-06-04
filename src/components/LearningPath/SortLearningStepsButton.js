@@ -9,7 +9,7 @@ export function SortLearningStepsButton({learningPath}) {
     return null;
   }
 
-  let target = `/learningpaths/${learningPath.id}/sort`;
+  let target = `/learningpaths/${learningPath.id}/step/sort`;
 
   return (
     <div>

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import Icon from '../Icon';
-import polyglot from '../../i18n';
+import Icon from '../../../components/Icon';
+import polyglot from '../../../i18n';
 
 export default function MediaTypeSelect({value, onChange}) {
   const changeType = (evt) => onChange(evt.target.value);

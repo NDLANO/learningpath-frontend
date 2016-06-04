@@ -2,9 +2,9 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import SortableLearningStepList from './SortableLearningStepList';
-import polyglot from '../../i18n';
+import polyglot from '../../../i18n';
 
-const SortLearningSteps = ({ learningPath }) =>
+const SortLearningPathSteps = ({ learningPath }) =>
   <div>
     <SortableLearningStepList learningPathId={learningPath.id} learningsteps={learningPath.learningsteps} />
     <ul className="vertical-menu">
@@ -18,7 +18,7 @@ const SortLearningSteps = ({ learningPath }) =>
 ;
 
 
-SortLearningSteps.propTypes = {
+SortLearningPathSteps.propTypes = {
   learningPath: PropTypes.object.isRequired
 };
 
@@ -26,4 +26,4 @@ const mapStateToProps = (state) => Object.assign({}, state, {
   learningPath: state.learningPath
 });
 
-export default connect(mapStateToProps)(SortLearningSteps);
+export default connect(mapStateToProps)(SortLearningPathSteps);

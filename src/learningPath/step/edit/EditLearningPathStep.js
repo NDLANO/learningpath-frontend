@@ -6,8 +6,8 @@ import LearningPathStepForm from './LearningPathStepForm';
 import {
   updateLearningPathStep,
   createLearningPathStep
-} from '../../actions';
-import { pushOrAssignLanguageValue } from '../../util/i18nFieldFinder';
+} from '../../../actions';
+import { pushOrAssignLanguageValue } from '../../../util/i18nFieldFinder';
 
 export function EditLearningPathStep(props, { lang: language }) {
   const {

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { DragSource, DropTarget } from 'react-dnd';
-import { guid } from '../../util/util';
+import { guid } from '../../../util/util';
 import flow from 'lodash/flow';
 
 const itemSource = {
