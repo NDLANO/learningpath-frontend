@@ -3,7 +3,6 @@ import { createAction } from 'redux-actions';
 import initializeSession from './initializeSession';
 import logout from './logout';
 import fetchLearningPath from './fetchLearningPath';
-import fetchLearningPathStep from './fetchLearningPathStep';
 import fetchLearningPaths from './fetchLearningPaths';
 import fetchMyLearningPaths from './fetchMyLearningPaths';
 import updateLearningPath from './updateLearningPath';
@@ -15,9 +14,11 @@ import deleteLearningPath from './deleteLearningPath';
 import fetchOembed from './fetchOembed';
 import validateOembed from './validateOembed';
 import updateLearningPathStatus from './updateLearningPathStatus';
-import updateLearningPathStep from './updateLearningPathStep';
-import createLearningPathStep from './createLearningPathStep';
-import { deleteLearningPathStep } from './deleteLearningPathStep';
+import {
+  fetchLearningPathStep,
+  createLearningPathStep,
+  updateLearningPathStep,
+  deleteLearningPathStep, } from './learningPathStepActions';
 import updateStepSequenceNumber from './updateStepSequenceNumber';
 import copyLearningPath from './copyLearningPath';
 
