@@ -4,7 +4,7 @@ import { Route } from 'react-router';
 import { bindActionCreators } from 'redux';
 
 import actions from '../../actions';
-import requireAuthentication from '../../components/requireAuthentication';
+import requireAuthentication from '../../session/requireAuthentication';
 import {
   LearningPathSummary,
   LearningPathToCButtons,

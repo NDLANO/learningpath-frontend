@@ -8,7 +8,7 @@ import EditLearningPath from './edit/EditLearningPath';
 import actions from '../actions';
 import { defaultSearchQuery, parseSearchQuery } from '../middleware/searchQuery';
 import isEmpty from 'lodash/isEmpty';
-import requireAuthentication from '../components/requireAuthentication';
+import requireAuthentication from '../session/requireAuthentication';
 import {
   LearningPath, LearningPathSummary, LearningPathToCButtons,
 } from '../components';

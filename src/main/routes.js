@@ -3,15 +3,16 @@ import { Route, IndexRoute } from 'react-router';
 import { bindActionCreators } from 'redux';
 
 import App from '../components/App';
-import {
-  Welcome, NotFound,
-  LoginProviders, SessionInitializer, LoginFailure,
-  MyPage
-} from '../components';
+import Welcome from './Welcome';
+import NotFound from './NotFound';
+import MyPage from './MyPage';
+
+import LoginProviders from '../session/LoginProviders';
 
 import actions from '../actions';
-import requireAuthentication from '../components/requireAuthentication';
+import requireAuthentication from '../session/requireAuthentication';
 import configureLearningPathRoutes from '../learningPath/routes';
+import loginRoutes from '../session/routes';
 
 export default function (store) {
   function ifAuthenticated(cb) {
@@ -34,9 +35,7 @@ export default function (store) {
     <Route path="/" onEnter={ifAuthenticated(checkValidSession)}>
       <IndexRoute component={Welcome} />
       <Route component={App}>
-        <Route path="login" component={LoginProviders} />
-        <Route path="login/success/:authToken" component={SessionInitializer} />
-        <Route path="login/failure" component={LoginFailure} />
+        {loginRoutes}
         <Route path="logout" onEnter={ifAuthenticated(logout)} component={LoginProviders} />
         <Route path="minside" component={requireAuthentication(MyPage)} onEnter={ifAuthenticated(fetchMyLearningPaths)} />
         {learningPathRoutes}

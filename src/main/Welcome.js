@@ -1,8 +1,8 @@
 import React from 'react';
 import Form from 'react-router-form';
-import Logo from './Logo';
+import Logo from '../components/Logo';
 import polyglot from '../i18n';
-import Masthead from './Masthead';
+import Masthead from '../components/Masthead';
 
 export default class Welcome extends React.Component {
   getChildContext() {

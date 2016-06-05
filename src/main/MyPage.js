@@ -4,16 +4,16 @@ import { Link } from 'react-router';
 import sortBy from 'lodash/sortBy';
 import reverse from 'lodash/reverse';
 import { setMyLearningPathsSortOrder, updateLearningPathStatus, deleteLearningPath, createLearningPath, copyLearningPath } from '../actions';
-import Icon from './Icon';
-import LabeledIcon from './LabeledIcon';
+import Icon from '../components/Icon';
+import LabeledIcon from '../components/LabeledIcon';
 import polyglot from '../i18n';
 
-import { LearningPathDropdown } from './LearningPathDropdown';
+import { LearningPathDropdown } from '../components/LearningPathDropdown';
 import formatDate from '../util/formatDate';
 import formatDuration from '../util/formatDuration';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
-import Lightbox from './Lightbox';
-import Masthead from './Masthead';
+import Lightbox from '../components/Lightbox';
+import Masthead from '../components/Masthead';
 import CreateLearningPath from '../learningPath/new/CreateLearningPath';
 
 export class MyPage extends React.Component {
