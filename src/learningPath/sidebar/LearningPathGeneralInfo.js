@@ -38,9 +38,7 @@ class LearningPathGeneralInfo extends React.Component {
       onLightboxClose();
     };
     const copy = (
-      <div className="block-container_fixed block-container_fixed--bottom--right">
-        <button className="cta-link cta-link--round cta-link--scale" onClick={onCopyLearningPathClick}>{polyglot.t('copyLearningPath.createCopy')}</button>
-      </div>
+      <button className="cta-link cta-link--round edit_learningpath--button" onClick={onCopyLearningPathClick}>{polyglot.t('copyLearningPath.createCopy')}</button>
     );
     return (
       <div>
