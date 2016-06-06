@@ -18,6 +18,11 @@ export function LearningPathDropdown({onSelect, learningPath}) {
       <span className="dropdown-menu_icon"><Icon.MoreVert /></span>
       <ul className="dropdown-menu_items">
         <li className="dropdown-menu_item">
+          <a href="#" className="dropdown-menu_link" onClick={makeOnClick('makecopy')}>
+            <Icon.ContentCopy /> {polyglot.t('pathDropDown.makeCopy')}
+          </a>
+        </li>
+        <li className="dropdown-menu_item">
           <a href="#" className="dropdown-menu_link" onClick={publishAction}>
             <Icon.Input /> {publishActionText}
           </a>

@@ -6,36 +6,66 @@ import get from 'lodash/get';
 import { titleI18N } from '../../util/i18nFieldFinder';
 import formatDate from '../../util/formatDate';
 import formatDuration from '../../util/formatDuration';
+import Lightbox from '../Lightbox';
 import { closeSidebars } from '../../actions';
 import LabeledIcon from '../LabeledIcon';
 import polyglot from '../../i18n';
+import CopyLearningPath from '../../learningPath/new/CopyLearningPath';
+class LearningPathGeneralInfo extends React.Component {
+  constructor(props) {
+    super(props);
 
-export function LearningPathGeneralInfo({learningPath, localCloseSidebars}, {lang}) {
-  const href = `/learningpaths/${learningPath.id}`;
-  const editPathTarget = `/learningpaths/${learningPath.id}/edit`;
-  let edit = '';
-  if (learningPath.canEdit) {
-    edit = (
-      <Link className="cta-link cta-link--round edit_learningpath--button" to={editPathTarget} onClick={localCloseSidebars}>{polyglot.t('editPage.edit')}</Link>
+    this.state = {
+      displayCopyPath: false
+    };
+  }
+
+  onCopyLearningPathClick() {
+    this.setState({
+      displayCopyPath: true
+    });
+  }
+
+  render() {
+    const { learningPath, copyPath, localCloseSidebars } = this.props;
+    const { lang } = this.context;
+    const href = `/learningpaths/${learningPath.id}`;
+    const editPathTarget = `/learningpaths/${learningPath.id}/edit`;
+    const onCopyLearningPathClick = this.onCopyLearningPathClick.bind(this);
+    let onLightboxClose = () => this.setState({displayCopyPath: false});
+    const onCopy = () => {
+      copyPath(learningPath, lang);
+      onLightboxClose();
+    };
+    const copy = (
+      <div className="block-container_fixed block-container_fixed--bottom--right">
+        <button className="cta-link cta-link--round cta-link--scale" onClick={onCopyLearningPathClick}>{polyglot.t('copyLearningPath.createCopy')}</button>
+      </div>
+    );
+    return (
+      <div>
+        <div className="learningpath-general-info">
+          <h3 className="learningpath-general-info_h">
+            <Link to={href} onClick={localCloseSidebars}>{titleI18N(learningPath, lang)}</Link>
+          </h3>
+          <div className="learningpath-general-info_b">
+            <LabeledIcon.Person labelText={get(learningPath, 'author.name')} />
+            <LabeledIcon.Today labelText={formatDate(learningPath.lastUpdated, lang)} tagName="time" />
+            <LabeledIcon.QueryBuilder labelText={formatDuration(learningPath.duration, lang)} tagName="time" />
+          </div>
+          {learningPath.canEdit ? <Link className="cta-link cta-link--round edit_learningpath--button" to={editPathTarget} onClick={localCloseSidebars}>{polyglot.t('editPage.edit')}</Link> : copy}
+        </div>
+        <Lightbox display={this.state.displayCopyPath} onClose={onLightboxClose}>
+          <CopyLearningPath learningPath={learningPath} onClose={onLightboxClose} onCopy={onCopy} />
+        </Lightbox>
+      </div>
     );
   }
-  return (
-    <div className="learningpath-general-info">
-      <h3 className="learningpath-general-info_h">
-        <Link to={href} onClick={localCloseSidebars}>{titleI18N(learningPath, lang)}</Link>
-      </h3>
-      <div className="learningpath-general-info_b">
-        <LabeledIcon.Person labelText={get(learningPath, 'author.name')} />
-        <LabeledIcon.Today labelText={formatDate(learningPath.lastUpdated, lang)} tagName="time" />
-        <LabeledIcon.QueryBuilder labelText={formatDuration(learningPath.duration, lang)} tagName="time" />
-      </div>
-      {edit}
-    </div>
-  );
 }
 
 LearningPathGeneralInfo.propTypes = {
   learningPath: PropTypes.object.isRequired,
+  copyPath: PropTypes.func.isRequired,
   localCloseSidebars: PropTypes.func.isRequired,
 };
 

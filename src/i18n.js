@@ -45,7 +45,8 @@ const phrases = {
   pathDropDown: {
     publish: 'Publiser',
     unpublish: 'Gjør privat',
-    delete: 'Slett'
+    delete: 'Slett',
+    makeCopy: 'Lag kopi'
   },
   requireAuthentication: {
     errorMessage: 'Denne siden krever innlogging.'
@@ -138,6 +139,15 @@ const phrases = {
     descriptionPlaceholder: 'Skriv en kort beskrivelse av læringsstien.',
     descriptionMaxLength: 'Max 150 tegn',
     createButton: 'Opprett ny læringssti'
+  },
+  copyLearningPath: {
+    makeCopy: 'Lag kopi',
+    copyText: 'Ønsker du å ta utgangspunkt i denne læringsstien for å lage en ny læringssti? Vi åpner en kopi og blir lagret sammen med dine andre læringsstier.',
+    createCopy: 'Kopier læringssti',
+    abortCopy: 'Avbryt',
+    copyTitle: 'Kopier annens læringssti',
+    copy: 'KOPI: ',
+    copiedMessage: 'Læringssti kopiert.'
   },
   updateLearningPath: {
     updatedMsg: 'Lagret OK'

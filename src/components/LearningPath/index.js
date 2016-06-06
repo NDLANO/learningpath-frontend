@@ -5,10 +5,11 @@ import classNames from 'classnames';
 import LearningPathGeneralInfo from './LearningPathGeneralInfo';
 import LearningPathPrevNext from './LearningPathPrevNext';
 import LearningPathToC from './LearningPathToC';
+
 import Masthead from '../Masthead';
 import Icon from '../Icon';
 import SortLearningStepsButton from './SortLearningStepsButton';
-import { fetchLearningPath } from '../../actions';
+import { fetchLearningPath, copyLearningPath } from '../../actions';
 
 export class LearningPath extends Component {
 
@@ -77,6 +78,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
 });
 
 const mapDispatchToProps = {
+  copyPath: copyLearningPath,
   localFetchLearingPath: fetchLearningPath,
 };
 

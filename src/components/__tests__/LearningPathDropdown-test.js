@@ -37,8 +37,7 @@ test('component/LearningPathDropdown de-publish', t => {
     <LearningPathDropdown learningPath={learningPath} onSelect={onSelect} />,
     {context: {lang: 'nb'}}
   );
-
-  component.find('.dropdown-menu_item').first().find('a')
+  component.find('.dropdown-menu_item').at(1).find('a')
            .simulate('click', { preventDefault });
 
   t.ok(preventDefault.calledOnce);
@@ -57,12 +56,30 @@ test('component/LearningPathDropdown publish', t => {
     {context: {lang: 'nb'}}
   );
 
-  component.find('.dropdown-menu_item').first().find('a')
+  component.find('.dropdown-menu_item').at(1).find('a')
            .simulate('click', { preventDefault });
 
   t.ok(preventDefault.calledOnce);
   t.ok(onSelect.calledOnce);
   t.deepEqual(onSelect.firstCall.args, ['publish', privateLearningPath]);
+
+  t.end();
+});
+
+test('component/LearningPathDropdown make copy', t => {
+  const onSelect = spy();
+  const preventDefault = spy();
+
+  const component = shallow(
+    <LearningPathDropdown learningPath={learningPath} onSelect={onSelect} />,
+    {context: {lang: 'nb'}}
+  );
+  component.find('.dropdown-menu_item').first().find('a')
+           .simulate('click', { preventDefault });
+
+  t.ok(preventDefault.calledOnce);
+  t.ok(onSelect.calledOnce);
+  t.deepEqual(onSelect.firstCall.args, ['makecopy', learningPath]);
 
   t.end();
 });
