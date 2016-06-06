@@ -5,10 +5,8 @@ import { bindActionCreators } from 'redux';
 
 import actions from '../../actions';
 import requireAuthentication from '../../session/requireAuthentication';
-import {
-  LearningPathSummary,
-  LearningPathToCButtons,
-} from '../../components';
+import LearningPathSummary from '../sidebar/LearningPathSummary';
+import LearningPathToCButtons from '../sidebar/LearningPathToCButtons';
 import LearningPathStep from './LearningPathStep';
 import CreateLearningPathStep from './create/CreateLearningPathStep';
 import EditLearningPathStep from './edit/EditLearningPathStep';
