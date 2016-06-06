@@ -6,9 +6,9 @@ import LoginFailure from './LoginFailure';
 import SessionInitializer from './SessionInitializer';
 
 export default (
-  <Route path="/login(/)">
+  <Route path="login(/)">
     <IndexRoute component={LoginProviders} />
-    <Route path="login/success/:authToken(/)" component={SessionInitializer} />
-    <Route path="login/failure(/)" component={LoginFailure} />
+    <Route path="success/:authToken(/)" component={SessionInitializer} />
+    <Route path="failure(/)" component={LoginFailure} />
   </Route>
 );
