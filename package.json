@@ -59,7 +59,7 @@
     "json-loader": "^0.5.4",
     "lodash": "^4.1.0",
     "moment": "^2.11.2",
-    "ndla-styleguide": "^0.1.13",
+    "ndla-styleguide": "^0.1.15",
     "node-polyglot": "^2.0.0",
     "node-uuid": "^1.4.7",
     "query-string": "^4.1.0",
