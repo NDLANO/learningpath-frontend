@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import { bindActionCreators } from 'redux';
 
-import App from '../components/App';
+import App from './App';
 import Welcome from './Welcome';
 import NotFound from './NotFound';
 import MyPage from './MyPage';

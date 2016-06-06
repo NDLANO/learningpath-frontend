@@ -8,7 +8,7 @@ import Icon from '../components/Icon';
 import LabeledIcon from '../components/LabeledIcon';
 import polyglot from '../i18n';
 
-import { LearningPathDropdown } from '../components/LearningPathDropdown';
+import { LearningPathDropdown } from './LearningPathDropdown';
 import formatDate from '../util/formatDate';
 import formatDuration from '../util/formatDuration';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';

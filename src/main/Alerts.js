@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 
-import Icon from './Icon';
+import Icon from '../components/Icon';
 import classNames from 'classnames';
 import {timeoutMessage, clearAllMessages} from '../actions';
 
