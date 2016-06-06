@@ -17,7 +17,7 @@ export default function (store) {
   function ifAuthenticated(cb) {
     return (...args) => {
       if (store.getState().authenticated) {
-        return cb(...args);
+        return cb ? cb(...args) : undefined;
       }
       return undefined;
     };

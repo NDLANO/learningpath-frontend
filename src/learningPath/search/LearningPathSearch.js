@@ -6,10 +6,10 @@ import isEqual from 'lodash/isEqual';
 import SearchResultPager from '../../common/SearchResultPager';
 import SearchForm from './LearningPathSearchForm';
 import SearchResult from './LearningPathSearchResult';
+import Masthead from '../../components/Masthead';
 import { fetchLearningPaths } from '../../actions';
 
 class LearningPathSearch extends Component {
-
 
   componentWillMount() {
     this.props.fetchLearningPaths();
@@ -36,6 +36,7 @@ class LearningPathSearch extends Component {
 
     return (
       <div>
+        <Masthead />
         <div className="page-header">
           <SearchForm
             {...query}
@@ -61,7 +62,7 @@ LearningPathSearch.propTypes = {
   learningPaths: PropTypes.arrayOf(PropTypes.object).isRequired,
   location: PropTypes.shape({ pathname: PropTypes.string.isRequired }),
   lastPage: PropTypes.number.isRequired,
-  pushRoute: PropTypes.func.isRequired
+  pushRoute: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {

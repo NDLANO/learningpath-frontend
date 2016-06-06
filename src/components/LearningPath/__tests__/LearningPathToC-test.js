@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import { Link } from 'react-router';
 
 import { learningPath } from '../../__tests__/mockData';
-import LearningPathToC from '../LearningPathToC';
+import { LearningPathToC } from '../LearningPathToC';
 
 test('component/LearningPathToC', t => {
   const component = shallow(<LearningPathToC learningPath={learningPath} />,

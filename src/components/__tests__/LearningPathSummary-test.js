@@ -3,7 +3,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { learningPath } from './mockData';
-import { LearningPathSummary } from '../LearningPathSummary';
+import LearningPathSummary from '../LearningPathSummary';
 
 test('component/LearningPathSummary', t => {
   const component = shallow(<LearningPathSummary learningPath={learningPath} />,

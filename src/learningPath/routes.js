@@ -16,6 +16,24 @@ import {
   SortLearningSteps
 } from '../components';
 
+const redirectToFirstStep = (store, fetchLearningPath) =>
+  (nextState, replace, callback) => {
+    const { params: { pathId } } = nextState;
+    fetchLearningPath(pathId).then(() => {
+      const stepId = store.getState().learningPath.learningsteps[0].id;
+      replace({
+        pathname: `/learningpaths/${pathId}/step/${stepId}`,
+      });
+      callback();
+    })
+    .catch(() => {
+      replace({
+        pathname: `/learningpaths/${pathId}`,
+      });
+      callback();
+    });
+  };
+
 export default function (store, ifAuthenticated) {
   const {
     fetchLearningPaths,
@@ -25,6 +43,7 @@ export default function (store, ifAuthenticated) {
     createEmptyLearningPath,
     changeLearningPathQuery
   } = bindActionCreators(actions, store.dispatch);
+
 
   return (
     <Route path="learningpaths(/)">
@@ -40,14 +59,13 @@ export default function (store, ifAuthenticated) {
         }}
       />
       <Route path="new" component={requireAuthentication(CreateLearningPath)} onEnter={ifAuthenticated(createEmptyLearningPath)} />
-      <Route path=":pathId" onEnter={({params}) => fetchLearningPath(params.pathId)} component={LearningPath} >
+      <Route path=":pathId" component={LearningPath} >
         <IndexRoute components={{main: LearningPathSummary, saveButtons: LearningPathToCButtons}} />
-        <Route path="edit" component={requireAuthentication(EditLearningPath)} onEnter={ifAuthenticated(({params}) => fetchLearningPath(params.pathId))} />
+        <Route path="first-step" component={requireAuthentication(EditLearningPath)} onEnter={redirectToFirstStep(store, fetchLearningPath)} />
+        <Route path="edit" component={requireAuthentication(EditLearningPath)} onEnter={ifAuthenticated()} />
 
         <Route path="step/new" component={requireAuthentication(CreateLearningPathStep)} onEnter={ifAuthenticated(createEmptyLearningPathStep)} />
-
-        <Route path="sort" components={{main: LearningPathSummary, sortLearningSteps: SortLearningSteps}} onEnter={ifAuthenticated(({params}) => fetchLearningPath(params.pathId))} />
-
+        <Route path="sort" components={{main: LearningPathSummary, sortLearningSteps: SortLearningSteps}} onEnter={ifAuthenticated()} />
         <Route path="step/:stepId/edit" component={requireAuthentication(EditLearningPathStep)} onEnter={ifAuthenticated(({params}) => fetchLearningPathStep(params.pathId, params.stepId))} />
         <Route
           path="step/:stepId" components={{main: LearningPathStep, saveButtons: LearningPathToCButtons}}

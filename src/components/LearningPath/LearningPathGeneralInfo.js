@@ -7,6 +7,7 @@ import { titleI18N } from '../../util/i18nFieldFinder';
 import formatDate from '../../util/formatDate';
 import formatDuration from '../../util/formatDuration';
 import Lightbox from '../Lightbox';
+import { closeSidebars } from '../../actions';
 import LabeledIcon from '../LabeledIcon';
 import polyglot from '../../i18n';
 import CopyLearningPath from '../../learningPath/new/CopyLearningPath';
@@ -26,7 +27,7 @@ class LearningPathGeneralInfo extends React.Component {
   }
 
   render() {
-    const { learningPath, copyPath } = this.props;
+    const { learningPath, copyPath, localCloseSidebars } = this.props;
     const { lang } = this.context;
     const href = `/learningpaths/${learningPath.id}`;
     const editPathTarget = `/learningpaths/${learningPath.id}/edit`;
@@ -43,14 +44,14 @@ class LearningPathGeneralInfo extends React.Component {
     );
     if (learningPath.canEdit) {
       edit = (
-        <Link className="cta-link cta-link--round edit_learningpath--button" to={editPathTarget}>{polyglot.t('editPage.edit')}</Link>
+        <Link className="cta-link cta-link--round edit_learningpath--button" to={editPathTarget} onClick={localCloseSidebars}>{polyglot.t('editPage.edit')}</Link>
       );
     }
     return (
       <div>
         <div className="learningpath-general-info">
           <h3 className="learningpath-general-info_h">
-            <Link to={href}>{titleI18N(learningPath, lang)}</Link>
+            <Link to={href} onClick={localCloseSidebars}>{titleI18N(learningPath, lang)}</Link>
           </h3>
           <div className="learningpath-general-info_b">
             <LabeledIcon.Person labelText={get(learningPath, 'author.name')} />
@@ -70,6 +71,7 @@ class LearningPathGeneralInfo extends React.Component {
 LearningPathGeneralInfo.propTypes = {
   learningPath: PropTypes.object.isRequired,
   copyPath: PropTypes.func.isRequired,
+  localCloseSidebars: PropTypes.func.isRequired,
 };
 
 LearningPathGeneralInfo.contextTypes = {
@@ -78,5 +80,8 @@ LearningPathGeneralInfo.contextTypes = {
 
 export const mapStateToProps = state => state;
 
+const mapDispatchToProps = {
+  localCloseSidebars: closeSidebars,
+};
 
-export default connect(mapStateToProps)(LearningPathGeneralInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(LearningPathGeneralInfo);
