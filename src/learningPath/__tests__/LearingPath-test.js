@@ -2,8 +2,8 @@ import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { learningPath } from '../../__tests__/mockData';
-import { LearningPath } from '..';
+import { learningPath } from '../../components/__tests__/mockData';
+import { LearningPath } from '../LearningPath';
 
 const FooBar = () => <div></div>;
 

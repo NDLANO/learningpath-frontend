@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
+import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
 export default function LearningPathSummary({learningPath}, {lang}) {
   return (
     <main className="two-column_col two-column_col--center">

@@ -2,14 +2,14 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import defined from 'defined';
 import classNames from 'classnames';
-import LearningPathGeneralInfo from './LearningPathGeneralInfo';
+import LearningPathGeneralInfo from './sidebar/LearningPathGeneralInfo';
 import LearningPathPrevNext from './LearningPathPrevNext';
-import LearningPathToC from './LearningPathToC';
+import LearningPathToC from './sidebar/LearningPathToC';
 
-import Masthead from '../Masthead';
-import Icon from '../Icon';
-import SortLearningStepsButton from './SortLearningStepsButton';
-import { fetchLearningPath, copyLearningPath } from '../../actions';
+import Masthead from '../components/Masthead';
+import Icon from '../components/Icon';
+import SortLearningStepsButton from './sidebar/SortLearningStepsButton';
+import { fetchLearningPath, copyLearningPath } from '../actions';
 
 export class LearningPath extends Component {
 

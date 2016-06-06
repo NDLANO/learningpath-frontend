@@ -6,9 +6,9 @@ import get from 'lodash/get';
 import { titleI18N } from '../../util/i18nFieldFinder';
 import formatDate from '../../util/formatDate';
 import formatDuration from '../../util/formatDuration';
-import Lightbox from '../Lightbox';
+import Lightbox from '../../components/Lightbox';
 import { closeSidebars } from '../../actions';
-import LabeledIcon from '../LabeledIcon';
+import LabeledIcon from '../../components/LabeledIcon';
 import polyglot from '../../i18n';
 import CopyLearningPath from '../../learningPath/new/CopyLearningPath';
 class LearningPathGeneralInfo extends React.Component {

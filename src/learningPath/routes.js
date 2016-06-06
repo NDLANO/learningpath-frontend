@@ -5,13 +5,13 @@ import { bindActionCreators } from 'redux';
 import LearningPathSearch from './search/LearningPathSearch';
 import CreateLearningPath from './new/CreateLearningPath';
 import EditLearningPath from './edit/EditLearningPath';
+import LearningPath from './LearningPath';
+import LearningPathSummary from './sidebar/LearningPathSummary';
+import LearningPathToCButtons from './sidebar/LearningPathToCButtons';
 import actions from '../actions';
 import { defaultSearchQuery, parseSearchQuery } from '../middleware/searchQuery';
 import isEmpty from 'lodash/isEmpty';
 import requireAuthentication from '../session/requireAuthentication';
-import {
-  LearningPath, LearningPathSummary, LearningPathToCButtons,
-} from '../components';
 
 import configureLearningPathStepRoutes from './step/routes';
 const redirectToFirstStep = (store, fetchLearningPath) =>
