@@ -37,16 +37,11 @@ class LearningPathGeneralInfo extends React.Component {
       copyPath(learningPath, lang);
       onLightboxClose();
     };
-    let edit = (
+    const copy = (
       <div className="block-container_fixed block-container_fixed--bottom--right">
         <button className="cta-link cta-link--round cta-link--scale" onClick={onCopyLearningPathClick}>Kopier læringssti</button>
       </div>
     );
-    if (learningPath.canEdit) {
-      edit = (
-        <Link className="cta-link cta-link--round edit_learningpath--button" to={editPathTarget} onClick={localCloseSidebars}>{polyglot.t('editPage.edit')}</Link>
-      );
-    }
     return (
       <div>
         <div className="learningpath-general-info">
@@ -58,7 +53,7 @@ class LearningPathGeneralInfo extends React.Component {
             <LabeledIcon.Today labelText={formatDate(learningPath.lastUpdated, lang)} tagName="time" />
             <LabeledIcon.QueryBuilder labelText={formatDuration(learningPath.duration, lang)} tagName="time" />
           </div>
-          {edit}
+          {learningPath.canEdit ? <Link className="cta-link cta-link--round edit_learningpath--button" to={editPathTarget} onClick={localCloseSidebars}>{polyglot.t('editPage.edit')}</Link> : copy}
         </div>
         <Lightbox display={this.state.displayCopyPath} onClose={onLightboxClose}>
           <CopyLearningPath learningPath={learningPath} onClose={onLightboxClose} onCopy={onCopy} />
