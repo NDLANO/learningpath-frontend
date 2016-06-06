@@ -142,6 +142,10 @@ export default class DescriptionHTMLEditor extends React.Component {
     const commentAboveApplies = !contentState.hasText() &&
       contentState.getBlockMap().first().getType() !== 'unstyled';
 
+    const onBlur = () => {
+      this.props.onBlur(stateToHTML(contentState));
+    };
+
     let className = classNames({
       'RichEditor-editor learning-step-form_input learning-step-form_paragraph': true,
       'RichEditor-hidePlaceholder': commentAboveApplies
@@ -165,6 +169,7 @@ export default class DescriptionHTMLEditor extends React.Component {
               <Editor
                 editorState={editorState}
                 onChange={this.onChange}
+                onBlur={onBlur}
                 placeholder={this.props.placeholder}
                 ref="editor"
                 spellCheck
@@ -181,6 +186,7 @@ export default class DescriptionHTMLEditor extends React.Component {
 DescriptionHTMLEditor.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func,
   placeholder: PropTypes.string
 };
 

@@ -34,6 +34,13 @@ const LearningPathStepForm = (props) => {
 
   const abortUrl = step.id ? `/learningpaths/${learningPathId}/step/${step.id}` : `/learningpaths/${learningPathId}`;
 
+  const handleDescriptionBlur = (value) => {
+    if (!showTitle.touched && !step.id && value !== '<p><br/></p>') {
+      showTitle.onChange(true);
+    }
+    description.onBlur(value);
+  };
+
   if (!type.value) {
     return <MediaTypeSelect {...type} />;
   }
@@ -65,7 +72,7 @@ const LearningPathStepForm = (props) => {
           {title.touched && title.error && <span className="error_message error_message--red">{title.error}</span>}
         </div>
       </div>
-      <DescriptionHTMLEditor lang={lang} {...description} />
+      <DescriptionHTMLEditor lang={lang} {...description} onBlur={handleDescriptionBlur} />
       <div className="learning-step-form_group">
         <div className="learningsource-form">
           <div>
