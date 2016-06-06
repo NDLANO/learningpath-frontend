@@ -145,7 +145,9 @@ const phrases = {
     copyText: 'Ønsker du å ta utgangspunkt i denne læringsstien for å lage en ny læringssti? Vi åpner en kopi og blir lagret sammen med dine andre læringsstier.',
     createCopy: 'Kopier læringssti',
     abortCopy: 'Avbryt',
-    copyTitle: 'Kopier annens læringssti'
+    copyTitle: 'Kopier annens læringssti',
+    copy: 'KOPI: ',
+    copiedMessage: 'Læringssti kopiert.'
   },
   updateLearningPath: {
     updatedMsg: 'Lagret OK'

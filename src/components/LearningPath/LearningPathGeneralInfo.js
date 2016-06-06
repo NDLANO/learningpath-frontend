@@ -34,7 +34,7 @@ class LearningPathGeneralInfo extends React.Component {
     const onCopyLearningPathClick = this.onCopyLearningPathClick.bind(this);
     let onLightboxClose = () => this.setState({displayCopyPath: false});
     const onCopy = () => {
-      copyPath(learningPath);
+      copyPath(learningPath, lang);
       onLightboxClose();
     };
     let edit = (
