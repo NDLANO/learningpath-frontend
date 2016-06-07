@@ -8,6 +8,7 @@ import SearchForm from './LearningPathSearchForm';
 import SearchResult from './LearningPathSearchResult';
 import Masthead from '../../components/Masthead';
 import { fetchLearningPaths } from '../../actions';
+import Footer from '../../components/Footer';
 
 class LearningPathSearch extends Component {
 
@@ -51,6 +52,7 @@ class LearningPathSearch extends Component {
           )}
           <SearchResultPager page={page} lastPage={lastPage} query={query} />
         </div>
+        <Footer />
       </div>
     );
   }

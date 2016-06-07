@@ -126,6 +126,16 @@ const phrases = {
     myPage: 'Mine læringsstier',
     logout: 'Logg ut %{name}'
   },
+  footer: {
+    aboutNDLA: 'Om NDLA',
+    aboutLearningPath: 'Om læringsstier',
+    privacy: 'Personvern',
+    feedback: 'Tilbakemelding',
+    footerInfo: 'Nettstedet er utarbeidet av NDLA som åpen kildekode.',
+    footerEditior: 'Ansvarlig redaktør: ',
+    footerIssueResponsible: 'Utgaveansvarlig: '
+
+  },
   duration: {
     zero: 'Ukjent lengde',
     hours: '%{smart_count} time |||| %{smart_count} timer',
