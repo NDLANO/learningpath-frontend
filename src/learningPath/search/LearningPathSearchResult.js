@@ -62,9 +62,9 @@ export default class SearchResult extends Component {
               </div>
               <div className="search-result_description">{descriptionI18N(path, lang)}</div>
               <div className="search-result_tags">
-                {tags && tags.length > 0 ? <strong>Tags: </strong> : null}
+                {tags && tags.length > 0 ? <p><strong>Tags:</strong></p> : null}
                 {tags.map(tag =>
-                  <span className="search-result-tag" onClick={(evt) => onTagClick(evt, tag.tag)} href="#">{tag.tag}</span>
+                  <span className="search-result_tag" onClick={(evt) => onTagClick(evt, tag.tag)} href="#">{tag.tag}</span>
                 )}
               </div>
             </div>
