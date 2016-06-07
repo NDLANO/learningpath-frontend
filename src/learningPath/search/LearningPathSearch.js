@@ -8,7 +8,7 @@ import SearchForm from './LearningPathSearchForm';
 import SearchResult from './LearningPathSearchResult';
 import Masthead from '../../components/Masthead';
 import { fetchLearningPaths } from '../../actions';
-import Footer from '../../components/Footer';
+import Footer from '../../common/Footer';
 
 class LearningPathSearch extends Component {
 

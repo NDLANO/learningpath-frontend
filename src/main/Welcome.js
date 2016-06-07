@@ -3,7 +3,7 @@ import Form from 'react-router-form';
 import Logo from '../components/Logo';
 import polyglot from '../i18n';
 import Masthead from '../components/Masthead';
-import Footer from '../components/Footer';
+import Footer from '../common/Footer';
 export default class Welcome extends React.Component {
   getChildContext() {
     return {
