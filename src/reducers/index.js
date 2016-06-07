@@ -11,6 +11,7 @@ import learningPaths from './learningPaths';
 import learningPathQuery from './learningPathQuery';
 import learningPathsTotalCount from './learningPathsTotalCount';
 import myLearningPathsSortOrder from './myLearningPathsSortOrder';
+import learningPathTags from '../learningPath/edit/tags/learningPathTagsReducer';
 import oembedPreview from './oembedPreview';
 import messages from './messages';
 import sidebar from './sidebar';
@@ -28,6 +29,7 @@ const rootReducers = combineReducers({
   messages,
   sidebar,
   oembedPreview,
+  learningPathTags,
   routing: routerReducer,
   form: formReducer,
 });

@@ -15,7 +15,7 @@ class TagsInput extends Component {
   }
 
   render() {
-    const { lang, value, onChange, onBlur, ...props } = this.props;
+    const { lang, value, tagOptions, onChange, onBlur, ...props } = this.props;
 
     if (typeof value === 'string') { // Handle redux form values witch are initialized as strings
       return null;
@@ -25,8 +25,10 @@ class TagsInput extends Component {
     const mappedValue = value.filter(element => element.language === lang)
                              .map(element => element.tag);
 
-    const data = ['Andre verdenskrig', 'Første verdenskrig', 'Verdenskart', 'Verdens ende'];
     const handleAdd = (tagName) => {
+      if (mappedValue.includes(tagName)) {
+        return;
+      }
       const tag = {tag: tagName, language: lang };
       value.push(tag);
       onChange(value);
@@ -45,7 +47,7 @@ class TagsInput extends Component {
     return (
       <Multiselect
         {...props}
-        data={data}
+        data={tagOptions}
         filter="contains"
         open={open}
         messages={messages}
@@ -64,7 +66,8 @@ TagsInput.propTypes = {
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func.isRequired,
   lang: PropTypes.string.isRequired,
-  value: PropTypes.any.isRequired
+  value: PropTypes.any.isRequired,
+  tagOptions: PropTypes.array.isRequired,
 };
 
 export default TagsInput;
