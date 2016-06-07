@@ -6,13 +6,16 @@ import LabeledIcon from '../../components/LabeledIcon';
 import formatDate from '../../util/formatDate';
 import formatDuration from '../../util/formatDuration';
 
-import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
+import { titleI18N, descriptionI18N, filterFieldsByLanguage } from '../../util/i18nFieldFinder';
 
 
 export default class SearchResult extends Component {
   constructor(props) {
     super(props);
-    this.state = {imageError: false};
+    this.state = {
+      imageError: false,
+      tag: null,
+    };
     this.handleImageError = this.handleImageError.bind(this);
   }
 
@@ -29,9 +32,19 @@ export default class SearchResult extends Component {
       }
       return <img className="search-result_img" role="presentation" src={'https://placeholdit.imgix.net/~text?txtsize=33&txt=NDLA&w=190&h=120'} />;
     };
+    if (!path.tags) {
+      return null;
+    }
+    const tags = filterFieldsByLanguage(path.tags, lang);
+
+    const onTagClick = (evt, tag) => {
+      evt.preventDefault();
+      this.setState({tag}, () => {
+        this.props.onTagSearchQuery(this.state.tag);
+      });
+    };
 
     return (
-
       <div>
         <Link to={`/learningpaths/${path.id}/first-step/`}>
           <div className="search-result">
@@ -48,6 +61,12 @@ export default class SearchResult extends Component {
                 <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName="time" />
               </div>
               <div className="search-result_description">{descriptionI18N(path, lang)}</div>
+              <div className="search-result_tags">
+                {tags && tags.length > 0 ? <strong>Tags: </strong> : null}
+                {tags.map(tag =>
+                  <span className="search-result-tag" onClick={(evt) => onTagClick(evt, tag.tag)} href="#">{tag.tag}</span>
+                )}
+              </div>
             </div>
           </div>
         </Link>
@@ -57,7 +76,8 @@ export default class SearchResult extends Component {
 }
 
 SearchResult.propTypes = {
-  path: PropTypes.object.isRequired
+  path: PropTypes.object.isRequired,
+  onTagSearchQuery: PropTypes.func.isRequired
 };
 
 SearchResult.contextTypes = {
