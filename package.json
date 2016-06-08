@@ -12,7 +12,7 @@
   "scripts": {
     "pretest": "eslint src",
     "test": "babel-tape-runner 'src/**/*-test.js'|tap-spec",
-    "test-watch": "watch 'babel-tape-runner 'src/**/*-test.js'|tap-spec||true' src/",
+    "tdd": "watch 'babel-tape-runner 'src/**/*-test.js'|tap-spec||true' src/",
     "postinstall": "cp -vr node_modules/ndla-styleguide/assets/* htdocs/assets/",
     "build": "webpack --progress --bail",
     "start": "webpack-dev-server --inline",
