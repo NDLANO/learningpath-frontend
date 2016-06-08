@@ -12,7 +12,7 @@
   "scripts": {
     "pretest": "eslint src",
     "test": "babel-tape-runner 'src/**/*-test.js'|tap-spec",
-    "test-watch": "watch 'babel-tape-runner 'src/**/*-test.js'|tap-spec||true' src/",
+    "tdd": "watch 'babel-tape-runner 'src/**/*-test.js'|tap-spec||true' src/",
     "postinstall": "cp -vr node_modules/ndla-styleguide/assets/* htdocs/assets/",
     "build": "webpack --progress --bail",
     "start": "webpack-dev-server --inline",
@@ -29,7 +29,7 @@
     "babel-preset-react": "^6.3.13",
     "babel-register": "^6.3.13",
     "babel-tape-runner": "^2.0.0",
-    "enzyme": "^2.1.0",
+    "enzyme": "2.3.0",
     "eslint": "^2.10.2",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-plugin-import": "^1.8.0",
@@ -77,6 +77,7 @@
     "redux-form": "^5.2.1",
     "redux-localstorage": "^0.4.0",
     "redux-thunk": "^2.0.1",
+    "reselect": "^2.5.1",
     "sanitize-html": "^1.11.3"
   }
 }

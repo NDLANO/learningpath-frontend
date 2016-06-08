@@ -36,11 +36,12 @@ const validate = values => {
 
 const LearningPathForm = (props) => {
   const {
+    tagOptions,
     fields: { title, description, duration, tags },
     handleSubmit,
     submitting,
     learningPath,
-    lang
+    lang,
   } = props;
 
 
@@ -93,7 +94,7 @@ const LearningPathForm = (props) => {
 
         <div className="learning-path-tags">
           <label htmlFor="tags" className="label--medium-bold  label--medium">{polyglot.t('learningPath.tags')}</label>
-          <TagsInput id="tags" lang={lang} {...tags} />
+          <TagsInput id="tags" tagOptions={tagOptions} lang={lang} {...tags} />
         </div>
 
         <div className="block-container_fixed block-container_fixed--bottom--right">
@@ -117,7 +118,8 @@ LearningPathForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
   learningPath: PropTypes.object.isRequired,
-  lang: PropTypes.string.isRequired
+  tagOptions: PropTypes.array.isRequired,
+  lang: PropTypes.string.isRequired,
 };
 
 const convertedDuration = (value) => {

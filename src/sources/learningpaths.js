@@ -10,6 +10,7 @@ const fetchPath = fetchAuthorized('/learningpaths/:pathId');
 const fetchPathStep = fetchAuthorized(
     '/learningpaths/:pathId/learningsteps/:stepId');
 const fetchMyPaths = fetchAuthorized('/learningpaths/mine');
+const fetchPathTags = fetchAuthorized('/learningpaths/tags');
 
 
 const postLearningPath = postAuthorized('/learningpaths');
@@ -93,5 +94,6 @@ export {
   updateStep,
   deleteStep,
   updateSeqNo,
-  copyPath
+  copyPath,
+  fetchPathTags,
 };
