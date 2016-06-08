@@ -29,7 +29,7 @@
     "babel-preset-react": "^6.3.13",
     "babel-register": "^6.3.13",
     "babel-tape-runner": "^2.0.0",
-    "enzyme": "^2.1.0",
+    "enzyme": "2.3.0",
     "eslint": "^2.10.2",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-plugin-import": "^1.8.0",

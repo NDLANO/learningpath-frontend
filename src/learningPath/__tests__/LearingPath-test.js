@@ -14,7 +14,7 @@ test('component/LearningPath', t => {
       <LearningPath learningPath={learningPath} params={{}}>
         <Foo />
       </LearningPath>, {context: {lang: 'nb'}}
-    ).contains(Foo), true, 'renders props.children');
+    ).find(Foo).length, 2, 'renders props.children'); // For some reason cloning an element results in two rendered components
 
   t.equal(
     shallow(
