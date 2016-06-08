@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import get from 'lodash/get';
 import LabeledIcon from '../../components/LabeledIcon';
+import classNames from 'classnames';
 
 import formatDate from '../../util/formatDate';
 import formatDuration from '../../util/formatDuration';
@@ -24,7 +25,7 @@ export default class SearchResult extends Component {
   }
 
   render() {
-    const { path } = this.props;
+    const { path, query } = this.props;
     const { lang } = this.context;
     const image = () => {
       if (path.coverPhotoUrl && !this.state.imageError) {
@@ -44,6 +45,12 @@ export default class SearchResult extends Component {
       });
     };
 
+    const tagsClassName = (tag) => classNames({
+      'search-result_tag': true,
+      'search-result_tag--active': query.tag === tag
+
+    });
+
     return (
       <div>
         <Link to={`/learningpaths/${path.id}/first-step/`}>
@@ -62,9 +69,8 @@ export default class SearchResult extends Component {
               </div>
               <div className="search-result_description">{descriptionI18N(path, lang)}</div>
               <div className="search-result_tags">
-                {tags && tags.length > 0 ? <p><strong>Tags:</strong></p> : null}
                 {tags.map(tag =>
-                  <span className="search-result_tag" onClick={(evt) => onTagClick(evt, tag.tag)} href="#">{tag.tag}</span>
+                  <span key={tag.tag} className={tagsClassName(tag.tag)} onClick={(evt) => onTagClick(evt, tag.tag)} href="#">{tag.tag}</span>
                 )}
               </div>
             </div>
@@ -77,7 +83,8 @@ export default class SearchResult extends Component {
 
 SearchResult.propTypes = {
   path: PropTypes.object.isRequired,
-  onTagSearchQuery: PropTypes.func.isRequired
+  onTagSearchQuery: PropTypes.func.isRequired,
+  query: PropTypes.object.isRequired
 };
 
 SearchResult.contextTypes = {
