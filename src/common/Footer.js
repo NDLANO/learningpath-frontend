@@ -1,0 +1,29 @@
+import React from 'react';
+import polyglot from '../i18n';
+
+export default function Footer() {
+  return (
+    <footer>
+      <ul className="footer_list">
+        <li className="footer_item">
+          <a href="http://om.ndla.no/" className="footer_link">{polyglot.t('footer.aboutNDLA')}</a>
+        </li>
+        <li className="footer_item">
+          <a href="http://om.ndla.no/" className="footer_link">{polyglot.t('footer.aboutLearningPath')}</a>
+        </li>
+        <li className="footer_item">
+          <a href="http://om.ndla.no/" className="footer_link">{polyglot.t('footer.feedback')}</a>
+        </li>
+        <li className="footer_item">
+          <a href="http://om.ndla.no/" className="footer_link">{polyglot.t('footer.privacy')}</a>
+        </li>
+      </ul>
+      <p className="footer_text">
+        {polyglot.t('footer.footerInfo')}
+      </p>
+      <p className="footer_text">
+        {polyglot.t('footer.footerEditior')}<strong>Øivind Høines</strong> {polyglot.t('footer.footerIssueResponsible')} <strong>Pål Frønsdal</strong>
+      </p>
+    </footer>
+  );
+}

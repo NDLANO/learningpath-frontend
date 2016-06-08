@@ -3,7 +3,7 @@ import Form from 'react-router-form';
 import Logo from '../components/Logo';
 import polyglot from '../i18n';
 import Masthead from '../components/Masthead';
-
+import Footer from '../common/Footer';
 export default class Welcome extends React.Component {
   getChildContext() {
     return {
@@ -47,6 +47,7 @@ export default class Welcome extends React.Component {
             <img src="http://placehold.it/300x200" alt="Placeholder" className="infoblock_img infoblock_img--left" />
           </div>
         </div>
+        <Footer />
       </div>
     );
   }

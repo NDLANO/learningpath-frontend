@@ -15,6 +15,7 @@ import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 import Lightbox from '../components/Lightbox';
 import Masthead from '../components/Masthead';
 import CreateLearningPath from '../learningPath/new/CreateLearningPath';
+import Footer from '../common/Footer';
 
 export class MyPage extends React.Component {
   constructor(props) {
@@ -120,6 +121,7 @@ export class MyPage extends React.Component {
         <Lightbox display={this.state.displayCreatePath} onClose={onLightboxClose}>
           <CreateLearningPath onSubmit={onCreateLearningPathSubmit} />
         </Lightbox>
+        <Footer />
       </div>
   );
   }
