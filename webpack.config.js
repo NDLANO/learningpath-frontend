@@ -18,7 +18,7 @@ if (process.env.npm_package_version) {
 }
 
 module.exports = {
-  entry: './src/index.js',
+  entry: ['babel-polyfill', './src/index.js'],
   target: 'web',
 
   output: {
