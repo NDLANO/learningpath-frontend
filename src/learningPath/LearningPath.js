@@ -22,6 +22,7 @@ export class LearningPath extends Component {
     const { learningPath, isTableOfContentOpen, activePathname, params: { stepId }, sortLearningSteps, main} = this.props;
     const { lang } = this.context;
     const saveButtons = defined(this.props.saveButtons, null);
+    const addStepButton = defined(this.props.addStepButton, null);
     const children = cloneElement(defined(main, this.props.children), { lang, });
     const sortableTableOfContent = defined(sortLearningSteps, <LearningPathToC {...this.props} />);
     const sortableTableOfContentButton = !sortLearningSteps ? <SortLearningStepsButton learningPath={learningPath} /> : null;
@@ -44,6 +45,7 @@ export class LearningPath extends Component {
           <aside className={collapseClassName()}>
             <LearningPathGeneralInfo {...this.props} />
             {sortableTableOfContent}
+            {addStepButton}
             {sortableTableOfContentButton}
             {saveButtons}
           </aside>
