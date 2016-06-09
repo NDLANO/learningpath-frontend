@@ -1,7 +1,7 @@
-import moment from 'moment';
+import format from 'date-fns/format';
 
 /* eslint-disable no-unused-vars*/
 export default function formatDate(date, locale) {
-  return moment(date).format('DD.MM.YY');
+  return format(date, 'DD.MM.YY');
 }
 /* eslint-enable */
