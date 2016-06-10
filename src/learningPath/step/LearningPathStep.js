@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import Helmet from 'react-helmet';
 
 import Oembed from './oembed/Oembed';
 import { titleI18N, descriptionI18N, oembedContentI18N } from '../../util/i18nFieldFinder';
@@ -45,6 +46,7 @@ class LearningPathStep extends React.Component {
       );
     return (
       <main className="two-column_col two-column_col--white-bg">
+        <Helmet title={polyglot.t('htmlTitleTemplates.learningPathStep', {title: stepTitle || ''})} />
         <div className="learning-step">
           {learningPathStep.showTitle ? (
             <div className="learning-step_hd">

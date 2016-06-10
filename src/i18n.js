@@ -171,6 +171,9 @@ const phrases = {
   updateLearningPathStatus: {
     updateStatusMsg: 'Oppdatert status OK'
   },
+  htmlTitleTemplates: {
+    learningPathStep: '%{title} (Læringssti fra NDLA.no)'
+  },
   validation: {
     required: 'Feltet er påkrevd.',
     integer: 'Må være et tall.',
