@@ -19,10 +19,10 @@ export function LearningPathToCButtons({learningPath, saveAction, saveAndPublish
 
   return (
     <div className="learning-path_save-buttons">
-      <button className="button--white_background button--blue_border labeled-icon" onClick={onClickSaveLearningPath}>
+      <button className="button--primary-outline labeled-icon" onClick={onClickSaveLearningPath}>
         <Icon.Save /> {polyglot.t('editPage.saveDraft')}
       </button>
-      <button className="button--white_background button--blue_border labeled-icon" onClick={onClickSaveAndPublishLearningPath}>
+      <button className="button--primary-outline labeled-icon" onClick={onClickSaveAndPublishLearningPath}>
         {polyglot.t('editPage.publish')} <Icon.Forward />
       </button>
     </div>
