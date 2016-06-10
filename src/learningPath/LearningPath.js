@@ -23,7 +23,7 @@ export class LearningPath extends Component {
     const { lang } = this.context;
     const saveButtons = defined(this.props.saveButtons, null);
     const addStepButton = defined(this.props.addStepButton, null);
-    const children = cloneElement(defined(main, this.props.children), { lang, });
+    const children = cloneElement(defined(main, this.props.children), { lang, learningPath });
     const sortableTableOfContent = defined(sortLearningSteps, <LearningPathToC {...this.props} />);
     const sortableTableOfContentButton = !sortLearningSteps ? <SortLearningStepsButton learningPath={learningPath} /> : null;
 
