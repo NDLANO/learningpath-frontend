@@ -32,6 +32,6 @@ export function pushOrAssignLanguageValue(array, propertyName, value, language) 
 
 export function filterFieldsByLanguage(array, language) {
   const cloned = cloneDeep(array);
-  const filterByLanguage = (obj) => 'language' in obj && obj.language === language;
+  const filterByLanguage = (obj) => obj.language && obj.language === language;
   return cloned.filter(filterByLanguage);
 }
