@@ -26,14 +26,15 @@ class LearningPathSearch extends Component {
   render() {
     const { learningPaths, query, lastPage, location: { pathname }, pushRoute } = this.props;
     let { page } = query;
-
     const navigateTo = (q) => {
       pushRoute({pathname, query: q});
     };
 
-    const submitSearchQuery = q => navigateTo(Object.assign({}, query, { query: q, page: 1 }));
+    const submitSearchQuery = q => navigateTo(Object.assign({}, query, { query: q, page: 1, tag: '' }));
 
     const changeSortOrder = sort => navigateTo(Object.assign({}, query, { sort }));
+
+    const changeSearchTag = tag => navigateTo(Object.assign({}, query, { tag }));
 
     return (
       <Wrapper>
@@ -46,10 +47,9 @@ class LearningPathSearch extends Component {
               onSearchQuerySubmit={submitSearchQuery}
             />
           </div>
-
           <div className="search-results">
             {learningPaths.map(path =>
-              (<SearchResult key={path.id} path={path} />)
+              (<SearchResult key={path.id} path={path} pushRoute={pushRoute} onTagSearchQuery={changeSearchTag} query={query} />)
             )}
             <SearchResultPager page={page} lastPage={lastPage} query={query} />
           </div>

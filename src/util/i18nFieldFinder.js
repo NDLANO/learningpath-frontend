@@ -8,7 +8,8 @@ const titleI18N = createFieldByLanguageFinder('title');
 const descriptionI18N = createFieldByLanguageFinder('description');
 const oembedI18N = createFieldByLanguageFinder('embedContent', 'html');
 const oembedUrlI18N = createFieldByLanguageFinder('embedContent', 'url');
-export { titleI18N, descriptionI18N, oembedUrlI18N, oembedI18N};
+const tagI18N = createFieldByLanguageFinder('tags');
+export { titleI18N, descriptionI18N, oembedUrlI18N, oembedI18N, tagI18N};
 
 export function oembedContentI18N(learningPathStep, lang) {
   return find(learningPathStep.embedContent, {language: lang});
@@ -27,4 +28,10 @@ export function pushOrAssignLanguageValue(array, propertyName, value, language) 
   }
   cloned[index] = valueWithLanguage;
   return cloned;
+}
+
+export function filterFieldsByLanguage(array, language) {
+  const cloned = cloneDeep(array);
+  const filterByLanguage = (obj) => obj.language && obj.language === language;
+  return cloned.filter(filterByLanguage);
 }
