@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import get from 'lodash/get';
 import LabeledIcon from '../../components/LabeledIcon';
 import classNames from 'classnames';
 
@@ -63,7 +62,6 @@ export default class SearchResult extends Component {
                 {titleI18N(path, lang)}
               </h2>
               <div className="search-result_meta">
-                <LabeledIcon.Person labelText={get(path, 'author.name')} />
                 <LabeledIcon.Today labelText={formatDate(path.lastUpdated, lang)} tagName="time" />
                 <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName="time" />
               </div>

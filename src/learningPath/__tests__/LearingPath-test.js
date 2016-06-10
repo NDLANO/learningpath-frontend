@@ -5,39 +5,40 @@ import { shallow } from 'enzyme';
 import { learningPath } from '../../components/__tests__/mockData';
 import { LearningPath } from '../LearningPath';
 
-const FooBar = () => <div></div>;
+const Foo = () => <div></div>;
+const Bar = () => <div></div>;
 
 test('component/LearningPath', t => {
   t.equal(
     shallow(
       <LearningPath learningPath={learningPath} params={{}}>
-        <FooBar />
-      </LearningPath>
-    ).find(FooBar).length, 1, 'renders props.children');
+        <Foo />
+      </LearningPath>, {context: {lang: 'nb'}}
+    ).find(Foo).length, 2, 'renders props.children'); // For some reason cloning an element results in two rendered components
+
+  t.equal(
+    shallow(
+      <LearningPath
+        learningPath={learningPath} params={{}} main={React.createElement(Bar)}
+        saveButtons={React.createElement(Foo)}
+      />, {context: {lang: 'nb'}}
+    ).find(Foo).length, 1, 'renders props.saveButtons');
 
   t.equal(
     shallow(
       <LearningPath
         learningPath={learningPath} params={{}}
-        saveButtons={React.createElement(FooBar)}
-      />
-    ).find(FooBar).length, 1, 'renders props.saveButtons');
+        main={React.createElement(Foo)}
+      />, {context: {lang: 'nb'}}
+    ).find(Foo).length, 1, 'renders props.main');
 
   t.equal(
     shallow(
       <LearningPath
-        learningPath={learningPath} params={{}}
-        main={React.createElement(FooBar)}
-      />
-    ).find(FooBar).length, 1, 'renders props.main');
-
-  t.equal(
-    shallow(
-      <LearningPath
-        learningPath={learningPath} params={{}}
-        sortLearningSteps={React.createElement(FooBar)}
-      />
-    ).find(FooBar).length, 1, 'renders props.sortLearningSteps');
+        learningPath={learningPath} params={{}} main={React.createElement(Bar)}
+        sortLearningSteps={React.createElement(Foo)}
+      />, {context: {lang: 'nb'}}
+    ).find(Foo).length, 1, 'renders props.sortLearningSteps');
 
   t.end();
 });

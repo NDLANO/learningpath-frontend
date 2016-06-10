@@ -2,15 +2,17 @@ import { createAction } from 'redux-actions';
 
 import initializeSession from './initializeSession';
 import logout from './logout';
-import fetchLearningPath from './fetchLearningPath';
 import fetchLearningPaths from './fetchLearningPaths';
 import fetchMyLearningPaths from './fetchMyLearningPaths';
-import updateLearningPath from './updateLearningPath';
-import createLearningPath from './createLearningPath';
-import createEmptyLearningPath from './createEmptyLearningPath';
 import checkValidSession from './checkValidSession.js';
 import timeoutMessage from './timeoutMessage.js';
-import deleteLearningPath from './deleteLearningPath';
+import {
+  createEmptyLearningPath,
+  fetchLearningPath,
+  updateLearningPath,
+  createLearningPath,
+  deleteLearningPath,
+} from './learningPathActions';
 import fetchOembed from './fetchOembed';
 import validateOembed from './validateOembed';
 import updateLearningPathStatus from './updateLearningPathStatus';

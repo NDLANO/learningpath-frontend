@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes, Component, cloneElement } from 'react';
 import { connect } from 'react-redux';
 import defined from 'defined';
 import classNames from 'classnames';
@@ -20,8 +20,9 @@ export class LearningPath extends Component {
 
   render() {
     const { learningPath, isTableOfContentOpen, activePathname, params: { stepId }, sortLearningSteps, main} = this.props;
+    const { lang } = this.context;
     const saveButtons = defined(this.props.saveButtons, null);
-    const children = defined(main, this.props.children);
+    const children = cloneElement(defined(main, this.props.children), { lang, });
     const sortableTableOfContent = defined(sortLearningSteps, <LearningPathToC {...this.props} />);
     const sortableTableOfContentButton = !sortLearningSteps ? <SortLearningStepsButton learningPath={learningPath} /> : null;
 
@@ -67,6 +68,10 @@ LearningPath.propTypes = {
   activePathname: PropTypes.string,
   isTableOfContentOpen: PropTypes.bool.isRequired,
   localFetchLearingPath: PropTypes.func.isRequired,
+};
+
+LearningPath.contextTypes = {
+  lang: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, state, {

@@ -4,8 +4,6 @@ import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
-import es6promise from 'es6-promise';
-es6promise.polyfill();
 import { defaultSearchQuery } from './middleware/searchQuery';
 import configureStore from './configureStore';
 import configureRoutes from './main/routes';

@@ -8,6 +8,7 @@ import SearchForm from './LearningPathSearchForm';
 import SearchResult from './LearningPathSearchResult';
 import Masthead from '../../components/Masthead';
 import { fetchLearningPaths } from '../../actions';
+import { Wrapper, Content, Footer } from '../../common/Layout';
 
 class LearningPathSearch extends Component {
 
@@ -36,23 +37,25 @@ class LearningPathSearch extends Component {
     const changeSearchTag = tag => navigateTo(Object.assign({}, query, { tag }));
 
     return (
-      <div>
-        <Masthead />
-        <div className="page-header">
-          <SearchForm
-            {...query}
-            onSortOrderChange={changeSortOrder}
-            onSearchQuerySubmit={submitSearchQuery}
-          />
-        </div>
-
-        <div className="search-results">
-          {learningPaths.map(path =>
-            (<SearchResult key={path.id} path={path} pushRoute={pushRoute} onTagSearchQuery={changeSearchTag} query={query} />)
-          )}
-          <SearchResultPager page={page} lastPage={lastPage} query={query} />
-        </div>
-      </div>
+      <Wrapper>
+        <Content>
+          <Masthead />
+          <div className="page-header">
+            <SearchForm
+              {...query}
+              onSortOrderChange={changeSortOrder}
+              onSearchQuerySubmit={submitSearchQuery}
+            />
+          </div>
+          <div className="search-results">
+            {learningPaths.map(path =>
+              (<SearchResult key={path.id} path={path} pushRoute={pushRoute} onTagSearchQuery={changeSearchTag} query={query} />)
+            )}
+            <SearchResultPager page={page} lastPage={lastPage} query={query} />
+          </div>
+        </Content>
+        <Footer />
+      </Wrapper>
     );
   }
 }

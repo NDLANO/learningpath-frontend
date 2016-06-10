@@ -15,6 +15,7 @@ import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 import Lightbox from '../components/Lightbox';
 import Masthead from '../components/Masthead';
 import CreateLearningPath from '../learningPath/new/CreateLearningPath';
+import { Wrapper, Content, Footer } from '../common/Layout';
 
 export class MyPage extends React.Component {
   constructor(props) {
@@ -105,22 +106,25 @@ export class MyPage extends React.Component {
     let onLightboxClose = () => this.setState({displayCreatePath: false});
 
     return (
-      <div>
-        <Masthead />
-        <div className="page-header">
-          <h2 className="page-header_name">{polyglot.t('myPage.pageHeader')}</h2>
-          <div className="page-header_ctrls">
-            {sortOrderSelect}
+      <Wrapper>
+        <Content>
+          <Masthead />
+          <div className="page-header">
+            <h2 className="page-header_name">{polyglot.t('myPage.pageHeader')}</h2>
+            <div className="page-header_ctrls">
+              {sortOrderSelect}
+            </div>
           </div>
-        </div>
-        <div className="tiles">{items}</div>
-        <button className="cta-link new-learningpath-button" onClick={onCreateLearningPathClick}>
-          <LabeledIcon.Add labelText={polyglot.t('myPage.newBtn')} />
-        </button>
-        <Lightbox display={this.state.displayCreatePath} onClose={onLightboxClose}>
-          <CreateLearningPath onSubmit={onCreateLearningPathSubmit} />
-        </Lightbox>
-      </div>
+          <div className="tiles">{items}</div>
+          <button className="cta-link new-learningpath-button" onClick={onCreateLearningPathClick}>
+            <LabeledIcon.Add labelText={polyglot.t('myPage.newBtn')} />
+          </button>
+          <Lightbox display={this.state.displayCreatePath} onClose={onLightboxClose}>
+            <CreateLearningPath onSubmit={onCreateLearningPathSubmit} />
+          </Lightbox>
+        </Content>
+        <Footer />
+      </Wrapper>
   );
   }
 }
