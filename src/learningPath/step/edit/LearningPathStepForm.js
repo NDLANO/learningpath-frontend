@@ -35,8 +35,12 @@ const LearningPathStepForm = (props) => {
   const abortUrl = step.id ? `/learningpaths/${learningPathId}/step/${step.id}` : `/learningpaths/${learningPathId}`;
 
   const handleDescriptionBlur = (value) => {
-    if (!showTitle.touched && !step.id && value !== '<p><br/></p>') {
-      showTitle.onChange(true);
+    if (!showTitle.touched && !step.id) {
+      if (value.hasText()) {
+        showTitle.onChange(true);
+      } else {
+        showTitle.onChange(false);
+      }
     }
     description.onBlur(value);
   };

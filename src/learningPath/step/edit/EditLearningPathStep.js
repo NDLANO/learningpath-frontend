@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import assign from 'lodash/assign';
 import LearningPathStepForm from './LearningPathStepForm';
+import { stateToHTML } from 'draft-js-export-html';
 
 import {
   updateLearningPathStep,
@@ -17,11 +18,12 @@ export function EditLearningPathStep(props, { lang: language }) {
   } = props;
 
   const handleSubmit = (values) => {
+    const descriptionHTML = stateToHTML(values.description);
     const toSave = Object.assign({}, step, {
       type: values.type,
       showTitle: values.showTitle,
       title: pushOrAssignLanguageValue(step.title, 'title', values.title, language),
-      description: pushOrAssignLanguageValue(step.description, 'description', values.description, language),
+      description: pushOrAssignLanguageValue(step.description, 'description', descriptionHTML, language),
       embedContent: pushOrAssignLanguageValue(step.embedContent, 'url', values.url, language),
     });
     return saveLearningPathStep(learningPathId, toSave);

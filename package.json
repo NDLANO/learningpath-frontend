@@ -53,6 +53,7 @@
     "defined": "1.0.0",
     "draft-js": "0.7.0",
     "draft-js-export-html": "0.2.2",
+    "draft-js-import-html": "0.1.10",
     "immutable": "3.8.1",
     "isomorphic-fetch": "2.2.1",
     "json-loader": "0.5.4",

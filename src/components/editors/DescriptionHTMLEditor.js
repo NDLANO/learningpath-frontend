@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
-import { Editor, EditorState, ContentState, RichUtils, convertFromHTML } from 'draft-js';
+import { Editor, EditorState, RichUtils } from 'draft-js';
+import { Record } from 'immutable';
 import Icon from '../Icon';
 import classNames from 'classnames';
-import { stateToHTML } from 'draft-js-export-html';
+import { stateFromHTML } from 'draft-js-import-html';
 import polyglot from '../../i18n';
 
 const StyleButton = ({ active, icon, style, onToggle }) => {
@@ -80,7 +81,7 @@ export default class DescriptionHTMLEditor extends React.Component {
         return;
       }
       const contentState = editorState.getCurrentContent();
-      onChange(stateToHTML(contentState));
+      onChange(contentState);
     });
 
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
@@ -89,16 +90,20 @@ export default class DescriptionHTMLEditor extends React.Component {
   }
 
   componentWillMount() {
-    this.setEditorContentStateFromHTML(this.props.value);
+    if (typeof this.props.value === 'string') {
+      this.setEditorContentStateFromHTML(this.props.value);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setEditorContentStateFromHTML(nextProps.value);
+    if (typeof nextProps.value === 'string') {
+      this.setEditorContentStateFromHTML(nextProps.value);
+    }
   }
 
   setEditorContentStateFromHTML(htmlStr) {
     if (htmlStr !== undefined) {
-      const contentState = ContentState.createFromBlockArray(convertFromHTML(htmlStr));
+      const contentState = stateFromHTML(htmlStr);
       const editorState = EditorState.createWithContent(contentState);
       this.setState({editorState});
     }
@@ -143,7 +148,7 @@ export default class DescriptionHTMLEditor extends React.Component {
       contentState.getBlockMap().first().getType() !== 'unstyled';
 
     const onBlur = () => {
-      this.props.onBlur(stateToHTML(contentState));
+      this.props.onBlur(contentState);
     };
 
     let className = classNames({
@@ -184,7 +189,10 @@ export default class DescriptionHTMLEditor extends React.Component {
 
 
 DescriptionHTMLEditor.propTypes = {
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(Record)
+  ]).isRequired,
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func,
   placeholder: PropTypes.string

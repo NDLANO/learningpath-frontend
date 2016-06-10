@@ -1,6 +1,12 @@
 import polyglot from '../i18n';
+import { Record } from 'immutable';
 
-const isEmpty = (value) => value === undefined || value === null || value === '' || value === '<p><br/></p>';
+const isEmpty = (value) => {
+  if (value instanceof Record && value.hasText) { // handle draf-js ContentState
+    return !value.hasText();
+  }
+  return value === undefined || value === null || value === '';
+};
 const join = (rules) => (value, data) => rules.map(rule => rule(value, data)).filter(error => !!error)[0];
 
 export function required(msgKey = 'validation.required') {
