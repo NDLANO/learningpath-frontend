@@ -92,7 +92,8 @@ const phrases = {
     cancelBtn: 'Avbryt',
     saveDraft: 'Lagre som utkast',
     saveAndPublish: 'Lagre og publiser',
-    edit: 'Endre detaljer'
+    edit: 'Endre detaljer',
+    publish: 'Publiser'
   },
   editPathStep: {
     urlLabel: 'Lim inn lenke (URL) fra ndla.no eller youtube.com',

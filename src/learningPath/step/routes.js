@@ -11,6 +11,7 @@ import LearningPathStep from './LearningPathStep';
 import CreateLearningPathStep from './create/CreateLearningPathStep';
 import EditLearningPathStep from './edit/EditLearningPathStep';
 import SortLearningPathSteps from './sort/SortLearningPathSteps';
+import AddLearningPathStepButton from '../sidebar/AddLearningPathStepButton';
 
 export default function (store, ifAuthenticated) {
   const {
@@ -25,7 +26,7 @@ export default function (store, ifAuthenticated) {
       <Route path="sort(/)" components={{main: LearningPathSummary, sortLearningSteps: SortLearningPathSteps}} onEnter={ifAuthenticated()} />
       <Route path=":stepId/edit(/)" component={requireAuthentication(EditLearningPathStep)} onEnter={ifAuthenticated(({params}) => fetchLearningPathStep(params.pathId, params.stepId))} />
       <Route
-        path=":stepId" components={{main: LearningPathStep, saveButtons: LearningPathToCButtons}}
+        path=":stepId" components={{main: LearningPathStep, addStepButton: AddLearningPathStepButton, saveButtons: LearningPathToCButtons}}
         onEnter={({params}) => fetchLearningPathStep(params.pathId, params.stepId)}
       />
     </Route>

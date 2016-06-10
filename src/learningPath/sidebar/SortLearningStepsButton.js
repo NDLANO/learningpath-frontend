@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-
+import Icon from '../../components/Icon';
 import polyglot from '../../i18n';
 
 export function SortLearningStepsButton({learningPath}) {
@@ -13,11 +13,10 @@ export function SortLearningStepsButton({learningPath}) {
 
   return (
     <div>
-      <ul className="vertical-menu">
-        <li className="vertical-menu_item">
-          <Link className="cta-link cta-link--block" to={target}>{polyglot.t('sortSteps.sortOrDelete')}</Link>
-        </li>
-      </ul>
+      <Link className="sort-steps_button" to={target}>
+        <Icon.ImportExport />
+        {polyglot.t('sortSteps.sortOrDelete')}
+      </Link>
     </div>
   );
 }
