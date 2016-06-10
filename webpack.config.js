@@ -1,11 +1,13 @@
+/* eslint-disable */
 var webpack = require('webpack');
 
 var plugins = [
   new webpack.EnvironmentPlugin(['NODE_ENV'])
 ];
 
+var DEBUG = process.env.NODE_ENV !== 'production';
 
-if (process.env.NODE_ENV === 'production') {
+if (!DEBUG) {
   plugins.push(new webpack.optimize.UglifyJsPlugin());
 }
 
@@ -18,8 +20,11 @@ if (process.env.npm_package_version) {
 }
 
 module.exports = {
-  entry: './src/index.js',
+  entry: ['babel-polyfill', './src/index.js'],
   target: 'web',
+  cache: DEBUG,
+  debug: DEBUG,
+  devtool: DEBUG ? 'cheap-module-eval-source-map' : false,
 
   output: {
     path: __dirname + '/htdocs/assets',
@@ -39,7 +44,7 @@ module.exports = {
       {
         test: /\.jsx?|\.js?$/,
         exclude: /node_modules/,
-        loader: 'if!babel-loader?presets[]=react,presets[]=es2015'
+        loaders: ['babel']
       },
       {
         test: /.json$/,
@@ -54,3 +59,4 @@ module.exports = {
   }
 
 };
+/* eslint-enable */

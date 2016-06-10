@@ -14,7 +14,7 @@ export function LearningPathToC({learningPath, activePathname, localCloseSidebar
   const base = `/learningpaths/${learningPath.id}`;
   const itemClassName = (path) => classNames({
     'step-nav_item': true,
-    'step-nav_item--active': activePathname ? activePathname.startsWith(path) : false
+    'step-nav_item--active': activePathname ? activePathname === path : false
   });
 
 
