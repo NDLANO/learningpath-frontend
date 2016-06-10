@@ -61,6 +61,7 @@ export class LearningPath extends Component {
 LearningPath.propTypes = {
   learningPath: PropTypes.object.isRequired,
   saveButtons: PropTypes.object,
+  addStepButton: PropTypes.object,
   main: PropTypes.object,
   params: PropTypes.shape({
     pathId: PropTypes.string.isRequired,

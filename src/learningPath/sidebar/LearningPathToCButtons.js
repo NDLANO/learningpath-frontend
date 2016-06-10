@@ -1,7 +1,5 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
-
 import polyglot from '../../i18n';
 import Icon from '../../components/Icon';
 import { updateLearningPath, updateLearningPathStatus, closeSidebars } from '../../actions';
