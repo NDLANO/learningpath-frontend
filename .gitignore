@@ -11,3 +11,4 @@ npm-debug.log
 /htdocs/assets/style.css
 /htdocs/assets/symbol-defs.svg
 /htdocs/assets/svg/
+/htdocs/assets/*.js
