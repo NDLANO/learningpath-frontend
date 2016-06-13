@@ -54,7 +54,7 @@ const LearningPathForm = (props) => {
   const remainingDescriptionLength = description.value ? 150 - description.value.length : 150;
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="learning-path-form" onSubmit={handleSubmit}>
       <div className="learning-path_hd">
         <h1>{polyglot.t('learningPath.pageName')}</h1>
         <label htmlFor="title" className="label--medium-bold  label--medium">{polyglot.t('learningPath.title')}</label>
