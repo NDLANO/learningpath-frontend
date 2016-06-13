@@ -26,8 +26,8 @@ class LearningPathStep extends React.Component {
   }
 
   render() {
-    const {learningPathStep, learningPath, copyPath} = this.props;
-    const {lang} = this.context;
+    const { authenticated, learningPathStep, learningPath, copyPath } = this.props;
+    const { lang } = this.context;
     const stepTitle = titleI18N(learningPathStep, lang);
     const stepDescription = descriptionI18N(learningPathStep, lang);
     const oembedContent = oembedContentI18N(learningPathStep, lang);
@@ -38,7 +38,7 @@ class LearningPathStep extends React.Component {
       copyPath(learningPath, lang);
       onLightboxClose();
     };
-    let edit = (
+    const edit = (
       <div className="block-container_fixed block-container_fixed--bottom--right">
         {learningPath.canEdit ? <Link className="cta-link cta-link--round cta-link--scale" to={editStepTarget}><Icon.Create /> {polyglot.t('editPathStep.edit')}</Link> :
           <button className="cta-link cta-link--round cta-link--scale" onClick={onCopyLearningPathClick}>{polyglot.t('copyLearningPath.createCopy')}</button>}
@@ -56,7 +56,7 @@ class LearningPathStep extends React.Component {
           <div className="learning-step_bd" dangerouslySetInnerHTML={{__html: stepDescription}} />
         </div>
         <Oembed oembedContent={oembedContent} />
-        {edit}
+        {authenticated ? edit : null}
         <Lightbox display={this.state.displayCopyPath} onClose={onLightboxClose}>
           <CopyLearningPath learningPath={learningPath} onClose={onLightboxClose} onCopy={onCopy} />
         </Lightbox>
@@ -66,6 +66,7 @@ class LearningPathStep extends React.Component {
 }
 
 LearningPathStep.propTypes = {
+  authenticated: PropTypes.bool.isRequired,
   learningPath: PropTypes.object.isRequired,
   learningPathStep: PropTypes.object.isRequired,
   copyPath: PropTypes.func.isRequired,
@@ -78,4 +79,10 @@ LearningPathStep.contextTypes = {
 const mapDispatchToProps = {
   copyPath: copyLearningPath,
 };
-export default connect(state => state, mapDispatchToProps)(LearningPathStep);
+
+const mapStateToProps = (state) => Object.assign({}, state, {
+  authenticated: state.authenticated
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(LearningPathStep);
