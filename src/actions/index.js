@@ -16,19 +16,12 @@ import {
 import fetchOembed from './fetchOembed';
 import validateOembed from './validateOembed';
 import updateLearningPathStatus from './updateLearningPathStatus';
-import {
-  fetchLearningPathStep,
-  createLearningPathStep,
-  updateLearningPathStep,
-  deleteLearningPathStep, } from './learningPathStepActions';
-import updateStepSequenceNumber from './updateStepSequenceNumber';
 import copyLearningPath from './copyLearningPath';
 
 export const applicationError = createAction('APPLICATION_ERROR');
 export const setAuthenticated = createAction('SET_AUTHENTICATED');
 export const setAuthToken = createAction('SET_AUTH_TOKEN');
 export const setLearningPath = createAction('SET_LEARNING_PATH');
-export const setLearningPathStep = createAction('SET_LEARNING_PATH_STEP');
 export const setLearningPaths = createAction('SET_LEARNING_PATHS');
 export const changeLearningPathQuery = createAction('CHANGE_LEARNING_PATH_QUERY');
 export const setLearningPathsTotalCount = createAction('SET_LEARNING_PATHS_TOTAL_COUNT');
@@ -43,8 +36,6 @@ export const clearMessage = createAction('CLEAR_MESSAGE');
 export const logoutAction = createAction('LOGOUT');
 export const setOembedObject = createAction('SET_OEMBED_OBJECT');
 export const setLearningPathStatus = createAction('UPDATE_LEARNING_PATH_STATUS');
-export const createEmptyLearningPathStep = createAction('CREATE_EMPTY_LEARNING_PATH_STEP');
-export const sortLearningPathSteps = createAction('SORT_LEARNING_PATH_STEPS');
 export const closeSidebars = createAction('CLOSE_SIDEBARS');
 export const openLeftSidebar = createAction('OPEN_LEFT_SIDEBAR');
 export const openRightSidebar = createAction('OPEN_RIGHT_SIDEBAR');
@@ -53,7 +44,6 @@ export {
   initializeSession,
   logout,
   fetchLearningPath,
-  fetchLearningPathStep,
   fetchLearningPaths,
   fetchMyLearningPaths,
   updateLearningPath,
@@ -64,10 +54,6 @@ export {
   fetchOembed,
   validateOembed,
   updateLearningPathStatus,
-  updateLearningPathStep,
-  createLearningPathStep,
-  deleteLearningPathStep,
-  updateStepSequenceNumber,
   copyLearningPath
 };
 
@@ -76,13 +62,10 @@ export default {
   setAuthenticated,
   setAuthToken,
   setLearningPath,
-  setLearningPathStep,
   setLearningPaths,
   changeLearningPathQuery,
   setLearningPathsTotalCount,
   setMyLearningPathsSortOrder,
-  createLearningPathStep,
-  updateLearningPathStep,
   updateLearningPathTitle,
   updateLearningPathDescription,
   removeLearningPath,
@@ -91,7 +74,6 @@ export default {
   initializeSession,
   logout,
   fetchLearningPath,
-  fetchLearningPathStep,
   fetchLearningPaths,
   fetchMyLearningPaths,
   updateLearningPath,
@@ -106,10 +88,6 @@ export default {
   fetchOembed,
   validateOembed,
   setLearningPathStatus,
-  createEmptyLearningPathStep,
-  deleteLearningPathStep,
-  sortLearningPathSteps,
-  updateStepSequenceNumber,
   copyLearningPath,
   closeSidebars,
   openLeftSidebar,

@@ -2,9 +2,10 @@ import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
-import payload403invalid from './payload403invalid';
+import payload403invalid from '../../../actions/__tests__/payload403invalid';
 
-import actions from '..';
+import { applicationError } from '../../../actions';
+import { setLearningPathStep, fetchLearningPathStep } from '../learningPathStepActions';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
@@ -25,10 +26,10 @@ test('actions/fetchLearningPathStep', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch(actions.fetchLearningPathStep(pathId, stepId))
+  store.dispatch(fetchLearningPathStep(pathId, stepId))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.setLearningPathStep({id: stepId, seqNo: 3})
+        setLearningPathStep({id: stepId, seqNo: 3})
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();
@@ -59,11 +60,11 @@ test('actions/fetchLearningPathStep cache hit', t => {
 
   const store = mockStore(initialState);
 
-  store.dispatch(actions.fetchLearningPathStep(pathId, stepId))
+  store.dispatch(fetchLearningPathStep(pathId, stepId))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.setLearningPathStep({id: stepId, seqNo: 3, cached: true}),
-        actions.setLearningPathStep({id: stepId, seqNo: 3, cached: false})
+        setLearningPathStep({id: stepId, seqNo: 3, cached: true}),
+        setLearningPathStep({id: stepId, seqNo: 3, cached: false})
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();
@@ -83,10 +84,10 @@ test('actions/fetchLearningPathStep access denied', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch(actions.fetchLearningPathStep(pathId, stepId))
+  store.dispatch(fetchLearningPathStep(pathId, stepId))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.applicationError(payload403invalid())
+        applicationError(payload403invalid())
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();

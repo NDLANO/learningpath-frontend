@@ -1,10 +1,10 @@
 import test from 'tape';
 import { isFSA } from 'flux-standard-action';
-import actions from '..';
+import { setLearningPathStep } from '../learningPathStepActions';
 
 
 test('actions/setLearningPathStep', t => {
-  const actual = actions.setLearningPathStep({ id: '12345' });
+  const actual = setLearningPathStep({ id: '12345' });
 
   t.ok(isFSA(actual), 'FSA compliant action');
 
@@ -17,7 +17,7 @@ test('actions/setLearningPathStep', t => {
 });
 
 test('actions/setLearningPathStep with error', t => {
-  const actual = actions.setLearningPathStep(new Error('fail!'));
+  const actual = setLearningPathStep(new Error('fail!'));
 
   t.ok(isFSA(actual), 'FSA compliant action');
 

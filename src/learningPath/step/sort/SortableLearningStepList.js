@@ -11,7 +11,7 @@ import {
   updateStepSequenceNumber,
   deleteLearningPathStep,
   sortLearningPathSteps
-} from '../../../actions';
+} from '../learningPathStepActions';
 
 class SortableLearningStepList extends Component {
   constructor(props) {

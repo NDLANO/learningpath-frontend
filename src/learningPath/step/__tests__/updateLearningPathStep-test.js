@@ -2,9 +2,10 @@ import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
-import payload403invalid from './payload403invalid';
+import payload403invalid from '../../../actions/__tests__/payload403invalid';
 
-import actions from '..';
+import { applicationError, addMessage } from '../../../actions';
+import { setLearningPathStep, updateLearningPathStep } from '../learningPathStepActions';
 import { routerActions } from 'react-router-redux';
 
 const middleware = [thunk];
@@ -12,9 +13,10 @@ const mockStore = configureStore(middleware);
 
 const authToken = '123345';
 const pathId = 123;
+const stepId = 321;
 
 
-test('actions/createLearningPathStep', t => {
+test('actions/updateLearningPathStep', t => {
   const done = res => {
     t.end(res);
     nock.cleanAll();
@@ -26,19 +28,20 @@ test('actions/createLearningPathStep', t => {
     embedContent: [{language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY'}]
   };
 
-  const learningStepReply = Object.assign({}, learningStep, {id: 1234});
+  const learningStepReply = Object.assign({}, learningStep, {id: stepId});
 
   const postPathStepApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .post(`/learningpaths/${pathId}/learningsteps`, learningStep)
+    .put(`/learningpaths/${pathId}/learningsteps/${stepId}`, learningStep)
     .reply(200, learningStepReply);
 
   const store = mockStore({ authToken });
 
-  store.dispatch(actions.createLearningPathStep(pathId, learningStep))
+  store.dispatch(updateLearningPathStep(pathId, stepId, learningStep))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.addMessage({message: 'Lagret OK'}),
-        routerActions.push({ pathname: `/learningpaths/${pathId}/step/1234` })
+        addMessage({message: 'Lagret OK'}),
+        setLearningPathStep(learningStepReply),
+        routerActions.push({ pathname: `/learningpaths/${pathId}/step/${stepId}` })
       ]);
 
       t.doesNotThrow(() => postPathStepApi.done());
@@ -48,7 +51,7 @@ test('actions/createLearningPathStep', t => {
     .catch(done);
 });
 
-test('actions/createLearningPathStep access denied', (t) => {
+test('actions/updateLearningPathStep access denied', (t) => {
   const done = res => {
     t.end(res);
     nock.cleanAll();
@@ -61,15 +64,15 @@ test('actions/createLearningPathStep access denied', (t) => {
   };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .post(`/learningpaths/${pathId}/learningsteps`, learningStep)
+    .put(`/learningpaths/${pathId}/learningsteps/${stepId}`, learningStep)
     .reply(403, {message: 'Invalid'});
 
   const store = mockStore({ authToken });
 
-  store.dispatch(actions.createLearningPathStep(pathId, learningStep))
+  store.dispatch(updateLearningPathStep(pathId, stepId, learningStep))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.applicationError(payload403invalid())
+        applicationError(payload403invalid())
       ]);
       t.doesNotThrow(() => apiMock.done());
 

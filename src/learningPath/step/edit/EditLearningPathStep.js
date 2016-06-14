@@ -7,7 +7,7 @@ import { stateToHTML } from 'draft-js-export-html';
 import {
   updateLearningPathStep,
   createLearningPathStep
-} from '../../../actions';
+} from '../learningPathStepActions';
 import { pushOrAssignLanguageValue } from '../../../util/i18nFieldFinder';
 
 export function EditLearningPathStep(props, { lang: language }) {

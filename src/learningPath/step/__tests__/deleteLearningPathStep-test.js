@@ -2,7 +2,8 @@ import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
-import actions from '..';
+
+import { deleteLearningPathStep } from '../learningPathStepActions';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
@@ -30,7 +31,7 @@ test('actions/deleteLearningPathStep with id', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch(actions.deleteLearningPathStep(pathId, stepId))
+  store.dispatch(deleteLearningPathStep(pathId, stepId))
     .then(() => {
       t.deepEqual(store.getActions(), [
         {type: 'SET_LEARNING_PATH', payload: {id: pathId}}

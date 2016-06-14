@@ -2,9 +2,10 @@ import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
-import payload403invalid from './payload403invalid';
+import payload403invalid from '../../../actions/__tests__/payload403invalid';
 
-import actions from '..';
+import { applicationError } from '../../../actions';
+import { updateStepSequenceNumber } from '../learningPathStepActions';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
@@ -38,7 +39,7 @@ test('actions/updateStepSequenceNumber sucessfully', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch(actions.updateStepSequenceNumber(pathId, stepId, seqNo))
+  store.dispatch(updateStepSequenceNumber(pathId, stepId, seqNo))
     .then(() => {
       t.deepEqual(store.getActions(), [
       ]);
@@ -71,10 +72,10 @@ test('actions/updateStepSequenceNumber access denied', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch(actions.updateStepSequenceNumber(pathId, stepId, seqNo))
+  store.dispatch(updateStepSequenceNumber(pathId, stepId, seqNo))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.applicationError(payload403invalid())
+        applicationError(payload403invalid())
       ]);
       t.doesNotThrow(() => nock.isDone());
 

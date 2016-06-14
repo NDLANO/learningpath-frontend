@@ -3,7 +3,7 @@ import React from 'react';
 import { Route } from 'react-router';
 import { bindActionCreators } from 'redux';
 
-import actions from '../../actions';
+import * as actions from './learningPathStepActions';
 import requireAuthentication from '../../session/requireAuthentication';
 import LearningPathSummary from '../sidebar/LearningPathSummary';
 import LearningPathToCButtons from '../sidebar/LearningPathToCButtons';
@@ -18,7 +18,6 @@ export default function (store, ifAuthenticated) {
     fetchLearningPathStep,
     createEmptyLearningPathStep,
   } = bindActionCreators(actions, store.dispatch);
-
 
   return (
     <Route path="step(/)">

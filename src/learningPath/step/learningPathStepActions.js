@@ -1,8 +1,13 @@
-import { setLearningPathStep, applicationError, addMessage, fetchLearningPath } from '.';
-import { updateStep, createStep, deleteStep, fetchPathStep } from '../sources/learningpaths';
+import { createAction } from 'redux-actions';
+import { applicationError, addMessage, fetchLearningPath } from '../../actions';
+import { updateStep, createStep, deleteStep, fetchPathStep, updateSeqNo } from '../../sources/learningpaths';
 import { routerActions } from 'react-router-redux';
-import polyglot from '../i18n';
+import polyglot from '../../i18n';
 import get from 'lodash/get';
+
+export const setLearningPathStep = createAction('SET_LEARNING_PATH_STEP');
+export const sortLearningPathSteps = createAction('SORT_LEARNING_PATH_STEPS');
+export const createEmptyLearningPathStep = createAction('CREATE_EMPTY_LEARNING_PATH_STEP');
 
 export function fetchLearningPathStep(pathId, stepId) {
   return (dispatch, getState) => {
@@ -52,4 +57,14 @@ export function deleteLearningPathStep(pathId, learningPathStepId) {
     deleteStep(getState().authToken, {pathId, stepId: learningPathStepId})
       .then(() => dispatch(fetchLearningPath(pathId)))
   ;
+}
+
+export function updateStepSequenceNumber(pathId, stepId, seqNo) {
+  return (dispatch, getState) => updateSeqNo(getState().authToken, {pathId, stepId}, {seqNo})
+    .then(() => {
+      dispatch(fetchLearningPath(pathId));
+    })
+    .catch(err => {
+      dispatch(applicationError(err));
+    });
 }
