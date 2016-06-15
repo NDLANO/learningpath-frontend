@@ -6,7 +6,7 @@ import authenticated from './authenticated';
 import authToken from './authToken';
 import user from './user';
 import learningPath from './learningPath';
-import learningPathStep from './learningPathStep';
+import learningPathStep from '../learningPath/step/learningPathStepReducer';
 import learningPaths from './learningPaths';
 import learningPathQuery from './learningPathQuery';
 import learningPathsTotalCount from './learningPathsTotalCount';
