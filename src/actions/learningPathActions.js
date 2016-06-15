@@ -37,6 +37,7 @@ export function createLearningPath(learningPath) {
 }
 
 export function updateLearningPath(pathId, learningPath, redirectUrl = `/learningpaths/${pathId}`) {
+  console.log(learningPath);
   return (dispatch, getState) => new Promise((resolve, reject) => updatePath(getState().authToken, { pathId }, learningPath)
     .then(lpath => {
       dispatch(addMessage({message: polyglot.t('updateLearningPath.updatedMsg')}));

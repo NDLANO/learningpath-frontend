@@ -15,6 +15,7 @@ import learningPathTags from '../learningPath/edit/tags/learningPathTagsReducer'
 import oembedPreview from './oembedPreview';
 import messages from './messages';
 import sidebar from './sidebar';
+import images from '../image/imageReducers';
 
 const rootReducers = combineReducers({
   authenticated,
@@ -30,6 +31,7 @@ const rootReducers = combineReducers({
   sidebar,
   oembedPreview,
   learningPathTags,
+  images,
   routing: routerReducer,
   form: formReducer,
 });
