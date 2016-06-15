@@ -34,7 +34,7 @@ class LearningPathSearch extends Component {
 
     const changeSortOrder = sort => navigateTo(Object.assign({}, query, { sort }));
 
-    const changeSearchTag = tag => navigateTo(Object.assign({}, query, { tag }));
+    const changeSearchTag = tag => navigateTo(Object.assign({}, query, { tag, page: 1 }));
 
     return (
       <Wrapper>
