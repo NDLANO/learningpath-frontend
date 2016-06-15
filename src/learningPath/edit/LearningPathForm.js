@@ -69,7 +69,6 @@ class LearningPathForm extends Component {
       onChoseImage();
       this.setState({displayImages: true});
     };
-    console.log(coverPhotoUrl);
     return (
       <form className="learning-path-form" onSubmit={handleSubmit}>
         <div className="learning-path_hd">

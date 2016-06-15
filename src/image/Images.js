@@ -8,7 +8,6 @@ export function Images(props) {
     closeLightBox,
   } = props;
   const onImageClick = (image) => {
-    console.log(image);
     onChange(image.previewUrl);
     closeLightBox();
   };
