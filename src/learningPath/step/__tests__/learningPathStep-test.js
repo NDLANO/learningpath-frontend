@@ -1,6 +1,6 @@
 import test from 'tape';
 
-import reducer from '../learningPathStep';
+import reducer from '../learningPathStepReducer';
 
 const payload = {id: '123'};
 
