@@ -6,7 +6,7 @@ import polyglot from '../i18n';
 export const setImages = createAction('SET_IMAGES');
 
 export function fetchLearningPathImages() {
-  return (dispatch, getState) => fetchImages(getState().authToken)
+  return (dispatch) => fetchImages()
     .then((images) => {
       dispatch(setImages(images));
       dispatch(addMessage({message: polyglot.t('updateLearningPath.updatedMsg')}));
