@@ -76,7 +76,7 @@ const phrases = {
     descriptionInformation: 'Maks 150 tegn og du har %{remainingDescriptionLength} igen. Beskrivelsen blir synlig i søk.',
     title: 'Tittel på læringssti',
     image: 'Illustrerende bilde',
-    imagePick: 'Klikk for å velge',
+    imagePick: 'Søk og velg bilde til læringsstien',
     duration: 'Varighet',
     tags: 'Tagger',
     imageInformation: 'Bildet blir synlig i søk på læringssti.'
