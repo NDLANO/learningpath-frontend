@@ -1,7 +1,13 @@
-import { createEmptyLearningPathStep, setLearningPath, applicationError, addMessage, removeLearningPath } from '.';
-import { fetchPath, createPath, deletePath, updatePath } from '../sources/learningpaths';
+import { createAction } from 'redux-actions';
+import { fetchPath, createPath, deletePath, updatePath, copyPath } from '../sources/learningpaths';
+import { applicationError, addMessage } from '../actions';
+import { createEmptyLearningPathStep } from './step/learningPathStepActions';
 import { routerActions } from 'react-router-redux';
 import polyglot from '../i18n';
+import { titleI18N } from '../util/i18nFieldFinder';
+
+export const setLearningPath = createAction('SET_LEARNING_PATH');
+export const removeLearningPath = createAction('REMOVE_LEARNING_PATH');
 
 export function fetchLearningPath(pathId) {
   return (dispatch, getState) => fetchPath(getState().authToken, { pathId })
@@ -56,4 +62,28 @@ export function updateLearningPath(pathId, learningPath, redirectUrl = `/learnin
 export function deleteLearningPath(pathId) {
   return (dispatch, getState) => deletePath(getState().authToken, { pathId })
     .then(dispatch(removeLearningPath(pathId)));
+}
+
+export function copyLearningPath(learningPath, locale) {
+  const copiedTitle = polyglot.t('copyLearningPath.copy').concat(titleI18N(learningPath, locale).toString());
+  const clonedLearningPathTitle = {
+    title: [
+      {title: copiedTitle, language: locale}
+    ]
+  };
+
+  return (dispatch, getState) => new Promise((resolve, reject) => copyPath(getState().authToken, {copyfrom: learningPath.id}, clonedLearningPathTitle)
+    .then(lpath => {
+      dispatch(addMessage({message: polyglot.t('copyLearningPath.copiedMessage')}));
+      dispatch(setLearningPath(lpath));
+      dispatch(routerActions.push({
+        pathname: `/learningpaths/${lpath.id}`
+      }));
+      resolve();
+    })
+    .catch(err => {
+      dispatch(applicationError(err));
+      reject();
+    }
+  ));
 }

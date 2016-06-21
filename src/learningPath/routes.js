@@ -9,7 +9,9 @@ import LearningPath from './LearningPath';
 import LearningPathSummary from './sidebar/LearningPathSummary';
 import LearningPathToCButtons from './sidebar/LearningPathToCButtons';
 import AddLearningPathStepButton from './sidebar/AddLearningPathStepButton';
-import actions from '../actions';
+import * as learningPathActions from './learningPathActions';
+import otherActions from '../actions';
+
 import { defaultSearchQuery, parseSearchQuery } from '../middleware/searchQuery';
 import isEmpty from 'lodash/isEmpty';
 import requireAuthentication from '../session/requireAuthentication';
@@ -35,11 +37,14 @@ const redirectToFirstStep = (store, fetchLearningPath) =>
 
 export default function (store, ifAuthenticated) {
   const {
-    fetchLearningPaths,
     fetchLearningPath,
     createEmptyLearningPath,
-    changeLearningPathQuery
-  } = bindActionCreators(actions, store.dispatch);
+  } = bindActionCreators(learningPathActions, store.dispatch);
+
+  const {
+    fetchLearningPaths,
+    changeLearningPathQuery,
+  } = bindActionCreators(otherActions, store.dispatch);
 
 
   const learningPathStepRoutes = configureLearningPathStepRoutes(store, ifAuthenticated);

@@ -9,7 +9,7 @@ import LearningPathToC from './sidebar/LearningPathToC';
 import Masthead from '../components/Masthead';
 import Icon from '../components/Icon';
 import SortLearningStepsButton from './sidebar/SortLearningStepsButton';
-import { fetchLearningPath, copyLearningPath } from '../actions';
+import { fetchLearningPath, copyLearningPath } from './learningPathActions';
 
 export class LearningPath extends Component {
 

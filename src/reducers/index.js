@@ -5,7 +5,7 @@ import { reducer as formReducer } from 'redux-form';
 import authenticated from './authenticated';
 import authToken from './authToken';
 import user from './user';
-import learningPath from './learningPath';
+import learningPath from '../learningPath/learningPathReducer';
 import learningPathStep from '../learningPath/step/learningPathStepReducer';
 import learningPaths from './learningPaths';
 import learningPathQuery from './learningPathQuery';

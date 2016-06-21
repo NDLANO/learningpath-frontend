@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import polyglot from '../../i18n';
 import Icon from '../../components/Icon';
-import { updateLearningPath, updateLearningPathStatus, closeSidebars } from '../../actions';
+import { updateLearningPath } from '../learningPathActions';
+import { updateLearningPathStatus, closeSidebars } from '../../actions';
 
 export function LearningPathToCButtons({learningPath, saveAction, saveAndPublishAction, localCloseSidebars}) {
   if (!learningPath.canEdit) {

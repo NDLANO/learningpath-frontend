@@ -7,9 +7,10 @@ import Oembed from './oembed/Oembed';
 import { titleI18N, descriptionI18N, oembedContentI18N } from '../../util/i18nFieldFinder';
 import polyglot from '../../i18n';
 import Icon from '../../components/Icon';
-import { copyLearningPath } from '../../actions';
+import { copyLearningPath } from '../learningPathActions';
 import CopyLearningPath from '../new/CopyLearningPath';
 import Lightbox from '../../components/Lightbox';
+
 class LearningPathStep extends React.Component {
   constructor(props) {
     super(props);
