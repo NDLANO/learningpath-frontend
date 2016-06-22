@@ -17,8 +17,6 @@ export const setLearningPaths = createAction('SET_LEARNING_PATHS');
 export const changeLearningPathQuery = createAction('CHANGE_LEARNING_PATH_QUERY');
 export const setLearningPathsTotalCount = createAction('SET_LEARNING_PATHS_TOTAL_COUNT');
 export const setMyLearningPathsSortOrder = createAction('SET_MY_LEARNING_PATHS_SORT_ORDER');
-export const updateLearningPathTitle = createAction('UPDATE_LEARNING_PATH_TITLE');
-export const updateLearningPathDescription = createAction('UPDATE_LEARNING_PATH_DESCRIPTION');
 export const setUserData = createAction('SET_USER_DATA');
 export const addMessage = createAction('ADD_MESSAGE');
 export const clearAllMessages = createAction('CLEAR_ALL_MESSAGES');
@@ -49,8 +47,6 @@ export default {
   changeLearningPathQuery,
   setLearningPathsTotalCount,
   setMyLearningPathsSortOrder,
-  updateLearningPathTitle,
-  updateLearningPathDescription,
   setUserData,
   initializeSession,
   logout,
