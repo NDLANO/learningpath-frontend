@@ -1,6 +1,6 @@
 import test from 'tape';
 import { isFSA } from 'flux-standard-action';
-import actions from '..';
+import { clearMessage, timeoutMessage } from '../messagesActions';
 
 test('actions/timeoutMessage', (t) => {
   const message = {
@@ -10,9 +10,9 @@ test('actions/timeoutMessage', (t) => {
     timeToLive: 500
   };
 
-  actions.timeoutMessage(message)(actual => {
+  timeoutMessage(message)(actual => {
     t.ok(isFSA(actual), 'FSA compliant action');
-    t.deepEqual(actual, actions.clearMessage(message.id));
+    t.deepEqual(actual, clearMessage(message.id));
     t.end();
   });
 });

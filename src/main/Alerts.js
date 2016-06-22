@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import Icon from '../components/Icon';
 import classNames from 'classnames';
-import {timeoutMessage, clearAllMessages} from '../actions';
+import { timeoutMessage, clearAllMessages } from '../messages/messagesActions';
 
 const priorities = {info: 0, success: 1, warning: 2, danger: 3 };
 

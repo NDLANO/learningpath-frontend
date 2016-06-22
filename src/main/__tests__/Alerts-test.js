@@ -3,7 +3,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import { Alerts } from '../Alerts';
-import { clearAllMessages } from '../../actions';
+import { clearAllMessages } from '../../messages/messagesActions';
 import uuid from 'node-uuid';
 
 const noop = () => {};

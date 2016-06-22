@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-import { applicationError, addMessage } from '../../actions';
+import { applicationError, addMessage } from '../../messages/messagesActions';
 import { fetchLearningPath } from '../learningPathActions';
 import { updateStep, createStep, deleteStep, fetchPathStep, updateSeqNo } from '../../sources/learningpaths';
 import { routerActions } from 'react-router-redux';

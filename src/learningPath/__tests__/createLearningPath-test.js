@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import nock from 'nock';
 import payload403invalid from '../../actions/__tests__/payload403invalid';
 
-import { applicationError, addMessage } from '../../actions';
+import { applicationError, addMessage } from '../../messages/messagesActions';
 import { createLearningPath, setLearningPath } from '../learningPathActions';
 import { createEmptyLearningPathStep } from '../step/learningPathStepActions';
 import { routerActions } from 'react-router-redux';

@@ -13,7 +13,7 @@ import learningPathsTotalCount from './learningPathsTotalCount';
 import myLearningPathsSortOrder from './myLearningPathsSortOrder';
 import learningPathTags from '../learningPath/edit/tags/learningPathTagsReducer';
 import oembedPreview from './oembedPreview';
-import messages from './messages';
+import messages from '../messages/messagesReducer';
 import sidebar from './sidebar';
 import images from '../image/imageReducers';
 

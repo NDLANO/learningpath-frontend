@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import nock from 'nock';
 import payload403invalid from '../../../actions/__tests__/payload403invalid';
 
-import { applicationError } from '../../../actions';
+import { applicationError } from '../../../messages/messagesActions';
 import { updateStepSequenceNumber } from '../learningPathStepActions';
 
 const middleware = [thunk];

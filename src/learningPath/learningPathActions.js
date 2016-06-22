@@ -1,6 +1,7 @@
 import { createAction } from 'redux-actions';
 import { fetchPath, createPath, deletePath, updatePath, copyPath } from '../sources/learningpaths';
-import { applicationError, addMessage } from '../actions';
+import { applicationError, addMessage } from '../messages/messagesActions';
+
 import { createEmptyLearningPathStep } from './step/learningPathStepActions';
 import { routerActions } from 'react-router-redux';
 import polyglot from '../i18n';
