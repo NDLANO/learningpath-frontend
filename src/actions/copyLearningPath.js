@@ -1,4 +1,5 @@
-import { setLearningPath, applicationError, addMessage } from '.';
+import { setLearningPath } from '.';
+import { applicationError, addMessage } from '../messages/messagesActions';
 import { copyPath } from '../sources/learningpaths';
 import { routerActions } from 'react-router-redux';
 import polyglot from '../i18n';
