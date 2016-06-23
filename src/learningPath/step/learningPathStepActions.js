@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions';
 import { applicationError, addMessage } from '../../messages/messagesActions';
 import { fetchLearningPath } from '../learningPathActions';
-import { updateStep, createStep, deleteStep, fetchPathStep, updateSeqNo } from '../../sources/learningpaths';
+import { updateStep, createStep, deleteStep, fetchPathStep, updateSeqNo, activateDeletedStep } from '../../sources/learningpaths';
 import { routerActions } from 'react-router-redux';
 import polyglot from '../../i18n';
 import get from 'lodash/get';
@@ -53,9 +53,29 @@ export function createLearningPathStep(pathId, learningPathStep) {
     .catch(err => dispatch(applicationError(err)));
 }
 
-export function deleteLearningPathStep(pathId, learningPathStepId) {
+export function activateDeletedLearningPathStep(pathId, stepId) {
   return (dispatch, getState) =>
-    deleteStep(getState().authToken, {pathId, stepId: learningPathStepId})
+    activateDeletedStep(getState().authToken, { pathId, stepId })
+      .then(() => dispatch(fetchLearningPath(pathId)))
+  ;
+}
+
+export function deleteLearningPathStep(pathId, stepId) {
+  return (dispatch, getState) =>
+    deleteStep(getState().authToken, { pathId, stepId })
+      .then(() => dispatch(
+        addMessage(
+          {
+            message: polyglot.t('learningPathStep.messages.delete.title'),
+            timeToLive: 5000,
+            severity: 'warning',
+            action: {
+              title: polyglot.t('learningPathStep.messages.delete.action'),
+              onClick: () => dispatch(activateDeletedLearningPathStep(pathId, stepId)),
+            },
+          }
+        )
+      ))
       .then(() => dispatch(fetchLearningPath(pathId)))
   ;
 }

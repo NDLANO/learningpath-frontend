@@ -3,9 +3,31 @@ import {connect} from 'react-redux';
 
 import Icon from '../components/Icon';
 import classNames from 'classnames';
-import { timeoutMessage, clearAllMessages } from '../messages/messagesActions';
+import { timeoutMessage, clearAllMessages, clearMessage } from '../messages/messagesActions';
 
 const priorities = {info: 0, success: 1, warning: 2, danger: 3 };
+
+const Action = ({title, onClick}) =>
+  <strong style={{float: 'right'}}><button onClick={onClick} className="un-button">{title}</button></strong>;
+
+Action.propTypes = {
+  title: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
+const Message = ({message, dispatch}) => {
+  const onClick = () => {
+    message.action.onClick();
+    dispatch(clearMessage(message.id));
+  };
+
+  return <li key={message.id}>{message.message} {message.action ? <Action title={message.action.title} onClick={onClick} /> : null}</li>;
+};
+
+Message.propTypes = {
+  message: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
 
 export function Alerts({dispatch, messages}) {
   const isHidden = messages.length === 0;
@@ -32,7 +54,9 @@ export function Alerts({dispatch, messages}) {
       </button>
       <div className="alert_msg">
         <ul>
-          {messages.map(message => (<li key={message.id}>{message.message}</li>))}
+          {messages.map(message => (
+            <Message dispatch={dispatch} message={message} />
+          ))}
         </ul>
       </div>
     </div>
