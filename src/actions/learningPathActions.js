@@ -14,7 +14,8 @@ export function createEmptyLearningPath() {
     title: [],
     description: [],
     learningsteps: [],
-    duration: 1 // https://support.knowit.no/support/browse/NDLA-198
+    duration: 1, // https://support.knowit.no/support/browse/NDLA-198
+    coverPhotoMetaUrl: ''
   });
 }
 

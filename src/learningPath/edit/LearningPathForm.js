@@ -10,7 +10,7 @@ import LearningPathDuration from './LearningPathDuration';
 import isInteger from 'lodash/isInteger';
 import Images from '../../image/Images';
 import Lightbox from '../../components/Lightbox';
-const fields = ['title', 'description', 'duration', 'tags', 'coverPhotoUrl'];
+const fields = ['title', 'description', 'duration', 'tags', 'coverPhotoMetaUrl'];
 
 const validate = values => {
   const errors = {};
@@ -45,15 +45,17 @@ class LearningPathForm extends Component {
   render() {
     const {
       tagOptions,
-      fields: { title, description, duration, tags, coverPhotoUrl },
+      fields: { title, description, duration, tags, coverPhotoMetaUrl },
       handleSubmit,
       submitting,
       learningPath,
       lang,
-      onChoseImage
+      onChoseImage,
+      imageSearchQuery,
+      fetchImage
     } = this.props;
 
-
+    console.log(this.props);
     const inputClassName = (hasError, isTextArea) => classNames({
       'input--alert': hasError,
       'textarea textarea--resize-vertical': isTextArea
@@ -66,7 +68,7 @@ class LearningPathForm extends Component {
     };
     const onImageLightboxOpen = (evt) => {
       evt.preventDefault();
-      onChoseImage();
+      onChoseImage(imageSearchQuery);
       this.setState({displayImages: true});
     };
     return (
@@ -94,7 +96,7 @@ class LearningPathForm extends Component {
           </div>
 
           <div className="learning-path-image">
-            <label className="label--medium-bold  label--medium">{polyglot.t('learningPath.image')}</label>
+            <label className="label--medium-bold label--medium">{polyglot.t('learningPath.image')}</label>
             <button className="button button--primary" onClick={(evt) => onImageLightboxOpen(evt)}>
               {polyglot.t('learningPath.imagePick')}
             </button>
@@ -102,7 +104,7 @@ class LearningPathForm extends Component {
           </div>
           <div className="lightbox_image-preview">
             <Lightbox display={this.state.displayImages} onClose={onImageLightboxClose}>
-              <Images id="coverPhotoUrl" {...coverPhotoUrl} closeLightBox={onImageLightboxClose} />
+              <Images id="coverPhotoMetaUrl" {...coverPhotoMetaUrl} closeLightBox={onImageLightboxClose} imageSearch={onChoseImage} imageSearchQuery={imageSearchQuery} fetchImage={fetchImage} />
             </Lightbox>
           </div>
 
@@ -141,7 +143,9 @@ LearningPathForm.propTypes = {
   learningPath: PropTypes.object.isRequired,
   tagOptions: PropTypes.array.isRequired,
   lang: PropTypes.string.isRequired,
-  onChoseImage: PropTypes.func.isRequired
+  onChoseImage: PropTypes.func.isRequired,
+  imageSearchQuery: PropTypes.object.isRequired,
+  fetchImage: PropTypes.func.isRequired
 };
 
 const convertedDuration = (value) => {
@@ -158,7 +162,7 @@ const mapStateToProps = (state, props) => ({
     description: descriptionI18N(props.learningPath, props.lang),
     duration: convertedDuration(props.learningPath.duration),
     tags: props.learningPath.tags ? props.learningPath.tags : [],
-    coverPhotoUrl: props.learningPath.coverPhotoUrl ? props.learningPath.coverPhotoUrl : ''
+    coverPhotoMetaUrl: props.learningPath.coverPhoto ? props.learningPath.coverPhoto.metaUrl : ''
   },
 });
 

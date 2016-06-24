@@ -51,7 +51,7 @@ class LearningPathSearch extends Component {
             {learningPaths.map(path =>
               (<SearchResult key={path.id} path={path} pushRoute={pushRoute} onTagSearchQuery={changeSearchTag} query={query} />)
             )}
-            <SearchResultPager page={page} lastPage={lastPage} query={query} />
+            <SearchResultPager page={page} lastPage={lastPage} query={query} pathName="/learningpaths" />
           </div>
         </Content>
         <Footer />

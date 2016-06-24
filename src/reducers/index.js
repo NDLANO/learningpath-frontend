@@ -16,7 +16,7 @@ import oembedPreview from './oembedPreview';
 import messages from './messages';
 import sidebar from './sidebar';
 import images from '../image/imageReducers';
-
+import imageSearchQuery from '../image/search/imageSearchReducers';
 const rootReducers = combineReducers({
   authenticated,
   authToken,
@@ -31,6 +31,7 @@ const rootReducers = combineReducers({
   sidebar,
   oembedPreview,
   learningPathTags,
+  imageSearchQuery,
   images,
   routing: routerReducer,
   form: formReducer,

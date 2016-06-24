@@ -39,7 +39,7 @@ export const setLearningPathStatus = createAction('UPDATE_LEARNING_PATH_STATUS')
 export const closeSidebars = createAction('CLOSE_SIDEBARS');
 export const openLeftSidebar = createAction('OPEN_LEFT_SIDEBAR');
 export const openRightSidebar = createAction('OPEN_RIGHT_SIDEBAR');
-
+export const changeImageSearchQuery = createAction('CHANGE_IMAGE_SEARCH_QUERY');
 export {
   initializeSession,
   logout,
@@ -64,6 +64,7 @@ export default {
   setLearningPath,
   setLearningPaths,
   changeLearningPathQuery,
+  changeImageSearchQuery,
   setLearningPathsTotalCount,
   setMyLearningPathsSortOrder,
   updateLearningPathTitle,
