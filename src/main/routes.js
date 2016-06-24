@@ -32,15 +32,13 @@ export default function (store) {
   const learningPathRoutes = configureLearningPathRoutes(store, ifAuthenticated);
 
   return (
-    <Route path="/" onEnter={ifAuthenticated(checkValidSession)}>
+    <Route path="/" component={App} onEnter={ifAuthenticated(checkValidSession)}>
       <IndexRoute component={Welcome} />
-      <Route component={App}>
-        {loginRoutes}
-        <Route path="logout" onEnter={ifAuthenticated(logout)} component={LoginProviders} />
-        <Route path="minside" component={requireAuthentication(MyPage)} onEnter={ifAuthenticated(fetchMyLearningPaths)} />
-        {learningPathRoutes}
-        <Route path="*" component={NotFound} />
-      </Route>
+      {loginRoutes}
+      <Route path="logout" onEnter={ifAuthenticated(logout)} component={LoginProviders} />
+      <Route path="minside" component={requireAuthentication(MyPage)} onEnter={ifAuthenticated(fetchMyLearningPaths)} />
+      {learningPathRoutes}
+      <Route path="*" component={NotFound} />
     </Route>
   );
 }

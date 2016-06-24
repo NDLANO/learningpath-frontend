@@ -10,7 +10,7 @@ import Alerts from './Alerts';
 export class App extends React.Component {
   getChildContext() {
     return {
-      lang: 'nb'
+      lang: this.props.locale
     };
   }
 
