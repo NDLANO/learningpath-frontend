@@ -1,7 +1,12 @@
 import { handleActions } from 'redux-actions';
 import cloneDeep from 'lodash/cloneDeep';
 
+const intitalState = {};
 export default handleActions({
+  LAST_DELETED_LEARNING_PATH_STEP: {
+    next(state, action) { return action.payload; },
+    throw(state) { return state; }
+  },
   SET_LEARNING_PATH_STEP: {
     next(state, action) { return action.payload; },
     throw(state) { return state; }
@@ -26,5 +31,5 @@ export default handleActions({
     },
     throw(state) { return state; }
   },
-  LOGOUT: () => ({})
-}, {});
+  LOGOUT: () => (intitalState)
+}, intitalState);

@@ -52,6 +52,9 @@ const deleteLearningPathStep = deleteAuthorized('/learningpaths/:pathId/learning
 const deleteStep = (authToken, {pathId, stepId}) =>
   deleteLearningPathStep(authToken, {pathId, stepId});
 
+const putLearningPathStepStatus = putAuthorized('/learningpaths/:pathId/learningsteps/:stepId/status');
+export const activateDeletedStep = (authToken, {pathId, stepId}) => putLearningPathStepStatus(authToken, {pathId, stepId}, {status: 'ACTIVE'});
+
 const putLearningPathStatus = putAuthorized('/learningpaths/:pathId/status');
 const updateStatus = (authToken, { pathId }, body) =>
   putLearningPathStatus(authToken, {pathId}, body);

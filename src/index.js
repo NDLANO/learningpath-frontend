@@ -14,7 +14,6 @@ const store = configureStore({
   authenticated: false,
   authToken: defaultApiKey,
   user: {},
-  learningPath: {},
   learningPathStep: {},
   learningPaths: [],
   learningPathQuery: defaultSearchQuery,

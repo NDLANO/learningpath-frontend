@@ -1,4 +1,5 @@
-import { applicationError, logoutAction } from '.';
+import { logoutAction } from '.';
+import { applicationError } from '../messages/messagesActions';
 import sendLogout from '../sources/sendLogout';
 
 export default function logout() {

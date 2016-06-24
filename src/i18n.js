@@ -160,8 +160,16 @@ const phrases = {
     copy: 'KOPI: ',
     copiedMessage: 'Læringssti kopiert.'
   },
+  learningPathStep: {
+    messages: {
+      delete: {
+        title: 'Slettet læringssteg',
+        action: 'Angre sletting',
+      }
+    }
+  },
   updateLearningPath: {
-    updatedMsg: 'Lagret OK'
+    updatedMsg: 'Lagret OK',
   },
   tagInput: {
     createNew: 'Opprett ny tag',

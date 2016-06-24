@@ -1,4 +1,3 @@
-
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
@@ -6,9 +5,7 @@ import LearningPathForm from './LearningPathForm';
 import { fetchLearningPathTagsIfNeeded } from './tags/learningPathTagsActions';
 import { getLearningPathTagsByLanguageFlatten } from './tags/learningPathTagsSelectors';
 import { fetchLearningPathImages, fetchLearningPathImage, fetchLearningPathImageWithUrl } from '../../image/imageActions';
-import {
-  updateLearningPath
-} from '../../actions';
+import { updateLearningPath } from '../learningPathActions';
 
 class EditLearningPath extends Component {
   componentDidMount() {

@@ -2,9 +2,10 @@ import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
-import payload403invalid from './payload403invalid';
+import payload403invalid from '../../actions/__tests__/payload403invalid';
 
-import actions from '..';
+import { applicationError } from '../../messages/messagesActions';
+import { fetchLearningPath, setLearningPath } from '../learningPathActions';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
@@ -24,10 +25,10 @@ test('actions/fetchLearningPath', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch(actions.fetchLearningPath(pathId))
+  store.dispatch(fetchLearningPath(pathId))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.setLearningPath({id: pathId})
+        setLearningPath({id: pathId})
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();
@@ -47,10 +48,10 @@ test('actions/fetchLearningPath access denied', (t) => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch(actions.fetchLearningPath(pathId))
+  store.dispatch(fetchLearningPath(pathId))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.applicationError(payload403invalid())
+        applicationError(payload403invalid())
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();

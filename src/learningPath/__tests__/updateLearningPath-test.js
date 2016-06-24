@@ -2,9 +2,10 @@ import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
-import payload403invalid from './payload403invalid';
+import payload403invalid from '../../actions/__tests__/payload403invalid';
 
-import actions from '..';
+import { applicationError, addMessage } from '../../messages/messagesActions';
+import { updateLearningPath, setLearningPath } from '../learningPathActions';
 import { routerActions } from 'react-router-redux';
 
 const middleware = [thunk];
@@ -27,13 +28,13 @@ test('actions/updateLearningPath', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch(actions.updateLearningPath(pathId, {
+  store.dispatch(updateLearningPath(pathId, {
     id: pathId, isRequest: true
   }))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.addMessage({message: 'Lagret OK'}),
-        actions.setLearningPath({
+        addMessage({message: 'Lagret OK'}),
+        setLearningPath({
           id: pathId,
           isResponse: true
         }),
@@ -59,7 +60,7 @@ test('actions/updateLearningPath with redirect', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch(actions.updateLearningPath(pathId, {id: pathId}, '/goto/dev/null'))
+  store.dispatch(updateLearningPath(pathId, {id: pathId}, '/goto/dev/null'))
     .then(() => {
       const actual = store.getActions();
 
@@ -88,10 +89,10 @@ test('actions/updateLearningPath access denied', (t) => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch(actions.updateLearningPath(pathId, { id: pathId, foo: 'bar' }))
+  store.dispatch(updateLearningPath(pathId, { id: pathId, foo: 'bar' }))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.applicationError(payload403invalid())
+        applicationError(payload403invalid())
       ]);
       t.doesNotThrow(() => apiMock.done());
 

@@ -1,5 +1,5 @@
 import test from 'tape';
-import reducer from '../messages';
+import reducer from '../messagesReducer';
 
 test('reducers/messages add message', t => {
   let nextState = reducer([], {

@@ -4,7 +4,9 @@ import get from 'lodash/get';
 import assign from 'lodash/assign';
 import findIndex from 'lodash/findIndex';
 import assureSequenceOrder from '../util/assureSequenceOrder';
-import assignOrPushPropReducer from '../util/assignOrPushPropReducer';
+
+export const initialState = {
+};
 
 export default handleActions({
   SET_LEARNING_PATH: {
@@ -38,16 +40,6 @@ export default handleActions({
     throw(state) { return state; }
   },
 
-  UPDATE_LEARNING_PATH_TITLE: {
-    next: assignOrPushPropReducer('title'),
-    throw(state) { return state; }
-  },
-
-  UPDATE_LEARNING_PATH_DESCRIPTION: {
-    next: assignOrPushPropReducer('description'),
-    throw(state) { return state; }
-  },
-
   SORT_LEARNING_PATH_STEPS: {
     next(state, action) {
       if (state.learningsteps.length !== action.payload.length) {
@@ -66,4 +58,4 @@ export default handleActions({
   },
 
   LOGOUT: () => ({})
-}, {});
+}, initialState);
