@@ -16,11 +16,13 @@ import oembedPreview from './oembedPreview';
 import messages from '../messages/messagesReducer';
 import sidebar from './sidebar';
 import images from '../image/imageReducers';
+import locale from '../locale/localeReducer';
 
 const rootReducers = combineReducers({
   authenticated,
   authToken,
   user,
+  locale,
   learningPath,
   learningPathStep,
   learningPaths,

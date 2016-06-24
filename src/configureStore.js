@@ -25,7 +25,7 @@ const createFinalStore = compose(
     errorReporter,
     middleware
   ),
-  persistState(['authenticated', 'authToken', 'user'], { key: 'ndla:sti', slicer }),
+  persistState(['authenticated', 'authToken', 'user', 'locale'], { key: 'ndla:sti', slicer }),
   window && window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore);
 
