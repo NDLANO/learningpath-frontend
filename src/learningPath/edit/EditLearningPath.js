@@ -5,7 +5,7 @@ import get from 'lodash/get';
 import LearningPathForm from './LearningPathForm';
 import { fetchLearningPathTagsIfNeeded } from './tags/learningPathTagsActions';
 import { getLearningPathTagsByLanguageFlatten } from './tags/learningPathTagsSelectors';
-import { fetchLearningPathImages, fetchLearningPathImage } from '../../image/imageActions';
+import { fetchLearningPathImages, fetchLearningPathImage, fetchLearningPathImageWithUrl } from '../../image/imageActions';
 import {
   updateLearningPath
 } from '../../actions';
@@ -53,14 +53,15 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
   learningPath: get(state, 'learningPath', {}),
   learningSteps: get(state, 'learningPath.learningsteps', []),
   tags: getLearningPathTagsByLanguageFlatten(state, ownProps.lang),
-  imageSearchQuery: get(state, 'imageSearchQuery', {query: '', page: 1, 'page-size': 16})
+  imageSearchQuery: get(state, 'imageSearchQuery', {query: '', page: 1, 'page-size': 16}),
 });
 
 const mapDispatchToProps = {
   localUpdateLearningPath: updateLearningPath,
   fetchLearningPathTags: fetchLearningPathTagsIfNeeded,
   localFetchImages: fetchLearningPathImages,
-  localFetchImage: fetchLearningPathImage
+  localFetchImage: fetchLearningPathImage,
+  localFetchImageWithUrl: fetchLearningPathImageWithUrl
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditLearningPath);

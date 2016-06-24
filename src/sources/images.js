@@ -15,7 +15,9 @@ const fetchImage = (imageId) => {
   const url = apiResourceUrl(formatPattern('/images/:imageId', {imageId}));
   return fetch(url).then(resolveJsonOrRejectWithError);
 };
+const fetchImageWithUrl = (url) => fetch(url).then(resolveJsonOrRejectWithError);
 export {
   fetchImages,
   fetchImage,
+  fetchImageWithUrl
 };

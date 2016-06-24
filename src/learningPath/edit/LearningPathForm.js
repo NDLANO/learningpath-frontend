@@ -55,7 +55,6 @@ class LearningPathForm extends Component {
       fetchImage
     } = this.props;
 
-    console.log(this.props);
     const inputClassName = (hasError, isTextArea) => classNames({
       'input--alert': hasError,
       'textarea textarea--resize-vertical': isTextArea
