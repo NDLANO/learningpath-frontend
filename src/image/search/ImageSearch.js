@@ -11,22 +11,23 @@ class ImageSearch extends React.Component {
     const { onSubmit, query, localChangeImageSearchQuery, totalCount } = this.props;
     const textQuery = query.query;
     const onQueryChange = (evt) => {
-      let newQuery = {};
-      if (textQuery === evt.target.value) {
-        newQuery = {query: evt.target.value, 'page-size': 16, page: query.page};
-      } else {
-        newQuery = {query: evt.target.value, 'page-size': 16, page: 1};
-      }
+      const newQuery = {
+        query: evt.target.value,
+        'page-size': 16,
+        page: textQuery === evt.target.value ? query.page : 1,
+      };
+
       this.setState({showTotalCount: false});
       localChangeImageSearchQuery(newQuery);
     };
-    const onImageSearchClick = (evt) => {
-      onSubmit(evt, query);
+    const submitImageSearchQuery = (evt) => {
+      evt.preventDefault();
       this.setState({showTotalCount: true});
+      onSubmit(evt, query);
     };
     const onKeyPress = (evt) => {
       if (evt.key === 'Enter') {
-        this.setState({showTotalCount: true});
+        submitImageSearchQuery(evt);
       }
     };
 
@@ -40,7 +41,7 @@ class ImageSearch extends React.Component {
             type="text" value={textQuery} onChange={(evt) => onQueryChange(evt)}
             onKeyPress={(evt) => onKeyPress(evt)} placeholder={polyglot.t('learningPath.image.searchPlaceholder')} className="image-search-form_query"
           />
-          <button className="image-search-form_btn" onClick={(evt) => onImageSearchClick(evt)}><Icon.Search /></button>
+          <button className="image-search-form_btn" onClick={(evt) => submitImageSearchQuery(evt)}><Icon.Search /></button>
         </div>
         <div className="image-search_border" />
         <div className="image-search_text">

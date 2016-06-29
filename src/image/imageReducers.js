@@ -3,7 +3,6 @@ import cloneDeep from 'lodash/cloneDeep';
 const initialState = {
   images: [],
   currentImage: {},
-  imagesSearchTime: 0,
 };
 export default handleActions({
   SET_IMAGES: {

@@ -12,7 +12,7 @@ function dispatchImagesReducers(images, dispatch, query) {
   dispatch(changeImageSearchQuery(query));
 }
 
-export function fetchLearningPathImages(query, isFirstSearch) {
+export function fetchLearningPathImages(query, isFirstSearch = false) {
   return (dispatch) => fetchImages(pickBy(query))
     .then((images) => {
       if (images.totalCount === 0 && isFirstSearch) {

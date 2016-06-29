@@ -29,6 +29,7 @@ export function Images(props) {
   };
   const submitImageSearchQuery = (evt, q) => {
     evt.preventDefault();
+    console.log(q);
     imageSearch(q, false);
   };
   const base = '/images';
