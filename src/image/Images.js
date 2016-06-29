@@ -4,7 +4,7 @@ import ImageSearch from './search/ImageSearch';
 import ImageSearchResult from './search/ImageSearchResult';
 import ImageSearchPager from './search/ImageSearchPager';
 import { changeImageSearchQuery } from '../actions';
-import Image from './Image';
+import get from 'lodash/get';
 export function Images(props) {
   const {
     images,
@@ -14,7 +14,9 @@ export function Images(props) {
     imageSearchQuery,
     localChangeImageSearchQuery,
     fetchImage,
-    currentImage
+    currentImage,
+    lastPage,
+    totalCount,
   } = props;
 
   if (!images) {
@@ -25,7 +27,6 @@ export function Images(props) {
       fetchImage(image.id);
     }
   };
-
   const submitImageSearchQuery = (evt, q) => {
     evt.preventDefault();
     imageSearch(q);
@@ -37,55 +38,44 @@ export function Images(props) {
     const coverPhotoMetaUrl = `${window.NDLA_API_URL}${base}/${image.id}`;
     onChange(coverPhotoMetaUrl);
   };
-
   return (
     <div>
-      <ImageSearch onSubmit={submitImageSearchQuery} query={imageSearchQuery} localChangeImageSearchQuery={localChangeImageSearchQuery} />
-      <div className="image_list">
-        {images.map((image, index) => {
-          if (image.isPreview) {
-            return <Image key={index} image={currentImage} onSaveImage={(evt) => onSaveImage(evt, currentImage)} />;
-          }
-          return <ImageSearchResult key={index} image={image} onImageClick={onImageClick} currentImage={currentImage} />;
-        })}
-        <ImageSearchPager page={imageSearchQuery.page} lastPage={5} query={imageSearchQuery} imageSearch={imageSearch} />
+      <div>
+        <ImageSearch onSubmit={submitImageSearchQuery} query={imageSearchQuery} localChangeImageSearchQuery={localChangeImageSearchQuery} totalCount={totalCount} />
+        <div className="image_list">
+          {images.map((image) =>
+            <ImageSearchResult key={image.id} image={image} onImageClick={onImageClick} currentImage={currentImage} onSaveImage={onSaveImage} />
+          )}
+        </div>
+        <ImageSearchPager page={imageSearchQuery.page} lastPage={lastPage} query={imageSearchQuery} imageSearch={imageSearch} />
       </div>
     </div>
   );
 }
 
 Images.propTypes = {
-  images: PropTypes.array.isRequired,
+  images: PropTypes.array,
   onChange: PropTypes.func.isRequired,
   closeLightBox: PropTypes.func.isRequired,
   imageSearchQuery: PropTypes.object.isRequired,
   imageSearch: PropTypes.func.isRequired,
   localChangeImageSearchQuery: PropTypes.func.isRequired,
   fetchImage: PropTypes.func.isRequired,
-  currentImage: PropTypes.object
+  currentImage: PropTypes.object,
+  lastPage: PropTypes.number.isRequired,
+  totalCount: PropTypes.number.isRequired,
 };
 
 Images.contextTypes = {
   lang: PropTypes.string.isRequired
 };
 
-const mapStateToProps = (state) => {
-  const images = state.images.images.results;
-  const currentImage = state.images.currentImage;
-  if (currentImage.id) {
-    const imageIndex = images.findIndex((i) => i.id === currentImage.id);
-    const localImages = images.slice();
-    localImages.splice(imageIndex + 1, 0, currentImage);
-    return Object.assign({}, state, {
-      images: localImages,
-      currentImage
-    });
-  }
-  return Object.assign({}, state, {
-    images: state.images.images.results,
-    currentImage
-  });
-};
+const mapStateToProps = (state) => Object.assign({}, state, {
+  images: state.images.images.results,
+  currentImage: state.images.currentImage,
+  lastPage: Math.ceil(state.images.images.totalCount / (state.imageSearchQuery['page-size'] || 1)),
+  totalCount: get(state, 'images.images.totalCount', 0),
+});
 
 const mapDispatchToProps = {
   localChangeImageSearchQuery: changeImageSearchQuery

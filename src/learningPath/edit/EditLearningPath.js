@@ -4,7 +4,7 @@ import get from 'lodash/get';
 import LearningPathForm from './LearningPathForm';
 import { fetchLearningPathTagsIfNeeded } from './tags/learningPathTagsActions';
 import { getLearningPathTagsByLanguageFlatten } from './tags/learningPathTagsSelectors';
-import { fetchLearningPathImages, fetchLearningPathImage, fetchLearningPathImageWithUrl } from '../../image/imageActions';
+import { fetchLearningPathImages, fetchLearningPathImage, fetchLearningPathImageWithMetaUrl } from '../../image/imageActions';
 import { updateLearningPath } from '../learningPathActions';
 
 class EditLearningPath extends Component {
@@ -26,7 +26,8 @@ class EditLearningPath extends Component {
 
     return (
       <main className="two-column_col two-column_col--center">
-        <LearningPathForm learningPath={learningPath} tagOptions={tags} onSubmit={handleSubmit} onChoseImage={localFetchImages}
+        <LearningPathForm
+          learningPath={learningPath} tagOptions={tags} onSubmit={handleSubmit} onChoseImage={localFetchImages}
           fetchImage={localFetchImage} imageSearchQuery={imageSearchQuery} lang={lang}
         />
       </main>
@@ -43,7 +44,8 @@ EditLearningPath.propTypes = {
   fetchLearningPathTags: PropTypes.func.isRequired,
   localFetchImages: PropTypes.func.isRequired,
   imageSearchQuery: PropTypes.object.isRequired,
-  localFetchImage: PropTypes.func.isRequired
+  localFetchImage: PropTypes.func.isRequired,
+  localFetchImageWithMetaUrl: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
@@ -58,7 +60,8 @@ const mapDispatchToProps = {
   fetchLearningPathTags: fetchLearningPathTagsIfNeeded,
   localFetchImages: fetchLearningPathImages,
   localFetchImage: fetchLearningPathImage,
-  localFetchImageWithUrl: fetchLearningPathImageWithUrl
+  localFetchImageWithMetaUrl: fetchLearningPathImageWithMetaUrl
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditLearningPath);

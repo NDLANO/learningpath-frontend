@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import Icon from '../../components/Icon';
-import { Link } from 'react-router';
 
 export function getRange(current, last) {
   let r1 = current - 2;

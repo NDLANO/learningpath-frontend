@@ -18,7 +18,7 @@ const store = configureStore({
   learningPaths: [],
   learningPathQuery: defaultSearchQuery,
   learningPathsTotalCount: 1,
-  messages: []
+  messages: [],
 });
 
 const routes = configureRoutes(store);

@@ -6,6 +6,7 @@ import { createEmptyLearningPathStep } from './step/learningPathStepActions';
 import { routerActions } from 'react-router-redux';
 import polyglot from '../i18n';
 import { titleI18N } from '../util/i18nFieldFinder';
+import { fetchLearningPathImageWithMetaUrl, setImage } from '../image/imageActions';
 
 export const setLearningPath = createAction('SET_LEARNING_PATH');
 export const removeLearningPath = createAction('REMOVE_LEARNING_PATH');
@@ -13,6 +14,13 @@ export const removeLearningPath = createAction('REMOVE_LEARNING_PATH');
 export function fetchLearningPath(pathId) {
   return (dispatch, getState) => fetchPath(getState().authToken, { pathId })
     .then(path => dispatch(setLearningPath(path)))
+    .then(path => {
+      if (path.payload.coverPhoto) {
+        dispatch(fetchLearningPathImageWithMetaUrl(path.payload.coverPhoto.metaUrl));
+      } else {
+        dispatch(setImage({}));
+      }
+    })
     .catch(err => dispatch(applicationError(err)));
 }
 

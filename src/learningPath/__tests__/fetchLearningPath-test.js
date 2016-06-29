@@ -6,14 +6,14 @@ import payload403invalid from '../../actions/__tests__/payload403invalid';
 
 import { applicationError } from '../../messages/messagesActions';
 import { fetchLearningPath, setLearningPath } from '../learningPathActions';
-
+import { setImage } from '../../image/imageActions';
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
 const authToken = '123345';
 const pathId = 123;
 
-test('actions/fetchLearningPath', t => {
+test('actions/fetchLearningPath without image', t => {
   const done = res => {
     t.end(res);
     nock.cleanAll();
@@ -28,7 +28,31 @@ test('actions/fetchLearningPath', t => {
   store.dispatch(fetchLearningPath(pathId))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        setLearningPath({id: pathId})
+        setLearningPath({id: pathId}),
+        setImage({})
+      ]);
+      t.doesNotThrow(() => apiMock.done());
+      done();
+    })
+    .catch(done);
+});
+
+test('actions/fetchLearningPath with image', t => {
+  const done = res => {
+    t.end(res);
+    nock.cleanAll();
+  };
+
+  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+    .get(`/learningpaths/${pathId}`)
+    .reply(200, {id: pathId, coverPhoto: {url: 'test', metaUrl: 'metaTest'}});
+
+  const store = mockStore({ authToken });
+
+  store.dispatch(fetchLearningPath(pathId))
+    .then(() => {
+      t.deepEqual(store.getActions(), [
+        setLearningPath({id: pathId, coverPhoto: {url: 'test', metaUrl: 'metaTest'}}),
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();

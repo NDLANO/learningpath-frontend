@@ -1,10 +1,11 @@
 import { createAction } from 'redux-actions';
-import { applicationError, changeImageSearchQuery } from '../actions';
-import { fetchImages, fetchImage, fetchImageWithUrl } from '../sources/images';
+import { changeImageSearchQuery } from '../actions';
+import { applicationError } from '../messages/messagesActions';
+import { fetchImages, fetchImage, fetchImageWithMetaUrl } from '../sources/images';
 import pickBy from 'lodash/pickBy';
 export const setImages = createAction('SET_IMAGES');
 export const setImage = createAction('SET_IMAGE');
-
+export const setImagesSearchTime = createAction('SET_IMAGES_SEARCH_TIME');
 export function fetchLearningPathImages(query) {
   return (dispatch) => fetchImages(pickBy(query))
     .then((images) => {
@@ -21,9 +22,8 @@ export function fetchLearningPathImage(imageId) {
     })
     .catch(err => dispatch(applicationError(err)));
 }
-
-export function fetchLearningPathImageWithUrl(url) {
-  return (dispatch) => fetchImageWithUrl(url)
+export function fetchLearningPathImageWithMetaUrl(url) {
+  return (dispatch) => fetchImageWithMetaUrl(url)
     .then((image) => {
       dispatch(setImage(image));
     })
