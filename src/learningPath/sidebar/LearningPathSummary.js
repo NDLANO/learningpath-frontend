@@ -5,9 +5,9 @@ export default function LearningPathSummary({learningPath, lang}) {
     <main className="two-column_col two-column_col--center">
       <div className="learning-path">
         <div className="learning-path_hd">
-          <h1 className="learning-path_title">{titleI18N(learningPath, lang)}</h1>
+          <h1 className="learning-path_title">{titleI18N(learningPath, lang, true)}</h1>
         </div>
-        <div className="learning-path_bd">{descriptionI18N(learningPath, lang)}</div>
+        <div className="learning-path_bd">{descriptionI18N(learningPath, lang, true)}</div>
       </div>
     </main>
 

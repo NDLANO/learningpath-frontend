@@ -1,11 +1,21 @@
 import defined from 'defined';
+import { preferdLocales } from '../locale/localeConstants';
+
+export const findFallbackTranslation = (translations) => {
+  const locale = preferdLocales.find((l) =>
+     translations.find(t => t.language === l.abbreviation)
+  );
+
+  return translations.find(t => t.language === locale.abbreviation);
+};
+
 
 const createFieldByLanguageFinder = (fieldName, propName) =>
-
-  (obj, lang) => defined(
-      defined(
-        defined(obj, {})[fieldName], []).find(d => d.language === lang),
-      {}
-    )[defined(propName, fieldName)];
+  (obj, lang, withFallback = false) => {
+    const translations = defined(defined(obj, {})[fieldName], []);
+    const translation = defined(translations.find(d => d.language === lang), withFallback ? findFallbackTranslation(translations) : {}, {});
+    return translation[defined(propName, fieldName)];
+  }
+;
 
 export default createFieldByLanguageFinder;

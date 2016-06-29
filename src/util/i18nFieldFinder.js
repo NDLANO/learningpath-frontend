@@ -1,18 +1,18 @@
-import find from 'lodash/find';
+import defined from 'defined';
 import cloneDeep from 'lodash/cloneDeep';
 import findIndex from 'lodash/findIndex';
 
-import createFieldByLanguageFinder from './createFieldByLanguageFinder';
+import createFieldByLanguageFinder, {findFallbackTranslation} from './createFieldByLanguageFinder';
 
-const titleI18N = createFieldByLanguageFinder('title');
-const descriptionI18N = createFieldByLanguageFinder('description');
-const oembedI18N = createFieldByLanguageFinder('embedContent', 'html');
-const oembedUrlI18N = createFieldByLanguageFinder('embedContent', 'url');
-const tagI18N = createFieldByLanguageFinder('tags');
-export { titleI18N, descriptionI18N, oembedUrlI18N, oembedI18N, tagI18N};
+export const titleI18N = createFieldByLanguageFinder('title');
+export const descriptionI18N = createFieldByLanguageFinder('description');
+export const oembedUrlI18N = createFieldByLanguageFinder('embedContent', 'url');
+export const tagI18N = createFieldByLanguageFinder('tags');
 
-export function oembedContentI18N(learningPathStep, lang) {
-  return find(learningPathStep.embedContent, {language: lang});
+
+export function oembedContentI18N(learningPathStep, lang, withFallback = false) {
+  const translations = defined(learningPathStep.embedContent, []);
+  return defined(translations.find(d => d.language === lang), withFallback ? findFallbackTranslation(translations) : undefined);
 }
 
 export function pushOrAssignLanguageValue(array, propertyName, value, language) {

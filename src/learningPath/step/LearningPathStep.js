@@ -29,9 +29,9 @@ class LearningPathStep extends React.Component {
   render() {
     const { authenticated, learningPathStep, learningPath, copyPath } = this.props;
     const { lang } = this.context;
-    const stepTitle = titleI18N(learningPathStep, lang);
-    const stepDescription = descriptionI18N(learningPathStep, lang);
-    const oembedContent = oembedContentI18N(learningPathStep, lang);
+    const stepTitle = titleI18N(learningPathStep, lang, true);
+    const stepDescription = descriptionI18N(learningPathStep, lang, true);
+    const oembedContent = oembedContentI18N(learningPathStep, lang, true);
     const editStepTarget = `/learningpaths/${learningPath.id}/step/${learningPathStep.id}/edit`;
     const onCopyLearningPathClick = this.onCopyLearningPathClick.bind(this);
     let onLightboxClose = () => this.setState({displayCopyPath: false});

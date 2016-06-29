@@ -59,13 +59,13 @@ export default class SearchResult extends Component {
             </div>
             <div className="search-result_bd">
               <h2 className="search-result_title">
-                {titleI18N(path, lang)}
+                {titleI18N(path, lang, true)}
               </h2>
               <div className="search-result_meta">
                 <LabeledIcon.Today labelText={formatDate(path.lastUpdated, lang)} tagName="time" />
                 <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName="time" />
               </div>
-              <div className="search-result_description">{descriptionI18N(path, lang)}</div>
+              <div className="search-result_description">{descriptionI18N(path, lang, true)}</div>
               <div className="search-result_tags">
                 {tags.map(tag =>
                   <span key={tag.tag} className={tagsClassName(tag.tag)} onClick={(evt) => onTagClick(evt, tag.tag)} href="#">{tag.tag}</span>

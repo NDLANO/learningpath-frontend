@@ -51,7 +51,7 @@ class LearningPathGeneralInfo extends React.Component {
       <div>
         <div className="learningpath-general-info">
           <h3 className="learningpath-general-info_h">
-            <Link to={href} onClick={localCloseSidebars}>{titleI18N(learningPath, lang)}</Link>
+            <Link to={href} onClick={localCloseSidebars}>{titleI18N(learningPath, lang, true)}</Link>
           </h3>
           <div className="learningpath-general-info_b">
             <LabeledIcon.Today labelText={formatDate(learningPath.lastUpdated, lang)} tagName="time" />

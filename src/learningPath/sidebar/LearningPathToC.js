@@ -28,7 +28,7 @@ export function LearningPathToC({learningPath, activePathname, localCloseSidebar
                 <div className="step-nav_line" />
                 <LearningPathStepIcon learningPathStepType={step.type} isCircle />
                 <div className="step-nav_title">
-                  {titleI18N(step, lang)}
+                  {titleI18N(step, lang, true)}
                 </div>
               </Link>
             </li>

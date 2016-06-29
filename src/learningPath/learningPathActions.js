@@ -66,7 +66,7 @@ export function deleteLearningPath(pathId) {
 }
 
 export function copyLearningPath(learningPath, locale) {
-  const copiedTitle = polyglot.t('copyLearningPath.copy').concat(titleI18N(learningPath, locale).toString());
+  const copiedTitle = polyglot.t('copyLearningPath.copy').concat(titleI18N(learningPath, locale, true).toString());
   const clonedLearningPathTitle = {
     title: [
       {title: copiedTitle, language: locale}
