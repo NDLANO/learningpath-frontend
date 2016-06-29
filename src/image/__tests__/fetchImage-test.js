@@ -21,8 +21,7 @@ test('actions/fetchImage with id', t => {
 
   const apiMock = nock('http://ndla-api')
     .get(`/images/${imageId}`)
-    .reply(200, {id: imageId})
-    .log(console.log);
+    .reply(200, {id: imageId});
 
   const store = mockStore({ });
 
@@ -45,8 +44,7 @@ test('actions/fetchImage with url', t => {
 
   const apiMock = nock('http://ndla-api')
     .get(`/images/${imageId}`)
-    .reply(200, {id: imageId})
-    .log(console.log);
+    .reply(200, {id: imageId});
 
   const store = mockStore({ });
 
@@ -96,7 +94,7 @@ test('actions/fetchImage with url access denied', (t) => {
 
   const store = mockStore();
 
-  store.dispatch(fetchLearningPathImage(imageId))
+  store.dispatch(fetchLearningPathImageWithMetaUrl(imageMetaUrl))
     .then(() => {
       t.deepEqual(store.getActions(), [
         applicationError(payload403invalid())

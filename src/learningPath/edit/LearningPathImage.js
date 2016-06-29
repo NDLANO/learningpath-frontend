@@ -64,7 +64,7 @@ class LearningPathImage extends React.Component {
   render() {
     const {
       onChoseImage,
-      imageSearchQuery,
+      learningPathTitle,
       fetchImage,
       onChange,
       currentImage
@@ -75,7 +75,8 @@ class LearningPathImage extends React.Component {
     };
     const onImageLightboxOpen = (evt) => {
       evt.preventDefault();
-      onChoseImage(imageSearchQuery);
+      console.log(learningPathTitle);
+      onChoseImage({query: learningPathTitle, 'page-size': 16, page: 1}, true);
       this.setState({displayImages: true});
     };
 
@@ -87,7 +88,9 @@ class LearningPathImage extends React.Component {
         </div>
         <div className="lightbox_image-preview">
           <Lightbox display={this.state.displayImages} onClose={onImageLightboxClose}>
-            <Images id="coverPhotoMetaUrl" onChange={onChange} closeLightBox={onImageLightboxClose} imageSearch={onChoseImage} imageSearchQuery={imageSearchQuery} fetchImage={fetchImage} />
+            <Images
+              id="coverPhotoMetaUrl" onChange={onChange} closeLightBox={onImageLightboxClose} imageSearch={onChoseImage} fetchImage={fetchImage}
+            />
           </Lightbox>
         </div>
       </div>
@@ -97,7 +100,7 @@ class LearningPathImage extends React.Component {
 
 LearningPathImage.propTypes = {
   onChoseImage: PropTypes.func.isRequired,
-  imageSearchQuery: PropTypes.object.isRequired,
+  learningPathTitle: PropTypes.string.isRequired,
   fetchImage: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   currentImage: PropTypes.object.isRequired

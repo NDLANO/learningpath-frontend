@@ -43,7 +43,6 @@ const LearningPathForm = (props) => {
     learningPath,
     lang,
     onChoseImage,
-    imageSearchQuery,
     fetchImage
   } = props;
 
@@ -54,7 +53,6 @@ const LearningPathForm = (props) => {
 
 
   const remainingDescriptionLength = description.value ? 150 - description.value.length : 150;
-
   return (
     <form className="learning-path-form" onSubmit={handleSubmit}>
       <div className="learning-path_hd">
@@ -79,7 +77,7 @@ const LearningPathForm = (props) => {
           <p className="learning-path_input-information">{polyglot.t('learningPath.descriptionInformation', {remainingDescriptionLength})}</p>
         </div>
 
-        <LearningPathImage onChoseImage={onChoseImage} imageSearchQuery={imageSearchQuery} fetchImage={fetchImage} {...coverPhotoMetaUrl} />
+        <LearningPathImage onChoseImage={onChoseImage} learningPathTitle={title.value} fetchImage={fetchImage} {...coverPhotoMetaUrl} />
 
         <div className="learning-path-duration">
           <label htmlFor="duration" className="label--medium-bold  label--medium">{polyglot.t('learningPath.duration')}</label>
@@ -116,7 +114,6 @@ LearningPathForm.propTypes = {
   tagOptions: PropTypes.array.isRequired,
   lang: PropTypes.string.isRequired,
   onChoseImage: PropTypes.func.isRequired,
-  imageSearchQuery: PropTypes.object.isRequired,
   fetchImage: PropTypes.func.isRequired
 };
 

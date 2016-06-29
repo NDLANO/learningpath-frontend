@@ -29,7 +29,7 @@ export function Images(props) {
   };
   const submitImageSearchQuery = (evt, q) => {
     evt.preventDefault();
-    imageSearch(q);
+    imageSearch(q, false);
   };
   const base = '/images';
 
@@ -75,6 +75,7 @@ const mapStateToProps = (state) => Object.assign({}, state, {
   currentImage: state.images.currentImage,
   lastPage: Math.ceil(state.images.images.totalCount / (state.imageSearchQuery['page-size'] || 1)),
   totalCount: get(state, 'images.images.totalCount', 0),
+  imageSearchQuery: get(state, 'imageSearchQuery', {query: '', page: 1, 'page-size': 16})
 });
 
 const mapDispatchToProps = {

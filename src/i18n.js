@@ -89,7 +89,8 @@ const phrases = {
       searchPlaceholder: 'Søk og finn passende bilde',
       choseImage: 'Bruk bildet',
       imageInformation: 'Bildet blir synlig i søk på læringssti.',
-      imageSearchTotalCount: 'Søk på "%{textQuery}" ga %{totalCount} resulater'
+      imageSearchTotalCount: 'Søk på "%{textQuery}" ga %{totalCount} resulater',
+      imageSearchOneTotalCount: 'Søk på "%{textQuery}" ga 1 resulat'
     }
   },
   editPage: {

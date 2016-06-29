@@ -5,7 +5,7 @@ import Icon from '../../components/Icon';
 class ImageSearch extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {showTotalCount: false};
+    this.state = {showTotalCount: true};
   }
   render() {
     const { onSubmit, query, localChangeImageSearchQuery, totalCount } = this.props;
@@ -30,6 +30,8 @@ class ImageSearch extends React.Component {
       }
     };
 
+    const totalCountText = totalCount === 1 ? polyglot.t('learningPath.image.imageSearchOneTotalCount', {textQuery}) : polyglot.t('learningPath.image.imageSearchTotalCount', {textQuery, totalCount});
+
     return (
       <div className="image-search">
         <h2>{polyglot.t('learningPath.image.search')}</h2>
@@ -42,7 +44,7 @@ class ImageSearch extends React.Component {
         </div>
         <div className="image-search_border" />
         <div className="image-search_text">
-          {this.state.showTotalCount ? <p>{polyglot.t('learningPath.image.imageSearchTotalCount', {textQuery, totalCount})}</p> : ''}
+          {this.state.showTotalCount ? <p>{totalCountText}</p> : ''}
         </div>
       </div>
     );

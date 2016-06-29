@@ -9,7 +9,6 @@ const imagesUrl = apiResourceUrl('/images');
 const fetchImages = (query = {'page-size': 16, page: 1}) => {
   let url = imagesUrl;
   url += `?${queryString.stringify(query)}`;
-  console.log(url);
   return fetch(url).then(resolveJsonOrRejectWithError);
 };
 const fetchImage = (imageId) => {
