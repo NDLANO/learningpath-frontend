@@ -75,7 +75,6 @@ class LearningPathImage extends React.Component {
     };
     const onImageLightboxOpen = (evt) => {
       evt.preventDefault();
-      console.log(learningPathTitle);
       onChoseImage({query: learningPathTitle, 'page-size': 16, page: 1}, true);
       this.setState({displayImages: true});
     };
