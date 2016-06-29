@@ -8,7 +8,6 @@ import {
   updateLearningPathStep,
   createLearningPathStep
 } from '../learningPathStepActions';
-import { pushOrAssignLanguageValue } from '../../../util/i18nFieldFinder';
 
 export function EditLearningPathStep(props, { lang: language }) {
   const {
@@ -22,9 +21,9 @@ export function EditLearningPathStep(props, { lang: language }) {
     const toSave = Object.assign({}, step, {
       type: values.type,
       showTitle: values.showTitle,
-      title: pushOrAssignLanguageValue(step.title, 'title', values.title, language),
-      description: pushOrAssignLanguageValue(step.description, 'description', descriptionHTML, language),
-      embedContent: pushOrAssignLanguageValue(step.embedContent, 'url', values.url, language),
+      title: [{title: values.title, language}],
+      description: [{description: descriptionHTML, language}],
+      embedContent: [{url: values.url, language}],
     });
     return saveLearningPathStep(learningPathId, toSave);
   };
