@@ -1,11 +1,11 @@
 import { createAction } from 'redux-actions';
-import { changeImageSearchQuery } from '../actions';
 import { applicationError } from '../messages/messagesActions';
 import { fetchImages, fetchImage, fetchImageWithMetaUrl } from '../sources/images';
 import pickBy from 'lodash/pickBy';
 export const setImages = createAction('SET_IMAGES');
 export const setImage = createAction('SET_IMAGE');
 export const setImagesSearchTime = createAction('SET_IMAGES_SEARCH_TIME');
+export const changeImageSearchQuery = createAction('CHANGE_IMAGE_SEARCH_QUERY');
 
 function dispatchImagesReducers(images, dispatch, query) {
   dispatch(setImages(images));

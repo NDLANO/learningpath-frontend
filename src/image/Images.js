@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ImageSearch from './search/ImageSearch';
 import ImageSearchResult from './search/ImageSearchResult';
 import ImageSearchPager from './search/ImageSearchPager';
-import { changeImageSearchQuery } from '../actions';
+import { changeImageSearchQuery } from './imageActions';
 import get from 'lodash/get';
 export function Images(props) {
   const {

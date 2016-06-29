@@ -3,8 +3,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 
-import {fetchLearningPathImages, setImages} from '../imageActions';
-import { changeImageSearchQuery } from '../../actions';
+import {fetchLearningPathImages, setImages, changeImageSearchQuery} from '../imageActions';
 import payload403invalid from '../../actions/__tests__/payload403invalid';
 
 import { applicationError } from '../../messages/messagesActions';
