@@ -1,20 +1,20 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import ImageSearch from './search/ImageSearch';
-import ImageSearchResult from './search/ImageSearchResult';
-import ImageSearchPager from './search/ImageSearchPager';
+import ImageSearch from './ImageSearch';
+import ImageSearchResult from './ImageSearchResult';
+import ButtonPager from '../common/pager/ButtonPager';
 import { changeImageSearchQuery } from './imageActions';
 import get from 'lodash/get';
 export function Images(props) {
   const {
     images,
-    imageSearch,
+    localFetchImages,
     closeLightBox,
     onChange,
     imageSearchQuery,
     localChangeImageSearchQuery,
     fetchImage,
-    currentImage,
+    selectedImage,
     lastPage,
     totalCount,
   } = props;
@@ -23,14 +23,13 @@ export function Images(props) {
     return null;
   }
   const onImageClick = (evt, image) => {
-    if (image.id !== currentImage.id) {
+    if (image.id !== selectedImage.id) {
       fetchImage(image.id);
     }
   };
   const submitImageSearchQuery = (evt, q) => {
     evt.preventDefault();
-    console.log(q);
-    imageSearch(q, false);
+    localFetchImages(q, false);
   };
   const base = '/images';
 
@@ -45,10 +44,10 @@ export function Images(props) {
         <ImageSearch onSubmit={submitImageSearchQuery} query={imageSearchQuery} localChangeImageSearchQuery={localChangeImageSearchQuery} totalCount={totalCount} />
         <div className="image_list">
           {images.map((image) =>
-            <ImageSearchResult key={image.id} image={image} onImageClick={onImageClick} currentImage={currentImage} onSaveImage={onSaveImage} />
+            <ImageSearchResult key={image.id} image={image} onImageClick={onImageClick} selectedImage={selectedImage} onSaveImage={onSaveImage} />
           )}
         </div>
-        <ImageSearchPager page={imageSearchQuery.page} lastPage={lastPage} query={imageSearchQuery} imageSearch={imageSearch} />
+        <ButtonPager page={imageSearchQuery.page} lastPage={lastPage} query={imageSearchQuery} pagerAction={localFetchImages} />
       </div>
     </div>
   );
@@ -59,10 +58,10 @@ Images.propTypes = {
   onChange: PropTypes.func.isRequired,
   closeLightBox: PropTypes.func.isRequired,
   imageSearchQuery: PropTypes.object.isRequired,
-  imageSearch: PropTypes.func.isRequired,
+  localFetchImages: PropTypes.func.isRequired,
   localChangeImageSearchQuery: PropTypes.func.isRequired,
   fetchImage: PropTypes.func.isRequired,
-  currentImage: PropTypes.object,
+  selectedImage: PropTypes.object,
   lastPage: PropTypes.number.isRequired,
   totalCount: PropTypes.number.isRequired,
 };
@@ -72,11 +71,11 @@ Images.contextTypes = {
 };
 
 const mapStateToProps = (state) => Object.assign({}, state, {
-  images: state.images.images.results,
-  currentImage: state.images.currentImage,
-  lastPage: Math.ceil(state.images.images.totalCount / (state.imageSearchQuery['page-size'] || 1)),
-  totalCount: get(state, 'images.images.totalCount', 0),
-  imageSearchQuery: get(state, 'imageSearchQuery', {query: '', page: 1, 'page-size': 16})
+  images: state.imageSearch.images.results,
+  selectedImage: state.imageSearch.selectedImage,
+  lastPage: Math.ceil(state.imageSearch.images.totalCount / (state.imageSearch.imageSearchQuery['page-size'] || 1)),
+  totalCount: get(state, 'imageSearch.images.totalCount', 0),
+  imageSearchQuery: get(state, 'imageSearch.imageSearchQuery', {query: '', page: 1, 'page-size': 16})
 });
 
 const mapDispatchToProps = {

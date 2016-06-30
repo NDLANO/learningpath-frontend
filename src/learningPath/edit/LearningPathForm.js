@@ -9,6 +9,7 @@ import { reduxForm } from 'redux-form';
 import LearningPathDuration from './LearningPathDuration';
 import isInteger from 'lodash/isInteger';
 import LearningPathImage from './LearningPathImage';
+import SubmitButton from '../../common/buttons/SubmitButton';
 const fields = ['title', 'description', 'duration', 'tags', 'coverPhotoMetaUrl'];
 
 const validate = values => {
@@ -42,7 +43,7 @@ const LearningPathForm = (props) => {
     submitting,
     learningPath,
     lang,
-    onChoseImage,
+    localFetchImages,
     fetchImage
   } = props;
 
@@ -77,7 +78,7 @@ const LearningPathForm = (props) => {
           <p className="learning-path_input-information">{polyglot.t('learningPath.descriptionInformation', {remainingDescriptionLength})}</p>
         </div>
 
-        <LearningPathImage onChoseImage={onChoseImage} learningPathTitle={title.value} fetchImage={fetchImage} {...coverPhotoMetaUrl} />
+        <LearningPathImage {...coverPhotoMetaUrl} localFetchImages={localFetchImages} learningPathTitle={title.value} fetchImage={fetchImage} />
 
         <div className="learning-path-duration">
           <label htmlFor="duration" className="label--medium-bold  label--medium">{polyglot.t('learningPath.duration')}</label>
@@ -95,9 +96,9 @@ const LearningPathForm = (props) => {
             <Link to={`/learningpaths/${learningPath.id}`} className="button button--secondary">
               <LabeledIcon.Clear labelText={polyglot.t('editPage.cancelBtn')} />
             </Link>
-            <button disabled={submitting} className="button button--primary" type="submit">
+            <SubmitButton disabled={submitting} className="button button--primary">
               <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
-            </button>
+            </SubmitButton>
           </div>
         </div>
       </div>
@@ -113,7 +114,7 @@ LearningPathForm.propTypes = {
   learningPath: PropTypes.object.isRequired,
   tagOptions: PropTypes.array.isRequired,
   lang: PropTypes.string.isRequired,
-  onChoseImage: PropTypes.func.isRequired,
+  localFetchImages: PropTypes.func.isRequired,
   fetchImage: PropTypes.func.isRequired
 };
 

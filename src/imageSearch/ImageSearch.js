@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import polyglot from '../../i18n';
-import Icon from '../../components/Icon';
+import polyglot from '../i18n';
+import Icon from '../components/Icon';
 
 class ImageSearch extends React.Component {
   constructor(props) {
@@ -36,12 +36,12 @@ class ImageSearch extends React.Component {
     return (
       <div className="image-search">
         <h2>{polyglot.t('learningPath.image.search')}</h2>
-        <div className="image-search-form">
+        <div className="image-search_form">
           <input
-            type="text" value={textQuery} onChange={(evt) => onQueryChange(evt)}
-            onKeyPress={(evt) => onKeyPress(evt)} placeholder={polyglot.t('learningPath.image.searchPlaceholder')} className="image-search-form_query"
+            type="text" value={textQuery} onChange={onQueryChange}
+            onKeyPress={onKeyPress} placeholder={polyglot.t('learningPath.image.searchPlaceholder')} className="image-search_form-query"
           />
-          <button className="image-search-form_btn" onClick={(evt) => submitImageSearchQuery(evt)}><Icon.Search /></button>
+          <button className="image-search_form-button" onClick={submitImageSearchQuery}><Icon.Search /></button>
         </div>
         <div className="image-search_border" />
         <div className="image-search_text">

@@ -1,12 +1,10 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import Image from '../Image';
-export default function ImageSearch(props) {
-  const { image, onImageClick, currentImage, onSaveImage } = props;
+import PreviewImage from './PreviewImage';
+export default function ImageSearch({ image, onImageClick, selectedImage, onSaveImage }) {
   const activeClassName = () => classNames({
     'image_list-item': true,
-    'image_list-item--active': currentImage.id === image.id
-
+    'image_list-item--active': selectedImage.id === image.id
   });
 
   return (
@@ -14,7 +12,7 @@ export default function ImageSearch(props) {
       <div className="image_list-item-inner">
         <img role="presentation" src={image.previewUrl} onClick={(evt) => onImageClick(evt, image)} />
       </div>
-      {currentImage.id === image.id ? <Image image={currentImage} onSaveImage={(evt) => onSaveImage(evt, currentImage)} /> : ''}
+      {selectedImage.id === image.id ? <PreviewImage image={selectedImage} onSaveImage={(evt) => onSaveImage(evt, selectedImage)} /> : ''}
     </div>
   );
 }
@@ -22,6 +20,6 @@ export default function ImageSearch(props) {
 ImageSearch.propTypes = {
   image: PropTypes.object.isRequired,
   onImageClick: PropTypes.func.isRequired,
-  currentImage: PropTypes.object,
+  selectedImage: PropTypes.object,
   onSaveImage: PropTypes.func.isRequired
 };

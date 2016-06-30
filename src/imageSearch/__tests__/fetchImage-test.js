@@ -5,7 +5,7 @@ import nock from 'nock';
 import payload403invalid from '../../actions/__tests__/payload403invalid';
 
 import { applicationError } from '../../messages/messagesActions';
-import { fetchLearningPathImage, setImage, fetchLearningPathImageWithMetaUrl } from '../../image/imageActions';
+import { fetchLearningPathImage, setImage, fetchLearningPathImageWithMetaUrl } from '../../imageSearch/imageActions';
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 

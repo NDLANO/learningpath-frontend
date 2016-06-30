@@ -6,7 +6,7 @@ import { createEmptyLearningPathStep } from './step/learningPathStepActions';
 import { routerActions } from 'react-router-redux';
 import polyglot from '../i18n';
 import { titleI18N } from '../util/i18nFieldFinder';
-import { fetchLearningPathImageWithMetaUrl, setImage } from '../image/imageActions';
+import { fetchLearningPathImageWithMetaUrl, setImage } from '../imageSearch/imageActions';
 
 export const setLearningPath = createAction('SET_LEARNING_PATH');
 export const removeLearningPath = createAction('REMOVE_LEARNING_PATH');

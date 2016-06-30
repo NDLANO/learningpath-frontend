@@ -4,7 +4,7 @@ import get from 'lodash/get';
 import LearningPathForm from './LearningPathForm';
 import { fetchLearningPathTagsIfNeeded } from './tags/learningPathTagsActions';
 import { getLearningPathTagsByLanguageFlatten } from './tags/learningPathTagsSelectors';
-import { fetchLearningPathImages, fetchLearningPathImage, fetchLearningPathImageWithMetaUrl } from '../../image/imageActions';
+import { fetchLearningPathImages, fetchLearningPathImage, fetchLearningPathImageWithMetaUrl } from '../../imageSearch/imageActions';
 import { updateLearningPath } from '../learningPathActions';
 
 class EditLearningPath extends Component {
@@ -27,7 +27,7 @@ class EditLearningPath extends Component {
     return (
       <main className="two-column_col two-column_col--center">
         <LearningPathForm
-          learningPath={learningPath} tagOptions={tags} onSubmit={handleSubmit} onChoseImage={localFetchImages}
+          learningPath={learningPath} tagOptions={tags} onSubmit={handleSubmit} localFetchImages={localFetchImages}
           fetchImage={localFetchImage} lang={lang}
         />
       </main>

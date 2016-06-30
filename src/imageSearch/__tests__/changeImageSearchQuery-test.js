@@ -1,7 +1,6 @@
-
 import test from 'tape';
 import { isFSA } from 'flux-standard-action';
-import { changeImageSearchQuery } from '../../imageActions';
+import { changeImageSearchQuery } from '../imageActions';
 
 
 test('actions/changeImageSearchQuery', (t) => {

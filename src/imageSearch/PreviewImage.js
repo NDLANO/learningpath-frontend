@@ -1,11 +1,7 @@
 import React, { PropTypes } from 'react';
 import polyglot from '../i18n';
 import { filterFieldsByLanguage } from '../util/i18nFieldFinder';
-export default function Image(props) {
-  const {
-    image,
-    onSaveImage
-  } = props;
+export default function Image({ image, onSaveImage }) {
   const tags = filterFieldsByLanguage(image.tags, 'nb');
   return (
     <div className="image-preview">
@@ -35,11 +31,12 @@ export default function Image(props) {
         <div className="image-preview_tags">
           <b>{polyglot.t('learningPath.image.tags')}</b>
           {tags.map(tag =>
-            <span key={tag.tag} className="search-result_tag">{tag.tag}</span>
+            <span key={tag.tag} className="tag_item">{tag.tag}</span>
           )}
         </div>
         <button className="button button--primary button--block" onClick={onSaveImage}>{polyglot.t('learningPath.image.choseImage')}</button>
       </div>
+      <div className="clear"></div>
     </div>
   );
 }
