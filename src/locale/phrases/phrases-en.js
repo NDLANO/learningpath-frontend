@@ -132,8 +132,8 @@ const phrases = {
     feedback: 'Feedback',
     footerInfo: 'This webapplication is developed by NDLA as Open Source code.',
     footerEditior: 'Chief editor: ',
-    footerIssueResponsible: 'Utgaveansvarlig: '
-
+    footerIssueResponsible: 'Utgaveansvarlig: ',
+    selectLanguage: 'Choose language (språk): ',
   },
   duration: {
     zero: 'Unknown length',

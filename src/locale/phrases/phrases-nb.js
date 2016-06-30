@@ -132,8 +132,8 @@ const phrases = {
     feedback: 'Tilbakemelding',
     footerInfo: 'Nettstedet er utarbeidet av NDLA som åpen kildekode.',
     footerEditior: 'Ansvarlig redaktør: ',
-    footerIssueResponsible: 'Utgaveansvarlig: '
-
+    footerIssueResponsible: 'Utgaveansvarlig: ',
+    selectLanguage: 'Velg språk (language): ',
   },
   duration: {
     zero: 'Ukjent lengde',

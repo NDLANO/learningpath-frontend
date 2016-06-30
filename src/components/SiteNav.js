@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import polyglot from '../i18n';
 
 import LabeledIcon from './LabeledIcon';
-import SelectLocale from '../locale/SelectLocale';
 import { closeSidebars } from '../actions';
 export function SiteNav({ authenticated, userName, cssModifier, localCloseSidebars}) {
   let myPage;
@@ -45,9 +44,6 @@ export function SiteNav({ authenticated, userName, cssModifier, localCloseSideba
   return (
     <div className={rootClasses}>
       <ul className="site-nav_list">
-        <li className="site-nav_item">
-          <SelectLocale />
-        </li>
         <li className="site-nav_item">
           <Link to="/learningpaths" className="site-nav_link" onClick={localCloseSidebars}>
             <LabeledIcon.Search labelText={polyglot.t('siteNav.search')} />
