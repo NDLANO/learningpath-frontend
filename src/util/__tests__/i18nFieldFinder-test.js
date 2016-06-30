@@ -1,6 +1,6 @@
 import test from 'tape';
 
-import { oembedContentI18N, titleI18N, filterFieldsByLanguage } from '../i18nFieldFinder';
+import { oembedContentI18N, titleI18N } from '../i18nFieldFinder';
 
 test('util/i18nFieldFinder titleI18N', t => {
   const learningPathStep = {
@@ -58,33 +58,6 @@ test('util/i18nFieldFinder oembedContentI18N', t => {
       { url: 'http://example.com', html: '<iframe src="http://example.com">', width: 500, language: 'nb' });
 
   t.notOk(oembedContentI18N(learningPathStep, 'eo'));
-
-  t.end();
-});
-
-test('util/i18nFieldFinder filterFieldsByLanguage', t => {
-  t.equal(typeof filterFieldsByLanguage, 'function');
-
-  const tags = [
-    { tag: 'Korv', language: 'sv' },
-    { tag: 'Pølse', language: 'nb' },
-    { tag: 'Soups', language: 'en' },
-    { tag: 'Supper', language: 'nb' },
-    { tag: 'Norge', language: 'nb' },
-    { tag: 'Learning', language: 'en' },
-  ];
-
-  const norwegianTags = filterFieldsByLanguage(tags, 'nb');
-  t.equal(norwegianTags.length, 3);
-  t.equal(norwegianTags[0].tag, 'Pølse');
-
-  const swedishTags = filterFieldsByLanguage(tags, 'sv');
-  t.equal(swedishTags.length, 1);
-  t.equal(swedishTags[0].tag, 'Korv');
-
-  const englishTags = filterFieldsByLanguage(tags, 'en');
-  t.equal(englishTags.length, 2);
-  t.equal(englishTags[0].tag, 'Soups');
 
   t.end();
 });

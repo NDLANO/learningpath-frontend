@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import get from 'lodash/get';
 import LearningPathForm from './LearningPathForm';
 import { fetchLearningPathTagsIfNeeded } from './tags/learningPathTagsActions';
-import { getLearningPathTagsByLanguageFlatten } from './tags/learningPathTagsSelectors';
+import { getLearningPathTagsByLanguage } from './tags/learningPathTagsSelectors';
 import { fetchLearningPathImages } from '../../image/imageActions';
 import { updateLearningPath } from '../learningPathActions';
 
@@ -45,7 +45,7 @@ EditLearningPath.propTypes = {
 const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
   learningPath: get(state, 'learningPath', {}),
   learningSteps: get(state, 'learningPath.learningsteps', []),
-  tags: getLearningPathTagsByLanguageFlatten(state, ownProps.lang),
+  tags: getLearningPathTagsByLanguage(state, ownProps.lang),
 });
 
 const mapDispatchToProps = {

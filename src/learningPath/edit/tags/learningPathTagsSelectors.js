@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
+import defined from 'defined';
 
 const getLearningPathTagsFromState = (state) => state.learningPathTags.all;
-const getLang = (_, lang) => lang;
 
 export const getLearningPathTags = createSelector(
     [getLearningPathTagsFromState],
@@ -9,11 +9,9 @@ export const getLearningPathTags = createSelector(
 );
 
 export const getLearningPathTagsByLanguage = createSelector(
-    [getLearningPathTags, getLang],
-    (tags, lang) => tags.filter(tag => tag.language === lang)
-);
-
-export const getLearningPathTagsByLanguageFlatten = createSelector(
-    [getLearningPathTagsByLanguage],
-    (tags) => tags.map(tag => tag.tag)
+    [getLearningPathTags],
+    (tags, lang) => {
+      const language = defined(tags.find(tag => tag.language === lang), {});
+      return defined(language.tags, []);
+    }
 );
