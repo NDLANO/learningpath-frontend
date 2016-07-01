@@ -101,7 +101,7 @@ export class MyPage extends React.Component {
     let onCreateLearningPathSubmit = values => createPath({
       title: [{title: values.title, language: lang}],
       description: [{description: values.description, language: lang}],
-      duration: 1, coverPhotoUrl: ''
+      duration: 1, coverPhoto: {url: '', metaUrl: ''}
     });
 
     let onLightboxClose = () => this.setState({displayCreatePath: false});

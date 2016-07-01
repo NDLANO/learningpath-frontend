@@ -5,11 +5,13 @@ import findIndex from 'lodash/findIndex';
 import createFieldByLanguageFinder from './createFieldByLanguageFinder';
 
 const titleI18N = createFieldByLanguageFinder('title');
+const titlesI18N = createFieldByLanguageFinder('titles');
 const descriptionI18N = createFieldByLanguageFinder('description');
 const oembedI18N = createFieldByLanguageFinder('embedContent', 'html');
 const oembedUrlI18N = createFieldByLanguageFinder('embedContent', 'url');
 const tagI18N = createFieldByLanguageFinder('tags');
-export { titleI18N, descriptionI18N, oembedUrlI18N, oembedI18N, tagI18N};
+const alttextsI18N = createFieldByLanguageFinder('alttexts');
+export { titleI18N, descriptionI18N, oembedUrlI18N, oembedI18N, tagI18N, titlesI18N, alttextsI18N};
 
 export function oembedContentI18N(learningPathStep, lang) {
   return find(learningPathStep.embedContent, {language: lang});
