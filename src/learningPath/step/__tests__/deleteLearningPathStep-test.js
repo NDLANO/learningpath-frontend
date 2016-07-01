@@ -30,10 +30,10 @@ test('actions/deleteLearningPathStep with id', t => {
 
 
   const store = mockStore({ authToken });
-
-  store.dispatch(deleteLearningPathStep(pathId, stepId))
+  store.dispatch(
+    deleteLearningPathStep(pathId, stepId))
     .then(() => {
-      t.equal(store.getActions().length, 2);
+      t.equal(store.getActions().length, 3);
       t.equal(store.getActions()[0].type, 'ADD_MESSAGE', 'action type is ADD_MESSAGE');
       t.ok(store.getActions()[0].payload.action, 'ADD_MESSAGE payload contains action');
       t.deepEqual(store.getActions()[1],
