@@ -20,8 +20,8 @@ test('actions/updateLearningPath', t => {
     nock.cleanAll();
   };
 
-  const putPathApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .put(`/learningpaths/${pathId}`, {
+  const patchPathApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+    .patch(`/learningpaths/${pathId}`, {
       id: pathId, isRequest: true
     })
     .reply(200, {id: pathId, isResponse: true});
@@ -41,7 +41,7 @@ test('actions/updateLearningPath', t => {
         routerActions.push({ pathname: `/learningpaths/${pathId}` })
       ]);
 
-      t.doesNotThrow(() => putPathApi.done());
+      t.doesNotThrow(() => patchPathApi.done());
 
       done();
     })
@@ -54,8 +54,8 @@ test('actions/updateLearningPath with redirect', t => {
     nock.cleanAll();
   };
 
-  const putPathApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .put(`/learningpaths/${pathId}`, { id: pathId })
+  const patchPathApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+    .patch(`/learningpaths/${pathId}`, { id: pathId })
     .reply(200, {id: pathId});
 
   const store = mockStore({ authToken });
@@ -67,7 +67,7 @@ test('actions/updateLearningPath with redirect', t => {
       t.equal(actual.length, 3, 'three actions');
       t.deepEqual(actual[2], routerActions.push({ pathname: '/goto/dev/null' }));
 
-      t.doesNotThrow(() => putPathApi.done());
+      t.doesNotThrow(() => patchPathApi.done());
 
       done();
     })
@@ -81,7 +81,7 @@ test('actions/updateLearningPath access denied', (t) => {
   };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .put(`/learningpaths/${pathId}`, {
+    .patch(`/learningpaths/${pathId}`, {
       id: pathId,
       foo: 'bar'
     })

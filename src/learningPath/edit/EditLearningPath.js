@@ -14,19 +14,19 @@ class EditLearningPath extends Component {
   }
 
   render() {
-    const { learningPath, localFetchImages, localUpdateLearningPath, lang, tags } = this.props;
+    const { learningPath, localFetchImages, localUpdateLearningPath, lang: language, tags } = this.props;
     const handleSubmit = values => localUpdateLearningPath(learningPath.id, {
-      title: [{title: values.title, language: lang}],
-      description: [{description: values.description, language: lang}],
+      title: [{title: values.title, language}],
+      description: [{description: values.description, language}],
       revision: learningPath.revision,
       duration: (values.duration.replace(/,/g, '.')) * 60,
-      tags: values.tags,
+      tags: [{tags: values.tags, language }],
       coverPhotoUrl: values.coverPhotoUrl
     });
 
     return (
       <main className="two-column_col two-column_col--center">
-        <LearningPathForm learningPath={learningPath} tagOptions={tags} onSubmit={handleSubmit} onChoseImage={localFetchImages} lang={lang} />
+        <LearningPathForm learningPath={learningPath} tagOptions={tags} onSubmit={handleSubmit} onChoseImage={localFetchImages} lang={language} />
       </main>
     );
   }

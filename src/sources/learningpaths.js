@@ -30,13 +30,13 @@ const createPath = (authToken, props, body) =>
 const copyPath = (authToken, {copyfrom}, body) =>
   copyLearningPath(authToken, {copyfrom}, body);
 
-const putLearningPath = putAuthorized('/learningpaths/:pathId');
+const patchLearningPath = patchAuthorized('/learningpaths/:pathId');
 const patchLearningPathStep = patchAuthorized('/learningpaths/:pathId/learningsteps/:stepId');
 
 const putSequenceNumber = putAuthorized('/learningpaths/:pathId/learningsteps/:stepId/seqNo');
 
 const updatePath = (authToken, { pathId }, body) =>
-  putLearningPath(authToken, { pathId }, body);
+  patchLearningPath(authToken, { pathId }, body);
 
 const updateStep = (authToken, { pathId, stepId }, body) =>
   patchLearningPathStep(authToken, {pathId, stepId}, body);
