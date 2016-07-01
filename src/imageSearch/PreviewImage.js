@@ -16,9 +16,7 @@ export default function PreviewImage({ image, onSaveImage }, {lang}) {
             {polyglot.t('learningPath.image.authors')}
           </b>
           <span className="image-preview_text--right">
-            {image.copyright.authors.map(author =>
-              <span key={author.name}>{author.name}, </span>
-            )}
+            {image.copyright.authors.reduce((prev, curr) => `${prev.name}, ${curr.name}`)}
           </span>
         </div>
         <div className="image-prieview_license">
