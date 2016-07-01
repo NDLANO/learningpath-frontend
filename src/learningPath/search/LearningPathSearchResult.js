@@ -44,9 +44,8 @@ export default class SearchResult extends Component {
     };
 
     const tagsClassName = (tag) => classNames({
-      'search-result_tag': true,
-      'search-result_tag--active': query.tag === tag
-
+      tag_item: true,
+      'tag_item--active': query.tag === tag,
     });
 
     return (
@@ -65,7 +64,7 @@ export default class SearchResult extends Component {
                 <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName="time" />
               </div>
               <div className="search-result_description">{descriptionI18N(path, lang, true)}</div>
-              <div className="search-result_tags">
+              <div className="tags_list">
                 {tags.map(tag =>
                   <span key={tag} className={tagsClassName(tag)} onClick={(evt) => onTagClick(evt, tag)} href="#">{tag}</span>
                 )}

@@ -4,7 +4,7 @@ import get from 'lodash/get';
 import LearningPathForm from './LearningPathForm';
 import { fetchLearningPathTagsIfNeeded } from './tags/learningPathTagsActions';
 import { getLearningPathTagsByLanguage } from './tags/learningPathTagsSelectors';
-import { fetchLearningPathImages } from '../../image/imageActions';
+import { fetchLearningPathImages, fetchLearningPathImage, fetchLearningPathImageWithMetaUrl } from '../../imageSearch/imageActions';
 import { updateLearningPath } from '../learningPathActions';
 
 class EditLearningPath extends Component {
@@ -14,19 +14,22 @@ class EditLearningPath extends Component {
   }
 
   render() {
-    const { learningPath, localFetchImages, localUpdateLearningPath, lang: language, tags } = this.props;
+    const { learningPath, localFetchImages, localUpdateLearningPath, localFetchImage, lang: language, tags } = this.props;
     const handleSubmit = values => localUpdateLearningPath(learningPath.id, {
       title: [{title: values.title, language}],
       description: [{description: values.description, language}],
       revision: learningPath.revision,
       duration: (values.duration.replace(/,/g, '.')) * 60,
       tags: [{tags: values.tags, language }],
-      coverPhotoUrl: values.coverPhotoUrl
+      coverPhotoMetaUrl: values.coverPhotoMetaUrl,
     });
 
     return (
       <main className="two-column_col two-column_col--center">
-        <LearningPathForm learningPath={learningPath} tagOptions={tags} onSubmit={handleSubmit} onChoseImage={localFetchImages} lang={language} />
+        <LearningPathForm
+          learningPath={learningPath} tagOptions={tags} onSubmit={handleSubmit} localFetchImages={localFetchImages}
+          fetchImage={localFetchImage} lang={language}
+        />
       </main>
     );
   }
@@ -39,7 +42,9 @@ EditLearningPath.propTypes = {
   tags: PropTypes.array.isRequired,
   localUpdateLearningPath: PropTypes.func.isRequired,
   fetchLearningPathTags: PropTypes.func.isRequired,
-  localFetchImages: PropTypes.func.isRequired
+  localFetchImages: PropTypes.func.isRequired,
+  localFetchImage: PropTypes.func.isRequired,
+  localFetchImageWithMetaUrl: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
@@ -52,6 +57,8 @@ const mapDispatchToProps = {
   localUpdateLearningPath: updateLearningPath,
   fetchLearningPathTags: fetchLearningPathTagsIfNeeded,
   localFetchImages: fetchLearningPathImages,
+  localFetchImage: fetchLearningPathImage,
+  localFetchImageWithMetaUrl: fetchLearningPathImageWithMetaUrl,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditLearningPath);

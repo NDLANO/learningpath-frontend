@@ -73,11 +73,23 @@ const phrases = {
     descriptionPlaceholder: 'Write a short description for the learning path.',
     descriptionInformation: 'Max 150 characters. You have %{remainingDescriptionLength} remaining. Description will be shown in search results.',
     title: 'Learning path title',
-    image: 'Illustrative picture',
     imagePick: 'Search and choose picture for learning path',
     duration: 'Duration',
     tags: 'Tags',
-    imageInformation: 'Picture will be shown in search results.'
+    image: {
+      title: 'Illustrative picture',
+      changeImage: 'Change picture',
+      copyright: 'License',
+      authors: 'Copyright',
+      tags: 'Tags',
+      searchAndChose: 'Search and choose picture for learning path',
+      search: 'Search pictures',
+      searchPlaceholder: 'Search and find an illustrative picture',
+      choseImage: 'Use picture',
+      imageInformation: 'Picture will be shown in search results.',
+      imageSearchTotalCount: 'Search for "%{textQuery}" yielded %{totalCount} results',
+      imageSearchOneTotalCount: 'Search for "%{textQuery}" yielded 1 result'
+    }
   },
   editPage: {
     learningpathShortDescriptionTitle: 'Introduction',

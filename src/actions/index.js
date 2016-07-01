@@ -22,7 +22,6 @@ export const setLearningPathStatus = createAction('UPDATE_LEARNING_PATH_STATUS')
 export const closeSidebars = createAction('CLOSE_SIDEBARS');
 export const openLeftSidebar = createAction('OPEN_LEFT_SIDEBAR');
 export const openRightSidebar = createAction('OPEN_RIGHT_SIDEBAR');
-
 export {
   initializeSession,
   logout,

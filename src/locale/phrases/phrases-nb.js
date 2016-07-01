@@ -73,11 +73,23 @@ const phrases = {
     descriptionPlaceholder: 'Skriv en kort beskrivelse av læringsstien.',
     descriptionInformation: 'Maks 150 tegn og du har %{remainingDescriptionLength} igen. Beskrivelsen blir synlig i søk.',
     title: 'Tittel på læringssti',
-    image: 'Illustrerende bilde',
     imagePick: 'Søk og velg bilde til læringsstien',
     duration: 'Varighet',
     tags: 'Tagger',
-    imageInformation: 'Bildet blir synlig i søk på læringssti.'
+    image: {
+      title: 'Illustrerende bilde',
+      changeImage: 'Bytt bilde',
+      copyright: 'Lisens',
+      authors: 'Opphav',
+      tags: 'Tagger',
+      searchAndChose: 'Søk og velg bilde til læringsstien',
+      search: 'Bildesøk',
+      searchPlaceholder: 'Søk og finn passende bilde',
+      choseImage: 'Bruk bildet',
+      imageInformation: 'Bildet blir synlig i søk på læringssti.',
+      imageSearchTotalCount: 'Søk på "%{textQuery}" ga %{totalCount} resulater',
+      imageSearchOneTotalCount: 'Søk på "%{textQuery}" ga 1 resulat'
+    }
   },
   editPage: {
     learningpathShortDescriptionTitle: 'Introduksjon',

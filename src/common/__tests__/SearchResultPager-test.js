@@ -3,9 +3,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Link } from 'react-router';
 
-import SearchResultPager, { getRange, stepNumbers } from '../SearchResultPager';
-
-test('component/SearchResultPager.getRange', t => {
+import LinkPager from '../pager/LinkPager';
+import { getRange, stepNumbers } from '../pager/PagerUtil';
+test('component/PagerUtil.getRange', t => {
   t.deepEquals(getRange(1, 5), [1, 5], '1,5');
   t.deepEquals(getRange(2, 5), [1, 5], '1,5');
   t.deepEquals(getRange(3, 5), [1, 5], '1,5');
@@ -21,7 +21,7 @@ test('component/SearchResultPager.getRange', t => {
   t.end();
 });
 
-test('component/SearchResultPager.stepNumbers', t => {
+test('component/PagerUtil.stepNumbers', t => {
   t.deepEquals(stepNumbers(1, 10), [1, 2, 3, 4, 5], '1,10');
   t.deepEquals(stepNumbers(2, 10), [1, 2, 3, 4, 5], '2,10');
   t.deepEquals(stepNumbers(3, 10), [1, 2, 3, 4, 5], '3,10');
@@ -45,8 +45,8 @@ test('component/SearchResultPager.stepNumbers', t => {
 
 
 function pagerTest({setup, expected}) {
-  test(`component/SearchResultPager page ${setup.page}/${setup.lastPage}`, t => {
-    const steps = shallow(<SearchResultPager query={{}} {...setup} />)
+  test(`component/LinkPager page ${setup.page}/${setup.lastPage}`, t => {
+    const steps = shallow(<LinkPager query={{}} {...setup} />)
       .find('.search-stepper_step');
 
     const prev = setup.page - 1;
