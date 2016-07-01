@@ -63,7 +63,7 @@ class SortableLearningStepList extends Component {
                   <Icon.ImportExport className="icon--m" />
                 </div>
                 <div className="sortable_title">
-                  {titleI18N(step, lang)}
+                  {titleI18N(step, lang, true)}
                 </div>
                 <div className="sortable_action">
                   <button onClick={() => deleteStep(learningPathId, step.id)} className="un-button">

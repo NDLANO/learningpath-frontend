@@ -4,7 +4,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import map from 'lodash/map';
 
 import assureSequenceOrder from '../util/assureSequenceOrder';
-import { fetchAuthorized, postAuthorized, putAuthorized, deleteAuthorized, resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';
+import { fetchAuthorized, postAuthorized, putAuthorized, patchAuthorized, deleteAuthorized, resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';
 
 const fetchPath = fetchAuthorized('/learningpaths/:pathId');
 const fetchPathStep = fetchAuthorized(
@@ -30,16 +30,16 @@ const createPath = (authToken, props, body) =>
 const copyPath = (authToken, {copyfrom}, body) =>
   copyLearningPath(authToken, {copyfrom}, body);
 
-const putLearningPath = putAuthorized('/learningpaths/:pathId');
-const putLearningPathStep = putAuthorized('/learningpaths/:pathId/learningsteps/:stepId');
+const patchLearningPath = patchAuthorized('/learningpaths/:pathId');
+const patchLearningPathStep = patchAuthorized('/learningpaths/:pathId/learningsteps/:stepId');
 
 const putSequenceNumber = putAuthorized('/learningpaths/:pathId/learningsteps/:stepId/seqNo');
 
 const updatePath = (authToken, { pathId }, body) =>
-  putLearningPath(authToken, { pathId }, body);
+  patchLearningPath(authToken, { pathId }, body);
 
 const updateStep = (authToken, { pathId, stepId }, body) =>
-  putLearningPathStep(authToken, {pathId, stepId}, body);
+  patchLearningPathStep(authToken, {pathId, stepId}, body);
 
 const createStep = (authToken, {pathId}, body) =>
   postLearningPathStep(authToken, { pathId }, body);

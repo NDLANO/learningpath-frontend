@@ -105,7 +105,7 @@ export default class DescriptionHTMLEditor extends React.Component {
     if (htmlStr !== undefined) {
       const contentState = stateFromHTML(htmlStr);
       const editorState = EditorState.createWithContent(contentState);
-      this.setState({editorState});
+      this.onChange(editorState);
     }
   }
 

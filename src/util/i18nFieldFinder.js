@@ -1,39 +1,16 @@
-import find from 'lodash/find';
-import cloneDeep from 'lodash/cloneDeep';
-import findIndex from 'lodash/findIndex';
+import defined from 'defined';
 
-import createFieldByLanguageFinder from './createFieldByLanguageFinder';
+import createFieldByLanguageFinder, { findFallbackTranslation } from './createFieldByLanguageFinder';
 
-const titleI18N = createFieldByLanguageFinder('title');
-const titlesI18N = createFieldByLanguageFinder('titles');
-const descriptionI18N = createFieldByLanguageFinder('description');
-const oembedI18N = createFieldByLanguageFinder('embedContent', 'html');
-const oembedUrlI18N = createFieldByLanguageFinder('embedContent', 'url');
-const tagI18N = createFieldByLanguageFinder('tags');
-const alttextsI18N = createFieldByLanguageFinder('alttexts');
-export { titleI18N, descriptionI18N, oembedUrlI18N, oembedI18N, tagI18N, titlesI18N, alttextsI18N};
+export const titleI18N = createFieldByLanguageFinder('title');
+export const titlesI18N = createFieldByLanguageFinder('titles');
+export const descriptionI18N = createFieldByLanguageFinder('description');
+export const oembedUrlI18N = createFieldByLanguageFinder('embedContent', 'url');
+export const tagsI18N = createFieldByLanguageFinder('tags');
+export const alttextsI18N = createFieldByLanguageFinder('alttexts');
 
-export function oembedContentI18N(learningPathStep, lang) {
-  return find(learningPathStep.embedContent, {language: lang});
-}
 
-export function pushOrAssignLanguageValue(array, propertyName, value, language) {
-  const cloned = cloneDeep(array);
-  const index = findIndex(cloned, ['language', language]);
-  const valueWithLanguage = { [propertyName]: value, language};
-
-  if (!value) {
-    return array;
-  } else if (index === -1) {
-    cloned.push(valueWithLanguage);
-    return cloned;
-  }
-  cloned[index] = valueWithLanguage;
-  return cloned;
-}
-
-export function filterFieldsByLanguage(array, language) {
-  const cloned = cloneDeep(array);
-  const filterByLanguage = (obj) => obj.language && obj.language === language;
-  return cloned.filter(filterByLanguage);
+export function oembedContentI18N(learningPathStep, lang, withFallback = false) {
+  const translations = defined(learningPathStep.embedContent, []);
+  return defined(translations.find(d => d.language === lang), withFallback ? findFallbackTranslation(translations) : undefined);
 }

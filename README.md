@@ -264,4 +264,3 @@ http://eslint.org
 **eslint-plugin-react:**
 React specific linting rules for ESLint.
 https://github.com/yannickcr/eslint-plugin-react
-

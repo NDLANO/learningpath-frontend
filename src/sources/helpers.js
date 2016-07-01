@@ -79,6 +79,16 @@ export function putAuthorized(path) {
   }).then(resolveJsonOrRejectWithError);
 }
 
+export function patchAuthorized(path) {
+  const url = params => apiResourceUrl(formatPattern(path, params));
+
+  return (authToken, params = {}, body) => fetch(url(params), {
+    headers: {'APP-KEY': authToken},
+    method: 'PATCH',
+    body: JSON.stringify(body)
+  }).then(resolveJsonOrRejectWithError);
+}
+
 export function deleteAuthorized(path) {
   const url = params => apiResourceUrl(formatPattern(path, params));
   return (authToken, params = {}) => fetch(url(params), {

@@ -24,7 +24,7 @@ const parseSearchQuery = (query) => Object.keys(query).reduce((obj, key) => {
 
 
 const searchQueryMiddleware = store => next => action => {
-  if (action.type === '@@router/LOCATION_CHANGE' && action.payload.pathname === '/learningpaths') {
+  if (action.type === '@@router/LOCATION_CHANGE' && action.payload.pathname.endsWith('learningpaths')) {
     let query = parseSearchQuery(action.payload.query);
     if (isEmpty(query)) {
       query = defaultSearchQuery;

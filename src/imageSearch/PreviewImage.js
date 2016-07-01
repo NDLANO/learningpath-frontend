@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
+// import defined from 'defined';
 import polyglot from '../i18n';
-import { filterFieldsByLanguage } from '../util/i18nFieldFinder';
-export default function Image({ image, onSaveImage }) {
-  const tags = filterFieldsByLanguage(image.tags, 'nb');
+// import { tagsI18N } from '../util/i18nFieldFinder';
+export default function PreviewImage({ image, onSaveImage }, {lang}) {
+  const tags = image.tags.filter(tag => tag.language === lang); // TODO: Use tagsI18N when imageAPI changes
   return (
     <div className="image-preview">
       <div className="image-preview_image">
@@ -41,11 +42,11 @@ export default function Image({ image, onSaveImage }) {
   );
 }
 
-Image.propTypes = {
+PreviewImage.propTypes = {
   image: PropTypes.object.isRequired,
   onSaveImage: PropTypes.func.isRequired
 };
 
-Image.contextTypes = {
+PreviewImage.contextTypes = {
   lang: PropTypes.string.isRequired
 };

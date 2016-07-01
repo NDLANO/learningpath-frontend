@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import defined from 'defined';
 import { Link } from 'react-router';
 import LabeledIcon from '../../components/LabeledIcon';
 import classNames from 'classnames';
@@ -6,7 +7,7 @@ import classNames from 'classnames';
 import formatDate from '../../util/formatDate';
 import formatDuration from '../../util/formatDuration';
 
-import { titleI18N, descriptionI18N, filterFieldsByLanguage } from '../../util/i18nFieldFinder';
+import { titleI18N, descriptionI18N, tagsI18N } from '../../util/i18nFieldFinder';
 
 
 export default class SearchResult extends Component {
@@ -32,10 +33,8 @@ export default class SearchResult extends Component {
       }
       return <img className="search-result_img" role="presentation" src={'https://placeholdit.imgix.net/~text?txtsize=33&txt=NDLA&w=190&h=120'} />;
     };
-    if (!path.tags) {
-      return null;
-    }
-    const tags = filterFieldsByLanguage(path.tags, lang);
+
+    const tags = defined(tagsI18N(path, lang, true), []);
 
     const onTagClick = (evt, tag) => {
       evt.preventDefault();
@@ -46,8 +45,7 @@ export default class SearchResult extends Component {
 
     const tagsClassName = (tag) => classNames({
       tag_item: true,
-      'tag_item--active': query.tag === tag
-
+      'tag_item--active': query.tag === tag,
     });
 
     return (
@@ -59,16 +57,16 @@ export default class SearchResult extends Component {
             </div>
             <div className="search-result_bd">
               <h2 className="search-result_title">
-                {titleI18N(path, lang)}
+                {titleI18N(path, lang, true)}
               </h2>
               <div className="search-result_meta">
                 <LabeledIcon.Today labelText={formatDate(path.lastUpdated, lang)} tagName="time" />
                 <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName="time" />
               </div>
-              <div className="search-result_description">{descriptionI18N(path, lang)}</div>
+              <div className="search-result_description">{descriptionI18N(path, lang, true)}</div>
               <div className="tags_list">
                 {tags.map(tag =>
-                  <span key={tag.tag} className={tagsClassName(tag.tag)} onClick={(evt) => onTagClick(evt, tag.tag)} href="#">{tag.tag}</span>
+                  <span key={tag} className={tagsClassName(tag)} onClick={(evt) => onTagClick(evt, tag)} href="#">{tag}</span>
                 )}
               </div>
             </div>

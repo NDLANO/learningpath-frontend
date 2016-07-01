@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import get from 'lodash/get';
 import LearningPathForm from './LearningPathForm';
 import { fetchLearningPathTagsIfNeeded } from './tags/learningPathTagsActions';
-import { getLearningPathTagsByLanguageFlatten } from './tags/learningPathTagsSelectors';
+import { getLearningPathTagsByLanguage } from './tags/learningPathTagsSelectors';
 import { fetchLearningPathImages, fetchLearningPathImage, fetchLearningPathImageWithMetaUrl } from '../../imageSearch/imageActions';
 import { updateLearningPath } from '../learningPathActions';
 
@@ -14,21 +14,21 @@ class EditLearningPath extends Component {
   }
 
   render() {
-    const { learningPath, localFetchImages, localUpdateLearningPath, localFetchImage, lang, tags } = this.props;
+    const { learningPath, localFetchImages, localUpdateLearningPath, localFetchImage, lang: language, tags } = this.props;
     const handleSubmit = values => localUpdateLearningPath(learningPath.id, {
-      title: [{title: values.title, language: lang}],
-      description: [{description: values.description, language: lang}],
+      title: [{title: values.title, language}],
+      description: [{description: values.description, language}],
       revision: learningPath.revision,
       duration: (values.duration.replace(/,/g, '.')) * 60,
-      tags: values.tags,
-      coverPhotoMetaUrl: values.coverPhotoMetaUrl
+      tags: [{tags: values.tags, language }],
+      coverPhotoMetaUrl: values.coverPhotoMetaUrl,
     });
 
     return (
       <main className="two-column_col two-column_col--center">
         <LearningPathForm
           learningPath={learningPath} tagOptions={tags} onSubmit={handleSubmit} localFetchImages={localFetchImages}
-          fetchImage={localFetchImage} lang={lang}
+          fetchImage={localFetchImage} lang={language}
         />
       </main>
     );
@@ -50,7 +50,7 @@ EditLearningPath.propTypes = {
 const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
   learningPath: get(state, 'learningPath', {}),
   learningSteps: get(state, 'learningPath.learningsteps', []),
-  tags: getLearningPathTagsByLanguageFlatten(state, ownProps.lang),
+  tags: getLearningPathTagsByLanguage(state, ownProps.lang),
 });
 
 const mapDispatchToProps = {

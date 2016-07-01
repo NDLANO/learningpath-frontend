@@ -38,8 +38,8 @@ export class MyPage extends React.Component {
     const {lang} = this.context;
     const onCreateLearningPathClick = this.onCreateLearningPathClick.bind(this);
     const items = learningPaths.map(lp => {
-      const title = titleI18N(lp, lang);
-      const description = descriptionI18N(lp, lang);
+      const title = titleI18N(lp, lang, true);
+      const description = descriptionI18N(lp, lang, true);
       const duration = formatDuration(lp.duration, lang);
       const lastUpdated = formatDate(lp.lastUpdated, lang);
 
@@ -149,7 +149,7 @@ MyPage.contextTypes = {
 const sortPaths = (paths, field, state) => {
   switch (field) {
     case 'title':
-      return sortBy(paths, (p) => titleI18N(p, state.lang));
+      return sortBy(paths, (p) => titleI18N(p, state.lang, true));
 
     case 'lastUpdated':
       return sortBy(paths, field);

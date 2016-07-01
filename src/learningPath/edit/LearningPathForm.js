@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
+import defined from 'defined';
 import { Link } from 'react-router';
 import LabeledIcon from '../../components/LabeledIcon';
-import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
+import { titleI18N, descriptionI18N, tagsI18N } from '../../util/i18nFieldFinder';
 import TagsInput from '../../common/TagsInput';
 import polyglot from '../../i18n';
 import classNames from 'classnames';
@@ -88,7 +89,7 @@ const LearningPathForm = (props) => {
 
         <div className="learning-path-tags">
           <label htmlFor="tags" className="label--medium-bold  label--medium">{polyglot.t('learningPath.tags')}</label>
-          <TagsInput id="tags" tagOptions={tagOptions} lang={lang} {...tags} />
+          <TagsInput id="tags" tagOptions={tagOptions} {...tags} />
         </div>
 
         <div className="block-container_fixed block-container_fixed--bottom--right">
@@ -131,7 +132,7 @@ const mapStateToProps = (state, props) => ({
     title: titleI18N(props.learningPath, props.lang),
     description: descriptionI18N(props.learningPath, props.lang),
     duration: convertedDuration(props.learningPath.duration),
-    tags: props.learningPath.tags ? props.learningPath.tags : [],
+    tags: defined(tagsI18N(props.learningPath, props.lang), []),
     coverPhotoMetaUrl: props.learningPath.coverPhoto ? props.learningPath.coverPhoto.metaUrl : ''
   },
 });
