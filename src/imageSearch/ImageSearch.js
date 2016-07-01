@@ -1,62 +1,84 @@
 import React, { PropTypes } from 'react';
-import polyglot from '../i18n';
-import Icon from '../components/Icon';
+import { connect } from 'react-redux';
+import ImageSearchForm from './ImageSearchForm';
+import ImageSearchResult from './ImageSearchResult';
+import ButtonPager from '../common/pager/ButtonPager';
+import { changeImageSearchQuery } from './imageActions';
+import get from 'lodash/get';
+export function Images(props) {
+  const {
+    images,
+    localFetchImages,
+    closeLightBox,
+    onChange,
+    imageSearchQuery,
+    localChangeImageSearchQuery,
+    fetchImage,
+    selectedImage,
+    lastPage,
+    totalCount,
+  } = props;
 
-class ImageSearch extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {showTotalCount: true};
+  if (!images) {
+    return null;
   }
-  render() {
-    const { onSubmit, query, localChangeImageSearchQuery, totalCount } = this.props;
-    const textQuery = query.query;
-    const onQueryChange = (evt) => {
-      const newQuery = {
-        query: evt.target.value,
-        'page-size': 16,
-        page: textQuery === evt.target.value ? query.page : 1,
-      };
+  const onImageClick = (evt, image) => {
+    if (image.id !== selectedImage.id) {
+      fetchImage(image.id);
+    }
+  };
+  const submitImageSearchQuery = (evt, q) => {
+    evt.preventDefault();
+    localFetchImages(q, false);
+  };
+  const base = '/images';
 
-      this.setState({showTotalCount: false});
-      localChangeImageSearchQuery(newQuery);
-    };
-    const submitImageSearchQuery = (evt) => {
-      evt.preventDefault();
-      this.setState({showTotalCount: true});
-      onSubmit(evt, query);
-    };
-    const onKeyPress = (evt) => {
-      if (evt.key === 'Enter') {
-        submitImageSearchQuery(evt);
-      }
-    };
-
-    const totalCountText = totalCount === 1 ? polyglot.t('learningPath.image.imageSearchOneTotalCount', {textQuery}) : polyglot.t('learningPath.image.imageSearchTotalCount', {textQuery, totalCount});
-
-    return (
-      <div className="image-search">
-        <h2>{polyglot.t('learningPath.image.search')}</h2>
-        <div className="image-search_form">
-          <input
-            type="text" value={textQuery} onChange={onQueryChange}
-            onKeyPress={onKeyPress} placeholder={polyglot.t('learningPath.image.searchPlaceholder')} className="image-search_form-query"
-          />
-          <button className="image-search_form-button" onClick={submitImageSearchQuery}><Icon.Search /></button>
+  const onSaveImage = (evt, image) => {
+    closeLightBox();
+    const coverPhotoMetaUrl = `${window.NDLA_API_URL}${base}/${image.id}`;
+    onChange(coverPhotoMetaUrl);
+  };
+  return (
+    <div>
+      <div>
+        <ImageSearchForm onSubmit={submitImageSearchQuery} query={imageSearchQuery} localChangeImageSearchQuery={localChangeImageSearchQuery} totalCount={totalCount} />
+        <div className="image_list">
+          {images.map((image) =>
+            <ImageSearchResult key={image.id} image={image} onImageClick={onImageClick} selectedImage={selectedImage} onSaveImage={onSaveImage} />
+          )}
         </div>
-        <div className="image-search_border" />
-        <div className="image-search_text">
-          {this.state.showTotalCount ? <p>{totalCountText}</p> : ''}
-        </div>
+        <ButtonPager page={imageSearchQuery.page} lastPage={lastPage} query={imageSearchQuery} pagerAction={localFetchImages} />
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-ImageSearch.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  query: PropTypes.object.isRequired,
+Images.propTypes = {
+  images: PropTypes.array,
+  onChange: PropTypes.func.isRequired,
+  closeLightBox: PropTypes.func.isRequired,
+  imageSearchQuery: PropTypes.object.isRequired,
+  localFetchImages: PropTypes.func.isRequired,
   localChangeImageSearchQuery: PropTypes.func.isRequired,
-  totalCount: PropTypes.number,
+  fetchImage: PropTypes.func.isRequired,
+  selectedImage: PropTypes.object,
+  lastPage: PropTypes.number.isRequired,
+  totalCount: PropTypes.number.isRequired,
 };
 
-export default (ImageSearch);
+Images.contextTypes = {
+  lang: PropTypes.string.isRequired
+};
+
+const mapStateToProps = (state) => Object.assign({}, state, {
+  images: state.imageSearch.images.results,
+  selectedImage: state.imageSearch.selectedImage,
+  lastPage: Math.ceil(state.imageSearch.images.totalCount / (state.imageSearch.imageSearchQuery['page-size'] || 1)),
+  totalCount: get(state, 'imageSearch.images.totalCount', 0),
+  imageSearchQuery: get(state, 'imageSearch.imageSearchQuery', {query: '', page: 1, 'page-size': 16})
+});
+
+const mapDispatchToProps = {
+  localChangeImageSearchQuery: changeImageSearchQuery
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Images);

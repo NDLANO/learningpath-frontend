@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Images from '../../imageSearch/Images';
+import ImageSearch from '../../imageSearch/ImageSearch';
 import Lightbox from '../../components/Lightbox';
 import polyglot from '../../i18n';
 import { connect } from 'react-redux';
@@ -91,7 +91,7 @@ class LearningPathImage extends React.Component {
         </div>
         <div className="lightbox_image-preview">
           <Lightbox display={this.state.displayImages} onClose={onImageLightboxClose}>
-            <Images
+            <ImageSearch
               id="coverPhotoMetaUrl" onChange={onChange} closeLightBox={onImageLightboxClose} localFetchImages={localFetchImages} fetchImage={fetchImage}
             />
           </Lightbox>
