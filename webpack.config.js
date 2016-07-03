@@ -8,23 +8,32 @@ var plugins = [
 ];
 
 if (!DEBUG) {
-  plugins.push(new webpack.optimize.UglifyJsPlugin());
   plugins.push(
     new webpack.DefinePlugin({
       __CLIENT__: true,
       __SERVER__: false,
-    })
-  );
-} else {
-  plugins.push(
-    new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')
       },
+    }),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin()
+  );
+} else {
+  plugins.push(
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
       __CLIENT__: true,
       __SERVER__: false,
     })
   );
+}
+
+var entry = ['babel-polyfill', './src/index.js'];
+
+if (DEBUG) {
+  entry.push('webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true&quiet=true');
 }
 
 if (process.env.npm_package_version) {
@@ -36,7 +45,7 @@ if (process.env.npm_package_version) {
 }
 
 module.exports = {
-  entry: ['babel-polyfill', './src/index.js'],
+  entry: entry,
   target: 'web',
   cache: DEBUG,
   debug: DEBUG,

@@ -6,8 +6,8 @@ if (process.env.NODE_ENV === 'unittest') {
   global.__SERVER__ = false; //eslint-disable-line
 }
 
-const NDLA_API_URL = 'http://api.test.ndla.no';
-const NDLA_DEFAULT_API_KEY = 'ndlalearningpathfrontend';
+const NDLA_API_URL = process.env.APIHOST || 'http://api.test.ndla.no';
+const NDLA_DEFAULT_API_KEY = process.env.APIKEY || 'ndlalearningpathfrontend';
 
 const locationOrigin = (() => {
   if (process.env.NODE_ENV === 'unittest') {
@@ -15,6 +15,7 @@ const locationOrigin = (() => {
   }
 
   if (__SERVER__) {
+    // TODO
     return undefined;
   }
 
@@ -30,11 +31,7 @@ export const defaultApiKey = (() => {
     return 'ndlatestapikey';
   }
 
-  if (__SERVER__) {
-    return NDLA_DEFAULT_API_KEY;
-  }
-
-  return window.NDLA_DEFAULT_API_KEY;
+  return NDLA_DEFAULT_API_KEY;
 })();
 
 const apiBaseUrl = (() => {
@@ -42,11 +39,7 @@ const apiBaseUrl = (() => {
     return 'http://ndla-api';
   }
 
-  if (__SERVER__) {
-    return defined(NDLA_API_URL, locationOrigin);
-  }
-
-  return defined(window.NDLA_API_URL, locationOrigin);
+  return defined(NDLA_API_URL, locationOrigin);
 })();
 
 
