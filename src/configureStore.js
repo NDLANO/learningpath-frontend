@@ -7,7 +7,6 @@ import { errorReporter, searchQueryMiddleware } from './middleware';
 
 import { routerMiddleware } from 'react-router-redux';
 
-
 const slicer = (paths) =>
   // custom slicer because default slicer does not store falsy values
   (state) => paths.reduce((acc, path) => {
@@ -26,8 +25,8 @@ export default function configureStore(initialState, history) {
       errorReporter,
       middleware
     ),
-    persistState(['authenticated', 'authToken', 'user'], { key: 'ndla:sti', slicer }),
-    window && window.devToolsExtension ? window.devToolsExtension() : f => f
+    __CLIENT__ ? persistState(['authenticated', 'authToken', 'user'], { key: 'ndla:sti', slicer }) : f => f,
+    __CLIENT__ && window && window.devToolsExtension ? window.devToolsExtension() : f => f
   )(createStore);
 
   return createFinalStore(reducers, initialState);

@@ -2,14 +2,22 @@ import 'isomorphic-fetch';
 import { formatPattern } from 'react-router/lib/PatternUtils';
 import defined from 'defined';
 
-/* #if development */
-export const isUnitTest = (() => typeof window === 'undefined')();
-/* #end */
+if (process.env.NODE_ENV === 'unittest') {
+  global.__SERVER__ = false; //eslint-disable-line
+}
+
+const NDLA_API_URL = 'http://api.test.ndla.no';
+const NDLA_DEFAULT_API_KEY = 'ndlalearningpathfrontend';
 
 const locationOrigin = (() => {
-  /* #if development */
-  if (isUnitTest) { return 'http://ndla-frontend'; }
-  /* #end */
+  if (process.env.NODE_ENV === 'unittest') {
+    return 'http://ndla-frontend';
+  }
+
+  if (__SERVER__) {
+    return undefined;
+  }
+
   if (typeof location.origin === 'undefined') {
     location.origin = [location.protocol, '//', location.host, ':', location.port].join('');
   }
@@ -18,16 +26,26 @@ const locationOrigin = (() => {
 })();
 
 export const defaultApiKey = (() => {
-  /* #if development */
-  if (isUnitTest) { return 'ndlatestapikey'; }
-  /* #end */
+  if (process.env.NODE_ENV === 'unittest') {
+    return 'ndlatestapikey';
+  }
+
+  if (__SERVER__) {
+    return NDLA_DEFAULT_API_KEY;
+  }
+
   return window.NDLA_DEFAULT_API_KEY;
 })();
 
 const apiBaseUrl = (() => {
-  /* #if development */
-  if (isUnitTest) { return 'http://ndla-api'; }
-  /* #end */
+  if (process.env.NODE_ENV === 'unittest') {
+    return 'http://ndla-api';
+  }
+
+  if (__SERVER__) {
+    return defined(NDLA_API_URL, locationOrigin);
+  }
+
   return defined(window.NDLA_API_URL, locationOrigin);
 })();
 

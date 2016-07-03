@@ -14,5 +14,12 @@ module.exports = {
     "comma-dangle": 0,
     "object-curly-spacing": 0,
     "react/prefer-stateless-function": 1
+  },
+  "globals": {
+    "__CLIENT__": true,
+    "__SERVER__": true,
+    "__DISABLE_SSR__": true,
+    "socket": true,
+    "webpackIsomorphicTools": true
   }
 };

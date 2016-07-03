@@ -1,14 +1,30 @@
 /* eslint-disable */
 var webpack = require('webpack');
 
-var plugins = [
-  new webpack.EnvironmentPlugin(['NODE_ENV'])
-];
-
 var DEBUG = process.env.NODE_ENV !== 'production';
+
+var plugins = [
+  new webpack.EnvironmentPlugin(['NODE_ENV']),
+];
 
 if (!DEBUG) {
   plugins.push(new webpack.optimize.UglifyJsPlugin());
+  plugins.push(
+    new webpack.DefinePlugin({
+      __CLIENT__: true,
+      __SERVER__: false,
+    })
+  );
+} else {
+  plugins.push(
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      },
+      __CLIENT__: true,
+      __SERVER__: false,
+    })
+  );
 }
 
 if (process.env.npm_package_version) {
@@ -36,8 +52,6 @@ module.exports = {
     contentBase: './htdocs',
     historyApiFallback: true
   },
-
-  'if-loader': process.env.NODE_ENV || 'development',
 
   module: {
     loaders: [

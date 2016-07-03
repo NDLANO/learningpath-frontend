@@ -11,8 +11,8 @@
   },
   "scripts": {
     "pretest": "eslint src",
-    "test": "babel-tape-runner 'src/**/*-test.js'|tap-spec",
-    "tdd": "watch 'babel-tape-runner 'src/**/*-test.js'|tap-spec||true' src/",
+    "test": "NODE_ENV=unittest babel-tape-runner 'src/**/*-test.js'|tap-spec",
+    "tdd": "watch 'NODE_ENV=unittest babel-tape-runner 'src/**/*-test.js'|tap-spec||true' src/",
     "postinstall": "cp -vr node_modules/ndla-styleguide/assets/* htdocs/assets/",
     "build": "webpack --progress --bail",
     "start": "webpack-dev-server --inline",
