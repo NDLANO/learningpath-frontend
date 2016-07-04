@@ -35,9 +35,9 @@ const ChangeImage = (props) => {
             {polyglot.t('learningPath.image.authors')}
           </b>
           <span>
-            {selectedImage.copyright.authors.map(author =>
-              <span key={author.name}>{author.name}, </span>
-            )}
+            {selectedImage.copyright.authors.map((author) =>
+              author.name
+            ).join(', ')}
           </span>
         </div>
         <Button className="button button--primary" onClick={onImageLightboxOpen}>

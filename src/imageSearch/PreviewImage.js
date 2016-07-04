@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
 // import defined from 'defined';
 import polyglot from '../i18n';
-// import { tagsI18N } from '../util/i18nFieldFinder';
+// import { titlesI18N } from '../util/i18nFieldFinder';
 export default function PreviewImage({ image, onSaveImage }, {lang}) {
   const tags = image.tags.filter(tag => tag.language === lang); // TODO: Use tagsI18N when imageAPI changes
+  console.log(image.copyright.authors);
   return (
     <div className="image-preview">
       <div className="image-preview_image">
@@ -16,7 +17,9 @@ export default function PreviewImage({ image, onSaveImage }, {lang}) {
             {polyglot.t('learningPath.image.authors')}
           </b>
           <span className="image-preview_text--right">
-            {image.copyright.authors.reduce((prev, curr) => `${prev.name}, ${curr.name}`)}
+            {image.copyright.authors.map((author) =>
+              author.name
+            ).join(', ')}
           </span>
         </div>
         <div className="image-prieview_license">
