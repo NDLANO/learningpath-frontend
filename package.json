@@ -59,7 +59,7 @@
     "isomorphic-fetch": "2.2.1",
     "json-loader": "0.5.4",
     "lodash": "4.13.1",
-    "ndla-styleguide": "0.1.17",
+    "ndla-styleguide": "0.1.18",
     "node-polyglot": "2.0.0",
     "node-uuid": "1.4.7",
     "query-string": "4.2.1",
