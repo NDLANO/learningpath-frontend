@@ -1,15 +1,17 @@
 import React, { PropTypes } from 'react';
+import defined from 'defined';
 import { Link } from 'react-router';
 import LabeledIcon from '../../components/LabeledIcon';
-import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
+import { titleI18N, descriptionI18N, tagsI18N } from '../../util/i18nFieldFinder';
 import TagsInput from '../../common/TagsInput';
 import polyglot from '../../i18n';
 import classNames from 'classnames';
 import { reduxForm } from 'redux-form';
 import LearningPathDuration from './LearningPathDuration';
 import isInteger from 'lodash/isInteger';
-
-const fields = ['title', 'description', 'duration', 'tags'];
+import LearningPathImage from './LearningPathImage';
+import SubmitButton from '../../common/buttons/SubmitButton';
+const fields = ['title', 'description', 'duration', 'tags', 'coverPhotoMetaUrl'];
 
 const validate = values => {
   const errors = {};
@@ -37,13 +39,14 @@ const validate = values => {
 const LearningPathForm = (props) => {
   const {
     tagOptions,
-    fields: { title, description, duration, tags },
+    fields: { title, description, duration, tags, coverPhotoMetaUrl },
     handleSubmit,
     submitting,
     learningPath,
     lang,
+    localFetchImages,
+    fetchImage
   } = props;
-
 
   const inputClassName = (hasError, isTextArea) => classNames({
     'input--alert': hasError,
@@ -52,7 +55,6 @@ const LearningPathForm = (props) => {
 
 
   const remainingDescriptionLength = description.value ? 150 - description.value.length : 150;
-
   return (
     <form className="learning-path-form" onSubmit={handleSubmit}>
       <div className="learning-path_hd">
@@ -77,14 +79,7 @@ const LearningPathForm = (props) => {
           <p className="learning-path_input-information">{polyglot.t('learningPath.descriptionInformation', {remainingDescriptionLength})}</p>
         </div>
 
-        <div className="learning-path-image">
-          <label className="label--medium-bold  label--medium">{polyglot.t('learningPath.image')}</label>
-          <div className="learning-path-image-drop">
-            <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/49665-200.png" role="presentation" />
-            <h2>{polyglot.t('learningPath.imagePick')}</h2>
-          </div>
-          <p className="learning-path_input-information">{polyglot.t('learningPath.imageInformation')}</p>
-        </div>
+        <LearningPathImage {...coverPhotoMetaUrl} localFetchImages={localFetchImages} learningPathTitle={title.value} fetchImage={fetchImage} />
 
         <div className="learning-path-duration">
           <label htmlFor="duration" className="label--medium-bold  label--medium">{polyglot.t('learningPath.duration')}</label>
@@ -94,7 +89,7 @@ const LearningPathForm = (props) => {
 
         <div className="learning-path-tags">
           <label htmlFor="tags" className="label--medium-bold  label--medium">{polyglot.t('learningPath.tags')}</label>
-          <TagsInput id="tags" tagOptions={tagOptions} lang={lang} {...tags} />
+          <TagsInput id="tags" tagOptions={tagOptions} {...tags} />
         </div>
 
         <div className="block-container_fixed block-container_fixed--bottom--right">
@@ -102,9 +97,9 @@ const LearningPathForm = (props) => {
             <Link to={`/learningpaths/${learningPath.id}`} className="button button--secondary">
               <LabeledIcon.Clear labelText={polyglot.t('editPage.cancelBtn')} />
             </Link>
-            <button disabled={submitting} className="button button--primary" type="submit">
+            <SubmitButton disabled={submitting} className="button button--primary">
               <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
-            </button>
+            </SubmitButton>
           </div>
         </div>
       </div>
@@ -120,6 +115,8 @@ LearningPathForm.propTypes = {
   learningPath: PropTypes.object.isRequired,
   tagOptions: PropTypes.array.isRequired,
   lang: PropTypes.string.isRequired,
+  localFetchImages: PropTypes.func.isRequired,
+  fetchImage: PropTypes.func.isRequired
 };
 
 const convertedDuration = (value) => {
@@ -135,8 +132,9 @@ const mapStateToProps = (state, props) => ({
     title: titleI18N(props.learningPath, props.lang),
     description: descriptionI18N(props.learningPath, props.lang),
     duration: convertedDuration(props.learningPath.duration),
-    tags: props.learningPath.tags ? props.learningPath.tags : []
-  }
+    tags: defined(tagsI18N(props.learningPath, props.lang), []),
+    coverPhotoMetaUrl: props.learningPath.coverPhoto ? props.learningPath.coverPhoto.metaUrl : ''
+  },
 });
 
 export default reduxForm({

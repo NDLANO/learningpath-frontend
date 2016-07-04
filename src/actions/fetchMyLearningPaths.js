@@ -1,4 +1,5 @@
-import { setLearningPaths, applicationError } from '.';
+import { setLearningPaths } from '.';
+import { applicationError } from '../messages/messagesActions';
 import { fetchMyPaths } from '../sources/learningpaths';
 
 export default function fetchMyLearningPaths() {

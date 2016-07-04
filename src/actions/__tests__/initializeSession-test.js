@@ -5,6 +5,7 @@ import nock from 'nock';
 import payload403invalid from './payload403invalid';
 
 import actions from '..';
+import { applicationError } from '../../messages/messagesActions';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
@@ -51,7 +52,7 @@ test('actions/initializeSession access denied', (t) => {
   store.dispatch(actions.initializeSession(authToken))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.applicationError(payload403invalid())
+        applicationError(payload403invalid())
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();

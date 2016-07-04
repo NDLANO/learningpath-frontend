@@ -1,4 +1,5 @@
-import { setLearningPathStatus, applicationError, addMessage } from '.';
+import { setLearningPathStatus } from '.';
+import { applicationError, addMessage } from '../messages/messagesActions';
 import { updateStatus } from '../sources/learningpaths';
 import { routerActions } from 'react-router-redux';
 import polyglot from '../i18n';

@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { routerActions } from 'react-router-redux';
 import isEqual from 'lodash/isEqual';
-import SearchResultPager from '../../common/SearchResultPager';
+import LinkPager from '../../common/pager/LinkPager';
 import SearchForm from './LearningPathSearchForm';
 import SearchResult from './LearningPathSearchResult';
 import Masthead from '../../components/Masthead';
@@ -34,7 +34,7 @@ class LearningPathSearch extends Component {
 
     const changeSortOrder = sort => navigateTo(Object.assign({}, query, { sort }));
 
-    const changeSearchTag = tag => navigateTo(Object.assign({}, query, { tag }));
+    const changeSearchTag = tag => navigateTo(Object.assign({}, query, { tag, page: 1 }));
 
     return (
       <Wrapper>
@@ -51,7 +51,7 @@ class LearningPathSearch extends Component {
             {learningPaths.map(path =>
               (<SearchResult key={path.id} path={path} pushRoute={pushRoute} onTagSearchQuery={changeSearchTag} query={query} />)
             )}
-            <SearchResultPager page={page} lastPage={lastPage} query={query} />
+            <LinkPager page={page} lastPage={lastPage} query={query} pathName="/learningpaths" />
           </div>
         </Content>
         <Footer />

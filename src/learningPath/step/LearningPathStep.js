@@ -7,9 +7,10 @@ import Oembed from './oembed/Oembed';
 import { titleI18N, descriptionI18N, oembedContentI18N } from '../../util/i18nFieldFinder';
 import polyglot from '../../i18n';
 import Icon from '../../components/Icon';
-import { copyLearningPath } from '../../actions';
+import { copyLearningPath } from '../learningPathActions';
 import CopyLearningPath from '../new/CopyLearningPath';
 import Lightbox from '../../components/Lightbox';
+
 class LearningPathStep extends React.Component {
   constructor(props) {
     super(props);
@@ -28,9 +29,9 @@ class LearningPathStep extends React.Component {
   render() {
     const { authenticated, learningPathStep, learningPath, copyPath } = this.props;
     const { lang } = this.context;
-    const stepTitle = titleI18N(learningPathStep, lang);
-    const stepDescription = descriptionI18N(learningPathStep, lang);
-    const oembedContent = oembedContentI18N(learningPathStep, lang);
+    const stepTitle = titleI18N(learningPathStep, lang, true);
+    const stepDescription = descriptionI18N(learningPathStep, lang, true);
+    const oembedContent = oembedContentI18N(learningPathStep, lang, true);
     const editStepTarget = `/learningpaths/${learningPath.id}/step/${learningPathStep.id}/edit`;
     const onCopyLearningPathClick = this.onCopyLearningPathClick.bind(this);
     let onLightboxClose = () => this.setState({displayCopyPath: false});

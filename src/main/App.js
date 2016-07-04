@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-
+import { getLocale } from '../locale/localeSelectors';
 import Alerts from './Alerts';
 
 export class App extends React.Component {
   getChildContext() {
     return {
-      lang: 'nb'
+      lang: this.props.locale
     };
   }
 
@@ -21,8 +21,14 @@ export class App extends React.Component {
   }
 }
 
-App.childContextTypes = {
-  lang: React.PropTypes.string
+App.propTypes = {
+  locale: PropTypes.string.isRequired,
 };
 
-export default connect(state => state)(App);
+App.childContextTypes = {
+  lang: PropTypes.string
+};
+
+const mapStateToProps = (state) => Object.assign({}, state, { locale: getLocale(state) });
+
+export default connect(mapStateToProps)(App);

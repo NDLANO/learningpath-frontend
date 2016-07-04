@@ -1,4 +1,5 @@
-import { setOembedObject, applicationError } from '.';
+import { setOembedObject } from '.';
+import { applicationError } from '../messages/messagesActions';
 import { fetchOembedUrl } from '../sources/learningpaths';
 
 export default function fetchOembed(url) {

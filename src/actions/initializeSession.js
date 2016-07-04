@@ -1,4 +1,5 @@
-import { setUserData, setAuthToken, setAuthenticated, applicationError } from '.';
+import { setUserData, setAuthToken, setAuthenticated } from '.';
+import { applicationError } from '../messages/messagesActions';
 import fetchAboutMe from '../sources/fetchAboutMe';
 
 export default function initializeSession(authToken) {

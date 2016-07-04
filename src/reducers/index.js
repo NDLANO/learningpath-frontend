@@ -5,21 +5,24 @@ import { reducer as formReducer } from 'redux-form';
 import authenticated from './authenticated';
 import authToken from './authToken';
 import user from './user';
-import learningPath from './learningPath';
-import learningPathStep from './learningPathStep';
+import learningPath from '../learningPath/learningPathReducer';
+import learningPathStep from '../learningPath/step/learningPathStepReducer';
 import learningPaths from './learningPaths';
 import learningPathQuery from './learningPathQuery';
 import learningPathsTotalCount from './learningPathsTotalCount';
 import myLearningPathsSortOrder from './myLearningPathsSortOrder';
 import learningPathTags from '../learningPath/edit/tags/learningPathTagsReducer';
 import oembedPreview from './oembedPreview';
-import messages from './messages';
+import messages from '../messages/messagesReducer';
 import sidebar from './sidebar';
+import imageSearch from '../imageSearch/imageReducers';
+import locale from '../locale/localeReducer';
 
 const rootReducers = combineReducers({
   authenticated,
   authToken,
   user,
+  locale,
   learningPath,
   learningPathStep,
   learningPaths,
@@ -30,6 +33,7 @@ const rootReducers = combineReducers({
   sidebar,
   oembedPreview,
   learningPathTags,
+  imageSearch,
   routing: routerReducer,
   form: formReducer,
 });

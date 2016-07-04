@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import sortBy from 'lodash/sortBy';
 import reverse from 'lodash/reverse';
-import { setMyLearningPathsSortOrder, updateLearningPathStatus, deleteLearningPath, createLearningPath, copyLearningPath } from '../actions';
+import { setMyLearningPathsSortOrder, updateLearningPathStatus } from '../actions';
+import { deleteLearningPath, createLearningPath, copyLearningPath } from '../learningPath/learningPathActions';
 import Icon from '../components/Icon';
 import LabeledIcon from '../components/LabeledIcon';
 import polyglot from '../i18n';
@@ -37,8 +38,8 @@ export class MyPage extends React.Component {
     const {lang} = this.context;
     const onCreateLearningPathClick = this.onCreateLearningPathClick.bind(this);
     const items = learningPaths.map(lp => {
-      const title = titleI18N(lp, lang);
-      const description = descriptionI18N(lp, lang);
+      const title = titleI18N(lp, lang, true);
+      const description = descriptionI18N(lp, lang, true);
       const duration = formatDuration(lp.duration, lang);
       const lastUpdated = formatDate(lp.lastUpdated, lang);
 
@@ -100,7 +101,7 @@ export class MyPage extends React.Component {
     let onCreateLearningPathSubmit = values => createPath({
       title: [{title: values.title, language: lang}],
       description: [{description: values.description, language: lang}],
-      duration: 1
+      duration: 1, coverPhoto: {url: '', metaUrl: ''}
     });
 
     let onLightboxClose = () => this.setState({displayCreatePath: false});
@@ -148,7 +149,7 @@ MyPage.contextTypes = {
 const sortPaths = (paths, field, state) => {
   switch (field) {
     case 'title':
-      return sortBy(paths, (p) => titleI18N(p, state.lang));
+      return sortBy(paths, (p) => titleI18N(p, state.lang, true));
 
     case 'lastUpdated':
       return sortBy(paths, field);
