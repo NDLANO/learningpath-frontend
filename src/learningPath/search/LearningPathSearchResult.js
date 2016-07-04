@@ -66,7 +66,8 @@ export default class SearchResult extends Component {
               </div>
 
               <div className="search-result_description">{descriptionI18N(path, lang, true)}</div>
-              {path.introduction && path.introduction.length > 0 ? <LearningPathIntroduction path={path} /> : ''}
+
+              <LearningPathIntroduction path={path} />
 
               <div className="tags_list">
                 {tags.map(tag =>

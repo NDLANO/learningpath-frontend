@@ -17,7 +17,9 @@ export default class SearchResult extends Component {
   render() {
     const { path } = this.props;
     const { lang } = this.context;
-
+    if (!path.introduction || path.introduction.length === 0) {
+      return null;
+    }
     const onClickShowIntroduction = (evt) => {
       evt.preventDefault();
       this.setState({showIntroduction: !this.state.showIntroduction});
@@ -28,12 +30,13 @@ export default class SearchResult extends Component {
       'search-result_introduction--open': this.state.showIntroduction
     });
     const introductionButtonText = this.state.showIntroduction ? polyglot.t('searchForm.hideIntroduction') : polyglot.t('searchForm.showIntroduction');
+    // path.introduction && path.introduction.length > 0 ?
     return (
       <div>
         <span className="show-introduction_button" onClick={(evt) => onClickShowIntroduction(evt)}>
           {introductionButtonText} {this.state.showIntroduction ? <Icon.ArrowUp /> : <Icon.ArrowDown />}
         </span>
-        <div className={introductionClassName()} dangerouslySetInnerHTML={{__html: introductionI18N(path, lang)}}>
+        <div className={introductionClassName()} dangerouslySetInnerHTML={{__html: introductionI18N(path, lang, true)}}>
         </div>
       </div>
     );
