@@ -2,6 +2,8 @@ const phrases = {
   searchForm: {
     placeholder: 'Søk etter læringsstier',
     btn: 'Søk',
+    hideIntroduction: 'Skjul introduksjon',
+    showIntroduction: 'Vis introduksjon',
     order: {
       relevance: 'Relevans',
       newest: 'Nyeste',
