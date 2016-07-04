@@ -69,6 +69,7 @@ const phrases = {
     pageName: 'Læringstidetaljer',
     previous: 'Forrige',
     next: 'Neste',
+    of: 'av',
     description: 'Beskrivelse',
     descriptionPlaceholder: 'Skriv en kort beskrivelse av læringsstien.',
     descriptionInformation: 'Maks 150 tegn og du har %{remainingDescriptionLength} igen. Beskrivelsen blir synlig i søk.',
