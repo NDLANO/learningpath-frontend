@@ -97,7 +97,6 @@ Masthead.propTypes = {
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
   learningPath: state.learningPath,
-  activePathname: get(ownProps, 'activePathname', ''),
   saveButtons: get(ownProps, 'saveButtons', null),
   isLeftSideBarOpen: get(state, 'sidebar.isLeftSideBarOpen', false),
   isRightSidebarOpen: get(state, 'sidebar.isRightSidebarOpen', false),

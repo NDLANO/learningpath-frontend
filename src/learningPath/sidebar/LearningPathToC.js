@@ -10,11 +10,11 @@ import {
 } from '../../actions';
 import { titleI18N } from '../../util/i18nFieldFinder';
 
-export function LearningPathToC({learningPath, activePathname, localCloseSidebars}, {lang}) {
+export function LearningPathToC({learningPath, activeStepId, localCloseSidebars}, {lang}) {
   const base = `/learningpaths/${learningPath.id}`;
-  const itemClassName = (path) => classNames({
+  const itemClassName = (stepId) => classNames({
     'step-nav_item': true,
-    'step-nav_item--active': activePathname ? activePathname === path : false
+    'step-nav_item--active': activeStepId ? activeStepId === stepId : false
   });
 
 
@@ -23,7 +23,7 @@ export function LearningPathToC({learningPath, activePathname, localCloseSidebar
       <div className="step-nav">
         <ul className="step-nav_list">
           {((steps) => steps.map(step => (
-            <li key={step.id} className={itemClassName(`${base}/step/${step.id}`)} >
+            <li key={step.id} className={itemClassName(`${step.id}`)} >
               <Link to={`${base}/step/${step.id}`} className="step-nav_link" onClick={localCloseSidebars}>
                 <div className="step-nav_line" />
                 <LearningPathStepIcon learningPathStepType={step.type} isCircle />
@@ -41,7 +41,7 @@ export function LearningPathToC({learningPath, activePathname, localCloseSidebar
 
 LearningPathToC.propTypes = {
   learningPath: PropTypes.object.isRequired,
-  activePathname: PropTypes.string,
+  activeStepId: PropTypes.string,
   localCloseSidebars: PropTypes.func.isRequired,
 };
 
@@ -50,7 +50,7 @@ LearningPathToC.contextTypes = {
 };
 
 LearningPathToC.defaultProps = {
-  activePathname: ''
+  activeStepId: ''
 };
 
 

@@ -19,12 +19,12 @@ export class LearningPath extends Component {
   }
 
   render() {
-    const { learningPath, isTableOfContentOpen, activePathname, params: { stepId }, sortLearningSteps, main} = this.props;
+    const { learningPath, isTableOfContentOpen, params: { stepId }, sortLearningSteps, main} = this.props;
     const { lang } = this.context;
     const saveButtons = defined(this.props.saveButtons, null);
     const addStepButton = defined(this.props.addStepButton, null);
     const children = cloneElement(defined(main, this.props.children), { lang, learningPath });
-    const sortableTableOfContent = defined(sortLearningSteps, <LearningPathToC {...this.props} />);
+    const sortableTableOfContent = defined(sortLearningSteps, <LearningPathToC learningPath={learningPath} activeStepId={stepId} />);
     const sortableTableOfContentButton = !sortLearningSteps ? <SortLearningStepsButton learningPath={learningPath} /> : null;
 
     const collapseClassName = () => classNames({
@@ -35,7 +35,7 @@ export class LearningPath extends Component {
 
     return (
       <div>
-        <Masthead saveButtons={saveButtons} activePathname={activePathname} sortLearningSteps={sortLearningSteps} sortableTableOfContentButton={sortableTableOfContentButton}>
+        <Masthead saveButtons={saveButtons} sortLearningSteps={sortLearningSteps} sortableTableOfContentButton={sortableTableOfContentButton}>
           <div className="masthead_button masthead_button--left">
             <Icon.MoreVert />
             <span>Læringssti</span>
@@ -68,7 +68,6 @@ LearningPath.propTypes = {
     stepId: PropTypes.string
   }).isRequired,
   sortLearningSteps: PropTypes.object,
-  activePathname: PropTypes.string,
   isTableOfContentOpen: PropTypes.bool.isRequired,
   localFetchLearingPath: PropTypes.func.isRequired,
 };
@@ -79,7 +78,6 @@ LearningPath.contextTypes = {
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
   learningPath: state.learningPath,
-  activePathname: ownProps.location.pathname,
   isPreview: ownProps.route.isPreview,
   sortLearningSteps: ownProps.sortLearningSteps,
   isTableOfContentOpen: state.sidebar.isLeftSideBarOpen,
