@@ -1,10 +1,13 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import express from 'express';
+import defined from 'defined';
 import webpack from 'webpack';
-import webpackConfig from '../webpack.config';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+
+import webpackConfig from '../webpack.config';
+import { getHtmlLang } from '../src/locale/configureLocale';
 import Html from './Html';
 
 const app = express();
@@ -24,8 +27,11 @@ app.use(express.static('htdocs'));
 
 app.get('*', (req, res) => {
   function renderOnClient() {
-    res.send('<!doctype html>\n' + renderToString(<Html lang="no_NB"/>)); // eslint-disable-line
+    const paths = req.url.split('/');
+    const lang = getHtmlLang(defined(paths[1], ''));
+    res.send('<!doctype html>\n' + renderToString(<Html lang={lang}/>)); // eslint-disable-line
   }
+
 
   if (__DISABLE_SSR__) {
     renderOnClient();
