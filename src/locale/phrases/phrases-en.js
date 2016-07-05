@@ -2,6 +2,8 @@ const phrases = {
   searchForm: {
     placeholder: 'Search learning paths',
     btn: 'Search',
+    hideIntroduction: 'Hide introduction',
+    showIntroduction: 'Show introduction',
     order: {
       relevance: 'Relevance',
       newest: 'Newest',
