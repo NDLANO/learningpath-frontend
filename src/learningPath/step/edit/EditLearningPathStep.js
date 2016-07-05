@@ -23,7 +23,7 @@ export function EditLearningPathStep(props, { lang: language }) {
       showTitle: values.showTitle,
       title: [{title: values.title, language}],
       description: [{description: descriptionHTML, language}],
-      embedContent: [{url: values.url, language}],
+      embedContent: values.url ? [{url: values.url, language}] : [],
     });
     return saveLearningPathStep(learningPathId, toSave);
   };
