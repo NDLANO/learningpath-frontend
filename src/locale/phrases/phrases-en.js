@@ -69,6 +69,7 @@ const phrases = {
     pageName: 'Learning path details',
     previous: 'Previous',
     next: 'Next',
+    of: 'of',
     description: 'Description',
     descriptionPlaceholder: 'Write a short description for the learning path.',
     descriptionInformation: 'Max 150 characters. You have %{remainingDescriptionLength} remaining. Description will be shown in search results.',
