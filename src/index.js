@@ -23,7 +23,7 @@ function configureBrowserHistory(path) {
 
 const paths = window.location.pathname.split('/');
 const path = paths.length > 2 ? paths[1] : '/';
-const locale = paths.length > 2 ? paths[1] : 'nb';
+const locale = paths.length > 2 && isValidLocale(paths[1]) ? paths[1] : 'nb';
 
 configureLocale(locale);
 const browserHistory = configureBrowserHistory(path);
