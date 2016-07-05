@@ -2,7 +2,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import express from 'express';
 import webpack from 'webpack';
-import config from '../webpack.config';
+import webpackConfig from '../webpack.config';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import Html from './Html';
@@ -10,12 +10,12 @@ import Html from './Html';
 const app = express();
 
 if (process.env.NODE_ENV === 'development') {
-  const compiler = webpack(config);
+  const compiler = webpack(webpackConfig);
   app.use(webpackDevMiddleware(compiler, {
     stats: {
       colors: true
     },
-    publicPath: config.output.publicPath
+    publicPath: webpackConfig.output.publicPath
   }));
   app.use(webpackHotMiddleware(compiler, {}));
 }

@@ -1,17 +1,27 @@
 import React, { PropTypes } from 'react';
-import Helmet from 'react-helmet';
+import config from '../src/config';
+import head from './Meta';
 
-const config = {
-  app: {
-    head: {
-      titleTemplate: 'NDLA Læringsstier',
-      meta: [
-        {name: 'description', content: 'NDLA Læringsstier'},
-        {charset: 'utf-8'},
-        {property: 'og:site_name', content: 'NDLA Læringsstier'},
-      ]
-    }
+
+const GoogleTagMangerNoScript = () => {
+  if (config.googleTagMangerId) {
+    return <noscript><iframe src={`//www.googletagmanager.com/ns.html?id=${config.googleTagMangerId}`} height="0" width="0" style={{display: 'none', visibility: 'hidden'}}></iframe></noscript>;
   }
+  return null;
+};
+
+const GoogleTagMangerScript = () => {
+  if (config.googleTagMangerId) {
+    return (
+      <script
+        dangerouslySetInnerHTML={{__html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+        var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;
+        j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})
+        (window,document,'script','dataLayer','${config.googleTagMangerId}');`}}
+      />
+    );
+  }
+  return null;
 };
 
 const Html = (props) => {
@@ -20,7 +30,10 @@ const Html = (props) => {
   return (
     <html lang={lang}>
       <head>
-        <Helmet {...config.app.head} />
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {head.title.toComponent()}
+        {head.meta.toComponent()}
         <link rel="stylesheet" type="text/css" href="/assets/style.css" />
         <link rel="stylesheet" type="text/css" href="/assets/Draft.css" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic,300|Signika:400,600,300,700" />
@@ -28,6 +41,8 @@ const Html = (props) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body>
+        <GoogleTagMangerNoScript />
+        <GoogleTagMangerScript />
         <div id="appContainer" />
         <script src="/assets/app.js"></script>
       </body>

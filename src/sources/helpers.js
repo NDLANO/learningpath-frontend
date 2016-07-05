@@ -1,13 +1,14 @@
 import 'isomorphic-fetch';
 import { formatPattern } from 'react-router/lib/PatternUtils';
 import defined from 'defined';
+import config from '../config';
+
+const NDLA_API_URL = config.ndlaApiUrl;
+const NDLA_API_KEY = config.ndlaApiKey;
 
 if (process.env.NODE_ENV === 'unittest') {
   global.__SERVER__ = false; //eslint-disable-line
 }
-
-const NDLA_API_URL = process.env.APIHOST || 'http://api.test.ndla.no';
-const NDLA_DEFAULT_API_KEY = process.env.APIKEY || 'ndlalearningpathfrontend';
 
 const locationOrigin = (() => {
   if (process.env.NODE_ENV === 'unittest') {
@@ -31,7 +32,7 @@ export const defaultApiKey = (() => {
     return 'ndlatestapikey';
   }
 
-  return NDLA_DEFAULT_API_KEY;
+  return NDLA_API_KEY;
 })();
 
 const apiBaseUrl = (() => {

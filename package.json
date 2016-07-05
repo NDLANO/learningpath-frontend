@@ -15,7 +15,7 @@
     "tdd": "watch 'NODE_ENV=unittest babel-tape-runner 'src/**/*-test.js'|tap-spec||true' src/",
     "postinstall": "cp -vr node_modules/ndla-styleguide/assets/* htdocs/assets/",
     "build": "NODE_ENV=production webpack --progress --bail",
-    "start": "NODE_ENV=development node server/server.js",
+    "start": "NODE_ENV=development nodemon --watch server server/server.js",
     "start-prod": "NODE_ENV=production node server/server.js",
     "start-dev-server": "webpack-dev-server --inline",
     "lint": "eslint src"
@@ -39,6 +39,7 @@
     "if-loader": "1.0.1",
     "jsdom": "9.2.1",
     "nock": "8.0.0",
+    "nodemon": "1.9.2",
     "react-addons-test-utils": "15.1.0",
     "redux-mock-store": "1.1.0",
     "sinon": "1.17.4",
@@ -46,8 +47,8 @@
     "tape": "4.5.1",
     "watch": "0.18.0",
     "webpack": "1.13.1",
-    "webpack-dev-server": "1.14.1",
     "webpack-dev-middleware": "1.6.1",
+    "webpack-dev-server": "1.14.1",
     "webpack-hot-middleware": "2.12.0"
   },
   "dependencies": {
