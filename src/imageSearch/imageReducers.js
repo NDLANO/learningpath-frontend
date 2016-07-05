@@ -3,6 +3,7 @@ import cloneDeep from 'lodash/cloneDeep';
 const initialState = {
   images: [],
   selectedImage: {},
+  savedImage: {},
   imageSearchQuery: {
     query: '',
     page: 1,
@@ -18,10 +19,18 @@ export default handleActions({
     },
     throw(state) { return state; }
   },
-  SET_IMAGE: {
+  SET_SELECTED_IMAGE: {
     next(state, action) {
       const nextState = cloneDeep(state);
       nextState.selectedImage = action.payload;
+      return nextState;
+    },
+    throw(state) { return state; }
+  },
+  SET_SAVED_IMAGE: {
+    next(state, action) {
+      const nextState = cloneDeep(state);
+      nextState.savedImage = action.payload;
       return nextState;
     },
     throw(state) { return state; }

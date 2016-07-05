@@ -3,7 +3,8 @@ import { applicationError } from '../messages/messagesActions';
 import { fetchImages, fetchImage, fetchImageWithMetaUrl } from '../sources/images';
 import pickBy from 'lodash/pickBy';
 export const setImages = createAction('SET_IMAGES');
-export const setImage = createAction('SET_IMAGE');
+export const setSelectedImage = createAction('SET_SELECTED_IMAGE');
+export const setSavedImage = createAction('SET_SAVED_IMAGE');
 export const setImagesSearchTime = createAction('SET_IMAGES_SEARCH_TIME');
 export const changeImageSearchQuery = createAction('CHANGE_IMAGE_SEARCH_QUERY');
 
@@ -27,14 +28,14 @@ export function fetchLearningPathImages(query, isFirstSearch = false) {
 export function fetchLearningPathImage(imageId) {
   return (dispatch) => fetchImage(imageId)
     .then((image) => {
-      dispatch(setImage(image));
+      dispatch(setSelectedImage(image));
     })
     .catch(err => dispatch(applicationError(err)));
 }
 export function fetchLearningPathImageWithMetaUrl(url) {
   return (dispatch) => fetchImageWithMetaUrl(url)
     .then((image) => {
-      dispatch(setImage(image));
+      dispatch(setSavedImage(image));
     })
     .catch(err => dispatch(applicationError(err)));
 }
