@@ -4,7 +4,6 @@ import polyglot from '../i18n';
 // import { titlesI18N } from '../util/i18nFieldFinder';
 export default function PreviewImage({ image, onSaveImage }, {lang}) {
   const tags = image.tags.filter(tag => tag.language === lang); // TODO: Use tagsI18N when imageAPI changes
-  console.log(image.copyright.authors);
   return (
     <div className="image-preview">
       <div className="image-preview_image">
