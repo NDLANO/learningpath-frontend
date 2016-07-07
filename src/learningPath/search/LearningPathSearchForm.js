@@ -8,6 +8,9 @@ export default class SearchForm extends Component {
       query: props.query,
       sort: props.sort
     };
+    this.handleSortChange = this.handleSortChange.bind(this);
+    this.handleQueryChange = this.handleQueryChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSortChange(evt) {
@@ -26,15 +29,11 @@ export default class SearchForm extends Component {
   }
 
   render() {
-    const handleSortChange = this.handleSortChange.bind(this);
-    const handleQueryChange = this.handleQueryChange.bind(this);
-    const handleSubmit = this.handleSubmit.bind(this);
-
     return (
-      <form onSubmit={handleSubmit} className="search-form search-form--on-dark" >
+      <form onSubmit={this.handleSubmit} className="search-form search-form--on-dark" >
         <input
           type="text" className="search-form_query"
-          onChange={handleQueryChange}
+          onChange={this.handleQueryChange}
           value={this.state.query}
           placeholder={polyglot.t('searchForm.placeholder')}
         />
@@ -43,7 +42,7 @@ export default class SearchForm extends Component {
 
         <select
           className="search-form_sort-order"
-          onChange={handleSortChange}
+          onChange={this.handleSortChange}
           value={this.state.sort}
         >
           <option value="relevance">{polyglot.t('searchForm.order.relevance')}</option>

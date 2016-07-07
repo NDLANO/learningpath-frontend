@@ -18,6 +18,7 @@ class LearningPathStep extends React.Component {
     this.state = {
       displayCopyPath: false
     };
+    this.onCopyLearningPathClick = this.onCopyLearningPathClick.bind(this);
   }
 
   onCopyLearningPathClick() {
@@ -33,7 +34,6 @@ class LearningPathStep extends React.Component {
     const stepDescription = descriptionI18N(learningPathStep, lang, true);
     const oembedContent = oembedContentI18N(learningPathStep, lang, true);
     const editStepTarget = `/learningpaths/${learningPath.id}/step/${learningPathStep.id}/edit`;
-    const onCopyLearningPathClick = this.onCopyLearningPathClick.bind(this);
     let onLightboxClose = () => this.setState({displayCopyPath: false});
     const onCopy = () => {
       copyPath(learningPath, lang);
@@ -42,7 +42,7 @@ class LearningPathStep extends React.Component {
     const edit = (
       <div className="block-container_fixed block-container_fixed--bottom--right">
         {learningPath.canEdit ? <Link className="cta-link cta-link--round cta-link--scale" to={editStepTarget}><Icon.Create /> {polyglot.t('editPathStep.edit')}</Link> :
-          <button className="cta-link cta-link--round cta-link--scale" onClick={onCopyLearningPathClick}>{polyglot.t('copyLearningPath.createCopy')}</button>}
+          <button className="cta-link cta-link--round cta-link--scale" onClick={this.onCopyLearningPathClick}>{polyglot.t('copyLearningPath.createCopy')}</button>}
       </div>
       );
     return (

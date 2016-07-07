@@ -25,6 +25,7 @@ export class MyPage extends React.Component {
     this.state = {
       displayCreatePath: false
     };
+    this.onCreateLearningPathClick = this.onCreateLearningPathClick.bind(this);
   }
 
   onCreateLearningPathClick() {
@@ -36,7 +37,6 @@ export class MyPage extends React.Component {
   render() {
     const {learningPaths, sortKey, setSortKey, deletePath, updatePathStatus, createPath, copyPath} = this.props;
     const {lang} = this.context;
-    const onCreateLearningPathClick = this.onCreateLearningPathClick.bind(this);
     const items = learningPaths.map(lp => {
       const title = titleI18N(lp, lang, true);
       const description = descriptionI18N(lp, lang, true);
@@ -117,7 +117,7 @@ export class MyPage extends React.Component {
             </div>
           </div>
           <div className="tiles">{items}</div>
-          <button className="cta-link new-learningpath-button" onClick={onCreateLearningPathClick}>
+          <button className="cta-link new-learningpath-button" onClick={this.onCreateLearningPathClick}>
             <LabeledIcon.Add labelText={polyglot.t('myPage.newBtn')} />
           </button>
           <Lightbox display={this.state.displayCreatePath} onClose={onLightboxClose}>

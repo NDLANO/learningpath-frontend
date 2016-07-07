@@ -9,6 +9,7 @@ export default class PreviewOembed extends React.Component {
     this.state = {
       previewOembed: false
     };
+    this.onPreviewClick = this.onPreviewClick.bind(this);
   }
 
   componentWillReceiveProps() {
@@ -21,7 +22,6 @@ export default class PreviewOembed extends React.Component {
   }
 
   render() {
-    const onPreviewClick = this.onPreviewClick.bind(this);
     const {content} = this.props;
     if (!content) {
       return null;
@@ -34,7 +34,7 @@ export default class PreviewOembed extends React.Component {
 
     let previewButton = !this.state.previewOembed
     ? (
-      <a className="learningsource__expand" onClick={onPreviewClick}>
+      <a className="learningsource__expand" onClick={this.onPreviewClick}>
         <span className="button button--outline">{polyglot.t('editPathStep.previewOembed')}</span>
       </a>) : null;
 
