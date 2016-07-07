@@ -6,7 +6,7 @@ import payload403invalid from '../../actions/__tests__/payload403invalid';
 
 import { applicationError } from '../../messages/messagesActions';
 import { fetchLearningPath, setLearningPath } from '../learningPathActions';
-import { setImage } from '../../imageSearch/imageActions';
+import { setSavedImage, setSelectedImage } from '../../imageSearch/imageActions';
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
@@ -29,7 +29,8 @@ test('actions/fetchLearningPath without image', t => {
     .then(() => {
       t.deepEqual(store.getActions(), [
         setLearningPath({id: pathId}),
-        setImage({})
+        setSavedImage({}),
+        setSelectedImage({})
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();

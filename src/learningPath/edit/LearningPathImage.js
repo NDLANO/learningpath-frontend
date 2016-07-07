@@ -68,7 +68,6 @@ class LearningPathImage extends React.Component {
       learningPathTitle,
       fetchImage,
       onChange,
-      selectedImage,
       savedImage
     } = this.props;
 
@@ -107,12 +106,10 @@ LearningPathImage.propTypes = {
   learningPathTitle: PropTypes.string.isRequired,
   fetchImage: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  selectedImage: PropTypes.object.isRequired,
   savedImage: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => Object.assign({}, state, {
-  selectedImage: state.imageSearch ? state.imageSearch.selectedImage : undefined,
   savedImage: state.imageSearch ? state.imageSearch.savedImage : undefined
 });
 

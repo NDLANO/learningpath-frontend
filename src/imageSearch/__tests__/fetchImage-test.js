@@ -5,7 +5,7 @@ import nock from 'nock';
 import payload403invalid from '../../actions/__tests__/payload403invalid';
 
 import { applicationError } from '../../messages/messagesActions';
-import { fetchLearningPathImage, setImage, fetchLearningPathImageWithMetaUrl } from '../../imageSearch/imageActions';
+import { fetchLearningPathImage, setSavedImage, setSelectedImage, fetchLearningPathImageWithMetaUrl } from '../../imageSearch/imageActions';
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
@@ -28,7 +28,7 @@ test('actions/fetchImage with id', t => {
   store.dispatch(fetchLearningPathImage(imageId))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        setImage({id: imageId})
+        setSelectedImage({id: imageId})
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();
@@ -51,7 +51,7 @@ test('actions/fetchImage with url', t => {
   store.dispatch(fetchLearningPathImageWithMetaUrl(imageMetaUrl))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        setImage({id: 123})
+        setSavedImage({id: 123})
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();
