@@ -6,7 +6,7 @@ import { fetchLearningPathTagsIfNeeded } from './tags/learningPathTagsActions';
 import { getLearningPathTagsByLanguage } from './tags/learningPathTagsSelectors';
 import { fetchLearningPathImages, fetchLearningPathImage, fetchLearningPathImageWithMetaUrl } from '../../imageSearch/imageActions';
 import { updateLearningPath } from '../learningPathActions';
-
+import isEmpty from 'lodash/isEmpty';
 class EditLearningPath extends Component {
   componentDidMount() {
     const { fetchLearningPathTags } = this.props;
@@ -21,7 +21,7 @@ class EditLearningPath extends Component {
       revision: learningPath.revision,
       duration: (values.duration.replace(/,/g, '.')) * 60,
       tags: [{tags: values.tags, language }],
-      coverPhotoMetaUrl: values.coverPhotoMetaUrl,
+      coverPhotoMetaUrl: !isEmpty(values.coverPhotoMetaUrl) ? values.coverPhotoMetaUrl : undefined,
     });
 
     return (

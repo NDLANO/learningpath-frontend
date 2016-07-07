@@ -2,6 +2,8 @@ const phrases = {
   searchForm: {
     placeholder: 'Search learning paths',
     btn: 'Search',
+    hideIntroduction: 'Hide introduction',
+    showIntroduction: 'Show introduction',
     order: {
       relevance: 'Relevance',
       newest: 'Newest',
@@ -69,6 +71,7 @@ const phrases = {
     pageName: 'Learning path details',
     previous: 'Previous',
     next: 'Next',
+    of: 'of',
     description: 'Description',
     descriptionPlaceholder: 'Write a short description for the learning path.',
     descriptionInformation: 'Max 150 characters. You have %{remainingDescriptionLength} remaining. Description will be shown in search results.',

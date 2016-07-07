@@ -3,9 +3,9 @@ import defined from 'defined';
 import { Link } from 'react-router';
 import LabeledIcon from '../../components/LabeledIcon';
 import classNames from 'classnames';
-
 import formatDate from '../../util/formatDate';
 import formatDuration from '../../util/formatDuration';
+import LearningPathIntroduction from './LearningPathIntroduction';
 
 import { titleI18N, descriptionI18N, tagsI18N } from '../../util/i18nFieldFinder';
 
@@ -16,6 +16,7 @@ export default class SearchResult extends Component {
     this.state = {
       imageError: false,
       tag: null,
+      showIntroduction: false,
     };
     this.handleImageError = this.handleImageError.bind(this);
   }
@@ -63,7 +64,11 @@ export default class SearchResult extends Component {
                 <LabeledIcon.Today labelText={formatDate(path.lastUpdated, lang)} tagName="time" />
                 <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName="time" />
               </div>
+
               <div className="search-result_description">{descriptionI18N(path, lang, true)}</div>
+
+              <LearningPathIntroduction path={path} />
+
               <div className="tags_list">
                 {tags.map(tag =>
                   <span key={tag} className={tagsClassName(tag)} onClick={(evt) => onTagClick(evt, tag)} href="#">{tag}</span>

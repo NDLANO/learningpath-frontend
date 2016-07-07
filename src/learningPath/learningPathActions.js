@@ -6,7 +6,7 @@ import { createEmptyLearningPathStep } from './step/learningPathStepActions';
 import { routerActions } from 'react-router-redux';
 import polyglot from '../i18n';
 import { titleI18N } from '../util/i18nFieldFinder';
-import { fetchLearningPathImageWithMetaUrl, setImage } from '../imageSearch/imageActions';
+import { fetchLearningPathImageWithMetaUrl, setSelectedImage, setSavedImage } from '../imageSearch/imageActions';
 
 export const setLearningPath = createAction('SET_LEARNING_PATH');
 export const removeLearningPath = createAction('REMOVE_LEARNING_PATH');
@@ -18,7 +18,8 @@ export function fetchLearningPath(pathId) {
       if (path.payload.coverPhoto) {
         dispatch(fetchLearningPathImageWithMetaUrl(path.payload.coverPhoto.metaUrl));
       } else {
-        dispatch(setImage({}));
+        dispatch(setSavedImage({}));
+        dispatch(setSelectedImage({}));
       }
     })
     .catch(err => dispatch(applicationError(err)));

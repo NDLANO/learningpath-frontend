@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ImageSearchForm from './ImageSearchForm';
 import ImageSearchResult from './ImageSearchResult';
 import ButtonPager from '../common/pager/ButtonPager';
-import { changeImageSearchQuery } from './imageActions';
+import { changeImageSearchQuery, setSavedImage } from './imageActions';
 import get from 'lodash/get';
 export function Images(props) {
   const {
@@ -17,6 +17,7 @@ export function Images(props) {
     selectedImage,
     lastPage,
     totalCount,
+    localSetSavedImage
   } = props;
 
   if (!images) {
@@ -37,6 +38,7 @@ export function Images(props) {
     closeLightBox();
     const coverPhotoMetaUrl = `${window.NDLA_API_URL}${base}/${image.id}`;
     onChange(coverPhotoMetaUrl);
+    localSetSavedImage(image);
   };
   return (
     <div>
@@ -64,6 +66,7 @@ Images.propTypes = {
   selectedImage: PropTypes.object,
   lastPage: PropTypes.number.isRequired,
   totalCount: PropTypes.number.isRequired,
+  localSetSavedImage: PropTypes.func.isRequired
 };
 
 Images.contextTypes = {
@@ -75,10 +78,11 @@ const mapStateToProps = (state) => Object.assign({}, state, {
   selectedImage: state.imageSearch.selectedImage,
   lastPage: Math.ceil(state.imageSearch.images.totalCount / (state.imageSearch.imageSearchQuery['page-size'] || 1)),
   totalCount: get(state, 'imageSearch.images.totalCount', 0),
-  imageSearchQuery: get(state, 'imageSearch.imageSearchQuery', {query: '', page: 1, 'page-size': 16})
+  imageSearchQuery: get(state, 'imageSearch.imageSearchQuery', {query: '', page: 1, 'page-size': 16}),
 });
 
 const mapDispatchToProps = {
-  localChangeImageSearchQuery: changeImageSearchQuery
+  localChangeImageSearchQuery: changeImageSearchQuery,
+  localSetSavedImage: setSavedImage
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Images);

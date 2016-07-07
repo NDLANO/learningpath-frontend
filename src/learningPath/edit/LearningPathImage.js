@@ -21,23 +21,23 @@ ChoseImage.propTypes = {
 };
 
 const ChangeImage = (props) => {
-  const { onImageLightboxOpen, selectedImage } = props;
+  const { onImageLightboxOpen, savedImage } = props;
   return (
     <div>
       <div className="image-preview_image">
-        <img role="presentation" src={selectedImage.images.full.url} />
+        <img role="presentation" src={savedImage.images.full.url} />
         <p className="learning-path_input-information">{polyglot.t('learningPath.image.imageInformation')}</p>
       </div>
       <div className="image-preview_information">
-        <h2 className="image-preview_title">{selectedImage.titles[0].title}</h2>
+        <h2 className="image-preview_title">{savedImage.titles[0].title}</h2>
         <div className="image-prieview_copyright-author">
           <b>
             {polyglot.t('learningPath.image.authors')}
           </b>
           <span>
-            {selectedImage.copyright.authors.map(author =>
-              <span key={author.name}>{author.name}, </span>
-            )}
+            {savedImage.copyright.authors.map((author) =>
+              author.name
+            ).join(', ')}
           </span>
         </div>
         <Button className="button button--primary" onClick={onImageLightboxOpen}>
@@ -50,7 +50,7 @@ const ChangeImage = (props) => {
 
 ChangeImage.propTypes = {
   onImageLightboxOpen: PropTypes.func.isRequired,
-  selectedImage: PropTypes.object.isRequired,
+  savedImage: PropTypes.object.isRequired,
 };
 
 class LearningPathImage extends React.Component {
@@ -68,7 +68,8 @@ class LearningPathImage extends React.Component {
       learningPathTitle,
       fetchImage,
       onChange,
-      selectedImage
+      selectedImage,
+      savedImage
     } = this.props;
 
     const onImageLightboxClose = () => {
@@ -85,8 +86,8 @@ class LearningPathImage extends React.Component {
         <div className="learning-path-image">
           <label className="label--medium-bold label--medium">{polyglot.t('learningPath.image.title')}</label>
           {
-            selectedImage && !isEmpty(selectedImage) ?
-              <ChangeImage onImageLightboxOpen={onImageLightboxOpen} selectedImage={selectedImage} /> : <ChoseImage onImageLightboxOpen={onImageLightboxOpen} />
+            savedImage && !isEmpty(savedImage) ?
+              <ChangeImage onImageLightboxOpen={onImageLightboxOpen} savedImage={savedImage} /> : <ChoseImage onImageLightboxOpen={onImageLightboxOpen} />
           }
         </div>
         <div className="lightbox_image-preview">
@@ -106,11 +107,13 @@ LearningPathImage.propTypes = {
   learningPathTitle: PropTypes.string.isRequired,
   fetchImage: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  selectedImage: PropTypes.object.isRequired
+  selectedImage: PropTypes.object.isRequired,
+  savedImage: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => Object.assign({}, state, {
-  selectedImage: state.imageSearch ? state.imageSearch.selectedImage : undefined
+  selectedImage: state.imageSearch ? state.imageSearch.selectedImage : undefined,
+  savedImage: state.imageSearch ? state.imageSearch.savedImage : undefined
 });
 
 export default connect(mapStateToProps)(LearningPathImage);
