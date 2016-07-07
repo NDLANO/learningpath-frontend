@@ -9,7 +9,5 @@ then
     VERSION="SNAPSHOT"
 fi
 
-npm install
-npm run build --production
 docker build -t $PROJECT:$VERSION .
 echo "BUILT $PROJECT:$VERSION"

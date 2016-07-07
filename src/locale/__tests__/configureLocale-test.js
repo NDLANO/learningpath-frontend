@@ -1,6 +1,6 @@
 import test from 'tape';
 
-import { configureLocale, isValidLocale } from '../configureLocale';
+import { configureLocale, getHtmlLang, isValidLocale } from '../configureLocale';
 
 test('configureLocale configureLocale()', (t) => {
   t.equal(configureLocale('en').currentLocale, 'en');
@@ -22,5 +22,13 @@ test('configureLocale isValidLocale()', (t) => {
   t.equal(isValidLocale('en'), true);
   t.equal(isValidLocale('aa'), false);
   t.equal(isValidLocale('ub'), false);
+  t.end();
+});
+
+test('configureLocale getHtmlLang()', (t) => {
+  t.equal(getHtmlLang('nb'), 'nb');
+  t.equal(getHtmlLang('nn'), 'nn');
+  t.equal(getHtmlLang('en'), 'en');
+  t.equal(getHtmlLang('aa'), 'nb');
   t.end();
 });
