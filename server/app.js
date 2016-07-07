@@ -33,12 +33,8 @@ app.get('*', (req, res) => {
   }
 
 
-  if (__DISABLE_SSR__) {
-    renderOnClient();
-    return;
-  }
-
-  // TODO: Server side rendering
+  renderOnClient();
+  return;
 });
 
 module.exports = app;
