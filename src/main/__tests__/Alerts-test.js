@@ -9,7 +9,7 @@ import uuid from 'node-uuid';
 const noop = () => {};
 
 test('component/Alerts default severity', t => {
-  let alertMessages = [{id: uuid.v4(), message: 'Testmessage'}];
+  let alertMessages = [{ id: uuid.v4(), message: 'Testmessage' }];
   const component = shallow(<Alerts messages={alertMessages} dispatch={noop} />);
 
   const messageElements = component.find('.alert_msg').find('Message');
@@ -24,7 +24,7 @@ test('component/Alerts default severity', t => {
 
 test('component/Alerts info severity', t => {
   const messages = ['Testmessage', 'TEST'];
-  let alertMessages = [{id: uuid.v4(), message: messages[0], severity: 'success'}, {id: uuid.v4(), message: messages[1]}];
+  let alertMessages = [{ id: uuid.v4(), message: messages[0], severity: 'success' }, { id: uuid.v4(), message: messages[1] }];
   const component = shallow(<Alerts messages={alertMessages} dispatch={noop} />);
 
   const messageElements = component.find('.alert_msg').find('Message');
@@ -38,7 +38,7 @@ test('component/Alerts info severity', t => {
 
 test('component/Alerts info and danger severity', t => {
   const messages = ['Test one', 'Test two'];
-  let alertMessages = [{id: uuid.v4(), message: messages[0], severity: 'info'}, {id: uuid.v4(), message: messages[1], severity: 'danger'}];
+  let alertMessages = [{ id: uuid.v4(), message: messages[0], severity: 'info' }, { id: uuid.v4(), message: messages[1], severity: 'danger' }];
   const component = shallow(<Alerts messages={alertMessages} dispatch={noop} />);
 
   const messageElements = component.find('.alert_msg').find('Message');
@@ -60,7 +60,7 @@ test('component/Alerts dismiss', t => {
   const dispatch = sinon.spy(() => {});
 
   const dismissBt = shallow(
-    <Alerts messages={[{id: uuid.v4(), message: 'whatever', severity: 'info'}]} dispatch={dispatch} />
+    <Alerts messages={[{ id: uuid.v4(), message: 'whatever', severity: 'info' }]} dispatch={dispatch} />
   ).find('.alert_dismiss');
 
   dismissBt.simulate('click');

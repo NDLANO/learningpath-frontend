@@ -1,8 +1,8 @@
-import {handleActions} from 'redux-actions';
+import { handleActions } from 'redux-actions';
 
 const initalState = {
   isRightSidebarOpen: false,
-  isLeftSideBarOpen: false
+  isLeftSideBarOpen: false,
 };
 
 export default handleActions({
@@ -10,21 +10,21 @@ export default handleActions({
     next() {
       return {
         isRightSidebarOpen: false,
-        isLeftSideBarOpen: true
+        isLeftSideBarOpen: true,
       };
-    }
+    },
   },
   OPEN_RIGHT_SIDEBAR: {
     next() {
       return {
         isRightSidebarOpen: true,
-        isLeftSideBarOpen: false
+        isLeftSideBarOpen: false,
       };
-    }
+    },
   },
   CLOSE_SIDEBARS: {
     next() {
       return initalState;
-    }
-  }
+    },
+  },
 }, initalState);

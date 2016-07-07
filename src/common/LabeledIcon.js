@@ -5,15 +5,15 @@ import Icon from './Icon';
 function LabeledIcon(props) {
   const { iconName, labelText } = props;
   const tagName = get(props, 'tagName', 'span');
-  let icon = React.createElement(Icon[iconName], {className: 'icon--with-label'});
-  let label = React.createElement(tagName, {className: 'labeled-icon_text'}, labelText);
+  let icon = React.createElement(Icon[iconName], { className: 'icon--with-label' });
+  let label = React.createElement(tagName, { className: 'labeled-icon_text' }, labelText);
   return (<span className="labeled-icon">{icon}{label}</span>);
 }
 
 LabeledIcon.propTypes = {
   labelText: PropTypes.string.isRequired,
   iconName: PropTypes.string.isRequired,
-  tagName: PropTypes.string
+  tagName: PropTypes.string,
 };
 
 
@@ -31,5 +31,5 @@ LabeledIcon.Delete = props => (<LabeledIcon {...props} iconName="Delete" />);
 export default LabeledIcon;
 
 LabeledIcon.defaultProps = {
-  labelText: ''
+  labelText: '',
 };

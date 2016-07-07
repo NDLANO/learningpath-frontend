@@ -23,20 +23,20 @@ export class MyPage extends React.Component {
     super(props);
 
     this.state = {
-      displayCreatePath: false
+      displayCreatePath: false,
     };
     this.onCreateLearningPathClick = this.onCreateLearningPathClick.bind(this);
   }
 
   onCreateLearningPathClick() {
     this.setState({
-      displayCreatePath: true
+      displayCreatePath: true,
     });
   }
 
   render() {
-    const {learningPaths, sortKey, setSortKey, deletePath, updatePathStatus, createPath, copyPath} = this.props;
-    const {lang} = this.context;
+    const { learningPaths, sortKey, setSortKey, deletePath, updatePathStatus, createPath, copyPath } = this.props;
+    const { lang } = this.context;
     const items = learningPaths.map(lp => {
       const title = titleI18N(lp, lang, true);
       const description = descriptionI18N(lp, lang, true);
@@ -99,12 +99,12 @@ export class MyPage extends React.Component {
     );
 
     let onCreateLearningPathSubmit = values => createPath({
-      title: [{title: values.title, language: lang}],
-      description: [{description: values.description, language: lang}],
-      duration: 1, coverPhoto: {url: '', metaUrl: ''}
+      title: [{ title: values.title, language: lang }],
+      description: [{ description: values.description, language: lang }],
+      duration: 1, coverPhoto: { url: '', metaUrl: '' },
     });
 
-    let onLightboxClose = () => this.setState({displayCreatePath: false});
+    let onLightboxClose = () => this.setState({ displayCreatePath: false });
 
     return (
       <Wrapper>
@@ -143,7 +143,7 @@ MyPage.propTypes = {
 MyPage.defaultProps = { learningPaths: [], sortKey: 'title' };
 
 MyPage.contextTypes = {
-  lang: PropTypes.string.isRequired
+  lang: PropTypes.string.isRequired,
 };
 
 const sortPaths = (paths, field, state) => {

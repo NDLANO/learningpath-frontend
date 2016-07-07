@@ -1,4 +1,4 @@
-import React, {PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import { reduxForm, reset } from 'redux-form';
 import polyglot from '../../i18n';
 
@@ -8,14 +8,14 @@ class CreateLearningPath extends React.Component {
 
 
   componentWillUnmount() {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch(reset('create-learning-path'));
   }
   render() {
     const {
       fields: { title, description },
       submitting,
-      handleSubmit
+      handleSubmit,
     } = this.props;
     return (
       <form onSubmit={handleSubmit}>
@@ -41,10 +41,10 @@ CreateLearningPath.propTypes = {
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default reduxForm({
   form: 'create-learning-path',
-  fields
+  fields,
 })(CreateLearningPath);

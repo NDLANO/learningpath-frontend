@@ -18,9 +18,9 @@ test('actions/checkValidSession', (t) => {
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get('/auth/me')
-    .reply(200, {first_name: 'alice', email: 'alice@example.com'});
+    .reply(200, { first_name: 'alice', email: 'alice@example.com' });
 
-  const store = mockStore({authToken});
+  const store = mockStore({ authToken });
 
   store.dispatch(actions.checkValidSession())
     .then(() => {
@@ -39,14 +39,14 @@ test('actions/checkValidSession invalid authToken', (t) => {
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get('/auth/me')
-    .reply(403, {message: 'Invalid'});
+    .reply(403, { message: 'Invalid' });
 
-  const store = mockStore({authToken});
+  const store = mockStore({ authToken });
 
   store.dispatch(actions.checkValidSession())
     .then(() => {
       t.deepEqual(store.getActions(), [
-        { type: 'LOGOUT', payload: undefined }
+        { type: 'LOGOUT', payload: undefined },
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();

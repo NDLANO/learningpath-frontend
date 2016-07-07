@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import Icon from '../../../common/Icon';
 import polyglot from '../../../i18n';
 
-export default function MediaTypeSelect({value, onChange}) {
+export default function MediaTypeSelect({ value, onChange }) {
   const changeType = (evt) => onChange(evt.target.value);
 
   const fieldNameAttr = 'step_media_type';
@@ -90,5 +90,5 @@ export default function MediaTypeSelect({value, onChange}) {
 
 MediaTypeSelect.propTypes = {
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.string
+  value: PropTypes.string,
 };

@@ -12,7 +12,7 @@ export default function LearningPathDuration(props) {
   };
   const durationClassName = (value) => classNames({
     'duration-menu-item': true,
-    'duration-menu-item__selected': props.value === value.toString()
+    'duration-menu-item__selected': props.value === value.toString(),
   });
   return (
     <div>
@@ -29,5 +29,5 @@ export default function LearningPathDuration(props) {
 
 LearningPathDuration.propTypes = {
   value: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired
+  id: PropTypes.string.isRequired,
 };

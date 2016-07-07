@@ -22,7 +22,7 @@ export function fetchLearningPathStep(pathId, stepId) {
       }
     }
 
-    return fetchPathStep(authToken, {pathId, stepId})
+    return fetchPathStep(authToken, { pathId, stepId })
     .then(step => dispatch(setLearningPathStep(step)))
     .catch(err => dispatch(applicationError(err)));
   };
@@ -31,11 +31,11 @@ export function fetchLearningPathStep(pathId, stepId) {
 export function updateLearningPathStep(pathId, stepId, learningPathStep) {
   return (dispatch, getState) => updateStep(getState().authToken, { pathId, stepId }, learningPathStep)
     .then((lpspath) => {
-      dispatch(addMessage({message: polyglot.t('updateLearningPath.updatedMsg')}));
+      dispatch(addMessage({ message: polyglot.t('updateLearningPath.updatedMsg') }));
       dispatch(setLearningPathStep(lpspath));
       dispatch(fetchLearningPath(pathId));
       dispatch(routerActions.push({
-        pathname: `/learningpaths/${pathId}/step/${lpspath.id}`
+        pathname: `/learningpaths/${pathId}/step/${lpspath.id}`,
       }));
     })
     .catch(err => dispatch(applicationError(err)));
@@ -44,10 +44,10 @@ export function updateLearningPathStep(pathId, stepId, learningPathStep) {
 export function createLearningPathStep(pathId, learningPathStep) {
   return (dispatch, getState) => createStep(getState().authToken, { pathId }, learningPathStep)
     .then(lpspath => {
-      dispatch(addMessage({message: polyglot.t('updateLearningPath.updatedMsg')}));
+      dispatch(addMessage({ message: polyglot.t('updateLearningPath.updatedMsg') }));
       dispatch(fetchLearningPath(pathId));
       dispatch(routerActions.push({
-        pathname: `/learningpaths/${pathId}/step/${lpspath.id}`
+        pathname: `/learningpaths/${pathId}/step/${lpspath.id}`,
       }));
     })
     .catch(err => dispatch(applicationError(err)));
@@ -81,7 +81,7 @@ export function deleteLearningPathStep(pathId, stepId) {
 }
 
 export function updateStepSequenceNumber(pathId, stepId, seqNo) {
-  return (dispatch, getState) => updateSeqNo(getState().authToken, {pathId, stepId}, {seqNo})
+  return (dispatch, getState) => updateSeqNo(getState().authToken, { pathId, stepId }, { seqNo })
     .then(() => {
       dispatch(fetchLearningPath(pathId));
     })

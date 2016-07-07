@@ -44,7 +44,7 @@ test('component/PagerUtil.stepNumbers', t => {
 });
 
 
-function pagerTest({setup, expected}) {
+function pagerTest({ setup, expected }) {
   test(`component/LinkPager page ${setup.page}/${setup.lastPage}`, t => {
     const steps = shallow(<LinkPager query={{}} {...setup} />)
       .find('.search-stepper_step');
@@ -85,25 +85,25 @@ function pagerTest({setup, expected}) {
 
 pagerTest({
   setup: { page: 1, lastPage: 1 },
-  expected: ['current']
+  expected: ['current'],
 });
 
 pagerTest({
   setup: { page: 3, lastPage: 5 },
-  expected: ['back', 1, 2, 'current', 4, 5, 'forward']
+  expected: ['back', 1, 2, 'current', 4, 5, 'forward'],
 });
 
 pagerTest({
   setup: { page: 1, lastPage: 5 },
-  expected: ['current', 2, 3, 4, 5, 'forward']
+  expected: ['current', 2, 3, 4, 5, 'forward'],
 });
 
 pagerTest({
   setup: { page: 19, lastPage: 19 },
-  expected: ['back', 15, 16, 17, 18, 'current']
+  expected: ['back', 15, 16, 17, 18, 'current'],
 });
 
 pagerTest({
   setup: { page: 4, lastPage: 10 },
-  expected: ['back', 2, 3, 'current', 5, 6, 'forward']
+  expected: ['back', 2, 3, 'current', 5, 6, 'forward'],
 });

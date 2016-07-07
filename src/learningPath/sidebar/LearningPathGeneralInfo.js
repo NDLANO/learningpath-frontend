@@ -14,14 +14,14 @@ class LearningPathGeneralInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayCopyPath: false
+      displayCopyPath: false,
     };
     this.onCopyLearningPathClick = this.onCopyLearningPathClick.bind(this);
   }
 
   onCopyLearningPathClick() {
     this.setState({
-      displayCopyPath: true
+      displayCopyPath: true,
     });
   }
 
@@ -41,7 +41,7 @@ class LearningPathGeneralInfo extends React.Component {
     const { learningPath, copyPath, localCloseSidebars } = this.props;
     const { lang } = this.context;
     const href = `/learningpaths/${learningPath.id}`;
-    let onLightboxClose = () => this.setState({displayCopyPath: false});
+    let onLightboxClose = () => this.setState({ displayCopyPath: false });
     const onCopy = () => {
       copyPath(learningPath, lang);
       onLightboxClose();
@@ -75,11 +75,11 @@ LearningPathGeneralInfo.propTypes = {
 };
 
 LearningPathGeneralInfo.contextTypes = {
-  lang: PropTypes.string.isRequired
+  lang: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => Object.assign({}, state, {
-  authenticated: state.authenticated
+  authenticated: state.authenticated,
 });
 
 const mapDispatchToProps = {

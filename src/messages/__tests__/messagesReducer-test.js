@@ -6,8 +6,8 @@ test('reducers/messages add message', t => {
     type: 'ADD_MESSAGE',
     payload: {
       message: 'This is a dangerous error',
-      severity: 'danger'
-    }
+      severity: 'danger',
+    },
   });
 
   t.equal(nextState.length, 1);
@@ -18,8 +18,8 @@ test('reducers/messages add message', t => {
     type: 'ADD_MESSAGE',
     payload: {
       message: 'Another somewhat less dangerous error',
-      severity: 'warning'
-    }
+      severity: 'warning',
+    },
   });
 
   t.equal(nextState.length, 2);
@@ -31,8 +31,8 @@ test('reducers/messages add message', t => {
       type: 'ADD_MESSAGE',
       payload: {
         message: 'A message',
-        severity: 'success'
-      }
+        severity: 'success',
+      },
     });
   }
 
@@ -45,13 +45,13 @@ test('reducers/messages add message', t => {
 
 test('reducers/messages clear message', t => {
   const currentState = [
-    {id: '1', message: 'melding', severity: 'info', timeToLive: 1000},
-    {id: '2', message: 'melding', severity: 'info', timeToLive: 1000}
+    { id: '1', message: 'melding', severity: 'info', timeToLive: 1000 },
+    { id: '2', message: 'melding', severity: 'info', timeToLive: 1000 },
   ];
 
   const nextState = reducer(currentState, {
     type: 'CLEAR_MESSAGE',
-    payload: '1'
+    payload: '1',
   });
   t.equal(nextState.length, 1);
 
@@ -60,7 +60,7 @@ test('reducers/messages clear message', t => {
 
 test('reducers/messages clear all messages', t => {
   let nextState = reducer([], {
-    type: 'CLEAR_ALL_MESSAGES'
+    type: 'CLEAR_ALL_MESSAGES',
   });
   t.equal(nextState.length, 0);
 
@@ -69,14 +69,14 @@ test('reducers/messages clear all messages', t => {
       type: 'ADD_MESSAGE',
       payload: {
         message: 'A message',
-        severity: 'success'
-      }
+        severity: 'success',
+      },
     });
   }
   t.equal(nextState.length, 10);
 
   nextState = reducer([], {
-    type: 'CLEAR_ALL_MESSAGES'
+    type: 'CLEAR_ALL_MESSAGES',
   });
   t.equal(nextState.length, 0);
 
@@ -89,9 +89,9 @@ test('reducers/messages application error', t => {
     error: true,
     payload: {
       json: {
-        messages: [{field: 'Generic error', message: 'Another somewhat less dangerous error'}]
-      }
-    }
+        messages: [{ field: 'Generic error', message: 'Another somewhat less dangerous error' }],
+      },
+    },
   });
 
   t.equal(nextState.length, 1);

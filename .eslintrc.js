@@ -11,8 +11,6 @@ module.exports = {
       ignoreComments: false
     }],
     'react/prop-types': [ 2, {'ignore': ['children','className'] }],
-    "comma-dangle": 0,
-    "object-curly-spacing": 0,
     "react/prefer-stateless-function": 1
   },
   "globals": {

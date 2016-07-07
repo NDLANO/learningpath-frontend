@@ -16,7 +16,7 @@ export default handleActions({
         { learningsteps: assureSequenceOrder(action.payload.learningsteps) }
       );
     },
-    throw(state) { return state; }
+    throw(state) { return state; },
   },
 
   UPDATE_LEARNING_PATH_STEP: {
@@ -36,7 +36,7 @@ export default handleActions({
       return nextState;
     },
 
-    throw(state) { return state; }
+    throw(state) { return state; },
   },
 
   SORT_LEARNING_PATH_STEPS: {
@@ -48,13 +48,13 @@ export default handleActions({
       nextState.learningsteps = action.payload;
       return nextState;
     },
-    throw(state) { return state; }
+    throw(state) { return state; },
   },
 
   UPDATE_LEARNING_PATH_TAGS: {
-    next(state, action) { return Object.assign({}, state, {tags: action.payload}); },
-    throw(state) { return state; }
+    next(state, action) { return Object.assign({}, state, { tags: action.payload }); },
+    throw(state) { return state; },
   },
 
-  LOGOUT: () => ({})
+  LOGOUT: () => ({}),
 }, initialState);

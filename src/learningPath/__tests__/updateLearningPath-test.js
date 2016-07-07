@@ -22,23 +22,23 @@ test('actions/updateLearningPath', t => {
 
   const patchPathApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .patch(`/learningpaths/${pathId}`, {
-      id: pathId, isRequest: true
+      id: pathId, isRequest: true,
     })
-    .reply(200, {id: pathId, isResponse: true});
+    .reply(200, { id: pathId, isResponse: true });
 
   const store = mockStore({ authToken });
 
   store.dispatch(updateLearningPath(pathId, {
-    id: pathId, isRequest: true
+    id: pathId, isRequest: true,
   }))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        addMessage({message: 'Lagret OK'}),
+        addMessage({ message: 'Lagret OK' }),
         setLearningPath({
           id: pathId,
-          isResponse: true
+          isResponse: true,
         }),
-        routerActions.push({ pathname: `/learningpaths/${pathId}` })
+        routerActions.push({ pathname: `/learningpaths/${pathId}` }),
       ]);
 
       t.doesNotThrow(() => patchPathApi.done());
@@ -56,11 +56,11 @@ test('actions/updateLearningPath with redirect', t => {
 
   const patchPathApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .patch(`/learningpaths/${pathId}`, { id: pathId })
-    .reply(200, {id: pathId});
+    .reply(200, { id: pathId });
 
   const store = mockStore({ authToken });
 
-  store.dispatch(updateLearningPath(pathId, {id: pathId}, '/goto/dev/null'))
+  store.dispatch(updateLearningPath(pathId, { id: pathId }, '/goto/dev/null'))
     .then(() => {
       const actual = store.getActions();
 
@@ -83,16 +83,16 @@ test('actions/updateLearningPath access denied', (t) => {
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .patch(`/learningpaths/${pathId}`, {
       id: pathId,
-      foo: 'bar'
+      foo: 'bar',
     })
-    .reply(403, {message: 'Invalid'});
+    .reply(403, { message: 'Invalid' });
 
   const store = mockStore({ authToken });
 
   store.dispatch(updateLearningPath(pathId, { id: pathId, foo: 'bar' }))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        applicationError(payload403invalid())
+        applicationError(payload403invalid()),
       ]);
       t.doesNotThrow(() => apiMock.done());
 

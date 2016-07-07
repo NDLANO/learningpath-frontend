@@ -5,7 +5,7 @@ import Icon from '../../common/Icon';
 import { updateLearningPath } from '../learningPathActions';
 import { updateLearningPathStatus, closeSidebars } from '../../actions';
 
-export function LearningPathToCButtons({learningPath, saveAction, saveAndPublishAction, localCloseSidebars}) {
+export function LearningPathToCButtons({ learningPath, saveAction, saveAndPublishAction, localCloseSidebars }) {
   if (!learningPath.canEdit) {
     return null;
   }

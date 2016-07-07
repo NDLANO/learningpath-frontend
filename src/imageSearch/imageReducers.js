@@ -17,7 +17,7 @@ export default handleActions({
       nextState.images = action.payload;
       return nextState;
     },
-    throw(state) { return state; }
+    throw(state) { return state; },
   },
   SET_SELECTED_IMAGE: {
     next(state, action) {
@@ -25,7 +25,7 @@ export default handleActions({
       nextState.selectedImage = action.payload;
       return nextState;
     },
-    throw(state) { return state; }
+    throw(state) { return state; },
   },
   SET_SAVED_IMAGE: {
     next(state, action) {
@@ -33,7 +33,7 @@ export default handleActions({
       nextState.savedImage = action.payload;
       return nextState;
     },
-    throw(state) { return state; }
+    throw(state) { return state; },
   },
   CHANGE_IMAGE_SEARCH_QUERY: {
     next(state, action) {
@@ -41,6 +41,6 @@ export default handleActions({
       nextState.imageSearchQuery = Object.assign({}, state.imageSearchQuery, action.payload);// action.payload;
       return nextState;
     },
-    throw(state) { return state; }
-  }
+    throw(state) { return state; },
+  },
 }, initialState);

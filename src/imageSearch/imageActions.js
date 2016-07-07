@@ -15,7 +15,7 @@ export function fetchLearningPathImages(query, isFirstSearch = false) {
         If the default search on the title (first search from edit learningpath), a new search will be executed with a empty query string.
       */
       if (images.totalCount === 0 && isFirstSearch) {
-        const newQuery = {query: '', 'page-size': query['page-size'], page: query.page};
+        const newQuery = { query: '', 'page-size': query['page-size'], page: query.page };
         dispatch(fetchLearningPathImages(newQuery, false));
       } else {
         dispatch(setImages(images));

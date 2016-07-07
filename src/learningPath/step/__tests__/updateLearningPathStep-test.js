@@ -23,12 +23,12 @@ test('actions/updateLearningPathStep', t => {
   };
 
   const learningStep = {
-    title: [{language: 'nb', title: 'Goat'}],
-    description: [{language: 'nb', description: 'this is a description'}],
-    embedContent: [{language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY'}]
+    title: [{ language: 'nb', title: 'Goat' }],
+    description: [{ language: 'nb', description: 'this is a description' }],
+    embedContent: [{ language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY' }],
   };
 
-  const learningStepReply = Object.assign({}, learningStep, {id: stepId});
+  const learningStepReply = Object.assign({}, learningStep, { id: stepId });
 
   const patchPathStepApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .patch(`/learningpaths/${pathId}/learningsteps/${stepId}`, learningStep)
@@ -39,9 +39,9 @@ test('actions/updateLearningPathStep', t => {
   store.dispatch(updateLearningPathStep(pathId, stepId, learningStep))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        addMessage({message: 'Lagret OK'}),
+        addMessage({ message: 'Lagret OK' }),
         setLearningPathStep(learningStepReply),
-        routerActions.push({ pathname: `/learningpaths/${pathId}/step/${stepId}` })
+        routerActions.push({ pathname: `/learningpaths/${pathId}/step/${stepId}` }),
       ]);
 
       t.doesNotThrow(() => patchPathStepApi.done());
@@ -58,21 +58,21 @@ test('actions/updateLearningPathStep access denied', (t) => {
   };
 
   const learningStep = {
-    title: [{language: 'nb', title: 'Goat'}],
-    description: [{language: 'nb', description: 'this is a description'}],
-    embedContent: [{language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY'}]
+    title: [{ language: 'nb', title: 'Goat' }],
+    description: [{ language: 'nb', description: 'this is a description' }],
+    embedContent: [{ language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY' }],
   };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .patch(`/learningpaths/${pathId}/learningsteps/${stepId}`, learningStep)
-    .reply(403, {message: 'Invalid'});
+    .reply(403, { message: 'Invalid' });
 
   const store = mockStore({ authToken });
 
   store.dispatch(updateLearningPathStep(pathId, stepId, learningStep))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        applicationError(payload403invalid())
+        applicationError(payload403invalid()),
       ]);
       t.doesNotThrow(() => apiMock.done());
 

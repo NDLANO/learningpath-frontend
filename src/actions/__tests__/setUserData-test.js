@@ -5,7 +5,7 @@ import actions from '..';
 
 test('actions/setUserData', (t) => {
   const actual = actions.setUserData({
-    name: 'Alice', email: 'alice@example.com'
+    name: 'Alice', email: 'alice@example.com',
   });
 
   t.ok(isFSA(actual), 'FSA compliant action');
@@ -14,7 +14,7 @@ test('actions/setUserData', (t) => {
   t.ok(actual.payload);
   t.deepEqual(actual.payload, {
     name: 'Alice',
-    email: 'alice@example.com'
+    email: 'alice@example.com',
   });
   t.notOk(actual.error);
 

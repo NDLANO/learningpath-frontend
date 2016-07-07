@@ -14,9 +14,9 @@ export default function validateOembed(url, lang, fieldName = 'url', msgKey = 'v
     }));
   }
 
-  return (dispatch, getState) => new Promise((resolve, reject) => fetchOembedUrl(getState().authToken, {url})
+  return (dispatch, getState) => new Promise((resolve, reject) => fetchOembedUrl(getState().authToken, { url })
     .then((oembed) => {
-      dispatch(setOembedPreview(Object.assign({}, oembed, {url, language: lang})));
+      dispatch(setOembedPreview(Object.assign({}, oembed, { url, language: lang })));
       resolve();
     })
     .catch(

@@ -23,14 +23,14 @@ test('component/MediaTypeSelect for given value', t => {
   const inputs = component.find('.icon-select_input');
 
   t.deepEqual(inputs.reduce((acc, input) =>
-      Object.assign(acc, {[input.prop('value')]: input.prop('checked')}), {}),
+      Object.assign(acc, { [input.prop('value')]: input.prop('checked') }), {}),
     {
       INTRODUCTION: false,
       TEXT: false,
       MULTIMEDIA: true,
       QUIZ: false,
       TASK: false,
-      SUMMARY: false
+      SUMMARY: false,
     }
   );
 

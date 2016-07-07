@@ -22,13 +22,13 @@ const createPath = (authToken, props, body) =>
   .then(lpath => Promise.all(map(body.learningsteps, step =>
       postLearningPathStep(authToken, { pathId: lpath.id }, step)
     )).then(steps => Object.assign({}, lpath, {
-      learningsteps: assureSequenceOrder(steps)
+      learningsteps: assureSequenceOrder(steps),
     }))
   )
 ;
 
-const copyPath = (authToken, {copyfrom}, body) =>
-  copyLearningPath(authToken, {copyfrom}, body);
+const copyPath = (authToken, { copyfrom }, body) =>
+  copyLearningPath(authToken, { copyfrom }, body);
 
 const patchLearningPath = patchAuthorized('/learningpaths/:pathId');
 const patchLearningPathStep = patchAuthorized('/learningpaths/:pathId/learningsteps/:stepId');
@@ -39,25 +39,25 @@ const updatePath = (authToken, { pathId }, body) =>
   patchLearningPath(authToken, { pathId }, body);
 
 const updateStep = (authToken, { pathId, stepId }, body) =>
-  patchLearningPathStep(authToken, {pathId, stepId}, body);
+  patchLearningPathStep(authToken, { pathId, stepId }, body);
 
-const createStep = (authToken, {pathId}, body) =>
+const createStep = (authToken, { pathId }, body) =>
   postLearningPathStep(authToken, { pathId }, body);
 
 const deleteLearningPath = deleteAuthorized('/learningpaths/:pathId');
 const deletePath = (authToken, { pathId }) =>
-  deleteLearningPath(authToken, {pathId});
+  deleteLearningPath(authToken, { pathId });
 
 const deleteLearningPathStep = deleteAuthorized('/learningpaths/:pathId/learningsteps/:stepId');
-const deleteStep = (authToken, {pathId, stepId}) =>
-  deleteLearningPathStep(authToken, {pathId, stepId});
+const deleteStep = (authToken, { pathId, stepId }) =>
+  deleteLearningPathStep(authToken, { pathId, stepId });
 
 const putLearningPathStepStatus = putAuthorized('/learningpaths/:pathId/learningsteps/:stepId/status');
-export const activateDeletedStep = (authToken, {pathId, stepId}) => putLearningPathStepStatus(authToken, {pathId, stepId}, {status: 'ACTIVE'});
+export const activateDeletedStep = (authToken, { pathId, stepId }) => putLearningPathStepStatus(authToken, { pathId, stepId }, { status: 'ACTIVE' });
 
 const putLearningPathStatus = putAuthorized('/learningpaths/:pathId/status');
 const updateStatus = (authToken, { pathId }, body) =>
-  putLearningPathStatus(authToken, {pathId}, body);
+  putLearningPathStatus(authToken, { pathId }, body);
 
 const learningPathsUrl = apiResourceUrl('/learningpaths');
 
@@ -78,7 +78,7 @@ const fetchPaths = (authToken, query) => {
 
     url += `?${queryString.stringify(q)}`;
   }
-  return fetch(url, {headers: {'APP-KEY': authToken}}).then(resolveJsonOrRejectWithError);
+  return fetch(url, { headers: { 'APP-KEY': authToken } }).then(resolveJsonOrRejectWithError);
 };
 
 const fetchOembedUrl = fetchAuthorized('/oembed/?url=:url');

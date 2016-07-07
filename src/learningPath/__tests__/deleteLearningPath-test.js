@@ -25,7 +25,7 @@ test('actions/deleteLearningPath', t => {
   store.dispatch(deleteLearningPath(123))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        {type: 'REMOVE_LEARNING_PATH', payload: 123}
+        { type: 'REMOVE_LEARNING_PATH', payload: 123 },
       ]);
 
       t.doesNotThrow(() => apiMock.done());

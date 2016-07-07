@@ -13,7 +13,7 @@ test('component/LearningPath', t => {
     shallow(
       <LearningPath learningPath={learningPath} params={{}}>
         <Foo />
-      </LearningPath>, {context: {lang: 'nb'}}
+      </LearningPath>, { context: { lang: 'nb' } }
     ).find(Foo).length, 2, 'renders props.children'); // For some reason cloning an element results in two rendered components
 
   t.equal(
@@ -21,7 +21,7 @@ test('component/LearningPath', t => {
       <LearningPath
         learningPath={learningPath} params={{}} main={React.createElement(Bar)}
         saveButtons={React.createElement(Foo)}
-      />, {context: {lang: 'nb'}}
+      />, { context: { lang: 'nb' } }
     ).find(Foo).length, 1, 'renders props.saveButtons');
 
   t.equal(
@@ -29,7 +29,7 @@ test('component/LearningPath', t => {
       <LearningPath
         learningPath={learningPath} params={{}}
         main={React.createElement(Foo)}
-      />, {context: {lang: 'nb'}}
+      />, { context: { lang: 'nb' } }
     ).find(Foo).length, 1, 'renders props.main');
 
   t.equal(
@@ -37,7 +37,7 @@ test('component/LearningPath', t => {
       <LearningPath
         learningPath={learningPath} params={{}} main={React.createElement(Bar)}
         sortLearningSteps={React.createElement(Foo)}
-      />, {context: {lang: 'nb'}}
+      />, { context: { lang: 'nb' } }
     ).find(Foo).length, 1, 'renders props.sortLearningSteps');
 
   t.end();

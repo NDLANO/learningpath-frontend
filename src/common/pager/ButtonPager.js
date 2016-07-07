@@ -7,7 +7,7 @@ export default function ButtonPager(props) {
   const { page, lastPage, query, pagerAction } = props;
   const steps = stepNumbers(page, lastPage);
 
-  const queryToPage = pageNumber => Object.assign({}, query, {page: pageNumber});
+  const queryToPage = pageNumber => Object.assign({}, query, { page: pageNumber });
 
   const handleClickToPage = pageNumber => evt => {
     evt.preventDefault();

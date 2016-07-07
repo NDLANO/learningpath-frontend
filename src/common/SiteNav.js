@@ -6,7 +6,7 @@ import polyglot from '../i18n';
 
 import LabeledIcon from './LabeledIcon';
 import { closeSidebars } from '../actions';
-export function SiteNav({ authenticated, userName, cssModifier, localCloseSidebars}) {
+export function SiteNav({ authenticated, userName, cssModifier, localCloseSidebars }) {
   let myPage;
   let logInOut;
 
@@ -22,7 +22,7 @@ export function SiteNav({ authenticated, userName, cssModifier, localCloseSideba
     logInOut = (
       <li className="site-nav_item">
         <Link to="/logout" className="site-nav_link" onClick={localCloseSidebars}>
-          <LabeledIcon.Exit labelText={polyglot.t('siteNav.logout', {name: userName})} />
+          <LabeledIcon.Exit labelText={polyglot.t('siteNav.logout', { name: userName })} />
         </Link>
       </li>
     );
@@ -38,7 +38,7 @@ export function SiteNav({ authenticated, userName, cssModifier, localCloseSideba
 
   let rootClasses = classNames({
     'site-nav': true,
-    [`site-nav--${cssModifier}`]: cssModifier
+    [`site-nav--${cssModifier}`]: cssModifier,
   });
 
   return (
@@ -60,12 +60,12 @@ SiteNav.propTypes = {
   authenticated: PropTypes.bool,
   userName: PropTypes.string,
   localCloseSidebars: PropTypes.func.isRequired,
-  cssModifier: PropTypes.string
+  cssModifier: PropTypes.string,
 };
 
 SiteNav.defaultProps = {
   authenticated: false,
-  userName: ''
+  userName: '',
 };
 
 const userName = user => [user.first_name, user.middle_name, user.last_name].join(' ');
@@ -77,7 +77,7 @@ const selectUserName = (state) => {
 };
 
 const mapStateToProps = (state) => Object.assign({}, state, {
-  userName: selectUserName(state)
+  userName: selectUserName(state),
 });
 
 const mapDispatchToProps = {

@@ -5,7 +5,7 @@ import actions from '..';
 
 test('actions/setLearningPaths', (t) => {
   const actual = actions.setLearningPaths([
-      { id: '12345' }, { id: '67890' }
+      { id: '12345' }, { id: '67890' },
   ]);
 
   t.ok(isFSA(actual), 'FSA compliant action');

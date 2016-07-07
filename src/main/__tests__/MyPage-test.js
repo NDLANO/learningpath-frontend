@@ -14,22 +14,22 @@ test('component/MyPage', t => {
     setSortKey: noop,
     createPath: noop,
     deletePath: noop,
-    updatePathStatus: noop
+    updatePathStatus: noop,
   };
 
   const component = shallow(<MyPage {...requiredProps} learningPaths={learningPaths} />,
-      {context: {lang: 'nb'}});
+      { context: { lang: 'nb' } });
 
   const links = component.find('.tile_bd').find(Link);
 
   t.deepEqual(links.map(n => n.prop('to')), [
     '/learningpaths/1/first-step',
-    '/learningpaths/2/first-step'
+    '/learningpaths/2/first-step',
   ]);
 
   t.deepEqual(links.find('.tile_title').map(n => n.prop('children')), [
     'Hva er kunst og kultur?',
-    'Leselighet og skrift'
+    'Leselighet og skrift',
   ]);
 
   t.end();
@@ -41,7 +41,7 @@ test('component/MyPage mapStateToProps', t => {
   const state = {
     lang: 'nb',
     learningPaths,
-    myLearningPathsSortOrder: 'title'
+    myLearningPathsSortOrder: 'title',
   };
 
   let actual = mapStateToProps(state);

@@ -5,11 +5,11 @@ const intitalState = {};
 export default handleActions({
   LAST_DELETED_LEARNING_PATH_STEP: {
     next(state, action) { return action.payload; },
-    throw(state) { return state; }
+    throw(state) { return state; },
   },
   SET_LEARNING_PATH_STEP: {
     next(state, action) { return action.payload; },
-    throw(state) { return state; }
+    throw(state) { return state; },
   },
   SET_OEMBED_OBJECT: {
     next(state, action) {
@@ -17,7 +17,7 @@ export default handleActions({
       nextState.oembed = action.payload;
       return nextState;
     },
-    throw(state) { return state; }
+    throw(state) { return state; },
   },
   CREATE_EMPTY_LEARNING_PATH_STEP: {
     next() {
@@ -26,10 +26,10 @@ export default handleActions({
         description: [],
         embedContent: [],
         type: '',
-        license: ''
+        license: '',
       };
     },
-    throw(state) { return state; }
+    throw(state) { return state; },
   },
-  LOGOUT: () => (intitalState)
+  LOGOUT: () => (intitalState),
 }, intitalState);

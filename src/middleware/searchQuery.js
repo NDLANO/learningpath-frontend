@@ -6,7 +6,7 @@ const defaultSearchQuery = {
   pageSize: 10,
   sort: '-lastUpdated',
   query: '',
-  tag: ''
+  tag: '',
 };
 
 const parseSearchQuery = (query) => Object.keys(query).reduce((obj, key) => {

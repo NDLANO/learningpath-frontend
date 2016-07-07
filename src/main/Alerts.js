@@ -1,21 +1,21 @@
-import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 
 import Icon from '../common/Icon';
 import classNames from 'classnames';
 import { timeoutMessage, clearAllMessages, clearMessage } from '../messages/messagesActions';
 
-const priorities = {info: 0, success: 1, warning: 2, danger: 3 };
+const priorities = { info: 0, success: 1, warning: 2, danger: 3 };
 
-const Action = ({title, onClick}) =>
-  <strong style={{float: 'right'}}><button onClick={onClick} className="un-button">{title}</button></strong>;
+const Action = ({ title, onClick }) =>
+  <strong style={{ float: 'right' }}><button onClick={onClick} className="un-button">{title}</button></strong>;
 
 Action.propTypes = {
   title: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 
-const Message = ({message, dispatch}) => {
+const Message = ({ message, dispatch }) => {
   const onClick = () => {
     message.action.onClick();
     dispatch(clearMessage(message.id));
@@ -29,11 +29,11 @@ Message.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-export function Alerts({dispatch, messages}) {
+export function Alerts({ dispatch, messages }) {
   const isHidden = messages.length === 0;
   let overlayClasses = classNames({
     'alert-overlay': true,
-    'alert-overlay--hidden': isHidden
+    'alert-overlay--hidden': isHidden,
   });
 
   const highestAlert = messages
@@ -65,7 +65,7 @@ export function Alerts({dispatch, messages}) {
 
 Alerts.propTypes = {
   messages: PropTypes.array.isRequired,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default connect(state => state)(Alerts);

@@ -1,10 +1,10 @@
 const environment = {
   development: {
-    isProduction: false
+    isProduction: false,
   },
   production: {
-    isProduction: true
-  }
+    isProduction: true,
+  },
 }[process.env.NODE_ENV || 'development'];
 
 module.exports = Object.assign({
@@ -17,10 +17,10 @@ module.exports = Object.assign({
     title: 'NDLA Læringsstier',
     head: {
       meta: [
-        {name: 'description', content: 'NDLA Læringsstier meta description'},
-        {property: 'og:site_name', content: 'NDLA Læringsstier'},
-      ]
-    }
+        { name: 'description', content: 'NDLA Læringsstier meta description' },
+        { property: 'og:site_name', content: 'NDLA Læringsstier' },
+      ],
+    },
   },
 
 }, environment);

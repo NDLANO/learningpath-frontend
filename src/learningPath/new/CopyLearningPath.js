@@ -1,8 +1,8 @@
-import React, {PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import polyglot from '../../i18n';
 
 
-export default function CopyLearningPath({onClose, onCopy}) {
+export default function CopyLearningPath({ onClose, onCopy }) {
   return (
     <div className="copy_learning-path">
       <h2>{polyglot.t('copyLearningPath.copyTitle')}</h2>

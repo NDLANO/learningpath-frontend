@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import polyglot from '../../i18n';
 import { closeSidebars } from '../../actions';
 
-export function AddLearningPathStepButton({learningPath, localCloseSidebars}) {
+export function AddLearningPathStepButton({ learningPath, localCloseSidebars }) {
   if (!learningPath.canEdit) {
     return null;
   }

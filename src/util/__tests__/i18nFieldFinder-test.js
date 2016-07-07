@@ -5,10 +5,10 @@ import { oembedContentI18N, titleI18N } from '../i18nFieldFinder';
 test('util/i18nFieldFinder titleI18N', t => {
   const learningPathStep = {
     title: [
-      {title: 'Bokmål', language: 'nb'},
-      {title: 'Nynorsk', language: 'nn'},
-      {title: 'English', language: 'en'}
-    ]
+      { title: 'Bokmål', language: 'nb' },
+      { title: 'Nynorsk', language: 'nn' },
+      { title: 'English', language: 'en' },
+    ],
   };
 
   t.deepEqual(titleI18N(learningPathStep, 'nb'), 'Bokmål');
@@ -22,9 +22,9 @@ test('util/i18nFieldFinder titleI18N', t => {
 test('util/i18nFieldFinder titleI18N with fallback', t => {
   const learningPathStep1 = {
     title: [
-      {title: 'Bokmål', language: 'nb'},
-      {title: 'English', language: 'en'}
-    ]
+      { title: 'Bokmål', language: 'nb' },
+      { title: 'English', language: 'en' },
+    ],
   };
 
   t.deepEqual(titleI18N(learningPathStep1, 'nb', true), 'Bokmål');
@@ -33,8 +33,8 @@ test('util/i18nFieldFinder titleI18N with fallback', t => {
 
   const learningPathStep2 = {
     title: [
-      {title: 'English', language: 'en'}
-    ]
+      { title: 'English', language: 'en' },
+    ],
   };
 
   t.deepEqual(titleI18N(learningPathStep2, 'nb', true), 'English');
@@ -50,8 +50,8 @@ test('util/i18nFieldFinder oembedContentI18N', t => {
   const learningPathStep = {
     embedContent: [
       { url: 'http://example.com/sv', html: '<iframe src="http://example.com/sv">', width: 500, language: 'sv' },
-      { url: 'http://example.com', html: '<iframe src="http://example.com">', width: 500, language: 'nb' }
-    ]
+      { url: 'http://example.com', html: '<iframe src="http://example.com">', width: 500, language: 'nb' },
+    ],
   };
 
   t.deepEqual(oembedContentI18N(learningPathStep, 'nb'),

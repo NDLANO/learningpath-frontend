@@ -10,7 +10,7 @@ export default class OneLineEditor extends React.Component {
 
     const { onChange, maxlength } = props;
 
-    this.onChange = (editorState) => this.setState({editorState}, () => {
+    this.onChange = (editorState) => this.setState({ editorState }, () => {
       if (editorState.getSelection().getHasFocus()) {
         return;
       }
@@ -73,10 +73,10 @@ OneLineEditor.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
-  maxlength: PropTypes.number
+  maxlength: PropTypes.number,
 };
 
 OneLineEditor.defaultProps = {
   placeholder: polyglot.t('editPage.oneLineEditorDefaultPlaceholder'),
-  maxlength: -1
+  maxlength: -1,
 };

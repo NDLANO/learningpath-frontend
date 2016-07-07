@@ -9,7 +9,7 @@ export default function fetchLearningPaths() {
       dispatch(setLearningPaths(res.results));
       dispatch(changeLearningPathQuery({
         page: res.page,
-        pageSize: res.pageSize
+        pageSize: res.pageSize,
       }));
     })
     .catch(err => dispatch(applicationError(err)));

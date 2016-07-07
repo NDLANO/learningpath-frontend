@@ -4,7 +4,7 @@ import PreviewImage from './PreviewImage';
 export default function ImageSearch({ image, onImageClick, selectedImage, onSaveImage }) {
   const activeClassName = () => classNames({
     'image_list-item': true,
-    'image_list-item--active': selectedImage.id === image.id
+    'image_list-item--active': selectedImage.id === image.id,
   });
 
   return (
@@ -21,5 +21,5 @@ ImageSearch.propTypes = {
   image: PropTypes.object.isRequired,
   onImageClick: PropTypes.func.isRequired,
   selectedImage: PropTypes.object,
-  onSaveImage: PropTypes.func.isRequired
+  onSaveImage: PropTypes.func.isRequired,
 };

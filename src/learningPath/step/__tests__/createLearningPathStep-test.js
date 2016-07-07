@@ -22,12 +22,12 @@ test('actions/createLearningPathStep', t => {
   };
 
   const learningStep = {
-    title: [{language: 'nb', title: 'Goat'}],
-    description: [{language: 'nb', description: 'this is a description'}],
-    embedContent: [{language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY'}]
+    title: [{ language: 'nb', title: 'Goat' }],
+    description: [{ language: 'nb', description: 'this is a description' }],
+    embedContent: [{ language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY' }],
   };
 
-  const learningStepReply = Object.assign({}, learningStep, {id: 1234});
+  const learningStepReply = Object.assign({}, learningStep, { id: 1234 });
 
   const postPathStepApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .post(`/learningpaths/${pathId}/learningsteps`, learningStep)
@@ -38,8 +38,8 @@ test('actions/createLearningPathStep', t => {
   store.dispatch(createLearningPathStep(pathId, learningStep))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        addMessage({message: 'Lagret OK'}),
-        routerActions.push({ pathname: `/learningpaths/${pathId}/step/1234` })
+        addMessage({ message: 'Lagret OK' }),
+        routerActions.push({ pathname: `/learningpaths/${pathId}/step/1234` }),
       ]);
 
       t.doesNotThrow(() => postPathStepApi.done());
@@ -56,21 +56,21 @@ test('actions/createLearningPathStep access denied', (t) => {
   };
 
   const learningStep = {
-    title: [{language: 'nb', title: 'Goat'}],
-    description: [{language: 'nb', description: 'this is a description'}],
-    embedContent: [{language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY'}]
+    title: [{ language: 'nb', title: 'Goat' }],
+    description: [{ language: 'nb', description: 'this is a description' }],
+    embedContent: [{ language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY' }],
   };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .post(`/learningpaths/${pathId}/learningsteps`, learningStep)
-    .reply(403, {message: 'Invalid'});
+    .reply(403, { message: 'Invalid' });
 
   const store = mockStore({ authToken });
 
   store.dispatch(createLearningPathStep(pathId, learningStep))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        applicationError(payload403invalid())
+        applicationError(payload403invalid()),
       ]);
       t.doesNotThrow(() => apiMock.done());
 

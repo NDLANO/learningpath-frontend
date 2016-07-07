@@ -9,7 +9,7 @@ const OnClickCheckbox = (field) => {
   const classes = {
     'learning-step-form_icon-bg': true,
     'learning-step-form_show-title': true,
-    'learning-step-form_show-title--active': field.value
+    'learning-step-form_show-title--active': field.value,
   };
   const tooltip = <Tooltip id="showTitleTooltip">Velg om titelen skal vises eller skjules</Tooltip>;
   const handleClick = () => {
@@ -30,6 +30,6 @@ const OnClickCheckbox = (field) => {
 };
 
 OnClickCheckbox.propTypes = {
-  field: PropTypes.object// .isRequired
+  field: PropTypes.object, // .isRequired
 };
 export default OnClickCheckbox;

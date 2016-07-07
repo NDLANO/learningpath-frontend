@@ -5,10 +5,10 @@ import polyglot from '../i18n';
 import withCloseSidebars from '../common/withCloseSidebars';
 
 function Logo(props) {
-  const {cssModifier, closeSidebars} = props;
+  const { cssModifier, closeSidebars } = props;
   let rootClasses = classNames({
     logo: true,
-    [`logo--${cssModifier}`]: cssModifier
+    [`logo--${cssModifier}`]: cssModifier,
   });
 
   return (
@@ -20,7 +20,7 @@ function Logo(props) {
 
 Logo.propTypes = {
   cssModifier: PropTypes.string,
-  closeSidebars: PropTypes.func.isRequired
+  closeSidebars: PropTypes.func.isRequired,
 };
 
 

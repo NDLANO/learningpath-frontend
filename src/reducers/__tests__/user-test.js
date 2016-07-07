@@ -15,32 +15,32 @@ test('reducers/user', (t) => {
 
   t.deepEqual(
     reducer(undefined, { type: 'SET_USER_DATA', payload }),
-    {name, email},
+    { name, email },
     'set state'
   );
 
   t.deepEqual(
-    reducer({name: 'Bob'}, { type: 'SET_USER_DATA', payload }),
-    {name, email},
+    reducer({ name: 'Bob' }, { type: 'SET_USER_DATA', payload }),
+    { name, email },
     'change state'
   );
 
   t.deepEqual(
-    reducer({name: 'Bob'},
+    reducer({ name: 'Bob' },
       { type: 'DO_NOT_SET_USER_DATA', payload }),
-    {name: 'Bob'},
+    { name: 'Bob' },
     'non-actionable action type'
   );
 
   t.deepEqual(
-    reducer({name, email},
+    reducer({ name, email },
       { type: 'SET_USER_DATA', payload: new Error('fail'), error: true }),
-    {name, email},
+    { name, email },
     'ignore errors'
   );
 
   t.deepEqual(
-    reducer({name: 'Bob'}, { type: 'LOGOUT' }),
+    reducer({ name: 'Bob' }, { type: 'LOGOUT' }),
     {},
     'logout'
   );

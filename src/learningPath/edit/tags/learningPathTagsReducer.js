@@ -16,6 +16,6 @@ export default handleActions({
         }
       );
     },
-    throw(state) { return state; }
+    throw(state) { return state; },
   },
 }, initialState);

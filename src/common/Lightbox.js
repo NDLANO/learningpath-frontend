@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import Icon from './Icon';
 
 export default class Lightbox extends React.Component {
@@ -10,16 +10,16 @@ export default class Lightbox extends React.Component {
 
   componentWillReceiveProps(props) {
     const { display } = props;
-    this.setState({display});
+    this.setState({ display });
   }
 
   onCloseButtonClick(evt) {
-    this.setState({display: false}, () => this.props.onClose());
+    this.setState({ display: false }, () => this.props.onClose());
     evt.preventDefault();
   }
 
   render() {
-    const {children} = this.props;
+    const { children } = this.props;
 
     return this.state.display ? <div className="lightbox">
       <div className="lightbox_content">
@@ -34,10 +34,10 @@ export default class Lightbox extends React.Component {
 
 Lightbox.propTypes = {
   onClose: PropTypes.func,
-  display: PropTypes.bool
+  display: PropTypes.bool,
 };
 
 Lightbox.defaultProps = {
   display: true,
-  onClose: () => {}
+  onClose: () => {},
 };

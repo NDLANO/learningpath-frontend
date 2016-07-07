@@ -21,16 +21,16 @@ test('actions/fetchLearningPath without image', t => {
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get(`/learningpaths/${pathId}`)
-    .reply(200, {id: pathId});
+    .reply(200, { id: pathId });
 
   const store = mockStore({ authToken });
 
   store.dispatch(fetchLearningPath(pathId))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        setLearningPath({id: pathId}),
+        setLearningPath({ id: pathId }),
         setSavedImage({}),
-        setSelectedImage({})
+        setSelectedImage({}),
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();
@@ -46,14 +46,14 @@ test('actions/fetchLearningPath with image', t => {
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get(`/learningpaths/${pathId}`)
-    .reply(200, {id: pathId, coverPhoto: {url: 'test', metaUrl: 'metaTest'}});
+    .reply(200, { id: pathId, coverPhoto: { url: 'test', metaUrl: 'metaTest' } });
 
   const store = mockStore({ authToken });
 
   store.dispatch(fetchLearningPath(pathId))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        setLearningPath({id: pathId, coverPhoto: {url: 'test', metaUrl: 'metaTest'}}),
+        setLearningPath({ id: pathId, coverPhoto: { url: 'test', metaUrl: 'metaTest' } }),
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();
@@ -69,14 +69,14 @@ test('actions/fetchLearningPath access denied', (t) => {
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get(`/learningpaths/${pathId}`)
-    .reply(403, {message: 'Invalid'});
+    .reply(403, { message: 'Invalid' });
 
   const store = mockStore({ authToken });
 
   store.dispatch(fetchLearningPath(pathId))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        applicationError(payload403invalid())
+        applicationError(payload403invalid()),
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();

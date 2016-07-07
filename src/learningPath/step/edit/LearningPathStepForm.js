@@ -30,7 +30,7 @@ const LearningPathStepForm = (props) => {
     learningPathId,
   } = props;
 
-  const embedContent = oembedContentI18N({embedContent: oembedPreview}, lang);
+  const embedContent = oembedContentI18N({ embedContent: oembedPreview }, lang);
 
   const abortUrl = step.id ? `/learningpaths/${learningPathId}/step/${step.id}` : `/learningpaths/${learningPathId}`;
 
@@ -115,7 +115,7 @@ LearningPathStepForm.propTypes = {
   submitting: PropTypes.bool.isRequired,
   learningPathId: PropTypes.number.isRequired,
   oembedPreview: PropTypes.array.isRequired,
-  validateOembedUrl: PropTypes.func.isRequired
+  validateOembedUrl: PropTypes.func.isRequired,
 };
 
 
@@ -126,12 +126,12 @@ const mapStateToProps = (state, props) => ({
     title: titleI18N(props.step, props.lang),
     description: descriptionI18N(props.step, props.lang),
     url: oembedUrlI18N(props.step, props.lang),
-    type: props.step.type
-  }
+    type: props.step.type,
+  },
 });
 
 const mapDispatchToProps = {
-  validateOembedUrl: (embedContent, lang) => validateOembed(embedContent, lang)
+  validateOembedUrl: (embedContent, lang) => validateOembed(embedContent, lang),
 };
 
 
@@ -142,7 +142,7 @@ const asyncValidate = (values, dispatch, props) => {
 
 const validate = createValidator({
   title: required(),
-  _error: oneOfIsRequired('editPathStep.validation.oneOfDescriptionOrUrlIsRequired', 'url', 'description')
+  _error: oneOfIsRequired('editPathStep.validation.oneOfDescriptionOrUrlIsRequired', 'url', 'description'),
 });
 
 export default reduxForm({

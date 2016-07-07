@@ -62,7 +62,7 @@ export function resolveJsonOrRejectWithError(res) {
 export function fetchAuthorized(path, method = 'GET') {
   const url = params => apiResourceUrl(formatPattern(path, params));
   return (authToken, params = {}) => fetch(url(params), {
-    method, headers: {'APP-KEY': authToken}
+    method, headers: { 'APP-KEY': authToken },
   }).then(resolveJsonOrRejectWithError);
 }
 
@@ -70,9 +70,9 @@ export function postAuthorized(path) {
   const url = params => apiResourceUrl(formatPattern(path, params));
 
   return (authToken, params = {}, body) => fetch(url(params), {
-    headers: {'APP-KEY': authToken},
+    headers: { 'APP-KEY': authToken },
     method: 'POST',
-    body: JSON.stringify(body)
+    body: JSON.stringify(body),
   }).then(resolveJsonOrRejectWithError);
 }
 
@@ -80,9 +80,9 @@ export function putAuthorized(path) {
   const url = params => apiResourceUrl(formatPattern(path, params));
 
   return (authToken, params = {}, body) => fetch(url(params), {
-    headers: {'APP-KEY': authToken},
+    headers: { 'APP-KEY': authToken },
     method: 'PUT',
-    body: JSON.stringify(body)
+    body: JSON.stringify(body),
   }).then(resolveJsonOrRejectWithError);
 }
 
@@ -90,16 +90,16 @@ export function patchAuthorized(path) {
   const url = params => apiResourceUrl(formatPattern(path, params));
 
   return (authToken, params = {}, body) => fetch(url(params), {
-    headers: {'APP-KEY': authToken},
+    headers: { 'APP-KEY': authToken },
     method: 'PATCH',
-    body: JSON.stringify(body)
+    body: JSON.stringify(body),
   }).then(resolveJsonOrRejectWithError);
 }
 
 export function deleteAuthorized(path) {
   const url = params => apiResourceUrl(formatPattern(path, params));
   return (authToken, params = {}) => fetch(url(params), {
-    headers: {'APP-KEY': authToken},
-    method: 'DELETE'
+    headers: { 'APP-KEY': authToken },
+    method: 'DELETE',
   });
 }

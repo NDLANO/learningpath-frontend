@@ -6,7 +6,7 @@ import { stateToHTML } from 'draft-js-export-html';
 
 import {
   updateLearningPathStep,
-  createLearningPathStep
+  createLearningPathStep,
 } from '../learningPathStepActions';
 
 export function EditLearningPathStep(props, { lang: language }) {
@@ -21,9 +21,9 @@ export function EditLearningPathStep(props, { lang: language }) {
     const toSave = Object.assign({}, step, {
       type: values.type,
       showTitle: values.showTitle,
-      title: [{title: values.title, language}],
-      description: [{description: descriptionHTML, language}],
-      embedContent: values.url ? [{url: values.url, language}] : [],
+      title: [{ title: values.title, language }],
+      description: [{ description: descriptionHTML, language }],
+      embedContent: values.url ? [{ url: values.url, language }] : [],
     });
     return saveLearningPathStep(learningPathId, toSave);
   };
@@ -50,7 +50,7 @@ EditLearningPathStep.propTypes = {
 };
 
 EditLearningPathStep.contextTypes = {
-  lang: PropTypes.string.isRequired
+  lang: PropTypes.string.isRequired,
 };
 
 export const mapStateToProps = state => assign({}, state, {

@@ -16,14 +16,14 @@ class LearningPathStep extends React.Component {
     super(props);
 
     this.state = {
-      displayCopyPath: false
+      displayCopyPath: false,
     };
     this.onCopyLearningPathClick = this.onCopyLearningPathClick.bind(this);
   }
 
   onCopyLearningPathClick() {
     this.setState({
-      displayCopyPath: true
+      displayCopyPath: true,
     });
   }
 
@@ -34,7 +34,7 @@ class LearningPathStep extends React.Component {
     const stepDescription = descriptionI18N(learningPathStep, lang, true);
     const oembedContent = oembedContentI18N(learningPathStep, lang, true);
     const editStepTarget = `/learningpaths/${learningPath.id}/step/${learningPathStep.id}/edit`;
-    let onLightboxClose = () => this.setState({displayCopyPath: false});
+    let onLightboxClose = () => this.setState({ displayCopyPath: false });
     const onCopy = () => {
       copyPath(learningPath, lang);
       onLightboxClose();
@@ -47,14 +47,14 @@ class LearningPathStep extends React.Component {
       );
     return (
       <main className="two-column_col two-column_col--white-bg">
-        <Helmet title={polyglot.t('htmlTitleTemplates.learningPathStep', {title: stepTitle || ''})} />
+        <Helmet title={polyglot.t('htmlTitleTemplates.learningPathStep', { title: stepTitle || '' })} />
         <div className="learning-step">
           {learningPathStep.showTitle ? (
             <div className="learning-step_hd">
               <h1 className="learning-step_title">{stepTitle}</h1>
             </div>
           ) : null}
-          <div className="learning-step_bd" dangerouslySetInnerHTML={{__html: stepDescription}} />
+          <div className="learning-step_bd" dangerouslySetInnerHTML={{ __html: stepDescription }} />
         </div>
         <Oembed oembedContent={oembedContent} />
         {authenticated ? edit : null}
@@ -74,7 +74,7 @@ LearningPathStep.propTypes = {
 };
 
 LearningPathStep.contextTypes = {
-  lang: PropTypes.string.isRequired
+  lang: PropTypes.string.isRequired,
 };
 
 const mapDispatchToProps = {
@@ -82,7 +82,7 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = (state) => Object.assign({}, state, {
-  authenticated: state.authenticated
+  authenticated: state.authenticated,
 });
 
 

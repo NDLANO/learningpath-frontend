@@ -10,25 +10,25 @@ const phrases = {
       oldest: 'Eldste',
       longest: 'Lengste',
       shortest: 'Korteste',
-      title: 'Alfabetisk'
-    }
+      title: 'Alfabetisk',
+    },
   },
   loginFailure: {
     errorMessage: 'Beklager. Innlogging feilet.',
-    loginLink: 'Logg inn'
+    loginLink: 'Logg inn',
   },
   loginProviders: {
-    description: 'Logg inn i NDLA med'
+    description: 'Logg inn i NDLA med',
   },
   logo: {
-    altText: 'Nasjonal digital læringsarena'
+    altText: 'Nasjonal digital læringsarena',
   },
   myPage: {
     order: {
       title: 'Alfabetisk',
       newest: 'Nyeste',
       oldest: 'Eldste',
-      status: 'Publisert'
+      status: 'Publisert',
     },
     pageHeader: 'Mine læringsstier',
     newBtn: 'Opprett ny læringssti',
@@ -38,18 +38,18 @@ const phrases = {
       statusValue: {
         PRIVATE: 'Privat',
         PUBLISHED: 'Søkbar',
-        NOT_LISTED: 'Åpen'
-      }
-    }
+        NOT_LISTED: 'Åpen',
+      },
+    },
   },
   pathDropDown: {
     publish: 'Publiser',
     unpublish: 'Gjør privat',
     delete: 'Slett',
-    makeCopy: 'Lag kopi'
+    makeCopy: 'Lag kopi',
   },
   requireAuthentication: {
-    errorMessage: 'Denne siden krever innlogging.'
+    errorMessage: 'Denne siden krever innlogging.',
   },
   welcomePage: {
     placeholder: 'Søk etter læringsstier',
@@ -65,7 +65,7 @@ const phrases = {
     Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.`,
     feature2Content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
     Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-    Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.`
+    Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.`,
   },
   learningPath: {
     pageName: 'Læringstidetaljer',
@@ -91,8 +91,8 @@ const phrases = {
       choseImage: 'Bruk bildet',
       imageInformation: 'Bildet blir synlig i søk på læringssti.',
       imageSearchTotalCount: 'Søk på "%{textQuery}" ga %{totalCount} resulater',
-      imageSearchOneTotalCount: 'Søk på "%{textQuery}" ga 1 resulat'
-    }
+      imageSearchOneTotalCount: 'Søk på "%{textQuery}" ga 1 resulat',
+    },
   },
   editPage: {
     learningpathShortDescriptionTitle: 'Introduksjon',
@@ -106,7 +106,7 @@ const phrases = {
     saveDraft: 'Lagre som utkast',
     saveAndPublish: 'Lagre og publiser',
     edit: 'Endre detaljer',
-    publish: 'Publiser'
+    publish: 'Publiser',
   },
   editPathStep: {
     urlLabel: 'Lim inn lenke (URL) fra ndla.no eller youtube.com',
@@ -116,10 +116,10 @@ const phrases = {
       multimedia: 'Multimedia',
       quiz: 'Quiz',
       task: 'Oppgave',
-      summary: 'Oppsummering'
+      summary: 'Oppsummering',
     },
     validation: {
-      oneOfDescriptionOrUrlIsRequired: 'Enten Beskrivelse eller Url feltet må fylles ut.'
+      oneOfDescriptionOrUrlIsRequired: 'Enten Beskrivelse eller Url feltet må fylles ut.',
     },
     mediatypeTitle: 'Velg innholdstype',
     mediatypeInformation: 'Hvilket type innhold skal læringssteget inneholde?',
@@ -127,18 +127,18 @@ const phrases = {
     urlPlaceholder: 'Lim inn lenke',
     stepDescriptionPlaceholder: 'Skriv en beskrivelse her',
     titlePlaceHolder: 'Skriv en tittel her',
-    previewOembed: 'Forhåndsvis hele artikkelen'
+    previewOembed: 'Forhåndsvis hele artikkelen',
   },
   sortSteps: {
     sortOrDelete: 'Sorter eller slett læringssteg',
     finish: 'Lagre sortering',
-    cancel: 'Avbryt'
+    cancel: 'Avbryt',
   },
   siteNav: {
     login: 'Logg inn',
     search: 'Finn læringssti',
     myPage: 'Mine læringsstier',
-    logout: 'Logg ut %{name}'
+    logout: 'Logg ut %{name}',
   },
   footer: {
     aboutNDLA: 'Om NDLA',
@@ -153,7 +153,7 @@ const phrases = {
   duration: {
     zero: 'Ukjent lengde',
     hours: '%{smart_count} time |||| %{smart_count} timer',
-    minutes: '%{smart_count} minutt |||| %{smart_count} minutter'
+    minutes: '%{smart_count} minutt |||| %{smart_count} minutter',
   },
   createLearningPath: {
     createdMsg: 'Lagret OK',
@@ -162,7 +162,7 @@ const phrases = {
     description: 'Beskrivelse',
     descriptionPlaceholder: 'Skriv en kort beskrivelse av læringsstien.',
     descriptionMaxLength: 'Max 150 tegn',
-    createButton: 'Opprett ny læringssti'
+    createButton: 'Opprett ny læringssti',
   },
   copyLearningPath: {
     makeCopy: 'Lag kopi',
@@ -171,15 +171,15 @@ const phrases = {
     abortCopy: 'Avbryt',
     copyTitle: 'Kopier annens læringssti',
     copy: 'KOPI: ',
-    copiedMessage: 'Læringssti kopiert.'
+    copiedMessage: 'Læringssti kopiert.',
   },
   learningPathStep: {
     messages: {
       delete: {
         title: 'Slettet læringssteg',
         action: 'Angre sletting',
-      }
-    }
+      },
+    },
   },
   updateLearningPath: {
     updatedMsg: 'Lagret OK',
@@ -187,13 +187,13 @@ const phrases = {
   tagInput: {
     createNew: 'Opprett ny tag',
     emptyList: 'Det er ingen tagger i denne listen',
-    emptyFilter: 'Fant ingen passende tagger'
+    emptyFilter: 'Fant ingen passende tagger',
   },
   updateLearningPathStatus: {
-    updateStatusMsg: 'Oppdatert status OK'
+    updateStatusMsg: 'Oppdatert status OK',
   },
   htmlTitleTemplates: {
-    learningPathStep: '%{title} (Læringssti fra NDLA.no)'
+    learningPathStep: '%{title} (Læringssti fra NDLA.no)',
   },
   validation: {
     required: 'Feltet er påkrevd.',
@@ -208,8 +208,8 @@ const phrases = {
     duration: 'Mangler varighet.',
     durationMinus: 'Varighet må være større en null.',
     durationNaN: 'Ugyldig variget. Tast inn antall timer.',
-    durationDecimals: 'Antall desimaler er maks to.'
-  }
+    durationDecimals: 'Antall desimaler er maks to.',
+  },
 };
 
 export default phrases;

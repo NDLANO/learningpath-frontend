@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import Icon from '../../common/Icon';
 import classNames from 'classnames';
 
-export default function LearningPathStepIcon({learningPathStepType, isCircle}) {
+export default function LearningPathStepIcon({ learningPathStepType, isCircle }) {
   const iconClassName = (type) => {
     switch (type) {
       case 'INTRODUCTION':
@@ -20,7 +20,7 @@ export default function LearningPathStepIcon({learningPathStepType, isCircle}) {
   };
 
   const divClassName = () => classNames({
-    'step-nav_circle': isCircle
+    'step-nav_circle': isCircle,
   });
 
   return (
@@ -32,5 +32,5 @@ export default function LearningPathStepIcon({learningPathStepType, isCircle}) {
 
 LearningPathStepIcon.propTypes = {
   learningPathStepType: PropTypes.string.isRequired,
-  isCircle: PropTypes.bool.isRequired
+  isCircle: PropTypes.bool.isRequired,
 };

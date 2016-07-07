@@ -8,7 +8,7 @@ import { LearningPathToC } from '../LearningPathToC';
 
 test('component/LearningPathToC', t => {
   const component = shallow(<LearningPathToC learningPath={learningPath} />,
-      {context: { lang: 'nb' }});
+      { context: { lang: 'nb' } });
 
   const links = component.find(Link);
 

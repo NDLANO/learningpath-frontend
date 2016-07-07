@@ -31,18 +31,18 @@ export function createEmptyLearningPath() {
     description: [],
     learningsteps: [],
     duration: 1, // https://support.knowit.no/support/browse/NDLA-198
-    coverPhotoMetaUrl: ''
+    coverPhotoMetaUrl: '',
   });
 }
 
 export function createLearningPath(learningPath) {
   return (dispatch, getState) => new Promise((resolve, reject) => createPath(getState().authToken, { }, learningPath)
     .then(lpath => {
-      dispatch(addMessage({message: polyglot.t('createLearningPath.createdMsg')}));
+      dispatch(addMessage({ message: polyglot.t('createLearningPath.createdMsg') }));
       dispatch(setLearningPath(lpath));
       dispatch(createEmptyLearningPathStep());
       dispatch(routerActions.push({
-        pathname: `/learningpaths/${lpath.id}/step/new`
+        pathname: `/learningpaths/${lpath.id}/step/new`,
       }));
       resolve();
     })
@@ -56,10 +56,10 @@ export function createLearningPath(learningPath) {
 export function updateLearningPath(pathId, learningPath, redirectUrl = `/learningpaths/${pathId}`) {
   return (dispatch, getState) => new Promise((resolve, reject) => updatePath(getState().authToken, { pathId }, learningPath)
     .then(lpath => {
-      dispatch(addMessage({message: polyglot.t('updateLearningPath.updatedMsg')}));
+      dispatch(addMessage({ message: polyglot.t('updateLearningPath.updatedMsg') }));
       dispatch(setLearningPath(lpath));
       dispatch(routerActions.push({
-        pathname: redirectUrl
+        pathname: redirectUrl,
       }));
       resolve();
     })
@@ -79,16 +79,16 @@ export function copyLearningPath(learningPath, locale) {
   const copiedTitle = polyglot.t('copyLearningPath.copy').concat(titleI18N(learningPath, locale, true).toString());
   const clonedLearningPathTitle = {
     title: [
-      {title: copiedTitle, language: locale}
-    ]
+      { title: copiedTitle, language: locale },
+    ],
   };
 
-  return (dispatch, getState) => new Promise((resolve, reject) => copyPath(getState().authToken, {copyfrom: learningPath.id}, clonedLearningPathTitle)
+  return (dispatch, getState) => new Promise((resolve, reject) => copyPath(getState().authToken, { copyfrom: learningPath.id }, clonedLearningPathTitle)
     .then(lpath => {
-      dispatch(addMessage({message: polyglot.t('copyLearningPath.copiedMessage')}));
+      dispatch(addMessage({ message: polyglot.t('copyLearningPath.copiedMessage') }));
       dispatch(setLearningPath(lpath));
       dispatch(routerActions.push({
-        pathname: `/learningpaths/${lpath.id}`
+        pathname: `/learningpaths/${lpath.id}`,
       }));
       resolve();
     })

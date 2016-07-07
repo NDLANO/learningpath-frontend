@@ -23,7 +23,7 @@ test('actions/updateStepSequenceNumber sucessfully', t => {
   };
 
   const body = {
-    seqNo: 3
+    seqNo: 3,
   };
 
   const learningStepReply = Object.assign({}, body, {});
@@ -35,7 +35,7 @@ test('actions/updateStepSequenceNumber sucessfully', t => {
   // fetchLearningPath
   nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get(`/learningpaths/${pathId}`)
-    .reply(200, {id: pathId});
+    .reply(200, { id: pathId });
 
   const store = mockStore({ authToken });
 
@@ -57,25 +57,25 @@ test('actions/updateStepSequenceNumber access denied', t => {
   };
 
   const body = {
-    seqNo: 3
+    seqNo: 3,
   };
 
   // updateSeqNo
   nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .put(`/learningpaths/${pathId}/learningsteps/${stepId}/seqNo`, body)
-    .reply(403, {message: 'Invalid'});
+    .reply(403, { message: 'Invalid' });
 
   // fetchLearningPath
   nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get(`/learningpaths/${pathId}`)
-    .reply(200, {id: pathId});
+    .reply(200, { id: pathId });
 
   const store = mockStore({ authToken });
 
   store.dispatch(updateStepSequenceNumber(pathId, stepId, seqNo))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        applicationError(payload403invalid())
+        applicationError(payload403invalid()),
       ]);
       t.doesNotThrow(() => nock.isDone());
 

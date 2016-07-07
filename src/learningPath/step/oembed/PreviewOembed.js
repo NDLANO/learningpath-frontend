@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import polyglot from '../../../i18n';
 import Oembed from './Oembed';
@@ -7,29 +7,29 @@ export default class PreviewOembed extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      previewOembed: false
+      previewOembed: false,
     };
     this.onPreviewClick = this.onPreviewClick.bind(this);
   }
 
   componentWillReceiveProps() {
-    this.setState({previewOembed: false});
+    this.setState({ previewOembed: false });
   }
 
   onPreviewClick(evt) {
-    this.setState({previewOembed: true});
+    this.setState({ previewOembed: true });
     evt.preventDefault();
   }
 
   render() {
-    const {content} = this.props;
+    const { content } = this.props;
     if (!content) {
       return null;
     }
 
     let frameClasses = classNames({
       learningsource__frame: true,
-      'learningsource__frame--hidden': !this.state.previewOembed
+      'learningsource__frame--hidden': !this.state.previewOembed,
     });
 
     let previewButton = !this.state.previewOembed
@@ -48,5 +48,5 @@ export default class PreviewOembed extends React.Component {
 }
 
 PreviewOembed.propTypes = {
-  content: PropTypes.object
+  content: PropTypes.object,
 };

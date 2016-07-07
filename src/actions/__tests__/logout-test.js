@@ -27,7 +27,7 @@ test('actions/logout', t => {
   store.dispatch(actions.logout())
     .then(() => {
       t.deepEqual(store.getActions(), [
-        { type: 'LOGOUT', payload: undefined }
+        { type: 'LOGOUT', payload: undefined },
       ]);
 
       t.doesNotThrow(() => apiMock.done());
@@ -44,13 +44,13 @@ test('actions/logout access denied', t => {
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get('/auth/logout')
-    .reply(403, {message: 'Invalid'});
+    .reply(403, { message: 'Invalid' });
 
   const store = mockStore({ authToken });
   store.dispatch(actions.logout())
     .then(() => {
       t.deepEqual(store.getActions(), [
-        applicationError(payload403invalid())
+        applicationError(payload403invalid()),
       ]);
 
       t.doesNotThrow(() => apiMock.done());

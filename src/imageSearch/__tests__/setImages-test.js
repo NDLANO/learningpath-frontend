@@ -1,7 +1,7 @@
 
 import test from 'tape';
 import { isFSA } from 'flux-standard-action';
-import {setImages} from '../imageActions';
+import { setImages } from '../imageActions';
 
 
 test('actions/setImages', (t) => {
@@ -9,8 +9,8 @@ test('actions/setImages', (t) => {
     {
       page: 1, 'page-size': 16, totalCount: 2,
       results: [
-        { id: '12345' }, { id: '67890' }
-      ]
+        { id: '12345' }, { id: '67890' },
+      ],
     }
   );
 
@@ -21,8 +21,8 @@ test('actions/setImages', (t) => {
     {
       page: 1, 'page-size': 16, totalCount: 2,
       results: [
-        { id: '12345' }, { id: '67890' }
-      ]
+        { id: '12345' }, { id: '67890' },
+      ],
     }
 );
   t.notOk(actual.error);

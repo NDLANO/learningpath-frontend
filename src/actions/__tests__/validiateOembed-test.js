@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import nock from 'nock';
 
 import actions from '..';
-import {removeOembedPreview, setOembedPreview} from '../validateOembed';
+import { removeOembedPreview, setOembedPreview } from '../validateOembed';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
@@ -17,7 +17,7 @@ test('actions/validiateOembed valid url', t => {
     nock.cleanAll();
   };
   const url = 'https://www.youtube.com/watch?v=BTqu9iMiPIU';
-  const oEmbedReply = {url, language: 'nb'};
+  const oEmbedReply = { url, language: 'nb' };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get(`/oembed/?url=${encodeURIComponent(url)}`)
@@ -47,7 +47,7 @@ test('actions/validiateOembed invalid url', t => {
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get(`/oembed/?url=${url}`)
-    .reply(501, {type: 'introduction', title: 'sup'});
+    .reply(501, { type: 'introduction', title: 'sup' });
 
   const store = mockStore({ authToken });
 
@@ -59,7 +59,7 @@ test('actions/validiateOembed invalid url', t => {
     })
     .catch((error) => {
       t.doesNotThrow(() => apiMock.done());
-      t.deepEqual({ url: 'feil'}, error);
+      t.deepEqual({ url: 'feil' }, error);
       done();
     });
 });
@@ -73,7 +73,7 @@ test('actions/validiateOembed', t => {
 
   store.dispatch(actions.validateOembed(''));
   t.deepEqual(store.getActions(), [
-    removeOembedPreview()
+    removeOembedPreview(),
   ]);
 
   done();

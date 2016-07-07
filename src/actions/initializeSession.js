@@ -6,7 +6,7 @@ export default function initializeSession(authToken) {
   return dispatch => fetchAboutMe(authToken).then(user => [
     setAuthenticated(true),
     setAuthToken(authToken),
-    setUserData(user)
+    setUserData(user),
   ].map(dispatch))
   .catch(err => dispatch(applicationError(err)));
 }

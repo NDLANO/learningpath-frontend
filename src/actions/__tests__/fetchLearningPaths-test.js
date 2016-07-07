@@ -20,7 +20,7 @@ test('actions/fetchLearningPaths', t => {
       totalCount: 2,
       page: 3,
       pageSize: 25,
-      results: [{id: '123'}, {id: '456'}]
+      results: [{ id: '123' }, { id: '456' }],
     });
 
   const store = mockStore({});
@@ -29,8 +29,8 @@ test('actions/fetchLearningPaths', t => {
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.setLearningPathsTotalCount(2),
-        actions.setLearningPaths([{id: '123'}, {id: '456'}]),
-        actions.changeLearningPathQuery({page: 3, pageSize: 25})
+        actions.setLearningPaths([{ id: '123' }, { id: '456' }]),
+        actions.changeLearningPathQuery({ page: 3, pageSize: 25 }),
       ]);
 
       t.doesNotThrow(() => apiMock.done());
@@ -48,12 +48,12 @@ test('actions/fetchLearningPaths with query', t => {
 
   const apiMock = nock('http://ndla-api')
     .get('/learningpaths')
-    .query({query: 'foobar', page: 4, 'page-size': 15, sort: 'relevance'})
+    .query({ query: 'foobar', page: 4, 'page-size': 15, sort: 'relevance' })
     .reply(200, {
       totalCount: 400,
       page: 4,
       pageSize: 15,
-      results: [{id: '123'}, {id: '456'}]
+      results: [{ id: '123' }, { id: '456' }],
     });
 
   const initialState = {
@@ -61,8 +61,8 @@ test('actions/fetchLearningPaths with query', t => {
       query: 'foobar',
       sort: 'relevance',
       page: 4,
-      pageSize: 15 // OBS! not page-size
-    }
+      pageSize: 15, // OBS! not page-size
+    },
   };
 
   const store = mockStore(initialState);
@@ -71,8 +71,8 @@ test('actions/fetchLearningPaths with query', t => {
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.setLearningPathsTotalCount(400),
-        actions.setLearningPaths([{id: '123'}, {id: '456'}]),
-        actions.changeLearningPathQuery({page: 4, pageSize: 15})
+        actions.setLearningPaths([{ id: '123' }, { id: '456' }]),
+        actions.changeLearningPathQuery({ page: 4, pageSize: 15 }),
       ]);
 
       t.doesNotThrow(() => apiMock.done());
@@ -96,14 +96,14 @@ test('actions/fetchLearningPaths with query without search term', t => {
 
   const apiMock = nock('http://ndla-api')
     .get('/learningpaths')
-    .query({page, sort, 'page-size': pageSize /* OBS! no query */})
+    .query({ page, sort, 'page-size': pageSize /* OBS! no query */})
     .reply(200, {
       page, pageSize, totalCount: 400,
-      results: [{id: '123'}, {id: '456'}]
+      results: [{ id: '123' }, { id: '456' }],
     });
 
   const initialState = {
-    learningPathQuery: { sort, page, pageSize, query: '' }
+    learningPathQuery: { sort, page, pageSize, query: '' },
   };
 
   const store = mockStore(initialState);
@@ -112,8 +112,8 @@ test('actions/fetchLearningPaths with query without search term', t => {
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.setLearningPathsTotalCount(400),
-        actions.setLearningPaths([{id: '123'}, {id: '456'}]),
-        actions.changeLearningPathQuery({page, pageSize})
+        actions.setLearningPaths([{ id: '123' }, { id: '456' }]),
+        actions.changeLearningPathQuery({ page, pageSize }),
       ]);
 
       t.doesNotThrow(() => apiMock.done());

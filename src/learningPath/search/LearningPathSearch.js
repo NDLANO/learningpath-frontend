@@ -27,7 +27,7 @@ class LearningPathSearch extends Component {
     const { learningPaths, query, lastPage, location: { pathname }, pushRoute } = this.props;
     let { page } = query;
     const navigateTo = (q) => {
-      pushRoute({pathname, query: q});
+      pushRoute({ pathname, query: q });
     };
 
     const submitSearchQuery = q => navigateTo(Object.assign({}, query, { query: q, page: 1, tag: '' }));
@@ -77,7 +77,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   fetchLearningPaths,
-  pushRoute: (route) => routerActions.push(route)
+  pushRoute: (route) => routerActions.push(route),
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(LearningPathSearch);

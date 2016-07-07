@@ -11,7 +11,7 @@ export default class Oembed extends React.Component {
     super(props);
     this.state = {
       isNDLAResource: false,
-      listeningToResize: false
+      listeningToResize: false,
     };
 
     this.handleResizeMessage = this.handleResizeMessage.bind(this);
@@ -33,11 +33,11 @@ export default class Oembed extends React.Component {
     return ReactDOM.findDOMNode(this).children[0];
   }
 
-  handleIframeResizing({oembedContent: {url}}) {
+  handleIframeResizing({ oembedContent: { url } }) {
     if (urlIsNDLA(url)) {
-      this.setState({isNDLAResource: true}, this.enableIframeResizing);
+      this.setState({ isNDLAResource: true }, this.enableIframeResizing);
     } else {
-      this.setState({isNDLAResource: false}, this.disableIframeResizing);
+      this.setState({ isNDLAResource: false }, this.disableIframeResizing);
     }
   }
 
@@ -73,24 +73,24 @@ export default class Oembed extends React.Component {
   }
 
   render() {
-    const {oembedContent: {html}} = this.props;
+    const { oembedContent: { html } } = this.props;
 
     return (
       <div
         className={classNames({
           'learning-step': true,
-          'learning-step--without-dimensions': this.state.isNDLAResource
+          'learning-step--without-dimensions': this.state.isNDLAResource,
         })}
-        dangerouslySetInnerHTML={{__html: html}}
+        dangerouslySetInnerHTML={{ __html: html }}
       />
     );
   }
 }
 
 Oembed.propTypes = {
-  oembedContent: PropTypes.object.isRequired
+  oembedContent: PropTypes.object.isRequired,
 };
 
 Oembed.defaultProps = {
-  oembedContent: {}
+  oembedContent: {},
 };

@@ -20,16 +20,16 @@ test('actions/initializeSession', (t) => {
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get('/auth/me')
-    .reply(200, {first_name: 'Alice', email: 'alice@example.com'});
+    .reply(200, { first_name: 'Alice', email: 'alice@example.com' });
 
-  const store = mockStore({user: {}, authToken: ''});
+  const store = mockStore({ user: {}, authToken: '' });
 
   store.dispatch(actions.initializeSession(authToken))
     .then(() => {
       t.deepEqual(store.getActions(), [
         actions.setAuthenticated(true),
         actions.setAuthToken(authToken),
-        actions.setUserData({first_name: 'Alice', email: 'alice@example.com'})
+        actions.setUserData({ first_name: 'Alice', email: 'alice@example.com' }),
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();
@@ -45,14 +45,14 @@ test('actions/initializeSession access denied', (t) => {
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get('/auth/me')
-    .reply(403, {message: 'Invalid'});
+    .reply(403, { message: 'Invalid' });
 
-  const store = mockStore({user: {}, authToken: ''});
+  const store = mockStore({ user: {}, authToken: '' });
 
   store.dispatch(actions.initializeSession(authToken))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        applicationError(payload403invalid())
+        applicationError(payload403invalid()),
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();

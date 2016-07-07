@@ -19,7 +19,7 @@ export class LearningPath extends Component {
   }
 
   render() {
-    const { learningPath, isTableOfContentOpen, params: { stepId }, sortLearningSteps, main} = this.props;
+    const { learningPath, isTableOfContentOpen, params: { stepId }, sortLearningSteps, main } = this.props;
     const { lang } = this.context;
     const saveButtons = defined(this.props.saveButtons, null);
     const addStepButton = defined(this.props.addStepButton, null);
@@ -65,7 +65,7 @@ LearningPath.propTypes = {
   main: PropTypes.object,
   params: PropTypes.shape({
     pathId: PropTypes.string.isRequired,
-    stepId: PropTypes.string
+    stepId: PropTypes.string,
   }).isRequired,
   sortLearningSteps: PropTypes.object,
   isTableOfContentOpen: PropTypes.bool.isRequired,
@@ -73,7 +73,7 @@ LearningPath.propTypes = {
 };
 
 LearningPath.contextTypes = {
-  lang: PropTypes.string.isRequired
+  lang: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, state, {

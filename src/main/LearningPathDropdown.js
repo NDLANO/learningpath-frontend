@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import polyglot from '../i18n';
 import Icon from '../common/Icon';
 
-export function LearningPathDropdown({onSelect, learningPath}) {
+export function LearningPathDropdown({ onSelect, learningPath }) {
   const makeOnClick = (actionType) => (evt) => {
     evt.preventDefault();
     onSelect(actionType, learningPath);
@@ -39,5 +39,5 @@ export function LearningPathDropdown({onSelect, learningPath}) {
 
 LearningPathDropdown.propTypes = {
   onSelect: PropTypes.func.isRequired,
-  learningPath: PropTypes.object.isRequired
+  learningPath: PropTypes.object.isRequired,
 };

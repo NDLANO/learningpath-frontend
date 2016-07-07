@@ -6,7 +6,7 @@ export default class SearchForm extends Component {
     super(props);
     this.state = {
       query: props.query,
-      sort: props.sort
+      sort: props.sort,
     };
     this.handleSortChange = this.handleSortChange.bind(this);
     this.handleQueryChange = this.handleQueryChange.bind(this);
@@ -14,13 +14,13 @@ export default class SearchForm extends Component {
   }
 
   handleSortChange(evt) {
-    this.setState({sort: evt.target.value}, () => {
+    this.setState({ sort: evt.target.value }, () => {
       this.props.onSortOrderChange(this.state.sort);
     });
   }
 
   handleQueryChange(evt) {
-    this.setState({query: evt.target.value});
+    this.setState({ query: evt.target.value });
   }
 
   handleSubmit(evt) {
@@ -61,9 +61,9 @@ SearchForm.propTypes = {
   sort: PropTypes.string,
   query: PropTypes.string,
   onSearchQuerySubmit: PropTypes.func.isRequired,
-  onSortOrderChange: PropTypes.func.isRequired
+  onSortOrderChange: PropTypes.func.isRequired,
 };
 
 SearchForm.defaultProps = {
-  sort: '-lastUpdated', query: ''
+  sort: '-lastUpdated', query: '',
 };

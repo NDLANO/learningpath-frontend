@@ -7,7 +7,7 @@ import { configureLocale, isValidLocale } from './locale/configureLocale';
 import { defaultSearchQuery } from './middleware/searchQuery';
 import configureStore from './configureStore';
 import configureRoutes from './main/routes';
-import {defaultApiKey} from './sources/helpers';
+import { defaultApiKey } from './sources/helpers';
 import { createHistory } from 'history';
 
 
@@ -15,7 +15,7 @@ function configureBrowserHistory(path) {
   if (isValidLocale(path)) {
     const basename = `/${path}/`;
     return useRouterHistory(createHistory)({
-      basename
+      basename,
     });
   }
   return useRouterHistory(createHistory)();

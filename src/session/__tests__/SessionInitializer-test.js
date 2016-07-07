@@ -18,7 +18,7 @@ test('component/SessionInitializer', t => {
 
   const params = { authToken: '12345' };
 
-  renderComponent({dispatch, params});
+  renderComponent({ dispatch, params });
 
   p.then(() => {
     t.equals(dispatch.callCount, 2, 'called twice');
@@ -36,7 +36,7 @@ test('component/SessionInitializer', t => {
 test('component/SessionInitializer without authToken', t => {
   const dispatch = sinon.spy(() => Promise.resolve());
 
-  renderComponent({dispatch, params: {}});
+  renderComponent({ dispatch, params: {} });
 
   t.notOk(dispatch.called);
   t.end();

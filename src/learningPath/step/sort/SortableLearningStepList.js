@@ -10,13 +10,13 @@ import { titleI18N } from '../../../util/i18nFieldFinder';
 import {
   updateStepSequenceNumber,
   deleteLearningPathStep,
-  sortLearningPathSteps
+  sortLearningPathSteps,
 } from '../learningPathStepActions';
 
 class SortableLearningStepList extends Component {
   constructor(props) {
     super(props);
-    this.state = {SortableItem: createSortableItem()};
+    this.state = { SortableItem: createSortableItem() };
     this.moveLearningStep = this.moveLearningStep.bind(this);
     this.findLearningStep = this.findLearningStep.bind(this);
   }
@@ -36,7 +36,7 @@ class SortableLearningStepList extends Component {
 
     return {
       step,
-      index: learningsteps.indexOf(step)
+      index: learningsteps.indexOf(step),
     };
   }
 
@@ -85,7 +85,7 @@ const mapStateToProps = state => state;
 export const mapDispatchToProps = {
   sortSteps: sortLearningPathSteps,
   localUpdateStepSequenceNumber: updateStepSequenceNumber,
-  deleteStep: deleteLearningPathStep
+  deleteStep: deleteLearningPathStep,
 };
 
 export default flow(
@@ -98,9 +98,9 @@ SortableLearningStepList.propTypes = {
   localUpdateStepSequenceNumber: PropTypes.func.isRequired,
   deleteStep: PropTypes.func.isRequired,
   learningPathId: PropTypes.number,
-  learningsteps: PropTypes.array
+  learningsteps: PropTypes.array,
 };
 
 SortableLearningStepList.contextTypes = {
-  lang: PropTypes.string.isRequired
+  lang: PropTypes.string.isRequired,
 };

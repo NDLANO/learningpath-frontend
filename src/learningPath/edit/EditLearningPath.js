@@ -16,11 +16,11 @@ class EditLearningPath extends Component {
   render() {
     const { learningPath, localFetchImages, localUpdateLearningPath, localFetchImage, lang: language, tags } = this.props;
     const handleSubmit = values => localUpdateLearningPath(learningPath.id, {
-      title: [{title: values.title, language}],
-      description: [{description: values.description, language}],
+      title: [{ title: values.title, language }],
+      description: [{ description: values.description, language }],
       revision: learningPath.revision,
       duration: (values.duration.replace(/,/g, '.')) * 60,
-      tags: [{tags: values.tags, language }],
+      tags: [{ tags: values.tags, language }],
       coverPhotoMetaUrl: !isEmpty(values.coverPhotoMetaUrl) ? values.coverPhotoMetaUrl : undefined,
     });
 
@@ -44,7 +44,7 @@ EditLearningPath.propTypes = {
   fetchLearningPathTags: PropTypes.func.isRequired,
   localFetchImages: PropTypes.func.isRequired,
   localFetchImage: PropTypes.func.isRequired,
-  localFetchImageWithMetaUrl: PropTypes.func.isRequired
+  localFetchImageWithMetaUrl: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, state, {

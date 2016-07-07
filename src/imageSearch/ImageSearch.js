@@ -17,7 +17,7 @@ export function Images(props) {
     selectedImage,
     lastPage,
     totalCount,
-    localSetSavedImage
+    localSetSavedImage,
   } = props;
 
   if (!images) {
@@ -66,11 +66,11 @@ Images.propTypes = {
   selectedImage: PropTypes.object,
   lastPage: PropTypes.number.isRequired,
   totalCount: PropTypes.number.isRequired,
-  localSetSavedImage: PropTypes.func.isRequired
+  localSetSavedImage: PropTypes.func.isRequired,
 };
 
 Images.contextTypes = {
-  lang: PropTypes.string.isRequired
+  lang: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => Object.assign({}, state, {
@@ -78,11 +78,11 @@ const mapStateToProps = (state) => Object.assign({}, state, {
   selectedImage: state.imageSearch.selectedImage,
   lastPage: Math.ceil(state.imageSearch.images.totalCount / (state.imageSearch.imageSearchQuery['page-size'] || 1)),
   totalCount: get(state, 'imageSearch.images.totalCount', 0),
-  imageSearchQuery: get(state, 'imageSearch.imageSearchQuery', {query: '', page: 1, 'page-size': 16}),
+  imageSearchQuery: get(state, 'imageSearch.imageSearchQuery', { query: '', page: 1, 'page-size': 16 }),
 });
 
 const mapDispatchToProps = {
   localChangeImageSearchQuery: changeImageSearchQuery,
-  localSetSavedImage: setSavedImage
+  localSetSavedImage: setSavedImage,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Images);

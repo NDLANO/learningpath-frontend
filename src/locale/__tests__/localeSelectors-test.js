@@ -4,7 +4,7 @@ import { getLocale } from '../localeSelectors';
 
 test('localeSelectors', (t) => {
   const state = {
-    locale: 'nb'
+    locale: 'nb',
   };
 
   t.equal(getLocale(state), 'nb');

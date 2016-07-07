@@ -7,10 +7,10 @@ export default function LinkPager(props) {
   const { page, lastPage, query, onLinkClick } = props;
   const steps = stepNumbers(page, lastPage);
 
-  const queryToPage = pageNumber => Object.assign({}, query, {page: pageNumber});
+  const queryToPage = pageNumber => Object.assign({}, query, { page: pageNumber });
   const linkToPage = pageNumber => ({
     pathname: '/learningpaths',
-    query: queryToPage(pageNumber)
+    query: queryToPage(pageNumber),
   });
   const handleClickToPage = pageNumber => evt => onLinkClick(evt, queryToPage(pageNumber));
 
@@ -50,9 +50,9 @@ LinkPager.propTypes = {
   page: PropTypes.number.isRequired,
   lastPage: PropTypes.number.isRequired,
   query: PropTypes.object.isRequired,
-  onLinkClick: PropTypes.func
+  onLinkClick: PropTypes.func,
 };
 
 LinkPager.defaultProps = {
-  onLinkClick: () => {}
+  onLinkClick: () => {},
 };

@@ -58,7 +58,7 @@ class LearningPathImage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayImages: false
+      displayImages: false,
     };
   }
 
@@ -68,16 +68,16 @@ class LearningPathImage extends React.Component {
       learningPathTitle,
       fetchImage,
       onChange,
-      savedImage
+      savedImage,
     } = this.props;
 
     const onImageLightboxClose = () => {
-      this.setState({displayImages: false});
+      this.setState({ displayImages: false });
     };
     const onImageLightboxOpen = (evt) => {
       evt.preventDefault();
-      localFetchImages({query: learningPathTitle, 'page-size': 16, page: 1}, true);
-      this.setState({displayImages: true});
+      localFetchImages({ query: learningPathTitle, 'page-size': 16, page: 1 }, true);
+      this.setState({ displayImages: true });
     };
 
     return (
@@ -110,7 +110,7 @@ LearningPathImage.propTypes = {
 };
 
 const mapStateToProps = (state) => Object.assign({}, state, {
-  savedImage: state.imageSearch ? state.imageSearch.savedImage : undefined
+  savedImage: state.imageSearch ? state.imageSearch.savedImage : undefined,
 });
 
 export default connect(mapStateToProps)(LearningPathImage);

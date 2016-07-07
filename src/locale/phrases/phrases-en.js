@@ -10,25 +10,25 @@ const phrases = {
       oldest: 'Oldest',
       longest: 'Longest',
       shortest: 'Shortest',
-      title: 'Alphabetical'
-    }
+      title: 'Alphabetical',
+    },
   },
   loginFailure: {
     errorMessage: 'Sorry. Login failed.',
-    loginLink: 'Log in'
+    loginLink: 'Log in',
   },
   loginProviders: {
-    description: 'Log in with'
+    description: 'Log in with',
   },
   logo: {
-    altText: 'The Norwegian Digital Learning Arena'
+    altText: 'The Norwegian Digital Learning Arena',
   },
   myPage: {
     order: {
       title: 'Alphabetical',
       newest: 'Newest',
       oldest: 'Oldest',
-      status: 'Published'
+      status: 'Published',
     },
     pageHeader: 'My learning paths',
     newBtn: 'Create new learning path',
@@ -38,18 +38,18 @@ const phrases = {
       statusValue: {
         PRIVATE: 'Private',
         PUBLISHED: 'Searchable',
-        NOT_LISTED: 'Open'
-      }
-    }
+        NOT_LISTED: 'Open',
+      },
+    },
   },
   pathDropDown: {
     publish: 'Publish',
     unpublish: 'Make private',
     delete: 'Delete',
-    makeCopy: 'Make copy'
+    makeCopy: 'Make copy',
   },
   requireAuthentication: {
-    errorMessage: 'This page requires you to be logged in.'
+    errorMessage: 'This page requires you to be logged in.',
   },
   welcomePage: {
     placeholder: 'Search for learning paths',
@@ -65,7 +65,7 @@ const phrases = {
     Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.`,
     feature2Content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
     Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-    Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.`
+    Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.`,
   },
   learningPath: {
     pageName: 'Learning path details',
@@ -91,8 +91,8 @@ const phrases = {
       choseImage: 'Use picture',
       imageInformation: 'Picture will be shown in search results.',
       imageSearchTotalCount: 'Search for "%{textQuery}" yielded %{totalCount} results',
-      imageSearchOneTotalCount: 'Search for "%{textQuery}" yielded 1 result'
-    }
+      imageSearchOneTotalCount: 'Search for "%{textQuery}" yielded 1 result',
+    },
   },
   editPage: {
     learningpathShortDescriptionTitle: 'Introduction',
@@ -106,7 +106,7 @@ const phrases = {
     saveDraft: 'Save as draft',
     saveAndPublish: 'Save and publish',
     edit: 'Edit details',
-    publish: 'Publish'
+    publish: 'Publish',
   },
   editPathStep: {
     urlLabel: 'Paste link (URL) from ndla.no or youtube.com',
@@ -116,10 +116,10 @@ const phrases = {
       multimedia: 'Multimedia',
       quiz: 'Quiz',
       task: 'Task',
-      summary: 'Summary'
+      summary: 'Summary',
     },
     validation: {
-      oneOfDescriptionOrUrlIsRequired: 'Either Description and Url must be provided.'
+      oneOfDescriptionOrUrlIsRequired: 'Either Description and Url must be provided.',
     },
     mediatypeTitle: 'Choose content type',
     mediatypeInformation: 'What type of content will the learning step contain?',
@@ -127,18 +127,18 @@ const phrases = {
     urlPlaceholder: 'Paste link',
     stepDescriptionPlaceholder: 'Write a description here',
     titlePlaceHolder: 'Write a title here',
-    previewOembed: 'Preview whole article'
+    previewOembed: 'Preview whole article',
   },
   sortSteps: {
     sortOrDelete: 'Sort or delete learning step',
     finish: 'Save sorting',
-    cancel: 'Cancel'
+    cancel: 'Cancel',
   },
   siteNav: {
     login: 'Log in',
     search: 'Find learning path',
     myPage: 'My learning paths',
-    logout: 'Log out %{name}'
+    logout: 'Log out %{name}',
   },
   footer: {
     aboutNDLA: 'About NDLA',
@@ -153,7 +153,7 @@ const phrases = {
   duration: {
     zero: 'Unknown length',
     hours: '%{smart_count} hour |||| %{smart_count} hours',
-    minutes: '%{smart_count} minute |||| %{smart_count} minutes'
+    minutes: '%{smart_count} minute |||| %{smart_count} minutes',
   },
   createLearningPath: {
     createdMsg: 'Saved OK',
@@ -162,7 +162,7 @@ const phrases = {
     description: 'Description',
     descriptionPlaceholder: 'Write a short description for the learning path.',
     descriptionMaxLength: 'Max 150 characters',
-    createButton: 'Create new learning path'
+    createButton: 'Create new learning path',
   },
   copyLearningPath: {
     makeCopy: 'Make copy',
@@ -171,15 +171,15 @@ const phrases = {
     abortCopy: 'Cancel',
     copyTitle: 'Copy another\'s learning paths',
     copy: 'COPY: ',
-    copiedMessage: 'Learning path was copied.'
+    copiedMessage: 'Learning path was copied.',
   },
   learningPathStep: {
     messages: {
       delete: {
         title: 'Learning step was deleted',
         action: 'Undo',
-      }
-    }
+      },
+    },
   },
   updateLearningPath: {
     updatedMsg: 'Saved OK',
@@ -187,13 +187,13 @@ const phrases = {
   tagInput: {
     createNew: 'Create new tag',
     emptyList: 'No tags available',
-    emptyFilter: 'No matching tags found'
+    emptyFilter: 'No matching tags found',
   },
   updateLearningPathStatus: {
-    updateStatusMsg: 'Status updated'
+    updateStatusMsg: 'Status updated',
   },
   htmlTitleTemplates: {
-    learningPathStep: '%{title} (learning path from NDLA.no)'
+    learningPathStep: '%{title} (learning path from NDLA.no)',
   },
   validation: {
     required: 'The field is required.',
@@ -208,8 +208,8 @@ const phrases = {
     duration: 'Duration required.',
     durationMinus: 'Duration must be bigger then zero.',
     durationNaN: 'Invalid duration. Must be in number of hours.',
-    durationDecimals: 'Max two decimals.'
-  }
+    durationDecimals: 'Max two decimals.',
+  },
 };
 
 export default phrases;

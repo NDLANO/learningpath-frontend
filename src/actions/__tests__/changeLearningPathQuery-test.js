@@ -7,7 +7,7 @@ test('actions/changeLearningPathQuery', (t) => {
   const actual = actions.changeLearningPathQuery({
     query: 'foo',
     page: 2,
-    sort: 'relevance'
+    sort: 'relevance',
   });
 
   t.ok(isFSA(actual), 'FSA compliant action');
@@ -16,7 +16,7 @@ test('actions/changeLearningPathQuery', (t) => {
   t.deepEqual(actual.payload, {
     query: 'foo',
     page: 2,
-    sort: 'relevance'
+    sort: 'relevance',
   });
   t.notOk(actual.error);
 

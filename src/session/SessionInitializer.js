@@ -20,7 +20,7 @@ export class SessionInitializer extends React.Component {
 
 SessionInitializer.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  params: PropTypes.shape({ authToken: PropTypes.string }).isRequired
+  params: PropTypes.shape({ authToken: PropTypes.string }).isRequired,
 };
 
 export default connect(state => state)(SessionInitializer);

@@ -7,7 +7,7 @@ import Alerts from './Alerts';
 export class App extends React.Component {
   getChildContext() {
     return {
-      lang: this.props.locale
+      lang: this.props.locale,
     };
   }
 
@@ -26,7 +26,7 @@ App.propTypes = {
 };
 
 App.childContextTypes = {
-  lang: PropTypes.string
+  lang: PropTypes.string,
 };
 
 const mapStateToProps = (state) => Object.assign({}, state, { locale: getLocale(state) });

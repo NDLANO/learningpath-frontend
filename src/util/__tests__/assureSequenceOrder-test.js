@@ -6,19 +6,19 @@ const pluckSeqNo = steps => steps.map(step => step.seqNo);
 
 test('util/assureSequenceOrder', t => {
   let actual = assureSequenceOrder([
-      {id: 3, seqNo: 2},
-      {id: 2, seqNo: 1},
-      {id: 1, seqNo: 0}
+      { id: 3, seqNo: 2 },
+      { id: 2, seqNo: 1 },
+      { id: 1, seqNo: 0 },
   ]);
 
   t.deepEqual(pluckIds(actual), [1, 2, 3]);
 
   actual = assureSequenceOrder([
-      {id: 4, seqNo: 5},
-      {id: 2, seqNo: 2},
-      {id: 3, seqNo: 3},
-      {id: 1, seqNo: -1},
-      {id: 2, seqNo: 2}
+      { id: 4, seqNo: 5 },
+      { id: 2, seqNo: 2 },
+      { id: 3, seqNo: 3 },
+      { id: 1, seqNo: -1 },
+      { id: 2, seqNo: 2 },
   ]);
 
   t.deepEqual(pluckIds(actual), [1, 2, 2, 3, 4]);

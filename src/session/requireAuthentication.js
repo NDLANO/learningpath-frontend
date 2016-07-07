@@ -12,7 +12,7 @@ export default function requireAuthentication(Component) {
   }
 
   AuthenticatedComponent.propTypes = {
-    authenticated: PropTypes.bool.isRequired
+    authenticated: PropTypes.bool.isRequired,
   };
 
   return connect(state => state)(AuthenticatedComponent);

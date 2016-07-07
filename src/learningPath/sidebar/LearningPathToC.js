@@ -10,11 +10,11 @@ import {
 } from '../../actions';
 import { titleI18N } from '../../util/i18nFieldFinder';
 
-export function LearningPathToC({learningPath, activeStepId, localCloseSidebars}, {lang}) {
+export function LearningPathToC({ learningPath, activeStepId, localCloseSidebars }, { lang }) {
   const base = `/learningpaths/${learningPath.id}`;
   const itemClassName = (stepId) => classNames({
     'step-nav_item': true,
-    'step-nav_item--active': activeStepId ? activeStepId === stepId : false
+    'step-nav_item--active': activeStepId ? activeStepId === stepId : false,
   });
 
 
@@ -46,11 +46,11 @@ LearningPathToC.propTypes = {
 };
 
 LearningPathToC.contextTypes = {
-  lang: PropTypes.string.isRequired
+  lang: PropTypes.string.isRequired,
 };
 
 LearningPathToC.defaultProps = {
-  activeStepId: ''
+  activeStepId: '',
 };
 
 

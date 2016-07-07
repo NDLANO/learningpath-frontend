@@ -2,8 +2,8 @@ import React from 'react';
 import polyglot from '../i18n';
 import SelectLocale from '../locale/SelectLocale';
 
-export const Wrapper = ({children}) => <div className="wrapper">{children}</div>;
-export const Content = ({children}) => <div className="content">{children}</div>;
+export const Wrapper = ({ children }) => <div className="wrapper">{children}</div>;
+export const Content = ({ children }) => <div className="content">{children}</div>;
 
 export const Footer = () =>
   <footer>

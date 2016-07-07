@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import Icon from '../../common/Icon';
 import polyglot from '../../i18n';
 
-export function SortLearningStepsButton({learningPath}) {
+export function SortLearningStepsButton({ learningPath }) {
   if (!learningPath.canEdit) {
     return null;
   }

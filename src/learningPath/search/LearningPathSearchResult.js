@@ -22,7 +22,7 @@ export default class SearchResult extends Component {
   }
 
   handleImageError() {
-    this.setState({imageError: true});
+    this.setState({ imageError: true });
   }
 
   render() {
@@ -39,7 +39,7 @@ export default class SearchResult extends Component {
 
     const onTagClick = (evt, tag) => {
       evt.preventDefault();
-      this.setState({tag}, () => {
+      this.setState({ tag }, () => {
         this.props.onTagSearchQuery(this.state.tag);
       });
     };
@@ -85,9 +85,9 @@ export default class SearchResult extends Component {
 SearchResult.propTypes = {
   path: PropTypes.object.isRequired,
   onTagSearchQuery: PropTypes.func.isRequired,
-  query: PropTypes.object.isRequired
+  query: PropTypes.object.isRequired,
 };
 
 SearchResult.contextTypes = {
-  lang: PropTypes.string.isRequired
+  lang: PropTypes.string.isRequired,
 };

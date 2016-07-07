@@ -13,7 +13,7 @@ const StyleButton = ({ active, icon, style, onToggle }) => {
   };
   const className = classNames(
       ['texformat-menu-item'],
-      {' texformat-menu-item__selected': active}
+      { ' texformat-menu-item__selected': active }
   );
 
   return (
@@ -27,19 +27,19 @@ StyleButton.propTypes = {
   style: PropTypes.string.isRequired,
   active: PropTypes.bool.isRequired,
   onToggle: PropTypes.func.isRequired,
-  icon: PropTypes.element.isRequired
+  icon: PropTypes.element.isRequired,
 };
 
 const STYLES = [
-  {label: 'Bold', style: 'BOLD', isInline: true, icon: <Icon.Bold />},
-  {label: 'Italic', style: 'ITALIC', isInline: true, icon: <Icon.Italic />},
-  {label: 'Underline', style: 'UNDERLINE', isInline: true, icon: <Icon.Underline />},
-  {label: 'UL', style: 'unordered-list-item', isInline: false, icon: <Icon.Bulleted />},
-  {label: 'OL', style: 'ordered-list-item', isInline: false, icon: <Icon.Numbered />}
+  { label: 'Bold', style: 'BOLD', isInline: true, icon: <Icon.Bold /> },
+  { label: 'Italic', style: 'ITALIC', isInline: true, icon: <Icon.Italic /> },
+  { label: 'Underline', style: 'UNDERLINE', isInline: true, icon: <Icon.Underline /> },
+  { label: 'UL', style: 'unordered-list-item', isInline: false, icon: <Icon.Bulleted /> },
+  { label: 'OL', style: 'ordered-list-item', isInline: false, icon: <Icon.Numbered /> },
 ];
 
 const StyleControls = props => {
-  const {editorState} = props;
+  const { editorState } = props;
   const selection = editorState.getSelection();
   const blockType = editorState.getCurrentContent().getBlockForKey(selection.getStartKey()).getType();
 
@@ -64,19 +64,19 @@ const StyleControls = props => {
 StyleControls.propTypes = {
   editorState: PropTypes.object.isRequired,
   onToggleInline: PropTypes.func.isRequired,
-  onToggleBlock: PropTypes.func.isRequired
+  onToggleBlock: PropTypes.func.isRequired,
 };
 
 export default class DescriptionHTMLEditor extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {editorState: EditorState.createEmpty()};
+    this.state = { editorState: EditorState.createEmpty() };
 
     const { onChange } = props;
 
     this.focus = () => this.refs.editor.focus();
     this.blur = () => this.refs.editor.blur();
-    this.onChange = editorState => this.setState({editorState}, () => {
+    this.onChange = editorState => this.setState({ editorState }, () => {
       if (editorState.getSelection().getHasFocus()) {
         return;
       }
@@ -153,7 +153,7 @@ export default class DescriptionHTMLEditor extends React.Component {
 
     let className = classNames({
       'RichEditor-editor learning-step-form_input learning-step-form_paragraph': true,
-      'RichEditor-hidePlaceholder': commentAboveApplies
+      'RichEditor-hidePlaceholder': commentAboveApplies,
     });
 
     return (
@@ -191,13 +191,13 @@ export default class DescriptionHTMLEditor extends React.Component {
 DescriptionHTMLEditor.propTypes = {
   value: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.instanceOf(Record)
+    PropTypes.instanceOf(Record),
   ]).isRequired,
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
 };
 
 DescriptionHTMLEditor.defaultProps = {
-  placeholder: polyglot.t('editPathStep.stepDescriptionPlaceholder')
+  placeholder: polyglot.t('editPathStep.stepDescriptionPlaceholder'),
 };

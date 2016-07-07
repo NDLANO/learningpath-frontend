@@ -16,7 +16,7 @@ test('component/LearningPathDropdown remove', t => {
 
   const component = shallow(
     <LearningPathDropdown learningPath={learningPath} onSelect={onSelect} />,
-    {context: {lang: 'nb'}}
+    { context: { lang: 'nb' } }
   );
 
   component.find('.dropdown-menu_item').last().find('a')
@@ -35,7 +35,7 @@ test('component/LearningPathDropdown de-publish', t => {
 
   const component = shallow(
     <LearningPathDropdown learningPath={learningPath} onSelect={onSelect} />,
-    {context: {lang: 'nb'}}
+    { context: { lang: 'nb' } }
   );
   component.find('.dropdown-menu_item').at(1).find('a')
            .simulate('click', { preventDefault });
@@ -53,7 +53,7 @@ test('component/LearningPathDropdown publish', t => {
 
   const component = shallow(
     <LearningPathDropdown learningPath={privateLearningPath} onSelect={onSelect} />,
-    {context: {lang: 'nb'}}
+    { context: { lang: 'nb' } }
   );
 
   component.find('.dropdown-menu_item').at(1).find('a')
@@ -72,7 +72,7 @@ test('component/LearningPathDropdown make copy', t => {
 
   const component = shallow(
     <LearningPathDropdown learningPath={learningPath} onSelect={onSelect} />,
-    {context: {lang: 'nb'}}
+    { context: { lang: 'nb' } }
   );
   component.find('.dropdown-menu_item').first().find('a')
            .simulate('click', { preventDefault });

@@ -4,7 +4,7 @@ import polyglot from '../i18n';
 
 const query = `?successUrl=${locationOrigin}/login/success/{appkey}&failureUrl=${locationOrigin}/login/failure`;
 
-export default function LoginProviders({message}) {
+export default function LoginProviders({ message }) {
   let messageEl;
   if (message) {
     messageEl = <p>{message}</p>;
@@ -24,5 +24,5 @@ export default function LoginProviders({message}) {
 }
 
 LoginProviders.propTypes = {
-  message: PropTypes.string
+  message: PropTypes.string,
 };

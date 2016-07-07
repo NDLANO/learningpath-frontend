@@ -22,12 +22,12 @@ export default class SearchResult extends Component {
     }
     const onClickShowIntroduction = (evt) => {
       evt.preventDefault();
-      this.setState({showIntroduction: !this.state.showIntroduction});
+      this.setState({ showIntroduction: !this.state.showIntroduction });
     };
 
     const introductionClassName = () => classNames({
       'search-result_introduction': true,
-      'search-result_introduction--open': this.state.showIntroduction
+      'search-result_introduction--open': this.state.showIntroduction,
     });
     const introductionButtonText = this.state.showIntroduction ? polyglot.t('searchForm.hideIntroduction') : polyglot.t('searchForm.showIntroduction');
     // path.introduction && path.introduction.length > 0 ?
@@ -36,7 +36,7 @@ export default class SearchResult extends Component {
         <span className="show-introduction_button" onClick={(evt) => onClickShowIntroduction(evt)}>
           {introductionButtonText} {this.state.showIntroduction ? <Icon.ArrowUp /> : <Icon.ArrowDown />}
         </span>
-        <div className={introductionClassName()} dangerouslySetInnerHTML={{__html: introductionI18N(path, lang, true)}}>
+        <div className={introductionClassName()} dangerouslySetInnerHTML={{ __html: introductionI18N(path, lang, true) }}>
         </div>
       </div>
     );
@@ -48,5 +48,5 @@ SearchResult.propTypes = {
 };
 
 SearchResult.contextTypes = {
-  lang: PropTypes.string.isRequired
+  lang: PropTypes.string.isRequired,
 };

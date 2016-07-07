@@ -15,7 +15,7 @@ class TagsInput extends Component {
     const messages = {
       createNew: polyglot.t('tagInput.createNew'),
       emptyFilter: polyglot.t('tagInput.emptyFilter'),
-      emptyList: polyglot.t('tagInput.emptyList')
+      emptyList: polyglot.t('tagInput.emptyList'),
     };
 
     if (typeof value === 'string') { // Handle redux form values witch are initialized as strings

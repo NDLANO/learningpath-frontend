@@ -45,12 +45,12 @@ const LearningPathForm = (props) => {
     learningPath,
     lang,
     localFetchImages,
-    fetchImage
+    fetchImage,
   } = props;
 
   const inputClassName = (hasError, isTextArea) => classNames({
     'input--alert': hasError,
-    'textarea textarea--resize-vertical': isTextArea
+    'textarea textarea--resize-vertical': isTextArea,
   });
 
 
@@ -76,7 +76,7 @@ const LearningPathForm = (props) => {
             className={inputClassName(description.touched && description.error, true)}
           />
           {description.touched && description.error && <span className="error_message error_message--red">{description.error}</span>}
-          <p className="learning-path_input-information">{polyglot.t('learningPath.descriptionInformation', {remainingDescriptionLength})}</p>
+          <p className="learning-path_input-information">{polyglot.t('learningPath.descriptionInformation', { remainingDescriptionLength })}</p>
         </div>
 
         <LearningPathImage {...coverPhotoMetaUrl} localFetchImages={localFetchImages} learningPathTitle={title.value} fetchImage={fetchImage} />
@@ -116,7 +116,7 @@ LearningPathForm.propTypes = {
   tagOptions: PropTypes.array.isRequired,
   lang: PropTypes.string.isRequired,
   localFetchImages: PropTypes.func.isRequired,
-  fetchImage: PropTypes.func.isRequired
+  fetchImage: PropTypes.func.isRequired,
 };
 
 const convertedDuration = (value) => {
@@ -133,7 +133,7 @@ const mapStateToProps = (state, props) => ({
     description: descriptionI18N(props.learningPath, props.lang),
     duration: convertedDuration(props.learningPath.duration),
     tags: defined(tagsI18N(props.learningPath, props.lang), []),
-    coverPhotoMetaUrl: props.learningPath.coverPhoto ? props.learningPath.coverPhoto.metaUrl : ''
+    coverPhotoMetaUrl: props.learningPath.coverPhoto ? props.learningPath.coverPhoto.metaUrl : '',
   },
 });
 

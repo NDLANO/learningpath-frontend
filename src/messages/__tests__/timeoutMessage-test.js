@@ -7,7 +7,7 @@ test('actions/timeoutMessage', (t) => {
     id: 123,
     message: 'All went well',
     severity: 'success',
-    timeToLive: 500
+    timeToLive: 500,
   };
 
   timeoutMessage(message)(actual => {

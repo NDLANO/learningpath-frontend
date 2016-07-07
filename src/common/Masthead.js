@@ -52,7 +52,7 @@ export function Masthead(props) {
 
   const mastheadPageOverlay = (isLeftSideBarOpen || isRightSidebarOpen) ? <div className="masthead_page-overlay" onClick={localCloseSidebars} /> : '';
 
-  const cloneChildren = children ? React.cloneElement(children, {className: activeButtonClassName(true, isLeftSideBarOpen), onClick: () => leftNavButtonClicked()}) : null;
+  const cloneChildren = children ? React.cloneElement(children, { className: activeButtonClassName(true, isLeftSideBarOpen), onClick: () => leftNavButtonClicked() }) : null;
 
   return (
     <div>

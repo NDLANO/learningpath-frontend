@@ -24,7 +24,7 @@ test('component/Oembed', t => {
 
   t.equal(div.length, 1);
   t.notOk(div.is('.learning-step--without-dimensions'), 'not .learning-step--without-dimensions');
-  t.deepEqual(div.prop('dangerouslySetInnerHTML'), {__html: oembed.html});
+  t.deepEqual(div.prop('dangerouslySetInnerHTML'), { __html: oembed.html });
 
   t.notOk(component.state('isNDLAResource'), 'state.isNDLAResource');
   t.notOk(component.state('listeningToResize'), 'state.listeningToResize');
@@ -42,7 +42,7 @@ test('component/Oembed ndla resource', t => {
 
   t.equal(div.length, 1);
   t.ok(div.is('.learning-step--without-dimensions'), '.learning-step--without-dimensions');
-  t.deepEqual(div.prop('dangerouslySetInnerHTML'), {__html: oembed.html});
+  t.deepEqual(div.prop('dangerouslySetInnerHTML'), { __html: oembed.html });
 
   t.ok(component.state('isNDLAResource'), 'state.isNDLAResource');
   t.ok(component.state('listeningToResize'), 'state.listeningToResize');
@@ -72,13 +72,13 @@ test('component/Oembed resize message listener', t => {
   t.equal(remove.callCount, 0, '1st removeEventListener');
 
   // update with other ndla resource
-  component.setProps({oembedContent: ndlaOembed2});
+  component.setProps({ oembedContent: ndlaOembed2 });
 
   t.equal(add.callCount, 1, '2nd addEventListener');
   t.equal(remove.callCount, 0, '2nd removeEventListener');
 
   // update with non-ndla resource
-  component.setProps({oembedContent: oembed});
+  component.setProps({ oembedContent: oembed });
 
   t.equal(add.callCount, 1, '3rd addEventListener');
   t.equal(remove.callCount, 1, '3rd removeEventListener');
@@ -91,7 +91,7 @@ test('component/Oembed resize message listener', t => {
       'iframeResizer stopped');
 
   // update with other ndla resource
-  component.setProps({oembedContent: ndlaOembed3});
+  component.setProps({ oembedContent: ndlaOembed3 });
 
   t.equal(add.callCount, 2, '4th addEventListener');
   t.equal(remove.callCount, 1, '4th removeEventListener');
@@ -116,21 +116,21 @@ test('component/Oembed iframe resizing', t => {
 
 
   instance.handleResizeMessage({
-    source: iframe.contentWindow, data: { height: '800' }
+    source: iframe.contentWindow, data: { height: '800' },
   });
 
   t.equal(iframe.style.height, '835px');
 
 
   instance.handleResizeMessage({
-    source: iframe.contentWindow, data: { height: '1000' }
+    source: iframe.contentWindow, data: { height: '1000' },
   });
 
   t.equal(iframe.style.height, '1035px');
 
 
   instance.handleResizeMessage({
-    source: iframe.contentWindow, data: { height: '900' }
+    source: iframe.contentWindow, data: { height: '900' },
   });
 
   t.equal(iframe.style.height, '1035px');
@@ -138,19 +138,19 @@ test('component/Oembed iframe resizing', t => {
   t.doesNotThrow(() => instance.handleResizeMessage());
 
   instance.handleResizeMessage({
-    source: {mysteryObject: true}, data: { height: '2000' }
+    source: { mysteryObject: true }, data: { height: '2000' },
   });
 
   t.equal(iframe.style.height, '1035px');
 
 
-  component.setProps({oembedContent: oembed});
+  component.setProps({ oembedContent: oembed });
 
   const nextIframe = instance.getIframeDOM();
   t.equal(nextIframe.style.height, '');
 
   instance.handleResizeMessage({
-    source: nextIframe.contentWindow, data: { height: '2000' }
+    source: nextIframe.contentWindow, data: { height: '2000' },
   });
 
   t.equal(nextIframe.style.height, '');

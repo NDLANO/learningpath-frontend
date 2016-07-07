@@ -16,7 +16,7 @@ export function LearningPathPrevNext(props) {
 
   const stepperClassName = (object) => classNames({
     'stepper-nav_button': true,
-    'stepper-nav_button--disabled': object === undefined
+    'stepper-nav_button--disabled': object === undefined,
   });
 
   const stepperTag = (stepObject, leftText, rightText) => {
@@ -45,7 +45,7 @@ LearningPathPrevNext.propTypes = {
   prevStep: PropTypes.string,
   currentSeqNo: PropTypes.number,
   currentStepNumber: PropTypes.number,
-  lastPageNumber: PropTypes.number
+  lastPageNumber: PropTypes.number,
 };
 
 
@@ -63,7 +63,7 @@ const mapStateToProps = (state, props) => {
       prevStep: undefined,
       nextStep: learningsteps.length > 0 ? `${base}/step/${learningsteps[0].id}` : undefined,
       currentStepNumber: 1,
-      lastPageNumber: learningsteps.length + 1
+      lastPageNumber: learningsteps.length + 1,
     });
   }
 
@@ -73,7 +73,7 @@ const mapStateToProps = (state, props) => {
     prevStep: currentSeqNo === 0 ? base : prevUrl,
     nextStep: nextUrl,
     currentStepNumber: currentSeqNo + 2, // zero indexed and the meta site is page number 1 so this must be plus two.
-    lastPageNumber: learningsteps.length + 1
+    lastPageNumber: learningsteps.length + 1,
   });
 };
 

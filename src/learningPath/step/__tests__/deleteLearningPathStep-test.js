@@ -21,7 +21,7 @@ test('actions/deleteLearningPathStep with id', t => {
   // GET /learningpaths/:pathId
   nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get(`/learningpaths/${pathId}`)
-    .reply(200, {id: pathId});
+    .reply(200, { id: pathId });
 
   // DELETE /learningpaths/:pathId/learningsteps/:stepId
   nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
@@ -36,7 +36,7 @@ test('actions/deleteLearningPathStep with id', t => {
       t.equal(store.getActions()[0].type, 'ADD_MESSAGE', 'action type is ADD_MESSAGE');
       t.ok(store.getActions()[0].payload.action, 'ADD_MESSAGE payload contains action');
       t.deepEqual(store.getActions()[1],
-        {type: 'SET_LEARNING_PATH', payload: {id: pathId}}
+        { type: 'SET_LEARNING_PATH', payload: { id: pathId } }
       );
 
       t.doesNotThrow(() => nock.isDone());

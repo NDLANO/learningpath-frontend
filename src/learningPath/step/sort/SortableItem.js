@@ -7,7 +7,7 @@ const itemSource = {
   beginDrag(props) {
     return {
       id: props.id,
-      originalIndex: props.index
+      originalIndex: props.index,
     };
   },
 
@@ -18,7 +18,7 @@ const itemSource = {
 
     const { id, originalIndex, newIndex } = monitor.getDropResult();
     props.onDrop(id, originalIndex, newIndex);
-  }
+  },
 };
 
 const itemTarget = {
@@ -44,20 +44,20 @@ const itemTarget = {
     const { index: newIndex } = props;
 
     return { id, originalIndex, newIndex };
-  }
+  },
 };
 
 
 function collectTarget(connect) {
   return {
-    connectDropTarget: connect.dropTarget()
+    connectDropTarget: connect.dropTarget(),
   };
 }
 
 function collectSource(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging()
+    isDragging: monitor.isDragging(),
   };
 }
 
@@ -73,7 +73,7 @@ class SortableItem extends Component {
     }
 
     const clonedChildren = React.cloneElement(children, {
-      style: Object.assign({}, children.props.style, {opacity})
+      style: Object.assign({}, children.props.style, { opacity }),
     });
 
     return connectDragSource(connectDropTarget(
@@ -92,7 +92,7 @@ SortableItem.propTypes = {
   id: PropTypes.any.isRequired,
   moveItem: PropTypes.func.isRequired,
   onDrop: PropTypes.func,
-  index: PropTypes.number.isRequired
+  index: PropTypes.number.isRequired,
 };
 
 // N.B. to use this component you need to call it as a function to create the class
