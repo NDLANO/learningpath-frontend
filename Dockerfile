@@ -3,7 +3,8 @@ FROM node:6.2.2
 #Add app user to enable running the container as an unprivileged user
 RUN useradd --user-group --create-home --shell /bin/false app
 
-ENV HOME=/home/app APP_PATH=/home/app/learningpath-frontend
+ENV HOME=/home/app
+ENV APP_PATH=$HOME/learningpath-frontend
 
 # Copy necessary files for installing dependencies
 COPY package.json .npmrc $APP_PATH/
