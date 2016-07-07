@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
-import Icon from '../components/Icon';
+import Icon from '../common/Icon';
 import polyglot from '../i18n';
 
 export function LearningPathPrevNext(props) {

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Icon from '../../../components/Icon';
+import Icon from '../../../common/Icon';
 import polyglot from '../../../i18n';
 
 export default function MediaTypeSelect({value, onChange}) {

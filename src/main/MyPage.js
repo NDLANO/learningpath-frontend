@@ -5,16 +5,16 @@ import sortBy from 'lodash/sortBy';
 import reverse from 'lodash/reverse';
 import { setMyLearningPathsSortOrder, updateLearningPathStatus } from '../actions';
 import { deleteLearningPath, createLearningPath, copyLearningPath } from '../learningPath/learningPathActions';
-import Icon from '../components/Icon';
-import LabeledIcon from '../components/LabeledIcon';
+import Icon from '../common/Icon';
+import LabeledIcon from '../common/LabeledIcon';
 import polyglot from '../i18n';
 
 import { LearningPathDropdown } from './LearningPathDropdown';
 import formatDate from '../util/formatDate';
 import formatDuration from '../util/formatDuration';
 import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
-import Lightbox from '../components/Lightbox';
-import Masthead from '../components/Masthead';
+import Lightbox from '../common/Lightbox';
+import Masthead from '../common/Masthead';
 import CreateLearningPath from '../learningPath/new/CreateLearningPath';
 import { Wrapper, Content, Footer } from '../common/Layout';
 

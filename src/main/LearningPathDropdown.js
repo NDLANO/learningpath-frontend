@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import polyglot from '../i18n';
-import Icon from '../components/Icon';
+import Icon from '../common/Icon';
 
 export function LearningPathDropdown({onSelect, learningPath}) {
   const makeOnClick = (actionType) => (evt) => {

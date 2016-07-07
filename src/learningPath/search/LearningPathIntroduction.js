@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import Icon from '../../components/Icon';
+import Icon from '../../common/Icon';
 import polyglot from '../../i18n';
 
 import { introductionI18N } from '../../util/i18nFieldFinder';

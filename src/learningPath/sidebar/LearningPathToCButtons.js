@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import polyglot from '../../i18n';
-import Icon from '../../components/Icon';
+import Icon from '../../common/Icon';
 import { updateLearningPath } from '../learningPathActions';
 import { updateLearningPathStatus, closeSidebars } from '../../actions';
 

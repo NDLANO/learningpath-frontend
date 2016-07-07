@@ -1,8 +1,8 @@
 import React from 'react';
 import Form from 'react-router-form';
-import Logo from '../components/Logo';
+import Logo from '../common/Logo';
 import polyglot from '../i18n';
-import Masthead from '../components/Masthead';
+import Masthead from '../common/Masthead';
 import { Wrapper, Content, Footer } from '../common/Layout';
 
 const Welcome = () =>

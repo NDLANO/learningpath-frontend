@@ -3,7 +3,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { spy } from 'sinon';
 
-import { learningPaths } from '../../components/__tests__/mockData';
+import { learningPaths } from '../../common/__tests__/mockData';
 import { LearningPathDropdown } from '../LearningPathDropdown';
 
 const learningPath = learningPaths[0];

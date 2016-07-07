@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import defined from 'defined';
 import { Link } from 'react-router';
-import LabeledIcon from '../../components/LabeledIcon';
+import LabeledIcon from '../../common/LabeledIcon';
 import { titleI18N, descriptionI18N, tagsI18N } from '../../util/i18nFieldFinder';
 import TagsInput from '../../common/TagsInput';
 import polyglot from '../../i18n';

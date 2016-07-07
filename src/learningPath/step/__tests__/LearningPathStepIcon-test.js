@@ -2,7 +2,7 @@ import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { learningStep } from '../../../components/__tests__/mockData';
+import { learningStep } from '../../../common/__tests__/mockData';
 
 import LearningPathStepIcon from '../LearningPathStepIcon';
 

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import polyglot from '../i18n';
-import Icon from '../components/Icon';
+import Icon from '../common/Icon';
 
 class ImageSearch extends React.Component {
   constructor(props) {

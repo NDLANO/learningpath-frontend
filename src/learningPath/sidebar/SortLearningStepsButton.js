@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import Icon from '../../components/Icon';
+import Icon from '../../common/Icon';
 import polyglot from '../../i18n';
 
 export function SortLearningStepsButton({learningPath}) {

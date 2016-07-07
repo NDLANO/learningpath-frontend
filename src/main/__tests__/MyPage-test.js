@@ -3,7 +3,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Link } from 'react-router';
 
-import { learningPaths } from '../../components/__tests__/mockData';
+import { learningPaths } from '../../common/__tests__/mockData';
 import { MyPage, mapStateToProps } from '../MyPage';
 
 

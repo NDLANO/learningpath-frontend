@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import ImageSearch from '../../imageSearch/ImageSearch';
-import Lightbox from '../../components/Lightbox';
+import Lightbox from '../../common/Lightbox';
 import polyglot from '../../i18n';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';

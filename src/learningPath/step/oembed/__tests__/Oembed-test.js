@@ -2,9 +2,9 @@ import test from 'tape';
 import React from 'react';
 import { mount } from 'enzyme';
 import { spy } from 'sinon';
-import '../../../../components/__tests__/jsdomEnv';
+import '../../../../common/__tests__/jsdomEnv';
 
-import { learningStep, ndlaLearningStep } from '../../../../components/__tests__/mockData';
+import { learningStep, ndlaLearningStep } from '../../../../common/__tests__/mockData';
 
 import Oembed, { urlIsNDLA } from '../Oembed';
 

@@ -5,9 +5,9 @@ import { Link } from 'react-router';
 import { titleI18N } from '../../util/i18nFieldFinder';
 import formatDate from '../../util/formatDate';
 import formatDuration from '../../util/formatDuration';
-import Lightbox from '../../components/Lightbox';
+import Lightbox from '../../common/Lightbox';
 import { closeSidebars } from '../../actions';
-import LabeledIcon from '../../components/LabeledIcon';
+import LabeledIcon from '../../common/LabeledIcon';
 import polyglot from '../../i18n';
 import CopyLearningPath from '../../learningPath/new/CopyLearningPath';
 class LearningPathGeneralInfo extends React.Component {

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Icon from '../../components/Icon';
+import Icon from '../../common/Icon';
 import { Link } from 'react-router';
 import { stepNumbers } from './PagerUtil';
 

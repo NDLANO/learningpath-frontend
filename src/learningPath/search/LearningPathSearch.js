@@ -6,7 +6,7 @@ import isEqual from 'lodash/isEqual';
 import LinkPager from '../../common/pager/LinkPager';
 import SearchForm from './LearningPathSearchForm';
 import SearchResult from './LearningPathSearchResult';
-import Masthead from '../../components/Masthead';
+import Masthead from '../../common/Masthead';
 import { fetchLearningPaths } from '../../actions';
 import { Wrapper, Content, Footer } from '../../common/Layout';
 

@@ -6,8 +6,8 @@ import LearningPathGeneralInfo from './sidebar/LearningPathGeneralInfo';
 import LearningPathPrevNext from './LearningPathPrevNext';
 import LearningPathToC from './sidebar/LearningPathToC';
 
-import Masthead from '../components/Masthead';
-import Icon from '../components/Icon';
+import Masthead from '../common/Masthead';
+import Icon from '../common/Icon';
 import SortLearningStepsButton from './sidebar/SortLearningStepsButton';
 import { fetchLearningPath, copyLearningPath } from './learningPathActions';
 

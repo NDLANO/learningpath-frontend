@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import flow from 'lodash/flow';
 
 import React, { Component, PropTypes } from 'react';
-import Icon from '../../../components/Icon';
+import Icon from '../../../common/Icon';
 import createSortableItem from './SortableItem';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
