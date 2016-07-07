@@ -11,7 +11,7 @@
     "npm": "~3.9.5"
   },
   "scripts": {
-    "pretest": "eslint src",
+    "pretest": "npm run lint",
     "test": "NODE_ENV=unittest babel-tape-runner 'src/**/*-test.js'|tap-spec",
     "tdd": "watch 'NODE_ENV=unittest babel-tape-runner 'src/**/*-test.js'|tap-spec||true' src/",
     "postinstall": "cp -vr node_modules/ndla-styleguide/assets/* htdocs/assets/",
@@ -19,7 +19,7 @@
     "start": "NODE_ENV=development nodemon --watch server server/server.js",
     "start-prod": "NODE_ENV=production node server/server.js",
     "start-dev-server": "webpack-dev-server --inline",
-    "lint": "eslint src"
+    "lint": "eslint src server"
   },
   "author": "ndla@knowit.no",
   "license": "GPL-3.0",

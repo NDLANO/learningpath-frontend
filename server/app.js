@@ -16,9 +16,9 @@ if (process.env.NODE_ENV === 'development') {
   const compiler = webpack(webpackConfig);
   app.use(webpackDevMiddleware(compiler, {
     stats: {
-      colors: true
+      colors: true,
     },
-    publicPath: webpackConfig.output.publicPath
+    publicPath: webpackConfig.output.publicPath,
   }));
   app.use(webpackHotMiddleware(compiler, {}));
 }
