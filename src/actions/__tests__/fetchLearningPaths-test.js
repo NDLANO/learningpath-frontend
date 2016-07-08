@@ -30,7 +30,6 @@ test('actions/fetchLearningPaths', t => {
       t.deepEqual(store.getActions(), [
         actions.setLearningPathsTotalCount(2),
         actions.setLearningPaths([{ id: '123' }, { id: '456' }]),
-        actions.changeLearningPathQuery({ page: 3, pageSize: 25 }),
       ]);
 
       t.doesNotThrow(() => apiMock.done());
@@ -72,7 +71,6 @@ test('actions/fetchLearningPaths with query', t => {
       t.deepEqual(store.getActions(), [
         actions.setLearningPathsTotalCount(400),
         actions.setLearningPaths([{ id: '123' }, { id: '456' }]),
-        actions.changeLearningPathQuery({ page: 4, pageSize: 15 }),
       ]);
 
       t.doesNotThrow(() => apiMock.done());
@@ -113,7 +111,6 @@ test('actions/fetchLearningPaths with query without search term', t => {
       t.deepEqual(store.getActions(), [
         actions.setLearningPathsTotalCount(400),
         actions.setLearningPaths([{ id: '123' }, { id: '456' }]),
-        actions.changeLearningPathQuery({ page, pageSize }),
       ]);
 
       t.doesNotThrow(() => apiMock.done());

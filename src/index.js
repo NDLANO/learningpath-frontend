@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { Router, useRouterHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { configureLocale, isValidLocale } from './locale/configureLocale';
-import { defaultSearchQuery } from './middleware/searchQuery';
 import configureStore from './configureStore';
 import configureRoutes from './main/routes';
 import { defaultApiKey } from './sources/helpers';
@@ -34,7 +33,6 @@ const store = configureStore({
   user: {},
   learningPathStep: {},
   learningPaths: [],
-  learningPathQuery: defaultSearchQuery,
   learningPathsTotalCount: 1,
   messages: [],
   locale,

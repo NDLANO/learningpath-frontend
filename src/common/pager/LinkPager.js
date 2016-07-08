@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import { stepNumbers } from './PagerUtil';
 
 export default function LinkPager(props) {
-  const { page, lastPage, query, onLinkClick } = props;
+  const { page, lastPage, query } = props;
   const steps = stepNumbers(page, lastPage);
 
   const queryToPage = pageNumber => Object.assign({}, query, { page: pageNumber });
@@ -12,20 +12,19 @@ export default function LinkPager(props) {
     pathname: '/learningpaths',
     query: queryToPage(pageNumber),
   });
-  const handleClickToPage = pageNumber => evt => onLinkClick(evt, queryToPage(pageNumber));
 
   let pageLinks = steps.map(n => {
     if (n === page) {
       return <span key={n} className="search-stepper_step search-stepper_step--active">{n}</span>;
     }
-    return <Link key={n} className="search-stepper_step" to={linkToPage(n)} onClick={handleClickToPage(n)}>{n}</Link>;
+    return <Link key={n} className="search-stepper_step" to={linkToPage(n)} >{n}</Link>;
   });
   let prevPageLink = '';
   let nextPageLink = '';
 
   if (steps[0] < page) {
     prevPageLink = (
-      <Link className="search-stepper_step search-stepper_step--back" to={linkToPage(page - 1)} onClick={handleClickToPage(page - 1)} >
+      <Link className="search-stepper_step search-stepper_step--back" to={linkToPage(page - 1)} >
         <Icon.Back />
       </Link>
     );
@@ -33,7 +32,7 @@ export default function LinkPager(props) {
 
   if (page < lastPage) {
     nextPageLink = (
-      <Link className="search-stepper_step search-stepper_step--forward" to={linkToPage(page + 1)} onClick={handleClickToPage(page + 1)} >
+      <Link className="search-stepper_step search-stepper_step--forward" to={linkToPage(page + 1)} >
         <Icon.Forward />
       </Link>
     );

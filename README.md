@@ -124,10 +124,6 @@ https://reactjs.org/react-router/
 Manage browser history with JavaScript
 https://github.com/mjackson/history#readme
 
-**react-router-form:**
-\<Form\> is to \<form\> as \<Link\> is to \<a\>.
-https://github.com/insin/react-router-form
-
 **redux:**
 Predictable state container for JavaScript apps.
 http://rackt.github.io/redux
