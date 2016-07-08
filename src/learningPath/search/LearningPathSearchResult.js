@@ -56,9 +56,9 @@ export default class SearchResult extends Component {
             {image()}
           </div>
           <div className="search-result_bd">
-              <h2 className="search-result_title">
-                {titleI18N(path, lang, true)}
-              </h2>
+            <h2 className="search-result_title">
+              {titleI18N(path, lang, true)}
+            </h2>
             <div className="search-result_meta">
               <LabeledIcon.Today labelText={formatDate(path.lastUpdated, lang)} tagName="time" />
               <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName="time" />
