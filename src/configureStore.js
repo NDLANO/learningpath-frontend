@@ -3,7 +3,7 @@ import thunkMiddleware from 'redux-thunk';
 import persistState from 'redux-localstorage';
 
 import reducers from './reducers';
-import { errorReporter, searchQueryMiddleware } from './middleware';
+import { errorReporter } from './middleware';
 
 import { routerMiddleware } from 'react-router-redux';
 
@@ -21,7 +21,6 @@ export default function configureStore(initialState, history) {
   const createFinalStore = compose(
     applyMiddleware(
       thunkMiddleware,
-      searchQueryMiddleware,
       errorReporter,
       middleware
     ),

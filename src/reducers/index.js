@@ -8,7 +8,6 @@ import user from './user';
 import learningPath from '../learningPath/learningPathReducer';
 import learningPathStep from '../learningPath/step/learningPathStepReducer';
 import learningPaths from './learningPaths';
-import learningPathQuery from './learningPathQuery';
 import learningPathsTotalCount from './learningPathsTotalCount';
 import myLearningPathsSortOrder from './myLearningPathsSortOrder';
 import learningPathTags from '../learningPath/edit/tags/learningPathTagsReducer';
@@ -26,7 +25,6 @@ const rootReducers = combineReducers({
   learningPath,
   learningPathStep,
   learningPaths,
-  learningPathQuery,
   learningPathsTotalCount,
   myLearningPathsSortOrder,
   messages,

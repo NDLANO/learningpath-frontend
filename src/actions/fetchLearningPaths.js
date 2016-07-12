@@ -1,16 +1,12 @@
-import { setLearningPathsTotalCount, setLearningPaths, changeLearningPathQuery } from '.';
+import { setLearningPathsTotalCount, setLearningPaths } from '.';
 import { applicationError } from '../messages/messagesActions';
 import { fetchPaths } from '../sources/learningpaths';
 
-export default function fetchLearningPaths() {
-  return (dispatch, getState) => fetchPaths(getState().authToken, getState().learningPathQuery)
+export default function fetchLearningPaths(query) {
+  return (dispatch, getState) => fetchPaths(getState().authToken, query)
     .then(res => {
       dispatch(setLearningPathsTotalCount(res.totalCount));
       dispatch(setLearningPaths(res.results));
-      dispatch(changeLearningPathQuery({
-        page: res.page,
-        pageSize: res.pageSize,
-      }));
     })
     .catch(err => dispatch(applicationError(err)));
 }

@@ -10,10 +10,8 @@ import LearningPathSummary from './sidebar/LearningPathSummary';
 import LearningPathToCButtons from './sidebar/LearningPathToCButtons';
 import AddLearningPathStepButton from './sidebar/AddLearningPathStepButton';
 import * as learningPathActions from './learningPathActions';
-import otherActions from '../actions';
+import { fetchLearningPaths } from '../actions';
 
-import { defaultSearchQuery, parseSearchQuery } from '../middleware/searchQuery';
-import isEmpty from 'lodash/isEmpty';
 import requireAuthentication from '../session/requireAuthentication';
 
 import configureLearningPathStepRoutes from './step/routes';
@@ -41,25 +39,13 @@ export default function (store, ifAuthenticated) {
     createEmptyLearningPath,
   } = bindActionCreators(learningPathActions, store.dispatch);
 
-  const {
-    fetchLearningPaths,
-    changeLearningPathQuery,
-  } = bindActionCreators(otherActions, store.dispatch);
-
-
   const learningPathStepRoutes = configureLearningPathStepRoutes(store, ifAuthenticated);
   return (
     <Route path="learningpaths(/)">
       <IndexRoute
-        component={LearningPathSearch} onEnter={ctx => {
-          let query = parseSearchQuery(ctx.location.query);
-          if (isEmpty(query)) {
-            query = defaultSearchQuery;
-          }
-
-          changeLearningPathQuery(query);
-          fetchLearningPaths();
-        }}
+        component={LearningPathSearch}
+        onEnter={(nextState) => store.dispatch(fetchLearningPaths(nextState.location.query))}
+        onChange={(prevState, nextState) => store.dispatch(fetchLearningPaths(nextState.location.query))}
       />
       <Route path="new" component={requireAuthentication(CreateLearningPath)} onEnter={ifAuthenticated(createEmptyLearningPath)} />
       <Route path=":pathId" component={LearningPath} >

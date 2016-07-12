@@ -50,34 +50,32 @@ export default class SearchResult extends Component {
     });
 
     return (
-      <div>
-        <Link to={`/learningpaths/${path.id}/first-step/`}>
-          <div className="search-result">
-            <div className="search-result_img_container">
-              {image()}
+      <Link to={`/learningpaths/${path.id}/first-step/`}>
+        <div className="search-result">
+          <div className="search-result_img_container">
+            {image()}
+          </div>
+          <div className="search-result_bd">
+            <h2 className="search-result_title">
+              {titleI18N(path, lang, true)}
+            </h2>
+            <div className="search-result_meta">
+              <LabeledIcon.Today labelText={formatDate(path.lastUpdated, lang)} tagName="time" />
+              <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName="time" />
             </div>
-            <div className="search-result_bd">
-              <h2 className="search-result_title">
-                {titleI18N(path, lang, true)}
-              </h2>
-              <div className="search-result_meta">
-                <LabeledIcon.Today labelText={formatDate(path.lastUpdated, lang)} tagName="time" />
-                <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName="time" />
-              </div>
 
-              <div className="search-result_description">{descriptionI18N(path, lang, true)}</div>
+            <div className="search-result_description">{descriptionI18N(path, lang, true)}</div>
 
-              <LearningPathIntroduction path={path} />
+            <LearningPathIntroduction path={path} />
 
-              <div className="tags_list">
-                {tags.map(tag =>
-                  <span key={tag} className={tagsClassName(tag)} onClick={(evt) => onTagClick(evt, tag)} href="#">{tag}</span>
-                )}
-              </div>
+            <div className="tags_list">
+              {tags.map(tag =>
+                <span key={tag} className={tagsClassName(tag)} onClick={(evt) => onTagClick(evt, tag)} href="#">{tag}</span>
+              )}
             </div>
           </div>
-        </Link>
-      </div>
+        </div>
+      </Link>
     );
   }
 }
