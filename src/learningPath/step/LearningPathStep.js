@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import Helmet from 'react-helmet';
 
 import Oembed from './oembed/Oembed';
-import { titleI18N, descriptionI18N, oembedContentI18N } from '../../util/i18nFieldFinder';
+import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
 import polyglot from '../../i18n';
 import Icon from '../../common/Icon';
 import { copyLearningPath } from '../learningPathActions';
@@ -32,7 +32,7 @@ class LearningPathStep extends React.Component {
     const { lang } = this.context;
     const stepTitle = titleI18N(learningPathStep, lang, true);
     const stepDescription = descriptionI18N(learningPathStep, lang, true);
-    const oembedContent = oembedContentI18N(learningPathStep, lang, true);
+    const oembedContent = learningPathStep.oembed;
     const editStepTarget = `/learningpaths/${learningPath.id}/step/${learningPathStep.id}/edit`;
     let onLightboxClose = () => this.setState({ displayCopyPath: false });
     const onCopy = () => {

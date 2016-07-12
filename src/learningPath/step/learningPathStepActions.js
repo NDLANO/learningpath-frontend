@@ -1,17 +1,24 @@
 import { createAction } from 'redux-actions';
 import { applicationError, addMessage } from '../../messages/messagesActions';
 import { fetchLearningPath } from '../learningPathActions';
-import { updateStep, createStep, deleteStep, fetchPathStep, updateSeqNo, activateDeletedStep } from '../../sources/learningpaths';
+import { updateStep, createStep, deleteStep, fetchPathStep, updateSeqNo, activateDeletedStep, fetchOembedUrl } from '../../sources/learningpaths';
 import { routerActions } from 'react-router-redux';
 import polyglot from '../../i18n';
 import get from 'lodash/get';
+import { oembedContentI18N } from '../../util/i18nFieldFinder';
 
 export const setLearningPathStep = createAction('SET_LEARNING_PATH_STEP');
 export const sortLearningPathSteps = createAction('SORT_LEARNING_PATH_STEPS');
 export const createEmptyLearningPathStep = createAction('CREATE_EMPTY_LEARNING_PATH_STEP');
+export const setOembedObject = createAction('SET_OEMBED_OBJECT');
+export function fetchOembed(query) {
+  return (dispatch, getState) => fetchOembedUrl(getState().authToken, query)
+    .then(object => dispatch(setOembedObject(object)))
+    .catch(err => dispatch(applicationError(err)));
+}
 
 export function fetchLearningPathStep(pathId, stepId) {
-  return (dispatch, getState) => {
+  return (dispatch, getState, locale) => {
     const { authToken, learningPath } = getState();
 
     if (get(learningPath, 'id') === pathId) {
@@ -23,7 +30,12 @@ export function fetchLearningPathStep(pathId, stepId) {
     }
 
     return fetchPathStep(authToken, { pathId, stepId })
-    .then(step => dispatch(setLearningPathStep(step)))
+    .then(step => {
+      if (step.embedContent) {
+        dispatch(fetchOembed({ url: oembedContentI18N(step, locale, true).url, maxwidth: Math.ceil(window.innerWidth * 0.5), maxheight: Math.ceil((window.innerWidth * 0.5) / 2) }));
+      }
+      dispatch(setLearningPathStep(step));
+    })
     .catch(err => dispatch(applicationError(err)));
   };
 }

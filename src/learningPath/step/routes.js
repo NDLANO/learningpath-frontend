@@ -18,12 +18,14 @@ export default function (store, ifAuthenticated) {
     fetchLearningPathStep,
     createEmptyLearningPathStep,
   } = bindActionCreators(actions, store.dispatch);
-
   return (
     <Route path="step(/)">
       <Route path="new(/)" component={requireAuthentication(CreateLearningPathStep)} onEnter={ifAuthenticated(createEmptyLearningPathStep)} />
       <Route path="sort(/)" components={{ main: LearningPathSummary, sortLearningSteps: SortLearningPathSteps }} onEnter={ifAuthenticated()} />
-      <Route path=":stepId/edit(/)" component={requireAuthentication(EditLearningPathStep)} onEnter={ifAuthenticated(({ params }) => fetchLearningPathStep(params.pathId, params.stepId))} />
+      <Route
+        path=":stepId/edit(/)" component={requireAuthentication(EditLearningPathStep)}
+        onEnter={ifAuthenticated(({ params }) => fetchLearningPathStep(params.pathId, params.stepId))}
+      />
       <Route
         path=":stepId" components={{ main: LearningPathStep, addStepButton: AddLearningPathStepButton, saveButtons: LearningPathToCButtons }}
         onEnter={({ params }) => fetchLearningPathStep(params.pathId, params.stepId)}
