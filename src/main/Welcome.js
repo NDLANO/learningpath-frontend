@@ -6,6 +6,7 @@ import Logo from '../common/Logo';
 import polyglot from '../i18n';
 import Masthead from '../common/Masthead';
 import { Wrapper, Content, Footer } from '../common/Layout';
+import isEmpty from 'lodash/isEmpty';
 
 class Welcome extends Component {
   constructor(props) {
@@ -19,8 +20,9 @@ class Welcome extends Component {
   handleSubmit(e) {
     const { query } = this.state;
     e.preventDefault();
+    const sort = (query && !isEmpty(query)) ? 'relevance' : '-lastUpdated';
     this.props.pushRoute({ pathname: '/learningPaths', query:
-      { query, page: 1, sort: '-lastUpdated' },
+      { query, page: 1, sort },
     });
   }
 

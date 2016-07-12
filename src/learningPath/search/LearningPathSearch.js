@@ -17,7 +17,7 @@ const LearningPathSearch = (props) => {
     pushRoute({ pathname, query: q });
   };
 
-  const submitSearchQuery = q => navigateTo(Object.assign({}, query, { query: q, page: 1, tag: '' }));
+  const submitSearchQuery = q => navigateTo(Object.assign({}, query, { query: q, page: 1, tag: '', sort: 'relevance' }));
 
   const changeSortOrder = sort => navigateTo(Object.assign({}, query, { sort }));
 
