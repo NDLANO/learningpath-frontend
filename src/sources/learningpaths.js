@@ -83,7 +83,6 @@ const fetchPaths = (authToken, query) => {
 
 const oembedUrl = apiResourceUrl('/oembed');
 const fetchOembedUrl = (authToken, query) => {
-  console.log(query);
   let url = oembedUrl;
   url += `?${queryString.stringify(query)}`;
   return fetch(url, { headers: { 'APP-KEY': authToken } }).then(resolveJsonOrRejectWithError);

@@ -56,7 +56,7 @@ class LearningPathStep extends React.Component {
           ) : null}
           <div className="learning-step_bd" dangerouslySetInnerHTML={{ __html: stepDescription }} />
         </div>
-        <Oembed oembedContent={oembedContent} />
+        {oembedContent ? <Oembed oembedContent={oembedContent} /> : ''}
         {authenticated ? edit : null}
         <Lightbox display={this.state.displayCopyPath} onClose={onLightboxClose}>
           <CopyLearningPath learningPath={learningPath} onClose={onLightboxClose} onCopy={onCopy} />
