@@ -32,7 +32,10 @@ export function fetchLearningPathStep(pathId, stepId) {
     return fetchPathStep(authToken, { pathId, stepId })
     .then(step => {
       if (step.embedContent) {
-        dispatch(fetchOembed({ url: oembedContentI18N(step, locale, true).url, maxwidth: Math.ceil(window.innerWidth * 0.5), maxheight: Math.ceil((window.innerWidth * 0.5) / 2) }));
+        const oembedContent = oembedContentI18N(step, locale, true);
+        if (oembedContent && oembedContent.url) {
+          dispatch(fetchOembed({ url: oembedContent.url, maxwidth: Math.ceil(window.innerWidth) }));
+        }
       }
       dispatch(setLearningPathStep(step));
     })
