@@ -4,7 +4,6 @@ import polyglot from '../../i18n';
 export default class SearchForm extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       query: props.query,
       sort: props.sort,
