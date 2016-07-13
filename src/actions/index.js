@@ -5,7 +5,6 @@ import logout from './logout';
 import fetchLearningPaths from './fetchLearningPaths';
 import fetchMyLearningPaths from './fetchMyLearningPaths';
 import checkValidSession from './checkValidSession.js';
-import fetchOembed from './fetchOembed';
 import validateOembed from './validateOembed';
 import updateLearningPathStatus from './updateLearningPathStatus';
 
@@ -16,7 +15,6 @@ export const setLearningPathsTotalCount = createAction('SET_LEARNING_PATHS_TOTAL
 export const setMyLearningPathsSortOrder = createAction('SET_MY_LEARNING_PATHS_SORT_ORDER');
 export const setUserData = createAction('SET_USER_DATA');
 export const logoutAction = createAction('LOGOUT');
-export const setOembedObject = createAction('SET_OEMBED_OBJECT');
 export const setLearningPathStatus = createAction('UPDATE_LEARNING_PATH_STATUS');
 export const closeSidebars = createAction('CLOSE_SIDEBARS');
 export const openLeftSidebar = createAction('OPEN_LEFT_SIDEBAR');
@@ -26,7 +24,6 @@ export {
   logout,
   fetchLearningPaths,
   fetchMyLearningPaths,
-  fetchOembed,
   validateOembed,
   updateLearningPathStatus,
 };
@@ -44,7 +41,6 @@ export default {
   fetchMyLearningPaths,
   checkValidSession,
   logoutAction,
-  fetchOembed,
   validateOembed,
   setLearningPathStatus,
   closeSidebars,

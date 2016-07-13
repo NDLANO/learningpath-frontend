@@ -94,3 +94,26 @@ test('actions/fetchLearningPathStep access denied', t => {
     })
     .catch(done);
 });
+
+test('actions/fetchLearningPathStep with embedContent', t => {
+  const done = res => {
+    t.end(res);
+    nock.cleanAll();
+  };
+
+  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+    .get(`/learningpaths/${pathId}/learningsteps/${stepId}`)
+    .reply(200, { id: stepId, seqNo: 3, embedContent: [{ url: 'test', html: 'ddd', language: 'nb' }] });
+
+  const store = mockStore({ authToken });
+
+  store.dispatch(fetchLearningPathStep(pathId, stepId))
+    .then(() => {
+      t.deepEqual(store.getActions(), [
+        setLearningPathStep({ id: stepId, seqNo: 3, embedContent: [{ url: 'test', html: 'ddd', language: 'nb' }] }),
+      ]);
+      t.doesNotThrow(() => apiMock.done());
+      done();
+    })
+    .catch(done);
+});
