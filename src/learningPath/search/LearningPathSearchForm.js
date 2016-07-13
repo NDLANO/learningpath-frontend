@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import polyglot from '../../i18n';
-
+import isEmpty from 'lodash/isEmpty';
 export default class SearchForm extends Component {
   constructor(props) {
     super(props);
@@ -20,12 +20,15 @@ export default class SearchForm extends Component {
   }
 
   handleQueryChange(evt) {
+    if (isEmpty(this.state.query)) {
+      this.setState({ sort: 'relevance' });
+    }
     this.setState({ query: evt.target.value });
   }
 
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.onSearchQuerySubmit(this.state.query);
+    this.props.onSearchQuerySubmit(this.state.query, this.state.sort);
   }
 
   render() {
