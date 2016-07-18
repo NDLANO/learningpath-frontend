@@ -4,6 +4,9 @@ import { Link } from 'react-router';
 import LabeledIcon from '../../common/LabeledIcon';
 import { titleI18N, descriptionI18N, tagsI18N } from '../../util/i18nFieldFinder';
 import TagsInput from '../../common/TagsInput';
+import LicenseSelector from './copyright/LicenseSelector';
+import Contributors from './copyright/Contributors';
+
 import polyglot from '../../i18n';
 import classNames from 'classnames';
 import { reduxForm } from 'redux-form';
@@ -11,7 +14,7 @@ import LearningPathDuration from './LearningPathDuration';
 import isInteger from 'lodash/isInteger';
 import LearningPathImage from './LearningPathImage';
 import SubmitButton from '../../common/buttons/SubmitButton';
-const fields = ['title', 'description', 'duration', 'tags', 'coverPhotoMetaUrl'];
+const fields = ['title', 'description', 'duration', 'tags', 'coverPhotoMetaUrl', 'license', 'contributors'];
 
 const validate = values => {
   const errors = {};
@@ -39,20 +42,20 @@ const validate = values => {
 const LearningPathForm = (props) => {
   const {
     tagOptions,
-    fields: { title, description, duration, tags, coverPhotoMetaUrl },
+    fields: { title, description, duration, tags, coverPhotoMetaUrl, license, contributors },
     handleSubmit,
     submitting,
     learningPath,
     lang,
     localFetchImages,
     fetchImage,
+    licenseOptions,
   } = props;
 
   const inputClassName = (hasError, isTextArea) => classNames({
     'input--alert': hasError,
     'textarea textarea--resize-vertical': isTextArea,
   });
-
 
   const remainingDescriptionLength = description.value ? 150 - description.value.length : 150;
   return (
@@ -102,6 +105,15 @@ const LearningPathForm = (props) => {
             </SubmitButton>
           </div>
         </div>
+
+        <div className="learningPath-contributors">
+          <label htmlFor="license" className="label--medium-bold  label--medium">{polyglot.t('learningPath.copyright.contributors')}</label>
+          <Contributors id="contributors" {...contributors} />
+        </div>
+        <div className="learningPath-copyright">
+          <label htmlFor="license" className="label--medium-bold  label--medium">{polyglot.t('learningPath.copyright.license')}</label>
+          <LicenseSelector id="license" licenseOptions={licenseOptions} {...license} />
+        </div>
       </div>
     </form>
   );
@@ -117,6 +129,7 @@ LearningPathForm.propTypes = {
   lang: PropTypes.string.isRequired,
   localFetchImages: PropTypes.func.isRequired,
   fetchImage: PropTypes.func.isRequired,
+  licenseOptions: PropTypes.array.isRequired,
 };
 
 const convertedDuration = (value) => {
@@ -134,6 +147,9 @@ const mapStateToProps = (state, props) => ({
     duration: convertedDuration(props.learningPath.duration),
     tags: defined(tagsI18N(props.learningPath, props.lang), []),
     coverPhotoMetaUrl: props.learningPath.coverPhoto ? props.learningPath.coverPhoto.metaUrl : '',
+    license: props.learningPath.copyright && props.learningPath.copyright.license ? props.learningPath.copyright.license : '',
+    contributors: props.learningPath.copyright && props.learningPath.copyright.contributors ? props.learningPath.copyright.contributors : [],
+
   },
 });
 

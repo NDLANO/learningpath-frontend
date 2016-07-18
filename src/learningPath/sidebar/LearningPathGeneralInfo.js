@@ -10,6 +10,7 @@ import { closeSidebars } from '../../actions';
 import LabeledIcon from '../../common/LabeledIcon';
 import polyglot from '../../i18n';
 import CopyLearningPath from '../../learningPath/new/CopyLearningPath';
+import LearningPathCopyright from './LearningPathCopyright';
 class LearningPathGeneralInfo extends React.Component {
   constructor(props) {
     super(props);
@@ -56,6 +57,7 @@ class LearningPathGeneralInfo extends React.Component {
           <div className="learningpath-general-info_b">
             <LabeledIcon.Today labelText={formatDate(learningPath.lastUpdated, lang)} tagName="time" />
             <LabeledIcon.QueryBuilder labelText={formatDuration(learningPath.duration, lang)} tagName="time" />
+            <LearningPathCopyright copyright={learningPath.copyright} />
           </div>
           {this.renderAction()}
         </div>

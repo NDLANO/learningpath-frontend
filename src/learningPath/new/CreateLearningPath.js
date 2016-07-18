@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { reduxForm, reset } from 'redux-form';
 import polyglot from '../../i18n';
-
-const fields = ['title', 'description'];
+import LicenseSelector from '../edit/copyright/LicenseSelector';
+const fields = ['title', 'description', 'license'];
 
 class CreateLearningPath extends React.Component {
 
@@ -13,9 +13,10 @@ class CreateLearningPath extends React.Component {
   }
   render() {
     const {
-      fields: { title, description },
+      fields: { title, description, license },
       submitting,
       handleSubmit,
+      licenseOptions,
     } = this.props;
     return (
       <form onSubmit={handleSubmit}>
@@ -27,8 +28,13 @@ class CreateLearningPath extends React.Component {
         <div>
           <label>{polyglot.t('createLearningPath.description')}</label>
           <textarea rows="4" cols="50" placeholder={polyglot.t('createLearningPath.descriptionPlaceholder')} maxLength="150" className="textarea" {...description} />
+          <p className="learning-path_input-information">{polyglot.t('createLearningPath.descriptionMaxLength')}</p>
         </div>
-        <p className="hint-text">{polyglot.t('createLearningPath.descriptionMaxLength')}</p>
+        <div>
+          <label>Lisens</label>
+          <LicenseSelector licenseOptions={licenseOptions} {...license} />
+          <p className="learning-path_input-information">{polyglot.t('createLearningPath.descriptionMaxLength')}</p>
+        </div>
         <button className="button cta-link cta-link--block" disabled={submitting} type="submit">
           {polyglot.t('createLearningPath.createButton')}
         </button>
@@ -42,6 +48,7 @@ CreateLearningPath.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
+  licenseOptions: PropTypes.array.isRequired,
 };
 
 export default reduxForm({

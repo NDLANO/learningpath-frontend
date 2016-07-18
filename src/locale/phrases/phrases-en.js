@@ -79,6 +79,10 @@ const phrases = {
     imagePick: 'Search and choose picture for learning path',
     duration: 'Duration',
     tags: 'Tags',
+    copyright: {
+      license: 'License',
+      contributors: 'Contributors',
+    },
     image: {
       title: 'Illustrative picture',
       changeImage: 'Change picture',
@@ -128,6 +132,8 @@ const phrases = {
     stepDescriptionPlaceholder: 'Write a description here',
     titlePlaceHolder: 'Write a title here',
     previewOembed: 'Preview whole article',
+    noLicensChosen: 'No licens chosen',
+
   },
   sortSteps: {
     sortOrDelete: 'Sort or delete learning step',
@@ -180,6 +186,7 @@ const phrases = {
         action: 'Undo',
       },
     },
+    license: 'License: %{license}',
   },
   updateLearningPath: {
     updatedMsg: 'Saved OK',
@@ -188,6 +195,11 @@ const phrases = {
     createNew: 'Create new tag',
     emptyList: 'No tags available',
     emptyFilter: 'No matching tags found',
+  },
+  copyrightInput: {
+    createNew: 'Create a new contributer',
+    emptyList: '',
+    emptyFilter: 'No contributers found. Add a contributer',
   },
   updateLearningPathStatus: {
     updateStatusMsg: 'Status updated',

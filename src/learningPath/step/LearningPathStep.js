@@ -45,6 +45,13 @@ class LearningPathStep extends React.Component {
           <button className="cta-link cta-link--round cta-link--scale" onClick={this.onCopyLearningPathClick}>{polyglot.t('copyLearningPath.createCopy')}</button>}
       </div>
       );
+    const license = learningPathStep.license && learningPathStep.license.license ? (
+      <p className="learning-step_license">
+        {learningPathStep.license.url ?
+          <a target="_blank" href={learningPathStep.license.url}>{polyglot.t('learningPathStep.license', { license: learningPathStep.license.license })}</a>
+        : polyglot.t('learningPathStep.license', { license: learningPathStep.license.license })}
+      </p>
+    ) : '';
     return (
       <main className="two-column_col two-column_col--white-bg">
         <Helmet title={polyglot.t('htmlTitleTemplates.learningPathStep', { title: stepTitle || '' })} />
@@ -52,6 +59,7 @@ class LearningPathStep extends React.Component {
           {learningPathStep.showTitle ? (
             <div className="learning-step_hd">
               <h1 className="learning-step_title">{stepTitle}</h1>
+              {license}
             </div>
           ) : null}
           <div className="learning-step_bd" dangerouslySetInnerHTML={{ __html: stepDescription }} />

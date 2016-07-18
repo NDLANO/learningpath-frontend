@@ -51,4 +51,5 @@ Icon.RemoveRedEye = props => (<Icon {...props} className={classNames('icon--remo
 Icon.ContentCopy = props => (<Icon {...props} className={classNames('icon--content_copy', props.className)} svgDefId="icon-content_copy" />);
 Icon.ArrowUp = props => (<Icon {...props} className={classNames('icon--keyboard-arrow-up', props.className)} svgDefId="icon-keyboard_arrow_up" />);
 Icon.ArrowDown = props => (<Icon {...props} className={classNames('icon--keyboard-arrow-down', props.className)} svgDefId="icon-keyboard_arrow_down" />);
+Icon.Copyright = props => (<Icon {...props} className={classNames('icon--copyright', props.className)} svgDefId="icon-copyright" />);
 export default Icon;
