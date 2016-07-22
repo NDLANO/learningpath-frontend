@@ -16,7 +16,7 @@ License.propTypes = {
   copyright: PropTypes.object.isRequired,
 };
 
-export const Contributors = ({ copyright }) => {
+const Contributors = ({ copyright }) => {
   if (!copyright.contributors || isEmpty(copyright.contributors)) {
     return null;
   }

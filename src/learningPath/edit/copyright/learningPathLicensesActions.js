@@ -1,10 +1,10 @@
 import { createAction } from 'redux-actions';
 import { fetchPathLicenses } from '../../../sources/learningpaths';
-import { applicationError } from '../../../actions';
+import { applicationError } from '../../../messages/messagesActions';
 
-const setLearningPathLicensens = createAction('SET_LEARNING_PATH_LICENSES');
+export const setLearningPathLicensens = createAction('SET_LEARNING_PATH_LICENSES');
 
-function fetchLearningPathLicenses() {
+export function fetchLearningPathLicenses() {
   return (dispatch, getState) => fetchPathLicenses(getState().authToken)
     .then(licenses => dispatch(setLearningPathLicensens(licenses)))
     .catch(err => dispatch(applicationError(err)));

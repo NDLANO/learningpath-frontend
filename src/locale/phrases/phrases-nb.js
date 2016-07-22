@@ -132,7 +132,7 @@ const phrases = {
     stepDescriptionPlaceholder: 'Skriv en beskrivelse her',
     titlePlaceHolder: 'Skriv en tittel her',
     previewOembed: 'Forhåndsvis hele artikkelen',
-    noLicensChosen: 'Ingen lisens valgt',
+    noLicenseChosen: 'Ingen lisens valgt',
   },
   sortSteps: {
     sortOrDelete: 'Sorter eller slett læringssteg',
@@ -197,7 +197,6 @@ const phrases = {
   },
   copyrightInput: {
     createNew: 'Opprett ny bidragsyter',
-    emptyList: '',
     emptyFilter: 'Ingen bidragsytere funnet. Legg derfor til bidragsyter',
   },
   updateLearningPathStatus: {

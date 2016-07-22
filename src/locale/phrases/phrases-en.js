@@ -132,7 +132,7 @@ const phrases = {
     stepDescriptionPlaceholder: 'Write a description here',
     titlePlaceHolder: 'Write a title here',
     previewOembed: 'Preview whole article',
-    noLicensChosen: 'No licens chosen',
+    noLicenseChosen: 'No license chosen',
 
   },
   sortSteps: {
@@ -198,7 +198,6 @@ const phrases = {
   },
   copyrightInput: {
     createNew: 'Create a new contributer',
-    emptyList: '',
     emptyFilter: 'No contributers found. Add a contributer',
   },
   updateLearningPathStatus: {
