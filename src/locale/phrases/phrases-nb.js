@@ -79,6 +79,10 @@ const phrases = {
     imagePick: 'Søk og velg bilde til læringsstien',
     duration: 'Varighet',
     tags: 'Tagger',
+    copyright: {
+      license: 'Lisens',
+      contributors: 'Bidragsytere',
+    },
     image: {
       title: 'Illustrerende bilde',
       changeImage: 'Bytt bilde',
@@ -128,6 +132,7 @@ const phrases = {
     stepDescriptionPlaceholder: 'Skriv en beskrivelse her',
     titlePlaceHolder: 'Skriv en tittel her',
     previewOembed: 'Forhåndsvis hele artikkelen',
+    noLicenseChosen: 'Ingen lisens valgt',
   },
   sortSteps: {
     sortOrDelete: 'Sorter eller slett læringssteg',
@@ -180,6 +185,7 @@ const phrases = {
         action: 'Angre sletting',
       },
     },
+    license: 'Lisens: %{license}',
   },
   updateLearningPath: {
     updatedMsg: 'Lagret OK',
@@ -188,6 +194,10 @@ const phrases = {
     createNew: 'Opprett ny tag',
     emptyList: 'Det er ingen tagger i denne listen',
     emptyFilter: 'Fant ingen passende tagger',
+  },
+  copyrightInput: {
+    createNew: 'Opprett ny bidragsyter',
+    emptyFilter: 'Ingen bidragsytere funnet. Legg derfor til bidragsyter',
   },
   updateLearningPathStatus: {
     updateStatusMsg: 'Oppdatert status OK',

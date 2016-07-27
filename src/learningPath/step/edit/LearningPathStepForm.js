@@ -11,7 +11,7 @@ import polyglot from '../../../i18n';
 import Icon from '../../../common/Icon';
 import OnClickCheckbox from './OnClickCheckbox';
 import OneLineEditor from '../../../common/editors/OneLineEditor';
-
+import LearningPathStepLicense from './LearningPathStepLicense';
 import PreviewOembed from '../oembed/PreviewOembed';
 import LearningPathStepIcon from '../LearningPathStepIcon';
 import {
@@ -24,10 +24,11 @@ const LearningPathStepForm = (props) => {
     lang,
     oembedPreview,
     error,
-    fields: { title, description, type, url, showTitle },
+    fields: { title, description, type, url, showTitle, license },
     handleSubmit,
     submitting,
     learningPathId,
+    licenseOptions,
   } = props;
 
   const embedContent = oembedContentI18N({ embedContent: oembedPreview }, lang);
@@ -48,7 +49,6 @@ const LearningPathStepForm = (props) => {
   if (!type.value) {
     return <MediaTypeSelect {...type} />;
   }
-
   return (
     <form onSubmit={handleSubmit} className="learning-step-form">
       <div className="learning-step-form_group">
@@ -63,6 +63,9 @@ const LearningPathStepForm = (props) => {
           <option value="TASK">{polyglot.t('editPathStep.mediatype.task')}</option>
           <option value="SUMMARY">{polyglot.t('editPathStep.mediatype.summary')}</option>
         </select>
+      </div>
+      <div className="learning-step-form_group">
+        <LearningPathStepLicense licenseOptions={licenseOptions} {...license} />
       </div>
       <div className="learning-step-form_group">
         <div className="learning-step-form_left">
@@ -116,6 +119,7 @@ LearningPathStepForm.propTypes = {
   learningPathId: PropTypes.number.isRequired,
   oembedPreview: PropTypes.array.isRequired,
   validateOembedUrl: PropTypes.func.isRequired,
+  licenseOptions: PropTypes.array.isRequired,
 };
 
 
@@ -127,6 +131,7 @@ const mapStateToProps = (state, props) => ({
     description: descriptionI18N(props.step, props.lang),
     url: oembedUrlI18N(props.step, props.lang),
     type: props.step.type,
+    license: defined(props.step.license, ''),
   },
 });
 
@@ -147,7 +152,7 @@ const validate = createValidator({
 
 export default reduxForm({
   form: 'learning-path-step',
-  fields: ['title', 'description', 'url', 'type', 'showTitle'],
+  fields: ['title', 'description', 'url', 'type', 'showTitle', 'license'],
   asyncValidate,
   validate,
   asyncBlurFields: ['url'],

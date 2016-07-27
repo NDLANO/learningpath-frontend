@@ -11,6 +11,7 @@ import learningPaths from './learningPaths';
 import learningPathsTotalCount from './learningPathsTotalCount';
 import myLearningPathsSortOrder from './myLearningPathsSortOrder';
 import learningPathTags from '../learningPath/edit/tags/learningPathTagsReducer';
+import learningPathLicenses from '../learningPath/edit/copyright/learningPathLicensesReducer';
 import oembedPreview from './oembedPreview';
 import messages from '../messages/messagesReducer';
 import sidebar from './sidebar';
@@ -31,6 +32,7 @@ const rootReducers = combineReducers({
   sidebar,
   oembedPreview,
   learningPathTags,
+  learningPathLicenses,
   imageSearch,
   routing: routerReducer,
   form: formReducer,

@@ -8,7 +8,7 @@ import { deleteLearningPath, createLearningPath, copyLearningPath } from '../lea
 import Icon from '../common/Icon';
 import LabeledIcon from '../common/LabeledIcon';
 import polyglot from '../i18n';
-
+import get from 'lodash/get';
 import { LearningPathDropdown } from './LearningPathDropdown';
 import formatDate from '../util/formatDate';
 import formatDuration from '../util/formatDuration';
@@ -17,7 +17,7 @@ import Lightbox from '../common/Lightbox';
 import Masthead from '../common/Masthead';
 import CreateLearningPath from '../learningPath/new/CreateLearningPath';
 import { Wrapper, Content, Footer } from '../common/Layout';
-
+import { fetchLearningPathLicensesIfNeeded } from '../learningPath/edit/copyright/learningPathLicensesActions';
 export class MyPage extends React.Component {
   constructor(props) {
     super(props);
@@ -27,7 +27,10 @@ export class MyPage extends React.Component {
     };
     this.onCreateLearningPathClick = this.onCreateLearningPathClick.bind(this);
   }
-
+  componentDidMount() {
+    const { fetchLearningPathLicenses } = this.props;
+    fetchLearningPathLicenses();
+  }
   onCreateLearningPathClick() {
     this.setState({
       displayCreatePath: true,
@@ -35,7 +38,7 @@ export class MyPage extends React.Component {
   }
 
   render() {
-    const { learningPaths, sortKey, setSortKey, deletePath, updatePathStatus, createPath, copyPath } = this.props;
+    const { learningPaths, sortKey, setSortKey, deletePath, updatePathStatus, createPath, copyPath, licenses } = this.props;
     const { lang } = this.context;
     const items = learningPaths.map(lp => {
       const title = titleI18N(lp, lang, true);
@@ -101,7 +104,7 @@ export class MyPage extends React.Component {
     let onCreateLearningPathSubmit = values => createPath({
       title: [{ title: values.title, language: lang }],
       description: [{ description: values.description, language: lang }],
-      duration: 1, coverPhoto: { url: '', metaUrl: '' },
+      duration: 1, coverPhoto: { url: '', metaUrl: '' }, copyright: { license: values.license ? values.license : licenses[0], contributors: [] },
     });
 
     let onLightboxClose = () => this.setState({ displayCreatePath: false });
@@ -121,7 +124,7 @@ export class MyPage extends React.Component {
             <LabeledIcon.Add labelText={polyglot.t('myPage.newBtn')} />
           </button>
           <Lightbox display={this.state.displayCreatePath} onClose={onLightboxClose}>
-            <CreateLearningPath onSubmit={onCreateLearningPathSubmit} />
+            <CreateLearningPath onSubmit={onCreateLearningPathSubmit} licenseOptions={licenses} />
           </Lightbox>
         </Content>
         <Footer />
@@ -138,6 +141,8 @@ MyPage.propTypes = {
   createPath: PropTypes.func.isRequired,
   learningPaths: PropTypes.array,
   copyPath: PropTypes.func.isRequired,
+  fetchLearningPathLicenses: PropTypes.func.isRequired,
+  licenses: PropTypes.array.isRequired,
 };
 
 MyPage.defaultProps = { learningPaths: [], sortKey: 'title' };
@@ -165,7 +170,9 @@ const sortPaths = (paths, field, state) => {
 export function mapStateToProps(state) {
   const sortKey = state.myLearningPathsSortOrder || 'title';
   const learningPaths = sortPaths(state.learningPaths, sortKey, state);
-  return Object.assign({}, state, { learningPaths, sortKey });
+  const licenses = get(state, 'learningPathLicenses.all', []);
+
+  return Object.assign({}, state, { learningPaths, sortKey, licenses });
 }
 
 const mapDispatchToProps = {
@@ -174,6 +181,8 @@ const mapDispatchToProps = {
   updatePathStatus: updateLearningPathStatus,
   createPath: createLearningPath,
   copyPath: copyLearningPath,
+  fetchLearningPathLicenses: fetchLearningPathLicensesIfNeeded,
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyPage);
