@@ -24,7 +24,7 @@ test('actions/createLearningPathStep', t => {
   const learningStep = {
     title: [{ language: 'nb', title: 'Goat' }],
     description: [{ language: 'nb', description: 'this is a description' }],
-    embedContent: [{ language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY' }],
+    embedUrl: [{ language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY' }],
   };
 
   const learningStepReply = Object.assign({}, learningStep, { id: 1234 });
@@ -58,7 +58,7 @@ test('actions/createLearningPathStep access denied', (t) => {
   const learningStep = {
     title: [{ language: 'nb', title: 'Goat' }],
     description: [{ language: 'nb', description: 'this is a description' }],
-    embedContent: [{ language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY' }],
+    embedUrl: [{ language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY' }],
   };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })

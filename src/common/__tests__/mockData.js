@@ -85,7 +85,7 @@ const learningPath = {
           language: 'nb',
         },
       ],
-      embedContent: [
+      embedUrl: [
         {
           url: 'http://ndla.no/nb/node/24049',
           language: 'nb',
@@ -111,7 +111,7 @@ const learningPath = {
           language: 'nb',
         },
       ],
-      embedContent: [
+      embedUrl: [
         {
           url: 'http://ndla.no/nb/node/24049',
           language: 'nb',
@@ -154,7 +154,7 @@ const learningStep = {
       language: 'nb',
     },
   ],
-  embedContent: [
+  embedUrl: [
     {
       url: 'https://www.youtube.com/watch?v=RYLlSFmGfm0',
       language: 'nb',
@@ -180,7 +180,7 @@ const ndlaLearningStep = {
       language: 'nb',
     },
   ],
-  embedContent: [
+  embedUrl: [
     {
       url: 'http://ndla.no/nb/node/24049',
       language: 'nb',

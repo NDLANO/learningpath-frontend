@@ -48,7 +48,7 @@ test('util/i18nFieldFinder oembedContentI18N', t => {
   t.equal(typeof oembedContentI18N, 'function');
 
   const learningPathStep = {
-    embedContent: [
+    embedUrl: [
       { url: 'http://example.com/sv', html: '<iframe src="http://example.com/sv">', width: 500, language: 'sv' },
       { url: 'http://example.com', html: '<iframe src="http://example.com">', width: 500, language: 'nb' },
     ],
