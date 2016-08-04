@@ -6,6 +6,7 @@ import { routerActions } from 'react-router-redux';
 import polyglot from '../../i18n';
 import get from 'lodash/get';
 import { oembedContentI18N } from '../../util/i18nFieldFinder';
+import cloneDeep from 'lodash/cloneDeep';
 
 export const setLearningPathStep = createAction('SET_LEARNING_PATH_STEP');
 export const sortLearningPathSteps = createAction('SORT_LEARNING_PATH_STEPS');
@@ -13,7 +14,11 @@ export const createEmptyLearningPathStep = createAction('CREATE_EMPTY_LEARNING_P
 export const setOembedObject = createAction('SET_OEMBED_OBJECT');
 export function fetchOembed(query) {
   return (dispatch, getState) => fetchOembedUrl(getState().authToken, query)
-    .then(object => dispatch(setOembedObject(object)))
+    .then(object => {
+      const clonedObject = cloneDeep(object);
+      clonedObject.url = query.url;
+      dispatch(setOembedObject(clonedObject));
+    })
     .catch(err => dispatch(applicationError(err)));
 }
 
