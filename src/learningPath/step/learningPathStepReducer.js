@@ -24,7 +24,7 @@ export default handleActions({
       return {
         title: [],
         description: [],
-        embedContent: [],
+        embedUrl: [],
         type: '',
         license: '',
       };

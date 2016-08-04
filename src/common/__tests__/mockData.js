@@ -85,13 +85,17 @@ const learningPath = {
           language: 'nb',
         },
       ],
-      embedContent: [
+      embedUrl: [
         {
           url: 'http://ndla.no/nb/node/24049',
           language: 'nb',
-          html: '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>',
         },
       ],
+      oembed: {
+        title: 'NDLA',
+        url: 'http://ndla.no/nb/node/24049',
+        html: '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>',
+      },
       type: 'TEXT',
       license: 'by-nc-sa',
       metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/7',
@@ -111,13 +115,17 @@ const learningPath = {
           language: 'nb',
         },
       ],
-      embedContent: [
+      embedUrl: [
         {
           url: 'http://ndla.no/nb/node/24049',
           language: 'nb',
-          html: '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>',
         },
       ],
+      oembed: {
+        title: 'NDLA',
+        url: 'http://ndla.no/nb/node/24049',
+        html: '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>',
+      },
       type: 'TEXT',
       metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/8',
     },
@@ -154,13 +162,17 @@ const learningStep = {
       language: 'nb',
     },
   ],
-  embedContent: [
+  embedUrl: [
     {
       url: 'https://www.youtube.com/watch?v=RYLlSFmGfm0',
       language: 'nb',
-      html: '<iframe width="480" height="270" src="https://www.youtube.com/embed/RYLlSFmGfm0?feature=oembed" frameborder="0" allowfullscreen></iframe>',
     },
   ],
+  oembed: {
+    title: 'NDLA',
+    url: 'https://www.youtube.com/watch?v=RYLlSFmGfm0',
+    html: '<iframe src="https://www.youtube.com/embed/RYLlSFmGfm0?feature=oembed" allowfullscreen></iframe>',
+  },
   type: 'TEXT',
   metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/8',
 };
@@ -180,13 +192,17 @@ const ndlaLearningStep = {
       language: 'nb',
     },
   ],
-  embedContent: [
+  embedUrl: [
     {
       url: 'http://ndla.no/nb/node/24049',
       language: 'nb',
-      html: '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>',
     },
   ],
+  oembed: {
+    title: 'NDLA',
+    url: 'http://ndla.no/nb/node/24049',
+    html: '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>',
+  },
   type: 'TEXT',
   metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/9',
 };

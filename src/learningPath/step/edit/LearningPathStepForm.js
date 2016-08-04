@@ -31,7 +31,7 @@ const LearningPathStepForm = (props) => {
     licenseOptions,
   } = props;
 
-  const embedContent = oembedContentI18N({ embedContent: oembedPreview }, lang);
+  const embedContent = oembedContentI18N({ embedUrl: oembedPreview }, lang);
 
   const abortUrl = step.id ? `/learningpaths/${learningPathId}/step/${step.id}` : `/learningpaths/${learningPathId}`;
 

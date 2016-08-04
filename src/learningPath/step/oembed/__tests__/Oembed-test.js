@@ -17,7 +17,7 @@ test('component/Oembed urlIsNDLA', t => {
 });
 
 test('component/Oembed', t => {
-  const oembed = learningStep.embedContent[0];
+  const oembed = learningStep.oembed;
   const component = mount(<Oembed oembedContent={oembed} />);
 
   const div = component.find('.learning-step');
@@ -35,7 +35,7 @@ test('component/Oembed', t => {
 test('component/Oembed ndla resource', t => {
   const addEventListener = spy(window, 'addEventListener');
 
-  const oembed = ndlaLearningStep.embedContent[0];
+  const oembed = ndlaLearningStep.oembed;
   const component = mount(<Oembed oembedContent={oembed} />);
 
   const div = component.find('.learning-step');
@@ -60,8 +60,8 @@ test('component/Oembed resize message listener', t => {
   const add = spy(window, 'addEventListener');
   const remove = spy(window, 'removeEventListener');
 
-  const oembed = learningStep.embedContent[0];
-  const ndlaOembed1 = ndlaLearningStep.embedContent[0];
+  const oembed = learningStep.oembed;
+  const ndlaOembed1 = ndlaLearningStep.oembed;
   const ndlaOembed2 = Object.assign({}, ndlaOembed1, { url: `${ndlaOembed1.url}?another` });
   const ndlaOembed3 = Object.assign({}, ndlaOembed1, { url: `${ndlaOembed1.url}?yetanother` });
 
@@ -103,8 +103,8 @@ test('component/Oembed resize message listener', t => {
 });
 
 test('component/Oembed iframe resizing', t => {
-  const ndlaOembed = ndlaLearningStep.embedContent[0];
-  const oembed = learningStep.embedContent[0];
+  const ndlaOembed = ndlaLearningStep.oembed;
+  const oembed = learningStep.oembed;
 
   const component = mount(<Oembed oembedContent={ndlaOembed} />);
   const instance = component.instance();
