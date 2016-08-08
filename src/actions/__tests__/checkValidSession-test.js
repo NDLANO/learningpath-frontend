@@ -46,7 +46,7 @@ test('actions/checkValidSession invalid authToken', (t) => {
   store.dispatch(actions.checkValidSession())
     .then(() => {
       t.deepEqual(store.getActions(), [
-        { type: 'LOGOUT', payload: undefined },
+        { type: 'LOGOUT' },
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();

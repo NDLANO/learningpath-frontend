@@ -27,7 +27,7 @@ test('actions/logout', t => {
   store.dispatch(actions.logout())
     .then(() => {
       t.deepEqual(store.getActions(), [
-        { type: 'LOGOUT', payload: undefined },
+        { type: 'LOGOUT' },
       ]);
 
       t.doesNotThrow(() => apiMock.done());

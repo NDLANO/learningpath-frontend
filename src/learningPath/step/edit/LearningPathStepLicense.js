@@ -15,7 +15,6 @@ const LearningPathStepLicense = (props) => {
   return (
     <div>
       <DropdownList
-        {...props}
         textField="description"
         value={currentValue}
         onBlur={() => onBlur(currentValue)}

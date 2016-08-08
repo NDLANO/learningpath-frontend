@@ -2,10 +2,10 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
 function Icon(props) {
-  const { svgDefId } = props;
+  const { svgDefId, ...rest } = props;
 
   return (
-    <svg {...props} className={classNames('icon', props.className)}>
+    <svg {...rest} className={classNames('icon', props.className)}>
       <use xlinkHref={`/assets/symbol-defs.svg#${svgDefId}`} />
     </svg>
   );
