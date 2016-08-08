@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import nock from 'nock';
 import payload403invalid from './payload403invalid';
 
-import actions from '..';
+import { logout } from '..';
 import { applicationError } from '../../messages/messagesActions';
 
 const middleware = [thunk];
@@ -24,7 +24,7 @@ test('actions/logout', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch(actions.logout())
+  store.dispatch(logout())
     .then(() => {
       t.deepEqual(store.getActions(), [
         { type: 'LOGOUT' },
@@ -47,7 +47,7 @@ test('actions/logout access denied', t => {
     .reply(403, { message: 'Invalid' });
 
   const store = mockStore({ authToken });
-  store.dispatch(actions.logout())
+  store.dispatch(logout())
     .then(() => {
       t.deepEqual(store.getActions(), [
         applicationError(payload403invalid()),

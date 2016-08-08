@@ -6,10 +6,10 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
 import LoginProviders from '../LoginProviders';
+import requireAuthentication from '../requireAuthentication';
 
 const mockStore = configureStore([thunk]);
 
-import requireAuthentication from '../requireAuthentication';
 
 function Whatever() {
   return <div className="whatever">whatever</div>;

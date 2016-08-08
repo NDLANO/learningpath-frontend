@@ -1,9 +1,10 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import assign from 'lodash/assign';
-import LearningPathStepForm from './LearningPathStepForm';
 import { stateToHTML } from 'draft-js-export-html';
 import get from 'lodash/get';
+
+import LearningPathStepForm from './LearningPathStepForm';
 import {
   updateLearningPathStep,
   createLearningPathStep,

@@ -1,10 +1,10 @@
 import test from 'tape';
 import { isFSA } from 'flux-standard-action';
-import actions from '..';
+import { setAuthenticated } from '..';
 
 
 test('actions/setAuthenticated', (t) => {
-  const actual = actions.setAuthenticated(true);
+  const actual = setAuthenticated(true);
 
   t.ok(isFSA(actual), 'FSA compliant action');
 
@@ -16,7 +16,7 @@ test('actions/setAuthenticated', (t) => {
 });
 
 test('actions/setAuthenticated with error', (t) => {
-  const actual = actions.setAuthenticated(new Error('fail!'));
+  const actual = setAuthenticated(new Error('fail!'));
 
   t.ok(isFSA(actual), 'FSA compliant action');
 

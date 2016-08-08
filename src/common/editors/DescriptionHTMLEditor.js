@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import { Editor, EditorState, RichUtils } from 'draft-js';
 import { Record } from 'immutable';
-import Icon from '../Icon';
 import classNames from 'classnames';
 import { stateFromHTML } from 'draft-js-import-html';
+import Icon from '../Icon';
 import polyglot from '../../i18n';
 
 const StyleButton = ({ active, icon, style, onToggle }) => {

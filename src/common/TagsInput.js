@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
-import polyglot from '../i18n';
 import Multiselect from 'react-widgets/lib/Multiselect';
+
+import polyglot from '../i18n';
 
 
 class TagsInput extends Component {

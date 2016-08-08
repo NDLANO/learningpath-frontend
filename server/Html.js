@@ -5,7 +5,7 @@ import head from './Meta';
 
 const GoogleTagMangerNoScript = () => {
   if (config.googleTagMangerId) {
-    return <noscript><iframe src={`//www.googletagmanager.com/ns.html?id=${config.googleTagMangerId}`} height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}></iframe></noscript>;
+    return <noscript><iframe src={`//www.googletagmanager.com/ns.html?id=${config.googleTagMangerId}`} height="0" width="0" style={{ display: 'none', visibility: 'hidden' }} /></noscript>;
   }
   return null;
 };
@@ -44,7 +44,7 @@ const Html = (props) => {
         <GoogleTagMangerNoScript />
         <GoogleTagMangerScript />
         <div id="appContainer" />
-        <script src="/assets/app.js"></script>
+        <script src="/assets/app.js" />
       </body>
     </html>
   );

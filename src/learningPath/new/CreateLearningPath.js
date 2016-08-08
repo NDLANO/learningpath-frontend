@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { reduxForm, reset } from 'redux-form';
 import polyglot from '../../i18n';
 import LicenseSelector from '../edit/copyright/LicenseSelector';
+
 const fields = ['title', 'description', 'license'];
 
 class CreateLearningPath extends React.Component {
@@ -22,16 +23,16 @@ class CreateLearningPath extends React.Component {
       <form onSubmit={handleSubmit}>
         <h1>{polyglot.t('createLearningPath.createNew')}</h1>
         <div>
-          <label>{polyglot.t('createLearningPath.title')}</label>
-          <input type="text" required {...title} />
+          <label htmlFor="title">{polyglot.t('createLearningPath.title')}</label>
+          <input id="title" type="text" required {...title} />
         </div>
         <div>
-          <label>{polyglot.t('createLearningPath.description')}</label>
-          <textarea rows="4" cols="50" placeholder={polyglot.t('createLearningPath.descriptionPlaceholder')} maxLength="150" className="textarea" {...description} />
+          <label htmlFor="description">{polyglot.t('createLearningPath.description')}</label>
+          <textarea id="description" rows="4" cols="50" placeholder={polyglot.t('createLearningPath.descriptionPlaceholder')} maxLength="150" className="textarea" {...description} />
           <p className="learning-path_input-information">{polyglot.t('createLearningPath.descriptionMaxLength')}</p>
         </div>
         <div>
-          <label>Lisens</label>
+          <label htmlFor="license">Lisens</label>
           <LicenseSelector licenseOptions={licenseOptions} {...license} />
           <p className="learning-path_input-information">{polyglot.t('createLearningPath.descriptionMaxLength')}</p>
         </div>

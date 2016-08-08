@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import classNames from 'classnames';
 
 import Icon from '../common/Icon';
-import classNames from 'classnames';
 import { timeoutMessage, clearAllMessages, clearMessage } from '../messages/messagesActions';
 
 const priorities = { info: 0, success: 1, warning: 2, danger: 3 };

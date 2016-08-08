@@ -1,11 +1,11 @@
 import { compose, createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import persistState from 'redux-localstorage';
+import { routerMiddleware } from 'react-router-redux';
 
 import reducers from './reducers';
 import { errorReporter } from './middleware';
 
-import { routerMiddleware } from 'react-router-redux';
 
 const slicer = (paths) =>
   // custom slicer because default slicer does not store falsy values

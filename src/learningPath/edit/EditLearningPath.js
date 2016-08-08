@@ -1,13 +1,15 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
+import isEmpty from 'lodash/isEmpty';
+
 import LearningPathForm from './LearningPathForm';
 import { fetchLearningPathTagsIfNeeded } from './tags/learningPathTagsActions';
 import { fetchLearningPathLicensesIfNeeded } from './copyright/learningPathLicensesActions';
 import { getLearningPathTagsByLanguage } from './tags/learningPathTagsSelectors';
 import { fetchLearningPathImages, fetchLearningPathImage, fetchLearningPathImageWithMetaUrl } from '../../imageSearch/imageActions';
 import { updateLearningPath } from '../learningPathActions';
-import isEmpty from 'lodash/isEmpty';
+
 class EditLearningPath extends Component {
   componentDidMount() {
     const { fetchLearningPathTags, fetchLearningPathLicenses } = this.props;

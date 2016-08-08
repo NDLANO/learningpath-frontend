@@ -7,7 +7,9 @@ import { setImages } from '../imageActions';
 test('actions/setImages', (t) => {
   const actual = setImages(
     {
-      page: 1, 'page-size': 16, totalCount: 2,
+      page: 1,
+      'page-size': 16,
+      totalCount: 2,
       results: [
         { id: '12345' }, { id: '67890' },
       ],
@@ -19,7 +21,9 @@ test('actions/setImages', (t) => {
   t.equal(actual.type, 'SET_IMAGES');
   t.deepEqual(actual.payload,
     {
-      page: 1, 'page-size': 16, totalCount: 2,
+      page: 1,
+      'page-size': 16,
+      totalCount: 2,
       results: [
         { id: '12345' }, { id: '67890' },
       ],

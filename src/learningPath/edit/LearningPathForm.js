@@ -1,19 +1,20 @@
 import React, { PropTypes } from 'react';
 import defined from 'defined';
 import { Link } from 'react-router';
+import isInteger from 'lodash/isInteger';
+import classNames from 'classnames';
+import { reduxForm } from 'redux-form';
+
 import LabeledIcon from '../../common/LabeledIcon';
 import { titleI18N, descriptionI18N, tagsI18N } from '../../util/i18nFieldFinder';
 import TagsInput from '../../common/TagsInput';
 import LicenseSelector from './copyright/LicenseSelector';
 import Contributors from './copyright/Contributors';
-
 import polyglot from '../../i18n';
-import classNames from 'classnames';
-import { reduxForm } from 'redux-form';
 import LearningPathDuration from './LearningPathDuration';
-import isInteger from 'lodash/isInteger';
 import LearningPathImage from './LearningPathImage';
 import SubmitButton from '../../common/buttons/SubmitButton';
+
 const fields = ['title', 'description', 'duration', 'tags', 'coverPhotoMetaUrl', 'license', 'contributors'];
 
 const validate = values => {

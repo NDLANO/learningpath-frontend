@@ -11,6 +11,7 @@ import LabeledIcon from '../../common/LabeledIcon';
 import polyglot from '../../i18n';
 import CopyLearningPath from '../../learningPath/new/CopyLearningPath';
 import LearningPathCopyright from './LearningPathCopyright';
+
 class LearningPathGeneralInfo extends React.Component {
   constructor(props) {
     super(props);

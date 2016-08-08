@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import sortBy from 'lodash/sortBy';
 import reverse from 'lodash/reverse';
+import get from 'lodash/get';
 import { setMyLearningPathsSortOrder, updateLearningPathStatus } from '../actions';
 import { deleteLearningPath, createLearningPath, copyLearningPath } from '../learningPath/learningPathActions';
 import Icon from '../common/Icon';
 import LabeledIcon from '../common/LabeledIcon';
 import polyglot from '../i18n';
-import get from 'lodash/get';
 import { LearningPathDropdown } from './LearningPathDropdown';
 import formatDate from '../util/formatDate';
 import formatDuration from '../util/formatDuration';
@@ -18,6 +18,7 @@ import Masthead from '../common/Masthead';
 import CreateLearningPath from '../learningPath/new/CreateLearningPath';
 import { Wrapper, Content, Footer } from '../common/Layout';
 import { fetchLearningPathLicensesIfNeeded } from '../learningPath/edit/copyright/learningPathLicensesActions';
+
 export class MyPage extends React.Component {
   constructor(props) {
     super(props);
@@ -104,7 +105,9 @@ export class MyPage extends React.Component {
     let onCreateLearningPathSubmit = values => createPath({
       title: [{ title: values.title, language: lang }],
       description: [{ description: values.description, language: lang }],
-      duration: 1, coverPhoto: { url: '', metaUrl: '' }, copyright: { license: values.license ? values.license : licenses[0], contributors: [] },
+      duration: 1,
+      coverPhoto: { url: '', metaUrl: '' },
+      copyright: { license: values.license ? values.license : licenses[0], contributors: [] },
     });
 
     let onLightboxClose = () => this.setState({ displayCreatePath: false });

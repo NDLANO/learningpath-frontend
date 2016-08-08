@@ -2,8 +2,9 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import defined from 'defined';
 import classNames from 'classnames';
-import LearningPathStepIcon from '../../learningPath/step/LearningPathStepIcon';
 import { connect } from 'react-redux';
+
+import LearningPathStepIcon from '../../learningPath/step/LearningPathStepIcon';
 import {
   closeSidebars,
   openLeftSidebar,

@@ -6,6 +6,7 @@ import polyglot from '../i18n';
 
 import LabeledIcon from './LabeledIcon';
 import { closeSidebars } from '../actions';
+
 export function SiteNav({ authenticated, userName, cssModifier, localCloseSidebars }) {
   let myPage;
   let logInOut;

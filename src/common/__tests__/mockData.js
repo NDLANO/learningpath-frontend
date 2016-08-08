@@ -8,11 +8,14 @@ const learningPaths = [
     ],
     description: [
       { description: `Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden.
-        Kurset fokuserer på kunst og kultur på et verdensperspektiv.`, language: 'nb' },
+        Kurset fokuserer på kunst og kultur på et verdensperspektiv.`,
+        language: 'nb' },
       { description: `Kurset dekker innføring og vil gje deg grunnleggjande forståing for vanlege omgrep i kunst og kultur verda.
-        Kurset fokuserer på kunst og kultur på eit verdsperspektiv.`, language: 'nn' },
+        Kurset fokuserer på kunst og kultur på eit verdsperspektiv.`,
+        language: 'nn' },
       { description: `The course covers the introduction and will give you a basic understanding of common concepts in the arts world.
-        The course focuses on art and culture in a world perspective`, language: 'en' },
+        The course focuses on art and culture in a world perspective`,
+        language: 'en' },
     ],
     metaUrl: 'http://api.test.ndla.no/learningpaths/1',
     duration: 1080,

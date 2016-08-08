@@ -1,12 +1,13 @@
 import { createAction } from 'redux-actions';
+import { routerActions } from 'react-router-redux';
+import get from 'lodash/get';
+import cloneDeep from 'lodash/cloneDeep';
+
 import { applicationError, addMessage } from '../../messages/messagesActions';
 import { fetchLearningPath } from '../learningPathActions';
 import { updateStep, createStep, deleteStep, fetchPathStep, updateSeqNo, activateDeletedStep, fetchOembedUrl } from '../../sources/learningpaths';
-import { routerActions } from 'react-router-redux';
 import polyglot from '../../i18n';
-import get from 'lodash/get';
 import { oembedContentI18N } from '../../util/i18nFieldFinder';
-import cloneDeep from 'lodash/cloneDeep';
 
 export const setLearningPathStep = createAction('SET_LEARNING_PATH_STEP');
 export const sortLearningPathSteps = createAction('SORT_LEARNING_PATH_STEPS');

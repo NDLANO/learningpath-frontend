@@ -11,7 +11,7 @@ export default function DescriptionEditor({ value, onChange, lang }) {
       maxlength={150}
       placeholder={polyglot.t('editPage.shortDescriptionPlaceholder')}
     />
-    <div className="editor_input-underline"></div>
+    <div className="editor_input-underline" />
   </div>);
 }
 

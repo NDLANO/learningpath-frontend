@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import PreviewImage from './PreviewImage';
+
 export default function ImageSearch({ image, onImageClick, selectedImage, onSaveImage }) {
   const activeClassName = () => classNames({
     'image_list-item': true,

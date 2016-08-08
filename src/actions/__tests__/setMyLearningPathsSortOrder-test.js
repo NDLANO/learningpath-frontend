@@ -1,9 +1,9 @@
 import test from 'tape';
 import { isFSA } from 'flux-standard-action';
-import actions from '..';
+import { setMyLearningPathsSortOrder } from '..';
 
 test('actions/setMyLearningPathsSortOrder', t => {
-  const actual = actions.setMyLearningPathsSortOrder('lastUpdated');
+  const actual = setMyLearningPathsSortOrder('lastUpdated');
 
   t.ok(isFSA(actual), 'FSA compliant action');
 
@@ -15,7 +15,7 @@ test('actions/setMyLearningPathsSortOrder', t => {
 });
 
 test('actions/setMyLearningPathsSortOrder with error', t => {
-  const actual = actions.setMyLearningPathsSortOrder(new Error('fail!'));
+  const actual = setMyLearningPathsSortOrder(new Error('fail!'));
 
   t.ok(isFSA(actual), 'FSA compliant action');
 

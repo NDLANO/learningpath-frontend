@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import classNames from 'classnames';
+import get from 'lodash/get';
 
 import Logo from './Logo';
 import SiteNav from './SiteNav';
 import Icon from './Icon';
-import classNames from 'classnames';
-import get from 'lodash/get';
 
 import {
   closeSidebars,

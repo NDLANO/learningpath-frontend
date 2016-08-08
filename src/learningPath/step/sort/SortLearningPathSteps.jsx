@@ -19,11 +19,11 @@ const SortLearningPathSteps = ({ learningPath }) =>
 
 
 SortLearningPathSteps.propTypes = {
-  learningPath: PropTypes.object.isRequired
+  learningPath: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => Object.assign({}, state, {
-  learningPath: state.learningPath
+  learningPath: state.learningPath,
 });
 
 export default connect(mapStateToProps)(SortLearningPathSteps);

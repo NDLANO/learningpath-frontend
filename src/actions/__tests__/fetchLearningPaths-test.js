@@ -3,7 +3,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 
-import actions from '..';
+import { fetchLearningPaths, setLearningPaths, setLearningPathsTotalCount } from '..';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
@@ -25,11 +25,11 @@ test('actions/fetchLearningPaths', t => {
 
   const store = mockStore({});
 
-  store.dispatch(actions.fetchLearningPaths())
+  store.dispatch(fetchLearningPaths())
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.setLearningPathsTotalCount(2),
-        actions.setLearningPaths([{ id: '123' }, { id: '456' }]),
+        setLearningPathsTotalCount(2),
+        setLearningPaths([{ id: '123' }, { id: '456' }]),
       ]);
 
       t.doesNotThrow(() => apiMock.done());
@@ -66,11 +66,11 @@ test('actions/fetchLearningPaths with query', t => {
 
   const store = mockStore(initialState);
 
-  store.dispatch(actions.fetchLearningPaths())
+  store.dispatch(fetchLearningPaths())
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.setLearningPathsTotalCount(400),
-        actions.setLearningPaths([{ id: '123' }, { id: '456' }]),
+        setLearningPathsTotalCount(400),
+        setLearningPaths([{ id: '123' }, { id: '456' }]),
       ]);
 
       t.doesNotThrow(() => apiMock.done());
@@ -96,7 +96,9 @@ test('actions/fetchLearningPaths with query without search term', t => {
     .get('/learningpaths')
     .query({ page, sort, 'page-size': pageSize /* OBS! no query */})
     .reply(200, {
-      page, pageSize, totalCount: 400,
+      page,
+      pageSize,
+      totalCount: 400,
       results: [{ id: '123' }, { id: '456' }],
     });
 
@@ -106,11 +108,11 @@ test('actions/fetchLearningPaths with query without search term', t => {
 
   const store = mockStore(initialState);
 
-  store.dispatch(actions.fetchLearningPaths())
+  store.dispatch(fetchLearningPaths())
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.setLearningPathsTotalCount(400),
-        actions.setLearningPaths([{ id: '123' }, { id: '456' }]),
+        setLearningPathsTotalCount(400),
+        setLearningPaths([{ id: '123' }, { id: '456' }]),
       ]);
 
       t.doesNotThrow(() => apiMock.done());

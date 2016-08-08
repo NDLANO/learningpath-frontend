@@ -48,7 +48,7 @@ class LearningPathStep extends React.Component {
     const license = learningPathStep.license && learningPathStep.license.license ? (
       <p className="learning-step_license">
         {learningPathStep.license.url ?
-          <a target="_blank" href={learningPathStep.license.url}>{polyglot.t('learningPathStep.license', { license: learningPathStep.license.license })}</a>
+          <a target="_blank" rel="noopener noreferrer" href={learningPathStep.license.url}>{polyglot.t('learningPathStep.license', { license: learningPathStep.license.license })}</a>
         : polyglot.t('learningPathStep.license', { license: learningPathStep.license.license })}
       </p>
     ) : '';

@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 
 import LinkPager from '../pager/LinkPager';
 import { getRange, stepNumbers } from '../pager/PagerUtil';
+
 test('component/PagerUtil.getRange', t => {
   t.deepEquals(getRange(1, 5), [1, 5], '1,5');
   t.deepEquals(getRange(2, 5), [1, 5], '1,5');

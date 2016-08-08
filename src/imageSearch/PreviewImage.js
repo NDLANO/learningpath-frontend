@@ -37,7 +37,7 @@ export default function PreviewImage({ image, onSaveImage }, { lang }) {
         </div>
         <button className="button button--primary button--block" onClick={onSaveImage}>{polyglot.t('learningPath.image.choseImage')}</button>
       </div>
-      <div className="clear"></div>
+      <div className="clear" />
     </div>
   );
 }

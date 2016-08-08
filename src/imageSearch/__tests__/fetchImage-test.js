@@ -6,6 +6,7 @@ import payload403invalid from '../../actions/__tests__/payload403invalid';
 
 import { applicationError } from '../../messages/messagesActions';
 import { fetchLearningPathImage, setSavedImage, setSelectedImage, fetchLearningPathImageWithMetaUrl } from '../../imageSearch/imageActions';
+
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 

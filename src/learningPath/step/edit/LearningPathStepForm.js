@@ -83,8 +83,9 @@ const LearningPathStepForm = (props) => {
       <div className="learning-step-form_group">
         <div className="learningsource-form">
           <div>
-            <label className="mediatype-menu__label">{polyglot.t('editPathStep.urlLabel')}</label>
+            <label htmlFor="url" className="mediatype-menu__label">{polyglot.t('editPathStep.urlLabel')}</label>
             <input
+              id="url"
               type="url"
               {...url}
               placeholder={polyglot.t('editPathStep.urlPlaceholder')}

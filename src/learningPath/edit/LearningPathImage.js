@@ -1,10 +1,12 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import isEmpty from 'lodash/isEmpty';
+
 import ImageSearch from '../../imageSearch/ImageSearch';
 import Lightbox from '../../common/Lightbox';
 import polyglot from '../../i18n';
-import { connect } from 'react-redux';
-import isEmpty from 'lodash/isEmpty';
 import Button from '../../common/buttons/Button';
+
 const ChoseImage = (props) => {
   const { onImageLightboxOpen } = props;
   return (
@@ -83,7 +85,7 @@ class LearningPathImage extends React.Component {
     return (
       <div>
         <div className="learning-path-image">
-          <label className="label--medium-bold label--medium">{polyglot.t('learningPath.image.title')}</label>
+          <label htmlFor="changeImage" className="label--medium-bold label--medium">{polyglot.t('learningPath.image.title')}</label>
           {
             savedImage && !isEmpty(savedImage) ?
               <ChangeImage onImageLightboxOpen={onImageLightboxOpen} savedImage={savedImage} /> : <ChoseImage onImageLightboxOpen={onImageLightboxOpen} />

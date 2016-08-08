@@ -15,6 +15,7 @@ import { fetchLearningPaths } from '../actions';
 import requireAuthentication from '../session/requireAuthentication';
 
 import configureLearningPathStepRoutes from './step/routes';
+
 const redirectToFirstStep = (store, fetchLearningPath) =>
   (nextState, replace, callback) => {
     const { params: { pathId } } = nextState;

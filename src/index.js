@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, useRouterHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
+import { createHistory } from 'history';
+
 import { configureLocale, isValidLocale } from './locale/configureLocale';
 import configureStore from './configureStore';
 import configureRoutes from './main/routes';
 import { defaultApiKey } from './sources/helpers';
-import { createHistory } from 'history';
 
 
 function configureBrowserHistory(path) {

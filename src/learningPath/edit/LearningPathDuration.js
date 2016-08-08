@@ -21,7 +21,7 @@ export default function LearningPathDuration(props) {
           <li key={newDuration} className={durationClassName(newDuration)} onClick={() => onChange(newDuration)}> {newDuration}</li>
         ))}
       </ul>
-      <input id={props.id} className="input-duration" {...props} onChange={(evt) => inputChange(evt)}></input>
+      <input id={props.id} className="input-duration" {...props} onChange={(evt) => inputChange(evt)} />
       <span>{'time(r)'}</span>
     </div>
   );

@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { routerActions } from 'react-router-redux';
+import isEmpty from 'lodash/isEmpty';
 
 import Logo from '../common/Logo';
 import polyglot from '../i18n';
 import Masthead from '../common/Masthead';
 import { Wrapper, Content, Footer } from '../common/Layout';
-import isEmpty from 'lodash/isEmpty';
 
 class Welcome extends Component {
   constructor(props) {
@@ -21,9 +21,7 @@ class Welcome extends Component {
     const { query } = this.state;
     e.preventDefault();
     const sort = (query && !isEmpty(query)) ? 'relevance' : '-lastUpdated';
-    this.props.pushRoute({ pathname: '/learningPaths', query:
-      { query, page: 1, sort },
-    });
+    this.props.pushRoute({ pathname: '/learningPaths', query: { query, page: 1, sort } });
   }
 
   render() {

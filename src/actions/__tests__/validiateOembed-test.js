@@ -3,7 +3,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 
-import actions from '..';
+import { validateOembed } from '..';
 import { removeOembedPreview, setOembedPreview } from '../validateOembed';
 
 const middleware = [thunk];
@@ -26,7 +26,7 @@ test('actions/validiateOembed valid url', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch(actions.validateOembed(url, 'nb'))
+  store.dispatch(validateOembed(url, 'nb'))
     .then(() => {
       t.deepEqual(store.getActions(), [
         setOembedPreview(oEmbedReply),
@@ -53,7 +53,7 @@ test('actions/validiateOembed invalid url', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch(actions.validateOembed(url, 'nb', 'url', 'feil'))
+  store.dispatch(validateOembed(url, 'nb', 'url', 'feil'))
     .then(() => {
       t.doesNotThrow(() => apiMock.done());
       t.fail('Promise should be rejected.');
@@ -73,7 +73,7 @@ test('actions/validiateOembed', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch(actions.validateOembed(''));
+  store.dispatch(validateOembed(''));
   t.deepEqual(store.getActions(), [
     removeOembedPreview(),
   ]);

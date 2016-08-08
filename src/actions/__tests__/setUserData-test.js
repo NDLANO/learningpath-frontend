@@ -1,10 +1,10 @@
 import test from 'tape';
 import { isFSA } from 'flux-standard-action';
-import actions from '..';
+import { setUserData } from '..';
 
 
 test('actions/setUserData', (t) => {
-  const actual = actions.setUserData({
+  const actual = setUserData({
     name: 'Alice', email: 'alice@example.com',
   });
 
@@ -22,7 +22,7 @@ test('actions/setUserData', (t) => {
 });
 
 test('actions/setUserData with error', (t) => {
-  const actual = actions.setUserData(new Error('fail!'));
+  const actual = setUserData(new Error('fail!'));
 
   t.ok(isFSA(actual), 'FSA compliant action');
 

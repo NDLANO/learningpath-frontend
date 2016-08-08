@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
-import Icon from '../../common/Icon';
 import classNames from 'classnames';
+
+import Icon from '../../common/Icon';
 
 export default function LearningPathStepIcon({ learningPathStepType, isCircle }) {
   const iconClassName = (type) => {

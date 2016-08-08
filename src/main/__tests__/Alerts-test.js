@@ -2,9 +2,10 @@ import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
+import uuid from 'node-uuid';
+
 import { Alerts } from '../Alerts';
 import { clearAllMessages } from '../../messages/messagesActions';
-import uuid from 'node-uuid';
 
 const noop = () => {};
 

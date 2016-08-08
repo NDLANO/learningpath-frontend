@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
+import noop from 'lodash/noop';
 import Icon from '../../../common/Icon';
 import Tooltip from '../../../common/tooltip/Tooltip';
 import OverlayTrigger from '../../../common/tooltip/OverlayTrigger';
-import noop from 'lodash/noop';
 
 const OnClickCheckbox = (field) => {
   const classes = {
@@ -21,8 +21,8 @@ const OnClickCheckbox = (field) => {
     <OverlayTrigger placement="top" overlay={tooltip}>
       <span className={classNames(classes)} onClick={handleClick} >
         {field.value ? <Icon.Visibility /> : <Icon.VisibilityOff />}
-        <label className="sr-only">
-          <input type="checkbox" {...field} onClick={handleClick} onBlur={noop} />
+        <label htmlFor="visibility" className="sr-only">
+          <input id="visibility" type="checkbox" {...field} onClick={handleClick} onBlur={noop} />
         </label>
       </span>
     </OverlayTrigger>

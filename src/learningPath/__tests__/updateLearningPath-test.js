@@ -2,11 +2,11 @@ import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
+import { routerActions } from 'react-router-redux';
 import payload403invalid from '../../actions/__tests__/payload403invalid';
 
 import { applicationError, addMessage } from '../../messages/messagesActions';
 import { updateLearningPath, setLearningPath } from '../learningPathActions';
-import { routerActions } from 'react-router-redux';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);

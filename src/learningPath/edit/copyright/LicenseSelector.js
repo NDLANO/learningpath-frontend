@@ -10,6 +10,7 @@ const LicenseSelector = (props) => {
   }
   return (
     <DropdownList
+      id="license"
       textField="description"
       value={currentValue}
       onBlur={() => onBlur(currentValue)}

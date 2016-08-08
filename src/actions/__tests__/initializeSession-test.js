@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import nock from 'nock';
 import payload403invalid from './payload403invalid';
 
-import actions from '..';
+import { initializeSession, setAuthenticated, setUserData, setAuthToken } from '..';
 import { applicationError } from '../../messages/messagesActions';
 
 const middleware = [thunk];
@@ -24,12 +24,12 @@ test('actions/initializeSession', (t) => {
 
   const store = mockStore({ user: {}, authToken: '' });
 
-  store.dispatch(actions.initializeSession(authToken))
+  store.dispatch(initializeSession(authToken))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        actions.setAuthenticated(true),
-        actions.setAuthToken(authToken),
-        actions.setUserData({ first_name: 'Alice', email: 'alice@example.com' }),
+        setAuthenticated(true),
+        setAuthToken(authToken),
+        setUserData({ first_name: 'Alice', email: 'alice@example.com' }),
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();
@@ -49,7 +49,7 @@ test('actions/initializeSession access denied', (t) => {
 
   const store = mockStore({ user: {}, authToken: '' });
 
-  store.dispatch(actions.initializeSession(authToken))
+  store.dispatch(initializeSession(authToken))
     .then(() => {
       t.deepEqual(store.getActions(), [
         applicationError(payload403invalid()),

@@ -1,10 +1,9 @@
 import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
+import { Link } from 'react-router';
 
 import { SiteNav } from '../SiteNav';
-
-import { Link } from 'react-router';
 
 test('component/SiteNav not authenticated', t => {
   const navLinks = shallow(<SiteNav authenticated={false} />).find(Link);

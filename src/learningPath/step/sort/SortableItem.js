@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { DragSource, DropTarget } from 'react-dnd';
-import { guid } from '../../../util/util';
+import uuid from 'node-uuid';
 import flow from 'lodash/flow';
 
 const itemSource = {
@@ -68,7 +68,7 @@ class SortableItem extends Component {
 
     if (isDragging && (placeholderStyle || placeholderClassName)) {
       return connectDragSource(connectDropTarget(
-        <div className={placeholderClassName} style={placeholderStyle}></div>
+        <div className={placeholderClassName} style={placeholderStyle} />
       ));
     }
 
@@ -98,7 +98,7 @@ SortableItem.propTypes = {
 // N.B. to use this component you need to call it as a function to create the class
 // Not sure of a better way to do this to enable non-colliding types for each parent component
 export default (customType) => {
-  const type = customType || guid();
+  const type = customType || uuid.v4();
   return flow(
     new DragSource(type, itemSource, collectSource),
     new DropTarget(type, itemTarget, collectTarget)

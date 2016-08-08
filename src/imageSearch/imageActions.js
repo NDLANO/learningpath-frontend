@@ -1,7 +1,9 @@
 import { createAction } from 'redux-actions';
+import pickBy from 'lodash/pickBy';
+
 import { applicationError } from '../messages/messagesActions';
 import { fetchImages, fetchImage, fetchImageWithMetaUrl } from '../sources/images';
-import pickBy from 'lodash/pickBy';
+
 export const setImages = createAction('SET_IMAGES');
 export const setSelectedImage = createAction('SET_SELECTED_IMAGE');
 export const setSavedImage = createAction('SET_SAVED_IMAGE');

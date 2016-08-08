@@ -1,5 +1,6 @@
 import { handleActions } from 'redux-actions';
 import cloneDeep from 'lodash/cloneDeep';
+
 const initialState = {
   images: [],
   selectedImage: {},

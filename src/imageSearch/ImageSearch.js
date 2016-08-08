@@ -1,10 +1,12 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import get from 'lodash/get';
+
 import ImageSearchForm from './ImageSearchForm';
 import ImageSearchResult from './ImageSearchResult';
 import ButtonPager from '../common/pager/ButtonPager';
 import { changeImageSearchQuery, setSavedImage } from './imageActions';
-import get from 'lodash/get';
+
 export function Images(props) {
   const {
     images,

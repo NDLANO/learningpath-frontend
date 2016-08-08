@@ -1,5 +1,5 @@
-import polyglot from '../i18n';
 import { Record } from 'immutable';
+import polyglot from '../i18n';
 
 const isEmpty = (value) => {
   if (value instanceof Record && value.hasText) { // handle draf-js ContentState

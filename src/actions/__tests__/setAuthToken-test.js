@@ -1,10 +1,10 @@
 import test from 'tape';
 import { isFSA } from 'flux-standard-action';
-import actions from '..';
+import { setAuthToken } from '..';
 
 
 test('actions/setAuthToken', (t) => {
-  const actual = actions.setAuthToken('12345');
+  const actual = setAuthToken('12345');
 
   t.ok(isFSA(actual), 'FSA compliant action');
 
@@ -16,7 +16,7 @@ test('actions/setAuthToken', (t) => {
 });
 
 test('actions/setAuthToken with error', (t) => {
-  const actual = actions.setAuthToken(new Error('fail!'));
+  const actual = setAuthToken(new Error('fail!'));
 
   t.ok(isFSA(actual), 'FSA compliant action');
 

@@ -1,10 +1,10 @@
 import test from 'tape';
 import { isFSA } from 'flux-standard-action';
-import actions from '..';
+import { setLearningPaths } from '..';
 
 
 test('actions/setLearningPaths', (t) => {
-  const actual = actions.setLearningPaths([
+  const actual = setLearningPaths([
       { id: '12345' }, { id: '67890' },
   ]);
 
@@ -18,7 +18,7 @@ test('actions/setLearningPaths', (t) => {
 });
 
 test('actions/setLearningPaths with error', (t) => {
-  const actual = actions.setLearningPaths(new Error('fail!'));
+  const actual = setLearningPaths(new Error('fail!'));
 
   t.ok(isFSA(actual), 'FSA compliant action');
 

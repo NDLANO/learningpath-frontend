@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import defined from 'defined';
 import { Link } from 'react-router';
-import LabeledIcon from '../../common/LabeledIcon';
 import classNames from 'classnames';
+
+import LabeledIcon from '../../common/LabeledIcon';
 import formatDate from '../../util/formatDate';
 import formatDuration from '../../util/formatDuration';
 import LearningPathIntroduction from './LearningPathIntroduction';
