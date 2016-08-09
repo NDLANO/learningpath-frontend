@@ -1,32 +1,24 @@
-import React, { Component, PropTypes, cloneElement } from 'react';
-import Portal from './Portal';
-import Position from './Position';
+import React, { PropTypes, cloneElement } from 'react';
+import classNames from 'classnames';
+import BaseOverlay from 'react-overlays/lib/Overlay';
 import { PLACEMENTS } from './constants';
 
-class Overlay extends Component {
+const Overlay = ({ children, ...props }) => {
+  const child = cloneElement(children, {
+    className: classNames(children.props.className, 'in'),
+  });
 
-  render() {
-    const { show, target, placement } = this.props;
-
-    if (!show) {
-      return null;
-    }
-    const children = cloneElement(this.props.children, { show });
-
-    return (
-      <Portal>
-        <Position {...{ target, placement }}>
-          {children}
-        </Position>
-      </Portal>
-    );
-  }
-}
+  return (
+    <BaseOverlay {...props} >
+      {child}
+    </BaseOverlay>
+  );
+};
 
 Overlay.propTypes = {
   children: PropTypes.node.isRequired,
   show: PropTypes.bool.isRequired,
-  target: PropTypes.func.isRequired,
+  target: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
   placement: PropTypes.oneOf(PLACEMENTS).isRequired,
 };
 

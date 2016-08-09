@@ -1,8 +1,8 @@
 import React, { Component, PropTypes, cloneElement } from 'react';
 import ReactDOM from 'react-dom';
+import createChainedFunction from 'react-overlays/lib/utils/createChainedFunction';
 import Overlay from './Overlay';
 import { PLACEMENTS } from './constants';
-import createChainedFunctions from './utils/createChainedFunctions';
 
 class OverlayTrigger extends Component {
 
@@ -10,7 +10,6 @@ class OverlayTrigger extends Component {
     super(args);
     this.handleShow = this.handleShow.bind(this);
     this.handleHide = this.handleHide.bind(this);
-    this.getOverlayTarget = this.getOverlayTarget.bind(this);
     this.state = {
       isOverlayShown: false,
     };
@@ -36,7 +35,7 @@ class OverlayTrigger extends Component {
     const props = {
       placement: this.props.placement,
       show: this.state.isOverlayShown,
-      target: this.getOverlayTarget,
+      target: this,
     };
 
     const overlay = cloneElement(this.props.overlay, {
@@ -48,10 +47,6 @@ class OverlayTrigger extends Component {
         {overlay}
       </Overlay>
     );
-  }
-
-  getOverlayTarget() {
-    return ReactDOM.findDOMNode(this);
   }
 
   handleShow() {
@@ -84,10 +79,10 @@ class OverlayTrigger extends Component {
     this.overlay = this.getOverlay();
 
     const props = {
-      onMouseOver: createChainedFunctions(this.handleShow, triggerProps.onMouseOver),
-      onMouseOut: createChainedFunctions(this.handleHide, triggerProps.onMouseOut),
-      onFocus: createChainedFunctions(this.handleShow, triggerProps.onFocus),
-      onBlur: createChainedFunctions(this.handleHide, triggerProps.onBlur),
+      onMouseOver: createChainedFunction(this.handleShow, triggerProps.onMouseOver),
+      onMouseOut: createChainedFunction(this.handleHide, triggerProps.onMouseOut),
+      onFocus: createChainedFunction(this.handleShow, triggerProps.onFocus),
+      onBlur: createChainedFunction(this.handleHide, triggerProps.onBlur),
       'aria-described-by': this.props.overlay.props.id,
     };
 
