@@ -21,7 +21,7 @@ export class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="page-container">
         {this.props.children}
         <Alerts />
       </div>
