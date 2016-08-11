@@ -38,12 +38,12 @@ class EditLearningPath extends Component {
     });
 
     return (
-      <main className="two-column_col two-column_col--center">
+      <div className="two-column_content">
         <LearningPathForm
           learningPath={learningPath} tagOptions={tags} licenseOptions={licenses} onSubmit={handleSubmit} localFetchImages={localFetchImages}
           fetchImage={localFetchImage} lang={language}
         />
-      </main>
+      </div>
     );
   }
 }

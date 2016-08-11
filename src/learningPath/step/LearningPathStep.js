@@ -61,7 +61,7 @@ class LearningPathStep extends React.Component {
       </p>
     ) : '';
     return (
-      <main className="two-column_col two-column_col--white-bg">
+      <div className="two-column_content--wide">
         <Helmet title={polyglot.t('htmlTitleTemplates.learningPathStep', { title: stepTitle || '' })} />
         <div className="learning-step">
           {learningPathStep.showTitle ? (
@@ -77,7 +77,7 @@ class LearningPathStep extends React.Component {
         <Lightbox display={this.state.displayCopyPath} onClose={onLightboxClose}>
           <CopyLearningPath learningPath={learningPath} onClose={onLightboxClose} onCopy={onCopy} />
         </Lightbox>
-      </main>
+      </div>
     );
   }
 }

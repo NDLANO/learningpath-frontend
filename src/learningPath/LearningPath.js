@@ -27,7 +27,7 @@ export class LearningPath extends Component {
   }
 
   render() {
-    const { learningPath, isTableOfContentOpen, params: { stepId }, sortLearningSteps, main } = this.props;
+    const { learningPath, isTableOfContentOpen, params: { stepId }, location: { pathname }, sortLearningSteps, main } = this.props;
     const { lang } = this.context;
     const saveButtons = defined(this.props.saveButtons, null);
     const addStepButton = defined(this.props.addStepButton, null);
@@ -39,6 +39,10 @@ export class LearningPath extends Component {
       'two-column_col table-of-content': true,
       'sidebar--collapsed': !isTableOfContentOpen,
       'sidebar--open': isTableOfContentOpen,
+    });
+
+    const mainClassNames = classNames('two-column_col', {
+      'two-column_col--white-bg': !!stepId || pathname.indexOf('/new') !== -1,
     });
 
     return (
@@ -57,10 +61,11 @@ export class LearningPath extends Component {
             {sortableTableOfContentButton}
             {saveButtons}
           </aside>
-          {children}
+          <main className={mainClassNames}>
+            {children}
+            <LearningPathPrevNext currentStepId={stepId} />
+          </main>
         </div>
-        <LearningPathPrevNext currentStepId={stepId} />
-        <div className="learning-path_margin" />
       </div>
     );
   }
@@ -74,6 +79,9 @@ LearningPath.propTypes = {
   params: PropTypes.shape({
     pathId: PropTypes.string.isRequired,
     stepId: PropTypes.string,
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
   }).isRequired,
   sortLearningSteps: PropTypes.object,
   isTableOfContentOpen: PropTypes.bool.isRequired,

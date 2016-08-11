@@ -52,17 +52,15 @@ class EditLearningPathStep extends Component {
     };
 
     return (
-      <main className="two-column_col two-column_col--white-bg">
-        <div className="learning-path-step">
-          <LearningPathStepForm
-            step={step}
-            learningPathId={learningPathId}
-            onSubmit={handleSubmit}
-            lang={language}
-            licenseOptions={licenses}
-          />
-        </div>
-      </main>
+      <div className="two-column_content--wide learning-path-step">
+        <LearningPathStepForm
+          step={step}
+          learningPathId={learningPathId}
+          onSubmit={handleSubmit}
+          lang={language}
+          licenseOptions={licenses}
+        />
+      </div>
     );
   }
 }
