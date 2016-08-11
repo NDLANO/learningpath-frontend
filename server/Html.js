@@ -40,18 +40,18 @@ const Html = (props) => {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         {head.title.toComponent()}
         {head.meta.toComponent()}
         <link rel="stylesheet" type="text/css" href="/assets/style.css" />
         <link rel="stylesheet" type="text/css" href="/assets/Draft.css" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic,300|Signika:400,600,300,700" />
         <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body>
         <GoogleTagMangerNoScript />
         <GoogleTagMangerScript />
-        <div id="appContainer" />
+        <div id="app-container" className="app-container" />
         <script src="/assets/app.js" />
       </body>
     </html>
