@@ -33,10 +33,10 @@ const GoogleTagMangerScript = () => {
 };
 
 const Html = (props) => {
-  const { lang } = props;
+  const { lang, className } = props;
 
   return (
-    <html lang={lang}>
+    <html lang={lang} className={className}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -60,6 +60,7 @@ const Html = (props) => {
 
 Html.propTypes = {
   lang: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired,
 };
 
 export default Html;

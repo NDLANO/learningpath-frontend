@@ -33,11 +33,20 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.static('htdocs'));
 
+const findIEClass = (userAgentString) => {
+  if (userAgentString.indexOf('MSIE') >= 0) {
+    return 'ie lt-ie11';
+  } else if (userAgentString.indexOf('Trident/7.0; rv:11.0') >= 0) {
+    return 'ie gt-ie10';
+  }
+  return '';
+};
+
 app.get('*', (req, res) => {
   function renderOnClient() {
     const paths = req.url.split('/');
     const lang = getHtmlLang(defined(paths[1], ''));
-    res.send('<!doctype html>\n' + renderToString(<Html lang={lang}/>)); // eslint-disable-line
+    res.send('<!doctype html>\n' + renderToString(<Html lang={lang} className={findIEClass(req.headers['user-agent'])} />)); // eslint-disable-line
   }
 
 
