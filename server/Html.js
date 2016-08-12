@@ -9,6 +9,7 @@
 import React, { PropTypes } from 'react';
 import config from '../src/config';
 import head from './Meta';
+import { SvgPolyfillScript, SvgPolyfillScriptInitalization } from './svgPolyfill';
 
 
 const GoogleTagMangerNoScript = () => {
@@ -32,6 +33,7 @@ const GoogleTagMangerScript = () => {
   return null;
 };
 
+
 const Html = (props) => {
   const { lang, className } = props;
 
@@ -45,6 +47,7 @@ const Html = (props) => {
         {head.meta.toComponent()}
         <link rel="stylesheet" type="text/css" href="/assets/style.css" />
         <link rel="stylesheet" type="text/css" href="/assets/Draft.css" />
+        <SvgPolyfillScript className={className} />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic,300|Signika:400,600,300,700" />
         <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
       </head>
@@ -53,6 +56,7 @@ const Html = (props) => {
         <GoogleTagMangerScript />
         <div id="app-container" className="app-container" />
         <script src="/assets/app.js" />
+        <SvgPolyfillScriptInitalization className={className} />
       </body>
     </html>
   );

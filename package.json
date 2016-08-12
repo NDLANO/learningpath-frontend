@@ -6,7 +6,7 @@
     "pretest": "npm run lint",
     "test": "NODE_ENV=unittest babel-tape-runner 'src/**/*-test.js'|tap-spec",
     "tdd": "watch 'NODE_ENV=unittest babel-tape-runner 'src/**/*-test.js'|tap-spec||true' src/",
-    "postinstall": "cp -vr node_modules/ndla-styleguide/assets/* htdocs/assets/",
+    "postinstall": "cp -vr node_modules/ndla-styleguide/assets/* htdocs/assets/ && cp node_modules/svg4everybody/dist/svg4everybody.min.js htdocs/assets/",
     "build": "NODE_ENV=production webpack --progress --bail",
     "start": "NODE_ENV=development nodemon --watch server server/server.js",
     "start-prod": "NODE_ENV=production node server/server.js",
@@ -81,7 +81,8 @@
     "redux-localstorage": "0.4.1",
     "redux-thunk": "2.1.0",
     "reselect": "2.5.3",
-    "sanitize-html": "1.11.4"
+    "sanitize-html": "1.11.4",
+    "svg4everybody": "2.1.0"
   },
   "repository": {
     "type": "git",
