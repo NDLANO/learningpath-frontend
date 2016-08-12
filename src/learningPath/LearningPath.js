@@ -46,7 +46,7 @@ export class LearningPath extends Component {
     });
 
     return (
-      <div>
+      <div className="wrapper">
         <Masthead saveButtons={saveButtons} sortLearningSteps={sortLearningSteps} sortableTableOfContentButton={sortableTableOfContentButton}>
           <div className="masthead_button masthead_button--left">
             <Icon.MoreVert />
