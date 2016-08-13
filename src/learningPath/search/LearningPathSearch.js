@@ -15,8 +15,9 @@ import LinkPager from '../../common/pager/LinkPager';
 import SearchForm from './LearningPathSearchForm';
 import SearchResult from './LearningPathSearchResult';
 import Masthead from '../../common/Masthead';
-import { fetchLearningPaths } from '../../actions';
+import { searchLearningPaths } from './learningPathSearchActions';
 import { Wrapper, Content, Footer } from '../../common/Layout';
+import { getLearningPathSearchResult } from './learningPathSearchSelectors';
 
 const LearningPathSearch = (props) => {
   const { learningPaths, lastPage, location: { pathname, query }, pushRoute } = props;
@@ -55,7 +56,7 @@ const LearningPathSearch = (props) => {
 };
 
 LearningPathSearch.propTypes = {
-  fetchLearningPaths: PropTypes.func.isRequired,
+  searchLearningPaths: PropTypes.func.isRequired,
   learningPaths: PropTypes.arrayOf(PropTypes.object).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
@@ -68,11 +69,14 @@ LearningPathSearch.propTypes = {
 const mapStateToProps = (state, props) => {
   const pageSize = defined(props.location.query.pageSize, '10');
   const lastPage = Math.ceil(state.learningPathsTotalCount / parseInt(pageSize, 10));
-  return Object.assign({}, state, { lastPage });
+  return Object.assign({}, {
+    lastPage,
+    learningPaths: getLearningPathSearchResult(state),
+  });
 };
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  fetchLearningPaths,
+  searchLearningPaths,
   pushRoute: (route) => routerActions.push(route),
 }, dispatch);
 

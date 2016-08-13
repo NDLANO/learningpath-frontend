@@ -14,6 +14,7 @@ import authenticated from './authenticated';
 import authToken from './authToken';
 import user from './user';
 import learningPath from '../learningPath/learningPathReducer';
+import learningPathSearch from '../learningPath/search/learningPathSearchReducer';
 import learningPathStep from '../learningPath/step/learningPathStepReducer';
 import learningPaths from './learningPaths';
 import learningPathsTotalCount from './learningPathsTotalCount';
@@ -32,6 +33,7 @@ const rootReducers = combineReducers({
   user,
   locale,
   learningPath,
+  learningPathSearch,
   learningPathStep,
   learningPaths,
   learningPathsTotalCount,

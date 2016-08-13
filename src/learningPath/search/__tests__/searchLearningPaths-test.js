@@ -11,12 +11,16 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 
-import { fetchLearningPaths, setLearningPaths, setLearningPathsTotalCount } from '..';
+import {
+  searchLearningPaths,
+  setLearningPathSearchResults,
+  setLearningPathsTotalCount,
+} from '../learningPathSearchActions';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-test('actions/fetchLearningPaths', t => {
+test('actions/searchLearningPaths', t => {
   const done = res => {
     t.end(res);
     nock.cleanAll();
@@ -33,11 +37,11 @@ test('actions/fetchLearningPaths', t => {
 
   const store = mockStore({});
 
-  store.dispatch(fetchLearningPaths())
+  store.dispatch(searchLearningPaths())
     .then(() => {
       t.deepEqual(store.getActions(), [
         setLearningPathsTotalCount(2),
-        setLearningPaths([{ id: '123' }, { id: '456' }]),
+        setLearningPathSearchResults([{ id: '123' }, { id: '456' }]),
       ]);
 
       t.doesNotThrow(() => apiMock.done());
@@ -46,7 +50,7 @@ test('actions/fetchLearningPaths', t => {
     .catch(done);
 });
 
-test('actions/fetchLearningPaths with query', t => {
+test('actions/searchLearningPaths with query', t => {
   const done = res => {
     t.end(res);
     nock.cleanAll();
@@ -74,11 +78,11 @@ test('actions/fetchLearningPaths with query', t => {
 
   const store = mockStore(initialState);
 
-  store.dispatch(fetchLearningPaths())
+  store.dispatch(searchLearningPaths())
     .then(() => {
       t.deepEqual(store.getActions(), [
         setLearningPathsTotalCount(400),
-        setLearningPaths([{ id: '123' }, { id: '456' }]),
+        setLearningPathSearchResults([{ id: '123' }, { id: '456' }]),
       ]);
 
       t.doesNotThrow(() => apiMock.done());
@@ -90,7 +94,7 @@ test('actions/fetchLearningPaths with query', t => {
     .catch(done);
 });
 
-test('actions/fetchLearningPaths with query without search term', t => {
+test('actions/searchLearningPaths with query without search term', t => {
   const done = res => {
     t.end(res);
     nock.cleanAll();
@@ -116,11 +120,11 @@ test('actions/fetchLearningPaths with query without search term', t => {
 
   const store = mockStore(initialState);
 
-  store.dispatch(fetchLearningPaths())
+  store.dispatch(searchLearningPaths())
     .then(() => {
       t.deepEqual(store.getActions(), [
         setLearningPathsTotalCount(400),
-        setLearningPaths([{ id: '123' }, { id: '456' }]),
+        setLearningPathSearchResults([{ id: '123' }, { id: '456' }]),
       ]);
 
       t.doesNotThrow(() => apiMock.done());

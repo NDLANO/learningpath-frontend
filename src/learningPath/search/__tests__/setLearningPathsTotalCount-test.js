@@ -8,7 +8,7 @@
 
 import test from 'tape';
 import { isFSA } from 'flux-standard-action';
-import { setLearningPathsTotalCount } from '..';
+import { setLearningPathsTotalCount } from '../learningPathSearchActions';
 
 
 test('actions/setLearningPathsTotalCount', t => {

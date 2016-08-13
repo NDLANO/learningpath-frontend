@@ -18,7 +18,7 @@ import LearningPathSummary from './sidebar/LearningPathSummary';
 import LearningPathToCButtons from './sidebar/LearningPathToCButtons';
 import AddLearningPathStepButton from './sidebar/AddLearningPathStepButton';
 import * as learningPathActions from './learningPathActions';
-import { fetchLearningPaths } from '../actions';
+import { searchLearningPaths } from './search/learningPathSearchActions';
 
 import requireAuthentication from '../session/requireAuthentication';
 
@@ -53,8 +53,8 @@ export default function (store, ifAuthenticated) {
     <Route path="learningpaths(/)">
       <IndexRoute
         component={LearningPathSearch}
-        onEnter={(nextState) => store.dispatch(fetchLearningPaths(nextState.location.query))}
-        onChange={(prevState, nextState) => store.dispatch(fetchLearningPaths(nextState.location.query))}
+        onEnter={(nextState) => store.dispatch(searchLearningPaths(nextState.location.query))}
+        onChange={(prevState, nextState) => store.dispatch(searchLearningPaths(nextState.location.query))}
       />
       <Route path="new" component={requireAuthentication(CreateLearningPath)} onEnter={ifAuthenticated(createEmptyLearningPath)} />
       <Route path=":pathId" component={LearningPath} >

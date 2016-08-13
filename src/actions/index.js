@@ -10,7 +10,6 @@ import { createAction } from 'redux-actions';
 
 import initializeSession from './initializeSession';
 import logout from './logout';
-import fetchLearningPaths from './fetchLearningPaths';
 import fetchMyLearningPaths from './fetchMyLearningPaths';
 import checkValidSession from './checkValidSession.js';
 import validateOembed from './validateOembed';
@@ -30,7 +29,6 @@ export const openRightSidebar = createAction('OPEN_RIGHT_SIDEBAR');
 export {
   initializeSession,
   logout,
-  fetchLearningPaths,
   fetchMyLearningPaths,
   validateOembed,
   updateLearningPathStatus,
@@ -45,7 +43,6 @@ export default {
   setUserData,
   initializeSession,
   logout,
-  fetchLearningPaths,
   fetchMyLearningPaths,
   checkValidSession,
   logoutAction,
