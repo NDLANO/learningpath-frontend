@@ -16,8 +16,8 @@ module.exports = {
 
     'jsx-a11y/href-no-hash': 1,
 
-    'import/prefer-default-export': 1,
-    'import/no-named-as-default': 1,
+    'import/prefer-default-export': 0,
+    'import/no-named-as-default': 0,
     'import/no-extraneous-dependencies':
       ['error', {'devDependencies': true}],
 
