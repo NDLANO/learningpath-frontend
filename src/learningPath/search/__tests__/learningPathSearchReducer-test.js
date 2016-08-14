@@ -13,13 +13,15 @@ import reducer from '../learningPathSearchReducer';
 test('reducers/learningPathSearch query', (t) => {
   t.deepEqual(
     reducer(undefined, {}),
-    { results: [] },
+    { results: [], totalCount: 1 },
     'initial state'
   );
 
   t.deepEqual(
-    reducer(undefined, { type: 'SET_LEARNING_PATH_SEARCH_RESULTS', payload: [1, 2, 3] }),
-    { results: [1, 2, 3] },
+    reducer(undefined, {
+      type: 'SET_LEARNING_PATH_SEARCH_RESULTS',
+      payload: { results: [1, 2, 3], totalCount: 30 } }),
+    { results: [1, 2, 3], totalCount: 30 },
     'set learning path search results'
   );
 

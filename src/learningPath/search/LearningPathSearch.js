@@ -17,7 +17,10 @@ import SearchResult from './LearningPathSearchResult';
 import Masthead from '../../common/Masthead';
 import { searchLearningPaths } from './learningPathSearchActions';
 import { Wrapper, Content, Footer } from '../../common/Layout';
-import { getLearningPathSearchResult } from './learningPathSearchSelectors';
+import {
+  getLearningPathSearchResult,
+  getLearningPathSearchTotalCount,
+ } from './learningPathSearchSelectors';
 
 const LearningPathSearch = (props) => {
   const { learningPaths, lastPage, location: { pathname, query }, pushRoute } = props;
@@ -68,7 +71,7 @@ LearningPathSearch.propTypes = {
 
 const mapStateToProps = (state, props) => {
   const pageSize = defined(props.location.query.pageSize, '10');
-  const lastPage = Math.ceil(state.learningPathsTotalCount / parseInt(pageSize, 10));
+  const lastPage = Math.ceil(getLearningPathSearchTotalCount(state) / parseInt(pageSize, 10));
   return Object.assign({}, {
     lastPage,
     learningPaths: getLearningPathSearchResult(state),

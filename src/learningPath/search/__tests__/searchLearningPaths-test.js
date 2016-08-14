@@ -14,7 +14,6 @@ import nock from 'nock';
 import {
   searchLearningPaths,
   setLearningPathSearchResults,
-  setLearningPathsTotalCount,
 } from '../learningPathSearchActions';
 
 const middleware = [thunk];
@@ -40,8 +39,10 @@ test('actions/searchLearningPaths', t => {
   store.dispatch(searchLearningPaths())
     .then(() => {
       t.deepEqual(store.getActions(), [
-        setLearningPathsTotalCount(2),
-        setLearningPathSearchResults([{ id: '123' }, { id: '456' }]),
+        setLearningPathSearchResults({
+          results: [{ id: '123' }, { id: '456' }],
+          totalCount: 2,
+        }),
       ]);
 
       t.doesNotThrow(() => apiMock.done());
@@ -81,8 +82,10 @@ test('actions/searchLearningPaths with query', t => {
   store.dispatch(searchLearningPaths())
     .then(() => {
       t.deepEqual(store.getActions(), [
-        setLearningPathsTotalCount(400),
-        setLearningPathSearchResults([{ id: '123' }, { id: '456' }]),
+        setLearningPathSearchResults({
+          results: [{ id: '123' }, { id: '456' }],
+          totalCount: 400,
+        }),
       ]);
 
       t.doesNotThrow(() => apiMock.done());
@@ -123,8 +126,10 @@ test('actions/searchLearningPaths with query without search term', t => {
   store.dispatch(searchLearningPaths())
     .then(() => {
       t.deepEqual(store.getActions(), [
-        setLearningPathsTotalCount(400),
-        setLearningPathSearchResults([{ id: '123' }, { id: '456' }]),
+        setLearningPathSearchResults({
+          results: [{ id: '123' }, { id: '456' }],
+          totalCount: 400,
+        }),
       ]);
 
       t.doesNotThrow(() => apiMock.done());

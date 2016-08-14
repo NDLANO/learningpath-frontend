@@ -7,19 +7,15 @@
  */
 
 import { handleActions } from 'redux-actions';
-import cloneDeep from 'lodash/cloneDeep';
 
 const initialState = {
   results: [],
+  totalCount: 1,
 };
 
 export default handleActions({
   SET_LEARNING_PATH_SEARCH_RESULTS: {
-    next(state, action) {
-      const nextState = cloneDeep(state);
-      nextState.results = action.payload;
-      return nextState;
-    },
+    next: (state, action) => action.payload,
     throw: (state) => state,
   },
 }, initialState);

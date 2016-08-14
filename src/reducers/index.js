@@ -17,7 +17,6 @@ import learningPath from '../learningPath/learningPathReducer';
 import learningPathSearch from '../learningPath/search/learningPathSearchReducer';
 import learningPathStep from '../learningPath/step/learningPathStepReducer';
 import learningPaths from './learningPaths';
-import learningPathsTotalCount from './learningPathsTotalCount';
 import myLearningPathsSortOrder from './myLearningPathsSortOrder';
 import learningPathTags from '../learningPath/edit/tags/learningPathTagsReducer';
 import learningPathLicenses from '../learningPath/edit/copyright/learningPathLicensesReducer';
@@ -36,7 +35,6 @@ const rootReducers = combineReducers({
   learningPathSearch,
   learningPathStep,
   learningPaths,
-  learningPathsTotalCount,
   myLearningPathsSortOrder,
   messages,
   sidebar,

@@ -42,7 +42,6 @@ const store = configureStore({
   user: {},
   learningPathStep: {},
   learningPaths: [],
-  learningPathsTotalCount: 1,
   messages: [],
   locale,
 }, browserHistory);

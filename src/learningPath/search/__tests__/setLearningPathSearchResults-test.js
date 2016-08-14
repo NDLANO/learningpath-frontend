@@ -12,14 +12,18 @@ import { setLearningPathSearchResults } from '../learningPathSearchActions';
 
 
 test('actions/setLearningPathSearchResults', (t) => {
-  const actual = setLearningPathSearchResults([
-      { id: '12345' }, { id: '67890' },
-  ]);
+  const actual = setLearningPathSearchResults({
+    results: [{ id: '12345' }, { id: '67890' }],
+    totalCount: 300,
+  });
 
   t.ok(isFSA(actual), 'FSA compliant action');
 
   t.equal(actual.type, 'SET_LEARNING_PATH_SEARCH_RESULTS');
-  t.deepEqual(actual.payload, [{ id: '12345' }, { id: '67890' }]);
+  t.deepEqual(actual.payload, {
+    results: [{ id: '12345' }, { id: '67890' }],
+    totalCount: 300,
+  });
   t.notOk(actual.error);
 
   t.end();
