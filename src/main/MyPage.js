@@ -102,7 +102,7 @@ export class MyPage extends React.Component {
     });
 
     const sortOrderSelect = (
-      <select value={sortKey} onChange={(evt) => setSortKey(evt.target.value)}>
+      <select className="select--white-border" value={sortKey} onChange={(evt) => setSortKey(evt.target.value)}>
         <option value="title">{polyglot.t('myPage.order.title')}</option>
         <option value="-lastUpdated">{polyglot.t('myPage.order.newest')}</option>
         <option value="lastUpdated">{polyglot.t('myPage.order.oldest')}</option>

@@ -53,7 +53,7 @@ export default class SearchForm extends Component {
         <button className="search-form_btn">{polyglot.t('searchForm.btn')}</button>
 
         <select
-          className="search-form_sort-order"
+          className="search-form_sort-order select--white-border"
           onChange={this.handleSortChange}
           value={this.state.sort}
         >
