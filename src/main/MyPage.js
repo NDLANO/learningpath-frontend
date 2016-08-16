@@ -24,7 +24,7 @@ import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 import Lightbox from '../common/Lightbox';
 import Masthead from '../common/Masthead';
 import CreateLearningPath from '../learningPath/new/CreateLearningPath';
-import { Wrapper, Content, Footer } from '../common/Layout';
+import { Wrapper, OneColumn, Footer } from '../common/Layout';
 import { fetchLearningPathLicensesIfNeeded } from '../learningPath/edit/copyright/learningPathLicensesActions';
 
 export class MyPage extends React.Component {
@@ -122,7 +122,7 @@ export class MyPage extends React.Component {
 
     return (
       <Wrapper>
-        <Content>
+        <OneColumn>
           <Masthead />
           <div className="page-header">
             <h2 className="page-header_name">{polyglot.t('myPage.pageHeader')}</h2>
@@ -137,7 +137,7 @@ export class MyPage extends React.Component {
           <Lightbox display={this.state.displayCreatePath} onClose={onLightboxClose}>
             <CreateLearningPath onSubmit={onCreateLearningPathSubmit} licenseOptions={licenses} />
           </Lightbox>
-        </Content>
+        </OneColumn>
         <Footer />
       </Wrapper>
   );

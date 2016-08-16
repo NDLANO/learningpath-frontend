@@ -14,7 +14,7 @@ import isEmpty from 'lodash/isEmpty';
 import Logo from '../common/Logo';
 import polyglot from '../i18n';
 import Masthead from '../common/Masthead';
-import { Wrapper, Content, Footer } from '../common/Layout';
+import { Wrapper, OneColumn, Footer } from '../common/Layout';
 
 class Welcome extends Component {
   constructor(props) {
@@ -35,7 +35,7 @@ class Welcome extends Component {
   render() {
     return (
       <Wrapper>
-        <Content>
+        <OneColumn>
           <div className="frontpage-masthead">
             <Masthead logo={<Logo cssModifier="on-dark" />} />
           </div>
@@ -57,24 +57,20 @@ class Welcome extends Component {
             <a href="/minside" className="hero_link cta-link cta-link-secondary cta-link--secondary-negative">{polyglot.t('welcomePage.newBtn')} »</a>
           </div>
           <div className="infoblock">
-            <div className="infoblock">
-              <div className="infoblock_text">
-                <h2 id="feature">{polyglot.t('welcomePage.feature1Title')}</h2>
-                <p>{polyglot.t('welcomePage.feature1Content')}</p>
-              </div>
-              <img src="http://placehold.it/300x200" alt="Placeholder" className="infoblock_img" />
+            <div className="infoblock_text">
+              <h2 id="feature">{polyglot.t('welcomePage.feature1Title')}</h2>
+              <p>{polyglot.t('welcomePage.feature1Content')}</p>
             </div>
+            <img src="http://placehold.it/300x200" alt="Placeholder" className="infoblock_img" />
           </div>
           <div className="infoblock">
-            <div className="infoblock">
-              <div className="infoblock_text infoblock_text--left" >
-                <h2>{polyglot.t('welcomePage.feature2Title')}</h2>
-                <p>{polyglot.t('welcomePage.feature2Content')}</p>
-              </div>
-              <img src="http://placehold.it/300x200" alt="Placeholder" className="infoblock_img infoblock_img--left" />
+            <div className="infoblock_text infoblock_text--left" >
+              <h2>{polyglot.t('welcomePage.feature2Title')}</h2>
+              <p>{polyglot.t('welcomePage.feature2Content')}</p>
             </div>
+            <img src="http://placehold.it/300x200" alt="Placeholder" className="infoblock_img infoblock_img--left" />
           </div>
-        </Content>
+        </OneColumn>
         <Footer />
       </Wrapper>
     );

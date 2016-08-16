@@ -11,7 +11,7 @@ import polyglot from '../i18n';
 import SelectLocale from '../locale/SelectLocale';
 
 export const Wrapper = ({ children }) => <div className="wrapper">{children}</div>;
-export const Content = ({ children }) => <div className="content">{children}</div>;
+export const OneColumn = ({ children }) => <div className="one-column">{children}</div>;
 
 export const Footer = () =>
   <footer>

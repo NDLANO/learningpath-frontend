@@ -16,7 +16,7 @@ import SearchForm from './LearningPathSearchForm';
 import SearchResult from './LearningPathSearchResult';
 import Masthead from '../../common/Masthead';
 import { searchLearningPaths } from './learningPathSearchActions';
-import { Wrapper, Content, Footer } from '../../common/Layout';
+import { Wrapper, OneColumn, Footer } from '../../common/Layout';
 import {
   getLearningPathSearchResult,
   getLearningPathSearchTotalCount,
@@ -37,7 +37,7 @@ const LearningPathSearch = (props) => {
 
   return (
     <Wrapper>
-      <Content>
+      <OneColumn>
         <Masthead />
         <div className="page-header">
           <SearchForm
@@ -52,7 +52,7 @@ const LearningPathSearch = (props) => {
           )}
           <LinkPager page={page} lastPage={lastPage} query={query} pathName="/learningpaths" />
         </div>
-      </Content>
+      </OneColumn>
       <Footer />
     </Wrapper>
   );
