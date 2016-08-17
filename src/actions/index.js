@@ -11,7 +11,6 @@ import { createAction } from 'redux-actions';
 import initializeSession from './initializeSession';
 import logout from './logout';
 import checkValidSession from './checkValidSession.js';
-import validateOembed from './validateOembed';
 
 export const setAuthenticated = createAction('SET_AUTHENTICATED');
 export const setAuthToken = createAction('SET_AUTH_TOKEN');
@@ -23,7 +22,6 @@ export const openRightSidebar = createAction('OPEN_RIGHT_SIDEBAR');
 export {
   initializeSession,
   logout,
-  validateOembed,
 };
 
 export default {
@@ -34,7 +32,6 @@ export default {
   logout,
   checkValidSession,
   logoutAction,
-  validateOembed,
   closeSidebars,
   openLeftSidebar,
   openRightSidebar,

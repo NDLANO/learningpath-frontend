@@ -11,8 +11,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 
-import { validateOembed } from '..';
-import { removeOembedPreview, setOembedPreview } from '../validateOembed';
+import { validateOembed, removeOembedPreview, setOembedPreview } from '../validateOembedActions';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);

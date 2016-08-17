@@ -22,9 +22,7 @@ import OneLineEditor from '../../../common/editors/OneLineEditor';
 import ObjectSelector from '../../../common/form/ObjectSelector';
 import PreviewOembed from '../oembed/PreviewOembed';
 import LearningPathStepIcon from '../LearningPathStepIcon';
-import {
-  validateOembed,
-} from '../../../actions';
+import { validateOembed } from './validateOembedActions';
 
 const LearningPathStepForm = (props) => {
   const {
