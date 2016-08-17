@@ -10,9 +10,9 @@ import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
-import payload403invalid from './payload403invalid';
+import payload403invalid from '../../actions/__tests__/payload403invalid';
 
-import { fetchMyLearningPaths, setLearningPaths } from '..';
+import { fetchMyLearningPaths, setLearningPaths } from '../myLearningPathsActions';
 import { applicationError } from '../../messages/messagesActions';
 
 const middleware = [thunk];

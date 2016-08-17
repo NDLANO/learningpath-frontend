@@ -13,7 +13,7 @@ import { bindActionCreators } from 'redux';
 import App from './App';
 import Welcome from './Welcome';
 import NotFound from './NotFound';
-import MyPage from './MyPage';
+import MyPage from '../myPage/MyPage';
 
 import LoginProviders from '../session/LoginProviders';
 
@@ -34,7 +34,6 @@ export default function (store) {
 
   const {
     logout,
-    fetchMyLearningPaths,
     checkValidSession,
   } = bindActionCreators(actions, store.dispatch);
   const learningPathRoutes = configureLearningPathRoutes(store, ifAuthenticated);
@@ -44,7 +43,7 @@ export default function (store) {
       <IndexRoute component={Welcome} />
       {loginRoutes}
       <Route path="logout" onEnter={ifAuthenticated(logout)} component={LoginProviders} />
-      <Route path="minside" component={requireAuthentication(MyPage)} onEnter={ifAuthenticated(fetchMyLearningPaths)} />
+      <Route path="minside" component={requireAuthentication(MyPage)} />
       {learningPathRoutes}
       <Route path="*" component={NotFound} />
     </Route>

@@ -26,6 +26,7 @@ import Masthead from '../common/Masthead';
 import CreateLearningPath from '../learningPath/new/CreateLearningPath';
 import { Wrapper, OneColumn, Footer } from '../common/Layout';
 import { fetchLearningPathLicensesIfNeeded } from '../learningPath/edit/copyright/learningPathLicensesActions';
+import { fetchMyLearningPaths } from './myLearningPathsActions';
 
 export class MyPage extends React.Component {
   constructor(props) {
@@ -36,10 +37,13 @@ export class MyPage extends React.Component {
     };
     this.onCreateLearningPathClick = this.onCreateLearningPathClick.bind(this);
   }
+
   componentDidMount() {
-    const { fetchLearningPathLicenses } = this.props;
+    const { fetchLearningPathLicenses, localFetchMyLearningPaths } = this.props;
     fetchLearningPathLicenses();
+    localFetchMyLearningPaths();
   }
+
   onCreateLearningPathClick() {
     this.setState({
       displayCreatePath: true,
@@ -153,6 +157,7 @@ MyPage.propTypes = {
   learningPaths: PropTypes.array,
   copyPath: PropTypes.func.isRequired,
   fetchLearningPathLicenses: PropTypes.func.isRequired,
+  localFetchMyLearningPaths: PropTypes.func.isRequired,
   licenses: PropTypes.array.isRequired,
 };
 
@@ -193,7 +198,7 @@ const mapDispatchToProps = {
   createPath: createLearningPath,
   copyPath: copyLearningPath,
   fetchLearningPathLicenses: fetchLearningPathLicensesIfNeeded,
-
+  localFetchMyLearningPaths: fetchMyLearningPaths,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyPage);

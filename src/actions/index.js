@@ -10,14 +10,12 @@ import { createAction } from 'redux-actions';
 
 import initializeSession from './initializeSession';
 import logout from './logout';
-import fetchMyLearningPaths from './fetchMyLearningPaths';
 import checkValidSession from './checkValidSession.js';
 import validateOembed from './validateOembed';
 import updateLearningPathStatus from './updateLearningPathStatus';
 
 export const setAuthenticated = createAction('SET_AUTHENTICATED');
 export const setAuthToken = createAction('SET_AUTH_TOKEN');
-export const setLearningPaths = createAction('SET_LEARNING_PATHS');
 export const setMyLearningPathsSortOrder = createAction('SET_MY_LEARNING_PATHS_SORT_ORDER');
 export const setUserData = createAction('SET_USER_DATA');
 export const logoutAction = createAction('LOGOUT');
@@ -28,7 +26,6 @@ export const openRightSidebar = createAction('OPEN_RIGHT_SIDEBAR');
 export {
   initializeSession,
   logout,
-  fetchMyLearningPaths,
   validateOembed,
   updateLearningPathStatus,
 };
@@ -36,12 +33,10 @@ export {
 export default {
   setAuthenticated,
   setAuthToken,
-  setLearningPaths,
   setMyLearningPathsSortOrder,
   setUserData,
   initializeSession,
   logout,
-  fetchMyLearningPaths,
   checkValidSession,
   logoutAction,
   validateOembed,
