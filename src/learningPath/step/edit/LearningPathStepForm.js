@@ -19,7 +19,7 @@ import polyglot from '../../../i18n';
 import Icon from '../../../common/Icon';
 import OnClickCheckbox from './OnClickCheckbox';
 import OneLineEditor from '../../../common/editors/OneLineEditor';
-import LearningPathStepLicense from './LearningPathStepLicense';
+import ObjectSelector from '../../../common/form/ObjectSelector';
 import PreviewOembed from '../oembed/PreviewOembed';
 import LearningPathStepIcon from '../LearningPathStepIcon';
 import {
@@ -73,7 +73,7 @@ const LearningPathStepForm = (props) => {
         </select>
       </div>
       <div className="learning-step-form_group">
-        <LearningPathStepLicense licenseOptions={licenseOptions} {...license} />
+        <ObjectSelector className="learning-step-form_select" idKey="license" labelKey="description" options={licenseOptions} {...license} />
       </div>
       <div className="learning-step-form_group">
         <div className="learning-step-form_left">

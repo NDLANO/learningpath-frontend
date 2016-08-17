@@ -21,7 +21,8 @@ const ObjectSelector = (props) => {
       {...rest}
     >
       {options.map(option =>
-        <option key={option[idKey]} value={option[idKey]}>{option[labelKey]}</option>)}
+        <option key={option[idKey] ? option[idKey] : 'undefined'} value={option[idKey]}>{option[labelKey]}</option>
+      )}
     </select>
   );
 };
