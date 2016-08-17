@@ -9,7 +9,7 @@
 import { createAction } from 'redux-actions';
 import { routerActions } from 'react-router-redux';
 
-import { fetchPath, createPath, deletePath, updatePath, copyPath } from '../sources/learningpaths';
+import { fetchPath, createPath, deletePath, updatePath, copyPath, updateStatus } from '../sources/learningpaths';
 import { applicationError, addMessage } from '../messages/messagesActions';
 import { createEmptyLearningPathStep } from './step/learningPathStepActions';
 import polyglot from '../i18n';
@@ -17,6 +17,7 @@ import { titleI18N } from '../util/i18nFieldFinder';
 import { fetchLearningPathImageWithMetaUrl, setSelectedImage, setSavedImage } from '../imageSearch/imageActions';
 
 export const setLearningPath = createAction('SET_LEARNING_PATH');
+export const setLearningPathStatus = createAction('UPDATE_LEARNING_PATH_STATUS');
 export const removeLearningPath = createAction('REMOVE_LEARNING_PATH');
 
 export function fetchLearningPath(pathId) {
@@ -81,6 +82,20 @@ export function updateLearningPath(pathId, learningPath, redirectUrl = `/learnin
 export function deleteLearningPath(pathId) {
   return (dispatch, getState) => deletePath(getState().authToken, { pathId })
     .then(dispatch(removeLearningPath(pathId)));
+}
+
+export function updateLearningPathStatus(pathId, status, redirectUrl = false) {
+  return (dispatch, getState) => updateStatus(getState().authToken, { pathId }, { status })
+    .then(() => {
+      dispatch(setLearningPathStatus({ id: pathId, status }));
+      dispatch(addMessage({ message: polyglot.t('updateLearningPathStatus.updateStatusMsg') }));
+      if (redirectUrl) {
+        dispatch(routerActions.push({
+          pathname: redirectUrl,
+        }));
+      }
+    })
+    .catch(err => dispatch(applicationError(err)));
 }
 
 export function copyLearningPath(learningPath, locale) {
