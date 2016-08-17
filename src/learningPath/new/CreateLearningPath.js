@@ -9,7 +9,7 @@
 import React, { PropTypes } from 'react';
 import { reduxForm, reset } from 'redux-form';
 import polyglot from '../../i18n';
-import LicenseSelector from '../edit/copyright/LicenseSelector';
+import ObjectSelector from '../../common/form/ObjectSelector';
 
 const fields = ['title', 'description', 'license'];
 
@@ -41,7 +41,7 @@ class CreateLearningPath extends React.Component {
         </div>
         <div>
           <label htmlFor="license">Lisens</label>
-          <LicenseSelector licenseOptions={licenseOptions} {...license} />
+          <ObjectSelector idKey="license" labelKey="description" options={licenseOptions} {...license} />
           <p className="learning-path_input-information">{polyglot.t('createLearningPath.descriptionMaxLength')}</p>
         </div>
         <button className="button cta-link cta-link--block" disabled={submitting} type="submit">

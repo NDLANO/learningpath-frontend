@@ -16,7 +16,7 @@ import { reduxForm } from 'redux-form';
 import LabeledIcon from '../../common/LabeledIcon';
 import { titleI18N, descriptionI18N, tagsI18N } from '../../util/i18nFieldFinder';
 import TagsInput from '../../common/TagsInput';
-import LicenseSelector from './copyright/LicenseSelector';
+import ObjectSelector from '../../common/form/ObjectSelector';
 import Contributors from './copyright/Contributors';
 import polyglot from '../../i18n';
 import LearningPathDuration from './LearningPathDuration';
@@ -121,7 +121,7 @@ const LearningPathForm = (props) => {
         </div>
         <div className="learningPath-copyright">
           <label htmlFor="license" className="label--medium-bold  label--medium">{polyglot.t('learningPath.copyright.license')}</label>
-          <LicenseSelector id="license" licenseOptions={licenseOptions} {...license} />
+          <ObjectSelector idKey="license" labelKey="description" options={licenseOptions} {...license} />
         </div>
       </div>
     </form>
