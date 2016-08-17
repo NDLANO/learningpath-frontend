@@ -16,7 +16,6 @@ import updateLearningPathStatus from './updateLearningPathStatus';
 
 export const setAuthenticated = createAction('SET_AUTHENTICATED');
 export const setAuthToken = createAction('SET_AUTH_TOKEN');
-export const setMyLearningPathsSortOrder = createAction('SET_MY_LEARNING_PATHS_SORT_ORDER');
 export const setUserData = createAction('SET_USER_DATA');
 export const logoutAction = createAction('LOGOUT');
 export const setLearningPathStatus = createAction('UPDATE_LEARNING_PATH_STATUS');
@@ -33,7 +32,6 @@ export {
 export default {
   setAuthenticated,
   setAuthToken,
-  setMyLearningPathsSortOrder,
   setUserData,
   initializeSession,
   logout,

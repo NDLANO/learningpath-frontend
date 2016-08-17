@@ -12,7 +12,7 @@ import { Link } from 'react-router';
 import sortBy from 'lodash/sortBy';
 import reverse from 'lodash/reverse';
 import get from 'lodash/get';
-import { setMyLearningPathsSortOrder, updateLearningPathStatus } from '../actions';
+import { updateLearningPathStatus } from '../actions';
 import { deleteLearningPath, createLearningPath, copyLearningPath } from '../learningPath/learningPathActions';
 import Icon from '../common/Icon';
 import LabeledIcon from '../common/LabeledIcon';
@@ -26,7 +26,7 @@ import Masthead from '../common/Masthead';
 import CreateLearningPath from '../learningPath/new/CreateLearningPath';
 import { Wrapper, OneColumn, Footer } from '../common/Layout';
 import { fetchLearningPathLicensesIfNeeded } from '../learningPath/edit/copyright/learningPathLicensesActions';
-import { fetchMyLearningPaths } from './myLearningPathsActions';
+import { setMyLearningPathsSortOrder, fetchMyLearningPaths } from './myPageActions';
 
 export class MyPage extends React.Component {
   constructor(props) {

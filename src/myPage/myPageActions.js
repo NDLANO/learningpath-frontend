@@ -10,6 +10,7 @@ import { createAction } from 'redux-actions';
 import { applicationError } from '../messages/messagesActions';
 import { fetchMyPaths } from '../sources/learningpaths';
 
+export const setMyLearningPathsSortOrder = createAction('SET_MY_LEARNING_PATHS_SORT_ORDER');
 export const setLearningPaths = createAction('SET_LEARNING_PATHS');
 
 export function fetchMyLearningPaths() {

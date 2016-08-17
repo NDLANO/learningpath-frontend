@@ -8,7 +8,7 @@
 
 import test from 'tape';
 import { isFSA } from 'flux-standard-action';
-import { setMyLearningPathsSortOrder } from '..';
+import { setMyLearningPathsSortOrder } from '../myPageActions';
 
 test('actions/setMyLearningPathsSortOrder', t => {
   const actual = setMyLearningPathsSortOrder('lastUpdated');
