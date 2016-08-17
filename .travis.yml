@@ -1,5 +1,8 @@
 language: node_js
 node_js:
-  - "6"
+- '6'
 script:
-  - npm test
+- npm test
+notifications:
+  slack:
+    secure: Vu8TVnpzkJA5uqezSEkq9g5aKtgZNHuqe0oRmJtS2bC0He+5+2X3oeaVRTAOtEuP0BP8p4DsOiCgdvuccZbgA8nGTw2LpR/wffSGbx1Q6LF31Zovvf1zNm3Zda3g6xuRD4OK6gefGZrkMaEAS6pRGC0w5O0ID6o7smhxea1UwXBO/p0qXkD0FrbcoLyKMdIK3OZ9necuR/1525eb3NqyggDQiuRyQBO/C0o8iObmqjKIQDoIq+F+w3DQ4xK5WjD1M1piAGYPDkUkA2UEsBXj4wAVSw4qHpnRRqwRf3Jc670dLkS6mI6ynKjuaElMuQ1jaOsx0/HJ52Lcsk1Lwh7WZK82HLd3va1XDNu7tCmdKM6GUqpnaVjcmW9L/HUj9HrwtExkiSctmtFr/JiAkQ2sNK5MZ+1axPQb0pUsXLEpVA3hfZd5OAJR5ZWF+v1rzdRTkpcqHzF6bp8EsH+RQ2+VDIIBWI4R4kY4ioALYoIeW4/52/ETJZsnUwkxixFRIxwLjZR16XmwEEGQdn6rCKeF2Ey7rGserO1Ad0BTwgX29+ZEQCYkzwdEvpOPGGp9w/xPkPf4+R7SnEjn7VZPKAjeYwo2XVcRUi3S/b6uP9JSAJsmF+TQIziUHukyjAnEL0X6ZEuFgNcOpCnhBmyz9BABJTlXjJBW/MfNIZQzVGyskKU=
