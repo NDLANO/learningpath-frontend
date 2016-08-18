@@ -13,7 +13,7 @@ import { createHistory } from 'history';
 import { availableLocales } from './localeConstants';
 import { getLocale } from './localeSelectors';
 
-const SelectLocale = ({ locale, pathname, search }) => {
+const SelectLocale = ({ locale, pathname, search, ...rest }) => {
   const handleChange = (newLocale) => {
     const path = pathname.startsWith('/') ? pathname.substring(1) : pathname;
     createHistory().push(`/${newLocale}/${path}${search}`); // Need create new history or else basename is included
@@ -21,7 +21,7 @@ const SelectLocale = ({ locale, pathname, search }) => {
   };
 
   return (
-    <select onChange={(evt) => { handleChange(evt.target.value); }} value={locale}>
+    <select onChange={(evt) => { handleChange(evt.target.value); }} value={locale} {...rest}>
       {availableLocales.map(l => <option key={l.abbreviation} value={l.abbreviation}>{l.name}</option>)}
     </select>
   );
@@ -38,7 +38,7 @@ const mapStateToProps = (state) => Object.assign(
   {}, state, {
     locale: getLocale(state),
     pathname: state.routing.locationBeforeTransitions.pathname,
-    search: state.routing.locationBeforeTransitions.search
+    search: state.routing.locationBeforeTransitions.search,
   }
 );
 

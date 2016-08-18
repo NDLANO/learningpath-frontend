@@ -160,8 +160,8 @@ const phrases = {
     privacy: 'Privacy',
     feedback: 'Feedback',
     footerInfo: 'This webapplication is developed by NDLA as Open Source code.',
-    footerEditior: 'Chief editor: ',
-    footerIssueResponsible: 'Utgaveansvarlig: ',
+    footerEditiorInChief: 'Editor in chief: ',
+    footerManagingEditor: 'Managing editor: ',
     selectLanguage: 'Choose language (språk): ',
   },
   duration: {

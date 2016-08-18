@@ -14,8 +14,12 @@ export const Wrapper = ({ children }) => <div className="wrapper">{children}</di
 export const OneColumn = ({ children }) => <div className="one-column">{children}</div>;
 
 export const Footer = () =>
-  <footer>
-    <ul className="footer_list">
+  <footer className="footer">
+    <form className="footer_language-form">
+      <label className="footer_language-label footer--bold" htmlFor="language-select">{polyglot.t('footer.selectLanguage')}</label>
+      <SelectLocale id="language-select" className="footer_language-select" />
+    </form>
+    <ul className="footer_list footer--bold">
       <li className="footer_item">
         <a href="http://om.ndla.no/" className="footer_link">{polyglot.t('footer.aboutNDLA')}</a>
       </li>
@@ -29,13 +33,12 @@ export const Footer = () =>
         <a href="http://om.ndla.no/" className="footer_link">{polyglot.t('footer.privacy')}</a>
       </li>
     </ul>
+    <div className="footer_ruler" />
     <p className="footer_text">
-      {polyglot.t('footer.selectLanguage')} <SelectLocale />
+      <span className="footer_editor">{polyglot.t('footer.footerEditiorInChief')}<strong>Øivind Høines</strong></span>
+      <span className="footer_editor">{polyglot.t('footer.footerManagingEditor')} <strong>Pål Frønsdal</strong></span>
     </p>
     <p className="footer_text">
       {polyglot.t('footer.footerInfo')}
-    </p>
-    <p className="footer_text">
-      {polyglot.t('footer.footerEditior')}<strong>Øivind Høines</strong> {polyglot.t('footer.footerIssueResponsible')} <strong>Pål Frønsdal</strong>
     </p>
   </footer>;

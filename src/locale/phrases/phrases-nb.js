@@ -159,8 +159,8 @@ const phrases = {
     privacy: 'Personvern',
     feedback: 'Tilbakemelding',
     footerInfo: 'Nettstedet er utarbeidet av NDLA som åpen kildekode.',
-    footerEditior: 'Ansvarlig redaktør: ',
-    footerIssueResponsible: 'Utgaveansvarlig: ',
+    footerEditiorInChief: 'Ansvarlig redaktør: ',
+    footerManagingEditor: 'Utgaveansvarlig: ',
     selectLanguage: 'Velg språk (language): ',
   },
   duration: {
