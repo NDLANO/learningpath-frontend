@@ -74,7 +74,7 @@ class SortableLearningStepList extends Component {
                   {titleI18N(step, lang, true)}
                 </div>
                 <div className="sortable_action">
-                  <button onClick={() => deleteStep(learningPathId, step.id)} className="un-button">
+                  <button onClick={() => deleteStep(learningPathId, step.id, titleI18N(step, lang, true))} className="un-button">
                     <Icon.Clear className="icon--m" />
                   </button>
                 </div>

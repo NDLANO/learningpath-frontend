@@ -12,52 +12,35 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import uuid from 'node-uuid';
 
-import { Alerts } from '../Alerts';
-import { clearAllMessages } from '../../messages/messagesActions';
+import { Alerts, Alert, Action } from '../Alerts';
+import { clearMessage } from '../../messages/messagesActions';
 
 const noop = () => {};
 
-test('component/Alerts default severity', t => {
+test('component/Alerts one message', t => {
   let alertMessages = [{ id: uuid.v4(), message: 'Testmessage' }];
   const component = shallow(<Alerts messages={alertMessages} dispatch={noop} />);
+  const alertElement = component.find('Alert');
 
-  const messageElements = component.find('.alert_msg').find('Message');
-  t.equals(messageElements.length, 1);
-  // t.equals(messageElements.text(), 'Testmessage');
-
-  const alertElement = component.find('.alert');
-  t.equal(alertElement.prop('className'), 'alert alert--info');
+  t.equals(alertElement.length, 1);
 
   t.end();
 });
 
-test('component/Alerts info severity', t => {
+test('component/Alerts two messages', t => {
   const messages = ['Testmessage', 'TEST'];
   let alertMessages = [{ id: uuid.v4(), message: messages[0], severity: 'success' }, { id: uuid.v4(), message: messages[1] }];
   const component = shallow(<Alerts messages={alertMessages} dispatch={noop} />);
 
-  const messageElements = component.find('.alert_msg').find('Message');
-  t.equals(messageElements.length, 2);
+  const alertElement = component.find('Alert');
+  t.equals(alertElement.length, 2);
 
-  const alertElement = component.find('.alert');
-  t.equal(alertElement.prop('className'), 'alert alert--success');
-
-  t.end();
-});
-
-test('component/Alerts info and danger severity', t => {
-  const messages = ['Test one', 'Test two'];
-  let alertMessages = [{ id: uuid.v4(), message: messages[0], severity: 'info' }, { id: uuid.v4(), message: messages[1], severity: 'danger' }];
-  const component = shallow(<Alerts messages={alertMessages} dispatch={noop} />);
-
-  const messageElements = component.find('.alert_msg').find('Message');
-  t.equals(messageElements.length, 2);
-
-  const alertElement = component.find('.alert');
-  t.equal(alertElement.prop('className'), 'alert alert--danger');
+  // const alertDIc = component.find('.alert');
+  // t.equal(alertDIc.prop('className'), 'alert alert--success');
 
   t.end();
 });
+
 
 test('component/Alerts without messages', t => {
   const component = shallow(<Alerts messages={[]} dispatch={noop} />);
@@ -65,17 +48,33 @@ test('component/Alerts without messages', t => {
   t.end();
 });
 
-test('component/Alerts dismiss', t => {
+
+test('component/Alert dismiss', t => {
   const dispatch = sinon.spy(() => {});
+  const id = uuid.v4();
 
   const dismissBt = shallow(
-    <Alerts messages={[{ id: uuid.v4(), message: 'whatever', severity: 'info' }]} dispatch={dispatch} />
+    <Alert message={{ id, message: 'whatever', severity: 'info' }} dispatch={dispatch} />
   ).find('.alert_dismiss');
 
   dismissBt.simulate('click');
 
   t.ok(dispatch.calledOnce);
-  t.deepEquals(dispatch.firstCall.args, [clearAllMessages()]);
+  t.deepEquals(dispatch.firstCall.args, [clearMessage(id)]);
+
+  t.end();
+});
+
+test('component/Action click', t => {
+  const handleClick = sinon.spy(() => {});
+
+  const actionBtn = shallow(
+    <Action title="Undo" onClick={handleClick} />
+  );
+
+  actionBtn.simulate('click');
+
+  t.ok(handleClick.calledOnce);
 
   t.end();
 });

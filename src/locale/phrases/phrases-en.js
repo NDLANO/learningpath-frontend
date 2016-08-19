@@ -190,7 +190,7 @@ const phrases = {
   learningPathStep: {
     messages: {
       delete: {
-        title: 'Learning step was deleted',
+        title: 'Deleted «%{stepTitle}»',
         action: 'Undo',
       },
     },

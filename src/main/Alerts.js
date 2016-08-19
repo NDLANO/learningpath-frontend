@@ -9,32 +9,47 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
+import uuid from 'node-uuid';
 
 import Icon from '../common/Icon';
-import { timeoutMessage, clearAllMessages, clearMessage } from '../messages/messagesActions';
+import { timeoutMessage, clearMessage } from '../messages/messagesActions';
 
-const priorities = { info: 0, success: 1, warning: 2, danger: 3 };
 
-const Action = ({ title, onClick }) =>
-  <strong style={{ float: 'right' }}><button onClick={onClick} className="un-button">{title}</button></strong>;
+export const Action = ({ title, onClick }) =>
+  <button onClick={onClick} className="un-button alert_action">
+    <span className="alert_action-text">{title}</span>
+  </button>;
 
 Action.propTypes = {
   title: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 
-const Message = ({ message, dispatch }) => {
+export const Alert = ({ message, dispatch }) => {
   const onClick = () => {
     message.action.onClick();
     dispatch(clearMessage(message.id));
   };
 
-  return <li key={message.id}>{message.message} {message.action ? <Action title={message.action.title} onClick={onClick} /> : null}</li>;
+  const severity = message.severity ? message.severity : 'info';
+
+  return (
+    <div className={`alert alert--${severity}`}>
+      <div className="alert_msg">
+        {message.message}
+      </div>
+      <button className="alert_dismiss un-button" onClick={() => dispatch(clearMessage(message.id))}>
+        <Icon.Clear />
+      </button>
+      {message.action ? <Action title={message.action.title} onClick={onClick} /> : null}
+    </div>
+  );
 };
 
-Message.propTypes = {
+Alert.propTypes = {
   message: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
+  className: PropTypes.string,
 };
 
 export function Alerts({ dispatch, messages }) {
@@ -44,31 +59,15 @@ export function Alerts({ dispatch, messages }) {
     'alert-overlay--hidden': isHidden,
   });
 
-  const highestAlert = messages
-    .map(m => m.severity)
-    .reduce((prev, current) => {
-      if (priorities[current] > priorities[prev]) {
-        return current;
-      }
-      return prev;
-    }, 'info');
-
   messages.filter(m => m.timeToLive > 0).forEach(item => dispatch(timeoutMessage(item)));
 
-  return (<div className={overlayClasses}>
-    <div className={`alert alert--${highestAlert}`}>
-      <button className="alert_dismiss un-button" onClick={() => dispatch(clearAllMessages())}>
-        <Icon.Clear />
-      </button>
-      <div className="alert_msg">
-        <ul>
-          {messages.map(message => (
-            <Message dispatch={dispatch} message={message} />
-          ))}
-        </ul>
-      </div>
+  return (
+    <div className={overlayClasses}>
+      {messages.map(message =>
+        <Alert key={uuid.v4()} dispatch={dispatch} message={message} />
+      )}
     </div>
-  </div>);
+  );
 }
 
 Alerts.propTypes = {

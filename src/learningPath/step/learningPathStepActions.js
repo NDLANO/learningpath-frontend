@@ -89,15 +89,15 @@ export function activateDeletedLearningPathStep(pathId, stepId) {
   ;
 }
 
-export function deleteLearningPathStep(pathId, stepId) {
+export function deleteLearningPathStep(pathId, stepId, stepTitle) {
   return (dispatch, getState) =>
     deleteStep(getState().authToken, { pathId, stepId })
       .then(() => dispatch(
         addMessage(
           {
-            message: polyglot.t('learningPathStep.messages.delete.title'),
-            timeToLive: 5000,
-            severity: 'warning',
+            message: polyglot.t('learningPathStep.messages.delete.title', { stepTitle }),
+            timeToLive: 7000,
+            severity: 'info',
             action: {
               title: polyglot.t('learningPathStep.messages.delete.action'),
               onClick: () => dispatch(activateDeletedLearningPathStep(pathId, stepId)),

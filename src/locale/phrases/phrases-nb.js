@@ -189,8 +189,8 @@ const phrases = {
   learningPathStep: {
     messages: {
       delete: {
-        title: 'Slettet læringssteg',
-        action: 'Angre sletting',
+        title: 'Slettet «%{stepTitle}»',
+        action: 'Angre',
       },
     },
     license: 'Lisens: %{license}',
