@@ -7,9 +7,7 @@
  */
 
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
 import classNames from 'classnames';
-import uuid from 'node-uuid';
 
 import Icon from '../common/Icon';
 import { timeoutMessage, clearMessage } from '../messages/messagesActions';
@@ -52,7 +50,7 @@ Alert.propTypes = {
   className: PropTypes.string,
 };
 
-export function Alerts({ dispatch, messages }) {
+export const Alerts = ({ dispatch, messages }) => {
   const isHidden = messages.length === 0;
   let overlayClasses = classNames({
     'alert-overlay': true,
@@ -64,15 +62,15 @@ export function Alerts({ dispatch, messages }) {
   return (
     <div className={overlayClasses}>
       {messages.map(message =>
-        <Alert key={uuid.v4()} dispatch={dispatch} message={message} />
+        <Alert key={message.id} dispatch={dispatch} message={message} />
       )}
     </div>
   );
-}
+};
 
 Alerts.propTypes = {
   messages: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 
-export default connect(state => state)(Alerts);
+export default Alerts;

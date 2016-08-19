@@ -10,7 +10,8 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import { getLocale } from '../locale/localeSelectors';
-import Alerts from './Alerts';
+import { getMessages } from '../messages/messagesSelectors';
+import Alerts from '../messages/Alerts';
 
 export class App extends React.Component {
   getChildContext() {
@@ -20,10 +21,11 @@ export class App extends React.Component {
   }
 
   render() {
+    const { dispatch, children, messages } = this.props;
     return (
       <div className="page-container">
-        {this.props.children}
-        <Alerts />
+        {children}
+        <Alerts dispatch={dispatch} messages={messages} />
       </div>
     );
   }
@@ -31,12 +33,17 @@ export class App extends React.Component {
 
 App.propTypes = {
   locale: PropTypes.string.isRequired,
+  messages: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 App.childContextTypes = {
   lang: PropTypes.string,
 };
 
-const mapStateToProps = (state) => Object.assign({}, state, { locale: getLocale(state) });
+const mapStateToProps = (state) => ({
+  locale: getLocale(state),
+  messages: getMessages(state),
+});
 
 export default connect(mapStateToProps)(App);
