@@ -8,7 +8,7 @@
 
 import { createAction } from 'redux-actions';
 import { fetchPathTags } from '../../../sources/learningpaths';
-import { applicationError } from '../../../actions';
+import { applicationError } from '../../../messages/messagesActions';
 
 const setLearningPathTags = createAction('SET_LEARNING_PATH_TAGS');
 

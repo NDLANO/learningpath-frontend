@@ -13,7 +13,7 @@ import classNames from 'classnames';
 import polyglot from '../i18n';
 
 import LabeledIcon from './LabeledIcon';
-import { closeSidebars } from '../actions';
+import { closeSidebars } from './sidebarActions';
 
 export function SiteNav({ authenticated, userName, cssModifier, localCloseSidebars }) {
   let myPage;

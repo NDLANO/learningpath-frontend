@@ -19,7 +19,7 @@ import {
   closeSidebars,
   openLeftSidebar,
   openRightSidebar,
-} from '../actions';
+} from './sidebarActions';
 
 export function Masthead(props) {
   const {

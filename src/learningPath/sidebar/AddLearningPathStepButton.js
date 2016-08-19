@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 import polyglot from '../../i18n';
-import { closeSidebars } from '../../actions';
+import { closeSidebars } from '../../common/sidebarActions';
 
 export function AddLearningPathStepButton({ learningPath, localCloseSidebars }) {
   if (!learningPath.canEdit) {

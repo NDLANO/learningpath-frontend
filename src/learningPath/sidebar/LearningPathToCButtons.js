@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import polyglot from '../../i18n';
 import Icon from '../../common/Icon';
 import { updateLearningPath, updateLearningPathStatus } from '../learningPathActions';
-import { closeSidebars } from '../../actions';
+import { closeSidebars } from '../../common/sidebarActions';
 
 export function LearningPathToCButtons({ learningPath, saveAction, saveAndPublishAction, localCloseSidebars }) {
   if (!learningPath.canEdit) {

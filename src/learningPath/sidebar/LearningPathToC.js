@@ -16,7 +16,7 @@ import LearningPathStepIcon from '../../learningPath/step/LearningPathStepIcon';
 import {
   closeSidebars,
   openLeftSidebar,
-} from '../../actions';
+} from '../../common/sidebarActions';
 import { titleI18N } from '../../util/i18nFieldFinder';
 
 export function LearningPathToC({ learningPath, activeStepId, localCloseSidebars }, { lang }) {
