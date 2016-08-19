@@ -11,7 +11,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 
-import actions from '..';
+import { checkValidSession } from '../sessionActions';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
@@ -30,7 +30,7 @@ test('actions/checkValidSession', (t) => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch(actions.checkValidSession())
+  store.dispatch(checkValidSession())
     .then(() => {
       t.deepEqual(store.getActions(), []);
       t.doesNotThrow(() => apiMock.done());
@@ -51,7 +51,7 @@ test('actions/checkValidSession invalid authToken', (t) => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch(actions.checkValidSession())
+  store.dispatch(checkValidSession())
     .then(() => {
       t.deepEqual(store.getActions(), [
         { type: 'LOGOUT' },

@@ -9,7 +9,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { routerActions } from 'react-router-redux';
-import { initializeSession } from '../actions';
+import { initializeSession } from './sessionActions';
 
 export class SessionInitializer extends React.Component {
   componentWillMount() {

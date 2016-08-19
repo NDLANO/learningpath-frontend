@@ -17,7 +17,7 @@ import MyPage from '../myPage/MyPage';
 
 import LoginProviders from '../session/LoginProviders';
 
-import actions from '../actions';
+import * as actions from '../session/sessionActions';
 import requireAuthentication from '../session/requireAuthentication';
 import configureLearningPathRoutes from '../learningPath/routes';
 import loginRoutes from '../session/routes';

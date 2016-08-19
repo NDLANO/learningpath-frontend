@@ -8,33 +8,27 @@
 
 import test from 'tape';
 import { isFSA } from 'flux-standard-action';
-import { setUserData } from '..';
+import { setAuthenticated } from '../sessionActions';
 
 
-test('actions/setUserData', (t) => {
-  const actual = setUserData({
-    name: 'Alice', email: 'alice@example.com',
-  });
+test('actions/setAuthenticated', (t) => {
+  const actual = setAuthenticated(true);
 
   t.ok(isFSA(actual), 'FSA compliant action');
 
-  t.equal(actual.type, 'SET_USER_DATA');
-  t.ok(actual.payload);
-  t.deepEqual(actual.payload, {
-    name: 'Alice',
-    email: 'alice@example.com',
-  });
+  t.equal(actual.type, 'SET_AUTHENTICATED');
+  t.equal(actual.payload, true);
   t.notOk(actual.error);
 
   t.end();
 });
 
-test('actions/setUserData with error', (t) => {
-  const actual = setUserData(new Error('fail!'));
+test('actions/setAuthenticated with error', (t) => {
+  const actual = setAuthenticated(new Error('fail!'));
 
   t.ok(isFSA(actual), 'FSA compliant action');
 
-  t.equal(actual.type, 'SET_USER_DATA');
+  t.equal(actual.type, 'SET_AUTHENTICATED');
   t.equal(actual.payload.message, 'fail!');
   t.ok(actual.error);
 
