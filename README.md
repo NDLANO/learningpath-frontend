@@ -188,10 +188,6 @@ https://github.com/airbnb/polyglot.js#readme
 Parse and stringify URL query strings.
 https://github.com/sindresorhus/query-string#readme
 
-**sanitize-html:**
-Clean up user-submitted HTML, preserving whitelisted elements and whitelisted attributes on a per-element basis.
-https://github.com/punkave/sanitize-html#readme
-
 ### ES2015
 
 **babel-core:**
