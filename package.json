@@ -50,6 +50,7 @@
     "babel-polyfill": "6.13.0",
     "babel-register": "6.11.6",
     "classnames": "2.2.5",
+    "compression": "1.6.2",
     "date-fns": "1.3.0",
     "defined": "1.0.0",
     "draft-js": "0.8.1",

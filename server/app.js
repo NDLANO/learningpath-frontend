@@ -9,6 +9,7 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import express from 'express';
+import compression from 'compression';
 import defined from 'defined';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
@@ -31,6 +32,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(webpackHotMiddleware(compiler, {}));
 }
 
+app.use(compression());
 app.use(express.static('htdocs'));
 
 const findIEClass = (userAgentString) => {
