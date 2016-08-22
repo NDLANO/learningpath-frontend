@@ -8,7 +8,6 @@
 
 import React, { PropTypes } from 'react';
 import { Editor, EditorState, RichUtils } from 'draft-js';
-import { Record } from 'immutable';
 import classNames from 'classnames';
 import { stateFromHTML } from 'draft-js-import-html';
 import Icon from '../Icon';
@@ -199,8 +198,8 @@ export default class DescriptionHTMLEditor extends React.Component {
 DescriptionHTMLEditor.propTypes = {
   value: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.instanceOf(Record),
-  ]).isRequired,
+    PropTypes.object,
+  ]),
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func,
   placeholder: PropTypes.string,
