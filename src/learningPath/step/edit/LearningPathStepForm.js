@@ -124,7 +124,7 @@ LearningPathStepForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
   learningPathId: PropTypes.number.isRequired,
-  oembedPreview: PropTypes.array.isRequired,
+  oembedPreview: PropTypes.array,
   validateOembedUrl: PropTypes.func.isRequired,
   licenseOptions: PropTypes.array.isRequired,
 };
