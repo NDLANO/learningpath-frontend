@@ -11,8 +11,8 @@ import { tagsI18N } from '../util/i18nFieldFinder';
 // import defined from 'defined';
 import polyglot from '../i18n';
 // import { titlesI18N } from '../util/i18nFieldFinder';
-export default function PreviewImage({ image, onSaveImage }, { lang }) {
-  const tags = tagsI18N(image)
+export default function PreviewImage({ image, onSaveImage }) {
+  const tags = tagsI18N(image);
   return (
     <div className="image-preview">
       <div className="image-preview_image">
