@@ -7,6 +7,7 @@
  */
 
 import React, { PropTypes } from 'react';
+import serialize from 'serialize-javascript';
 import config from '../src/config';
 import head from './Meta';
 import assets from '../htdocs/assets/assets';
@@ -51,12 +52,13 @@ const Html = (props) => {
         <SvgPolyfillScript className={className} />
         <link rel="stylesheet" type="text/css" href={`/assets/${cssFileName}`} />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic,300|Signika:400,600,300,700" />
-        <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href={`/assets/${assets['favicon.ico']}`} type="image/x-icon" />
       </head>
       <body>
         <GoogleTagMangerNoScript />
         <GoogleTagMangerScript />
         <div id="app-container" className="app-container" />
+        <script dangerouslySetInnerHTML={{ __html: `window.assets = ${serialize(assets)}` }} />
         <script src={`/assets/${scriptFileName}`} />
         <SvgPolyfillScriptInitalization className={className} />
       </body>
