@@ -15,6 +15,7 @@ import Oembed from './oembed/Oembed';
 import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
 import polyglot from '../../i18n';
 import Icon from '../../common/Icon';
+import { fetchLearningPathStep } from './learningPathStepActions';
 import { copyLearningPath } from '../learningPathActions';
 import CopyLearningPath from '../new/CopyLearningPath';
 import Lightbox from '../../common/Lightbox';
@@ -27,6 +28,21 @@ class LearningPathStep extends React.Component {
       displayCopyPath: false,
     };
     this.onCopyLearningPathClick = this.onCopyLearningPathClick.bind(this);
+  }
+
+  componentWillMount() {
+    const { lang } = this.context;
+    const { localFetchLearningPathStep, params: { pathId, stepId } } = this.props;
+    localFetchLearningPathStep(pathId, stepId, lang);
+  }
+
+  componentWillUpdate(nextProps) {
+    const { lang } = this.context;
+    const { localFetchLearningPathStep, params: { pathId, stepId } } = nextProps;
+
+    if (this.props.params.stepId !== stepId || this.props.params.pathId !== pathId) {
+      localFetchLearningPathStep(pathId, stepId, lang);
+    }
   }
 
   onCopyLearningPathClick() {
@@ -86,6 +102,11 @@ LearningPathStep.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   learningPath: PropTypes.object.isRequired,
   learningPathStep: PropTypes.object.isRequired,
+  localFetchLearningPathStep: PropTypes.func.isRequired,
+  params: PropTypes.shape({
+    pathId: PropTypes.string.isRequired,
+    stepId: PropTypes.string,
+  }).isRequired,
   copyPath: PropTypes.func.isRequired,
 };
 
@@ -95,6 +116,7 @@ LearningPathStep.contextTypes = {
 
 const mapDispatchToProps = {
   copyPath: copyLearningPath,
+  localFetchLearningPathStep: fetchLearningPathStep,
 };
 
 const mapStateToProps = (state) => Object.assign({}, state, {

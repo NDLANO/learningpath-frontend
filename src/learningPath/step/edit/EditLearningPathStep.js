@@ -14,6 +14,7 @@ import get from 'lodash/get';
 
 import LearningPathStepForm from './LearningPathStepForm';
 import {
+  fetchLearningPathStep,
   updateLearningPathStep,
   createLearningPathStep,
 } from '../learningPathStepActions';
@@ -21,14 +22,16 @@ import { fetchLearningPathLicensesIfNeeded } from '../../edit/copyright/learning
 import polyglot from '../../../i18n';
 
 class EditLearningPathStep extends Component {
-  componentDidMount() {
-    const { fetchLearningPathLicenses } = this.props;
+
+  componentWillMount() {
+    const { lang } = this.context;
+    const { fetchLearningPathLicenses, localFetchLearningPathStep, params: { pathId, stepId } } = this.props;
     fetchLearningPathLicenses();
+    localFetchLearningPathStep(pathId, stepId, lang);
   }
+
   render() {
-    const {
-      lang: language,
-    } = this.context;
+    const { lang: language } = this.context;
     const {
       step,
       saveLearningPathStep,
@@ -69,8 +72,13 @@ class EditLearningPathStep extends Component {
 EditLearningPathStep.propTypes = {
   step: PropTypes.object.isRequired,
   saveLearningPathStep: PropTypes.func.isRequired,
+  params: PropTypes.shape({
+    pathId: PropTypes.string.isRequired,
+    stepId: PropTypes.string,
+  }).isRequired,
   learningPathId: PropTypes.number,
   fetchLearningPathLicenses: PropTypes.func.isRequired,
+  localFetchLearningPathStep: PropTypes.func.isRequired,
   licenses: PropTypes.array.isRequired,
 };
 
@@ -87,6 +95,7 @@ export const mapStateToProps = state => assign({}, state, {
 export const mapDispatchToProps = {
   saveLearningPathStep: (learningPathId, lps) => (lps.id ? updateLearningPathStep(learningPathId, lps.id, lps) : createLearningPathStep(learningPathId, lps)),
   fetchLearningPathLicenses: fetchLearningPathLicensesIfNeeded,
+  localFetchLearningPathStep: fetchLearningPathStep,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditLearningPathStep);
