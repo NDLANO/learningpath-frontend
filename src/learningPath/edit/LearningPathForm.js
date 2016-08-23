@@ -95,7 +95,7 @@ const LearningPathForm = (props) => {
 
         <div className="learning-path-duration">
           <label htmlFor="duration" className="label--medium-bold  label--medium">{polyglot.t('learningPath.duration')}</label>
-          <LearningPathDuration id="duration" {...duration} />
+          <LearningPathDuration id="duration" {...duration} />s
           {duration.touched && duration.error && <span className="error_message error_message--red">{duration.error}</span>}
         </div>
 
