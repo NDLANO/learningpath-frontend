@@ -104,6 +104,14 @@ const LearningPathForm = (props) => {
           <TagsInput id="tags" tagOptions={tagOptions} {...tags} />
         </div>
 
+        <div className="learningPath-contributors">
+          <label htmlFor="license" className="label--medium-bold  label--medium">{polyglot.t('learningPath.copyright.contributors')}</label>
+          <Contributors id="contributors" {...contributors} />
+        </div>
+        <div className="learningPath-copyright">
+          <label htmlFor="license" className="label--medium-bold  label--medium">{polyglot.t('learningPath.copyright.license')}</label>
+          <ObjectSelector idKey="license" labelKey="description" options={licenseOptions} {...license} />
+        </div>
         <div className="block-container_fixed block-container_fixed--bottom--right">
           <div className="button-group">
             <Link to={`/learningpaths/${learningPath.id}`} className="button button--secondary">
@@ -113,15 +121,6 @@ const LearningPathForm = (props) => {
               <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
             </SubmitButton>
           </div>
-        </div>
-
-        <div className="learningPath-contributors">
-          <label htmlFor="license" className="label--medium-bold  label--medium">{polyglot.t('learningPath.copyright.contributors')}</label>
-          <Contributors id="contributors" {...contributors} />
-        </div>
-        <div className="learningPath-copyright">
-          <label htmlFor="license" className="label--medium-bold  label--medium">{polyglot.t('learningPath.copyright.license')}</label>
-          <ObjectSelector idKey="license" labelKey="description" options={licenseOptions} {...license} />
         </div>
       </div>
     </form>
