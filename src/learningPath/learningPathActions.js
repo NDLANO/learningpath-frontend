@@ -9,7 +9,7 @@
 import { createAction } from 'redux-actions';
 import { routerActions } from 'react-router-redux';
 
-import { fetchPath, createPath, deletePath, updatePath, copyPath, updateStatus } from '../sources/learningpaths';
+import { fetchPath, createPath, deletePath, updatePath, copyPath, updateStatus, activateDeletedPath } from '../sources/learningpaths';
 import { applicationError, addMessage } from '../messages/messagesActions';
 import { createEmptyLearningPathStep } from './step/learningPathStepActions';
 import polyglot from '../i18n';
@@ -78,10 +78,26 @@ export function updateLearningPath(pathId, learningPath, redirectUrl = `/learnin
     }
   ));
 }
-
+export function activateDeletedLearningPath(pathId) {
+  return (dispatch, getState) =>
+    activateDeletedPath(getState().authToken, { pathId });
+}
 export function deleteLearningPath(pathId) {
   return (dispatch, getState) => deletePath(getState().authToken, { pathId })
-    .then(dispatch(removeLearningPath(pathId)));
+    .then(dispatch(removeLearningPath(pathId)))
+    .then(dispatch(
+      addMessage(
+        {
+          message: 'Angre sletting?',
+          timeToLive: 7000,
+          severity: 'info',
+          action: {
+            title: polyglot.t('learningPathStep.messages.delete.action'),
+            onClick: () => dispatch(activateDeletedLearningPath(pathId)),
+          },
+        }
+      ))
+    );
 }
 
 export function updateLearningPathStatus(pathId, status, redirectUrl = false) {
