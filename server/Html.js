@@ -9,6 +9,7 @@
 import React, { PropTypes } from 'react';
 import config from '../src/config';
 import head from './Meta';
+import assets from '../htdocs/assets/assets';
 import { SvgPolyfillScript, SvgPolyfillScriptInitalization } from './svgPolyfill';
 
 
@@ -36,6 +37,8 @@ const GoogleTagMangerScript = () => {
 
 const Html = (props) => {
   const { lang, className } = props;
+  const scriptFileName = process.env.NODE_ENV === 'development' ? '/main.js' : assets['main.js'];
+  const cssFileName = process.env.NODE_ENV === 'development' ? '/main.css' : assets['main.css'];
 
   return (
     <html lang={lang} className={className}>
@@ -45,9 +48,8 @@ const Html = (props) => {
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         {head.title.toComponent()}
         {head.meta.toComponent()}
-        <link rel="stylesheet" type="text/css" href="/assets/style.css" />
-        <link rel="stylesheet" type="text/css" href="/assets/Draft.css" />
         <SvgPolyfillScript className={className} />
+        <link rel="stylesheet" type="text/css" href={`/assets/${cssFileName}`} />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic,300|Signika:400,600,300,700" />
         <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
       </head>
@@ -55,7 +57,7 @@ const Html = (props) => {
         <GoogleTagMangerNoScript />
         <GoogleTagMangerScript />
         <div id="app-container" className="app-container" />
-        <script src="/assets/app.js" />
+        <script src={`/assets/${scriptFileName}`} />
         <SvgPolyfillScriptInitalization className={className} />
       </body>
     </html>

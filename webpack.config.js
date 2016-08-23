@@ -1,9 +1,11 @@
 /* eslint-disable */
-var webpack = require('webpack');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
-var DEBUG = process.env.NODE_ENV !== 'production';
+const DEBUG = process.env.NODE_ENV !== 'production';
 
-var plugins = [
+let plugins = [
   new webpack.EnvironmentPlugin(['NODE_ENV']),
 ];
 
@@ -16,11 +18,30 @@ if (!DEBUG) {
         NODE_ENV: JSON.stringify('production')
       },
     }),
+
+    // OccurrenceOrderPlugin is needed for long-term caching to work properly.
+    // See http://mxs.is/googmv
+    new webpack.optimize.OccurrenceOrderPlugin(true),
+
+    // Merge all duplicate modules
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin()
+
+    // Minify and optimize the JavaScript
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false, // ...but do not show warnings in the console (there is a lot of them)
+        screw_ie8: true, // drop IE 6-8 specific optimizations
+      }
+    }),
+
+    new ManifestPlugin({fileName: 'assets.json'}),
+
+    // Extract the CSS into a separate file
+    new ExtractTextPlugin('[name].[contenthash].css')
   );
 } else {
   plugins.push(
+    new ExtractTextPlugin('[name].css'),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
@@ -30,7 +51,12 @@ if (!DEBUG) {
   );
 }
 
-var entry = ['babel-polyfill', './src/index.js'];
+var entry = [
+  'babel-polyfill',
+  './src/index.js',
+  'draft-js/dist/Draft.css',
+  'ndla-styleguide/assets/style.css'
+];
 
 if (DEBUG) {
   entry.push('webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true&quiet=true');
@@ -54,7 +80,7 @@ module.exports = {
   output: {
     path: __dirname + '/htdocs/assets',
     publicPath: '/assets',
-    filename: 'app.js'
+    filename: DEBUG ? '[name].js' : '[name].[chunkhash].js',
   },
 
   devServer: {
@@ -70,6 +96,14 @@ module.exports = {
         loaders: ['babel']
       },
       {
+        test: /\.jpe?g$|\.gif$|\.png$|\.ico|\.svg$|\.woff$|\.ttf$/,
+        loader: 'file-loader?name=[path][name]-[hash].[ext]'
+      },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
+      },
+      {
         test: /.json$/,
         loader: 'json'
       }
@@ -80,6 +114,5 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.json', '.jsx']
   }
-
 };
 /* eslint-enable */

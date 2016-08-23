@@ -33,7 +33,9 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(compression());
-app.use(express.static('htdocs'));
+app.use(express.static('htdocs', {
+  maxAge: 1000 * 60 * 60 * 24 * 365, // One year
+}));
 
 const findIEClass = (userAgentString) => {
   if (userAgentString.indexOf('MSIE') >= 0) {
