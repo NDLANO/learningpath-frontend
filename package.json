@@ -9,7 +9,7 @@
     "tdd": "watch 'NODE_ENV=unittest babel-tape-runner 'src/**/*-test.js'|tap-spec||true' src/",
     "copy-svg-polyfill": "cp node_modules/svg4everybody/dist/svg4everybody.min.js htdocs/assets/",
     "prebuild": "npm run clean && npm run copy-svg-polyfill",
-    "build": "NODE_ENV=production webpack --progress --bail",
+    "build": "NODE_ENV=production webpack --config ./webpack.config.prod.js -p --bail",
     "start": "NODE_ENV=development nodemon --watch server server/server.js",
     "start-prod": "NODE_ENV=production node server/server.js",
     "start-dev-server": "webpack-dev-server --inline",
