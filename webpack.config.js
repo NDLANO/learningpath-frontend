@@ -81,7 +81,7 @@ module.exports = {
 
   output: {
     path: __dirname + '/htdocs/assets',
-    publicPath: '/assets',
+    publicPath: '/assets/',
     filename: DEBUG ? '[name].js' : '[name].[chunkhash].js',
   },
 
@@ -99,11 +99,11 @@ module.exports = {
       },
       {
         test: /\.jpe?g$|\.gif$|\.png$|\.ico|\.svg$|\.woff$|\.ttf$/,
-        loader: 'file-loader?name=/[name]-[hash].[ext]'
+        loader: DEBUG ? 'file-loader?name=[name].[ext]' : 'file-loader?name=[name]-[hash].[ext]'
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader?root=.."),
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader?root=../"),
       },
       {
         test: /.json$/,

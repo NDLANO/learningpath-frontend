@@ -10,9 +10,9 @@ import React, { PropTypes } from 'react';
 import serialize from 'serialize-javascript';
 import config from '../src/config';
 import head from './Meta';
-import assets from '../htdocs/assets/assets';
 import { SvgPolyfillScript, SvgPolyfillScriptInitalization } from './svgPolyfill';
 
+const assets = process.env.NODE_ENV === 'development' ? require('./developmentAssets') : require('../htdocs/assets/assets'); // ignore import-nounresolved
 
 const GoogleTagMangerNoScript = () => {
   if (config.googleTagMangerId) {
@@ -38,8 +38,6 @@ const GoogleTagMangerScript = () => {
 
 const Html = (props) => {
   const { lang, className } = props;
-  const scriptFileName = process.env.NODE_ENV === 'development' ? '/main.js' : assets['main.js'];
-  const cssFileName = process.env.NODE_ENV === 'development' ? '/main.css' : assets['main.css'];
 
   return (
     <html lang={lang} className={className}>
@@ -50,7 +48,7 @@ const Html = (props) => {
         {head.title.toComponent()}
         {head.meta.toComponent()}
         <SvgPolyfillScript className={className} />
-        <link rel="stylesheet" type="text/css" href={`/assets/${cssFileName}`} />
+        <link rel="stylesheet" type="text/css" href={`/assets/${assets['main.css']}`} />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic,300|Signika:400,600,300,700" />
         <link rel="shortcut icon" href={`/assets/${assets['favicon.ico']}`} type="image/x-icon" />
       </head>
@@ -59,7 +57,7 @@ const Html = (props) => {
         <GoogleTagMangerScript />
         <div id="app-container" className="app-container" />
         <script dangerouslySetInnerHTML={{ __html: `window.assets = ${serialize(assets)}` }} />
-        <script src={`/assets/${scriptFileName}`} />
+        <script src={`/assets/${assets['main.js']}`} />
         <SvgPolyfillScriptInitalization className={className} />
       </body>
     </html>
