@@ -7,11 +7,12 @@
  */
 
 import React, { PropTypes } from 'react';
+import { tagsI18N } from '../util/i18nFieldFinder';
 // import defined from 'defined';
 import polyglot from '../i18n';
 // import { titlesI18N } from '../util/i18nFieldFinder';
-export default function PreviewImage({ image, onSaveImage }, { lang }) {
-  const tags = image.tags.filter(tag => tag.language === lang); // TODO: Use tagsI18N when imageAPI changes
+export default function PreviewImage({ image, onSaveImage }) {
+  const tags = tagsI18N(image);
   return (
     <div className="image-preview">
       <div className="image-preview_image">
@@ -40,7 +41,7 @@ export default function PreviewImage({ image, onSaveImage }, { lang }) {
         <div className="image-preview_tags">
           <b>{polyglot.t('learningPath.image.tags')}</b>
           {tags.map(tag =>
-            <span key={tag.tag} className="tag_item">{tag.tag}</span>
+            <span key={tag} className="tag_item">{tag}</span>
           )}
         </div>
         <button className="button button--primary button--block" onClick={onSaveImage}>{polyglot.t('learningPath.image.choseImage')}</button>
