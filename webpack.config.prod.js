@@ -20,13 +20,6 @@ module.exports = require('./webpack.config.base')({
   fileLoader: 'file-loader?name=[name]-[hash].[ext]',
 
   plugins: [
-    new webpack.DefinePlugin({
-      __CLIENT__: true,
-      __SERVER__: false,
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-      },
-    }),
 
     // OccurrenceOrderPlugin is needed for long-term caching to work properly.
     // See http://mxs.is/googmv
