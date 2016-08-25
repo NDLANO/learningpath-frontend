@@ -66,7 +66,7 @@
     "immutable": "3.8.1",
     "isomorphic-fetch": "2.2.1",
     "lodash": "4.15.0",
-    "ndla-styleguide": "0.1.25",
+    "ndla-styleguide": "0.1.26",
     "node-polyglot": "2.0.0",
     "node-uuid": "1.4.7",
     "query-string": "4.2.3",
