@@ -12,7 +12,7 @@ import config from '../src/config';
 import head from './Meta';
 import { SvgPolyfillScript, SvgPolyfillScriptInitalization } from './svgPolyfill';
 
-const assets = process.env.NODE_ENV === 'development' ? require('./developmentAssets') : require('../htdocs/assets/assets'); // eslint-disable-next-line import/no-unresolved
+const assets = process.env.NODE_ENV === 'development' ? require('./developmentAssets') : require('../htdocs/assets/assets'); // eslint-disable-line import/no-unresolved
 
 const GoogleTagMangerNoScript = () => {
   if (config.googleTagMangerId) {
