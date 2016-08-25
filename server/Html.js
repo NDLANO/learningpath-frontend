@@ -7,10 +7,12 @@
  */
 
 import React, { PropTypes } from 'react';
+import serialize from 'serialize-javascript';
 import config from '../src/config';
 import head from './Meta';
 import { SvgPolyfillScript, SvgPolyfillScriptInitalization } from './svgPolyfill';
 
+const assets = process.env.NODE_ENV === 'development' ? require('./developmentAssets') : require('../htdocs/assets/assets'); // eslint-disable-line import/no-unresolved
 
 const GoogleTagMangerNoScript = () => {
   if (config.googleTagMangerId) {
@@ -45,17 +47,17 @@ const Html = (props) => {
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         {head.title.toComponent()}
         {head.meta.toComponent()}
-        <link rel="stylesheet" type="text/css" href="/assets/style.css" />
-        <link rel="stylesheet" type="text/css" href="/assets/Draft.css" />
         <SvgPolyfillScript className={className} />
+        <link rel="stylesheet" type="text/css" href={`/assets/${assets['main.css']}`} />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic,300|Signika:400,600,300,700" />
-        <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href={`/assets/${assets['favicon.ico']}`} type="image/x-icon" />
       </head>
       <body>
         <GoogleTagMangerNoScript />
         <GoogleTagMangerScript />
         <div id="app-container" className="app-container" />
-        <script src="/assets/app.js" />
+        <script dangerouslySetInnerHTML={{ __html: `window.assets = ${serialize(assets)}` }} />
+        <script src={`/assets/${assets['main.js']}`} />
         <SvgPolyfillScriptInitalization className={className} />
       </body>
     </html>

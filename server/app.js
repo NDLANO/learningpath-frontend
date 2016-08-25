@@ -9,12 +9,13 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import express from 'express';
+import compression from 'compression';
 import defined from 'defined';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
-import webpackConfig from '../webpack.config';
+import webpackConfig from '../webpack.config.dev';
 import { getHtmlLang } from '../src/locale/configureLocale';
 import Html from './Html';
 
@@ -31,7 +32,10 @@ if (process.env.NODE_ENV === 'development') {
   app.use(webpackHotMiddleware(compiler, {}));
 }
 
-app.use(express.static('htdocs'));
+app.use(compression());
+app.use(express.static('htdocs', {
+  maxAge: 1000 * 60 * 60 * 24 * 365, // One year
+}));
 
 const findIEClass = (userAgentString) => {
   if (userAgentString.indexOf('MSIE') >= 0) {
