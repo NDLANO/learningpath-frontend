@@ -1,4 +1,5 @@
 # NDLA Læringsstier Front-End
+[![Build Status](https://travis-ci.org/NDLANO/learningpath-frontend.svg?branch=master)](https://travis-ci.org/NDLANO/learningpath-frontend)
 
 ## Requirements
 
