@@ -12,7 +12,6 @@
     "build": "NODE_ENV=production webpack --config ./webpack.config.prod.js -p --bail",
     "start": "NODE_ENV=development nodemon --watch server server/server.js",
     "start-prod": "NODE_ENV=production node server/server.js",
-    "start-dev-server": "webpack-dev-server --inline",
     "lint": "eslint src server"
   },
   "engines": {
@@ -36,8 +35,8 @@
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.9.0",
     "flux-standard-action": "0.6.1",
-    "if-loader": "1.0.1",
     "jsdom": "9.4.2",
+    "json-loader": "0.5.4",
     "nock": "8.0.0",
     "nodemon": "1.10.2",
     "react-addons-test-utils": "15.3.1",
@@ -49,7 +48,6 @@
     "watch": "0.19.2",
     "webpack": "1.13.2",
     "webpack-dev-middleware": "1.6.1",
-    "webpack-dev-server": "1.14.1",
     "webpack-hot-middleware": "2.12.2",
     "webpack-manifest-plugin": "1.0.1"
   },
@@ -67,7 +65,6 @@
     "history": "2.1.2",
     "immutable": "3.8.1",
     "isomorphic-fetch": "2.2.1",
-    "json-loader": "0.5.4",
     "lodash": "4.15.0",
     "ndla-styleguide": "0.1.25",
     "node-polyglot": "2.0.0",

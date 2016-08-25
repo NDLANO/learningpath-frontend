@@ -163,6 +163,14 @@ http://expressjs.com/
 Simple monitor script for use during development of a node.js app.
 http://nodemon.io
 
+**compression**
+Node.js compression middleware
+https://github.com/expressjs/compression#readme
+
+**serialize-javascript**
+Serialize JavaScript to a superset of JSON that includes regular expressions and functions.
+https://github.com/yahoo/serialize-javascript
+
 ### Util
 
 **classnames:**
@@ -188,6 +196,14 @@ https://github.com/airbnb/polyglot.js#readme
 **query-string:**
 Parse and stringify URL query strings.
 https://github.com/sindresorhus/query-string#readme
+
+**svg4everybody**
+Use external SVG spritemaps in any browser (IE Polyfill)
+https://github.com/jonathantneal/svg4everybody#readme
+
+**node-uuid**
+Rigorous implementation of RFC4122 (v1 and v4) UUIDs.
+https://github.com/broofa/node-uuid
 
 ### ES2015
 
@@ -221,6 +237,10 @@ https://github.com/matthew-andrews/isomorphic-fetch/issues
 
 ### Webpack and friends
 
+**webpack:**
+Packs CommonJs/AMD modules for the browser. Allows to split your codebase into multiple bundles, which can be loaded on demand. Support loaders to preprocess files, i.e. json, jade, coffee, css, less, ... and your custom stuff.
+https://github.com/webpack/webpack
+
 **babel-loader:**
 babel module loader for webpack.
 https://github.com/babel/babel-loader
@@ -229,9 +249,13 @@ https://github.com/babel/babel-loader
 json loader module for webpack
 https://github.com/webpack/json-loader#readme
 
-**webpack:**
-Packs CommonJs/AMD modules for the browser. Allows to split your codebase into multiple bundles, which can be loaded on demand. Support loaders to preprocess files, i.e. json, jade, coffee, css, less, ... and your custom stuff.
-https://github.com/webpack/webpack
+**file-loader**
+file loader module for webpack
+https://github.com/webpack/file-loader
+
+**css-loader**
+CSS loader module for webpack
+https://github.com/webpack/css-loader#readme
 
 **webpack-dev-middleware:**
 Offers a dev middleware for webpack, which arguments a live bundle to a directory
@@ -245,6 +269,13 @@ https://github.com/glenjamin/webpack-hot-middleware#readme
 Serves a webpack app. Updates the browser on changes.
 http://github.com/webpack/webpack-dev-server
 
+**webpack-manifest-plugin**
+Webpack plugin for generating asset manifests
+https://github.com/danethurber/webpack-manifest-plugin
+
+**extract-text-webpack-plugin**
+Extract text from bundle into a file.
+http://github.com/webpack/extract-text-webpack-plugin
 
 ### Testing
 
