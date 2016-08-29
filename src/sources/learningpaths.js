@@ -68,7 +68,7 @@ const putLearningPathStatus = putAuthorized('/learningpaths/:pathId/status');
 const updateStatus = (authToken, { pathId }, body) =>
   putLearningPathStatus(authToken, { pathId }, body);
 
-export const activateDeletedPath = (authToken, { pathId }) => putLearningPathStatus(authToken, { pathId }, { status: 'ACTIVE' });
+export const activateDeletedPath = (authToken, { pathId, status }) => putLearningPathStatus(authToken, { pathId }, { status });
 
 const learningPathsUrl = apiResourceUrl('/learningpaths');
 

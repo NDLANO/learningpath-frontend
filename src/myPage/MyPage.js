@@ -61,7 +61,7 @@ export class MyPage extends React.Component {
       const onDropDownSelect = actionType => {
         switch (actionType) {
           case 'delete':
-            deletePath(lp.id);
+            deletePath(lp);
             break;
           case 'publish':
             updatePathStatus(lp.id, 'PUBLISHED');

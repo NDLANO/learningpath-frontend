@@ -15,6 +15,7 @@ import { createEmptyLearningPathStep } from './step/learningPathStepActions';
 import polyglot from '../i18n';
 import { titleI18N } from '../util/i18nFieldFinder';
 import { fetchLearningPathImageWithMetaUrl, setSelectedImage, setSavedImage } from '../imageSearch/imageActions';
+import { fetchMyLearningPaths } from '../myPage/myPageActions';
 
 export const setLearningPath = createAction('SET_LEARNING_PATH');
 export const setLearningPathStatus = createAction('UPDATE_LEARNING_PATH_STATUS');
@@ -78,13 +79,14 @@ export function updateLearningPath(pathId, learningPath, redirectUrl = `/learnin
     }
   ));
 }
-export function activateDeletedLearningPath(pathId) {
+export function activateDeletedLearningPath(pathId, status) {
   return (dispatch, getState) =>
-    activateDeletedPath(getState().authToken, { pathId });
+    activateDeletedPath(getState().authToken, { pathId, status })
+    .then(() => dispatch(fetchMyLearningPaths()));
 }
-export function deleteLearningPath(pathId) {
-  return (dispatch, getState) => deletePath(getState().authToken, { pathId })
-    .then(dispatch(removeLearningPath(pathId)))
+export function deleteLearningPath(learningPath) {
+  return (dispatch, getState) => deletePath(getState().authToken, { pathId: learningPath.id })
+    .then(dispatch(removeLearningPath(learningPath.id)))
     .then(dispatch(
       addMessage(
         {
@@ -93,7 +95,7 @@ export function deleteLearningPath(pathId) {
           severity: 'info',
           action: {
             title: polyglot.t('learningPathStep.messages.delete.action'),
-            onClick: () => dispatch(activateDeletedLearningPath(pathId)),
+            onClick: () => dispatch(activateDeletedLearningPath(learningPath.id, learningPath.status)),
           },
         }
       ))
