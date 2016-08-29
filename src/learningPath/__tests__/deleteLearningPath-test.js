@@ -30,11 +30,11 @@ test('actions/deleteLearningPath', t => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch(deleteLearningPath(123))
+  store.dispatch(deleteLearningPath({ id: 123, status: 'PRIVATE' }))
     .then(() => {
-      t.deepEqual(store.getActions(), [
-        { type: 'REMOVE_LEARNING_PATH', payload: 123 },
-      ]);
+      t.deepEqual(store.getActions()[0], { type: 'REMOVE_LEARNING_PATH', payload: 123 });
+      t.equal(store.getActions()[1].type, 'ADD_MESSAGE', 'action type is ADD_MESSAGE');
+      t.ok(store.getActions()[1].payload.action, 'ADD_MESSAGE payload contains action');
 
       t.doesNotThrow(() => apiMock.done());
       done();
