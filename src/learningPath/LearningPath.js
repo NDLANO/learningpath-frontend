@@ -13,6 +13,8 @@ import classNames from 'classnames';
 import LearningPathGeneralInfo from './sidebar/LearningPathGeneralInfo';
 import LearningPathPrevNext from './LearningPathPrevNext';
 import LearningPathToC from './sidebar/LearningPathToC';
+import Lightbox from '../common/Lightbox';
+import CopyLearningPath from '../learningPath/new/CopyLearningPath';
 
 import Masthead from '../common/Masthead';
 import Icon from '../common/Icon';
@@ -20,14 +22,24 @@ import SortLearningStepsButton from './sidebar/SortLearningStepsButton';
 import { fetchLearningPath, copyLearningPath } from './learningPathActions';
 
 export class LearningPath extends Component {
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      displayCopyPath: false,
+    };
+    this.onCopyLearningPathClick = this.onCopyLearningPathClick.bind(this);
+  }
   componentDidMount() {
     const { localFetchLearingPath, params: { pathId } } = this.props;
     localFetchLearingPath(pathId);
   }
-
+  onCopyLearningPathClick() {
+    this.setState({
+      displayCopyPath: true,
+    });
+  }
   render() {
-    const { learningPath, isTableOfContentOpen, params: { stepId }, location: { pathname }, sortLearningSteps, main } = this.props;
+    const { learningPath, isTableOfContentOpen, copyPath, params: { stepId }, location: { pathname }, sortLearningSteps, main } = this.props;
     const { lang } = this.context;
     const saveButtons = defined(this.props.saveButtons, null);
     const addStepButton = defined(this.props.addStepButton, null);
@@ -41,6 +53,12 @@ export class LearningPath extends Component {
       'sidebar--open': isTableOfContentOpen,
     });
 
+    const onLightboxClose = () => this.setState({ displayCopyPath: false });
+    const onCopy = () => {
+      copyPath(learningPath, lang);
+      onLightboxClose();
+    };
+
     const mainClassNames = classNames('two-column_col', {
       'two-column_col--white-bg': !!stepId || pathname.indexOf('/new') !== -1,
     });
@@ -53,9 +71,12 @@ export class LearningPath extends Component {
             <span>Læringssti</span>
           </div>
         </Masthead>
+        <Lightbox display={this.state.displayCopyPath} onClose={onLightboxClose}>
+          <CopyLearningPath learningPath={learningPath} onClose={onLightboxClose} onCopy={onCopy} />
+        </Lightbox>
         <div className="two-column">
           <aside className={collapseClassName()}>
-            <LearningPathGeneralInfo {...this.props} />
+            <LearningPathGeneralInfo {...this.props} onCopyLearningPathClick={this.onCopyLearningPathClick} />
             {sortableTableOfContent}
             {addStepButton}
             {sortableTableOfContentButton}
@@ -86,6 +107,7 @@ LearningPath.propTypes = {
   sortLearningSteps: PropTypes.object,
   isTableOfContentOpen: PropTypes.bool.isRequired,
   localFetchLearingPath: PropTypes.func.isRequired,
+  copyPath: PropTypes.func.isRequired,
 };
 
 LearningPath.contextTypes = {

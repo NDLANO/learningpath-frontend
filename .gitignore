@@ -3,12 +3,4 @@ npm-debug.log
 .DS_Store
 *.iml
 /.idea
-/htdocs/assets/editable.png
-/htdocs/assets/favicon.ico
-/htdocs/assets/logo.png
-/htdocs/assets/ndla-logo-white.png
-/htdocs/assets/selection.json
-/htdocs/assets/style.css
-/htdocs/assets/symbol-defs.svg
-/htdocs/assets/svg/
-/htdocs/assets/*.js
+/htdocs/assets/

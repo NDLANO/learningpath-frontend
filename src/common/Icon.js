@@ -14,7 +14,7 @@ function Icon(props) {
 
   return (
     <svg {...rest} className={classNames('icon', props.className)}>
-      <use xlinkHref={`/assets/symbol-defs.svg#${svgDefId}`} />
+      <use xlinkHref={`/assets/${window.assets['symbol-defs.svg']}#${svgDefId}`} />
     </svg>
   );
 }

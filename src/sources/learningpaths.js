@@ -24,7 +24,7 @@ const fetchPathLicenses = fetchAuthorized('/learningpaths/licenses');
 
 const postLearningPath = postAuthorized('/learningpaths');
 const postLearningPathStep = postAuthorized('/learningpaths/:pathId/learningsteps');
-const copyLearningPath = postAuthorized('/learningpaths/?copy-from=:copyfrom');
+const copyLearningPath = postAuthorized('/learningpaths/:copyfrom/copy');
 
 const createPath = (authToken, props, body) =>
   postLearningPath(authToken, props, body)

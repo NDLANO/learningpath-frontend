@@ -27,7 +27,10 @@ class EditLearningPathStep extends Component {
     const { lang } = this.context;
     const { fetchLearningPathLicenses, localFetchLearningPathStep, params: { pathId, stepId } } = this.props;
     fetchLearningPathLicenses();
-    localFetchLearningPathStep(pathId, stepId, lang);
+
+    if (stepId) {
+      localFetchLearningPathStep(pathId, stepId, lang);
+    }
   }
 
   render() {
