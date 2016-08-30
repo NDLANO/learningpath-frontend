@@ -46,7 +46,7 @@ export function Images(props) {
 
   const onSaveImage = (evt, image) => {
     closeLightBox();
-    const coverPhotoMetaUrl = `${window.NDLA_API_URL}${base}/${image.id}`;
+    const coverPhotoMetaUrl = `${window.config.ndlaApiUrl}${base}/${image.id}`;
     onChange(coverPhotoMetaUrl);
     localSetSavedImage(image);
   };
