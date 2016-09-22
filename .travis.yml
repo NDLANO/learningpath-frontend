@@ -5,7 +5,7 @@ script:
 - npm test
 notifications:
   slack:
-    on_success: always
+    on_success: change
     on_failure: always
     rooms:
       secure: nsj9HxReGKIgNMTO3sahfZg0JCDakTJbLcieshisvsI89QlZZYuZH+gNbpwxa6OyfpcZBdnVMgGWrByMEuv6AzTFzZK7VzpRWlMDbntpKPk5LRMjp1GNIDpbalFTllM2hsrBC1yaHCwsR/0jHYgmkQrjfvzj4yOO1b6gEu7LTCJ8qA5Dho52g4gKdKv5UtskGYKoVQpc6VpWrKYCdZ6PM8D4ikoFW+UlvnixQH4yJoxDP+aUnnZkq8/NmPpoMOqEOVyVWA92FHJRGrsW/oZ3llOdZqmGnS8ySFgzrnOHaQBpImgmXh7StYMYkAGna/0EyKkOCAiiejlP7HgMxXXzVjBbLqPCMlgJOiOJP6bgp1/ZvMNI3NS51DeZtLuPaCiZBGc1Z4UGAzIuK+GnC6EL/HEyqc6o/6sdiJdXZPe8G0gP83Fwir2r1tW2XoL0BTl/lPxpxS/xJuEsVCf6/D8gSfr8yrAw53TUxLmFPFaXvhZkBWU8lUPZD6Se7gHrA6Bk6SbvKRRbwfS2f1xHN8XVFhz1TMkpckqVWBALySd0H2lY1DkQkm67Zb+Ap4OwEiEljYRMBMJncI8FmDlooDYKL8LUNwb1Nlf7X/TEzebhr0Xh11eo6mrSXdBgbXh6potuh8EhQrLgwW6M4ZlSbBJKH1QXfuTZgfrrehVE39dSqyg=
