@@ -10,9 +10,9 @@ const entry = [
   'babel-polyfill',
   './src/index.js',
   'draft-js/dist/Draft.css',
-  'ndla-styleguide/assets/style.css',
-  'ndla-styleguide/assets/favicon.ico',
-  'ndla-styleguide/assets/symbol-defs.svg',
+  'ndla-learningpath-styleguide/assets/style.css',
+  'ndla-learningpath-styleguide/assets/favicon.ico',
+  'ndla-learningpath-styleguide/assets/symbol-defs.svg',
 ];
 
 module.exports = (options) => ({
