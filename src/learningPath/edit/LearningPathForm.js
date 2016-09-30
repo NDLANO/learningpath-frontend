@@ -61,7 +61,6 @@ const LearningPathForm = (props) => {
     fetchImage,
     licenseOptions,
   } = props;
-  console.log(props);
   return (
     <form className="learning-path-form" onSubmit={handleSubmit}>
       <div className="learning-path_hd">
