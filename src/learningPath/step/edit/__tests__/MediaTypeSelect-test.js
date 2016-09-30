@@ -15,7 +15,10 @@ import sinon from 'sinon';
 import MediaTypeSelect from '../MediaTypeSelect';
 
 test('component/MediaTypeSelect', t => {
-  const component = shallow(<MediaTypeSelect onChange={noop} />);
+  const propsInput = {
+    onChange: noop,
+  };
+  const component = shallow(<MediaTypeSelect input={propsInput} />);
 
   const inputs = component.find('.icon-select_input');
 
@@ -26,7 +29,11 @@ test('component/MediaTypeSelect', t => {
 });
 
 test('component/MediaTypeSelect for given value', t => {
-  const component = shallow(<MediaTypeSelect value="MULTIMEDIA" onChange={noop} />);
+  const propsInput = {
+    value: 'MULTIMEDIA',
+    onChange: noop,
+  };
+  const component = shallow(<MediaTypeSelect input={propsInput} />);
 
   const inputs = component.find('.icon-select_input');
 
@@ -48,7 +55,11 @@ test('component/MediaTypeSelect for given value', t => {
 test('component/MediaTypeSelect onChange', t => {
   const onChangeSpy = sinon.spy(() => {});
 
-  const component = shallow(<MediaTypeSelect onChange={onChangeSpy} />);
+  const propsInput = {
+    onChange: onChangeSpy,
+  };
+
+  const component = shallow(<MediaTypeSelect input={propsInput} />);
 
   const inputs = component.find('.icon-select_input');
 
