@@ -7,12 +7,12 @@
  */
 
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import defined from 'defined';
 import { Link } from 'react-router';
 import isInteger from 'lodash/isInteger';
 import { reduxForm, Field } from 'redux-form';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
 import LabeledIcon from '../../common/LabeledIcon';
 import { titleI18N, descriptionI18N, tagsI18N } from '../../util/i18nFieldFinder';
 import TagsInput from '../../common/TagsInput';
