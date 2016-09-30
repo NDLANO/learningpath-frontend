@@ -31,6 +31,7 @@ export default function LearningPathDuration(props) {
       </ul>
       <input id={props.id} className="input-duration" {...props.input} onChange={(evt) => inputChange(evt)} />
       <span>{'time(r)'}</span>
+      <br />
       {props.meta.touched && props.meta.error && <span className="error_message error_message--red">{props.meta.error}</span>}
     </div>
   );
