@@ -19,7 +19,7 @@ class TagsInput extends Component {
   }
 
   render() {
-    const { value, tagOptions, onChange, onBlur, ...props } = this.props;
+    const { tagOptions, input } = this.props;
 
     const messages = {
       createNew: polyglot.t('tagInput.createNew'),
@@ -34,28 +34,25 @@ class TagsInput extends Component {
     const { open } = this.state;
 
     const handleAdd = (tag) => {
-      if (value.includes(tag)) {
+      if (input.value.includes(tag)) {
         return;
       }
-      value.push(tag);
-      onChange(value);
+      input.value.push(tag);
+      input.onChange(input.value);
     };
-
 
     const handleSearch = (searchTerm) => {
       this.setState({ open: searchTerm.length > 2 });
     };
-
     return (
       <Multiselect
-        {...props}
         data={tagOptions}
         filter="contains"
         open={open}
         messages={messages}
-        value={value}
-        onBlur={() => onBlur(value)}
-        onChange={onChange}
+        value={input.value}
+        onBlur={() => input.onBlur(input.value)}
+        onChange={input.onChange}
         onCreate={handleAdd}
         onToggle={() => {}}
         onSearch={handleSearch}
@@ -65,9 +62,11 @@ class TagsInput extends Component {
 }
 
 TagsInput.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func.isRequired,
-  value: PropTypes.any.isRequired,
+  input: PropTypes.shape({
+    onChange: PropTypes.func.isRequired,
+    onBlur: PropTypes.func.isRequired,
+    value: PropTypes.any.isRequired,
+  }).isRequired,
   tagOptions: PropTypes.array.isRequired,
 };
 

@@ -79,7 +79,7 @@ export default class DescriptionHTMLEditor extends React.Component {
     super(props);
     this.state = { editorState: EditorState.createEmpty() };
 
-    const { onChange } = props;
+    const { input } = props;
 
     this.focus = () => this.refs.editor.focus();
     this.blur = () => this.refs.editor.blur();
@@ -88,7 +88,7 @@ export default class DescriptionHTMLEditor extends React.Component {
         return;
       }
       const contentState = editorState.getCurrentContent();
-      onChange(contentState);
+      input.onChange(contentState);
     });
 
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
@@ -97,14 +97,14 @@ export default class DescriptionHTMLEditor extends React.Component {
   }
 
   componentWillMount() {
-    if (typeof this.props.value === 'string') {
-      this.setEditorContentStateFromHTML(this.props.value);
+    if (typeof this.props.input.value === 'string') {
+      this.setEditorContentStateFromHTML(this.props.input.value);
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (typeof nextProps.value === 'string') {
-      this.setEditorContentStateFromHTML(nextProps.value);
+    if (typeof nextProps.input.value === 'string') {
+      this.setEditorContentStateFromHTML(nextProps.input.value);
     }
   }
 
@@ -155,7 +155,8 @@ export default class DescriptionHTMLEditor extends React.Component {
       contentState.getBlockMap().first().getType() !== 'unstyled';
 
     const onBlur = () => {
-      this.props.onBlur(contentState);
+      this.props.input.onBlur(contentState);
+      this.props.onBlur(contentState, this.props.input.onBlur);
     };
 
     let className = classNames({
@@ -196,11 +197,15 @@ export default class DescriptionHTMLEditor extends React.Component {
 
 
 DescriptionHTMLEditor.propTypes = {
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-  ]),
-  onChange: PropTypes.func.isRequired,
+
+  input: PropTypes.shape({
+    onChange: PropTypes.func.isRequired,
+    onBlur: PropTypes.func.isRequired,
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+    ]),
+  }),
   onBlur: PropTypes.func,
   placeholder: PropTypes.string,
 };

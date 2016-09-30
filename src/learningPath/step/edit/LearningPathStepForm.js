@@ -7,9 +7,11 @@
  */
 
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { Link } from 'react-router';
 import defined from 'defined';
-import { reduxForm } from 'redux-form';
+import { reduxForm, Field, change } from 'redux-form';
 import { titleI18N, descriptionI18N, oembedUrlI18N, oembedContentI18N } from '../../../util/i18nFieldFinder';
 import { createValidator, required, oneOfIsRequired } from '../../../util/validation';
 import LabeledIcon from '../../../common/LabeledIcon';
@@ -20,87 +22,103 @@ import Icon from '../../../common/Icon';
 import OnClickCheckbox from './OnClickCheckbox';
 import OneLineEditor from '../../../common/editors/OneLineEditor';
 import ObjectSelector from '../../../common/form/ObjectSelector';
+import InputField from '../../../common/form/InputField';
+
 import PreviewOembed from '../oembed/PreviewOembed';
 import LearningPathStepIcon from '../LearningPathStepIcon';
 import { validateOembed } from './validateOembedActions';
 
+const formName = 'learning-path-step';
 const LearningPathStepForm = (props) => {
   const {
     step,
     lang,
     oembedPreview,
     error,
-    fields: { title, description, type, url, showTitle, license },
     handleSubmit,
     submitting,
     learningPathId,
     licenseOptions,
+    formValues,
+    formFields,
+    localChange,
   } = props;
-
   const embedContent = oembedContentI18N({ embedUrl: oembedPreview }, lang);
-
   const abortUrl = step.id ? `/learningpaths/${learningPathId}/step/${step.id}` : `/learningpaths/${learningPathId}`;
-
-  const handleDescriptionBlur = (value) => {
-    if (!showTitle.touched && !step.id) {
+  const handleDescriptionBlur = (value, blur) => {
+    if (!formFields || (!formFields.showTitle && !step.id)) {
       if (value.hasText()) {
-        showTitle.onChange(true);
+        localChange(formName, 'showTitle', true);
       } else {
-        showTitle.onChange(false);
+        localChange(formName, 'showTitle', false);
       }
     }
-    description.onBlur(value);
+    blur(value);
   };
 
-  if (!type.value) {
-    return <MediaTypeSelect {...type} />;
+  if (!formValues || !formValues.type) {
+    return <Field name="type" component={MediaTypeSelect} />;
   }
+
   return (
     <form onSubmit={handleSubmit} className="learning-step-form">
       <div className="learning-step-form_group">
         <span className="learning-step-form_mediatype-icon">
-          <LearningPathStepIcon learningPathStepType={type.value} isCircle={false} />
+          <LearningPathStepIcon learningPathStepType={step.type} isCircle={false} />
         </span>
-        <select className="learning-step-form_mediatype-dd" {...type} >
+
+        <Field component="select" name="type" className="learning-step-form_mediatype-dd">
           <option value="INTRODUCTION">{polyglot.t('editPathStep.mediatype.introduction')}</option>
           <option value="TEXT">{polyglot.t('editPathStep.mediatype.text')}</option>
           <option value="MULTIMEDIA">{polyglot.t('editPathStep.mediatype.multimedia')}</option>
           <option value="QUIZ">{polyglot.t('editPathStep.mediatype.quiz')}</option>
           <option value="TASK">{polyglot.t('editPathStep.mediatype.task')}</option>
           <option value="SUMMARY">{polyglot.t('editPathStep.mediatype.summary')}</option>
-        </select>
+        </Field>
       </div>
+
       <div className="learning-step-form_group">
-        <ObjectSelector className="learning-step-form_select" idKey="license" labelKey="description" options={licenseOptions} {...license} />
+        <Field
+          name="license"
+          className="learning-step-form_select"
+          idKey="license"
+          labelKey="description"
+          options={licenseOptions}
+          component={ObjectSelector}
+        />
       </div>
+
       <div className="learning-step-form_group">
         <div className="learning-step-form_left">
           <span className="learning-step-form_icon-bg"><Icon.Create /></span>
-          <OnClickCheckbox {...showTitle} />
+          <Field name="showTitle" component={OnClickCheckbox} />
         </div>
         <div className="learning-step-form_right">
-          <div className="learning-step-form_input learning-step-form_title">
-            <OneLineEditor lang={lang} {...title} placeholder={polyglot.t('editPathStep.titlePlaceHolder')} />
-          </div>
-          {title.touched && title.error && <span className="error_message error_message--red">{title.error}</span>}
+          <Field
+            name="title"
+            lang={lang}
+            placeholder={polyglot.t('editPathStep.titlePlaceHolder')}
+            wrapperClassName="learning-step-form_input learning-step-form_title"
+            component={OneLineEditor}
+          />
         </div>
       </div>
-      <DescriptionHTMLEditor lang={lang} {...description} onBlur={handleDescriptionBlur} />
+      <Field name="description" lang={lang} component={DescriptionHTMLEditor} onBlur={handleDescriptionBlur} />
       <div className="learning-step-form_group">
         <div className="learningsource-form">
           <div>
-            <label htmlFor="url" className="mediatype-menu__label">{polyglot.t('editPathStep.urlLabel')}</label>
-            <input
-              id="url"
-              type="url"
-              {...url}
+            <Field
+              name="url"
+              component={InputField}
               placeholder={polyglot.t('editPathStep.urlPlaceholder')}
+              type="url"
+              label={polyglot.t('editPathStep.urlLabel')}
+              labelClassName="mediatype-menu__label"
             />
-            {url.touched && url.error && <span className="error_message error_message--red">{url.error}</span>}
             <PreviewOembed content={embedContent} />
           </div>
         </div>
-        {(url.touched || description.touched) && error && <span className="error_message error_message--red">{error}</span>}
+        {(formFields && (formFields.url || formFields.description)) && error && <span className="error_message error_message--red">{error}</span>}
         <div className="block-container_fixed block-container_fixed--bottom--right">
           <div className="button-group">
             <Link to={abortUrl} className="button button--secondary">
@@ -119,7 +137,6 @@ const LearningPathStepForm = (props) => {
 LearningPathStepForm.propTypes = {
   lang: PropTypes.string.isRequired,
   error: PropTypes.string,
-  fields: PropTypes.object.isRequired,
   step: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
@@ -127,11 +144,16 @@ LearningPathStepForm.propTypes = {
   oembedPreview: PropTypes.array,
   validateOembedUrl: PropTypes.func.isRequired,
   licenseOptions: PropTypes.array.isRequired,
+  formValues: PropTypes.object,
+  formFields: PropTypes.object,
+  localChange: PropTypes.func.isRequired,
 };
 
 
 const mapStateToProps = (state, props) => ({
   oembedPreview: state.oembedPreview.oembedContent,
+  formValues: state.form[formName] ? state.form['learning-path-step'].values : undefined,
+  formFields: state.form[formName] ? state.form['learning-path-step'].fields : undefined,
   initialValues: {
     showTitle: defined(props.step.showTitle, false),
     title: titleI18N(props.step, props.lang),
@@ -144,8 +166,8 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = {
   validateOembedUrl: (embedContent, lang) => validateOembed(embedContent, lang),
+  localChange: (form, field, value) => change(form, field, value),
 };
-
 
 const asyncValidate = (values, dispatch, props) => {
   const { validateOembedUrl, lang } = props;
@@ -157,10 +179,12 @@ const validate = createValidator({
   _error: oneOfIsRequired('editPathStep.validation.oneOfDescriptionOrUrlIsRequired', 'url', 'description'),
 });
 
-export default reduxForm({
-  form: 'learning-path-step',
-  fields: ['title', 'description', 'url', 'type', 'showTitle', 'license'],
-  asyncValidate,
-  validate,
-  asyncBlurFields: ['url'],
-}, mapStateToProps, mapDispatchToProps)(LearningPathStepForm);
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  reduxForm({
+    form: formName,
+    asyncValidate,
+    validate,
+    asyncBlurFields: ['url'],
+  })
+)(LearningPathStepForm);

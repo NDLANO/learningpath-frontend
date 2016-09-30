@@ -77,7 +77,9 @@ class LearningPathImage extends React.Component {
       localFetchImages,
       learningPathTitle,
       fetchImage,
-      onChange,
+      input: {
+        onChange,
+      },
       savedImage,
     } = this.props;
 
@@ -115,7 +117,9 @@ LearningPathImage.propTypes = {
   localFetchImages: PropTypes.func.isRequired,
   learningPathTitle: PropTypes.string.isRequired,
   fetchImage: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
+  input: PropTypes.shape({
+    onChange: PropTypes.func.isRequired,
+  }).isRequired,
   savedImage: PropTypes.object.isRequired,
 };
 

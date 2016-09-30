@@ -10,12 +10,14 @@ import React, { PropTypes } from 'react';
 import defined from 'defined';
 import { Link } from 'react-router';
 import isInteger from 'lodash/isInteger';
-import classNames from 'classnames';
-import { reduxForm } from 'redux-form';
-
+import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import LabeledIcon from '../../common/LabeledIcon';
 import { titleI18N, descriptionI18N, tagsI18N } from '../../util/i18nFieldFinder';
 import TagsInput from '../../common/TagsInput';
+import InputField from '../../common/form/InputField';
+import LearningPathDescription from './LearningPathDescription';
 import ObjectSelector from '../../common/form/ObjectSelector';
 import Contributors from './copyright/Contributors';
 import polyglot from '../../i18n';
@@ -23,8 +25,7 @@ import LearningPathDuration from './LearningPathDuration';
 import LearningPathImage from './LearningPathImage';
 import SubmitButton from '../../common/buttons/SubmitButton';
 
-const fields = ['title', 'description', 'duration', 'tags', 'coverPhotoMetaUrl', 'license', 'contributors'];
-
+const formName = 'edit-learning-path';
 const validate = values => {
   const errors = {};
   if (!values.description) {
@@ -34,8 +35,9 @@ const validate = values => {
   if (!values.title) {
     errors.title = polyglot.t('errors.title');
   }
-
-  if (!values.duration && !isNaN(values.duration)) {
+  if (!values.duration) {
+    errors.duration = polyglot.t('errors.duration');
+  } else if (!values.duration && !isNaN(values.duration)) {
     errors.duration = polyglot.t('errors.duration');
   } else if (values.duration <= 0) {
     errors.duration = polyglot.t('errors.durationMinus');
@@ -47,11 +49,9 @@ const validate = values => {
   return errors;
 };
 
-
 const LearningPathForm = (props) => {
   const {
     tagOptions,
-    fields: { title, description, duration, tags, coverPhotoMetaUrl, license, contributors },
     handleSubmit,
     submitting,
     learningPath,
@@ -60,58 +60,42 @@ const LearningPathForm = (props) => {
     fetchImage,
     licenseOptions,
   } = props;
-
-  const inputClassName = (hasError, isTextArea) => classNames({
-    'input--alert': hasError,
-    'textarea textarea--resize-vertical': isTextArea,
-  });
-
-  const remainingDescriptionLength = description.value ? 150 - description.value.length : 150;
   return (
     <form className="learning-path-form" onSubmit={handleSubmit}>
       <div className="learning-path_hd">
         <h1>{polyglot.t('learningPath.pageName')}</h1>
-        <label htmlFor="title" className="label--medium-bold  label--medium">{polyglot.t('learningPath.title')}</label>
         <div className="learning-path-input learning-path-input__title">
-          <input id="title" className={inputClassName(title.touched && title.error, false)} type="text" required{...title} lang={lang} />
-          {title.touched && title.error && <span className="error_message error_message--red">{title.error}</span>}
+          <Field name="title" id="title" component={InputField} type="text" lang={lang} label={polyglot.t('learningPath.title')} labelClassName="label--medium-bold label--medium" />
         </div>
       </div>
 
       <div className="learning-path_bd">
-        <label htmlFor="description" className="label--medium-bold  label--medium">{polyglot.t('learningPath.description')}</label>
         <div className="learning-path-input learning-path-input__paragraph">
-          <textarea
-            id="description"
-            {...description} rows="4" cols="50"
-            placeholder={polyglot.t('learningPath.descriptionPlaceholder')} maxLength="150"
-            className={inputClassName(description.touched && description.error, true)}
-          />
-          {description.touched && description.error && <span className="error_message error_message--red">{description.error}</span>}
-          <p className="learning-path_input-information">{polyglot.t('learningPath.descriptionInformation', { remainingDescriptionLength })}</p>
+          <Field name="description" component={LearningPathDescription} />
         </div>
 
-        <LearningPathImage {...coverPhotoMetaUrl} localFetchImages={localFetchImages} learningPathTitle={title.value} fetchImage={fetchImage} />
+        <Field name="coverPhotoMetaUrl" component={LearningPathImage} localFetchImages={localFetchImages} learningPathTitle={'norge'} fetchImage={fetchImage} />
 
         <div className="learning-path-duration">
           <label htmlFor="duration" className="label--medium-bold  label--medium">{polyglot.t('learningPath.duration')}</label>
-          <LearningPathDuration id="duration" {...duration} />
-          {duration.touched && duration.error && <span className="error_message error_message--red">{duration.error}</span>}
+          <Field name="duration" component={LearningPathDuration} id="duration" />
         </div>
 
         <div className="learning-path-tags">
           <label htmlFor="tags" className="label--medium-bold  label--medium">{polyglot.t('learningPath.tags')}</label>
-          <TagsInput id="tags" tagOptions={tagOptions} {...tags} />
+          <Field name="tags" component={TagsInput} id="tags" tagOptions={tagOptions} />
         </div>
 
         <div className="learningPath-contributors">
           <label htmlFor="license" className="label--medium-bold  label--medium">{polyglot.t('learningPath.copyright.contributors')}</label>
-          <Contributors id="contributors" {...contributors} />
+          <Field name="contributors" component={Contributors} id="contributors" />
         </div>
+
         <div className="learningPath-copyright">
           <label htmlFor="license" className="label--medium-bold  label--medium">{polyglot.t('learningPath.copyright.license')}</label>
-          <ObjectSelector idKey="license" labelKey="description" options={licenseOptions} {...license} />
+          <Field name="license" component={ObjectSelector} idKey="license" labelKey="description" options={licenseOptions} />
         </div>
+
         <div className="block-container_fixed block-container_fixed--bottom--right">
           <div className="button-group">
             <Link to={`/learningpaths/${learningPath.id}`} className="button button--secondary">
@@ -128,7 +112,6 @@ const LearningPathForm = (props) => {
 };
 
 LearningPathForm.propTypes = {
-  fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
@@ -152,17 +135,18 @@ const mapStateToProps = (state, props) => ({
   initialValues: {
     title: titleI18N(props.learningPath, props.lang),
     description: descriptionI18N(props.learningPath, props.lang),
-    duration: convertedDuration(props.learningPath.duration),
+    duration: convertedDuration(state.learningPath.duration),
     tags: defined(tagsI18N(props.learningPath, props.lang), []),
     coverPhotoMetaUrl: props.learningPath.coverPhoto ? props.learningPath.coverPhoto.metaUrl : '',
     license: props.learningPath.copyright && props.learningPath.copyright.license ? props.learningPath.copyright.license : '',
     contributors: props.learningPath.copyright && props.learningPath.copyright.contributors ? props.learningPath.copyright.contributors : [],
-
   },
 });
 
-export default reduxForm({
-  form: 'edit-learning-path',
-  fields,
-  validate,
-}, mapStateToProps)(LearningPathForm);
+export default compose(
+  connect(mapStateToProps),
+  reduxForm({
+    form: formName,
+    validate,
+  })
+)(LearningPathForm);

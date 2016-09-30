@@ -27,6 +27,7 @@ class EditLearningPath extends Component {
 
   render() {
     const { learningPath, localFetchImages, localUpdateLearningPath, localFetchImage, lang: language, tags, licenses } = this.props;
+
     const handleSubmit = values => localUpdateLearningPath(learningPath.id, {
       title: [{ title: values.title, language }],
       description: [{ description: values.description, language }],
@@ -62,10 +63,10 @@ EditLearningPath.propTypes = {
   localFetchImageWithMetaUrl: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
+const mapStateToProps = (state) => Object.assign({}, state, {
   learningPath: get(state, 'learningPath', {}),
   learningSteps: get(state, 'learningPath.learningsteps', []),
-  tags: getLearningPathTagsByLanguage(state, ownProps.lang),
+  tags: getLearningPathTagsByLanguage(state),
   licenses: get(state, 'learningPathLicenses.all', []),
 });
 

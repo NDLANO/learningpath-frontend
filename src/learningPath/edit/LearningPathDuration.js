@@ -13,14 +13,14 @@ import classNames from 'classnames';
 export default function LearningPathDuration(props) {
   const durations = [1, 2, 3, 4, 5];
   const onChange = (value) => {
-    props.onChange(value.toString());
+    props.input.onChange(value.toString());
   };
   const inputChange = (evt) => {
-    props.onChange(evt.target.value);
+    props.input.onChange(evt.target.value);
   };
   const durationClassName = (value) => classNames({
     'duration-menu-item': true,
-    'duration-menu-item__selected': props.value === value.toString(),
+    'duration-menu-item__selected': props.input.value === value.toString(),
   });
   return (
     <div>
@@ -29,13 +29,18 @@ export default function LearningPathDuration(props) {
           <li key={newDuration} className={durationClassName(newDuration)} onClick={() => onChange(newDuration)}> {newDuration}</li>
         ))}
       </ul>
-      <input id={props.id} className="input-duration" {...props} onChange={(evt) => inputChange(evt)} />
+      <input id={props.id} className="input-duration" {...props.input} onChange={(evt) => inputChange(evt)} />
       <span>{'time(r)'}</span>
+      {props.meta.touched && props.meta.error && <span className="error_message error_message--red">{props.meta.error}</span>}
     </div>
   );
 }
 
 LearningPathDuration.propTypes = {
-  value: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  input: PropTypes.shape({
+    onChange: PropTypes.func.isRequired,
+    value: PropTypes.string,
+  }).isRequired,
+  meta: PropTypes.object.isRequired,
 };

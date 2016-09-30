@@ -7,14 +7,11 @@
  */
 
 import React, { PropTypes } from 'react';
-import { reduxForm, reset } from 'redux-form';
+import { reduxForm, reset, Field } from 'redux-form';
 import polyglot from '../../i18n';
 import ObjectSelector from '../../common/form/ObjectSelector';
 
-const fields = ['title', 'description', 'license'];
-
 class CreateLearningPath extends React.Component {
-
 
   componentWillUnmount() {
     const { dispatch } = this.props;
@@ -22,7 +19,6 @@ class CreateLearningPath extends React.Component {
   }
   render() {
     const {
-      fields: { title, description, license },
       submitting,
       handleSubmit,
       licenseOptions,
@@ -31,17 +27,36 @@ class CreateLearningPath extends React.Component {
       <form onSubmit={handleSubmit}>
         <h1>{polyglot.t('createLearningPath.createNew')}</h1>
         <div>
-          <label htmlFor="title">{polyglot.t('createLearningPath.title')}</label>
-          <input id="title" type="text" required {...title} />
+          <Field
+            name="title"
+            id="title"
+            type="text"
+            component="input"
+          />
         </div>
         <div>
           <label htmlFor="description">{polyglot.t('createLearningPath.description')}</label>
-          <textarea id="description" rows="4" cols="50" placeholder={polyglot.t('createLearningPath.descriptionPlaceholder')} maxLength="150" className="textarea" {...description} />
+          <Field
+            id="description"
+            rows="4"
+            cols="50"
+            name="description"
+            placeholder={polyglot.t('createLearningPath.descriptionPlaceholder')}
+            maxLength="150"
+            className="textarea"
+            component="textarea"
+          />
           <p className="learning-path_input-information">{polyglot.t('createLearningPath.descriptionMaxLength')}</p>
         </div>
         <div>
           <label htmlFor="license">Lisens</label>
-          <ObjectSelector idKey="license" labelKey="description" options={licenseOptions} {...license} />
+          <Field
+            name="license"
+            idKey="license"
+            labelKey="description"
+            options={licenseOptions}
+            component={ObjectSelector}
+          />
           <p className="learning-path_input-information">{polyglot.t('createLearningPath.descriptionMaxLength')}</p>
         </div>
         <button className="button cta-link cta-link--block" disabled={submitting} type="submit">
@@ -53,7 +68,6 @@ class CreateLearningPath extends React.Component {
 }
 
 CreateLearningPath.propTypes = {
-  fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
@@ -62,5 +76,4 @@ CreateLearningPath.propTypes = {
 
 export default reduxForm({
   form: 'create-learning-path',
-  fields,
 })(CreateLearningPath);

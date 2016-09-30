@@ -113,13 +113,15 @@ export class MyPage extends React.Component {
       </select>
     );
 
-    let onCreateLearningPathSubmit = values => createPath({
-      title: [{ title: values.title, language: lang }],
-      description: [{ description: values.description, language: lang }],
-      duration: 1,
-      coverPhoto: { url: '', metaUrl: '' },
-      copyright: { license: values.license ? values.license : licenses[0], contributors: [] },
-    });
+    let onCreateLearningPathSubmit = values => {
+      createPath({
+        title: [{ title: values.title, language: lang }],
+        description: [{ description: values.description, language: lang }],
+        duration: 1,
+        coverPhoto: { url: '', metaUrl: '' },
+        copyright: { license: values.license ? values.license : licenses[0], contributors: [] },
+      });
+    };
 
     let onLightboxClose = () => this.setState({ displayCreatePath: false });
 
