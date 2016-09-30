@@ -54,12 +54,14 @@ const LearningPathForm = (props) => {
     tagOptions,
     handleSubmit,
     submitting,
+    valid,
     learningPath,
     lang,
     localFetchImages,
     fetchImage,
     licenseOptions,
   } = props;
+  console.log(props);
   return (
     <form className="learning-path-form" onSubmit={handleSubmit}>
       <div className="learning-path_hd">
@@ -101,7 +103,7 @@ const LearningPathForm = (props) => {
             <Link to={`/learningpaths/${learningPath.id}`} className="button button--secondary">
               <LabeledIcon.Clear labelText={polyglot.t('editPage.cancelBtn')} />
             </Link>
-            <SubmitButton disabled={submitting} className="button button--primary">
+            <SubmitButton disabled={submitting || !valid} className="button button--primary">
               <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
             </SubmitButton>
           </div>
@@ -115,6 +117,7 @@ LearningPathForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
+  valid: PropTypes.bool.isRequired,
   learningPath: PropTypes.object.isRequired,
   tagOptions: PropTypes.array.isRequired,
   lang: PropTypes.string.isRequired,

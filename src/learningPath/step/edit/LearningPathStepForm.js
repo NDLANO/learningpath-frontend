@@ -42,6 +42,7 @@ const LearningPathStepForm = (props) => {
     formValues,
     formFields,
     localChange,
+    valid,
   } = props;
   const embedContent = oembedContentI18N({ embedUrl: oembedPreview }, lang);
   const abortUrl = step.id ? `/learningpaths/${learningPathId}/step/${step.id}` : `/learningpaths/${learningPathId}`;
@@ -124,7 +125,7 @@ const LearningPathStepForm = (props) => {
             <Link to={abortUrl} className="button button--secondary">
               <LabeledIcon.Clear labelText={polyglot.t('editPage.cancelBtn')} />
             </Link>
-            <button disabled={submitting} className="button button--primary" type="submit">
+            <button disabled={submitting || !valid} className="button button--primary" type="submit">
               <LabeledIcon.Save labelText={polyglot.t('editPage.savePathBtn')} />
             </button>
           </div>
@@ -147,6 +148,7 @@ LearningPathStepForm.propTypes = {
   formValues: PropTypes.object,
   formFields: PropTypes.object,
   localChange: PropTypes.func.isRequired,
+  valid: PropTypes.bool.isRequired,
 };
 
 
