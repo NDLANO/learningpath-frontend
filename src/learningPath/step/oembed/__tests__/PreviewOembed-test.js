@@ -20,7 +20,7 @@ test('component/PreviewOembed click button', (t) => {
   let frame = component.find('.learningsource__frame');
   t.equals(frame.prop('className'), 'learningsource__frame learningsource__frame--hidden');
 
-  frame.find('a').simulate('click', { preventDefault });
+  frame.find('button').simulate('click', { preventDefault });
 
   component.update();
   frame = component.find('.learningsource__frame');

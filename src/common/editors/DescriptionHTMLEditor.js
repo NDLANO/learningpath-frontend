@@ -178,7 +178,9 @@ export default class DescriptionHTMLEditor extends React.Component {
             <span className="learning-step-form_icon-bg"><Icon.Create /></span>
           </div>
           <div className="learning-step-form_right">
+            {/*eslint-disable*/}
             <div className={className} onClick={this.focus}>
+              {/*eslint-enable*/}
               <Editor
                 editorState={editorState}
                 onChange={this.onChange}

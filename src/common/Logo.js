@@ -16,13 +16,14 @@ function Logo(props) {
   const { cssModifier, closeSidebars } = props;
   const rootClasses = classNames({
     logo: true,
+    'un-button': true,
     [`logo--${cssModifier}`]: cssModifier,
   });
 
   return (
-    <h1 className={rootClasses} onClick={closeSidebars}>
+    <button className={rootClasses} onClick={closeSidebars}>
       <Link to="/" className="logo_link">{polyglot.t('logo.altText')}</Link>
-    </h1>
+    </button>
   );
 }
 

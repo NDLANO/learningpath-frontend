@@ -34,7 +34,7 @@ test('reducers/messages add message', (t) => {
   t.equal(nextState[1].severity, 'warning');
   t.equal(nextState[1].message, 'Another somewhat less dangerous error');
 
-  for (let i = 0; i < 8; ++i) {
+  for (let i = 0; i < 8; i += 1) {
     nextState = reducer(nextState, {
       type: 'ADD_MESSAGE',
       payload: {
@@ -72,7 +72,7 @@ test('reducers/messages clear all messages', (t) => {
   });
   t.equal(nextState.length, 0);
 
-  for (let i = 0; i < 10; ++i) {
+  for (let i = 0; i < 10; i += 1) {
     nextState = reducer(nextState, {
       type: 'ADD_MESSAGE',
       payload: {

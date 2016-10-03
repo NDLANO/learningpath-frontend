@@ -34,6 +34,7 @@ export function Images(props) {
     return null;
   }
   const onImageClick = (evt, image) => {
+    evt.preventDefault();
     if (image.id !== selectedImage.id) {
       fetchImage(image.id);
     }

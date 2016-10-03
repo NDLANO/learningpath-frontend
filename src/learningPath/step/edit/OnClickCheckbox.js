@@ -15,6 +15,7 @@ import OverlayTrigger from '../../../common/tooltip/OverlayTrigger';
 
 const OnClickCheckbox = ({ input }) => {
   const classes = {
+    'un-button': true,
     'learning-step-form_icon-bg': true,
     'learning-step-form_show-title': true,
     'learning-step-form_show-title--active': input.value,
@@ -27,12 +28,12 @@ const OnClickCheckbox = ({ input }) => {
 
   return (
     <OverlayTrigger placement="top" overlay={tooltip}>
-      <span className={classNames(classes)} onClick={handleClick} >
+      <button className={classNames(classes)} onClick={handleClick} >
         {input.value ? <Icon.Visibility /> : <Icon.VisibilityOff />}
         <label htmlFor="visibility" className="sr-only">
           <input id="visibility" type="checkbox" {...input} onClick={handleClick} onBlur={noop} />
         </label>
-      </span>
+      </button>
     </OverlayTrigger>
   );
 };
