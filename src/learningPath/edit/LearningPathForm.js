@@ -24,7 +24,7 @@ import polyglot from '../../i18n';
 import LearningPathDuration from './LearningPathDuration';
 import LearningPathImage from './LearningPathImage';
 import SubmitButton from '../../common/buttons/SubmitButton';
-
+import values from 'lodash/values';
 const formName = 'edit-learning-path';
 const validate = values => {
   const errors = {};
@@ -60,7 +60,9 @@ const LearningPathForm = (props) => {
     localFetchImages,
     fetchImage,
     licenseOptions,
+    formValues,
   } = props;
+  const learningPathTitle = defined(formValues.title, '');
   return (
     <form className="learning-path-form" onSubmit={handleSubmit}>
       <div className="learning-path_hd">
@@ -75,7 +77,7 @@ const LearningPathForm = (props) => {
           <Field name="description" component={LearningPathDescription} />
         </div>
 
-        <Field name="coverPhotoMetaUrl" component={LearningPathImage} localFetchImages={localFetchImages} learningPathTitle={'norge'} fetchImage={fetchImage} />
+        <Field name="coverPhotoMetaUrl" component={LearningPathImage} localFetchImages={localFetchImages} learningPathTitle={learningPathTitle} fetchImage={fetchImage} />
 
         <div className="learning-path-duration">
           <label htmlFor="duration" className="label--medium-bold  label--medium">{polyglot.t('learningPath.duration')}</label>
@@ -123,6 +125,7 @@ LearningPathForm.propTypes = {
   localFetchImages: PropTypes.func.isRequired,
   fetchImage: PropTypes.func.isRequired,
   licenseOptions: PropTypes.array.isRequired,
+  formValues: PropTypes.object.isRequired,
 };
 
 const convertedDuration = (value) => {
@@ -137,12 +140,13 @@ const mapStateToProps = (state, props) => ({
   initialValues: {
     title: titleI18N(props.learningPath, props.lang),
     description: descriptionI18N(props.learningPath, props.lang),
-    duration: convertedDuration(state.learningPath.duration),
+    duration: convertedDuration(props.learningPath.duration),
     tags: defined(tagsI18N(props.learningPath, props.lang), []),
     coverPhotoMetaUrl: props.learningPath.coverPhoto ? props.learningPath.coverPhoto.metaUrl : '',
-    license: props.learningPath.copyright && props.learningPath.copyright.license ? props.learningPath.copyright.license : '',
+    license: props.learningPath.copyright && props.learningPath.copyright.license ? defined(props.learningPath.copyright.license, '') : '',
     contributors: props.learningPath.copyright && props.learningPath.copyright.contributors ? props.learningPath.copyright.contributors : [],
   },
+  formValues: state.form[formName] ? state.form[formName].values : {},
 });
 
 export default compose(
