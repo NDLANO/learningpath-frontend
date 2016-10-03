@@ -56,7 +56,6 @@ const LearningPathStepForm = (props) => {
     }
     blur(value);
   };
-  console.log(props.initialValues);
   if (!formValues || !formValues.type) {
     return <Field name="type" component={MediaTypeSelect} />;
   }

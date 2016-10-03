@@ -24,7 +24,7 @@ import polyglot from '../../i18n';
 import LearningPathDuration from './LearningPathDuration';
 import LearningPathImage from './LearningPathImage';
 import SubmitButton from '../../common/buttons/SubmitButton';
-import values from 'lodash/values';
+
 const formName = 'edit-learning-path';
 const validate = values => {
   const errors = {};
