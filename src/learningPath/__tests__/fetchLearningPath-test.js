@@ -22,8 +22,8 @@ const mockStore = configureStore(middleware);
 const authToken = '123345';
 const pathId = 123;
 
-test('actions/fetchLearningPath without image', t => {
-  const done = res => {
+test('actions/fetchLearningPath without image', (t) => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };
@@ -47,8 +47,8 @@ test('actions/fetchLearningPath without image', t => {
     .catch(done);
 });
 
-test('actions/fetchLearningPath with image', t => {
-  const done = res => {
+test('actions/fetchLearningPath with image', (t) => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };
@@ -71,7 +71,7 @@ test('actions/fetchLearningPath with image', t => {
 });
 
 test('actions/fetchLearningPath access denied', (t) => {
-  const done = res => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };

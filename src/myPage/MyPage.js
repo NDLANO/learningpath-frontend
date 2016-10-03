@@ -52,13 +52,13 @@ export class MyPage extends React.Component {
   render() {
     const { learningPaths, sortKey, setSortKey, deletePath, updatePathStatus, createPath, copyPath, licenses } = this.props;
     const { lang } = this.context;
-    const items = learningPaths.map(lp => {
+    const items = learningPaths.map((lp) => {
       const title = titleI18N(lp, lang, true);
       const description = descriptionI18N(lp, lang, true);
       const duration = formatDuration(lp.duration, lang);
       const lastUpdated = formatDate(lp.lastUpdated, lang);
 
-      const onDropDownSelect = actionType => {
+      const onDropDownSelect = (actionType) => {
         switch (actionType) {
           case 'delete':
             deletePath(lp);
@@ -105,7 +105,7 @@ export class MyPage extends React.Component {
     });
 
     const sortOrderSelect = (
-      <select className="select--white-border" value={sortKey} onChange={(evt) => setSortKey(evt.target.value)}>
+      <select className="select--white-border" value={sortKey} onChange={evt => setSortKey(evt.target.value)}>
         <option value="title">{polyglot.t('myPage.order.title')}</option>
         <option value="-lastUpdated">{polyglot.t('myPage.order.newest')}</option>
         <option value="lastUpdated">{polyglot.t('myPage.order.oldest')}</option>
@@ -113,7 +113,7 @@ export class MyPage extends React.Component {
       </select>
     );
 
-    let onCreateLearningPathSubmit = values => {
+    const onCreateLearningPathSubmit = (values) => {
       createPath({
         title: [{ title: values.title, language: lang }],
         description: [{ description: values.description, language: lang }],
@@ -123,7 +123,7 @@ export class MyPage extends React.Component {
       });
     };
 
-    let onLightboxClose = () => this.setState({ displayCreatePath: false });
+    const onLightboxClose = () => this.setState({ displayCreatePath: false });
 
     return (
       <Wrapper>
@@ -171,7 +171,7 @@ MyPage.contextTypes = {
 const sortPaths = (paths, field, state) => {
   switch (field) {
     case 'title':
-      return sortBy(paths, (p) => titleI18N(p, state.lang, true));
+      return sortBy(paths, p => titleI18N(p, state.lang, true));
 
     case 'lastUpdated':
       return sortBy(paths, field);

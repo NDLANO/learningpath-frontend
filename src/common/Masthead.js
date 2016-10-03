@@ -48,17 +48,18 @@ export function Masthead(props) {
   const activeButtonClassName = (isLeft, isActive) => classNames({
     active: isActive,
     masthead_button: true,
+    'un-button': true,
     'masthead_button--right': !isLeft,
     'masthead_button--left': isLeft,
   });
 
-  const collapseClassName = (isOpen) => classNames({
+  const collapseClassName = isOpen => classNames({
     'masthead--desktop': true,
     'sidebar--collapsed': !isOpen,
     'sidebar--open': isOpen,
   });
 
-  const mastheadPageOverlay = (isLeftSideBarOpen || isRightSidebarOpen) ? <div className="masthead_page-overlay" onClick={localCloseSidebars} /> : '';
+  const mastheadPageOverlay = (isLeftSideBarOpen || isRightSidebarOpen) ? <button className="masthead_page-overlay" onClick={localCloseSidebars} /> : '';
 
   const cloneChildren = children ? React.cloneElement(children, { className: activeButtonClassName(true, isLeftSideBarOpen), onClick: () => leftNavButtonClicked() }) : null;
 
@@ -68,15 +69,15 @@ export function Masthead(props) {
         <div className="masthead--mobile">
           {cloneChildren}
           {logo}
-          <div className={activeButtonClassName(false, isRightSidebarOpen)} onClick={() => rightNavButtonClicked()}>
+          <button className={activeButtonClassName(false, isRightSidebarOpen)} onClick={() => rightNavButtonClicked()}>
             <Icon.Menu />
             <span>Meny</span>
-          </div>
+          </button>
         </div>
         <div className={collapseClassName(isRightSidebarOpen)}>
-          <div className="masthead_left--desktop" onClick={localCloseSidebars}>
+          <button className="un-button masthead_left--desktop" onClick={localCloseSidebars}>
             {logo}
-          </div>
+          </button>
           <div className="masthead_right--desktop">
             <SiteNav />
           </div>

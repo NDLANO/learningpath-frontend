@@ -22,8 +22,8 @@ const authToken = '123345';
 const pathId = 123;
 const stepId = 456;
 
-test('actions/fetchLearningPathStep', t => {
-  const done = res => {
+test('actions/fetchLearningPathStep', (t) => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };
@@ -45,8 +45,8 @@ test('actions/fetchLearningPathStep', t => {
     .catch(done);
 });
 
-test('actions/fetchLearningPathStep cache hit', t => {
-  const done = res => {
+test('actions/fetchLearningPathStep cache hit', (t) => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };
@@ -80,8 +80,8 @@ test('actions/fetchLearningPathStep cache hit', t => {
     .catch(done);
 });
 
-test('actions/fetchLearningPathStep access denied', t => {
-  const done = res => {
+test('actions/fetchLearningPathStep access denied', (t) => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };
@@ -103,8 +103,8 @@ test('actions/fetchLearningPathStep access denied', t => {
     .catch(done);
 });
 
-test('actions/fetchLearningPathStep with embedUrl', t => {
-  const done = res => {
+test('actions/fetchLearningPathStep with embedUrl', (t) => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };

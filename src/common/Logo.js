@@ -14,7 +14,7 @@ import withCloseSidebars from '../common/withCloseSidebars';
 
 function Logo(props) {
   const { cssModifier, closeSidebars } = props;
-  let rootClasses = classNames({
+  const rootClasses = classNames({
     logo: true,
     [`logo--${cssModifier}`]: cssModifier,
   });

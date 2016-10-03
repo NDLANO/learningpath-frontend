@@ -24,8 +24,8 @@ const stepId = 321;
 const seqNo = 3;
 
 
-test('actions/updateStepSequenceNumber sucessfully', t => {
-  const done = res => {
+test('actions/updateStepSequenceNumber sucessfully', (t) => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };
@@ -58,8 +58,8 @@ test('actions/updateStepSequenceNumber sucessfully', t => {
     .catch(done);
 });
 
-test('actions/updateStepSequenceNumber access denied', t => {
-  const done = res => {
+test('actions/updateStepSequenceNumber access denied', (t) => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };

@@ -18,7 +18,7 @@ export default function LearningPathDuration(props) {
   const inputChange = (evt) => {
     props.input.onChange(evt.target.value);
   };
-  const durationClassName = (value) => classNames({
+  const durationClassName = value => classNames({
     'duration-menu-item': true,
     'duration-menu-item__selected': props.input.value === value.toString(),
   });
@@ -29,7 +29,7 @@ export default function LearningPathDuration(props) {
           <li key={newDuration} className={durationClassName(newDuration)} onClick={() => onChange(newDuration)}> {newDuration}</li>
         ))}
       </ul>
-      <input id={props.id} className="input-duration" {...props.input} onChange={(evt) => inputChange(evt)} />
+      <input id={props.id} className="input-duration" {...props.input} onChange={evt => inputChange(evt)} />
       <span>{'time(r)'}</span>
       <br />
       {props.meta.touched && props.meta.error && <span className="error_message error_message--red">{props.meta.error}</span>}

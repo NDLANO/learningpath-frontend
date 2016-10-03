@@ -18,7 +18,7 @@ export default class OneLineEditor extends React.Component {
 
     const { input: { onChange }, maxlength } = props;
 
-    this.onChange = (editorState) => this.setState({ editorState }, () => {
+    this.onChange = editorState => this.setState({ editorState }, () => {
       if (editorState.getSelection().getHasFocus()) {
         return;
       }

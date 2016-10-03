@@ -16,6 +16,6 @@ const initialState = {
 export default handleActions({
   SET_LEARNING_PATH_SEARCH_RESULTS: {
     next: (state, action) => action.payload,
-    throw: (state) => state,
+    throw: state => state,
   },
 }, initialState);

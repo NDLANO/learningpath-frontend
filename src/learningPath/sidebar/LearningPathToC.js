@@ -21,7 +21,7 @@ import { titleI18N } from '../../util/i18nFieldFinder';
 
 export function LearningPathToC({ learningPath, activeStepId, localCloseSidebars }, { lang }) {
   const base = `/learningpaths/${learningPath.id}`;
-  const itemClassName = (stepId) => classNames({
+  const itemClassName = stepId => classNames({
     'step-nav_item': true,
     'step-nav_item--active': activeStepId ? activeStepId === stepId : false,
   });
@@ -31,7 +31,7 @@ export function LearningPathToC({ learningPath, activeStepId, localCloseSidebars
     <div>
       <div className="step-nav">
         <ul className="step-nav_list">
-          {((steps) => steps.map(step => (
+          {(steps => steps.map(step => (
             <li key={step.id} className={itemClassName(`${step.id}`)} >
               <Link to={`${base}/step/${step.id}`} className="step-nav_link" onClick={localCloseSidebars}>
                 <div className="step-nav_line" />

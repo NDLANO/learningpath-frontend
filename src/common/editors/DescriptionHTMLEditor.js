@@ -14,7 +14,7 @@ import Icon from '../Icon';
 import polyglot from '../../i18n';
 
 const StyleButton = ({ active, icon, style, onToggle }) => {
-  const handleToggle = e => {
+  const handleToggle = (e) => {
     e.preventDefault();
     onToggle(style);
   };
@@ -45,7 +45,7 @@ const STYLES = [
   { label: 'OL', style: 'ordered-list-item', isInline: false, icon: <Icon.Numbered /> },
 ];
 
-const StyleControls = props => {
+const StyleControls = (props) => {
   const { editorState } = props;
   const selection = editorState.getSelection();
   const blockType = editorState.getCurrentContent().getBlockForKey(selection.getStartKey()).getType();
@@ -159,7 +159,7 @@ export default class DescriptionHTMLEditor extends React.Component {
       this.props.onBlur(contentState, this.props.input.onBlur);
     };
 
-    let className = classNames({
+    const className = classNames({
       'RichEditor-editor learning-step-form_input learning-step-form_paragraph': true,
       'RichEditor-hidePlaceholder': commentAboveApplies,
     });

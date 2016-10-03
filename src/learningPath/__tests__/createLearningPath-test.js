@@ -23,8 +23,8 @@ const mockStore = configureStore(middleware);
 const authToken = '123345';
 const pathId = 123;
 
-test('actions/createLearningPath', t => {
-  const done = res => {
+test('actions/createLearningPath', (t) => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };
@@ -84,7 +84,7 @@ test('actions/createLearningPath', t => {
 });
 
 test('actions/createLearningPath access denied', (t) => {
-  const done = res => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };

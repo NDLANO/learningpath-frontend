@@ -10,7 +10,7 @@ import test from 'tape';
 
 import formatDuration from '../formatDuration';
 
-test('util/formatDuration', t => {
+test('util/formatDuration', (t) => {
   t.equal(typeof formatDuration, 'function');
 
   t.equal(formatDuration(1), '1 minutt');

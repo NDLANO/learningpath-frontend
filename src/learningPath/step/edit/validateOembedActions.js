@@ -16,7 +16,7 @@ export const setOembedPreview = createAction('SET_OEMBED_PREVIEW');
 
 export function validateOembed(url, lang, fieldName = 'url', msgKey = 'validation.oembed') {
   if (!url || url.length === 0) {
-    return ((dispatch) => new Promise((resolve) => {
+    return (dispatch => new Promise((resolve) => {
       dispatch(removeOembedPreview());
       resolve();
     }));

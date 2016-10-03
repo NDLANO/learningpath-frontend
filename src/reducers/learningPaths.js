@@ -15,12 +15,12 @@ import set from 'lodash/set';
 export default handleActions({
   SET_LEARNING_PATHS: {
     next: (state, action) => action.payload,
-    throw: (state) => state,
+    throw: state => state,
   },
 
   REMOVE_LEARNING_PATH: {
     next: (state, action) => reject(cloneDeep(state), { id: action.payload }),
-    throw: (state) => state,
+    throw: state => state,
   },
 
   UPDATE_LEARNING_PATH_STATUS: {
@@ -30,6 +30,6 @@ export default handleActions({
       set(find(nextState, { id }), 'status', status);
       return nextState;
     },
-    throw: (state) => state,
+    throw: state => state,
   },
 }, []);

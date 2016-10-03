@@ -11,7 +11,7 @@ import Icon from '../../../common/Icon';
 import polyglot from '../../../i18n';
 
 export default function MediaTypeSelect({ input }) {
-  const changeType = (evt) => input.onChange(evt.target.value);
+  const changeType = evt => input.onChange(evt.target.value);
 
   const fieldNameAttr = 'step_media_type';
   const fieldIdAttr = name => `${fieldNameAttr}_${name}`;

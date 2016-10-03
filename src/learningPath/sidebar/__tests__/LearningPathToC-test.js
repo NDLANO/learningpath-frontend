@@ -14,7 +14,7 @@ import { Link } from 'react-router';
 import { learningPath } from '../../../common/__tests__/mockData';
 import { LearningPathToC } from '../LearningPathToC';
 
-test('component/LearningPathToC', t => {
+test('component/LearningPathToC', (t) => {
   const component = shallow(<LearningPathToC learningPath={learningPath} />,
       { context: { lang: 'nb' } });
 

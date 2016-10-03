@@ -26,25 +26,25 @@ Selfie.propTypes = { foo: PropTypes.string };
 Selfie.defaultProps = { foo: 'default bar' };
 
 
-test('components/TestSetup selftest', tt => {
-  tt.test('- unit test mocking', t => {
+test('components/TestSetup selftest', (tt) => {
+  tt.test('- unit test mocking', (t) => {
     t.equal(locationOrigin, 'http://ndla-frontend');
     t.equal(apiBaseUrl, 'http://ndla-api');
     t.equal(defaultApiKey, 'ndlatestapikey');
     t.end();
   });
 
-  tt.test('- Enzyme shallow rendering', t => {
+  tt.test('- Enzyme shallow rendering', (t) => {
     t.doesNotThrow(() => shallow(<Selfie />));
     t.end();
   });
 
-  tt.test('- Enzyme full dom rendering', t => {
+  tt.test('- Enzyme full dom rendering', (t) => {
     t.doesNotThrow(() => mount(<Selfie />));
     t.end();
   });
 
-  tt.test('- Enzyme static rendering', t => {
+  tt.test('- Enzyme static rendering', (t) => {
     t.doesNotThrow(() => render(<Selfie />));
     t.end();
   });

@@ -24,7 +24,7 @@ export const setOembedObject = createAction('SET_OEMBED_OBJECT');
 
 export function fetchOembed(query) {
   return (dispatch, getState) => fetchOembedUrl(getState().authToken, query)
-    .then(object => {
+    .then((object) => {
       const clonedObject = Object.assign({}, object, { url: query.url, language: getState().locale });
       dispatch(setOembedObject(clonedObject));
       dispatch(setOembedPreview(clonedObject));
@@ -44,7 +44,7 @@ export function fetchLearningPathStep(pathId, stepId) {
     }
 
     return fetchPathStep(authToken, { pathId, stepId })
-      .then(step => {
+      .then((step) => {
         if (step.embedUrl) {
           const oembedContent = oembedContentI18N(step, locale, true);
           if (oembedContent && oembedContent.url) {
@@ -72,7 +72,7 @@ export function updateLearningPathStep(pathId, stepId, learningPathStep) {
 
 export function createLearningPathStep(pathId, learningPathStep) {
   return (dispatch, getState) => createStep(getState().authToken, { pathId }, learningPathStep)
-    .then(lpspath => {
+    .then((lpspath) => {
       dispatch(addMessage({ message: polyglot.t('updateLearningPath.updatedMsg') }));
       dispatch(fetchLearningPath(pathId));
       dispatch(routerActions.push({
@@ -114,7 +114,7 @@ export function updateStepSequenceNumber(pathId, stepId, seqNo) {
     .then(() => {
       dispatch(fetchLearningPath(pathId));
     })
-    .catch(err => {
+    .catch((err) => {
       dispatch(applicationError(err));
     });
 }

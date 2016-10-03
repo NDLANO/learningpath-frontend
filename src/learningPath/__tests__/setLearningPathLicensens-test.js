@@ -12,7 +12,7 @@ import { isFSA } from 'flux-standard-action';
 import { setLearningPathLicensens } from '../edit/copyright/learningPathLicensesActions';
 
 
-test('actions/setLearningPathLicensens', t => {
+test('actions/setLearningPathLicensens', (t) => {
   const actual = setLearningPathLicensens([{ id: '12345' }, { id: '123456' }]);
 
   t.ok(isFSA(actual), 'FSA compliant action');
@@ -25,7 +25,7 @@ test('actions/setLearningPathLicensens', t => {
   t.end();
 });
 
-test('actions/setLearningPathLicensens with error', t => {
+test('actions/setLearningPathLicensens with error', (t) => {
   const actual = setLearningPathLicensens(new Error('fail!'));
 
   t.ok(isFSA(actual), 'FSA compliant action');

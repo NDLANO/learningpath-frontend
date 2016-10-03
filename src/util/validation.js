@@ -15,7 +15,7 @@ const isEmpty = (value) => {
   }
   return value === undefined || value === null || value === '';
 };
-const join = (rules) => (value, data) => rules.map(rule => rule(value, data)).filter(error => !!error)[0];
+const join = rules => (value, data) => rules.map(rule => rule(value, data)).filter(error => !!error)[0];
 
 export function required(msgKey = 'validation.required') {
   return (value) => {

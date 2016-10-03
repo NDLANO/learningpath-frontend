@@ -53,7 +53,7 @@ export default function (store, ifAuthenticated) {
     <Route path="learningpaths(/)">
       <IndexRoute
         component={LearningPathSearch}
-        onEnter={(nextState) => store.dispatch(searchLearningPaths(nextState.location.query))}
+        onEnter={nextState => store.dispatch(searchLearningPaths(nextState.location.query))}
         onChange={(prevState, nextState) => store.dispatch(searchLearningPaths(nextState.location.query))}
       />
       <Route path="new" component={requireAuthentication(CreateLearningPath)} onEnter={ifAuthenticated(createEmptyLearningPath)} />

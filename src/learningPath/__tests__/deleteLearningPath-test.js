@@ -18,8 +18,8 @@ const mockStore = configureStore(middleware);
 
 const authToken = '123345';
 
-test('actions/deleteLearningPath', t => {
-  const done = res => {
+test('actions/deleteLearningPath', (t) => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };
