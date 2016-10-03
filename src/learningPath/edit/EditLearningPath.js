@@ -28,6 +28,10 @@ class EditLearningPath extends Component {
   render() {
     const { learningPath, localFetchImages, localUpdateLearningPath, localFetchImage, lang: language, tags, licenses } = this.props;
 
+    if (!learningPath.id) {
+      return null;
+    }
+
     const handleSubmit = values => localUpdateLearningPath(learningPath.id, {
       title: [{ title: values.title, language }],
       description: [{ description: values.description, language }],
