@@ -12,7 +12,7 @@ import assureSequenceOrder from '../assureSequenceOrder';
 const pluckIds = steps => steps.map(step => step.id);
 const pluckSeqNo = steps => steps.map(step => step.seqNo);
 
-test('util/assureSequenceOrder', t => {
+test('util/assureSequenceOrder', (t) => {
   let actual = assureSequenceOrder([
       { id: 3, seqNo: 2 },
       { id: 2, seqNo: 1 },

@@ -14,7 +14,7 @@ import sinon from 'sinon';
 
 import MediaTypeSelect from '../MediaTypeSelect';
 
-test('component/MediaTypeSelect', t => {
+test('component/MediaTypeSelect', (t) => {
   const propsInput = {
     onChange: noop,
   };
@@ -28,7 +28,7 @@ test('component/MediaTypeSelect', t => {
   t.end();
 });
 
-test('component/MediaTypeSelect for given value', t => {
+test('component/MediaTypeSelect for given value', (t) => {
   const propsInput = {
     value: 'MULTIMEDIA',
     onChange: noop,
@@ -52,7 +52,7 @@ test('component/MediaTypeSelect for given value', t => {
   t.end();
 });
 
-test('component/MediaTypeSelect onChange', t => {
+test('component/MediaTypeSelect onChange', (t) => {
   const onChangeSpy = sinon.spy(() => {});
 
   const propsInput = {

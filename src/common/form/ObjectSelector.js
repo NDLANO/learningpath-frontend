@@ -11,7 +11,7 @@ import React, { PropTypes } from 'react';
 const ObjectSelector = (props) => {
   const { options, labelKey, idKey, input: { onChange, onBlur, value }, ...rest } = props;
 
-  const parse = (event) => options.find(option => option[idKey] === event.target.value);
+  const parse = event => options.find(option => option[idKey] === event.target.value);
   return (
     <select
       onBlur={event => onBlur(parse(event))}

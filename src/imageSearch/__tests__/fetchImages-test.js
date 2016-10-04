@@ -19,8 +19,8 @@ import { applicationError } from '../../messages/messagesActions';
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-test('actions/fetchImages', t => {
-  const done = res => {
+test('actions/fetchImages', (t) => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };
@@ -55,7 +55,7 @@ test('actions/fetchImages', t => {
 });
 
 test('actions/fetchImage with url access denied', (t) => {
-  const done = res => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };

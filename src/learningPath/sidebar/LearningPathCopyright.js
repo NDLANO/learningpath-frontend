@@ -32,7 +32,7 @@ const Contributors = ({ copyright }) => {
   return (
     <span>
       <Icon.Person />
-      {copyright.contributors.map((contributor) =>
+      {copyright.contributors.map(contributor =>
         contributor.name
       ).join(', ')}
     </span>

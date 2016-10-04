@@ -17,12 +17,12 @@ export default function ButtonPager(props) {
 
   const queryToPage = pageNumber => Object.assign({}, query, { page: pageNumber });
 
-  const handleClickToPage = pageNumber => evt => {
+  const handleClickToPage = pageNumber => (evt) => {
     evt.preventDefault();
     pagerAction(queryToPage(pageNumber));
   };
 
-  let pageLinks = steps.map(n => {
+  const pageLinks = steps.map((n) => {
     if (n === page) {
       return <span key={n} className="search-stepper_step search-stepper_step--active">{n}</span>;
     }
@@ -47,11 +47,13 @@ export default function ButtonPager(props) {
     );
   }
 
-  return (<div className="search-stepper">
+  return (
+    <div className="search-stepper">
       {prevPageLink}
       {pageLinks}
       {nextPageLink}
-  </div>);
+    </div>
+  );
 }
 
 ButtonPager.propTypes = {

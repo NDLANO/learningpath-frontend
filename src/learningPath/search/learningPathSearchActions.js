@@ -14,7 +14,7 @@ export const setLearningPathSearchResults = createAction('SET_LEARNING_PATH_SEAR
 
 export function searchLearningPaths(query) {
   return (dispatch, getState) => fetchPaths(getState().authToken, query)
-    .then(res => {
+    .then((res) => {
       dispatch(setLearningPathSearchResults({
         results: res.results,
         totalCount: res.totalCount,

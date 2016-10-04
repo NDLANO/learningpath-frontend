@@ -16,7 +16,7 @@ import { learningStep, ndlaLearningStep } from '../../../../common/__tests__/moc
 
 import Oembed, { urlIsNDLA } from '../Oembed';
 
-test('component/Oembed urlIsNDLA', t => {
+test('component/Oembed urlIsNDLA', (t) => {
   t.ok(urlIsNDLA('http://ndla.no/nb/node/12345'));
   t.notOk(urlIsNDLA('http://exampe.com/ndla.no/nb/node/12345'));
   t.notOk(urlIsNDLA());
@@ -24,7 +24,7 @@ test('component/Oembed urlIsNDLA', t => {
   t.end();
 });
 
-test('component/Oembed', t => {
+test('component/Oembed', (t) => {
   const oembed = learningStep.oembed;
   const component = mount(<Oembed oembedContent={oembed} />);
 
@@ -40,7 +40,7 @@ test('component/Oembed', t => {
   t.end();
 });
 
-test('component/Oembed ndla resource', t => {
+test('component/Oembed ndla resource', (t) => {
   const addEventListener = spy(window, 'addEventListener');
 
   const oembed = ndlaLearningStep.oembed;
@@ -64,7 +64,7 @@ test('component/Oembed ndla resource', t => {
   window.addEventListener.restore();
 });
 
-test('component/Oembed resize message listener', t => {
+test('component/Oembed resize message listener', (t) => {
   const add = spy(window, 'addEventListener');
   const remove = spy(window, 'removeEventListener');
 
@@ -110,7 +110,7 @@ test('component/Oembed resize message listener', t => {
   window.removeEventListener.restore();
 });
 
-test('component/Oembed iframe resizing', t => {
+test('component/Oembed iframe resizing', (t) => {
   const ndlaOembed = ndlaLearningStep.oembed;
   const oembed = learningStep.oembed;
 

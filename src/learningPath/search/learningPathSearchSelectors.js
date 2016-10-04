@@ -8,15 +8,15 @@
 
 import { createSelector } from 'reselect';
 
-const getLearningPathSearchResultFromState = (state) => state.learningPathSearch.results;
-const getLearningPathSearchTotalCountFromState = (state) => state.learningPathSearch.totalCount;
+const getLearningPathSearchResultFromState = state => state.learningPathSearch.results;
+const getLearningPathSearchTotalCountFromState = state => state.learningPathSearch.totalCount;
 
 export const getLearningPathSearchResult = createSelector(
     [getLearningPathSearchResultFromState],
-    (results) => results
+    results => results
 );
 
 export const getLearningPathSearchTotalCount = createSelector(
     [getLearningPathSearchTotalCountFromState],
-    (totalCount) => totalCount
+    totalCount => totalCount
 );

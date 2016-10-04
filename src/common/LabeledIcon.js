@@ -13,8 +13,8 @@ import Icon from './Icon';
 function LabeledIcon(props) {
   const { iconName, labelText } = props;
   const tagName = get(props, 'tagName', 'span');
-  let icon = React.createElement(Icon[iconName], { className: 'icon--with-label' });
-  let label = React.createElement(tagName, { className: 'labeled-icon_text' }, labelText);
+  const icon = React.createElement(Icon[iconName], { className: 'icon--with-label' });
+  const label = React.createElement(tagName, { className: 'labeled-icon_text' }, labelText);
   return (<span className="labeled-icon">{icon}{label}</span>);
 }
 

@@ -19,9 +19,11 @@ export default function ImageSearch({ image, onImageClick, selectedImage, onSave
   return (
     <div key={image.id} className={activeClassName()}>
       <div className="image_list-item-inner">
-        <img role="presentation" src={image.previewUrl} onClick={(evt) => onImageClick(evt, image)} />
+        <button className="un-button" onClick={evt => onImageClick(evt, image)}>
+          <img role="presentation" src={image.previewUrl} />
+        </button>
       </div>
-      {selectedImage.id === image.id ? <PreviewImage image={selectedImage} onSaveImage={(evt) => onSaveImage(evt, selectedImage)} /> : ''}
+      {selectedImage.id === image.id ? <PreviewImage image={selectedImage} onSaveImage={evt => onSaveImage(evt, selectedImage)} /> : ''}
     </div>
   );
 }

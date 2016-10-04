@@ -45,7 +45,7 @@ const ChangeImage = (props) => {
             {polyglot.t('learningPath.image.authors')}
           </b>
           <span>
-            {savedImage.copyright.authors.map((author) =>
+            {savedImage.copyright.authors.map(author =>
               author.name
             ).join(', ')}
           </span>
@@ -123,7 +123,7 @@ LearningPathImage.propTypes = {
   savedImage: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => Object.assign({}, state, {
+const mapStateToProps = state => Object.assign({}, state, {
   savedImage: state.imageSearch ? state.imageSearch.savedImage : undefined,
 });
 

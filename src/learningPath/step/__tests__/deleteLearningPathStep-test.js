@@ -20,8 +20,8 @@ const authToken = '123345';
 const pathId = 123;
 const stepId = 321;
 
-test('actions/deleteLearningPathStep with id', t => {
-  const done = res => {
+test('actions/deleteLearningPathStep with id', (t) => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };

@@ -24,8 +24,8 @@ const pathId = 123;
 const stepId = 321;
 
 
-test('actions/updateLearningPathStep', t => {
-  const done = res => {
+test('actions/updateLearningPathStep', (t) => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };
@@ -60,7 +60,7 @@ test('actions/updateLearningPathStep', t => {
 });
 
 test('actions/updateLearningPathStep access denied', (t) => {
-  const done = res => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };

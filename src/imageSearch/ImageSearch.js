@@ -34,6 +34,7 @@ export function Images(props) {
     return null;
   }
   const onImageClick = (evt, image) => {
+    evt.preventDefault();
     if (image.id !== selectedImage.id) {
       fetchImage(image.id);
     }
@@ -55,7 +56,7 @@ export function Images(props) {
       <div>
         <ImageSearchForm onSubmit={submitImageSearchQuery} query={imageSearchQuery} localChangeImageSearchQuery={localChangeImageSearchQuery} totalCount={totalCount} />
         <div className="image_list">
-          {images.map((image) =>
+          {images.map(image =>
             <ImageSearchResult key={image.id} image={image} onImageClick={onImageClick} selectedImage={selectedImage} onSaveImage={onSaveImage} />
           )}
         </div>
@@ -83,7 +84,7 @@ Images.contextTypes = {
   lang: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => Object.assign({}, state, {
+const mapStateToProps = state => Object.assign({}, state, {
   images: state.imageSearch.images.results,
   selectedImage: state.imageSearch.selectedImage,
   lastPage: Math.ceil(state.imageSearch.images.totalCount / (state.imageSearch.imageSearchQuery['page-size'] || 1)),

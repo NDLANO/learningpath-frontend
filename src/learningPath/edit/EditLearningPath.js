@@ -67,7 +67,7 @@ EditLearningPath.propTypes = {
   localFetchImageWithMetaUrl: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => Object.assign({}, state, {
+const mapStateToProps = state => Object.assign({}, state, {
   learningPath: get(state, 'learningPath', {}),
   learningSteps: get(state, 'learningPath.learningsteps', []),
   tags: getLearningPathTagsByLanguage(state),

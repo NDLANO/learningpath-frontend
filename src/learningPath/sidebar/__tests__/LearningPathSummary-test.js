@@ -13,7 +13,7 @@ import { shallow } from 'enzyme';
 import { learningPath } from '../../../common/__tests__/mockData';
 import LearningPathSummary from '../LearningPathSummary';
 
-test('component/LearningPathSummary', t => {
+test('component/LearningPathSummary', (t) => {
   const component = shallow(<LearningPathSummary learningPath={learningPath} lang="nb" />);
 
   const titleNode = component.find('.learning-path_title');

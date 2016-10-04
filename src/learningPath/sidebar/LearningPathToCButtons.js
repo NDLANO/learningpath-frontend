@@ -46,8 +46,8 @@ LearningPathToCButtons.propTypes = {
 };
 
 const mapDispatchToProps = {
-  saveAction: (lp) => updateLearningPath(lp.id, lp, '/minside'),
-  saveAndPublishAction: (lp) => updateLearningPathStatus(lp.id, 'PUBLISHED', '/minside'),
+  saveAction: lp => updateLearningPath(lp.id, lp, '/minside'),
+  saveAndPublishAction: lp => updateLearningPathStatus(lp.id, 'PUBLISHED', '/minside'),
   localCloseSidebars: closeSidebars,
 
 };

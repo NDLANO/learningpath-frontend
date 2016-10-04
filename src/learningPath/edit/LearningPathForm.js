@@ -26,7 +26,7 @@ import LearningPathImage from './LearningPathImage';
 import SubmitButton from '../../common/buttons/SubmitButton';
 
 const formName = 'edit-learning-path';
-const validate = values => {
+const validate = (values) => {
   const errors = {};
   if (!values.description) {
     errors.description = polyglot.t('errors.description');
