@@ -10,7 +10,7 @@ import test from 'tape';
 
 import reducer from '../myLearningPathsSortOrder';
 
-test('reducers/myLearningPathsSortOrder', t => {
+test('reducers/myLearningPathsSortOrder', (t) => {
   /*
   t.equal(
       JSON.stringify(reducer(undefined, {})),

@@ -23,8 +23,8 @@ const authToken = '123345';
 const pathId = 123;
 
 
-test('actions/createLearningPathStep', t => {
-  const done = res => {
+test('actions/createLearningPathStep', (t) => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };
@@ -58,7 +58,7 @@ test('actions/createLearningPathStep', t => {
 });
 
 test('actions/createLearningPathStep access denied', (t) => {
-  const done = res => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };

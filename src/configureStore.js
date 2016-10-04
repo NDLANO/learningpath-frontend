@@ -15,9 +15,9 @@ import reducers from './reducers';
 import { errorReporter } from './middleware';
 
 
-const slicer = (paths) =>
+const slicer = paths =>
   // custom slicer because default slicer does not store falsy values
-  (state) => paths.reduce((acc, path) => {
+  state => paths.reduce((acc, path) => {
     // eslint-disable-next-line no-param-reassign
     acc[path] = state[path];
     return acc;

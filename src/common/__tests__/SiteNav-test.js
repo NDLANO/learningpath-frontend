@@ -13,7 +13,7 @@ import { Link } from 'react-router';
 
 import { SiteNav } from '../SiteNav';
 
-test('component/SiteNav not authenticated', t => {
+test('component/SiteNav not authenticated', (t) => {
   const navLinks = shallow(<SiteNav authenticated={false} />).find(Link);
 
   t.equals(navLinks.length, 2, 'two links');
@@ -24,7 +24,7 @@ test('component/SiteNav not authenticated', t => {
   t.end();
 });
 
-test('component/SiteNav authenticated', t => {
+test('component/SiteNav authenticated', (t) => {
   const navLinks = shallow(<SiteNav authenticated userName="Alice" />).find(Link);
 
   t.equals(navLinks.length, 3, 'three links');

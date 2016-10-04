@@ -8,16 +8,17 @@
 
 import { createSelector } from 'reselect';
 import defined from 'defined';
+import { getLocale } from '../../../locale/localeSelectors';
 
-const getLearningPathTagsFromState = (state) => state.learningPathTags.all;
+const getLearningPathTagsFromState = state => state.learningPathTags.all;
 
 export const getLearningPathTags = createSelector(
     [getLearningPathTagsFromState],
-    (tags) => tags
+    tags => tags
 );
 
 export const getLearningPathTagsByLanguage = createSelector(
-    [getLearningPathTags],
+    [getLearningPathTags, getLocale],
     (tags, lang) => {
       const language = defined(tags.find(tag => tag.language === lang), {});
       return defined(language.tags, []);

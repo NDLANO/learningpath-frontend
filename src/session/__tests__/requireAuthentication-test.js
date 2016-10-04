@@ -24,7 +24,7 @@ function Whatever() {
 }
 
 
-test('component/requireAuthentication', t => {
+test('component/requireAuthentication', (t) => {
   t.doesNotThrow(() => {
     const root = mount(
       React.createElement(
@@ -38,7 +38,7 @@ test('component/requireAuthentication', t => {
   t.end();
 });
 
-test('component/requireAuthentication not authenticated', t => {
+test('component/requireAuthentication not authenticated', (t) => {
   t.doesNotThrow(() => {
     const root = mount(
       React.createElement(

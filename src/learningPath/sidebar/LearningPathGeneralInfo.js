@@ -72,7 +72,7 @@ LearningPathGeneralInfo.contextTypes = {
   lang: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => Object.assign({}, state, {
+const mapStateToProps = state => Object.assign({}, state, {
   authenticated: state.authenticated,
 });
 

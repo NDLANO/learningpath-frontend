@@ -10,7 +10,7 @@ import { createAction } from 'redux-actions';
 
 import { applicationError } from '../messages/messagesActions';
 import sendLogout from '../sources/sendLogout';
-import fetchAboutMe from '../sources/fetchAboutMe.js';
+import fetchAboutMe from '../sources/fetchAboutMe';
 
 export const setAuthenticated = createAction('SET_AUTHENTICATED');
 export const setAuthToken = createAction('SET_AUTH_TOKEN');

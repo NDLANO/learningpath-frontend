@@ -10,7 +10,7 @@ import test from 'tape';
 
 import formatDate from '../formatDate';
 
-test('util/formatDate', t => {
+test('util/formatDate', (t) => {
   t.equal(typeof formatDate, 'function');
 
   t.equal(formatDate('2014-12-24T10:44:06Z', 'nb'), '24.12.14');

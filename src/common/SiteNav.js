@@ -45,7 +45,7 @@ export function SiteNav({ authenticated, userName, cssModifier, localCloseSideba
     );
   }
 
-  let rootClasses = classNames({
+  const rootClasses = classNames({
     'site-nav': true,
     [`site-nav--${cssModifier}`]: cssModifier,
   });
@@ -85,7 +85,7 @@ const selectUserName = (state) => {
   return '';
 };
 
-const mapStateToProps = (state) => Object.assign({}, state, {
+const mapStateToProps = state => Object.assign({}, state, {
   userName: selectUserName(state),
 });
 

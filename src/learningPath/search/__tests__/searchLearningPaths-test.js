@@ -19,8 +19,8 @@ import {
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-test('actions/searchLearningPaths', t => {
-  const done = res => {
+test('actions/searchLearningPaths', (t) => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };
@@ -51,8 +51,8 @@ test('actions/searchLearningPaths', t => {
     .catch(done);
 });
 
-test('actions/searchLearningPaths with query', t => {
-  const done = res => {
+test('actions/searchLearningPaths with query', (t) => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };
@@ -97,8 +97,8 @@ test('actions/searchLearningPaths with query', t => {
     .catch(done);
 });
 
-test('actions/searchLearningPaths with query without search term', t => {
-  const done = res => {
+test('actions/searchLearningPaths with query without search term', (t) => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };

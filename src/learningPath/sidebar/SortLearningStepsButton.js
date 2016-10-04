@@ -17,7 +17,7 @@ export function SortLearningStepsButton({ learningPath }) {
     return null;
   }
 
-  let target = `/learningpaths/${learningPath.id}/step/sort`;
+  const target = `/learningpaths/${learningPath.id}/step/sort`;
 
   return (
     <div>

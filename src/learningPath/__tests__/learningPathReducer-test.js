@@ -86,7 +86,7 @@ test('reducers/learningPath update learning step', (t) => {
   t.end();
 });
 
-test('redurcers/learningPath drag and drop sort learning steps', t => {
+test('redurcers/learningPath drag and drop sort learning steps', (t) => {
   const step1 = { id: 123, title: [{ title: 'testTitle', language: 'nb' }] };
   const step2 = { id: 124, title: [{ title: 'another Title', language: 'nb' }] };
   const step3 = { id: 125, title: [{ title: 'another Title', language: 'nb' }] };

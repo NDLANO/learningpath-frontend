@@ -18,8 +18,8 @@ const mockStore = configureStore(middleware);
 
 const authToken = '123345';
 
-test('actions/validiateOembed valid url', t => {
-  const done = res => {
+test('actions/validiateOembed valid url', (t) => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };
@@ -46,8 +46,8 @@ test('actions/validiateOembed valid url', t => {
     .catch(done);
 });
 
-test('actions/validiateOembed invalid url', t => {
-  const done = res => {
+test('actions/validiateOembed invalid url', (t) => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };
@@ -73,8 +73,8 @@ test('actions/validiateOembed invalid url', t => {
     });
 });
 
-test('actions/validiateOembed', t => {
-  const done = res => {
+test('actions/validiateOembed', (t) => {
+  const done = (res) => {
     t.end(res);
   };
 

@@ -14,7 +14,7 @@ import { learningStep } from '../../../common/__tests__/mockData';
 
 import LearningPathStepIcon from '../LearningPathStepIcon';
 
-test('component/LearningPathStepIcon', t => {
+test('component/LearningPathStepIcon', (t) => {
   const component = shallow(<LearningPathStepIcon learningPathStep={learningStep} isCircle />);
 
   const iconNode = component.find('.step-nav_circle');

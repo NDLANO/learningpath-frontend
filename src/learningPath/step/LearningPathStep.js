@@ -58,7 +58,7 @@ class LearningPathStep extends React.Component {
     const stepDescription = descriptionI18N(learningPathStep, lang, true);
     const oembedContent = learningPathStep.oembed;
     const editStepTarget = `/learningpaths/${learningPath.id}/step/${learningPathStep.id}/edit`;
-    let onLightboxClose = () => this.setState({ displayCopyPath: false });
+    const onLightboxClose = () => this.setState({ displayCopyPath: false });
     const onCopy = () => {
       copyPath(learningPath, lang);
       onLightboxClose();
@@ -119,7 +119,7 @@ const mapDispatchToProps = {
   localFetchLearningPathStep: fetchLearningPathStep,
 };
 
-const mapStateToProps = (state) => Object.assign({}, state, {
+const mapStateToProps = state => Object.assign({}, state, {
   authenticated: state.authenticated,
 });
 

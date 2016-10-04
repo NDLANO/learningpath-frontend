@@ -21,7 +21,7 @@ const mockStore = configureStore(middleware);
 const authToken = '123345';
 
 test('actions/fetchMyLearningPaths', (t) => {
-  const done = res => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };
@@ -44,7 +44,7 @@ test('actions/fetchMyLearningPaths', (t) => {
 });
 
 test('actions/fetchLearningPaths access denied', (t) => {
-  const done = res => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };

@@ -11,7 +11,7 @@ import { isFSA } from 'flux-standard-action';
 import { setLearningPathStep } from '../learningPathStepActions';
 
 
-test('actions/setLearningPathStep', t => {
+test('actions/setLearningPathStep', (t) => {
   const actual = setLearningPathStep({ id: '12345' });
 
   t.ok(isFSA(actual), 'FSA compliant action');
@@ -24,7 +24,7 @@ test('actions/setLearningPathStep', t => {
   t.end();
 });
 
-test('actions/setLearningPathStep with error', t => {
+test('actions/setLearningPathStep with error', (t) => {
   const actual = setLearningPathStep(new Error('fail!'));
 
   t.ok(isFSA(actual), 'FSA compliant action');

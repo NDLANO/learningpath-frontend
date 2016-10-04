@@ -40,7 +40,7 @@ class SortableLearningStepList extends Component {
   }
 
   findLearningStep(id, learningsteps) {
-    const step = learningsteps.find(c => c.id === id);
+    const step = learningsteps.find(c => c.id === this.id);
 
     return {
       step,

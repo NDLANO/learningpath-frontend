@@ -14,7 +14,7 @@ import Icon from '../Icon';
 import polyglot from '../../i18n';
 
 const StyleButton = ({ active, icon, style, onToggle }) => {
-  const handleToggle = e => {
+  const handleToggle = (e) => {
     e.preventDefault();
     onToggle(style);
   };
@@ -45,7 +45,7 @@ const STYLES = [
   { label: 'OL', style: 'ordered-list-item', isInline: false, icon: <Icon.Numbered /> },
 ];
 
-const StyleControls = props => {
+const StyleControls = (props) => {
   const { editorState } = props;
   const selection = editorState.getSelection();
   const blockType = editorState.getCurrentContent().getBlockForKey(selection.getStartKey()).getType();
@@ -79,7 +79,7 @@ export default class DescriptionHTMLEditor extends React.Component {
     super(props);
     this.state = { editorState: EditorState.createEmpty() };
 
-    const { onChange } = props;
+    const { input } = props;
 
     this.focus = () => this.refs.editor.focus();
     this.blur = () => this.refs.editor.blur();
@@ -88,7 +88,7 @@ export default class DescriptionHTMLEditor extends React.Component {
         return;
       }
       const contentState = editorState.getCurrentContent();
-      onChange(contentState);
+      input.onChange(contentState);
     });
 
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
@@ -97,14 +97,14 @@ export default class DescriptionHTMLEditor extends React.Component {
   }
 
   componentWillMount() {
-    if (typeof this.props.value === 'string') {
-      this.setEditorContentStateFromHTML(this.props.value);
+    if (typeof this.props.input.value === 'string') {
+      this.setEditorContentStateFromHTML(this.props.input.value);
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (typeof nextProps.value === 'string') {
-      this.setEditorContentStateFromHTML(nextProps.value);
+    if (typeof nextProps.input.value === 'string') {
+      this.setEditorContentStateFromHTML(nextProps.input.value);
     }
   }
 
@@ -155,10 +155,11 @@ export default class DescriptionHTMLEditor extends React.Component {
       contentState.getBlockMap().first().getType() !== 'unstyled';
 
     const onBlur = () => {
-      this.props.onBlur(contentState);
+      this.props.input.onBlur(contentState);
+      this.props.onBlur(contentState, this.props.input.onBlur);
     };
 
-    let className = classNames({
+    const className = classNames({
       'RichEditor-editor learning-step-form_input learning-step-form_paragraph': true,
       'RichEditor-hidePlaceholder': commentAboveApplies,
     });
@@ -177,7 +178,9 @@ export default class DescriptionHTMLEditor extends React.Component {
             <span className="learning-step-form_icon-bg"><Icon.Create /></span>
           </div>
           <div className="learning-step-form_right">
+            {/*eslint-disable*/}
             <div className={className} onClick={this.focus}>
+              {/*eslint-enable*/}
               <Editor
                 editorState={editorState}
                 onChange={this.onChange}
@@ -196,11 +199,15 @@ export default class DescriptionHTMLEditor extends React.Component {
 
 
 DescriptionHTMLEditor.propTypes = {
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-  ]),
-  onChange: PropTypes.func.isRequired,
+
+  input: PropTypes.shape({
+    onChange: PropTypes.func.isRequired,
+    onBlur: PropTypes.func.isRequired,
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+    ]),
+  }),
   onBlur: PropTypes.func,
   placeholder: PropTypes.string,
 };

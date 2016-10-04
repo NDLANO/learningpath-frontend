@@ -10,8 +10,8 @@ import React, { PropTypes } from 'react';
 import Icon from '../../../common/Icon';
 import polyglot from '../../../i18n';
 
-export default function MediaTypeSelect({ value, onChange }) {
-  const changeType = (evt) => onChange(evt.target.value);
+export default function MediaTypeSelect({ input }) {
+  const changeType = evt => input.onChange(evt.target.value);
 
   const fieldNameAttr = 'step_media_type';
   const fieldIdAttr = name => `${fieldNameAttr}_${name}`;
@@ -26,7 +26,7 @@ export default function MediaTypeSelect({ value, onChange }) {
             <input
               type="radio" className="icon-select_input"
               id={fieldIdAttr('introduction')} name={fieldNameAttr}
-              value="INTRODUCTION" checked={value === 'INTRODUCTION'} onChange={changeType}
+              value="INTRODUCTION" checked={input.value === 'INTRODUCTION'} onChange={changeType}
             />
             <label htmlFor={fieldIdAttr('introduction')} className="icon-select_label">
               <Icon.TypeText />
@@ -37,7 +37,7 @@ export default function MediaTypeSelect({ value, onChange }) {
             <input
               type="radio" className="icon-select_input"
               id={fieldIdAttr('text')} name={fieldNameAttr}
-              value="TEXT" checked={value === 'TEXT'} onChange={changeType}
+              value="TEXT" checked={input.value === 'TEXT'} onChange={changeType}
             />
             <label htmlFor={fieldIdAttr('text')} className="icon-select_label">
               <Icon.TypeText />
@@ -48,7 +48,7 @@ export default function MediaTypeSelect({ value, onChange }) {
             <input
               type="radio" className="icon-select_input"
               id={fieldIdAttr('video')} name={fieldNameAttr}
-              value="MULTIMEDIA" checked={value === 'MULTIMEDIA'} onChange={changeType}
+              value="MULTIMEDIA" checked={input.value === 'MULTIMEDIA'} onChange={changeType}
             />
             <label htmlFor={fieldIdAttr('video')} className="icon-select_label">
               <Icon.TypeMedia />
@@ -61,7 +61,7 @@ export default function MediaTypeSelect({ value, onChange }) {
             <input
               type="radio" className="icon-select_input"
               id={fieldIdAttr('quiz')} name={fieldNameAttr}
-              value="QUIZ" checked={value === 'QUIZ'} onChange={changeType}
+              value="QUIZ" checked={input.value === 'QUIZ'} onChange={changeType}
             />
             <label htmlFor={fieldIdAttr('quiz')} className="icon-select_label">
               <Icon.TypeQuiz />
@@ -72,7 +72,7 @@ export default function MediaTypeSelect({ value, onChange }) {
             <input
               type="radio" className="icon-select_input"
               id={fieldIdAttr('task')} name={fieldNameAttr}
-              value="TASK" checked={value === 'TASK'} onChange={changeType}
+              value="TASK" checked={input.value === 'TASK'} onChange={changeType}
             />
             <label htmlFor={fieldIdAttr('task')} className="icon-select_label">
               <Icon.TypeTask />
@@ -83,7 +83,7 @@ export default function MediaTypeSelect({ value, onChange }) {
             <input
               type="radio" className="icon-select_input"
               id={fieldIdAttr('summary')} name={fieldNameAttr}
-              value="SUMMARY" checked={value === 'SUMMARY'} onChange={changeType}
+              value="SUMMARY" checked={input.value === 'SUMMARY'} onChange={changeType}
             />
             <label htmlFor={fieldIdAttr('summary')} className="icon-select_label">
               <Icon.TypeSummary />
@@ -97,6 +97,5 @@ export default function MediaTypeSelect({ value, onChange }) {
 }
 
 MediaTypeSelect.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.string,
+  input: PropTypes.object.isRequired,
 };

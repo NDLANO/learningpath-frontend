@@ -21,7 +21,7 @@ const mockStore = configureStore(middleware);
 const authToken = '123345';
 
 test('actions/initializeSession', (t) => {
-  const done = res => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };
@@ -46,7 +46,7 @@ test('actions/initializeSession', (t) => {
 });
 
 test('actions/initializeSession access denied', (t) => {
-  const done = res => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };

@@ -22,8 +22,8 @@ const imageId = 123;
 
 const imageMetaUrl = 'http://ndla-api:80/images/123';
 
-test('actions/fetchImage with id', t => {
-  const done = res => {
+test('actions/fetchImage with id', (t) => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };
@@ -45,8 +45,8 @@ test('actions/fetchImage with id', t => {
     .catch(done);
 });
 
-test('actions/fetchImage with url', t => {
-  const done = res => {
+test('actions/fetchImage with url', (t) => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };
@@ -69,7 +69,7 @@ test('actions/fetchImage with url', t => {
 });
 
 test('actions/fetchImage with id access denied', (t) => {
-  const done = res => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };
@@ -92,7 +92,7 @@ test('actions/fetchImage with id access denied', (t) => {
 });
 
 test('actions/fetchImage with url access denied', (t) => {
-  const done = res => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };

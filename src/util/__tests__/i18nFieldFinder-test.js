@@ -10,7 +10,7 @@ import test from 'tape';
 
 import { oembedContentI18N, titleI18N } from '../i18nFieldFinder';
 
-test('util/i18nFieldFinder titleI18N', t => {
+test('util/i18nFieldFinder titleI18N', (t) => {
   const learningPathStep = {
     title: [
       { title: 'Bokmål', language: 'nb' },
@@ -27,7 +27,7 @@ test('util/i18nFieldFinder titleI18N', t => {
   t.end();
 });
 
-test('util/i18nFieldFinder titleI18N with fallback', t => {
+test('util/i18nFieldFinder titleI18N with fallback', (t) => {
   const learningPathStep1 = {
     title: [
       { title: 'Bokmål', language: 'nb' },
@@ -52,7 +52,7 @@ test('util/i18nFieldFinder titleI18N with fallback', t => {
   t.end();
 });
 
-test('util/i18nFieldFinder oembedContentI18N', t => {
+test('util/i18nFieldFinder oembedContentI18N', (t) => {
   t.equal(typeof oembedContentI18N, 'function');
 
   const learningPathStep = {

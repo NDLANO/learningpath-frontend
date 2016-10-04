@@ -22,7 +22,7 @@ export function LearningPathPrevNext(props) {
     lastPageNumber,
   } = props;
 
-  const stepperClassName = (object) => classNames({
+  const stepperClassName = object => classNames({
     'stepper-nav_button': true,
     'stepper-nav_button--disabled': object === undefined,
   });

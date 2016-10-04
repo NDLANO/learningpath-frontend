@@ -13,31 +13,32 @@ import Icon from '../../../common/Icon';
 import Tooltip from '../../../common/tooltip/Tooltip';
 import OverlayTrigger from '../../../common/tooltip/OverlayTrigger';
 
-const OnClickCheckbox = (field) => {
+const OnClickCheckbox = ({ input }) => {
   const classes = {
+    'un-button': true,
     'learning-step-form_icon-bg': true,
     'learning-step-form_show-title': true,
-    'learning-step-form_show-title--active': field.value,
+    'learning-step-form_show-title--active': input.value,
   };
   const tooltip = <Tooltip id="showTitleTooltip">Velg om titelen skal vises eller skjules</Tooltip>;
   const handleClick = () => {
-    field.onChange(!field.value);
-    field.onBlur(!field.value);
+    input.onChange(!input.value);
+    input.onBlur(!input.value);
   };
 
   return (
     <OverlayTrigger placement="top" overlay={tooltip}>
-      <span className={classNames(classes)} onClick={handleClick} >
-        {field.value ? <Icon.Visibility /> : <Icon.VisibilityOff />}
+      <button className={classNames(classes)} onClick={handleClick} >
+        {input.value ? <Icon.Visibility /> : <Icon.VisibilityOff />}
         <label htmlFor="visibility" className="sr-only">
-          <input id="visibility" type="checkbox" {...field} onClick={handleClick} onBlur={noop} />
+          <input id="visibility" type="checkbox" {...input} onClick={handleClick} onBlur={noop} />
         </label>
-      </span>
+      </button>
     </OverlayTrigger>
   );
 };
 
 OnClickCheckbox.propTypes = {
-  field: PropTypes.object, // .isRequired
+  input: PropTypes.object, // .isRequired
 };
 export default OnClickCheckbox;
