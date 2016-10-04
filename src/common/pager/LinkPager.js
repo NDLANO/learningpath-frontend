@@ -22,7 +22,7 @@ export default function LinkPager(props) {
     query: queryToPage(pageNumber),
   });
 
-  let pageLinks = steps.map(n => {
+  const pageLinks = steps.map((n) => {
     if (n === page) {
       return <span key={n} className="search-stepper_step search-stepper_step--active">{n}</span>;
     }
@@ -47,11 +47,13 @@ export default function LinkPager(props) {
     );
   }
 
-  return (<div className="search-stepper">
+  return (
+    <div className="search-stepper">
       {prevPageLink}
       {pageLinks}
       {nextPageLink}
-  </div>);
+    </div>
+  );
 }
 
 LinkPager.propTypes = {

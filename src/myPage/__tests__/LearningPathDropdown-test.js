@@ -18,7 +18,7 @@ const learningPath = learningPaths[0];
 const privateLearningPath = Object.assign({}, learningPath, { status: 'PRIVATE' });
 
 
-test('component/LearningPathDropdown remove', t => {
+test('component/LearningPathDropdown remove', (t) => {
   const preventDefault = spy();
   const onSelect = spy();
 
@@ -37,7 +37,7 @@ test('component/LearningPathDropdown remove', t => {
   t.end();
 });
 
-test('component/LearningPathDropdown de-publish', t => {
+test('component/LearningPathDropdown de-publish', (t) => {
   const onSelect = spy();
   const preventDefault = spy();
 
@@ -55,7 +55,7 @@ test('component/LearningPathDropdown de-publish', t => {
   t.end();
 });
 
-test('component/LearningPathDropdown publish', t => {
+test('component/LearningPathDropdown publish', (t) => {
   const onSelect = spy();
   const preventDefault = spy();
 
@@ -74,7 +74,7 @@ test('component/LearningPathDropdown publish', t => {
   t.end();
 });
 
-test('component/LearningPathDropdown make copy', t => {
+test('component/LearningPathDropdown make copy', (t) => {
   const onSelect = spy();
   const preventDefault = spy();
 

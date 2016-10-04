@@ -15,7 +15,7 @@ import { LearningPath } from '../LearningPath';
 const Foo = () => <div />;
 const Bar = () => <div />;
 
-test('component/LearningPath', t => {
+test('component/LearningPath', (t) => {
   t.equal(
     shallow(
       <LearningPath learningPath={learningPath} params={{}} location={{ pathname: '' }}>

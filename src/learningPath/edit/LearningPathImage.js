@@ -45,7 +45,7 @@ const ChangeImage = (props) => {
             {polyglot.t('learningPath.image.authors')}
           </b>
           <span>
-            {savedImage.copyright.authors.map((author) =>
+            {savedImage.copyright.authors.map(author =>
               author.name
             ).join(', ')}
           </span>
@@ -77,7 +77,9 @@ class LearningPathImage extends React.Component {
       localFetchImages,
       learningPathTitle,
       fetchImage,
-      onChange,
+      input: {
+        onChange,
+      },
       savedImage,
     } = this.props;
 
@@ -115,11 +117,13 @@ LearningPathImage.propTypes = {
   localFetchImages: PropTypes.func.isRequired,
   learningPathTitle: PropTypes.string.isRequired,
   fetchImage: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
+  input: PropTypes.shape({
+    onChange: PropTypes.func.isRequired,
+  }).isRequired,
   savedImage: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => Object.assign({}, state, {
+const mapStateToProps = state => Object.assign({}, state, {
   savedImage: state.imageSearch ? state.imageSearch.savedImage : undefined,
 });
 

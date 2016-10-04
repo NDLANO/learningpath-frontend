@@ -19,7 +19,7 @@ function renderComponent(props = {}) {
 }
 
 
-test('component/SessionInitializer', t => {
+test('component/SessionInitializer', (t) => {
   const p = Promise.resolve();
 
   const dispatch = sinon.spy(() => p);
@@ -41,7 +41,7 @@ test('component/SessionInitializer', t => {
   });
 });
 
-test('component/SessionInitializer without authToken', t => {
+test('component/SessionInitializer without authToken', (t) => {
   const dispatch = sinon.spy(() => Promise.resolve());
 
   renderComponent({ dispatch, params: {} });

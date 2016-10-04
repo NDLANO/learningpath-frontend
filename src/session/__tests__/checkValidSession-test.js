@@ -19,7 +19,7 @@ const mockStore = configureStore(middleware);
 const authToken = '123345';
 
 test('actions/checkValidSession', (t) => {
-  const done = res => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };
@@ -40,7 +40,7 @@ test('actions/checkValidSession', (t) => {
 });
 
 test('actions/checkValidSession invalid authToken', (t) => {
-  const done = res => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };

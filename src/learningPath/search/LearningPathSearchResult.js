@@ -53,8 +53,9 @@ export default class SearchResult extends Component {
       });
     };
 
-    const tagsClassName = (tag) => classNames({
+    const tagsClassName = tag => classNames({
       tag_item: true,
+      'un-button': true,
       'tag_item--active': query.tag === tag,
     });
 
@@ -79,7 +80,7 @@ export default class SearchResult extends Component {
 
             <div className="tags_list">
               {tags.map(tag =>
-                <span key={tag} className={tagsClassName(tag)} onClick={(evt) => onTagClick(evt, tag)} href="#">{tag}</span>
+                <button key={tag} className={tagsClassName(tag)} onClick={evt => onTagClick(evt, tag)} href="#">{tag}</button>
               )}
             </div>
           </div>

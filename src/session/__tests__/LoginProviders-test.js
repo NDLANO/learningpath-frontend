@@ -13,7 +13,7 @@ import { shallow } from 'enzyme';
 import LoginProviders from '../LoginProviders';
 
 
-test('component/LoginProviders', t => {
+test('component/LoginProviders', (t) => {
   const component = shallow(<LoginProviders />);
 
   const links = component.find('.cta-link');
@@ -22,7 +22,7 @@ test('component/LoginProviders', t => {
 
   t.deepEquals(links.map(n => n.text()), ['Google', 'Facebook', 'Twitter']);
 
-  links.map(n => n.prop('href')).forEach(href => {
+  links.map(n => n.prop('href')).forEach((href) => {
     t.ok(/successUrl=/.test(href), 'successUrl param');
     t.ok(/failureUrl=/.test(href), 'failureUrl param');
   });
@@ -30,7 +30,7 @@ test('component/LoginProviders', t => {
   t.end();
 });
 
-test('component/LoginProviders with message', t => {
+test('component/LoginProviders with message', (t) => {
   const component = shallow(<LoginProviders message="A message to you, rudy" />);
 
   t.ok(component.findWhere(n => n.text() === 'A message to you, rudy').length, 'has message');

@@ -11,7 +11,7 @@ import polyglot from '../i18n';
 import Icon from '../common/Icon';
 
 export function LearningPathDropdown({ onSelect, learningPath }) {
-  const makeOnClick = (actionType) => (evt) => {
+  const makeOnClick = actionType => (evt) => {
     evt.preventDefault();
     onSelect(actionType, learningPath);
   };

@@ -41,7 +41,7 @@ App.childContextTypes = {
   lang: PropTypes.string,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   locale: getLocale(state),
   messages: getMessages(state),
 });

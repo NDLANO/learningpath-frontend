@@ -18,7 +18,7 @@ class Contributors extends Component {
   }
 
   render() {
-    const { value, onChange, onBlur, ...props } = this.props;
+    const { input } = this.props;
 
     if (typeof value === 'string') { // Handle redux form values witch are initialized as strings
       return null;
@@ -33,11 +33,11 @@ class Contributors extends Component {
     const { open } = this.state;
 
     const handleAdd = (contributor) => {
-      if (value.includes(contributor)) {
+      if (input.value.includes(contributor)) {
         return;
       }
-      value.push(Object.assign({ name: contributor, type: 'Forfatter' }));
-      onChange(value);
+      input.value.push(Object.assign({ name: contributor, type: 'Forfatter' }));
+      input.onChange(input.value);
     };
 
 
@@ -47,15 +47,14 @@ class Contributors extends Component {
 
     return (
       <Multiselect
-        {...props}
         data={[]}
         filter="contains"
         open={open}
         messages={messages}
-        value={value}
+        value={input.value}
         textField="name"
-        onBlur={() => onBlur(value)}
-        onChange={onChange}
+        onBlur={() => input.onBlur(input.value)}
+        onChange={input.onChange}
         onCreate={handleAdd}
         onToggle={() => {}}
         onSearch={handleSearch}
@@ -65,9 +64,11 @@ class Contributors extends Component {
 }
 
 Contributors.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func.isRequired,
-  value: PropTypes.any.isRequired,
+  input: PropTypes.shape({
+    onChange: PropTypes.func.isRequired,
+    onBlur: PropTypes.func.isRequired,
+    value: PropTypes.any.isRequired,
+  }).isRequired,
 };
 
 export default Contributors;

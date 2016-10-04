@@ -19,7 +19,7 @@ export const setImagesSearchTime = createAction('SET_IMAGES_SEARCH_TIME');
 export const changeImageSearchQuery = createAction('CHANGE_IMAGE_SEARCH_QUERY');
 
 export function fetchLearningPathImages(query, isFirstSearch = false) {
-  return (dispatch) => fetchImages(pickBy(query))
+  return dispatch => fetchImages(pickBy(query))
     .then((images) => {
       /*
         If the default search on the title (first search from edit learningpath), a new search will be executed with a empty query string.
@@ -36,14 +36,14 @@ export function fetchLearningPathImages(query, isFirstSearch = false) {
 }
 
 export function fetchLearningPathImage(imageId) {
-  return (dispatch) => fetchImage(imageId)
+  return dispatch => fetchImage(imageId)
     .then((image) => {
       dispatch(setSelectedImage(image));
     })
     .catch(err => dispatch(applicationError(err)));
 }
 export function fetchLearningPathImageWithMetaUrl(url) {
-  return (dispatch) => fetchImageWithMetaUrl(url)
+  return dispatch => fetchImageWithMetaUrl(url)
     .then((image) => {
       dispatch(setSavedImage(image));
     })

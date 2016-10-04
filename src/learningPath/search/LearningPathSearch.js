@@ -78,9 +78,9 @@ const mapStateToProps = (state, props) => {
   });
 };
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
+const mapDispatchToProps = dispatch => bindActionCreators({
   searchLearningPaths,
-  pushRoute: (route) => routerActions.push(route),
+  pushRoute: route => routerActions.push(route),
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(LearningPathSearch);

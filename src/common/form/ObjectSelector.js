@@ -9,16 +9,15 @@
 import React, { PropTypes } from 'react';
 
 const ObjectSelector = (props) => {
-  const { options, value, labelKey, idKey, onChange, onBlur, ...rest } = props;
+  const { options, labelKey, idKey, input: { onChange, onBlur, value }, ...rest } = props;
 
-  const parse = (event) => options.find(option => option[idKey] === event.target.value);
-
+  const parse = event => options.find(option => option[idKey] === event.target.value);
   return (
     <select
       onBlur={event => onBlur(parse(event))}
       onChange={event => onChange(parse(event))}
       value={value[idKey]}
-      {...rest}
+      {...rest.input}
     >
       {options.map(option =>
         <option key={option[idKey] ? option[idKey] : 'undefined'} value={option[idKey]}>{option[labelKey]}</option>
@@ -28,9 +27,7 @@ const ObjectSelector = (props) => {
 };
 
 ObjectSelector.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func.isRequired,
-  value: PropTypes.any.isRequired,
+  input: PropTypes.object.isRequired,
   options: PropTypes.array.isRequired,
   labelKey: PropTypes.string.isRequired,
   idKey: PropTypes.string.isRequired,

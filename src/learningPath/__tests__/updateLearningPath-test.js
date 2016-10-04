@@ -22,8 +22,8 @@ const mockStore = configureStore(middleware);
 const authToken = '123345';
 const pathId = 123;
 
-test('actions/updateLearningPath', t => {
-  const done = res => {
+test('actions/updateLearningPath', (t) => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };
@@ -56,8 +56,8 @@ test('actions/updateLearningPath', t => {
     .catch(done);
 });
 
-test('actions/updateLearningPath with redirect', t => {
-  const done = res => {
+test('actions/updateLearningPath with redirect', (t) => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };
@@ -83,7 +83,7 @@ test('actions/updateLearningPath with redirect', t => {
 });
 
 test('actions/updateLearningPath access denied', (t) => {
-  const done = res => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };

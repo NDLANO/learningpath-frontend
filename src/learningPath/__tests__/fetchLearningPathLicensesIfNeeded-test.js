@@ -20,8 +20,8 @@ const mockStore = configureStore(middleware);
 
 const authToken = '123345';
 const licenses = [{ license: 'GPL v3', description: 'En lisens', url: 'ndla.no' }, { license: 'Copyright v3', description: 'En lisens', url: 'ndla.no' }];
-test('actions/fetchLearningPathLicenses', t => {
-  const done = res => {
+test('actions/fetchLearningPathLicenses', (t) => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };
@@ -45,7 +45,7 @@ test('actions/fetchLearningPathLicenses', t => {
 
 
 test('actions/fetchLearningPathLicenses access denied', (t) => {
-  const done = res => {
+  const done = (res) => {
     t.end(res);
     nock.cleanAll();
   };

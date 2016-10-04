@@ -52,7 +52,7 @@ Alert.propTypes = {
 
 export const Alerts = ({ dispatch, messages }) => {
   const isHidden = messages.length === 0;
-  let overlayClasses = classNames({
+  const overlayClasses = classNames({
     'alert-overlay': true,
     'alert-overlay--hidden': isHidden,
   });

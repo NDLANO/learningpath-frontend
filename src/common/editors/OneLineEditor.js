@@ -16,9 +16,9 @@ export default class OneLineEditor extends React.Component {
 
     this.state = { editorState: EditorState.createEmpty() };
 
-    const { onChange, maxlength } = props;
+    const { input: { onChange }, maxlength } = props;
 
-    this.onChange = (editorState) => this.setState({ editorState }, () => {
+    this.onChange = editorState => this.setState({ editorState }, () => {
       if (editorState.getSelection().getHasFocus()) {
         return;
       }
@@ -48,11 +48,11 @@ export default class OneLineEditor extends React.Component {
   }
 
   componentWillMount() {
-    this.updateEditorContentStateFromText(this.props.value);
+    this.updateEditorContentStateFromText(this.props.input.value);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.updateEditorContentStateFromText(nextProps.value);
+    this.updateEditorContentStateFromText(nextProps.input.value);
   }
 
   updateEditorContentStateFromText(text) {
@@ -63,28 +63,39 @@ export default class OneLineEditor extends React.Component {
   }
 
   render() {
+    const { placeholder, meta, wrapperClassName } = this.props;
     return (
-      <Editor
-        editorState={this.state.editorState}
-        onChange={this.onChange}
-        handleBeforeInput={this.handleBeforeInput}
-        handlePastedText={this.handlePastedText}
-        handleReturn={this.handleReturn}
-        placeholder={this.props.placeholder}
-        ref="editor"
-      />
+      <div>
+        <div className={wrapperClassName}>
+          <Editor
+            editorState={this.state.editorState}
+            onChange={this.onChange}
+            handleBeforeInput={this.handleBeforeInput}
+            handlePastedText={this.handlePastedText}
+            handleReturn={this.handleReturn}
+            placeholder={placeholder}
+            ref="editor"
+          />
+        </div>
+        {this.props.meta.touched && meta.error && <span className="error_message error_message--red">{meta.error}</span>}
+      </div>
     );
   }
 }
 
 OneLineEditor.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  input: PropTypes.shape({
+    onChange: PropTypes.func.isRequired,
+    value: PropTypes.string.isRequired,
+  }).isRequired,
   placeholder: PropTypes.string,
   maxlength: PropTypes.number,
+  meta: PropTypes.object.isRequired,
+  wrapperClassName: PropTypes.string.isRequired,
 };
 
 OneLineEditor.defaultProps = {
   placeholder: polyglot.t('editPage.oneLineEditorDefaultPlaceholder'),
   maxlength: -1,
+  wrapperClassName: '',
 };

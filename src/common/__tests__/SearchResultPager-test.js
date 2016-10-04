@@ -14,7 +14,7 @@ import { Link } from 'react-router';
 import LinkPager from '../pager/LinkPager';
 import { getRange, stepNumbers } from '../pager/PagerUtil';
 
-test('component/PagerUtil.getRange', t => {
+test('component/PagerUtil.getRange', (t) => {
   t.deepEquals(getRange(1, 5), [1, 5], '1,5');
   t.deepEquals(getRange(2, 5), [1, 5], '1,5');
   t.deepEquals(getRange(3, 5), [1, 5], '1,5');
@@ -30,7 +30,7 @@ test('component/PagerUtil.getRange', t => {
   t.end();
 });
 
-test('component/PagerUtil.stepNumbers', t => {
+test('component/PagerUtil.stepNumbers', (t) => {
   t.deepEquals(stepNumbers(1, 10), [1, 2, 3, 4, 5], '1,10');
   t.deepEquals(stepNumbers(2, 10), [1, 2, 3, 4, 5], '2,10');
   t.deepEquals(stepNumbers(3, 10), [1, 2, 3, 4, 5], '3,10');
@@ -54,7 +54,7 @@ test('component/PagerUtil.stepNumbers', t => {
 
 
 function pagerTest({ setup, expected }) {
-  test(`component/LinkPager page ${setup.page}/${setup.lastPage}`, t => {
+  test(`component/LinkPager page ${setup.page}/${setup.lastPage}`, (t) => {
     const steps = shallow(<LinkPager query={{}} {...setup} />)
       .find('.search-stepper_step');
 

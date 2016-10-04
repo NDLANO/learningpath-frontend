@@ -15,7 +15,7 @@ import { learningPaths } from '../../common/__tests__/mockData';
 import { MyPage, mapStateToProps } from '../MyPage';
 
 
-test('component/MyPage', t => {
+test('component/MyPage', (t) => {
   const noop = () => {};
 
   const requiredProps = {
@@ -43,7 +43,7 @@ test('component/MyPage', t => {
   t.end();
 });
 
-test('component/MyPage mapStateToProps', t => {
+test('component/MyPage mapStateToProps', (t) => {
   t.ok(mapStateToProps instanceof Function);
 
   const state = {
