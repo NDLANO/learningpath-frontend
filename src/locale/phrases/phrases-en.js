@@ -87,6 +87,7 @@ const phrases = {
     imagePick: 'Search and choose picture for learning path',
     duration: 'Duration',
     tags: 'Tags',
+    copy: 'Copy',
     copyright: {
       license: 'License',
       contributors: 'Contributors',

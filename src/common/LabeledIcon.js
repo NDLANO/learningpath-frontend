@@ -13,8 +13,8 @@ import Icon from './Icon';
 function LabeledIcon(props) {
   const { iconName, labelText } = props;
   const tagName = get(props, 'tagName', 'span');
-  let icon = React.createElement(Icon[iconName], { className: 'icon--with-label' });
-  let label = React.createElement(tagName, { className: 'labeled-icon_text' }, labelText);
+  const icon = React.createElement(Icon[iconName], { className: 'icon--with-label' });
+  const label = React.createElement(tagName, { className: 'labeled-icon_text' }, labelText);
   return (<span className="labeled-icon">{icon}{label}</span>);
 }
 
@@ -35,7 +35,8 @@ LabeledIcon.Exit = props => (<LabeledIcon {...props} iconName="Exit" />);
 LabeledIcon.Apps = props => (<LabeledIcon {...props} iconName="Apps" />);
 LabeledIcon.Clear = props => (<LabeledIcon {...props} iconName="Clear" />);
 LabeledIcon.Delete = props => (<LabeledIcon {...props} iconName="Delete" />);
-
+LabeledIcon.ContentCopy = props => (<LabeledIcon {...props} iconName="ContentCopy" />);
+LabeledIcon.Copyright = props => (<LabeledIcon {...props} iconName="Copyright" />);
 export default LabeledIcon;
 
 LabeledIcon.defaultProps = {

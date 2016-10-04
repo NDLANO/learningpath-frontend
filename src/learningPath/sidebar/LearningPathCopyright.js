@@ -7,8 +7,10 @@
  */
 
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import isEmpty from 'lodash/isEmpty';
 import Icon from '../../common/Icon';
+import LabeledIcon from '../../common/LabeledIcon';
 
 const License = ({ copyright }) => {
   if (!copyright.license) {
@@ -16,8 +18,8 @@ const License = ({ copyright }) => {
   }
   return (
     <span>
-      <Icon.Copyright />
-      {copyright.license.url ? <a target="_blank" rel="noopener noreferrer" href={copyright.license.url}>{copyright.license.license}</a> : copyright.license.license}
+      {copyright.license.url ?
+        <Link to={copyright.license.url} rel="noopener noreferrer" target="_blank"><LabeledIcon.Copyright tagName="copyright" labelText={copyright.license.license} /></Link> : ''}
     </span>
   );
 };

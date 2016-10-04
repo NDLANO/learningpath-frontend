@@ -33,7 +33,16 @@ const LearningPathGeneralInfo = (props, context) => {
     }
     return null;
   };
-
+  const isBasedOn = () => {
+    if (learningPath.isBasedOn) {
+      return (
+        <Link to={`/learningpaths/${learningPath.isBasedOn}/first-step/`} target="_blank">
+          <LabeledIcon.ContentCopy labelText={polyglot.t('learningPath.copy')} tagName="copy" />
+        </Link>
+      );
+    }
+    return '';
+  };
   return (
     <div>
       <div className="learningpath-general-info">
@@ -44,6 +53,7 @@ const LearningPathGeneralInfo = (props, context) => {
           <LabeledIcon.Today labelText={formatDate(learningPath.lastUpdated, lang)} tagName="time" />
           <LabeledIcon.QueryBuilder labelText={formatDuration(learningPath.duration, lang)} tagName="time" />
           <LearningPathCopyright copyright={learningPath.copyright} />
+          {isBasedOn()}
         </div>
         {renderAction()}
       </div>
