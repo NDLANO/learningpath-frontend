@@ -36,7 +36,7 @@ const LearningPathGeneralInfo = (props, context) => {
   const isBasedOn = () => {
     if (learningPath.isBasedOn) {
       return (
-        <Link to={`/learningpaths/${learningPath.isBasedOn}/first-step/`} target="_blank">
+        <Link to={`/learningpaths/${learningPath.isBasedOn}/first-step/`} target="_blank" rel="noopener noreferrer" >
           <LabeledIcon.ContentCopy labelText={polyglot.t('learningPath.copy')} tagName="copy" />
         </Link>
       );

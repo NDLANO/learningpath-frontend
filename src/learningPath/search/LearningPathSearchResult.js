@@ -66,7 +66,7 @@ export default class SearchResult extends Component {
     const isBasedOn = () => {
       if (path.isBasedOn) {
         return (
-          <Link className="cta-link--primary cta-link--underline" to={`/learningpaths/${path.isBasedOn}/first-step/`} target="_blank">
+          <Link className="cta-link--primary cta-link--underline" to={`/learningpaths/${path.isBasedOn}/first-step/`} target="_blank" rel="noopener noreferrer" >
             <LabeledIcon.ContentCopy labelText={polyglot.t('learningPath.copy')} tagName="copy" />
           </Link>
         );
