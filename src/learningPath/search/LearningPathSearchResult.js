@@ -35,7 +35,7 @@ export default class SearchResult extends Component {
   }
 
   render() {
-    const { path, query, pushRoute } = this.props;
+    const { path, query } = this.props;
     const { lang } = this.context;
 
     const image = () => {
@@ -52,10 +52,6 @@ export default class SearchResult extends Component {
       this.setState({ tag }, () => {
         this.props.onTagSearchQuery(this.state.tag);
       });
-    };
-    const onSearchResultClick = (evt) => {
-      evt.preventDefault();
-      pushRoute(`/learningpaths/${path.id}/first-step/`);
     };
 
     const tagsClassName = tag => classNames({
@@ -78,19 +74,21 @@ export default class SearchResult extends Component {
     return (
       <div>
         <div className="search-result">
-          <div role="link" onClick={onSearchResultClick} className="search-result_img_container">
+          <Link to={`/learningpaths/${path.id}/first-step/`} className="search-result_img_container">
             {image()}
-          </div>
+          </Link>
           <div className="search-result_bd">
-            <h2 role="link" onClick={onSearchResultClick} className="search-result_title">
-              {titleI18N(path, lang, true)}
-            </h2>
+            <Link to={`/learningpaths/${path.id}/first-step/`}>
+              <h2 className="search-result_title">
+                {titleI18N(path, lang, true)}
+              </h2>
+            </Link>
             <div className="search-result_meta">
               <LabeledIcon.Today labelText={formatDate(path.lastUpdated, lang)} tagName="time" />
               <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName="time" />
               {isBasedOn()}
             </div>
-            <div role="link" onClick={onSearchResultClick} className="search-result_description">{descriptionI18N(path, lang, true)}</div>
+            <Link to={`/learningpaths/${path.id}/first-step/`} className="search-result_description">{descriptionI18N(path, lang, true)}</Link>
             <LearningPathIntroduction path={path} />
             <div className="tags_list">
               {tags.map(tag =>
@@ -108,7 +106,6 @@ SearchResult.propTypes = {
   path: PropTypes.object.isRequired,
   onTagSearchQuery: PropTypes.func.isRequired,
   query: PropTypes.object.isRequired,
-  pushRoute: PropTypes.func.isRequired,
 };
 
 SearchResult.contextTypes = {
