@@ -55,6 +55,7 @@ const phrases = {
     unpublish: 'Gjør privat',
     delete: 'Slett',
     makeCopy: 'Lag kopi',
+    unlist: 'Fjern fra søk',
   },
   requireAuthentication: {
     errorMessage: 'Denne siden krever innlogging.',

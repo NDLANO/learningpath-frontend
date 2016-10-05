@@ -55,6 +55,7 @@ const phrases = {
     unpublish: 'Make private',
     delete: 'Delete',
     makeCopy: 'Make copy',
+    unlist: 'Remove from search',
   },
   requireAuthentication: {
     errorMessage: 'This page requires you to be logged in.',

@@ -64,12 +64,31 @@ test('component/LearningPathDropdown publish', (t) => {
     { context: { lang: 'nb' } }
   );
 
-  component.find('.dropdown-menu_item').at(1).find('a')
+  component.find('.dropdown-menu_item').at(2).find('a')
            .simulate('click', { preventDefault });
 
   t.ok(preventDefault.calledOnce);
   t.ok(onSelect.calledOnce);
   t.deepEqual(onSelect.firstCall.args, ['publish', privateLearningPath]);
+
+  t.end();
+});
+
+test('component/LearningPathDropdown unlist', (t) => {
+  const onSelect = spy();
+  const preventDefault = spy();
+
+  const component = shallow(
+    <LearningPathDropdown learningPath={privateLearningPath} onSelect={onSelect} />,
+    { context: { lang: 'nb' } }
+  );
+
+  component.find('.dropdown-menu_item').at(3).find('a')
+           .simulate('click', { preventDefault });
+
+  t.ok(preventDefault.calledOnce);
+  t.ok(onSelect.calledOnce);
+  t.deepEqual(onSelect.firstCall.args, ['unlist', privateLearningPath]);
 
   t.end();
 });
