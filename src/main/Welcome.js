@@ -28,7 +28,7 @@ class Welcome extends Component {
   handleSubmit(e) {
     const { query } = this.state;
     e.preventDefault();
-    const sort = (query && !isEmpty(query)) ? 'relevance' : '-lastUpdated';
+    const sort = (query && !isEmpty(query)) ? '-relevance' : '-lastUpdated';
     this.props.pushRoute({ pathname: '/learningPaths', query: { query, page: 1, sort } });
   }
 

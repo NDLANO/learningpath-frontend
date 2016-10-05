@@ -30,7 +30,7 @@ export default class SearchForm extends Component {
 
   handleQueryChange(evt) {
     if (isEmpty(this.state.query)) {
-      this.setState({ sort: 'relevance' });
+      this.setState({ sort: '-relevance' });
     }
     this.setState({ query: evt.target.value });
   }
@@ -57,7 +57,7 @@ export default class SearchForm extends Component {
           onChange={this.handleSortChange}
           value={this.state.sort}
         >
-          <option value="relevance">{polyglot.t('searchForm.order.relevance')}</option>
+          <option value="-relevance">{polyglot.t('searchForm.order.relevance')}</option>
           <option value="-lastUpdated">{polyglot.t('searchForm.order.newest')}</option>
           <option value="lastUpdated">{polyglot.t('searchForm.order.oldest')}</option>
           <option value="-duration">{polyglot.t('searchForm.order.longest')}</option>
