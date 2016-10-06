@@ -1,4 +1,3 @@
-
 /**
  * Copyright (c) 2016-present, NDLA.
  *
@@ -41,7 +40,7 @@ export function LearningPathDropdown({ onSelect, learningPath }) {
             <Icon.ContentCopy /> {polyglot.t('pathDropDown.makeCopy')}
           </a>
         </li>
-        {statuses.map(status =>
+        {statuses.filter(status => status.status !== learningPath.status).map(status =>
           <li key={status.action} className={dropDownMenuItemClassName(status.status)}>
             <a href="#" className="dropdown-menu_link" onClick={publishAction(status)}>
               <Icon.Input /> {polyglot.t(`pathDropDown.${status.action}`)}
