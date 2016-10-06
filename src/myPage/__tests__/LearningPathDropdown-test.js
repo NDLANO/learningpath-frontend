@@ -64,7 +64,7 @@ test('component/LearningPathDropdown publish', (t) => {
     { context: { lang: 'nb' } }
   );
 
-  component.find('.dropdown-menu_item').at(2).find('a')
+  component.find('.dropdown-menu_item').at(1).find('a')
            .simulate('click', { preventDefault });
 
   t.ok(preventDefault.calledOnce);
@@ -83,7 +83,7 @@ test('component/LearningPathDropdown unlist', (t) => {
     { context: { lang: 'nb' } }
   );
 
-  component.find('.dropdown-menu_item').at(3).find('a')
+  component.find('.dropdown-menu_item').at(2).find('a')
            .simulate('click', { preventDefault });
 
   t.ok(preventDefault.calledOnce);
