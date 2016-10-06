@@ -7,7 +7,7 @@
  */
 
 import { createAction } from 'redux-actions';
-
+import { change } from 'redux-form';
 import { fetchOembedUrl } from '../../../sources/learningpaths';
 import polyglot from '../../../i18n';
 
@@ -25,6 +25,10 @@ export function validateOembed(url, lang, fieldName = 'url', msgKey = 'validatio
   return (dispatch, getState) => new Promise((resolve, reject) => fetchOembedUrl(getState().authToken, { url })
     .then((oembed) => {
       dispatch(setOembedPreview(Object.assign({}, oembed, { url, language: lang })));
+      const state = getState();
+      if (oembed.title && state.form['learning-path-step'] && state.form['learning-path-step'].values && !state.form['learning-path-step'].values.title) {
+        dispatch(change('learning-path-step', 'title', oembed.title));
+      }
       resolve();
     })
     .catch(
