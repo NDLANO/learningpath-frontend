@@ -120,3 +120,5 @@ LearningPathStepFields.propTypes = {
   url: PropTypes.object.isRequired,
   title: PropTypes.object.isRequired,
 };
+
+export default LearningPathStepFields;
