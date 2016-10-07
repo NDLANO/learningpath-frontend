@@ -100,7 +100,7 @@ const asyncValidate = (values, dispatch, props) => {
 
 const validate = createValidator({
   title: required(),
-  _error: oneOfIsRequired('editPathStep.validation.oneOfDescriptionOrUrlIsRequired', 'url', 'description'),
+  description: oneOfIsRequired('editPathStep.validation.oneOfDescriptionOrUrlIsRequired', 'url', 'description'),
 });
 
 export default compose(

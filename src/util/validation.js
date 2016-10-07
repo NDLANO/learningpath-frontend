@@ -6,11 +6,10 @@
  *
  */
 
-import { Record } from 'immutable';
 import polyglot from '../i18n';
 
 const isEmpty = (value) => {
-  if (value instanceof Record && value.hasText) { // handle draf-js ContentState
+  if (value && value.hasText) { // handle draf-js ContentState
     return !value.hasText();
   }
   return value === undefined || value === null || value === '';

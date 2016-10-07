@@ -23,7 +23,6 @@ import InputField from '../../../common/form/InputField';
 const LearningPathStepFields = (props) => {
   const {
     step,
-    error,
     lang,
     licenseOptions,
     oembedPreview,
@@ -45,7 +44,6 @@ const LearningPathStepFields = (props) => {
     }
     description.input.onBlur(value);
   };
-
   if (!type.input.value) {
     return <MediaTypeSelect {...type} />;
   }
@@ -101,7 +99,7 @@ const LearningPathStepFields = (props) => {
             <PreviewOembed content={embedContent} />
           </div>
         </div>
-        {(url.meta.touched || description.meta.touched) && error && <span className="error_message error_message--red">{error}</span>}
+        {(url.meta.touched || description.meta.touched) && description.meta.error && <span className="error_message error_message--red">{description.meta.error}</span>}
       </div>
     </div>
   );
