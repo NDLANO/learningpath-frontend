@@ -60,29 +60,27 @@ export default class SearchResult extends Component {
     });
 
     return (
-      <div>
-        <div className="search-result">
-          <Link to={`/learningpaths/${path.id}/first-step/`} className="search-result_img_container">
-            {image()}
+      <div className="search-result">
+        <Link to={`/learningpaths/${path.id}/first-step/`} className="search-result_img_container">
+          {image()}
+        </Link>
+        <div className="search-result_bd">
+          <Link to={`/learningpaths/${path.id}/first-step/`}>
+            <h2 className="search-result_title">
+              {titleI18N(path, lang, true)}
+            </h2>
           </Link>
-          <div className="search-result_bd">
-            <Link to={`/learningpaths/${path.id}/first-step/`}>
-              <h2 className="search-result_title">
-                {titleI18N(path, lang, true)}
-              </h2>
-            </Link>
-            <div className="search-result_meta">
-              <LabeledIcon.Today labelText={formatDate(path.lastUpdated, lang)} tagName="time" />
-              <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName="time" />
-              {path.isBasedOn ? <IsBasedOn url={`/learningpaths/${path.isBasedOn}/first-step/`} className="cta-link--primary cta-link--underline" /> : ''}
-            </div>
-            <Link to={`/learningpaths/${path.id}/first-step/`} className="search-result_description">{descriptionI18N(path, lang, true)}</Link>
-            <LearningPathIntroduction path={path} />
-            <div className="tags_list">
-              {tags.map(tag =>
-                <button key={tag} className={tagsClassName(tag)} onClick={evt => onTagClick(evt, tag)} href="#">{tag}</button>
-              )}
-            </div>
+          <div className="search-result_meta">
+            <LabeledIcon.Today labelText={formatDate(path.lastUpdated, lang)} tagName="time" />
+            <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName="time" />
+            {path.isBasedOn ? <IsBasedOn url={`/learningpaths/${path.isBasedOn}/first-step/`} className="cta-link--primary cta-link--underline" /> : ''}
+          </div>
+          <Link to={`/learningpaths/${path.id}/first-step/`} className="search-result_description">{descriptionI18N(path, lang, true)}</Link>
+          <LearningPathIntroduction path={path} />
+          <div className="tags_list">
+            {tags.map(tag =>
+              <button key={tag} className={tagsClassName(tag)} onClick={evt => onTagClick(evt, tag)} href="#">{tag}</button>
+            )}
           </div>
         </div>
       </div>
