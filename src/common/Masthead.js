@@ -75,9 +75,9 @@ export function Masthead(props) {
           </button>
         </div>
         <div className={collapseClassName(isRightSidebarOpen)}>
-          <button className="un-button masthead_left--desktop" onClick={localCloseSidebars}>
+          <div className="masthead_left--desktop">
             {logo}
-          </button>
+          </div>
           <div className="masthead_right--desktop">
             <SiteNav />
           </div>

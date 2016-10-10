@@ -87,6 +87,7 @@ const phrases = {
     imagePick: 'Søk og velg bilde til læringsstien',
     duration: 'Varighet',
     tags: 'Tagger',
+    copy: 'Kopi',
     copyright: {
       license: 'Lisens',
       contributors: 'Bidragsytere',

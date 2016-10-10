@@ -15,24 +15,14 @@ import formatDate from '../../util/formatDate';
 import formatDuration from '../../util/formatDuration';
 import { closeSidebars } from '../../common/sidebarActions';
 import LabeledIcon from '../../common/LabeledIcon';
-import polyglot from '../../i18n';
 import LearningPathCopyright from './LearningPathCopyright';
+import IsBasedOn from '../../common/IsBasedOn';
+import LearningPathActionType from './LearningPathActionType';
 
 const LearningPathGeneralInfo = (props, context) => {
   const { authenticated, learningPath, localCloseSidebars, onCopyLearningPathClick } = props;
   const { lang } = context;
   const href = `/learningpaths/${learningPath.id}`;
-
-  const renderAction = () => {
-    const classNames = 'cta-link cta-link--round edit_learningpath--button';
-    if (learningPath.canEdit) {
-      const editPathTarget = `/learningpaths/${learningPath.id}/edit`;
-      return <Link className={classNames} to={editPathTarget} onClick={localCloseSidebars}>{polyglot.t('editPage.edit')}</Link>;
-    } else if (authenticated) {
-      return <button className={classNames} onClick={onCopyLearningPathClick}>{polyglot.t('copyLearningPath.createCopy')}</button>;
-    }
-    return null;
-  };
 
   return (
     <div>
@@ -44,8 +34,9 @@ const LearningPathGeneralInfo = (props, context) => {
           <LabeledIcon.Today labelText={formatDate(learningPath.lastUpdated, lang)} tagName="time" />
           <LabeledIcon.QueryBuilder labelText={formatDuration(learningPath.duration, lang)} tagName="time" />
           <LearningPathCopyright copyright={learningPath.copyright} />
+          {learningPath.isBasedOn ? <IsBasedOn url={`/learningpaths/${learningPath.isBasedOn}/first-step/`} /> : '' }
         </div>
-        {renderAction()}
+        <LearningPathActionType authenticated={authenticated} learningPath={learningPath} localCloseSidebars={localCloseSidebars} onCopyLearningPathClick={onCopyLearningPathClick} />
       </div>
     </div>
   );

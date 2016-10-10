@@ -41,7 +41,7 @@ export default class SearchResult extends Component {
     // path.introduction && path.introduction.length > 0 ?
     return (
       <div>
-        <button className="un-button show-introduction_button" onClick={evt => onClickShowIntroduction(evt)}>
+        <button className="un-button show-introduction_button" onClick={onClickShowIntroduction}>
           {introductionButtonText} {this.state.showIntroduction ? <Icon.ArrowUp /> : <Icon.ArrowDown />}
         </button>
         <div className={introductionClassName()} dangerouslySetInnerHTML={{ __html: introductionI18N(path, lang, true) }} />

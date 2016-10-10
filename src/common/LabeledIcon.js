@@ -35,7 +35,8 @@ LabeledIcon.Exit = props => (<LabeledIcon {...props} iconName="Exit" />);
 LabeledIcon.Apps = props => (<LabeledIcon {...props} iconName="Apps" />);
 LabeledIcon.Clear = props => (<LabeledIcon {...props} iconName="Clear" />);
 LabeledIcon.Delete = props => (<LabeledIcon {...props} iconName="Delete" />);
-
+LabeledIcon.ContentCopy = props => (<LabeledIcon {...props} iconName="ContentCopy" />);
+LabeledIcon.Copyright = props => (<LabeledIcon {...props} iconName="Copyright" />);
 export default LabeledIcon;
 
 LabeledIcon.defaultProps = {
