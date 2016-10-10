@@ -14,8 +14,7 @@ import LabeledIcon from '../../common/LabeledIcon';
 import formatDate from '../../util/formatDate';
 import formatDuration from '../../util/formatDuration';
 import LearningPathIntroduction from './LearningPathIntroduction';
-import polyglot from '../../i18n';
-
+import IsBasedOn from '../../common/IsBasedOn';
 import { titleI18N, descriptionI18N, tagsI18N } from '../../util/i18nFieldFinder';
 
 
@@ -60,17 +59,6 @@ export default class SearchResult extends Component {
       'tag_item--active': query.tag === tag,
     });
 
-    const isBasedOn = () => {
-      if (path.isBasedOn) {
-        return (
-          <Link className="cta-link--primary cta-link--underline" to={`/learningpaths/${path.isBasedOn}/first-step/`} target="_blank" rel="noopener noreferrer" >
-            <LabeledIcon.ContentCopy labelText={polyglot.t('learningPath.copy')} tagName="copy" />
-          </Link>
-        );
-      }
-      return '';
-    };
-
     return (
       <div>
         <div className="search-result">
@@ -86,7 +74,7 @@ export default class SearchResult extends Component {
             <div className="search-result_meta">
               <LabeledIcon.Today labelText={formatDate(path.lastUpdated, lang)} tagName="time" />
               <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName="time" />
-              {isBasedOn()}
+              {path.isBasedOn ? <IsBasedOn url={`/learningpaths/${path.isBasedOn}/first-step/`} className="cta-link--primary cta-link--underline" /> : ''}
             </div>
             <Link to={`/learningpaths/${path.id}/first-step/`} className="search-result_description">{descriptionI18N(path, lang, true)}</Link>
             <LearningPathIntroduction path={path} />
