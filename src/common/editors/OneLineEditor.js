@@ -63,13 +63,14 @@ export default class OneLineEditor extends React.Component {
   }
 
   render() {
-    const { placeholder, meta, wrapperClassName } = this.props;
+    const { placeholder, meta, wrapperClassName, input: { onBlur } } = this.props;
     return (
       <div>
         <div className={wrapperClassName}>
           <Editor
             editorState={this.state.editorState}
             onChange={this.onChange}
+            onBlur={onBlur}
             handleBeforeInput={this.handleBeforeInput}
             handlePastedText={this.handlePastedText}
             handleReturn={this.handleReturn}
@@ -77,7 +78,7 @@ export default class OneLineEditor extends React.Component {
             ref="editor"
           />
         </div>
-        {this.props.meta.touched && meta.error && <span className="error_message error_message--red">{meta.error}</span>}
+        {meta.touched && meta.error && <span className="error_message error_message--red">{meta.error}</span>}
       </div>
     );
   }
