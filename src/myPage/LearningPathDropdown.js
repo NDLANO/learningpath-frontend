@@ -30,7 +30,6 @@ export function LearningPathDropdown({ onSelect, learningPath }) {
     'dropdown-menu_item': true,
     active: learningPath.status === status,
   });
-
   return (
     <div className="dropdown-menu">
       <span className="dropdown-menu_icon"><Icon.MoreVert /></span>
@@ -43,7 +42,7 @@ export function LearningPathDropdown({ onSelect, learningPath }) {
         {statuses.filter(status => status.status !== learningPath.status).map(status =>
           <li key={status.action} className={dropDownMenuItemClassName(status.status)}>
             <a href="#" className="dropdown-menu_link" onClick={publishAction(status)}>
-              <Icon.Input /> {polyglot.t(`pathDropDown.${status.action}`)}
+              <Icon.Input /> {polyglot.t(`pathDropDown.${learningPath.status}.${status.action}`)}
             </a>
           </li>
         )}

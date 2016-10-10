@@ -51,11 +51,20 @@ const phrases = {
     },
   },
   pathDropDown: {
-    publish: 'Publish',
-    unpublish: 'Make private',
+    PRIVATE: {
+      publish: 'Publish, searchable',
+      unlist: 'Publish, not searchable',
+    },
+    PUBLISHED: {
+      unpublish: 'Make private',
+      unlist: 'Remove from search',
+    },
+    NOT_LISTED: {
+      publish: 'Publish, searchable',
+      unpublish: 'Make private',
+    },
     delete: 'Delete',
     makeCopy: 'Make copy',
-    unlist: 'Remove from search',
   },
   requireAuthentication: {
     errorMessage: 'This page requires you to be logged in.',
