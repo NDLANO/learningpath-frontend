@@ -23,7 +23,6 @@ import Contributors from './copyright/Contributors';
 import polyglot from '../../i18n';
 import LearningPathDuration from './LearningPathDuration';
 import LearningPathImage from './LearningPathImage';
-import LearningPathPintrest from './LearningPathPintrest';
 import SubmitButton from '../../common/buttons/SubmitButton';
 
 const formName = 'edit-learning-path';
@@ -79,7 +78,6 @@ const LearningPathForm = (props) => {
         </div>
 
         <Field name="coverPhotoMetaUrl" component={LearningPathImage} localFetchImages={localFetchImages} learningPathTitle={learningPathTitle} fetchImage={fetchImage} />
-        <LearningPathPintrest />
 
         <div className="learning-path-duration">
           <label htmlFor="duration" className="label--medium-bold  label--medium">{polyglot.t('learningPath.duration')}</label>

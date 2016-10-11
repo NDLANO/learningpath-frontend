@@ -9,11 +9,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PintrestBoardForm from './PintrestBoardForm';
+import { fetchPins } from './pintrestApi';
 
 class PintrestImport extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { pins: [], fetchingPins: false };
+    this.handleBoardNameSubmit = this.handleBoardNameSubmit.bind(this);
+  }
+
+  handleBoardNameSubmit(boardName) {
+    this.setState({ fetchingPins: true });
+    fetchPins(boardName)
+      .then((pins) => {
+        console.log(pins);
+        this.setState({ pins });
+        this.setState({ fetchingPins: false });
+      }).catch(() => {
+        this.setState({ fetchingPins: false });
+      })
+    ;
+  }
+
   render() {
     return (
-      <PintrestBoardForm />
+      <div>
+        <PintrestBoardForm onBoardNameSubmit={this.handleBoardNameSubmit} />
+      </div>
     );
   }
 }

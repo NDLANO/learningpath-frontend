@@ -36,7 +36,7 @@ class LearningPathPintrest extends React.Component {
   render() {
     return (
       <div>
-        <Button className="button button--primary" onClick={this.openLightbox}>
+        <Button className="button button--primary-outline cta-link--block" onClick={this.openLightbox}>
           {polyglot.t('pintrest.importFrom')}
         </Button>
         <Lightbox display={this.state.displayLightbox} width="800px" onClose={this.closeLightbox}>

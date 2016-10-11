@@ -21,6 +21,8 @@ module.exports = Object.assign({
   googleTagMangerId: process.env.GOOGLE_TAG_MANGER_ID || undefined,
   ndlaApiUrl: process.env.NDLA_API_URL || 'http://api.test.ndla.no',
   ndlaApiKey: process.env.NDLA_API_KEY || 'ndlalearningpathfrontend',
+  pintrestApiUrl: process.env.PINTREST_API_URL || 'https://api.pinterest.com/v1/',
+  pintrestEnabled: process.env.PINTREST_ACCESS_TOKEN !== undefined,
   app: {
     title: 'NDLA Læringsstier',
     head: {
