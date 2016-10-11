@@ -240,6 +240,13 @@ const phrases = {
     durationNaN: 'Invalid duration. Must be in number of hours.',
     durationDecimals: 'Max two decimals.',
   },
+  pintrest: {
+    importFrom: 'Get learning steps from Pintrest',
+    form: {
+      placeholder: 'username/board',
+      submit: 'Fetch pins',
+    },
+  },
 };
 
 export default phrases;

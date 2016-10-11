@@ -239,6 +239,13 @@ const phrases = {
     durationNaN: 'Ugyldig variget. Tast inn antall timer.',
     durationDecimals: 'Antall desimaler er maks to.',
   },
+  pintrest: {
+    importFrom: 'Hent læringssteg fra Pintrest',
+    form: {
+      placeholder: 'brukernavn/tavlenavn',
+      submit: 'Hent pins',
+    },
+  },
 };
 
 export default phrases;
