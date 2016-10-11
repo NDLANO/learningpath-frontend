@@ -10,6 +10,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import PintrestBoardForm from './PintrestBoardForm';
 import PinForm from './PinForm';
+import { getLocale } from '../locale/localeSelectors';
 import * as learningPathStepActions from '../learningPath/step/learningPathStepActions';
 import { fetchPins } from './pintrestApi';
 
@@ -19,6 +20,7 @@ class PintrestImport extends Component {
     super(props);
     this.state = { pins: [], fetchingPins: false };
     this.handleBoardNameSubmit = this.handleBoardNameSubmit.bind(this);
+    this.handleCreateLearningPathStep = this.handleCreateLearningPathStep.bind(this);
   }
 
   handleBoardNameSubmit(boardName) {
@@ -33,26 +35,40 @@ class PintrestImport extends Component {
     ;
   }
 
+  handleCreateLearningPathStep(title, url) {
+    const { createLearningPathStep, learningPath, locale: language } = this.props;
+
+    createLearningPathStep(learningPath.id, {
+      type: 'TEXT',
+      showTitle: true,
+      title: [{ title, language }],
+      embedUrl: [{ url, language }],
+    });
+  }
+
   render() {
     const { pins } = this.state;
-    const { createLearningPathStep } = this.props;
     return (
       <div>
         <PintrestBoardForm onBoardNameSubmit={this.handleBoardNameSubmit} />
-        { pins.map(pin => <PinForm key={pin.id} pin={pin} createLearningPathStep={createLearningPathStep} />) }
+        { pins.map(pin => <PinForm key={pin.id} pin={pin} onCreateLearningPathStep={this.handleCreateLearningPathStep} />) }
       </div>
     );
   }
 }
 
 PintrestImport.propTypes = {
+  locale: PropTypes.string.isRequired,
   createLearningPathStep: PropTypes.func.isRequired,
+  learningPath: PropTypes.object.isRequired,
 };
 
 const mapDispatchToProps = {
   createLearningPathStep: (learningPathId, step) => learningPathStepActions.createLearningPathStep(learningPathId, step),
 };
 
-const mapStateToProps = state => state;
+const mapStateToProps = state => ({
+  locale: getLocale(state),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(PintrestImport);

@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Icon from '../../common/Icon';
 import polyglot from '../../i18n';
-import LearningPathPintrest from './LearningPathPintrest';
+import PintrestLightbox from './PintrestLightbox';
 
 export function SortLearningStepsButton({ learningPath }) {
   if (!learningPath.canEdit) {
@@ -28,7 +28,7 @@ export function SortLearningStepsButton({ learningPath }) {
       </Link>
       <ul className="vertical-menu">
         <li className="vertical-menu_item">
-          <LearningPathPintrest />
+          <PintrestLightbox learningPath={learningPath} />
         </li>
       </ul>
     </div>

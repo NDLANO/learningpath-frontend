@@ -6,15 +6,14 @@
  *
  */
 
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { Component, PropTypes } from 'react';
 
 import PintrestImport from '../../pintrest/PintrestImport';
 import Lightbox from '../../common/Lightbox';
 import polyglot from '../../i18n';
 import Button from '../../common/buttons/Button';
 
-class LearningPathPintrest extends React.Component {
+class PintrestLightbox extends Component {
 
   constructor(props) {
     super(props);
@@ -34,22 +33,22 @@ class LearningPathPintrest extends React.Component {
   }
 
   render() {
+    const { learningPath } = this.props;
     return (
       <div>
         <Button className="button button--primary-outline cta-link--block" onClick={this.openLightbox}>
           {polyglot.t('pintrest.importFrom')}
         </Button>
         <Lightbox display={this.state.displayLightbox} width="800px" onClose={this.closeLightbox}>
-          <PintrestImport />
+          <PintrestImport learningPath={learningPath} />
         </Lightbox>
       </div>
     );
   }
 }
 
-LearningPathPintrest.propTypes = { };
+PintrestLightbox.propTypes = {
+  learningPath: PropTypes.object.isRequired,
+};
 
-const mapStateToProps = state => Object.assign({}, state, {
-});
-
-export default connect(mapStateToProps)(LearningPathPintrest);
+export default PintrestLightbox;

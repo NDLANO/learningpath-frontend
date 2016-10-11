@@ -17,9 +17,10 @@ class PinForm extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    const { createLearningPathStep } = this.props;
-    console.log(createLearningPathStep);
+    const { onCreateLearningPathStep, pin } = this.props;
+    onCreateLearningPathStep(pin.note, pin.original_link);
   }
+
   render() {
     const { pin } = this.props;
     return (
@@ -36,6 +37,8 @@ class PinForm extends Component {
 
 PinForm.propTypes = {
   pin: PropTypes.object.isRequired,
-  createLearningPathStep: PropTypes.func.isRequired,
+  learningPathId: PropTypes.string.isRequired,
+  lang: PropTypes.string.isRequired,
+  onCreateLearningPathStep: PropTypes.func.isRequired,
 };
 export default PinForm;
