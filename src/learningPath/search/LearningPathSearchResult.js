@@ -36,7 +36,6 @@ export default class SearchResult extends Component {
   render() {
     const { path, query } = this.props;
     const { lang } = this.context;
-    console.log(path);
     const image = () => {
       if (path.coverPhotoUrl && !this.state.imageError) {
         return <img className="search-result_img" role="presentation" src={path.coverPhotoUrl} onError={this.handleImageError} />;
