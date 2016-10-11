@@ -100,7 +100,7 @@ const phrases = {
     copy: 'Kopi',
     copyright: {
       license: 'Lisens',
-      contributors: 'Bidragsytere',
+      contributors: 'Forfattere',
     },
     image: {
       title: 'Illustrerende bilde',

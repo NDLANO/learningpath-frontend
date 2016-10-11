@@ -19,7 +19,7 @@ const IsBasedOn = ({ url, className }) => (
 
 
 IsBasedOn.propTypes = {
-  url: PropTypes.object.isRequired,
+  url: PropTypes.string.isRequired,
   className: PropTypes.string,
 };
 

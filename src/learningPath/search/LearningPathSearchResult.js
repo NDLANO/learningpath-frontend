@@ -16,7 +16,7 @@ import formatDuration from '../../util/formatDuration';
 import LearningPathIntroduction from './LearningPathIntroduction';
 import IsBasedOn from '../../common/IsBasedOn';
 import { titleI18N, descriptionI18N, tagsI18N } from '../../util/i18nFieldFinder';
-
+import LearningPathContributors from '../sidebar/LearningPathContributors';
 
 export default class SearchResult extends Component {
   constructor(props) {
@@ -36,7 +36,7 @@ export default class SearchResult extends Component {
   render() {
     const { path, query } = this.props;
     const { lang } = this.context;
-
+    console.log(path);
     const image = () => {
       if (path.coverPhotoUrl && !this.state.imageError) {
         return <img className="search-result_img" role="presentation" src={path.coverPhotoUrl} onError={this.handleImageError} />;
@@ -45,7 +45,6 @@ export default class SearchResult extends Component {
     };
 
     const tags = defined(tagsI18N(path, lang, true), []);
-
     const onTagClick = (evt, tag) => {
       evt.preventDefault();
       this.setState({ tag }, () => {
@@ -58,7 +57,6 @@ export default class SearchResult extends Component {
       'un-button': true,
       'tag_item--active': query.tag === tag,
     });
-
     return (
       <div className="search-result">
         <Link to={`/learningpaths/${path.id}/first-step/`} className="search-result_img_container">
@@ -74,6 +72,7 @@ export default class SearchResult extends Component {
             <LabeledIcon.Today labelText={formatDate(path.lastUpdated, lang)} tagName="time" />
             <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName="time" />
             {path.isBasedOn ? <IsBasedOn url={`/learningpaths/${path.isBasedOn}/first-step/`} className="cta-link--primary cta-link--underline" /> : ''}
+            <LearningPathContributors copyright={path.copyright} />
           </div>
           <Link to={`/learningpaths/${path.id}/first-step/`} className="search-result_description">{descriptionI18N(path, lang, true)}</Link>
           <LearningPathIntroduction path={path} />
