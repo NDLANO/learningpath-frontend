@@ -246,6 +246,10 @@ const phrases = {
       placeholder: 'username/board',
       submit: 'Fetch pins',
     },
+    pinForm: {
+      create: 'Create learning step',
+      viewSource: 'View source link',
+    },
   },
 };
 

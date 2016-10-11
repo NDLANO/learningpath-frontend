@@ -6,9 +6,11 @@
  *
  */
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import PintrestBoardForm from './PintrestBoardForm';
+import PinForm from './PinForm';
+import * as learningPathStepActions from '../learningPath/step/learningPathStepActions';
 import { fetchPins } from './pintrestApi';
 
 class PintrestImport extends Component {
@@ -23,8 +25,7 @@ class PintrestImport extends Component {
     this.setState({ fetchingPins: true });
     fetchPins(boardName)
       .then((pins) => {
-        console.log(pins);
-        this.setState({ pins });
+        this.setState({ pins: pins.data });
         this.setState({ fetchingPins: false });
       }).catch(() => {
         this.setState({ fetchingPins: false });
@@ -33,17 +34,25 @@ class PintrestImport extends Component {
   }
 
   render() {
+    const { pins } = this.state;
+    const { createLearningPathStep } = this.props;
     return (
       <div>
         <PintrestBoardForm onBoardNameSubmit={this.handleBoardNameSubmit} />
+        { pins.map(pin => <PinForm key={pin.id} pin={pin} createLearningPathStep={createLearningPathStep} />) }
       </div>
     );
   }
 }
 
-PintrestImport.propTypes = { };
+PintrestImport.propTypes = {
+  createLearningPathStep: PropTypes.func.isRequired,
+};
 
-const mapStateToProps = state => Object.assign({}, state, {
-});
+const mapDispatchToProps = {
+  createLearningPathStep: (learningPathId, step) => learningPathStepActions.createLearningPathStep(learningPathId, step),
+};
 
-export default connect(mapStateToProps)(PintrestImport);
+const mapStateToProps = state => state;
+
+export default connect(mapStateToProps, mapDispatchToProps)(PintrestImport);

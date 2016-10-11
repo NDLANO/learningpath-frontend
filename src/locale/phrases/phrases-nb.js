@@ -245,6 +245,10 @@ const phrases = {
       placeholder: 'brukernavn/tavlenavn',
       submit: 'Hent pins',
     },
+    pinForm: {
+      create: 'Opprett læringssteg',
+      viewSource: 'Se kilde lenke',
+    },
   },
 };
 

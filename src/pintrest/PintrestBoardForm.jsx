@@ -56,7 +56,7 @@ PintrestBoardForm.propTypes = {
 };
 
 PintrestBoardForm.defaultProps = {
-  boardName: '',
+  boardName: 'ndlaintegration/youtube',
 };
 
 export default PintrestBoardForm;
