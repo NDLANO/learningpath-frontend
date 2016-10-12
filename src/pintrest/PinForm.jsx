@@ -12,21 +12,31 @@ import polyglot from '../i18n';
 class PinForm extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      title: props.pin.note,
+    };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleTitleChange = this.handleTitleChange.bind(this);
+  }
+
+  handleTitleChange(evt) {
+    this.setState({ title: evt.target.value });
   }
 
   handleSubmit(evt) {
     evt.preventDefault();
     const { onCreateLearningPathStep, pin } = this.props;
-    onCreateLearningPathStep(pin.note, pin.original_link);
+    const { title } = this.state;
+    onCreateLearningPathStep(title, pin.original_link);
   }
 
   render() {
     const { pin } = this.props;
+    const { title } = this.state;
     return (
       <div style={{ height: '5em' }}>
         <form onSubmit={this.handleSubmit}>
-          <input id="title" type="text" style={{ width: '50%', marginRight: '1em', height: '3.5em' }} defaultValue={pin.note} />
+          <input id="title" type="text" style={{ width: '50%', marginRight: '1em', height: '3.5em' }} onChange={this.handleTitleChange} value={title} />
           <button className="button button--primary" type="submit">{polyglot.t('pintrest.pinForm.create')}</button>
           <a className="button button--outline" style={{ float: 'right' }} href={pin.original_link}>{polyglot.t('pintrest.pinForm.viewSource')}</a>
         </form>
