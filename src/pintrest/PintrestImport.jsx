@@ -36,14 +36,17 @@ class PintrestImport extends Component {
     ;
   }
 
-  handleCreateLearningPathStep(title, url) {
+  handleCreateLearningPathStep(pinId, title, url) {
     const { createLearningPathStep, learningPath, locale: language } = this.props;
+    const { pins } = this.state;
 
     createLearningPathStep(learningPath.id, {
       type: 'TEXT',
       showTitle: true,
       title: [{ title, language }],
       embedUrl: [{ url, language }],
+    }).then(() => {
+      this.setState({ pins: pins.filter(pin => pin.id !== pinId) });
     });
   }
 

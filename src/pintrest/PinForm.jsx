@@ -27,7 +27,7 @@ class PinForm extends Component {
     evt.preventDefault();
     const { onCreateLearningPathStep, pin } = this.props;
     const { title } = this.state;
-    onCreateLearningPathStep(title, pin.original_link);
+    onCreateLearningPathStep(pin.id, title, pin.original_link);
   }
 
   render() {
@@ -47,8 +47,6 @@ class PinForm extends Component {
 
 PinForm.propTypes = {
   pin: PropTypes.object.isRequired,
-  learningPathId: PropTypes.string.isRequired,
-  lang: PropTypes.string.isRequired,
   onCreateLearningPathStep: PropTypes.func.isRequired,
 };
 export default PinForm;
