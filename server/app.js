@@ -14,7 +14,9 @@ import defined from 'defined';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+import requestProxy from 'express-request-proxy';
 
+import config from '../src/config';
 import webpackConfig from '../webpack.config.dev';
 import { getHtmlLang } from '../src/locale/configureLocale';
 import Html from './Html';
@@ -46,13 +48,19 @@ const findIEClass = (userAgentString) => {
   return '';
 };
 
+app.get('/pintrest-proxy/*', requestProxy({
+  url: `${config.pintrestApiUrl}*`,
+  query: {
+    access_token: process.env.PINTREST_ACCESS_TOKEN,
+  },
+}));
+
 app.get('*', (req, res) => {
   function renderOnClient() {
     const paths = req.url.split('/');
     const lang = getHtmlLang(defined(paths[1], ''));
     res.send('<!doctype html>\n' + renderToString(<Html lang={lang} className={findIEClass(req.headers['user-agent'])} />)); // eslint-disable-line
   }
-
 
   renderOnClient();
   return;

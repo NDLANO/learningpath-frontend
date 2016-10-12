@@ -27,10 +27,12 @@ export default class Lightbox extends React.Component {
   }
 
   render() {
-    const { children } = this.props;
+    const { children, width } = this.props;
+
+    const style = width ? { maxWidth: width } : undefined;
 
     return this.state.display ? <div className="lightbox">
-      <div className="lightbox_content">
+      <div className="lightbox_content" style={style}>
         <a href="#" className="close-dialog" onClick={this.onCloseButtonClick}>
           <Icon.Clear />
         </a>
@@ -43,6 +45,7 @@ export default class Lightbox extends React.Component {
 Lightbox.propTypes = {
   onClose: PropTypes.func,
   display: PropTypes.bool,
+  width: PropTypes.string,
 };
 
 Lightbox.defaultProps = {

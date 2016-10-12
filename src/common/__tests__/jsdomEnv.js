@@ -13,6 +13,7 @@ const exposedProperties = ['window', 'navigator', 'document'];
 global.document = jsdom('');
 global.__SERVER__ = true; // eslint-disable-line no-underscore-dangle
 global.window = document.defaultView;
+global.window.config = {};
 
 Object.keys(document.defaultView).forEach((property) => {
   if (typeof global[property] === 'undefined') {
