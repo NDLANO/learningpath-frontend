@@ -12,6 +12,21 @@ import { Link } from 'react-router';
 import Icon from '../../common/Icon';
 import polyglot from '../../i18n';
 import PintrestLightbox from './PintrestLightbox';
+import config from '../../config';
+
+const PINTREST_ENABLED = __SERVER__ ? config.pintrestEnabled : window.config.pintrestEnabled;
+
+const PintrestLightboxButton = ({ learningPath }) => (
+  <ul className="vertical-menu">
+    <li className="vertical-menu_item">
+      <PintrestLightbox learningPath={learningPath} />
+    </li>
+  </ul>
+);
+
+PintrestLightboxButton.propTypes = {
+  learningPath: PropTypes.object.isRequired,
+};
 
 export function SortLearningStepsButton({ learningPath }) {
   if (!learningPath.canEdit) {
@@ -26,11 +41,7 @@ export function SortLearningStepsButton({ learningPath }) {
         <Icon.ImportExport />
         {polyglot.t('sortSteps.sortOrDelete')}
       </Link>
-      <ul className="vertical-menu">
-        <li className="vertical-menu_item">
-          <PintrestLightbox learningPath={learningPath} />
-        </li>
-      </ul>
+      { PINTREST_ENABLED ? <PintrestLightboxButton learningPath={learningPath} /> : null }
     </div>
   );
 }
