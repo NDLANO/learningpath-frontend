@@ -19,7 +19,7 @@ class PintrestImport extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { pins: [], fetchingPins: false };
+    this.state = { pins: [], fetchingPins: false, message: '' };
     this.handleBoardNameSubmit = this.handleBoardNameSubmit.bind(this);
     this.handleCreateLearningPathStep = this.handleCreateLearningPathStep.bind(this);
   }
@@ -28,10 +28,16 @@ class PintrestImport extends Component {
     this.setState({ fetchingPins: true });
     fetchPins(boardName)
       .then((pins) => {
-        this.setState({ pins: pins.data });
-        this.setState({ fetchingPins: false });
-      }).catch(() => {
-        this.setState({ fetchingPins: false });
+        this.setState({
+          pins: pins.data,
+          fetchingPins: false,
+          message: '',
+        });
+      }).catch((error) => {
+        this.setState({
+          message: error.message,
+          fetchingPins: false,
+        });
       })
     ;
   }
@@ -51,11 +57,12 @@ class PintrestImport extends Component {
   }
 
   render() {
-    const { pins } = this.state;
+    const { pins, message } = this.state;
     return (
       <div>
         <h2>{ polyglot.t('pintrest.lightbox.heading') }</h2>
         <PintrestBoardForm onBoardNameSubmit={this.handleBoardNameSubmit} />
+        { message ? <div className="error_message error_message--red">{ message }</div> : null}
         { pins.map(pin => <PinForm key={pin.id} pin={pin} onCreateLearningPathStep={this.handleCreateLearningPathStep} />) }
       </div>
     );

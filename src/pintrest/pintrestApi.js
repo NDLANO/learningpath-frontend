@@ -7,6 +7,13 @@
  */
 
 import fetch from 'isomorphic-fetch';
-import { resolveJsonOrRejectWithError } from '../sources/helpers';
 
-export const fetchPins = boardName => fetch(`/pintrest-proxy/boards/${boardName}/pins/?fields=id%2Clink%2Cnote%2Curl%2Coriginal_link`).then(resolveJsonOrRejectWithError);
+export const fetchPins = boardName => fetch(`/pintrest-proxy/boards/${boardName}/pins/?fields=id%2Clink%2Cnote%2Curl%2Coriginal_link`).then(res => (
+  new Promise((resolve, reject) => {
+    if (res.ok) {
+      return resolve(res.json());
+    }
+    return res.json()
+        .then(json => reject(json));
+  }))
+);
