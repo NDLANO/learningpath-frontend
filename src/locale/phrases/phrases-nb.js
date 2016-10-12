@@ -241,6 +241,9 @@ const phrases = {
   },
   pintrest: {
     importFrom: 'Hent læringssteg fra Pintrest',
+    lightbox: {
+      heading: 'Hent læringssteg fra Pintrest',
+    },
     form: {
       placeholder: 'brukernavn/tavlenavn',
       submit: 'Hent pins',

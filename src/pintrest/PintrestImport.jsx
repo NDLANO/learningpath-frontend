@@ -13,6 +13,7 @@ import PinForm from './PinForm';
 import { getLocale } from '../locale/localeSelectors';
 import * as learningPathStepActions from '../learningPath/step/learningPathStepActions';
 import { fetchPins } from './pintrestApi';
+import polyglot from '../i18n';
 
 class PintrestImport extends Component {
 
@@ -50,6 +51,7 @@ class PintrestImport extends Component {
     const { pins } = this.state;
     return (
       <div>
+        <h2>{ polyglot.t('pintrest.lightbox.heading') }</h2>
         <PintrestBoardForm onBoardNameSubmit={this.handleBoardNameSubmit} />
         { pins.map(pin => <PinForm key={pin.id} pin={pin} onCreateLearningPathStep={this.handleCreateLearningPathStep} />) }
       </div>

@@ -242,6 +242,9 @@ const phrases = {
   },
   pintrest: {
     importFrom: 'Get learning steps from Pintrest',
+    lightbox: {
+      heading: 'Get learning steps from Pintrest',
+    },
     form: {
       placeholder: 'username/board',
       submit: 'Fetch pins',
