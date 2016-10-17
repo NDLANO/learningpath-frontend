@@ -100,7 +100,7 @@ const phrases = {
     copy: 'Copy',
     copyright: {
       license: 'License',
-      contributors: 'Contributors',
+      contributors: 'Authors',
     },
     image: {
       title: 'Illustrative picture',
