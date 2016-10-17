@@ -19,6 +19,7 @@ import ObjectSelector from '../../../common/form/ObjectSelector';
 import PreviewOembed from '../oembed/PreviewOembed';
 import LearningPathStepIcon from '../LearningPathStepIcon';
 import InputField from '../../../common/form/InputField';
+import EmbedSearch from '../../../embedSearch/EmbedSearch';
 
 const LearningPathStepFields = (props) => {
   const {
@@ -86,16 +87,12 @@ const LearningPathStepFields = (props) => {
       </div>
       <DescriptionHTMLEditor input={description.input} lang={lang} onBlur={handleDescriptionBlur} />
       <div className="learning-step-form_group">
+        <EmbedSearch urlOnBlur={url.input.onBlur} />
         <div className="learningsource-form">
           <div>
-            <Field
-              name="url"
-              component={InputField}
-              placeholder={polyglot.t('editPathStep.urlPlaceholder')}
-              type="url"
-              label={polyglot.t('editPathStep.urlLabel')}
-              labelClassName="mediatype-menu__label"
-            />
+            <label className="mediatype-menu__label" htmlFor="url">{polyglot.t('editPathStep.urlLabel')}</label>
+            <input {...url.input} placeholder={polyglot.t('editPathStep.urlPlaceholder')} type="url" />
+            {url.meta.touched && url.meta.error && <span className="error_message error_message--red">{url.meta.error}</span>}
             <PreviewOembed content={embedContent} />
           </div>
         </div>

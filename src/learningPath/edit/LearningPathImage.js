@@ -101,7 +101,7 @@ class LearningPathImage extends React.Component {
               <ChangeImage onImageLightboxOpen={onImageLightboxOpen} savedImage={savedImage} /> : <ChoseImage onImageLightboxOpen={onImageLightboxOpen} />
           }
         </div>
-        <div className="lightbox_image-preview">
+        <div className="big-lightbox_wrapper big-lightbox_wrapper--scroll">
           <Lightbox display={this.state.displayImages} onClose={onImageLightboxClose}>
             <ImageSearch
               id="coverPhotoMetaUrl" onChange={onChange} closeLightBox={onImageLightboxClose} localFetchImages={localFetchImages} fetchImage={fetchImage}

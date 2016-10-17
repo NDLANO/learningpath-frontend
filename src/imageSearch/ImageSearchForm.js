@@ -48,9 +48,9 @@ class ImageSearch extends React.Component {
         <div className="image-search_form">
           <input
             type="text" value={textQuery} onChange={onQueryChange}
-            onKeyPress={onKeyPress} placeholder={polyglot.t('learningPath.image.searchPlaceholder')} className="image-search_form-query"
+            onKeyPress={onKeyPress} placeholder={polyglot.t('learningPath.image.searchPlaceholder')} className="search-form_query--gray"
           />
-          <button className="image-search_form-button" onClick={submitImageSearchQuery}><Icon.Search /></button>
+          <button className="search-form_btn--gray" onClick={submitImageSearchQuery}><Icon.Search /></button>
         </div>
         <div className="image-search_border" />
         <div className="image-search_text">

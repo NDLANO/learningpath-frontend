@@ -25,6 +25,7 @@ import messages from '../messages/messagesReducer';
 import sidebar from './sidebar';
 import imageSearch from '../imageSearch/imageReducers';
 import locale from '../locale/localeReducer';
+import embedSearch from '../embedSearch/embedSearchReducer';
 
 const rootReducers = combineReducers({
   authenticated,
@@ -42,6 +43,7 @@ const rootReducers = combineReducers({
   learningPathTags,
   learningPathLicenses,
   imageSearch,
+  embedSearch,
   routing: routerReducer,
   form: formReducer,
 });
