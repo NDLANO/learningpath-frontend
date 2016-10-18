@@ -21,6 +21,9 @@ module.exports = Object.assign({
   googleTagMangerId: process.env.GOOGLE_TAG_MANGER_ID || undefined,
   ndlaApiUrl: process.env.NDLA_API_URL || 'http://api.test.ndla.no',
   ndlaApiKey: process.env.NDLA_API_KEY || 'ndlalearningpathfrontend',
+  googleSearchEngineId: process.env.NDLA_GOOGLE_SEARCH_ENGINE_ID,
+  googleApiKey: process.env.NDLA_GOOGLE_API_KEY,
+  googleApiUrl: process.env.NDLA_GOOGLE_API_URL || 'https://www.googleapis.com/customsearch/v1',
   app: {
     title: 'NDLA Læringsstier',
     head: {
@@ -30,7 +33,4 @@ module.exports = Object.assign({
       ],
     },
   },
-  GOOGLE_API_URL: 'https://www.googleapis.com/customsearch/v1',
-
-
 }, environment);

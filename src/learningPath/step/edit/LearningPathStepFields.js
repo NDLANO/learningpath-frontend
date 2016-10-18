@@ -18,7 +18,6 @@ import OneLineEditor from '../../../common/editors/OneLineEditor';
 import ObjectSelector from '../../../common/form/ObjectSelector';
 import PreviewOembed from '../oembed/PreviewOembed';
 import LearningPathStepIcon from '../LearningPathStepIcon';
-import InputField from '../../../common/form/InputField';
 import EmbedSearch from '../../../embedSearch/EmbedSearch';
 
 const LearningPathStepFields = (props) => {

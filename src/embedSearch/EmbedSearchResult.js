@@ -11,30 +11,29 @@ import { Link } from 'react-router';
 import EmbedSearchResultImage from './EmbedSearchResultImage';
 import Icon from '../common/Icon';
 
-const EmbedSearchResult = ({ item, onPreviewClick, addEmbedResult }) => {
-  return (
-    <div className="embed-search_result" >
-      <EmbedSearchResultImage labels={item.labels} pagemap={item.pagemap} />
-      <div className="embed-search_result-information">
-        <h3 className="embed-search_result-title">{item.title}</h3>
-        <Link to={item.link}>{item.link}</Link>
-        <p>
-          {item.snippet}
-        </p>
-        <div>
-          <button onClick={evt => addEmbedResult(evt, item)} className="un-button google-custom-search_add-button">
-            <Icon.Add />
-            Bruk i læringsstien
-          </button>
-          <button onClick={evt => onPreviewClick(evt, item)} className="un-button embed-search_preview-button">
-            <Icon.RemoveRedEye />
-            Forhåndsvis
-          </button>
-        </div>
+const EmbedSearchResult = ({ item, onPreviewClick, addEmbedResult }) => (
+  <div className="embed-search_result" >
+    <EmbedSearchResultImage labels={item.labels} pagemap={item.pagemap} />
+    <div className="embed-search_result-information">
+      <h3 className="embed-search_result-title">{item.title}</h3>
+      <Link href={item.link} target="_blank">{item.link}</Link>
+      <p>
+        {item.snippet}
+      </p>
+      <div>
+        <button onClick={evt => addEmbedResult(evt, item)} className="un-button google-custom-search_add-button">
+          <Icon.Add />
+          Bruk i læringsstien
+        </button>
+        <button onClick={evt => onPreviewClick(evt, item)} className="un-button embed-search_preview-button">
+          <Icon.RemoveRedEye />
+          Forhåndsvis
+        </button>
       </div>
     </div>
-  );
-};
+  </div>
+);
+
 
 EmbedSearchResult.propTypes = {
   item: PropTypes.object.isRequired,

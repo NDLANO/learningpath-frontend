@@ -28,7 +28,7 @@ const EmbedSearchForm = ({ localFetchEmbedSearch, localChangeEmbedSearchQuery, q
   };
   const handleFilterChange = (evt, filter) => {
     evt.preventDefault();
-    localFetchEmbedSearch(Object.assign({}, this.props.query, { filter }));
+    localFetchEmbedSearch(Object.assign({}, query, { filter }));
   };
   const filters = [{ name: 'Alle', key: '' }, { name: 'Youtube', key: 'more:youtube' }, { name: 'NDLA', key: 'more:ndla' }];
 
@@ -37,7 +37,7 @@ const EmbedSearchForm = ({ localFetchEmbedSearch, localChangeEmbedSearchQuery, q
       <h4>Legg til innhold fra ekstern kilde</h4>
       <input
         type="text" className="search-form_query--gray"
-        onChange={evt => localChangeEmbedSearchQuery(Object.assign({}, query, { q: evt.target.value }))}
+        onChange={evt => localChangeEmbedSearchQuery(Object.assign({}, query, { textQuery: evt.target.value }))}
         onKeyPress={onKeyPress}
         placeholder="Søk og finn kilde"
       />

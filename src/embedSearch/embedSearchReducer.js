@@ -14,7 +14,7 @@ const initialState = {
   result: {},
   query: {
     start: 1,
-    q: '',
+    textQuery: '',
     filter: '',
     page: 1,
     numberOfPages: 1,
