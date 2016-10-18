@@ -13,20 +13,17 @@ import ButtonPager from '../common/pager/ButtonPager';
 const EmbedSearchResults = ({ items, onPreviewClick, addEmbedResult, query, pagerAction }) => {
   if (!items || items.length === 0) {
     return (
-      <div className="google-custom-search_results">
+      <div className="embed-search_results">
         <p>Ingen resultater funnet</p>
       </div>
     );
   }
   const onPagerButtonClicked = (q) => {
-    if (q.page > query.page) {
-      pagerAction(Object.assign({}, q, { start: query.nextIndex }));
-    } else {
-      pagerAction(Object.assign({}, q, { start: query.previousIndex }));
-    }
+    const nextIndex = query.start + ((q.page - query.page) * 10);
+    pagerAction(Object.assign({}, q, { start: nextIndex }));
   };
   return (
-    <div className="google-custom-search_results">
+    <div className="embed-search_results">
       {items.map(item =>
         <EmbedSearchResult key={item.cacheId} item={item} onPreviewClick={onPreviewClick} addEmbedResult={addEmbedResult} />
       )}
@@ -39,6 +36,8 @@ EmbedSearchResults.propTypes = {
   items: PropTypes.array.isRequired,
   onPreviewClick: PropTypes.func.isRequired,
   addEmbedResult: PropTypes.func.isRequired,
+  pagerAction: PropTypes.func.isRequired,
+  query: PropTypes.object.isRequired,
 };
 
 export default EmbedSearchResults;

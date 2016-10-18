@@ -10,11 +10,11 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import Icon from '../common/Icon';
 
-const EmbedSearchForm = ({ localFetchEmbedSearch, onFilterClick, handleQueryChange, query, filters }) => {
+const EmbedSearchForm = ({ localFetchEmbedSearch, localChangeEmbedSearchQuery, query }) => {
   const filterClass = filter => classNames({
     'un-button': true,
-    'google-custom-search_form-filter ': true,
-    'google-custom-search_form-filter--active': query.filter === filter,
+    'embed-search_form-filter ': true,
+    'embed-search_form-filter--active': query.filter === filter,
   });
   const onKeyPress = (evt) => {
     if (evt.key === 'Enter') {
@@ -26,22 +26,25 @@ const EmbedSearchForm = ({ localFetchEmbedSearch, onFilterClick, handleQueryChan
     evt.preventDefault();
     localFetchEmbedSearch(query);
   };
-
+  const handleFilterChange = (evt, filter) => {
+    evt.preventDefault();
+    localFetchEmbedSearch(Object.assign({}, this.props.query, { filter }));
+  };
+  const filters = [{ name: 'Alle', key: '' }, { name: 'Youtube', key: 'more:youtube' }, { name: 'NDLA', key: 'more:ndla' }];
 
   return (
-    <div className="google-custom-search_form">
+    <div className="embed-search_form">
       <h4>Legg til innhold fra ekstern kilde</h4>
       <input
         type="text" className="search-form_query--gray"
-        onChange={handleQueryChange}
+        onChange={evt => localChangeEmbedSearchQuery(Object.assign({}, query, { q: evt.target.value }))}
         onKeyPress={onKeyPress}
-        value={query.q}
         placeholder="Søk og finn kilde"
       />
       <button className="search-form_btn--gray" onClick={submitEmbedSearch}><Icon.Search /></button>
-      <div className="google-custom-search_form-filters">
+      <div className="embed-search_form-filters">
         {filters.map(filter =>
-          <button key={filter.key} className={filterClass(filter.key)} onClick={evt => onFilterClick(evt, filter.key)}>{filter.name}</button>
+          <button key={filter.key} className={filterClass(filter.key)} onClick={evt => handleFilterChange(evt, filter.key)}>{filter.name}</button>
         )}
       </div>
     </div>
@@ -50,10 +53,8 @@ const EmbedSearchForm = ({ localFetchEmbedSearch, onFilterClick, handleQueryChan
 
 EmbedSearchForm.propTypes = {
   localFetchEmbedSearch: PropTypes.func.isRequired,
-  handleQueryChange: PropTypes.func.isRequired,
-  query: PropTypes.string.isRequired,
-  filters: PropTypes.array.isRequired,
-  onFilterClick: PropTypes.func.isRequired,
+  localChangeEmbedSearchQuery: PropTypes.func.isRequired,
+  query: PropTypes.object.isRequired,
 };
 
 export default EmbedSearchForm;

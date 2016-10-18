@@ -10,32 +10,25 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
-import { fetchEmbedSearch, fetchOembed, removeEmbedPreview } from './embedSearchActions';
+import { fetchEmbedSearch, fetchOembed, removeEmbedPreview, changeEmbedSearchQuery } from './embedSearchActions';
 import EmbedSearchResults from './EmbedSearchResults';
 import EmbedSearchForm from './EmbedSearchForm';
 import Lightbox from '../common/Lightbox';
 import Oembed from '../learningPath/step/oembed/Oembed';
 import { oembedContentI18N } from '../util/i18nFieldFinder';
+import { getEmbedResultFromState, getEmbedQueryFromState, getOembedContentFromState } from './embedSearchSelectors';
 
 class EmbedSearch extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      filters: [
-        { name: 'Alle', key: '' },
-        { name: 'Youtube', key: 'more:youtube' },
-        { name: 'NDLA', key: 'more:ndla' },
-      ],
       active: false,
-      queryString: '',
       oembedDisplay: false,
     };
     this.toggleGoogleCustomSearch = this.toggleGoogleCustomSearch.bind(this);
-    this.handleQueryChange = this.handleQueryChange.bind(this);
     this.previewOembed = this.previewOembed.bind(this);
     this.onImageLightboxClose = this.onImageLightboxClose.bind(this);
-    this.handleFilterChange = this.handleFilterChange.bind(this);
     this.addEmbedResult = this.addEmbedResult.bind(this);
   }
   onImageLightboxClose() {
@@ -46,17 +39,10 @@ class EmbedSearch extends React.Component {
     evt.preventDefault();
     this.setState({ active: !this.state.active });
   }
-  handleQueryChange(evt) {
-    this.setState({ queryString: evt.target.value });
-  }
   previewOembed(evt, item) {
     evt.preventDefault();
     this.props.localFetchOembed(item.link, this.context.lang);
     this.setState({ oembedDisplay: true });
-  }
-  handleFilterChange(evt, filter) {
-    evt.preventDefault();
-    this.props.localFetchEmbedSearch(Object.assign({}, this.props.query, filter));
   }
   addEmbedResult(evt, item) {
     evt.preventDefault();
@@ -68,10 +54,12 @@ class EmbedSearch extends React.Component {
   render() {
     const { result, localFetchEmbedSearch, oembedPreview, query } = this.props;
     const { lang: language } = this.context;
+
     const containerClass = {
-      'google-custom-search_container': true,
-      'google-custom-search_container--active': this.state.active,
+      'embed-search_container': true,
+      'embed-search_container--active': this.state.active,
     };
+
     const resultItems = get(result, 'items', []);
     const embedContent = oembedPreview ? oembedContentI18N({ embedUrl: oembedPreview }, language) : oembedPreview;
 
@@ -80,11 +68,9 @@ class EmbedSearch extends React.Component {
         <button className="button button--primary button--block" onClick={this.toggleGoogleCustomSearch}>Google Custom Search</button>
         <div className={classNames(containerClass)}>
           <EmbedSearchForm
-            filters={this.state.filters}
             query={query}
-            handleQueryChange={this.handleQueryChange}
+            localChangeEmbedSearchQuery={this.props.localChangeEmbedSearchQuery}
             localFetchEmbedSearch={localFetchEmbedSearch}
-            onFilterClick={this.handleFilterChange}
           />
           <EmbedSearchResults
             items={resultItems}
@@ -107,12 +93,14 @@ const mapDispatchToProps = {
   localFetchEmbedSearch: fetchEmbedSearch,
   localFetchOembed: fetchOembed,
   removeOembed: removeEmbedPreview,
+  localChangeEmbedSearchQuery: changeEmbedSearchQuery,
 };
 
+
 const mapStateToProps = state => Object.assign({}, state, {
-  result: state.embedSearch.result,
-  query: state.embedSearch.query,
-  oembedPreview: state.embedSearch.oembedContent,
+  result: getEmbedResultFromState(state),
+  query: getEmbedQueryFromState(state),
+  oembedPreview: getOembedContentFromState(state),
 });
 
 EmbedSearch.propTypes = {
@@ -122,6 +110,8 @@ EmbedSearch.propTypes = {
   oembedPreview: PropTypes.array,
   removeOembed: PropTypes.func.isRequired,
   urlOnBlur: PropTypes.func.isRequired,
+  query: PropTypes.object.isRequired,
+  localChangeEmbedSearchQuery: PropTypes.func.isRequired,
 };
 
 EmbedSearch.contextTypes = {

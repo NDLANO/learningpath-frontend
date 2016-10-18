@@ -18,7 +18,7 @@ const EmbedSearchResultImage = ({ pagemap, labels }) => {
   };
 
   return (
-    <div className="google-custom-search_result-img">
+    <div className="embed-search_result-img">
       <img role="presentation" src={imageSource()} />
     </div>
   );

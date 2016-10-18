@@ -2,10 +2,8 @@ import queryString from 'query-string';
 import config from '../config';
 import { resolveJsonOrRejectWithError } from './helpers';
 
-const GOOGLE_URL = 'https://www.googleapis.com/customsearch/v1';
-
 const fetchGoogleContent = (query) => {
-  let url = GOOGLE_URL;
+  let url = config.GOOGLE_API_URL;
   const params = {
     key: config.GOOGLE_API_KEY,
     cx: config.GOOGLE_SEARCH_ENGINE_ID,

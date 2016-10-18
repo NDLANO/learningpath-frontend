@@ -30,6 +30,7 @@ module.exports = Object.assign({
       ],
     },
   },
+  GOOGLE_API_URL: 'https://www.googleapis.com/customsearch/v1',
 
 
 }, environment);

@@ -16,9 +16,8 @@ const initialState = {
     start: 1,
     q: '',
     filter: '',
-    previousIndex: undefined,
-    nextIndex: undefined,
     page: 1,
+    numberOfPages: 1,
   },
   oembedContent: [],
 };
@@ -35,7 +34,7 @@ export default handleActions({
     next: assignOrPushPropReducer('oembedContent'),
     throw(state) { return state; },
   },
-  SET_EMBED_SEARCH_QUERY: {
+  CHANGE_EMBED_SEARCH_QUERY: {
     next(state, action) {
       const nextState = cloneDeep(state);
       nextState.query = action.payload;
