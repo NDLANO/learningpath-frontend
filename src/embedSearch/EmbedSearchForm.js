@@ -9,37 +9,46 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import Icon from '../common/Icon';
+import polyglot from '../i18n';
 
-const EmbedSearchForm = ({ localFetchEmbedSearch, localChangeEmbedSearchQuery, query }) => {
+const EmbedSearchForm = ({ localFetchEmbedSearch, handleTextQueryChange, query, textQuery }) => {
   const filterClass = filter => classNames({
     'un-button': true,
     'embed-search_form-filter ': true,
     'embed-search_form-filter--active': query.filter === filter,
   });
-  const onKeyPress = (evt) => {
-    if (evt.key === 'Enter') {
-      evt.preventDefault();
-      localFetchEmbedSearch(query);
-    }
-  };
+
   const submitEmbedSearch = (evt) => {
     evt.preventDefault();
-    localFetchEmbedSearch(query);
+    const newQuery = Object.assign({}, query, {
+      start: textQuery === query.textQuery ? query.start : 1,
+      page: textQuery === query.textQuery ? query.page : 1,
+      textQuery,
+    });
+    localFetchEmbedSearch(newQuery);
   };
+
+  const onKeyPress = (evt) => {
+    if (evt.key === 'Enter') {
+      submitEmbedSearch(evt);
+    }
+  };
+
   const handleFilterChange = (evt, filter) => {
     evt.preventDefault();
     localFetchEmbedSearch(Object.assign({}, query, { filter }));
   };
-  const filters = [{ name: 'Alle', key: '' }, { name: 'Youtube', key: 'more:youtube' }, { name: 'NDLA', key: 'more:ndla' }];
+
+  const filters = [{ name: polyglot.t('embedSearch.form.allFilter'), key: '' }, { name: 'Youtube', key: 'more:youtube' }, { name: 'NDLA', key: 'more:ndla' }];
 
   return (
     <div className="embed-search_form">
-      <h4>Legg til innhold fra ekstern kilde</h4>
+      <h4>{polyglot.t('embedSearch.form.title')}</h4>
       <input
         type="text" className="search-form_query--gray"
-        onChange={evt => localChangeEmbedSearchQuery(Object.assign({}, query, { textQuery: evt.target.value }))}
+        onChange={handleTextQueryChange}
         onKeyPress={onKeyPress}
-        placeholder="Søk og finn kilde"
+        placeholder={polyglot.t('embedSearch.form.placeholder')}
       />
       <button className="search-form_btn--gray" onClick={submitEmbedSearch}><Icon.Search /></button>
       <div className="embed-search_form-filters">
@@ -53,8 +62,9 @@ const EmbedSearchForm = ({ localFetchEmbedSearch, localChangeEmbedSearchQuery, q
 
 EmbedSearchForm.propTypes = {
   localFetchEmbedSearch: PropTypes.func.isRequired,
-  localChangeEmbedSearchQuery: PropTypes.func.isRequired,
+  handleTextQueryChange: PropTypes.func.isRequired,
   query: PropTypes.object.isRequired,
+  textQuery: PropTypes.string.isRequired,
 };
 
 export default EmbedSearchForm;

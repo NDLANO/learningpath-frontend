@@ -9,12 +9,13 @@
 import React, { PropTypes } from 'react';
 import EmbedSearchResult from './EmbedSearchResult';
 import ButtonPager from '../common/pager/ButtonPager';
+import polyglot from '../i18n';
 
 const EmbedSearchResults = ({ items, onPreviewClick, addEmbedResult, query, pagerAction }) => {
   if (!items || items.length === 0) {
     return (
       <div className="embed-search_results">
-        <p>Ingen resultater funnet</p>
+        <p>{polyglot.t('embedSearch.results.noResults')}</p>
       </div>
     );
   }

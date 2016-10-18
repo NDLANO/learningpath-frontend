@@ -239,6 +239,19 @@ const phrases = {
     durationNaN: 'Ugyldig variget. Tast inn antall timer.',
     durationDecimals: 'Antall desimaler er maks to.',
   },
+  embedSearch: {
+    form: {
+      title: 'Legg til innhold fra ekstern kilde',
+      placeholder: 'Søk og finn kilde',
+      allFilter: 'Alle',
+    },
+    results: {
+      noResults: 'Ingen resultater funnet',
+      useInPath: 'Bruk i læringsstien',
+      preview: 'Forhåndvis',
+    },
+    button: 'Søk etter eksterne ressurser',
+  },
 };
 
 export default phrases;

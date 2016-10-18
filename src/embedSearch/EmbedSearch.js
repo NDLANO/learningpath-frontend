@@ -17,6 +17,7 @@ import Lightbox from '../common/Lightbox';
 import Oembed from '../learningPath/step/oembed/Oembed';
 import { oembedContentI18N } from '../util/i18nFieldFinder';
 import { getEmbedResultFromState, getEmbedQueryFromState, getOembedContentFromState } from './embedSearchSelectors';
+import polyglot from '../i18n';
 
 class EmbedSearch extends React.Component {
   constructor(props) {
@@ -25,11 +26,13 @@ class EmbedSearch extends React.Component {
     this.state = {
       active: false,
       oembedDisplay: false,
+      textQuery: props.query.textQuery,
     };
     this.toggleGoogleCustomSearch = this.toggleGoogleCustomSearch.bind(this);
     this.previewOembed = this.previewOembed.bind(this);
     this.onImageLightboxClose = this.onImageLightboxClose.bind(this);
     this.addEmbedResult = this.addEmbedResult.bind(this);
+    this.handleTextQueryChange = this.handleTextQueryChange.bind(this);
   }
   onImageLightboxClose() {
     this.props.removeOembed();
@@ -49,6 +52,9 @@ class EmbedSearch extends React.Component {
     this.props.urlOnBlur(item.link);
     this.setState({ active: false });
   }
+  handleTextQueryChange(evt) {
+    this.setState({ textQuery: evt.target.value });
+  }
 
 
   render() {
@@ -65,12 +71,13 @@ class EmbedSearch extends React.Component {
 
     return (
       <div>
-        <button className="button button--primary button--block" onClick={this.toggleGoogleCustomSearch}>Google Custom Search</button>
+        <button className="button button--primary button--block" onClick={this.toggleGoogleCustomSearch}>{polyglot.t('embedSearch.button')}</button>
         <div className={classNames(containerClass)}>
           <EmbedSearchForm
             query={query}
-            localChangeEmbedSearchQuery={this.props.localChangeEmbedSearchQuery}
+            handleTextQueryChange={this.handleTextQueryChange}
             localFetchEmbedSearch={localFetchEmbedSearch}
+            textQuery={this.state.textQuery}
           />
           <EmbedSearchResults
             items={resultItems}
