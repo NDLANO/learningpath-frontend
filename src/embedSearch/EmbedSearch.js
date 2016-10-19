@@ -32,6 +32,9 @@ class EmbedSearch extends React.Component {
     this.addEmbedResult = this.addEmbedResult.bind(this);
     this.handleTextQueryChange = this.handleTextQueryChange.bind(this);
   }
+  componentWillMount() {
+    this.props.localFetchEmbedSearch(this.props.query);
+  }
   onImageLightboxClose() {
     this.props.removeOembed();
     this.setState({ oembedDisplay: false });
@@ -67,7 +70,7 @@ class EmbedSearch extends React.Component {
 
     return (
       <div>
-        <button className="button button--primary button--block" onClick={this.toggleGoogleCustomSearch}>{polyglot.t('embedSearch.button')}</button>
+        <button className="button button--primary button--block embed-search_open-button" onClick={this.toggleGoogleCustomSearch}>{polyglot.t('embedSearch.button')}</button>
         <div className={classNames(containerClass)}>
           <EmbedSearchForm
             query={query}
@@ -82,7 +85,7 @@ class EmbedSearch extends React.Component {
             pagerAction={localFetchEmbedSearch}
             query={query}
           />
-        <EmbedSearchPreview oembedPreview={oembedPreview} oembedDisplay={this.state.oembedDisplay} onImageLightboxClose={this.onImageLightboxClose} lang={language} />
+          <EmbedSearchPreview oembedPreview={oembedPreview} oembedDisplay={this.state.oembedDisplay} onImageLightboxClose={this.onImageLightboxClose} lang={language} />
         </div>
       </div>
     );
@@ -94,7 +97,6 @@ const mapDispatchToProps = {
   removeOembed: removeEmbedPreview,
   localChangeEmbedSearchQuery: changeEmbedSearchQuery,
 };
-
 
 const mapStateToProps = state => Object.assign({}, state, {
   result: getEmbedResultFromState(state),
