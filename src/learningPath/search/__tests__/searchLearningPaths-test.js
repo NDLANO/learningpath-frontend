@@ -66,7 +66,8 @@ test('actions/searchLearningPaths with query', (t) => {
       page: 4,
       pageSize: 15,
       results: [{ id: '123' }, { id: '456' }],
-    });
+    })
+    .log(console.log);
 
   const initialState = {
     learningPathQuery: {
