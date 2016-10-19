@@ -6,9 +6,15 @@ const GOOGLE_API_URL = __SERVER__ ? config.googleApiUrl : window.config.googleAp
 const GOOGLE_API_KEY = __SERVER__ ? config.googleApiKey : window.config.googleApiKey;
 const GOOGLE_SEARCH_ENGINE_ID = __SERVER__ ? config.googleSearchEngineId : window.config.googleSearchEngineId;
 
+const apiBaseUrl = (() => {
+  if (process.env.NODE_ENV === 'unittest') {
+    return 'http://google-api';
+  }
+  return GOOGLE_API_URL;
+})();
 
 const fetchGoogleContent = (query) => {
-  let url = GOOGLE_API_URL;
+  let url = apiBaseUrl();
   const params = {
     key: GOOGLE_API_KEY,
     cx: GOOGLE_SEARCH_ENGINE_ID,
