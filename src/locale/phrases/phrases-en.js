@@ -100,7 +100,7 @@ const phrases = {
     copy: 'Copy',
     copyright: {
       license: 'License',
-      contributors: 'Contributors',
+      contributors: 'Authors',
     },
     image: {
       title: 'Illustrative picture',
@@ -252,6 +252,20 @@ const phrases = {
       preview: 'Preiview',
     },
     button: 'Search for external resources',
+  },
+  pintrest: {
+    importFrom: 'Get learning steps from Pintrest',
+    lightbox: {
+      heading: 'Get learning steps from Pintrest',
+    },
+    form: {
+      placeholder: 'username/board',
+      submit: 'Fetch pins',
+    },
+    pinForm: {
+      create: 'Create learning step',
+      viewSource: 'View source link',
+    },
   },
 };
 

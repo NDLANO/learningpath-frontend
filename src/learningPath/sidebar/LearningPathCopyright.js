@@ -7,58 +7,26 @@
  */
 
 import React, { PropTypes } from 'react';
-import isEmpty from 'lodash/isEmpty';
-import Icon from '../../common/Icon';
-import LabeledIcon from '../../common/LabeledIcon';
+import LearningPathContributors from './LearningPathContributors';
+import LearningPathLicense from './LearningPathLicense';
 
-const License = ({ copyright }) => {
-  if (!copyright.license) {
-    return null;
-  }
-  return (
-    <span>
-      {copyright.license.url ?
-        <a href={copyright.license.url} rel="noopener noreferrer" target="_blank"><LabeledIcon.Copyright tagName="copyright" labelText={copyright.license.license} /></a> : ''}
-    </span>
-  );
-};
-License.propTypes = {
-  copyright: PropTypes.object.isRequired,
-};
-
-const Contributors = ({ copyright }) => {
-  if (!copyright.contributors || isEmpty(copyright.contributors)) {
-    return null;
-  }
-  return (
-    <span>
-      <Icon.Person />
-      {copyright.contributors.map(contributor =>
-        contributor.name
-      ).join(', ')}
-    </span>
-  );
-};
-Contributors.propTypes = {
-  copyright: PropTypes.object.isRequired,
-};
-
-
-export default function LearningPathCopyright({ copyright }) {
+const LearningPathCopyright = ({ copyright }) => {
   if (!copyright) {
     return null;
   }
   return (
     <div className="learningpath-copyright">
       <div className="learningpath-contributors">
-        <Contributors copyright={copyright} />
+        <LearningPathContributors copyright={copyright} />
       </div>
       <div className="learningpath-license">
-        <License copyright={copyright} />
+        <LearningPathLicense copyright={copyright} />
       </div>
     </div>
   );
-}
+};
 LearningPathCopyright.propTypes = {
   copyright: PropTypes.object,
 };
+
+export default LearningPathCopyright;

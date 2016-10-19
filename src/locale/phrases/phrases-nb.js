@@ -100,7 +100,7 @@ const phrases = {
     copy: 'Kopi',
     copyright: {
       license: 'Lisens',
-      contributors: 'Bidragsytere',
+      contributors: 'Forfattere',
     },
     image: {
       title: 'Illustrerende bilde',
@@ -251,6 +251,20 @@ const phrases = {
       preview: 'Forhåndvis',
     },
     button: 'Søk etter eksterne ressurser',
+  },
+  pintrest: {
+    importFrom: 'Hent læringssteg fra Pintrest',
+    lightbox: {
+      heading: 'Hent læringssteg fra Pintrest',
+    },
+    form: {
+      placeholder: 'brukernavn/tavlenavn',
+      submit: 'Hent pins',
+    },
+    pinForm: {
+      create: 'Opprett læringssteg',
+      viewSource: 'Se kilde lenke',
+    },
   },
 };
 
