@@ -250,6 +250,10 @@ const phrases = {
       useInPath: 'Bruk i læringsstien',
       preview: 'Forhåndvis',
     },
+    preview: {
+      title: 'Forhåndsvisning av oembed',
+      error: 'En feil har oppstått.',
+    },
     button: 'Søk etter eksterne ressurser',
   },
   pintrest: {

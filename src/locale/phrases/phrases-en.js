@@ -251,6 +251,10 @@ const phrases = {
       useInPath: 'Use in learningpath',
       preview: 'Preiview',
     },
+    preview: {
+      title: 'Preview for oembed',
+      error: 'An error has occured',
+    },
     button: 'Search for external resources',
   },
   pintrest: {

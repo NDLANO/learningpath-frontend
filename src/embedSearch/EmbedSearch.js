@@ -13,9 +13,7 @@ import get from 'lodash/get';
 import { fetchEmbedSearch, fetchOembed, removeEmbedPreview, changeEmbedSearchQuery } from './embedSearchActions';
 import EmbedSearchResults from './EmbedSearchResults';
 import EmbedSearchForm from './EmbedSearchForm';
-import Lightbox from '../common/Lightbox';
-import Oembed from '../learningPath/step/oembed/Oembed';
-import { oembedContentI18N } from '../util/i18nFieldFinder';
+import EmbedSearchPreview from './EmbedSearchPreview';
 import { getEmbedResultFromState, getEmbedQueryFromState, getOembedContentFromState } from './embedSearchSelectors';
 import polyglot from '../i18n';
 
@@ -60,14 +58,12 @@ class EmbedSearch extends React.Component {
   render() {
     const { result, localFetchEmbedSearch, oembedPreview, query } = this.props;
     const { lang: language } = this.context;
-
     const containerClass = {
       'embed-search_container': true,
       'embed-search_container--active': this.state.active,
     };
 
     const resultItems = get(result, 'items', []);
-    const embedContent = oembedPreview ? oembedContentI18N({ embedUrl: oembedPreview }, language) : oembedPreview;
 
     return (
       <div>
@@ -86,11 +82,7 @@ class EmbedSearch extends React.Component {
             pagerAction={localFetchEmbedSearch}
             query={query}
           />
-          <div className="big-lightbox_wrapper big-lightbox_wrapper--scroll big-lightbox_wrapper--center">
-            <Lightbox display={this.state.oembedDisplay} onClose={this.onImageLightboxClose}>
-              <Oembed oembedContent={embedContent} />
-            </Lightbox>
-          </div>
+        <EmbedSearchPreview oembedPreview={oembedPreview} oembedDisplay={this.state.oembedDisplay} onImageLightboxClose={this.onImageLightboxClose} lang={language} />
         </div>
       </div>
     );

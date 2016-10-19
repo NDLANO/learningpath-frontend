@@ -26,5 +26,8 @@ export function fetchOembed(url, lang) {
     .then((oembed) => {
       dispatch(setEmbedPreview(Object.assign({}, oembed, { url, language: lang })));
     })
-    .catch(err => dispatch(applicationError(err)));
+    .catch((err) => {
+      dispatch(setEmbedPreview({ error: true }));
+      dispatch(applicationError(err));
+    });
 }
