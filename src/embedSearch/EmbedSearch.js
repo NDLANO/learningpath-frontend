@@ -10,7 +10,7 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
-import { fetchEmbedSearch, fetchOembed, removeEmbedPreview, changeEmbedSearchQuery } from './embedSearchActions';
+import * as actions from './embedSearchActions';
 import EmbedSearchResults from './EmbedSearchResults';
 import EmbedSearchForm from './EmbedSearchForm';
 import EmbedSearchPreview from './EmbedSearchPreview';
@@ -92,10 +92,10 @@ class EmbedSearch extends React.Component {
   }
 }
 const mapDispatchToProps = {
-  localFetchEmbedSearch: fetchEmbedSearch,
-  localFetchOembed: fetchOembed,
-  removeOembed: removeEmbedPreview,
-  localChangeEmbedSearchQuery: changeEmbedSearchQuery,
+  localFetchEmbedSearch: actions.fetchEmbedSearch,
+  localFetchOembed: actions.fetchOembed,
+  removeOembed: actions.removeEmbedPreview,
+  localChangeEmbedSearchQuery: actions.changeEmbedSearchQuery,
 };
 
 const mapStateToProps = state => Object.assign({}, state, {
