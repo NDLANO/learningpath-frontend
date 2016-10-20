@@ -240,6 +240,23 @@ const phrases = {
     durationNaN: 'Invalid duration. Must be in number of hours.',
     durationDecimals: 'Max two decimals.',
   },
+  embedSearch: {
+    form: {
+      title: 'Add content from an external source',
+      placeholder: 'Search and find source',
+      allFilter: 'All',
+    },
+    results: {
+      noResults: 'No results found',
+      useInPath: 'Use in learningpath',
+      preview: 'Preiview',
+    },
+    preview: {
+      title: 'Preview for oembed',
+      error: 'An error has occured',
+    },
+    button: 'Search for external resources',
+  },
   pintrest: {
     importFrom: 'Get learning steps from Pintrest',
     lightbox: {

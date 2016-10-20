@@ -7,7 +7,6 @@
  */
 
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
 import LabeledIcon from '../../common/LabeledIcon';
 
 const LearningPathLicense = ({ copyright }) => {
@@ -17,7 +16,7 @@ const LearningPathLicense = ({ copyright }) => {
   return (
     <span>
       {copyright.license.url ?
-        <Link to={copyright.license.url} rel="noopener noreferrer" target="_blank"><LabeledIcon.Copyright tagName="copyright" labelText={copyright.license.license} /></Link> : ''}
+        <a href={copyright.license.url} rel="noopener noreferrer" target="_blank"><LabeledIcon.Copyright tagName="copyright" labelText={copyright.license.license} /></a> : ''}
     </span>
   );
 };
