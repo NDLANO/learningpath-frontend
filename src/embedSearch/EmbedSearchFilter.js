@@ -10,7 +10,7 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import polyglot from '../i18n';
 
-const EmbedSearchFilter = ({ localFetchEmbedSearch, query }) => {
+const EmbedSearchFilter = ({ localFetchEmbedSearch, query, textQuery }) => {
   const filterClass = filter => classNames({
     'un-button': true,
     'embed-search_form-filter ': true,
@@ -19,7 +19,7 @@ const EmbedSearchFilter = ({ localFetchEmbedSearch, query }) => {
 
   const handleFilterChange = (evt, filter) => {
     evt.preventDefault();
-    localFetchEmbedSearch(Object.assign({}, query, { filter }));
+    localFetchEmbedSearch(Object.assign({}, query, { filter, textQuery }));
   };
 
   const filters = [{ name: polyglot.t('embedSearch.form.allFilter'), key: '' }, { name: 'Youtube', key: 'more:youtube' }, { name: 'NDLA', key: 'more:ndla' }];
@@ -35,7 +35,6 @@ const EmbedSearchFilter = ({ localFetchEmbedSearch, query }) => {
 
 EmbedSearchFilter.propTypes = {
   localFetchEmbedSearch: PropTypes.func.isRequired,
-  handleTextQueryChange: PropTypes.func.isRequired,
   query: PropTypes.object.isRequired,
   textQuery: PropTypes.string.isRequired,
 };

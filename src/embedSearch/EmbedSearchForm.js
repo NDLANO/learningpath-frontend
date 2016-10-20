@@ -38,7 +38,7 @@ const EmbedSearchForm = ({ localFetchEmbedSearch, handleTextQueryChange, query, 
         placeholder={polyglot.t('embedSearch.form.placeholder')}
       />
       <button className="search-form_btn--gray" onClick={submitEmbedSearch}><Icon.Search /></button>
-      <EmbedSearchFilter query={query} localFetchOembed={localFetchEmbedSearch} />
+      <EmbedSearchFilter query={query} localFetchEmbedSearch={localFetchEmbedSearch} textQuery={textQuery} />
     </div>
   );
 };
