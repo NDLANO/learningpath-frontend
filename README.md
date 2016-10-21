@@ -5,6 +5,7 @@
 
 - Node.JS ~6.2
 - npm ~3.9
+- yarn ~0.16
 - Docker (optional)
 
 ## Getting started
