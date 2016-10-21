@@ -20,10 +20,10 @@ What's in the box?
 
 All dependencies are defined in `package.json` and are managed with npm.  To
 initially install all dependencies and when the list dependency has changed,
-run `npm install`.
+run `yarn install`.
 
 ```
-$ npm install
+$ yarn install
 ```
 
 ### Start development server
