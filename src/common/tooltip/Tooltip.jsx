@@ -28,9 +28,12 @@ const Tooltip = (props) => {
     [`tooltip--${placement}`]: true,
     in: show,
   };
-
+  const positionStyle = {
+    left: props.positionLeft,
+    top: props.positionTop,
+  };
   return (
-    <div {...props} className={classNames('tooltip', className, classes)} role="tooltip">
+    <div style={positionStyle} className={classNames('tooltip', className, classes)} role="tooltip">
       <div className="tooltip_arrow" />
       <div className="tooltip_content">
         {children}
@@ -48,6 +51,8 @@ Tooltip.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
   show: PropTypes.bool.isRequired,
+  positionTop: PropTypes.number,
+  positionLeft: PropTypes.number,
 };
 
 Tooltip.defaultProps = {

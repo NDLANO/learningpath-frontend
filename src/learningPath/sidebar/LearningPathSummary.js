@@ -9,7 +9,10 @@
 import React, { PropTypes } from 'react';
 import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
 
-export default function LearningPathSummary({ learningPath, lang }) {
+const LearningPathSummary = ({ learningPath, lang }) => {
+  if (!learningPath || !lang) {
+    return null;
+  }
   return (
     <div className="two-column_content">
       <div className="learning-path">
@@ -24,9 +27,11 @@ export default function LearningPathSummary({ learningPath, lang }) {
       </div>
     </div>
   );
-}
+};
 
 LearningPathSummary.propTypes = {
-  learningPath: PropTypes.object.isRequired,
-  lang: PropTypes.string.isRequired,
+  learningPath: PropTypes.object,
+  lang: PropTypes.string,
 };
+
+export default LearningPathSummary;
