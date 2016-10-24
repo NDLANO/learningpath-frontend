@@ -12,17 +12,7 @@ import polyglot from '../../i18n';
 import ObjectSelector from '../../common/form/ObjectSelector';
 import InputField from '../../common/form/InputField';
 import TextAreaField from '../../common/form/TextAreaField';
-
-const validate = (values) => {
-  const errors = {};
-  if (!values.description) {
-    errors.description = polyglot.t('errors.description');
-  }
-  if (!values.title) {
-    errors.title = polyglot.t('errors.title');
-  }
-  return errors;
-};
+import { createValidator, required } from '../../util/validation';
 
 class CreateLearningPath extends React.Component {
 
@@ -81,6 +71,11 @@ class CreateLearningPath extends React.Component {
     );
   }
 }
+
+const validate = createValidator({
+  title: required('errors.title'),
+  description: required('errors.description'),
+});
 
 CreateLearningPath.propTypes = {
   handleSubmit: PropTypes.func.isRequired,

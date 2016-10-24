@@ -19,14 +19,15 @@ TextAreaField.propTypes = {
   type: PropTypes.string,
   labelClassName: PropTypes.string,
   placeholder: PropTypes.string,
-  rows: PropTypes.number,
-  cols: PropTypes.number,
-  maxLength: PropTypes.number.isRequired,
+  rows: PropTypes.string,
+  cols: PropTypes.string,
+  maxLength: PropTypes.string,
 };
 TextAreaField.defaultProps = {
   type: 'text',
   placeholder: '',
   labelClassName: '',
+  label: '',
   rows: '4',
   cols: '50',
 };
