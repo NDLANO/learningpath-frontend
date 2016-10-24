@@ -5,16 +5,18 @@ RUN useradd --user-group --create-home --shell /bin/false app
 
 ENV HOME=/home/app
 ENV APP_PATH=$HOME/learningpath-frontend
+RUN npm install -g yarn
 
 # Copy necessary files for installing dependencies
-COPY package.json .npmrc $APP_PATH/
+COPY package.json .npmrc yarn.lock $APP_PATH/
 RUN chown -R app:app $HOME/*
+
 
 # Run npm install before src copy to enable better layer caching
 USER app
 WORKDIR $APP_PATH
 RUN mkdir -p $APP_PATH/htdocs/assets/ && \
-    npm install
+    yarn install
 
 # Copy necessary source files for server and client build
 USER root
