@@ -10,6 +10,9 @@ import React, { PropTypes } from 'react';
 import { reduxForm, reset, Field } from 'redux-form';
 import polyglot from '../../i18n';
 import ObjectSelector from '../../common/form/ObjectSelector';
+import InputField from '../../common/form/InputField';
+import TextAreaField from '../../common/form/TextAreaField';
+import { createValidator, required } from '../../util/validation';
 
 class CreateLearningPath extends React.Component {
 
@@ -22,6 +25,7 @@ class CreateLearningPath extends React.Component {
       submitting,
       handleSubmit,
       licenseOptions,
+      valid,
     } = this.props;
     return (
       <form onSubmit={handleSubmit}>
@@ -31,7 +35,8 @@ class CreateLearningPath extends React.Component {
             name="title"
             id="title"
             type="text"
-            component="input"
+            component={InputField}
+            label={polyglot.t('createLearningPath.title')}
           />
         </div>
         <div>
@@ -44,7 +49,7 @@ class CreateLearningPath extends React.Component {
             placeholder={polyglot.t('createLearningPath.descriptionPlaceholder')}
             maxLength="150"
             className="textarea"
-            component="textarea"
+            component={TextAreaField}
           />
           <p className="learning-path_input-information">{polyglot.t('createLearningPath.descriptionMaxLength')}</p>
         </div>
@@ -57,9 +62,9 @@ class CreateLearningPath extends React.Component {
             options={licenseOptions}
             component={ObjectSelector}
           />
-          <p className="learning-path_input-information">{polyglot.t('createLearningPath.descriptionMaxLength')}</p>
         </div>
-        <button className="button cta-link cta-link--block" disabled={submitting} type="submit">
+        <br />
+        <button className="button cta-link cta-link--block" disabled={submitting || !valid} type="submit">
           {polyglot.t('createLearningPath.createButton')}
         </button>
       </form>
@@ -67,13 +72,20 @@ class CreateLearningPath extends React.Component {
   }
 }
 
+const validate = createValidator({
+  title: required('errors.title'),
+  description: required('errors.description'),
+});
+
 CreateLearningPath.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
   licenseOptions: PropTypes.array.isRequired,
+  valid: PropTypes.bool.isRequired,
 };
 
 export default reduxForm({
   form: 'create-learning-path',
+  validate,
 })(CreateLearningPath);
