@@ -16,7 +16,7 @@ RUN chown -R app:app $HOME/*
 USER app
 WORKDIR $APP_PATH
 RUN mkdir -p $APP_PATH/htdocs/assets/ && \
-    yarn install
+    yarn
 
 # Copy necessary source files for server and client build
 USER root
