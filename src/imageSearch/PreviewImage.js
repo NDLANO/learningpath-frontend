@@ -10,15 +10,15 @@ import React, { PropTypes } from 'react';
 import { tagsI18N } from '../util/i18nFieldFinder';
 // import defined from 'defined';
 import polyglot from '../i18n';
+import { scaleImage } from '../util/imageScaler';
 // import { titlesI18N } from '../util/i18nFieldFinder';
 export default function PreviewImage({ image, onSaveImage }) {
   const tags = tagsI18N(image);
 
-  const newImageWidth = window.innerWidth / 2;
   return (
     <div className="image-preview">
       <div className="image-preview_image">
-        <img role="presentation" src={`${image.images.full.url}?width=${newImageWidth}`} />
+        <img role="presentation" src={scaleImage(image.images.full.url)} />
       </div>
       <div className="image-preview_information">
         <h2 className="image-preview_title">{image.titles[0].title}</h2>
