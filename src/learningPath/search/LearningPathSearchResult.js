@@ -17,6 +17,7 @@ import LearningPathIntroduction from './LearningPathIntroduction';
 import IsBasedOn from '../../common/IsBasedOn';
 import { titleI18N, descriptionI18N, tagsI18N } from '../../util/i18nFieldFinder';
 import LearningPathContributors from '../sidebar/LearningPathContributors';
+import { scaleImage } from '../../util/imageScaler';
 
 export default class SearchResult extends Component {
   constructor(props) {
@@ -38,7 +39,7 @@ export default class SearchResult extends Component {
     const { lang } = this.context;
     const image = () => {
       if (path.coverPhotoUrl && !this.state.imageError) {
-        return <img className="search-result_img" role="presentation" src={path.coverPhotoUrl} onError={this.handleImageError} />;
+        return <img className="search-result_img" role="presentation" src={scaleImage(path.coverPhotoUrl)} onError={this.handleImageError} />;
       }
       return <img className="search-result_img" role="presentation" src={'https://placeholdit.imgix.net/~text?txtsize=33&txt=NDLA&w=190&h=120'} />;
     };

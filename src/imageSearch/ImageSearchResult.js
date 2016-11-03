@@ -9,6 +9,7 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import PreviewImage from './PreviewImage';
+import { scaleImage } from '../util/imageScaler';
 
 export default function ImageSearch({ image, onImageClick, selectedImage, onSaveImage }) {
   const activeClassName = () => classNames({
@@ -20,7 +21,7 @@ export default function ImageSearch({ image, onImageClick, selectedImage, onSave
     <div key={image.id} className={activeClassName()}>
       <div className="image_list-item-inner">
         <button className="un-button" onClick={evt => onImageClick(evt, image)}>
-          <img role="presentation" src={image.previewUrl} />
+          <img role="presentation" src={scaleImage(image.previewUrl)} />
         </button>
       </div>
       {selectedImage.id === image.id ? <PreviewImage image={selectedImage} onSaveImage={evt => onSaveImage(evt, selectedImage)} /> : ''}
