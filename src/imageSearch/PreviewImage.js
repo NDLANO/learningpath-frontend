@@ -18,7 +18,7 @@ export default function PreviewImage({ image, onSaveImage }) {
   return (
     <div className="image-preview">
       <div className="image-preview_image">
-        <img role="presentation" src={scaleImage(image.images.full.url)} />
+        <img role="presentation" src={scaleImage(image.url)} />
       </div>
       <div className="image-preview_information">
         <h2 className="image-preview_title">{image.titles[0].title}</h2>
