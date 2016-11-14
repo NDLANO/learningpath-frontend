@@ -40,6 +40,7 @@ To use a different apis set the the following environment variables:
 NDLA_LEARNINGPATH_API_URL
 NDLA_IMAGE_API_URL
 NDLA_OEMBED_PROXY_URL
+NDLA_AUTH_URL
 ```
 
 ### Unit tests
