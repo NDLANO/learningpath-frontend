@@ -22,7 +22,7 @@ export default function CopyLearningPath({ onClose, onCopy }) {
         {polyglot.t('copyLearningPath.createCopy')}
       </button>
     </div>
-    );
+  );
 }
 
 CopyLearningPath.propTypes = {
