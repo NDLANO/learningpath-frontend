@@ -148,7 +148,7 @@ export class MyPage extends React.Component {
         </OneColumn>
         <Footer />
       </Wrapper>
-  );
+    );
   }
 }
 
