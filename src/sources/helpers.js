@@ -11,17 +11,14 @@ import { formatPattern } from 'react-router/lib/PatternUtils';
 import defined from 'defined';
 import config from '../config';
 
-const NDLA_LEARNINGPATH_API_URL = __SERVER__ ? config.ndlaLearningPathApiUrl : window.config.ndlaLearningPathApiUrl;
-const NDLA_IMAGE_API_URL = __SERVER__ ? config.ndlaImageApiUrl : window.config.ndlaImageApiUrl;
-const NDLA_OEMBED_PROXY_URL = __SERVER__ ? config.ndlaOembedProxyUrl : window.config.ndlaOembedProxyUrl;
-const NDLA_AUTH_URL = __SERVER__ ? config.ndlaAuthUrl : window.config.ndlaAuthUrl;
-const NDLA_LEARNINGPATH_API_KEY = __SERVER__ ? config.ndlaLearningPathApiKey : window.config.ndlaLearningPathApiKey;
+const NDLA_API_URL = __SERVER__ ? config.ndlaApiUrl : window.config.ndlaApiUrl;
+const NDLA_API_KEY = __SERVER__ ? config.ndlaApiKey : window.config.ndlaApiKey;
 
 if (process.env.NODE_ENV === 'unittest') {
   global.__SERVER__ = false; //eslint-disable-line
 }
 
-export const locationOrigin = (() => {
+const locationOrigin = (() => {
   if (process.env.NODE_ENV === 'unittest') {
     return 'http://ndla-frontend';
   }
@@ -38,41 +35,21 @@ export const defaultApiKey = (() => {
     return 'ndlatestapikey';
   }
 
-  return NDLA_LEARNINGPATH_API_KEY;
+  return NDLA_API_KEY;
+})();
+
+const apiBaseUrl = (() => {
+  if (process.env.NODE_ENV === 'unittest') {
+    return 'http://ndla-api';
+  }
+
+  return defined(NDLA_API_URL, locationOrigin);
 })();
 
 
-export function learningPathApiResourceUrl(path) {
-  if (process.env.NODE_ENV === 'unittest') {
-    return `http://ndla-api${path}`;
-  }
+export { locationOrigin, apiBaseUrl };
 
-  return defined(NDLA_LEARNINGPATH_API_URL, locationOrigin) + path;
-}
-
-export function authResourceUrl(path) {
-  if (process.env.NODE_ENV === 'unittest') {
-    return `http://ndla-api${path}`;
-  }
-
-  return defined(NDLA_AUTH_URL, locationOrigin) + path;
-}
-
-export function imageApiResourceUrl(path) {
-  if (process.env.NODE_ENV === 'unittest') {
-    return `http://ndla-api${path}`;
-  }
-
-  return defined(NDLA_IMAGE_API_URL, locationOrigin) + path;
-}
-
-export function oembedProxyResourceUrl(path) {
-  if (process.env.NODE_ENV === 'unittest') {
-    return `http://ndla-api${path}`;
-  }
-
-  return defined(NDLA_OEMBED_PROXY_URL, locationOrigin) + path;
-}
+export function apiResourceUrl(path) { return apiBaseUrl + path; }
 
 export function createErrorPayload(status, message, json) {
   return Object.assign(new Error(message), { status, json });
@@ -91,14 +68,14 @@ export function resolveJsonOrRejectWithError(res) {
 
 
 export function fetchAuthorized(path, method = 'GET') {
-  const url = params => learningPathApiResourceUrl(formatPattern(path, params));
+  const url = params => apiResourceUrl(formatPattern(path, params));
   return (authToken, params = {}) => fetch(url(params), {
     method, headers: { 'APP-KEY': authToken },
   }).then(resolveJsonOrRejectWithError);
 }
 
 export function postAuthorized(path) {
-  const url = params => learningPathApiResourceUrl(formatPattern(path, params));
+  const url = params => apiResourceUrl(formatPattern(path, params));
 
   return (authToken, params = {}, body) => fetch(url(params), {
     headers: { 'APP-KEY': authToken },
@@ -108,7 +85,7 @@ export function postAuthorized(path) {
 }
 
 export function putAuthorized(path) {
-  const url = params => learningPathApiResourceUrl(formatPattern(path, params));
+  const url = params => apiResourceUrl(formatPattern(path, params));
 
   return (authToken, params = {}, body) => fetch(url(params), {
     headers: { 'APP-KEY': authToken },
@@ -118,7 +95,7 @@ export function putAuthorized(path) {
 }
 
 export function patchAuthorized(path) {
-  const url = params => learningPathApiResourceUrl(formatPattern(path, params));
+  const url = params => apiResourceUrl(formatPattern(path, params));
 
   return (authToken, params = {}, body) => fetch(url(params), {
     headers: { 'APP-KEY': authToken },
@@ -128,7 +105,7 @@ export function patchAuthorized(path) {
 }
 
 export function deleteAuthorized(path) {
-  const url = params => learningPathApiResourceUrl(formatPattern(path, params));
+  const url = params => apiResourceUrl(formatPattern(path, params));
   return (authToken, params = {}) => fetch(url(params), {
     headers: { 'APP-KEY': authToken },
     method: 'DELETE',

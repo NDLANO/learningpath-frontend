@@ -35,12 +35,7 @@ Start node server with hot reloading middleware listening on port 3000.
 $ npm start
 ```
 
-To use a different apis set the the following environment variables:
-```
-NDLA_LEARNINGPATH_API_URL
-NDLA_IMAGE_API_URL
-NDLA_OEMBED_PROXY_URL
-```
+To use a different api set the `NDLA_API_URL` environment variable.
 
 ### Unit tests
 

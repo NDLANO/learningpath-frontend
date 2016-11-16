@@ -12,7 +12,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import map from 'lodash/map';
 
 import assureSequenceOrder from '../util/assureSequenceOrder';
-import { fetchAuthorized, postAuthorized, putAuthorized, patchAuthorized, deleteAuthorized, resolveJsonOrRejectWithError, learningPathApiResourceUrl, oembedProxyResourceUrl } from './helpers';
+import { fetchAuthorized, postAuthorized, putAuthorized, patchAuthorized, deleteAuthorized, resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';
 
 const fetchPath = fetchAuthorized('/learningpaths/:pathId');
 const fetchPathStep = fetchAuthorized(
@@ -70,7 +70,7 @@ const updateStatus = (authToken, { pathId }, body) =>
 
 export const activateDeletedPath = (authToken, { pathId, status }) => putLearningPathStatus(authToken, { pathId }, { status });
 
-const learningPathsUrl = learningPathApiResourceUrl('/learningpaths');
+const learningPathsUrl = apiResourceUrl('/learningpaths');
 
 const updateSeqNo = (authToken, { pathId, stepId }, body) =>
   putSequenceNumber(authToken, { pathId, stepId }, body);
@@ -92,7 +92,7 @@ const fetchPaths = (authToken, query) => {
   return fetch(url, { headers: { 'APP-KEY': authToken } }).then(resolveJsonOrRejectWithError);
 };
 
-const oembedUrl = oembedProxyResourceUrl('/oembed');
+const oembedUrl = apiResourceUrl('/oembed');
 const fetchOembedUrl = (authToken, query) => {
   let url = oembedUrl;
   url += `?${queryString.stringify(query)}`;

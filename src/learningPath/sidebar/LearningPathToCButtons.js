@@ -35,7 +35,7 @@ export function LearningPathToCButtons({ learningPath, saveAction, saveAndPublis
         {polyglot.t('editPage.publish')} <Icon.Forward />
       </button>
     </div>
-  );
+);
 }
 
 LearningPathToCButtons.propTypes = {

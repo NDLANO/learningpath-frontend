@@ -11,7 +11,7 @@ import React, { Component, PropTypes } from 'react';
 import { shallow, mount, render } from 'enzyme';
 import './jsdomEnv';
 
-import { locationOrigin, defaultApiKey } from '../../sources/helpers';
+import { locationOrigin, apiBaseUrl, defaultApiKey } from '../../sources/helpers';
 
 class Selfie extends Component {
   componentDidMount() {
@@ -29,6 +29,7 @@ Selfie.defaultProps = { foo: 'default bar' };
 test('components/TestSetup selftest', (tt) => {
   tt.test('- unit test mocking', (t) => {
     t.equal(locationOrigin, 'http://ndla-frontend');
+    t.equal(apiBaseUrl, 'http://ndla-api');
     t.equal(defaultApiKey, 'ndlatestapikey');
     t.end();
   });
