@@ -11,7 +11,7 @@ import classNames from 'classnames';
 import ReactDOM from 'react-dom';
 import get from 'lodash/get';
 
-export const urlIsNDLA = url => (/http:\/\/ndla.no/).test(url);
+export const urlIsNDLA = url => (/^(http|https):\/\/ndla.no/).test(url);
 
 
 export default class Oembed extends React.Component {
