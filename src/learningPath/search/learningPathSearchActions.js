@@ -8,9 +8,17 @@
 
 import { createAction } from 'redux-actions';
 import { applicationError } from '../../messages/messagesActions';
-import { fetchPaths } from '../../sources/learningpaths';
+import { fetchPaths, fetchPath } from '../../sources/learningpaths';
 
+export const setLearningPathBasedOn = createAction('SET_LEARNING_PATH_BASED_ON');
 export const setLearningPathSearchResults = createAction('SET_LEARNING_PATH_SEARCH_RESULTS');
+
+function fetchIsBasedOnPath(path, index) {
+  return (dispatch, getState) => fetchPath(getState().authToken, { pathId: path.isBasedOn })
+    .then((isBasedOnPath) => {
+      dispatch(setLearningPathBasedOn({ isBasedOnPath, index }));
+    });
+}
 
 export function searchLearningPaths(query) {
   return (dispatch, getState) => fetchPaths(getState().authToken, query)
@@ -19,6 +27,7 @@ export function searchLearningPaths(query) {
         results: res.results,
         totalCount: res.totalCount,
       }));
+      res.results.filter(path => path.isBasedOn).map((path, index) => dispatch(fetchIsBasedOnPath(path, index)));
     })
     .catch(err => dispatch(applicationError(err)));
 }

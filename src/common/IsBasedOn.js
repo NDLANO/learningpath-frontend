@@ -8,19 +8,21 @@
 
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import LabeledIcon from './LabeledIcon';
-import polyglot from '../i18n';
 
-const IsBasedOn = ({ url, className }) => (
-  <Link to={url} className={className} target="_blank" rel="noopener noreferrer" >
-    <LabeledIcon.ContentCopy labelText={polyglot.t('learningPath.copy')} tagName="copy" />
-  </Link>
+const IsBasedOn = ({ url, className, title }) => (
+  <p>
+    <span>basert på </span>
+    <Link to={url} className={className} target="_blank" rel="noopener noreferrer" >
+      {title}
+    </Link>
+  </p>
 );
 
 
 IsBasedOn.propTypes = {
   url: PropTypes.string.isRequired,
   className: PropTypes.string,
+  title: PropTypes.string,
 };
 
 export default IsBasedOn;

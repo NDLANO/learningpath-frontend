@@ -21,6 +21,13 @@ export const setLearningPath = createAction('SET_LEARNING_PATH');
 export const setLearningPathStatus = createAction('UPDATE_LEARNING_PATH_STATUS');
 export const removeLearningPath = createAction('REMOVE_LEARNING_PATH');
 
+function fetchIsBasedOnPath(path) {
+  return (dispatch, getState) => fetchPath(getState().authToken, { pathId: path.isBasedOn })
+    .then((isBasedOnPath) => {
+      dispatch(setLearningPath(Object.assign({}, { ...path, isBasedOnTitle: isBasedOnPath.title })));
+    });
+}
+
 export function fetchLearningPath(pathId) {
   return (dispatch, getState) => fetchPath(getState().authToken, { pathId })
     .then(path => dispatch(setLearningPath(path)))
@@ -30,6 +37,9 @@ export function fetchLearningPath(pathId) {
       } else {
         dispatch(setSavedImage({}));
         dispatch(setSelectedImage({}));
+      }
+      if (path.payload.isBasedOn) {
+        dispatch(fetchIsBasedOnPath(path.payload));
       }
     })
     .catch(err => dispatch(applicationError(err)));
