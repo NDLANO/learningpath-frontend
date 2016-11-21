@@ -8,21 +8,28 @@
 
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
+import polyglot from '../i18n';
+import { isBasedOnTitleI18N } from '../util/i18nFieldFinder';
 
-const IsBasedOn = ({ url, className, title }) => (
-  <p>
-    <span>basert på </span>
-    <Link to={url} className={className} target="_blank" rel="noopener noreferrer" >
-      {title}
-    </Link>
-  </p>
-);
+const IsBasedOn = ({ path }, { lang }) => {
+  const title = path.isBasedOnTitle ? isBasedOnTitleI18N(path, lang, true) : polyglot.t('learningPath.isBasedOnPath');
+  const url = `/learningpaths/${path.isBasedOn}/first-step/`;
+  return (
+    <p>
+      <span>{polyglot.t('learningPath.isBasedOn')}</span>
+      <Link to={url} className="cta-link--primary cta-link--underline" target="_blank" rel="noopener noreferrer" >
+        {title}
+      </Link>
+    </p>
+  );
+};
 
 
 IsBasedOn.propTypes = {
-  url: PropTypes.string.isRequired,
-  className: PropTypes.string,
-  title: PropTypes.string,
+  path: PropTypes.object.isRequired,
 };
 
+IsBasedOn.contextTypes = {
+  lang: PropTypes.string.isRequired,
+};
 export default IsBasedOn;

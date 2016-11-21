@@ -10,7 +10,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-import { titleI18N, isBasedOnTitleI18N } from '../../util/i18nFieldFinder';
+import { titleI18N } from '../../util/i18nFieldFinder';
 import formatDate from '../../util/formatDate';
 import formatDuration from '../../util/formatDuration';
 import { closeSidebars } from '../../common/sidebarActions';
@@ -23,7 +23,6 @@ const LearningPathGeneralInfo = (props, context) => {
   const { authenticated, learningPath, localCloseSidebars, onCopyLearningPathClick } = props;
   const { lang } = context;
   const href = `/learningpaths/${learningPath.id}`;
-  const isBasedOnTitle = learningPath.isBasedOnTitle ? isBasedOnTitleI18N(learningPath, lang, true) : 'Kopi';
 
   return (
     <div>
@@ -35,7 +34,7 @@ const LearningPathGeneralInfo = (props, context) => {
           <LabeledIcon.Today labelText={formatDate(learningPath.lastUpdated, lang)} tagName="time" />
           <LabeledIcon.QueryBuilder labelText={formatDuration(learningPath.duration, lang)} tagName="time" />
           <LearningPathCopyright copyright={learningPath.copyright} />
-          {learningPath.isBasedOn ? <IsBasedOn url={`/learningpaths/${learningPath.isBasedOn}/first-step/`} className={'cta-link--primary cta-link--underline'} title={isBasedOnTitle} /> : '' }
+          {learningPath.isBasedOn ? <IsBasedOn path={learningPath} /> : '' }
         </div>
         <LearningPathActionType authenticated={authenticated} learningPath={learningPath} localCloseSidebars={localCloseSidebars} onCopyLearningPathClick={onCopyLearningPathClick} />
       </div>

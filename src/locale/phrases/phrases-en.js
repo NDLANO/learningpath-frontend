@@ -98,6 +98,8 @@ const phrases = {
     duration: 'Duration',
     tags: 'Tags',
     copy: 'Copy',
+    isBasedOn: 'based on ',
+    isBasedOnPath: 'another learningpath',
     copyright: {
       license: 'License',
       contributors: 'Authors',

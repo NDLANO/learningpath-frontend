@@ -98,6 +98,8 @@ const phrases = {
     duration: 'Varighet',
     tags: 'Tagger',
     copy: 'Kopi',
+    isBasedOn: 'basert på ',
+    isBasedOnPath: 'en annen læringssti',
     copyright: {
       license: 'Lisens',
       contributors: 'Forfattere',
