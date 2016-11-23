@@ -34,7 +34,7 @@ const LearningPathGeneralInfo = (props, context) => {
           <LabeledIcon.Today labelText={formatDate(learningPath.lastUpdated, lang)} tagName="time" />
           <LabeledIcon.QueryBuilder labelText={formatDuration(learningPath.duration, lang)} tagName="time" />
           <LearningPathCopyright copyright={learningPath.copyright} />
-          {learningPath.isBasedOn ? <IsBasedOn url={`/learningpaths/${learningPath.isBasedOn}/first-step/`} /> : '' }
+          {learningPath.isBasedOn ? <IsBasedOn path={learningPath} /> : '' }
         </div>
         <LearningPathActionType authenticated={authenticated} learningPath={learningPath} localCloseSidebars={localCloseSidebars} onCopyLearningPathClick={onCopyLearningPathClick} />
       </div>

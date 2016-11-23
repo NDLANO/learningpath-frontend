@@ -71,12 +71,12 @@ export default class SearchResult extends Component {
           <div className="search-result_meta">
             <LabeledIcon.Today labelText={formatDate(path.lastUpdated, lang)} tagName="time" />
             <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName="time" />
-            {path.isBasedOn ? <IsBasedOn url={`/learningpaths/${path.isBasedOn}/first-step/`} className="cta-link--primary cta-link--underline" /> : ''}
             <LearningPathContributors copyright={path.copyright} />
           </div>
           <Link to={`/learningpaths/${path.id}/first-step/`} className="search-result_description">{descriptionI18N(path, lang, true)}</Link>
           <LearningPathIntroduction path={path} />
-          <div className="tags_list">
+          {path.isBasedOn ? <IsBasedOn path={path} /> : ''}
+          <div>
             {tags.map(tag =>
               <button key={tag} className={tagsClassName(tag)} onClick={evt => onTagClick(evt, tag)} href="#">{tag}</button>
             )}
