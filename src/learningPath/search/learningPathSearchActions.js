@@ -13,10 +13,10 @@ import { fetchPaths, fetchPath } from '../../sources/learningpaths';
 export const setLearningPathBasedOn = createAction('SET_LEARNING_PATH_BASED_ON');
 export const setLearningPathSearchResults = createAction('SET_LEARNING_PATH_SEARCH_RESULTS');
 
-function fetchIsBasedOnPath(path, index) {
+function fetchIsBasedOnPath(path) {
   return (dispatch, getState) => fetchPath(getState().authToken, { pathId: path.isBasedOn })
     .then((isBasedOnPath) => {
-      dispatch(setLearningPathBasedOn({ isBasedOnPath, index }));
+      dispatch(setLearningPathBasedOn({ isBasedOnPath, pathId: path.id }));
     });
 }
 
@@ -27,7 +27,7 @@ export function searchLearningPaths(query) {
         results: res.results,
         totalCount: res.totalCount,
       }));
-      res.results.filter(path => path.isBasedOn).map((path, index) => dispatch(fetchIsBasedOnPath(path, index)));
+      res.results.filter(path => path.isBasedOn).map(path => dispatch(fetchIsBasedOnPath(path)));
     })
     .catch(err => dispatch(applicationError(err)));
 }

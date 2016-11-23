@@ -24,7 +24,7 @@ export const removeLearningPath = createAction('REMOVE_LEARNING_PATH');
 function fetchIsBasedOnPath(path) {
   return (dispatch, getState) => fetchPath(getState().authToken, { pathId: path.isBasedOn })
     .then((isBasedOnPath) => {
-      dispatch(setLearningPath(Object.assign({}, { ...path, isBasedOnTitle: isBasedOnPath.title })));
+      dispatch(setLearningPath({ ...path, isBasedOnTitle: isBasedOnPath.title }));
     });
 }
 
