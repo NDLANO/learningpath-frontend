@@ -12,13 +12,14 @@ import { Link } from 'react-router';
 import Helmet from 'react-helmet';
 
 import Oembed from './oembed/Oembed';
-import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
+import { titleI18N } from '../../util/i18nFieldFinder';
 import polyglot from '../../i18n';
 import Icon from '../../common/Icon';
 import { fetchLearningPathStep } from './learningPathStepActions';
 import { copyLearningPath } from '../learningPathActions';
 import CopyLearningPath from '../new/CopyLearningPath';
 import Lightbox from '../../common/Lightbox';
+import LearningPathStepInformation from './LearningPathStepInformation';
 
 class LearningPathStep extends React.Component {
   constructor(props) {
@@ -55,7 +56,6 @@ class LearningPathStep extends React.Component {
     const { authenticated, learningPathStep, learningPath, copyPath } = this.props;
     const { lang } = this.context;
     const stepTitle = titleI18N(learningPathStep, lang, true);
-    const stepDescription = descriptionI18N(learningPathStep, lang, true);
     const oembedContent = learningPathStep.oembed;
     const editStepTarget = `/learningpaths/${learningPath.id}/step/${learningPathStep.id}/edit`;
     const onLightboxClose = () => this.setState({ displayCopyPath: false });
@@ -68,26 +68,11 @@ class LearningPathStep extends React.Component {
         {learningPath.canEdit ? <Link className="cta-link cta-link--round cta-link--scale" to={editStepTarget}><Icon.Create /> {polyglot.t('editPathStep.edit')}</Link> :
           <button className="cta-link cta-link--round cta-link--scale" onClick={this.onCopyLearningPathClick}>{polyglot.t('copyLearningPath.createCopy')}</button>}
       </div>
-      );
-    const license = learningPathStep.license && learningPathStep.license.license ? (
-      <p className="learning-step_license">
-        {learningPathStep.license.url ?
-          <a target="_blank" rel="noopener noreferrer" href={learningPathStep.license.url}>{polyglot.t('learningPathStep.license', { license: learningPathStep.license.license })}</a>
-        : polyglot.t('learningPathStep.license', { license: learningPathStep.license.license })}
-      </p>
-    ) : '';
+    );
     return (
       <div className="two-column_content--wide">
         <Helmet title={polyglot.t('htmlTitleTemplates.learningPathStep', { title: stepTitle || '' })} />
-        <div className="learning-step">
-          {learningPathStep.showTitle ? (
-            <div className="learning-step_hd">
-              <h1 className="learning-step_title">{stepTitle}</h1>
-              {license}
-            </div>
-          ) : null}
-          <div className="learning-step_bd" dangerouslySetInnerHTML={{ __html: stepDescription }} />
-        </div>
+        <LearningPathStepInformation learningPathStep={learningPathStep} stepTitle={stepTitle} />
         {oembedContent ? <Oembed oembedContent={oembedContent} /> : ''}
         {authenticated ? edit : null}
         <Lightbox display={this.state.displayCopyPath} onClose={onLightboxClose}>

@@ -28,7 +28,9 @@ const LearningPathGeneralInfo = (props, context) => {
     <div>
       <div className="learningpath-general-info">
         <h3 className="learningpath-general-info_h">
-          <Link to={href} onClick={localCloseSidebars}>{titleI18N(learningPath, lang, true)}</Link>
+          <Link to={href} className={'cta-link--primary cta-link--underline'} onClick={localCloseSidebars}>
+            {titleI18N(learningPath, lang, true)}
+          </Link>
         </h3>
         <div className="learningpath-general-info_b">
           <LabeledIcon.Today labelText={formatDate(learningPath.lastUpdated, lang)} tagName="time" />
