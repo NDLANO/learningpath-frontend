@@ -22,6 +22,7 @@ import {
   getLearningPathSearchTotalCount,
  } from './learningPathSearchSelectors';
 
+
 const LearningPathSearch = (props) => {
   const { learningPaths, lastPage, location: { pathname, query }, pushRoute } = props;
   const page = query.page ? parseInt(query.page, 10) : 1;
