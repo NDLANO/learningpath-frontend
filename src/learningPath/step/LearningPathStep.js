@@ -8,13 +8,10 @@
 
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import Helmet from 'react-helmet';
-
 import Oembed from './oembed/Oembed';
 import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
 import polyglot from '../../i18n';
-import Icon from '../../common/Icon';
 import { fetchLearningPathStep } from './learningPathStepActions';
 import { copyLearningPath } from '../learningPathActions';
 import CopyLearningPath from '../new/CopyLearningPath';
