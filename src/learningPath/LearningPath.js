@@ -77,10 +77,12 @@ export class LearningPath extends Component {
         <div className="two-column">
           <aside className={collapseClassName()}>
             <LearningPathGeneralInfo {...this.props} onCopyLearningPathClick={this.onCopyLearningPathClick} />
-            {sortableTableOfContent}
-            {addStepButton}
-            {sortableTableOfContentButton}
-            {saveButtons}
+            <div className="step-nav_wrapper">
+              {sortableTableOfContent}
+              {addStepButton}
+              {sortableTableOfContentButton}
+              {saveButtons}
+            </div>
           </aside>
           <main className={mainClassNames}>
             {children}
