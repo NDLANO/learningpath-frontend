@@ -52,23 +52,16 @@ class LearningPathStep extends React.Component {
   }
 
   render() {
-    const { authenticated, learningPathStep, learningPath, copyPath } = this.props;
+    const { learningPathStep, learningPath, copyPath } = this.props;
     const { lang } = this.context;
     const stepTitle = titleI18N(learningPathStep, lang, true);
     const stepDescription = descriptionI18N(learningPathStep, lang, true);
     const oembedContent = learningPathStep.oembed;
-    const editStepTarget = `/learningpaths/${learningPath.id}/step/${learningPathStep.id}/edit`;
     const onLightboxClose = () => this.setState({ displayCopyPath: false });
     const onCopy = () => {
       copyPath(learningPath, lang);
       onLightboxClose();
     };
-    const edit = (
-      <div className="block-container_fixed block-container_fixed--bottom--right">
-        {learningPath.canEdit ? <Link className="cta-link cta-link--round cta-link--scale" to={editStepTarget}><Icon.Create /> {polyglot.t('editPathStep.edit')}</Link> :
-          <button className="cta-link cta-link--round cta-link--scale" onClick={this.onCopyLearningPathClick}>{polyglot.t('copyLearningPath.createCopy')}</button>}
-      </div>
-      );
     const license = learningPathStep.license && learningPathStep.license.license ? (
       <p className="learning-step_license">
         {learningPathStep.license.url ?
@@ -89,7 +82,6 @@ class LearningPathStep extends React.Component {
           <div className="learning-step_bd" dangerouslySetInnerHTML={{ __html: stepDescription }} />
         </div>
         {oembedContent ? <Oembed oembedContent={oembedContent} /> : ''}
-        {authenticated ? edit : null}
         <Lightbox display={this.state.displayCopyPath} onClose={onLightboxClose}>
           <CopyLearningPath learningPath={learningPath} onClose={onLightboxClose} onCopy={onCopy} />
         </Lightbox>
