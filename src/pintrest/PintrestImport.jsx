@@ -26,7 +26,7 @@ class PintrestImport extends Component {
 
   handleBoardNameSubmit(boardName) {
     this.setState({ fetchingPins: true });
-    fetchPins(boardName)
+    fetchPins(boardName.match((/\w+\/\w+/))[0])
       .then((pins) => {
         this.setState({
           pins: pins.data,
