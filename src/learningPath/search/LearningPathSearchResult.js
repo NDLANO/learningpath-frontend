@@ -62,6 +62,14 @@ export default class SearchResult extends Component {
         <Link to={`/learningpaths/${path.id}/first-step/`} className="search-result_img_container">
           {image()}
         </Link>
+        <div className="border-box_wrapper">
+          <div className="border-box border-box--block">
+            <LabeledIcon.Today labelText={formatDate(path.lastUpdated, lang)} tagName="time" />
+          </div>
+          <div className="border-box border-box--block">
+            <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName="time" />
+          </div>
+        </div>
         <div className="search-result_bd">
           <Link to={`/learningpaths/${path.id}/first-step/`}>
             <h2 className="search-result_title">
@@ -78,14 +86,6 @@ export default class SearchResult extends Component {
             {tags.map(tag =>
               <button key={tag} className={tagsClassName(tag)} onClick={evt => onTagClick(evt, tag)} href="#">{tag}</button>
             )}
-          </div>
-        </div>
-        <div className="border-box_wrapper">
-          <div className="border-box border-box--block">
-            <LabeledIcon.Today labelText={formatDate(path.lastUpdated, lang)} tagName="time" />
-          </div>
-          <div className="border-box border-box--block">
-            <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName="time" />
           </div>
         </div>
       </div>

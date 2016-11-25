@@ -30,11 +30,17 @@ const LearningPathGeneralInfo = (props, context) => {
         <h3 className="learningpath-general-info_h">
           <Link to={href} onClick={localCloseSidebars}>{titleI18N(learningPath, lang, true)}</Link>
         </h3>
+        <div className="border-box_wrapper">
+          <div className="border-box border-box--inline_block">
+            <LabeledIcon.Today labelText={formatDate(learningPath.lastUpdated, lang)} tagName="time" />
+          </div>
+          <div className="border-box border-box--inline_block">
+            <LabeledIcon.QueryBuilder labelText={formatDuration(learningPath.duration, lang)} tagName="time" />
+          </div>
+        </div>
         <div className="learningpath-general-info_b">
-          <LabeledIcon.Today labelText={formatDate(learningPath.lastUpdated, lang)} tagName="time" />
-          <LabeledIcon.QueryBuilder labelText={formatDuration(learningPath.duration, lang)} tagName="time" />
-          <LearningPathCopyright copyright={learningPath.copyright} />
           {learningPath.isBasedOn ? <IsBasedOn path={learningPath} /> : '' }
+          <LearningPathCopyright copyright={learningPath.copyright} />
         </div>
         <LearningPathActionType authenticated={authenticated} learningPath={learningPath} localCloseSidebars={localCloseSidebars} onCopyLearningPathClick={onCopyLearningPathClick} />
       </div>
