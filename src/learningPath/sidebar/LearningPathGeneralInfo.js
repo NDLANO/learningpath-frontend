@@ -31,10 +31,10 @@ const LearningPathGeneralInfo = (props, context) => {
           <Link to={href} onClick={localCloseSidebars}>{titleI18N(learningPath, lang, true)}</Link>
         </h3>
         <div className="border-box_wrapper">
-          <div className="border-box border-box--inline_block">
+          <div className="border-box">
             <LabeledIcon.Today labelText={formatDate(learningPath.lastUpdated, lang)} tagName="time" />
           </div>
-          <div className="border-box border-box--inline_block">
+          <div className="border-box">
             <LabeledIcon.QueryBuilder labelText={formatDuration(learningPath.duration, lang)} tagName="time" />
           </div>
         </div>
