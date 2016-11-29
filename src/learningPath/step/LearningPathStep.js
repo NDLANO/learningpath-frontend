@@ -8,13 +8,10 @@
 
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import Helmet from 'react-helmet';
-
 import Oembed from './oembed/Oembed';
 import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
 import polyglot from '../../i18n';
-import Icon from '../../common/Icon';
 import { fetchLearningPathStep } from './learningPathStepActions';
 import { copyLearningPath } from '../learningPathActions';
 import CopyLearningPath from '../new/CopyLearningPath';
@@ -52,23 +49,16 @@ class LearningPathStep extends React.Component {
   }
 
   render() {
-    const { authenticated, learningPathStep, learningPath, copyPath } = this.props;
+    const { learningPathStep, learningPath, copyPath } = this.props;
     const { lang } = this.context;
     const stepTitle = titleI18N(learningPathStep, lang, true);
     const stepDescription = descriptionI18N(learningPathStep, lang, true);
     const oembedContent = learningPathStep.oembed;
-    const editStepTarget = `/learningpaths/${learningPath.id}/step/${learningPathStep.id}/edit`;
     const onLightboxClose = () => this.setState({ displayCopyPath: false });
     const onCopy = () => {
       copyPath(learningPath, lang);
       onLightboxClose();
     };
-    const edit = (
-      <div className="block-container_fixed block-container_fixed--bottom--right">
-        {learningPath.canEdit ? <Link className="cta-link cta-link--round cta-link--scale" to={editStepTarget}><Icon.Create /> {polyglot.t('editPathStep.edit')}</Link> :
-          <button className="cta-link cta-link--round cta-link--scale" onClick={this.onCopyLearningPathClick}>{polyglot.t('copyLearningPath.createCopy')}</button>}
-      </div>
-      );
     const license = learningPathStep.license && learningPathStep.license.license ? (
       <p className="learning-step_license">
         {learningPathStep.license.url ?
@@ -89,7 +79,6 @@ class LearningPathStep extends React.Component {
           <div className="learning-step_bd" dangerouslySetInnerHTML={{ __html: stepDescription }} />
         </div>
         {oembedContent ? <Oembed oembedContent={oembedContent} /> : ''}
-        {authenticated ? edit : null}
         <Lightbox display={this.state.displayCopyPath} onClose={onLightboxClose}>
           <CopyLearningPath learningPath={learningPath} onClose={onLightboxClose} onCopy={onCopy} />
         </Lightbox>

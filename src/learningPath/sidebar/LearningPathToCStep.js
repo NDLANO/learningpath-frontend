@@ -13,21 +13,28 @@ import classNames from 'classnames';
 import last from 'lodash/last';
 import LearningPathStepIcon from '../../learningPath/step/LearningPathStepIcon';
 import { titleI18N } from '../../util/i18nFieldFinder';
+import Icon from '../../common/Icon';
 
-const LearningPathToCStep = ({ learningPath, activeStepId, localCloseSidebars, hasAddStepButton, step, steps }, { lang }) => {
+const LearningPathToCStep = (props, { lang }) => {
+  const { learningPath, activeStepId, localCloseSidebars, hasAddStepButton, step, steps } = props;
   const base = `/learningpaths/${learningPath.id}`;
   const itemClassName = stepId => classNames({
     'step-nav_item': true,
     'step-nav_item--active': activeStepId ? activeStepId === stepId : false,
     'step-nav_item--bottom_border': ((hasAddStepButton && learningPath.canEdit) || (!hasAddStepButton && step !== last(steps)) || (step !== last(steps) && !learningPath.canEdit)),
   });
+  const isActiveAndCanEdit = activeStepId === step.id.toString() && learningPath.canEdit;
+  const linkUrl = isActiveAndCanEdit ? `${base}/step/${step.id}/edit` : `${base}/step/${step.id}`;
   return (
     <li className={itemClassName(`${step.id}`)} >
-      <Link to={`${base}/step/${step.id}`} className="step-nav_link" onClick={localCloseSidebars}>
+      <Link to={linkUrl} className="step-nav_link" onClick={localCloseSidebars}>
         {steps.length > 1 ? <div className="step-nav_line" /> : ''}
         <LearningPathStepIcon learningPathStepType={step.type} isCircle />
         <div className="step-nav_title">
-          {titleI18N(step, lang, true)}
+          <span>
+            {titleI18N(step, lang, true)}
+          </span>
+          {isActiveAndCanEdit ? <Icon.Create /> : ''}
         </div>
       </Link>
     </li>
