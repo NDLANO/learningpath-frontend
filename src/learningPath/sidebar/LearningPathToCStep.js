@@ -23,14 +23,8 @@ const LearningPathToCStep = (props, { lang }) => {
     'step-nav_item--active': activeStepId ? activeStepId === stepId : false,
     'step-nav_item--bottom_border': ((hasAddStepButton && learningPath.canEdit) || (!hasAddStepButton && step !== last(steps)) || (step !== last(steps) && !learningPath.canEdit)),
   });
-
-  const editButton = (
-    <Link to={`${base}/step/${step.id}/edit`} onClick={localCloseSidebars}>
-      <Icon.Create />
-    </Link>
-  );
-
-  const linkUrl = (activeStepId === step.id.toString() && learningPath.canEdit) ? `${base}/step/${step.id}/edit` : `${base}/step/${step.id}`;
+  const isActiveAndCanEdit = activeStepId === step.id.toString() && learningPath.canEdit;
+  const linkUrl = isActiveAndCanEdit ? `${base}/step/${step.id}/edit` : `${base}/step/${step.id}`;
   return (
     <li className={itemClassName(`${step.id}`)} >
       <Link to={linkUrl} className="step-nav_link" onClick={localCloseSidebars}>
@@ -40,7 +34,7 @@ const LearningPathToCStep = (props, { lang }) => {
           <span>
             {titleI18N(step, lang, true)}
           </span>
-          {learningPath.canEdit ? editButton : ''}
+          {isActiveAndCanEdit ? <Icon.Create /> : ''}
         </div>
       </Link>
     </li>
