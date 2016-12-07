@@ -27,18 +27,17 @@ class LearningPathStep extends React.Component {
     this.onCopyLearningPathClick = this.onCopyLearningPathClick.bind(this);
   }
 
-  componentWillMount() {
-    const { lang } = this.context;
+  componentDidMount() {
     const { localFetchLearningPathStep, params: { pathId, stepId } } = this.props;
-    localFetchLearningPathStep(pathId, stepId, lang);
+    const width = this.columnWidth.getBoundingClientRect().width;
+    localFetchLearningPathStep(pathId, stepId, width);
   }
 
   componentWillUpdate(nextProps) {
-    const { lang } = this.context;
     const { localFetchLearningPathStep, params: { pathId, stepId } } = nextProps;
-
+    const width = this.columnWidth.getBoundingClientRect().width;
     if (this.props.params.stepId !== stepId || this.props.params.pathId !== pathId) {
-      localFetchLearningPathStep(pathId, stepId, lang);
+      localFetchLearningPathStep(pathId, stepId, width);
     }
   }
 
@@ -69,7 +68,7 @@ class LearningPathStep extends React.Component {
     return (
       <div className="two-column_content--wide">
         <Helmet title={polyglot.t('htmlTitleTemplates.learningPathStep', { title: stepTitle || '' })} />
-        <div className="learning-step">
+        <div className="learning-step" ref={(div) => { this.columnWidth = div; }}>
           {learningPathStep.showTitle ? (
             <div className="learning-step_hd">
               <h1 className="learning-step_title">{stepTitle}</h1>

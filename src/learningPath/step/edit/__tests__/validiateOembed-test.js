@@ -109,15 +109,15 @@ test('actions/validiateOembed invalid url', (t) => {
     nock.cleanAll();
   };
   const url = 'thisIsAnInvalidUrl';
-
+  const maxwidth = 300;
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get('/oembed')
-    .query({ url })
+    .query({ url, maxwidth })
     .reply(501, { type: 'introduction', title: 'sup' });
 
   const store = mockStore({ authToken });
 
-  store.dispatch(validateOembed(url, 'nb', 'url', 'feil'))
+  store.dispatch(validateOembed(url, 'nb', maxwidth, 'url', 'feil'))
     .then(() => {
       t.doesNotThrow(() => apiMock.done());
       t.fail('Promise should be rejected.');

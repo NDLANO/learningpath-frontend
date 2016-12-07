@@ -67,7 +67,7 @@ LearningPathStepForm.propTypes = {
   step: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
-  learningPathId: PropTypes.number.isRequired,
+  learningPathId: PropTypes.number,
   oembedPreview: PropTypes.array,
   validateOembedUrl: PropTypes.func.isRequired,
   licenseOptions: PropTypes.array.isRequired,
@@ -89,13 +89,15 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapDispatchToProps = {
-  validateOembedUrl: (embedContent, lang) => validateOembed(embedContent, lang),
+  validateOembedUrl: (embedContent, lang, maxwidth) => validateOembed(embedContent, lang, maxwidth),
   localChange: (form, field, value) => change(form, field, value),
 };
 
 const asyncValidate = (values, dispatch, props) => {
   const { validateOembedUrl, lang } = props;
-  return validateOembedUrl(values.url, lang);
+  const tempWidth = window.innerWidth > 1456 ? 729 : (window.innerWidth - 330 - 64) * 0.9 * 0.9; // 330 (sidebar), 64(paddings)
+  const width = window.innerWidth < 800 ? window.innerWidth : tempWidth;
+  return validateOembedUrl(values.url, lang, width);
 };
 
 const validate = createValidator({
