@@ -23,13 +23,13 @@ import polyglot from '../../../i18n';
 
 class EditLearningPathStep extends Component {
 
-  componentWillMount() {
-    const { lang } = this.context;
+  componentDidMount() {
     const { fetchLearningPathLicenses, localFetchLearningPathStep, params: { pathId, stepId } } = this.props;
     fetchLearningPathLicenses();
-
     if (stepId) {
-      localFetchLearningPathStep(pathId, stepId, lang);
+      const tempWidth = window.innerWidth > 1456 ? 729 : (window.innerWidth - 330 - 64) * 0.9 * 0.9; // 330 (sidebar), 64(paddings)
+      const width = window.innerWidth < 800 ? window.innerWidth : tempWidth;
+      localFetchLearningPathStep(pathId, stepId, width);
     }
   }
 
@@ -79,7 +79,7 @@ EditLearningPathStep.propTypes = {
     pathId: PropTypes.string.isRequired,
     stepId: PropTypes.string,
   }).isRequired,
-  learningPathId: PropTypes.number,
+  learningPathId: PropTypes.number.isRequired,
   fetchLearningPathLicenses: PropTypes.func.isRequired,
   localFetchLearningPathStep: PropTypes.func.isRequired,
   licenses: PropTypes.array.isRequired,

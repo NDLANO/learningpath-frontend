@@ -15,7 +15,7 @@ import polyglot from '../../../i18n';
 export const removeOembedPreview = createAction('REMOVE_OEMBED_PREVIEW');
 export const setOembedPreview = createAction('SET_OEMBED_PREVIEW');
 
-export function validateOembed(url, lang, fieldName = 'url', msgKey = 'validation.oembed') {
+export function validateOembed(url, lang, maxwidth, fieldName = 'url', msgKey = 'validation.oembed') {
   if (!url || url.length === 0) {
     return (dispatch => new Promise((resolve) => {
       dispatch(removeOembedPreview());
@@ -23,7 +23,7 @@ export function validateOembed(url, lang, fieldName = 'url', msgKey = 'validatio
     }));
   }
 
-  return (dispatch, getState) => new Promise((resolve, reject) => fetchOembedUrl(getState().authToken, { url })
+  return (dispatch, getState) => new Promise((resolve, reject) => fetchOembedUrl(getState().authToken, { url, maxwidth })
     .then((oembed) => {
       const state = getState();
       const currentOembedTitle = get(state, 'oembedPreview.oembedContent[0].title');

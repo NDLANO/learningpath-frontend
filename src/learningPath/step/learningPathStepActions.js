@@ -32,7 +32,7 @@ export function fetchOembed(query) {
     .catch(err => dispatch(applicationError(err)));
 }
 
-export function fetchLearningPathStep(pathId, stepId) {
+export function fetchLearningPathStep(pathId, stepId, width) {
   return (dispatch, getState) => {
     const { authToken, learningPath, locale } = getState();
 
@@ -48,7 +48,7 @@ export function fetchLearningPathStep(pathId, stepId) {
         if (step.embedUrl) {
           const oembedContent = oembedContentI18N(step, locale, true);
           if (oembedContent && oembedContent.url) {
-            dispatch(fetchOembed({ url: oembedContent.url, maxwidth: Math.ceil(window.innerWidth) }));
+            dispatch(fetchOembed({ url: oembedContent.url, maxwidth: Math.ceil(width) }));
           }
         }
         dispatch(setLearningPathStep(step));
