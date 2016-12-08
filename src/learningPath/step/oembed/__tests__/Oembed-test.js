@@ -127,21 +127,21 @@ test('component/Oembed iframe resizing', (t) => {
     source: iframe.contentWindow, data: { height: '800' },
   });
 
-  t.equal(iframe.style.height, '835px');
+  t.equal(iframe.style.height, '855px');
 
 
   instance.handleResizeMessage({
     source: iframe.contentWindow, data: { height: '1000' },
   });
 
-  t.equal(iframe.style.height, '1035px');
+  t.equal(iframe.style.height, '1055px');
 
 
   instance.handleResizeMessage({
     source: iframe.contentWindow, data: { height: '900' },
   });
 
-  t.equal(iframe.style.height, '1035px');
+  t.equal(iframe.style.height, '1055px');
 
   t.doesNotThrow(() => instance.handleResizeMessage());
 
@@ -149,7 +149,7 @@ test('component/Oembed iframe resizing', (t) => {
     source: { mysteryObject: true }, data: { height: '2000' },
   });
 
-  t.equal(iframe.style.height, '1035px');
+  t.equal(iframe.style.height, '1055px');
 
 
   component.setProps({ oembedContent: oembed });
