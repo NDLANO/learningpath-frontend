@@ -11,7 +11,6 @@ import { connect } from 'react-redux';
 import defined from 'defined';
 import classNames from 'classnames';
 import LearningPathGeneralInfo from './sidebar/LearningPathGeneralInfo';
-import LearningPathPrevNext from './LearningPathPrevNext';
 import LearningPathToC from './sidebar/LearningPathToC';
 import Lightbox from '../common/Lightbox';
 import CopyLearningPath from '../learningPath/new/CopyLearningPath';
@@ -86,7 +85,6 @@ export class LearningPath extends Component {
           </aside>
           <main className={mainClassNames}>
             {children}
-            <LearningPathPrevNext currentStepId={stepId} />
           </main>
         </div>
       </div>

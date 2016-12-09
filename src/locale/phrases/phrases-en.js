@@ -87,8 +87,8 @@ const phrases = {
   },
   learningPath: {
     pageName: 'Learning path details',
-    previous: 'Previous',
-    next: 'Next',
+    previous: 'Previous: %{title}',
+    next: 'Next: %{title}',
     of: 'of',
     description: 'Description',
     descriptionPlaceholder: 'Write a short description for the learning path.',

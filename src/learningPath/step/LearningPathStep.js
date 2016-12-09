@@ -16,6 +16,7 @@ import { fetchLearningPathStep } from './learningPathStepActions';
 import { copyLearningPath } from '../learningPathActions';
 import CopyLearningPath from '../new/CopyLearningPath';
 import Lightbox from '../../common/Lightbox';
+import LearningPathStepPrevNext from './LearningPathStepPrevNext';
 
 class LearningPathStep extends React.Component {
   constructor(props) {
@@ -68,20 +69,22 @@ class LearningPathStep extends React.Component {
     ) : '';
     return (
       <div className="two-column_content--wide">
-        <Helmet title={polyglot.t('htmlTitleTemplates.learningPathStep', { title: stepTitle || '' })} />
-        <div className="learning-step">
-          {learningPathStep.showTitle ? (
-            <div className="learning-step_hd">
-              <h1 className="learning-step_title">{stepTitle}</h1>
-              {license}
-            </div>
+        <LearningPathStepPrevNext currentStepId={learningPathStep.id} lang={lang}>
+          <Helmet title={polyglot.t('htmlTitleTemplates.learningPathStep', { title: stepTitle || '' })} />
+          <div className="learning-step">
+            {learningPathStep.showTitle ? (
+              <div className="learning-step_hd">
+                <h1 className="learning-step_title">{stepTitle}</h1>
+                {license}
+              </div>
           ) : null}
-          <div className="learning-step_bd" dangerouslySetInnerHTML={{ __html: stepDescription }} />
-        </div>
-        {oembedContent ? <Oembed oembedContent={oembedContent} /> : ''}
-        <Lightbox display={this.state.displayCopyPath} onClose={onLightboxClose}>
-          <CopyLearningPath learningPath={learningPath} onClose={onLightboxClose} onCopy={onCopy} />
-        </Lightbox>
+            <div className="learning-step_bd" dangerouslySetInnerHTML={{ __html: stepDescription }} />
+          </div>
+          {oembedContent ? <Oembed oembedContent={oembedContent} /> : ''}
+          <Lightbox display={this.state.displayCopyPath} onClose={onLightboxClose}>
+            <CopyLearningPath learningPath={learningPath} onClose={onLightboxClose} onCopy={onCopy} />
+          </Lightbox>
+        </LearningPathStepPrevNext>
       </div>
     );
   }

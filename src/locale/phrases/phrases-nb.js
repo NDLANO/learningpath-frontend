@@ -87,8 +87,8 @@ const phrases = {
   },
   learningPath: {
     pageName: 'Læringstidetaljer',
-    previous: 'Forrige',
-    next: 'Neste',
+    previous: 'Forrige: %{title}',
+    next: 'Neste: %{title}',
     of: 'av',
     description: 'Beskrivelse',
     descriptionPlaceholder: 'Skriv en kort beskrivelse av læringsstien.',
