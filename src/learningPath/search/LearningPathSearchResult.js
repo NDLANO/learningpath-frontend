@@ -63,6 +63,14 @@ export default class SearchResult extends Component {
         <Link to={`/learningpaths/${path.id}/first-step/`} className="search-result_img_container">
           {image()}
         </Link>
+        <div className="border-box_wrapper">
+          <div className="border-box border-box--block">
+            <LabeledIcon.Today labelText={formatDate(path.lastUpdated, lang)} tagName="time" />
+          </div>
+          <div className="border-box border-box--block">
+            <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName="time" />
+          </div>
+        </div>
         <div className="search-result_bd">
           <Link to={`/learningpaths/${path.id}/first-step/`}>
             <h2 className="search-result_title">
@@ -70,8 +78,6 @@ export default class SearchResult extends Component {
             </h2>
           </Link>
           <div className="search-result_meta">
-            <LabeledIcon.Today labelText={formatDate(path.lastUpdated, lang)} tagName="time" />
-            <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName="time" />
             <LearningPathContributors copyright={path.copyright} />
           </div>
           <Link to={`/learningpaths/${path.id}/first-step/`} className="search-result_description">{descriptionI18N(path, lang, true)}</Link>

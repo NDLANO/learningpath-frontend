@@ -15,12 +15,12 @@ const IsBasedOn = ({ path }, { lang }) => {
   const title = path.isBasedOnTitle ? isBasedOnTitleI18N(path, lang, true) : polyglot.t('learningPath.isBasedOnPath');
   const url = `/learningpaths/${path.isBasedOn}/first-step/`;
   return (
-    <p>
+    <span className="is-based-on_wrapper">
       <span>{polyglot.t('learningPath.isBasedOn')}</span>
       <Link to={url} className="cta-link--primary cta-link--underline" target="_blank" rel="noopener noreferrer" >
         {title}
       </Link>
-    </p>
+    </span>
   );
 };
 

@@ -12,7 +12,7 @@ import ReactDOM from 'react-dom';
 import get from 'lodash/get';
 
 export const urlIsNDLA = url => (/^(http|https):\/\/ndla.no/).test(url);
-
+export const urlIsApiNDLA = url => (/^(http):\/\/api.(test|staging).ndla.no/).test(url);
 
 export default class Oembed extends React.Component {
   constructor(props) {
@@ -42,7 +42,7 @@ export default class Oembed extends React.Component {
   }
 
   handleIframeResizing({ oembedContent: { url } }) {
-    if (urlIsNDLA(url)) {
+    if (urlIsNDLA(url) || urlIsApiNDLA(url)) {
       this.setState({ isNDLAResource: true }, this.enableIframeResizing);
     } else {
       this.setState({ isNDLAResource: false }, this.disableIframeResizing);
@@ -72,7 +72,7 @@ export default class Oembed extends React.Component {
       return;
     }
 
-    const newHeight = parseInt(get(evt, 'data.height', 0), 10) + 35;
+    const newHeight = parseInt(get(evt, 'data.height', 0), 10) + 55;
     const currentHeight = parseInt(get(iframe, 'style.height') || 0, 10);
 
     if (newHeight > currentHeight) {
