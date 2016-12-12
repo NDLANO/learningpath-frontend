@@ -43,7 +43,7 @@ export default function PreviewImage({ image, onSaveImage }) {
         <div className="image-preview_tags">
           <b>{polyglot.t('learningPath.image.tags')}</b>
           {tags.map(tag =>
-            <span key={tag} className="tag_item">{tag}</span>
+            <span key={tag} className="tag_item">{`#${tag}`}</span>
           )}
         </div>
         <button className="button button--primary button--block" onClick={onSaveImage}>{polyglot.t('learningPath.image.choseImage')}</button>
