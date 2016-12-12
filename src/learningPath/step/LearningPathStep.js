@@ -17,6 +17,7 @@ import { copyLearningPath } from '../learningPathActions';
 import CopyLearningPath from '../new/CopyLearningPath';
 import Lightbox from '../../common/Lightbox';
 import LearningPathStepInformation from './LearningPathStepInformation';
+import LearningPathStepPrevNext from './LearningPathStepPrevNext';
 
 class LearningPathStep extends React.Component {
   constructor(props) {
@@ -62,12 +63,14 @@ class LearningPathStep extends React.Component {
 
     return (
       <div className="two-column_content--wide">
-        <Helmet title={polyglot.t('htmlTitleTemplates.learningPathStep', { title: stepTitle || '' })} />
-        <LearningPathStepInformation learningPathStep={learningPathStep} stepTitle={stepTitle} />
-        {oembedContent ? <Oembed oembedContent={oembedContent} /> : ''}
-        <Lightbox display={this.state.displayCopyPath} onClose={onLightboxClose}>
-          <CopyLearningPath learningPath={learningPath} onClose={onLightboxClose} onCopy={onCopy} />
-        </Lightbox>
+        <LearningPathStepPrevNext currentStepId={learningPathStep.id} lang={lang}>
+          <Helmet title={polyglot.t('htmlTitleTemplates.learningPathStep', { title: stepTitle || '' })} />
+          <LearningPathStepInformation learningPathStep={learningPathStep} stepTitle={stepTitle} />
+          {oembedContent ? <Oembed oembedContent={oembedContent} /> : ''}
+          <Lightbox display={this.state.displayCopyPath} onClose={onLightboxClose}>
+            <CopyLearningPath learningPath={learningPath} onClose={onLightboxClose} onCopy={onCopy} />
+          </Lightbox>
+        </LearningPathStepPrevNext>
       </div>
     );
   }
