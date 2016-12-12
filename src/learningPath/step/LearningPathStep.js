@@ -8,7 +8,6 @@
 
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import Helmet from 'react-helmet';
 import Oembed from './oembed/Oembed';
 import { titleI18N } from '../../util/i18nFieldFinder';
@@ -60,12 +59,7 @@ class LearningPathStep extends React.Component {
       copyPath(learningPath, lang);
       onLightboxClose();
     };
-    const edit = (
-      <div className="block-container_fixed block-container_fixed--bottom--right">
-        {learningPath.canEdit ? <Link className="cta-link cta-link--round cta-link--scale" to={editStepTarget}><Icon.Create /> {polyglot.t('editPathStep.edit')}</Link> :
-          <button className="cta-link cta-link--round cta-link--scale" onClick={this.onCopyLearningPathClick}>{polyglot.t('copyLearningPath.createCopy')}</button>}
-      </div>
-    );
+
     return (
       <div className="two-column_content--wide">
         <Helmet title={polyglot.t('htmlTitleTemplates.learningPathStep', { title: stepTitle || '' })} />

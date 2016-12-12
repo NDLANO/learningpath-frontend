@@ -59,7 +59,7 @@ class EditLearningPathStep extends Component {
     };
 
     return (
-      <div className="two-column_content--wide learning-path-step">
+      <div className="two-column_content--wide learning-path-step two-column_content--white-bg">
         <LearningPathStepForm
           step={step}
           learningPathId={learningPathId}
