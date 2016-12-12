@@ -84,7 +84,7 @@ export default class SearchResult extends Component {
           {path.isBasedOn ? <IsBasedOn path={path} /> : ''}
           <div>
             {tags.map(tag =>
-              <button key={tag} className={tagsClassName(tag)} onClick={evt => onTagClick(evt, tag)} href="#">{tag}</button>
+              <button key={tag} className={tagsClassName(tag)} onClick={evt => onTagClick(evt, tag)} href="#">{`#${tag}`}</button>
             )}
           </div>
         </div>
