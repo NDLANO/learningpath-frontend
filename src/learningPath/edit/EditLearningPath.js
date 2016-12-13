@@ -20,9 +20,9 @@ import { updateLearningPath } from '../learningPathActions';
 
 class EditLearningPath extends Component {
   componentDidMount() {
-    const { fetchLearningPathTags, fetchLearningPathLicenses } = this.props;
+    const { fetchLearningPathTags, fetchLearninigPathLicenses } = this.props;
     fetchLearningPathTags();
-    fetchLearningPathLicenses();
+    fetchLearninigPathLicenses(true);
   }
 
   render() {
@@ -61,7 +61,7 @@ EditLearningPath.propTypes = {
   licenses: PropTypes.array.isRequired,
   localUpdateLearningPath: PropTypes.func.isRequired,
   fetchLearningPathTags: PropTypes.func.isRequired,
-  fetchLearningPathLicenses: PropTypes.func.isRequired,
+  fetchLearninigPathLicenses: PropTypes.func.isRequired,
   localFetchImages: PropTypes.func.isRequired,
   localFetchImage: PropTypes.func.isRequired,
   localFetchImageWithMetaUrl: PropTypes.func.isRequired,
@@ -71,13 +71,13 @@ const mapStateToProps = state => Object.assign({}, state, {
   learningPath: get(state, 'learningPath', {}),
   learningSteps: get(state, 'learningPath.learningsteps', []),
   tags: getLearningPathTagsByLanguage(state),
-  licenses: get(state, 'learningPathLicenses.all', []),
+  licenses: get(state, 'learningPathLicenses.creativeCommonLicenses.all', []),
 });
 
 const mapDispatchToProps = {
   localUpdateLearningPath: updateLearningPath,
   fetchLearningPathTags: fetchLearningPathTagsIfNeeded,
-  fetchLearningPathLicenses: fetchLearningPathLicensesIfNeeded,
+  fetchLearninigPathLicenses: fetchLearningPathLicensesIfNeeded,
   localFetchImages: fetchLearningPathImages,
   localFetchImage: fetchLearningPathImage,
   localFetchImageWithMetaUrl: fetchLearningPathImageWithMetaUrl,

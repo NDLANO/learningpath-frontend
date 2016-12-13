@@ -38,8 +38,8 @@ export class MyPage extends React.Component {
   }
 
   componentDidMount() {
-    const { fetchLearningPathLicenses, localFetchMyLearningPaths } = this.props;
-    fetchLearningPathLicenses();
+    const { fetchLearninigPathLicenses, localFetchMyLearningPaths } = this.props;
+    fetchLearninigPathLicenses(true);
     localFetchMyLearningPaths();
   }
 
@@ -160,7 +160,7 @@ MyPage.propTypes = {
   createPath: PropTypes.func.isRequired,
   learningPaths: PropTypes.array,
   copyPath: PropTypes.func.isRequired,
-  fetchLearningPathLicenses: PropTypes.func.isRequired,
+  fetchLearninigPathLicenses: PropTypes.func.isRequired,
   localFetchMyLearningPaths: PropTypes.func.isRequired,
   licenses: PropTypes.array.isRequired,
 };
@@ -190,7 +190,7 @@ const sortPaths = (paths, field, state) => {
 export function mapStateToProps(state) {
   const sortKey = state.myLearningPathsSortOrder || 'title';
   const learningPaths = sortPaths(state.learningPaths, sortKey, state);
-  const licenses = get(state, 'learningPathLicenses.all', []);
+  const licenses = get(state, 'learningPathLicenses.creativeCommonLicenses.all', []);
 
   return Object.assign({}, state, { learningPaths, sortKey, licenses });
 }
@@ -201,7 +201,7 @@ const mapDispatchToProps = {
   updatePathStatus: updateLearningPathStatus,
   createPath: createLearningPath,
   copyPath: copyLearningPath,
-  fetchLearningPathLicenses: fetchLearningPathLicensesIfNeeded,
+  fetchLearninigPathLicenses: fetchLearningPathLicensesIfNeeded,
   localFetchMyLearningPaths: fetchMyLearningPaths,
 };
 
