@@ -33,7 +33,7 @@ export function LearningPathPrevNext(props) {
         {stepperTag(prevStep, polyglot.t('learningPath.previous', { title: prevStep ? prevStep.title : '' }), false)}
       </div>
       {children}
-      <div className="learning-step learning-step--padding-bottom">
+      <div className="learning-step learning-step--padding-bottom learning-step--padding-top">
         {stepperTag(nextStep, polyglot.t('learningPath.next', { title: nextStep ? nextStep.title : '' }), true)}
       </div>
     </div>

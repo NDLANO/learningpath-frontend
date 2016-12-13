@@ -57,6 +57,7 @@ export default class SearchResult extends Component {
       'un-button': true,
       'tag_item--active': query.tag === tag,
     });
+
     return (
       <div className="search-result">
         <Link to={`/learningpaths/${path.id}/first-step/`} className="search-result_img_container">

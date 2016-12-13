@@ -38,7 +38,7 @@ export class LearningPath extends Component {
     });
   }
   render() {
-    const { learningPath, isTableOfContentOpen, copyPath, params: { stepId }, location: { pathname }, sortLearningSteps, main } = this.props;
+    const { learningPath, isTableOfContentOpen, copyPath, params: { stepId }, sortLearningSteps, main } = this.props;
     const { lang } = this.context;
     const saveButtons = defined(this.props.saveButtons, null);
     const addStepButton = defined(this.props.addStepButton, null);
@@ -57,10 +57,6 @@ export class LearningPath extends Component {
       copyPath(learningPath, lang);
       onLightboxClose();
     };
-
-    const mainClassNames = classNames('two-column_col', {
-      'two-column_col--white-bg': !!stepId || pathname.indexOf('/new') !== -1,
-    });
 
     return (
       <div className="wrapper">
@@ -83,7 +79,7 @@ export class LearningPath extends Component {
               {saveButtons}
             </div>
           </aside>
-          <main className={mainClassNames}>
+          <main className="two-column_col">
             {children}
           </main>
         </div>
@@ -100,9 +96,6 @@ LearningPath.propTypes = {
   params: PropTypes.shape({
     pathId: PropTypes.string.isRequired,
     stepId: PropTypes.string,
-  }).isRequired,
-  location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired,
   }).isRequired,
   sortLearningSteps: PropTypes.object,
   isTableOfContentOpen: PropTypes.bool.isRequired,

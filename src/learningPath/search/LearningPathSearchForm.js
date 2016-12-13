@@ -42,7 +42,7 @@ export default class SearchForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className="search-form search-form--on-dark" >
+      <form onSubmit={this.handleSubmit} className="search-form" >
         <input
           type="text" className="search-form_query"
           onChange={this.handleQueryChange}
@@ -53,7 +53,7 @@ export default class SearchForm extends Component {
         <button className="search-form_btn">{polyglot.t('searchForm.btn')}</button>
 
         <select
-          className="search-form_sort-order select--white-border"
+          className="search-form_sort-order select--gray-border"
           onChange={this.handleSortChange}
           value={this.state.sort}
         >

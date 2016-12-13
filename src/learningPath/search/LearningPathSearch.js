@@ -38,7 +38,7 @@ const LearningPathSearch = (props) => {
 
   return (
     <Wrapper>
-      <OneColumn>
+      <OneColumn className={'one-colum--white-bg'}>
         <Masthead />
         <div className="page-header">
           <SearchForm
