@@ -19,9 +19,9 @@ const fetchPathStep = fetchAuthorized(
     '/learningpaths/:pathId/learningsteps/:stepId');
 const fetchMyPaths = fetchAuthorized('/learningpaths/mine');
 const fetchPathTags = fetchAuthorized('/learningpaths/tags');
-const fetchPathLicenses = (authToken, creativeCommon = false) => {
+const fetchPathLicenses = (authToken, filter) => {
   let url = apiResourceUrl('/learningpaths/licenses');
-  const query = { 'creative-common': creativeCommon };
+  const query = { filter };
   url += `?${queryString.stringify(query)}`;
   return fetch(url, { headers: { 'APP-KEY': authToken } }).then(resolveJsonOrRejectWithError);
 };

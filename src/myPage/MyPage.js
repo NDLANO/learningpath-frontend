@@ -39,7 +39,7 @@ export class MyPage extends React.Component {
 
   componentDidMount() {
     const { fetchLearninigPathLicenses, localFetchMyLearningPaths } = this.props;
-    fetchLearninigPathLicenses(true);
+    fetchLearninigPathLicenses('by');
     localFetchMyLearningPaths();
   }
 

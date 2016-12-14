@@ -22,7 +22,7 @@ class EditLearningPath extends Component {
   componentDidMount() {
     const { fetchLearningPathTags, fetchLearninigPathLicenses } = this.props;
     fetchLearningPathTags();
-    fetchLearninigPathLicenses(true);
+    fetchLearninigPathLicenses('by');
   }
 
   render() {

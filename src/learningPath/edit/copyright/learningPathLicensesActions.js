@@ -13,10 +13,10 @@ import { applicationError } from '../../../messages/messagesActions';
 export const setCreativeCommonLicenses = createAction('SET_CREATIVE_COMMON_LICENSES');
 export const setAllLicenses = createAction('SET_ALL_LICENSES');
 
-export function fetchLearningPathLicenses(creativeCommon = false) {
-  return (dispatch, getState) => fetchPathLicenses(getState().authToken, creativeCommon)
+export function fetchLearningPathLicenses(filter) {
+  return (dispatch, getState) => fetchPathLicenses(getState().authToken, filter)
     .then((licenses) => {
-      if (creativeCommon) {
+      if (filter.length > 0) {
         dispatch(setCreativeCommonLicenses(licenses));
       } else {
         dispatch(setAllLicenses(licenses));
@@ -25,11 +25,11 @@ export function fetchLearningPathLicenses(creativeCommon = false) {
     .catch(err => dispatch(applicationError(err)));
 }
 
-export function fetchLearningPathLicensesIfNeeded(creativeCommon = false) {
+export function fetchLearningPathLicensesIfNeeded(filter = '') {
   return (dispatch, getState) => {
     const { learningPathLicenses } = getState();
-    if ((creativeCommon && !learningPathLicenses.creativeCommonLicenses.hasFetched) || (!creativeCommon && !learningPathLicenses.allLicenses.hasFetched)) {
-      dispatch(fetchLearningPathLicenses(creativeCommon));
+    if ((filter.length > 0 && !learningPathLicenses.creativeCommonLicenses.hasFetched) || (filter.length === 0 && !learningPathLicenses.allLicenses.hasFetched)) {
+      dispatch(fetchLearningPathLicenses(filter));
     }
   };
 }
