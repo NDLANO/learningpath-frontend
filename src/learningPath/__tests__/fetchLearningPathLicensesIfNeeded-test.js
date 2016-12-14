@@ -13,14 +13,14 @@ import nock from 'nock';
 import payload403invalid from '../../actions/__tests__/payload403invalid';
 
 import { applicationError } from '../../messages/messagesActions';
-import { fetchLearningPathLicenses, setLearningPathLicensens } from '../edit/copyright/learningPathLicensesActions';
+import { fetchLearningPathLicenses, setAllLicenses, setCreativeCommonLicenses } from '../edit/copyright/learningPathLicensesActions';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
 const authToken = '123345';
 const licenses = [{ license: 'GPL v3', description: 'En lisens', url: 'ndla.no' }, { license: 'Copyright v3', description: 'En lisens', url: 'ndla.no' }];
-test('actions/fetchLearningPathLicenses', (t) => {
+test('actions/fetchLearningPathLicenses with creative-common sat to false', (t) => {
   const done = (res) => {
     t.end(res);
     nock.cleanAll();
@@ -35,7 +35,7 @@ test('actions/fetchLearningPathLicenses', (t) => {
   store.dispatch(fetchLearningPathLicenses())
     .then(() => {
       t.deepEqual(store.getActions(), [
-        setLearningPathLicensens(licenses),
+        setAllLicenses(licenses),
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();
@@ -44,7 +44,7 @@ test('actions/fetchLearningPathLicenses', (t) => {
 });
 
 
-test('actions/fetchLearningPathLicenses access denied', (t) => {
+test('actions/fetchLearningPathLicenses with creative-common sat to false access denied', (t) => {
   const done = (res) => {
     t.end(res);
     nock.cleanAll();
@@ -56,7 +56,57 @@ test('actions/fetchLearningPathLicenses access denied', (t) => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch(fetchLearningPathLicenses(licenses))
+  store.dispatch(fetchLearningPathLicenses())
+    .then(() => {
+      t.deepEqual(store.getActions(), [
+        applicationError(payload403invalid()),
+      ]);
+      t.doesNotThrow(() => apiMock.done());
+      done();
+    })
+    .catch(done);
+});
+
+
+test('actions/fetchLearningPathLicenses with creative-common sat to false', (t) => {
+  const done = (res) => {
+    t.end(res);
+    nock.cleanAll();
+  };
+
+  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+    .get('/learningpaths/licenses')
+    .query({ filter: 'by' })
+    .reply(200, licenses);
+
+  const store = mockStore({ authToken });
+
+  store.dispatch(fetchLearningPathLicenses('by'))
+    .then(() => {
+      t.deepEqual(store.getActions(), [
+        setCreativeCommonLicenses(licenses),
+      ]);
+      t.doesNotThrow(() => apiMock.done());
+      done();
+    })
+    .catch(done);
+});
+
+
+test('actions/fetchLearningPathLicenses with creative-common sat to true access denied', (t) => {
+  const done = (res) => {
+    t.end(res);
+    nock.cleanAll();
+  };
+
+  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+    .get('/learningpaths/licenses')
+    .query({ filter: 'by' })
+    .reply(403, { message: 'Invalid' });
+
+  const store = mockStore({ authToken });
+
+  store.dispatch(fetchLearningPathLicenses('by'))
     .then(() => {
       t.deepEqual(store.getActions(), [
         applicationError(payload403invalid()),
