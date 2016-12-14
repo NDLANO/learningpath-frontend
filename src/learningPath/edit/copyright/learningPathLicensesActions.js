@@ -13,7 +13,7 @@ import { applicationError } from '../../../messages/messagesActions';
 export const setCreativeCommonLicenses = createAction('SET_CREATIVE_COMMON_LICENSES');
 export const setAllLicenses = createAction('SET_ALL_LICENSES');
 
-export function fetchLearningPathLicenses(filter) {
+export function fetchLearningPathLicenses(filter = '') {
   return (dispatch, getState) => fetchPathLicenses(getState().authToken, filter)
     .then((licenses) => {
       if (filter.length > 0) {

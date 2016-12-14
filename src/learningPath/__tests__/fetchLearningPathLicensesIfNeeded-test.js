@@ -28,7 +28,6 @@ test('actions/fetchLearningPathLicenses with creative-common sat to false', (t) 
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get('/learningpaths/licenses')
-    .query({ 'creative-common': false })
     .reply(200, licenses);
 
   const store = mockStore({ authToken });
@@ -53,7 +52,6 @@ test('actions/fetchLearningPathLicenses with creative-common sat to false access
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get('/learningpaths/licenses')
-    .query({ 'creative-common': false })
     .reply(403, { message: 'Invalid' });
 
   const store = mockStore({ authToken });
@@ -78,12 +76,12 @@ test('actions/fetchLearningPathLicenses with creative-common sat to false', (t) 
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get('/learningpaths/licenses')
-    .query({ 'creative-common': true })
+    .query({ filter: 'by' })
     .reply(200, licenses);
 
   const store = mockStore({ authToken });
 
-  store.dispatch(fetchLearningPathLicenses(true))
+  store.dispatch(fetchLearningPathLicenses('by'))
     .then(() => {
       t.deepEqual(store.getActions(), [
         setCreativeCommonLicenses(licenses),
@@ -103,12 +101,12 @@ test('actions/fetchLearningPathLicenses with creative-common sat to true access 
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get('/learningpaths/licenses')
-    .query({ 'creative-common': true })
+    .query({ filter: 'by' })
     .reply(403, { message: 'Invalid' });
 
   const store = mockStore({ authToken });
 
-  store.dispatch(fetchLearningPathLicenses(true))
+  store.dispatch(fetchLearningPathLicenses('by'))
     .then(() => {
       t.deepEqual(store.getActions(), [
         applicationError(payload403invalid()),
