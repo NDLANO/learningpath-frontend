@@ -2991,6 +2991,16 @@ ndla-learningpath-styleguide@0.1.33:
   version "0.1.33"
   resolved "https://registry.yarnpkg.com/ndla-learningpath-styleguide/-/ndla-learningpath-styleguide-0.1.33.tgz#d3315056520c257d57903c6f254f25a1c2b08a21"
 
+ndla-licenses@0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/ndla-licenses/-/ndla-licenses-0.0.5.tgz#e31197d96be7fe9a76a50164e37cac0a1f0e248d"
+  dependencies:
+    defined "1.0.0"
+
+ndla-ui@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/ndla-ui/-/ndla-ui-0.1.5.tgz#9ad90348d569a13343a42a9c5f45e1d988e84989"
+
 negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
@@ -3743,6 +3753,10 @@ re-emitter@^1.0.0:
 react-addons-test-utils@15.3.2:
   version "15.3.2"
   resolved "https://registry.yarnpkg.com/react-addons-test-utils/-/react-addons-test-utils-15.3.2.tgz#c09a44f583425a4a9c1b38444d7a6c3e6f0f41f6"
+
+react-bem-helper:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-bem-helper/-/react-bem-helper-1.2.0.tgz#be5cc79dd59da0b318345131da829c83793186ed"
 
 react-dnd-html5-backend@2.1.2:
   version "2.1.2"
