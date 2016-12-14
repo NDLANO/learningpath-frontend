@@ -132,7 +132,7 @@ export class MyPage extends React.Component {
       <Wrapper>
         <OneColumn>
           <Masthead />
-          <div className="page-header">
+          <div className="page-header page-header--primary">
             <h2 className="page-header_name">{polyglot.t('myPage.pageHeader')}</h2>
             <div className="page-header_ctrls">
               {sortOrderSelect}
