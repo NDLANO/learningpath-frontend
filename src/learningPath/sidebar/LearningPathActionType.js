@@ -11,7 +11,7 @@ import { Link } from 'react-router';
 import polyglot from '../../i18n';
 
 const LearningPathActionType = ({ authenticated, learningPath, onCopyLearningPathClick, localCloseSidebars }) => {
-  const classNames = 'cta-link cta-link--round edit_learningpath--button';
+  const classNames = 'cta-link edit_learningpath--button';
   if (learningPath.canEdit) {
     return <Link className={classNames} to={`/learningpaths/${learningPath.id}/edit`} onClick={localCloseSidebars}>{polyglot.t('editPage.edit')}</Link>;
   } else if (authenticated) {

@@ -21,7 +21,8 @@ const OnClickCheckbox = ({ input }) => {
     'learning-step-form_show-title--active': input.value,
   };
   const tooltip = <Tooltip id="showTitleTooltip">Velg om titelen skal vises eller skjules</Tooltip>;
-  const handleClick = () => {
+  const handleClick = (evt) => {
+    evt.preventDefault();
     input.onChange(!input.value);
     input.onBlur(!input.value);
   };

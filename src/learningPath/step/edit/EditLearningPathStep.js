@@ -59,7 +59,7 @@ class EditLearningPathStep extends Component {
     };
 
     return (
-      <div className="two-column_content--wide learning-path-step">
+      <div className="two-column_content--wide learning-path-step two-column_content--white-bg">
         <LearningPathStepForm
           step={step}
           learningPathId={learningPathId}
@@ -92,7 +92,7 @@ EditLearningPathStep.contextTypes = {
 export const mapStateToProps = state => assign({}, state, {
   step: state.learningPathStep,
   learningPathId: state.learningPath.id,
-  licenses: [{ description: polyglot.t('editPathStep.noLicenseChosen'), license: undefined }].concat(get(state, 'learningPathLicenses.all', [])),
+  licenses: [{ description: polyglot.t('editPathStep.noLicenseChosen'), license: undefined }].concat(get(state, 'learningPathLicenses.allLicenses.all', [])),
 });
 
 export const mapDispatchToProps = {

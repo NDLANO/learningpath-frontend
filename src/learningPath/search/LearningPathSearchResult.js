@@ -57,6 +57,7 @@ export default class SearchResult extends Component {
       'un-button': true,
       'tag_item--active': query.tag === tag,
     });
+
     return (
       <div className="search-result">
         <Link to={`/learningpaths/${path.id}/first-step/`} className="search-result_img_container">
@@ -84,7 +85,7 @@ export default class SearchResult extends Component {
           {path.isBasedOn ? <IsBasedOn path={path} /> : ''}
           <div>
             {tags.map(tag =>
-              <button key={tag} className={tagsClassName(tag)} onClick={evt => onTagClick(evt, tag)} href="#">{tag}</button>
+              <button key={tag} className={tagsClassName(tag)} onClick={evt => onTagClick(evt, tag)} href="#">{`#${tag}`}</button>
             )}
           </div>
         </div>

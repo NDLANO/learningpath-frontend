@@ -10,20 +10,26 @@ import { createAction } from 'redux-actions';
 import { fetchPathLicenses } from '../../../sources/learningpaths';
 import { applicationError } from '../../../messages/messagesActions';
 
-export const setLearningPathLicensens = createAction('SET_LEARNING_PATH_LICENSES');
+export const setCreativeCommonLicenses = createAction('SET_CREATIVE_COMMON_LICENSES');
+export const setAllLicenses = createAction('SET_ALL_LICENSES');
 
-export function fetchLearningPathLicenses() {
-  return (dispatch, getState) => fetchPathLicenses(getState().authToken)
-    .then(licenses => dispatch(setLearningPathLicensens(licenses)))
+export function fetchLearningPathLicenses(filter = '') {
+  return (dispatch, getState) => fetchPathLicenses(getState().authToken, filter)
+    .then((licenses) => {
+      if (filter.length > 0) {
+        dispatch(setCreativeCommonLicenses(licenses));
+      } else {
+        dispatch(setAllLicenses(licenses));
+      }
+    })
     .catch(err => dispatch(applicationError(err)));
 }
 
-export function fetchLearningPathLicensesIfNeeded() {
+export function fetchLearningPathLicensesIfNeeded(filter = '') {
   return (dispatch, getState) => {
     const { learningPathLicenses } = getState();
-
-    if (!learningPathLicenses.hasFetched) {
-      dispatch(fetchLearningPathLicenses());
+    if ((filter.length > 0 && !learningPathLicenses.creativeCommonLicenses.hasFetched) || (filter.length === 0 && !learningPathLicenses.allLicenses.hasFetched)) {
+      dispatch(fetchLearningPathLicenses(filter));
     }
   };
 }

@@ -7,16 +7,18 @@
  */
 
 import React, { PropTypes } from 'react';
-import LabeledIcon from '../../common/LabeledIcon';
+import getLicenseByAbbreviation from 'ndla-licenses';
+import { LicenseIconList } from 'ndla-ui';
 
 const LearningPathLicense = ({ copyright }) => {
   if (!copyright.license) {
     return null;
   }
+  const license = getLicenseByAbbreviation(copyright.license.license);
   return (
     <span>
       {copyright.license.url ?
-        <a href={copyright.license.url} rel="noopener noreferrer" target="_blank"><LabeledIcon.Copyright tagName="copyright" labelText={copyright.license.license} /></a> : ''}
+        <a href={copyright.license.url} rel="noopener noreferrer" target="_blank"> <LicenseIconList licenseRights={license.rights} /></a> : ''}
     </span>
   );
 };

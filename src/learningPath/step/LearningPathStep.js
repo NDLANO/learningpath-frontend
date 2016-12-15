@@ -10,12 +10,14 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import Oembed from './oembed/Oembed';
-import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
+import { titleI18N } from '../../util/i18nFieldFinder';
 import polyglot from '../../i18n';
 import { fetchLearningPathStep } from './learningPathStepActions';
 import { copyLearningPath } from '../learningPathActions';
 import CopyLearningPath from '../new/CopyLearningPath';
 import Lightbox from '../../common/Lightbox';
+import LearningPathStepInformation from './LearningPathStepInformation';
+import LearningPathStepPrevNext from './LearningPathStepPrevNext';
 
 class LearningPathStep extends React.Component {
   constructor(props) {
@@ -52,36 +54,23 @@ class LearningPathStep extends React.Component {
     const { learningPathStep, learningPath, copyPath } = this.props;
     const { lang } = this.context;
     const stepTitle = titleI18N(learningPathStep, lang, true);
-    const stepDescription = descriptionI18N(learningPathStep, lang, true);
     const oembedContent = learningPathStep.oembed;
     const onLightboxClose = () => this.setState({ displayCopyPath: false });
     const onCopy = () => {
       copyPath(learningPath, lang);
       onLightboxClose();
     };
-    const license = learningPathStep.license && learningPathStep.license.license ? (
-      <p className="learning-step_license">
-        {learningPathStep.license.url ?
-          <a target="_blank" rel="noopener noreferrer" href={learningPathStep.license.url}>{polyglot.t('learningPathStep.license', { license: learningPathStep.license.license })}</a>
-        : polyglot.t('learningPathStep.license', { license: learningPathStep.license.license })}
-      </p>
-    ) : '';
+
     return (
       <div className="two-column_content--wide">
-        <Helmet title={polyglot.t('htmlTitleTemplates.learningPathStep', { title: stepTitle || '' })} />
-        <div className="learning-step">
-          {learningPathStep.showTitle ? (
-            <div className="learning-step_hd">
-              <h1 className="learning-step_title">{stepTitle}</h1>
-              {license}
-            </div>
-          ) : null}
-          <div className="learning-step_bd" dangerouslySetInnerHTML={{ __html: stepDescription }} />
-        </div>
-        {oembedContent ? <Oembed oembedContent={oembedContent} /> : ''}
-        <Lightbox display={this.state.displayCopyPath} onClose={onLightboxClose}>
-          <CopyLearningPath learningPath={learningPath} onClose={onLightboxClose} onCopy={onCopy} />
-        </Lightbox>
+        <LearningPathStepPrevNext currentStepId={learningPathStep.id} lang={lang}>
+          <Helmet title={polyglot.t('htmlTitleTemplates.learningPathStep', { title: stepTitle || '' })} />
+          <LearningPathStepInformation learningPathStep={learningPathStep} stepTitle={stepTitle} />
+          {oembedContent ? <Oembed oembedContent={oembedContent} /> : ''}
+          <Lightbox display={this.state.displayCopyPath} onClose={onLightboxClose}>
+            <CopyLearningPath learningPath={learningPath} onClose={onLightboxClose} onCopy={onCopy} />
+          </Lightbox>
+        </LearningPathStepPrevNext>
       </div>
     );
   }

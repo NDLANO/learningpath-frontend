@@ -87,6 +87,7 @@ export default class Oembed extends React.Component {
       <div
         className={classNames({
           'learning-step': true,
+          'learning-step_embed': true,
           'learning-step--without-dimensions': this.state.isNDLAResource,
         })}
         dangerouslySetInnerHTML={{ __html: html }}
