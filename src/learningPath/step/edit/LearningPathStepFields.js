@@ -19,6 +19,7 @@ import ObjectSelector from '../../../common/form/ObjectSelector';
 import PreviewOembed from '../oembed/PreviewOembed';
 import LearningPathStepIcon from '../LearningPathStepIcon';
 import EmbedSearch from '../../../embedSearch/EmbedSearch';
+import LTISearch from '../../../ltiSearch/LTISearch';
 
 const LearningPathStepFields = (props) => {
   const {
@@ -87,6 +88,7 @@ const LearningPathStepFields = (props) => {
       <DescriptionHTMLEditor input={description.input} lang={lang} onBlur={handleDescriptionBlur} />
       <div className="learning-step-form_group">
         <EmbedSearch urlOnBlur={url.input.onBlur} />
+        <LTISearch />
         <div className="learningsource-form">
           <div>
             <label className="mediatype-menu__label" htmlFor="url">{polyglot.t('editPathStep.urlLabel')}</label>
