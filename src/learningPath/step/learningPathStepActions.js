@@ -58,6 +58,7 @@ export function fetchLearningPathStep(pathId, stepId) {
 }
 
 export function updateLearningPathStep(pathId, stepId, learningPathStep) {
+  console.log(learningPathStep);
   return (dispatch, getState) => updateStep(getState().authToken, { pathId, stepId }, learningPathStep)
     .then((lpspath) => {
       dispatch(addMessage({ message: polyglot.t('updateLearningPath.updatedMsg') }));

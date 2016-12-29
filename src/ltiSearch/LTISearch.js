@@ -7,10 +7,10 @@
  */
 
 import React, { PropTypes } from 'react';
-import classNames from 'classnames';
 import ReactDOMServer from 'react-dom/server';
 import LTISubmitForm from './LTISubmitForm';
 import LTISearchFilter from './LTISearchFilter';
+import Lightbox from '../common/Lightbox';
 
 class LTISearch extends React.Component {
   constructor(props) {
@@ -19,9 +19,11 @@ class LTISearch extends React.Component {
     this.state = {
       active: false,
       iframeParams: undefined,
+      ltiDisplay: false,
     };
     this.handlePostMessage = this.handlePostMessage.bind(this);
-    this.toggleGoogleCustomSearch = this.toggleGoogleCustomSearch.bind(this);
+    this.toggleLTISearch = this.toggleLTISearch.bind(this);
+    this.ltiSearchClose = this.ltiSearchClose.bind(this);
   }
   componentDidMount() {
     if (window.location.search) {
@@ -44,21 +46,26 @@ class LTISearch extends React.Component {
     if (!evt.data || evt.data.type !== 'ltiParams') {
       return;
     }
-    console.log('HLALALALLALA');
-    document.getElementById('ltiiframe').remove();
-    this.setState({ iframeParams: evt.data.params });
+    this.props.embedTypeOnBlur('lti');
+    if (evt.data.params.url) {
+      this.props.urlOnBlur(decodeURIComponent(evt.data.params.url));
+    }
+    this.setState({ ltiDisplay: false });
   }
 
-  toggleGoogleCustomSearch(evt) {
+  toggleLTISearch(evt) {
     evt.preventDefault();
+    this.setState({ ltiDisplay: true });
+
     this.setState({ active: !this.state.active });
   }
+
+  ltiSearchClose() {
+    this.setState({ ltiDisplay: false });
+  }
   render() {
-    const containerClass = {
-      'embed-search_container': true,
-      'embed-search_container--active': this.state.active,
-    };
-    const params = this.state.iframeParams ? this.state.iframeParams : {};
+    const { stepId, learningPathId } = this.props;
+
     const onFilterClick = (filter = undefined) => {
       if (filter) {
         const frameDiv = document.getElementById('ltiiframewrapper');
@@ -76,13 +83,14 @@ class LTISearch extends React.Component {
 
     return (
       <div>
-        <button className="button button--primary button--block embed-search_open-button" onClick={this.toggleGoogleCustomSearch}>Søk i LTI</button>
-        <div className={classNames(containerClass)}>
-          <LTISearchFilter onFilterClick={onFilterClick} />
-          <div id="ltiiframewrapper" className="lti-iframe_wrapper">
-            <iframe id="ltiiframe" />
-            {params && params.url ? <iframe src={decodeURIComponent(params.url)} /> : ''}
-          </div>
+        <button className="button button--primary button--block embed-search_open-button" onClick={this.toggleLTISearch}>Søk i LTI</button>
+        <div className="big-lightbox_wrapper big-lightbox_wrapper--scroll">
+          <Lightbox display={this.state.ltiDisplay} onClose={this.ltiSearchClose}>
+            <LTISearchFilter onFilterClick={onFilterClick} stepId={stepId} learningPathId={learningPathId} />
+            <div id="ltiiframewrapper" className="lti-iframe_wrapper">
+              <iframe id="ltiiframe" />
+            </div>
+          </Lightbox>
         </div>
       </div>
     );
@@ -91,6 +99,10 @@ class LTISearch extends React.Component {
 
 
 LTISearch.propTypes = {
+  stepId: PropTypes.number.isRequired,
+  learningPathId: PropTypes.number.isRequired,
+  urlOnBlur: PropTypes.func.isRequired,
+  embedTypeOnBlur: PropTypes.func.isRequired,
 };
 
 LTISearch.contextTypes = {

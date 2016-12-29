@@ -30,11 +30,11 @@ export default class PreviewOembed extends React.Component {
   }
 
   render() {
-    const { content } = this.props;
+    const { content, type } = this.props;
     if (!content) {
       return null;
     }
-
+    console.log(type);
     const frameClasses = classNames({
       learningsource__frame: true,
       'learningsource__frame--hidden': !this.state.previewOembed,
@@ -46,15 +46,18 @@ export default class PreviewOembed extends React.Component {
         <span className="button button--outline">{polyglot.t('editPathStep.previewOembed')}</span>
       </button>) : null;
 
-    return (<div className="learningsource--wrapper">
-      <div className={frameClasses}>
-        <Oembed oembedContent={content} />
-        {previewButton}
+    return (
+      <div className="learningsource--wrapper">
+        <div className={frameClasses}>
+          <Oembed oembedContent={content} />
+          {previewButton}
+        </div>
       </div>
-    </div>);
+    );
   }
 }
 
 PreviewOembed.propTypes = {
   content: PropTypes.object,
+  type: PropTypes.string,
 };

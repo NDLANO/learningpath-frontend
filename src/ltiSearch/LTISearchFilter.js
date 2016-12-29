@@ -20,7 +20,6 @@ class LTISearchFilter extends React.Component {
   }
 
   handleLTIFilterChange(evt, filter) {
-    console.log('YO');
     evt.preventDefault();
     if (filter) {
       this.setState({ filter: filter.key });
@@ -33,12 +32,14 @@ class LTISearchFilter extends React.Component {
 
 
   render() {
+    const { stepId, learningPathId } = this.props;
+    const returnUrl = `${window.location.origin}/lti/${learningPathId}/step/${stepId}`;
     const filters = [
       {
         key: 'khan_academy',
         name: 'Khan academy',
         extra_args: {
-          ext_content_return_url: window.location.href,
+          ext_content_return_url: returnUrl,
           ext_content_return_types: 'oembed,lti_launch_url,url,image_url',
           ext_content_intended_use: 'embed',
         },
@@ -47,7 +48,7 @@ class LTISearchFilter extends React.Component {
         key: 'youtube',
         name: 'Youtube',
         extra_args: {
-          ext_content_return_url: window.location.href,
+          ext_content_return_url: returnUrl,
           ext_content_return_types: 'oembed,lti_launch_url,url,image_url',
           ext_content_intended_use: 'embed',
         },
@@ -56,7 +57,7 @@ class LTISearchFilter extends React.Component {
         key: 'quizlet',
         name: 'Quizlet',
         extra_args: {
-          ext_content_return_url: window.location.href,
+          ext_content_return_url: returnUrl,
           ext_content_return_types: 'oembed,lti_launch_url,url,image_url',
           ext_content_intended_use: 'embed',
         },
@@ -65,7 +66,7 @@ class LTISearchFilter extends React.Component {
         key: 'youtube_ted_ed',
         name: 'Ted',
         extra_args: {
-          ext_content_return_url: window.location.href,
+          ext_content_return_url: returnUrl,
           ext_content_return_types: 'oembed,lti_launch_url,url,image_url',
           ext_content_intended_use: 'embed',
         },
@@ -90,6 +91,7 @@ class LTISearchFilter extends React.Component {
 
 LTISearchFilter.propTypes = {
   onFilterClick: PropTypes.func.isRequired,
-
+  stepId: PropTypes.number.isRequired,
+  learningPathId: PropTypes.number.isRequired,
 };
 export default LTISearchFilter;
