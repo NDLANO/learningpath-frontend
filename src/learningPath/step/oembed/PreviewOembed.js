@@ -30,11 +30,10 @@ export default class PreviewOembed extends React.Component {
   }
 
   render() {
-    const { content, type } = this.props;
+    const { content, embedType } = this.props;
     if (!content) {
       return null;
     }
-    console.log(type);
     const frameClasses = classNames({
       learningsource__frame: true,
       'learningsource__frame--hidden': !this.state.previewOembed,
@@ -49,7 +48,7 @@ export default class PreviewOembed extends React.Component {
     return (
       <div className="learningsource--wrapper">
         <div className={frameClasses}>
-          <Oembed oembedContent={content} />
+          <Oembed oembedContent={content} embedType={embedType} />
           {previewButton}
         </div>
       </div>
@@ -59,5 +58,5 @@ export default class PreviewOembed extends React.Component {
 
 PreviewOembed.propTypes = {
   content: PropTypes.object,
-  type: PropTypes.string,
+  embedType: PropTypes.string,
 };

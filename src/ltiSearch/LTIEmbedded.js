@@ -6,7 +6,7 @@
  *
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import polyglot from '../i18n';
 
 class LTIEmbedded extends React.Component {
@@ -24,15 +24,10 @@ class LTIEmbedded extends React.Component {
   render() {
     return (
       <div className="embed-search_form-filters">
-        <p>LTI Ressurs er lagret</p>
+        <p>{polyglot.t('ltiSearch.ltiAdded')}</p>
       </div>
     );
   }
 }
-
-
-LTIEmbedded.propTypes = {
-
-};
 
 export default LTIEmbedded;

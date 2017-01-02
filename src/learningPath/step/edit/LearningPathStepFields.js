@@ -102,7 +102,7 @@ const LearningPathStepFields = (props) => {
             <label className="mediatype-menu__label" htmlFor="url">{polyglot.t('editPathStep.urlLabel')}</label>
             <input {...url.input} onChange={handleOembedUrl} placeholder={polyglot.t('editPathStep.urlPlaceholder')} type="url" />
             {url.meta.touched && url.meta.error && <span className="error_message error_message--red">{url.meta.error}</span>}
-            <PreviewOembed content={embedContent} type={embedContentType} />
+            <PreviewOembed content={embedContent} embedType={embedContentType} />
           </div>
         </div>
         {(url.meta.touched || description.meta.touched) && description.meta.error && <span className="error_message error_message--red">{description.meta.error}</span>}

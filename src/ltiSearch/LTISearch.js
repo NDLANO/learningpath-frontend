@@ -17,8 +17,6 @@ class LTISearch extends React.Component {
     super(props);
 
     this.state = {
-      active: false,
-      iframeParams: undefined,
       ltiDisplay: false,
     };
     this.handlePostMessage = this.handlePostMessage.bind(this);
@@ -26,19 +24,6 @@ class LTISearch extends React.Component {
     this.ltiSearchClose = this.ltiSearchClose.bind(this);
   }
   componentDidMount() {
-    if (window.location.search) {
-      const params = window.location.search.substr(1).split('&').map(param => param.split('=')).reduce((obj, cur) => {
-        const newObj = obj;
-        newObj[cur[0]] = cur[1];
-        return newObj;
-      }, {});
-      const obj = { params, type: 'ltiParams' };
-      parent.postMessage(obj, window.location.href);
-    } else {
-      this.enableLTIMessage();
-    }
-  }
-  enableLTIMessage() {
     window.addEventListener('message', this.handlePostMessage);
   }
 
@@ -56,8 +41,6 @@ class LTISearch extends React.Component {
   toggleLTISearch(evt) {
     evt.preventDefault();
     this.setState({ ltiDisplay: true });
-
-    this.setState({ active: !this.state.active });
   }
 
   ltiSearchClose() {
@@ -99,7 +82,7 @@ class LTISearch extends React.Component {
 
 
 LTISearch.propTypes = {
-  stepId: PropTypes.number.isRequired,
+  stepId: PropTypes.number,
   learningPathId: PropTypes.number.isRequired,
   urlOnBlur: PropTypes.func.isRequired,
   embedTypeOnBlur: PropTypes.func.isRequired,

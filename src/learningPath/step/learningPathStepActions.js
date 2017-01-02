@@ -23,13 +23,21 @@ export const createEmptyLearningPathStep = createAction('CREATE_EMPTY_LEARNING_P
 export const setOembedObject = createAction('SET_OEMBED_OBJECT');
 
 export function fetchOembed(query) {
-  return (dispatch, getState) => fetchOembedUrl(getState().authToken, query)
-    .then((object) => {
-      const clonedObject = Object.assign({}, object, { url: query.url, language: getState().locale });
-      dispatch(setOembedObject(clonedObject));
-      dispatch(setOembedPreview(clonedObject));
-    })
-    .catch(err => dispatch(applicationError(err)));
+  if (query.embedType === 'oembed') {
+    return (dispatch, getState) => fetchOembedUrl(getState().authToken, query)
+      .then((object) => {
+        const clonedObject = Object.assign({}, object, { url: query.url, embedType: query.embedType, language: getState().locale });
+        dispatch(setOembedObject(clonedObject));
+        dispatch(setOembedPreview(clonedObject));
+      })
+      .catch(err => dispatch(applicationError(err)));
+  }
+  return ((dispatch, getState) => new Promise((resolve) => {
+    const clonedObject = { html: `<iframe src="${query.url}"/>`, url: query.url, embedType: query.embedType, language: getState().locale };
+    dispatch(setOembedObject(clonedObject));
+    dispatch(setOembedPreview(clonedObject));
+    resolve();
+  }));
 }
 
 export function fetchLearningPathStep(pathId, stepId) {
@@ -45,20 +53,19 @@ export function fetchLearningPathStep(pathId, stepId) {
 
     return fetchPathStep(authToken, { pathId, stepId })
       .then((step) => {
+        dispatch(setLearningPathStep(step));
         if (step.embedUrl) {
           const oembedContent = oembedContentI18N(step, locale, true);
           if (oembedContent && oembedContent.url) {
-            dispatch(fetchOembed({ url: oembedContent.url, maxwidth: Math.ceil(window.innerWidth) }));
+            dispatch(fetchOembed({ url: oembedContent.url, embedType: oembedContent.embedType, maxwidth: Math.ceil(window.innerWidth) }));
           }
         }
-        dispatch(setLearningPathStep(step));
       })
     .catch(err => dispatch(applicationError(err)));
   };
 }
 
 export function updateLearningPathStep(pathId, stepId, learningPathStep) {
-  console.log(learningPathStep);
   return (dispatch, getState) => updateStep(getState().authToken, { pathId, stepId }, learningPathStep)
     .then((lpspath) => {
       dispatch(addMessage({ message: polyglot.t('updateLearningPath.updatedMsg') }));

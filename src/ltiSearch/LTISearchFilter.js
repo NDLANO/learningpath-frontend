@@ -13,65 +13,36 @@ class LTISearchFilter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      filter: undefined,
+      filter: 'khan_academy',
+      filters: [
+        { key: 'khan_academy', name: 'Khan Academy' },
+        { key: 'youtube', name: 'Youtube' },
+        { key: 'quizlet', name: 'Quizlet' },
+        { key: 'youtube_ted_ed', name: 'Ted' },
+      ],
     };
 
     this.handleLTIFilterChange = this.handleLTIFilterChange.bind(this);
   }
 
+  componentDidMount() {
+    const { stepId, learningPathId } = this.props;
+    const returnUrl = stepId ? `${window.location.origin}/lti/${learningPathId}/step/${stepId}` : `${window.location.origin}/lti/${learningPathId}/step/new`;
+    const query = { key: 'khan_academy', returnUrl };
+    this.props.onFilterClick(query);
+  }
+
   handleLTIFilterChange(evt, filter) {
     evt.preventDefault();
-    if (filter) {
-      this.setState({ filter: filter.key });
-      this.props.onFilterClick(filter);
-    } else {
-      this.setState({ filter });
-      this.props.onFilterClick(filter);
-    }
+    const { stepId, learningPathId } = this.props;
+    const returnUrl = stepId ? `${window.location.origin}/lti/${learningPathId}/step/${stepId}` : `${window.location.origin}/lti/${learningPathId}/step/new`;
+    const query = { ...filter, returnUrl };
+    this.setState({ filter: filter.key });
+    this.props.onFilterClick(query);
   }
 
 
   render() {
-    const { stepId, learningPathId } = this.props;
-    const returnUrl = `${window.location.origin}/lti/${learningPathId}/step/${stepId}`;
-    const filters = [
-      {
-        key: 'khan_academy',
-        name: 'Khan academy',
-        extra_args: {
-          ext_content_return_url: returnUrl,
-          ext_content_return_types: 'oembed,lti_launch_url,url,image_url',
-          ext_content_intended_use: 'embed',
-        },
-      },
-      {
-        key: 'youtube',
-        name: 'Youtube',
-        extra_args: {
-          ext_content_return_url: returnUrl,
-          ext_content_return_types: 'oembed,lti_launch_url,url,image_url',
-          ext_content_intended_use: 'embed',
-        },
-      },
-      {
-        key: 'quizlet',
-        name: 'Quizlet',
-        extra_args: {
-          ext_content_return_url: returnUrl,
-          ext_content_return_types: 'oembed,lti_launch_url,url,image_url',
-          ext_content_intended_use: 'embed',
-        },
-      },
-      {
-        key: 'youtube_ted_ed',
-        name: 'Ted',
-        extra_args: {
-          ext_content_return_url: returnUrl,
-          ext_content_return_types: 'oembed,lti_launch_url,url,image_url',
-          ext_content_intended_use: 'embed',
-        },
-      },
-    ];
     const filterClass = filter => classNames({
       'un-button': true,
       'lti-search_form-filter ': true,
@@ -80,8 +51,7 @@ class LTISearchFilter extends React.Component {
 
     return (
       <div className="lti-search_form-filters">
-        <button onClick={evt => this.handleLTIFilterChange(evt, undefined)} className={filterClass(undefined)}>Ingen</button>
-        {filters.map(filter =>
+        {this.state.filters.map(filter =>
           <button key={filter.key} className={filterClass(filter.key)} onClick={evt => this.handleLTIFilterChange(evt, filter)}>{filter.name}</button>
         )}
       </div>
@@ -91,7 +61,7 @@ class LTISearchFilter extends React.Component {
 
 LTISearchFilter.propTypes = {
   onFilterClick: PropTypes.func.isRequired,
-  stepId: PropTypes.number.isRequired,
+  stepId: PropTypes.number,
   learningPathId: PropTypes.number.isRequired,
 };
 export default LTISearchFilter;

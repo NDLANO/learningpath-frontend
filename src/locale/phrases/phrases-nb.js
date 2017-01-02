@@ -241,6 +241,9 @@ const phrases = {
     durationNaN: 'Ugyldig variget. Tast inn antall timer.',
     durationDecimals: 'Antall desimaler er maks to.',
   },
+  ltiSearch: {
+    ltiAdded: 'LTI Ressurs er lagret',
+  },
   embedSearch: {
     form: {
       title: 'Legg til innhold fra ekstern kilde',

@@ -46,6 +46,7 @@ export default function (store) {
       <Route path="minside" component={requireAuthentication(MyPage)} />
       {learningPathRoutes}
       <Route path="lti/:pathId/step/:stepId" component={requireAuthentication(LTIEmbedded)} />
+      <Route path="lti/:pathId/step/new" component={requireAuthentication(LTIEmbedded)} />
       <Route path="*" component={NotFound} />
     </Route>
   );

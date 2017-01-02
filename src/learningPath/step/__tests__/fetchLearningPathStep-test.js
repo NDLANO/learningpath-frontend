@@ -111,14 +111,14 @@ test('actions/fetchLearningPathStep with embedUrl', (t) => {
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get(`/learningpaths/${pathId}/learningsteps/${stepId}`)
-    .reply(200, { id: stepId, seqNo: 3, embedUrl: [{ url: 'test', language: 'nb' }] });
+    .reply(200, { id: stepId, seqNo: 3, embedUrl: [{ url: 'test', language: 'nb', embedType: 'oembed' }] });
 
   const store = mockStore({ authToken });
 
   store.dispatch(fetchLearningPathStep(pathId, stepId))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        setLearningPathStep({ id: stepId, seqNo: 3, embedUrl: [{ url: 'test', language: 'nb' }] }),
+        setLearningPathStep({ id: stepId, seqNo: 3, embedUrl: [{ url: 'test', language: 'nb', embedType: 'oembed' }] }),
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();

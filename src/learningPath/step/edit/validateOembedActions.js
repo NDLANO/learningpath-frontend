@@ -25,7 +25,7 @@ export function validateOembed(url, lang, embedType = 'omebed', fieldName = 'url
   if (embedType === 'lti') {
     return (dispatch => new Promise((resolve) => {
       const oembed = { html: `<iframe src="${url}"/>` };
-      dispatch(setOembedPreview(Object.assign({}, oembed, { url, language: lang })));
+      dispatch(setOembedPreview(Object.assign({}, oembed, { url, embedType, language: lang })));
       resolve();
     }));
   }
@@ -36,7 +36,7 @@ export function validateOembed(url, lang, embedType = 'omebed', fieldName = 'url
       const currentOembedTitle = get(state, 'oembedPreview.oembedContent[0].title');
       const currentFormTitle = get(state, 'form.learning-path-step.values.title');
 
-      dispatch(setOembedPreview(Object.assign({}, oembed, { url, language: lang })));
+      dispatch(setOembedPreview(Object.assign({}, oembed, { url, embedType, language: lang })));
 
       if (oembed.title && (!currentFormTitle || currentOembedTitle === currentFormTitle)) {
         dispatch(change('learning-path-step', 'title', oembed.title));

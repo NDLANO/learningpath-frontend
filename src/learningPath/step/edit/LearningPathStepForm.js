@@ -12,7 +12,7 @@ import { compose } from 'redux';
 import { Link } from 'react-router';
 import defined from 'defined';
 import { reduxForm, Fields, change } from 'redux-form';
-import { titleI18N, descriptionI18N, oembedUrlI18N } from '../../../util/i18nFieldFinder';
+import { titleI18N, descriptionI18N, oembedUrlI18N, embedTypeUrlI18N } from '../../../util/i18nFieldFinder';
 import { createValidator, required, oneOfIsRequired } from '../../../util/validation';
 import LabeledIcon from '../../../common/LabeledIcon';
 import polyglot from '../../../i18n';
@@ -86,7 +86,7 @@ const mapStateToProps = (state, props) => ({
     url: oembedUrlI18N(props.step, props.lang),
     type: props.step.type,
     license: defined(props.step.license, ''),
-    embedType: 'oembed',
+    embedType: embedTypeUrlI18N(props.step, props.lang),
   },
 });
 
@@ -97,7 +97,6 @@ const mapDispatchToProps = {
 
 const asyncValidate = (values, dispatch, props) => {
   const { validateOembedUrl, lang } = props;
-  console.log(values);
   return validateOembedUrl(values.url, lang, values.embedType);
 };
 
