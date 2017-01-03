@@ -9,10 +9,11 @@
 import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import { routerActions } from 'react-router-redux';
 import nock from 'nock';
 import payload403invalid from '../../actions/__tests__/payload403invalid';
 
-import { applicationError } from '../../messages/messagesActions';
+import { applicationError, addMessage } from '../../messages/messagesActions';
 import { fetchLearningPath, setLearningPath } from '../learningPathActions';
 import { setSavedImage, setSelectedImage } from '../../imageSearch/imageActions';
 
@@ -70,6 +71,58 @@ test('actions/fetchLearningPath with image', (t) => {
     .catch(done);
 });
 
+test('actions/fetchLearningPath with isEdit true and canEdit false', (t) => {
+  const done = (res) => {
+    t.end(res);
+    nock.cleanAll();
+  };
+
+  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+    .get(`/learningpaths/${pathId}`)
+    .reply(200, { id: pathId, canEdit: false });
+
+  const store = mockStore({ authToken });
+
+  store.dispatch(fetchLearningPath(pathId, true))
+    .then(() => {
+      t.deepEqual(store.getActions(), [
+        addMessage({ message: 'Du har ikke tilgang til denne siden', severity: 'danger', timeToLive: 3000 }),
+        routerActions.push({ pathname: `/learningpaths/${pathId}` }),
+        setLearningPath({ id: pathId, canEdit: false }),
+        setSavedImage({}),
+        setSelectedImage({}),
+      ]);
+      t.doesNotThrow(() => apiMock.done());
+      done();
+    })
+    .catch(done);
+});
+
+test('actions/fetchLearningPath with isEdit true and canEdit true', (t) => {
+  const done = (res) => {
+    t.end(res);
+    nock.cleanAll();
+  };
+
+  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+    .get(`/learningpaths/${pathId}`)
+    .reply(200, { id: pathId, canEdit: true });
+
+  const store = mockStore({ authToken });
+
+  store.dispatch(fetchLearningPath(pathId, true))
+    .then(() => {
+      t.deepEqual(store.getActions(), [
+        setLearningPath({ id: pathId, canEdit: true }),
+        setSavedImage({}),
+        setSelectedImage({}),
+      ]);
+      t.doesNotThrow(() => apiMock.done());
+      done();
+    })
+    .catch(done);
+});
+
 test('actions/fetchLearningPath access denied', (t) => {
   const done = (res) => {
     t.end(res);
@@ -85,6 +138,8 @@ test('actions/fetchLearningPath access denied', (t) => {
   store.dispatch(fetchLearningPath(pathId))
     .then(() => {
       t.deepEqual(store.getActions(), [
+        addMessage({ message: 'Du har ikke tilgang til denne siden', severity: 'danger', timeToLive: 3000 }),
+        routerActions.push({ pathname: '/' }),
         applicationError(payload403invalid()),
       ]);
       t.doesNotThrow(() => apiMock.done());

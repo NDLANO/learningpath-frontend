@@ -11,7 +11,6 @@ import { connect } from 'react-redux';
 import assign from 'lodash/assign';
 import { stateToHTML } from 'draft-js-export-html';
 import get from 'lodash/get';
-import { routerActions } from 'react-router-redux';
 
 import LearningPathStepForm from './LearningPathStepForm';
 import {

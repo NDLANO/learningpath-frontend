@@ -10,9 +10,10 @@ import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
+import { routerActions } from 'react-router-redux';
 import payload403invalid from '../../../actions/__tests__/payload403invalid';
 
-import { applicationError } from '../../../messages/messagesActions';
+import { applicationError, addMessage } from '../../../messages/messagesActions';
 import { setLearningPathStep, fetchLearningPathStep } from '../learningPathStepActions';
 
 const middleware = [thunk];
@@ -38,6 +39,54 @@ test('actions/fetchLearningPathStep', (t) => {
     .then(() => {
       t.deepEqual(store.getActions(), [
         setLearningPathStep({ id: stepId, seqNo: 3 }),
+      ]);
+      t.doesNotThrow(() => apiMock.done());
+      done();
+    })
+    .catch(done);
+});
+
+test('actions/fetchLearningPathStep with isEdit true and canEdit false', (t) => {
+  const done = (res) => {
+    t.end(res);
+    nock.cleanAll();
+  };
+
+  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+    .get(`/learningpaths/${pathId}/learningsteps/${stepId}`)
+    .reply(200, { id: stepId, seqNo: 3, canEdit: false });
+
+  const store = mockStore({ authToken });
+
+  store.dispatch(fetchLearningPathStep(pathId, stepId, true))
+    .then(() => {
+      t.deepEqual(store.getActions(), [
+        setLearningPathStep({ id: stepId, seqNo: 3, canEdit: false }),
+        addMessage({ message: 'Du har ikke tilgang til denne siden', severity: 'danger', timeToLive: 3000 }),
+        routerActions.push({ pathname: `/learningpaths/${pathId}/step/${stepId}` }),
+      ]);
+      t.doesNotThrow(() => apiMock.done());
+      done();
+    })
+    .catch(done);
+});
+
+test('actions/fetchLearningPathStep with isEdit true and canEdit true', (t) => {
+  const done = (res) => {
+    t.end(res);
+    nock.cleanAll();
+  };
+
+  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+    .get(`/learningpaths/${pathId}/learningsteps/${stepId}`)
+    .reply(200, { id: stepId, seqNo: 3, canEdit: true });
+
+  const store = mockStore({ authToken });
+
+  store.dispatch(fetchLearningPathStep(pathId, stepId, true))
+    .then(() => {
+      t.deepEqual(store.getActions(), [
+        setLearningPathStep({ id: stepId, seqNo: 3, canEdit: true }),
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();
