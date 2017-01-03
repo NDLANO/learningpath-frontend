@@ -30,17 +30,15 @@ class LearningPathStep extends React.Component {
   }
 
   componentWillMount() {
-    const { lang } = this.context;
     const { localFetchLearningPathStep, params: { pathId, stepId } } = this.props;
-    localFetchLearningPathStep(pathId, stepId, lang);
+    localFetchLearningPathStep(pathId, stepId);
   }
 
   componentWillUpdate(nextProps) {
-    const { lang } = this.context;
     const { localFetchLearningPathStep, params: { pathId, stepId } } = nextProps;
 
     if (this.props.params.stepId !== stepId || this.props.params.pathId !== pathId) {
-      localFetchLearningPathStep(pathId, stepId, lang);
+      localFetchLearningPathStep(pathId, stepId);
     }
   }
 

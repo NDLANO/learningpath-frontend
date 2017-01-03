@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import assign from 'lodash/assign';
 import { stateToHTML } from 'draft-js-export-html';
 import get from 'lodash/get';
+import { routerActions } from 'react-router-redux';
 
 import LearningPathStepForm from './LearningPathStepForm';
 import {
@@ -24,12 +25,11 @@ import polyglot from '../../../i18n';
 class EditLearningPathStep extends Component {
 
   componentWillMount() {
-    const { lang } = this.context;
     const { fetchLearningPathLicenses, localFetchLearningPathStep, params: { pathId, stepId } } = this.props;
     fetchLearningPathLicenses();
 
     if (stepId) {
-      localFetchLearningPathStep(pathId, stepId, lang);
+      localFetchLearningPathStep(pathId, stepId, true);
     }
   }
 
@@ -41,6 +41,7 @@ class EditLearningPathStep extends Component {
       learningPathId,
       licenses,
     } = this.props;
+
     if (!learningPathId) {
       return null;
     }

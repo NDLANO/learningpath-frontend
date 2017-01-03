@@ -32,7 +32,16 @@ export function fetchOembed(query) {
     .catch(err => dispatch(applicationError(err)));
 }
 
-export function fetchLearningPathStep(pathId, stepId) {
+function canAccessLearningPathStep(pathId, step, isEdit = false, dispatch) {
+  if (isEdit && !step.canEdit) {
+    dispatch(addMessage({ message: polyglot.t('learningPathStep.messages.noAcess'), severity: 'danger', timeToLive: 3000 }));
+    dispatch(routerActions.push({
+      pathname: `/learningpaths/${pathId}/step/${step.id}`,
+    }));
+  }
+}
+
+export function fetchLearningPathStep(pathId, stepId, isEdit = false) {
   return (dispatch, getState) => {
     const { authToken, learningPath, locale } = getState();
 
@@ -40,6 +49,7 @@ export function fetchLearningPathStep(pathId, stepId) {
       const step = get(learningPath, 'learningsteps', []).find(s => s.id === stepId);
       if (step) {
         dispatch(setLearningPathStep(step));
+        canAccessLearningPathStep(pathId, step, isEdit, dispatch);
       }
     }
 
@@ -52,6 +62,7 @@ export function fetchLearningPathStep(pathId, stepId) {
           }
         }
         dispatch(setLearningPathStep(step));
+        canAccessLearningPathStep(pathId, step, isEdit, dispatch);
       })
     .catch(err => dispatch(applicationError(err)));
   };

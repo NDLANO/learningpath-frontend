@@ -118,6 +118,9 @@ const phrases = {
       imageSearchTotalCount: 'Search for "%{textQuery}" yielded %{totalCount} results',
       imageSearchOneTotalCount: 'Search for "%{textQuery}" yielded 1 result',
     },
+    messages: {
+      noAcess: 'You do not have access to this page',
+    },
   },
   editPage: {
     learningpathShortDescriptionTitle: 'Introduction',
@@ -206,6 +209,7 @@ const phrases = {
         title: 'Deleted «%{stepTitle}»',
         action: 'Undo',
       },
+      noAcess: 'You do not have access to this page',
     },
     license: 'License: %{license}',
   },
