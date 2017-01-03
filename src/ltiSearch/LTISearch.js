@@ -7,8 +7,7 @@
  */
 
 import React, { PropTypes } from 'react';
-import ReactDOMServer from 'react-dom/server';
-import LTISubmitForm from './LTISubmitForm';
+import { ltiForm } from './ltiSubmitForm';
 import LTISearchFilter from './LTISearchFilter';
 import Lightbox from '../common/Lightbox';
 
@@ -58,7 +57,7 @@ class LTISearch extends React.Component {
         frameDiv.replaceChild(frame, iframe);
         const newIframe = frameDiv.getElementsByTagName('iframe')[0].contentWindow.document;
         const body = newIframe.getElementsByTagName('body')[0];
-        const form = ReactDOMServer.renderToString(<LTISubmitForm filter={filter} />);
+        const form = ltiForm(filter);
         body.innerHTML = form;
         newIframe.getElementById('ltiform').submit();
       }

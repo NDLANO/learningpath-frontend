@@ -64,4 +64,5 @@ LTISearchFilter.propTypes = {
   stepId: PropTypes.number,
   learningPathId: PropTypes.number.isRequired,
 };
+
 export default LTISearchFilter;
