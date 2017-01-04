@@ -11,7 +11,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import noop from 'lodash/noop';
 import { Link } from 'react-router';
-import { learningPath, learningPathNotEditable } from '../../../common/__tests__/mockData';
+import { learningPath, learningPathNotEditable } from '../../../common/__tests__/translatedMockData';
 import LearningPathToCStep from '../LearningPathToCStep';
 
 test('component/LearningPathToCStep first step with no add step button', (t) => {

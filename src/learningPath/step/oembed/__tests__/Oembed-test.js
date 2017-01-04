@@ -12,7 +12,7 @@ import { mount } from 'enzyme';
 import { spy } from 'sinon';
 import '../../../../common/__tests__/jsdomEnv';
 
-import { learningStep, ndlaLearningStep } from '../../../../common/__tests__/mockData';
+import { learningStep, ndlaLearningStep } from '../../../../common/__tests__/translatedMockData';
 
 import Oembed, { urlIsNDLA } from '../Oembed';
 

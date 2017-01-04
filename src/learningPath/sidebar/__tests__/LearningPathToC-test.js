@@ -9,7 +9,7 @@
 import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
-import { learningPath } from '../../../common/__tests__/mockData';
+import { learningPath } from '../../../common/__tests__/translatedMockData';
 import { LearningPathToC } from '../LearningPathToC';
 import LearningPathToCStep from '../LearningPathToCStep';
 
