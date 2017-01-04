@@ -10,7 +10,6 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import Oembed from './oembed/Oembed';
-import { titleI18N } from '../../util/i18nFieldFinder';
 import polyglot from '../../i18n';
 import { fetchLearningPathStep } from './learningPathStepActions';
 import { copyLearningPath } from '../learningPathActions';
@@ -18,6 +17,7 @@ import CopyLearningPath from '../new/CopyLearningPath';
 import Lightbox from '../../common/Lightbox';
 import LearningPathStepInformation from './LearningPathStepInformation';
 import LearningPathStepPrevNext from './LearningPathStepPrevNext';
+import { getI18nLearningPathStep } from './learningPathStepSelectors';
 
 class LearningPathStep extends React.Component {
   constructor(props) {
@@ -53,7 +53,6 @@ class LearningPathStep extends React.Component {
   render() {
     const { learningPathStep, learningPath, copyPath } = this.props;
     const { lang } = this.context;
-    const stepTitle = titleI18N(learningPathStep, lang, true);
     const oembedContent = learningPathStep.oembed;
     const onLightboxClose = () => this.setState({ displayCopyPath: false });
     const onCopy = () => {
@@ -64,8 +63,8 @@ class LearningPathStep extends React.Component {
     return (
       <div className="two-column_content--wide">
         <LearningPathStepPrevNext currentStepId={learningPathStep.id} lang={lang}>
-          <Helmet title={polyglot.t('htmlTitleTemplates.learningPathStep', { title: stepTitle || '' })} />
-          <LearningPathStepInformation learningPathStep={learningPathStep} stepTitle={stepTitle} />
+          <Helmet title={polyglot.t('htmlTitleTemplates.learningPathStep', { title: learningPathStep.title || '' })} />
+          <LearningPathStepInformation learningPathStep={learningPathStep} stepTitle={learningPathStep.title} />
           {oembedContent ? <Oembed oembedContent={oembedContent} /> : ''}
           <Lightbox display={this.state.displayCopyPath} onClose={onLightboxClose}>
             <CopyLearningPath learningPath={learningPath} onClose={onLightboxClose} onCopy={onCopy} />
@@ -99,6 +98,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => Object.assign({}, state, {
   authenticated: state.authenticated,
+  learningPathStep: getI18nLearningPathStep(state),
 });
 
 

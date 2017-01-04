@@ -7,7 +7,6 @@
  */
 
 import React, { Component, PropTypes } from 'react';
-import defined from 'defined';
 import { Link } from 'react-router';
 import classNames from 'classnames';
 import LabeledIcon from '../../common/LabeledIcon';
@@ -15,7 +14,6 @@ import formatDate from '../../util/formatDate';
 import formatDuration from '../../util/formatDuration';
 import LearningPathIntroduction from './LearningPathIntroduction';
 import IsBasedOn from '../../common/IsBasedOn';
-import { titleI18N, descriptionI18N, tagsI18N } from '../../util/i18nFieldFinder';
 import LearningPathContributors from '../sidebar/LearningPathContributors';
 import { scaleImage } from '../../util/imageScaler';
 
@@ -44,7 +42,7 @@ export default class SearchResult extends Component {
       return <img className="search-result_img" role="presentation" src={'https://placeholdit.imgix.net/~text?txtsize=33&txt=NDLA&w=190&h=120'} />;
     };
 
-    const tags = defined(tagsI18N(path, lang, true), []);
+    const tags = path.tags;
     const onTagClick = (evt, tag) => {
       evt.preventDefault();
       this.setState({ tag }, () => {
@@ -74,13 +72,13 @@ export default class SearchResult extends Component {
         <div className="search-result_bd">
           <Link to={`/learningpaths/${path.id}/first-step/`}>
             <h2 className="search-result_title">
-              {titleI18N(path, lang, true)}
+              {path.title}
             </h2>
           </Link>
           <div className="search-result_meta">
             <LearningPathContributors copyright={path.copyright} />
           </div>
-          <Link to={`/learningpaths/${path.id}/first-step/`} className="search-result_description">{descriptionI18N(path, lang, true)}</Link>
+          <Link to={`/learningpaths/${path.id}/first-step/`} className="search-result_description">{path.description}</Link>
           <LearningPathIntroduction path={path} />
           {path.isBasedOn ? <IsBasedOn path={path} /> : ''}
           <div>

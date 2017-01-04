@@ -20,6 +20,8 @@ import {
 } from '../learningPathStepActions';
 import { fetchLearningPathLicensesIfNeeded } from '../../edit/copyright/learningPathLicensesActions';
 import polyglot from '../../../i18n';
+import { getI18nLearningPathStep } from '../learningPathStepSelectors';
+import { getLearningPathId } from '../../learningPathSelectors';
 
 class EditLearningPathStep extends Component {
 
@@ -90,8 +92,8 @@ EditLearningPathStep.contextTypes = {
 };
 
 export const mapStateToProps = state => assign({}, state, {
-  step: state.learningPathStep,
-  learningPathId: state.learningPath.id,
+  step: getI18nLearningPathStep(state),
+  learningPathId: getLearningPathId(state),
   licenses: [{ description: polyglot.t('editPathStep.noLicenseChosen'), license: undefined }].concat(get(state, 'learningPathLicenses.allLicenses.all', [])),
 });
 

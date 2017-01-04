@@ -7,7 +7,6 @@
  */
 
 import React, { PropTypes } from 'react';
-import { titleI18N, descriptionI18N } from '../../util/i18nFieldFinder';
 
 const LearningPathSummary = ({ learningPath, lang }) => {
   if (!learningPath || !lang) {
@@ -17,11 +16,11 @@ const LearningPathSummary = ({ learningPath, lang }) => {
     <div className="two-column_content">
       <div className="learning-path">
         <div className="learning-path_hd">
-          <h1 className="learning-path_title">{titleI18N(learningPath, lang, true)}</h1>
+          <h1 className="learning-path_title">{learningPath.title}</h1>
         </div>
         <div className="learning-path_bd">
           <div>
-            {descriptionI18N(learningPath, lang, true)}
+            {learningPath.description}
           </div>
         </div>
       </div>

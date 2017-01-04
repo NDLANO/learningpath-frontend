@@ -8,6 +8,7 @@
 
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
+import isEmpty from 'lodash/isEmpty';
 import polyglot from '../../../i18n';
 import Oembed from './Oembed';
 
@@ -31,7 +32,8 @@ export default class PreviewOembed extends React.Component {
 
   render() {
     const { content } = this.props;
-    if (!content) {
+
+    if (!content || isEmpty(content)) {
       return null;
     }
 

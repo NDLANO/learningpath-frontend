@@ -12,12 +12,12 @@ import { compose } from 'redux';
 import { Link } from 'react-router';
 import defined from 'defined';
 import { reduxForm, Fields, change } from 'redux-form';
-import { titleI18N, descriptionI18N, oembedUrlI18N } from '../../../util/i18nFieldFinder';
 import { createValidator, required, oneOfIsRequired } from '../../../util/validation';
 import LabeledIcon from '../../../common/LabeledIcon';
 import polyglot from '../../../i18n';
 import LearningPathStepFields from './LearningPathStepFields';
 import { validateOembed } from './validateOembedActions';
+import { getI18NEmbedContent } from '../learningPathStepSelectors';
 
 const formName = 'learning-path-step';
 const LearningPathStepForm = (props) => {
@@ -32,8 +32,8 @@ const LearningPathStepForm = (props) => {
     licenseOptions,
     valid,
   } = props;
-  const abortUrl = step.id ? `/learningpaths/${learningPathId}/step/${step.id}` : `/learningpaths/${learningPathId}`;
 
+  const abortUrl = step.id ? `/learningpaths/${learningPathId}/step/${step.id}` : `/learningpaths/${learningPathId}`;
   return (
     <form onSubmit={handleSubmit} className="learning-step-form">
       <div className="learning-step-form_group">
@@ -68,7 +68,7 @@ LearningPathStepForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
   learningPathId: PropTypes.number.isRequired,
-  oembedPreview: PropTypes.array,
+  oembedPreview: PropTypes.object,
   validateOembedUrl: PropTypes.func.isRequired,
   licenseOptions: PropTypes.array.isRequired,
   localChange: PropTypes.func.isRequired,
@@ -77,12 +77,12 @@ LearningPathStepForm.propTypes = {
 
 
 const mapStateToProps = (state, props) => ({
-  oembedPreview: state.oembedPreview.oembedContent,
+  oembedPreview: getI18NEmbedContent(state),
   initialValues: {
     showTitle: defined(props.step.showTitle, false),
-    title: titleI18N(props.step, props.lang),
-    description: descriptionI18N(props.step, props.lang),
-    url: oembedUrlI18N(props.step, props.lang),
+    title: props.step.title,
+    description: props.step.description,
+    url: props.step.embedUrl.url,
     type: props.step.type,
     license: defined(props.step.license, ''),
   },

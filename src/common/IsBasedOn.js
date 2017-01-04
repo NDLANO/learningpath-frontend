@@ -9,10 +9,9 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import polyglot from '../i18n';
-import { isBasedOnTitleI18N } from '../util/i18nFieldFinder';
 
-const IsBasedOn = ({ path }, { lang }) => {
-  const title = path.isBasedOnTitle ? isBasedOnTitleI18N(path, lang, true) : polyglot.t('learningPath.isBasedOnPath');
+const IsBasedOn = ({ path }) => {
+  const title = path.isBasedOnTitle ? path.isBasedOnTitle : polyglot.t('learningPath.isBasedOnPath');
   const url = `/learningpaths/${path.isBasedOn}/first-step/`;
   return (
     <span className="is-based-on_wrapper">
@@ -24,12 +23,8 @@ const IsBasedOn = ({ path }, { lang }) => {
   );
 };
 
-
 IsBasedOn.propTypes = {
   path: PropTypes.object.isRequired,
 };
 
-IsBasedOn.contextTypes = {
-  lang: PropTypes.string.isRequired,
-};
 export default IsBasedOn;
