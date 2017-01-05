@@ -20,6 +20,9 @@ import PreviewOembed from '../oembed/PreviewOembed';
 import LearningPathStepIcon from '../LearningPathStepIcon';
 import EmbedSearch from '../../../embedSearch/EmbedSearch';
 import LTISearch from '../../../ltiSearch/LTISearch';
+import config from '../../../config';
+
+const LTI_ENABLED = __SERVER__ ? config.ltiActivated : window.config.ltiActivated;
 
 const LearningPathStepFields = (props) => {
   const {
@@ -95,7 +98,7 @@ const LearningPathStepFields = (props) => {
       <DescriptionHTMLEditor input={description.input} lang={lang} onBlur={handleDescriptionBlur} />
       <div className="learning-step-form_group">
         <EmbedSearch urlOnBlur={handleOembedUrl} />
-        <LTISearch stepId={step.id} learningPathId={learningPathId} embedTypeOnBlur={embedType.input.onBlur} urlOnBlur={url.input.onBlur} />
+        { LTI_ENABLED ? <LTISearch stepId={step.id} learningPathId={learningPathId} embedTypeOnBlur={embedType.input.onBlur} urlOnBlur={url.input.onBlur} /> : '' }
         <input {...embedType.input} type="hidden" />
         <div className="learningsource-form">
           <div>
