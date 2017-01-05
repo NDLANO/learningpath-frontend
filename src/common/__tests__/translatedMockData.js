@@ -4,6 +4,9 @@ const translatedLearningPaths = [
     title: 'Hva er kunst og kultur?',
     description: `Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden.
         Kurset fokuserer på kunst og kultur på et verdensperspektiv.`,
+    introduction: '<p>Norsk test id 1</p>',
+    tags: ['kristofer'],
+    isBasedOnTitle: undefined,
     metaUrl: 'http://api.test.ndla.no/learningpaths/1',
     duration: 1080,
     status: 'PUBLISHED',
@@ -14,6 +17,9 @@ const translatedLearningPaths = [
     id: '2',
     title: 'Leselighet og skrift',
     description: 'Uttrykkene "leselighet" og "lesbarhet" brukes om hverandre i norsk fagterminologi, og ofte uten klare forestillinger om hva begrepene står for.',
+    introduction: '<p>Norsk test</p>',
+    tags: ['kristofer'],
+    isBasedOnTitle: undefined,
     metaUrl: 'http://api.test.ndla.no/learningpaths/2',
     duration: 45,
     status: 'PRIVATE',
@@ -122,11 +128,9 @@ const translatedLearningStep = {
   seqNo: 2,
   title: 'En annen tittel her',
   description: '<h1>Beskrivelse</h1>',
-  embedUrl: [
-    {
-      url: 'https://www.youtube.com/watch?v=RYLlSFmGfm0',
-    },
-  ],
+  embedUrl: {
+    url: 'https://www.youtube.com/watch?v=RYLlSFmGfm0',
+  },
   oembed: {
     title: 'NDLA',
     url: 'https://www.youtube.com/watch?v=RYLlSFmGfm0',
@@ -155,4 +159,26 @@ const translatedNdlaLearningStep = {
   metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/9',
 };
 
-export { translatedLearningPaths, translatedLearningPath, translatedLearningPathNotEditable, translatedLearningStep, translatedNdlaLearningStep };
+const nbOembedContent = {
+  type: 'rich',
+  version: '1.0',
+  title: 'Klart du bør bli journalist',
+  width: 800,
+  height: 800,
+  html: '<iframe src="http://api.test.ndla.no/article-oembed/html/nb/60" frameborder="0" />',
+  url: 'http://api.test.ndla.no:8082/article/60',
+  language: 'nb',
+};
+
+const enOembedContent = {
+  type: 'rich',
+  version: '1.0',
+  title: 'You should become journalist',
+  width: 800,
+  height: 800,
+  html: '<iframe src="http://api.test.ndla.no/article-oembed/html/en/60" frameborder="0" />',
+  url: 'http://api.test.ndla.no:8082/article/60',
+  language: 'en',
+};
+
+export { translatedLearningPaths, translatedLearningPath, translatedLearningPathNotEditable, translatedLearningStep, translatedNdlaLearningStep, nbOembedContent, enOembedContent };
