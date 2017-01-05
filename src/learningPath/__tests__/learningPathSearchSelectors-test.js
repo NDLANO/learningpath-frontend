@@ -8,7 +8,7 @@
 
 import test from 'tape';
 import { learningPath } from '../../common/__tests__/mockData';
-import { getI18nLearningPath } from '../learningPathSelectors';
+import { getI18nLearningPath, getI18nLearningPathSteps, getLearningPathId } from '../learningPathSelectors';
 import { translatedLearningPath } from '../../common/__tests__/translatedMockData';
 
 test('selectors/getI18nLearningPath', (t) => {
@@ -21,6 +21,32 @@ test('selectors/getI18nLearningPath', (t) => {
     getI18nLearningPath(state),
     translatedLearningPath,
     'translate learningpath correctly'
+  );
+  t.end();
+});
+
+test('selectors/getI18nLearningPathSteps', (t) => {
+  const state = {
+    learningPath,
+    locale: 'nb',
+  };
+  t.deepEqual(
+    getI18nLearningPathSteps(state),
+    translatedLearningPath.learningsteps,
+    'translate learningpathsteps correctly'
+  );
+  t.end();
+});
+
+test('selectors/getLearningPathId', (t) => {
+  const state = {
+    learningPath,
+    locale: 'nb',
+  };
+  t.equal(
+    getLearningPathId(state),
+    translatedLearningPath.id,
+    'learningpath id is correct from selector'
   );
   t.end();
 });
