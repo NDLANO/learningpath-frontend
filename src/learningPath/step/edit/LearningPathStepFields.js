@@ -58,6 +58,7 @@ const LearningPathStepFields = (props) => {
   if (!type.input.value) {
     return <MediaTypeSelect {...type} />;
   }
+
   return (
     <div>
       <div className="learning-step-form_group">
