@@ -11,12 +11,12 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import noop from 'lodash/noop';
 import { Link } from 'react-router';
-import { learningPath, learningPathNotEditable } from '../../../common/__tests__/translatedMockData';
+import { translatedLearningPath, translatedLearningPathNotEditable } from '../../../common/__tests__/translatedMockData';
 import LearningPathToCStep from '../LearningPathToCStep';
 
 test('component/LearningPathToCStep first step with no add step button', (t) => {
   const component = shallow(
-    <LearningPathToCStep learningPath={learningPath} step={learningPath.learningsteps[0]} steps={learningPath.learningsteps} activeStepId="" localCloseSidebars={noop} />,
+    <LearningPathToCStep learningPath={translatedLearningPath} step={translatedLearningPath.learningsteps[0]} steps={translatedLearningPath.learningsteps} activeStepId="" localCloseSidebars={noop} />,
       { context: { lang: 'nb' } }
   );
   const link = component.find(Link);
@@ -32,7 +32,7 @@ test('component/LearningPathToCStep first step with no add step button', (t) => 
 // (!hasAddStepButton && step !== last(steps))
 test('component/LearningPathToCStep last step with no add step button editable', (t) => {
   const component = shallow(
-    <LearningPathToCStep learningPath={learningPath} step={learningPath.learningsteps[1]} steps={learningPath.learningsteps} activeStepId="" localCloseSidebars={noop} />,
+    <LearningPathToCStep learningPath={translatedLearningPath} step={translatedLearningPath.learningsteps[1]} steps={translatedLearningPath.learningsteps} activeStepId="" localCloseSidebars={noop} />,
       { context: { lang: 'nb' } }
   );
   const link = component.find(Link);
@@ -47,7 +47,13 @@ test('component/LearningPathToCStep last step with no add step button editable',
 // (hasAddStepButton && learningPath.canEdit)
 test('component/LearningPathToCStep last step with add step button editable', (t) => {
   const component = shallow(
-    <LearningPathToCStep learningPath={learningPath} step={learningPath.learningsteps[1]} steps={learningPath.learningsteps} activeStepId="" hasAddStepButton localCloseSidebars={noop} />,
+    <LearningPathToCStep
+      learningPath={translatedLearningPath}
+      step={translatedLearningPath.learningsteps[1]}
+      steps={translatedLearningPath.learningsteps}
+      activeStepId="" hasAddStepButton
+      localCloseSidebars={noop}
+    />,
       { context: { lang: 'nb' } }
   );
   const link = component.find(Link);
@@ -62,7 +68,12 @@ test('component/LearningPathToCStep last step with add step button editable', (t
 test('component/LearningPathToCStep last step with add step button not editable', (t) => {
   const component = shallow(
     <LearningPathToCStep
-      learningPath={learningPathNotEditable} step={learningPathNotEditable.learningsteps[1]} steps={learningPathNotEditable.learningsteps} activeStepId="" hasAddStepButton localCloseSidebars={noop}
+      learningPath={translatedLearningPathNotEditable}
+      step={translatedLearningPathNotEditable.learningsteps[1]}
+      steps={translatedLearningPathNotEditable.learningsteps}
+      activeStepId=""
+      hasAddStepButton
+      localCloseSidebars={noop}
     />,
     { context: { lang: 'nb' } }
   );
@@ -79,7 +90,12 @@ test('component/LearningPathToCStep last step with add step button not editable'
 test('component/LearningPathToCStep first step with add step button not editable', (t) => {
   const component = shallow(
     <LearningPathToCStep
-      learningPath={learningPathNotEditable} step={learningPathNotEditable.learningsteps[0]} steps={learningPathNotEditable.learningsteps} activeStepId="" hasAddStepButton localCloseSidebars={noop}
+      learningPath={translatedLearningPathNotEditable}
+      step={translatedLearningPathNotEditable.learningsteps[0]}
+      steps={translatedLearningPathNotEditable.learningsteps}
+      activeStepId=""
+      hasAddStepButton
+      localCloseSidebars={noop}
     />,
     { context: { lang: 'nb' } }
   );

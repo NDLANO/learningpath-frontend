@@ -65,6 +65,7 @@ const learningPath = {
       language: 'en',
     },
   ],
+  isBasedOnTitle: undefined,
   description: [
     {
       description: 'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
@@ -90,23 +91,6 @@ const learningPath = {
           language: 'nb',
         },
       ],
-      description: [
-        {
-          description: 'Beskrivelse',
-          language: 'nb',
-        },
-      ],
-      embedUrl: [
-        {
-          url: 'http://ndla.no/nb/node/24049',
-          language: 'nb',
-        },
-      ],
-      oembed: {
-        title: 'NDLA',
-        url: 'http://ndla.no/nb/node/24049',
-        html: '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>',
-      },
       type: 'TEXT',
       license: 'by-nc-sa',
       metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/7',
@@ -120,23 +104,6 @@ const learningPath = {
           language: 'nb',
         },
       ],
-      description: [
-        {
-          description: 'Beskrivelse',
-          language: 'nb',
-        },
-      ],
-      embedUrl: [
-        {
-          url: 'http://ndla.no/nb/node/24049',
-          language: 'nb',
-        },
-      ],
-      oembed: {
-        title: 'NDLA',
-        url: 'http://ndla.no/nb/node/24049',
-        html: '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>',
-      },
       type: 'TEXT',
       metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/8',
     },
@@ -149,7 +116,7 @@ const learningPath = {
   canEdit: true,
   tags: [
     {
-      tag: 'kristofer',
+      tags: ['kristofer'],
       language: 'nb',
     },
   ],

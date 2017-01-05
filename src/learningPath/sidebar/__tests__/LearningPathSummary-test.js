@@ -10,12 +10,11 @@ import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { learningPath } from '../../../common/__tests__/translatedMockData';
+import { translatedLearningPath } from '../../../common/__tests__/translatedMockData';
 import LearningPathSummary from '../LearningPathSummary';
 
 test('component/LearningPathSummary', (t) => {
-  console.log(learningPath);
-  const component = shallow(<LearningPathSummary learningPath={learningPath} lang="nb" />);
+  const component = shallow(<LearningPathSummary learningPath={translatedLearningPath} lang="nb" />);
 
   const titleNode = component.find('.learning-path_title');
 

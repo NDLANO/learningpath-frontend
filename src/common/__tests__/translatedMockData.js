@@ -1,4 +1,4 @@
-const learningPaths = [
+const translatedLearningPaths = [
   {
     id: '1',
     title: 'Hva er kunst og kultur?',
@@ -22,7 +22,7 @@ const learningPaths = [
   },
 ];
 
-const learningPath = {
+const translatedLearningPath = {
   id: 4,
   title: 'Kristofers private bokmål',
   description: 'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
@@ -32,17 +32,6 @@ const learningPath = {
       id: 7,
       seqNo: 1,
       title: 'Tittel her',
-      description: 'Beskrivelse',
-      embedUrl: [
-        {
-          url: 'http://ndla.no/nb/node/24049',
-        },
-      ],
-      oembed: {
-        title: 'NDLA',
-        url: 'http://ndla.no/nb/node/24049',
-        html: '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>',
-      },
       type: 'TEXT',
       license: 'by-nc-sa',
       metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/7',
@@ -51,21 +40,11 @@ const learningPath = {
       id: 8,
       seqNo: 2,
       title: 'En annen tittel her',
-      description: 'Beskrivelse',
-      embedUrl: [
-        {
-          url: 'http://ndla.no/nb/node/24049',
-        },
-      ],
-      oembed: {
-        title: 'NDLA',
-        url: 'http://ndla.no/nb/node/24049',
-        html: '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>',
-      },
       type: 'TEXT',
       metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/8',
     },
   ],
+  isBasedOnTitle: undefined,
   learningstepUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps',
   coverPhotoUrl: 'http://api.ndla.no/images/full/sy2fe75b.jpg',
   duration: 1080,
@@ -80,7 +59,7 @@ const learningPath = {
 };
 
 
-const learningPathNotEditable = {
+const translatedLearningPathNotEditable = {
   id: 4,
   title: 'Kristofers private bokmål',
   description: 'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
@@ -138,7 +117,7 @@ const learningPathNotEditable = {
   },
 };
 
-const learningStep = {
+const translatedLearningStep = {
   id: 8,
   seqNo: 2,
   title: 'En annen tittel her',
@@ -157,7 +136,7 @@ const learningStep = {
   metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/8',
 };
 
-const ndlaLearningStep = {
+const translatedNdlaLearningStep = {
   id: 9,
   seqNo: 3,
   title: 'En annen tittel her',
@@ -176,4 +155,4 @@ const ndlaLearningStep = {
   metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/9',
 };
 
-export { learningPaths, learningPath, learningPathNotEditable, learningStep, ndlaLearningStep };
+export { translatedLearningPaths, translatedLearningPath, translatedLearningPathNotEditable, translatedLearningStep, translatedNdlaLearningStep };
