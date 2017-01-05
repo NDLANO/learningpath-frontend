@@ -27,7 +27,7 @@ test('actions/fetchMyLearningPaths', (t) => {
   };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .get('/learningpaths/mine')
+    .get('/learningpath-api/v1/learningpaths/mine')
     .reply(200, [{ id: '123' }, { id: '456' }]);
 
   const store = mockStore({ authToken });
@@ -50,7 +50,7 @@ test('actions/fetchLearningPaths access denied', (t) => {
   };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .get('/learningpaths/mine')
+    .get('/learningpath-api/v1/learningpaths/mine')
     .reply(403, { message: 'Invalid' });
 
   const store = mockStore({ authToken });

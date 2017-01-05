@@ -26,7 +26,7 @@ test('actions/fetchImages', (t) => {
   };
 
   const apiMock = nock('http://ndla-api')
-    .get('/images')
+    .get('/image-api/v1/images')
     .query({ page: 3, pageSize: 25 })
     .reply(200, {
       totalCount: 2,
@@ -61,7 +61,7 @@ test('actions/fetchImage with url access denied', (t) => {
   };
 
   const apiMock = nock('http://ndla-api')
-    .get('/images')
+    .get('/image-api/v1/images')
     .query({ page: 3, pageSize: 25 })
     .reply(403, { message: 'Invalid' });
 

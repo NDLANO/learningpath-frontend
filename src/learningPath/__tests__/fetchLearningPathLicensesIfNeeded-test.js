@@ -27,7 +27,7 @@ test('actions/fetchLearningPathLicenses with creative-common sat to false', (t) 
   };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .get('/learningpaths/licenses')
+    .get('/learningpath-api/v1/learningpaths/licenses')
     .reply(200, licenses);
 
   const store = mockStore({ authToken });
@@ -51,7 +51,7 @@ test('actions/fetchLearningPathLicenses with creative-common sat to false access
   };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .get('/learningpaths/licenses')
+    .get('/learningpath-api/v1/learningpaths/licenses')
     .reply(403, { message: 'Invalid' });
 
   const store = mockStore({ authToken });
@@ -75,7 +75,7 @@ test('actions/fetchLearningPathLicenses with creative-common sat to false', (t) 
   };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .get('/learningpaths/licenses')
+    .get('/learningpath-api/v1/learningpaths/licenses')
     .query({ filter: 'by' })
     .reply(200, licenses);
 
@@ -100,7 +100,7 @@ test('actions/fetchLearningPathLicenses with creative-common sat to true access 
   };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .get('/learningpaths/licenses')
+    .get('/learningpath-api/v1/learningpaths/licenses')
     .query({ filter: 'by' })
     .reply(403, { message: 'Invalid' });
 
