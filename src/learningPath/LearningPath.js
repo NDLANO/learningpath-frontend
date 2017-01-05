@@ -46,7 +46,7 @@ export class LearningPath extends Component {
     const children = cloneElement(defined(main, this.props.children), { lang, learningPath });
     const sortableTableOfContent = defined(sortLearningSteps, <LearningPathToC learningPath={learningPath} activeStepId={stepId} hasAddStepButton={addStepButton !== null} />);
     const sortableTableOfContentButton = !sortLearningSteps ? <SortLearningStepsButton learningPath={learningPath} /> : null;
-    console.log(learningPath);
+
     const collapseClassName = () => classNames({
       'two-column_col table-of-content': true,
       'sidebar--collapsed': !isTableOfContentOpen,
