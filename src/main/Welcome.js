@@ -57,18 +57,11 @@ class Welcome extends Component {
             <a href="/minside" className="hero_link cta-link cta-link-secondary cta-link--secondary-negative">{polyglot.t('welcomePage.newBtn')} »</a>
           </div>
           <div className="infoblock">
+            <img src="http://placehold.it/300x200" alt="Placeholder" className="infoblock_img" />
             <div className="infoblock_text">
               <h2 id="feature">{polyglot.t('welcomePage.feature1Title')}</h2>
               <p>{polyglot.t('welcomePage.feature1Content')}</p>
             </div>
-            <img src="http://placehold.it/300x200" alt="Placeholder" className="infoblock_img" />
-          </div>
-          <div className="infoblock">
-            <div className="infoblock_text infoblock_text--left" >
-              <h2>{polyglot.t('welcomePage.feature2Title')}</h2>
-              <p>{polyglot.t('welcomePage.feature2Content')}</p>
-            </div>
-            <img src="http://placehold.it/300x200" alt="Placeholder" className="infoblock_img infoblock_img--left" />
           </div>
         </OneColumn>
         <Footer />

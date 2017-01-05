@@ -76,14 +76,12 @@ const phrases = {
     explanationBtn: 'Hva er en læringssti?',
     newBtn: 'Lag din egen læringssti',
     searchBtn: 'Søk',
-    feature1Title: 'Enklere å følge',
-    feature2Title: 'Enda enklere å følge',
-    feature1Content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
-    Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-    Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.`,
-    feature2Content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
-    Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-    Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.`,
+    feature1Title: 'Læringssti hos NDLA',
+    feature1Content: `Læringstier organiserer fagstoff i en bestemt rekkefølge.
+      Du kan finne redaksjonelt kvalitetssikrede læringstier fra NDLA, der læringsaktiviteter er pedagogisk organisert.
+      Stier kan også tilpasses ulike læringssituasjoner. Læringstier kan bygges opp fra bunnen av,
+      men læringsstoff kan også fjernes eller legges til eksisterende læringstier.
+      Ressurser hentes enkelt inn fra NDLA og andre steder på nett.`,
   },
   learningPath: {
     pageName: 'Læringstidetaljer',
