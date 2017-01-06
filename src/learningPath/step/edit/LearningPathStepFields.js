@@ -18,6 +18,10 @@ import ObjectSelector from '../../../common/form/ObjectSelector';
 import PreviewOembed from '../oembed/PreviewOembed';
 import LearningPathStepIcon from '../LearningPathStepIcon';
 import EmbedSearch from '../../../embedSearch/EmbedSearch';
+import LTISearch from '../../../ltiSearch/LTISearch';
+import config from '../../../config';
+
+const LTI_ENABLED = __SERVER__ ? config.ltiActivated : window.config.ltiActivated;
 
 const LearningPathStepFields = (props) => {
   const {
@@ -30,6 +34,8 @@ const LearningPathStepFields = (props) => {
     description,
     title,
     url,
+    embedType,
+    learningPathId,
   } = props;
   const handleDescriptionBlur = (value) => {
     if ((!showTitle.meta.touched && !step.id)) {
@@ -41,9 +47,14 @@ const LearningPathStepFields = (props) => {
     }
     description.input.onBlur(value);
   };
+  const handleOembedUrl = (value, oembedType = 'oembed') => {
+    embedType.input.onChange(oembedType);
+    url.input.onBlur(value);
+  };
   if (!type.input.value) {
     return <MediaTypeSelect {...type} />;
   }
+
   return (
     <div>
       <div className="learning-step-form_group">
@@ -83,11 +94,13 @@ const LearningPathStepFields = (props) => {
       </div>
       <DescriptionHTMLEditor input={description.input} lang={lang} onBlur={handleDescriptionBlur} />
       <div className="learning-step-form_group">
-        <EmbedSearch urlOnBlur={url.input.onBlur} />
+        <EmbedSearch urlOnBlur={handleOembedUrl} />
+        { LTI_ENABLED ? <LTISearch stepId={step.id} learningPathId={learningPathId} embedTypeOnBlur={embedType.input.onBlur} urlOnBlur={url.input.onBlur} /> : '' }
+        <input {...embedType.input} type="hidden" />
         <div className="learningsource-form">
           <div>
             <label className="mediatype-menu__label" htmlFor="url">{polyglot.t('editPathStep.urlLabel')}</label>
-            <input {...url.input} placeholder={polyglot.t('editPathStep.urlPlaceholder')} type="url" />
+            <input {...url.input} onChange={handleOembedUrl} placeholder={polyglot.t('editPathStep.urlPlaceholder')} type="url" />
             {url.meta.touched && url.meta.error && <span className="error_message error_message--red">{url.meta.error}</span>}
             <PreviewOembed content={oembedPreview} />
           </div>
@@ -110,6 +123,8 @@ LearningPathStepFields.propTypes = {
   showTitle: PropTypes.object.isRequired,
   url: PropTypes.object.isRequired,
   title: PropTypes.object.isRequired,
+  learningPathId: PropTypes.number.isRequired,
+  embedType: PropTypes.object.isRequired,
 };
 
 export default LearningPathStepFields;

@@ -36,7 +36,6 @@ export default class PreviewOembed extends React.Component {
     if (!content || isEmpty(content)) {
       return null;
     }
-
     const frameClasses = classNames({
       learningsource__frame: true,
       'learningsource__frame--hidden': !this.state.previewOembed,
@@ -48,12 +47,14 @@ export default class PreviewOembed extends React.Component {
         <span className="button button--outline">{polyglot.t('editPathStep.previewOembed')}</span>
       </button>) : null;
 
-    return (<div className="learningsource--wrapper">
-      <div className={frameClasses}>
-        <Oembed oembedContent={content} />
-        {previewButton}
+    return (
+      <div className="learningsource--wrapper">
+        <div className={frameClasses}>
+          <Oembed oembedContent={content} />
+          {previewButton}
+        </div>
       </div>
-    </div>);
+    );
   }
 }
 

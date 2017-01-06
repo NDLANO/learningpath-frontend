@@ -20,7 +20,7 @@ const EmbedSearchPreview = ({ oembedPreview, oembedDisplay, onImageLightboxClose
     <div className="big-lightbox_wrapper big-lightbox_wrapper--scroll big-lightbox_wrapper--center">
       <Lightbox display={oembedDisplay} onClose={onImageLightboxClose}>
         <h2>{polyglot.t('embedSearch.preview.title')}</h2>
-        {embedHasError ? <p>{polyglot.t('embedSearch.preview.error')}</p> : <Oembed oembedContent={embedContent} />}
+        {embedHasError ? <p>{polyglot.t('embedSearch.preview.error')}</p> : <Oembed oembedContent={embedContent} embedType="oembed" />}
       </Lightbox>
     </div>
   );
