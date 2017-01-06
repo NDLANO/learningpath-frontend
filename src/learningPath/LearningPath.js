@@ -19,6 +19,7 @@ import Masthead from '../common/Masthead';
 import Icon from '../common/Icon';
 import SortLearningStepsButton from './sidebar/SortLearningStepsButton';
 import { fetchLearningPath, copyLearningPath } from './learningPathActions';
+import { getI18nLearningPath } from './learningPathSelectors';
 
 export class LearningPath extends Component {
   constructor(props) {
@@ -112,7 +113,7 @@ LearningPath.contextTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
-  learningPath: state.learningPath,
+  learningPath: getI18nLearningPath(state),
   isPreview: ownProps.route.isPreview,
   sortLearningSteps: ownProps.sortLearningSteps,
   isTableOfContentOpen: state.sidebar.isLeftSideBarOpen,

@@ -11,8 +11,10 @@ import defined from 'defined';
 import { connect } from 'react-redux';
 import { closeSidebars } from '../../common/sidebarActions';
 import LearningPathToCStep from './LearningPathToCStep';
+import { getI18nLearningPath } from '../learningPathSelectors';
 
-export function LearningPathToC({ learningPath, activeStepId, localCloseSidebars, hasAddStepButton }) {
+export function LearningPathToC(props) {
+  const { learningPath, activeStepId, localCloseSidebars, hasAddStepButton } = props;
   const steps = defined(learningPath.learningsteps, []);
   return (
     <div>
@@ -51,7 +53,10 @@ LearningPathToC.defaultProps = {
 };
 
 
-const mapStateToProps = state => state;
+const mapStateToProps = state => Object.assign({}, state, {
+  learningPath: getI18nLearningPath(state),
+});
+
 const mapDispatchToProps = {
   localCloseSidebars: closeSidebars,
 };

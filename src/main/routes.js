@@ -15,7 +15,7 @@ import Welcome from './Welcome';
 import NotFound from './NotFound';
 import Forbidden from './Forbidden';
 import MyPage from '../myPage/MyPage';
-
+import LTIEmbedded from '../ltiSearch/LTIEmbedded';
 import LoginProviders from '../session/LoginProviders';
 
 import * as actions from '../session/sessionActions';
@@ -46,6 +46,8 @@ export default function (store) {
       <Route path="logout" onEnter={ifAuthenticated(logout)} component={LoginProviders} />
       <Route path="minside" component={requireAuthentication(MyPage)} />
       {learningPathRoutes}
+      <Route path="lti/:pathId/step/:stepId" component={requireAuthentication(LTIEmbedded)} />
+      <Route path="lti/:pathId/step/new" component={requireAuthentication(LTIEmbedded)} />
       <Route path="forbidden" component={Forbidden} />
       <Route path="*" component={NotFound} />
     </Route>

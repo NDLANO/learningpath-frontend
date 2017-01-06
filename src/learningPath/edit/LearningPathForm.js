@@ -14,7 +14,6 @@ import { Link } from 'react-router';
 import isInteger from 'lodash/isInteger';
 import { reduxForm, Field } from 'redux-form';
 import LabeledIcon from '../../common/LabeledIcon';
-import { titleI18N, descriptionI18N, tagsI18N } from '../../util/i18nFieldFinder';
 import TagsInput from '../../common/TagsInput';
 import InputField from '../../common/form/InputField';
 import LearningPathDescription from './LearningPathDescription';
@@ -62,6 +61,7 @@ const LearningPathForm = (props) => {
     licenseOptions,
     formValues,
   } = props;
+
   const learningPathTitle = defined(formValues.title, '');
   return (
     <form className="learning-path-form" onSubmit={handleSubmit}>
@@ -138,15 +138,15 @@ const convertedDuration = (value) => {
 
 const mapStateToProps = (state, props) => ({
   initialValues: {
-    title: titleI18N(props.learningPath, props.lang),
-    description: descriptionI18N(props.learningPath, props.lang),
+    title: props.learningPath.title,
+    description: props.learningPath.description,
     duration: convertedDuration(props.learningPath.duration),
-    tags: defined(tagsI18N(props.learningPath, props.lang), []),
+    tags: props.learningPath.tags,
     coverPhotoMetaUrl: props.learningPath.coverPhoto ? props.learningPath.coverPhoto.metaUrl : '',
     license: props.learningPath.copyright && props.learningPath.copyright.license ? defined(props.learningPath.copyright.license, '') : '',
     contributors: props.learningPath.copyright && props.learningPath.copyright.contributors ? props.learningPath.copyright.contributors : [],
   },
-  formValues: state.form[formName] ? state.form[formName].values : {},
+  formValues: state.form[formName] && state.form[formName].values ? state.form[formName].values : {},
 });
 
 export default compose(

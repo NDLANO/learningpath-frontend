@@ -14,7 +14,6 @@ import HTML5Backend from 'react-dnd-html5-backend';
 
 import Icon from '../../../common/Icon';
 import createSortableItem from './SortableItem';
-import { titleI18N } from '../../../util/i18nFieldFinder';
 import {
   updateStepSequenceNumber,
   deleteLearningPathStep,
@@ -49,14 +48,12 @@ class SortableLearningStepList extends Component {
   }
 
   render() {
-    const { lang } = this.context;
     const { SortableItem } = this.state;
     const { learningPathId, learningsteps, deleteStep, localUpdateStepSequenceNumber } = this.props;
 
     if (!learningsteps || !learningPathId) {
       return null;
     }
-
     return (
       <div className="sortable">
         <ul className="sortable_list">
@@ -71,10 +68,10 @@ class SortableLearningStepList extends Component {
                   <Icon.ImportExport className="icon--m" />
                 </div>
                 <div className="sortable_title">
-                  {titleI18N(step, lang, true)}
+                  {step.title}
                 </div>
                 <div className="sortable_action">
-                  <button onClick={() => deleteStep(learningPathId, step.id, titleI18N(step, lang, true))} className="un-button">
+                  <button onClick={() => deleteStep(learningPathId, step.id, step.title)} className="un-button">
                     <Icon.Clear className="icon--m" />
                   </button>
                 </div>
@@ -107,8 +104,4 @@ SortableLearningStepList.propTypes = {
   deleteStep: PropTypes.func.isRequired,
   learningPathId: PropTypes.number,
   learningsteps: PropTypes.array,
-};
-
-SortableLearningStepList.contextTypes = {
-  lang: PropTypes.string.isRequired,
 };

@@ -26,6 +26,7 @@ module.exports = Object.assign({
   googleApiUrl: process.env.NDLA_GOOGLE_API_URL || 'https://www.googleapis.com',
   pintrestApiUrl: process.env.PINTREST_API_URL || 'https://api.pinterest.com/v1/',
   pintrestEnabled: process.env.PINTREST_ACCESS_TOKEN !== undefined,
+  ltiActivated: process.env.NDLA_LTI_ACTIVATED === 'true',
   app: {
     title: 'NDLA Læringsstier',
     head: {

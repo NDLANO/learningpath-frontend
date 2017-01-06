@@ -16,7 +16,9 @@ export default handleActions({
     throw(state) { return state; },
   },
   SET_LEARNING_PATH_STEP: {
-    next(state, action) { return action.payload; },
+    next(state, action) {
+      return action.payload;
+    },
     throw(state) { return state; },
   },
   SET_OEMBED_OBJECT: {

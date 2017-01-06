@@ -14,6 +14,16 @@ const learningPaths = [
       { title: 'Kva er kunst og kultur?', language: 'nn' },
       { title: 'What is art and culture?', language: 'en' },
     ],
+    introduction: [
+      {
+        introduction: '<p>Norsk test id 1</p>',
+        language: 'nb',
+      },
+      {
+        introduction: '<p>Testing id 1</p>',
+        language: 'en',
+      },
+    ],
     description: [
       { description: `Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden.
         Kurset fokuserer på kunst og kultur på et verdensperspektiv.`,
@@ -25,6 +35,13 @@ const learningPaths = [
         The course focuses on art and culture in a world perspective`,
         language: 'en' },
     ],
+    tags: [
+      {
+        tags: ['kristofer'],
+        language: 'nb',
+      },
+    ],
+    isBasedOnTitle: undefined,
     metaUrl: 'http://api.test.ndla.no/learningpaths/1',
     duration: 1080,
     status: 'PUBLISHED',
@@ -41,6 +58,23 @@ const learningPaths = [
       { description: 'Uttrykkene "leselighet" og "lesbarhet" brukes om hverandre i norsk fagterminologi, og ofte uten klare forestillinger om hva begrepene står for.', language: 'nb' },
       { description: 'Uttrykka "leselighet" og "lesbarhet" vert brukt om kvarandre i norsk fagterminologi, og ofte utan klåre førestillingar om kva omgrepa står for.', language: 'nn' },
     ],
+    introduction: [
+      {
+        introduction: '<p>Norsk test</p>',
+        language: 'nb',
+      },
+      {
+        introduction: '<p>Testing</p>',
+        language: 'en',
+      },
+    ],
+    tags: [
+      {
+        tags: ['kristofer'],
+        language: 'nb',
+      },
+    ],
+    isBasedOnTitle: undefined,
     metaUrl: 'http://api.test.ndla.no/learningpaths/2',
     duration: 45,
     status: 'PRIVATE',
@@ -65,6 +99,7 @@ const learningPath = {
       language: 'en',
     },
   ],
+  isBasedOnTitle: undefined,
   description: [
     {
       description: 'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
@@ -90,23 +125,6 @@ const learningPath = {
           language: 'nb',
         },
       ],
-      description: [
-        {
-          description: 'Beskrivelse',
-          language: 'nb',
-        },
-      ],
-      embedUrl: [
-        {
-          url: 'http://ndla.no/nb/node/24049',
-          language: 'nb',
-        },
-      ],
-      oembed: {
-        title: 'NDLA',
-        url: 'http://ndla.no/nb/node/24049',
-        html: '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>',
-      },
       type: 'TEXT',
       license: 'by-nc-sa',
       metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/7',
@@ -120,23 +138,6 @@ const learningPath = {
           language: 'nb',
         },
       ],
-      description: [
-        {
-          description: 'Beskrivelse',
-          language: 'nb',
-        },
-      ],
-      embedUrl: [
-        {
-          url: 'http://ndla.no/nb/node/24049',
-          language: 'nb',
-        },
-      ],
-      oembed: {
-        title: 'NDLA',
-        url: 'http://ndla.no/nb/node/24049',
-        html: '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>',
-      },
       type: 'TEXT',
       metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/8',
     },
@@ -149,7 +150,7 @@ const learningPath = {
   canEdit: true,
   tags: [
     {
-      tag: 'kristofer',
+      tags: ['kristofer'],
       language: 'nb',
     },
   ],
@@ -329,4 +330,29 @@ const ndlaLearningStep = {
   metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/9',
 };
 
-export { learningPaths, learningPath, learningPathNotEditable, learningStep, ndlaLearningStep };
+const oembedPreview = {
+  oembedContent: [
+    {
+      type: 'rich',
+      version: '1.0',
+      title: 'Klart du bør bli journalist',
+      width: 800,
+      height: 800,
+      html: '<iframe src="http://api.test.ndla.no/article-oembed/html/nb/60" frameborder="0" />',
+      url: 'http://api.test.ndla.no:8082/article/60',
+      language: 'nb',
+    },
+    {
+      type: 'rich',
+      version: '1.0',
+      title: 'You should become journalist',
+      width: 800,
+      height: 800,
+      html: '<iframe src="http://api.test.ndla.no/article-oembed/html/en/60" frameborder="0" />',
+      url: 'http://api.test.ndla.no:8082/article/60',
+      language: 'en',
+    },
+  ],
+};
+
+export { learningPaths, learningPath, learningPathNotEditable, learningStep, ndlaLearningStep, oembedPreview };
