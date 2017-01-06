@@ -13,7 +13,7 @@ import { routerActions } from 'react-router-redux';
 import nock from 'nock';
 import payload403invalid from '../../actions/__tests__/payload403invalid';
 
-import { applicationError, addMessage } from '../../messages/messagesActions';
+import { applicationError } from '../../messages/messagesActions';
 import { fetchLearningPath, setLearningPath } from '../learningPathActions';
 import { setSavedImage, setSelectedImage } from '../../imageSearch/imageActions';
 
@@ -86,8 +86,7 @@ test('actions/fetchLearningPath with isEdit true and canEdit false', (t) => {
   store.dispatch(fetchLearningPath(pathId, true))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        addMessage({ message: 'Du har ikke tilgang til denne siden', severity: 'danger', timeToLive: 3000 }),
-        routerActions.push({ pathname: `/learningpaths/${pathId}` }),
+        routerActions.push({ pathname: '/forbidden' }),
         setLearningPath({ id: pathId, canEdit: false }),
         setSavedImage({}),
         setSelectedImage({}),
@@ -138,8 +137,7 @@ test('actions/fetchLearningPath access denied', (t) => {
   store.dispatch(fetchLearningPath(pathId))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        addMessage({ message: 'Du har ikke tilgang til denne siden', severity: 'danger', timeToLive: 3000 }),
-        routerActions.push({ pathname: '/' }),
+        routerActions.push({ pathname: '/forbidden' }),
         applicationError(payload403invalid()),
       ]);
       t.doesNotThrow(() => apiMock.done());
