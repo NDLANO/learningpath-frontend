@@ -24,9 +24,8 @@ export const removeLearningPath = createAction('REMOVE_LEARNING_PATH');
 
 function canAccessLearningPath(path, isEdit = false, dispatch) {
   if ((isEdit && !path.canEdit)) {
-    dispatch(addMessage({ message: polyglot.t('learningPath.messages.noAcess'), severity: 'danger', timeToLive: 3000 }));
     dispatch(routerActions.push({
-      pathname: `/learningpaths/${path.id}`,
+      pathname: '/forbidden',
     }));
   }
 }
@@ -58,9 +57,8 @@ export function fetchLearningPath(pathId, isEdit = false) {
     })
     .catch((err) => {
       if (err.status === 403) {
-        dispatch(addMessage({ message: polyglot.t('learningPath.messages.noAcess'), severity: 'danger', timeToLive: 3000 }));
         dispatch(routerActions.push({
-          pathname: '/',
+          pathname: '/forbidden',
         }));
       }
       dispatch(applicationError(err));

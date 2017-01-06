@@ -118,9 +118,6 @@ const phrases = {
       imageSearchTotalCount: 'Søk på "%{textQuery}" ga %{totalCount} resulater',
       imageSearchOneTotalCount: 'Søk på "%{textQuery}" ga 1 resulat',
     },
-    messages: {
-      noAcess: 'Du har ikke tilgang til denne siden',
-    },
   },
   editPage: {
     learningpathShortDescriptionTitle: 'Introduksjon',
@@ -208,7 +205,6 @@ const phrases = {
         title: 'Slettet «%{stepTitle}»',
         action: 'Angre',
       },
-      noAcess: 'Du har ikke tilgang til denne siden',
     },
     license: 'Lisens: %{license}',
   },
@@ -275,6 +271,11 @@ const phrases = {
       create: 'Opprett læringssteg',
       viewSource: 'Se kilde lenke',
     },
+  },
+  htmlStatus: {
+    notFound: 'Denne siden finnes ikke',
+    forbidden: 'Du har ikke tilgang til denne siden',
+    backToFrontpage: 'Tilbake til forsiden',
   },
 };
 

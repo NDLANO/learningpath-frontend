@@ -34,9 +34,8 @@ export function fetchOembed(query) {
 
 function canAccessLearningPathStep(pathId, step, isEdit = false, dispatch) {
   if (isEdit && !step.canEdit) {
-    dispatch(addMessage({ message: polyglot.t('learningPathStep.messages.noAcess'), severity: 'danger', timeToLive: 3000 }));
     dispatch(routerActions.push({
-      pathname: `/learningpaths/${pathId}/step/${step.id}`,
+      pathname: '/forbidden',
     }));
   }
 }

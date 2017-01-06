@@ -13,6 +13,7 @@ import { bindActionCreators } from 'redux';
 import App from './App';
 import Welcome from './Welcome';
 import NotFound from './NotFound';
+import Forbidden from './Forbidden';
 import MyPage from '../myPage/MyPage';
 
 import LoginProviders from '../session/LoginProviders';
@@ -45,6 +46,7 @@ export default function (store) {
       <Route path="logout" onEnter={ifAuthenticated(logout)} component={LoginProviders} />
       <Route path="minside" component={requireAuthentication(MyPage)} />
       {learningPathRoutes}
+      <Route path="forbidden" component={Forbidden} />
       <Route path="*" component={NotFound} />
     </Route>
   );

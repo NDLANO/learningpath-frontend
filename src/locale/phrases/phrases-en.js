@@ -118,9 +118,6 @@ const phrases = {
       imageSearchTotalCount: 'Search for "%{textQuery}" yielded %{totalCount} results',
       imageSearchOneTotalCount: 'Search for "%{textQuery}" yielded 1 result',
     },
-    messages: {
-      noAcess: 'You do not have access to this page',
-    },
   },
   editPage: {
     learningpathShortDescriptionTitle: 'Introduction',
@@ -209,7 +206,6 @@ const phrases = {
         title: 'Deleted «%{stepTitle}»',
         action: 'Undo',
       },
-      noAcess: 'You do not have access to this page',
     },
     license: 'License: %{license}',
   },
@@ -276,6 +272,11 @@ const phrases = {
       create: 'Create learning step',
       viewSource: 'View source link',
     },
+  },
+  htmlStatus: {
+    notFound: 'The page cannot be found',
+    forbidden: 'You do not have access to this page',
+    backToFrontpage: 'Go to frontpage',
   },
 };
 
