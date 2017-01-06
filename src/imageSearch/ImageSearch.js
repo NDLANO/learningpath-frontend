@@ -8,12 +8,11 @@
 
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import get from 'lodash/get';
-
 import ImageSearchForm from './ImageSearchForm';
 import ImageSearchResult from './ImageSearchResult';
 import ButtonPager from '../common/pager/ButtonPager';
 import { changeImageSearchQuery, setSavedImage } from './imageActions';
+import { getSelectedImage, getImageSearchQuery, getResults, getLastPage, getTotalCount } from './imageSelectors';
 
 export function Images(props) {
   const {
@@ -85,11 +84,11 @@ Images.contextTypes = {
 };
 
 const mapStateToProps = state => Object.assign({}, state, {
-  images: state.imageSearch.images.results,
-  selectedImage: state.imageSearch.selectedImage,
-  lastPage: Math.ceil(state.imageSearch.images.totalCount / (state.imageSearch.imageSearchQuery['page-size'] || 1)),
-  totalCount: get(state, 'imageSearch.images.totalCount', 0),
-  imageSearchQuery: get(state, 'imageSearch.imageSearchQuery', { query: '', page: 1, 'page-size': 16 }),
+  images: getResults(state),
+  selectedImage: getSelectedImage(state),
+  lastPage: getLastPage(state),
+  totalCount: getTotalCount(state),
+  imageSearchQuery: getImageSearchQuery(state),
 });
 
 const mapDispatchToProps = {

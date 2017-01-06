@@ -17,6 +17,7 @@ import { fetchLearningPathLicensesIfNeeded } from './copyright/learningPathLicen
 import { getLearningPathTagsByLanguage } from './tags/learningPathTagsSelectors';
 import { fetchLearningPathImages, fetchLearningPathImage, fetchLearningPathImageWithMetaUrl } from '../../imageSearch/imageActions';
 import { updateLearningPath } from '../learningPathActions';
+import { getI18nLearningPath, getI18nLearningPathSteps } from '../learningPathSelectors';
 
 class EditLearningPath extends Component {
   componentDidMount() {
@@ -68,8 +69,8 @@ EditLearningPath.propTypes = {
 };
 
 const mapStateToProps = state => Object.assign({}, state, {
-  learningPath: get(state, 'learningPath', {}),
-  learningSteps: get(state, 'learningPath.learningsteps', []),
+  learningPath: getI18nLearningPath(state),
+  learningSteps: getI18nLearningPathSteps(state),
   tags: getLearningPathTagsByLanguage(state),
   licenses: get(state, 'learningPathLicenses.creativeCommonLicenses.all', []),
 });

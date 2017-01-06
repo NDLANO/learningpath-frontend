@@ -11,9 +11,6 @@ import classNames from 'classnames';
 import Icon from '../../common/Icon';
 import polyglot from '../../i18n';
 
-import { introductionI18N } from '../../util/i18nFieldFinder';
-
-
 export default class SearchResult extends Component {
   constructor(props) {
     super(props);
@@ -24,8 +21,7 @@ export default class SearchResult extends Component {
 
   render() {
     const { path } = this.props;
-    const { lang } = this.context;
-    if (!path.introduction || path.introduction.length === 0) {
+    if (!path.introduction) {
       return null;
     }
     const onClickShowIntroduction = (evt) => {
@@ -44,7 +40,7 @@ export default class SearchResult extends Component {
         <button className="un-button show-introduction_button" onClick={onClickShowIntroduction}>
           {introductionButtonText} {this.state.showIntroduction ? <Icon.ArrowUp /> : <Icon.ArrowDown />}
         </button>
-        <div className={introductionClassName()} dangerouslySetInnerHTML={{ __html: introductionI18N(path, lang, true) }} />
+        <div className={introductionClassName()} dangerouslySetInnerHTML={{ __html: path.introduction }} />
       </div>
     );
   }
@@ -52,8 +48,4 @@ export default class SearchResult extends Component {
 
 SearchResult.propTypes = {
   path: PropTypes.object.isRequired,
-};
-
-SearchResult.contextTypes = {
-  lang: PropTypes.string.isRequired,
 };

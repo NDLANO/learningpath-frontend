@@ -8,7 +8,6 @@
 
 import React, { PropTypes } from 'react';
 import { Field } from 'redux-form';
-import { oembedContentI18N, embedTypeUrlI18N } from '../../../util/i18nFieldFinder';
 import DescriptionHTMLEditor from '../../../common/editors/DescriptionHTMLEditor';
 import MediaTypeSelect from './MediaTypeSelect';
 import polyglot from '../../../i18n';
@@ -38,9 +37,6 @@ const LearningPathStepFields = (props) => {
     embedType,
     learningPathId,
   } = props;
-
-  const embedContent = oembedContentI18N({ embedUrl: oembedPreview }, lang);
-  const embedContentType = embedTypeUrlI18N({ embedUrl: oembedPreview }, lang);
   const handleDescriptionBlur = (value) => {
     if ((!showTitle.meta.touched && !step.id)) {
       if (value.hasText()) {
@@ -106,7 +102,7 @@ const LearningPathStepFields = (props) => {
             <label className="mediatype-menu__label" htmlFor="url">{polyglot.t('editPathStep.urlLabel')}</label>
             <input {...url.input} onChange={handleOembedUrl} placeholder={polyglot.t('editPathStep.urlPlaceholder')} type="url" />
             {url.meta.touched && url.meta.error && <span className="error_message error_message--red">{url.meta.error}</span>}
-            <PreviewOembed content={embedContent} embedType={embedContentType} />
+            <PreviewOembed content={oembedPreview} />
           </div>
         </div>
         {(url.meta.touched || description.meta.touched) && description.meta.error && <span className="error_message error_message--red">{description.meta.error}</span>}
@@ -120,7 +116,7 @@ LearningPathStepFields.propTypes = {
   lang: PropTypes.string.isRequired,
   error: PropTypes.string,
   step: PropTypes.object.isRequired,
-  oembedPreview: PropTypes.array,
+  oembedPreview: PropTypes.object,
   licenseOptions: PropTypes.array.isRequired,
   description: PropTypes.object.isRequired,
   type: PropTypes.object.isRequired,

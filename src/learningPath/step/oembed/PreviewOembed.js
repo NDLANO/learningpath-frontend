@@ -8,6 +8,7 @@
 
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
+import isEmpty from 'lodash/isEmpty';
 import polyglot from '../../../i18n';
 import Oembed from './Oembed';
 
@@ -30,8 +31,9 @@ export default class PreviewOembed extends React.Component {
   }
 
   render() {
-    const { content, embedType } = this.props;
-    if (!content) {
+    const { content } = this.props;
+
+    if (!content || isEmpty(content)) {
       return null;
     }
     const frameClasses = classNames({
@@ -48,7 +50,7 @@ export default class PreviewOembed extends React.Component {
     return (
       <div className="learningsource--wrapper">
         <div className={frameClasses}>
-          <Oembed oembedContent={content} embedType={embedType} />
+          <Oembed oembedContent={content} />
           {previewButton}
         </div>
       </div>
@@ -58,5 +60,4 @@ export default class PreviewOembed extends React.Component {
 
 PreviewOembed.propTypes = {
   content: PropTypes.object,
-  embedType: PropTypes.string,
 };

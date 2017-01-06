@@ -10,7 +10,6 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-import { titleI18N } from '../../util/i18nFieldFinder';
 import formatDate from '../../util/formatDate';
 import formatDuration from '../../util/formatDuration';
 import { closeSidebars } from '../../common/sidebarActions';
@@ -18,18 +17,18 @@ import LabeledIcon from '../../common/LabeledIcon';
 import LearningPathCopyright from './LearningPathCopyright';
 import IsBasedOn from '../../common/IsBasedOn';
 import LearningPathActionType from './LearningPathActionType';
+import { getI18nLearningPath } from '../learningPathSelectors';
 
 const LearningPathGeneralInfo = (props, context) => {
   const { authenticated, learningPath, localCloseSidebars, onCopyLearningPathClick } = props;
   const { lang } = context;
   const href = `/learningpaths/${learningPath.id}`;
-
   return (
     <div>
       <div className="learningpath-general-info">
         <h3 className="learningpath-general-info_h">
           <Link to={href} className={'cta-link--primary cta-link--underline'} onClick={localCloseSidebars}>
-            {titleI18N(learningPath, lang, true)}
+            {learningPath.title}
           </Link>
         </h3>
         <div className="border-box_wrapper">
@@ -62,6 +61,7 @@ LearningPathGeneralInfo.contextTypes = {
 };
 
 const mapStateToProps = state => Object.assign({}, state, {
+  learningPath: getI18nLearningPath(state),
   authenticated: state.authenticated,
 });
 

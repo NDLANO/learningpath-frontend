@@ -12,7 +12,7 @@ import { mount } from 'enzyme';
 import { spy } from 'sinon';
 import '../../../../common/__tests__/jsdomEnv';
 
-import { learningStep, ndlaLearningStep } from '../../../../common/__tests__/mockData';
+import { translatedLearningStep, translatedNdlaLearningStep } from '../../../../common/__tests__/translatedMockData';
 
 import Oembed, { urlIsNDLA } from '../Oembed';
 
@@ -25,7 +25,7 @@ test('component/Oembed urlIsNDLA', (t) => {
 });
 
 test('component/Oembed', (t) => {
-  const oembed = learningStep.oembed;
+  const oembed = translatedLearningStep.oembed;
   const component = mount(<Oembed oembedContent={oembed} />);
 
   const div = component.find('.learning-step');
@@ -43,7 +43,7 @@ test('component/Oembed', (t) => {
 test('component/Oembed ndla resource', (t) => {
   const addEventListener = spy(window, 'addEventListener');
 
-  const oembed = ndlaLearningStep.oembed;
+  const oembed = translatedNdlaLearningStep.oembed;
   const component = mount(<Oembed oembedContent={oembed} />);
 
   const div = component.find('.learning-step');
@@ -68,8 +68,8 @@ test('component/Oembed resize message listener', (t) => {
   const add = spy(window, 'addEventListener');
   const remove = spy(window, 'removeEventListener');
 
-  const oembed = learningStep.oembed;
-  const ndlaOembed1 = ndlaLearningStep.oembed;
+  const oembed = translatedLearningStep.oembed;
+  const ndlaOembed1 = translatedNdlaLearningStep.oembed;
   const ndlaOembed2 = Object.assign({}, ndlaOembed1, { url: `${ndlaOembed1.url}?another` });
   const ndlaOembed3 = Object.assign({}, ndlaOembed1, { url: `${ndlaOembed1.url}?yetanother` });
 
@@ -111,8 +111,8 @@ test('component/Oembed resize message listener', (t) => {
 });
 
 test('component/Oembed iframe resizing', (t) => {
-  const ndlaOembed = ndlaLearningStep.oembed;
-  const oembed = learningStep.oembed;
+  const ndlaOembed = translatedNdlaLearningStep.oembed;
+  const oembed = translatedLearningStep.oembed;
 
   const component = mount(<Oembed oembedContent={ndlaOembed} />);
   const instance = component.instance();
