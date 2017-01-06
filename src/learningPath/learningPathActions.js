@@ -56,10 +56,11 @@ export function fetchLearningPath(pathId, isEdit = false) {
       }
     })
     .catch((err) => {
+      console.log();
       if (err.status === 403) {
-        dispatch(routerActions.push({
-          pathname: '/forbidden',
-        }));
+        dispatch(routerActions.push({ pathname: '/forbidden' }));
+      } else if (err.status === 404) {
+        dispatch(routerActions.push({ pathname: '/notfound' }));
       }
       dispatch(applicationError(err));
     });

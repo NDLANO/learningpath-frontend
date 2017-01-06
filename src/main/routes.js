@@ -49,6 +49,7 @@ export default function (store) {
       <Route path="lti/:pathId/step/:stepId" component={requireAuthentication(LTIEmbedded)} />
       <Route path="lti/:pathId/step/new" component={requireAuthentication(LTIEmbedded)} />
       <Route path="forbidden" component={Forbidden} />
+      <Route path="notfound" component={NotFound} />
       <Route path="*" component={NotFound} />
     </Route>
   );

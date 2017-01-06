@@ -71,7 +71,12 @@ export function fetchLearningPathStep(pathId, stepId, isEdit = false) {
         dispatch(setLearningPathStep(step));
         canAccessLearningPathStep(pathId, step, isEdit, dispatch);
       })
-    .catch(err => dispatch(applicationError(err)));
+    .catch((err) => {
+      if (err.status === 404) {
+        dispatch(routerActions.push({ pathname: '/notfound' }));
+      }
+      dispatch(applicationError(err));
+    });
   };
 }
 
