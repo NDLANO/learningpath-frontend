@@ -12,7 +12,7 @@ import { compose } from 'redux';
 import { Link } from 'react-router';
 import defined from 'defined';
 import { reduxForm, Fields, change } from 'redux-form';
-import { titleI18N, descriptionI18N, oembedUrlI18N } from '../../../util/i18nFieldFinder';
+import { titleI18N, descriptionI18N, oembedUrlI18N, embedTypeUrlI18N } from '../../../util/i18nFieldFinder';
 import { createValidator, required, oneOfIsRequired } from '../../../util/validation';
 import LabeledIcon from '../../../common/LabeledIcon';
 import polyglot from '../../../i18n';
@@ -38,9 +38,10 @@ const LearningPathStepForm = (props) => {
     <form onSubmit={handleSubmit} className="learning-step-form">
       <div className="learning-step-form_group">
         <Fields
-          names={['type', 'title', 'showTitle', 'url', 'description']}
+          names={['type', 'title', 'showTitle', 'url', 'description', 'embedType']}
           component={LearningPathStepFields}
           step={step}
+          learningPathId={learningPathId}
           error={error}
           lang={lang}
           licenseOptions={licenseOptions}
@@ -85,17 +86,18 @@ const mapStateToProps = (state, props) => ({
     url: oembedUrlI18N(props.step, props.lang),
     type: props.step.type,
     license: defined(props.step.license, ''),
+    embedType: embedTypeUrlI18N(props.step, props.lang),
   },
 });
 
 const mapDispatchToProps = {
-  validateOembedUrl: (embedContent, lang) => validateOembed(embedContent, lang),
+  validateOembedUrl: (embedContent, lang, embedType) => validateOembed(embedContent, lang, embedType),
   localChange: (form, field, value) => change(form, field, value),
 };
 
 const asyncValidate = (values, dispatch, props) => {
   const { validateOembedUrl, lang } = props;
-  return validateOembedUrl(values.url, lang);
+  return validateOembedUrl(values.url, lang, values.embedType);
 };
 
 const validate = createValidator({

@@ -15,10 +15,17 @@ import polyglot from '../../../i18n';
 export const removeOembedPreview = createAction('REMOVE_OEMBED_PREVIEW');
 export const setOembedPreview = createAction('SET_OEMBED_PREVIEW');
 
-export function validateOembed(url, lang, fieldName = 'url', msgKey = 'validation.oembed') {
+export function validateOembed(url, lang, embedType = 'omebed', fieldName = 'url', msgKey = 'validation.oembed') {
   if (!url || url.length === 0) {
     return (dispatch => new Promise((resolve) => {
       dispatch(removeOembedPreview());
+      resolve();
+    }));
+  }
+  if (embedType === 'lti') {
+    return (dispatch => new Promise((resolve) => {
+      const oembed = { html: `<iframe src="${url}"/>` };
+      dispatch(setOembedPreview(Object.assign({}, oembed, { url, embedType, language: lang })));
       resolve();
     }));
   }
@@ -29,7 +36,7 @@ export function validateOembed(url, lang, fieldName = 'url', msgKey = 'validatio
       const currentOembedTitle = get(state, 'oembedPreview.oembedContent[0].title');
       const currentFormTitle = get(state, 'form.learning-path-step.values.title');
 
-      dispatch(setOembedPreview(Object.assign({}, oembed, { url, language: lang })));
+      dispatch(setOembedPreview(Object.assign({}, oembed, { url, embedType, language: lang })));
 
       if (oembed.title && (!currentFormTitle || currentOembedTitle === currentFormTitle)) {
         dispatch(change('learning-path-step', 'title', oembed.title));

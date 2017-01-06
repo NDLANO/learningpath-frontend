@@ -40,7 +40,7 @@ const stepFormWithTitle = {
 };
 
 
-const testValidateOembed = (t, url, store, apiReply, expectedActions) => {
+const testValidateOembed = (t, url, embedType, store, apiReply, expectedActions) => {
   const done = (res) => {
     t.end(res);
     nock.cleanAll();
@@ -51,7 +51,7 @@ const testValidateOembed = (t, url, store, apiReply, expectedActions) => {
     .query({ url })
     .reply(200, apiReply);
 
-  store.dispatch(validateOembed(url, 'nb'))
+  store.dispatch(validateOembed(url, 'nb', embedType))
     .then(() => {
       t.deepEqual(store.getActions(), expectedActions);
 
@@ -64,43 +64,48 @@ const testValidateOembed = (t, url, store, apiReply, expectedActions) => {
 
 test('actions/validiateOembed valid url and no step title', (t) => {
   const url = 'https://www.youtube.com/watch?v=BTqu9iMiPIU';
-  const apiReply = { title: 'test', url, language: 'nb' };
+  const embedType = 'oembed';
+
+  const apiReply = { embedType: 'oembed', title: 'test', url, language: 'nb' };
 
   const store = mockStore({ authToken, form: { 'learning-path-step': stepFormWithoutTitle } });
   const expectedActions = [
     setOembedPreview(apiReply),
     change('learning-path-step', 'title', apiReply.title),
   ];
-  testValidateOembed(t, url, store, apiReply, expectedActions);
+  testValidateOembed(t, url, embedType, store, apiReply, expectedActions);
 });
 
 test('actions/validiateOembed valid url and with step title', (t) => {
   const url = 'https://www.youtube.com/watch?v=BTqu9iMiPIU';
-  const apiReply = { title: 'test', url, language: 'nb' };
+  const embedType = 'oembed';
+  const apiReply = { embedType, title: 'test', url, language: 'nb' };
   const store = mockStore({ authToken, form: { 'learning-path-step': stepFormWithTitle } });
   const expectedActions = [setOembedPreview(apiReply)];
-  testValidateOembed(t, url, store, apiReply, expectedActions);
+  testValidateOembed(t, url, embedType, store, apiReply, expectedActions);
 });
 
 test('actions/validiateOembed valid url and replace step title if current form title equals current oembed title', (t) => {
   const url = 'http://ndla.no/nb/node/166201?fag=17&meny=15554';
-  const apiReply = { title: 'test', url, language: 'nb' };
+  const embedType = 'oembed';
+  const apiReply = { embedType, title: 'test', url, language: 'nb' };
   const store = mockStore({ oembedPreview: { oembedContent: [{ title: 'Youtube film' }] }, authToken, form: { 'learning-path-step': stepFormWithTitle } });
   const expectedActions = [
     setOembedPreview(apiReply),
     change('learning-path-step', 'title', apiReply.title),
   ];
-  testValidateOembed(t, url, store, apiReply, expectedActions);
+  testValidateOembed(t, url, embedType, store, apiReply, expectedActions);
 });
 
 test('actions/validiateOembed valid url and do not replace step title if current form title is not equal to current oembed title', (t) => {
   const url = 'http://ndla.no/nb/node/166201?fag=17&meny=15554';
-  const apiReply = { title: 'test', url, language: 'nb' };
+  const embedType = 'oembed';
+  const apiReply = { embedType, title: 'test', url, language: 'nb' };
   const store = mockStore({ oembedPreview: { oembedContent: [{ title: 'ndla no' }] }, authToken, form: { 'learning-path-step': stepFormWithTitle } });
   const expectedActions = [
     setOembedPreview(apiReply),
   ];
-  testValidateOembed(t, url, store, apiReply, expectedActions);
+  testValidateOembed(t, url, embedType, store, apiReply, expectedActions);
 });
 
 test('actions/validiateOembed invalid url', (t) => {
@@ -117,7 +122,7 @@ test('actions/validiateOembed invalid url', (t) => {
 
   const store = mockStore({ authToken });
 
-  store.dispatch(validateOembed(url, 'nb', 'url', 'feil'))
+  store.dispatch(validateOembed(url, 'nb', 'oembed', 'url', 'feil'))
     .then(() => {
       t.doesNotThrow(() => apiMock.done());
       t.fail('Promise should be rejected.');

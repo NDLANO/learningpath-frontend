@@ -240,6 +240,9 @@ const phrases = {
     durationNaN: 'Invalid duration. Must be in number of hours.',
     durationDecimals: 'Max two decimals.',
   },
+  ltiSearch: {
+    ltiAdded: 'LTI Resource is saved',
+  },
   embedSearch: {
     form: {
       title: 'Add content from an external source',
