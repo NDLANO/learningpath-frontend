@@ -9,6 +9,7 @@
 import React, { PropTypes } from 'react';
 import LTISearchFilter from './LTISearchFilter';
 import Lightbox from '../common/Lightbox';
+import { onFilterClick } from './ltiSearchActions';
 
 class LTISearch extends React.Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class LTISearch extends React.Component {
     this.toggleLTISearch = this.toggleLTISearch.bind(this);
     this.ltiSearchClose = this.ltiSearchClose.bind(this);
   }
+
   componentDidMount() {
     window.addEventListener('message', this.handlePostMessage);
   }
@@ -44,32 +46,9 @@ class LTISearch extends React.Component {
   ltiSearchClose() {
     this.setState({ ltiDisplay: false });
   }
+
   render() {
     const { stepId, learningPathId } = this.props;
-
-    const ltiForm = filter => `<form action="https://www.edu-apps.org/lti_public_resources/?tool_id=${filter.key}" method="post" id="ltiform">
-          <input name="lti_message_type" type="hidden" value="basic-lti-launch-request" />
-          <input name="lti_version" type="hidden" value="LTI-1p1" />
-          <input name="roles" type="hidden" value="Instructor" />
-          <input name="ext_content_return_url" type="hidden" value="${filter.returnUrl}" />
-          <input name="ext_content_return_types" type="hidden" value="oembed,lti_launch_url,url,image_url" />
-          <input name="ext_content_intended_use" type="hidden" value="embed" />
-        </form>`;
-
-    const onFilterClick = (filter = undefined) => {
-      if (filter) {
-        const frameDiv = document.getElementById('ltiiframewrapper');
-        const iframe = frameDiv.getElementsByTagName('iframe')[0];
-        const frame = document.createElement('iframe');
-        frame.id = 'ltiiframe';
-        frameDiv.replaceChild(frame, iframe);
-        const newIframe = frameDiv.getElementsByTagName('iframe')[0].contentWindow.document;
-        const body = newIframe.getElementsByTagName('body')[0];
-        const form = ltiForm(filter);
-        body.innerHTML = form;
-        newIframe.getElementById('ltiform').submit();
-      }
-    };
 
     return (
       <div>
@@ -86,7 +65,6 @@ class LTISearch extends React.Component {
     );
   }
 }
-
 
 LTISearch.propTypes = {
   stepId: PropTypes.number,
