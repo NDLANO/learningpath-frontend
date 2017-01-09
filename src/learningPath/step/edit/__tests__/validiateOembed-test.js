@@ -47,7 +47,7 @@ const testValidateOembed = (t, url, store, apiReply, expectedActions) => {
   };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .get('/oembed')
+    .get('/oembed-proxy/v1/oembed')
     .query({ url })
     .reply(200, apiReply);
 
@@ -111,7 +111,7 @@ test('actions/validiateOembed invalid url', (t) => {
   const url = 'thisIsAnInvalidUrl';
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .get('/oembed')
+    .get('/oembed-proxy/v1/oembed')
     .query({ url })
     .reply(501, { type: 'introduction', title: 'sup' });
 

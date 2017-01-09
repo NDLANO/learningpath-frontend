@@ -39,7 +39,7 @@ test('actions/updateLearningPathStep', (t) => {
   const learningStepReply = Object.assign({}, learningStep, { id: stepId });
 
   const patchPathStepApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .patch(`/learningpaths/${pathId}/learningsteps/${stepId}`, learningStep)
+    .patch(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`, learningStep)
     .reply(200, learningStepReply);
 
   const store = mockStore({ authToken });
@@ -72,7 +72,7 @@ test('actions/updateLearningPathStep access denied', (t) => {
   };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .patch(`/learningpaths/${pathId}/learningsteps/${stepId}`, learningStep)
+    .patch(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`, learningStep)
     .reply(403, { message: 'Invalid' });
 
   const store = mockStore({ authToken });
