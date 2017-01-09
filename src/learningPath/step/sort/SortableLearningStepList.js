@@ -11,7 +11,6 @@ import { connect } from 'react-redux';
 import flow from 'lodash/flow';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-
 import Icon from '../../../common/Icon';
 import createSortableItem from './SortableItem';
 import {
@@ -19,27 +18,11 @@ import {
   deleteLearningPathStep,
   sortLearningPathSteps,
 } from '../learningPathStepActions';
+import { titleI18N } from '../../../util/i18nFieldFinder';
 
 class SortableLearningStepList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { SortableItem: createSortableItem() };
-    this.moveLearningStep = this.moveLearningStep.bind(this);
-    this.findLearningStep = this.findLearningStep.bind(this);
-  }
-
-  moveLearningStep(id, atIndex) {
-    const { learningsteps } = this.props;
-    const { step, index } = this.findLearningStep(id, learningsteps);
-    const { sortSteps } = this.props;
-    learningsteps.splice(index, 1);
-    learningsteps.splice(atIndex, 0, step);
-    const updated = learningsteps.map((s, i) => Object.assign(s, { seqNo: i }));
-    sortSteps(updated);
-  }
-
-  findLearningStep(id, learningsteps) {
-    const step = learningsteps.find(c => c.id === this.id);
+  static findLearningStep(id, learningsteps) {
+    const step = learningsteps.find(c => c.id === id);
 
     return {
       step,
@@ -47,7 +30,23 @@ class SortableLearningStepList extends Component {
     };
   }
 
+  constructor(props) {
+    super(props);
+    this.state = { SortableItem: createSortableItem() };
+    this.moveLearningStep = this.moveLearningStep.bind(this);
+  }
+
+  moveLearningStep(id, atIndex) {
+    const { learningsteps, sortSteps } = this.props;
+    const { step, index } = SortableLearningStepList.findLearningStep(id, learningsteps);
+    learningsteps.splice(index, 1);
+    learningsteps.splice(atIndex, 0, step);
+    const updated = learningsteps.map((s, i) => Object.assign(s, { seqNo: i }));
+    sortSteps(updated);
+  }
+
   render() {
+    const { lang } = this.context;
     const { SortableItem } = this.state;
     const { learningPathId, learningsteps, deleteStep, localUpdateStepSequenceNumber } = this.props;
 
@@ -68,7 +67,7 @@ class SortableLearningStepList extends Component {
                   <Icon.ImportExport className="icon--m" />
                 </div>
                 <div className="sortable_title">
-                  {step.title}
+                  {titleI18N(step, lang, true)}
                 </div>
                 <div className="sortable_action">
                   <button onClick={() => deleteStep(learningPathId, step.id, step.title)} className="un-button">
@@ -83,7 +82,6 @@ class SortableLearningStepList extends Component {
     );
   }
 }
-
 
 const mapStateToProps = state => state;
 
@@ -104,4 +102,8 @@ SortableLearningStepList.propTypes = {
   deleteStep: PropTypes.func.isRequired,
   learningPathId: PropTypes.number,
   learningsteps: PropTypes.array,
+};
+
+SortableLearningStepList.contextTypes = {
+  lang: PropTypes.string.isRequired,
 };
