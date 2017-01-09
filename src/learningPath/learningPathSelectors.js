@@ -11,7 +11,7 @@ import defined from 'defined';
 import { titleI18N, descriptionI18N, tagsI18N, isBasedOnTitleI18N } from '../util/i18nFieldFinder';
 import { getLocale } from '../locale/localeSelectors';
 
-const getLearningPath = state => state.learningPath;
+export const getLearningPath = state => state.learningPath;
 
 export const getLearningPathId = state => state.learningPath.id;
 
@@ -27,8 +27,7 @@ export const getI18nLearningPath = createSelector(
       title: titleI18N(step, lang, true),
     })) : [],
     tags: defined(tagsI18N(learningPath, lang, true), []),
-  })
-);
+  }));
 
 
 export const getI18nLearningPathSteps = createSelector(
