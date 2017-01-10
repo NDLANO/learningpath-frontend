@@ -55,7 +55,7 @@ export class LearningPath extends Component {
 
     const onLightboxClose = () => this.setState({ displayCopyPath: false });
     const onCopy = () => {
-      copyPath(learningPath, lang);
+      copyPath(learningPath, lang, true);
       onLightboxClose();
     };
 
