@@ -12,7 +12,6 @@ import Helmet from 'react-helmet';
 import Oembed from './oembed/Oembed';
 import polyglot from '../../i18n';
 import { fetchLearningPathStep } from './learningPathStepActions';
-import { copyLearningPath } from '../learningPathActions';
 import LearningPathStepInformation from './LearningPathStepInformation';
 import LearningPathStepPrevNext from './LearningPathStepPrevNext';
 import { getI18nLearningPathStep } from './learningPathStepSelectors';
