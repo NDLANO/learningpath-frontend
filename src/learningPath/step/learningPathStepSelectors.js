@@ -7,7 +7,7 @@
  */
 
 import { createSelector } from 'reselect';
-import { titleI18N, descriptionI18N, oembedUrlI18N, oembedContentI18N } from '../../util/i18nFieldFinder';
+import { titleI18N, descriptionI18N, oembedUrlI18N, oembedContentI18N, embedTypeUrlI18N } from '../../util/i18nFieldFinder';
 import { getLocale } from '../../locale/localeSelectors';
 
 const getLearningPathStep = state => state.learningPathStep;
@@ -29,6 +29,7 @@ export const getI18nLearningPathStep = createSelector(
     description: descriptionI18N(learningPathStep, lang, true),
     embedUrl: {
       url: oembedUrlI18N(learningPathStep, lang),
+      embedType: embedTypeUrlI18N(learningPathStep, lang),
     },
   })
 );
