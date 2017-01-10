@@ -289,6 +289,7 @@ const learningStep = {
     {
       url: 'https://www.youtube.com/watch?v=RYLlSFmGfm0',
       language: 'nb',
+      embedType: 'oembed',
     },
   ],
   oembed: {

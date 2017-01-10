@@ -130,6 +130,7 @@ const translatedLearningStep = {
   description: '<h1>Beskrivelse</h1>',
   embedUrl: {
     url: 'https://www.youtube.com/watch?v=RYLlSFmGfm0',
+    embedType: 'oembed',
   },
   oembed: {
     title: 'NDLA',
