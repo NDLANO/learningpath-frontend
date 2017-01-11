@@ -23,7 +23,7 @@ export default handleActions({
     throw: state => state,
   },
 
-  UPDATE_LEARNING_PATH_STATUS: {
+  UPDATE_LEARNING_PATHS_STATUS: {
     next(state, action) {
       const { id, status } = action.payload;
       const nextState = cloneDeep(state);

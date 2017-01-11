@@ -18,9 +18,9 @@ import { fetchLearningPathImageWithMetaUrl, setSelectedImage, setSavedImage } fr
 import { fetchMyLearningPaths } from '../myPage/myPageActions';
 
 export const setLearningPath = createAction('SET_LEARNING_PATH');
-export const setLearningPathStatus = createAction('UPDATE_LEARNING_PATH_STATUS');
+export const setLearningPathsStatus = createAction('UPDATE_LEARNING_PATHS_STATUS');
 export const removeLearningPath = createAction('REMOVE_LEARNING_PATH');
-
+export const setLearningPathStatus = createAction('UPDATE_LEARNING_PATH_STATUS');
 function fetchIsBasedOnPath(path) {
   return (dispatch, getState) => fetchPath(getState().authToken, { pathId: path.isBasedOn })
     .then((isBasedOnPath) => {
@@ -111,11 +111,10 @@ export function deleteLearningPath(learningPath) {
       ))
     );
 }
-
-export function updateLearningPathStatus(pathId, status, redirectUrl = false) {
+function updateLPStatus(pathId, status, redirectUrl, setStatus) {
   return (dispatch, getState) => updateStatus(getState().authToken, { pathId }, { status })
     .then(() => {
-      dispatch(setLearningPathStatus({ id: pathId, status }));
+      dispatch(setStatus);
       dispatch(addMessage({ message: polyglot.t('updateLearningPathStatus.updateStatusMsg') }));
       if (redirectUrl) {
         dispatch(routerActions.push({
@@ -124,6 +123,15 @@ export function updateLearningPathStatus(pathId, status, redirectUrl = false) {
       }
     })
     .catch(err => dispatch(applicationError(err)));
+}
+export function updateLearningPathsStatus(pathId, status, redirectUrl = false) {
+  const setStatus = setLearningPathsStatus({ id: pathId, status });
+  return updateLPStatus(pathId, status, redirectUrl, setStatus);
+}
+
+export function updateLearningPathStatus(pathId, status, redirectUrl = false) {
+  const setStatus = setLearningPathStatus({ status });
+  return updateLPStatus(pathId, status, redirectUrl, setStatus);
 }
 
 export function copyLearningPath(learningPath, locale) {

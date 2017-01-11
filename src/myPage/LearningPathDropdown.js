@@ -10,6 +10,7 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import polyglot from '../i18n';
 import Icon from '../common/Icon';
+import { learningPathStatuses } from '../util/learningPathStatuses';
 
 export function LearningPathDropdown({ onSelect, learningPath }) {
   const makeOnClick = actionType => (evt) => {
@@ -17,7 +18,6 @@ export function LearningPathDropdown({ onSelect, learningPath }) {
     onSelect(actionType, learningPath);
   };
 
-  const statuses = [{ status: 'PRIVATE', action: 'unpublish' }, { status: 'PUBLISHED', action: 'publish' }, { status: 'NOT_LISTED', action: 'unlist' }];
 
   const publishAction = status => (evt) => {
     evt.preventDefault();
@@ -30,6 +30,7 @@ export function LearningPathDropdown({ onSelect, learningPath }) {
     'dropdown-menu_item': true,
     active: learningPath.status === status,
   });
+
   return (
     <div className="dropdown-menu">
       <span className="dropdown-menu_icon"><Icon.MoreVert /></span>
@@ -39,7 +40,7 @@ export function LearningPathDropdown({ onSelect, learningPath }) {
             <Icon.ContentCopy /> {polyglot.t('pathDropDown.makeCopy')}
           </a>
         </li>
-        {statuses.filter(status => status.status !== learningPath.status).map(status =>
+        {learningPathStatuses.filter(status => status.status !== learningPath.status).map(status =>
           <li key={status.action} className={dropDownMenuItemClassName(status.status)}>
             <a href="#" className="dropdown-menu_link" onClick={publishAction(status)}>
               <Icon.Input /> {polyglot.t(`pathDropDown.${learningPath.status}.${status.action}`)}

@@ -80,14 +80,14 @@ test('reducers/learningPaths update learning path status', (t) => {
   ];
 
   let actual = reducer(paths, {
-    type: 'UPDATE_LEARNING_PATH_STATUS',
+    type: 'UPDATE_LEARNING_PATHS_STATUS',
     payload: { id: 125, status: 'PUBLIC' },
   });
 
   t.equal(paths[2].status, 'PRIVATE', 'publish');
 
   actual = reducer(paths, {
-    type: 'UPDATE_LEARNING_PATH_STATUS',
+    type: 'UPDATE_LEARNING_PATHS_STATUS',
     payload: { id: 666, status: 'PUBLIC' },
   });
 
@@ -95,7 +95,7 @@ test('reducers/learningPaths update learning path status', (t) => {
 
   t.deepEqual(
     reducer([], {
-      type: 'UPDATE_LEARNING_PATH_STATUS',
+      type: 'UPDATE_LEARNING_PATHS_STATUS',
       payload: { id: 1, status: 'PUBLIC' },
     }),
     [],

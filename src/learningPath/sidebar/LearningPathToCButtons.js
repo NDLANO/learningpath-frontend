@@ -11,24 +11,24 @@ import { connect } from 'react-redux';
 import polyglot from '../../i18n';
 import { updateLearningPathStatus } from '../learningPathActions';
 import { closeSidebars } from '../../common/sidebarActions';
+import { getI18nLearningPath } from '../learningPathSelectors';
+import { learningPathStatuses } from '../../util/learningPathStatuses';
 
 export function LearningPathToCButtons({ learningPath, updatePathStatus, localCloseSidebars }) {
   if (!learningPath.canEdit) {
     return null;
   }
 
-  const statuses = [{ status: 'PRIVATE', action: 'unpublish' }, { status: 'PUBLISHED', action: 'publish' }, { status: 'NOT_LISTED', action: 'unlist' }];
   const publishAction = status => (evt) => {
     evt.preventDefault();
     if (status.status !== learningPath.status) {
       updatePathStatus(learningPath.id, status.status).then(localCloseSidebars);
     }
   };
-
   return (
     <div className="learning-path_save-buttons">
-      {statuses.filter(status => status.status !== learningPath.status).map(status =>
-        <button key={status.status} className="button--primary-outline labeled-icon" onClick={publishAction}>
+      {learningPathStatuses.filter(status => status.status !== learningPath.status).map(status =>
+        <button key={status.status} className="button--primary-outline labeled-icon" onClick={publishAction(status)}>
           {polyglot.t(`pathDropDown.${learningPath.status}.${status.action}`)}
         </button>
       )}
@@ -42,9 +42,13 @@ LearningPathToCButtons.propTypes = {
   localCloseSidebars: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = state => Object.assign({}, state, {
+  learningPath: getI18nLearningPath(state),
+});
+
 const mapDispatchToProps = {
   updatePathStatus: updateLearningPathStatus,
   localCloseSidebars: closeSidebars,
 };
 
-export default connect(state => state, mapDispatchToProps)(LearningPathToCButtons);
+export default connect(mapStateToProps, mapDispatchToProps)(LearningPathToCButtons);

@@ -63,6 +63,15 @@ export default handleActions({
     next(state, action) { return Object.assign({}, state, { tags: action.payload }); },
     throw(state) { return state; },
   },
+  UPDATE_LEARNING_PATH_STATUS: {
+    next(state, action) {
+      const { status } = action.payload;
+      const nextState = cloneDeep(state);
+      nextState.status = status;
+      return nextState;
+    },
+    throw: state => state,
+  },
 
   LOGOUT: () => ({}),
 }, initialState);
