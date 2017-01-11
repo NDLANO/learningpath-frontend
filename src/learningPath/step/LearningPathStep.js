@@ -12,22 +12,11 @@ import Helmet from 'react-helmet';
 import Oembed from './oembed/Oembed';
 import polyglot from '../../i18n';
 import { fetchLearningPathStep } from './learningPathStepActions';
-import { copyLearningPath } from '../learningPathActions';
-import CopyLearningPath from '../new/CopyLearningPath';
-import Lightbox from '../../common/Lightbox';
 import LearningPathStepInformation from './LearningPathStepInformation';
 import LearningPathStepPrevNext from './LearningPathStepPrevNext';
 import { getI18nLearningPathStep } from './learningPathStepSelectors';
 
 class LearningPathStep extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      displayCopyPath: false,
-    };
-    this.onCopyLearningPathClick = this.onCopyLearningPathClick.bind(this);
-  }
 
   componentWillMount() {
     const { lang } = this.context;
@@ -44,21 +33,10 @@ class LearningPathStep extends React.Component {
     }
   }
 
-  onCopyLearningPathClick() {
-    this.setState({
-      displayCopyPath: true,
-    });
-  }
-
   render() {
-    const { learningPathStep, learningPath, copyPath } = this.props;
+    const { learningPathStep } = this.props;
     const { lang } = this.context;
     const oembedContent = learningPathStep.oembed;
-    const onLightboxClose = () => this.setState({ displayCopyPath: false });
-    const onCopy = () => {
-      copyPath(learningPath, lang);
-      onLightboxClose();
-    };
 
     return (
       <div className="two-column_content--wide">
@@ -66,9 +44,6 @@ class LearningPathStep extends React.Component {
           <Helmet title={polyglot.t('htmlTitleTemplates.learningPathStep', { title: learningPathStep.title || '' })} />
           <LearningPathStepInformation learningPathStep={learningPathStep} stepTitle={learningPathStep.title} />
           {oembedContent ? <Oembed oembedContent={oembedContent} /> : ''}
-          <Lightbox display={this.state.displayCopyPath} onClose={onLightboxClose}>
-            <CopyLearningPath learningPath={learningPath} onClose={onLightboxClose} onCopy={onCopy} />
-          </Lightbox>
         </LearningPathStepPrevNext>
       </div>
     );
@@ -77,14 +52,12 @@ class LearningPathStep extends React.Component {
 
 LearningPathStep.propTypes = {
   authenticated: PropTypes.bool.isRequired,
-  learningPath: PropTypes.object.isRequired,
   learningPathStep: PropTypes.object.isRequired,
   localFetchLearningPathStep: PropTypes.func.isRequired,
   params: PropTypes.shape({
     pathId: PropTypes.string.isRequired,
     stepId: PropTypes.string,
   }).isRequired,
-  copyPath: PropTypes.func.isRequired,
 };
 
 LearningPathStep.contextTypes = {
@@ -92,7 +65,6 @@ LearningPathStep.contextTypes = {
 };
 
 const mapDispatchToProps = {
-  copyPath: copyLearningPath,
   localFetchLearningPathStep: fetchLearningPathStep,
 };
 
