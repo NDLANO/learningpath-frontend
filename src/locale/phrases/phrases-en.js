@@ -76,14 +76,12 @@ const phrases = {
     explanationBtn: 'What is a learning path?',
     newBtn: 'Make your own learning path',
     searchBtn: 'Search',
-    feature1Title: 'Easier to follow',
-    feature2Title: 'Even easier to follow',
-    feature1Content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
-    Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-    Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.`,
-    feature2Content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
-    Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-    Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.`,
+    feature1Title: 'Learningpath by NDLA',
+    feature1Content: `Learning paths organizes subject matter in a certain order.
+      You can find editorial quality assured learning paths from NDLA, where learning activities are educational organized.
+      Paths can also be adapted to different learning situations. Learning paths can be built up from scratch,
+      but learning material can also be removed or added to existing learning paths.
+      Resources are obtained easily from NDLA and elsewhere online.`,
   },
   learningPath: {
     pageName: 'Learning path details',
@@ -241,6 +239,9 @@ const phrases = {
     durationMinus: 'Duration must be bigger then zero.',
     durationNaN: 'Invalid duration. Must be in number of hours.',
     durationDecimals: 'Max two decimals.',
+  },
+  ltiSearch: {
+    ltiAdded: 'LTI Resource is saved',
   },
   embedSearch: {
     form: {

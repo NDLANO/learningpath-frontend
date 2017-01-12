@@ -12,12 +12,12 @@ import { compose } from 'redux';
 import { Link } from 'react-router';
 import defined from 'defined';
 import { reduxForm, Fields, change } from 'redux-form';
-import { titleI18N, descriptionI18N, oembedUrlI18N } from '../../../util/i18nFieldFinder';
 import { createValidator, required, oneOfIsRequired } from '../../../util/validation';
 import LabeledIcon from '../../../common/LabeledIcon';
 import polyglot from '../../../i18n';
 import LearningPathStepFields from './LearningPathStepFields';
 import { validateOembed } from './validateOembedActions';
+import { getI18NEmbedContent } from '../learningPathStepSelectors';
 
 const formName = 'learning-path-step';
 const LearningPathStepForm = (props) => {
@@ -32,15 +32,16 @@ const LearningPathStepForm = (props) => {
     licenseOptions,
     valid,
   } = props;
-  const abortUrl = step.id ? `/learningpaths/${learningPathId}/step/${step.id}` : `/learningpaths/${learningPathId}`;
 
+  const abortUrl = step.id ? `/learningpaths/${learningPathId}/step/${step.id}` : `/learningpaths/${learningPathId}`;
   return (
     <form onSubmit={handleSubmit} className="learning-step-form">
       <div className="learning-step-form_group">
         <Fields
-          names={['type', 'title', 'showTitle', 'url', 'description']}
+          names={['type', 'title', 'showTitle', 'url', 'description', 'embedType']}
           component={LearningPathStepFields}
           step={step}
+          learningPathId={learningPathId}
           error={error}
           lang={lang}
           licenseOptions={licenseOptions}
@@ -68,7 +69,7 @@ LearningPathStepForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
   learningPathId: PropTypes.number.isRequired,
-  oembedPreview: PropTypes.array,
+  oembedPreview: PropTypes.object,
   validateOembedUrl: PropTypes.func.isRequired,
   licenseOptions: PropTypes.array.isRequired,
   localChange: PropTypes.func.isRequired,
@@ -77,25 +78,26 @@ LearningPathStepForm.propTypes = {
 
 
 const mapStateToProps = (state, props) => ({
-  oembedPreview: state.oembedPreview.oembedContent,
+  oembedPreview: getI18NEmbedContent(state),
   initialValues: {
     showTitle: defined(props.step.showTitle, false),
-    title: titleI18N(props.step, props.lang),
-    description: descriptionI18N(props.step, props.lang),
-    url: oembedUrlI18N(props.step, props.lang),
+    title: props.step.title,
+    description: props.step.description,
+    url: props.step.embedUrl.url,
     type: props.step.type,
     license: defined(props.step.license, ''),
+    embedType: props.step.embedUrl.embedType,
   },
 });
 
 const mapDispatchToProps = {
-  validateOembedUrl: (embedContent, lang) => validateOembed(embedContent, lang),
+  validateOembedUrl: (embedContent, lang, embedType) => validateOembed(embedContent, lang, embedType),
   localChange: (form, field, value) => change(form, field, value),
 };
 
 const asyncValidate = (values, dispatch, props) => {
   const { validateOembedUrl, lang } = props;
-  return validateOembedUrl(values.url, lang);
+  return validateOembedUrl(values.url, lang, values.embedType);
 };
 
 const validate = createValidator({

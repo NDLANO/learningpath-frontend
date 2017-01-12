@@ -11,41 +11,38 @@ import { connect } from 'react-redux';
 import flow from 'lodash/flow';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-
 import Icon from '../../../common/Icon';
 import createSortableItem from './SortableItem';
-import { titleI18N } from '../../../util/i18nFieldFinder';
 import {
   updateStepSequenceNumber,
   deleteLearningPathStep,
   sortLearningPathSteps,
 } from '../learningPathStepActions';
+import { titleI18N } from '../../../util/i18nFieldFinder';
 
 class SortableLearningStepList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { SortableItem: createSortableItem() };
-    this.moveLearningStep = this.moveLearningStep.bind(this);
-    this.findLearningStep = this.findLearningStep.bind(this);
-  }
-
-  moveLearningStep(id, atIndex) {
-    const { learningsteps } = this.props;
-    const { step, index } = this.findLearningStep(id, learningsteps);
-    const { sortSteps } = this.props;
-    learningsteps.splice(index, 1);
-    learningsteps.splice(atIndex, 0, step);
-    const updated = learningsteps.map((s, i) => Object.assign(s, { seqNo: i }));
-    sortSteps(updated);
-  }
-
-  findLearningStep(id, learningsteps) {
-    const step = learningsteps.find(c => c.id === this.id);
+  static findLearningStep(id, learningsteps) {
+    const step = learningsteps.find(c => c.id === id);
 
     return {
       step,
       index: learningsteps.indexOf(step),
     };
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = { SortableItem: createSortableItem() };
+    this.moveLearningStep = this.moveLearningStep.bind(this);
+  }
+
+  moveLearningStep(id, atIndex) {
+    const { learningsteps, sortSteps } = this.props;
+    const { step, index } = SortableLearningStepList.findLearningStep(id, learningsteps);
+    learningsteps.splice(index, 1);
+    learningsteps.splice(atIndex, 0, step);
+    const updated = learningsteps.map((s, i) => Object.assign(s, { seqNo: i }));
+    sortSteps(updated);
   }
 
   render() {
@@ -56,7 +53,6 @@ class SortableLearningStepList extends Component {
     if (!learningsteps || !learningPathId) {
       return null;
     }
-
     return (
       <div className="sortable">
         <ul className="sortable_list">
@@ -86,7 +82,6 @@ class SortableLearningStepList extends Component {
     );
   }
 }
-
 
 const mapStateToProps = state => state;
 

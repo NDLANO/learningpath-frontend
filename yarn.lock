@@ -2987,13 +2987,13 @@ natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
 
-ndla-learningpath-styleguide@0.1.34:
-  version "0.1.34"
-  resolved "https://registry.yarnpkg.com/ndla-learningpath-styleguide/-/ndla-learningpath-styleguide-0.1.34.tgz#2ae229cfedfa47f2c6b5cdf2fe8bde4cd4e3c868"
+ndla-learningpath-styleguide@0.1.36:
+  version "0.1.36"
+  resolved "https://registry.yarnpkg.com/ndla-learningpath-styleguide/-/ndla-learningpath-styleguide-0.1.36.tgz#c4d27c277aa169b036f4c3be42bb0921327ec7ae"
 
-ndla-licenses@0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/ndla-licenses/-/ndla-licenses-0.0.5.tgz#e31197d96be7fe9a76a50164e37cac0a1f0e248d"
+ndla-licenses@0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/ndla-licenses/-/ndla-licenses-0.0.6.tgz#d9439b92f6a7feb295644f568c2071ea2731fc6f"
   dependencies:
     defined "1.0.0"
 

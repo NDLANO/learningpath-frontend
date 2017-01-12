@@ -12,10 +12,9 @@ import classNames from 'classnames';
 
 import last from 'lodash/last';
 import LearningPathStepIcon from '../../learningPath/step/LearningPathStepIcon';
-import { titleI18N } from '../../util/i18nFieldFinder';
 import Icon from '../../common/Icon';
 
-const LearningPathToCStep = (props, { lang }) => {
+const LearningPathToCStep = (props) => {
   const { learningPath, activeStepId, localCloseSidebars, hasAddStepButton, step, steps } = props;
   const base = `/learningpaths/${learningPath.id}`;
   const itemClassName = stepId => classNames({
@@ -32,7 +31,7 @@ const LearningPathToCStep = (props, { lang }) => {
         <LearningPathStepIcon learningPathStepType={step.type} isCircle />
         <div className="step-nav_title">
           <span>
-            {titleI18N(step, lang, true)}
+            {step.title}
           </span>
           {isActiveAndCanEdit ? <Icon.Create /> : ''}
         </div>
@@ -48,10 +47,6 @@ LearningPathToCStep.propTypes = {
   localCloseSidebars: PropTypes.func.isRequired,
   hasAddStepButton: PropTypes.bool.isRequired,
   steps: PropTypes.array.isRequired,
-};
-
-LearningPathToCStep.contextTypes = {
-  lang: PropTypes.string.isRequired,
 };
 
 LearningPathToCStep.defaultProps = {

@@ -9,8 +9,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import sortBy from 'lodash/sortBy';
-import reverse from 'lodash/reverse';
 import get from 'lodash/get';
 import { deleteLearningPath, createLearningPath, copyLearningPath, updateLearningPathStatus } from '../learningPath/learningPathActions';
 import Icon from '../common/Icon';
@@ -19,13 +17,13 @@ import polyglot from '../i18n';
 import { LearningPathDropdown } from './LearningPathDropdown';
 import formatDate from '../util/formatDate';
 import formatDuration from '../util/formatDuration';
-import { titleI18N, descriptionI18N } from '../util/i18nFieldFinder';
 import Lightbox from '../common/Lightbox';
 import Masthead from '../common/Masthead';
 import CreateLearningPath from '../learningPath/new/CreateLearningPath';
 import { Wrapper, OneColumn, Footer } from '../common/Layout';
 import { fetchLearningPathLicensesIfNeeded } from '../learningPath/edit/copyright/learningPathLicensesActions';
 import { setMyLearningPathsSortOrder, fetchMyLearningPaths } from './myPageActions';
+import { getI18NLearningPaths, getSortKey } from './myPageSelectors';
 
 export class MyPage extends React.Component {
   constructor(props) {
@@ -53,8 +51,6 @@ export class MyPage extends React.Component {
     const { learningPaths, sortKey, setSortKey, deletePath, updatePathStatus, createPath, copyPath, licenses } = this.props;
     const { lang } = this.context;
     const items = learningPaths.map((lp) => {
-      const title = titleI18N(lp, lang, true);
-      const description = descriptionI18N(lp, lang, true);
       const duration = formatDuration(lp.duration, lang);
       const lastUpdated = formatDate(lp.lastUpdated, lang);
 
@@ -88,8 +84,8 @@ export class MyPage extends React.Component {
             </div>
           </div>
           <Link className="tile_bd" to={`/learningpaths/${lp.id}/first-step`}>
-            <h3 className="tile_title">{title}</h3>
-            <p>{description}</p>
+            <h3 className="tile_title">{lp.title}</h3>
+            <p>{lp.description}</p>
           </Link>
           <div className="tile_ft">
             <div className="tile_property">
@@ -132,7 +128,7 @@ export class MyPage extends React.Component {
       <Wrapper>
         <OneColumn>
           <Masthead />
-          <div className="page-header">
+          <div className="page-header page-header--primary">
             <h2 className="page-header_name">{polyglot.t('myPage.pageHeader')}</h2>
             <div className="page-header_ctrls">
               {sortOrderSelect}
@@ -171,25 +167,9 @@ MyPage.contextTypes = {
   lang: PropTypes.string.isRequired,
 };
 
-const sortPaths = (paths, field, state) => {
-  switch (field) {
-    case 'title':
-      return sortBy(paths, p => titleI18N(p, state.lang, true));
-
-    case 'lastUpdated':
-      return sortBy(paths, field);
-
-    case '-lastUpdated':
-      return reverse(sortBy(paths, 'lastUpdated'));
-
-    default:
-      return sortBy(paths, field);
-  }
-};
-
 export function mapStateToProps(state) {
-  const sortKey = state.myLearningPathsSortOrder || 'title';
-  const learningPaths = sortPaths(state.learningPaths, sortKey, state);
+  const sortKey = getSortKey(state);
+  const learningPaths = getI18NLearningPaths(state);
   const licenses = get(state, 'learningPathLicenses.creativeCommonLicenses.all', []);
 
   return Object.assign({}, state, { learningPaths, sortKey, licenses });

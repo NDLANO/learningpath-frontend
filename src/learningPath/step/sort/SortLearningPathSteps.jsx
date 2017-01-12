@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import SortableLearningStepList from './SortableLearningStepList';
 import polyglot from '../../../i18n';
+import { getLearningPath } from '../../learningPathSelectors';
 
 const SortLearningPathSteps = ({ learningPath }) =>
   <div>
@@ -30,8 +31,8 @@ SortLearningPathSteps.propTypes = {
   learningPath: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => Object.assign({}, state, {
-  learningPath: state.learningPath,
+const mapStateToProps = state => Object.assign({}, state, {
+  learningPath: getLearningPath(state),
 });
 
 export default connect(mapStateToProps)(SortLearningPathSteps);

@@ -9,12 +9,12 @@
 import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
-import { learningPath } from '../../../common/__tests__/mockData';
+import { translatedLearningPath } from '../../../common/__tests__/translatedMockData';
 import { LearningPathToC } from '../LearningPathToC';
 import LearningPathToCStep from '../LearningPathToCStep';
 
 test('component/LearningPathToC', (t) => {
-  const component = shallow(<LearningPathToC learningPath={learningPath} />,
+  const component = shallow(<LearningPathToC learningPath={translatedLearningPath} />,
       { context: { lang: 'nb' } });
 
   const steps = component.find(LearningPathToCStep);

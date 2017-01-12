@@ -81,7 +81,7 @@ export default class Oembed extends React.Component {
   }
 
   render() {
-    const { oembedContent: { html } } = this.props;
+    const { oembedContent: { html, embedType } } = this.props;
 
     return (
       <div
@@ -89,6 +89,8 @@ export default class Oembed extends React.Component {
           'learning-step': true,
           'learning-step_embed': true,
           'learning-step--without-dimensions': this.state.isNDLAResource,
+          'learning-step_lti': embedType === 'lti',
+          'learning-step_oembed': embedType === 'oembed',
         })}
         dangerouslySetInnerHTML={{ __html: html }}
       />
@@ -98,6 +100,7 @@ export default class Oembed extends React.Component {
 
 Oembed.propTypes = {
   oembedContent: PropTypes.object.isRequired,
+  embedType: PropTypes.string,
 };
 
 Oembed.defaultProps = {

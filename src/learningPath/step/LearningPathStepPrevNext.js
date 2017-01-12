@@ -26,7 +26,6 @@ export function LearningPathPrevNext(props) {
     'learning-step_stepper--right': isRight,
   });
   const stepperTag = (stepObject, text, isRight) => (stepObject ? <Link className={stepperClassName(isRight)} to={stepObject.url}> {text} </Link> : null);
-
   return (
     <div>
       <div className="learning-step learning-step--padding-top">

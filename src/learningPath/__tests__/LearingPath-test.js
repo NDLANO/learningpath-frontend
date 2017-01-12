@@ -9,7 +9,7 @@
 import test from 'tape'; import React from 'react';
 import { shallow } from 'enzyme';
 
-import { learningPath } from '../../common/__tests__/mockData';
+import { translatedLearningPath } from '../../common/__tests__/translatedMockData';
 import { LearningPath } from '../LearningPath';
 
 const Foo = () => <div />;
@@ -18,7 +18,7 @@ const Bar = () => <div />;
 test('component/LearningPath', (t) => {
   t.equal(
     shallow(
-      <LearningPath learningPath={learningPath} params={{}} location={{ pathname: '' }}>
+      <LearningPath learningPath={translatedLearningPath} params={{}} location={{ pathname: '' }}>
         <Foo />
       </LearningPath>, { context: { lang: 'nb' } }
     ).find(Foo).length, 2, 'renders props.children'); // For some reason cloning an element results in two rendered components
@@ -26,7 +26,7 @@ test('component/LearningPath', (t) => {
   t.equal(
     shallow(
       <LearningPath
-        learningPath={learningPath} params={{}} location={{ pathname: '' }} main={React.createElement(Bar)}
+        learningPath={translatedLearningPath} params={{}} location={{ pathname: '' }} main={React.createElement(Bar)}
         saveButtons={React.createElement(Foo)}
       />, { context: { lang: 'nb' } }
     ).find(Foo).length, 1, 'renders props.saveButtons');
@@ -34,7 +34,7 @@ test('component/LearningPath', (t) => {
   t.equal(
     shallow(
       <LearningPath
-        learningPath={learningPath} params={{}} location={{ pathname: '' }}
+        learningPath={translatedLearningPath} params={{}} location={{ pathname: '' }}
         main={React.createElement(Foo)}
       />, { context: { lang: 'nb' } }
     ).find(Foo).length, 1, 'renders props.main');
@@ -42,7 +42,7 @@ test('component/LearningPath', (t) => {
   t.equal(
     shallow(
       <LearningPath
-        learningPath={learningPath} params={{}} location={{ pathname: '' }} main={React.createElement(Bar)}
+        learningPath={translatedLearningPath} params={{}} location={{ pathname: '' }} main={React.createElement(Bar)}
         sortLearningSteps={React.createElement(Foo)}
       />, { context: { lang: 'nb' } }
     ).find(Foo).length, 1, 'renders props.sortLearningSteps');
