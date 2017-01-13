@@ -111,7 +111,7 @@ test('actions/fetchLearningPathStep with embedUrl', (t) => {
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`)
-    .reply(200, { id: stepId, seqNo: 3, embedUrl: [{ url: 'test', language: 'nb', embedType: 'oembed'  }] });
+    .reply(200, { id: stepId, seqNo: 3, embedUrl: [{ url: 'test', language: 'nb', embedType: 'oembed' }] });
 
   const store = mockStore({ authToken });
 

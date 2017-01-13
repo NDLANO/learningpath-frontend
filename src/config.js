@@ -16,29 +16,33 @@ const environment = {
 }[process.env.NODE_ENV || 'development'];
 
 const ndlaEnvironment = process.env.NDLA_ENVIRONMENT || 'test';
-const apiDomain = () => {
-  switch (process.env.NDLA_ENVIRONMENT) {
-    case 'local':
-      return 'http://localhost';
-    case 'prod':
-      return 'http://api.ndla.no';
-    default:
-      return `http://${ndlaEnvironment}.api.ndla.no`;
+
+const activatedForEnvironment = (config, defaultValue) => {
+  if (config[ndlaEnvironment] !== undefined) {
+    return config[ndlaEnvironment];
   }
+  return defaultValue;
 };
+
+const apiDomain = activatedForEnvironment({
+  local: 'http://localhost',
+  prod: 'http://api.ndla.no' },
+  `http://${ndlaEnvironment}.api.ndla.no`);
+const ltiActivated = activatedForEnvironment({ test: true, local: true }, false);
+const pinterestActivated = activatedForEnvironment({ test: true, local: true }, false);
 
 module.exports = Object.assign({
   host: process.env.LEARINGPATH_HOST || 'localhost',
   port: process.env.LEARINGPATH_PORT || '3000',
   googleTagMangerId: process.env.GOOGLE_TAG_MANGER_ID || undefined,
-  ndlaApiUrl: process.env.NDLA_API_URL || apiDomain(),
+  ndlaApiUrl: process.env.NDLA_API_URL || apiDomain,
   ndlaApiKey: process.env.NDLA_API_KEY || 'ndlalearningpathfrontend',
   googleSearchEngineId: process.env.NDLA_GOOGLE_SEARCH_ENGINE_ID,
   googleApiKey: process.env.NDLA_GOOGLE_API_KEY,
   googleApiUrl: process.env.NDLA_GOOGLE_API_URL || 'https://www.googleapis.com',
   pintrestApiUrl: process.env.PINTREST_API_URL || 'https://api.pinterest.com/v1/',
-  pintrestEnabled: process.env.PINTREST_ACCESS_TOKEN !== undefined,
-  ltiActivated: process.env.NDLA_LTI_ACTIVATED === 'true',
+  pintrestEnabled: process.env.PINTREST_ACCESS_TOKEN !== undefined && pinterestActivated,
+  ltiActivated: ltiActivated,
   app: {
     title: 'NDLA Læringsstier',
     head: {
