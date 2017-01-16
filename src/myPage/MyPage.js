@@ -10,7 +10,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import get from 'lodash/get';
-import { deleteLearningPath, createLearningPath, copyLearningPath, updateLearningPathStatus } from '../learningPath/learningPathActions';
+import { deleteLearningPath, createLearningPath, copyLearningPath, updateLearningPathsStatus } from '../learningPath/learningPathActions';
 import Icon from '../common/Icon';
 import LabeledIcon from '../common/LabeledIcon';
 import polyglot from '../i18n';
@@ -178,7 +178,7 @@ export function mapStateToProps(state) {
 const mapDispatchToProps = {
   setSortKey: setMyLearningPathsSortOrder,
   deletePath: deleteLearningPath,
-  updatePathStatus: updateLearningPathStatus,
+  updatePathStatus: updateLearningPathsStatus,
   createPath: createLearningPath,
   copyPath: copyLearningPath,
   fetchLearninigPathLicenses: fetchLearningPathLicensesIfNeeded,

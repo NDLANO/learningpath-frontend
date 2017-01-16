@@ -53,7 +53,7 @@ test('actions/fetchLearningPathStep with isEdit true and canEdit false', (t) => 
   };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .get(`/learningpaths/${pathId}/learningsteps/${stepId}`)
+    .get(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`)
     .reply(200, { id: stepId, seqNo: 3, canEdit: false });
 
   const store = mockStore({ authToken });
@@ -77,7 +77,7 @@ test('actions/fetchLearningPathStep with isEdit true and canEdit true', (t) => {
   };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .get(`/learningpaths/${pathId}/learningsteps/${stepId}`)
+    .get(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`)
     .reply(200, { id: stepId, seqNo: 3, canEdit: true });
 
   const store = mockStore({ authToken });
