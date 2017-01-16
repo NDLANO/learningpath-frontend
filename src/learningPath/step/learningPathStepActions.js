@@ -40,7 +40,15 @@ export function fetchOembed(query) {
   }));
 }
 
-export function fetchLearningPathStep(pathId, stepId) {
+function canAccessLearningPathStep(pathId, step, isEdit = false, dispatch) {
+  if (isEdit && !step.canEdit) {
+    dispatch(routerActions.push({
+      pathname: '/forbidden',
+    }));
+  }
+}
+
+export function fetchLearningPathStep(pathId, stepId, isEdit = false) {
   return (dispatch, getState) => {
     const { authToken, learningPath, locale } = getState();
 
@@ -48,20 +56,27 @@ export function fetchLearningPathStep(pathId, stepId) {
       const step = get(learningPath, 'learningsteps', []).find(s => s.id === stepId);
       if (step) {
         dispatch(setLearningPathStep(step));
+        canAccessLearningPathStep(pathId, step, isEdit, dispatch);
       }
     }
 
     return fetchPathStep(authToken, { pathId, stepId })
       .then((step) => {
-        dispatch(setLearningPathStep(step));
         if (step.embedUrl) {
           const oembedContent = oembedContentI18N(step, locale, true);
           if (oembedContent && oembedContent.url) {
             dispatch(fetchOembed({ url: oembedContent.url, embedType: oembedContent.embedType, maxwidth: Math.ceil(window.innerWidth) }));
           }
         }
+        dispatch(setLearningPathStep(step));
+        canAccessLearningPathStep(pathId, step, isEdit, dispatch);
       })
-    .catch(err => dispatch(applicationError(err)));
+    .catch((err) => {
+      if (err.status === 404) {
+        dispatch(routerActions.push({ pathname: '/notfound' }));
+      }
+      dispatch(applicationError(err));
+    });
   };
 }
 

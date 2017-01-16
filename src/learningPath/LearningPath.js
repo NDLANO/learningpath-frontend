@@ -31,7 +31,11 @@ export class LearningPath extends Component {
   }
   componentDidMount() {
     const { localFetchLearingPath, params: { pathId } } = this.props;
-    localFetchLearingPath(pathId);
+    if (window.location.pathname === `/learningpaths/${pathId}/edit`) {
+      localFetchLearingPath(pathId, true);
+    } else {
+      localFetchLearingPath(pathId, false);
+    }
   }
   onCopyLearningPathClick() {
     this.setState({

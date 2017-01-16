@@ -274,6 +274,11 @@ const phrases = {
       viewSource: 'View source link',
     },
   },
+  htmlStatus: {
+    notFound: 'The page cannot be found',
+    forbidden: 'You do not have access to this page',
+    backToFrontpage: 'Go to frontpage',
+  },
 };
 
 export default phrases;

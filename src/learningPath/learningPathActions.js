@@ -20,6 +20,15 @@ export const setLearningPath = createAction('SET_LEARNING_PATH');
 export const setLearningPathStatus = createAction('UPDATE_LEARNING_PATH_STATUS');
 export const removeLearningPath = createAction('REMOVE_LEARNING_PATH');
 
+
+function canAccessLearningPath(path, isEdit = false, dispatch) {
+  if ((isEdit && !path.canEdit)) {
+    dispatch(routerActions.push({
+      pathname: '/forbidden',
+    }));
+  }
+}
+
 function fetchIsBasedOnPath(path) {
   return (dispatch, getState) => fetchPath(getState().authToken, { pathId: path.isBasedOn })
     .then((isBasedOnPath) => {
@@ -27,21 +36,32 @@ function fetchIsBasedOnPath(path) {
     });
 }
 
-export function fetchLearningPath(pathId) {
+export function fetchLearningPath(pathId, isEdit = false) {
   return (dispatch, getState) => fetchPath(getState().authToken, { pathId })
-    .then(path => dispatch(setLearningPath(path)))
     .then((path) => {
-      if (path.payload.coverPhoto) {
-        dispatch(fetchLearningPathImageWithMetaUrl(path.payload.coverPhoto.metaUrl));
+      canAccessLearningPath(path, isEdit, dispatch);
+      dispatch(setLearningPath(path));
+      return path;
+    })
+    .then((path) => {
+      if (path.coverPhoto) {
+        dispatch(fetchLearningPathImageWithMetaUrl(path.coverPhoto.metaUrl));
       } else {
         dispatch(setSavedImage({}));
         dispatch(setSelectedImage({}));
       }
-      if (path.payload.isBasedOn) {
-        dispatch(fetchIsBasedOnPath(path.payload));
+      if (path.isBasedOn) {
+        dispatch(fetchIsBasedOnPath(path));
       }
     })
-    .catch(err => dispatch(applicationError(err)));
+    .catch((err) => {
+      if (err.status === 403) {
+        dispatch(routerActions.push({ pathname: '/forbidden' }));
+      } else if (err.status === 404) {
+        dispatch(routerActions.push({ pathname: '/notfound' }));
+      }
+      dispatch(applicationError(err));
+    });
 }
 
 export function createEmptyLearningPath() {

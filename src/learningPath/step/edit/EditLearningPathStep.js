@@ -26,12 +26,11 @@ import { getLearningPathId } from '../../learningPathSelectors';
 class EditLearningPathStep extends Component {
 
   componentWillMount() {
-    const { lang } = this.context;
     const { fetchLearningPathLicenses, localFetchLearningPathStep, params: { pathId, stepId } } = this.props;
     fetchLearningPathLicenses();
 
     if (stepId) {
-      localFetchLearningPathStep(pathId, stepId, lang);
+      localFetchLearningPathStep(pathId, stepId, true);
     }
   }
 
@@ -43,6 +42,7 @@ class EditLearningPathStep extends Component {
       learningPathId,
       licenses,
     } = this.props;
+
     if (!learningPathId) {
       return null;
     }
