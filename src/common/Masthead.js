@@ -64,7 +64,7 @@ export function Masthead(props) {
   const cloneChildren = children ? React.cloneElement(children, { className: activeButtonClassName(true, isLeftSideBarOpen), onClick: () => leftNavButtonClicked() }) : null;
 
   return (
-    <div>
+    <div className="masthead_wrapper">
       <div className="masthead">
         <div className="masthead--mobile">
           {cloneChildren}

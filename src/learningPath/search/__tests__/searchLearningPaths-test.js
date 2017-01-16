@@ -26,7 +26,7 @@ test('actions/searchLearningPaths', (t) => {
   };
 
   const apiMock = nock('http://ndla-api')
-    .get('/learningpaths')
+    .get('/learningpath-api/v1/learningpaths')
     .reply(200, {
       totalCount: 2,
       page: 3,
@@ -59,7 +59,7 @@ test('actions/searchLearningPaths with query', (t) => {
 
 
   const apiMock = nock('http://ndla-api')
-    .get('/learningpaths')
+    .get('/learningpath-api/v1/learningpaths')
     .query({ query: 'foobar', page: 4, 'page-size': 15, sort: '-relevance' })
     .reply(200, {
       totalCount: 400,
@@ -108,7 +108,7 @@ test('actions/searchLearningPaths with query without search term', (t) => {
   const sort = '-relevance';
 
   const apiMock = nock('http://ndla-api')
-    .get('/learningpaths')
+    .get('/learningpath-api/v1/learningpaths')
     .query({ page, sort, 'page-size': pageSize /* OBS! no query */})
     .reply(200, {
       page,

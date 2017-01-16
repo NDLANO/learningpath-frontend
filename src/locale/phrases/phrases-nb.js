@@ -273,6 +273,11 @@ const phrases = {
       viewSource: 'Se kilde lenke',
     },
   },
+  htmlStatus: {
+    notFound: 'Denne siden finnes ikke',
+    forbidden: 'Du har ikke tilgang til denne siden',
+    backToFrontpage: 'Tilbake til forsiden',
+  },
 };
 
 export default phrases;

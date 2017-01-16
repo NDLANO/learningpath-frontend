@@ -12,7 +12,7 @@ import { formatPattern } from 'react-router/lib/PatternUtils';
 
 import { resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';
 
-const imagesUrl = apiResourceUrl('/images');
+const imagesUrl = apiResourceUrl('/image-api/v1/images');
 
 const fetchImages = (query = { 'page-size': 16, page: 1 }) => {
   let url = imagesUrl;
@@ -20,7 +20,7 @@ const fetchImages = (query = { 'page-size': 16, page: 1 }) => {
   return fetch(url).then(resolveJsonOrRejectWithError);
 };
 const fetchImage = (imageId) => {
-  const url = apiResourceUrl(formatPattern('/images/:imageId', { imageId }));
+  const url = apiResourceUrl(formatPattern('/image-api/v1/images/:imageId', { imageId }));
   return fetch(url).then(resolveJsonOrRejectWithError);
 };
 const fetchImageWithMetaUrl = url => fetch(url).then(resolveJsonOrRejectWithError);

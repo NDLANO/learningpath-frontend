@@ -20,7 +20,7 @@ const mockStore = configureStore(middleware);
 
 const imageId = 123;
 
-const imageMetaUrl = 'http://ndla-api:80/images/123';
+const imageMetaUrl = 'http://ndla-api:80/image-api/v1/images/123';
 
 test('actions/fetchImage with id', (t) => {
   const done = (res) => {
@@ -29,7 +29,7 @@ test('actions/fetchImage with id', (t) => {
   };
 
   const apiMock = nock('http://ndla-api')
-    .get(`/images/${imageId}`)
+    .get(`/image-api/v1/images/${imageId}`)
     .reply(200, { id: imageId });
 
   const store = mockStore({ });
@@ -52,7 +52,7 @@ test('actions/fetchImage with url', (t) => {
   };
 
   const apiMock = nock('http://ndla-api')
-    .get(`/images/${imageId}`)
+    .get(`/image-api/v1/images/${imageId}`)
     .reply(200, { id: imageId });
 
   const store = mockStore({ });
@@ -75,7 +75,7 @@ test('actions/fetchImage with id access denied', (t) => {
   };
 
   const apiMock = nock('http://ndla-api')
-    .get(`/images/${imageId}`)
+    .get(`/image-api/v1/images/${imageId}`)
     .reply(403, { message: 'Invalid' });
 
   const store = mockStore();
@@ -98,7 +98,7 @@ test('actions/fetchImage with url access denied', (t) => {
   };
 
   const apiMock = nock('http://ndla-api')
-    .get(`/images/${imageId}`)
+    .get(`/image-api/v1/images/${imageId}`)
     .reply(403, { message: 'Invalid' });
 
   const store = mockStore();

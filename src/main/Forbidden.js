@@ -10,10 +10,10 @@ import React from 'react';
 import { Link } from 'react-router';
 import polyglot from '../i18n';
 
-export default function NotFound() {
+export default function Forbidden() {
   return (
     <div className="status-response_container">
-      <h2>404: {polyglot.t('htmlStatus.notFound')}</h2>
+      <h2>403: {polyglot.t('htmlStatus.forbidden')}</h2>
       <Link to="/" className="cta-link--primary">{polyglot.t('htmlStatus.backToFrontpage')}</Link>
     </div>
   );

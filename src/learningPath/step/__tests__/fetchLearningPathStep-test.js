@@ -10,6 +10,7 @@ import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
+import { routerActions } from 'react-router-redux';
 import payload403invalid from '../../../actions/__tests__/payload403invalid';
 
 import { applicationError } from '../../../messages/messagesActions';
@@ -29,7 +30,7 @@ test('actions/fetchLearningPathStep', (t) => {
   };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .get(`/learningpaths/${pathId}/learningsteps/${stepId}`)
+    .get(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`)
     .reply(200, { id: stepId, seqNo: 3 });
 
   const store = mockStore({ authToken });
@@ -45,7 +46,7 @@ test('actions/fetchLearningPathStep', (t) => {
     .catch(done);
 });
 
-test('actions/fetchLearningPathStep cache hit', (t) => {
+test('actions/fetchLearningPathStep with isEdit true and canEdit false', (t) => {
   const done = (res) => {
     t.end(res);
     nock.cleanAll();
@@ -53,6 +54,53 @@ test('actions/fetchLearningPathStep cache hit', (t) => {
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
     .get(`/learningpaths/${pathId}/learningsteps/${stepId}`)
+    .reply(200, { id: stepId, seqNo: 3, canEdit: false });
+
+  const store = mockStore({ authToken });
+
+  store.dispatch(fetchLearningPathStep(pathId, stepId, true))
+    .then(() => {
+      t.deepEqual(store.getActions(), [
+        setLearningPathStep({ id: stepId, seqNo: 3, canEdit: false }),
+        routerActions.push({ pathname: '/forbidden' }),
+      ]);
+      t.doesNotThrow(() => apiMock.done());
+      done();
+    })
+    .catch(done);
+});
+
+test('actions/fetchLearningPathStep with isEdit true and canEdit true', (t) => {
+  const done = (res) => {
+    t.end(res);
+    nock.cleanAll();
+  };
+
+  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+    .get(`/learningpaths/${pathId}/learningsteps/${stepId}`)
+    .reply(200, { id: stepId, seqNo: 3, canEdit: true });
+
+  const store = mockStore({ authToken });
+
+  store.dispatch(fetchLearningPathStep(pathId, stepId, true))
+    .then(() => {
+      t.deepEqual(store.getActions(), [
+        setLearningPathStep({ id: stepId, seqNo: 3, canEdit: true }),
+      ]);
+      t.doesNotThrow(() => apiMock.done());
+      done();
+    })
+    .catch(done);
+});
+
+test('actions/fetchLearningPathStep cache hit', (t) => {
+  const done = (res) => {
+    t.end(res);
+    nock.cleanAll();
+  };
+
+  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+    .get(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`)
     .reply(200, { id: stepId, seqNo: 3, cached: false });
 
   const initialState = {
@@ -87,7 +135,7 @@ test('actions/fetchLearningPathStep access denied', (t) => {
   };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .get(`/learningpaths/${pathId}/learningsteps/${stepId}`)
+    .get(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`)
     .reply(403, { message: 'Invalid' });
 
   const store = mockStore({ authToken });
@@ -110,7 +158,7 @@ test('actions/fetchLearningPathStep with embedUrl', (t) => {
   };
 
   const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
-    .get(`/learningpaths/${pathId}/learningsteps/${stepId}`)
+    .get(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`)
     .reply(200, { id: stepId, seqNo: 3, embedUrl: [{ url: 'test', language: 'nb', embedType: 'oembed' }] });
 
   const store = mockStore({ authToken });

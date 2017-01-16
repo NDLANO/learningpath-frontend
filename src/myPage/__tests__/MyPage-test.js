@@ -11,7 +11,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Link } from 'react-router';
 
+import { translatedLearningPaths } from '../../common/__tests__/translatedMockData';
 import { learningPaths } from '../../common/__tests__/mockData';
+
 import { MyPage, mapStateToProps } from '../MyPage';
 
 
@@ -25,7 +27,7 @@ test('component/MyPage', (t) => {
     updatePathStatus: noop,
   };
 
-  const component = shallow(<MyPage {...requiredProps} learningPaths={learningPaths} />,
+  const component = shallow(<MyPage {...requiredProps} learningPaths={translatedLearningPaths} />,
       { context: { lang: 'nb' } });
 
   const links = component.find('.tile_bd').find(Link);
@@ -60,7 +62,7 @@ test('component/MyPage mapStateToProps', (t) => {
   t.deepEqual(actual.learningPaths.map(d => d.id), ['1', '2']);
 
 
-  t.ok(learningPaths[0].lastUpdated < learningPaths[1].lastUpdated, 'self-test');
+  t.ok(translatedLearningPaths[0].lastUpdated < translatedLearningPaths[1].lastUpdated, 'self-test');
 
   actual = mapStateToProps(Object.assign({},
     state, { myLearningPathsSortOrder: '-lastUpdated' }

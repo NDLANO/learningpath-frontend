@@ -14,13 +14,13 @@ import map from 'lodash/map';
 import assureSequenceOrder from '../util/assureSequenceOrder';
 import { fetchAuthorized, postAuthorized, putAuthorized, patchAuthorized, deleteAuthorized, resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';
 
-const fetchPath = fetchAuthorized('/learningpaths/:pathId');
+const fetchPath = fetchAuthorized('/learningpath-api/v1/learningpaths/:pathId');
 const fetchPathStep = fetchAuthorized(
-    '/learningpaths/:pathId/learningsteps/:stepId');
-const fetchMyPaths = fetchAuthorized('/learningpaths/mine');
-const fetchPathTags = fetchAuthorized('/learningpaths/tags');
+    '/learningpath-api/v1/learningpaths/:pathId/learningsteps/:stepId');
+const fetchMyPaths = fetchAuthorized('/learningpath-api/v1/learningpaths/mine');
+const fetchPathTags = fetchAuthorized('/learningpath-api/v1/learningpaths/tags');
 const fetchPathLicenses = (authToken, filter) => {
-  let url = apiResourceUrl('/learningpaths/licenses');
+  let url = apiResourceUrl('/learningpath-api/v1/learningpaths/licenses');
   if (filter.length > 0) {
     const query = { filter };
     url += `?${queryString.stringify(query)}`;
@@ -29,9 +29,9 @@ const fetchPathLicenses = (authToken, filter) => {
 };
 
 
-const postLearningPath = postAuthorized('/learningpaths');
-const postLearningPathStep = postAuthorized('/learningpaths/:pathId/learningsteps');
-const copyLearningPath = postAuthorized('/learningpaths/:copyfrom/copy');
+const postLearningPath = postAuthorized('/learningpath-api/v1/learningpaths');
+const postLearningPathStep = postAuthorized('/learningpath-api/v1/learningpaths/:pathId/learningsteps');
+const copyLearningPath = postAuthorized('/learningpath-api/v1/learningpaths/:copyfrom/copy');
 
 const createPath = (authToken, props, body) =>
   postLearningPath(authToken, props, body)
@@ -46,10 +46,10 @@ const createPath = (authToken, props, body) =>
 const copyPath = (authToken, { copyfrom }, body) =>
   copyLearningPath(authToken, { copyfrom }, body);
 
-const patchLearningPath = patchAuthorized('/learningpaths/:pathId');
-const patchLearningPathStep = patchAuthorized('/learningpaths/:pathId/learningsteps/:stepId');
+const patchLearningPath = patchAuthorized('/learningpath-api/v1/learningpaths/:pathId');
+const patchLearningPathStep = patchAuthorized('/learningpath-api/v1/learningpaths/:pathId/learningsteps/:stepId');
 
-const putSequenceNumber = putAuthorized('/learningpaths/:pathId/learningsteps/:stepId/seqNo');
+const putSequenceNumber = putAuthorized('/learningpath-api/v1/learningpaths/:pathId/learningsteps/:stepId/seqNo');
 
 const updatePath = (authToken, { pathId }, body) =>
   patchLearningPath(authToken, { pathId }, body);
@@ -60,24 +60,24 @@ const updateStep = (authToken, { pathId, stepId }, body) =>
 const createStep = (authToken, { pathId }, body) =>
   postLearningPathStep(authToken, { pathId }, body);
 
-const deleteLearningPath = deleteAuthorized('/learningpaths/:pathId');
+const deleteLearningPath = deleteAuthorized('/learningpath-api/v1/learningpaths/:pathId');
 const deletePath = (authToken, { pathId }) =>
   deleteLearningPath(authToken, { pathId });
 
-const deleteLearningPathStep = deleteAuthorized('/learningpaths/:pathId/learningsteps/:stepId');
+const deleteLearningPathStep = deleteAuthorized('/learningpath-api/v1/learningpaths/:pathId/learningsteps/:stepId');
 const deleteStep = (authToken, { pathId, stepId }) =>
   deleteLearningPathStep(authToken, { pathId, stepId });
 
-const putLearningPathStepStatus = putAuthorized('/learningpaths/:pathId/learningsteps/:stepId/status');
+const putLearningPathStepStatus = putAuthorized('/learningpath-api/v1/learningpaths/:pathId/learningsteps/:stepId/status');
 export const activateDeletedStep = (authToken, { pathId, stepId }) => putLearningPathStepStatus(authToken, { pathId, stepId }, { status: 'ACTIVE' });
 
-const putLearningPathStatus = putAuthorized('/learningpaths/:pathId/status');
+const putLearningPathStatus = putAuthorized('/learningpath-api/v1/learningpaths/:pathId/status');
 const updateStatus = (authToken, { pathId }, body) =>
   putLearningPathStatus(authToken, { pathId }, body);
 
 export const activateDeletedPath = (authToken, { pathId, status }) => putLearningPathStatus(authToken, { pathId }, { status });
 
-const learningPathsUrl = apiResourceUrl('/learningpaths');
+const learningPathsUrl = apiResourceUrl('/learningpath-api/v1/learningpaths');
 
 const updateSeqNo = (authToken, { pathId, stepId }, body) =>
   putSequenceNumber(authToken, { pathId, stepId }, body);
@@ -99,7 +99,7 @@ const fetchPaths = (authToken, query) => {
   return fetch(url, { headers: { 'APP-KEY': authToken } }).then(resolveJsonOrRejectWithError);
 };
 
-const oembedUrl = apiResourceUrl('/oembed');
+const oembedUrl = apiResourceUrl('/oembed-proxy/v1/oembed');
 const fetchOembedUrl = (authToken, query) => {
   let url = oembedUrl;
   url += `?${queryString.stringify(query)}`;

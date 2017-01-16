@@ -13,6 +13,7 @@ import { bindActionCreators } from 'redux';
 import App from './App';
 import Welcome from './Welcome';
 import NotFound from './NotFound';
+import Forbidden from './Forbidden';
 import MyPage from '../myPage/MyPage';
 import LTIEmbedded from '../ltiSearch/LTIEmbedded';
 import LoginProviders from '../session/LoginProviders';
@@ -47,6 +48,8 @@ export default function (store) {
       {learningPathRoutes}
       <Route path="lti/:pathId/step/:stepId" component={requireAuthentication(LTIEmbedded)} />
       <Route path="lti/:pathId/step/new" component={requireAuthentication(LTIEmbedded)} />
+      <Route path="forbidden" component={Forbidden} />
+      <Route path="notfound" component={NotFound} />
       <Route path="*" component={NotFound} />
     </Route>
   );
