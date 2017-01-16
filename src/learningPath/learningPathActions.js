@@ -19,6 +19,7 @@ import { fetchMyLearningPaths } from '../myPage/myPageActions';
 export const setLearningPath = createAction('SET_LEARNING_PATH');
 export const setLearningPathsStatus = createAction('UPDATE_LEARNING_PATHS_STATUS');
 export const removeLearningPath = createAction('REMOVE_LEARNING_PATH');
+export const setLearningPathStatus = createAction('UPDATE_LEARNING_PATH_STATUS');
 
 
 function canAccessLearningPath(path, isEdit = false, dispatch) {
