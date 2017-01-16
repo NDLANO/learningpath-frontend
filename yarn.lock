@@ -2987,9 +2987,9 @@ natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
 
-ndla-learningpath-styleguide@0.1.36:
-  version "0.1.36"
-  resolved "https://registry.yarnpkg.com/ndla-learningpath-styleguide/-/ndla-learningpath-styleguide-0.1.36.tgz#c4d27c277aa169b036f4c3be42bb0921327ec7ae"
+ndla-learningpath-styleguide@0.1.37:
+  version "0.1.37"
+  resolved "https://registry.yarnpkg.com/ndla-learningpath-styleguide/-/ndla-learningpath-styleguide-0.1.37.tgz#f64f6c715bdc38a15668616ab0c3c2d578bbfe90"
 
 ndla-licenses@0.0.6:
   version "0.0.6"
