@@ -9,7 +9,6 @@
 import React, { PropTypes } from 'react';
 import { Field } from 'redux-form';
 import DescriptionHTMLEditor from '../../../common/editors/DescriptionHTMLEditor';
-import MediaTypeSelect from './MediaTypeSelect';
 import polyglot from '../../../i18n';
 import Icon from '../../../common/Icon';
 import OnClickCheckbox from './OnClickCheckbox';
@@ -51,9 +50,6 @@ const LearningPathStepFields = (props) => {
     embedType.input.onChange(oembedType);
     url.input.onBlur(value);
   };
-  if (!type.input.value) {
-    return <MediaTypeSelect {...type} />;
-  }
 
   return (
     <div>
