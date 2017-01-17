@@ -84,9 +84,6 @@ export default class DescriptionHTMLEditor extends React.Component {
     this.focus = () => this.refs.editor.focus();
     this.blur = () => this.refs.editor.blur();
     this.onChange = editorState => this.setState({ editorState }, () => {
-      if (editorState.getSelection().getHasFocus()) {
-        return;
-      }
       const contentState = editorState.getCurrentContent();
       input.onChange(contentState);
     });
