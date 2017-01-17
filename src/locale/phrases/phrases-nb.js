@@ -144,8 +144,6 @@ const phrases = {
     validation: {
       oneOfDescriptionOrUrlIsRequired: 'Enten Beskrivelse eller Url feltet må fylles ut.',
     },
-    mediatypeTitle: 'Velg innholdstype',
-    mediatypeInformation: 'Hvilket type innhold skal læringssteget inneholde?',
     edit: 'Rediger læringssteg',
     urlPlaceholder: 'Lim inn lenke',
     stepDescriptionPlaceholder: 'Skriv en beskrivelse her',
