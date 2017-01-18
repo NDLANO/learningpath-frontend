@@ -258,7 +258,7 @@ const phrases = {
       title: 'Preview for oembed',
       error: 'An error has occured',
     },
-    button: 'Search for external resources',
+    button: 'Search for NDLA resources',
   },
   pintrest: {
     importFrom: 'Get learning steps from Pintrest',

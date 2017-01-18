@@ -22,7 +22,7 @@ const EmbedSearchFilter = ({ localFetchEmbedSearch, query, textQuery }) => {
     localFetchEmbedSearch(Object.assign({}, query, { filter, textQuery }));
   };
 
-  const filters = [{ name: polyglot.t('embedSearch.form.allFilter'), key: '' }, { name: 'Youtube', key: 'more:youtube' }, { name: 'NDLA', key: 'more:ndla' }];
+  const filters = [{ name: 'NDLA', key: 'more:ndla' }, { name: 'Youtube', key: 'more:youtube' }];
 
   return (
     <div className="embed-search_form-filters">
