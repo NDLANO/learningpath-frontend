@@ -8,7 +8,6 @@
 
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import polyglot from '../i18n';
 
 const EmbedSearchFilter = ({ localFetchEmbedSearch, query, textQuery }) => {
   const filterClass = filter => classNames({
