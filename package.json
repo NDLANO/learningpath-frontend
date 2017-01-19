@@ -61,7 +61,7 @@
     "eslint": "^3.13.1",
     "express": "4.14.0",
     "express-request-proxy": "2.0.0",
-    "history": "3.2.0",
+    "history": "3.2.1",
     "immutable": "3.8.1",
     "isomorphic-fetch": "2.2.1",
     "lodash": "4.17.4",
