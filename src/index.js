@@ -17,6 +17,7 @@ import { configureLocale, isValidLocale } from './locale/configureLocale';
 import configureStore from './configureStore';
 import configureRoutes from './main/routes';
 import { defaultApiKey } from './sources/helpers';
+import ErrorReporter from './ErrorReporter';
 
 
 function configureBrowserHistory(path) {
@@ -46,6 +47,8 @@ const store = configureStore({
   locale,
 }, browserHistory);
 
+const { logglyApiKey, ndlaEnvironment } = window.config;
+window.ErrorReporter = ErrorReporter.getInstance({ store, logglyApiKey, ndlaEnvironment });
 
 const history = syncHistoryWithStore(browserHistory, store);
 const routes = configureRoutes(store);
