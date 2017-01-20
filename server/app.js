@@ -63,7 +63,6 @@ app.get('*', (req, res) => {
   }
 
   renderOnClient();
-  return;
 });
 
 module.exports = app;

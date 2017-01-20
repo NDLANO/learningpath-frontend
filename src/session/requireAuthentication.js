@@ -16,7 +16,7 @@ export default function requireAuthentication(Component) {
   function AuthenticatedComponent(props) {
     return props.authenticated ?
       <Component {...props} /> :
-        <LoginProviders message={polyglot.t('requireAuthentication.errorMessage')} />;
+      <LoginProviders message={polyglot.t('requireAuthentication.errorMessage')} />;
   }
 
   AuthenticatedComponent.propTypes = {
