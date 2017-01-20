@@ -12,7 +12,7 @@ import ReactDOM from 'react-dom';
 import get from 'lodash/get';
 
 export const urlIsNDLA = url => (/^(http|https):\/\/ndla.no/).test(url);
-export const urlIsApiNDLA = url => (/^(http):\/\/api.(test|staging).ndla.no/).test(url);
+export const urlIsApiNDLA = url => (/^(http|https):\/\/(test|staging).api.ndla.no/).test(url);
 
 export default class Oembed extends React.Component {
   constructor(props) {
