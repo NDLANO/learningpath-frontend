@@ -255,7 +255,7 @@ const phrases = {
       title: 'Forhåndsvisning av oembed',
       error: 'En feil har oppstått.',
     },
-    button: 'Søk etter eksterne ressurser',
+    button: 'Søk i NDLA',
   },
   pintrest: {
     importFrom: 'Hent læringssteg fra Pintrest',
