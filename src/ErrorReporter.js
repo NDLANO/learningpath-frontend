@@ -11,33 +11,40 @@ import uuid from './util/uuid';
 
 import send from './logglyApi';
 
-const ErrorReporter = (function () {
+const ErrorReporter = (function Singleton() {
   let instance;
 
   const sessionId = uuid();
 
-  function sendToLoggly(initialData, config) {
+  function sendToLoggly(data, config) {
     // Don't send to loggly if environment is undefined
     if (!config.environment) {
       return;
     }
 
-    const data = {
-      ...initialData,
+    const extendedData = {
+      ...data,
       sessionId,
       appName: `${config.environment}/${config.componentName}`,
     };
 
-    send(config.logglyApiKey, data);
+    send(config.logglyApiKey, extendedData);
   }
 
-  // function processException() {
-  //
-  // }
+  function getLogData(stackInfo, store) {
+    return {
+      level: 'error',
+      text: `${stackInfo.name}: ${stackInfo.message}`,
+      stackInfo,
+      state: store.getState(),
+    };
+  }
 
   function init(config) {
-    TraceKit.report.subscribe((stackInfo, options) => {
-      console.log(stackInfo, options);
+    // Suscribes to window.onerror
+    TraceKit.report.subscribe((stackInfo) => {
+      const data = getLogData(stackInfo, config.store);
+      sendToLoggly(data, config);
     });
 
     return {
