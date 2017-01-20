@@ -47,8 +47,8 @@ const store = configureStore({
   locale,
 }, browserHistory);
 
-const { logglyApiKey, ndlaEnvironment } = window.config;
-window.ErrorReporter = ErrorReporter.getInstance({ store, logglyApiKey, ndlaEnvironment });
+const { logglyApiKey, logEnvironment, componentName } = window.config;
+window.ErrorReporter = ErrorReporter.getInstance({ store, logglyApiKey, environment: logEnvironment, componentName });
 
 const history = syncHistoryWithStore(browserHistory, store);
 const routes = configureRoutes(store);

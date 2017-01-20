@@ -17,8 +17,18 @@ const ErrorReporter = (function () {
   const sessionId = uuid();
 
   function sendToLoggly(data, config) {
-    const body = { ...data, sessionId, tag: 'testing-js-client-logging' };
-    fetch(`${LOGGLY_URL}/inputs/${config.logglyApiKey}/tag/jslogger`, {
+    // Don't send to loggly if environment is undefined
+    if (!config.environment) {
+      return;
+    }
+
+    const body = {
+      ...data,
+      sessionId,
+      appName: `${config.environment}/${config.componentName}`,
+    };
+
+    fetch(`${LOGGLY_URL}/inputs/${config.logglyApiKey}/`, {
       method: 'POST',
       body: JSON.stringify(body),
     }).then((res) => {
@@ -39,7 +49,7 @@ const ErrorReporter = (function () {
 
     return {
       captureMessage(msg) {
-        sendToLoggly({ text: msg }, config);
+        sendToLoggly({ text: msg, level: 'info' }, config);
       },
     };
   }
