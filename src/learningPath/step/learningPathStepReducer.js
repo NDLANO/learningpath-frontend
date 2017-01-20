@@ -35,7 +35,7 @@ export default handleActions({
         title: [],
         description: [],
         embedUrl: [],
-        type: '',
+        type: 'TEXT',
         license: '',
       };
     },

@@ -144,8 +144,6 @@ const phrases = {
     validation: {
       oneOfDescriptionOrUrlIsRequired: 'Either Description and Url must be provided.',
     },
-    mediatypeTitle: 'Choose content type',
-    mediatypeInformation: 'What type of content will the learning step contain?',
     edit: 'Edit learning path step',
     urlPlaceholder: 'Paste link',
     stepDescriptionPlaceholder: 'Write a description here',
