@@ -9,40 +9,33 @@
 import TraceKit from 'tracekit';
 import uuid from './util/uuid';
 
+import send from './logglyApi';
 
 const ErrorReporter = (function () {
   let instance;
 
-  const LOGGLY_URL = 'https://logs-01.loggly.com';
   const sessionId = uuid();
 
-  function sendToLoggly(data, config) {
+  function sendToLoggly(initialData, config) {
     // Don't send to loggly if environment is undefined
     if (!config.environment) {
       return;
     }
 
-    const body = {
-      ...data,
+    const data = {
+      ...initialData,
       sessionId,
       appName: `${config.environment}/${config.componentName}`,
     };
 
-    fetch(`${LOGGLY_URL}/inputs/${config.logglyApiKey}/`, {
-      method: 'POST',
-      body: JSON.stringify(body),
-    }).then((res) => {
-      console.log(res);
-    });
+    send(config.logglyApiKey, data);
   }
+
   // function processException() {
   //
   // }
 
   function init(config) {
-     // Singleton
-    console.log(config);
-
     TraceKit.report.subscribe((stackInfo, options) => {
       console.log(stackInfo, options);
     });
