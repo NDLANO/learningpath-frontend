@@ -25,6 +25,7 @@ const ErrorReporter = (function Singleton() {
     const extendedData = {
       ...data,
       sessionId,
+      userAgent: navigator.userAgent,
       appName: `${config.environment}/${config.componentName}`,
     };
 
@@ -35,6 +36,7 @@ const ErrorReporter = (function Singleton() {
     return {
       level: 'error',
       text: `${stackInfo.name}: ${stackInfo.message}`,
+      userAgent: navigator.userAgent,
       stackInfo,
       state: store.getState(),
     };
