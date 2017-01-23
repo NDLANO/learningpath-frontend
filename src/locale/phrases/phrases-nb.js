@@ -144,8 +144,6 @@ const phrases = {
     validation: {
       oneOfDescriptionOrUrlIsRequired: 'Enten Beskrivelse eller Url feltet må fylles ut.',
     },
-    mediatypeTitle: 'Velg innholdstype',
-    mediatypeInformation: 'Hvilket type innhold skal læringssteget inneholde?',
     edit: 'Rediger læringssteg',
     urlPlaceholder: 'Lim inn lenke',
     stepDescriptionPlaceholder: 'Skriv en beskrivelse her',
@@ -257,7 +255,7 @@ const phrases = {
       title: 'Forhåndsvisning av oembed',
       error: 'En feil har oppstått.',
     },
-    button: 'Søk etter eksterne ressurser',
+    button: 'Søk i NDLA',
   },
   pintrest: {
     importFrom: 'Hent læringssteg fra Pintrest',

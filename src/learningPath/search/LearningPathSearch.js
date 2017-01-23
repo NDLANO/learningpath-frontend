@@ -11,6 +11,7 @@ import defined from 'defined';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { routerActions } from 'react-router-redux';
+import upperFirst from 'lodash/upperFirst';
 import LinkPager from '../../common/pager/LinkPager';
 import SearchForm from './LearningPathSearchForm';
 import SearchResult from './LearningPathSearchResult';
@@ -36,6 +37,8 @@ const LearningPathSearch = (props) => {
 
   const changeSearchTag = tag => navigateTo(Object.assign({}, query, { tag, page: 1 }));
 
+  const acitveTagTitle = query.tag ? <h1 className="search-results_active-tag">{upperFirst(query.tag)}</h1> : '';
+
   return (
     <Wrapper>
       <OneColumn className={'one-colum--white-bg'}>
@@ -48,6 +51,7 @@ const LearningPathSearch = (props) => {
           />
         </div>
         <div className="search-results">
+          {acitveTagTitle}
           {learningPaths.map(path =>
             (<SearchResult key={path.id} path={path} pushRoute={pushRoute} onTagSearchQuery={changeSearchTag} query={query} />)
           )}

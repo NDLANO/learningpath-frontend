@@ -1,5 +1,5 @@
 
-FROM node:6.2.2
+FROM node:6.9.4
 
 #Add app user to enable running the container as an unprivileged user
 RUN useradd --user-group --create-home --shell /bin/false app
