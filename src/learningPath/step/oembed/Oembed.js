@@ -42,7 +42,6 @@ export default class Oembed extends React.Component {
   }
 
   handleIframeResizing({ oembedContent: { url } }) {
-    console.log(url);
     if (urlIsNDLA(url) || urlIsApiNDLA(url)) {
       this.setState({ isNDLAResource: true }, this.enableIframeResizing);
     } else {
