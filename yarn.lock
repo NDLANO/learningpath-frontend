@@ -2839,10 +2839,6 @@ lodash@^3.5.0, lodash@^3.6.0:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
-loggly-jslogger@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/loggly-jslogger/-/loggly-jslogger-2.1.0.tgz#4dec44635db75996ad0a5588db67c6bf703cc7f3"
-
 lolex@1.3.2:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/lolex/-/lolex-1.3.2.tgz#7c3da62ffcb30f0f5a80a2566ca24e45d8a01f31"
@@ -2981,6 +2977,12 @@ natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
 
+ndla-error-reporter@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/ndla-error-reporter/-/ndla-error-reporter-0.1.0.tgz#f7f136899d892535c30435855546b7167cdfdac2"
+  dependencies:
+    tracekit "^0.4.4"
+
 ndla-learningpath-styleguide@0.1.37:
   version "0.1.37"
   resolved "https://registry.yarnpkg.com/ndla-learningpath-styleguide/-/ndla-learningpath-styleguide-0.1.37.tgz#f64f6c715bdc38a15668616ab0c3c2d578bbfe90"
@@ -2994,6 +2996,10 @@ ndla-licenses@0.0.6:
 ndla-ui@^0.1.5:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/ndla-ui/-/ndla-ui-0.1.5.tgz#9ad90348d569a13343a42a9c5f45e1d988e84989"
+
+ndla-util@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/ndla-util/-/ndla-util-0.1.0.tgz#27284ecfda92dabeddb8bd0bdb034ef5697bf3c3"
 
 negotiator@0.6.1:
   version "0.6.1"
