@@ -34,6 +34,7 @@ module.exports = Object.assign({
   googleApiKey: process.env.NDLA_GOOGLE_API_KEY,
   googleApiUrl: process.env.NDLA_GOOGLE_API_URL || 'https://www.googleapis.com',
   logEnvironment: process.env.NDLA_ENVIRONMENT || 'local',
+  logglyApiKey: process.env.LOGGLY_API_KEY,
   pintrestApiUrl: process.env.PINTREST_API_URL || 'https://api.pinterest.com/v1/',
   pintrestEnabled: process.env.PINTREST_ACCESS_TOKEN !== undefined && pinterestActivated,
   ltiActivated,

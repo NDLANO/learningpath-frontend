@@ -48,7 +48,7 @@ const store = configureStore({
 }, browserHistory);
 
 const { logglyApiKey, logEnvironment, componentName } = window.config;
-window.ErrorReporter = ErrorReporter.getInstance({ store, logglyApiKey, environment: logEnvironment, componentName });
+window.errorReporter = ErrorReporter.getInstance({ store, logglyApiKey, environment: logEnvironment, componentName });
 
 const history = syncHistoryWithStore(browserHistory, store);
 const routes = configureRoutes(store);
