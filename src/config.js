@@ -34,6 +34,7 @@ const pinterestActivated = activatedForEnvironment({ test: true, local: true }, 
 module.exports = Object.assign({
   host: process.env.LEARINGPATH_HOST || 'localhost',
   port: process.env.LEARINGPATH_PORT || '3000',
+  redirect_port: process.env.LEARNINGPATH_REDIRECT_PORT || '3001',
   googleTagMangerId: process.env.GOOGLE_TAG_MANGER_ID || undefined,
   ndlaApiUrl: process.env.NDLA_API_URL || apiDomain,
   ndlaApiKey: process.env.NDLA_API_KEY || 'ndlalearningpathfrontend',
