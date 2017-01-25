@@ -15,7 +15,7 @@ const initialState = {
   query: {
     start: 1,
     textQuery: '',
-    filter: '',
+    filter: 'more:ndla',
     page: 1,
     numberOfPages: 1,
   },

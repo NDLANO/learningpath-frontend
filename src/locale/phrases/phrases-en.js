@@ -144,8 +144,6 @@ const phrases = {
     validation: {
       oneOfDescriptionOrUrlIsRequired: 'Either Description and Url must be provided.',
     },
-    mediatypeTitle: 'Choose content type',
-    mediatypeInformation: 'What type of content will the learning step contain?',
     edit: 'Edit learning path step',
     urlPlaceholder: 'Paste link',
     stepDescriptionPlaceholder: 'Write a description here',
@@ -258,7 +256,7 @@ const phrases = {
       title: 'Preview for oembed',
       error: 'An error has occured',
     },
-    button: 'Search for external resources',
+    button: 'Search for NDLA resources',
   },
   pintrest: {
     importFrom: 'Get learning steps from Pintrest',

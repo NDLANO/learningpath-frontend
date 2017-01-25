@@ -18,8 +18,8 @@ const activatedForEnvironment = (config, defaultValue) => {
 
 const apiDomain = activatedForEnvironment({
   local: 'http://localhost',
-  prod: 'http://api.ndla.no' },
-  `http://${environment}.api.ndla.no`);
+  prod: 'https://api.ndla.no' },
+  `https://${environment}.api.ndla.no`);
 const ltiActivated = activatedForEnvironment({ test: true, local: true }, false);
 const pinterestActivated = activatedForEnvironment({ test: true, local: true }, false);
 

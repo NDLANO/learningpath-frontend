@@ -91,7 +91,7 @@ class OverlayTrigger extends Component {
       onMouseOut: createChainedFunction(this.handleHide, triggerProps.onMouseOut),
       onFocus: createChainedFunction(this.handleShow, triggerProps.onFocus),
       onBlur: createChainedFunction(this.handleHide, triggerProps.onBlur),
-      'aria-described-by': this.props.overlay.props.id,
+      'aria-describedby': this.props.overlay.props.id,
     };
 
     return cloneElement(trigger, props);
