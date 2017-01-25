@@ -57,7 +57,9 @@ export function ApiError(message, res = {}, json) {
   this.url = res.url;
   this.status = res.status;
   this.json = json;
-  this.stack = (new Error()).stack;
+  // Drop creating a stack for easier unit testing
+  // The stack does'nt give any value as long as the ApiError is only created in createErrorPayload()
+  // this.stack = (new Error()).stack;
 }
 ApiError.prototype = Object.create(Error.prototype);
 ApiError.prototype.constructor = ApiError;

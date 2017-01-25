@@ -59,7 +59,7 @@ test('actions/fetchLearningPathLicenses with creative-common sat to false access
   store.dispatch(fetchLearningPathLicenses())
     .then(() => {
       t.deepEqual(store.getActions(), [
-        applicationError(payload403invalid()),
+        applicationError(payload403invalid('http://ndla-api/learningpath-api/v1/learningpaths/licenses')),
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();
@@ -109,7 +109,7 @@ test('actions/fetchLearningPathLicenses with creative-common sat to true access 
   store.dispatch(fetchLearningPathLicenses('by'))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        applicationError(payload403invalid()),
+        applicationError(payload403invalid('http://ndla-api/learningpath-api/v1/learningpaths/licenses?filter=by')),
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();

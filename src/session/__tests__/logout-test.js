@@ -58,7 +58,7 @@ test('actions/logout access denied', (t) => {
   store.dispatch(logout())
     .then(() => {
       t.deepEqual(store.getActions(), [
-        applicationError(payload403invalid()),
+        applicationError(payload403invalid('http://ndla-api/auth/logout')),
       ]);
 
       t.doesNotThrow(() => apiMock.done());
