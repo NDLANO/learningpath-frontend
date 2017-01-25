@@ -20,6 +20,7 @@ export default class OneLineEditor extends React.Component {
 
     this.onChange = editorState => this.setState({ editorState }, () => {
       const newValue = editorState.getCurrentContent().getPlainText();
+      console.log(newValue);
       onChange(newValue);
     });
 
@@ -44,10 +45,6 @@ export default class OneLineEditor extends React.Component {
 
   componentWillMount() {
     this.updateEditorContentStateFromText(this.props.input.value);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.updateEditorContentStateFromText(nextProps.input.value);
   }
 
   updateEditorContentStateFromText(text) {
