@@ -138,7 +138,7 @@ test('actions/fetchLearningPath access denied', (t) => {
     .then(() => {
       t.deepEqual(store.getActions(), [
         routerActions.push({ pathname: '/forbidden' }),
-        applicationError(payload403invalid()),
+        applicationError(payload403invalid(`http://ndla-api/learningpath-api/v1/learningpaths/${pathId}`)),
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();

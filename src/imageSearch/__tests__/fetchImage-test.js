@@ -83,7 +83,7 @@ test('actions/fetchImage with id access denied', (t) => {
   store.dispatch(fetchLearningPathImage(imageId))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        applicationError(payload403invalid()),
+        applicationError(payload403invalid(`http://ndla-api/image-api/v1/images/${imageId}`)),
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();
@@ -106,7 +106,7 @@ test('actions/fetchImage with url access denied', (t) => {
   store.dispatch(fetchLearningPathImageWithMetaUrl(imageMetaUrl))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        applicationError(payload403invalid()),
+        applicationError(payload403invalid(`http://ndla-api:80/image-api/v1/images/${imageId}`)),
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();

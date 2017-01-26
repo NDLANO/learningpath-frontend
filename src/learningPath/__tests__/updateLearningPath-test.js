@@ -100,7 +100,7 @@ test('actions/updateLearningPath access denied', (t) => {
   store.dispatch(updateLearningPath(pathId, { id: pathId, foo: 'bar' }))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        applicationError(payload403invalid()),
+        applicationError(payload403invalid(`http://ndla-api/learningpaths/${pathId}`)),
       ]);
       t.doesNotThrow(() => apiMock.done());
 

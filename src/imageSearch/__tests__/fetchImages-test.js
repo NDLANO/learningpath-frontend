@@ -54,7 +54,7 @@ test('actions/fetchImages', (t) => {
     .catch(done);
 });
 
-test('actions/fetchImage with url access denied', (t) => {
+test('actions/fetchImages with url access denied', (t) => {
   const done = (res) => {
     t.end(res);
     nock.cleanAll();
@@ -70,7 +70,7 @@ test('actions/fetchImage with url access denied', (t) => {
   store.dispatch(fetchLearningPathImages({ page: 3, pageSize: 25 }))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        applicationError(payload403invalid()),
+        applicationError(payload403invalid('http://ndla-api/image-api/v1/images?page=3&pageSize=25')),
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();

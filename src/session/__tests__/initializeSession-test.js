@@ -60,7 +60,7 @@ test('actions/initializeSession access denied', (t) => {
   store.dispatch(initializeSession(authToken))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        applicationError(payload403invalid()),
+        applicationError(payload403invalid('http://ndla-api/auth/me')),
       ]);
       t.doesNotThrow(() => apiMock.done());
       done();

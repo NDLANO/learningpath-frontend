@@ -78,7 +78,7 @@ test('actions/createLearningPathStep access denied', (t) => {
   store.dispatch(createLearningPathStep(pathId, learningStep))
     .then(() => {
       t.deepEqual(store.getActions(), [
-        applicationError(payload403invalid()),
+        applicationError(payload403invalid(`http://ndla-api/learningpath-api/v1/learningpaths/${pathId}/learningsteps`)),
       ]);
       t.doesNotThrow(() => apiMock.done());
 

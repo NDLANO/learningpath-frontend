@@ -14,6 +14,7 @@ module.exports = require('./webpack.config.base')({
   // Utilize long-term caching by adding content hashes (not compilation hashes) to compiled assets
   output: {
     filename: '[name].[chunkhash].js',
+    sourceMapFilename: '[file].map',
   },
 
   // Use hashes in prod to anbale caching
@@ -41,4 +42,6 @@ module.exports = require('./webpack.config.base')({
     // Extract the CSS into a separate file
     new ExtractTextPlugin('[name].[contenthash].css'),
   ],
+
+  devtool: 'source-map',
 });
