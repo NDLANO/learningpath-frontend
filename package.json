@@ -66,7 +66,7 @@
     "immutable": "3.8.1",
     "isomorphic-fetch": "2.2.1",
     "lodash": "4.17.4",
-    "ndla-error-reporter": "beta",
+    "ndla-error-reporter": "^0.1.2",
     "ndla-learningpath-styleguide": "0.1.38",
     "ndla-licenses": "0.0.6",
     "ndla-ui": "^0.1.6",
