@@ -25,7 +25,7 @@ const activatedForEnvironment = (config, defaultValue) => {
 };
 
 const apiDomain = activatedForEnvironment({
-  local: 'http://localhost:20000',
+  local: 'http://proxy.ndla-local',
   prod: 'https://api.ndla.no' },
   `https://${ndlaEnvironment}.api.ndla.no`);
 const ltiActivated = activatedForEnvironment({ test: true, local: true }, false);
