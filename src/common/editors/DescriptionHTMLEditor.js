@@ -81,8 +81,8 @@ export default class DescriptionHTMLEditor extends React.Component {
 
     const { input } = props;
 
-    this.focus = () => this.refs.editor.focus();
-    this.blur = () => this.refs.editor.blur();
+    this.focus = () => this.editor.focus();
+    this.blur = () => this.editor.blur();
     this.onChange = editorState => this.setState({ editorState }, () => {
       const contentState = editorState.getCurrentContent();
       input.onChange(contentState);
@@ -183,7 +183,7 @@ export default class DescriptionHTMLEditor extends React.Component {
                 onChange={this.onChange}
                 onBlur={onBlur}
                 placeholder={this.props.placeholder}
-                ref="editor"
+                ref={(editor) => { this.editor = editor; }}
                 spellCheck
               />
             </div>

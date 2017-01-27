@@ -24,7 +24,7 @@ export default class OneLineEditor extends React.Component {
     });
 
     this.handleReturn = () => {
-      this.refs.editor.blur();
+      this.editor.blur();
       return true;
     };
     this.handleReturn = this.handleReturn.bind(this);
@@ -70,7 +70,7 @@ export default class OneLineEditor extends React.Component {
             handlePastedText={this.handlePastedText}
             handleReturn={this.handleReturn}
             placeholder={placeholder}
-            ref="editor"
+            ref={(editor) => { this.editor = editor; }}
           />
         </div>
         {meta.touched && meta.error && <span className="error_message error_message--red">{meta.error}</span>}
