@@ -8,7 +8,6 @@
 
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import ReactDOM from 'react-dom';
 import get from 'lodash/get';
 
 export const urlIsNDLA = url => (/^(http|https):\/\/ndla.no/).test(url);
@@ -38,7 +37,7 @@ export default class Oembed extends React.Component {
   }
 
   getIframeDOM() {
-    return ReactDOM.findDOMNode(this).children[0];
+    return this.iframeDiv.children[0];
   }
 
   handleIframeResizing({ oembedContent: { url } }) {
@@ -93,6 +92,7 @@ export default class Oembed extends React.Component {
           'learning-step_oembed': embedType === 'oembed',
         })}
         dangerouslySetInnerHTML={{ __html: html }}
+        ref={(iframeDiv) => { this.iframeDiv = iframeDiv; }}
       />
     );
   }
