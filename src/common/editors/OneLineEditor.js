@@ -46,10 +46,6 @@ export default class OneLineEditor extends React.Component {
     this.updateEditorContentStateFromText(this.props.input.value);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.updateEditorContentStateFromText(nextProps.input.value);
-  }
-
   updateEditorContentStateFromText(text) {
     if (text !== undefined) {
       const editorState = EditorState.createWithContent(ContentState.createFromText(text));
