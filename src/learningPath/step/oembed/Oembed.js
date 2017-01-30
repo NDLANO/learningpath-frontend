@@ -13,6 +13,8 @@ import get from 'lodash/get';
 
 export const urlIsNDLA = url => (/^(http|https):\/\/ndla.no/).test(url);
 export const urlIsApiNDLA = url => (/^(http|https):\/\/ndla-frontend.(test.|staging.)?api.ndla.no/).test(url);
+export const urlIsLocalNdla = url => (/^http:\/\/proxy.ndla-local:30017/).test(url);
+
 
 export default class Oembed extends React.Component {
   constructor(props) {
@@ -42,7 +44,7 @@ export default class Oembed extends React.Component {
   }
 
   handleIframeResizing({ oembedContent: { url } }) {
-    if (urlIsNDLA(url) || urlIsApiNDLA(url)) {
+    if (urlIsNDLA(url) || urlIsApiNDLA(url) || urlIsLocalNdla(url)) {
       this.setState({ isNDLAResource: true }, this.enableIframeResizing);
     } else {
       this.setState({ isNDLAResource: false }, this.disableIframeResizing);
