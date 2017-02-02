@@ -36,21 +36,21 @@ export function LearningPathDropdown({ onSelect, learningPath }) {
       <span className="dropdown-menu_icon"><Icon.MoreVert /></span>
       <ul className="dropdown-menu_items">
         <li className="dropdown-menu_item">
-          <a href="#" className="dropdown-menu_link" onClick={makeOnClick('makecopy')}>
+          <button className="un-button dropdown-menu_link" onClick={makeOnClick('makecopy')}>
             <Icon.ContentCopy /> {polyglot.t('pathDropDown.makeCopy')}
-          </a>
+          </button>
         </li>
         {learningPathStatuses.filter(status => status.status !== learningPath.status).map(status =>
           <li key={status.action} className={dropDownMenuItemClassName(status.status)}>
-            <a href="#" className="dropdown-menu_link" onClick={publishAction(status)}>
+            <button className="un-button dropdown-menu_link" onClick={publishAction(status)}>
               <Icon.Input /> {polyglot.t(`pathDropDown.${learningPath.status}.${status.action}`)}
-            </a>
+            </button>
           </li>
         )}
         <li className="dropdown-menu_item">
-          <a href="#" className="dropdown-menu_link" onClick={makeOnClick('delete')}>
+          <button className="un-button dropdown-menu_link" onClick={makeOnClick('delete')}>
             <Icon.Delete /> {polyglot.t('pathDropDown.delete')}
-          </a>
+          </button>
         </li>
       </ul>
     </div>

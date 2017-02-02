@@ -27,7 +27,7 @@ test('component/LearningPathDropdown remove', (t) => {
     { context: { lang: 'nb' } }
   );
 
-  component.find('.dropdown-menu_item').last().find('a')
+  component.find('.dropdown-menu_item').last().find('button')
            .simulate('click', { preventDefault });
 
   t.ok(preventDefault.calledOnce);
@@ -45,7 +45,7 @@ test('component/LearningPathDropdown de-publish', (t) => {
     <LearningPathDropdown learningPath={learningPath} onSelect={onSelect} />,
     { context: { lang: 'nb' } }
   );
-  component.find('.dropdown-menu_item').at(1).find('a')
+  component.find('.dropdown-menu_item').at(1).find('button')
            .simulate('click', { preventDefault });
 
   t.ok(preventDefault.calledOnce);
@@ -64,7 +64,7 @@ test('component/LearningPathDropdown publish', (t) => {
     { context: { lang: 'nb' } }
   );
 
-  component.find('.dropdown-menu_item').at(1).find('a')
+  component.find('.dropdown-menu_item').at(1).find('button')
            .simulate('click', { preventDefault });
 
   t.ok(preventDefault.calledOnce);
@@ -83,7 +83,7 @@ test('component/LearningPathDropdown unlist', (t) => {
     { context: { lang: 'nb' } }
   );
 
-  component.find('.dropdown-menu_item').at(2).find('a')
+  component.find('.dropdown-menu_item').at(2).find('button')
            .simulate('click', { preventDefault });
 
   t.ok(preventDefault.calledOnce);
@@ -101,7 +101,7 @@ test('component/LearningPathDropdown make copy', (t) => {
     <LearningPathDropdown learningPath={learningPath} onSelect={onSelect} />,
     { context: { lang: 'nb' } }
   );
-  component.find('.dropdown-menu_item').first().find('a')
+  component.find('.dropdown-menu_item').first().find('button')
            .simulate('click', { preventDefault });
 
   t.ok(preventDefault.calledOnce);
