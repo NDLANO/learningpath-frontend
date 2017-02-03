@@ -52,15 +52,9 @@ const phrases = {
   },
   pathDropDown: {
     PRIVATE: {
-      publish: 'Publish, searchable',
-      unlist: 'Publish, not searchable',
+      publish: 'Publish',
     },
     PUBLISHED: {
-      unpublish: 'Make private',
-      unlist: 'Remove from search',
-    },
-    NOT_LISTED: {
-      publish: 'Publish, searchable',
       unpublish: 'Make private',
     },
     delete: 'Delete',

@@ -52,15 +52,9 @@ const phrases = {
   },
   pathDropDown: {
     PRIVATE: {
-      publish: 'Publiser, søkbar',
-      unlist: 'Publiser, ikke søkbar',
+      publish: 'Publiser',
     },
     PUBLISHED: {
-      unpublish: 'Gjør privat',
-      unlist: 'Fjern fra søk',
-    },
-    NOT_LISTED: {
-      publish: 'Publiser, søkbar',
       unpublish: 'Gjør privat',
     },
     delete: 'Slett',

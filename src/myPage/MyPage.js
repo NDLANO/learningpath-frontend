@@ -62,9 +62,6 @@ export class MyPage extends React.Component {
           case 'publish':
             updatePathStatus(lp.id, 'PUBLISHED');
             break;
-          case 'unlist':
-            updatePathStatus(lp.id, 'NOT_LISTED');
-            break;
           case 'unpublish':
             updatePathStatus(lp.id, 'PRIVATE');
             break;

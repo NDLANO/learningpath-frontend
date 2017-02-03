@@ -74,25 +74,6 @@ test('component/LearningPathDropdown publish', (t) => {
   t.end();
 });
 
-test('component/LearningPathDropdown unlist', (t) => {
-  const onSelect = spy();
-  const preventDefault = spy();
-
-  const component = shallow(
-    <LearningPathDropdown learningPath={privateLearningPath} onSelect={onSelect} />,
-    { context: { lang: 'nb' } }
-  );
-
-  component.find('.dropdown-menu_item').at(2).find('button')
-           .simulate('click', { preventDefault });
-
-  t.ok(preventDefault.calledOnce);
-  t.ok(onSelect.calledOnce);
-  t.deepEqual(onSelect.firstCall.args, ['unlist', privateLearningPath]);
-
-  t.end();
-});
-
 test('component/LearningPathDropdown make copy', (t) => {
   const onSelect = spy();
   const preventDefault = spy();
