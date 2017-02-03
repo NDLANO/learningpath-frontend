@@ -27,6 +27,7 @@ module.exports = Object.assign({
   componentName: process.env.npm_package_name,
   host: process.env.LEARINGPATH_HOST || 'localhost',
   port: process.env.LEARINGPATH_PORT || '3000',
+  redirectPort: process.env.LEARNINGPATH_REDIRECT_PORT || '3001',
   googleTagMangerId: process.env.GOOGLE_TAG_MANGER_ID || undefined,
   ndlaApiUrl: process.env.NDLA_API_URL || apiDomain,
   ndlaApiKey: process.env.NDLA_API_KEY || 'ndlalearningpathfrontend',
