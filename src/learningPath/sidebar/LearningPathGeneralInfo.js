@@ -20,30 +20,42 @@ import LearningPathActionType from './LearningPathActionType';
 import { getI18nLearningPath } from '../learningPathSelectors';
 
 const LearningPathGeneralInfo = (props, context) => {
-  const { authenticated, learningPath, localCloseSidebars, onCopyLearningPathClick } = props;
+  const { authenticated, learningPath, localCloseSidebars, onCopyLearningPathClick, changeStatusButton, addStepButton } = props;
   const { lang } = context;
   const href = `/learningpaths/${learningPath.id}`;
   return (
     <div>
       <div className="learningpath-general-info">
-        <h3 className="learningpath-general-info_h">
-          <Link to={href} className={'cta-link--primary cta-link--underline'} onClick={localCloseSidebars}>
-            {learningPath.title}
-          </Link>
-        </h3>
-        <div className="border-box_wrapper">
-          <div className="border-box">
-            <LabeledIcon.Today labelText={formatDate(learningPath.lastUpdated, lang)} tagName="time" />
-          </div>
-          <div className="border-box">
-            <LabeledIcon.QueryBuilder labelText={formatDuration(learningPath.duration, lang)} tagName="time" />
-          </div>
+        <div className="learningpath-general-info_h">
+          <LearningPathCopyright copyright={learningPath.copyright} />
+          <h3>
+            <Link to={href} className={'cta-link--primary cta-link--underline'} onClick={localCloseSidebars}>
+              {learningPath.title}
+            </Link>
+          </h3>
+          {learningPath.isBasedOn ? <IsBasedOn path={learningPath} /> : '' }
         </div>
         <div className="learningpath-general-info_b">
-          {learningPath.isBasedOn ? <IsBasedOn path={learningPath} /> : '' }
-          <LearningPathCopyright copyright={learningPath.copyright} />
+          <div className="border-box_wrapper">
+            <div className="border-box border-box--block">
+              <LabeledIcon.Today labelText={formatDate(learningPath.lastUpdated, lang)} tagName="time" />
+            </div>
+            <div className="border-box border-box--block">
+              <LabeledIcon.QueryBuilder labelText={formatDuration(learningPath.duration, lang)} tagName="time" />
+            </div>
+          </div>
+          <div className="learningpath-general-actions">
+            {changeStatusButton}
+            <LearningPathActionType
+              hasChangeStatusButton={changeStatusButton !== null}
+              authenticated={authenticated}
+              learningPath={learningPath}
+              localCloseSidebars={localCloseSidebars}
+              onCopyLearningPathClick={onCopyLearningPathClick}
+            />
+          </div>
         </div>
-        <LearningPathActionType authenticated={authenticated} learningPath={learningPath} localCloseSidebars={localCloseSidebars} onCopyLearningPathClick={onCopyLearningPathClick} />
+        {addStepButton}
       </div>
     </div>
   );
@@ -54,6 +66,8 @@ LearningPathGeneralInfo.propTypes = {
   learningPath: PropTypes.object.isRequired,
   localCloseSidebars: PropTypes.func.isRequired,
   onCopyLearningPathClick: PropTypes.func.isRequired,
+  changeStatusButton: PropTypes.object,
+  addStepButton: PropTypes.object,
 };
 
 LearningPathGeneralInfo.contextTypes = {

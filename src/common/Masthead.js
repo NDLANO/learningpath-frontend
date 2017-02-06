@@ -92,7 +92,7 @@ export function Masthead(props) {
 Masthead.propTypes = {
   children: PropTypes.node,
   logo: PropTypes.object,
-  saveButtons: PropTypes.object,
+  changeStatusButton: PropTypes.object,
   sortableTableOfContent: PropTypes.object,
   sortLearningSteps: PropTypes.object,
   learningPath: PropTypes.object,
@@ -106,7 +106,7 @@ Masthead.propTypes = {
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
   learningPath: state.learningPath,
-  saveButtons: get(ownProps, 'saveButtons', null),
+  changeStatusButton: get(ownProps, 'changeStatusButton', null),
   isLeftSideBarOpen: get(state, 'sidebar.isLeftSideBarOpen', false),
   isRightSidebarOpen: get(state, 'sidebar.isRightSidebarOpen', false),
   logo: get(ownProps, 'logo', <Logo />),

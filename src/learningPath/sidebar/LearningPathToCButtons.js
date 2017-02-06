@@ -26,7 +26,7 @@ export function LearningPathToCButtons({ learningPath, updatePathStatus, localCl
     }
   };
   return (
-    <div className="vertical-menu">
+    <div>
       {learningPathStatuses.filter(status => status.status !== learningPath.status).map(status =>
         <button key={status.status} className="button--primary-outline cta-link--block" onClick={publishAction(status)}>
           {polyglot.t(`pathDropDown.${learningPath.status}.${status.action}`)}

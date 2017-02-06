@@ -26,14 +26,6 @@ test('component/LearningPath', (t) => {
   t.equal(
     shallow(
       <LearningPath
-        learningPath={translatedLearningPath} params={{}} location={{ pathname: '' }} main={React.createElement(Bar)}
-        saveButtons={React.createElement(Foo)}
-      />, { context: { lang: 'nb' } }
-    ).find(Foo).length, 1, 'renders props.saveButtons');
-
-  t.equal(
-    shallow(
-      <LearningPath
         learningPath={translatedLearningPath} params={{}} location={{ pathname: '' }}
         main={React.createElement(Foo)}
       />, { context: { lang: 'nb' } }

@@ -60,7 +60,7 @@ test('component/LearningPathToCStep last step with add step button editable', (t
   t.ok(link.at(0).is('.step-nav_link'), 'last step link is nav_link');
 
   const item = component.find('.step-nav_item');
-  t.ok(item.at(0).is('.step-nav_item--bottom_border'), 'last step link has not class step-nav_item--bottom_border');
+  t.notOk(item.at(0).is('.step-nav_item--bottom_border'), 'last step link has not class step-nav_item--bottom_border');
 
   t.end();
 });
@@ -72,7 +72,6 @@ test('component/LearningPathToCStep last step with add step button not editable'
       step={translatedLearningPathNotEditable.learningsteps[1]}
       steps={translatedLearningPathNotEditable.learningsteps}
       activeStepId=""
-      hasAddStepButton
       localCloseSidebars={noop}
     />,
     { context: { lang: 'nb' } }
@@ -94,7 +93,6 @@ test('component/LearningPathToCStep first step with add step button not editable
       step={translatedLearningPathNotEditable.learningsteps[0]}
       steps={translatedLearningPathNotEditable.learningsteps}
       activeStepId=""
-      hasAddStepButton
       localCloseSidebars={noop}
     />,
     { context: { lang: 'nb' } }

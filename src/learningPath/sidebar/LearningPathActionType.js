@@ -8,14 +8,18 @@
 
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
+import classNames from 'classnames';
 import polyglot from '../../i18n';
 
-const LearningPathActionType = ({ authenticated, learningPath, onCopyLearningPathClick, localCloseSidebars }) => {
-  const classNames = 'cta-link edit_learningpath--button';
+const LearningPathActionType = ({ authenticated, learningPath, onCopyLearningPathClick, localCloseSidebars, hasChangeStatusButton }) => {
+  const buttonClassName = classNames({
+    'cta-link cta-link--block': true,
+    'learningpath-action-type_button': hasChangeStatusButton,
+  });
   if (learningPath.canEdit) {
-    return <Link className={classNames} to={`/learningpaths/${learningPath.id}/edit`} onClick={localCloseSidebars}>{polyglot.t('editPage.edit')}</Link>;
+    return <Link className={buttonClassName} to={`/learningpaths/${learningPath.id}/edit`} onClick={localCloseSidebars}>{polyglot.t('editPage.edit')}</Link>;
   } else if (authenticated) {
-    return <button className={classNames} onClick={onCopyLearningPathClick}>{polyglot.t('copyLearningPath.createCopy')}</button>;
+    return <button className="cta-link cta-link--block copy-learningpath_button" onClick={onCopyLearningPathClick}>{polyglot.t('copyLearningPath.createCopy')}</button>;
   }
   return null;
 };
@@ -25,6 +29,7 @@ LearningPathActionType.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   onCopyLearningPathClick: PropTypes.func.isRequired,
   localCloseSidebars: PropTypes.func.isRequired,
+  hasChangeStatusButton: PropTypes.bool.isRequired,
 };
 
 export default LearningPathActionType;
