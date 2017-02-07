@@ -15,12 +15,12 @@ import LearningPathStepIcon from '../../learningPath/step/LearningPathStepIcon';
 import Icon from '../../common/Icon';
 
 const LearningPathToCStep = (props) => {
-  const { learningPath, activeStepId, localCloseSidebars, hasAddStepButton, step, steps } = props;
+  const { learningPath, activeStepId, localCloseSidebars, step, steps } = props;
   const base = `/learningpaths/${learningPath.id}`;
   const itemClassName = stepId => classNames({
     'step-nav_item': true,
     'step-nav_item--active': activeStepId ? activeStepId === stepId : false,
-    'step-nav_item--bottom_border': ((hasAddStepButton && learningPath.canEdit) || (!hasAddStepButton && step !== last(steps)) || (step !== last(steps) && !learningPath.canEdit)),
+    'step-nav_item--bottom_border': step !== last(steps),
   });
   const isActiveAndCanEdit = activeStepId === step.id.toString() && learningPath.canEdit;
   const linkUrl = isActiveAndCanEdit ? `${base}/step/${step.id}/edit` : `${base}/step/${step.id}`;
@@ -45,7 +45,6 @@ LearningPathToCStep.propTypes = {
   step: PropTypes.object.isRequired,
   activeStepId: PropTypes.string,
   localCloseSidebars: PropTypes.func.isRequired,
-  hasAddStepButton: PropTypes.bool.isRequired,
   steps: PropTypes.array.isRequired,
 };
 

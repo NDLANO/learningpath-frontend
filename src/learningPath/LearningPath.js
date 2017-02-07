@@ -46,10 +46,10 @@ export class LearningPath extends Component {
   render() {
     const { learningPath, isTableOfContentOpen, copyPath, params: { stepId }, sortLearningSteps, main } = this.props;
     const { lang } = this.context;
-    const saveButtons = defined(this.props.saveButtons, null);
+    const changeStatusButton = defined(this.props.changeStatusButton, null);
     const addStepButton = defined(this.props.addStepButton, null);
     const children = cloneElement(defined(main, this.props.children), { lang, learningPath });
-    const sortableTableOfContent = defined(sortLearningSteps, <LearningPathToC learningPath={learningPath} activeStepId={stepId} hasAddStepButton={addStepButton !== null} />);
+    const sortableTableOfContent = defined(sortLearningSteps, <LearningPathToC learningPath={learningPath} activeStepId={stepId} />);
     const sortableTableOfContentButton = !sortLearningSteps ? <SortLearningStepsButton learningPath={learningPath} /> : null;
 
     const collapseClassName = () => classNames({
@@ -63,10 +63,9 @@ export class LearningPath extends Component {
       copyPath(learningPath, lang);
       onLightboxClose();
     };
-
     return (
       <div className="wrapper">
-        <Masthead saveButtons={saveButtons} sortLearningSteps={sortLearningSteps} sortableTableOfContentButton={sortableTableOfContentButton}>
+        <Masthead changeStatusButton={changeStatusButton} sortLearningSteps={sortLearningSteps} sortableTableOfContentButton={sortableTableOfContentButton}>
           <div className="masthead_button masthead_button--left">
             <Icon.MoreVert />
             <span>Læringssti</span>
@@ -77,13 +76,16 @@ export class LearningPath extends Component {
         </Lightbox>
         <div className="two-column">
           <aside className={collapseClassName()}>
-            <LearningPathGeneralInfo {...this.props} onCopyLearningPathClick={this.onCopyLearningPathClick} />
+            <LearningPathGeneralInfo
+              {...this.props}
+              onCopyLearningPathClick={this.onCopyLearningPathClick}
+              addStepButton={addStepButton}
+              changeStatusButton={changeStatusButton}
+            />
             <div className="step-nav_wrapper">
               {sortableTableOfContentButton}
               {sortableTableOfContent}
-              {addStepButton}
               <PintrestLightboxButton learningPath={learningPath} />
-              {saveButtons}
             </div>
           </aside>
           <main className="two-column_col">
@@ -97,7 +99,7 @@ export class LearningPath extends Component {
 
 LearningPath.propTypes = {
   learningPath: PropTypes.object.isRequired,
-  saveButtons: PropTypes.object,
+  changeStatusButton: PropTypes.object,
   addStepButton: PropTypes.object,
   main: PropTypes.object,
   params: PropTypes.shape({

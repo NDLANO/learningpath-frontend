@@ -58,7 +58,7 @@ export default function (store, ifAuthenticated) {
       />
       <Route path="new" component={requireAuthentication(CreateLearningPath)} onEnter={ifAuthenticated(createEmptyLearningPath)} />
       <Route path=":pathId" component={LearningPath} >
-        <IndexRoute components={{ main: LearningPathSummary, addStepButton: AddLearningPathStepButton, saveButtons: LearningPathToCButtons }} />
+        <IndexRoute components={{ main: LearningPathSummary, addStepButton: AddLearningPathStepButton, changeStatusButton: LearningPathToCButtons }} />
         <Route path="first-step" component={requireAuthentication(EditLearningPath)} onEnter={redirectToFirstStep(store, fetchLearningPath)} />
         <Route path="edit" component={requireAuthentication(EditLearningPath)} onEnter={ifAuthenticated()} />
         {learningPathStepRoutes}
