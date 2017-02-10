@@ -39,11 +39,12 @@ const apiEmbedEngingeId = (() => {
 const apiEmbedResourceUrl = path => apiEmbedUrl + path;
 
 const fetchGoogleContent = (query) => {
+  console.log(query.filter);
   let url = apiEmbedResourceUrl('/customsearch/v1/');
   const params = {
     key: apiEmbedKey,
     cx: apiEmbedEngingeId,
-    q: `${query.textQuery} ${query.filter}`,
+    q: `${query.textQuery} ${query.filter.key}`,
     start: query.start ? query.start : undefined,
   };
   url += `?${queryString.stringify(params)}`;

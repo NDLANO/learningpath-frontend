@@ -11,7 +11,7 @@ import EmbedSearchResult from './EmbedSearchResult';
 import ButtonPager from '../common/pager/ButtonPager';
 import polyglot from '../i18n';
 
-const EmbedSearchResults = ({ items, onPreviewClick, addEmbedResult, query, pagerAction }) => {
+const EmbedSearchResults = ({ items, onPreviewClick, addEmbedResult, query, pagerAction, oembedComponent }) => {
   if (!items || items.length === 0) {
     return (
       <div className="embed-search_results">
@@ -26,7 +26,10 @@ const EmbedSearchResults = ({ items, onPreviewClick, addEmbedResult, query, page
   return (
     <div className="embed-search_results">
       {items.map(item =>
-        <EmbedSearchResult key={item.cacheId} item={item} onPreviewClick={onPreviewClick} addEmbedResult={addEmbedResult} />
+        <div>
+          <EmbedSearchResult key={item.cacheId} item={item} onPreviewClick={onPreviewClick} addEmbedResult={addEmbedResult} />
+          {oembedComponent ? oembedComponent : ''}
+        </div>
       )}
       <ButtonPager page={query.page} lastPage={query.numberOfPages} query={query} pagerAction={onPagerButtonClicked} />
     </div>
@@ -39,6 +42,7 @@ EmbedSearchResults.propTypes = {
   addEmbedResult: PropTypes.func.isRequired,
   pagerAction: PropTypes.func.isRequired,
   query: PropTypes.object.isRequired,
+  oembedComponent: PropTypes.object,
 };
 
 export default EmbedSearchResults;

@@ -16,9 +16,11 @@ import OneLineEditor from '../../../common/editors/OneLineEditor';
 import ObjectSelector from '../../../common/form/ObjectSelector';
 import PreviewOembed from '../oembed/PreviewOembed';
 import LearningPathStepIcon from '../LearningPathStepIcon';
-import EmbedSearch from '../../../embedSearch/EmbedSearch';
 import LTISearch from '../../../ltiSearch/LTISearch';
+import NdlaEmbedSearch from '../../../ndlaEmbedSearch/NdlaEmbedSearch';
+
 import config from '../../../config';
+import ExternalEmbedSearch from '../../../externalEmbedSearch/ExternalEmbedSearch';
 
 const LTI_ENABLED = __SERVER__ ? config.ltiActivated : window.config.ltiActivated;
 
@@ -90,8 +92,8 @@ const LearningPathStepFields = (props) => {
       </div>
       <DescriptionHTMLEditor input={description.input} lang={lang} onBlur={handleDescriptionBlur} />
       <div className="learning-step-form_group">
-        <EmbedSearch urlOnBlur={handleOembedUrl} />
-        { LTI_ENABLED ? <LTISearch stepId={step.id} learningPathId={learningPathId} embedTypeOnBlur={embedType.input.onBlur} urlOnBlur={url.input.onBlur} /> : '' }
+        <ExternalEmbedSearch learningPathId={learningPathId} stepId={step.id} embedTypeOnBlur={embedType.input.onBlur} urlOnBlur={url.input.onBlur} />
+        <NdlaEmbedSearch urlOnBlur={handleOembedUrl} />
         <input {...embedType.input} type="hidden" />
         <div className="learningsource-form">
           <div>

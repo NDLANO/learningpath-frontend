@@ -14,7 +14,7 @@ import polyglot from '../i18n';
 
 const EmbedSearchPreview = ({ oembedPreview, oembedDisplay, onImageLightboxClose, lang }) => {
   const embedHasError = oembedPreview && oembedPreview.length > 0 ? oembedPreview[0].error : false;
-  const embedContent = oembedPreview && !embedHasError ? oembedContentI18N({ embedUrl: oembedPreview }, lang) : oembedPreview;
+  const embedContent = oembedPreview && !embedHasError ? oembedPreview : oembedPreview;
 
   return (
     <div className="big-lightbox_wrapper big-lightbox_wrapper--scroll big-lightbox_wrapper--center">
@@ -27,7 +27,7 @@ const EmbedSearchPreview = ({ oembedPreview, oembedDisplay, onImageLightboxClose
 };
 
 EmbedSearchPreview.propTypes = {
-  oembedPreview: PropTypes.array,
+  oembedPreview: PropTypes.object,
   oembedDisplay: PropTypes.bool.isRequired,
   onImageLightboxClose: PropTypes.func.isRequired,
   lang: PropTypes.string.isRequired,
