@@ -13,6 +13,7 @@ import ExternalEmbedSearchContainer from './ExternalEmbedSearchContainer';
 import Lightbox from '../common/Lightbox';
 import * as actions from '../embedSearch/embedSearchActions';
 import { getEmbedResultFromState, getEmbedQueryFromState, getOembedContentFromState } from '../embedSearch/embedSearchSelectors';
+import polyglot from '../i18n';
 
 class ExternalEmbedSearch extends React.Component {
   constructor(props) {
@@ -47,6 +48,7 @@ class ExternalEmbedSearch extends React.Component {
   }
   closeExternalSearch() {
     this.setState({ active: false });
+    this.props.removeOembed({ type: 'external' });
   }
 
   render() {
@@ -55,7 +57,7 @@ class ExternalEmbedSearch extends React.Component {
     return (
       <div>
         <button className="button button--primary button--block embed-search_open-button" onClick={this.displayExternalSearch}>
-          Søk i eksterne ressurser
+          {polyglot.t('embedSearch.externalButton')}
         </button>
         <div className="big-lightbox_wrapper big-lightbox_wrapper--scroll">
           <Lightbox display={this.state.active} onClose={this.closeExternalSearch}>
@@ -70,7 +72,6 @@ class ExternalEmbedSearch extends React.Component {
             />
           </Lightbox>
         </div>
-
       </div>
     );
   }
@@ -83,6 +84,7 @@ ExternalEmbedSearch.propTypes = {
   urlOnBlur: PropTypes.func.isRequired,
   localFetchEmbedSearch: PropTypes.func.isRequired,
   query: PropTypes.object.isRequired,
+  removeOembed: PropTypes.func.isRequired,
 };
 const mapStateToProps = state => Object.assign({}, state, {
   result: getEmbedResultFromState(state, 'external'),
@@ -91,6 +93,7 @@ const mapStateToProps = state => Object.assign({}, state, {
 });
 const mapDispatchToProps = {
   localFetchEmbedSearch: actions.fetchExternalEmbedSearch,
+  removeOembed: actions.removeEmbedPreview,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExternalEmbedSearch);

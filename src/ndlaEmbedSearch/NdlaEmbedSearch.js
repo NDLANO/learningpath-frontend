@@ -53,7 +53,6 @@ class NdlaEmbedSearch extends React.Component {
 
   render() {
     const { result, localFetchEmbedSearch, oembedPreview, query } = this.props;
-    const { lang: language } = this.context;
     const containerClass = {
       'embed-search_container': true,
       'embed-search_container--active': this.state.active,
@@ -63,9 +62,11 @@ class NdlaEmbedSearch extends React.Component {
 
     return (
       <div>
-        <button className="button button--primary button--block embed-search_open-button" onClick={this.toggleGoogleCustomSearch}>{polyglot.t('embedSearch.button')}</button>
+        <button className="button button--primary button--block embed-search_open-button" onClick={this.toggleGoogleCustomSearch}>
+          {polyglot.t('embedSearch.ndlaButton')}
+        </button>
         <div className={classNames(containerClass)}>
-          <h4>Legg til innhold fra NDLA</h4>
+          <h4>{polyglot.t('embedSearch.form.ndlaTitle')}</h4>
           <EmbedSearchForm
             query={query}
             handleTextQueryChange={this.handleTextQueryChange}
@@ -79,7 +80,7 @@ class NdlaEmbedSearch extends React.Component {
             pagerAction={localFetchEmbedSearch}
             query={query}
           />
-          <EmbedSearchPreview oembedPreview={oembedPreview} oembedDisplay={this.state.oembedDisplay} onImageLightboxClose={this.onImageLightboxClose} lang={language} />
+          <EmbedSearchPreview oembedPreview={oembedPreview} oembedDisplay={this.state.oembedDisplay} onImageLightboxClose={this.onImageLightboxClose} />
         </div>
       </div>
     );
@@ -95,10 +96,6 @@ NdlaEmbedSearch.propTypes = {
   urlOnBlur: PropTypes.func.isRequired,
   query: PropTypes.object.isRequired,
   localChangeEmbedSearchQuery: PropTypes.func.isRequired,
-};
-
-NdlaEmbedSearch.contextTypes = {
-  lang: PropTypes.string.isRequired,
 };
 
 const mapDispatchToProps = {

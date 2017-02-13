@@ -44,7 +44,7 @@ function fetchOembed(url, lang, type) {
       dispatch(setEmbedPreview({ type, oembedContent: Object.assign({}, oembed, { url, language: lang }) }));
     })
     .catch((err) => {
-      dispatch(setEmbedPreview({ error: true }));
+      dispatch(setEmbedPreview({ type, oembedContent: { error: true, url } }));
       dispatch(applicationError(err));
     });
 }

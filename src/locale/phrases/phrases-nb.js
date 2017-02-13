@@ -236,7 +236,8 @@ const phrases = {
   },
   embedSearch: {
     form: {
-      title: 'Legg til innhold fra ekstern kilde',
+      externalTitle: 'Legg til innhold fra ekstern kilde',
+      ndlaTitle: 'Legg til innhold fra NDLA',
       placeholder: 'Søk og finn kilde',
       allFilter: 'Alle',
     },
@@ -249,7 +250,8 @@ const phrases = {
       title: 'Forhåndsvisning av oembed',
       error: 'En feil har oppstått.',
     },
-    button: 'Søk i NDLA',
+    externalButton: 'Søk i eksterne ressurser',
+    ndlaButton: 'Søk i NDLA',
   },
   pintrest: {
     importFrom: 'Hent læringssteg fra Pintrest',

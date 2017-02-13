@@ -7,8 +7,6 @@
  */
 
 import React, { PropTypes } from 'react';
-import classNames from 'classnames';
-import polyglot from '../i18n';
 import LTISearch from '../ltiSearch/LTISearch';
 import ExternalOembedSearch from './ExternalOembedSearch';
 

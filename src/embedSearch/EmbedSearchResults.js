@@ -8,10 +8,10 @@
 
 import React, { PropTypes } from 'react';
 import EmbedSearchResult from './EmbedSearchResult';
-import ButtonPager from '../common/pager/ButtonPager';
 import polyglot from '../i18n';
+import EmbedSearchPager from './EmbedSearchPager';
 
-const EmbedSearchResults = ({ items, onPreviewClick, addEmbedResult, query, pagerAction, oembedComponent }) => {
+const EmbedSearchResults = ({ items, onPreviewClick, addEmbedResult, query, pagerAction }) => {
   if (!items || items.length === 0) {
     return (
       <div className="embed-search_results">
@@ -19,19 +19,13 @@ const EmbedSearchResults = ({ items, onPreviewClick, addEmbedResult, query, page
       </div>
     );
   }
-  const onPagerButtonClicked = (q) => {
-    const nextIndex = query.start + ((q.page - query.page) * 10);
-    pagerAction(Object.assign({}, q, { start: nextIndex }));
-  };
+
   return (
     <div className="embed-search_results">
       {items.map(item =>
-        <div>
-          <EmbedSearchResult key={item.cacheId} item={item} onPreviewClick={onPreviewClick} addEmbedResult={addEmbedResult} />
-          {oembedComponent ? oembedComponent : ''}
-        </div>
+        <EmbedSearchResult key={item.cacheId} item={item} onPreviewClick={onPreviewClick} addEmbedResult={addEmbedResult} />
       )}
-      <ButtonPager page={query.page} lastPage={query.numberOfPages} query={query} pagerAction={onPagerButtonClicked} />
+      <EmbedSearchPager query={query} pagerAction={pagerAction} />
     </div>
 
   );
@@ -42,7 +36,6 @@ EmbedSearchResults.propTypes = {
   addEmbedResult: PropTypes.func.isRequired,
   pagerAction: PropTypes.func.isRequired,
   query: PropTypes.object.isRequired,
-  oembedComponent: PropTypes.object,
 };
 
 export default EmbedSearchResults;

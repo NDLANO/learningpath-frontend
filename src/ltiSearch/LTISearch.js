@@ -7,7 +7,6 @@
  */
 
 import React, { PropTypes } from 'react';
-import Lightbox from '../common/Lightbox';
 import { changeIframeContent } from './ltiSearchActions';
 
 class LTISearch extends React.Component {

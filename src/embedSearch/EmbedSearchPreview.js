@@ -9,28 +9,21 @@
 import React, { PropTypes } from 'react';
 import Lightbox from '../common/Lightbox';
 import Oembed from '../learningPath/step/oembed/Oembed';
-import { oembedContentI18N } from '../util/i18nFieldFinder';
 import polyglot from '../i18n';
 
-const EmbedSearchPreview = ({ oembedPreview, oembedDisplay, onImageLightboxClose, lang }) => {
-  const embedHasError = oembedPreview && oembedPreview.length > 0 ? oembedPreview[0].error : false;
-  const embedContent = oembedPreview && !embedHasError ? oembedPreview : oembedPreview;
-
-  return (
-    <div className="big-lightbox_wrapper big-lightbox_wrapper--scroll big-lightbox_wrapper--center">
-      <Lightbox display={oembedDisplay} onClose={onImageLightboxClose}>
-        <h2>{polyglot.t('embedSearch.preview.title')}</h2>
-        {embedHasError ? <p>{polyglot.t('embedSearch.preview.error')}</p> : <Oembed oembedContent={embedContent} embedType="oembed" />}
-      </Lightbox>
-    </div>
+const EmbedSearchPreview = ({ oembedPreview, oembedDisplay, onImageLightboxClose }) => (
+  <div className="big-lightbox_wrapper big-lightbox_wrapper--scroll big-lightbox_wrapper--center">
+    <Lightbox display={oembedDisplay} onClose={onImageLightboxClose}>
+      <h2>{polyglot.t('embedSearch.preview.title')}</h2>
+      {oembedPreview.error ? <p>{polyglot.t('embedSearch.preview.error')}</p> : <Oembed oembedContent={oembedPreview} embedType="oembed" />}
+    </Lightbox>
+  </div>
   );
-};
 
 EmbedSearchPreview.propTypes = {
   oembedPreview: PropTypes.object,
   oembedDisplay: PropTypes.bool.isRequired,
   onImageLightboxClose: PropTypes.func.isRequired,
-  lang: PropTypes.string.isRequired,
 };
 
 export default EmbedSearchPreview;

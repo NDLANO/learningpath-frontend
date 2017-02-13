@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import classNames from 'classnames';
 import get from 'lodash/get';
 import EmbedSearchForm from '../embedSearch/EmbedSearchForm';
 import * as actions from '../embedSearch/embedSearchActions';
-import EmbedSearchResults from '../embedSearch/EmbedSearchResults';
 import ExternalOembedPreview from './ExternalOembedPreview';
 import { getEmbedResultFromState, getEmbedQueryFromState, getOembedContentFromState } from '../embedSearch/embedSearchSelectors';
 import polyglot from '../i18n';
+import EmbedSearchResult from '../embedSearch/EmbedSearchResult';
+import EmbedSearchPager from '../embedSearch/EmbedSearchPager';
 
 const searchType = 'external';
 
@@ -27,8 +27,9 @@ class ExternalOembedSearch extends React.Component {
   componentWillMount() {
     this.props.localFetchEmbedSearch(this.props.query);
   }
-  onPreviewClose() {
-    this.props.removeOembed();
+  onPreviewClose(evt) {
+    evt.preventDefault();
+    this.props.removeOembed({ type: 'external' });
     this.setState({ oembedDisplay: false });
   }
   previewOembed(evt, item) {
@@ -42,17 +43,11 @@ class ExternalOembedSearch extends React.Component {
 
   render() {
     const { result, localFetchEmbedSearch, oembedPreview, query, addEmbedResult } = this.props;
-    const { lang: language } = this.context;
-    const containerClass = {
-      'embed-search_container': true,
-      'embed-search_container--active': this.state.active,
-    };
-    console.log(oembedPreview);
-    const oembedComponent = <ExternalOembedPreview oembedPreview={oembedPreview} oembedDisplay={this.state.oembedDisplay} onPreviewboxClose={this.onPreviewClose} />;
+    const oembed = oembedPreview ? <ExternalOembedPreview oembedPreview={oembedPreview} oembedDisplay={this.state.oembedDisplay} onPreviewboxClose={this.onPreviewClose} /> : '';
     const resultItems = get(result, 'items', []);
     return (
-      <div>
-        <h4>Legg til innhold fra NDLA</h4>
+      <div className="embed-search_container embed-search_container--active">
+        <h4>{polyglot.t('embedSearch.form.externalTitle')}</h4>
         <EmbedSearchForm
           query={query}
           handleTextQueryChange={this.handleTextQueryChange}
@@ -60,17 +55,15 @@ class ExternalOembedSearch extends React.Component {
           textQuery={this.state.textQuery}
           searchType={searchType}
         />
-        <EmbedSearchResults
-          items={resultItems}
-          onPreviewClick={this.previewOembed}
-          addEmbedResult={addEmbedResult}
-          pagerAction={localFetchEmbedSearch}
-          query={query}
-          searchType={searchType}
-          oembedComponent={oembedComponent}
-        />
-
-
+        <div className="embed-search_results">
+          {resultItems.map(item =>
+            <div key={item.cacheId} >
+              <EmbedSearchResult item={item} onPreviewClick={this.previewOembed} addEmbedResult={addEmbedResult} />
+              {oembedPreview && oembedPreview.url === item.link ? oembed : ''}
+            </div>
+          )}
+          <EmbedSearchPager query={query} pagerAction={localFetchEmbedSearch} />
+        </div>
       </div>
     );
   }

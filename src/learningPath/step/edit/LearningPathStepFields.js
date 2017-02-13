@@ -16,13 +16,8 @@ import OneLineEditor from '../../../common/editors/OneLineEditor';
 import ObjectSelector from '../../../common/form/ObjectSelector';
 import PreviewOembed from '../oembed/PreviewOembed';
 import LearningPathStepIcon from '../LearningPathStepIcon';
-import LTISearch from '../../../ltiSearch/LTISearch';
 import NdlaEmbedSearch from '../../../ndlaEmbedSearch/NdlaEmbedSearch';
-
-import config from '../../../config';
 import ExternalEmbedSearch from '../../../externalEmbedSearch/ExternalEmbedSearch';
-
-const LTI_ENABLED = __SERVER__ ? config.ltiActivated : window.config.ltiActivated;
 
 const LearningPathStepFields = (props) => {
   const {

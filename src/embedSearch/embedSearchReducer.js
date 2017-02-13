@@ -50,9 +50,9 @@ export default handleActions({
     },
   },
   REMOVE_EMBED_PREVIEW: {
-    next(state) {
+    next(state, action) {
       const nextState = cloneDeep(state);
-      nextState.oembedContent = undefined;
+      nextState[action.payload.type].oembedContent = undefined;
       return nextState;
     },
     throw(state) { return state; },

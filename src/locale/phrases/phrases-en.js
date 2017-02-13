@@ -237,7 +237,8 @@ const phrases = {
   },
   embedSearch: {
     form: {
-      title: 'Add content from an external source',
+      ndlaTitle: 'Add content from NDLA',
+      externalTitle: 'Add content from an external source',
       placeholder: 'Search and find source',
       allFilter: 'All',
     },
@@ -250,7 +251,8 @@ const phrases = {
       title: 'Preview for oembed',
       error: 'An error has occured',
     },
-    button: 'Search for NDLA resources',
+    ndlaButton: 'Search for NDLA resources',
+    externalButton: 'Search for external resources',
   },
   pintrest: {
     importFrom: 'Get learning steps from Pintrest',

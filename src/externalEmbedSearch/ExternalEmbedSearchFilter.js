@@ -8,10 +8,11 @@
 
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import polyglot from '../i18n';
+import config from '../config';
+
+const LTI_ENABLED = __SERVER__ ? config.ltiActivated : window.config.ltiActivated;
 
 const ExternalEmbedSearchFilter = ({ currentFilter, onFilterChange, learningPathId, stepId }) => {
-  console.log(currentFilter);
   const filterClass = filter => classNames({
     'un-button': true,
     'embed-search_form-filter ': true,
@@ -24,13 +25,14 @@ const ExternalEmbedSearchFilter = ({ currentFilter, onFilterChange, learningPath
     { key: 'khan_academy', returnUrl, name: 'Khan Academy', type: 'lti' },
     { key: 'quizlet', returnUrl, name: 'Quizlet', type: 'lti' },
   ];
+
+  const filteredFilters = LTI_ENABLED ? filters : filters.filter((filter => filter.type !== 'lti'));
+
   return (
-    <div className="embed-search_form">
-      <div className="embed-search_form-filters">
-        {filters.map(filter =>
-          <button key={filter.key} onClick={evt => onFilterChange(evt, filter)} className={filterClass(filter.key)}>{filter.name}</button>
+    <div className="embed-search_form-filters">
+      {filteredFilters.map(filter =>
+        <button key={filter.key} onClick={evt => onFilterChange(evt, filter)} className={filterClass(filter.key)}>{filter.name}</button>
         )}
-      </div>
     </div>
   );
 };
