@@ -42,7 +42,7 @@ const propsWithItems = {
 test('component/EmbedSearchResult with results', (t) => {
   const component = shallow(<EmbedSearchResults {...propsWithItems} />);
 
-  const pager = component.find('ButtonPager');
+  const pager = component.find('EmbedSearchPager');
   t.equal(pager.length, 1, 'One pager found');
 
   const results = component.find('EmbedSearchResult');
