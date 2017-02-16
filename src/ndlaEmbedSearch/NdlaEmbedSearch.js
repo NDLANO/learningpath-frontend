@@ -42,9 +42,9 @@ class NdlaEmbedSearch extends React.Component {
     this.props.localFetchOembed(item.link, this.context.lang, searchType);
     this.setState({ oembedDisplay: true });
   }
-  addEmbedResult(evt, item) {
+  addEmbedResult(evt, url) {
     evt.preventDefault();
-    this.props.urlOnBlur(item.link);
+    this.props.urlOnBlur(url, 'oembed');
     this.setState({ active: false });
   }
   handleTextQueryChange(evt) {

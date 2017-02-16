@@ -36,9 +36,9 @@ class ExternalEmbedSearch extends React.Component {
     }
   }
 
-  addEmbedResult(evt, item) {
+  addEmbedResult(evt, url) {
     evt.preventDefault();
-    this.props.urlOnBlur(item.link);
+    this.props.urlOnBlur(url, this.state.filter.type);
     this.setState({ active: false });
   }
 
@@ -52,7 +52,7 @@ class ExternalEmbedSearch extends React.Component {
   }
 
   render() {
-    const { learningPathId, stepId, embedTypeOnBlur, urlOnBlur } = this.props;
+    const { learningPathId, stepId } = this.props;
 
     return (
       <div>
@@ -64,10 +64,7 @@ class ExternalEmbedSearch extends React.Component {
             <ExternalEmbedSearchFilter currentFilter={this.state.filter} onFilterChange={this.onFilterChange} learningPathId={learningPathId} stepId={stepId} />
             <ExternalEmbedSearchContainer
               currentFilter={this.state.filter}
-              embedTypeOnBlur={embedTypeOnBlur}
-              urlOnBlur={urlOnBlur}
               learningPathId={learningPathId}
-              closeExternalSearch={this.closeExternalSearch}
               addEmbedResult={this.addEmbedResult}
             />
           </Lightbox>
@@ -80,7 +77,6 @@ class ExternalEmbedSearch extends React.Component {
 ExternalEmbedSearch.propTypes = {
   learningPathId: PropTypes.number.isRequired,
   stepId: PropTypes.number,
-  embedTypeOnBlur: PropTypes.func.isRequired,
   urlOnBlur: PropTypes.func.isRequired,
   localFetchEmbedSearch: PropTypes.func.isRequired,
   query: PropTypes.object.isRequired,

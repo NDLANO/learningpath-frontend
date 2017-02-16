@@ -23,7 +23,6 @@ const ExternalEmbedSearchFilter = ({ currentFilter, onFilterChange, learningPath
     { key: 'more:youtube', name: 'Youtube', type: 'oembed' },
     { key: 'more:Ted', name: 'Ted', type: 'oembed' },
     { key: 'khan_academy', returnUrl, name: 'Khan Academy', type: 'lti' },
-    { key: 'quizlet', returnUrl, name: 'Quizlet', type: 'lti' },
   ];
 
   const filteredFilters = LTI_ENABLED ? filters : filters.filter((filter => filter.type !== 'lti'));

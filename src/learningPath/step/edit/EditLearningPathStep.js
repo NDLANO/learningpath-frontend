@@ -54,8 +54,8 @@ class EditLearningPathStep extends Component {
         showTitle: values.showTitle,
         title: [{ title: values.title, language }],
         description: [{ description: descriptionHTML, language }],
-        embedUrl: values.url ? [{ url: values.url, language, embedType: values.embedType }] : [],
-        license: values.license && values.license ? values.license.license : '',
+        embedUrl: values.url ? [{ url: values.url.url, language, embedType: values.url.embedType }] : [],
+        license: values.license && values.license.licen ? values.license.license : '',
       });
       return saveLearningPathStep(learningPathId, toSave);
     };

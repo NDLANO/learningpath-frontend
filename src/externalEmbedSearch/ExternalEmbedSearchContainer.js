@@ -11,28 +11,21 @@ import LTISearch from '../ltiSearch/LTISearch';
 import ExternalOembedSearch from './ExternalOembedSearch';
 
 const ExternalEmbedSearchContainer = (props) => {
-  const { currentFilter, embedTypeOnBlur, urlOnBlur, learningPathId, closeExternalSearch, addEmbedResult } = props;
+  const { currentFilter, learningPathId, addEmbedResult } = props;
   if (currentFilter.type === 'lti') {
     return (
-      <LTISearch filter={currentFilter} embedTypeOnBlur={embedTypeOnBlur} urlOnBlur={urlOnBlur} learningPathId={learningPathId} closeExternalSearch={closeExternalSearch} />
+      <LTISearch filter={currentFilter} addEmbedResult={addEmbedResult} learningPathId={learningPathId} />
     );
   }
   return (
-    <ExternalOembedSearch
-      urlOnBlur={urlOnBlur}
-      addEmbedResult={addEmbedResult}
-    />
+    <ExternalOembedSearch addEmbedResult={addEmbedResult} />
   );
 };
 
 ExternalEmbedSearchContainer.propTypes = {
   currentFilter: PropTypes.object.isRequired,
-  embedTypeOnBlur: PropTypes.func.isRequired,
-  urlOnBlur: PropTypes.func.isRequired,
   learningPathId: PropTypes.number.isRequired,
-  closeExternalSearch: PropTypes.func.isRequired,
   addEmbedResult: PropTypes.func.isRequired,
-
 };
 
 export default ExternalEmbedSearchContainer;

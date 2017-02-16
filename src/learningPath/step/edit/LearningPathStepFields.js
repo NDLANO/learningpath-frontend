@@ -30,9 +30,9 @@ const LearningPathStepFields = (props) => {
     description,
     title,
     url,
-    embedType,
     learningPathId,
   } = props;
+
   const handleDescriptionBlur = (value) => {
     if ((!showTitle.meta.touched && !step.id)) {
       if (value.hasText()) {
@@ -43,11 +43,17 @@ const LearningPathStepFields = (props) => {
     }
     description.input.onBlur(value);
   };
-  const handleOembedUrl = (value, oembedType = 'oembed') => {
-    embedType.input.onChange(oembedType);
-    url.input.onBlur(value);
+
+  const handleEmbedUrlChange = (embedUrl, embedType = 'oembed') => {
+    url.input.onBlur({ url: embedUrl, embedType });
   };
 
+  const handleUrlOnBlur = (evt) => {
+    const value = evt.target.value;
+    if (url.input.value.url !== value) {
+      url.input.onBlur({ url: value, embedType: 'oembed' });
+    }
+  };
   return (
     <div>
       <div className="learning-step-form_group">
@@ -87,13 +93,12 @@ const LearningPathStepFields = (props) => {
       </div>
       <DescriptionHTMLEditor input={description.input} lang={lang} onBlur={handleDescriptionBlur} />
       <div className="learning-step-form_group">
-        <ExternalEmbedSearch learningPathId={learningPathId} stepId={step.id} embedTypeOnBlur={embedType.input.onBlur} urlOnBlur={url.input.onBlur} />
-        <NdlaEmbedSearch urlOnBlur={handleOembedUrl} />
-        <input {...embedType.input} type="hidden" />
+        <ExternalEmbedSearch learningPathId={learningPathId} stepId={step.id} urlOnBlur={handleEmbedUrlChange} />
+        <NdlaEmbedSearch urlOnBlur={handleEmbedUrlChange} />
         <div className="learningsource-form">
           <div>
             <label className="mediatype-menu__label" htmlFor="url">{polyglot.t('editPathStep.urlLabel')}</label>
-            <input {...url.input} onChange={handleOembedUrl} placeholder={polyglot.t('editPathStep.urlPlaceholder')} type="url" />
+            <input name="url" onBlur={handleUrlOnBlur} onChange={handleUrlOnBlur} value={url.input.value.url} placeholder={polyglot.t('editPathStep.urlPlaceholder')} type="url" />
             {url.meta.touched && url.meta.error && <span className="error_message error_message--red">{url.meta.error}</span>}
             <PreviewOembed content={oembedPreview} />
           </div>
@@ -117,7 +122,6 @@ LearningPathStepFields.propTypes = {
   url: PropTypes.object.isRequired,
   title: PropTypes.object.isRequired,
   learningPathId: PropTypes.number.isRequired,
-  embedType: PropTypes.object.isRequired,
 };
 
 export default LearningPathStepFields;

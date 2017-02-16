@@ -75,7 +75,6 @@ ExternalOembedSearch.propTypes = {
   localFetchOembed: PropTypes.func.isRequired,
   oembedPreview: PropTypes.object,
   removeOembed: PropTypes.func.isRequired,
-  urlOnBlur: PropTypes.func.isRequired,
   query: PropTypes.object.isRequired,
   localChangeEmbedSearchQuery: PropTypes.func.isRequired,
   addEmbedResult: PropTypes.func.isRequired,

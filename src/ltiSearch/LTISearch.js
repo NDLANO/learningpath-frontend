@@ -30,11 +30,9 @@ class LTISearch extends React.Component {
     if (!evt.data || evt.data.type !== 'ltiParams') {
       return;
     }
-    this.props.embedTypeOnBlur('lti');
     if (evt.data.params.url) {
-      this.props.urlOnBlur(decodeURIComponent(evt.data.params.url));
+      this.props.addEmbedResult(evt, decodeURIComponent(evt.data.params.url));
     }
-    this.props.closeExternalSearch();
   }
 
   render() {
@@ -48,9 +46,7 @@ class LTISearch extends React.Component {
 
 LTISearch.propTypes = {
   filter: PropTypes.object.isRequired,
-  embedTypeOnBlur: PropTypes.func.isRequired,
-  urlOnBlur: PropTypes.func.isRequired,
-  closeExternalSearch: PropTypes.func.isRequired,
+  addEmbedResult: PropTypes.func.isRequired,
 };
 
 LTISearch.contextTypes = {
