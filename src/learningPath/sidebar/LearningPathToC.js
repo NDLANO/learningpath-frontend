@@ -14,7 +14,7 @@ import LearningPathToCStep from './LearningPathToCStep';
 import { getI18nLearningPath } from '../learningPathSelectors';
 
 export function LearningPathToC(props) {
-  const { learningPath, activeStepId, localCloseSidebars, hasAddStepButton } = props;
+  const { learningPath, activeStepId, localCloseSidebars } = props;
   const steps = defined(learningPath.learningsteps, []);
   return (
     <div>
@@ -27,7 +27,6 @@ export function LearningPathToC(props) {
               learningPath={learningPath}
               localCloseSidebars={localCloseSidebars}
               activeStepId={activeStepId}
-              hasAddStepButton={hasAddStepButton}
               steps={steps}
             />
           )))}
@@ -41,7 +40,6 @@ LearningPathToC.propTypes = {
   learningPath: PropTypes.object.isRequired,
   activeStepId: PropTypes.string,
   localCloseSidebars: PropTypes.func.isRequired,
-  hasAddStepButton: PropTypes.bool.isRequired,
 };
 
 LearningPathToC.contextTypes = {

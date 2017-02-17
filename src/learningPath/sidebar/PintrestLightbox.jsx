@@ -36,6 +36,7 @@ class PintrestLightbox extends Component {
     const { learningPath } = this.props;
     return (
       <div>
+        <br />
         <Button className="button button--primary-outline cta-link--block" onClick={this.openLightbox}>
           {polyglot.t('pintrest.importFrom')}
         </Button>
