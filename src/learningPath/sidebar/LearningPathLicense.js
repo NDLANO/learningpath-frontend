@@ -11,7 +11,7 @@ import getLicenseByAbbreviation from 'ndla-licenses';
 import { LicenseIconList } from 'ndla-ui';
 
 const LearningPathLicense = ({ copyright }) => {
-  if (!copyright.license) {
+  if (!copyright || !copyright.license) {
     return null;
   }
   const license = getLicenseByAbbreviation(copyright.license.license);
@@ -23,7 +23,7 @@ const LearningPathLicense = ({ copyright }) => {
   );
 };
 LearningPathLicense.propTypes = {
-  copyright: PropTypes.object.isRequired,
+  copyright: PropTypes.object,
 };
 
 export default LearningPathLicense;

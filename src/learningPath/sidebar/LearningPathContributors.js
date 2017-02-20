@@ -11,7 +11,7 @@ import isEmpty from 'lodash/isEmpty';
 import Icon from '../../common/Icon';
 
 const LearningPathContributors = ({ copyright }) => {
-  if (!copyright.contributors || isEmpty(copyright.contributors)) {
+  if (!copyright || !copyright.contributors || isEmpty(copyright.contributors)) {
     return null;
   }
   return (
@@ -24,7 +24,7 @@ const LearningPathContributors = ({ copyright }) => {
   );
 };
 LearningPathContributors.propTypes = {
-  copyright: PropTypes.object.isRequired,
+  copyright: PropTypes.object,
 };
 
 export default LearningPathContributors;

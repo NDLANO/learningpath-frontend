@@ -8,32 +8,33 @@
 
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
-
 import formatDate from '../../util/formatDate';
 import formatDuration from '../../util/formatDuration';
 import { closeSidebars } from '../../common/sidebarActions';
 import LabeledIcon from '../../common/LabeledIcon';
-import LearningPathCopyright from './LearningPathCopyright';
+import LearningPathLicense from './LearningPathLicense';
 import IsBasedOn from '../../common/IsBasedOn';
 import LearningPathActionType from './LearningPathActionType';
 import { getI18nLearningPath } from '../learningPathSelectors';
+import LearningPathContributors from './LearningPathContributors';
 
 const LearningPathGeneralInfo = (props, context) => {
   const { authenticated, learningPath, localCloseSidebars, onCopyLearningPathClick, changeStatusButton, addStepButton } = props;
   const { lang } = context;
-  const href = `/learningpaths/${learningPath.id}`;
   return (
     <div>
       <div className="learningpath-general-info">
         <div className="learningpath-general-info_h">
-          <LearningPathCopyright copyright={learningPath.copyright} />
+          <div className="learningpath-license">
+            <LearningPathLicense copyright={learningPath.copyright} />
+          </div>
           <h3>
-            <Link to={href} className={'cta-link--primary cta-link--underline'} onClick={localCloseSidebars}>
-              {learningPath.title}
-            </Link>
+            {learningPath.title}
           </h3>
           {learningPath.isBasedOn ? <IsBasedOn path={learningPath} /> : '' }
+        </div>
+        <div className="learningpath-contributors">
+          <LearningPathContributors copyright={learningPath.copyright} />
         </div>
         <div className="learningpath-general-info_b">
           <div className="border-box_wrapper">

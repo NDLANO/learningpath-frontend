@@ -13,9 +13,10 @@ const entry = [
   'ndla-learningpath-styleguide/assets/style.css',
   'ndla-learningpath-styleguide/assets/favicon.ico',
   'ndla-learningpath-styleguide/assets/symbol-defs.svg',
+  'ndla-learningpath-styleguide/assets/learningpath.jpg',
 ];
 
-module.exports = (options) => ({
+module.exports = options => ({
   entry: options.entry.concat(entry),
 
   output: Object.assign({ // Compile into htdocs/assets
