@@ -17,25 +17,42 @@ export const setEmbedResults = createAction('SET_EMBED_RESULTS');
 export const removeEmbedPreview = createAction('REMOVE_EMBED_PREVIEW');
 export const changeEmbedSearchQuery = createAction('CHANGE_EMBED_SEARCH_QUERY');
 
-export function fetchEmbedSearch(query) {
+function fetchEmbedSearch(query, type) {
   return (dispatch, getState) => fetchGoogleContent(query)
     .then((result) => {
-      dispatch(setEmbedResults(result));
+      dispatch(setEmbedResults({ type, result }));
     })
     .then(() => {
-      const updatedQuery = Object.assign({}, query, { numberOfPages: getNumberOfPages(getState()) });
-      dispatch(changeEmbedSearchQuery(updatedQuery));
+      const updatedQuery = Object.assign({}, query, { numberOfPages: getNumberOfPages(getState(), type) });
+      dispatch(changeEmbedSearchQuery({ type, query: updatedQuery }));
     })
     .catch(err => dispatch(applicationError(err)));
 }
 
-export function fetchOembed(url, lang) {
+export function fetchExternalEmbedSearch(query) {
+  return fetchEmbedSearch(query, 'external');
+}
+
+export function fetchNdlaEmbedSearch(query) {
+  return fetchEmbedSearch(query, 'ndla');
+}
+
+
+function fetchOembed(url, lang, type) {
   return (dispatch, getState) => fetchOembedUrl(getState().authToken, { url })
     .then((oembed) => {
-      dispatch(setEmbedPreview(Object.assign({}, oembed, { url, language: lang })));
+      dispatch(setEmbedPreview({ type, oembedContent: Object.assign({}, oembed, { url, language: lang }) }));
     })
     .catch((err) => {
-      dispatch(setEmbedPreview({ error: true }));
+      dispatch(setEmbedPreview({ type, oembedContent: { error: true, url } }));
       dispatch(applicationError(err));
     });
+}
+
+export function fetchExternalOembed(url, lang) {
+  return fetchOembed(url, lang, 'external');
+}
+
+export function fetchNdlaOembed(url, lang) {
+  return fetchOembed(url, lang, 'ndla');
 }

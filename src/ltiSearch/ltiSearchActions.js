@@ -8,7 +8,7 @@ function ltiForm(filter) {
       <input name="ext_content_intended_use" type="hidden" value="embed" />
     </form>`;
 }
-export function onFilterClick(filter = undefined) {
+export function changeIframeContent(filter = undefined) {
   if (filter) {
     const frameDiv = document.getElementById('ltiiframewrapper');
     const iframe = frameDiv.getElementsByTagName('iframe')[0];

@@ -43,7 +43,7 @@ const fetchGoogleContent = (query) => {
   const params = {
     key: apiEmbedKey,
     cx: apiEmbedEngingeId,
-    q: `${query.textQuery} ${query.filter}`,
+    q: `${query.textQuery} ${query.filter.key}`,
     start: query.start ? query.start : undefined,
   };
   url += `?${queryString.stringify(params)}`;

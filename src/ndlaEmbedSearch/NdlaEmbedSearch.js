@@ -7,17 +7,19 @@
  */
 
 import React, { PropTypes } from 'react';
-import classNames from 'classnames';
 import { connect } from 'react-redux';
+import classNames from 'classnames';
 import get from 'lodash/get';
-import * as actions from './embedSearchActions';
-import EmbedSearchResults from './EmbedSearchResults';
-import EmbedSearchForm from './EmbedSearchForm';
-import EmbedSearchPreview from './EmbedSearchPreview';
-import { getEmbedResultFromState, getEmbedQueryFromState, getOembedContentFromState } from './embedSearchSelectors';
+import EmbedSearchForm from '../embedSearch/EmbedSearchForm';
+import * as actions from '../embedSearch/embedSearchActions';
+import EmbedSearchResults from '../embedSearch/EmbedSearchResults';
+import EmbedSearchPreview from '../embedSearch/EmbedSearchPreview';
+import { getEmbedResultFromState, getEmbedQueryFromState, getOembedContentFromState } from '../embedSearch/embedSearchSelectors';
 import polyglot from '../i18n';
 
-class EmbedSearch extends React.Component {
+const searchType = 'ndla';
+
+class NdlaEmbedSearch extends React.Component {
   constructor(props) {
     super(props);
 
@@ -33,7 +35,7 @@ class EmbedSearch extends React.Component {
     this.handleTextQueryChange = this.handleTextQueryChange.bind(this);
   }
   componentWillMount() {
-    this.props.localFetchEmbedSearch(this.props.query);
+    this.props.localFetchEmbedSearch(this.props.query, 'ndla');
   }
   onImageLightboxClose() {
     this.props.removeOembed();
@@ -45,22 +47,20 @@ class EmbedSearch extends React.Component {
   }
   previewOembed(evt, item) {
     evt.preventDefault();
-    this.props.localFetchOembed(item.link, this.context.lang);
+    this.props.localFetchOembed(item.link, this.context.lang, searchType);
     this.setState({ oembedDisplay: true });
   }
-  addEmbedResult(evt, item) {
+  addEmbedResult(evt, url) {
     evt.preventDefault();
-    this.props.urlOnBlur(item.link);
+    this.props.urlOnBlur(url, 'oembed');
     this.setState({ active: false });
   }
   handleTextQueryChange(evt) {
     this.setState({ textQuery: evt.target.value });
   }
 
-
   render() {
     const { result, localFetchEmbedSearch, oembedPreview, query } = this.props;
-    const { lang: language } = this.context;
     const containerClass = {
       'embed-search_container': true,
       'embed-search_container--active': this.state.active,
@@ -70,8 +70,11 @@ class EmbedSearch extends React.Component {
 
     return (
       <div>
-        <button className="button button--primary button--block embed-search_open-button" onClick={this.toggleGoogleCustomSearch}>{polyglot.t('embedSearch.button')}</button>
+        <button className="button button--primary button--block embed-search_open-button" onClick={this.toggleGoogleCustomSearch}>
+          {polyglot.t('embedSearch.ndlaButton')}
+        </button>
         <div className={classNames(containerClass)}>
+          <h4>{polyglot.t('embedSearch.form.ndlaTitle')}</h4>
           <EmbedSearchForm
             query={query}
             handleTextQueryChange={this.handleTextQueryChange}
@@ -85,38 +88,35 @@ class EmbedSearch extends React.Component {
             pagerAction={localFetchEmbedSearch}
             query={query}
           />
-          <EmbedSearchPreview oembedPreview={oembedPreview} oembedDisplay={this.state.oembedDisplay} onImageLightboxClose={this.onImageLightboxClose} lang={language} />
+          <EmbedSearchPreview oembedPreview={oembedPreview} oembedDisplay={this.state.oembedDisplay} onImageLightboxClose={this.onImageLightboxClose} />
         </div>
       </div>
     );
   }
 }
-const mapDispatchToProps = {
-  localFetchEmbedSearch: actions.fetchEmbedSearch,
-  localFetchOembed: actions.fetchOembed,
-  removeOembed: actions.removeEmbedPreview,
-  localChangeEmbedSearchQuery: actions.changeEmbedSearchQuery,
-};
 
-const mapStateToProps = state => Object.assign({}, state, {
-  result: getEmbedResultFromState(state),
-  query: getEmbedQueryFromState(state),
-  oembedPreview: getOembedContentFromState(state),
-});
-
-EmbedSearch.propTypes = {
+NdlaEmbedSearch.propTypes = {
   localFetchEmbedSearch: PropTypes.func.isRequired,
   result: PropTypes.object.isRequired,
   localFetchOembed: PropTypes.func.isRequired,
-  oembedPreview: PropTypes.array,
+  oembedPreview: PropTypes.object,
   removeOembed: PropTypes.func.isRequired,
   urlOnBlur: PropTypes.func.isRequired,
   query: PropTypes.object.isRequired,
   localChangeEmbedSearchQuery: PropTypes.func.isRequired,
 };
 
-EmbedSearch.contextTypes = {
-  lang: PropTypes.string.isRequired,
+const mapDispatchToProps = {
+  localFetchEmbedSearch: actions.fetchNdlaEmbedSearch,
+  localFetchOembed: actions.fetchNdlaOembed,
+  removeOembed: actions.removeEmbedPreview,
+  localChangeEmbedSearchQuery: actions.changeEmbedSearchQuery,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EmbedSearch);
+const mapStateToProps = state => Object.assign({}, state, {
+  result: getEmbedResultFromState(state, searchType),
+  query: getEmbedQueryFromState(state, searchType),
+  oembedPreview: getOembedContentFromState(state, searchType),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NdlaEmbedSearch);

@@ -8,8 +8,8 @@
 
 import { createSelector } from 'reselect';
 
-const getTotalResultsFromState = (state) => {
-  const result = state.embedSearch.result;
+const getTotalResultsFromState = (state, type) => {
+  const result = state.embedSearch[type].result;
   return result.queries.request ? result.queries.request[0].totalResults : undefined;
 };
 
@@ -18,8 +18,8 @@ export const getNumberOfPages = createSelector(
   totalResults => (totalResults ? totalResults / 10 : 1)
 );
 
-export const getEmbedResultFromState = state => state.embedSearch.result;
+export const getEmbedResultFromState = (state, type) => state.embedSearch[type].result;
 
-export const getEmbedQueryFromState = state => state.embedSearch.query;
+export const getEmbedQueryFromState = (state, type) => state.embedSearch[type].query;
 
-export const getOembedContentFromState = state => state.embedSearch.oembedContent;
+export const getOembedContentFromState = (state, type) => state.embedSearch[type].oembedContent;
