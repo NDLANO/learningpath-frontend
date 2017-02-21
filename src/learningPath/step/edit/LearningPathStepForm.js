@@ -83,7 +83,7 @@ const mapStateToProps = (state, props) => ({
     showTitle: defined(props.step.showTitle, false),
     title: props.step.title,
     description: props.step.description,
-    url: { url: defined(props.step.embedUrl.url, ''), embedType: props.step.embedUrl.embedType },
+    url: { url: defined(props.step.embedUrl.url, ''), embedType: defined(props.step.embedUrl.embedType, 'oembed') },
     type: props.step.type,
     license: defined(props.step.license, ''),
   },
