@@ -23,6 +23,8 @@ const apiDomain = activatedForEnvironment({
 const ltiActivated = activatedForEnvironment({ test: true, local: true }, false);
 const pinterestActivated = activatedForEnvironment({ test: true, local: true }, false);
 
+const isProduction = activatedForEnvironment({ test: true, local: true, staging: true, production: true }, false);
+
 module.exports = Object.assign({
   componentName: process.env.npm_package_name,
   host: process.env.LEARINGPATH_HOST || 'localhost',
@@ -39,6 +41,7 @@ module.exports = Object.assign({
   pintrestApiUrl: process.env.PINTREST_API_URL || 'https://api.pinterest.com/v1/',
   pintrestEnabled: process.env.PINTREST_ACCESS_TOKEN !== undefined && pinterestActivated,
   ltiActivated,
+  isProduction: process.env.LEARINGPATH_HOST ? isProduction : false,
   app: {
     title: 'NDLA Læringsstier',
     head: {

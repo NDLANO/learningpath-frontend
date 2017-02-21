@@ -15,8 +15,10 @@ import Logo from '../common/Logo';
 import polyglot from '../i18n';
 import Masthead from '../common/Masthead';
 import { Wrapper, OneColumn, Footer } from '../common/Layout';
+import config from '../config';
 
-const assets = __SERVER__ ? require('../../htdocs/assets/assets') : require('../../server/developmentAssets');
+
+const assets = config.isProduction ? require('../../htdocs/assets/assets') : require('../../server/developmentAssets');
 
 class Welcome extends Component {
   constructor(props) {
