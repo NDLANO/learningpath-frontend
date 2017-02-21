@@ -26,11 +26,9 @@ class ExternalOembedSearch extends React.Component {
     this.state = {
       active: false,
       oembedDisplay: false,
-      textQuery: props.query.textQuery,
     };
     this.previewOembed = this.previewOembed.bind(this);
     this.onPreviewClose = this.onPreviewClose.bind(this);
-    this.handleTextQueryChange = this.handleTextQueryChange.bind(this);
   }
   componentWillMount() {
     this.props.localFetchEmbedSearch(this.props.query);
@@ -45,31 +43,30 @@ class ExternalOembedSearch extends React.Component {
     this.props.localFetchOembed(item.link, this.context.lang, searchType);
     this.setState({ oembedDisplay: true });
   }
-  handleTextQueryChange(evt) {
-    this.setState({ textQuery: evt.target.value });
-  }
 
   render() {
-    const { result, localFetchEmbedSearch, oembedPreview, query, addEmbedResult } = this.props;
+    const { result, localFetchEmbedSearch, oembedPreview, query, addEmbedResult, handleTextQueryChange, textQuery } = this.props;
     const oembed = oembedPreview ? <ExternalOembedPreview oembedPreview={oembedPreview} oembedDisplay={this.state.oembedDisplay} onPreviewboxClose={this.onPreviewClose} /> : '';
     const resultItems = get(result, 'items', []);
+    const emptyResult = resultItems.length === 0;
     return (
       <div className="embed-search_container embed-search_container--active">
         <h4>{polyglot.t('embedSearch.form.externalTitle')}</h4>
         <EmbedSearchForm
           query={query}
-          handleTextQueryChange={this.handleTextQueryChange}
+          handleTextQueryChange={handleTextQueryChange}
           localFetchEmbedSearch={localFetchEmbedSearch}
-          textQuery={this.state.textQuery}
+          textQuery={textQuery}
           searchType={searchType}
         />
+
         <div className="embed-search_results">
-          {resultItems.map(item =>
+          { !emptyResult ? resultItems.map(item =>
             <div key={item.cacheId} >
               <EmbedSearchResult item={item} onPreviewClick={this.previewOembed} addEmbedResult={addEmbedResult} />
               {oembedPreview && oembedPreview.url === item.link ? oembed : ''}
             </div>
-          )}
+          ) : <p>{polyglot.t('embedSearch.results.noResults')}</p>}
           <EmbedSearchPager query={query} pagerAction={localFetchEmbedSearch} />
         </div>
       </div>
@@ -86,6 +83,8 @@ ExternalOembedSearch.propTypes = {
   query: PropTypes.object.isRequired,
   localChangeEmbedSearchQuery: PropTypes.func.isRequired,
   addEmbedResult: PropTypes.func.isRequired,
+  handleTextQueryChange: PropTypes.func.isRequired,
+  textQuery: PropTypes.string.isRequired,
 };
 
 ExternalOembedSearch.contextTypes = {

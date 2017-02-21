@@ -16,8 +16,7 @@ import OneLineEditor from '../../../common/editors/OneLineEditor';
 import ObjectSelector from '../../../common/form/ObjectSelector';
 import PreviewOembed from '../oembed/PreviewOembed';
 import LearningPathStepIcon from '../LearningPathStepIcon';
-import NdlaEmbedSearch from '../../../ndlaEmbedSearch/NdlaEmbedSearch';
-import ExternalEmbedSearch from '../../../externalEmbedSearch/ExternalEmbedSearch';
+import LearningPathStepEmbed from './LearningPathStepEmbed';
 
 const LearningPathStepFields = (props) => {
   const {
@@ -93,8 +92,7 @@ const LearningPathStepFields = (props) => {
       </div>
       <DescriptionHTMLEditor input={description.input} lang={lang} onBlur={handleDescriptionBlur} />
       <div className="learning-step-form_group">
-        <ExternalEmbedSearch learningPathId={learningPathId} stepId={step.id} urlOnBlur={handleEmbedUrlChange} />
-        <NdlaEmbedSearch urlOnBlur={handleEmbedUrlChange} />
+        <LearningPathStepEmbed learningPathId={learningPathId} step={step} handleEmbedUrlChange={handleEmbedUrlChange} />
         <div className="learningsource-form">
           <div>
             <label className="mediatype-menu__label" htmlFor="url">{polyglot.t('editPathStep.urlLabel')}</label>

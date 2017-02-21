@@ -34,6 +34,7 @@ const EmbedSearchForm = ({ localFetchEmbedSearch, handleTextQueryChange, query, 
         onChange={handleTextQueryChange}
         onKeyPress={onKeyPress}
         placeholder={polyglot.t('embedSearch.form.placeholder')}
+        value={textQuery}
       />
       <button className="search-form_btn--gray" onClick={submitEmbedSearch}><Icon.Search /></button>
     </div>

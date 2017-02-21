@@ -11,14 +11,14 @@ import LTISearch from '../ltiSearch/LTISearch';
 import ExternalOembedSearch from './ExternalOembedSearch';
 
 const ExternalEmbedSearchContainer = (props) => {
-  const { currentFilter, learningPathId, addEmbedResult } = props;
+  const { currentFilter, learningPathId, addEmbedResult, handleTextQueryChange, textQuery } = props;
   if (currentFilter.type === 'lti') {
     return (
       <LTISearch filter={currentFilter} addEmbedResult={addEmbedResult} learningPathId={learningPathId} />
     );
   }
   return (
-    <ExternalOembedSearch addEmbedResult={addEmbedResult} />
+    <ExternalOembedSearch addEmbedResult={addEmbedResult} handleTextQueryChange={handleTextQueryChange} textQuery={textQuery} />
   );
 };
 
@@ -26,6 +26,8 @@ ExternalEmbedSearchContainer.propTypes = {
   currentFilter: PropTypes.object.isRequired,
   learningPathId: PropTypes.number.isRequired,
   addEmbedResult: PropTypes.func.isRequired,
+  handleTextQueryChange: PropTypes.func.isRequired,
+  textQuery: PropTypes.string.isRequired,
 };
 
 export default ExternalEmbedSearchContainer;

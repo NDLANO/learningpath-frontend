@@ -15,7 +15,10 @@ const getTotalResultsFromState = (state, type) => {
 
 export const getNumberOfPages = createSelector(
   [getTotalResultsFromState],
-  totalResults => (totalResults ? totalResults / 10 : 1)
+  (totalResults) => {
+    const numberOfPages = (totalResults ? Math.ceil(totalResults / 10) : 1);
+    return numberOfPages > 10 ? 10 : numberOfPages;
+  }
 );
 
 export const getEmbedResultFromState = (state, type) => state.embedSearch[type].result;
