@@ -28,23 +28,20 @@ class NdlaEmbedSearch extends React.Component {
       oembedDisplay: false,
       textQuery: props.query.textQuery,
     };
-    this.toggleGoogleCustomSearch = this.toggleGoogleCustomSearch.bind(this);
     this.previewOembed = this.previewOembed.bind(this);
-    this.onImageLightboxClose = this.onImageLightboxClose.bind(this);
     this.addEmbedResult = this.addEmbedResult.bind(this);
     this.handleTextQueryChange = this.handleTextQueryChange.bind(this);
+    this.onImageLightboxClose = this.onImageLightboxClose.bind(this);
   }
   componentWillMount() {
     this.props.localFetchEmbedSearch(this.props.query, 'ndla');
   }
+
   onImageLightboxClose() {
-    this.props.removeOembed();
+    this.props.removeOembed({ type: 'ndla' });
     this.setState({ oembedDisplay: false });
   }
-  toggleGoogleCustomSearch(evt) {
-    evt.preventDefault();
-    this.setState({ active: !this.state.active });
-  }
+
   previewOembed(evt, item) {
     evt.preventDefault();
     this.props.localFetchOembed(item.link, this.context.lang, searchType);
@@ -53,26 +50,23 @@ class NdlaEmbedSearch extends React.Component {
   addEmbedResult(evt, url) {
     evt.preventDefault();
     this.props.urlOnBlur(url, 'oembed');
-    this.setState({ active: false });
+    this.props.toggleNdlaDisplay(evt);
   }
   handleTextQueryChange(evt) {
     this.setState({ textQuery: evt.target.value });
   }
 
   render() {
-    const { result, localFetchEmbedSearch, oembedPreview, query } = this.props;
+    const { result, localFetchEmbedSearch, oembedPreview, query, display } = this.props;
     const containerClass = {
       'embed-search_container': true,
-      'embed-search_container--active': this.state.active,
+      'embed-search_container--active': display,
     };
 
     const resultItems = get(result, 'items', []);
 
     return (
       <div>
-        <button className="button button--primary button--block embed-search_open-button" onClick={this.toggleGoogleCustomSearch}>
-          {polyglot.t('embedSearch.ndlaButton')}
-        </button>
         <div className={classNames(containerClass)}>
           <h4>{polyglot.t('embedSearch.form.ndlaTitle')}</h4>
           <EmbedSearchForm
@@ -104,6 +98,8 @@ NdlaEmbedSearch.propTypes = {
   urlOnBlur: PropTypes.func.isRequired,
   query: PropTypes.object.isRequired,
   localChangeEmbedSearchQuery: PropTypes.func.isRequired,
+  display: PropTypes.bool.isRequired,
+  toggleNdlaDisplay: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = {

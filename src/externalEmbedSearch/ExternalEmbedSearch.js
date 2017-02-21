@@ -13,62 +13,58 @@ import ExternalEmbedSearchContainer from './ExternalEmbedSearchContainer';
 import Lightbox from '../common/Lightbox';
 import * as actions from '../embedSearch/embedSearchActions';
 import { getEmbedResultFromState, getEmbedQueryFromState, getOembedContentFromState } from '../embedSearch/embedSearchSelectors';
-import polyglot from '../i18n';
 
 class ExternalEmbedSearch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: false,
+      type: props.query,
       filter: props.query.filter,
-
+      textQuery: props.query.textQuery,
     };
-    this.displayExternalSearch = this.displayExternalSearch.bind(this);
     this.onFilterChange = this.onFilterChange.bind(this);
-    this.closeExternalSearch = this.closeExternalSearch.bind(this);
     this.addEmbedResult = this.addEmbedResult.bind(this);
+    this.handleTextQueryChange = this.handleTextQueryChange.bind(this);
   }
+
+  componentWillMount() {
+    if (this.state.filter.type === 'oembed') {
+      this.props.localFetchEmbedSearch(Object.assign({}, this.props.query, { page: 1, start: 1, filter: this.state.filter, textQuery: '' }));
+    }
+  }
+
   onFilterChange(evt, filter) {
     evt.preventDefault();
-    this.setState({ filter });
+    this.setState({ filter, textQuery: '' });
     if (filter.type === 'oembed') {
-      this.props.localFetchEmbedSearch(Object.assign({}, this.props.query, { filter, textQuery: '' }));
+      this.props.localFetchEmbedSearch(Object.assign({}, this.props.query, { page: 1, start: 1, filter, textQuery: '' }));
     }
+  }
+
+  handleTextQueryChange(evt) {
+    this.setState({ textQuery: evt.target.value });
   }
 
   addEmbedResult(evt, url) {
     evt.preventDefault();
     this.props.urlOnBlur(url, this.state.filter.type);
-    this.setState({ active: false });
-  }
-
-  displayExternalSearch(evt) {
-    evt.preventDefault();
-    this.setState({ active: true });
-  }
-  closeExternalSearch() {
-    this.setState({ active: false });
-    this.props.removeOembed({ type: 'external' });
+    this.props.handleDisplayClose();
   }
 
   render() {
-    const { learningPathId, stepId } = this.props;
-
+    const { learningPathId, stepId, handleDisplayClose, display } = this.props;
     return (
-      <div>
-        <button className="button button--primary button--block embed-search_open-button" onClick={this.displayExternalSearch}>
-          {polyglot.t('embedSearch.externalButton')}
-        </button>
-        <div className="big-lightbox_wrapper big-lightbox_wrapper--scroll">
-          <Lightbox display={this.state.active} onClose={this.closeExternalSearch}>
-            <ExternalEmbedSearchFilter currentFilter={this.state.filter} onFilterChange={this.onFilterChange} learningPathId={learningPathId} stepId={stepId} />
-            <ExternalEmbedSearchContainer
-              currentFilter={this.state.filter}
-              learningPathId={learningPathId}
-              addEmbedResult={this.addEmbedResult}
-            />
-          </Lightbox>
-        </div>
+      <div className="big-lightbox_wrapper big-lightbox_wrapper--scroll">
+        <Lightbox display={display} onClose={handleDisplayClose}>
+          <ExternalEmbedSearchFilter currentFilter={this.state.filter} onFilterChange={this.onFilterChange} learningPathId={learningPathId} stepId={stepId} />
+          <ExternalEmbedSearchContainer
+            currentFilter={this.state.filter}
+            learningPathId={learningPathId}
+            addEmbedResult={this.addEmbedResult}
+            textQuery={this.state.textQuery}
+            handleTextQueryChange={this.handleTextQueryChange}
+          />
+        </Lightbox>
       </div>
     );
   }
@@ -81,6 +77,8 @@ ExternalEmbedSearch.propTypes = {
   localFetchEmbedSearch: PropTypes.func.isRequired,
   query: PropTypes.object.isRequired,
   removeOembed: PropTypes.func.isRequired,
+  handleDisplayClose: PropTypes.func.isRequired,
+  display: PropTypes.bool.isRequired,
 };
 const mapStateToProps = state => Object.assign({}, state, {
   result: getEmbedResultFromState(state, 'external'),
