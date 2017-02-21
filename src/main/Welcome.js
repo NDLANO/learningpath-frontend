@@ -16,6 +16,8 @@ import polyglot from '../i18n';
 import Masthead from '../common/Masthead';
 import { Wrapper, OneColumn, Footer } from '../common/Layout';
 
+const assets = __SERVER__ ? require('../../htdocs/assets/assets') : require('../../server/developmentAssets');
+
 class Welcome extends Component {
   constructor(props) {
     super(props);
@@ -57,7 +59,7 @@ class Welcome extends Component {
             <a href="/minside" className="hero_link cta-link cta-link-secondary cta-link--secondary-negative">{polyglot.t('welcomePage.newBtn')} »</a>
           </div>
           <div className="infoblock">
-            <img src="/assets/learningpath.jpg" alt="Placeholder" className="infoblock_img frontpage-intro_img" />
+            <img src={`/assets/${assets['learningpath.jpg']}`} alt="Placeholder" className="infoblock_img frontpage-intro_img" />
             <div className="infoblock_text">
               <h2 id="feature">{polyglot.t('welcomePage.feature1Title')}</h2>
               <p>{polyglot.t('welcomePage.feature1Content')}</p>
