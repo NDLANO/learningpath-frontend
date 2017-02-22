@@ -11,6 +11,7 @@ import { applicationError } from '../messages/messagesActions';
 import { fetchGoogleContent } from '../sources/embedSearch';
 import { fetchOembedUrl } from '../sources/learningpaths';
 import { getNumberOfPages } from './embedSearchSelectors';
+import transformHttpToHttps from '../util/urlTransformer';
 
 export const setEmbedPreview = createAction('SET_EMBED_PREVIEW');
 export const setEmbedResults = createAction('SET_EMBED_RESULTS');
@@ -20,7 +21,8 @@ export const changeEmbedSearchQuery = createAction('CHANGE_EMBED_SEARCH_QUERY');
 function fetchEmbedSearch(query, type) {
   return (dispatch, getState) => fetchGoogleContent(query)
     .then((result) => {
-      dispatch(setEmbedResults({ type, result }));
+      const newResult = (type === 'ndla') ? { ...result, items: result.items.map(item => ({ ...item, link: transformHttpToHttps(item.link) })) } : result;
+      dispatch(setEmbedResults({ type, result: newResult }));
     })
     .then(() => {
       const updatedQuery = Object.assign({}, query, { numberOfPages: getNumberOfPages(getState(), type) });
