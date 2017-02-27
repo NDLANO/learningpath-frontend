@@ -21,7 +21,7 @@ const EmbedSearchResult = ({ item, onPreviewClick, addEmbedResult }) => (
         {item.snippet}
       </p>
       <div>
-        <button onClick={evt => addEmbedResult(evt, item)} className="un-button google-custom-search_add-button">
+        <button onClick={evt => addEmbedResult(evt, item.link)} className="un-button google-custom-search_add-button">
           <Icon.Add />
           {polyglot.t('embedSearch.results.useInPath')}
         </button>

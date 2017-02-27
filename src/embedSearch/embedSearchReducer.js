@@ -8,43 +8,51 @@
 
 import { handleActions } from 'redux-actions';
 import cloneDeep from 'lodash/cloneDeep';
-import assignOrPushPropReducer from '../util/assignOrPushPropReducer';
 
-const initialState = {
+const typeBaseDefaultState = (filterKey, name, type) => ({
   result: {},
   query: {
     start: 1,
     textQuery: '',
-    filter: 'more:ndla',
+    filter: { key: filterKey, name, type },
     page: 1,
     numberOfPages: 1,
   },
-  oembedContent: [],
+  oembedContent: {},
+});
+
+const initialState = {
+  ndla: typeBaseDefaultState('more:ndla', 'NDLA', 'oembed'),
+  external: typeBaseDefaultState('more:youtube', 'Youtube', 'oembed'),
 };
 export default handleActions({
   SET_EMBED_RESULTS: {
     next(state, action) {
       const nextState = cloneDeep(state);
-      nextState.result = action.payload;
+      nextState[action.payload.type].result = action.payload.result;
       return nextState;
     },
     throw(state) { return state; },
   },
   SET_EMBED_PREVIEW: {
-    next: assignOrPushPropReducer('oembedContent'),
+    next(state, action) {
+      const nextState = cloneDeep(state);
+      nextState[action.payload.type].oembedContent = action.payload.oembedContent;
+      return nextState;
+    },
     throw(state) { return state; },
   },
   CHANGE_EMBED_SEARCH_QUERY: {
     next(state, action) {
       const nextState = cloneDeep(state);
-      nextState.query = action.payload;
+      nextState[action.payload.type].query = action.payload.query;
       return nextState;
     },
   },
   REMOVE_EMBED_PREVIEW: {
-    next(state) {
+    next(state, action) {
       const nextState = cloneDeep(state);
-      nextState.oembedContent = undefined;
+      nextState[action.payload.type].oembedContent = {};
       return nextState;
     },
     throw(state) { return state; },

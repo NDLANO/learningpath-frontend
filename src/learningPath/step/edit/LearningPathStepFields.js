@@ -16,11 +16,7 @@ import OneLineEditor from '../../../common/editors/OneLineEditor';
 import ObjectSelector from '../../../common/form/ObjectSelector';
 import PreviewOembed from '../oembed/PreviewOembed';
 import LearningPathStepIcon from '../LearningPathStepIcon';
-import EmbedSearch from '../../../embedSearch/EmbedSearch';
-import LTISearch from '../../../ltiSearch/LTISearch';
-import config from '../../../config';
-
-const LTI_ENABLED = __SERVER__ ? config.ltiActivated : window.config.ltiActivated;
+import LearningPathStepEmbed from './LearningPathStepEmbed';
 
 const LearningPathStepFields = (props) => {
   const {
@@ -33,9 +29,9 @@ const LearningPathStepFields = (props) => {
     description,
     title,
     url,
-    embedType,
     learningPathId,
   } = props;
+
   const handleDescriptionBlur = (value) => {
     if ((!showTitle.meta.touched && !step.id)) {
       if (value.hasText()) {
@@ -46,11 +42,17 @@ const LearningPathStepFields = (props) => {
     }
     description.input.onBlur(value);
   };
-  const handleOembedUrl = (value, oembedType = 'oembed') => {
-    embedType.input.onChange(oembedType);
-    url.input.onBlur(value);
+
+  const handleEmbedUrlChange = (embedUrl, embedType = 'oembed') => {
+    url.input.onBlur({ url: embedUrl, embedType });
   };
 
+  const handleUrlOnBlur = (evt) => {
+    const value = evt.target.value;
+    if (url.input.value.url !== value) {
+      url.input.onBlur({ url: value, embedType: 'oembed' });
+    }
+  };
   return (
     <div>
       <div className="learning-step-form_group">
@@ -90,13 +92,11 @@ const LearningPathStepFields = (props) => {
       </div>
       <DescriptionHTMLEditor input={description.input} lang={lang} onBlur={handleDescriptionBlur} />
       <div className="learning-step-form_group">
-        <EmbedSearch urlOnBlur={handleOembedUrl} />
-        { LTI_ENABLED ? <LTISearch stepId={step.id} learningPathId={learningPathId} embedTypeOnBlur={embedType.input.onBlur} urlOnBlur={url.input.onBlur} /> : '' }
-        <input {...embedType.input} type="hidden" />
+        <LearningPathStepEmbed learningPathId={learningPathId} step={step} handleEmbedUrlChange={handleEmbedUrlChange} />
         <div className="learningsource-form">
           <div>
             <label className="mediatype-menu__label" htmlFor="url">{polyglot.t('editPathStep.urlLabel')}</label>
-            <input {...url.input} onChange={handleOembedUrl} placeholder={polyglot.t('editPathStep.urlPlaceholder')} type="url" />
+            <input name="url" onBlur={handleUrlOnBlur} onChange={handleUrlOnBlur} value={url.input.value.url} placeholder={polyglot.t('editPathStep.urlPlaceholder')} type="url" />
             {url.meta.touched && url.meta.error && <span className="error_message error_message--red">{url.meta.error}</span>}
             <PreviewOembed content={oembedPreview} />
           </div>
@@ -120,7 +120,6 @@ LearningPathStepFields.propTypes = {
   url: PropTypes.object.isRequired,
   title: PropTypes.object.isRequired,
   learningPathId: PropTypes.number.isRequired,
-  embedType: PropTypes.object.isRequired,
 };
 
 export default LearningPathStepFields;

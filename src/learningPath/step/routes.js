@@ -34,7 +34,7 @@ export default function (store, ifAuthenticated) {
         path=":stepId/edit(/)" component={requireAuthentication(EditLearningPathStep)}
       />
       <Route
-        path=":stepId" components={{ main: LearningPathStep, addStepButton: AddLearningPathStepButton, saveButtons: LearningPathToCButtons }}
+        path=":stepId" components={{ main: LearningPathStep, addStepButton: AddLearningPathStepButton, changeStatusButton: LearningPathToCButtons }}
       />
     </Route>
   );

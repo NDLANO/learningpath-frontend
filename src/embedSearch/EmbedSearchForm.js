@@ -9,7 +9,6 @@
 import React, { PropTypes } from 'react';
 import Icon from '../common/Icon';
 import polyglot from '../i18n';
-import EmbedSearchFilter from './EmbedSearchFilter';
 
 const EmbedSearchForm = ({ localFetchEmbedSearch, handleTextQueryChange, query, textQuery }) => {
   const submitEmbedSearch = (evt) => {
@@ -30,15 +29,14 @@ const EmbedSearchForm = ({ localFetchEmbedSearch, handleTextQueryChange, query, 
 
   return (
     <div className="embed-search_form">
-      <h4>{polyglot.t('embedSearch.form.title')}</h4>
       <input
         type="text" className="search-form_query--gray"
         onChange={handleTextQueryChange}
         onKeyPress={onKeyPress}
         placeholder={polyglot.t('embedSearch.form.placeholder')}
+        value={textQuery}
       />
       <button className="search-form_btn--gray" onClick={submitEmbedSearch}><Icon.Search /></button>
-      <EmbedSearchFilter query={query} localFetchEmbedSearch={localFetchEmbedSearch} textQuery={textQuery} />
     </div>
   );
 };

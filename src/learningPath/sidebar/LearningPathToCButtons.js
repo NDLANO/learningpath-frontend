@@ -14,7 +14,7 @@ import { closeSidebars } from '../../common/sidebarActions';
 import { getI18nLearningPath } from '../learningPathSelectors';
 import { learningPathStatuses } from '../../util/learningPathStatuses';
 
-export function LearningPathToCButtons({ learningPath, updatePathStatus, localCloseSidebars }) {
+export const LearningPathToCButtons = ({ learningPath, updatePathStatus, localCloseSidebars }) => {
   if (!learningPath.canEdit) {
     return null;
   }
@@ -34,7 +34,7 @@ export function LearningPathToCButtons({ learningPath, updatePathStatus, localCl
       )}
     </div>
   );
-}
+};
 
 LearningPathToCButtons.propTypes = {
   learningPath: PropTypes.object.isRequired,

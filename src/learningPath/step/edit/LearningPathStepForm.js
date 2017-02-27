@@ -38,7 +38,7 @@ const LearningPathStepForm = (props) => {
     <form onSubmit={handleSubmit} className="learning-step-form">
       <div className="learning-step-form_group">
         <Fields
-          names={['type', 'title', 'showTitle', 'url', 'description', 'embedType']}
+          names={['type', 'title', 'showTitle', 'url', 'description']}
           component={LearningPathStepFields}
           step={step}
           learningPathId={learningPathId}
@@ -83,10 +83,9 @@ const mapStateToProps = (state, props) => ({
     showTitle: defined(props.step.showTitle, false),
     title: props.step.title,
     description: props.step.description,
-    url: props.step.embedUrl.url,
+    url: { url: defined(props.step.embedUrl.url, ''), embedType: defined(props.step.embedUrl.embedType, 'oembed') },
     type: props.step.type,
     license: defined(props.step.license, ''),
-    embedType: props.step.embedUrl.embedType,
   },
 });
 
@@ -97,7 +96,7 @@ const mapDispatchToProps = {
 
 const asyncValidate = (values, dispatch, props) => {
   const { validateOembedUrl, lang } = props;
-  return validateOembedUrl(values.url, lang, values.embedType);
+  return validateOembedUrl(values.url.url, lang, values.url.embedType);
 };
 
 const validate = createValidator({
