@@ -62,14 +62,17 @@ export function fetchLearningPathStep(pathId, stepId, isEdit = false) {
 
     return fetchPathStep(authToken, { pathId, stepId })
       .then((step) => {
+        dispatch(setLearningPathStep(step));
+        canAccessLearningPathStep(pathId, step, isEdit, dispatch);
+        return step;
+      })
+      .then((step) => {
         if (step.embedUrl) {
           const oembedContent = oembedContentI18N(step, locale, true);
           if (oembedContent && oembedContent.url) {
             dispatch(fetchOembed({ url: oembedContent.url, embedType: oembedContent.embedType, maxwidth: Math.ceil(window.innerWidth) }));
           }
         }
-        dispatch(setLearningPathStep(step));
-        canAccessLearningPathStep(pathId, step, isEdit, dispatch);
       })
     .catch((err) => {
       if (err.status === 404) {
