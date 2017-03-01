@@ -7,7 +7,18 @@
  */
 
 import startsWith from 'lodash/startsWith';
+import endsWith from 'lodash/endsWith';
 
-export default function transformHttpToHttps(url) {
+
+export function removeSlashOembed(url) {
+  return endsWith(url, '/oembed') ? url.replace('/oembed', '') : url;
+}
+export function transformHttpToHttps(url) {
   return startsWith(url, 'http:') ? `https${url.substring(4, url.length)}` : url;
+}
+
+export function transformNdlaUrl(url) {
+  let newUrl = transformHttpToHttps(url);
+  newUrl = removeSlashOembed(newUrl);
+  return newUrl;
 }
