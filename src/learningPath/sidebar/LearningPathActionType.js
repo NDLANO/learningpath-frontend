@@ -13,13 +13,13 @@ import polyglot from '../../i18n';
 
 const LearningPathActionType = ({ authenticated, learningPath, onCopyLearningPathClick, localCloseSidebars, hasChangeStatusButton }) => {
   const buttonClassName = classNames({
-    'cta-link cta-link--block': true,
+    'cta-link cta-link--primary-outline cta-link--block': true,
     'learningpath-action-type_button': hasChangeStatusButton,
   });
   if (learningPath.canEdit) {
     return <Link className={buttonClassName} to={`/learningpaths/${learningPath.id}/edit`} onClick={localCloseSidebars}>{polyglot.t('editPage.edit')}</Link>;
   } else if (authenticated) {
-    return <button className="cta-link cta-link--block copy-learningpath_button" onClick={onCopyLearningPathClick}>{polyglot.t('copyLearningPath.createCopy')}</button>;
+    return <button className="cta-link cta-link--primary-outline cta-link--block copy-learningpath_button" onClick={onCopyLearningPathClick}>{polyglot.t('copyLearningPath.createCopy')}</button>;
   }
   return null;
 };

@@ -48,7 +48,7 @@ class LearningPathStepEmbed extends React.Component {
     return (
       <div className="learning-step-embed_group">
         <div className="button-group button-group--square button-group--block">
-          <button className="button--primary-white-hover" onClick={this.toggleNdlaDisplay}>{polyglot.t('embedSearch.ndlaButton')}</button>
+          <button className="button--primary-outline" onClick={this.toggleNdlaDisplay}>{polyglot.t('embedSearch.ndlaButton')}</button>
           <button className="button--primary-outline" onClick={this.handleExternalDisplayOpen}>{polyglot.t('embedSearch.externalButton')}</button>
         </div>
         <ExternalEmbedSearch
