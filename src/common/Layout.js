@@ -21,16 +21,16 @@ export const Footer = () =>
     </form>
     <ul className="footer_list footer--bold">
       <li className="footer_item">
-        <a href="http://om.ndla.no/" className="footer_link">{polyglot.t('footer.aboutNDLA')}</a>
+        <a href="https://om.ndla.no/" className="footer_link">{polyglot.t('footer.aboutNDLA')}</a>
       </li>
       <li className="footer_item">
-        <a href="http://om.ndla.no/" className="footer_link">{polyglot.t('footer.aboutLearningPath')}</a>
+        <a href="https://om.ndla.no/" className="footer_link">{polyglot.t('footer.aboutLearningPath')}</a>
       </li>
       <li className="footer_item">
-        <a href="http://om.ndla.no/" className="footer_link">{polyglot.t('footer.feedback')}</a>
+        <a href="https://om.ndla.no/" className="footer_link">{polyglot.t('footer.feedback')}</a>
       </li>
       <li className="footer_item">
-        <a href="http://om.ndla.no/" className="footer_link">{polyglot.t('footer.privacy')}</a>
+        <a href="https://om.ndla.no/" className="footer_link">{polyglot.t('footer.privacy')}</a>
       </li>
     </ul>
     <div className="footer_ruler" />
