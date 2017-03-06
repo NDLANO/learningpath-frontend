@@ -58,7 +58,6 @@ const LearningPathForm = (props) => {
     lang,
     localFetchImages,
     fetchImage,
-    licenseOptions,
     formValues,
   } = props;
 
@@ -92,11 +91,6 @@ const LearningPathForm = (props) => {
         <div className="learningPath-contributors">
           <label htmlFor="license" className="label--medium-bold  label--medium">{polyglot.t('learningPath.copyright.contributors')}</label>
           <Field name="contributors" component={Contributors} id="contributors" />
-        </div>
-
-        <div className="learningPath-copyright">
-          <label htmlFor="license" className="label--medium-bold  label--medium">{polyglot.t('learningPath.copyright.license')}</label>
-          <Field name="license" component={ObjectSelector} idKey="license" labelKey="description" options={licenseOptions} />
         </div>
 
         <div className="block-container_fixed block-container_fixed--bottom--right">

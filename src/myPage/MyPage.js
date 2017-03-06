@@ -9,7 +9,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import get from 'lodash/get';
 import { deleteLearningPath, createLearningPath, copyLearningPath, updateLearningPathsStatus } from '../learningPath/learningPathActions';
 import Icon from '../common/Icon';
 import LabeledIcon from '../common/LabeledIcon';
@@ -21,7 +20,6 @@ import Lightbox from '../common/Lightbox';
 import Masthead from '../common/Masthead';
 import CreateLearningPath from '../learningPath/new/CreateLearningPath';
 import { Wrapper, OneColumn, Footer } from '../common/Layout';
-import { fetchLearningPathLicensesIfNeeded } from '../learningPath/edit/copyright/learningPathLicensesActions';
 import { setMyLearningPathsSortOrder, fetchMyLearningPaths } from './myPageActions';
 import { getI18NLearningPaths, getSortKey } from './myPageSelectors';
 
@@ -36,8 +34,7 @@ export class MyPage extends React.Component {
   }
 
   componentDidMount() {
-    const { fetchLearninigPathLicenses, localFetchMyLearningPaths } = this.props;
-    fetchLearninigPathLicenses('by');
+    const { localFetchMyLearningPaths } = this.props;
     localFetchMyLearningPaths();
   }
 
@@ -48,7 +45,7 @@ export class MyPage extends React.Component {
   }
 
   render() {
-    const { learningPaths, sortKey, setSortKey, deletePath, updatePathStatus, createPath, copyPath, licenses } = this.props;
+    const { learningPaths, sortKey, setSortKey, deletePath, updatePathStatus, createPath, copyPath } = this.props;
     const { lang } = this.context;
     const items = learningPaths.map((lp) => {
       const duration = formatDuration(lp.duration, lang);
@@ -115,7 +112,7 @@ export class MyPage extends React.Component {
         description: [{ description: values.description, language: lang }],
         duration: 1,
         coverPhoto: { url: '', metaUrl: '' },
-        copyright: { license: values.license ? values.license : licenses[0], contributors: [] },
+        copyright: { license: undefined, contributors: [] },
       });
     };
 
@@ -136,7 +133,7 @@ export class MyPage extends React.Component {
             <LabeledIcon.Add labelText={polyglot.t('myPage.newBtn')} />
           </button>
           <Lightbox display={this.state.displayCreatePath} onClose={onLightboxClose}>
-            <CreateLearningPath onSubmit={onCreateLearningPathSubmit} licenseOptions={licenses} />
+            <CreateLearningPath onSubmit={onCreateLearningPathSubmit} />
           </Lightbox>
         </OneColumn>
         <Footer />
@@ -153,9 +150,7 @@ MyPage.propTypes = {
   createPath: PropTypes.func.isRequired,
   learningPaths: PropTypes.array,
   copyPath: PropTypes.func.isRequired,
-  fetchLearninigPathLicenses: PropTypes.func.isRequired,
   localFetchMyLearningPaths: PropTypes.func.isRequired,
-  licenses: PropTypes.array.isRequired,
 };
 
 MyPage.defaultProps = { learningPaths: [], sortKey: 'title' };
@@ -167,9 +162,8 @@ MyPage.contextTypes = {
 export function mapStateToProps(state) {
   const sortKey = getSortKey(state);
   const learningPaths = getI18NLearningPaths(state);
-  const licenses = get(state, 'learningPathLicenses.creativeCommonLicenses.all', []);
 
-  return Object.assign({}, state, { learningPaths, sortKey, licenses });
+  return Object.assign({}, state, { learningPaths, sortKey });
 }
 
 const mapDispatchToProps = {
@@ -178,7 +172,6 @@ const mapDispatchToProps = {
   updatePathStatus: updateLearningPathsStatus,
   createPath: createLearningPath,
   copyPath: copyLearningPath,
-  fetchLearninigPathLicenses: fetchLearningPathLicensesIfNeeded,
   localFetchMyLearningPaths: fetchMyLearningPaths,
 };
 
