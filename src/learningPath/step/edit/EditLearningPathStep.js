@@ -21,7 +21,7 @@ import {
 import { fetchLearningPathLicensesIfNeeded } from '../../edit/copyright/learningPathLicensesActions';
 import polyglot from '../../../i18n';
 import { getI18nLearningPathStep } from '../learningPathStepSelectors';
-import { getLearningPathId } from '../../learningPathSelectors';
+import { getI18nLearningPath } from '../../learningPathSelectors';
 
 class EditLearningPathStep extends Component {
 
@@ -39,11 +39,11 @@ class EditLearningPathStep extends Component {
     const {
       step,
       saveLearningPathStep,
-      learningPathId,
+      learningPath,
       licenses,
     } = this.props;
 
-    if (!learningPathId) {
+    if (!learningPath || !learningPath.id) {
       return null;
     }
 
@@ -57,14 +57,13 @@ class EditLearningPathStep extends Component {
         embedUrl: values.url && values.url.url ? [{ url: values.url.url, language, embedType: values.url.embedType }] : [],
         license: values.license && values.license.licen ? values.license.license : '',
       });
-      return saveLearningPathStep(learningPathId, toSave);
+      return saveLearningPathStep(learningPath.id, toSave);
     };
-
     return (
       <div className="two-column_content--wide learning-path-step two-column_content--white-bg">
         <LearningPathStepForm
           step={step}
-          learningPathId={learningPathId}
+          learningPath={learningPath}
           onSubmit={handleSubmit}
           lang={language}
           licenseOptions={licenses}
@@ -81,7 +80,7 @@ EditLearningPathStep.propTypes = {
     pathId: PropTypes.string.isRequired,
     stepId: PropTypes.string,
   }).isRequired,
-  learningPathId: PropTypes.number,
+  learningPath: PropTypes.object,
   fetchLearningPathLicenses: PropTypes.func.isRequired,
   localFetchLearningPathStep: PropTypes.func.isRequired,
   licenses: PropTypes.array.isRequired,
@@ -93,7 +92,7 @@ EditLearningPathStep.contextTypes = {
 
 export const mapStateToProps = state => assign({}, state, {
   step: getI18nLearningPathStep(state),
-  learningPathId: getLearningPathId(state),
+  learningPath: getI18nLearningPath(state),
   licenses: [{ description: polyglot.t('editPathStep.noLicenseChosen'), license: undefined }].concat(get(state, 'learningPathLicenses.allLicenses.all', [])),
 });
 
