@@ -37,7 +37,9 @@ class CreateLearningPath extends React.Component {
             type="text"
             component={InputField}
             label={polyglot.t('createLearningPath.title')}
+            maxLength="75"
           />
+          <p className="learning-path_input-information">{polyglot.t('createLearningPath.titleMaxLength')}</p>
         </div>
         <div>
           <label htmlFor="description">{polyglot.t('createLearningPath.description')}</label>
