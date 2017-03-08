@@ -5,6 +5,7 @@ import config from '../../config';
 const PINTEREST_ENABLED = __SERVER__ ? config.pinterestEnabled : window.config.pinterestEnabled;
 
 const PinterestLightboxButton = ({ learningPath }) => {
+  console.log(config);
   if (!PINTEREST_ENABLED) {
     return null;
   }

@@ -48,10 +48,10 @@ const findIEClass = (userAgentString) => {
   return '';
 };
 
-app.get('/Pinterest-proxy/*', requestProxy({
+app.get('/pinterest-proxy/*', requestProxy({
   url: `${config.pinterestApiUrl}*`,
   query: {
-    access_token: process.env.Pinterest_ACCESS_TOKEN,
+    access_token: process.env.PINTEREST_ACCESS_TOKEN,
   },
 }));
 
