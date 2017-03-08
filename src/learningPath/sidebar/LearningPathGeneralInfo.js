@@ -13,7 +13,6 @@ import formatDate from '../../util/formatDate';
 import formatDuration from '../../util/formatDuration';
 import { closeSidebars } from '../../common/sidebarActions';
 import LabeledIcon from '../../common/LabeledIcon';
-import LearningPathLicense from './LearningPathLicense';
 import IsBasedOn from '../../common/IsBasedOn';
 import LearningPathActionType from './LearningPathActionType';
 import { getI18nLearningPath } from '../learningPathSelectors';
@@ -43,9 +42,6 @@ const LearningPathGeneralInfo = (props, context) => {
     <div>
       <div className="learningpath-general-info">
         <div className="learningpath-general-info_h">
-          <div className="learningpath-license">
-            <LearningPathLicense copyright={learningPath.copyright} />
-          </div>
           <h3>
             {learningPath.title}
           </h3>
