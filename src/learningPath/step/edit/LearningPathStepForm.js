@@ -28,12 +28,12 @@ const LearningPathStepForm = (props) => {
     error,
     handleSubmit,
     submitting,
-    learningPathId,
+    learningPath,
     licenseOptions,
     valid,
   } = props;
 
-  const abortUrl = step.id ? `/learningpaths/${learningPathId}/step/${step.id}` : `/learningpaths/${learningPathId}`;
+  const abortUrl = step.id ? `/learningpaths/${learningPath.id}/step/${step.id}` : `/learningpaths/${learningPath.id}`;
   return (
     <form onSubmit={handleSubmit} className="learning-step-form">
       <div className="learning-step-form_group">
@@ -41,7 +41,7 @@ const LearningPathStepForm = (props) => {
           names={['type', 'title', 'showTitle', 'url', 'description']}
           component={LearningPathStepFields}
           step={step}
-          learningPathId={learningPathId}
+          learningPathId={learningPath.id}
           error={error}
           lang={lang}
           licenseOptions={licenseOptions}
@@ -68,7 +68,7 @@ LearningPathStepForm.propTypes = {
   step: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
-  learningPathId: PropTypes.number.isRequired,
+  learningPath: PropTypes.object.isRequired,
   oembedPreview: PropTypes.object,
   validateOembedUrl: PropTypes.func.isRequired,
   licenseOptions: PropTypes.array.isRequired,
@@ -84,7 +84,7 @@ const mapStateToProps = (state, props) => ({
     title: props.step.title,
     description: props.step.description,
     url: { url: defined(props.step.embedUrl.url, ''), embedType: defined(props.step.embedUrl.embedType, 'oembed') },
-    type: props.step.type,
+    type: props.learningPath.learningsteps && props.learningPath.learningsteps.length > 0 ? props.step.type : 'INTRODUCTION',
     license: defined(props.step.license, ''),
   },
 });
