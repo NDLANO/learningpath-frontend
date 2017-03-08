@@ -37,7 +37,13 @@ class EditLearningPath extends Component {
       revision: learningPath.revision,
       duration: (values.duration.replace(/,/g, '.')) * 60,
       tags: [{ tags: values.tags, language }],
-      copyright: { contributors: !isEmpty(values.contributors) ? values.contributors : undefined },
+      copyright: {
+        license: {
+          license: 'by-sa',
+          description: 'Creative Commons Attribution-ShareAlike 2.0 Generic',
+          url: 'https://creativecommons.org/licenses/by-sa/2.0/',
+        },
+        contributors: !isEmpty(values.contributors) ? values.contributors : undefined },
       coverPhotoMetaUrl: !isEmpty(values.coverPhotoMetaUrl) ? values.coverPhotoMetaUrl : undefined,
     });
 

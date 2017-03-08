@@ -112,7 +112,7 @@ export class MyPage extends React.Component {
         description: [{ description: values.description, language: lang }],
         duration: 1,
         coverPhoto: { url: '', metaUrl: '' },
-        copyright: { license: undefined, contributors: [] },
+        copyright: { license: { license: 'by-sa', description: 'Creative Commons Attribution-ShareAlike 2.0 Generic', url: 'https://creativecommons.org/licenses/by-sa/2.0/' }, contributors: [] },
       });
     };
 
