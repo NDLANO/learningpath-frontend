@@ -9,7 +9,7 @@
 import React, { Component, PropTypes } from 'react';
 import polyglot from '../i18n';
 
-class PintrestBoardForm extends Component {
+class PinterestBoardForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,7 +35,7 @@ class PintrestBoardForm extends Component {
           type="text" className="search-form_query"
           onChange={this.handleQueryChange}
           value={this.state.boardName}
-          placeholder={polyglot.t('pintrest.form.placeholder')}
+          placeholder={polyglot.t('Pinterest.form.placeholder')}
         />
 
         <button
@@ -43,20 +43,20 @@ class PintrestBoardForm extends Component {
           className="search-form_btn"
           style={{ marginLeft: '-6.2em' }}
         >
-          {polyglot.t('pintrest.form.submit')}
+          {polyglot.t('Pinterest.form.submit')}
         </button>
       </form>
     );
   }
 }
 
-PintrestBoardForm.propTypes = {
+PinterestBoardForm.propTypes = {
   boardName: PropTypes.string,
   onBoardNameSubmit: PropTypes.func.isRequired,
 };
 
-PintrestBoardForm.defaultProps = {
+PinterestBoardForm.defaultProps = {
   boardName: '',
 };
 
-export default PintrestBoardForm;
+export default PinterestBoardForm;

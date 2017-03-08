@@ -255,10 +255,10 @@ const phrases = {
     ndlaButton: 'Search for NDLA resources',
     externalButton: 'Search for external resources',
   },
-  pintrest: {
-    importFrom: 'Get learning steps from Pintrest',
+  Pinterest: {
+    importFrom: 'Get learning steps from Pinterest',
     lightbox: {
-      heading: 'Get learning steps from Pintrest',
+      heading: 'Get learning steps from Pinterest',
     },
     form: {
       placeholder: 'username/board',

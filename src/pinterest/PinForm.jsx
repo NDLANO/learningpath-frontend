@@ -37,8 +37,8 @@ class PinForm extends Component {
       <div style={{ height: '5em' }}>
         <form onSubmit={this.handleSubmit}>
           <input id="title" type="text" style={{ width: '50%', marginRight: '1em', height: '3.5em' }} onChange={this.handleTitleChange} value={title} />
-          <button className="button button--primary" type="submit">{polyglot.t('pintrest.pinForm.create')}</button>
-          <a className="button button--outline" target="_blank" rel="noopener noreferrer" style={{ float: 'right' }} href={pin.original_link}>{polyglot.t('pintrest.pinForm.viewSource')}</a>
+          <button className="button button--primary" type="submit">{polyglot.t('Pinterest.pinForm.create')}</button>
+          <a className="button button--outline" target="_blank" rel="noopener noreferrer" style={{ float: 'right' }} href={pin.original_link}>{polyglot.t('Pinterest.pinForm.viewSource')}</a>
         </form>
       </div>
     );

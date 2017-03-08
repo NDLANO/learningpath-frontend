@@ -8,14 +8,14 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import PintrestBoardForm from './PintrestBoardForm';
+import PinterestBoardForm from './PinterestBoardForm';
 import PinForm from './PinForm';
 import { getLocale } from '../locale/localeSelectors';
 import * as learningPathStepActions from '../learningPath/step/learningPathStepActions';
-import { fetchPins } from './pintrestApi';
+import { fetchPins } from './PinterestApi';
 import polyglot from '../i18n';
 
-class PintrestImport extends Component {
+class PinterestImport extends Component {
 
   constructor(props) {
     super(props);
@@ -60,8 +60,8 @@ class PintrestImport extends Component {
     const { pins, message } = this.state;
     return (
       <div>
-        <h2>{ polyglot.t('pintrest.lightbox.heading') }</h2>
-        <PintrestBoardForm onBoardNameSubmit={this.handleBoardNameSubmit} />
+        <h2>{ polyglot.t('Pinterest.lightbox.heading') }</h2>
+        <PinterestBoardForm onBoardNameSubmit={this.handleBoardNameSubmit} />
         { message ? <div className="error_message error_message--red">{ message }</div> : null}
         { pins.map(pin => <PinForm key={pin.id} pin={pin} onCreateLearningPathStep={this.handleCreateLearningPathStep} />) }
       </div>
@@ -69,7 +69,7 @@ class PintrestImport extends Component {
   }
 }
 
-PintrestImport.propTypes = {
+PinterestImport.propTypes = {
   locale: PropTypes.string.isRequired,
   createLearningPathStep: PropTypes.func.isRequired,
   learningPath: PropTypes.object.isRequired,
@@ -83,4 +83,4 @@ const mapStateToProps = state => ({
   locale: getLocale(state),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PintrestImport);
+export default connect(mapStateToProps, mapDispatchToProps)(PinterestImport);

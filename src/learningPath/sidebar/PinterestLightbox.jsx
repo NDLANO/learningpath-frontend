@@ -8,12 +8,12 @@
 
 import React, { Component, PropTypes } from 'react';
 
-import PintrestImport from '../../pintrest/PintrestImport';
+import PinterestImport from '../../pinterest/PinterestImport';
 import Lightbox from '../../common/Lightbox';
 import polyglot from '../../i18n';
 import Button from '../../common/buttons/Button';
 
-class PintrestLightbox extends Component {
+class PinterestLightbox extends Component {
 
   constructor(props) {
     super(props);
@@ -38,18 +38,18 @@ class PintrestLightbox extends Component {
       <div>
         <br />
         <Button className="button button--primary-outline cta-link--block" onClick={this.openLightbox}>
-          {polyglot.t('pintrest.importFrom')}
+          {polyglot.t('Pinterest.importFrom')}
         </Button>
         <Lightbox display={this.state.displayLightbox} width="800px" onClose={this.closeLightbox}>
-          <PintrestImport learningPath={learningPath} />
+          <PinterestImport learningPath={learningPath} />
         </Lightbox>
       </div>
     );
   }
 }
 
-PintrestLightbox.propTypes = {
+PinterestLightbox.propTypes = {
   learningPath: PropTypes.object.isRequired,
 };
 
-export default PintrestLightbox;
+export default PinterestLightbox;

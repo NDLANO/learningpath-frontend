@@ -8,7 +8,7 @@
 
 import fetch from 'isomorphic-fetch';
 
-export const fetchPins = boardName => fetch(`/pintrest-proxy/boards/${boardName}/pins/?fields=id%2Clink%2Cnote%2Curl%2Coriginal_link`).then(res => (
+export const fetchPins = boardName => fetch(`/Pinterest-proxy/boards/${boardName}/pins/?fields=id%2Clink%2Cnote%2Curl%2Coriginal_link`).then(res => (
   new Promise((resolve, reject) => {
     if (res.ok) {
       return resolve(res.json());

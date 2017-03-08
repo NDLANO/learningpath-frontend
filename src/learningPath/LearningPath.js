@@ -20,7 +20,7 @@ import Icon from '../common/Icon';
 import SortLearningStepsButton from './sidebar/SortLearningStepsButton';
 import { fetchLearningPath, copyLearningPath } from './learningPathActions';
 import { getI18nLearningPath } from './learningPathSelectors';
-import PintrestLightboxButton from './sidebar/PintrestLightboxButton';
+import PinterestLightboxButton from './sidebar/PinterestLightboxButton';
 
 export class LearningPath extends Component {
   constructor(props) {
@@ -85,7 +85,7 @@ export class LearningPath extends Component {
             <div className="step-nav_wrapper">
               {sortableTableOfContentButton}
               {sortableTableOfContent}
-              <PintrestLightboxButton learningPath={learningPath} />
+              <PinterestLightboxButton learningPath={learningPath} />
             </div>
           </aside>
           <main className="two-column_col">
