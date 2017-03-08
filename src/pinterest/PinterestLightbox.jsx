@@ -8,10 +8,10 @@
 
 import React, { Component, PropTypes } from 'react';
 
-import PinterestImport from '../../pinterest/PinterestImport';
-import Lightbox from '../../common/Lightbox';
-import polyglot from '../../i18n';
-import Button from '../../common/buttons/Button';
+import PinterestImport from './PinterestImport';
+import Lightbox from '../common/Lightbox';
+import polyglot from '../i18n';
+import Button from '../common/buttons/Button';
 
 class PinterestLightbox extends Component {
 

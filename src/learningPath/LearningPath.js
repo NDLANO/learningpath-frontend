@@ -20,7 +20,7 @@ import Icon from '../common/Icon';
 import SortLearningStepsButton from './sidebar/SortLearningStepsButton';
 import { fetchLearningPath, copyLearningPath } from './learningPathActions';
 import { getI18nLearningPath } from './learningPathSelectors';
-import PinterestLightboxButton from './sidebar/PinterestLightboxButton';
+import PinterestLightboxButton from '../pinterest/PinterestLightboxButton';
 
 export class LearningPath extends Component {
   constructor(props) {

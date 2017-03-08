@@ -35,7 +35,7 @@ class PinterestBoardForm extends Component {
           type="text" className="search-form_query"
           onChange={this.handleQueryChange}
           value={this.state.boardName}
-          placeholder={polyglot.t('Pinterest.form.placeholder')}
+          placeholder={polyglot.t('pinterest.form.placeholder')}
         />
 
         <button
@@ -43,7 +43,7 @@ class PinterestBoardForm extends Component {
           className="search-form_btn"
           style={{ marginLeft: '-6.2em' }}
         >
-          {polyglot.t('Pinterest.form.submit')}
+          {polyglot.t('pinterest.form.submit')}
         </button>
       </form>
     );

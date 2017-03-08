@@ -254,13 +254,15 @@ const phrases = {
     externalButton: 'Søk i eksterne ressurser',
     ndlaButton: 'Søk i NDLA',
   },
-  Pinterest: {
+  interest: {
     importFrom: 'Hent læringssteg fra Pinterest',
     lightbox: {
       heading: 'Hent læringssteg fra Pinterest',
     },
     form: {
       placeholder: 'brukernavn/tavlenavn',
+      usernamePlaceholder: 'brukernavn',
+      boardPlaceholder: 'tavlenavn',
       submit: 'Hent pins',
     },
     pinForm: {

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import PinterestLightbox from './PinterestLightbox';
-import config from '../../config';
+import config from '../config';
 
 const PINTEREST_ENABLED = __SERVER__ ? config.pinterestEnabled : window.config.pinterestEnabled;
 
