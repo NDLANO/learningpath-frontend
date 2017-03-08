@@ -176,9 +176,10 @@ const phrases = {
     createdMsg: 'Saved OK',
     createNew: 'Create new learning path',
     title: 'Title',
+    titleMaxLength: 'Max 75 characters.',
     description: 'Description',
     descriptionPlaceholder: 'Write a short description for the learning path.',
-    descriptionMaxLength: 'Max 150 characters',
+    descriptionMaxLength: 'Max 150 characters.',
     createButton: 'Create new learning path',
   },
   copyLearningPath: {

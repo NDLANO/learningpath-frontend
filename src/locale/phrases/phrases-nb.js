@@ -175,9 +175,10 @@ const phrases = {
     createdMsg: 'Lagret OK',
     createNew: 'Opprett ny læringssti',
     title: 'Tittel',
+    titleMaxLength: 'Maks 75 tegn.',
     description: 'Beskrivelse',
     descriptionPlaceholder: 'Skriv en kort beskrivelse av læringsstien.',
-    descriptionMaxLength: 'Max 150 tegn',
+    descriptionMaxLength: 'Maks 150 tegn.',
     createButton: 'Opprett ny læringssti',
   },
   copyLearningPath: {

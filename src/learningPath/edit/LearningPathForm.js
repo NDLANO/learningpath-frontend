@@ -68,7 +68,16 @@ const LearningPathForm = (props) => {
       <div className="learning-path_hd">
         <h1>{polyglot.t('learningPath.pageName')}</h1>
         <div className="learning-path-input learning-path-input__title">
-          <Field name="title" id="title" component={InputField} type="text" lang={lang} label={polyglot.t('learningPath.title')} labelClassName="label--medium-bold label--medium" />
+          <Field
+            name="title"
+            id="title"
+            component={InputField}
+            type="text" lang={lang}
+            label={polyglot.t('learningPath.title')}
+            labelClassName="label--medium-bold label--medium"
+            maxLength="75"
+          />
+          <p className="learning-path_input-information">{polyglot.t('createLearningPath.titleMaxLength')}</p>
         </div>
       </div>
 
