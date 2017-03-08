@@ -36,8 +36,8 @@ module.exports = Object.assign({
   googleApiUrl: process.env.NDLA_GOOGLE_API_URL || 'https://www.googleapis.com',
   logEnvironment: process.env.NDLA_ENVIRONMENT || 'local',
   logglyApiKey: process.env.LOGGLY_API_KEY,
-  pinterestApiUrl: process.env.Pinterest_API_URL || 'https://api.pinterest.com/v1/',
-  pinterestEnabled: process.env.Pinterest_ACCESS_TOKEN !== undefined && pinterestActivated,
+  pinterestApiUrl: process.env.PINTEREST_API_URL || 'https://api.pinterest.com/v1/',
+  pinterestEnabled: process.env.PINTEREST_ACCESS_TOKEN !== undefined && pinterestActivated,
   ltiActivated,
   app: {
     title: 'NDLA Læringsstier',

@@ -12,7 +12,7 @@ import PinterestBoardForm from './PinterestBoardForm';
 import PinForm from './PinForm';
 import { getLocale } from '../locale/localeSelectors';
 import * as learningPathStepActions from '../learningPath/step/learningPathStepActions';
-import { fetchPins } from './PinterestApi';
+import { fetchPins } from './pinterestApi';
 import polyglot from '../i18n';
 
 class PinterestImport extends Component {
