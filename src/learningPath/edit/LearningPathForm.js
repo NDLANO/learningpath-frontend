@@ -17,7 +17,6 @@ import LabeledIcon from '../../common/LabeledIcon';
 import TagsInput from '../../common/TagsInput';
 import InputField from '../../common/form/InputField';
 import LearningPathDescription from './LearningPathDescription';
-import ObjectSelector from '../../common/form/ObjectSelector';
 import Contributors from './copyright/Contributors';
 import polyglot from '../../i18n';
 import LearningPathDuration from './LearningPathDuration';
