@@ -13,7 +13,6 @@ import isEmpty from 'lodash/isEmpty';
 
 import LearningPathForm from './LearningPathForm';
 import { fetchLearningPathTagsIfNeeded } from './tags/learningPathTagsActions';
-import { fetchLearningPathLicensesIfNeeded } from './copyright/learningPathLicensesActions';
 import { getLearningPathTagsByLanguage } from './tags/learningPathTagsSelectors';
 import { fetchLearningPathImages, fetchLearningPathImage, fetchLearningPathImageWithMetaUrl } from '../../imageSearch/imageActions';
 import { updateLearningPath } from '../learningPathActions';
@@ -21,13 +20,12 @@ import { getI18nLearningPath, getI18nLearningPathSteps } from '../learningPathSe
 
 class EditLearningPath extends Component {
   componentDidMount() {
-    const { fetchLearningPathTags, fetchLearninigPathLicenses } = this.props;
+    const { fetchLearningPathTags } = this.props;
     fetchLearningPathTags();
-    fetchLearninigPathLicenses('by');
   }
 
   render() {
-    const { learningPath, localFetchImages, localUpdateLearningPath, localFetchImage, lang: language, tags, licenses } = this.props;
+    const { learningPath, localFetchImages, localUpdateLearningPath, localFetchImage, lang: language, tags } = this.props;
 
     if (!learningPath.id) {
       return null;
@@ -39,14 +37,20 @@ class EditLearningPath extends Component {
       revision: learningPath.revision,
       duration: (values.duration.replace(/,/g, '.')) * 60,
       tags: [{ tags: values.tags, language }],
-      copyright: { license: values.license ? values.license : undefined, contributors: !isEmpty(values.contributors) ? values.contributors : undefined },
+      copyright: {
+        license: {
+          license: 'by-sa',
+          description: 'Creative Commons Attribution-ShareAlike 2.0 Generic',
+          url: 'https://creativecommons.org/licenses/by-sa/2.0/',
+        },
+        contributors: !isEmpty(values.contributors) ? values.contributors : undefined },
       coverPhotoMetaUrl: !isEmpty(values.coverPhotoMetaUrl) ? values.coverPhotoMetaUrl : undefined,
     });
 
     return (
       <div className="two-column_content">
         <LearningPathForm
-          learningPath={learningPath} tagOptions={tags} licenseOptions={licenses} onSubmit={handleSubmit} localFetchImages={localFetchImages}
+          learningPath={learningPath} tagOptions={tags} onSubmit={handleSubmit} localFetchImages={localFetchImages}
           fetchImage={localFetchImage} lang={language}
         />
       </div>
@@ -59,10 +63,8 @@ EditLearningPath.propTypes = {
   lang: PropTypes.string.isRequired,
   learningSteps: PropTypes.array.isRequired,
   tags: PropTypes.array.isRequired,
-  licenses: PropTypes.array.isRequired,
   localUpdateLearningPath: PropTypes.func.isRequired,
   fetchLearningPathTags: PropTypes.func.isRequired,
-  fetchLearninigPathLicenses: PropTypes.func.isRequired,
   localFetchImages: PropTypes.func.isRequired,
   localFetchImage: PropTypes.func.isRequired,
   localFetchImageWithMetaUrl: PropTypes.func.isRequired,
@@ -78,7 +80,6 @@ const mapStateToProps = state => Object.assign({}, state, {
 const mapDispatchToProps = {
   localUpdateLearningPath: updateLearningPath,
   fetchLearningPathTags: fetchLearningPathTagsIfNeeded,
-  fetchLearninigPathLicenses: fetchLearningPathLicensesIfNeeded,
   localFetchImages: fetchLearningPathImages,
   localFetchImage: fetchLearningPathImage,
   localFetchImageWithMetaUrl: fetchLearningPathImageWithMetaUrl,

@@ -9,7 +9,6 @@
 import React, { PropTypes } from 'react';
 import { reduxForm, reset, Field } from 'redux-form';
 import polyglot from '../../i18n';
-import ObjectSelector from '../../common/form/ObjectSelector';
 import InputField from '../../common/form/InputField';
 import TextAreaField from '../../common/form/TextAreaField';
 import { createValidator, required } from '../../util/validation';
@@ -24,7 +23,6 @@ class CreateLearningPath extends React.Component {
     const {
       submitting,
       handleSubmit,
-      licenseOptions,
       valid,
     } = this.props;
     return (
@@ -55,16 +53,6 @@ class CreateLearningPath extends React.Component {
           />
           <p className="learning-path_input-information">{polyglot.t('createLearningPath.descriptionMaxLength')}</p>
         </div>
-        <div>
-          <label htmlFor="license">Lisens</label>
-          <Field
-            name="license"
-            idKey="license"
-            labelKey="description"
-            options={licenseOptions}
-            component={ObjectSelector}
-          />
-        </div>
         <br />
         <button className="button cta-link cta-link--block" disabled={submitting || !valid} type="submit">
           {polyglot.t('createLearningPath.createButton')}
@@ -83,7 +71,6 @@ CreateLearningPath.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
-  licenseOptions: PropTypes.array.isRequired,
   valid: PropTypes.bool.isRequired,
 };
 
