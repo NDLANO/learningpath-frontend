@@ -38,7 +38,7 @@ class PinterestLightbox extends Component {
       <div>
         <br />
         <Button className="button button--primary-outline cta-link--block" onClick={this.openLightbox}>
-          {polyglot.t('Pinterest.importFrom')}
+          {polyglot.t('pinterest.importFrom')}
         </Button>
         <Lightbox display={this.state.displayLightbox} width="800px" onClose={this.closeLightbox}>
           <PinterestImport learningPath={learningPath} />

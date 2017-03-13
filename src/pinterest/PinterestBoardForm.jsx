@@ -14,6 +14,7 @@ class PinterestBoardForm extends Component {
     super(props);
     this.state = {
       boardName: props.boardName,
+      username: props.username,
     };
     this.handleQueryChange = this.handleQueryChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);

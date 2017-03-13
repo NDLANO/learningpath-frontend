@@ -254,7 +254,7 @@ const phrases = {
     externalButton: 'Søk i eksterne ressurser',
     ndlaButton: 'Søk i NDLA',
   },
-  interest: {
+  pinterest: {
     importFrom: 'Hent læringssteg fra Pinterest',
     lightbox: {
       heading: 'Hent læringssteg fra Pinterest',
