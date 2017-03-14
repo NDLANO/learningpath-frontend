@@ -24,9 +24,10 @@ class PinterestImport extends Component {
     this.handleCreateLearningPathStep = this.handleCreateLearningPathStep.bind(this);
   }
 
-  handleBoardNameSubmit(boardName) {
+  handleBoardNameSubmit(username, boardName) {
+    console.log(boardName);
     this.setState({ fetchingPins: true });
-    fetchPins(boardName.match((/\w+\/\w+/))[0])
+    fetchPins(username, boardName)
       .then((pins) => {
         this.setState({
           pins: pins.data,
@@ -60,7 +61,7 @@ class PinterestImport extends Component {
     const { pins, message } = this.state;
     return (
       <div>
-        <h2>{ polyglot.t('Pinterest.lightbox.heading') }</h2>
+        <h2>{ polyglot.t('pinterest.lightbox.heading') }</h2>
         <PinterestBoardForm onBoardNameSubmit={this.handleBoardNameSubmit} />
         { message ? <div className="error_message error_message--red">{ message }</div> : null}
         { pins.map(pin => <PinForm key={pin.id} pin={pin} onCreateLearningPathStep={this.handleCreateLearningPathStep} />) }

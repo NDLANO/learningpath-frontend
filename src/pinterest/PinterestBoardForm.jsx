@@ -21,24 +21,33 @@ class PinterestBoardForm extends Component {
   }
 
   handleQueryChange(evt) {
-    this.setState({ boardName: evt.target.value });
+    this.setState({ [evt.target.name]: evt.target.value });
   }
 
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.onBoardNameSubmit(this.state.boardName);
+    this.props.onBoardNameSubmit(this.state.username, this.state.boardName);
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit} className="search-form">
-        <input
-          type="text" className="search-form_query"
-          onChange={this.handleQueryChange}
-          value={this.state.boardName}
-          placeholder={polyglot.t('pinterest.form.placeholder')}
-        />
-
+        <div>
+          <input
+            type="text" className="search-form_query"
+            onChange={this.handleQueryChange}
+            value={this.state.username}
+            name="username"
+            placeholder={polyglot.t('pinterest.form.usernamePlaceholder')}
+          />
+          <input
+            type="text" className="search-form_query"
+            onChange={this.handleQueryChange}
+            value={this.state.boardName}
+            name="boardName"
+            placeholder={polyglot.t('pinterest.form.boardPlaceholder')}
+          />
+        </div>
         <button
           type="submit"
           className="search-form_btn"
@@ -53,11 +62,13 @@ class PinterestBoardForm extends Component {
 
 PinterestBoardForm.propTypes = {
   boardName: PropTypes.string,
+  username: PropTypes.string,
   onBoardNameSubmit: PropTypes.func.isRequired,
 };
 
 PinterestBoardForm.defaultProps = {
   boardName: '',
+  username: '',
 };
 
 export default PinterestBoardForm;
