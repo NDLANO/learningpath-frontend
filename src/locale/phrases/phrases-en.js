@@ -92,6 +92,8 @@ const phrases = {
     copy: 'Copy',
     isBasedOn: 'based on ',
     isBasedOnPath: 'another learningpath',
+    showIsBasedOn: 'Show is based on',
+    hideIsBasedOn: 'Hide is based on',
     copyright: {
       license: 'License',
       contributors: 'Authors',
