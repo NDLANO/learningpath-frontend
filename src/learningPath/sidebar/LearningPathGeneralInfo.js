@@ -13,7 +13,7 @@ import formatDate from '../../util/formatDate';
 import formatDuration from '../../util/formatDuration';
 import { closeSidebars } from '../../common/sidebarActions';
 import LabeledIcon from '../../common/LabeledIcon';
-import IsBasedOn from '../../common/IsBasedOn';
+import LearningPathTitle from './LearningPathTitle';
 import LearningPathActionType from './LearningPathActionType';
 import { getI18nLearningPath } from '../learningPathSelectors';
 import LearningPathContributors from './LearningPathContributors';
@@ -37,16 +37,10 @@ const LearningPathGeneralInfo = (props, context) => {
       />
     </div>
   );
-
   return (
     <div>
       <div className="learningpath-general-info">
-        <div className="learningpath-general-info_h">
-          <h3>
-            {learningPath.title}
-          </h3>
-          {learningPath.isBasedOn ? <IsBasedOn path={learningPath} /> : '' }
-        </div>
+        <LearningPathTitle learningPath={learningPath} />
         <div className="learningpath-contributors">
           <LearningPathContributors copyright={learningPath.copyright} />
         </div>
