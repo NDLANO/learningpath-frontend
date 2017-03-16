@@ -12,6 +12,32 @@ import IsBasedOn from '../../common/IsBasedOn';
 import polyglot from '../../i18n';
 import Icon from '../../common/Icon';
 
+const ClickableLearningPathTitle = ({ learningPath, onShowToggle, showTitle }) => {
+  if (learningPath.title.length < 30) {
+    return <h3>{learningPath.title}</h3>;
+  }
+  const titleClassName = classNames({
+    'learningpath-general-info_title': true,
+    'learningpath-general-info_title--open': showTitle,
+  });
+
+  return (
+    <div className={titleClassName}>
+      <button className="un-button" onClick={() => onShowToggle('showTitle')}>
+        <h3>
+          {learningPath.title}
+        </h3>
+      </button>
+    </div>
+  );
+};
+
+ClickableLearningPathTitle.propTypes = {
+  learningPath: PropTypes.object.isRequired,
+  onShowToggle: PropTypes.func.isRequired,
+  showTitle: PropTypes.bool.isRequired,
+};
+
 class LearningPathTitle extends Component {
   constructor(props) {
     super(props);
@@ -31,10 +57,6 @@ class LearningPathTitle extends Component {
       return null;
     }
 
-    const titleClassName = classNames({
-      'learningpath-general-info_title': true,
-      'learningpath-general-info_title--open': this.state.showTitle,
-    });
 
     const isBasedOnClassName = classNames({
       'learningpath-general-info_is-basedon': true,
@@ -43,13 +65,7 @@ class LearningPathTitle extends Component {
 
     return (
       <div className="learningpath-general-info_h">
-        <div className={titleClassName}>
-          <button className="un-button" onClick={() => this.onShowToggle('showTitle')}>
-            <h3>
-              {learningPath.title}
-            </h3>
-          </button>
-        </div>
+        <ClickableLearningPathTitle learningPath={learningPath} showTitle={this.state.showTitle} onShowToggle={this.onShowToggle} />
         {learningPath.isBasedOn ?
           <div>
             <button className="un-button learningpath-general-info_is-basedon-button" onClick={() => this.onShowToggle('showIsBasedOn')}>
