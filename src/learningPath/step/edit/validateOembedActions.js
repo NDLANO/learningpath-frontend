@@ -30,7 +30,7 @@ export function validateOembed(url, lang, embedType = 'omebed', fieldName = 'url
     }));
   }
 
-  return (dispatch, getState) => new Promise((resolve, reject) => fetchOembedUrl(getState().authToken, { url })
+  return (dispatch, getState) => new Promise((resolve, reject) => fetchOembedUrl(getState().accessToken, { url })
     .then((oembed) => {
       const state = getState();
       const currentOembedTitle = get(state, 'oembedPreview.oembedContent[0].title');

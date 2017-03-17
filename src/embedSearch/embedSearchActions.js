@@ -41,7 +41,7 @@ export function fetchNdlaEmbedSearch(query) {
 
 
 function fetchOembed(url, lang, type) {
-  return (dispatch, getState) => fetchOembedUrl(getState().authToken, { url })
+  return (dispatch, getState) => fetchOembedUrl(getState().accessToken, { url })
     .then((oembed) => {
       dispatch(setEmbedPreview({ type, oembedContent: Object.assign({}, oembed, { url, language: lang }) }));
     })

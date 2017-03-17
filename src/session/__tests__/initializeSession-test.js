@@ -12,13 +12,13 @@ import thunk from 'redux-thunk';
 import nock from 'nock';
 import payload403invalid from '../../actions/__tests__/payload403invalid';
 
-import { initializeSession, setAuthenticated, setUserData, setAuthToken } from '../sessionActions';
+import { initializeSession, setAuthenticated, setUserData, setAccessToken } from '../sessionActions';
 import { applicationError } from '../../messages/messagesActions';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-const authToken = '123345';
+const accessToken = '123345';
 
 test('actions/initializeSession', (t) => {
   const done = (res) => {
@@ -26,17 +26,17 @@ test('actions/initializeSession', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
     .get('/auth/me')
     .reply(200, { first_name: 'Alice', email: 'alice@example.com' });
 
-  const store = mockStore({ user: {}, authToken: '' });
+  const store = mockStore({ user: {}, accessToken: '' });
 
-  store.dispatch(initializeSession(authToken))
+  store.dispatch(initializeSession(accessToken))
     .then(() => {
       t.deepEqual(store.getActions(), [
         setAuthenticated(true),
-        setAuthToken(authToken),
+        setAccessToken(accessToken),
         setUserData({ first_name: 'Alice', email: 'alice@example.com' }),
       ]);
       t.doesNotThrow(() => apiMock.done());
@@ -51,13 +51,13 @@ test('actions/initializeSession access denied', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
     .get('/auth/me')
     .reply(403, { message: 'Invalid' });
 
-  const store = mockStore({ user: {}, authToken: '' });
+  const store = mockStore({ user: {}, accessToken: '' });
 
-  store.dispatch(initializeSession(authToken))
+  store.dispatch(initializeSession(accessToken))
     .then(() => {
       t.deepEqual(store.getActions(), [
         applicationError(payload403invalid('http://ndla-api/auth/me')),

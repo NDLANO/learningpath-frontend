@@ -12,7 +12,7 @@ import defined from 'defined';
 import config from '../config';
 
 const NDLA_API_URL = __SERVER__ ? config.ndlaApiUrl : window.config.ndlaApiUrl;
-const NDLA_API_KEY = __SERVER__ ? config.ndlaApiKey : window.config.ndlaApiKey;
+const NDLA_API_KEY = window.token.access_token;
 
 if (process.env.NODE_ENV === 'unittest') {
   global.__SERVER__ = false; //eslint-disable-line
@@ -30,11 +30,10 @@ const locationOrigin = (() => {
   return location.origin;
 })();
 
-export const defaultApiKey = (() => {
+export const accessToken = (() => {
   if (process.env.NODE_ENV === 'unittest') {
     return 'ndlatestapikey';
   }
-
   return NDLA_API_KEY;
 })();
 
@@ -79,19 +78,21 @@ export function resolveJsonOrRejectWithError(res) {
   });
 }
 
+export const authorizationHeader = accessToken => `Bearer ${accessToken}`;
+
 
 export function fetchAuthorized(path, method = 'GET') {
   const url = params => apiResourceUrl(formatPattern(path, params));
-  return (authToken, params = {}) => fetch(url(params), {
-    method, headers: { 'APP-KEY': authToken },
+  return (accessToken, params = {}) => fetch(url(params), {
+    method, headers: { Authorization: authorizationHeader(accessToken) },
   }).then(resolveJsonOrRejectWithError);
 }
 
 export function postAuthorized(path) {
   const url = params => apiResourceUrl(formatPattern(path, params));
 
-  return (authToken, params = {}, body) => fetch(url(params), {
-    headers: { 'APP-KEY': authToken },
+  return (accessToken, params = {}, body) => fetch(url(params), {
+    headers: { Authorization: authorizationHeader(accessToken) },
     method: 'POST',
     body: JSON.stringify(body),
   }).then(resolveJsonOrRejectWithError);
@@ -100,8 +101,8 @@ export function postAuthorized(path) {
 export function putAuthorized(path) {
   const url = params => apiResourceUrl(formatPattern(path, params));
 
-  return (authToken, params = {}, body) => fetch(url(params), {
-    headers: { 'APP-KEY': authToken },
+  return (accessToken, params = {}, body) => fetch(url(params), {
+    headers: { Authorization: authorizationHeader(accessToken) },
     method: 'PUT',
     body: JSON.stringify(body),
   }).then(resolveJsonOrRejectWithError);
@@ -110,8 +111,8 @@ export function putAuthorized(path) {
 export function patchAuthorized(path) {
   const url = params => apiResourceUrl(formatPattern(path, params));
 
-  return (authToken, params = {}, body) => fetch(url(params), {
-    headers: { 'APP-KEY': authToken },
+  return (accessToken, params = {}, body) => fetch(url(params), {
+    headers: { Authorization: authorizationHeader(accessToken) },
     method: 'PATCH',
     body: JSON.stringify(body),
   }).then(resolveJsonOrRejectWithError);
@@ -119,8 +120,8 @@ export function patchAuthorized(path) {
 
 export function deleteAuthorized(path) {
   const url = params => apiResourceUrl(formatPattern(path, params));
-  return (authToken, params = {}) => fetch(url(params), {
-    headers: { 'APP-KEY': authToken },
+  return (accessToken, params = {}) => fetch(url(params), {
+    headers: { Authorization: authorizationHeader(accessToken) },
     method: 'DELETE',
   });
 }

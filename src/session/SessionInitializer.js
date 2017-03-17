@@ -11,12 +11,20 @@ import { connect } from 'react-redux';
 import { routerActions } from 'react-router-redux';
 import { initializeSession } from './sessionActions';
 
+
 export class SessionInitializer extends React.Component {
   componentWillMount() {
-    const { dispatch, params: { authToken } } = this.props;
+    const { dispatch, stateUuid, params: { accessToken } } = this.props;
 
-    if (authToken) {
-      dispatch(initializeSession(authToken))
+    const getHashValue = (key) => {
+      const matches = this.props.location.hash.match(new RegExp(`${key}=([^&]*)`));
+      return matches ? matches[1] : null;
+    };
+
+    console.log(getHashValue('state'));
+    console.log(this.props);
+    if (getHashValue('id_token') && getHashValue('state') === stateUuid) {
+      dispatch(initializeSession(accessToken))
         .then(() => dispatch(routerActions.replace('/minside')));
     }
   }
@@ -28,7 +36,7 @@ export class SessionInitializer extends React.Component {
 
 SessionInitializer.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  params: PropTypes.shape({ authToken: PropTypes.string }).isRequired,
+  params: PropTypes.shape({ accessToken: PropTypes.string }).isRequired,
 };
 
 export default connect(state => state)(SessionInitializer);

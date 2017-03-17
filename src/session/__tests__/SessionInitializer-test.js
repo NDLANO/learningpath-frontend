@@ -24,7 +24,7 @@ test('component/SessionInitializer', (t) => {
 
   const dispatch = sinon.spy(() => p);
 
-  const params = { authToken: '12345' };
+  const params = { accessToken: '12345' };
 
   renderComponent({ dispatch, params });
 
@@ -41,7 +41,7 @@ test('component/SessionInitializer', (t) => {
   });
 });
 
-test('component/SessionInitializer without authToken', (t) => {
+test('component/SessionInitializer without accessToken', (t) => {
   const dispatch = sinon.spy(() => Promise.resolve());
 
   renderComponent({ dispatch, params: {} });

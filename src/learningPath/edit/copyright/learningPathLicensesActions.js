@@ -14,7 +14,7 @@ export const setCreativeCommonLicenses = createAction('SET_CREATIVE_COMMON_LICEN
 export const setAllLicenses = createAction('SET_ALL_LICENSES');
 
 export function fetchLearningPathLicenses(filter = '') {
-  return (dispatch, getState) => fetchPathLicenses(getState().authToken, filter)
+  return (dispatch, getState) => fetchPathLicenses(getState().accessToken, filter)
     .then((licenses) => {
       if (filter.length > 0) {
         dispatch(setCreativeCommonLicenses(licenses));

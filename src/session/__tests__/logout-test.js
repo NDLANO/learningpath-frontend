@@ -18,7 +18,7 @@ import { applicationError } from '../../messages/messagesActions';
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-const authToken = '123345';
+const accessToken = '123345';
 
 test('actions/logout', (t) => {
   const done = (res) => {
@@ -26,11 +26,11 @@ test('actions/logout', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
     .get('/auth/logout')
     .reply(204);
 
-  const store = mockStore({ authToken });
+  const store = mockStore({ accessToken });
 
   store.dispatch(logout())
     .then(() => {
@@ -50,11 +50,11 @@ test('actions/logout access denied', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
     .get('/auth/logout')
     .reply(403, { message: 'Invalid' });
 
-  const store = mockStore({ authToken });
+  const store = mockStore({ accessToken });
   store.dispatch(logout())
     .then(() => {
       t.deepEqual(store.getActions(), [

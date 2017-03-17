@@ -13,7 +13,7 @@ import { applicationError } from '../../../messages/messagesActions';
 const setLearningPathTags = createAction('SET_LEARNING_PATH_TAGS');
 
 function fetchLearningPathTags() {
-  return (dispatch, getState) => fetchPathTags(getState().authToken)
+  return (dispatch, getState) => fetchPathTags(getState().accessToken)
     .then(tags => dispatch(setLearningPathTags(tags)))
     .catch(err => dispatch(applicationError(err)));
 }

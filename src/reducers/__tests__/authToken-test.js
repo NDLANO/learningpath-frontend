@@ -8,9 +8,9 @@
 
 import test from 'tape';
 
-import reducer from '../authToken';
+import reducer from '../accessToken';
 
-test('reducers/authToken', (t) => {
+test('reducers/accessToken', (t) => {
   t.equal(
     reducer(undefined, {}),
     'ndlatestapikey',

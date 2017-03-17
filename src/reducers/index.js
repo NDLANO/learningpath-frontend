@@ -11,7 +11,8 @@ import { routerReducer } from 'react-router-redux';
 import { reducer as formReducer } from 'redux-form';
 
 import authenticated from './authenticated';
-import authToken from './authToken';
+import accessToken from './accessToken';
+import stateUuid from './stateUuid';
 import user from './user';
 import learningPath from '../learningPath/learningPathReducer';
 import learningPathSearch from '../learningPath/search/learningPathSearchReducer';
@@ -29,7 +30,7 @@ import embedSearch from '../embedSearch/embedSearchReducer';
 
 const rootReducers = combineReducers({
   authenticated,
-  authToken,
+  accessToken,
   user,
   locale,
   learningPath,
@@ -39,6 +40,7 @@ const rootReducers = combineReducers({
   myLearningPathsSortOrder,
   messages,
   sidebar,
+  stateUuid,
   oembedPreview,
   learningPathTags,
   learningPathLicenses,
