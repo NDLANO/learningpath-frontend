@@ -19,7 +19,7 @@ const activatedForEnvironment = (config, defaultValue) => {
 const apiDomain = activatedForEnvironment({
   local: 'http://proxy.ndla-local',
   prod: 'https://api.ndla.no' },
-  'http://proxy.ndla-local');
+  'https://api.test.ndla.no');
 const ltiActivated = activatedForEnvironment({ test: true, local: true }, false);
 const pinterestActivated = activatedForEnvironment({ test: true, local: true }, false);
 
