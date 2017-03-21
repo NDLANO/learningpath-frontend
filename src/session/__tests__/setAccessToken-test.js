@@ -16,7 +16,7 @@ test('actions/setAccessToken', (t) => {
 
   t.ok(isFSA(actual), 'FSA compliant action');
 
-  t.equal(actual.type, 'SET_AUTH_TOKEN');
+  t.equal(actual.type, 'SET_ACCESS_TOKEN');
   t.equal(actual.payload, '12345');
   t.notOk(actual.error);
 
@@ -28,7 +28,7 @@ test('actions/setAccessToken with error', (t) => {
 
   t.ok(isFSA(actual), 'FSA compliant action');
 
-  t.equal(actual.type, 'SET_AUTH_TOKEN');
+  t.equal(actual.type, 'SET_ACCESS_TOKEN');
   t.equal(actual.payload.message, 'fail!');
   t.ok(actual.error);
 

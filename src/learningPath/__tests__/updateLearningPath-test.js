@@ -28,7 +28,7 @@ test('actions/updateLearningPath', (t) => {
     nock.cleanAll();
   };
 
-  const patchPathApi = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  const patchPathApi = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .patch(`/learningpaths/${pathId}`, {
       id: pathId, isRequest: true,
     })
@@ -62,7 +62,7 @@ test('actions/updateLearningPath with redirect', (t) => {
     nock.cleanAll();
   };
 
-  const patchPathApi = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  const patchPathApi = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .patch(`/learningpaths/${pathId}`, { id: pathId })
     .reply(200, { id: pathId });
 
@@ -88,7 +88,7 @@ test('actions/updateLearningPath access denied', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .patch(`/learningpaths/${pathId}`, {
       id: pathId,
       foo: 'bar',

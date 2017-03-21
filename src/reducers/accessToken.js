@@ -14,5 +14,8 @@ export default handleActions({
     next: (state, action) => action.payload,
     throw: state => state,
   },
-  LOGOUT: () => accessToken,
+  LOGOUT: {
+    next: (state, action) => action.payload,
+    throw: state => state,
+  },
 }, accessToken);

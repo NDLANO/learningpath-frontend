@@ -24,7 +24,7 @@ test('actions/deleteLearningPath', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .delete('/learningpath-api/v1/learningpaths/123')
     .reply(204);
 

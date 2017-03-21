@@ -27,12 +27,12 @@ test('actions/deleteLearningPathStep with id', (t) => {
   };
 
   // GET /learningpaths/:pathId
-  nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get(`/learningpath-api/v1/learningpaths/${pathId}`)
     .reply(200, { id: pathId });
 
   // DELETE /learningpaths/:pathId/learningsteps/:stepId
-  nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .delete(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`)
     .reply(204);
 

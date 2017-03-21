@@ -37,11 +37,11 @@ test('actions/updateStepSequenceNumber sucessfully', (t) => {
   const learningStepReply = Object.assign({}, body, {});
 
   // updateSeqNo
-  nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .put(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}/seqNo`, body)
     .reply(200, learningStepReply);
   // fetchLearningPath
-  nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get(`/learningpaths/${pathId}`)
     .reply(200, { id: pathId });
 
@@ -69,12 +69,12 @@ test('actions/updateStepSequenceNumber access denied', (t) => {
   };
 
   // updateSeqNo
-  nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .put(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}/seqNo`, body)
     .reply(403, { message: 'Invalid' });
 
   // fetchLearningPath
-  nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get(`/learningpath-api/v1/learningpaths/${pathId}`)
     .reply(200, { id: pathId });
 

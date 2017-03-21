@@ -49,6 +49,7 @@
     "webpack-manifest-plugin": "1.1.0"
   },
   "dependencies": {
+    "auth0-js": "8.4.0",
     "babel-polyfill": "6.20.0",
     "babel-register": "6.18.0",
     "babel-runtime": "^6.22.0",
@@ -67,6 +68,7 @@
     "history": "3.2.1",
     "immutable": "3.8.1",
     "isomorphic-fetch": "2.2.1",
+    "jwt-decode": "2.1.0",
     "lodash": "4.17.4",
     "ndla-error-reporter": "^0.1.2",
     "ndla-learningpath-styleguide": "0.1.45",

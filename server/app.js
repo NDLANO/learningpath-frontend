@@ -56,6 +56,12 @@ app.get('/pintrest-proxy/*', requestProxy({
   },
 }));
 
+app.get('/get_token', (req, res) => {
+  getToken().then((token) => {
+    res.send(token);
+  }).catch(err => res.status(500).send(err.message));
+});
+
 app.get('*', (req, res) => {
   function renderOnClient() {
     getToken().then((token) => {

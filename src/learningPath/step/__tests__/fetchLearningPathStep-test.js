@@ -29,7 +29,7 @@ test('actions/fetchLearningPathStep', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`)
     .reply(200, { id: stepId, seqNo: 3 });
 
@@ -52,7 +52,7 @@ test('actions/fetchLearningPathStep with isEdit true and canEdit false', (t) => 
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`)
     .reply(200, { id: stepId, seqNo: 3, canEdit: false });
 
@@ -76,7 +76,7 @@ test('actions/fetchLearningPathStep with isEdit true and canEdit true', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`)
     .reply(200, { id: stepId, seqNo: 3, canEdit: true });
 
@@ -99,7 +99,7 @@ test('actions/fetchLearningPathStep cache hit', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`)
     .reply(200, { id: stepId, seqNo: 3, cached: false });
 
@@ -134,7 +134,7 @@ test('actions/fetchLearningPathStep access denied', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`)
     .reply(403, { message: 'Invalid' });
 
@@ -157,7 +157,7 @@ test('actions/fetchLearningPathStep with embedUrl', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`)
     .reply(200, { id: stepId, seqNo: 3, embedUrl: [{ url: 'test', language: 'nb', embedType: 'oembed' }] });
 

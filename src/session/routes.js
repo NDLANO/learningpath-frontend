@@ -8,7 +8,6 @@
 
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
-import { uuid } from 'ndla-util';
 import LoginProviders from './LoginProviders';
 import LoginFailure from './LoginFailure';
 import SessionInitializer from './SessionInitializer';

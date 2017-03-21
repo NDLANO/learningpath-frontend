@@ -37,7 +37,7 @@ test('actions/createLearningPathStep', (t) => {
 
   const learningStepReply = Object.assign({}, learningStep, { id: 1234 });
 
-  const postPathStepApi = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  const postPathStepApi = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .post(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps`, learningStep)
     .reply(200, learningStepReply);
 
@@ -69,7 +69,7 @@ test('actions/createLearningPathStep access denied', (t) => {
     embedUrl: [{ language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY' }],
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .post(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps`, learningStep)
     .reply(403, { message: 'Invalid' });
 

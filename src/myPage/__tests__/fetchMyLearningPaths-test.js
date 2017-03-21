@@ -26,7 +26,7 @@ test('actions/fetchMyLearningPaths', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get('/learningpath-api/v1/learningpaths/mine')
     .reply(200, [{ id: '123' }, { id: '456' }]);
 
@@ -49,7 +49,7 @@ test('actions/fetchLearningPaths access denied', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get('/learningpath-api/v1/learningpaths/mine')
     .reply(403, { message: 'Invalid' });
 

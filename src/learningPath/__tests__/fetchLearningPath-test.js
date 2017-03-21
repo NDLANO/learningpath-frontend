@@ -29,7 +29,7 @@ test('actions/fetchLearningPath without image', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get(`/learningpath-api/v1/learningpaths/${pathId}`)
     .reply(200, { id: pathId });
 
@@ -54,7 +54,7 @@ test('actions/fetchLearningPath with image', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get(`/learningpath-api/v1/learningpaths/${pathId}`)
     .reply(200, { id: pathId, coverPhoto: { url: 'test', metaUrl: 'metaTest' } });
 
@@ -77,7 +77,7 @@ test('actions/fetchLearningPath with isEdit true and canEdit false', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get(`/learningpath-api/v1/learningpaths/${pathId}`)
     .reply(200, { id: pathId, canEdit: false });
 
@@ -103,7 +103,7 @@ test('actions/fetchLearningPath with isEdit true and canEdit true', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get(`/learningpath-api/v1/learningpaths/${pathId}`)
     .reply(200, { id: pathId, canEdit: true });
 
@@ -128,7 +128,7 @@ test('actions/fetchLearningPath access denied', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get(`/learningpath-api/v1/learningpaths/${pathId}`)
     .reply(403, { message: 'Invalid' });
 

@@ -12,7 +12,10 @@ import defined from 'defined';
 import config from '../config';
 
 const NDLA_API_URL = __SERVER__ ? config.ndlaApiUrl : window.config.ndlaApiUrl;
-const NDLA_API_KEY = window.token.access_token;
+const NDLA_ACCESS_TOKEN = __SERVER__ ? config.accessToken : window.config.accessToken;
+const AUTH0_DOMAIN = __SERVER__ ? config.auth0Domain : window.config.auth0Domain;
+const AUTH0_CLIENT_ID = __SERVER__ ? config.auth0ClientID : window.config.auth0ClientID;
+
 
 if (process.env.NODE_ENV === 'unittest') {
   global.__SERVER__ = false; //eslint-disable-line
@@ -30,11 +33,15 @@ const locationOrigin = (() => {
   return location.origin;
 })();
 
+export const auth0ClientId = (() => AUTH0_CLIENT_ID)();
+
+export const auth0Domain = (() => AUTH0_DOMAIN)();
+
 export const accessToken = (() => {
   if (process.env.NODE_ENV === 'unittest') {
     return 'ndlatestapikey';
   }
-  return NDLA_API_KEY;
+  return NDLA_ACCESS_TOKEN;
 })();
 
 const apiBaseUrl = (() => {
@@ -78,21 +85,21 @@ export function resolveJsonOrRejectWithError(res) {
   });
 }
 
-export const authorizationHeader = accessToken => `Bearer ${accessToken}`;
+export const authorizationHeader = token => `Bearer ${token}`;
 
 
 export function fetchAuthorized(path, method = 'GET') {
   const url = params => apiResourceUrl(formatPattern(path, params));
-  return (accessToken, params = {}) => fetch(url(params), {
-    method, headers: { Authorization: authorizationHeader(accessToken) },
+  return (token, params = {}) => fetch(url(params), {
+    method, headers: { Authorization: authorizationHeader(token) },
   }).then(resolveJsonOrRejectWithError);
 }
 
 export function postAuthorized(path) {
   const url = params => apiResourceUrl(formatPattern(path, params));
 
-  return (accessToken, params = {}, body) => fetch(url(params), {
-    headers: { Authorization: authorizationHeader(accessToken) },
+  return (token, params = {}, body) => fetch(url(params), {
+    headers: { Authorization: authorizationHeader(token) },
     method: 'POST',
     body: JSON.stringify(body),
   }).then(resolveJsonOrRejectWithError);
@@ -101,8 +108,8 @@ export function postAuthorized(path) {
 export function putAuthorized(path) {
   const url = params => apiResourceUrl(formatPattern(path, params));
 
-  return (accessToken, params = {}, body) => fetch(url(params), {
-    headers: { Authorization: authorizationHeader(accessToken) },
+  return (token, params = {}, body) => fetch(url(params), {
+    headers: { Authorization: authorizationHeader(token) },
     method: 'PUT',
     body: JSON.stringify(body),
   }).then(resolveJsonOrRejectWithError);
@@ -111,8 +118,8 @@ export function putAuthorized(path) {
 export function patchAuthorized(path) {
   const url = params => apiResourceUrl(formatPattern(path, params));
 
-  return (accessToken, params = {}, body) => fetch(url(params), {
-    headers: { Authorization: authorizationHeader(accessToken) },
+  return (token, params = {}, body) => fetch(url(params), {
+    headers: { Authorization: authorizationHeader(token) },
     method: 'PATCH',
     body: JSON.stringify(body),
   }).then(resolveJsonOrRejectWithError);
@@ -120,8 +127,8 @@ export function patchAuthorized(path) {
 
 export function deleteAuthorized(path) {
   const url = params => apiResourceUrl(formatPattern(path, params));
-  return (accessToken, params = {}) => fetch(url(params), {
-    headers: { Authorization: authorizationHeader(accessToken) },
+  return (token, params = {}) => fetch(url(params), {
+    headers: { Authorization: authorizationHeader(token) },
     method: 'DELETE',
   });
 }

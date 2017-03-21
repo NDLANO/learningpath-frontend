@@ -35,19 +35,19 @@ test('actions/createLearningPath', (t) => {
     { seqNo: 2 },
   ];
 
-  const postPathApi = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  const postPathApi = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .post('/learningpaths', { isRequest: true, learningsteps })
     .reply(200, { id: pathId, isResponse: true });
 
-  const postStep1Api = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  const postStep1Api = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .post(`/learningpaths/${pathId}/learningsteps`, { seqNo: 0 })
     .reply(200, { id: 12, seqNo: 0, isResponse: true });
 
-  const postStep2Api = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  const postStep2Api = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .post(`/learningpaths/${pathId}/learningsteps`, { seqNo: 1 })
     .reply(200, { id: 34, seqNo: 1, isResponse: true });
 
-  const postStep3Api = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  const postStep3Api = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .post(`/learningpaths/${pathId}/learningsteps`, { seqNo: 2 })
     .reply(200, { id: 56, seqNo: 2, isResponse: true });
 
@@ -89,7 +89,7 @@ test('actions/createLearningPath access denied', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': accessToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .post('/learningpaths', {
       foo: 'bar',
     })

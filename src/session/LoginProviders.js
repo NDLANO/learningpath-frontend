@@ -7,35 +7,25 @@
  */
 
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { uuid } from 'ndla-util';
-import { apiResourceUrl, locationOrigin } from '../sources/helpers';
 import polyglot from '../i18n';
-import { setStateUuid } from './sessionActions';
+import { loginSocialMedia } from './sessionActions';
 
-const stateUuid = uuid();
-
-const LoginProviders = ({ message, localSetStateUuid }) => {
+const LoginProviders = (props) => {
+  const { message } = props;
   let messageEl;
   if (message) {
     messageEl = <p>{message}</p>;
   }
 
-  const generateNewUuidState = (suuid) => {
-    console.log(suuid);
-    localSetStateUuid(suuid);
-  };
-
-  const query = `?successUrl=${locationOrigin}/login/success&state=${stateUuid}`;
 
   return (
     <div className="one-column one-column--narrow">
       <h3>{polyglot.t('loginProviders.description')}</h3>
       {messageEl}
       <ul className="vertical-menu">
-        <li className="vertical-menu_item"><a onClick={() => generateNewUuidState(stateUuid)} className="cta-link cta-link--block cta-link--gl" href={apiResourceUrl(`/auth/login/google${query}`)}>Google</a></li>
-        <li className="vertical-menu_item"><a className="cta-link cta-link--block cta-link--fb" href={apiResourceUrl(`/auth/login/facebook${query}`)}>Facebook</a></li>
-        <li className="vertical-menu_item"><a className="cta-link cta-link--block cta-link--tw" href={apiResourceUrl(`/auth/login/twitter${query}`)}>Twitter</a></li>
+        <li className="vertical-menu_item"><button onClick={() => loginSocialMedia('google-oauth2')} className="un-button cta-link cta-link--block cta-link--gl">Google</button></li>
+        <li className="vertical-menu_item"><button onClick={() => loginSocialMedia('facebook')} className="un-button cta-link cta-link--block cta-link--fb">Facebook</button></li>
+        <li className="vertical-menu_item"><button onClick={() => loginSocialMedia('twitter')} className="un-button cta-link cta-link--block cta-link--tw">Twitter</button></li>
       </ul>
     </div>
   );
@@ -43,11 +33,6 @@ const LoginProviders = ({ message, localSetStateUuid }) => {
 
 LoginProviders.propTypes = {
   message: PropTypes.string,
-  localSetStateUuid: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = {
-  localSetStateUuid: setStateUuid,
-};
-
-export default connect(state => state, mapDispatchToProps)(LoginProviders);
+export default LoginProviders;
