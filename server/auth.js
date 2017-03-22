@@ -16,7 +16,7 @@ const getToken = () => fetch(url, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-    Authorization: `Basic ${b64EncodeUnicode(`${process.env.client_id}:${process.env.client_secret}`)}`,
+    Authorization: `Basic ${b64EncodeUnicode(`${process.env.NDLA_LEARNING_PATH_CLIENT_ID}:${process.env.NDLA_LEARNING_PATH_CLIENT_SECRET}`)}`,
   },
   body: queryString.stringify(clientData),
 }).then(res => res.json());
