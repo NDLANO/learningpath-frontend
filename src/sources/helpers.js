@@ -33,9 +33,19 @@ const locationOrigin = (() => {
   return location.origin;
 })();
 
-export const auth0ClientId = (() => AUTH0_CLIENT_ID)();
+export const auth0ClientId = (() => {
+  if (process.env.NODE_ENV === 'unittest') {
+    return '123456789';
+  }
+  return AUTH0_CLIENT_ID;
+})();
 
-export const auth0Domain = (() => AUTH0_DOMAIN)();
+export const auth0Domain = (() => {
+  if (process.env.NODE_ENV === 'unittest') {
+    return 'http://auth-ndla';
+  }
+  return AUTH0_DOMAIN;
+})();
 
 export const accessToken = (() => {
   if (process.env.NODE_ENV === 'unittest') {
