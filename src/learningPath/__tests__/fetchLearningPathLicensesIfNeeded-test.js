@@ -18,7 +18,7 @@ import { fetchLearningPathLicenses, setAllLicenses, setCreativeCommonLicenses } 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-const authToken = '123345';
+const accessToken = '123345';
 const licenses = [{ license: 'GPL v3', description: 'En lisens', url: 'ndla.no' }, { license: 'Copyright v3', description: 'En lisens', url: 'ndla.no' }];
 test('actions/fetchLearningPathLicenses with creative-common sat to false', (t) => {
   const done = (res) => {
@@ -26,11 +26,11 @@ test('actions/fetchLearningPathLicenses with creative-common sat to false', (t) 
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get('/learningpath-api/v1/learningpaths/licenses')
     .reply(200, licenses);
 
-  const store = mockStore({ authToken });
+  const store = mockStore({ accessToken });
 
   store.dispatch(fetchLearningPathLicenses())
     .then(() => {
@@ -50,11 +50,11 @@ test('actions/fetchLearningPathLicenses with creative-common sat to false access
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get('/learningpath-api/v1/learningpaths/licenses')
     .reply(403, { message: 'Invalid' });
 
-  const store = mockStore({ authToken });
+  const store = mockStore({ accessToken });
 
   store.dispatch(fetchLearningPathLicenses())
     .then(() => {
@@ -74,12 +74,12 @@ test('actions/fetchLearningPathLicenses with creative-common sat to false', (t) 
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get('/learningpath-api/v1/learningpaths/licenses')
     .query({ filter: 'by' })
     .reply(200, licenses);
 
-  const store = mockStore({ authToken });
+  const store = mockStore({ accessToken });
 
   store.dispatch(fetchLearningPathLicenses('by'))
     .then(() => {
@@ -99,12 +99,12 @@ test('actions/fetchLearningPathLicenses with creative-common sat to true access 
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get('/learningpath-api/v1/learningpaths/licenses')
     .query({ filter: 'by' })
     .reply(403, { message: 'Invalid' });
 
-  const store = mockStore({ authToken });
+  const store = mockStore({ accessToken });
 
   store.dispatch(fetchLearningPathLicenses('by'))
     .then(() => {

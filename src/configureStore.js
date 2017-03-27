@@ -25,14 +25,13 @@ const slicer = paths =>
 
 export default function configureStore(initialState, history) {
   const middleware = routerMiddleware(history);
-
   const createFinalStore = compose(
     applyMiddleware(
       thunkMiddleware,
       errorReporter,
       middleware
     ),
-    __CLIENT__ ? persistState(['authenticated', 'authToken', 'user'], { key: 'ndla:sti', slicer }) : f => f,
+    __CLIENT__ ? persistState(['authenticated', 'accessToken', 'user', 'stateUuid'], { key: 'ndla:sti', slicer }) : f => f,
     __CLIENT__ && window && window.devToolsExtension ? window.devToolsExtension() : f => f
   )(createStore);
 

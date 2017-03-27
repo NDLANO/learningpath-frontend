@@ -9,23 +9,17 @@
 import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
-
 import LoginProviders from '../LoginProviders';
 
 
 test('component/LoginProviders', (t) => {
   const component = shallow(<LoginProviders />);
 
-  const links = component.find('.cta-link');
+  const buttons = component.find('.cta-link');
 
-  t.equals(links.length, 3);
+  t.equals(buttons.length, 3);
 
-  t.deepEquals(links.map(n => n.text()), ['Google', 'Facebook', 'Twitter']);
-
-  links.map(n => n.prop('href')).forEach((href) => {
-    t.ok(/successUrl=/.test(href), 'successUrl param');
-    t.ok(/failureUrl=/.test(href), 'failureUrl param');
-  });
+  t.deepEquals(buttons.map(n => n.text()), ['Google', 'Facebook', 'Twitter']);
 
   t.end();
 });

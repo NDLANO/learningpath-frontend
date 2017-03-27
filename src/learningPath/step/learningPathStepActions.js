@@ -24,7 +24,7 @@ export const setOembedObject = createAction('SET_OEMBED_OBJECT');
 
 export function fetchOembed(query) {
   if (query.embedType === 'oembed') {
-    return (dispatch, getState) => fetchOembedUrl(getState().authToken, query)
+    return (dispatch, getState) => fetchOembedUrl(getState().accessToken, query)
       .then((object) => {
         const clonedObject = Object.assign({}, object, { url: query.url, embedType: query.embedType, language: getState().locale });
         dispatch(setOembedObject(clonedObject));
@@ -50,7 +50,7 @@ function canAccessLearningPathStep(pathId, step, isEdit = false, dispatch) {
 
 export function fetchLearningPathStep(pathId, stepId, isEdit = false) {
   return (dispatch, getState) => {
-    const { authToken, learningPath, locale } = getState();
+    const { accessToken, learningPath, locale } = getState();
 
     if (get(learningPath, 'id') === pathId) {
       const step = get(learningPath, 'learningsteps', []).find(s => s.id === stepId);
@@ -60,7 +60,7 @@ export function fetchLearningPathStep(pathId, stepId, isEdit = false) {
       }
     }
 
-    return fetchPathStep(authToken, { pathId, stepId })
+    return fetchPathStep(accessToken, { pathId, stepId })
       .then((step) => {
         dispatch(setLearningPathStep(step));
         canAccessLearningPathStep(pathId, step, isEdit, dispatch);
@@ -84,7 +84,7 @@ export function fetchLearningPathStep(pathId, stepId, isEdit = false) {
 }
 
 export function updateLearningPathStep(pathId, stepId, learningPathStep) {
-  return (dispatch, getState) => updateStep(getState().authToken, { pathId, stepId }, learningPathStep)
+  return (dispatch, getState) => updateStep(getState().accessToken, { pathId, stepId }, learningPathStep)
     .then((lpspath) => {
       dispatch(addMessage({ message: polyglot.t('updateLearningPath.updatedMsg') }));
       dispatch(setLearningPathStep(lpspath));
@@ -97,7 +97,7 @@ export function updateLearningPathStep(pathId, stepId, learningPathStep) {
 }
 
 export function createLearningPathStep(pathId, learningPathStep) {
-  return (dispatch, getState) => createStep(getState().authToken, { pathId }, learningPathStep)
+  return (dispatch, getState) => createStep(getState().accessToken, { pathId }, learningPathStep)
     .then((lpspath) => {
       dispatch(addMessage({ message: polyglot.t('updateLearningPath.updatedMsg') }));
       dispatch(fetchLearningPath(pathId));
@@ -110,14 +110,14 @@ export function createLearningPathStep(pathId, learningPathStep) {
 
 export function activateDeletedLearningPathStep(pathId, stepId) {
   return (dispatch, getState) =>
-    activateDeletedStep(getState().authToken, { pathId, stepId })
+    activateDeletedStep(getState().accessToken, { pathId, stepId })
       .then(() => dispatch(fetchLearningPath(pathId)))
   ;
 }
 
 export function deleteLearningPathStep(pathId, stepId, stepTitle) {
   return (dispatch, getState) =>
-    deleteStep(getState().authToken, { pathId, stepId })
+    deleteStep(getState().accessToken, { pathId, stepId })
       .then(() => dispatch(
         addMessage(
           {
@@ -136,7 +136,7 @@ export function deleteLearningPathStep(pathId, stepId, stepTitle) {
 }
 
 export function updateStepSequenceNumber(pathId, stepId, seqNo) {
-  return (dispatch, getState) => updateSeqNo(getState().authToken, { pathId, stepId }, { seqNo })
+  return (dispatch, getState) => updateSeqNo(getState().accessToken, { pathId, stepId }, { seqNo })
     .then(() => {
       dispatch(fetchLearningPath(pathId));
     })

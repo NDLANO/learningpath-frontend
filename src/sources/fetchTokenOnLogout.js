@@ -6,8 +6,8 @@
  *
  */
 
-import { fetchAuthorized } from './helpers';
+ import { resolveJsonOrRejectWithError } from './helpers';
 
-const sendLogout = fetchAuthorized('/auth/logout');
+ const fetchTokenOnLogout = fetch('/get_token').then(resolveJsonOrRejectWithError);
 
-export default sendLogout;
+ export default fetchTokenOnLogout;

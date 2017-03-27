@@ -19,7 +19,7 @@ import { createLearningPathStep } from '../learningPathStepActions';
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-const authToken = '123345';
+const accessToken = '123345';
 const pathId = 123;
 
 
@@ -37,11 +37,11 @@ test('actions/createLearningPathStep', (t) => {
 
   const learningStepReply = Object.assign({}, learningStep, { id: 1234 });
 
-  const postPathStepApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  const postPathStepApi = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .post(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps`, learningStep)
     .reply(200, learningStepReply);
 
-  const store = mockStore({ authToken });
+  const store = mockStore({ accessToken });
 
   store.dispatch(createLearningPathStep(pathId, learningStep))
     .then(() => {
@@ -69,11 +69,11 @@ test('actions/createLearningPathStep access denied', (t) => {
     embedUrl: [{ language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY' }],
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .post(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps`, learningStep)
     .reply(403, { message: 'Invalid' });
 
-  const store = mockStore({ authToken });
+  const store = mockStore({ accessToken });
 
   store.dispatch(createLearningPathStep(pathId, learningStep))
     .then(() => {

@@ -7,12 +7,12 @@
  */
 
 import { handleActions } from 'redux-actions';
-import { defaultApiKey } from '../sources/helpers';
+import { uuid } from 'ndla-util';
+
 
 export default handleActions({
-  SET_AUTH_TOKEN: {
+  SET_STATE_UUID: {
     next: (state, action) => action.payload,
     throw: state => state,
   },
-  LOGOUT: () => defaultApiKey,
-}, defaultApiKey);
+}, uuid());

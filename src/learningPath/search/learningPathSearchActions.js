@@ -14,14 +14,14 @@ export const setLearningPathBasedOn = createAction('SET_LEARNING_PATH_BASED_ON')
 export const setLearningPathSearchResults = createAction('SET_LEARNING_PATH_SEARCH_RESULTS');
 
 function fetchIsBasedOnPath(path) {
-  return (dispatch, getState) => fetchPath(getState().authToken, { pathId: path.isBasedOn })
+  return (dispatch, getState) => fetchPath(getState().accessToken, { pathId: path.isBasedOn })
     .then((isBasedOnPath) => {
       dispatch(setLearningPathBasedOn({ isBasedOnPath, pathId: path.id }));
     });
 }
 
 export function searchLearningPaths(query) {
-  return (dispatch, getState) => fetchPaths(getState().authToken, query)
+  return (dispatch, getState) => fetchPaths(getState().accessToken, query)
     .then((res) => {
       dispatch(setLearningPathSearchResults({
         results: res.results,

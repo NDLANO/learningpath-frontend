@@ -19,7 +19,7 @@ import { updateLearningPath, setLearningPath } from '../learningPathActions';
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-const authToken = '123345';
+const accessToken = '123345';
 const pathId = 123;
 
 test('actions/updateLearningPath', (t) => {
@@ -28,13 +28,13 @@ test('actions/updateLearningPath', (t) => {
     nock.cleanAll();
   };
 
-  const patchPathApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  const patchPathApi = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .patch(`/learningpaths/${pathId}`, {
       id: pathId, isRequest: true,
     })
     .reply(200, { id: pathId, isResponse: true });
 
-  const store = mockStore({ authToken });
+  const store = mockStore({ accessToken });
 
   store.dispatch(updateLearningPath(pathId, {
     id: pathId, isRequest: true,
@@ -62,11 +62,11 @@ test('actions/updateLearningPath with redirect', (t) => {
     nock.cleanAll();
   };
 
-  const patchPathApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  const patchPathApi = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .patch(`/learningpaths/${pathId}`, { id: pathId })
     .reply(200, { id: pathId });
 
-  const store = mockStore({ authToken });
+  const store = mockStore({ accessToken });
 
   store.dispatch(updateLearningPath(pathId, { id: pathId }, '/goto/dev/null'))
     .then(() => {
@@ -88,14 +88,14 @@ test('actions/updateLearningPath access denied', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .patch(`/learningpaths/${pathId}`, {
       id: pathId,
       foo: 'bar',
     })
     .reply(403, { message: 'Invalid' });
 
-  const store = mockStore({ authToken });
+  const store = mockStore({ accessToken });
 
   store.dispatch(updateLearningPath(pathId, { id: pathId, foo: 'bar' }))
     .then(() => {

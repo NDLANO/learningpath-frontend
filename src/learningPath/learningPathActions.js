@@ -31,14 +31,14 @@ function canAccessLearningPath(path, isEdit = false, dispatch) {
 }
 
 function fetchIsBasedOnPath(path) {
-  return (dispatch, getState) => fetchPath(getState().authToken, { pathId: path.isBasedOn })
+  return (dispatch, getState) => fetchPath(getState().accessToken, { pathId: path.isBasedOn })
     .then((isBasedOnPath) => {
       dispatch(setLearningPath({ ...path, isBasedOnTitle: isBasedOnPath.title }));
     });
 }
 
 export function fetchLearningPath(pathId, isEdit = false) {
-  return (dispatch, getState) => fetchPath(getState().authToken, { pathId })
+  return (dispatch, getState) => fetchPath(getState().accessToken, { pathId })
     .then((path) => {
       canAccessLearningPath(path, isEdit, dispatch);
       dispatch(setLearningPath(path));
@@ -76,7 +76,7 @@ export function createEmptyLearningPath() {
 }
 
 export function createLearningPath(learningPath) {
-  return (dispatch, getState) => new Promise((resolve, reject) => createPath(getState().authToken, { }, learningPath)
+  return (dispatch, getState) => new Promise((resolve, reject) => createPath(getState().accessToken, { }, learningPath)
     .then((lpath) => {
       dispatch(addMessage({ message: polyglot.t('createLearningPath.createdMsg') }));
       dispatch(setLearningPath(lpath));
@@ -94,7 +94,7 @@ export function createLearningPath(learningPath) {
 }
 
 export function updateLearningPath(pathId, learningPath, redirectUrl = `/learningpaths/${pathId}`) {
-  return (dispatch, getState) => new Promise((resolve, reject) => updatePath(getState().authToken, { pathId }, learningPath)
+  return (dispatch, getState) => new Promise((resolve, reject) => updatePath(getState().accessToken, { pathId }, learningPath)
     .then((lpath) => {
       dispatch(addMessage({ message: polyglot.t('updateLearningPath.updatedMsg') }));
       dispatch(setLearningPath(lpath));
@@ -111,11 +111,11 @@ export function updateLearningPath(pathId, learningPath, redirectUrl = `/learnin
 }
 export function activateDeletedLearningPath(pathId, status) {
   return (dispatch, getState) =>
-    activateDeletedPath(getState().authToken, { pathId, status })
+    activateDeletedPath(getState().accessToken, { pathId, status })
     .then(() => dispatch(fetchMyLearningPaths()));
 }
 export function deleteLearningPath(learningPath) {
-  return (dispatch, getState) => deletePath(getState().authToken, { pathId: learningPath.id })
+  return (dispatch, getState) => deletePath(getState().accessToken, { pathId: learningPath.id })
     .then(dispatch(removeLearningPath(learningPath.id)))
     .then(dispatch(
       addMessage(
@@ -132,7 +132,7 @@ export function deleteLearningPath(learningPath) {
     );
 }
 function updateLPStatus(pathId, status, redirectUrl, setStatus) {
-  return (dispatch, getState) => updateStatus(getState().authToken, { pathId }, { status })
+  return (dispatch, getState) => updateStatus(getState().accessToken, { pathId }, { status })
     .then(() => {
       dispatch(setStatus);
       dispatch(addMessage({ message: polyglot.t('updateLearningPathStatus.updateStatusMsg') }));
@@ -162,7 +162,7 @@ export function copyLearningPath(learningPath, locale) {
     ],
   };
 
-  return (dispatch, getState) => new Promise((resolve, reject) => copyPath(getState().authToken, { copyfrom: learningPath.id }, clonedLearningPathTitle)
+  return (dispatch, getState) => new Promise((resolve, reject) => copyPath(getState().accessToken, { copyfrom: learningPath.id }, clonedLearningPathTitle)
     .then((lpath) => {
       dispatch(addMessage({ message: polyglot.t('copyLearningPath.copiedMessage') }));
       dispatch(setLearningPath(lpath));
