@@ -18,7 +18,6 @@ const Auth0SilentCallback = `
           domain: '${config.auth0Domain}',
           clientID: '${config.auth0ClientID}'
         });
-        console.log(window.location.hash);
         var result = webAuth.parseHash(window.location.hash, function(err, data) {
           parent.postMessage(err || data, window.location.origin);
         });
