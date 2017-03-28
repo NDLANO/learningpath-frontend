@@ -58,7 +58,7 @@ app.get('/pintrest-proxy/*', requestProxy({
 }));
 
 app.get('/login/silent-callback', (req, res) => {
-  res.send('<!doctype html>\n' + renderToString(<Auth0SilentCallback />)); // eslint-disable-line
+  res.send('<!doctype html>\n' + Auth0SilentCallback); // eslint-disable-line
 });
 
 app.get('/is_token_valid', (req, res) => {
