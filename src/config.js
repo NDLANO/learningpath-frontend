@@ -39,6 +39,8 @@ module.exports = Object.assign({
   pintrestApiUrl: process.env.PINTREST_API_URL || 'https://api.pinterest.com/v1/',
   pintrestEnabled: process.env.PINTREST_ACCESS_TOKEN !== undefined && pinterestActivated,
   ltiActivated,
+  auth0ClientID: process.env.AUTH0_CLIENT_ID,
+  auth0Domain: process.env.AUTH0_DOMAIN,
   app: {
     title: 'NDLA Læringsstier',
     head: {

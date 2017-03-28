@@ -7,35 +7,116 @@
  */
 
 import { createAction } from 'redux-actions';
-
+import auth0 from 'auth0-js';
+import { routerActions } from 'react-router-redux';
+import { locationOrigin, auth0ClientId, auth0Domain, getToken } from '../sources/helpers';
+import { decodeIdToken, getTimeToUpdateInMs } from '../util/jwtHelper';
+import { fetchNewToken, isTokenValid } from '../sources/tokens';
 import { applicationError } from '../messages/messagesActions';
-import sendLogout from '../sources/sendLogout';
-import fetchAboutMe from '../sources/fetchAboutMe';
 
 export const setAuthenticated = createAction('SET_AUTHENTICATED');
-export const setAuthToken = createAction('SET_AUTH_TOKEN');
+export const setAccessToken = createAction('SET_ACCESS_TOKEN');
 export const setUserData = createAction('SET_USER_DATA');
-export const logoutAction = createAction('LOGOUT');
+export const logoutAction = createAction('LOGOUT_ID_TOKEN');
+export const setIdToken = createAction('SET_ID_TOKEN');
+const auth = new auth0.WebAuth({
+  clientID: auth0ClientId,
+  domain: auth0Domain,
+  responseType: 'token id_token',
+  redirectUri: `${locationOrigin}/login/success`,
+  scope: 'openid app_metadata name',
+});
 
+export function parseHash(hash) {
+  return (dispatch) => {
+    auth.parseHash({ hash, _idTokenVerification: false }, (err, authResult) => {
+      if (authResult && authResult.accessToken && authResult.idToken) {
+        dispatch(setIdToken(authResult.idToken));
+        dispatch(setAuthenticated(true));
+        dispatch(setUserData(decodeIdToken(authResult.idToken)));
+        dispatch(routerActions.replace('/minside'));
+      }
+    });
+  };
+}
+
+export function loginSocialMedia(type) {
+  auth.authorize({
+    connection: type,
+  });
+}
 
 export function logout() {
-  return (dispatch, getState) => sendLogout(getState().authToken)
-    .then(() => dispatch(logoutAction()))
+  return dispatch => fetchNewToken()
+    .then((token) => {
+      dispatch(setAccessToken(token.access_token));
+      dispatch(setAuthenticated(false));
+      dispatch(logoutAction());
+      auth.logout({
+        returnTo: `${locationOrigin}/login`,
+        client_id: auth0ClientId,
+      });
+    })
     .catch(err => dispatch(applicationError(err)));
 }
 
+export function renewAuth0Token() {
+  return (dispatch) => {
+    auth.renewAuth({
+      redirectUri: `${locationOrigin}/login/silent-callback`,
+      usePostMessage: true,
+    }, (err, authResult) => {
+      if (authResult && authResult.idToken) {
+        dispatch(setIdToken(authResult.idToken));
+        dispatch(setAuthenticated(true));
+        dispatch(setUserData(decodeIdToken(authResult.idToken)));
+        dispatch(checkValidSession(authResult.idToken)); //eslint-disable-line
+      } else {
+        dispatch(logout());
+      }
+    });
+  };
+}
 
-export function checkValidSession() {
-  return (dispatch, getState) => fetchAboutMe(getState().authToken)
-    .catch(() => dispatch(logoutAction()));
+export function renewAuthToken() {
+  return dispatch => fetchNewToken()
+    .then((token) => {
+      dispatch(setAccessToken(token.access_token));
+      dispatch(checkValidSession(token.access_token)); //eslint-disable-line
+    });
+}
+
+export function refreshToken(getState) {
+  return (dispatch) => {
+    if (getState().authenticated) {
+      dispatch(renewAuth0Token());
+    } else {
+      dispatch(renewAuthToken());
+    }
+  };
 }
 
 
-export function initializeSession(authToken) {
-  return dispatch => fetchAboutMe(authToken).then(user => [
-    setAuthenticated(true),
-    setAuthToken(authToken),
-    setUserData(user),
-  ].map(dispatch))
-  .catch(err => dispatch(applicationError(err)));
+export function checkValidSession(token = undefined) {
+  return (dispatch, getState) => setTimeout(
+    () => {
+      dispatch(refreshToken(getState));
+    },
+    token ? getTimeToUpdateInMs(token) : getTimeToUpdateInMs(getToken(getState))
+  );
+}
+
+export function checkAccessTokenOnEnter() {
+  return (dispatch, getState) => setTimeout(() => {
+    if (getState().authenticated) {
+      isTokenValid(decodeIdToken(getState().idToken).exp).then((valid) => {
+        if (valid.isTokenExpired) {
+          dispatch(routerActions.replace('/'));
+        }
+        dispatch(renewAuth0Token());
+      });
+    } else {
+      dispatch(renewAuthToken());
+    }
+  }, 0);
 }
