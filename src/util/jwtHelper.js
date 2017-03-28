@@ -12,5 +12,5 @@ export function getTokenIssuedAt(token) {
 export const decodeIdToken = idToken => decode(idToken);
 
 export function getTimeToUpdateInMs(token) {
-  return (getTokenExpiration(token) - getTokenIssuedAt(token) - 10) * 1000; // Removes 5 minutes from time to update
+  return (getTokenExpiration(token) - getTokenIssuedAt(token) - (60 * 3)) * 1000; // Removes 3 minutes from time to update
 }
