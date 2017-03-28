@@ -20,7 +20,7 @@ const url = `${NDLA_API_URL}/auth/tokens`;
 
 const b64EncodeUnicode = str => btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (match, p1) => String.fromCharCode(`0x${p1}`)));
 
-const getToken = () => fetch(url, {
+export const getToken = () => fetch(url, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
@@ -29,7 +29,4 @@ const getToken = () => fetch(url, {
   body: queryString.stringify(clientData),
 }).then(res => res.json());
 
-
-export {
-  getToken,
-};
+export const isTokenExpired = tokenExp => tokenExp - (Date.now() / 1000) <= 0;
