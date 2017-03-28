@@ -63,6 +63,10 @@ const apiBaseUrl = (() => {
 })();
 
 
+export function getToken(getState) {
+  return getState().authenticated ? getState().idToken : getState().accessToken;
+}
+
 export { locationOrigin, apiBaseUrl };
 
 export function apiResourceUrl(path) { return apiBaseUrl + path; }
@@ -73,6 +77,7 @@ export function ApiError(message, res = {}, json) {
   this.url = res.url;
   this.status = res.status;
   this.json = json;
+  this.code = json.code;
   // Drop creating a stack for easier unit testing
   // The stack does'nt give any value as long as the ApiError is only created in createErrorPayload()
   // this.stack = (new Error()).stack;

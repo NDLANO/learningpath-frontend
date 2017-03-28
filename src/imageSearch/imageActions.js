@@ -11,6 +11,7 @@ import pickBy from 'lodash/pickBy';
 
 import { applicationError } from '../messages/messagesActions';
 import { fetchImages, fetchImage, fetchImageWithMetaUrl } from '../sources/images';
+import { getToken } from '../sources/helpers';
 
 export const setImages = createAction('SET_IMAGES');
 export const setSelectedImage = createAction('SET_SELECTED_IMAGE');
@@ -19,7 +20,7 @@ export const setImagesSearchTime = createAction('SET_IMAGES_SEARCH_TIME');
 export const changeImageSearchQuery = createAction('CHANGE_IMAGE_SEARCH_QUERY');
 
 export function fetchLearningPathImages(query, isFirstSearch = false) {
-  return dispatch => fetchImages(pickBy(query))
+  return (dispatch, getState) => fetchImages(pickBy(query), getToken(getState))
     .then((images) => {
       /*
         If the default search on the title (first search from edit learningpath), a new search will be executed with a empty query string.
@@ -36,14 +37,14 @@ export function fetchLearningPathImages(query, isFirstSearch = false) {
 }
 
 export function fetchLearningPathImage(imageId) {
-  return dispatch => fetchImage(imageId)
+  return (dispatch, getState) => fetchImage(imageId, getToken(getState))
     .then((image) => {
       dispatch(setSelectedImage(image));
     })
     .catch(err => dispatch(applicationError(err)));
 }
 export function fetchLearningPathImageWithMetaUrl(url) {
-  return dispatch => fetchImageWithMetaUrl(url)
+  return (dispatch, getState) => fetchImageWithMetaUrl(url, getToken(getState))
     .then((image) => {
       dispatch(setSavedImage(image));
     })

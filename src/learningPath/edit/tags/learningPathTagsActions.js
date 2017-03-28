@@ -9,11 +9,12 @@
 import { createAction } from 'redux-actions';
 import { fetchPathTags } from '../../../sources/learningpaths';
 import { applicationError } from '../../../messages/messagesActions';
+import { getToken } from '../../../sources/helpers';
 
 const setLearningPathTags = createAction('SET_LEARNING_PATH_TAGS');
 
 function fetchLearningPathTags() {
-  return (dispatch, getState) => fetchPathTags(getState().accessToken)
+  return (dispatch, getState) => fetchPathTags(getToken(getState))
     .then(tags => dispatch(setLearningPathTags(tags)))
     .catch(err => dispatch(applicationError(err)));
 }

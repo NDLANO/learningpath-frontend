@@ -13,8 +13,6 @@ import { Router, useRouterHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { createHistory } from 'history';
 import ErrorReporter from 'ndla-error-reporter';
-import { uuid } from 'ndla-util';
-
 import { configureLocale, isValidLocale } from './locale/configureLocale';
 import configureStore from './configureStore';
 import configureRoutes from './main/routes';
@@ -41,7 +39,7 @@ const browserHistory = configureBrowserHistory(path);
 const store = configureStore({
   authenticated: false,
   accessToken,
-  stateUuid: uuid(),
+  idToken: '',
   user: {},
   learningPathStep: {},
   learningPaths: [],

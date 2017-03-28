@@ -12,12 +12,16 @@ import { connect } from 'react-redux';
 import { getLocale } from '../locale/localeSelectors';
 import { getMessages } from '../messages/messagesSelectors';
 import Alerts from '../messages/Alerts';
+import { checkAccessTokenOnEnter } from '../session/sessionActions';
 
 export class App extends React.Component {
   getChildContext() {
     return {
       lang: this.props.locale,
     };
+  }
+  componentWillMount() {
+    this.props.dispatch(checkAccessTokenOnEnter());
   }
 
   render() {

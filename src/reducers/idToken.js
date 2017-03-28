@@ -7,11 +7,13 @@
  */
 
 import { handleActions } from 'redux-actions';
-import { accessToken } from '../sources/helpers';
+
+const emptyIdToken = '';
 
 export default handleActions({
-  SET_ACCESS_TOKEN: {
+  SET_ID_TOKEN: {
     next: (state, action) => action.payload,
     throw: state => state,
   },
-}, accessToken);
+  LOGOUT_ID_TOKEN: () => emptyIdToken,
+}, emptyIdToken);

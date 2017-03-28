@@ -8,6 +8,6 @@
 
  import { resolveJsonOrRejectWithError } from './helpers';
 
- const fetchTokenOnLogout = fetch('/get_token').then(resolveJsonOrRejectWithError);
+ export const fetchNewToken = () => fetch('/get_token').then(resolveJsonOrRejectWithError);
 
- export default fetchTokenOnLogout;
+ export const isTokenValid = tokenExp => fetch(`/is_token_valid?tokenExp=${tokenExp}`).then(resolveJsonOrRejectWithError);

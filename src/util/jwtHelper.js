@@ -1,22 +1,16 @@
 import decode from 'jwt-decode';
 
-export function getTokenExpirationDate(token) {
+export function getTokenExpiration(token) {
   const decoded = decode(token);
-  if (!decoded.exp) {
-    return null;
-  }
-
-  const date = new Date(0); // The 0 here is the key, which sets the date to the epoch
-  date.setUTCSeconds(decoded.exp);
-  return date;
+  return decoded.exp;
 }
-
-export function isTokenExpired(token) {
-  const date = getTokenExpirationDate(token);
-  if (date === null) {
-    return false;
-  }
-  return !(date.valueOf() > new Date().valueOf());
+export function getTokenIssuedAt(token) {
+  const decoded = decode(token);
+  return decoded.iat;
 }
 
 export const decodeIdToken = idToken => decode(idToken);
+
+export function getTimeToUpdateInMs(token) {
+  return (getTokenExpiration(token) - getTokenIssuedAt(token) - 10) * 1000; // Removes 5 minutes from time to update
+}
