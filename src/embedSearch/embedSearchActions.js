@@ -12,6 +12,7 @@ import { fetchGoogleContent } from '../sources/embedSearch';
 import { fetchOembedUrl } from '../sources/learningpaths';
 import { getNumberOfPages } from './embedSearchSelectors';
 import { transformNdlaUrl } from '../util/urlTransformer';
+import { getToken } from '../sources/helpers';
 
 export const setEmbedPreview = createAction('SET_EMBED_PREVIEW');
 export const setEmbedResults = createAction('SET_EMBED_RESULTS');
@@ -41,7 +42,7 @@ export function fetchNdlaEmbedSearch(query) {
 
 
 function fetchOembed(url, lang, type) {
-  return (dispatch, getState) => fetchOembedUrl(getState().authToken, { url })
+  return (dispatch, getState) => fetchOembedUrl(getToken(getState), { url })
     .then((oembed) => {
       dispatch(setEmbedPreview({ type, oembedContent: Object.assign({}, oembed, { url, language: lang }) }));
     })

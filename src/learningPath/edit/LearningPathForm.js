@@ -126,7 +126,6 @@ LearningPathForm.propTypes = {
   lang: PropTypes.string.isRequired,
   localFetchImages: PropTypes.func.isRequired,
   fetchImage: PropTypes.func.isRequired,
-  licenseOptions: PropTypes.array.isRequired,
   formValues: PropTypes.object.isRequired,
 };
 
