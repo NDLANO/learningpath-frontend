@@ -24,7 +24,7 @@ const AuthScript = () => (
   />
 );
 
-const Auth0 = () => (
+const Auth0SilentCallback = () => (
   <html lang="no">
     <head />
     <body>
@@ -34,4 +34,4 @@ const Auth0 = () => (
   </html>
   );
 
-export default Auth0;
+export default Auth0SilentCallback;

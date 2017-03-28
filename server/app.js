@@ -21,7 +21,7 @@ import webpackConfig from '../webpack.config.dev';
 import { getHtmlLang } from '../src/locale/configureLocale';
 import Html from './Html';
 import { getToken, isTokenExpired } from './auth';
-import Auth0 from './Auth0';
+import Auth0SilentCallback from './Auth0SilentCallback';
 
 const app = express();
 
@@ -58,7 +58,7 @@ app.get('/pintrest-proxy/*', requestProxy({
 }));
 
 app.get('/login/silent-callback', (req, res) => {
-  res.send('<!doctype html>\n' + renderToString(<Auth0 />)); // eslint-disable-line
+  res.send('<!doctype html>\n' + renderToString(<Auth0SilentCallback />)); // eslint-disable-line
 });
 
 app.get('/is_token_valid', (req, res) => {
