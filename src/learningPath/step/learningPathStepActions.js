@@ -51,7 +51,7 @@ function canAccessLearningPathStep(pathId, step, isEdit = false, dispatch) {
 
 export function fetchLearningPathStep(pathId, stepId, isEdit = false) {
   return (dispatch, getState) => {
-    const { accessToken, learningPath, locale } = getState();
+    const { learningPath, locale } = getState();
 
     if (get(learningPath, 'id') === pathId) {
       const step = get(learningPath, 'learningsteps', []).find(s => s.id === stepId);
@@ -61,7 +61,7 @@ export function fetchLearningPathStep(pathId, stepId, isEdit = false) {
       }
     }
 
-    return fetchPathStep(accessToken, { pathId, stepId })
+    return fetchPathStep(getToken(getState), { pathId, stepId })
       .then((step) => {
         dispatch(setLearningPathStep(step));
         canAccessLearningPathStep(pathId, step, isEdit, dispatch);
