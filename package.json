@@ -1,6 +1,6 @@
 {
   "name": "learningpath-frontend",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "description": "NDLA Learning Path Frontend",
   "scripts": {
     "pretest": "npm run lint",
