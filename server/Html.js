@@ -37,8 +37,9 @@ const GoogleTagMangerScript = () => {
 
 
 const Html = (props) => {
-  const { lang, className } = props;
-
+  const { lang, className, token } = props;
+  const configWithAccessToken = config;
+  configWithAccessToken.accessToken = token.access_token;
   return (
     <html lang={lang} className={className}>
       <head>
@@ -57,7 +58,7 @@ const Html = (props) => {
         <GoogleTagMangerScript />
         <div id="app-container" className="app-container" />
         <script dangerouslySetInnerHTML={{ __html: `window.assets = ${serialize(assets)}` }} />
-        <script dangerouslySetInnerHTML={{ __html: `window.config = ${serialize(config)}` }} />
+        <script dangerouslySetInnerHTML={{ __html: `window.config = ${serialize(configWithAccessToken)}` }} />
         <script src={`/assets/${assets['main.js']}`} />
         <SvgPolyfillScriptInitalization className={className} />
       </body>
@@ -68,6 +69,7 @@ const Html = (props) => {
 Html.propTypes = {
   lang: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
+  token: PropTypes.object.isRequired,
 };
 
 export default Html;

@@ -20,7 +20,7 @@ import { createEmptyLearningPathStep } from '../step/learningPathStepActions';
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-const authToken = '123345';
+const accessToken = '123345';
 const pathId = 123;
 
 test('actions/createLearningPath', (t) => {
@@ -35,23 +35,23 @@ test('actions/createLearningPath', (t) => {
     { seqNo: 2 },
   ];
 
-  const postPathApi = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  const postPathApi = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .post('/learningpaths', { isRequest: true, learningsteps })
     .reply(200, { id: pathId, isResponse: true });
 
-  const postStep1Api = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  const postStep1Api = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .post(`/learningpaths/${pathId}/learningsteps`, { seqNo: 0 })
     .reply(200, { id: 12, seqNo: 0, isResponse: true });
 
-  const postStep2Api = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  const postStep2Api = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .post(`/learningpaths/${pathId}/learningsteps`, { seqNo: 1 })
     .reply(200, { id: 34, seqNo: 1, isResponse: true });
 
-  const postStep3Api = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  const postStep3Api = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .post(`/learningpaths/${pathId}/learningsteps`, { seqNo: 2 })
     .reply(200, { id: 56, seqNo: 2, isResponse: true });
 
-  const store = mockStore({ authToken });
+  const store = mockStore({ accessToken });
 
 
   store.dispatch(
@@ -89,13 +89,13 @@ test('actions/createLearningPath access denied', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .post('/learningpaths', {
       foo: 'bar',
     })
     .reply(403, { message: 'Invalid' });
 
-  const store = mockStore({ authToken });
+  const store = mockStore({ accessToken });
 
   store.dispatch(createLearningPath({ foo: 'bar' }))
     .then(() => {

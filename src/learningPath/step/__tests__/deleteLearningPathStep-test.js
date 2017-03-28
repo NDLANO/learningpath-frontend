@@ -16,7 +16,7 @@ import { deleteLearningPathStep } from '../learningPathStepActions';
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-const authToken = '123345';
+const accessToken = '123345';
 const pathId = 123;
 const stepId = 321;
 
@@ -27,17 +27,17 @@ test('actions/deleteLearningPathStep with id', (t) => {
   };
 
   // GET /learningpaths/:pathId
-  nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get(`/learningpath-api/v1/learningpaths/${pathId}`)
     .reply(200, { id: pathId });
 
   // DELETE /learningpaths/:pathId/learningsteps/:stepId
-  nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .delete(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`)
     .reply(204);
 
 
-  const store = mockStore({ authToken });
+  const store = mockStore({ accessToken });
   store.dispatch(deleteLearningPathStep(pathId, stepId))
     .then(() => {
       t.equal(store.getActions().length, 4);

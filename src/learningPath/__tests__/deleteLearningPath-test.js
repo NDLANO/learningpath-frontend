@@ -16,7 +16,7 @@ import { deleteLearningPath } from '../learningPathActions';
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-const authToken = '123345';
+const accessToken = '123345';
 
 test('actions/deleteLearningPath', (t) => {
   const done = (res) => {
@@ -24,11 +24,11 @@ test('actions/deleteLearningPath', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .delete('/learningpath-api/v1/learningpaths/123')
     .reply(204);
 
-  const store = mockStore({ authToken });
+  const store = mockStore({ accessToken });
 
   store.dispatch(deleteLearningPath({ id: 123, status: 'PRIVATE' }))
     .then(() => {

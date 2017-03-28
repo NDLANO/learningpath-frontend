@@ -7,12 +7,11 @@
  */
 
 import { handleActions } from 'redux-actions';
-import { defaultApiKey } from '../sources/helpers';
+import { accessToken } from '../sources/helpers';
 
 export default handleActions({
-  SET_AUTH_TOKEN: {
+  SET_ACCESS_TOKEN: {
     next: (state, action) => action.payload,
     throw: state => state,
   },
-  LOGOUT: () => defaultApiKey,
-}, defaultApiKey);
+}, accessToken);

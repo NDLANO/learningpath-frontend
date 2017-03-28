@@ -35,12 +35,11 @@ export default function (store) {
 
   const {
     logout,
-    checkValidSession,
   } = bindActionCreators(actions, store.dispatch);
   const learningPathRoutes = configureLearningPathRoutes(store, ifAuthenticated);
 
   return (
-    <Route path="/" component={App} onEnter={ifAuthenticated(checkValidSession)}>
+    <Route path="/" component={App}>
       <IndexRoute component={Welcome} />
       {loginRoutes}
       <Route path="logout" onEnter={ifAuthenticated(logout)} component={LoginProviders} />
