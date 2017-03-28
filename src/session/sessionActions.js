@@ -75,6 +75,7 @@ export function renewAuth0Token() {
       redirectUri: `${locationOrigin}/login/silent-callback`,
       usePostMessage: true,
     }, (err, authResult) => {
+      console.log(authResult);
       if (authResult && authResult.idToken) {
         dispatch(setIdToken(authResult.idToken));
         dispatch(setAuthenticated(true));
@@ -106,7 +107,7 @@ export function refreshToken(getState) {
 }
 
 export function checkAccessTokenOnEnter() {
-  return (dispatch, getState) => setTimeout(() => {
+  return (dispatch, getState) => {
     if (getState().authenticated) {
       isTokenValid(decodeIdToken(getState().idToken).exp).then((valid) => {
         if (valid.isTokenExpired) {
@@ -117,5 +118,5 @@ export function checkAccessTokenOnEnter() {
     } else {
       dispatch(renewAuthToken());
     }
-  }, 0);
+  };
 }

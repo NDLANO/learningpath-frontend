@@ -35,12 +35,11 @@ export default function (store) {
 
   const {
     logout,
-    checkAccessTokenOnEnter,
   } = bindActionCreators(actions, store.dispatch);
   const learningPathRoutes = configureLearningPathRoutes(store, ifAuthenticated);
 
   return (
-    <Route path="/" onEnter={checkAccessTokenOnEnter} component={App}>
+    <Route path="/" component={App}>
       <IndexRoute component={Welcome} />
       {loginRoutes}
       <Route path="logout" onEnter={ifAuthenticated(logout)} component={LoginProviders} />
