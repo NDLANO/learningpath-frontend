@@ -1,4 +1,4 @@
-token;/**
+/**
  * Copyright (c) 2016-present, NDLA.
  *
  * This source code is licensed under the GPLv3 license found in the
@@ -10,7 +10,6 @@ import 'isomorphic-fetch';
 import queryString from 'query-string';
 import cloneDeep from 'lodash/cloneDeep';
 import map from 'lodash/map';
-
 import assureSequenceOrder from '../util/assureSequenceOrder';
 import { fetchAuthorized, authorizationHeader, postAuthorized, putAuthorized, patchAuthorized, deleteAuthorized, resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';
 
