@@ -60,6 +60,15 @@ export function logout() {
     .catch(err => dispatch(applicationError(err)));
 }
 
+export function checkValidSession(token = undefined) {
+  return (dispatch, getState) => setTimeout(
+    () => {
+      dispatch(refreshToken(getState)); // eslint-disable-line
+    },
+    token ? getTimeToUpdateInMs(token) : getTimeToUpdateInMs(getToken(getState))
+  );
+}
+
 export function renewAuth0Token() {
   return (dispatch) => {
     auth.renewAuth({
@@ -70,7 +79,7 @@ export function renewAuth0Token() {
         dispatch(setIdToken(authResult.idToken));
         dispatch(setAuthenticated(true));
         dispatch(setUserData(decodeIdToken(authResult.idToken)));
-        dispatch(checkValidSession(authResult.idToken)); //eslint-disable-line
+        dispatch(checkValidSession(authResult.idToken));
       } else {
         dispatch(logout());
       }
@@ -82,7 +91,7 @@ export function renewAuthToken() {
   return dispatch => fetchNewToken()
     .then((token) => {
       dispatch(setAccessToken(token.access_token));
-      dispatch(checkValidSession(token.access_token)); //eslint-disable-line
+      dispatch(checkValidSession(token.access_token));
     });
 }
 
@@ -94,16 +103,6 @@ export function refreshToken(getState) {
       dispatch(renewAuthToken());
     }
   };
-}
-
-
-export function checkValidSession(token = undefined) {
-  return (dispatch, getState) => setTimeout(
-    () => {
-      dispatch(refreshToken(getState));
-    },
-    token ? getTimeToUpdateInMs(token) : getTimeToUpdateInMs(getToken(getState))
-  );
 }
 
 export function checkAccessTokenOnEnter() {
