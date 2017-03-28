@@ -19,7 +19,7 @@ const activatedForEnvironment = (config, defaultValue) => {
 const apiDomain = activatedForEnvironment({
   local: 'http://proxy.ndla-local',
   prod: 'https://api.ndla.no' },
-  'http://proxy.ndla-local');
+  `https://${environment}.api.ndla.no`);
 const ltiActivated = activatedForEnvironment({ test: true, local: true }, false);
 const pinterestActivated = activatedForEnvironment({ test: true, local: true }, false);
 
@@ -39,8 +39,6 @@ module.exports = Object.assign({
   pintrestApiUrl: process.env.PINTREST_API_URL || 'https://api.pinterest.com/v1/',
   pintrestEnabled: process.env.PINTREST_ACCESS_TOKEN !== undefined && pinterestActivated,
   ltiActivated,
-  auth0ClientID: process.env.AUTH0_CLIENT_ID,
-  auth0Domain: process.env.AUTH0_DOMAIN,
   app: {
     title: 'NDLA Læringsstier',
     head: {

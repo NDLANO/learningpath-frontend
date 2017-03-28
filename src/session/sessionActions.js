@@ -19,6 +19,7 @@ export const setAccessToken = createAction('SET_ACCESS_TOKEN');
 export const setUserData = createAction('SET_USER_DATA');
 export const logoutAction = createAction('LOGOUT_ID_TOKEN');
 export const setIdToken = createAction('SET_ID_TOKEN');
+
 const auth = new auth0.WebAuth({
   clientID: auth0ClientId,
   domain: auth0Domain,
@@ -75,7 +76,6 @@ export function renewAuth0Token() {
       redirectUri: `${locationOrigin}/login/silent-callback`,
       usePostMessage: true,
     }, (err, authResult) => {
-      console.log(authResult);
       if (authResult && authResult.idToken) {
         dispatch(setIdToken(authResult.idToken));
         dispatch(setAuthenticated(true));
@@ -108,7 +108,7 @@ export function refreshToken(getState) {
 
 export function checkAccessTokenOnEnter() {
   return (dispatch, getState) => {
-    if (getState().authenticated) {
+    if (getState().authenticated && getState().idToken) {
       isTokenValid(decodeIdToken(getState().idToken).exp).then((valid) => {
         if (valid.isTokenExpired) {
           dispatch(routerActions.replace('/'));
