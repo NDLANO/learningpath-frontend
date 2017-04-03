@@ -20,7 +20,7 @@ import { setSavedImage, setSelectedImage } from '../../imageSearch/imageActions'
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-const authToken = '123345';
+const accessToken = '123345';
 const pathId = 123;
 
 test('actions/fetchLearningPath without image', (t) => {
@@ -29,11 +29,11 @@ test('actions/fetchLearningPath without image', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get(`/learningpath-api/v1/learningpaths/${pathId}`)
     .reply(200, { id: pathId });
 
-  const store = mockStore({ authToken });
+  const store = mockStore({ accessToken });
 
   store.dispatch(fetchLearningPath(pathId))
     .then(() => {
@@ -54,11 +54,11 @@ test('actions/fetchLearningPath with image', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get(`/learningpath-api/v1/learningpaths/${pathId}`)
     .reply(200, { id: pathId, coverPhoto: { url: 'test', metaUrl: 'metaTest' } });
 
-  const store = mockStore({ authToken });
+  const store = mockStore({ accessToken });
 
   store.dispatch(fetchLearningPath(pathId))
     .then(() => {
@@ -77,11 +77,11 @@ test('actions/fetchLearningPath with isEdit true and canEdit false', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get(`/learningpath-api/v1/learningpaths/${pathId}`)
     .reply(200, { id: pathId, canEdit: false });
 
-  const store = mockStore({ authToken });
+  const store = mockStore({ accessToken });
 
   store.dispatch(fetchLearningPath(pathId, true))
     .then(() => {
@@ -103,11 +103,11 @@ test('actions/fetchLearningPath with isEdit true and canEdit true', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get(`/learningpath-api/v1/learningpaths/${pathId}`)
     .reply(200, { id: pathId, canEdit: true });
 
-  const store = mockStore({ authToken });
+  const store = mockStore({ accessToken });
 
   store.dispatch(fetchLearningPath(pathId, true))
     .then(() => {
@@ -128,11 +128,11 @@ test('actions/fetchLearningPath access denied', (t) => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { 'app-key': authToken } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get(`/learningpath-api/v1/learningpaths/${pathId}`)
     .reply(403, { message: 'Invalid' });
 
-  const store = mockStore({ authToken });
+  const store = mockStore({ accessToken });
 
   store.dispatch(fetchLearningPath(pathId))
     .then(() => {

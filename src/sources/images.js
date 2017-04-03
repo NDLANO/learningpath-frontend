@@ -10,20 +10,20 @@ import 'isomorphic-fetch';
 import queryString from 'query-string';
 import { formatPattern } from 'react-router/lib/PatternUtils';
 
-import { resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';
+import { resolveJsonOrRejectWithError, apiResourceUrl, authorizationHeader } from './helpers';
 
 const imagesUrl = apiResourceUrl('/image-api/v1/images');
 
-const fetchImages = (query = { 'page-size': 16, page: 1 }) => {
+const fetchImages = (query = { 'page-size': 16, page: 1 }, token) => {
   let url = imagesUrl;
   url += `?${queryString.stringify(query)}`;
-  return fetch(url).then(resolveJsonOrRejectWithError);
+  return fetch(url, { headers: { Authorization: authorizationHeader(token) } }).then(resolveJsonOrRejectWithError);
 };
-const fetchImage = (imageId) => {
+const fetchImage = (imageId, token) => {
   const url = apiResourceUrl(formatPattern('/image-api/v1/images/:imageId', { imageId }));
-  return fetch(url).then(resolveJsonOrRejectWithError);
+  return fetch(url, { headers: { Authorization: authorizationHeader(token) } }).then(resolveJsonOrRejectWithError);
 };
-const fetchImageWithMetaUrl = url => fetch(url).then(resolveJsonOrRejectWithError);
+const fetchImageWithMetaUrl = (url, token) => fetch(url, { headers: { Authorization: authorizationHeader(token) } }).then(resolveJsonOrRejectWithError);
 
 export {
   fetchImages,

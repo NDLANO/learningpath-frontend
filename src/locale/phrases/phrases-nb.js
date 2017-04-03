@@ -92,6 +92,8 @@ const phrases = {
     copy: 'Kopi',
     isBasedOn: 'basert på ',
     isBasedOnPath: 'en annen læringssti',
+    showIsBasedOn: 'Vis basert på',
+    hideIsBasedOn: 'Skjul basert på',
     copyright: {
       license: 'Lisens',
       contributors: 'Forfattere',
@@ -144,6 +146,7 @@ const phrases = {
     titlePlaceHolder: 'Skriv en tittel her',
     previewOembed: 'Forhåndsvis hele artikkelen',
     noLicenseChosen: 'Ingen lisens valgt',
+    showTitle: 'Velg om titelen skal vises eller skjules',
   },
   sortSteps: {
     sortOrDelete: 'Sorter eller slett læringssteg',

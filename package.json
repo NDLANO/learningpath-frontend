@@ -1,6 +1,6 @@
 {
   "name": "learningpath-frontend",
-  "version": "0.1.16",
+  "version": "0.1.19",
   "description": "NDLA Learning Path Frontend",
   "scripts": {
     "pretest": "npm run lint",
@@ -49,9 +49,11 @@
     "webpack-manifest-plugin": "1.1.0"
   },
   "dependencies": {
+    "auth0-js": "8.4.0",
     "babel-polyfill": "6.20.0",
     "babel-register": "6.18.0",
     "babel-runtime": "^6.22.0",
+    "btoa": "1.1.2",
     "classnames": "2.2.5",
     "compression": "1.6.2",
     "date-fns": "1.26.0",
@@ -62,12 +64,14 @@
     "eslint": "^3.13.1",
     "express": "4.14.0",
     "express-request-proxy": "2.0.0",
+    "form-data": "2.1.2",
     "history": "3.2.1",
     "immutable": "3.8.1",
     "isomorphic-fetch": "2.2.1",
+    "jwt-decode": "2.1.0",
     "lodash": "4.17.4",
     "ndla-error-reporter": "^0.1.2",
-    "ndla-learningpath-styleguide": "0.1.44",
+    "ndla-learningpath-styleguide": "0.1.46",
     "ndla-licenses": "0.0.6",
     "ndla-ui": "^0.1.6",
     "ndla-util": "^0.1.0",

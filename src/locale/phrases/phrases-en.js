@@ -92,6 +92,8 @@ const phrases = {
     copy: 'Copy',
     isBasedOn: 'based on ',
     isBasedOnPath: 'another learningpath',
+    showIsBasedOn: 'Show is based on',
+    hideIsBasedOn: 'Hide is based on',
     copyright: {
       license: 'License',
       contributors: 'Authors',
@@ -144,7 +146,7 @@ const phrases = {
     titlePlaceHolder: 'Write a title here',
     previewOembed: 'Preview whole article',
     noLicenseChosen: 'No license chosen',
-
+    showTitle: 'Chose if the title should be visible or hidden',
   },
   sortSteps: {
     sortOrDelete: 'Sort or delete learning step',

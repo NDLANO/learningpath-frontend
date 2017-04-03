@@ -17,7 +17,6 @@ import LabeledIcon from '../../common/LabeledIcon';
 import TagsInput from '../../common/TagsInput';
 import InputField from '../../common/form/InputField';
 import LearningPathDescription from './LearningPathDescription';
-import ObjectSelector from '../../common/form/ObjectSelector';
 import Contributors from './copyright/Contributors';
 import polyglot from '../../i18n';
 import LearningPathDuration from './LearningPathDuration';
@@ -58,7 +57,6 @@ const LearningPathForm = (props) => {
     lang,
     localFetchImages,
     fetchImage,
-    licenseOptions,
     formValues,
   } = props;
 
@@ -103,11 +101,6 @@ const LearningPathForm = (props) => {
           <Field name="contributors" component={Contributors} id="contributors" />
         </div>
 
-        <div className="learningPath-copyright">
-          <label htmlFor="license" className="label--medium-bold  label--medium">{polyglot.t('learningPath.copyright.license')}</label>
-          <Field name="license" component={ObjectSelector} idKey="license" labelKey="description" options={licenseOptions} />
-        </div>
-
         <div className="block-container_fixed block-container_fixed--bottom--right">
           <div className="button-group">
             <Link to={`/learningpaths/${learningPath.id}`} className="button button--secondary">
@@ -133,7 +126,6 @@ LearningPathForm.propTypes = {
   lang: PropTypes.string.isRequired,
   localFetchImages: PropTypes.func.isRequired,
   fetchImage: PropTypes.func.isRequired,
-  licenseOptions: PropTypes.array.isRequired,
   formValues: PropTypes.object.isRequired,
 };
 

@@ -12,6 +12,7 @@ import noop from 'lodash/noop';
 import Icon from '../../../common/Icon';
 import Tooltip from '../../../common/tooltip/Tooltip';
 import OverlayTrigger from '../../../common/tooltip/OverlayTrigger';
+import polyglot from '../../../i18n';
 
 const OnClickCheckbox = ({ input }) => {
   const classes = {
@@ -20,7 +21,7 @@ const OnClickCheckbox = ({ input }) => {
     'learning-step-form_show-title': true,
     'learning-step-form_show-title--active': input.value,
   };
-  const tooltip = <Tooltip id="showTitleTooltip">Velg om titelen skal vises eller skjules</Tooltip>;
+  const tooltip = <Tooltip id="showTitleTooltip">{polyglot.t('editPathStep.showTitle')}</Tooltip>;
   const handleClick = (evt) => {
     evt.preventDefault();
     input.onChange(!input.value);

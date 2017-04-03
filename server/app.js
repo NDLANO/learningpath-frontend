@@ -20,6 +20,8 @@ import config from '../src/config';
 import webpackConfig from '../webpack.config.dev';
 import { getHtmlLang } from '../src/locale/configureLocale';
 import Html from './Html';
+import { getToken, isTokenExpired } from './auth';
+import Auth0SilentCallback from './Auth0SilentCallback';
 
 const app = express();
 
@@ -55,11 +57,28 @@ app.get('/pinterest-proxy/*', requestProxy({
   },
 }));
 
+app.get('/login/silent-callback', (req, res) => {
+  res.send('<!doctype html>\n' + Auth0SilentCallback); // eslint-disable-line
+});
+
+app.get('/is_token_valid', (req, res) => {
+  const idTokenExp = req.query.tokenExp;
+  res.send({ isTokenExpired: isTokenExpired(idTokenExp) });
+});
+
+app.get('/get_token', (req, res) => {
+  getToken().then((token) => {
+    res.send(token);
+  }).catch(err => res.status(500).send(err.message));
+});
+
 app.get('*', (req, res) => {
   function renderOnClient() {
-    const paths = req.url.split('/');
-    const lang = getHtmlLang(defined(paths[1], ''));
-    res.send('<!doctype html>\n' + renderToString(<Html lang={lang} className={findIEClass(req.headers['user-agent'])} />)); // eslint-disable-line
+    getToken().then((token) => {
+      const paths = req.url.split('/');
+      const lang = getHtmlLang(defined(paths[1], ''));
+      res.send('<!doctype html>\n' + renderToString(<Html lang={lang} className={findIEClass(req.headers['user-agent'])} token={token}/>)); // eslint-disable-line
+    }).catch(err => res.status(500).send(err.message));
   }
 
   renderOnClient();
