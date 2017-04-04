@@ -268,6 +268,7 @@ const phrases = {
       boardPlaceholder: 'board',
       submit: 'Fetch pins',
     },
+    allPins: 'All pins',
     error: 'Did not find the board under the specified username.',
     pinForm: {
       create: 'Create learning step',

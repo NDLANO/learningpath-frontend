@@ -16,6 +16,7 @@ import * as learningPathStepActions from '../learningPath/step/learningPathStepA
 import * as pinterestActions from './pinterestActions';
 import { getPins } from './pinterestSelectors';
 import { getLocale } from '../locale/localeSelectors';
+import { getLearningPathId } from '../learningPath/learningPathSelectors';
 
 class PinterestLightbox extends Component {
 
@@ -45,8 +46,8 @@ class PinterestLightbox extends Component {
   }
 
   handleCreateLearningPathStep(pinId, title, url) {
-    const { createLearningPathStep, pins, localSetPins, learningPath, locale: language } = this.props;
-    createLearningPathStep(learningPath.id, {
+    const { createLearningPathStep, pins, localSetPins, learningPathId, locale: language } = this.props;
+    createLearningPathStep(learningPathId, {
       type: 'TEXT',
       showTitle: true,
       title: [{ title, language }],
@@ -57,7 +58,7 @@ class PinterestLightbox extends Component {
   }
 
   render() {
-    const { learningPath, pins } = this.props;
+    const { pins } = this.props;
     return (
       <div className="pinterest-lightbox_container">
         <Button className="button button--primary-outline cta-link--block pinterest-lightbox_button" onClick={this.openLightbox}>
@@ -66,7 +67,6 @@ class PinterestLightbox extends Component {
         <div className="big-lightbox_wrapper big-lightbox_wrapper--scroll">
           <Lightbox display={this.state.displayLightbox} width="800px" onClose={this.closeLightbox}>
             <PinterestImport
-              learningPath={learningPath}
               handleCreateLearningPathStep={this.handleCreateLearningPathStep}
               handleBoardNameSubmit={this.handleBoardNameSubmit}
               pins={pins}
@@ -79,7 +79,7 @@ class PinterestLightbox extends Component {
 }
 
 PinterestLightbox.propTypes = {
-  learningPath: PropTypes.object.isRequired,
+  learningPathId: PropTypes.number.isRequired,
   locale: PropTypes.string.isRequired,
   createLearningPathStep: PropTypes.func.isRequired,
   localSetPins: PropTypes.func.isRequired,
@@ -100,6 +100,7 @@ const mapDispatchToProps = {
 const mapStateToProps = state => ({
   locale: getLocale(state),
   pins: getPins(state),
+  learningPathId: getLearningPathId(state),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PinterestLightbox);

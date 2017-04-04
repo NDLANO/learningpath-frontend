@@ -15,7 +15,7 @@ const PinterestImport = ({ pins, handleBoardNameSubmit, handleCreateLearningPath
   <div className="pinterest-container">
     <h2>{ polyglot.t('pinterest.lightbox.heading') }</h2>
     <PinterestBoardForm onBoardNameSubmit={handleBoardNameSubmit} />
-    { pins && pins.length > 0 ? <h3>Alle pins</h3> : '' }
+    { pins && pins.length > 0 ? <h3>{polyglot.t('pinterest.allPins')}</h3> : '' }
     { pins.map(pin => <PinForm key={pin.id} pin={pin} onCreateLearningPathStep={handleCreateLearningPathStep} />) }
   </div>
   );

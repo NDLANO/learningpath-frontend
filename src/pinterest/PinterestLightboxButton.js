@@ -1,20 +1,16 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import PinterestLightbox from './PinterestLightbox';
 import config from '../config';
 
 const PINTEREST_ENABLED = __SERVER__ ? config.pinterestEnabled : window.config.pinterestEnabled;
 
-const PinterestLightboxButton = ({ learningPath }) => {
+const PinterestLightboxButton = () => {
   if (!PINTEREST_ENABLED) {
     return null;
   }
   return (
-    <PinterestLightbox learningPath={learningPath} />
+    <PinterestLightbox />
   );
-};
-
-PinterestLightboxButton.propTypes = {
-  learningPath: PropTypes.object.isRequired,
 };
 
 export default PinterestLightboxButton;

@@ -268,6 +268,7 @@ const phrases = {
       boardPlaceholder: 'tavlenavn',
       submit: 'Hent pins',
     },
+    allPins: 'Alle pins',
     error: 'Fant ikke tavlen under dette brukernavnet.',
     pinForm: {
       create: 'Opprett læringssteg',
