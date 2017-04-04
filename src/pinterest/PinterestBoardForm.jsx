@@ -31,27 +31,24 @@ class PinterestBoardForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className="search-form">
-        <div>
-          <input
-            type="text" className="search-form_query"
-            onChange={this.handleQueryChange}
-            value={this.state.username}
-            name="username"
-            placeholder={polyglot.t('pinterest.form.usernamePlaceholder')}
-          />
-          <input
-            type="text" className="search-form_query"
-            onChange={this.handleQueryChange}
-            value={this.state.boardName}
-            name="boardName"
-            placeholder={polyglot.t('pinterest.form.boardPlaceholder')}
-          />
-        </div>
+      <form onSubmit={this.handleSubmit} className="pinterest-search-form">
+        <input
+          type="text"
+          onChange={this.handleQueryChange}
+          value={this.state.username}
+          name="username"
+          placeholder={polyglot.t('pinterest.form.usernamePlaceholder')}
+        />
+        <input
+          type="text"
+          onChange={this.handleQueryChange}
+          value={this.state.boardName}
+          name="boardName"
+          placeholder={polyglot.t('pinterest.form.boardPlaceholder')}
+        />
         <button
           type="submit"
-          className="search-form_btn"
-          style={{ marginLeft: '-6.2em' }}
+          className="button--primary-outline cta-link--block pinterest_button"
         >
           {polyglot.t('pinterest.form.submit')}
         </button>

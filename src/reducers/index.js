@@ -27,6 +27,7 @@ import sidebar from './sidebar';
 import imageSearch from '../imageSearch/imageReducers';
 import locale from '../locale/localeReducer';
 import embedSearch from '../embedSearch/embedSearchReducer';
+import pinterest from '../pinterest/pinterestReducer';
 
 const rootReducers = combineReducers({
   authenticated,
@@ -46,6 +47,7 @@ const rootReducers = combineReducers({
   learningPathLicenses,
   imageSearch,
   embedSearch,
+  pinterest,
   routing: routerReducer,
   form: formReducer,
 });

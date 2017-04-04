@@ -8,6 +8,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import polyglot from '../i18n';
+import { transformHttpToHttps } from '../util/urlTransformer';
 
 class PinForm extends Component {
   constructor(props) {
@@ -27,18 +28,18 @@ class PinForm extends Component {
     evt.preventDefault();
     const { onCreateLearningPathStep, pin } = this.props;
     const { title } = this.state;
-    onCreateLearningPathStep(pin.id, title, pin.original_link);
+    onCreateLearningPathStep(pin.id, title, transformHttpToHttps(pin.original_link));
   }
 
   render() {
     const { pin } = this.props;
     const { title } = this.state;
     return (
-      <div style={{ height: '5em' }}>
+      <div className="pin-container">
         <form onSubmit={this.handleSubmit}>
-          <input id="title" type="text" style={{ width: '50%', marginRight: '1em', height: '3.5em' }} onChange={this.handleTitleChange} value={title} />
-          <button className="button button--primary" type="submit">{polyglot.t('Pinterest.pinForm.create')}</button>
-          <a className="button button--outline" target="_blank" rel="noopener noreferrer" style={{ float: 'right' }} href={pin.original_link}>{polyglot.t('Pinterest.pinForm.viewSource')}</a>
+          <input id="title" type="text" onChange={this.handleTitleChange} value={title} />
+          <button className="button--primary-outline cta-link--block pinterest_button" type="submit">{polyglot.t('pinterest.pinForm.create')}</button>
+          <a className="button--primary-outline cta-link--block pinterest_button" target="_blank" rel="noopener noreferrer" href={transformHttpToHttps(pin.original_link)}>{polyglot.t('pinterest.pinForm.viewSource')}</a>
         </form>
       </div>
     );

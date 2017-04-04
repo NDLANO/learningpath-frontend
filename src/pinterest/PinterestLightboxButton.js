@@ -5,16 +5,11 @@ import config from '../config';
 const PINTEREST_ENABLED = __SERVER__ ? config.pinterestEnabled : window.config.pinterestEnabled;
 
 const PinterestLightboxButton = ({ learningPath }) => {
-  console.log(config);
   if (!PINTEREST_ENABLED) {
     return null;
   }
   return (
-    <ul className="vertical-menu">
-      <li className="vertical-menu_item">
-        <PinterestLightbox learningPath={learningPath} />
-      </li>
-    </ul>
+    <PinterestLightbox learningPath={learningPath} />
   );
 };
 
