@@ -19,6 +19,11 @@ import { updateLearningPath } from '../learningPathActions';
 import { getI18nLearningPath, getI18nLearningPathSteps } from '../learningPathSelectors';
 
 class EditLearningPath extends Component {
+  constructor() {
+    super();
+    this.state = { unsavedContributor: '' };
+  }
+
   componentDidMount() {
     const { fetchLearningPathTags } = this.props;
     fetchLearningPathTags();
@@ -31,27 +36,35 @@ class EditLearningPath extends Component {
       return null;
     }
 
-    const handleSubmit = values => localUpdateLearningPath(learningPath.id, {
-      title: [{ title: values.title, language }],
-      description: [{ description: values.description, language }],
-      revision: learningPath.revision,
-      duration: (values.duration.replace(/,/g, '.')) * 60,
-      tags: [{ tags: values.tags, language }],
-      copyright: {
-        license: {
-          license: 'by-sa',
-          description: 'Creative Commons Attribution-ShareAlike 2.0 Generic',
-          url: 'https://creativecommons.org/licenses/by-sa/2.0/',
+    const handleContributorChange = changes => this.setState({ unsavedContributor: changes });
+
+    const handleSubmit = (values) => {
+      const unsavedContributor = this.state.unsavedContributor;
+      if (unsavedContributor.length > 0) values.contributors.push({ name: unsavedContributor, type: 'Forfatter' });
+
+      return localUpdateLearningPath(learningPath.id, {
+        title: [{ title: values.title, language }],
+        description: [{ description: values.description, language }],
+        revision: learningPath.revision,
+        duration: (values.duration.replace(/,/g, '.')) * 60,
+        tags: [{ tags: values.tags, language }],
+        copyright: {
+          license: {
+            license: 'by-sa',
+            description: 'Creative Commons Attribution-ShareAlike 2.0 Generic',
+            url: 'https://creativecommons.org/licenses/by-sa/2.0/',
+          },
+          contributors: !isEmpty(values.contributors) ? values.contributors : undefined,
         },
-        contributors: !isEmpty(values.contributors) ? values.contributors : undefined },
-      coverPhotoMetaUrl: !isEmpty(values.coverPhotoMetaUrl) ? values.coverPhotoMetaUrl : undefined,
-    });
+        coverPhotoMetaUrl: !isEmpty(values.coverPhotoMetaUrl) ? values.coverPhotoMetaUrl : undefined,
+      });
+    };
 
     return (
       <div className="two-column_content">
         <LearningPathForm
           learningPath={learningPath} tagOptions={tags} onSubmit={handleSubmit} localFetchImages={localFetchImages}
-          fetchImage={localFetchImage} lang={language}
+          fetchImage={localFetchImage} lang={language} onContributorChange={handleContributorChange}
         />
       </div>
     );
