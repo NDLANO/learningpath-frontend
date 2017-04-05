@@ -76,6 +76,9 @@ export function renewAuth0Token() {
       redirectUri: `${locationOrigin}/login/silent-callback`,
       usePostMessage: true,
     }, (err, authResult) => {
+      if (process.env.NODE_ENV === 'development' && (authResult.source === '@devtools-page' || authResult.source === '@devtools-extension')) { // Temporarily fix for bug in auth0
+        return;
+      }
       if (authResult && authResult.idToken) {
         dispatch(setIdToken(authResult.idToken));
         dispatch(setAuthenticated(true));
@@ -112,6 +115,10 @@ export function checkAccessTokenOnEnter() {
       isTokenValid(decodeIdToken(getState().idToken).exp).then((valid) => {
         if (valid.isTokenExpired) {
           dispatch(routerActions.replace('/'));
+          if (process.env.NODE_ENV === 'development') { // Temporarily fix for bug in auth0
+            dispatch(logout());
+            return;
+          }
         }
         dispatch(renewAuth0Token());
       });
