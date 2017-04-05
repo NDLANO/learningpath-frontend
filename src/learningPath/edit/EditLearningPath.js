@@ -40,10 +40,12 @@ class EditLearningPath extends Component {
 
     const handleSubmit = (values) => {
       const unsavedContributor = this.state.unsavedContributor;
-      if (unsavedContributor.length > 0) {
+      let contributors = [...values.contributors];
+      if (unsavedContributor.length > 2) {
         const contributorsName = values.contributors.map(contributor => contributor.name);
         if (contributorsName.indexOf(unsavedContributor) === -1) {
-          values.contributors.push({ name: unsavedContributor, type: 'Forfatter' });
+          contributors = [...contributors, { name: unsavedContributor, type: 'Forfatter' }];
+          this.setState({ unsavedContributor: '' });
         }
       }
       return localUpdateLearningPath(learningPath.id, {
@@ -58,7 +60,7 @@ class EditLearningPath extends Component {
             description: 'Creative Commons Attribution-ShareAlike 2.0 Generic',
             url: 'https://creativecommons.org/licenses/by-sa/2.0/',
           },
-          contributors: !isEmpty(values.contributors) ? values.contributors : undefined,
+          contributors: !isEmpty(contributors) ? contributors : undefined,
         },
         coverPhotoMetaUrl: !isEmpty(values.coverPhotoMetaUrl) ? values.coverPhotoMetaUrl : undefined,
       });
