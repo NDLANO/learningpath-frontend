@@ -40,8 +40,12 @@ class EditLearningPath extends Component {
 
     const handleSubmit = (values) => {
       const unsavedContributor = this.state.unsavedContributor;
-      if (unsavedContributor.length > 0) values.contributors.push({ name: unsavedContributor, type: 'Forfatter' });
-
+      if (unsavedContributor.length > 0) {
+        const contributorsName = values.contributors.map(contributor => contributor.name);
+        if (contributorsName.indexOf(unsavedContributor) === -1) {
+          values.contributors.push({ name: unsavedContributor, type: 'Forfatter' });
+        }
+      }
       return localUpdateLearningPath(learningPath.id, {
         title: [{ title: values.title, language }],
         description: [{ description: values.description, language }],
