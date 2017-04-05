@@ -26,7 +26,7 @@ const LearningPathToCStep = (props) => {
   const linkUrl = isActiveAndCanEdit ? `${base}/step/${step.id}/edit` : `${base}/step/${step.id}`;
   return (
     <li className={itemClassName(`${step.id}`)} >
-      <Link to={linkUrl} className="step-nav_link" onClick={localCloseSidebars}>
+      <Link to={linkUrl} className="step-nav_link" onClick={() => localCloseSidebars()}>
         {steps.length > 1 ? <div className="step-nav_line" /> : ''}
         <LearningPathStepIcon learningPathStepType={step.type} isCircle />
         <div className="step-nav_title">
