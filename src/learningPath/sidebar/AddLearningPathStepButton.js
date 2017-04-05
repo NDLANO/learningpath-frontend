@@ -20,7 +20,7 @@ export function AddLearningPathStepButton({ learningPath, localCloseSidebars }) 
   const newStepTarget = `/learningpaths/${learningPath.id}/step/new`;
   return (
     <div className="add-learningpath-step">
-      <Link to={newStepTarget} className="add-learningpath-step_button cta-link cta-link--block cta-link--secondary" onClick={localCloseSidebars}>
+      <Link to={newStepTarget} className="add-learningpath-step_button cta-link cta-link--block cta-link--secondary" onClick={() => localCloseSidebars}>
         <div className="plus-sign--circle">+</div>
         {polyglot.t('editPage.addStepBtn')}
       </Link>
