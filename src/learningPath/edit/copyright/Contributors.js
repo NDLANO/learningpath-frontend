@@ -69,7 +69,7 @@ Contributors.propTypes = {
     onBlur: PropTypes.func.isRequired,
     value: PropTypes.any.isRequired,
   }).isRequired,
-  onContributorChange: PropTypes.func,
+  onContributorChange: PropTypes.func.isRequired,
 };
 
 export default Contributors;
