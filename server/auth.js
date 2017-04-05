@@ -30,3 +30,5 @@ export const getToken = () => fetch(url, {
 }).then(res => res.json());
 
 export const isTokenExpired = tokenExp => tokenExp - (Date.now() / 1000) <= 0;
+
+export const getExpireTime = tokenExp => tokenExp - (Date.now() / 1000);
