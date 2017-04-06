@@ -21,7 +21,7 @@ import { getI18nLearningPath, getI18nLearningPathSteps } from '../learningPathSe
 class EditLearningPath extends Component {
   constructor() {
     super();
-    this.state = { unsavedContributor: '' };
+    this.state = { unsavedContributor: '', unsavedTags: '' };
   }
 
   componentDidMount() {
@@ -36,11 +36,22 @@ class EditLearningPath extends Component {
       return null;
     }
 
+    const handleTagsChange = changes => this.setState({ unsavedTags: changes });
     const handleContributorChange = changes => this.setState({ unsavedContributor: changes });
 
     const handleSubmit = (values) => {
+      const unsavedTags = this.state.unsavedTags;
       const unsavedContributor = this.state.unsavedContributor;
+      let tagValues = [...values.tags];
       let contributors = [...values.contributors];
+
+      if (unsavedTags.length > 2) {
+        if (tags.indexOf(unsavedTags) === -1) {
+          tagValues = [...tagValues, unsavedTags];
+          this.setState({ unsavedTags: '' });
+        }
+      }
+
       if (unsavedContributor.length > 2) {
         const contributorsName = values.contributors.map(contributor => contributor.name);
         if (contributorsName.indexOf(unsavedContributor) === -1) {
@@ -48,12 +59,13 @@ class EditLearningPath extends Component {
           this.setState({ unsavedContributor: '' });
         }
       }
+
       return localUpdateLearningPath(learningPath.id, {
         title: [{ title: values.title, language }],
         description: [{ description: values.description, language }],
         revision: learningPath.revision,
         duration: (values.duration.replace(/,/g, '.')) * 60,
-        tags: [{ tags: values.tags, language }],
+        tags: [{ tags: tagValues, language }],
         copyright: {
           license: {
             license: 'by-sa',
@@ -70,7 +82,7 @@ class EditLearningPath extends Component {
       <div className="two-column_content">
         <LearningPathForm
           learningPath={learningPath} tagOptions={tags} onSubmit={handleSubmit} localFetchImages={localFetchImages}
-          fetchImage={localFetchImage} lang={language} onContributorChange={handleContributorChange}
+          fetchImage={localFetchImage} lang={language} onContributorChange={handleContributorChange} onTagsChange={handleTagsChange}
         />
       </div>
     );

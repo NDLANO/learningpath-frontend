@@ -19,7 +19,7 @@ class TagsInput extends Component {
   }
 
   render() {
-    const { tagOptions, input } = this.props;
+    const { tagOptions, input, onUnsavedChanges } = this.props;
 
     const messages = {
       createNew: polyglot.t('tagInput.createNew'),
@@ -42,6 +42,7 @@ class TagsInput extends Component {
     };
 
     const handleSearch = (searchTerm) => {
+      onUnsavedChanges(searchTerm);
       this.setState({ open: searchTerm.length > 2 });
     };
     return (
@@ -54,7 +55,7 @@ class TagsInput extends Component {
         onBlur={() => input.onBlur(input.value)}
         onChange={input.onChange}
         onCreate={handleAdd}
-        onToggle={() => {}}
+        onToggle={() => { }}
         onSearch={handleSearch}
       />
     );
@@ -68,6 +69,7 @@ TagsInput.propTypes = {
     value: PropTypes.any.isRequired,
   }).isRequired,
   tagOptions: PropTypes.array.isRequired,
+  onUnsavedChanges: PropTypes.func.isRequired,
 };
 
 export default TagsInput;

@@ -18,7 +18,7 @@ class Contributors extends Component {
   }
 
   render() {
-    const { input, onContributorChange } = this.props;
+    const { input, onUnsavedChanges } = this.props;
 
     if (typeof value === 'string') { // Handle redux form values witch are initialized as strings
       return null;
@@ -41,7 +41,7 @@ class Contributors extends Component {
     };
 
     const handleSearch = (searchTerm) => {
-      onContributorChange(searchTerm);
+      onUnsavedChanges(searchTerm);
       this.setState({ open: searchTerm.length > 2 });
     };
 
@@ -69,7 +69,7 @@ Contributors.propTypes = {
     onBlur: PropTypes.func.isRequired,
     value: PropTypes.any.isRequired,
   }).isRequired,
-  onContributorChange: PropTypes.func.isRequired,
+  onUnsavedChanges: PropTypes.func.isRequired,
 };
 
 export default Contributors;
