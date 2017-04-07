@@ -13,7 +13,7 @@ import Tooltip from '../../../common/tooltip/Tooltip';
 import OverlayTrigger from '../../../common/tooltip/OverlayTrigger';
 import polyglot from '../../../i18n';
 
-const InfoIconTooltip = () => {
+const DescriptionLicenseInfo = () => {
   const classes = {
     'learning-step-form_icon-bg': true,
     'learning-step-form_show_license_info': true,
@@ -29,5 +29,4 @@ const InfoIconTooltip = () => {
     </OverlayTrigger>
   );
 };
-
-export default InfoIconTooltip;
+export default DescriptionLicenseInfo;
