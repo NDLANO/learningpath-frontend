@@ -146,6 +146,7 @@ const phrases = {
     titlePlaceHolder: 'Skriv en tittel her',
     previewOembed: 'Forhåndsvis hele artikkelen',
     noLicenseChosen: 'Ingen lisens valgt',
+    showLicenseInfo: 'Lisensen gjelder kun for den valgte teksten',
     showTitle: 'Velg om titelen skal vises eller skjules',
   },
   sortSteps: {

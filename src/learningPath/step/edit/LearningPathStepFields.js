@@ -12,6 +12,7 @@ import DescriptionHTMLEditor from '../../../common/editors/DescriptionHTMLEditor
 import polyglot from '../../../i18n';
 import Icon from '../../../common/Icon';
 import OnClickCheckbox from './OnClickCheckbox';
+import InfoIconTooltip from './InfoIconTooltip';
 import OneLineEditor from '../../../common/editors/OneLineEditor';
 import ObjectSelector from '../../../common/form/ObjectSelector';
 import PreviewOembed from '../oembed/PreviewOembed';
@@ -71,14 +72,20 @@ const LearningPathStepFields = (props) => {
       </div>
 
       <div className="learning-step-form_group">
-        <Field
-          name="license"
-          className="learning-step-form_select"
-          idKey="license"
-          labelKey="description"
-          options={licenseOptions}
-          component={ObjectSelector}
-        />
+        <div className="learning-step-form_left">
+          <InfoIconTooltip />
+        </div>
+        <div className="learning-step-form_right">
+          <div className="learning-step-form_select">
+            <Field
+              name="license"
+              idKey="license"
+              labelKey="description"
+              options={licenseOptions}
+              component={ObjectSelector}
+            />
+          </div>
+        </div>
       </div>
 
       <div className="learning-step-form_group">

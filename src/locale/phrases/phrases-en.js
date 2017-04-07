@@ -146,6 +146,7 @@ const phrases = {
     titlePlaceHolder: 'Write a title here',
     previewOembed: 'Preview whole article',
     noLicenseChosen: 'No license chosen',
+    showLicenseInfo: 'The license applies only to the selected text',
     showTitle: 'Chose if the title should be visible or hidden',
   },
   sortSteps: {
