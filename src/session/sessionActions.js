@@ -54,7 +54,7 @@ export function logout() {
       dispatch(setAuthenticated(false));
       dispatch(logoutAction());
       auth.logout({
-        returnTo: `${locationOrigin}/login`,
+        returnTo: `${locationOrigin}/`,
         client_id: auth0ClientId,
       });
     })

@@ -12,6 +12,7 @@ import DescriptionHTMLEditor from '../../../common/editors/DescriptionHTMLEditor
 import polyglot from '../../../i18n';
 import Icon from '../../../common/Icon';
 import OnClickCheckbox from './OnClickCheckbox';
+import DescriptionLicenseInfo from './DescriptionLicenseInfo';
 import OneLineEditor from '../../../common/editors/OneLineEditor';
 import ObjectSelector from '../../../common/form/ObjectSelector';
 import PreviewOembed from '../oembed/PreviewOembed';
@@ -87,16 +88,23 @@ const LearningPathStepFields = (props) => {
       </div>
 
       <div className="learning-step-form_group">
-        <ObjectSelector
-          name="license"
-          className="learning-step-form_select"
-          idKey="license"
-          labelKey="description"
-          options={licenseOptions}
-          disabled={disableLicense()}
-          input={license.input}
-        />
-        {(description.meta.touched) && description.meta.error && <span className="error_message error_message--red">{description.meta.error}</span>}
+        <div className="learning-step-form_left">
+          <DescriptionLicenseInfo />
+        </div>
+        <div className="learning-step-form_right">
+          <div className="learning-step-form_select">
+            <ObjectSelector
+              name="license"
+              className="learning-step-form_select"
+              idKey="license"
+              labelKey="description"
+              options={licenseOptions}
+              disabled={disableLicense()}
+              input={license.input}
+            />
+            {(description.meta.touched) && description.meta.error && <span className="error_message error_message--red">{description.meta.error}</span>}
+          </div>
+        </div>
       </div>
 
       <div className="learning-step-form_group">
