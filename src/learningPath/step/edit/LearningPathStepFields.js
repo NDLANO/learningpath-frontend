@@ -7,7 +7,7 @@
  */
 
 import React, { PropTypes } from 'react';
-import { Field } from 'redux-form';
+import { ContentState } from 'draft-js';
 import DescriptionHTMLEditor from '../../../common/editors/DescriptionHTMLEditor';
 import polyglot from '../../../i18n';
 import Icon from '../../../common/Icon';
@@ -17,7 +17,6 @@ import ObjectSelector from '../../../common/form/ObjectSelector';
 import PreviewOembed from '../oembed/PreviewOembed';
 import LearningPathStepIcon from '../LearningPathStepIcon';
 import LearningPathStepEmbed from './LearningPathStepEmbed';
-import { ContentState } from 'draft-js';
 
 const LearningPathStepFields = (props) => {
   const {
