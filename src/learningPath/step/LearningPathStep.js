@@ -15,19 +15,27 @@ import { fetchLearningPathStep } from './learningPathStepActions';
 import LearningPathStepInformation from './LearningPathStepInformation';
 import LearningPathStepPrevNext from './LearningPathStepPrevNext';
 import { getI18nLearningPathStep } from './learningPathStepSelectors';
+import Spinner from '../../common/Spinner';
 
 class LearningPathStep extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: true,
+    };
+  }
 
   componentWillMount() {
     const { localFetchLearningPathStep, params: { pathId, stepId } } = this.props;
-    localFetchLearningPathStep(pathId, stepId);
+    localFetchLearningPathStep(pathId, stepId).then(() => this.setState({ isLoading: false }));
   }
 
   componentWillUpdate(nextProps) {
     const { localFetchLearningPathStep, params: { pathId, stepId } } = nextProps;
 
     if (this.props.params.stepId !== stepId || this.props.params.pathId !== pathId) {
-      localFetchLearningPathStep(pathId, stepId);
+      this.setState({ isLoading: true });
+      localFetchLearningPathStep(pathId, stepId).then(() => this.setState({ isLoading: false }));
     }
   }
 
@@ -40,6 +48,7 @@ class LearningPathStep extends React.Component {
       <div className="two-column_content--wide">
         <LearningPathStepPrevNext currentStepId={learningPathStep.id} lang={lang}>
           <Helmet title={polyglot.t('htmlTitleTemplates.learningPathStep', { title: learningPathStep.title || '' })} />
+          {this.state.isLoading && <Spinner hasMargins />}
           <LearningPathStepInformation learningPathStep={learningPathStep} stepTitle={learningPathStep.title} />
           {oembedContent ? <Oembed oembedContent={oembedContent} /> : ''}
         </LearningPathStepPrevNext>
