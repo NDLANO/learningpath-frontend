@@ -48,7 +48,7 @@ class LearningPathStep extends React.Component {
       <div className="two-column_content--wide">
         <LearningPathStepPrevNext currentStepId={learningPathStep.id} lang={lang}>
           <Helmet title={polyglot.t('htmlTitleTemplates.learningPathStep', { title: learningPathStep.title || '' })} />
-          {this.state.isLoading && <Spinner margins />}
+          {this.state.isLoading && <Spinner hasMargins />}
           <LearningPathStepInformation learningPathStep={learningPathStep} stepTitle={learningPathStep.title} />
           {oembedContent ? <Oembed oembedContent={oembedContent} /> : ''}
         </LearningPathStepPrevNext>

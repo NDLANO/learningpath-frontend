@@ -9,22 +9,22 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
-const Spinner = ({ margins }) => {
+const Spinner = ({ hasMargins }) => {
   const classes = classNames(
     'spinner',
     {
-      'spinner--margins': margins,
+      'spinner--margins': hasMargins,
     }
   );
   return <div className={classes} />;
 };
 
 Spinner.propTypes = {
-  margins: PropTypes.bool,
+  hasMargins: PropTypes.bool,
 };
 
 Spinner.defaultProps = {
-  margins: undefined,
+  hasMargins: undefined,
 };
 
 export default Spinner;

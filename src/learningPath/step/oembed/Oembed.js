@@ -90,7 +90,7 @@ export default class Oembed extends React.Component {
 
     return (
       <div>
-        {this.state.isLoadingResource && <Spinner margins />}
+        {this.state.isLoadingResource && <Spinner hasMargins />}
         <div
           className={classNames({
             'learning-step': true,
