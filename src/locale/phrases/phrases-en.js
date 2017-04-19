@@ -268,6 +268,7 @@ const phrases = {
       usernamePlaceholder: 'username',
       boardPlaceholder: 'board',
       submit: 'Fetch pins',
+      requiredFields: 'Both username and boardname must be filled.',
     },
     allPins: 'All pins',
     error: 'Did not find the board under the specified username.',

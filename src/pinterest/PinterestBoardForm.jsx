@@ -7,6 +7,7 @@
  */
 
 import React, { Component, PropTypes } from 'react';
+import isEmpty from 'lodash/isEmpty';
 import polyglot from '../i18n';
 
 class PinterestBoardForm extends Component {
@@ -30,6 +31,8 @@ class PinterestBoardForm extends Component {
   }
 
   render() {
+    console.log(this.state);
+    const disabledButton = isEmpty(this.state.boardName) || isEmpty(this.state.username);
     return (
       <form onSubmit={this.handleSubmit} className="pinterest-search-form">
         <input
@@ -48,10 +51,12 @@ class PinterestBoardForm extends Component {
         />
         <button
           type="submit"
-          className="button--primary-outline cta-link--block pinterest_button"
+          className="button button--primary-outline cta-link--block pinterest_button"
+          disabled={disabledButton}
         >
           {polyglot.t('pinterest.form.submit')}
         </button>
+        <p className="learning-path_input-information">{polyglot.t('pinterest.form.requiredFields')}</p>
       </form>
     );
   }

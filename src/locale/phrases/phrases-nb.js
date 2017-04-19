@@ -268,6 +268,7 @@ const phrases = {
       usernamePlaceholder: 'brukernavn',
       boardPlaceholder: 'tavlenavn',
       submit: 'Hent pins',
+      requiredFields: 'Både brukernavn og tavlenavn må være fylt ut.',
     },
     allPins: 'Alle pins',
     error: 'Fant ikke tavlen under dette brukernavnet.',
