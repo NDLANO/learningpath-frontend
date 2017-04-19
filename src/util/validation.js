@@ -25,6 +25,16 @@ export function required(msgKey = 'validation.required') {
   };
 }
 
+export function licenseExistsIfDescriptionExists(msgKey, descriptionField, licenseField) {
+  return (value, data) => {
+    const license = data[licenseField] && data[licenseField].license ? data[licenseField].license : '';
+    if (isEmpty(data[descriptionField]) || (!isEmpty(data[descriptionField]) && !isEmpty(license))) {
+      return null;
+    }
+    return polyglot.t(msgKey);
+  };
+}
+
 export function oneOfIsRequired(msgKey, ...fields) {
   return (value, data) => {
     if (fields.some(field => !isEmpty(data[field]))) {

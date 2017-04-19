@@ -17,6 +17,7 @@ import ObjectSelector from '../../../common/form/ObjectSelector';
 import PreviewOembed from '../oembed/PreviewOembed';
 import LearningPathStepIcon from '../LearningPathStepIcon';
 import LearningPathStepEmbed from './LearningPathStepEmbed';
+import { ContentState } from 'draft-js';
 
 const LearningPathStepFields = (props) => {
   const {
@@ -30,6 +31,7 @@ const LearningPathStepFields = (props) => {
     title,
     url,
     learningPathId,
+    license,
   } = props;
 
   const handleDescriptionBlur = (value) => {
@@ -40,6 +42,11 @@ const LearningPathStepFields = (props) => {
         showTitle.input.onChange(false);
       }
     }
+
+    if (!value.hasText()) {
+      license.input.onChange({ description: polyglot.t('editPathStep.noLicenseChosen'), license: '' });
+    }
+
     description.input.onBlur(value);
   };
 
@@ -53,6 +60,16 @@ const LearningPathStepFields = (props) => {
       url.input.onBlur({ url: value, embedType: 'oembed' });
     }
   };
+
+  const disableLicense = () => {
+    if (description.input.value && description.input.value instanceof ContentState) {
+      return !description.input.value.hasText();
+    } else if (description.input.value === '<p><br></p>') {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <div>
       <div className="learning-step-form_group">
@@ -71,14 +88,16 @@ const LearningPathStepFields = (props) => {
       </div>
 
       <div className="learning-step-form_group">
-        <Field
+        <ObjectSelector
           name="license"
           className="learning-step-form_select"
           idKey="license"
           labelKey="description"
           options={licenseOptions}
-          component={ObjectSelector}
+          disabled={disableLicense()}
+          input={license.input}
         />
+        {(description.meta.touched) && description.meta.error && <span className="error_message error_message--red">{description.meta.error}</span>}
       </div>
 
       <div className="learning-step-form_group">
@@ -101,7 +120,7 @@ const LearningPathStepFields = (props) => {
             <PreviewOembed content={oembedPreview} />
           </div>
         </div>
-        {(url.meta.touched || description.meta.touched) && description.meta.error && <span className="error_message error_message--red">{description.meta.error}</span>}
+        {(url.meta.touched || description.meta.touched) && url.meta.error && <span className="error_message error_message--red">{url.meta.error}</span>}
       </div>
     </div>
   );
@@ -120,6 +139,7 @@ LearningPathStepFields.propTypes = {
   url: PropTypes.object.isRequired,
   title: PropTypes.object.isRequired,
   learningPathId: PropTypes.number.isRequired,
+  license: PropTypes.object.isRequired,
 };
 
 export default LearningPathStepFields;

@@ -139,6 +139,7 @@ const phrases = {
     },
     validation: {
       oneOfDescriptionOrUrlIsRequired: 'Either Description and Url must be provided.',
+      licenseAndDescription: 'When description is added, a license has to be chosen.',
     },
     edit: 'Edit learning path step',
     urlPlaceholder: 'Paste link',

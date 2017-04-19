@@ -139,6 +139,7 @@ const phrases = {
     },
     validation: {
       oneOfDescriptionOrUrlIsRequired: 'Enten Beskrivelse eller Url feltet må fylles ut.',
+      licenseAndDescription: 'Ved utfyllelse av beskrivelse må lisens være valgt.',
     },
     edit: 'Rediger læringssteg',
     urlPlaceholder: 'Lim inn lenke',
