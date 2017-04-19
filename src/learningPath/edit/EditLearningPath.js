@@ -19,6 +19,11 @@ import { updateLearningPath } from '../learningPathActions';
 import { getI18nLearningPath, getI18nLearningPathSteps } from '../learningPathSelectors';
 
 class EditLearningPath extends Component {
+  constructor() {
+    super();
+    this.state = { unsavedContributor: '', unsavedTags: '' };
+  }
+
   componentDidMount() {
     const { fetchLearningPathTags } = this.props;
     fetchLearningPathTags();
@@ -31,27 +36,53 @@ class EditLearningPath extends Component {
       return null;
     }
 
-    const handleSubmit = values => localUpdateLearningPath(learningPath.id, {
-      title: [{ title: values.title, language }],
-      description: [{ description: values.description, language }],
-      revision: learningPath.revision,
-      duration: (values.duration.replace(/,/g, '.')) * 60,
-      tags: [{ tags: values.tags, language }],
-      copyright: {
-        license: {
-          license: 'by-sa',
-          description: 'Creative Commons Attribution-ShareAlike 2.0 Generic',
-          url: 'https://creativecommons.org/licenses/by-sa/2.0/',
+    const handleTagsChange = changes => this.setState({ unsavedTags: changes });
+    const handleContributorChange = changes => this.setState({ unsavedContributor: changes });
+
+    const handleSubmit = (values) => {
+      const unsavedTags = this.state.unsavedTags;
+      const unsavedContributor = this.state.unsavedContributor;
+      let tagValues = [...values.tags];
+      let contributors = [...values.contributors];
+
+      if (unsavedTags.length > 2) {
+        if (tags.indexOf(unsavedTags) === -1) {
+          tagValues = [...tagValues, unsavedTags];
+          this.setState({ unsavedTags: '' });
+        }
+      }
+
+      if (unsavedContributor.length > 2) {
+        const contributorsName = values.contributors.map(contributor => contributor.name);
+        if (contributorsName.indexOf(unsavedContributor) === -1) {
+          contributors = [...contributors, { name: unsavedContributor, type: 'Forfatter' }];
+          this.setState({ unsavedContributor: '' });
+        }
+      }
+
+      return localUpdateLearningPath(learningPath.id, {
+        title: [{ title: values.title, language }],
+        description: [{ description: values.description, language }],
+        revision: learningPath.revision,
+        duration: (values.duration.replace(/,/g, '.')) * 60,
+        tags: [{ tags: tagValues, language }],
+        copyright: {
+          license: {
+            license: 'by-sa',
+            description: 'Creative Commons Attribution-ShareAlike 2.0 Generic',
+            url: 'https://creativecommons.org/licenses/by-sa/2.0/',
+          },
+          contributors: !isEmpty(contributors) ? contributors : undefined,
         },
-        contributors: !isEmpty(values.contributors) ? values.contributors : undefined },
-      coverPhotoMetaUrl: !isEmpty(values.coverPhotoMetaUrl) ? values.coverPhotoMetaUrl : undefined,
-    });
+        coverPhotoMetaUrl: !isEmpty(values.coverPhotoMetaUrl) ? values.coverPhotoMetaUrl : undefined,
+      });
+    };
 
     return (
       <div className="two-column_content">
         <LearningPathForm
           learningPath={learningPath} tagOptions={tags} onSubmit={handleSubmit} localFetchImages={localFetchImages}
-          fetchImage={localFetchImage} lang={language}
+          fetchImage={localFetchImage} lang={language} onContributorChange={handleContributorChange} onTagsChange={handleTagsChange}
         />
       </div>
     );

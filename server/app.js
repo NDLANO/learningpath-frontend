@@ -20,7 +20,7 @@ import config from '../src/config';
 import webpackConfig from '../webpack.config.dev';
 import { getHtmlLang } from '../src/locale/configureLocale';
 import Html from './Html';
-import { getToken, isTokenExpired } from './auth';
+import { getToken, isTokenExpired, getExpireTime } from './auth';
 import Auth0SilentCallback from './Auth0SilentCallback';
 
 const app = express();
@@ -63,7 +63,7 @@ app.get('/login/silent-callback', (req, res) => {
 
 app.get('/is_token_valid', (req, res) => {
   const idTokenExp = req.query.tokenExp;
-  res.send({ isTokenExpired: isTokenExpired(idTokenExp) });
+  res.send({ isTokenExpired: isTokenExpired(idTokenExp), expiresIn: getExpireTime(idTokenExp) });
 });
 
 app.get('/get_token', (req, res) => {

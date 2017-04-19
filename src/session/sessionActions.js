@@ -54,7 +54,7 @@ export function logout() {
       dispatch(setAuthenticated(false));
       dispatch(logoutAction());
       auth.logout({
-        returnTo: `${locationOrigin}/login`,
+        returnTo: `${locationOrigin}/`,
         client_id: auth0ClientId,
       });
     })
@@ -71,11 +71,19 @@ export function checkValidSession(token = undefined) {
 }
 
 export function renewAuth0Token() {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     auth.renewAuth({
       redirectUri: `${locationOrigin}/login/silent-callback`,
       usePostMessage: true,
     }, (err, authResult) => {
+      if (process.env.NODE_ENV === 'development' && authResult && (authResult.source === '@devtools-page' || authResult.source === '@devtools-extension')) { // Temporarily fix for bug in auth0
+        isTokenValid(decodeIdToken(getState().idToken).exp).then((valid) => {
+          if (valid.isTokenExpired) {
+            dispatch(logout());
+          }
+        });
+        return;
+      }
       if (authResult && authResult.idToken) {
         dispatch(setIdToken(authResult.idToken));
         dispatch(setAuthenticated(true));
