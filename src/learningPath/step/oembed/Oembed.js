@@ -9,6 +9,7 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import get from 'lodash/get';
+import Spinner from '../../../common/Spinner';
 
 export const urlIsNDLA = url => (/^(http|https):\/\/ndla.no/).test(url);
 export const urlIsApiNDLA = url => (/^(http|https):\/\/ndla-frontend.(test.|staging.)?api.ndla.no/).test(url);
@@ -21,6 +22,7 @@ export default class Oembed extends React.Component {
     this.state = {
       isNDLAResource: false,
       listeningToResize: false,
+      isLoadingResource: true,
     };
 
     this.handleResizeMessage = this.handleResizeMessage.bind(this);
@@ -36,6 +38,7 @@ export default class Oembed extends React.Component {
 
   componentWillUnmount() {
     this.disableIframeResizing();
+    this.setState({ isLoadingResource: false });
   }
 
   getIframeDOM() {
@@ -76,6 +79,7 @@ export default class Oembed extends React.Component {
     const newHeight = parseInt(get(evt, 'data.height', 0), 10) + 55;
     const currentHeight = parseInt(get(iframe, 'style.height') || 0, 10);
 
+    this.setState({ isLoadingResource: false });
     if (newHeight > currentHeight) {
       iframe.style.height = `${newHeight}px`;
     }
@@ -85,17 +89,20 @@ export default class Oembed extends React.Component {
     const { oembedContent: { html, embedType } } = this.props;
 
     return (
-      <div
-        className={classNames({
-          'learning-step': true,
-          'learning-step_embed': true,
-          'learning-step--without-dimensions': this.state.isNDLAResource,
-          'learning-step_lti': embedType === 'lti',
-          'learning-step_oembed': embedType === 'oembed',
-        })}
-        dangerouslySetInnerHTML={{ __html: html }}
-        ref={(iframeDiv) => { this.iframeDiv = iframeDiv; }}
-      />
+      <div>
+        {this.state.isLoadingResource && <Spinner margins />}
+        <div
+          className={classNames({
+            'learning-step': true,
+            'learning-step_embed': true,
+            'learning-step--without-dimensions': this.state.isNDLAResource,
+            'learning-step_lti': embedType === 'lti',
+            'learning-step_oembed': embedType === 'oembed',
+          })}
+          dangerouslySetInnerHTML={{ __html: html }}
+          ref={(iframeDiv) => { this.iframeDiv = iframeDiv; }}
+        />
+      </div>
     );
   }
 }
