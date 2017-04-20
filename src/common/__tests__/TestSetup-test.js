@@ -7,7 +7,8 @@
  */
 
 import test from 'tape';
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { shallow, mount, render } from 'enzyme';
 import './jsdomEnv';
 

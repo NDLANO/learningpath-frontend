@@ -6,7 +6,8 @@
  *
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import DescriptionHTMLEditor from '../../../common/editors/DescriptionHTMLEditor';
 import polyglot from '../../../i18n';

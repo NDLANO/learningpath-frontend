@@ -6,7 +6,8 @@
  *
  */
 
-import React, { PropTypes, Component, cloneElement } from 'react';
+import React, { Component, cloneElement } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import defined from 'defined';
 import classNames from 'classnames';

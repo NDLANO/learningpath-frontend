@@ -6,7 +6,8 @@
  *
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Lightbox from '../common/Lightbox';
 import Oembed from '../learningPath/step/oembed/Oembed';
 import polyglot from '../i18n';
@@ -18,7 +19,7 @@ const EmbedSearchPreview = ({ oembedPreview, oembedDisplay, onImageLightboxClose
       {oembedPreview.error ? <p>{polyglot.t('embedSearch.preview.error')}</p> : <Oembed oembedContent={oembedPreview} embedType="oembed" />}
     </Lightbox>
   </div>
-  );
+);
 
 EmbedSearchPreview.propTypes = {
   oembedPreview: PropTypes.object,

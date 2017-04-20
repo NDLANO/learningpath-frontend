@@ -6,7 +6,8 @@
  *
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import config from '../config';
 
@@ -31,7 +32,7 @@ const ExternalEmbedSearchFilter = ({ currentFilter, onFilterChange, learningPath
     <div className="embed-search_form-filters">
       {filteredFilters.map(filter =>
         <button key={filter.key} onClick={evt => onFilterChange(evt, filter)} className={filterClass(filter.key)}>{filter.name}</button>
-        )}
+      )}
     </div>
   );
 };

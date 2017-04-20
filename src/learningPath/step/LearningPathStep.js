@@ -6,7 +6,8 @@
  *
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import Oembed from './oembed/Oembed';
@@ -50,7 +51,7 @@ class LearningPathStep extends React.Component {
           <Helmet title={polyglot.t('htmlTitleTemplates.learningPathStep', { title: learningPathStep.title || '' })} />
           {this.state.isLoading && <Spinner hasMargins />}
           <LearningPathStepInformation learningPathStep={learningPathStep} stepTitle={learningPathStep.title} />
-          {oembedContent ? <Oembed oembedContent={oembedContent} /> : ''}
+          {oembedContent ? <Oembed oembedContent={oembedContent} /> : <Spinner hasMargins />}
         </LearningPathStepPrevNext>
       </div>
     );
