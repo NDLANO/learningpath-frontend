@@ -25,29 +25,40 @@ module.exports = options => ({
   }, options.output), // Merge with env dependent settings
 
   module: {
-
-    loaders: [
+    rules: [
       {
         test: /\.jsx?|\.js?$/, // Transform all .js and .jsx files required somewhere with Babel
-        exclude: /node_modules/, // See .babelrc
-        loaders: ['babel'],
+        exclude: [/node_modules/], // See .babelrc
+        loaders: 'babel-loader',
       },
       {
         test: /\.jpe?g$|\.gif$|\.png$|\.ico|\.svg$|\.woff$|\.ttf$/,
-        loader: options.fileLoader,
+        use: [
+          {
+            // Load files without hash in development
+            loader: options.fileLoader,
+          },
+        ],
       },
       {
         // Extract css to seprate file. Run css url's trough file loader for hashing in prod build
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader?root=../'),
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader?root=../',
+        }),
       },
       {
         test: /.json$/,
-        loader: 'json',
+        use: {
+          loader: 'json-loader',
+        },
       },
     ],
   },
   plugins: options.plugins.concat([
+    // Show Webpack progress
+    new webpack.ProgressPlugin(),
     // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
     // inside your code for any environment checks; UglifyJS will automatically
     // drop any unreachable code.
@@ -58,12 +69,15 @@ module.exports = options => ({
       __CLIENT__: true,
       __SERVER__: false,
     }),
+    new webpack.NamedModulesPlugin(),
   ]),
 
   resolve: {
-    modules: ['src', 'node_modules'],
+    modules: [
+      'src',
+      'node_modules',
+    ],
     extensions: [
-      '',
       '.js',
       '.json',
       '.jsx',
@@ -72,5 +86,4 @@ module.exports = options => ({
 
   devtool: options.devtool,
   target: 'web', // Make web variables accessible to webpack, e.g. window
-  progress: true,
 });

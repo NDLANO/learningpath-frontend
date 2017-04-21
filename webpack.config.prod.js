@@ -22,10 +22,6 @@ module.exports = require('./webpack.config.base')({
 
   plugins: [
 
-    // OccurrenceOrderPlugin is needed for long-term caching to work properly.
-    // See http://mxs.is/googmv
-    new webpack.optimize.OccurrenceOrderPlugin(true),
-
     // Merge all duplicate modules
     new webpack.optimize.DedupePlugin(),
 
@@ -40,7 +36,7 @@ module.exports = require('./webpack.config.base')({
     new ManifestPlugin({ fileName: 'assets.json' }),
 
     // Extract the CSS into a separate file
-    new ExtractTextPlugin('[name].[contenthash].css'),
+    new ExtractTextPlugin({ filename: '[name].[contenthash].css', allChunks: false }),
   ],
 
   devtool: 'source-map',
