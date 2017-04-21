@@ -7,9 +7,9 @@
  */
 
 import 'isomorphic-fetch';
-import { formatPattern } from 'react-router/lib/PatternUtils';
 import defined from 'defined';
 import config from '../config';
+import formatUrl from '../util/formatUrlUtil';
 
 const NDLA_API_URL = __SERVER__ ? config.ndlaApiUrl : window.config.ndlaApiUrl;
 const NDLA_ACCESS_TOKEN = __SERVER__ ? config.accessToken : window.config.accessToken;
@@ -104,14 +104,14 @@ export const authorizationHeader = token => `Bearer ${token}`;
 
 
 export function fetchAuthorized(path, method = 'GET') {
-  const url = params => apiResourceUrl(formatPattern(path, params));
+  const url = params => apiResourceUrl(formatUrl(path, params));
   return (token, params = {}) => fetch(url(params), {
     method, headers: { Authorization: authorizationHeader(token) },
   }).then(resolveJsonOrRejectWithError);
 }
 
 export function postAuthorized(path) {
-  const url = params => apiResourceUrl(formatPattern(path, params));
+  const url = params => apiResourceUrl(formatUrl(path, params));
 
   return (token, params = {}, body) => fetch(url(params), {
     headers: { Authorization: authorizationHeader(token) },
@@ -121,7 +121,7 @@ export function postAuthorized(path) {
 }
 
 export function putAuthorized(path) {
-  const url = params => apiResourceUrl(formatPattern(path, params));
+  const url = params => apiResourceUrl(formatUrl(path, params));
 
   return (token, params = {}, body) => fetch(url(params), {
     headers: { Authorization: authorizationHeader(token) },
@@ -131,7 +131,7 @@ export function putAuthorized(path) {
 }
 
 export function patchAuthorized(path) {
-  const url = params => apiResourceUrl(formatPattern(path, params));
+  const url = params => apiResourceUrl(formatUrl(path, params));
 
   return (token, params = {}, body) => fetch(url(params), {
     headers: { Authorization: authorizationHeader(token) },
@@ -141,7 +141,7 @@ export function patchAuthorized(path) {
 }
 
 export function deleteAuthorized(path) {
-  const url = params => apiResourceUrl(formatPattern(path, params));
+  const url = params => apiResourceUrl(formatUrl(path, params));
   return (token, params = {}) => fetch(url(params), {
     headers: { Authorization: authorizationHeader(token) },
     method: 'DELETE',

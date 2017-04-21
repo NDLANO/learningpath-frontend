@@ -8,7 +8,7 @@
 
 import React, { PropTypes } from 'react';
 import getLicenseByAbbreviation from 'ndla-licenses';
-import { LicenseIconList } from 'ndla-ui';
+import LicenseIconList from 'ndla-ui/lib/license/LicenseIconList';
 import polyglot from '../../i18n';
 
 const LearningPathStepLicense = ({ learningPathStep }) => {
