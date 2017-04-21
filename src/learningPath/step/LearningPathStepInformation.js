@@ -14,9 +14,9 @@ const LearningPathStepInformation = ({ learningPathStep, stepTitle }) => (
     {learningPathStep.showTitle ? (
       <div className="learning-step_hd">
         <h1 className="learning-step_title">{stepTitle}</h1>
-        <LearningPathStepLicense learningPathStep={learningPathStep} />
       </div>
       ) : null}
+    {learningPathStep.description ? <LearningPathStepLicense learningPathStep={learningPathStep} /> : ''}
     {learningPathStep.description ? <div className="learning-step_bd" dangerouslySetInnerHTML={{ __html: learningPathStep.description }} /> : ''}
   </div>
   );

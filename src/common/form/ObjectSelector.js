@@ -9,20 +9,23 @@
 import React, { PropTypes } from 'react';
 
 const ObjectSelector = (props) => {
-  const { options, labelKey, idKey, input: { onChange, onBlur, value }, ...rest } = props;
-
+  const { options, labelKey, idKey, input: { onChange, onBlur, value }, disabled, ...rest } = props;
   const parse = event => options.find(option => option[idKey] === event.target.value);
+
   return (
-    <select
-      onBlur={event => onBlur(parse(event))}
-      onChange={event => onChange(parse(event))}
-      value={value[idKey]}
-      {...rest.input}
-    >
-      {options.map(option =>
-        <option key={option[idKey] ? option[idKey] : 'undefined'} value={option[idKey]}>{option[labelKey]}</option>
-      )}
-    </select>
+    <div>
+      <select
+        onBlur={event => onBlur(parse(event))}
+        onChange={event => onChange(parse(event))}
+        value={value[idKey]}
+        disabled={disabled}
+        {...rest.input}
+      >
+        {options.map(option =>
+          <option key={option[idKey] ? option[idKey] : 'undefined'} value={option[idKey]}>{option[labelKey]}</option>
+        )}
+      </select>
+    </div>
   );
 };
 
@@ -31,6 +34,11 @@ ObjectSelector.propTypes = {
   options: PropTypes.array.isRequired,
   labelKey: PropTypes.string.isRequired,
   idKey: PropTypes.string.isRequired,
+  disabled: PropTypes.bool,
+};
+
+ObjectSelector.defaultProps = {
+  disabled: false,
 };
 
 export default ObjectSelector;
