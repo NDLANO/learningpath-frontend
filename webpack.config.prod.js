@@ -22,9 +22,6 @@ module.exports = require('./webpack.config.base')({
 
   plugins: [
 
-    // Merge all duplicate modules
-    new webpack.optimize.DedupePlugin(),
-
     // Minify and optimize the JavaScript
     new webpack.optimize.UglifyJsPlugin({
       compress: {
