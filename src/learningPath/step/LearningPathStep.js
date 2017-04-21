@@ -51,7 +51,7 @@ class LearningPathStep extends React.Component {
           <Helmet title={polyglot.t('htmlTitleTemplates.learningPathStep', { title: learningPathStep.title || '' })} />
           {this.state.isLoading && <Spinner hasMargins />}
           <LearningPathStepInformation learningPathStep={learningPathStep} stepTitle={learningPathStep.title} />
-          {oembedContent ? <Oembed oembedContent={oembedContent} /> : <Spinner hasMargins />}
+          {oembedContent ? <Oembed oembedContent={oembedContent} /> : ''}
         </LearningPathStepPrevNext>
       </div>
     );
