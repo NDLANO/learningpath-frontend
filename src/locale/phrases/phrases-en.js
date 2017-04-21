@@ -139,6 +139,7 @@ const phrases = {
     },
     validation: {
       oneOfDescriptionOrUrlIsRequired: 'Either Description and Url must be provided.',
+      licenseAndDescription: 'When description is added, a license has to be chosen.',
     },
     edit: 'Edit learning path step',
     urlPlaceholder: 'Paste link',
@@ -258,15 +259,20 @@ const phrases = {
     ndlaButton: 'Search for NDLA resources',
     externalButton: 'Search for external resources',
   },
-  pintrest: {
-    importFrom: 'Get learning steps from Pintrest',
+  pinterest: {
+    importFrom: 'Get learning steps from Pinterest',
     lightbox: {
-      heading: 'Get learning steps from Pintrest',
+      heading: 'Get learning steps from Pinterest',
     },
     form: {
       placeholder: 'username/board',
+      usernamePlaceholder: 'username',
+      boardPlaceholder: 'board',
       submit: 'Fetch pins',
+      requiredFields: 'Both username and boardname must be filled.',
     },
+    allPins: 'All pins',
+    error: 'Did not find the board under the specified username.',
     pinForm: {
       create: 'Create learning step',
       viewSource: 'View source link',

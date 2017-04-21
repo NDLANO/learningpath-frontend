@@ -50,10 +50,10 @@ const findIEClass = (userAgentString) => {
   return '';
 };
 
-app.get('/pintrest-proxy/*', requestProxy({
-  url: `${config.pintrestApiUrl}*`,
+app.get('/pinterest-proxy/*', requestProxy({
+  url: `${config.pinterestApiUrl}*`,
   query: {
-    access_token: process.env.PINTREST_ACCESS_TOKEN,
+    access_token: process.env.PINTEREST_ACCESS_TOKEN,
   },
 }));
 

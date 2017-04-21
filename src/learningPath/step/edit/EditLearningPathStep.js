@@ -28,7 +28,7 @@ class EditLearningPathStep extends Component {
 
   componentWillMount() {
     const { fetchLearningPathLicenses, localFetchLearningPathStep, params: { pathId, stepId } } = this.props;
-    fetchLearningPathLicenses();
+    fetchLearningPathLicenses('4.0');
 
     if (stepId) {
       localFetchLearningPathStep(pathId, stepId, true);
@@ -43,7 +43,6 @@ class EditLearningPathStep extends Component {
       learningPath,
       licenses,
     } = this.props;
-
     if (!learningPath || !learningPath.id) {
       return null;
     }
@@ -56,10 +55,11 @@ class EditLearningPathStep extends Component {
         title: [{ title: values.title, language }],
         description: [{ description: descriptionHTML, language }],
         embedUrl: values.url && values.url.url ? [{ url: values.url.url, language, embedType: values.url.embedType }] : [],
-        license: values.license && values.license.licen ? values.license.license : '',
+        license: values.license && values.license.license ? values.license.license : '',
       });
       return saveLearningPathStep(learningPath.id, toSave);
     };
+
     return (
       <div className="two-column_content--wide learning-path-step two-column_content--white-bg">
         <LearningPathStepForm
@@ -94,7 +94,7 @@ EditLearningPathStep.contextTypes = {
 export const mapStateToProps = state => assign({}, state, {
   step: getI18nLearningPathStep(state),
   learningPath: getI18nLearningPath(state),
-  licenses: [{ description: polyglot.t('editPathStep.noLicenseChosen'), license: undefined }].concat(get(state, 'learningPathLicenses.allLicenses.all', [])),
+  licenses: [{ description: polyglot.t('editPathStep.noLicenseChosen'), license: '' }].concat(get(state, 'learningPathLicenses.creativeCommonLicenses.all', [])),
 });
 
 export const mapDispatchToProps = {

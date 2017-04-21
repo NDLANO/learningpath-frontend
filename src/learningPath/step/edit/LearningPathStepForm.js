@@ -13,7 +13,7 @@ import { compose } from 'redux';
 import { Link } from 'react-router';
 import defined from 'defined';
 import { reduxForm, Fields, change } from 'redux-form';
-import { createValidator, required, oneOfIsRequired } from '../../../util/validation';
+import { createValidator, required, oneOfIsRequired, licenseExistsIfDescriptionExists } from '../../../util/validation';
 import LabeledIcon from '../../../common/LabeledIcon';
 import polyglot from '../../../i18n';
 import LearningPathStepFields from './LearningPathStepFields';
@@ -39,7 +39,7 @@ const LearningPathStepForm = (props) => {
     <form onSubmit={handleSubmit} className="learning-step-form">
       <div className="learning-step-form_group">
         <Fields
-          names={['type', 'title', 'showTitle', 'url', 'description']}
+          names={['type', 'title', 'showTitle', 'url', 'description', 'license']}
           component={LearningPathStepFields}
           step={step}
           learningPathId={learningPath.id}
@@ -102,7 +102,8 @@ const asyncValidate = (values, dispatch, props) => {
 
 const validate = createValidator({
   title: required(),
-  description: oneOfIsRequired('editPathStep.validation.oneOfDescriptionOrUrlIsRequired', 'url', 'description'),
+  url: oneOfIsRequired('editPathStep.validation.oneOfDescriptionOrUrlIsRequired', 'url', 'description'),
+  description: licenseExistsIfDescriptionExists('editPathStep.validation.licenseAndDescription', 'description', 'license'),
 });
 
 export default compose(
