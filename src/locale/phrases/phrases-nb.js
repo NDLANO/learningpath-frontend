@@ -259,15 +259,20 @@ const phrases = {
     externalButton: 'Søk i eksterne ressurser',
     ndlaButton: 'Søk i NDLA',
   },
-  pintrest: {
-    importFrom: 'Hent læringssteg fra Pintrest',
+  pinterest: {
+    importFrom: 'Hent læringssteg fra Pinterest',
     lightbox: {
-      heading: 'Hent læringssteg fra Pintrest',
+      heading: 'Hent læringssteg fra Pinterest',
     },
     form: {
       placeholder: 'brukernavn/tavlenavn',
+      usernamePlaceholder: 'brukernavn',
+      boardPlaceholder: 'tavlenavn',
       submit: 'Hent pins',
+      requiredFields: 'Både brukernavn og tavlenavn må være fylt ut.',
     },
+    allPins: 'Alle pins',
+    error: 'Fant ikke tavlen under dette brukernavnet.',
     pinForm: {
       create: 'Opprett læringssteg',
       viewSource: 'Se kilde lenke',
