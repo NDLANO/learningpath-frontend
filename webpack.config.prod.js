@@ -22,15 +22,9 @@ module.exports = require('./webpack.config.base')({
 
   plugins: [
 
-    // OccurrenceOrderPlugin is needed for long-term caching to work properly.
-    // See http://mxs.is/googmv
-    new webpack.optimize.OccurrenceOrderPlugin(true),
-
-    // Merge all duplicate modules
-    new webpack.optimize.DedupePlugin(),
-
     // Minify and optimize the JavaScript
     new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
       compress: {
         warnings: false, // ...but do not show warnings in the console (there is a lot of them)
         screw_ie8: true, // drop IE 6-8 specific optimizations
@@ -40,7 +34,7 @@ module.exports = require('./webpack.config.base')({
     new ManifestPlugin({ fileName: 'assets.json' }),
 
     // Extract the CSS into a separate file
-    new ExtractTextPlugin('[name].[contenthash].css'),
+    new ExtractTextPlugin({ filename: '[name].[contenthash].css', allChunks: false }),
   ],
 
   devtool: 'source-map',

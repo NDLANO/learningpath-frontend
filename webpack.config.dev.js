@@ -7,9 +7,9 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
 const plugins = [
-  new ExtractTextPlugin('[name].css'),
+  new ExtractTextPlugin({ filename: '[name].css', allChunks: false }),
   new webpack.HotModuleReplacementPlugin(),
-  new webpack.NoErrorsPlugin(),
+  new webpack.NoEmitOnErrorsPlugin(),
 ];
 
 module.exports = require('./webpack.config.base')({
