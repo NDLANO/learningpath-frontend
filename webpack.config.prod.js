@@ -24,6 +24,7 @@ module.exports = require('./webpack.config.base')({
 
     // Minify and optimize the JavaScript
     new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
       compress: {
         warnings: false, // ...but do not show warnings in the console (there is a lot of them)
         screw_ie8: true, // drop IE 6-8 specific optimizations
