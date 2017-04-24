@@ -8,14 +8,17 @@
 
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { createHistory } from 'history';
+import createHistory from 'history/createBrowserHistory';
+import { withRouter } from 'react-router-dom';
 
 import { availableLocales } from './localeConstants';
 import { getLocale } from './localeSelectors';
-import { getPathnameBeforeTransitions, getSearchBeforeTransitions } from '../main/routingSelectors';
 
-const SelectLocale = ({ locale, pathname, search }) => {
+const SelectLocale = (props) => {
+  const { locale, location: { pathname, search } } = props;
+  console.log(props);
   const handleChange = (newLocale) => {
+    console.log(createHistory);
     const path = pathname.startsWith('/') ? pathname.substring(1) : pathname;
     createHistory().push(`/${newLocale}/${path}${search}`); // Need create new history or else basename is included
     window.location.reload();
@@ -31,14 +34,11 @@ const SelectLocale = ({ locale, pathname, search }) => {
 
 SelectLocale.propTypes = {
   locale: PropTypes.string.isRequired,
-  pathname: PropTypes.string.isRequired,
-  search: PropTypes.string.isRequired,
+  location: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   locale: getLocale(state),
-  pathname: getPathnameBeforeTransitions(state),
-  search: getSearchBeforeTransitions(state),
 });
 
-export default connect(mapStateToProps)(SelectLocale);
+export default withRouter(connect(mapStateToProps)(SelectLocale));

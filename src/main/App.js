@@ -8,11 +8,13 @@
 
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-
+import { Switch, Route } from 'react-router-dom';
 import { getLocale } from '../locale/localeSelectors';
 import { getMessages } from '../messages/messagesSelectors';
 import Alerts from '../messages/Alerts';
 import { checkAccessTokenOnEnter } from '../session/sessionActions';
+import ScrollToTop from './ScrollToTop';
+import Welcome from './Welcome';
 
 export class App extends React.Component {
   getChildContext() {
@@ -26,11 +28,20 @@ export class App extends React.Component {
 
   render() {
     const { dispatch, children, messages } = this.props;
+
+    console.log(this.props);
     return (
-      <div className="page-container">
-        {children}
-        <Alerts dispatch={dispatch} messages={messages} />
+      <div>
+        <div className="page-container">
+          {children}
+          <Alerts dispatch={dispatch} messages={messages} />
+        </div>
+        <ScrollToTop />
+        <Switch>
+          <Route path="/" component={Welcome} />
+        </Switch>
       </div>
+
     );
   }
 }

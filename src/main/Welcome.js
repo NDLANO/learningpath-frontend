@@ -34,6 +34,7 @@ class Welcome extends Component {
   }
 
   render() {
+    console.log('HALLA');
     const assets = config.isProduction = require('../../server/developmentAssets'); // eslint-disable-line
     return (
       <Wrapper>
