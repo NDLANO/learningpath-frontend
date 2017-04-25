@@ -201,10 +201,6 @@ https://github.com/sindresorhus/query-string#readme
 Use external SVG spritemaps in any browser (IE Polyfill)
 https://github.com/jonathantneal/svg4everybody#readme
 
-**node-uuid**
-Rigorous implementation of RFC4122 (v1 and v4) UUIDs.
-https://github.com/broofa/node-uuid
-
 ### ES2015
 
 **babel-core:**

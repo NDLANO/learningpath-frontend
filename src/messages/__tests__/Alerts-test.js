@@ -10,15 +10,15 @@ import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
-import uuid from 'node-uuid';
+import { uuid } from 'ndla-util';
 
 import { Alerts, Alert, Action } from '../Alerts';
 import { clearMessage } from '../../messages/messagesActions';
 
-const noop = () => {};
+const noop = () => { };
 
 test('component/Alerts one message', (t) => {
-  const alertMessages = [{ id: uuid.v4(), message: 'Testmessage' }];
+  const alertMessages = [{ id: uuid(), message: 'Testmessage' }];
   const component = shallow(<Alerts messages={alertMessages} dispatch={noop} />);
   const alertElement = component.find('Alert');
 
@@ -29,7 +29,7 @@ test('component/Alerts one message', (t) => {
 
 test('component/Alerts two messages', (t) => {
   const messages = ['Testmessage', 'TEST'];
-  const alertMessages = [{ id: uuid.v4(), message: messages[0], severity: 'success' }, { id: uuid.v4(), message: messages[1] }];
+  const alertMessages = [{ id: uuid(), message: messages[0], severity: 'success' }, { id: uuid(), message: messages[1] }];
   const component = shallow(<Alerts messages={alertMessages} dispatch={noop} />);
 
   const alertElement = component.find('Alert');
@@ -50,8 +50,8 @@ test('component/Alerts without messages', (t) => {
 
 
 test('component/Alert dismiss', (t) => {
-  const dispatch = sinon.spy(() => {});
-  const id = uuid.v4();
+  const dispatch = sinon.spy(() => { });
+  const id = uuid();
 
   const dismissBt = shallow(
     <Alert message={{ id, message: 'whatever', severity: 'info' }} dispatch={dispatch} />
@@ -66,7 +66,7 @@ test('component/Alert dismiss', (t) => {
 });
 
 test('component/Action click', (t) => {
-  const handleClick = sinon.spy(() => {});
+  const handleClick = sinon.spy(() => { });
 
   const actionBtn = shallow(
     <Action title="Undo" onClick={handleClick} />

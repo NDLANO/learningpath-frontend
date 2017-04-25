@@ -76,7 +76,6 @@
     "ndla-ui": "^0.1.6",
     "ndla-util": "^0.1.0",
     "node-polyglot": "2.2.2",
-    "node-uuid": "^1.4.8",
     "prop-types": "^15.5.8",
     "query-string": "^4.3.4",
     "react": "^15.5.4",
