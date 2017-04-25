@@ -6,7 +6,8 @@
  *
  */
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { DragSource, DropTarget } from 'react-dnd';
 import uuid from 'node-uuid';
 import flow from 'lodash/flow';

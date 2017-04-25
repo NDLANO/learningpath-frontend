@@ -6,7 +6,8 @@
  *
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const ObjectSelector = (props) => {
   const { options, labelKey, idKey, input: { onChange, onBlur, value }, disabled, ...rest } = props;

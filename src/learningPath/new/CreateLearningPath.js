@@ -6,7 +6,8 @@
  *
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { reduxForm, reset, Field } from 'redux-form';
 import polyglot from '../../i18n';
 import InputField from '../../common/form/InputField';

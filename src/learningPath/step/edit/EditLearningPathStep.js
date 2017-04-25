@@ -6,7 +6,8 @@
  *
  */
 
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import assign from 'lodash/assign';
 import { stateToHTML } from 'draft-js-export-html';

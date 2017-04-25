@@ -6,7 +6,8 @@
  *
  */
 
-import React, { PropTypes, cloneElement } from 'react';
+import React, { cloneElement } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import BaseOverlay from 'react-overlays/lib/Overlay';
 import { PLACEMENTS } from './constants';

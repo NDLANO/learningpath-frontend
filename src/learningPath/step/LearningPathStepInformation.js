@@ -6,7 +6,8 @@
  *
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import LearningPathStepLicense from './LearningPathStepLicense';
 
 const LearningPathStepInformation = ({ learningPathStep, stepTitle }) => (
@@ -19,7 +20,7 @@ const LearningPathStepInformation = ({ learningPathStep, stepTitle }) => (
     {learningPathStep.description ? <LearningPathStepLicense learningPathStep={learningPathStep} /> : ''}
     {learningPathStep.description ? <div className="learning-step_bd" dangerouslySetInnerHTML={{ __html: learningPathStep.description }} /> : ''}
   </div>
-  );
+);
 
 LearningPathStepInformation.propTypes = {
   learningPathStep: PropTypes.object.isRequired,
