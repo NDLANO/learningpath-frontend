@@ -6,7 +6,8 @@
  *
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Editor, EditorState, RichUtils } from 'draft-js';
 import classNames from 'classnames';
 import { stateFromHTML } from 'draft-js-import-html';
@@ -19,8 +20,8 @@ const StyleButton = ({ active, icon, style, onToggle }) => {
     onToggle(style);
   };
   const className = classNames(
-      ['texformat-menu-item'],
-      { ' texformat-menu-item__selected': active }
+    ['texformat-menu-item'],
+    { ' texformat-menu-item__selected': active }
   );
 
   return (

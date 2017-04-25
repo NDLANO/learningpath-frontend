@@ -6,7 +6,8 @@
  *
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import defined from 'defined';
 import { connect } from 'react-redux';
 import { closeSidebars } from '../../common/sidebarActions';

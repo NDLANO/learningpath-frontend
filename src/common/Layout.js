@@ -7,11 +7,22 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import polyglot from '../i18n';
 import SelectLocale from '../locale/SelectLocale';
 
 export const Wrapper = ({ children }) => <div className="wrapper">{children}</div>;
 export const OneColumn = ({ children, className }) => <div className={className ? `one-column ${className}` : 'one-column'}>{children}</div>;
+
+Wrapper.propTypes = {
+  children: PropTypes.node,
+};
+
+OneColumn.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};
+
 
 export const Footer = () =>
   <footer className="footer">

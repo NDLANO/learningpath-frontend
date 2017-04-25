@@ -6,7 +6,8 @@
  *
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { ContentState } from 'draft-js';
 import DescriptionHTMLEditor from '../../../common/editors/DescriptionHTMLEditor';
 import polyglot from '../../../i18n';
