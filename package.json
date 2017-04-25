@@ -60,7 +60,6 @@
     "defined": "1.0.0",
     "draft-convert": "^1.4.5",
     "draft-js": "^0.10.0",
-    "draft-js-export-html": "0.5.2",
     "eslint": "^3.13.1",
     "express": "4.15.2",
     "express-request-proxy": "2.0.0",
