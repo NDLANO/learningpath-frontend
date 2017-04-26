@@ -30,11 +30,10 @@ class Welcome extends Component {
     const { query } = this.state;
     e.preventDefault();
     const sort = (query && !isEmpty(query)) ? '-relevance' : '-lastUpdated';
-    this.props.pushRoute({ pathname: '/learningPaths', query: { query, page: 1, sort } });
+    this.props.pushRoute({ pathname: '/learningpaths', query: { query, page: 1, sort } });
   }
 
   render() {
-    console.log('HALLA');
     const assets = config.isProduction = require('../../server/developmentAssets'); // eslint-disable-line
     return (
       <Wrapper>

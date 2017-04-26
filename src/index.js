@@ -8,16 +8,16 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'url-search-params-polyfill';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import ErrorReporter from 'ndla-error-reporter';
 import { configureLocale, isValidLocale } from './locale/configureLocale';
 import configureStore from './configureStore';
 import { accessToken } from './sources/helpers';
-import ScrollToTop from './main/ScrollToTop';
 import App from './main/App';
-
+import configureHistory from './configureHistory';
 function generateBasename(path) {
   if (isValidLocale(path)) {
     return `/${path}/`;
@@ -30,8 +30,9 @@ const path = paths.length > 2 ? paths[1] : '/';
 const locale = paths.length > 2 && isValidLocale(paths[1]) ? paths[1] : 'nb';
 
 configureLocale(locale);
-
 const basename = generateBasename(path);
+
+const browserHistory = basename ? configureHistory(createHistory({ basename })) : configureHistory(createHistory());
 
 const store = configureStore({
   authenticated: false,
@@ -42,7 +43,7 @@ const store = configureStore({
   learningPaths: [],
   messages: [],
   locale,
-});
+}, browserHistory);
 
 const { logglyApiKey, logEnvironment, componentName } = window.config;
 window.errorReporter = ErrorReporter.getInstance({ store, logglyApiKey, environment: logEnvironment, componentName });
@@ -50,9 +51,9 @@ window.errorReporter = ErrorReporter.getInstance({ store, logglyApiKey, environm
 
 ReactDOM.render(
   <Provider store={store} locale={locale}>
-    <BrowserRouter basename={basename || ''}>
+    <Router history={browserHistory}>
       <App />
-    </BrowserRouter>
+    </Router>
   </Provider>,
   document.getElementById('app-container')
 );

@@ -9,7 +9,7 @@
 import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import LinkPager from '../pager/LinkPager';
 import { getRange, stepNumbers } from '../pager/PagerUtil';

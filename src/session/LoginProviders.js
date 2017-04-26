@@ -7,11 +7,14 @@
  */
 
 import React, { PropTypes } from 'react';
+import { Route } from 'react-router-dom';
 import polyglot from '../i18n';
 import { loginSocialMedia } from './sessionActions';
+import LoginFailure from './LoginFailure';
+import SessionInitializer from './SessionInitializer';
 
 const LoginProviders = (props) => {
-  const { message } = props;
+  const { message, match } = props;
   let messageEl;
   if (message) {
     messageEl = <p>{message}</p>;
@@ -20,6 +23,8 @@ const LoginProviders = (props) => {
 
   return (
     <div className="one-column one-column--narrow">
+      <Route path={`${match.url}/success`} component={SessionInitializer} />
+      <Route path={`${match.url}/failure(/)`} component={LoginFailure} />
       <h3>{polyglot.t('loginProviders.description')}</h3>
       {messageEl}
       <ul className="vertical-menu">
@@ -33,6 +38,7 @@ const LoginProviders = (props) => {
 
 LoginProviders.propTypes = {
   message: PropTypes.string,
+  match: PropTypes.object.isRequired,
 };
 
 export default LoginProviders;

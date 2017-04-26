@@ -8,10 +8,7 @@
 
 import { createSelector } from 'reselect';
 
-const getRoutingFromState = (state) => {
-  console.log(state);
-  return state.routing;
-};
+const getRoutingFromState = state => state.routing;
 
 export const getLocationBeforeTransitions = createSelector(
   [getRoutingFromState],

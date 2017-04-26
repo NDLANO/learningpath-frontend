@@ -7,7 +7,7 @@
  */
 
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import LabeledIcon from '../../common/LabeledIcon';
 import formatDate from '../../util/formatDate';
@@ -58,7 +58,7 @@ export default class SearchResult extends Component {
 
     return (
       <div className="search-result">
-        <Link to={`/learningpaths/${path.id}/first-step/`} className="search-result_img_container">
+        <Link to={`/learningpaths/${path.id}/first-step`} className="search-result_img_container">
           {image()}
         </Link>
         <div className="border-box_wrapper">
@@ -70,7 +70,7 @@ export default class SearchResult extends Component {
           </div>
         </div>
         <div className="search-result_bd">
-          <Link to={`/learningpaths/${path.id}/first-step/`}>
+          <Link to={`/learningpaths/${path.id}/first-step`}>
             <h2 className="search-result_title">
               {path.title}
             </h2>
@@ -78,7 +78,7 @@ export default class SearchResult extends Component {
           <div className="search-result_meta">
             <LearningPathContributors copyright={path.copyright} />
           </div>
-          <Link to={`/learningpaths/${path.id}/first-step/`} className="search-result_description">{path.description}</Link>
+          <Link to={`/learningpaths/${path.id}/first-step`} className="search-result_description">{path.description}</Link>
           <LearningPathIntroduction path={path} />
           {path.isBasedOn ? <IsBasedOn path={path} /> : ''}
           <div>

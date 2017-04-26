@@ -10,7 +10,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import defined from 'defined';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import isInteger from 'lodash/isInteger';
 import { reduxForm, Field } from 'redux-form';
 import LabeledIcon from '../../common/LabeledIcon';

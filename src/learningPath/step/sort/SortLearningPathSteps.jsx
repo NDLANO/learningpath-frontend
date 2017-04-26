@@ -8,7 +8,7 @@
 
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import SortableLearningStepList from './SortableLearningStepList';
 import polyglot from '../../../i18n';
 import { getLearningPath } from '../../learningPathSelectors';

@@ -10,6 +10,8 @@ import { connect } from 'react-redux';
 import get from 'lodash/get';
 import assign from 'lodash/assign';
 import EditLearningPathStep, { mapStateToProps, mapDispatchToProps } from '../edit/EditLearningPathStep';
+import * as actions from '../learningPathStepActions';
+import ifAuthenticated from '../../../util/ifAuthenticated';
 
 const extendMapStateToProps = state => assign({}, mapStateToProps, {
   step: get(state, 'learningPathStep', {}),
@@ -18,6 +20,8 @@ const extendMapStateToProps = state => assign({}, mapStateToProps, {
 });
 
 const extendMapDispatchToProps = assign({}, mapDispatchToProps, {
+  localIfAuthenticated: ifAuthenticated,
+  localCreateEmptyLearningPathStep: actions.createEmptyLearningPathStep,
 });
 
 export default connect(extendMapStateToProps, extendMapDispatchToProps)(EditLearningPathStep);

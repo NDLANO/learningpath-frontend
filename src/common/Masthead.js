@@ -94,7 +94,6 @@ Masthead.propTypes = {
   logo: PropTypes.object,
   changeStatusButton: PropTypes.object,
   sortableTableOfContent: PropTypes.object,
-  sortLearningSteps: PropTypes.object,
   learningPath: PropTypes.object,
   sortableTableOfContentButton: PropTypes.object,
   isLeftSideBarOpen: PropTypes.bool.isRequired,

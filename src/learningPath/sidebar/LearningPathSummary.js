@@ -7,11 +7,14 @@
  */
 
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { getI18nLearningPath } from '../learningPathSelectors';
 
-const LearningPathSummary = ({ learningPath, lang }) => {
-  if (!learningPath || !lang) {
+const LearningPathSummary = ({ learningPath }) => {
+  if (!learningPath) {
     return null;
   }
+  console.log(learningPath);
   return (
     <div className="two-column_content">
       <div className="learning-path">
@@ -30,7 +33,11 @@ const LearningPathSummary = ({ learningPath, lang }) => {
 
 LearningPathSummary.propTypes = {
   learningPath: PropTypes.object,
-  lang: PropTypes.string,
 };
 
-export default LearningPathSummary;
+const mapStateToProps = state => Object.assign({}, state, {
+  learningPath: getI18nLearningPath(state),
+});
+
+
+export default connect(mapStateToProps)(LearningPathSummary);
