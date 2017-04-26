@@ -11,9 +11,8 @@ import express from 'express';
 const app = express();
 
 app.get('*', (req, res) => {
-  const hostname = req.get("Host");
+  const hostname = req.get('Host');
   if (hostname === undefined || !hostname.match(/^(.+\.)?ndla\.no$/gi)) {
-    res.set("Connection", "close");
     res.send(400);
   }
 
