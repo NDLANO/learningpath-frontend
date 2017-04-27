@@ -81,13 +81,9 @@ Hint: Running `npm ls --long --depth 0` prints a list of dependencies including 
 A React framework for building text editors.
 https://facebook.github.io/draft-js
 
-**draft-js-export-html**
-DraftJS: Export ContentState to HTML.
-https://github.com/sstur/draft-js-export-html#readme
-
-**draft-js-import-html**
-DraftJS: import HTML to ContentState.
-https://github.com/sstur/draft-js-import-html#readme
+**draft-convert**
+Extensibly serialize & deserialize Draft.js ContentState with HTML.
+https://github.com/HubSpot/draft-convert
 
 **react:**
 React is a JavaScript library for building user interfaces.

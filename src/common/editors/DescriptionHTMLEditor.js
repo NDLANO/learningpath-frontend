@@ -10,7 +10,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Editor, EditorState, RichUtils } from 'draft-js';
 import classNames from 'classnames';
-import { stateFromHTML } from 'draft-js-import-html';
+import { convertFromHTML } from 'draft-convert';
 import Icon from '../Icon';
 import polyglot from '../../i18n';
 
@@ -108,7 +108,7 @@ export default class DescriptionHTMLEditor extends React.Component {
 
   setEditorContentStateFromHTML(htmlStr) {
     if (htmlStr !== undefined) {
-      const contentState = stateFromHTML(htmlStr);
+      const contentState = convertFromHTML(htmlStr);
       const editorState = EditorState.createWithContent(contentState);
       this.onChange(editorState);
     }

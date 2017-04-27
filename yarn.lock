@@ -1669,28 +1669,12 @@ domutils@1.5.1, domutils@^1.5.1:
     dom-serializer "0"
     domelementtype "1"
 
-draft-js-export-html@0.5.2:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/draft-js-export-html/-/draft-js-export-html-0.5.2.tgz#089e55ce06d5aed0dbd9af5eee2eb56c58a1c428"
+draft-convert@^1.4.5:
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/draft-convert/-/draft-convert-1.4.5.tgz#89e8c1b198881d830cd0ebaae5832603e2778cf0"
   dependencies:
-    draft-js-utils "^0.1.5"
-
-draft-js-import-element@^0.4.1:
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/draft-js-import-element/-/draft-js-import-element-0.4.3.tgz#785381a2e0323a9836cfa856c442e9013bd482a4"
-  dependencies:
-    draft-js-utils "^0.1.5"
-    synthetic-dom "^0.2.0"
-
-draft-js-import-html@0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/draft-js-import-html/-/draft-js-import-html-0.3.2.tgz#cc205a6192cac2c6520576688702ee31f5241810"
-  dependencies:
-    draft-js-import-element "^0.4.1"
-
-draft-js-utils@^0.1.5:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/draft-js-utils/-/draft-js-utils-0.1.6.tgz#71f0e90a843426f0eadc83e8154b3220c4bb7f9e"
+    immutable "~3.7.4"
+    invariant "^2.2.1"
 
 draft-js@^0.10.0:
   version "0.10.0"
@@ -3313,7 +3297,7 @@ jsbn@^0.1.0, jsbn@~0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.0.tgz#650987da0dd74f4ebf5a11377a2aa2d273e97dfd"
 
-jsdom@9.12.0, jsdom@^9.11.0:
+jsdom@^9.11.0:
   version "9.12.0"
   resolved "https://registry.yarnpkg.com/jsdom/-/jsdom-9.12.0.tgz#e8c546fffcb06c00d4833ca84410fed7f8a097d4"
   dependencies:
@@ -5485,10 +5469,6 @@ symbol-tree@^3.2.1:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.2.tgz#ae27db38f660a7ae2e1c3b7d1bc290819b8519e6"
 
-synthetic-dom@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/synthetic-dom/-/synthetic-dom-0.2.0.tgz#a06d1522641bbff9d82960d265bec52f2791560d"
-
 table@^3.7.8:
   version "3.8.3"
   resolved "https://registry.yarnpkg.com/table/-/table-3.8.3.tgz#2bbc542f0fda9861a755d3947fefd8b3f513855f"
@@ -5807,13 +5787,6 @@ warning@^3.0.0:
   resolved "https://registry.yarnpkg.com/warning/-/warning-3.0.0.tgz#32e5377cb572de4ab04753bdf8821c01ed605b7c"
   dependencies:
     loose-envify "^1.0.0"
-
-watch@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/watch/-/watch-1.0.2.tgz#340a717bde765726fa0aa07d721e0147a551df0c"
-  dependencies:
-    exec-sh "^0.2.0"
-    minimist "^1.2.0"
 
 watch@~0.10.0:
   version "0.10.0"

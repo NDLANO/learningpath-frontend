@@ -10,7 +10,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import assign from 'lodash/assign';
-import { stateToHTML } from 'draft-js-export-html';
+import { convertToHTML } from 'draft-convert';
 import get from 'lodash/get';
 
 import LearningPathStepForm from './LearningPathStepForm';
@@ -48,7 +48,14 @@ class EditLearningPathStep extends Component {
     }
 
     const handleSubmit = (values) => {
-      const descriptionHTML = stateToHTML(values.description);
+      const descriptionHTML = convertToHTML({
+        styleToHTML: (style) => {
+          if (style === 'UNDERLINE') {
+            return <u />;
+          }
+          return undefined;
+        },
+      })(values.description);
       const toSave = Object.assign({}, step, {
         type: values.type,
         showTitle: values.showTitle,
