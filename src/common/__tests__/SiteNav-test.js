@@ -6,32 +6,27 @@
  *
  */
 
-import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Link } from 'react-router';
 
 import { SiteNav } from '../SiteNav';
 
-test('component/SiteNav not authenticated', (t) => {
+test('component/SiteNav not authenticated', () => {
   const navLinks = shallow(<SiteNav authenticated={false} />).find(Link);
 
-  t.equals(navLinks.length, 2, 'two links');
+  expect(navLinks.length).toBe(2);
 
-  t.equals(navLinks.at(0).props().to, '/learningpaths');
-  t.equals(navLinks.at(1).props().to, '/login');
-
-  t.end();
+  expect(navLinks.at(0).props().to).toBe('/learningpaths');
+  expect(navLinks.at(1).props().to).toBe('/login');
 });
 
-test('component/SiteNav authenticated', (t) => {
+test('component/SiteNav authenticated', () => {
   const navLinks = shallow(<SiteNav authenticated userName="Alice" />).find(Link);
 
-  t.equals(navLinks.length, 3, 'three links');
+  expect(navLinks.length).toBe(3);
 
-  t.equals(navLinks.at(0).props().to, '/learningpaths');
-  t.equals(navLinks.at(1).props().to, '/minside');
-  t.equals(navLinks.at(2).props().to, '/logout');
-
-  t.end();
+  expect(navLinks.at(0).props().to).toBe('/learningpaths');
+  expect(navLinks.at(1).props().to).toBe('/minside');
+  expect(navLinks.at(2).props().to).toBe('/logout');
 });

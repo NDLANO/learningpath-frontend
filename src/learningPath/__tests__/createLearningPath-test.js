@@ -6,7 +6,6 @@
  *
  */
 
-import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
@@ -23,9 +22,9 @@ const mockStore = configureStore(middleware);
 const accessToken = '123345';
 const pathId = 123;
 
-test('actions/createLearningPath', (t) => {
+test('actions/createLearningPath', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -58,7 +57,7 @@ test('actions/createLearningPath', (t) => {
     createLearningPath({ isRequest: true, learningsteps })
   )
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         addMessage({ message: 'Lagret OK' }),
         setLearningPath({
           id: pathId,
@@ -73,19 +72,19 @@ test('actions/createLearningPath', (t) => {
         routerActions.push({ pathname: `/learningpaths/${pathId}/step/new` }),
       ]);
 
-      t.doesNotThrow(() => postPathApi.done());
-      t.doesNotThrow(() => postStep1Api.done());
-      t.doesNotThrow(() => postStep2Api.done());
-      t.doesNotThrow(() => postStep3Api.done());
+      expect(() => postPathApi.done()).not.toThrow();
+      expect(() => postStep1Api.done()).not.toThrow();
+      expect(() => postStep2Api.done()).not.toThrow();
+      expect(() => postStep3Api.done()).not.toThrow();
 
       done();
     })
     .catch(done);
 });
 
-test('actions/createLearningPath access denied', (t) => {
+test('actions/createLearningPath access denied', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -99,10 +98,10 @@ test('actions/createLearningPath access denied', (t) => {
 
   store.dispatch(createLearningPath({ foo: 'bar' }))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         applicationError(payload403invalid('http://ndla-api/learningpaths')),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
 
       done();
     })

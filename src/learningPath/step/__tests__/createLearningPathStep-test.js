@@ -6,7 +6,6 @@
  *
  */
 
-import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
@@ -23,9 +22,9 @@ const accessToken = '123345';
 const pathId = 123;
 
 
-test('actions/createLearningPathStep', (t) => {
+test('actions/createLearningPathStep', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -45,21 +44,21 @@ test('actions/createLearningPathStep', (t) => {
 
   store.dispatch(createLearningPathStep(pathId, learningStep))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         addMessage({ message: 'Lagret OK' }),
         routerActions.push({ pathname: `/learningpaths/${pathId}/step/1234` }),
       ]);
 
-      t.doesNotThrow(() => postPathStepApi.done());
+      expect(() => postPathStepApi.done()).not.toThrow();
 
       done();
     })
     .catch(done);
 });
 
-test('actions/createLearningPathStep access denied', (t) => {
+test('actions/createLearningPathStep access denied', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -77,10 +76,10 @@ test('actions/createLearningPathStep access denied', (t) => {
 
   store.dispatch(createLearningPathStep(pathId, learningStep))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         applicationError(payload403invalid(`http://ndla-api/learningpath-api/v1/learningpaths/${pathId}/learningsteps`)),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
 
       done();
     })

@@ -6,7 +6,6 @@
  *
  */
 
-import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
 import noop from 'lodash/noop';
@@ -22,14 +21,11 @@ const Bar = () => <div />;
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
-test('component/LearningPathGeneralInfo', (t) => {
-  t.equal(
-    shallow(
-      <LearningPathGeneralInfo
-        learningPath={translatedLearningPath} onCopyLearningPathClick={noop} addStepButton={React.createElement(Bar)}
-        changeStatusButton={React.createElement(Foo)} store={mockStore({ learningPath, authenticated: true, localCloseSidebars: noop })}
-      />, { context: { lang: 'nb' } }
-  ).dive().find(Foo).length, 1, 'renders props.changeStatusButton');
-
-  t.end();
+test('component/LearningPathGeneralInfo', () => {
+  expect(shallow(
+    <LearningPathGeneralInfo
+      learningPath={translatedLearningPath} onCopyLearningPathClick={noop} addStepButton={React.createElement(Bar)}
+      changeStatusButton={React.createElement(Foo)} store={mockStore({ learningPath, authenticated: true, localCloseSidebars: noop })}
+    />, { context: { lang: 'nb' } }
+).dive().find(Foo).length).toBe(1);
 });

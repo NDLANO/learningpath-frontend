@@ -6,7 +6,6 @@
  *
  */
 
-import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
@@ -22,9 +21,10 @@ const imageId = 123;
 
 const imageMetaUrl = 'http://ndla-api:80/image-api/v1/images/123';
 
-test('actions/fetchImage with id', (t) => {
+
+test('actions/fetchImage with id', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -32,22 +32,22 @@ test('actions/fetchImage with id', (t) => {
     .get(`/image-api/v1/images/${imageId}`)
     .reply(200, { id: imageId });
 
-  const store = mockStore({ });
+  const store = mockStore({});
 
   store.dispatch(fetchLearningPathImage(imageId))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         setSelectedImage({ id: imageId }),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);
 });
 
-test('actions/fetchImage with url', (t) => {
+test('actions/fetchImage with url', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -55,22 +55,22 @@ test('actions/fetchImage with url', (t) => {
     .get(`/image-api/v1/images/${imageId}`)
     .reply(200, { id: imageId });
 
-  const store = mockStore({ });
+  const store = mockStore({});
 
   store.dispatch(fetchLearningPathImageWithMetaUrl(imageMetaUrl))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         setSavedImage({ id: 123 }),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);
 });
 
-test('actions/fetchImage with id access denied', (t) => {
+test('actions/fetchImage with id access denied', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -82,18 +82,18 @@ test('actions/fetchImage with id access denied', (t) => {
 
   store.dispatch(fetchLearningPathImage(imageId))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         applicationError(payload403invalid(`http://ndla-api/image-api/v1/images/${imageId}`)),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);
 });
 
-test('actions/fetchImage with url access denied', (t) => {
+test('actions/fetchImage with url access denied', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -105,10 +105,10 @@ test('actions/fetchImage with url access denied', (t) => {
 
   store.dispatch(fetchLearningPathImageWithMetaUrl(imageMetaUrl))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         applicationError(payload403invalid(`http://ndla-api:80/image-api/v1/images/${imageId}`)),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);

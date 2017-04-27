@@ -6,46 +6,20 @@
  *
  */
 
-import test from 'tape';
-
 import reducer from '../idToken';
 
-test('reducers/idToken', (t) => {
-  t.equal(
-    reducer(undefined, {}),
-    '',
-    'initial state'
-  );
+test('reducers/idToken', () => {
+  expect(reducer(undefined, {})).toBe('');
 
-  t.equal(
-    reducer(undefined, { type: 'SET_ID_TOKEN', payload: '12345' }),
-    '12345',
-    'set state'
-  );
+  expect(reducer(undefined, { type: 'SET_ID_TOKEN', payload: '12345' })).toBe('12345');
 
-  t.equal(
-    reducer('12345', { type: 'SET_ID_TOKEN', payload: '67890' }),
-    '67890',
-    'change state'
-  );
+  expect(reducer('12345', { type: 'SET_ID_TOKEN', payload: '67890' })).toBe('67890');
 
-  t.equal(
-    reducer('12345', { type: 'DO_NOT_SET_ID_TOKEN', payload: 'foobar' }),
-    '12345',
-    'non-actionable action type'
-  );
+  expect(reducer('12345', { type: 'DO_NOT_SET_ID_TOKEN', payload: 'foobar' })).toBe('12345');
 
-  t.equal(
-    reducer('12345', { type: 'SET_ID_TOKEN', payload: new Error('foobar'), error: true }),
-    '12345',
-    'ignore errors'
-  );
+  expect(
+    reducer('12345', { type: 'SET_ID_TOKEN', payload: new Error('foobar'), error: true })
+  ).toBe('12345');
 
-  t.equal(
-      reducer('12345', { type: 'LOGOUT_ID_TOKEN' }),
-      '',
-      'logout'
-    );
-
-  t.end();
+  expect(reducer('12345', { type: 'LOGOUT_ID_TOKEN' })).toBe('');
 });

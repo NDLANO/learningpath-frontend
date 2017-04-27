@@ -6,52 +6,24 @@
  *
  */
 
-import test from 'tape';
-
 import reducer from '../user';
 
 const name = 'Alice';
 const email = 'user@example.com';
 const payload = { name, email };
 
-test('reducers/user', (t) => {
-  t.equal(
-    JSON.stringify(reducer(undefined, {})),
-    '{}',
-    'empty action on undefined state'
-  );
+test('reducers/user', () => {
+  expect(JSON.stringify(reducer(undefined, {}))).toBe('{}');
 
-  t.deepEqual(
-    reducer(undefined, { type: 'SET_USER_DATA', payload }),
-    { name, email },
-    'set state'
-  );
+  expect(reducer(undefined, { type: 'SET_USER_DATA', payload })).toEqual({ name, email });
 
-  t.deepEqual(
-    reducer({ name: 'Bob' }, { type: 'SET_USER_DATA', payload }),
-    { name, email },
-    'change state'
-  );
+  expect(reducer({ name: 'Bob' }, { type: 'SET_USER_DATA', payload })).toEqual({ name, email });
 
-  t.deepEqual(
-    reducer({ name: 'Bob' },
-      { type: 'DO_NOT_SET_USER_DATA', payload }),
-    { name: 'Bob' },
-    'non-actionable action type'
-  );
+  expect(reducer({ name: 'Bob' },
+    { type: 'DO_NOT_SET_USER_DATA', payload })).toEqual({ name: 'Bob' });
 
-  t.deepEqual(
-    reducer({ name, email },
-      { type: 'SET_USER_DATA', payload: new Error('fail'), error: true }),
-    { name, email },
-    'ignore errors'
-  );
+  expect(reducer({ name, email },
+    { type: 'SET_USER_DATA', payload: new Error('fail'), error: true })).toEqual({ name, email });
 
-  t.deepEqual(
-    reducer({ name: 'Bob' }, { type: 'LOGOUT' }),
-    {},
-    'logout'
-  );
-
-  t.end();
+  expect(reducer({ name: 'Bob' }, { type: 'LOGOUT' })).toEqual({});
 });

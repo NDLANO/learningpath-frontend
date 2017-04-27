@@ -6,7 +6,6 @@
  *
  */
 
-import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
@@ -24,9 +23,9 @@ const stepId = 321;
 const seqNo = 3;
 
 
-test('actions/updateStepSequenceNumber sucessfully', (t) => {
+test('actions/updateStepSequenceNumber sucessfully', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -49,18 +48,18 @@ test('actions/updateStepSequenceNumber sucessfully', (t) => {
 
   store.dispatch(updateStepSequenceNumber(pathId, stepId, seqNo))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
       ]);
-      t.doesNotThrow(() => nock.isDone());
+      expect(() => nock.isDone()).not.toThrow();
 
       done();
     })
     .catch(done);
 });
 
-test('actions/updateStepSequenceNumber access denied', (t) => {
+test('actions/updateStepSequenceNumber access denied', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -82,10 +81,10 @@ test('actions/updateStepSequenceNumber access denied', (t) => {
 
   store.dispatch(updateStepSequenceNumber(pathId, stepId, seqNo))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         applicationError(payload403invalid(`http://ndla-api/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}/seqNo`)),
       ]);
-      t.doesNotThrow(() => nock.isDone());
+      expect(() => nock.isDone()).not.toThrow();
 
       done();
     })

@@ -6,7 +6,6 @@
  *
  */
 
-import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
 import noop from 'lodash/noop';
@@ -14,38 +13,34 @@ import { Link } from 'react-router';
 import { translatedLearningPath, translatedLearningPathNotEditable } from '../../../common/__tests__/translatedMockData';
 import LearningPathToCStep from '../LearningPathToCStep';
 
-test('component/LearningPathToCStep first step with no add step button', (t) => {
+test('component/LearningPathToCStep first step with no add step button', () => {
   const component = shallow(
     <LearningPathToCStep learningPath={translatedLearningPath} step={translatedLearningPath.learningsteps[0]} steps={translatedLearningPath.learningsteps} activeStepId="" localCloseSidebars={noop} />,
       { context: { lang: 'nb' } }
   );
   const link = component.find(Link);
-  t.ok(link.at(0).is('.step-nav_link'), 'first step link is nav_link');
+  expect(link.at(0).is('.step-nav_link')).toBeTruthy();
 
   const item = component.find('.step-nav_item');
-  t.ok(item.at(0).is('.step-nav_item--bottom_border'), 'first step has class step-nav_item--bottom_border');
-
-  t.end();
+  expect(item.at(0).is('.step-nav_item--bottom_border')).toBeTruthy();
 });
 
 
 // (!hasAddStepButton && step !== last(steps))
-test('component/LearningPathToCStep last step with no add step button editable', (t) => {
+test('component/LearningPathToCStep last step with no add step button editable', () => {
   const component = shallow(
     <LearningPathToCStep learningPath={translatedLearningPath} step={translatedLearningPath.learningsteps[1]} steps={translatedLearningPath.learningsteps} activeStepId="" localCloseSidebars={noop} />,
       { context: { lang: 'nb' } }
   );
   const link = component.find(Link);
-  t.ok(link.at(0).is('.step-nav_link'), 'last step link is nav_link');
+  expect(link.at(0).is('.step-nav_link')).toBeTruthy();
 
   const item = component.find('.step-nav_item');
-  t.notOk(item.at(0).is('.step-nav_item--bottom_border'), 'last step link has not class step-nav_item--bottom_border');
-
-  t.end();
+  expect(item.at(0).is('.step-nav_item--bottom_border')).toBeFalsy();
 });
 
 // (hasAddStepButton && learningPath.canEdit)
-test('component/LearningPathToCStep last step with add step button editable', (t) => {
+test('component/LearningPathToCStep last step with add step button editable', () => {
   const component = shallow(
     <LearningPathToCStep
       learningPath={translatedLearningPath}
@@ -57,15 +52,13 @@ test('component/LearningPathToCStep last step with add step button editable', (t
       { context: { lang: 'nb' } }
   );
   const link = component.find(Link);
-  t.ok(link.at(0).is('.step-nav_link'), 'last step link is nav_link');
+  expect(link.at(0).is('.step-nav_link')).toBeTruthy();
 
   const item = component.find('.step-nav_item');
-  t.notOk(item.at(0).is('.step-nav_item--bottom_border'), 'last step link has not class step-nav_item--bottom_border');
-
-  t.end();
+  expect(item.at(0).is('.step-nav_item--bottom_border')).toBeFalsy();
 });
 
-test('component/LearningPathToCStep last step with add step button not editable', (t) => {
+test('component/LearningPathToCStep last step with add step button not editable', () => {
   const component = shallow(
     <LearningPathToCStep
       learningPath={translatedLearningPathNotEditable}
@@ -77,16 +70,14 @@ test('component/LearningPathToCStep last step with add step button not editable'
     { context: { lang: 'nb' } }
   );
   const link = component.find(Link);
-  t.ok(link.at(0).is('.step-nav_link'), 'last step link is nav_link');
+  expect(link.at(0).is('.step-nav_link')).toBeTruthy();
 
   const item = component.find('.step-nav_item');
-  t.notOk(item.at(0).is('.step-nav_item--bottom_border'), 'last step link has not class step-nav_item--bottom_border');
-
-  t.end();
+  expect(item.at(0).is('.step-nav_item--bottom_border')).toBeFalsy();
 });
 
 // (step !== last(steps) && !learningPath.canEdit)
-test('component/LearningPathToCStep first step with add step button not editable', (t) => {
+test('component/LearningPathToCStep first step with add step button not editable', () => {
   const component = shallow(
     <LearningPathToCStep
       learningPath={translatedLearningPathNotEditable}
@@ -98,10 +89,8 @@ test('component/LearningPathToCStep first step with add step button not editable
     { context: { lang: 'nb' } }
   );
   const link = component.find(Link);
-  t.ok(link.at(0).is('.step-nav_link'), 'first step link is nav_link');
+  expect(link.at(0).is('.step-nav_link')).toBeTruthy();
 
   const item = component.find('.step-nav_item');
-  t.ok(item.at(0).is('.step-nav_item--bottom_border'), 'first step link has class step-nav_item--bottom_border');
-
-  t.end();
+  expect(item.at(0).is('.step-nav_item--bottom_border')).toBeTruthy();
 });

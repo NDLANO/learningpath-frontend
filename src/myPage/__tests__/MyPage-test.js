@@ -6,7 +6,6 @@
  *
  */
 
-import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Link } from 'react-router';
@@ -17,7 +16,7 @@ import { learningPaths } from '../../common/__tests__/mockData';
 import { MyPage, mapStateToProps } from '../MyPage';
 
 
-test('component/MyPage', (t) => {
+test('component/MyPage', () => {
   const noop = () => {};
 
   const requiredProps = {
@@ -32,21 +31,19 @@ test('component/MyPage', (t) => {
 
   const links = component.find('.tile_bd').find(Link);
 
-  t.deepEqual(links.map(n => n.prop('to')), [
+  expect(links.map(n => n.prop('to'))).toEqual([
     '/learningpaths/1/first-step',
     '/learningpaths/2/first-step',
   ]);
 
-  t.deepEqual(links.find('.tile_title').map(n => n.prop('children')), [
+  expect(links.find('.tile_title').map(n => n.prop('children'))).toEqual([
     'Hva er kunst og kultur?',
     'Leselighet og skrift',
   ]);
-
-  t.end();
 });
 
-test('component/MyPage mapStateToProps', (t) => {
-  t.ok(mapStateToProps instanceof Function);
+test('component/MyPage mapStateToProps', () => {
+  expect(mapStateToProps instanceof Function).toBeTruthy();
 
   const state = {
     lang: 'nb',
@@ -56,27 +53,27 @@ test('component/MyPage mapStateToProps', (t) => {
 
   let actual = mapStateToProps(state);
 
-  t.ok(actual.learningPaths instanceof Array);
-  t.equal(actual.lang, state.lang);
-  t.equal(actual.sortKey, 'title');
-  t.deepEqual(actual.learningPaths.map(d => d.id), ['1', '2']);
+  expect(actual.learningPaths instanceof Array).toBeTruthy();
+  expect(actual.lang).toBe(state.lang);
+  expect(actual.sortKey).toBe('title');
+  expect(actual.learningPaths.map(d => d.id)).toEqual(['1', '2']);
 
 
-  t.ok(translatedLearningPaths[0].lastUpdated < translatedLearningPaths[1].lastUpdated, 'self-test');
+  expect(
+    translatedLearningPaths[0].lastUpdated < translatedLearningPaths[1].lastUpdated
+  ).toBeTruthy();
 
   actual = mapStateToProps(Object.assign({},
     state, { myLearningPathsSortOrder: '-lastUpdated' }
   ));
 
-  t.equal(actual.sortKey, '-lastUpdated');
-  t.deepEqual(actual.learningPaths.map(d => d.id), ['2', '1']);
+  expect(actual.sortKey).toBe('-lastUpdated');
+  expect(actual.learningPaths.map(d => d.id)).toEqual(['2', '1']);
 
   actual = mapStateToProps(Object.assign({},
     state, { myLearningPathsSortOrder: 'lastUpdated' }
   ));
 
-  t.equal(actual.sortKey, 'lastUpdated');
-  t.deepEqual(actual.learningPaths.map(d => d.id), ['1', '2']);
-
-  t.end();
+  expect(actual.sortKey).toBe('lastUpdated');
+  expect(actual.learningPaths.map(d => d.id)).toEqual(['1', '2']);
 });

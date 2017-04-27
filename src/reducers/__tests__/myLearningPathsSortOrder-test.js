@@ -6,11 +6,9 @@
  *
  */
 
-import test from 'tape';
-
 import reducer from '../myLearningPathsSortOrder';
 
-test('reducers/myLearningPathsSortOrder', (t) => {
+test('reducers/myLearningPathsSortOrder', () => {
   /*
   t.equal(
       JSON.stringify(reducer(undefined, {})),
@@ -20,16 +18,14 @@ test('reducers/myLearningPathsSortOrder', (t) => {
   */
 
   let actual = reducer(undefined, { type: 'SET_MY_LEARNING_PATHS_SORT_ORDER', payload: 'status' });
-  t.equal(actual, 'status', 'set state');
+  expect(actual).toBe('status');
 
   actual = reducer('status', { type: 'SET_MY_LEARNING_PATHS_SORT_ORDER', payload: 'title' });
-  t.equal(actual, 'title', 'change state');
+  expect(actual).toBe('title');
 
   actual = reducer('status', { type: 'DO_NOT_SET_MY_LEARNING_PATHS_SORT_ORDER', payload: 'title' });
-  t.deepEqual(actual, 'status', 'non-actionable action type');
+  expect(actual).toEqual('status');
 
   actual = reducer('status', { type: 'LOGOUT' });
-  t.deepEqual(actual, 'title', 'logout');
-
-  t.end();
+  expect(actual).toEqual('title');
 });

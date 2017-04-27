@@ -6,16 +6,12 @@
  *
  */
 
-import test from 'tape';
-
 import { getLocale } from '../localeSelectors';
 
-test('localeSelectors', (t) => {
+test('localeSelectors', () => {
   const state = {
     locale: 'nb',
   };
 
-  t.equal(getLocale(state), 'nb');
-
-  t.end();
+  expect(getLocale(state)).toBe('nb');
 });

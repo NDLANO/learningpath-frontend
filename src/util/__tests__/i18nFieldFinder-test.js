@@ -6,11 +6,9 @@
  *
  */
 
-import test from 'tape';
-
 import { oembedContentI18N, titleI18N } from '../i18nFieldFinder';
 
-test('util/i18nFieldFinder titleI18N', (t) => {
+test('util/i18nFieldFinder titleI18N', () => {
   const learningPathStep = {
     title: [
       { title: 'Bokmål', language: 'nb' },
@@ -19,15 +17,13 @@ test('util/i18nFieldFinder titleI18N', (t) => {
     ],
   };
 
-  t.deepEqual(titleI18N(learningPathStep, 'nb'), 'Bokmål');
-  t.deepEqual(titleI18N(learningPathStep, 'nn'), 'Nynorsk');
-  t.deepEqual(titleI18N(learningPathStep, 'en'), 'English');
-  t.deepEqual(titleI18N(learningPathStep, 'es'), undefined);
-
-  t.end();
+  expect(titleI18N(learningPathStep, 'nb')).toEqual('Bokmål');
+  expect(titleI18N(learningPathStep, 'nn')).toEqual('Nynorsk');
+  expect(titleI18N(learningPathStep, 'en')).toEqual('English');
+  expect(titleI18N(learningPathStep, 'es')).toEqual(undefined);
 });
 
-test('util/i18nFieldFinder titleI18N with fallback', (t) => {
+test('util/i18nFieldFinder titleI18N with fallback', () => {
   const learningPathStep1 = {
     title: [
       { title: 'Bokmål', language: 'nb' },
@@ -35,9 +31,9 @@ test('util/i18nFieldFinder titleI18N with fallback', (t) => {
     ],
   };
 
-  t.deepEqual(titleI18N(learningPathStep1, 'nb', true), 'Bokmål');
-  t.deepEqual(titleI18N(learningPathStep1, 'en', true), 'English');
-  t.deepEqual(titleI18N(learningPathStep1, 'nn', true), 'Bokmål');
+  expect(titleI18N(learningPathStep1, 'nb', true)).toEqual('Bokmål');
+  expect(titleI18N(learningPathStep1, 'en', true)).toEqual('English');
+  expect(titleI18N(learningPathStep1, 'nn', true)).toEqual('Bokmål');
 
   const learningPathStep2 = {
     title: [
@@ -45,15 +41,13 @@ test('util/i18nFieldFinder titleI18N with fallback', (t) => {
     ],
   };
 
-  t.deepEqual(titleI18N(learningPathStep2, 'nb', true), 'English');
-  t.deepEqual(titleI18N(learningPathStep2, 'en', true), 'English');
-  t.deepEqual(titleI18N(learningPathStep2, 'es', true), 'English');
-
-  t.end();
+  expect(titleI18N(learningPathStep2, 'nb', true)).toEqual('English');
+  expect(titleI18N(learningPathStep2, 'en', true)).toEqual('English');
+  expect(titleI18N(learningPathStep2, 'es', true)).toEqual('English');
 });
 
-test('util/i18nFieldFinder oembedContentI18N', (t) => {
-  t.equal(typeof oembedContentI18N, 'function');
+test('util/i18nFieldFinder oembedContentI18N', () => {
+  expect(typeof oembedContentI18N).toBe('function');
 
   const learningPathStep = {
     embedUrl: [
@@ -62,10 +56,9 @@ test('util/i18nFieldFinder oembedContentI18N', (t) => {
     ],
   };
 
-  t.deepEqual(oembedContentI18N(learningPathStep, 'nb'),
-      { url: 'http://example.com', html: '<iframe src="http://example.com">', width: 500, language: 'nb' });
+  expect(oembedContentI18N(learningPathStep, 'nb')).toEqual(
+    { url: 'http://example.com', html: '<iframe src="http://example.com">', width: 500, language: 'nb' }
+  );
 
-  t.notOk(oembedContentI18N(learningPathStep, 'eo'));
-
-  t.end();
+  expect(oembedContentI18N(learningPathStep, 'eo')).toBeFalsy();
 });

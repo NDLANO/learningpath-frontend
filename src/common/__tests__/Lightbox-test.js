@@ -6,23 +6,20 @@
  *
  */
 
-import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
 
 import Lightbox from '../Lightbox';
 
-test('component/Lightbox', (t) => {
-  const component = shallow(<Lightbox display onClose={() => {}}><h1>enlighted!</h1></Lightbox>);
-  t.ok(component.hasClass('lightbox'), 'has .lightbox');
+test('component/Lightbox', () => {
+  const component = shallow(<Lightbox display onClose={() => { }}><h1>enlighted!</h1></Lightbox>);
+  expect(component.hasClass('lightbox')).toBeTruthy();
 
   const contentContainer = component.find('.lightbox_content');
-  t.equal(contentContainer.length, 1, 'has one .lightbox_content');
+  expect(contentContainer.length).toBe(1);
 
-  t.equal(contentContainer.children().length, 2, 'contains two content element');
+  expect(contentContainer.children().length).toBe(2);
 
   const content = contentContainer.children().at(1);
-  t.equal(content.html(), '<h1>enlighted!</h1>', 'contains nested children');
-
-  t.end();
+  expect(content.html()).toBe('<h1>enlighted!</h1>');
 });

@@ -6,7 +6,6 @@
  *
  */
 
-import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
 import { spy } from 'sinon';
@@ -18,7 +17,7 @@ const learningPath = learningPaths[0];
 const privateLearningPath = Object.assign({}, learningPath, { status: 'PRIVATE' });
 
 
-test('component/LearningPathDropdown remove', (t) => {
+test('component/LearningPathDropdown remove', () => {
   const preventDefault = spy();
   const onSelect = spy();
 
@@ -30,14 +29,12 @@ test('component/LearningPathDropdown remove', (t) => {
   component.find('.dropdown-menu_item').last().find('button')
            .simulate('click', { preventDefault });
 
-  t.ok(preventDefault.calledOnce);
-  t.ok(onSelect.calledOnce);
-  t.deepEqual(onSelect.firstCall.args, ['delete', learningPath]);
-
-  t.end();
+  expect(preventDefault.calledOnce).toBeTruthy();
+  expect(onSelect.calledOnce).toBeTruthy();
+  expect(onSelect.firstCall.args).toEqual(['delete', learningPath]);
 });
 
-test('component/LearningPathDropdown de-publish', (t) => {
+test('component/LearningPathDropdown de-publish', () => {
   const onSelect = spy();
   const preventDefault = spy();
 
@@ -48,14 +45,12 @@ test('component/LearningPathDropdown de-publish', (t) => {
   component.find('.dropdown-menu_item').at(1).find('button')
            .simulate('click', { preventDefault });
 
-  t.ok(preventDefault.calledOnce);
-  t.ok(onSelect.calledOnce);
-  t.deepEqual(onSelect.firstCall.args, ['unpublish', learningPath]);
-
-  t.end();
+  expect(preventDefault.calledOnce).toBeTruthy();
+  expect(onSelect.calledOnce).toBeTruthy();
+  expect(onSelect.firstCall.args).toEqual(['unpublish', learningPath]);
 });
 
-test('component/LearningPathDropdown publish', (t) => {
+test('component/LearningPathDropdown publish', () => {
   const onSelect = spy();
   const preventDefault = spy();
 
@@ -67,14 +62,12 @@ test('component/LearningPathDropdown publish', (t) => {
   component.find('.dropdown-menu_item').at(1).find('button')
            .simulate('click', { preventDefault });
 
-  t.ok(preventDefault.calledOnce);
-  t.ok(onSelect.calledOnce);
-  t.deepEqual(onSelect.firstCall.args, ['publish', privateLearningPath]);
-
-  t.end();
+  expect(preventDefault.calledOnce).toBeTruthy();
+  expect(onSelect.calledOnce).toBeTruthy();
+  expect(onSelect.firstCall.args).toEqual(['publish', privateLearningPath]);
 });
 
-test('component/LearningPathDropdown make copy', (t) => {
+test('component/LearningPathDropdown make copy', () => {
   const onSelect = spy();
   const preventDefault = spy();
 
@@ -85,9 +78,7 @@ test('component/LearningPathDropdown make copy', (t) => {
   component.find('.dropdown-menu_item').first().find('button')
            .simulate('click', { preventDefault });
 
-  t.ok(preventDefault.calledOnce);
-  t.ok(onSelect.calledOnce);
-  t.deepEqual(onSelect.firstCall.args, ['makecopy', learningPath]);
-
-  t.end();
+  expect(preventDefault.calledOnce).toBeTruthy();
+  expect(onSelect.calledOnce).toBeTruthy();
+  expect(onSelect.firstCall.args).toEqual(['makecopy', learningPath]);
 });

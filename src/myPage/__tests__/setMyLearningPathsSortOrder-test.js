@@ -6,30 +6,25 @@
  *
  */
 
-import test from 'tape';
 import { isFSA } from 'flux-standard-action';
 import { setMyLearningPathsSortOrder } from '../myPageActions';
 
-test('actions/setMyLearningPathsSortOrder', (t) => {
+test('actions/setMyLearningPathsSortOrder', () => {
   const actual = setMyLearningPathsSortOrder('lastUpdated');
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'SET_MY_LEARNING_PATHS_SORT_ORDER');
-  t.equal(actual.payload, 'lastUpdated');
-  t.notOk(actual.error);
-
-  t.end();
+  expect(actual.type).toBe('SET_MY_LEARNING_PATHS_SORT_ORDER');
+  expect(actual.payload).toBe('lastUpdated');
+  expect(actual.error).toBeFalsy();
 });
 
-test('actions/setMyLearningPathsSortOrder with error', (t) => {
+test('actions/setMyLearningPathsSortOrder with error', () => {
   const actual = setMyLearningPathsSortOrder(new Error('fail!'));
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'SET_MY_LEARNING_PATHS_SORT_ORDER');
-  t.equal(actual.payload.message, 'fail!');
-  t.ok(actual.error);
-
-  t.end();
+  expect(actual.type).toBe('SET_MY_LEARNING_PATHS_SORT_ORDER');
+  expect(actual.payload.message).toBe('fail!');
+  expect(actual.error).toBeTruthy();
 });

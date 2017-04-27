@@ -6,7 +6,7 @@
  *
  */
 
-import test from 'tape'; import React from 'react';
+import React from 'react';
 import { shallow } from 'enzyme';
 
 import { translatedLearningPath } from '../../common/__tests__/translatedMockData';
@@ -15,29 +15,24 @@ import { LearningPath } from '../LearningPath';
 const Foo = () => <div />;
 const Bar = () => <div />;
 
-test('component/LearningPath', (t) => {
-  t.equal(
-    shallow(
-      <LearningPath learningPath={translatedLearningPath} params={{}} location={{ pathname: '' }}>
-        <Foo />
-      </LearningPath>, { context: { lang: 'nb' } }
-    ).find(Foo).length, 2, 'renders props.children'); // For some reason cloning an element results in two rendered components
+test('component/LearningPath', () => {
+  expect(shallow(
+    <LearningPath learningPath={translatedLearningPath} params={{}} location={{ pathname: '' }}>
+      <Foo />
+    </LearningPath>, { context: { lang: 'nb' } }
+  ).find(Foo).length).toBe(2); // For some reason cloning an element results in two rendered components
 
-  t.equal(
-    shallow(
-      <LearningPath
-        learningPath={translatedLearningPath} params={{}} location={{ pathname: '' }}
-        main={React.createElement(Foo)}
-      />, { context: { lang: 'nb' } }
-    ).find(Foo).length, 1, 'renders props.main');
+  expect(shallow(
+    <LearningPath
+      learningPath={translatedLearningPath} params={{}} location={{ pathname: '' }}
+      main={React.createElement(Foo)}
+    />, { context: { lang: 'nb' } }
+  ).find(Foo).length).toBe(1);
 
-  t.equal(
-    shallow(
-      <LearningPath
-        learningPath={translatedLearningPath} params={{}} location={{ pathname: '' }} main={React.createElement(Bar)}
-        sortLearningSteps={React.createElement(Foo)}
-      />, { context: { lang: 'nb' } }
-    ).find(Foo).length, 1, 'renders props.sortLearningSteps');
-
-  t.end();
+  expect(shallow(
+    <LearningPath
+      learningPath={translatedLearningPath} params={{}} location={{ pathname: '' }} main={React.createElement(Bar)}
+      sortLearningSteps={React.createElement(Foo)}
+    />, { context: { lang: 'nb' } }
+  ).find(Foo).length).toBe(1);
 });

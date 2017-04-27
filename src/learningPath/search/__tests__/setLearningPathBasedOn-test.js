@@ -6,37 +6,32 @@
  *
  */
 
-import test from 'tape';
 import { isFSA } from 'flux-standard-action';
 import { setLearningPathBasedOn } from '../learningPathSearchActions';
 
 
-test('actions/setLearningPathBasedOn', (t) => {
+test('actions/setLearningPathBasedOn', () => {
   const actual = setLearningPathBasedOn({
     results: { title: 'hei' },
     index: 1,
   });
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'SET_LEARNING_PATH_BASED_ON');
-  t.deepEqual(actual.payload, {
+  expect(actual.type).toBe('SET_LEARNING_PATH_BASED_ON');
+  expect(actual.payload).toEqual({
     results: { title: 'hei' },
     index: 1,
   });
-  t.notOk(actual.error);
-
-  t.end();
+  expect(actual.error).toBeFalsy();
 });
 
-test('actions/setLearningPathBasedOn with error', (t) => {
+test('actions/setLearningPathBasedOn with error', () => {
   const actual = setLearningPathBasedOn(new Error('fail!'));
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'SET_LEARNING_PATH_BASED_ON');
-  t.equal(actual.payload.message, 'fail!');
-  t.ok(actual.error);
-
-  t.end();
+  expect(actual.type).toBe('SET_LEARNING_PATH_BASED_ON');
+  expect(actual.payload.message).toBe('fail!');
+  expect(actual.error).toBeTruthy();
 });

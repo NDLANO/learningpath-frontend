@@ -6,31 +6,26 @@
  *
  */
 
-import test from 'tape';
 import { isFSA } from 'flux-standard-action';
 import { changeImageSearchQuery } from '../imageActions';
 
 
-test('actions/changeImageSearchQuery', (t) => {
+test('actions/changeImageSearchQuery', () => {
   const actual = changeImageSearchQuery({ query: 'test', 'page-size': 16, page: 1 });
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'CHANGE_IMAGE_SEARCH_QUERY');
-  t.deepEqual(actual.payload, { query: 'test', 'page-size': 16, page: 1 });
-  t.notOk(actual.error);
-
-  t.end();
+  expect(actual.type).toBe('CHANGE_IMAGE_SEARCH_QUERY');
+  expect(actual.payload).toEqual({ query: 'test', 'page-size': 16, page: 1 });
+  expect(actual.error).toBeFalsy();
 });
 
-test('actions/changeImageSearchQuery with error', (t) => {
+test('actions/changeImageSearchQuery with error', () => {
   const actual = changeImageSearchQuery(new Error('fail!'));
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'CHANGE_IMAGE_SEARCH_QUERY');
-  t.equal(actual.payload.message, 'fail!');
-  t.ok(actual.error);
-
-  t.end();
+  expect(actual.type).toBe('CHANGE_IMAGE_SEARCH_QUERY');
+  expect(actual.payload.message).toBe('fail!');
+  expect(actual.error).toBeTruthy();
 });

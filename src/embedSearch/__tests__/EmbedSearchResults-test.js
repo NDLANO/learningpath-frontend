@@ -6,7 +6,6 @@
  *
  */
 
-import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
 import noop from 'lodash/noop';
@@ -39,24 +38,20 @@ const propsWithItems = {
   },
   pagerAction: noop,
 };
-test('component/EmbedSearchResult with results', (t) => {
+test('component/EmbedSearchResult with results', () => {
   const component = shallow(<EmbedSearchResults {...propsWithItems} />);
 
   const pager = component.find('EmbedSearchPager');
-  t.equal(pager.length, 1, 'One pager found');
+  expect(pager.length).toBe(1);
 
   const results = component.find('EmbedSearchResult');
-  t.equal(results.length, 2, 'Two results found');
-
-  t.end();
+  expect(results.length).toBe(2);
 });
 
-test('component/EmbedSearchResult with no results', (t) => {
+test('component/EmbedSearchResult with no results', () => {
   const component = shallow(<EmbedSearchResults {...propsWithNoItems} />);
 
   const noResults = component.find('p');
 
-  t.equal(noResults.length, 1, 'no results found p tag');
-
-  t.end();
+  expect(noResults.length).toBe(1);
 });

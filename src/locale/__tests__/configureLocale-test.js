@@ -6,37 +6,31 @@
  *
  */
 
-import test from 'tape';
-
 import { configureLocale, getHtmlLang, isValidLocale } from '../configureLocale';
 
-test('configureLocale configureLocale()', (t) => {
-  t.equal(configureLocale('en').currentLocale, 'en');
-  t.equal(configureLocale('en').phrases['footer.aboutNDLA'], 'About NDLA');
+test('configureLocale configureLocale()', () => {
+  expect(configureLocale('en').currentLocale).toBe('en');
+  expect(configureLocale('en').phrases['footer.aboutNDLA']).toBe('About NDLA');
 
-  t.equal(configureLocale('nb').currentLocale, 'nb');
-  t.equal(configureLocale('nb').phrases['footer.aboutNDLA'], 'Om NDLA');
+  expect(configureLocale('nb').currentLocale).toBe('nb');
+  expect(configureLocale('nb').phrases['footer.aboutNDLA']).toBe('Om NDLA');
 
   // Defaults to nb if locale not found
-  t.equal(configureLocale('ru').currentLocale, 'nb');
-  t.equal(configureLocale('ru').phrases['footer.aboutNDLA'], 'Om NDLA');
-
-  t.end();
+  expect(configureLocale('ru').currentLocale).toBe('nb');
+  expect(configureLocale('ru').phrases['footer.aboutNDLA']).toBe('Om NDLA');
 });
 
-test('configureLocale isValidLocale()', (t) => {
-  t.equal(isValidLocale('nb'), true);
-  t.equal(isValidLocale('nn'), true);
-  t.equal(isValidLocale('en'), true);
-  t.equal(isValidLocale('aa'), false);
-  t.equal(isValidLocale('ub'), false);
-  t.end();
+test('configureLocale isValidLocale()', () => {
+  expect(isValidLocale('nb')).toBe(true);
+  expect(isValidLocale('nn')).toBe(true);
+  expect(isValidLocale('en')).toBe(true);
+  expect(isValidLocale('aa')).toBe(false);
+  expect(isValidLocale('ub')).toBe(false);
 });
 
-test('configureLocale getHtmlLang()', (t) => {
-  t.equal(getHtmlLang('nb'), 'nb');
-  t.equal(getHtmlLang('nn'), 'nn');
-  t.equal(getHtmlLang('en'), 'en');
-  t.equal(getHtmlLang('aa'), 'nb');
-  t.end();
+test('configureLocale getHtmlLang()', () => {
+  expect(getHtmlLang('nb')).toBe('nb');
+  expect(getHtmlLang('nn')).toBe('nn');
+  expect(getHtmlLang('en')).toBe('en');
+  expect(getHtmlLang('aa')).toBe('nb');
 });

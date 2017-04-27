@@ -6,7 +6,6 @@
  *
  */
 
-import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
@@ -20,9 +19,9 @@ const mockStore = configureStore(middleware);
 
 const idToken = '123345';
 
-test('actions/fetchMyLearningPaths', (t) => {
+test('actions/fetchMyLearningPaths', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -34,18 +33,18 @@ test('actions/fetchMyLearningPaths', (t) => {
 
   store.dispatch(fetchMyLearningPaths())
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         setLearningPaths([{ id: '123' }, { id: '456' }]),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);
 });
 
-test('actions/fetchLearningPaths access denied', (t) => {
+test('actions/fetchLearningPaths access denied', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -57,10 +56,10 @@ test('actions/fetchLearningPaths access denied', (t) => {
 
   store.dispatch(fetchMyLearningPaths())
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         applicationError(payload403invalid('http://ndla-api/learningpath-api/v1/learningpaths/mine')),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);

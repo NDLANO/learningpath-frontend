@@ -6,31 +6,26 @@
  *
  */
 
-import test from 'tape';
 import { isFSA } from 'flux-standard-action';
 import { setAccessToken } from '../sessionActions';
 
 
-test('actions/setAccessToken', (t) => {
+test('actions/setAccessToken', () => {
   const actual = setAccessToken('12345');
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'SET_ACCESS_TOKEN');
-  t.equal(actual.payload, '12345');
-  t.notOk(actual.error);
-
-  t.end();
+  expect(actual.type).toBe('SET_ACCESS_TOKEN');
+  expect(actual.payload).toBe('12345');
+  expect(actual.error).toBeFalsy();
 });
 
-test('actions/setAccessToken with error', (t) => {
+test('actions/setAccessToken with error', () => {
   const actual = setAccessToken(new Error('fail!'));
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'SET_ACCESS_TOKEN');
-  t.equal(actual.payload.message, 'fail!');
-  t.ok(actual.error);
-
-  t.end();
+  expect(actual.type).toBe('SET_ACCESS_TOKEN');
+  expect(actual.payload.message).toBe('fail!');
+  expect(actual.error).toBeTruthy();
 });

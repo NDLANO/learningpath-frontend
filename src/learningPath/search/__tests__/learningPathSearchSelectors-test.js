@@ -6,12 +6,11 @@
  *
  */
 
-import test from 'tape';
 import { learningPaths } from '../../../common/__tests__/mockData';
 import { getLearningPathSearchResult } from '../learningPathSearchSelectors';
 import { translatedLearningPaths } from '../../../common/__tests__/translatedMockData';
 
-test('selectors/getLearningPathSearchResult', (t) => {
+test('selectors/getLearningPathSearchResult', () => {
   const state = {
     learningPathSearch: {
       results: learningPaths,
@@ -19,10 +18,5 @@ test('selectors/getLearningPathSearchResult', (t) => {
     locale: 'nb',
   };
 
-  t.deepEqual(
-    getLearningPathSearchResult(state),
-    translatedLearningPaths,
-    'translate learningpaths correctly'
-  );
-  t.end();
+  expect(getLearningPathSearchResult(state)).toEqual(translatedLearningPaths);
 });

@@ -8,16 +8,19 @@ module.exports = {
 
     'react/no-string-refs': 1,
     'react/no-find-dom-node': 1,
-    'react/prop-types': [ 2, {'ignore': ['children','className'] }],
+    'react/prop-types': [2, { 'ignore': ['children', 'className'] }],
 
     'react/prefer-stateless-function': 1,
     "comma-dangle": ["error", {
-        "arrays": "always-multiline",
-        "objects": "always-multiline",
-        "imports": "always-multiline",
-        "exports": "always-multiline",
-        "functions": "ignore",
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "always-multiline",
+      "exports": "always-multiline",
+      "functions": "ignore",
     }]
+  },
+  "env": {
+    "jest": true
   },
   'globals': {
     '__CLIENT__': true,

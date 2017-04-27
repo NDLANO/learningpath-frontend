@@ -6,24 +6,12 @@
  *
  */
 
-import test from 'tape';
-
 import reducer from '../learningPathSearchReducer';
 
-test('reducers/learningPathSearch query', (t) => {
-  t.deepEqual(
-    reducer(undefined, {}),
-    { results: [], totalCount: 1 },
-    'initial state'
-  );
+test('reducers/learningPathSearch query', () => {
+  expect(reducer(undefined, {})).toEqual({ results: [], totalCount: 1 });
 
-  t.deepEqual(
-    reducer(undefined, {
-      type: 'SET_LEARNING_PATH_SEARCH_RESULTS',
-      payload: { results: [1, 2, 3], totalCount: 30 } }),
-    { results: [1, 2, 3], totalCount: 30 },
-    'set learning path search results'
-  );
-
-  t.end();
+  expect(reducer(undefined, {
+    type: 'SET_LEARNING_PATH_SEARCH_RESULTS',
+    payload: { results: [1, 2, 3], totalCount: 30 } })).toEqual({ results: [1, 2, 3], totalCount: 30 });
 });

@@ -6,47 +6,31 @@
  *
  */
 
-import test from 'tape';
 import { learningPath } from '../../common/__tests__/mockData';
 import { getI18nLearningPath, getI18nLearningPathSteps, getLearningPathId } from '../learningPathSelectors';
 import { translatedLearningPath } from '../../common/__tests__/translatedMockData';
 
-test('selectors/getI18nLearningPath', (t) => {
+test('selectors/getI18nLearningPath', () => {
   const state = {
     learningPath,
     locale: 'nb',
   };
 
-  t.deepEqual(
-    getI18nLearningPath(state),
-    translatedLearningPath,
-    'translate learningpath correctly'
-  );
-  t.end();
+  expect(getI18nLearningPath(state)).toEqual(translatedLearningPath);
 });
 
-test('selectors/getI18nLearningPathSteps', (t) => {
+test('selectors/getI18nLearningPathSteps', () => {
   const state = {
     learningPath,
     locale: 'nb',
   };
-  t.deepEqual(
-    getI18nLearningPathSteps(state),
-    translatedLearningPath.learningsteps,
-    'translate learningpathsteps correctly'
-  );
-  t.end();
+  expect(getI18nLearningPathSteps(state)).toEqual(translatedLearningPath.learningsteps);
 });
 
-test('selectors/getLearningPathId', (t) => {
+test('selectors/getLearningPathId', () => {
   const state = {
     learningPath,
     locale: 'nb',
   };
-  t.equal(
-    getLearningPathId(state),
-    translatedLearningPath.id,
-    'learningpath id is correct from selector'
-  );
-  t.end();
+  expect(getLearningPathId(state)).toBe(translatedLearningPath.id);
 });

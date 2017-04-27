@@ -6,7 +6,6 @@
  *
  */
 
-import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
@@ -18,9 +17,9 @@ const mockStore = configureStore(middleware);
 
 const accessToken = '123345';
 
-test('actions/deleteLearningPath', (t) => {
+test('actions/deleteLearningPath', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -32,11 +31,11 @@ test('actions/deleteLearningPath', (t) => {
 
   store.dispatch(deleteLearningPath({ id: 123, status: 'PRIVATE' }))
     .then(() => {
-      t.deepEqual(store.getActions()[0], { type: 'REMOVE_LEARNING_PATH', payload: 123 });
-      t.equal(store.getActions()[1].type, 'ADD_MESSAGE', 'action type is ADD_MESSAGE');
-      t.ok(store.getActions()[1].payload.action, 'ADD_MESSAGE payload contains action');
+      expect(store.getActions()[0]).toEqual({ type: 'REMOVE_LEARNING_PATH', payload: 123 });
+      expect(store.getActions()[1].type).toBe('ADD_MESSAGE');
+      expect(store.getActions()[1].payload.action).toBeTruthy();
 
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);

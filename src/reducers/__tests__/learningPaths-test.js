@@ -7,72 +7,43 @@
  */
 
 
-import test from 'tape';
-
 import reducer from '../learningPaths';
 
-test('reducers/learningPaths', (t) => {
-  t.deepEqual(
-      reducer(undefined, {}),
-      [],
-      'initial state');
+test('reducers/learningPaths', () => {
+  expect(reducer(undefined, {})).toEqual([]);
 
-  t.deepEqual(
-    reducer(undefined, { type: 'SET_LEARNING_PATHS', payload: ['a', 'b', 'c'] }),
-    ['a', 'b', 'c'],
-    'set state'
-  );
+  expect(
+    reducer(undefined, { type: 'SET_LEARNING_PATHS', payload: ['a', 'b', 'c'] })
+  ).toEqual(['a', 'b', 'c']);
 
-  t.deepEqual(
-    reducer(['a', 'b', 'c'], { type: 'SET_LEARNING_PATHS', payload: ['d', 'e', 'f'] }),
-    ['d', 'e', 'f'],
-    'change state'
-  );
+  expect(
+    reducer(['a', 'b', 'c'], { type: 'SET_LEARNING_PATHS', payload: ['d', 'e', 'f'] })
+  ).toEqual(['d', 'e', 'f']);
 
-  t.deepEqual(
-    reducer(['a', 'b', 'c'],
-      { type: 'DO_NOT_SET_LEARNING_PATHS', payload: ['d', 'e', 'f'] }),
-    ['a', 'b', 'c'],
-    'non-actionable action type'
-  );
+  expect(reducer(['a', 'b', 'c'],
+    { type: 'DO_NOT_SET_LEARNING_PATHS', payload: ['d', 'e', 'f'] })).toEqual(['a', 'b', 'c']);
 
-  t.deepEqual(
-    reducer(['a', 'b', 'c'],
-      { type: 'SET_LEARNING_PATHS', payload: new Error('foobar'), error: true }),
-    ['a', 'b', 'c'],
-    'ignore errors'
-  );
-
-  t.end();
+  expect(reducer(['a', 'b', 'c'],
+    { type: 'SET_LEARNING_PATHS', payload: new Error('foobar'), error: true })).toEqual(['a', 'b', 'c']);
 });
 
-test('reducers/learningPaths remove learning path', (t) => {
+test('reducers/learningPaths remove learning path', () => {
   const path1 = { id: 123, title: [{ title: 'testTitle', language: 'nb' }] };
   const path2 = { id: 124, title: [{ title: 'another Title', language: 'nb' }] };
   const path3 = { id: 125, title: [{ title: 'another Title', language: 'nb' }] };
 
-  t.deepEqual(
-    reducer([path1, path2, path3], { type: 'REMOVE_LEARNING_PATH', payload: 0 }),
-    [path1, path2, path3],
-    'id mismatch'
-  );
+  expect(
+    reducer([path1, path2, path3], { type: 'REMOVE_LEARNING_PATH', payload: 0 })
+  ).toEqual([path1, path2, path3]);
 
-  t.deepEqual(
-    reducer([path1, path2, path3], { type: 'REMOVE_LEARNING_PATH', payload: 123 }),
-    [path2, path3],
-    'remove state'
-  );
+  expect(
+    reducer([path1, path2, path3], { type: 'REMOVE_LEARNING_PATH', payload: 123 })
+  ).toEqual([path2, path3]);
 
-  t.deepEqual(
-    reducer([], { type: 'REMOVE_LEARNING_PATH', payload: 123 }),
-    [],
-    'empty state'
-  );
-
-  t.end();
+  expect(reducer([], { type: 'REMOVE_LEARNING_PATH', payload: 123 })).toEqual([]);
 });
 
-test('reducers/learningPaths update learning path status', (t) => {
+test('reducers/learningPaths update learning path status', () => {
   const paths = [
     { id: 123, status: 'PUBLIC' },
     { id: 124, status: 'PRIVATE' },
@@ -84,23 +55,17 @@ test('reducers/learningPaths update learning path status', (t) => {
     payload: { id: 125, status: 'PUBLIC' },
   });
 
-  t.equal(paths[2].status, 'PRIVATE', 'publish');
+  expect(paths[2].status).toBe('PRIVATE');
 
   actual = reducer(paths, {
     type: 'UPDATE_LEARNING_PATHS_STATUS',
     payload: { id: 666, status: 'PUBLIC' },
   });
 
-  t.deepEqual(actual, paths, 'publish unkown id');
+  expect(actual).toEqual(paths);
 
-  t.deepEqual(
-    reducer([], {
-      type: 'UPDATE_LEARNING_PATHS_STATUS',
-      payload: { id: 1, status: 'PUBLIC' },
-    }),
-    [],
-    'empty state'
-  );
-
-  t.end();
+  expect(reducer([], {
+    type: 'UPDATE_LEARNING_PATHS_STATUS',
+    payload: { id: 1, status: 'PUBLIC' },
+  })).toEqual([]);
 });

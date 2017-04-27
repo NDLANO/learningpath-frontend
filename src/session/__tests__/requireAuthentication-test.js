@@ -6,7 +6,6 @@
  *
  */
 
-import test from 'tape';
 import React from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
@@ -24,8 +23,8 @@ function Whatever() {
 }
 
 
-test('component/requireAuthentication', (t) => {
-  t.doesNotThrow(() => {
+test('component/requireAuthentication', () => {
+  expect(() => {
     const root = mount(
       React.createElement(
         Provider, { store: mockStore({ authenticated: true }) },
@@ -33,13 +32,12 @@ test('component/requireAuthentication', (t) => {
       )
     );
 
-    t.equal(root.find('.whatever').length, 1);
-  });
-  t.end();
+    expect(root.find('.whatever').length).toBe(1);
+  }).not.toThrow();
 });
 
-test('component/requireAuthentication not authenticated', (t) => {
-  t.doesNotThrow(() => {
+test('component/requireAuthentication not authenticated', () => {
+  expect(() => {
     const root = mount(
       React.createElement(
         Provider, { store: mockStore({ authenticated: false }) },
@@ -47,13 +45,11 @@ test('component/requireAuthentication not authenticated', (t) => {
       )
     );
 
-    t.equal(root.find('.whatever').length, 0);
+    expect(root.find('.whatever').length).toBe(0);
 
     const providers = root.find(LoginProviders);
 
-    t.equal(providers.length, 1, 'has login provider');
-    t.ok(providers.props().message, 'has message');
-  });
-
-  t.end();
+    expect(providers.length).toBe(1);
+    expect(providers.props().message).toBeTruthy();
+  }).not.toThrow();
 });

@@ -6,31 +6,26 @@
  *
  */
 
-import test from 'tape';
 import { isFSA } from 'flux-standard-action';
 import { setAuthenticated } from '../sessionActions';
 
 
-test('actions/setAuthenticated', (t) => {
+test('actions/setAuthenticated', () => {
   const actual = setAuthenticated(true);
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'SET_AUTHENTICATED');
-  t.equal(actual.payload, true);
-  t.notOk(actual.error);
-
-  t.end();
+  expect(actual.type).toBe('SET_AUTHENTICATED');
+  expect(actual.payload).toBe(true);
+  expect(actual.error).toBeFalsy();
 });
 
-test('actions/setAuthenticated with error', (t) => {
+test('actions/setAuthenticated with error', () => {
   const actual = setAuthenticated(new Error('fail!'));
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'SET_AUTHENTICATED');
-  t.equal(actual.payload.message, 'fail!');
-  t.ok(actual.error);
-
-  t.end();
+  expect(actual.type).toBe('SET_AUTHENTICATED');
+  expect(actual.payload.message).toBe('fail!');
+  expect(actual.error).toBeTruthy();
 });

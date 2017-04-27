@@ -6,59 +6,50 @@
  *
  */
 
-import test from 'tape';
 import { isFSA } from 'flux-standard-action';
 
 import { setCreativeCommonLicenses, setAllLicenses } from '../edit/copyright/learningPathLicensesActions';
 
 
-test('actions/setCreativeCommonLicenses', (t) => {
+test('actions/setCreativeCommonLicenses', () => {
   const actual = setCreativeCommonLicenses([{ id: '12345' }, { id: '123456' }]);
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'SET_CREATIVE_COMMON_LICENSES');
-  t.ok(actual.payload);
-  t.deepEqual(actual.payload, [{ id: '12345' }, { id: '123456' }]);
-  t.notOk(actual.error);
-
-  t.end();
+  expect(actual.type).toBe('SET_CREATIVE_COMMON_LICENSES');
+  expect(actual.payload).toBeTruthy();
+  expect(actual.payload).toEqual([{ id: '12345' }, { id: '123456' }]);
+  expect(actual.error).toBeFalsy();
 });
 
-test('actions/setCreativeCommonLicenses with error', (t) => {
+test('actions/setCreativeCommonLicenses with error', () => {
   const actual = setCreativeCommonLicenses(new Error('fail!'));
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'SET_CREATIVE_COMMON_LICENSES');
-  t.equal(actual.payload.message, 'fail!');
-  t.ok(actual.error);
-
-  t.end();
+  expect(actual.type).toBe('SET_CREATIVE_COMMON_LICENSES');
+  expect(actual.payload.message).toBe('fail!');
+  expect(actual.error).toBeTruthy();
 });
 
 
-test('actions/setAllLicenses', (t) => {
+test('actions/setAllLicenses', () => {
   const actual = setAllLicenses([{ id: '12345' }, { id: '123456' }]);
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'SET_ALL_LICENSES');
-  t.ok(actual.payload);
-  t.deepEqual(actual.payload, [{ id: '12345' }, { id: '123456' }]);
-  t.notOk(actual.error);
-
-  t.end();
+  expect(actual.type).toBe('SET_ALL_LICENSES');
+  expect(actual.payload).toBeTruthy();
+  expect(actual.payload).toEqual([{ id: '12345' }, { id: '123456' }]);
+  expect(actual.error).toBeFalsy();
 });
 
-test('actions/setAllLicenses with error', (t) => {
+test('actions/setAllLicenses with error', () => {
   const actual = setAllLicenses(new Error('fail!'));
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'SET_ALL_LICENSES');
-  t.equal(actual.payload.message, 'fail!');
-  t.ok(actual.error);
-
-  t.end();
+  expect(actual.type).toBe('SET_ALL_LICENSES');
+  expect(actual.payload.message).toBe('fail!');
+  expect(actual.error).toBeTruthy();
 });

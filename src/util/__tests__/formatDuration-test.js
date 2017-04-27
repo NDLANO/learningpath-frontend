@@ -6,26 +6,22 @@
  *
  */
 
-import test from 'tape';
-
 import formatDuration from '../formatDuration';
 
-test('util/formatDuration', (t) => {
-  t.equal(typeof formatDuration, 'function');
+test('util/formatDuration', () => {
+  expect(typeof formatDuration).toBe('function');
 
-  t.equal(formatDuration(1), '1 minutt');
-  t.equal(formatDuration(30), '30 minutter');
-  t.equal(formatDuration(59), '59 minutter');
-  t.equal(formatDuration(60), '1 time');
-  t.equal(formatDuration(120), '2 timer');
+  expect(formatDuration(1)).toBe('1 minutt');
+  expect(formatDuration(30)).toBe('30 minutter');
+  expect(formatDuration(59)).toBe('59 minutter');
+  expect(formatDuration(60)).toBe('1 time');
+  expect(formatDuration(120)).toBe('2 timer');
 
-  t.equal(formatDuration(135), '2 timer 15 minutter');
-  t.equal(formatDuration(115), '1 time 55 minutter');
-  t.equal(formatDuration(121), '2 timer 1 minutt');
+  expect(formatDuration(135)).toBe('2 timer 15 minutter');
+  expect(formatDuration(115)).toBe('1 time 55 minutter');
+  expect(formatDuration(121)).toBe('2 timer 1 minutt');
 
-  t.equal(formatDuration(0), 'Ukjent lengde');
-  t.equal(formatDuration(-1), 'Ukjent lengde');
-  t.equal(formatDuration(NaN), 'Ukjent lengde');
-
-  t.end();
+  expect(formatDuration(0)).toBe('Ukjent lengde');
+  expect(formatDuration(-1)).toBe('Ukjent lengde');
+  expect(formatDuration(NaN)).toBe('Ukjent lengde');
 });

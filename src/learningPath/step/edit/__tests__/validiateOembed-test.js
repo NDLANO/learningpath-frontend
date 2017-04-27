@@ -6,7 +6,6 @@
  *
  */
 
-import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
@@ -40,9 +39,9 @@ const stepFormWithTitle = {
 };
 
 
-const testValidateOembed = (t, url, embedType, store, apiReply, expectedActions) => {
-  const done = (res) => {
-    t.end(res);
+const testValidateOembed = (url, embedType, store, apiReply, expectedActions) => {
+  const done = () => {
+    // t.end(res);
     nock.cleanAll();
   };
 
@@ -53,16 +52,16 @@ const testValidateOembed = (t, url, embedType, store, apiReply, expectedActions)
 
   store.dispatch(validateOembed(url, 'nb', embedType))
     .then(() => {
-      t.deepEqual(store.getActions(), expectedActions);
+      expect(store.getActions()).toEqual(expectedActions);
 
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
 
       done();
     })
     .catch(done);
 };
 
-test('actions/validiateOembed valid url and no step title', (t) => {
+test('actions/validiateOembed valid url and no step title', () => {
   const url = 'https://www.youtube.com/watch?v=BTqu9iMiPIU';
   const embedType = 'oembed';
 
@@ -73,19 +72,19 @@ test('actions/validiateOembed valid url and no step title', (t) => {
     setOembedPreview(apiReply),
     change('learning-path-step', 'title', apiReply.title),
   ];
-  testValidateOembed(t, url, embedType, store, apiReply, expectedActions);
+  testValidateOembed(url, embedType, store, apiReply, expectedActions);
 });
 
-test('actions/validiateOembed valid url and with step title', (t) => {
+test('actions/validiateOembed valid url and with step title', () => {
   const url = 'https://www.youtube.com/watch?v=BTqu9iMiPIU';
   const embedType = 'oembed';
   const apiReply = { embedType, title: 'test', url, language: 'nb' };
   const store = mockStore({ accessToken, form: { 'learning-path-step': stepFormWithTitle } });
   const expectedActions = [setOembedPreview(apiReply)];
-  testValidateOembed(t, url, embedType, store, apiReply, expectedActions);
+  testValidateOembed(url, embedType, store, apiReply, expectedActions);
 });
 
-test('actions/validiateOembed valid url and replace step title if current form title equals current oembed title', (t) => {
+test('actions/validiateOembed valid url and replace step title if current form title equals current oembed title', () => {
   const url = 'http://ndla.no/nb/node/166201?fag=17&meny=15554';
   const embedType = 'oembed';
   const apiReply = { embedType, title: 'test', url, language: 'nb' };
@@ -94,10 +93,10 @@ test('actions/validiateOembed valid url and replace step title if current form t
     setOembedPreview(apiReply),
     change('learning-path-step', 'title', apiReply.title),
   ];
-  testValidateOembed(t, url, embedType, store, apiReply, expectedActions);
+  testValidateOembed(url, embedType, store, apiReply, expectedActions);
 });
 
-test('actions/validiateOembed valid url and do not replace step title if current form title is not equal to current oembed title', (t) => {
+test('actions/validiateOembed valid url and do not replace step title if current form title is not equal to current oembed title', () => {
   const url = 'http://ndla.no/nb/node/166201?fag=17&meny=15554';
   const embedType = 'oembed';
   const apiReply = { embedType, title: 'test', url, language: 'nb' };
@@ -105,12 +104,12 @@ test('actions/validiateOembed valid url and do not replace step title if current
   const expectedActions = [
     setOembedPreview(apiReply),
   ];
-  testValidateOembed(t, url, embedType, store, apiReply, expectedActions);
+  testValidateOembed(url, embedType, store, apiReply, expectedActions);
 });
 
-test('actions/validiateOembed invalid url', (t) => {
-  const done = (res) => {
-    t.end(res);
+test('actions/validiateOembed invalid url', () => {
+  const done = () => {
+    // done(res);
     nock.cleanAll();
   };
   const url = 'thisIsAnInvalidUrl';
@@ -124,28 +123,28 @@ test('actions/validiateOembed invalid url', (t) => {
 
   store.dispatch(validateOembed(url, 'nb', 'oembed', 'url', 'feil'))
     .then(() => {
-      t.doesNotThrow(() => apiMock.done());
-      t.fail('Promise should be rejected.');
+      expect(() => apiMock.done()).not.toThrow();
+      done.fail('Promise should be rejected.');
       done();
     })
     .catch((error) => {
-      t.doesNotThrow(() => apiMock.done());
-      t.deepEqual({ url: 'feil' }, error);
+      expect(() => apiMock.done()).not.toThrow();
+      expect({ url: 'feil' }).toEqual(error);
       done();
     });
 });
 
-test('actions/validiateOembed', (t) => {
-  const done = (res) => {
-    t.end(res);
-  };
+test('actions/validiateOembed', () => {
+  // const done = (res) => {
+  //   done(res);
+  // };
 
   const store = mockStore({ accessToken });
 
   store.dispatch(validateOembed(''));
-  t.deepEqual(store.getActions(), [
+  expect(store.getActions()).toEqual([
     removeOembedPreview(),
   ]);
 
-  done();
+  // done();
 });

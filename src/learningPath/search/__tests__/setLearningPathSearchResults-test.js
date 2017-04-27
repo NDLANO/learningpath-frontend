@@ -6,37 +6,32 @@
  *
  */
 
-import test from 'tape';
 import { isFSA } from 'flux-standard-action';
 import { setLearningPathSearchResults } from '../learningPathSearchActions';
 
 
-test('actions/setLearningPathSearchResults', (t) => {
+test('actions/setLearningPathSearchResults', () => {
   const actual = setLearningPathSearchResults({
     results: [{ id: '12345' }, { id: '67890' }],
     totalCount: 300,
   });
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'SET_LEARNING_PATH_SEARCH_RESULTS');
-  t.deepEqual(actual.payload, {
+  expect(actual.type).toBe('SET_LEARNING_PATH_SEARCH_RESULTS');
+  expect(actual.payload).toEqual({
     results: [{ id: '12345' }, { id: '67890' }],
     totalCount: 300,
   });
-  t.notOk(actual.error);
-
-  t.end();
+  expect(actual.error).toBeFalsy();
 });
 
-test('actions/setLearningPathSearchResults with error', (t) => {
+test('actions/setLearningPathSearchResults with error', () => {
   const actual = setLearningPathSearchResults(new Error('fail!'));
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'SET_LEARNING_PATH_SEARCH_RESULTS');
-  t.equal(actual.payload.message, 'fail!');
-  t.ok(actual.error);
-
-  t.end();
+  expect(actual.type).toBe('SET_LEARNING_PATH_SEARCH_RESULTS');
+  expect(actual.payload.message).toBe('fail!');
+  expect(actual.error).toBeTruthy();
 });
