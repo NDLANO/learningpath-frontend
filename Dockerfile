@@ -1,32 +1,29 @@
-
-FROM node:6.9.4
-
-#Add app user to enable running the container as an unprivileged user
-RUN useradd --user-group --create-home --shell /bin/false app
+FROM node:6.10.0-alpine
 
 ENV HOME=/home/app
 ENV APP_PATH=$HOME/learningpath-frontend
 
-# Copy necessary files for installing dependencies
-COPY package.json .npmrc $APP_PATH/
-RUN chown -R app:app $HOME/*
+# Install yarn
+ENV YARN_VERSION 0.23.2
+ADD https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v${YARN_VERSION}.tar.gz /opt/yarn.tar.gz
+RUN cd /opt/ && tar xf yarn.tar.gz && mv dist yarn && rm yarn.tar.gz
+ENV PATH $PATH:/opt/yarn/bin/
 
-# Run npm install before src copy to enable better layer caching
-USER app
+# Copy necessary files for installing dependencies
+COPY yarn.lock package.json $APP_PATH/
+
+# Run yarn before src copy to enable better layer caching
 WORKDIR $APP_PATH
 RUN mkdir -p $APP_PATH/htdocs/assets/ && \
-    npm install
+    yarn
 
 # Copy necessary source files for server and client build
-USER root
 COPY .babelrc webpack.config.base.js webpack.config.prod.js webpack.config.dev.js $APP_PATH/
 COPY src $APP_PATH/src
 COPY server $APP_PATH/server
-RUN chown -R app:app $HOME/*
 
 # Build client code
-USER app
 WORKDIR $APP_PATH
-RUN npm run build
+RUN yarn run build
 
 CMD ["npm", "run", "start-prod"]
