@@ -1,4 +1,11 @@
-import test from 'tape';
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
 import { isFSA } from 'flux-standard-action';
 import { changeEmbedSearchQuery } from '../embedSearchActions';
 
@@ -9,28 +16,24 @@ const query = {
   filter: '',
 };
 
-test('actions/changeEmbedSearchQuery', (t) => {
+test('actions/changeEmbedSearchQuery', () => {
   const actual = changeEmbedSearchQuery(
     query
   );
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'CHANGE_EMBED_SEARCH_QUERY');
-  t.deepEqual(actual.payload, query);
-  t.notOk(actual.error);
-
-  t.end();
+  expect(actual.type).toBe('CHANGE_EMBED_SEARCH_QUERY');
+  expect(actual.payload).toEqual(query);
+  expect(actual.error).toBeFalsy();
 });
 
-test('actions/changeEmbedSearchQuery with error', (t) => {
+test('actions/changeEmbedSearchQuery with error', () => {
   const actual = changeEmbedSearchQuery(new Error('fail!'));
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'CHANGE_EMBED_SEARCH_QUERY');
-  t.equal(actual.payload.message, 'fail!');
-  t.ok(actual.error);
-
-  t.end();
+  expect(actual.type).toBe('CHANGE_EMBED_SEARCH_QUERY');
+  expect(actual.payload.message).toBe('fail!');
+  expect(actual.error).toBeTruthy();
 });

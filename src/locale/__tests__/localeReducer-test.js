@@ -6,22 +6,10 @@
  *
  */
 
-import test from 'tape';
-
 import reducer from '../localeReducer';
 
-test('reducers/locale', (t) => {
-  t.equal(
-    reducer(undefined, {}),
-    'nb',
-    'initial state'
-  );
+test('reducers/locale', () => {
+  expect(reducer(undefined, {})).toBe('nb');
 
-  t.equal(
-    reducer(undefined, { type: 'SET_LOCALE', payload: 'en' }),
-    'en',
-    'set state'
-  );
-
-  t.end();
+  expect(reducer(undefined, { type: 'SET_LOCALE', payload: 'en' })).toBe('en');
 });

@@ -6,11 +6,13 @@
  *
  */
 
-import test from 'tape';
+/**
+ * @jest-environment jsdom
+ */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { shallow, mount, render } from 'enzyme';
-import './jsdomEnv';
 
 import { locationOrigin, apiBaseUrl, accessToken } from '../../sources/helpers';
 
@@ -27,26 +29,22 @@ Selfie.propTypes = { foo: PropTypes.string };
 Selfie.defaultProps = { foo: 'default bar' };
 
 
-test('components/TestSetup selftest', (tt) => {
-  tt.test('- unit test mocking', (t) => {
-    t.equal(locationOrigin, 'http://ndla-frontend');
-    t.equal(apiBaseUrl, 'http://ndla-api');
-    t.equal(accessToken, 'ndlatestapikey');
-    t.end();
+test('components/TestSetup selftest', () => {
+  test('- unit test mocking', () => {
+    expect(locationOrigin).toBe('http://ndla-frontend');
+    expect(apiBaseUrl).toBe('http://ndla-api');
+    expect(accessToken).toBe('ndlatestapikey');
   });
 
-  tt.test('- Enzyme shallow rendering', (t) => {
-    t.doesNotThrow(() => shallow(<Selfie />));
-    t.end();
+  test('- Enzyme shallow rendering', () => {
+    expect(() => shallow(<Selfie />)).not.toThrow();
   });
 
-  tt.test('- Enzyme full dom rendering', (t) => {
-    t.doesNotThrow(() => mount(<Selfie />));
-    t.end();
+  test('- Enzyme full dom rendering', () => {
+    expect(() => mount(<Selfie />)).not.toThrow();
   });
 
-  tt.test('- Enzyme static rendering', (t) => {
-    t.doesNotThrow(() => render(<Selfie />));
-    t.end();
+  test('- Enzyme static rendering', () => {
+    expect(() => render(<Selfie />)).not.toThrow();
   });
 });

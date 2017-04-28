@@ -7,64 +7,51 @@
  */
 
 
-import test from 'tape';
 import { isFSA } from 'flux-standard-action';
 import { setSelectedImage, setSavedImage } from '../imageActions';
 
 
-test('actions/setSelecteImage', (t) => {
+test('actions/setSelecteImage', () => {
   const actual = setSelectedImage(
     { id: '123345' }
   );
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'SET_SELECTED_IMAGE');
-  t.deepEqual(actual.payload,
-    { id: '123345' }
-  );
-  t.notOk(actual.error);
-
-  t.end();
+  expect(actual.type).toBe('SET_SELECTED_IMAGE');
+  expect(actual.payload).toEqual({ id: '123345' });
+  expect(actual.error).toBeFalsy();
 });
 
-test('actions/setSelecteImage with error', (t) => {
+test('actions/setSelecteImage with error', () => {
   const actual = setSelectedImage(new Error('fail!'));
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'SET_SELECTED_IMAGE');
-  t.equal(actual.payload.message, 'fail!');
-  t.ok(actual.error);
-
-  t.end();
+  expect(actual.type).toBe('SET_SELECTED_IMAGE');
+  expect(actual.payload.message).toBe('fail!');
+  expect(actual.error).toBeTruthy();
 });
 
 
-test('actions/setSavedImage', (t) => {
+test('actions/setSavedImage', () => {
   const actual = setSavedImage(
     { id: '123345' }
   );
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'SET_SAVED_IMAGE');
-  t.deepEqual(actual.payload,
-    { id: '123345' }
-  );
-  t.notOk(actual.error);
-
-  t.end();
+  expect(actual.type).toBe('SET_SAVED_IMAGE');
+  expect(actual.payload).toEqual({ id: '123345' });
+  expect(actual.error).toBeFalsy();
 });
 
-test('actions/setSavedImage with error', (t) => {
+test('actions/setSavedImage with error', () => {
   const actual = setSavedImage(new Error('fail!'));
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'SET_SAVED_IMAGE');
-  t.equal(actual.payload.message, 'fail!');
-  t.ok(actual.error);
-
-  t.end();
+  expect(actual.type).toBe('SET_SAVED_IMAGE');
+  expect(actual.payload.message).toBe('fail!');
+  expect(actual.error).toBeTruthy();
 });

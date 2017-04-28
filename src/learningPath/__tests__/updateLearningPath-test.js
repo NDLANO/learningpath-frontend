@@ -6,7 +6,6 @@
  *
  */
 
-import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
@@ -22,9 +21,9 @@ const mockStore = configureStore(middleware);
 const accessToken = '123345';
 const pathId = 123;
 
-test('actions/updateLearningPath', (t) => {
+test('actions/updateLearningPath', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -40,7 +39,7 @@ test('actions/updateLearningPath', (t) => {
     id: pathId, isRequest: true,
   }))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         addMessage({ message: 'Lagret OK' }),
         setLearningPath({
           id: pathId,
@@ -49,16 +48,16 @@ test('actions/updateLearningPath', (t) => {
         routerActions.push({ pathname: `/learningpaths/${pathId}` }),
       ]);
 
-      t.doesNotThrow(() => patchPathApi.done());
+      expect(() => patchPathApi.done()).not.toThrow();
 
       done();
     })
     .catch(done);
 });
 
-test('actions/updateLearningPath with redirect', (t) => {
+test('actions/updateLearningPath with redirect', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -72,19 +71,19 @@ test('actions/updateLearningPath with redirect', (t) => {
     .then(() => {
       const actual = store.getActions();
 
-      t.equal(actual.length, 3, 'three actions');
-      t.deepEqual(actual[2], routerActions.push({ pathname: '/goto/dev/null' }));
+      expect(actual.length).toBe(3);
+      expect(actual[2]).toEqual(routerActions.push({ pathname: '/goto/dev/null' }));
 
-      t.doesNotThrow(() => patchPathApi.done());
+      expect(() => patchPathApi.done()).not.toThrow();
 
       done();
     })
     .catch(done);
 });
 
-test('actions/updateLearningPath access denied', (t) => {
+test('actions/updateLearningPath access denied', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -99,10 +98,10 @@ test('actions/updateLearningPath access denied', (t) => {
 
   store.dispatch(updateLearningPath(pathId, { id: pathId, foo: 'bar' }))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         applicationError(payload403invalid(`http://ndla-api/learningpaths/${pathId}`)),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
 
       done();
     })

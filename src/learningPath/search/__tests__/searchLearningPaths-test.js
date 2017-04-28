@@ -6,7 +6,6 @@
  *
  */
 
-import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
@@ -19,9 +18,9 @@ import {
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-test('actions/searchLearningPaths', (t) => {
+test('actions/searchLearningPaths', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -38,22 +37,22 @@ test('actions/searchLearningPaths', (t) => {
 
   store.dispatch(searchLearningPaths())
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         setLearningPathSearchResults({
           results: [{ id: '123' }, { id: '456' }],
           totalCount: 2,
         }),
       ]);
 
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);
 });
 
-test('actions/searchLearningPaths with query', (t) => {
+test('actions/searchLearningPaths with query', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -81,25 +80,25 @@ test('actions/searchLearningPaths with query', (t) => {
 
   store.dispatch(searchLearningPaths())
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         setLearningPathSearchResults({
           results: [{ id: '123' }, { id: '456' }],
           totalCount: 400,
         }),
       ]);
 
-      t.doesNotThrow(() => apiMock.done());
-      t.equal(initialState.learningPathQuery.pageSize, 15, 'side effect 1');
-      t.notOk(initialState.learningPathQuery['page-size'], 'side effect 2');
+      expect(() => apiMock.done()).not.toThrow();
+      expect(initialState.learningPathQuery.pageSize).toBe(15);
+      expect(initialState.learningPathQuery['page-size']).toBeFalsy();
 
       done();
     })
     .catch(done);
 });
 
-test('actions/searchLearningPaths with query without search term', (t) => {
+test('actions/searchLearningPaths with query without search term', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -109,7 +108,7 @@ test('actions/searchLearningPaths with query without search term', (t) => {
 
   const apiMock = nock('http://ndla-api')
     .get('/learningpath-api/v1/learningpaths')
-    .query({ page, sort, 'page-size': pageSize /* OBS! no query */})
+    .query({ page, sort, 'page-size': pageSize /* OBS! no query */ })
     .reply(200, {
       page,
       pageSize,
@@ -125,15 +124,15 @@ test('actions/searchLearningPaths with query without search term', (t) => {
 
   store.dispatch(searchLearningPaths())
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         setLearningPathSearchResults({
           results: [{ id: '123' }, { id: '456' }],
           totalCount: 400,
         }),
       ]);
 
-      t.doesNotThrow(() => apiMock.done());
-      t.equal(initialState.learningPathQuery.query, '', 'side effect');
+      expect(() => apiMock.done()).not.toThrow();
+      expect(initialState.learningPathQuery.query).toBe('');
       done();
     })
     .catch(done);

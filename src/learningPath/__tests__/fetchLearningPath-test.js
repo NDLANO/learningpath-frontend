@@ -6,7 +6,6 @@
  *
  */
 
-import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { routerActions } from 'react-router-redux';
@@ -23,9 +22,9 @@ const mockStore = configureStore(middleware);
 const accessToken = '123345';
 const pathId = 123;
 
-test('actions/fetchLearningPath without image', (t) => {
+test('actions/fetchLearningPath without image', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -37,20 +36,20 @@ test('actions/fetchLearningPath without image', (t) => {
 
   store.dispatch(fetchLearningPath(pathId))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         setLearningPath({ id: pathId }),
         setSavedImage({}),
         setSelectedImage({}),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);
 });
 
-test('actions/fetchLearningPath with image', (t) => {
+test('actions/fetchLearningPath with image', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -62,18 +61,18 @@ test('actions/fetchLearningPath with image', (t) => {
 
   store.dispatch(fetchLearningPath(pathId))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         setLearningPath({ id: pathId, coverPhoto: { url: 'test', metaUrl: 'metaTest' } }),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);
 });
 
-test('actions/fetchLearningPath with isEdit true and canEdit false', (t) => {
+test('actions/fetchLearningPath with isEdit true and canEdit false', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -85,21 +84,21 @@ test('actions/fetchLearningPath with isEdit true and canEdit false', (t) => {
 
   store.dispatch(fetchLearningPath(pathId, true))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         routerActions.push({ pathname: '/forbidden' }),
         setLearningPath({ id: pathId, canEdit: false }),
         setSavedImage({}),
         setSelectedImage({}),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);
 });
 
-test('actions/fetchLearningPath with isEdit true and canEdit true', (t) => {
+test('actions/fetchLearningPath with isEdit true and canEdit true', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -111,20 +110,20 @@ test('actions/fetchLearningPath with isEdit true and canEdit true', (t) => {
 
   store.dispatch(fetchLearningPath(pathId, true))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         setLearningPath({ id: pathId, canEdit: true }),
         setSavedImage({}),
         setSelectedImage({}),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);
 });
 
-test('actions/fetchLearningPath access denied', (t) => {
+test('actions/fetchLearningPath access denied', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -136,11 +135,11 @@ test('actions/fetchLearningPath access denied', (t) => {
 
   store.dispatch(fetchLearningPath(pathId))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         routerActions.push({ pathname: '/forbidden' }),
         applicationError(payload403invalid(`http://ndla-api/learningpath-api/v1/learningpaths/${pathId}`)),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);

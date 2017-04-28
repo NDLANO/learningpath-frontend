@@ -6,7 +6,6 @@
  *
  */
 
-import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
@@ -20,9 +19,9 @@ const mockStore = configureStore(middleware);
 
 const accessToken = '123345';
 const licenses = [{ license: 'GPL v3', description: 'En lisens', url: 'ndla.no' }, { license: 'Copyright v3', description: 'En lisens', url: 'ndla.no' }];
-test('actions/fetchLearningPathLicenses with creative-common sat to false', (t) => {
+test('actions/fetchLearningPathLicenses with creative-common sat to false', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -34,19 +33,19 @@ test('actions/fetchLearningPathLicenses with creative-common sat to false', (t) 
 
   store.dispatch(fetchLearningPathLicenses())
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         setAllLicenses(licenses),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);
 });
 
 
-test('actions/fetchLearningPathLicenses with creative-common sat to false access denied', (t) => {
+test('actions/fetchLearningPathLicenses with creative-common sat to false access denied', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -58,19 +57,19 @@ test('actions/fetchLearningPathLicenses with creative-common sat to false access
 
   store.dispatch(fetchLearningPathLicenses())
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         applicationError(payload403invalid('http://ndla-api/learningpath-api/v1/learningpaths/licenses')),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);
 });
 
 
-test('actions/fetchLearningPathLicenses with creative-common sat to false', (t) => {
+test('actions/fetchLearningPathLicenses with creative-common sat to false', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -83,19 +82,19 @@ test('actions/fetchLearningPathLicenses with creative-common sat to false', (t) 
 
   store.dispatch(fetchLearningPathLicenses('by'))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         setCreativeCommonLicenses(licenses),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);
 });
 
 
-test('actions/fetchLearningPathLicenses with creative-common sat to true access denied', (t) => {
+test('actions/fetchLearningPathLicenses with creative-common sat to true access denied', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -108,10 +107,10 @@ test('actions/fetchLearningPathLicenses with creative-common sat to true access 
 
   store.dispatch(fetchLearningPathLicenses('by'))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         applicationError(payload403invalid('http://ndla-api/learningpath-api/v1/learningpaths/licenses?filter=by')),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);

@@ -6,7 +6,6 @@
  *
  */
 
-import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
 import noop from 'lodash/noop';
@@ -20,17 +19,14 @@ import LearningPathSummary from '../LearningPathSummary';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
-test('component/LearningPathSummary', (t) => {
+test('component/LearningPathSummary', () => {
   const component = shallow(<LearningPathSummary learningPath={translatedLearningPath} lang="nb" store={mockStore({ learningPath, authenticated: true, localCloseSidebars: noop })} />);
 
   const titleNode = component.dive().find('.learning-path_title');
-  t.equal(titleNode.length, 1, 'one title node');
-  t.equal(titleNode.text(), 'Kristofers private bokmål');
+  expect(titleNode.length).toBe(1);
+  expect(titleNode.text()).toBe('Kristofers private bokmål');
 
   const bodyNode = component.dive().find('.learning-path_bd');
-  t.equal(bodyNode.length, 1, 'one body node');
-  t.equal(bodyNode.text().substring(0, 50),
-     'Kurset dekker innføring og vil gi deg grunnleggend');
-
-  t.end();
+  expect(bodyNode.length).toBe(1);
+  expect(bodyNode.text().substring(0, 50)).toBe('Kurset dekker innføring og vil gi deg grunnleggend');
 });

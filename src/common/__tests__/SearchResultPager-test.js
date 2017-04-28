@@ -6,7 +6,6 @@
  *
  */
 
-import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Link } from 'react-router-dom';
@@ -14,81 +13,75 @@ import queryString from 'query-string';
 import LinkPager from '../pager/LinkPager';
 import { getRange, stepNumbers } from '../pager/PagerUtil';
 
-test('component/PagerUtil.getRange', (t) => {
-  t.deepEquals(getRange(1, 5), [1, 5], '1,5');
-  t.deepEquals(getRange(2, 5), [1, 5], '1,5');
-  t.deepEquals(getRange(3, 5), [1, 5], '1,5');
+test('component/PagerUtil.getRange', () => {
+  expect(getRange(1, 5)).toEqual([1, 5], '1,5');
+  expect(getRange(2, 5)).toEqual([1, 5], '1,5');
+  expect(getRange(3, 5)).toEqual([1, 5], '1,5');
 
-  t.deepEquals(getRange(4, 10), [2, 6], '4,10');
-  t.deepEquals(getRange(22, 23), [19, 23], '22,23');
-  t.deepEquals(getRange(23, 23), [19, 23], '22,23');
+  expect(getRange(4, 10)).toEqual([2, 6], '4,10');
+  expect(getRange(22, 23)).toEqual([19, 23], '22,23');
+  expect(getRange(23, 23)).toEqual([19, 23], '22,23');
 
-  t.deepEquals(getRange(1, 1), [1, 1], '1,1');
-  t.deepEquals(getRange(2, 3), [1, 3], '2,3');
-  t.deepEquals(getRange(3, 3), [1, 3], '3,3');
-
-  t.end();
+  expect(getRange(1, 1)).toEqual([1, 1], '1,1');
+  expect(getRange(2, 3)).toEqual([1, 3], '2,3');
+  expect(getRange(3, 3)).toEqual([1, 3], '3,3');
 });
 
-test('component/PagerUtil.stepNumbers', (t) => {
-  t.deepEquals(stepNumbers(1, 10), [1, 2, 3, 4, 5], '1,10');
-  t.deepEquals(stepNumbers(2, 10), [1, 2, 3, 4, 5], '2,10');
-  t.deepEquals(stepNumbers(3, 10), [1, 2, 3, 4, 5], '3,10');
-  t.deepEquals(stepNumbers(4, 10), [2, 3, 4, 5, 6], '4,10');
-  t.deepEquals(stepNumbers(5, 10), [3, 4, 5, 6, 7], '5,10');
+test('component/PagerUtil.stepNumbers', () => {
+  expect(stepNumbers(1, 10)).toEqual([1, 2, 3, 4, 5], '1,10');
+  expect(stepNumbers(2, 10)).toEqual([1, 2, 3, 4, 5], '2,10');
+  expect(stepNumbers(3, 10)).toEqual([1, 2, 3, 4, 5], '3,10');
+  expect(stepNumbers(4, 10)).toEqual([2, 3, 4, 5, 6], '4,10');
+  expect(stepNumbers(5, 10)).toEqual([3, 4, 5, 6, 7], '5,10');
 
-  t.deepEquals(stepNumbers(1, 5), [1, 2, 3, 4, 5], '1,5');
-  t.deepEquals(stepNumbers(2, 5), [1, 2, 3, 4, 5], '2,5');
-  t.deepEquals(stepNumbers(3, 5), [1, 2, 3, 4, 5], '3,5');
-  t.deepEquals(stepNumbers(4, 5), [1, 2, 3, 4, 5], '4,5');
-  t.deepEquals(stepNumbers(5, 5), [1, 2, 3, 4, 5], '5,5');
+  expect(stepNumbers(1, 5)).toEqual([1, 2, 3, 4, 5], '1,5');
+  expect(stepNumbers(2, 5)).toEqual([1, 2, 3, 4, 5], '2,5');
+  expect(stepNumbers(3, 5)).toEqual([1, 2, 3, 4, 5], '3,5');
+  expect(stepNumbers(4, 5)).toEqual([1, 2, 3, 4, 5], '4,5');
+  expect(stepNumbers(5, 5)).toEqual([1, 2, 3, 4, 5], '5,5');
 
-  t.deepEquals(stepNumbers(1, 1), [1]);
-  t.deepEquals(stepNumbers(2, 2), [1, 2]);
-  t.deepEquals(stepNumbers(3, 3), [1, 2, 3]);
-  t.deepEquals(stepNumbers(4, 4), [1, 2, 3, 4]);
-  t.deepEquals(stepNumbers(5, 5), [1, 2, 3, 4, 5]);
-
-  t.end();
+  expect(stepNumbers(1, 1)).toEqual([1]);
+  expect(stepNumbers(2, 2)).toEqual([1, 2]);
+  expect(stepNumbers(3, 3)).toEqual([1, 2, 3]);
+  expect(stepNumbers(4, 4)).toEqual([1, 2, 3, 4]);
+  expect(stepNumbers(5, 5)).toEqual([1, 2, 3, 4, 5]);
 });
 
 
 function pagerTest({ setup, expected }) {
-  test(`component/LinkPager page ${setup.page}/${setup.lastPage}`, (t) => {
+  test(`component/LinkPager page ${setup.page}/${setup.lastPage}`, () => {
     const steps = shallow(<LinkPager query={{}} {...setup} />)
       .find('.search-stepper_step');
 
     const prev = setup.page - 1;
     const next = setup.page + 1;
 
-    t.equal(steps.length, expected.length, 'steppers length');
+    expect(steps.length).toBe(expected.length);
 
     expected.forEach((value, i) => {
-      const n = i + 1;
+      // const n = i + 1;
       const step = steps.at(i);
 
       switch (value) {
         case 'current':
-          t.ok(step.is('.search-stepper_step--active'), 'Current page active');
-          t.equal(step.text(), setup.page.toString(), 'Current page text');
-          t.notOk(step.is(Link), 'Current page not linked');
+          expect(step.is('.search-stepper_step--active')).toBeTruthy();
+          expect(step.text()).toBe(setup.page.toString());
+          expect(step.is(Link)).toBeFalsy();
           break;
         case 'back':
-          t.ok(step.is('Link.search-stepper_step--back'), 'Back link');
-          t.equal(parseInt(queryString.parse(step.props().to.search).page, 10), prev, `Back link links to page ${prev}`);
+          expect(step.is('Link.search-stepper_step--back')).toBeTruthy();
+          expect(parseInt(queryString.parse(step.props().to.search).page, 10)).toBe(prev);
           break;
         case 'forward':
-          t.ok(step.is('Link.search-stepper_step--forward'), 'Forward link');
-          t.equal(parseInt(queryString.parse(step.props().to.search).page, 10), next, `Forward link links to page ${next}`);
+          expect(step.is('Link.search-stepper_step--forward')).toBeTruthy();
+          expect(parseInt(queryString.parse(step.props().to.search).page, 10)).toBe(next);
           break;
         default:
-          t.ok(step.is(Link), `stepper ${n} is Link`);
-          t.equal(parseInt(queryString.parse(step.props().to.search).page, 10), value, `Stepper ${n} links to page ${value}`);
-          t.equal(step.props().children, value, `Stepper ${n} has text ${value}`);
+          expect(step.is(Link)).toBeTruthy();
+          expect(parseInt(queryString.parse(step.props().to.search).page, 10)).toBe(value);
+          expect(step.props().children).toBe(value);
       }
     });
-
-    t.end();
   });
 }
 

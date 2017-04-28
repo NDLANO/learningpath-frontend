@@ -6,76 +6,38 @@
  *
  */
 
-import test from 'tape';
-
 import reducer from '../pinterestReducer';
 
 const pinsPayload = ['test1', 'test2'];
 
 
-test('reducers/pinterestReducer', (t) => {
-  t.equal(
-    JSON.stringify(reducer(undefined, {})),
-    '{"pins":[],"fetchingPins":false}',
-    'empty action on undefined state'
-  );
+test('reducers/pinterestReducer', () => {
+  expect(JSON.stringify(reducer(undefined, {}))).toBe('{"pins":[],"fetchingPins":false}');
 
-  t.deepEqual(
-    reducer(undefined, { type: 'SET_PINS', payload: pinsPayload }),
-    { fetchingPins: false, pins: ['test1', 'test2'] },
-    'set state'
-  );
+  expect(reducer(undefined, { type: 'SET_PINS', payload: pinsPayload })).toEqual({ fetchingPins: false, pins: ['test1', 'test2'] });
 
-  t.deepEqual(
-    reducer({ fetchingPins: false, pins: ['test1', 'test3'] }, { type: 'SET_PINS', payload: pinsPayload }),
-    { fetchingPins: false, pins: ['test1', 'test2'] },
-    'change state'
-  );
+  expect(
+    reducer({ fetchingPins: false, pins: ['test1', 'test3'] }, { type: 'SET_PINS', payload: pinsPayload })
+  ).toEqual({ fetchingPins: false, pins: ['test1', 'test2'] });
 
-  t.deepEqual(
-    reducer({ fetchingPins: false, pins: ['test1', 'test3'] },
-      { type: 'DO_NOT_SET_PINS', payload: pinsPayload }),
-    { fetchingPins: false, pins: ['test1', 'test3'] },
-    'non-actionable action type'
-  );
+  expect(reducer({ fetchingPins: false, pins: ['test1', 'test3'] },
+    { type: 'DO_NOT_SET_PINS', payload: pinsPayload })).toEqual({ fetchingPins: false, pins: ['test1', 'test3'] });
 
-  t.deepEqual(
-    reducer({ fetchingPins: false, pins: ['test1', 'test2'] },
-      { type: 'SET_PINS', payload: new Error('fail'), error: true }),
-    { fetchingPins: false, pins: ['test1', 'test2'] },
-    'ignore errors'
-  );
+  expect(reducer({ fetchingPins: false, pins: ['test1', 'test2'] },
+    { type: 'SET_PINS', payload: new Error('fail'), error: true })).toEqual({ fetchingPins: false, pins: ['test1', 'test2'] });
 
-  t.deepEqual(
-    reducer(undefined, { type: 'SET_FETCHING_PINS', payload: true }),
-    { fetchingPins: true, pins: [] },
-    'set state'
-  );
+  expect(reducer(undefined, { type: 'SET_FETCHING_PINS', payload: true })).toEqual({ fetchingPins: true, pins: [] });
 
-  t.deepEqual(
-    reducer({ fetchingPins: true, pins: ['test1', 'test3'] }, { type: 'SET_FETCHING_PINS', payload: false }),
-    { fetchingPins: false, pins: ['test1', 'test3'] },
-    'change state'
-  );
+  expect(
+    reducer({ fetchingPins: true, pins: ['test1', 'test3'] }, { type: 'SET_FETCHING_PINS', payload: false })
+  ).toEqual({ fetchingPins: false, pins: ['test1', 'test3'] });
 
-  t.deepEqual(
-    reducer({ fetchingPins: true, pins: ['test1', 'test3'] },
-      { type: 'SET_FETCHING_PINS', payload: new Error('fail'), error: true }),
-    { fetchingPins: true, pins: ['test1', 'test3'] },
-    'ignore errors'
-  );
+  expect(reducer({ fetchingPins: true, pins: ['test1', 'test3'] },
+    { type: 'SET_FETCHING_PINS', payload: new Error('fail'), error: true })).toEqual({ fetchingPins: true, pins: ['test1', 'test3'] });
 
-  t.deepEqual(
-    reducer(undefined, { type: 'REMOVE_PINS', payload: {} }),
-    { fetchingPins: false, pins: [] },
-    'set state'
-  );
+  expect(reducer(undefined, { type: 'REMOVE_PINS', payload: {} })).toEqual({ fetchingPins: false, pins: [] });
 
-  t.deepEqual(
-    reducer({ fetchingPins: true, pins: ['test1', 'test3'] }, { type: 'REMOVE_PINS', payload: {} }),
-    { fetchingPins: false, pins: [] },
-    'change state'
-  );
-
-  t.end();
+  expect(
+    reducer({ fetchingPins: true, pins: ['test1', 'test3'] }, { type: 'REMOVE_PINS', payload: {} })
+  ).toEqual({ fetchingPins: false, pins: [] });
 });

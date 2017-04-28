@@ -271,29 +271,21 @@ http://github.com/webpack/extract-text-webpack-plugin
 
 ### Testing
 
-**babel-tape-runner:**
-Babel + Tape for running your ES Next tests.
-https://github.com/wavded/babel-tape-runner
+**jest**
+🃏 Painless JavaScript Testing. 
+https://github.com/facebook/jest
+
+**babel-jest**
+Babel Jest plugin
+https://github.com/facebook/jest/tree/master/packages/babel-jest
 
 **enzyme:**
 JavaScript Testing utilities for React.
 https://github.com/airbnb/enzyme#readme
 
-**faucet:**
-human-readable TAP summarizer.
-https://github.com/substack/faucet
-
-**tap-spec:**
-Formatted TAP output like Mocha's spec reporter
-https://github.com/scottcorgan/tap-spec#readme
-
 **flux-standard-action:**
 A human-friendly standard for Flux action objects.
 https://www.npmjs.com/package/flux-standard-action
-
-**jsdom:**
-A JavaScript implementation of the DOM and HTML standards.
-https://github.com/tmpvar/jsdom#readme
 
 **nock:**
 HTTP Server mocking for Node.js.
@@ -310,14 +302,6 @@ https://github.com/arnaudbenard/redux-mock-store#readme
 **sinon:**
 JavaScript test spies, stubs and mocks.
 http://sinonjs.org/
-
-**tape:**
-tap-producing test harness for node and browsers.
-https://github.com/substack/tape
-
-**watch:**
-Utilities for watching file trees.
-https://github.com/mikeal/watch
 
 ### Code style
 

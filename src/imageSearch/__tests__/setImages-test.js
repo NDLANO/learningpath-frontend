@@ -7,12 +7,11 @@
  */
 
 
-import test from 'tape';
 import { isFSA } from 'flux-standard-action';
 import { setImages } from '../imageActions';
 
 
-test('actions/setImages', (t) => {
+test('actions/setImages', () => {
   const actual = setImages(
     {
       page: 1,
@@ -24,32 +23,26 @@ test('actions/setImages', (t) => {
     }
   );
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'SET_IMAGES');
-  t.deepEqual(actual.payload,
-    {
-      page: 1,
-      'page-size': 16,
-      totalCount: 2,
-      results: [
-        { id: '12345' }, { id: '67890' },
-      ],
-    }
-);
-  t.notOk(actual.error);
-
-  t.end();
+  expect(actual.type).toBe('SET_IMAGES');
+  expect(actual.payload).toEqual({
+    page: 1,
+    'page-size': 16,
+    totalCount: 2,
+    results: [
+      { id: '12345' }, { id: '67890' },
+    ],
+  });
+  expect(actual.error).toBeFalsy();
 });
 
-test('actions/setImages with error', (t) => {
+test('actions/setImages with error', () => {
   const actual = setImages(new Error('fail!'));
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'SET_IMAGES');
-  t.equal(actual.payload.message, 'fail!');
-  t.ok(actual.error);
-
-  t.end();
+  expect(actual.type).toBe('SET_IMAGES');
+  expect(actual.payload.message).toBe('fail!');
+  expect(actual.error).toBeTruthy();
 });

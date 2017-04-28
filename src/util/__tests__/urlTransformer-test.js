@@ -6,59 +6,45 @@
  *
  */
 
-import test from 'tape';
-
 import { transformHttpToHttps, removeSlashOembed, transformNdlaUrl } from '../urlTransformer';
 
-test('util/transformHttpToHttps http changes to https', (t) => {
-  t.equal(typeof transformHttpToHttps, 'function');
+test('util/transformHttpToHttps http changes to https', () => {
+  expect(typeof transformHttpToHttps).toBe('function');
 
-  t.equal(transformHttpToHttps('http://ndla.no/3'), 'https://ndla.no/3');
-
-  t.end();
+  expect(transformHttpToHttps('http://ndla.no/3')).toBe('https://ndla.no/3');
 });
 
 
-test('util/transformHttpToHttps https does not change', (t) => {
-  t.equal(typeof transformHttpToHttps, 'function');
+test('util/transformHttpToHttps https does not change', () => {
+  expect(typeof transformHttpToHttps).toBe('function');
 
-  t.equal(transformHttpToHttps('https://ndla.no/3'), 'https://ndla.no/3');
-
-  t.end();
+  expect(transformHttpToHttps('https://ndla.no/3')).toBe('https://ndla.no/3');
 });
 
 
-test('util/removeSlashOembed removes /oembed', (t) => {
-  t.equal(typeof removeSlashOembed, 'function');
+test('util/removeSlashOembed removes /oembed', () => {
+  expect(typeof removeSlashOembed).toBe('function');
 
-  t.equal(removeSlashOembed('https://ndla.no/3/oembed'), 'https://ndla.no/3');
-
-  t.end();
+  expect(removeSlashOembed('https://ndla.no/3/oembed')).toBe('https://ndla.no/3');
 });
 
 
-test('util/removeSlashOembed url does not change', (t) => {
-  t.equal(typeof removeSlashOembed, 'function');
+test('util/removeSlashOembed url does not change', () => {
+  expect(typeof removeSlashOembed).toBe('function');
 
-  t.equal(removeSlashOembed('https://ndla.no/3'), 'https://ndla.no/3');
-
-  t.end();
+  expect(removeSlashOembed('https://ndla.no/3')).toBe('https://ndla.no/3');
 });
 
 
-test('util/transformNdlaUrl removes /oembed and adds https', (t) => {
-  t.equal(typeof transformNdlaUrl, 'function');
+test('util/transformNdlaUrl removes /oembed and adds https', () => {
+  expect(typeof transformNdlaUrl).toBe('function');
 
-  t.equal(transformNdlaUrl('http://ndla.no/3/oembed'), 'https://ndla.no/3');
-
-  t.end();
+  expect(transformNdlaUrl('http://ndla.no/3/oembed')).toBe('https://ndla.no/3');
 });
 
 
-test('util/transformNdlaUrl url does not change', (t) => {
-  t.equal(typeof transformNdlaUrl, 'function');
+test('util/transformNdlaUrl url does not change', () => {
+  expect(typeof transformNdlaUrl).toBe('function');
 
-  t.equal(transformNdlaUrl('https://ndla.no/3'), 'https://ndla.no/3');
-
-  t.end();
+  expect(transformNdlaUrl('https://ndla.no/3')).toBe('https://ndla.no/3');
 });

@@ -6,46 +6,20 @@
  *
  */
 
-import test from 'tape';
-
 import reducer from '../authenticated';
 
-test('reducers/authenticated', (t) => {
-  t.equal(
-    reducer(undefined, {}),
-    false,
-    'initial state'
-  );
+test('reducers/authenticated', () => {
+  expect(reducer(undefined, {})).toBe(false);
 
-  t.equal(
-    reducer(undefined, { type: 'SET_AUTHENTICATED', payload: true }),
-    true,
-    'set state'
-  );
+  expect(reducer(undefined, { type: 'SET_AUTHENTICATED', payload: true })).toBe(true);
 
-  t.equal(
-    reducer(true, { type: 'SET_AUTHENTICATED', payload: false }),
-    false,
-    'change state'
-  );
+  expect(reducer(true, { type: 'SET_AUTHENTICATED', payload: false })).toBe(false);
 
-  t.equal(
-    reducer(true, { type: 'DO_NOT_SET_AUTHENTICATED', payload: false }),
-    true,
-    'non-actionable action type'
-  );
+  expect(reducer(true, { type: 'DO_NOT_SET_AUTHENTICATED', payload: false })).toBe(true);
 
-  t.equal(
-    reducer(true, { type: 'SET_AUTHENTICATED', payload: new Error('foobar'), error: true }),
-    true,
-    'ignore errors'
-  );
+  expect(
+    reducer(true, { type: 'SET_AUTHENTICATED', payload: new Error('foobar'), error: true })
+  ).toBe(true);
 
-  t.equal(
-    reducer(true, { type: 'LOGOUT' }),
-    false,
-    'logout'
-  );
-
-  t.end();
+  expect(reducer(true, { type: 'LOGOUT' })).toBe(false);
 });

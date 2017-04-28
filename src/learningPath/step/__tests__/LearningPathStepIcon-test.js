@@ -6,7 +6,6 @@
  *
  */
 
-import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
 
@@ -14,12 +13,10 @@ import { translatedLearningStep } from '../../../common/__tests__/translatedMock
 
 import LearningPathStepIcon from '../LearningPathStepIcon';
 
-test('component/LearningPathStepIcon', (t) => {
+test('component/LearningPathStepIcon', () => {
   const component = shallow(<LearningPathStepIcon learningPathStep={translatedLearningStep} isCircle />);
 
   const iconNode = component.find('.step-nav_circle');
 
-  t.equal(iconNode.length, 1, 'one icon node');
-
-  t.end();
+  expect(iconNode.length).toBe(1);
 });

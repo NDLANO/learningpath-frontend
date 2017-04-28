@@ -6,7 +6,6 @@
  *
  */
 
-import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
@@ -23,9 +22,9 @@ const accessToken = '123345';
 const pathId = 123;
 const stepId = 456;
 
-test('actions/fetchLearningPathStep', (t) => {
+test('actions/fetchLearningPathStep', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -37,18 +36,18 @@ test('actions/fetchLearningPathStep', (t) => {
 
   store.dispatch(fetchLearningPathStep(pathId, stepId))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         setLearningPathStep({ id: stepId, seqNo: 3 }),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);
 });
 
-test('actions/fetchLearningPathStep with isEdit true and canEdit false', (t) => {
+test('actions/fetchLearningPathStep with isEdit true and canEdit false', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -60,19 +59,19 @@ test('actions/fetchLearningPathStep with isEdit true and canEdit false', (t) => 
 
   store.dispatch(fetchLearningPathStep(pathId, stepId, true))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         setLearningPathStep({ id: stepId, seqNo: 3, canEdit: false }),
         routerActions.push({ pathname: '/forbidden' }),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);
 });
 
-test('actions/fetchLearningPathStep with isEdit true and canEdit true', (t) => {
+test('actions/fetchLearningPathStep with isEdit true and canEdit true', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -84,18 +83,18 @@ test('actions/fetchLearningPathStep with isEdit true and canEdit true', (t) => {
 
   store.dispatch(fetchLearningPathStep(pathId, stepId, true))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         setLearningPathStep({ id: stepId, seqNo: 3, canEdit: true }),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);
 });
 
-test('actions/fetchLearningPathStep cache hit', (t) => {
+test('actions/fetchLearningPathStep cache hit', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -118,19 +117,19 @@ test('actions/fetchLearningPathStep cache hit', (t) => {
 
   store.dispatch(fetchLearningPathStep(pathId, stepId))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         setLearningPathStep({ id: stepId, seqNo: 3, cached: true }),
         setLearningPathStep({ id: stepId, seqNo: 3, cached: false }),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);
 });
 
-test('actions/fetchLearningPathStep access denied', (t) => {
+test('actions/fetchLearningPathStep access denied', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -142,18 +141,18 @@ test('actions/fetchLearningPathStep access denied', (t) => {
 
   store.dispatch(fetchLearningPathStep(pathId, stepId))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         applicationError(payload403invalid(`http://ndla-api/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`)),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);
 });
 
-test('actions/fetchLearningPathStep with embedUrl', (t) => {
+test('actions/fetchLearningPathStep with embedUrl', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -165,10 +164,10 @@ test('actions/fetchLearningPathStep with embedUrl', (t) => {
 
   store.dispatch(fetchLearningPathStep(pathId, stepId))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         setLearningPathStep({ id: stepId, seqNo: 3, embedUrl: [{ url: 'test', language: 'nb', embedType: 'oembed' }] }),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);

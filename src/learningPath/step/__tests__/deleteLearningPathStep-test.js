@@ -6,7 +6,6 @@
  *
  */
 
-import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
@@ -20,9 +19,9 @@ const accessToken = '123345';
 const pathId = 123;
 const stepId = 321;
 
-test('actions/deleteLearningPathStep with id', (t) => {
+test('actions/deleteLearningPathStep with id', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -40,14 +39,12 @@ test('actions/deleteLearningPathStep with id', (t) => {
   const store = mockStore({ accessToken });
   store.dispatch(deleteLearningPathStep(pathId, stepId))
     .then(() => {
-      t.equal(store.getActions().length, 4);
-      t.equal(store.getActions()[0].type, 'ADD_MESSAGE', 'action type is ADD_MESSAGE');
-      t.ok(store.getActions()[0].payload.action, 'ADD_MESSAGE payload contains action');
-      t.deepEqual(store.getActions()[1],
-        { type: 'SET_LEARNING_PATH', payload: { id: pathId } }
-      );
+      expect(store.getActions().length).toBe(4);
+      expect(store.getActions()[0].type).toBe('ADD_MESSAGE');
+      expect(store.getActions()[0].payload.action).toBeTruthy();
+      expect(store.getActions()[1]).toEqual({ type: 'SET_LEARNING_PATH', payload: { id: pathId } });
 
-      t.doesNotThrow(() => nock.isDone());
+      expect(() => nock.isDone()).not.toThrow();
       done();
     })
     .catch(done);

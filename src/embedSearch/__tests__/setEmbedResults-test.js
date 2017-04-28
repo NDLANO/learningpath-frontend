@@ -1,5 +1,11 @@
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
 
-import test from 'tape';
 import { isFSA } from 'flux-standard-action';
 import { setEmbedResults } from '../embedSearchActions';
 
@@ -13,28 +19,24 @@ const results = {
     ],
   },
 };
-test('actions/setEmbedResults', (t) => {
+test('actions/setEmbedResults', () => {
   const actual = setEmbedResults(
     results
   );
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'SET_EMBED_RESULTS');
-  t.deepEqual(actual.payload, results);
-  t.notOk(actual.error);
-
-  t.end();
+  expect(actual.type).toBe('SET_EMBED_RESULTS');
+  expect(actual.payload).toEqual(results);
+  expect(actual.error).toBeFalsy();
 });
 
-test('actions/setEmbedResults with error', (t) => {
+test('actions/setEmbedResults with error', () => {
   const actual = setEmbedResults(new Error('fail!'));
 
-  t.ok(isFSA(actual), 'FSA compliant action');
+  expect(isFSA(actual)).toBeTruthy();
 
-  t.equal(actual.type, 'SET_EMBED_RESULTS');
-  t.equal(actual.payload.message, 'fail!');
-  t.ok(actual.error);
-
-  t.end();
+  expect(actual.type).toBe('SET_EMBED_RESULTS');
+  expect(actual.payload.message).toBe('fail!');
+  expect(actual.error).toBeTruthy();
 });

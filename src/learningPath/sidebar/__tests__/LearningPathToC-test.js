@@ -6,20 +6,17 @@
  *
  */
 
-import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
 import { translatedLearningPath } from '../../../common/__tests__/translatedMockData';
 import { LearningPathToC } from '../LearningPathToC';
 import LearningPathToCStep from '../LearningPathToCStep';
 
-test('component/LearningPathToC', (t) => {
+test('component/LearningPathToC', () => {
   const component = shallow(<LearningPathToC learningPath={translatedLearningPath} />,
-      { context: { lang: 'nb' } });
+    { context: { lang: 'nb' } });
 
   const steps = component.find(LearningPathToCStep);
 
-  t.equal(steps.length, 2, 'has two steps');
-
-  t.end();
+  expect(steps.length).toBe(2);
 });

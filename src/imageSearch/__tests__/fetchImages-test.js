@@ -6,7 +6,6 @@
  *
  */
 
-import test from 'tape';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
@@ -19,9 +18,9 @@ import { applicationError } from '../../messages/messagesActions';
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-test('actions/fetchImages', (t) => {
+test('actions/fetchImages', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -38,25 +37,26 @@ test('actions/fetchImages', (t) => {
 
   store.dispatch(fetchLearningPathImages({ page: 3, pageSize: 25 }))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         setImages({
           totalCount: 2,
           page: 3,
           pageSize: 25,
-          results: [{ id: '123' }, { id: '456' }] }
+          results: [{ id: '123' }, { id: '456' }],
+        }
         ),
         changeImageSearchQuery({ page: 3, pageSize: 25 }),
       ]);
 
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);
 });
 
-test('actions/fetchImages with url access denied', (t) => {
+test('actions/fetchImages with url access denied', () => {
   const done = (res) => {
-    t.end(res);
+    done(res);
     nock.cleanAll();
   };
 
@@ -69,10 +69,10 @@ test('actions/fetchImages with url access denied', (t) => {
 
   store.dispatch(fetchLearningPathImages({ page: 3, pageSize: 25 }))
     .then(() => {
-      t.deepEqual(store.getActions(), [
+      expect(store.getActions()).toEqual([
         applicationError(payload403invalid('http://ndla-api/image-api/v1/images?page=3&pageSize=25')),
       ]);
-      t.doesNotThrow(() => apiMock.done());
+      expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);

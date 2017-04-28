@@ -6,28 +6,23 @@
  *
  */
 
-import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
 import LoginProviders from '../LoginProviders';
 
 
-test('component/LoginProviders', (t) => {
+test('component/LoginProviders', () => {
   const component = shallow(<LoginProviders match={{ url: '' }} />);
 
   const buttons = component.find('.cta-link');
 
-  t.equals(buttons.length, 3);
+  expect(buttons.length).toBe(3);
 
-  t.deepEquals(buttons.map(n => n.text()), ['Google', 'Facebook', 'Twitter']);
-
-  t.end();
+  expect(buttons.map(n => n.text())).toEqual(['Google', 'Facebook', 'Twitter']);
 });
 
-test('component/LoginProviders with message', (t) => {
+test('component/LoginProviders with message', () => {
   const component = shallow(<LoginProviders message="A message to you, rudy" match={{ url: '' }} />);
 
-  t.ok(component.findWhere(n => n.text() === 'A message to you, rudy').length, 'has message');
-
-  t.end();
+  expect(component.findWhere(n => n.text() === 'A message to you, rudy').length).toBeTruthy();
 });
