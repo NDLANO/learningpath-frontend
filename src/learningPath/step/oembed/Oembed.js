@@ -6,7 +6,8 @@
  *
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import get from 'lodash/get';
 import Spinner from '../../../common/Spinner';
@@ -28,7 +29,7 @@ export default class Oembed extends React.Component {
     this.handleResizeMessage = this.handleResizeMessage.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.handleIframeResizing(this.props);
   }
 
@@ -63,6 +64,7 @@ export default class Oembed extends React.Component {
   disableIframeResizing() {
     window.removeEventListener('message', this.handleResizeMessage);
     this.setState({ listeningToResize: false });
+    this.setState({ isLoadingResource: false });
   }
 
   handleResizeMessage(evt) {
@@ -79,10 +81,10 @@ export default class Oembed extends React.Component {
     const newHeight = parseInt(get(evt, 'data.height', 0), 10) + 55;
     const currentHeight = parseInt(get(iframe, 'style.height') || 0, 10);
 
-    this.setState({ isLoadingResource: false });
     if (newHeight > currentHeight) {
       iframe.style.height = `${newHeight}px`;
     }
+    this.setState({ isLoadingResource: false });
   }
 
   render() {

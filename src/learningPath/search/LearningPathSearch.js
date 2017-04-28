@@ -6,7 +6,8 @@
  *
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import defined from 'defined';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -24,6 +25,7 @@ import {
   getLearningPathSearchTotalCount,
  } from './learningPathSearchSelectors';
 import parseQueryString from '../../util/parseQueryString';
+
 
 class LearningPathSearch extends React.Component {
 

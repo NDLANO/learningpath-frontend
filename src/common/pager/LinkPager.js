@@ -6,9 +6,10 @@
  *
  */
 
-import React, { PropTypes } from 'react';
-import { Link } from 'react-router-dom';
 import queryString from 'query-string';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import Icon from '../../common/Icon';
 import { stepNumbers } from './PagerUtil';

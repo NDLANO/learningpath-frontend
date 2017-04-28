@@ -6,7 +6,8 @@
  *
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import formatDate from '../../util/formatDate';
@@ -19,7 +20,7 @@ import { getI18nLearningPath } from '../learningPathSelectors';
 import LearningPathContributors from './LearningPathContributors';
 
 const LearningPathGeneralInfo = (props, context) => {
-  const { authenticated, learningPath, localCloseSidebars, onCopyLearningPathClick, changeStatusButton, addStepButton } = props;
+  const { authenticated, learningPath, localCloseSidebars, onCopyLearningPathClick, changeStatusButton, addStepButton, pinterestButton } = props;
   const { lang } = context;
   const borderBoxClassName = classNames({
     'border-box_wrapper': true,
@@ -56,6 +57,7 @@ const LearningPathGeneralInfo = (props, context) => {
           { authenticated ? actions : ' '}
         </div>
         {addStepButton}
+        {pinterestButton}
       </div>
     </div>
   );
@@ -68,6 +70,7 @@ LearningPathGeneralInfo.propTypes = {
   onCopyLearningPathClick: PropTypes.func.isRequired,
   changeStatusButton: PropTypes.object,
   addStepButton: PropTypes.object,
+  pinterestButton: PropTypes.object,
 };
 
 LearningPathGeneralInfo.contextTypes = {

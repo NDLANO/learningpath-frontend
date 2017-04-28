@@ -20,6 +20,7 @@ import CreateLearningPathStep from './create/CreateLearningPathStep';
 import EditLearningPathStep from './edit/EditLearningPathStep';
 import SortLearningPathSteps from './sort/SortLearningPathSteps';
 import AddLearningPathStepButton from '../sidebar/AddLearningPathStepButton';
+import PinterestLightboxButton from '../../pinterest/PinterestLightboxButton';
 
 export default function (store, ifAuthenticated) {
   const {
@@ -34,7 +35,7 @@ export default function (store, ifAuthenticated) {
         path=":stepId/edit(/)" component={requireAuthentication(EditLearningPathStep)}
       />
       <Route
-        path=":stepId" components={{ main: LearningPathStep, addStepButton: AddLearningPathStepButton, changeStatusButton: LearningPathToCButtons }}
+        path=":stepId" components={{ main: LearningPathStep, addStepButton: AddLearningPathStepButton, changeStatusButton: LearningPathToCButtons, pinterestButton: PinterestLightboxButton }}
       />
     </Route>
   );

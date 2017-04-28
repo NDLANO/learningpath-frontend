@@ -6,7 +6,8 @@
  *
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import getLicenseByAbbreviation from 'ndla-licenses';
 import LicenseIconList from 'ndla-ui/lib/license/LicenseIconList';
 import polyglot from '../../i18n';
@@ -21,7 +22,7 @@ const LearningPathStepLicense = ({ learningPathStep }) => {
     <span className="learning-step_license">
       {learningPathStep.license.url ?
         <a target="_blank" rel="noopener noreferrer" href={learningPathStep.license.url}>{licenseText}</a>
-      : licenseText}
+        : licenseText}
     </span>
   );
 };

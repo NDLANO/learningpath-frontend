@@ -6,7 +6,8 @@
  *
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Oembed from '../learningPath/step/oembed/Oembed';
 import polyglot from '../i18n';

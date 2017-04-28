@@ -6,7 +6,9 @@
  *
  */
 
-import React, { PropTypes } from 'react';
+
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import polyglot from '../i18n';
 
@@ -15,7 +17,7 @@ const IsBasedOn = ({ path, showText }) => {
   const url = `/learningpaths/${path.isBasedOn}/first-step`;
   return (
     <span className="is-based-on_wrapper">
-      { showText ? <span>{polyglot.t('learningPath.isBasedOn')}</span> : '' }
+      {showText ? <span>{polyglot.t('learningPath.isBasedOn')}</span> : ''}
       <Link to={url} className="cta-link--primary cta-link--underline" target="_blank" rel="noopener noreferrer" >
         {title}
       </Link>

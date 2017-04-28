@@ -6,7 +6,8 @@
  *
  */
 
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Multiselect from 'react-widgets/lib/Multiselect';
 
 import polyglot from '../i18n';

@@ -6,10 +6,11 @@
  *
  */
 
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import assign from 'lodash/assign';
-import { stateToHTML } from 'draft-js-export-html';
+import { convertToHTML } from 'draft-convert';
 import get from 'lodash/get';
 
 import LearningPathStepForm from './LearningPathStepForm';
@@ -27,7 +28,8 @@ class EditLearningPathStep extends Component {
 
   componentWillMount() {
     const { authenticated, localIfAuthenticated, localCreateEmptyLearningPathStep, fetchLearningPathLicenses, localFetchLearningPathStep, match: { params: { pathId, stepId } } } = this.props;
-    fetchLearningPathLicenses();
+    fetchLearningPathLicenses('4.0');
+
 
     if (localIfAuthenticated && localCreateEmptyLearningPathStep) {
       localIfAuthenticated(authenticated, localCreateEmptyLearningPathStep);
@@ -49,15 +51,23 @@ class EditLearningPathStep extends Component {
     }
 
     const handleSubmit = (values) => {
-      const descriptionHTML = stateToHTML(values.description);
+      const descriptionHTML = convertToHTML({
+        styleToHTML: (style) => {
+          if (style === 'UNDERLINE') {
+            return <u />;
+          }
+          return undefined;
+        },
+      })(values.description);
       const toSave = Object.assign({}, step, {
         type: values.type,
         showTitle: values.showTitle,
         title: [{ title: values.title, language }],
         description: [{ description: descriptionHTML, language }],
-        embedUrl: values.url && values.url.url ? [{ url: values.url.url, language, embedType: values.url.embedType }] : [],
-        license: values.license && values.license.licen ? values.license.license : '',
+        embedUrl: values.url && values.url.url ? [{ url: values.url.url, language, embedType: values.url.embedType }] : [{ url: '', language, embedType: 'oembed' }],
+        license: values.license && values.license.license ? values.license.license : '',
       });
+
       return saveLearningPathStep(learningPath.id, toSave);
     };
 
@@ -105,7 +115,7 @@ EditLearningPathStep.contextTypes = {
 export const mapStateToProps = state => assign({}, state, {
   step: getI18nLearningPathStep(state),
   learningPath: getI18nLearningPath(state),
-  licenses: [{ description: polyglot.t('editPathStep.noLicenseChosen'), license: undefined }].concat(get(state, 'learningPathLicenses.allLicenses.all', [])),
+  licenses: [{ description: polyglot.t('editPathStep.noLicenseChosen'), license: '' }].concat(get(state, 'learningPathLicenses.creativeCommonLicenses.all', [])),
 });
 
 export const mapDispatchToProps = {

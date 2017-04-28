@@ -6,7 +6,8 @@
  *
  */
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import IsBasedOn from '../../common/IsBasedOn';
 import polyglot from '../../i18n';
@@ -76,7 +77,7 @@ class LearningPathTitle extends Component {
               <IsBasedOn path={learningPath} showText={false} />
             </div>
           </div>
-        : ''}
+          : ''}
       </div>
     );
   }

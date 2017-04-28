@@ -6,7 +6,9 @@
  *
  */
 
-import React, { PropTypes, Component } from 'react';
+
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { routerActions } from 'react-router-redux';
@@ -22,7 +24,6 @@ import SortLearningStepsButton from './sidebar/SortLearningStepsButton';
 import LearningPathSummary from './sidebar/LearningPathSummary';
 import { fetchLearningPath, copyLearningPath } from './learningPathActions';
 import { getI18nLearningPath } from './learningPathSelectors';
-import PintrestLightboxButton from './sidebar/PintrestLightboxButton';
 import LearningPathStep from './step/LearningPathStep';
 import CreateLearningPathStep from './step/create/CreateLearningPathStep';
 import EditLearningPathStep from './step/edit/EditLearningPathStep';
@@ -30,6 +31,7 @@ import EditLearningPath from './edit/EditLearningPath';
 import SortLearningPathSteps from './step/sort/SortLearningPathSteps';
 import LearningPathToCButtons from './sidebar/LearningPathToCButtons';
 import AddLearningPathStepButton from './sidebar/AddLearningPathStepButton';
+
 
 export class LearningPath extends Component {
   constructor(props) {
@@ -106,7 +108,6 @@ export class LearningPath extends Component {
             <div className="step-nav_wrapper">
               {sortableTableOfContentButton}
               {sortableTableOfContent}
-              <PintrestLightboxButton learningPath={learningPath} />
             </div>
           </aside>
           <main className="two-column_col">

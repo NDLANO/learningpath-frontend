@@ -28,8 +28,8 @@ export const getI18nLearningPathStep = createSelector(
     title: titleI18N(learningPathStep, lang, true),
     description: descriptionI18N(learningPathStep, lang, true),
     embedUrl: {
-      url: oembedUrlI18N(learningPathStep, lang),
-      embedType: embedTypeUrlI18N(learningPathStep, lang),
+      url: oembedUrlI18N(learningPathStep, lang, false),
+      embedType: embedTypeUrlI18N(learningPathStep, lang, false),
     },
   })
 );

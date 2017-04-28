@@ -6,9 +6,10 @@
  *
  */
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { DragSource, DropTarget } from 'react-dnd';
-import uuid from 'node-uuid';
+import { uuid } from 'ndla-util';
 import flow from 'lodash/flow';
 
 const itemSource = {
@@ -106,7 +107,7 @@ SortableItem.propTypes = {
 // N.B. to use this component you need to call it as a function to create the class
 // Not sure of a better way to do this to enable non-colliding types for each parent component
 export default (customType) => {
-  const type = customType || uuid.v4();
+  const type = customType || uuid();
   return flow(
     new DragSource(type, itemSource, collectSource),
     new DropTarget(type, itemTarget, collectTarget)
