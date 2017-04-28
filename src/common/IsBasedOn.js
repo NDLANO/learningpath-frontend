@@ -6,14 +6,15 @@
  *
  */
 
+
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import polyglot from '../i18n';
 
 const IsBasedOn = ({ path, showText }) => {
   const title = path.isBasedOnTitle ? path.isBasedOnTitle : polyglot.t('learningPath.isBasedOnPath');
-  const url = `/learningpaths/${path.isBasedOn}/first-step/`;
+  const url = `/learningpaths/${path.isBasedOn}/first-step`;
   return (
     <span className="is-based-on_wrapper">
       {showText ? <span>{polyglot.t('learningPath.isBasedOn')}</span> : ''}

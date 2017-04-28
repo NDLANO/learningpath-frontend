@@ -18,6 +18,7 @@ import { getLearningPathTagsByLanguage } from './tags/learningPathTagsSelectors'
 import { fetchLearningPathImages, fetchLearningPathImage, fetchLearningPathImageWithMetaUrl } from '../../imageSearch/imageActions';
 import { updateLearningPath } from '../learningPathActions';
 import { getI18nLearningPath, getI18nLearningPathSteps } from '../learningPathSelectors';
+import { getLocale } from '../../locale/localeSelectors';
 
 class EditLearningPath extends Component {
   constructor() {
@@ -107,6 +108,7 @@ const mapStateToProps = state => Object.assign({}, state, {
   learningSteps: getI18nLearningPathSteps(state),
   tags: getLearningPathTagsByLanguage(state),
   licenses: get(state, 'learningPathLicenses.creativeCommonLicenses.all', []),
+  lang: getLocale(state),
 });
 
 const mapDispatchToProps = {

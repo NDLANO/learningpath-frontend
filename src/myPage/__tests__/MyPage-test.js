@@ -9,7 +9,7 @@
 import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import { translatedLearningPaths } from '../../common/__tests__/translatedMockData';
 import { learningPaths } from '../../common/__tests__/mockData';
@@ -27,7 +27,7 @@ test('component/MyPage', (t) => {
     updatePathStatus: noop,
   };
 
-  const component = shallow(<MyPage {...requiredProps} learningPaths={translatedLearningPaths} />,
+  const component = shallow(<MyPage {...requiredProps} learningPaths={translatedLearningPaths} copyPath={noop} localFetchMyLearningPaths={noop} />,
       { context: { lang: 'nb' } });
 
   const links = component.find('.tile_bd').find(Link);

@@ -9,8 +9,8 @@
 import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Link } from 'react-router';
-
+import { Link } from 'react-router-dom';
+import queryString from 'query-string';
 import LinkPager from '../pager/LinkPager';
 import { getRange, stepNumbers } from '../pager/PagerUtil';
 
@@ -75,15 +75,15 @@ function pagerTest({ setup, expected }) {
           break;
         case 'back':
           t.ok(step.is('Link.search-stepper_step--back'), 'Back link');
-          t.equal(step.props().to.query.page, prev, `Back link links to page ${prev}`);
+          t.equal(parseInt(queryString.parse(step.props().to.search).page, 10), prev, `Back link links to page ${prev}`);
           break;
         case 'forward':
           t.ok(step.is('Link.search-stepper_step--forward'), 'Forward link');
-          t.equal(step.props().to.query.page, next, `Forward link links to page ${next}`);
+          t.equal(parseInt(queryString.parse(step.props().to.search).page, 10), next, `Forward link links to page ${next}`);
           break;
         default:
           t.ok(step.is(Link), `stepper ${n} is Link`);
-          t.equal(step.props().to.query.page, value, `Stepper ${n} links to page ${value}`);
+          t.equal(parseInt(queryString.parse(step.props().to.search).page, 10), value, `Stepper ${n} links to page ${value}`);
           t.equal(step.props().children, value, `Stepper ${n} has text ${value}`);
       }
     });

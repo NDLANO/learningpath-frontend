@@ -27,10 +27,13 @@ import { getI18nLearningPath } from '../../learningPathSelectors';
 class EditLearningPathStep extends Component {
 
   componentWillMount() {
-    const { fetchLearningPathLicenses, localFetchLearningPathStep, params: { pathId, stepId } } = this.props;
+    const { authenticated, localIfAuthenticated, localCreateEmptyLearningPathStep, fetchLearningPathLicenses, localFetchLearningPathStep, match: { params: { pathId, stepId } } } = this.props;
     fetchLearningPathLicenses('4.0');
 
-    if (stepId) {
+
+    if (localIfAuthenticated && localCreateEmptyLearningPathStep) {
+      localIfAuthenticated(authenticated, localCreateEmptyLearningPathStep);
+    } else if (stepId) {
       localFetchLearningPathStep(pathId, stepId, true);
     }
   }
@@ -68,6 +71,10 @@ class EditLearningPathStep extends Component {
       return saveLearningPathStep(learningPath.id, toSave);
     };
 
+    if (this.props.match.path === '/learningpaths/:pathId/step/new' && step.id) {
+      return null;
+    }
+
     return (
       <div className="two-column_content--wide learning-path-step two-column_content--white-bg">
         <LearningPathStepForm
@@ -85,14 +92,20 @@ class EditLearningPathStep extends Component {
 EditLearningPathStep.propTypes = {
   step: PropTypes.object.isRequired,
   saveLearningPathStep: PropTypes.func.isRequired,
-  params: PropTypes.shape({
-    pathId: PropTypes.string.isRequired,
-    stepId: PropTypes.string,
+  match: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+    params: PropTypes.shape({
+      pathId: PropTypes.string.isRequired,
+      stepId: PropTypes.string,
+    }).isRequired,
   }).isRequired,
   learningPath: PropTypes.object,
   fetchLearningPathLicenses: PropTypes.func.isRequired,
   localFetchLearningPathStep: PropTypes.func.isRequired,
   licenses: PropTypes.array.isRequired,
+  localIfAuthenticated: PropTypes.func,
+  localCreateEmptyLearningPathStep: PropTypes.func,
+  authenticated: PropTypes.bool.isRequired,
 };
 
 EditLearningPathStep.contextTypes = {

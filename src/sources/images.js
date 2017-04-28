@@ -8,7 +8,7 @@
 
 import 'isomorphic-fetch';
 import queryString from 'query-string';
-import { formatPattern } from 'react-router/lib/PatternUtils';
+import formatUrl from '../util/formatUrlUtil';
 
 import { resolveJsonOrRejectWithError, apiResourceUrl, authorizationHeader } from './helpers';
 
@@ -20,7 +20,7 @@ const fetchImages = (query = { 'page-size': 16, page: 1 }, token) => {
   return fetch(url, { headers: { Authorization: authorizationHeader(token) } }).then(resolveJsonOrRejectWithError);
 };
 const fetchImage = (imageId, token) => {
-  const url = apiResourceUrl(formatPattern('/image-api/v1/images/:imageId', { imageId }));
+  const url = apiResourceUrl(formatUrl('/image-api/v1/images/:imageId', { imageId }));
   return fetch(url, { headers: { Authorization: authorizationHeader(token) } }).then(resolveJsonOrRejectWithError);
 };
 const fetchImageWithMetaUrl = (url, token) => fetch(url, { headers: { Authorization: authorizationHeader(token) } }).then(resolveJsonOrRejectWithError);

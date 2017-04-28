@@ -6,21 +6,32 @@
  *
  */
 
-import React, { Component, cloneElement } from 'react';
+
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import defined from 'defined';
+import { Switch, Route, withRouter } from 'react-router-dom';
+import { routerActions } from 'react-router-redux';
 import classNames from 'classnames';
 import LearningPathGeneralInfo from './sidebar/LearningPathGeneralInfo';
 import LearningPathToC from './sidebar/LearningPathToC';
 import Lightbox from '../common/Lightbox';
+import PrivateRoute from '../main/PrivateRoute';
 import CopyLearningPath from '../learningPath/new/CopyLearningPath';
-
 import Masthead from '../common/Masthead';
 import Icon from '../common/Icon';
 import SortLearningStepsButton from './sidebar/SortLearningStepsButton';
+import LearningPathSummary from './sidebar/LearningPathSummary';
 import { fetchLearningPath, copyLearningPath } from './learningPathActions';
 import { getI18nLearningPath } from './learningPathSelectors';
+import LearningPathStep from './step/LearningPathStep';
+import CreateLearningPathStep from './step/create/CreateLearningPathStep';
+import EditLearningPathStep from './step/edit/EditLearningPathStep';
+import EditLearningPath from './edit/EditLearningPath';
+import SortLearningPathSteps from './step/sort/SortLearningPathSteps';
+import LearningPathToCButtons from './sidebar/LearningPathToCButtons';
+import AddLearningPathStepButton from './sidebar/AddLearningPathStepButton';
+
 
 export class LearningPath extends Component {
   constructor(props) {
@@ -31,9 +42,16 @@ export class LearningPath extends Component {
     this.onCopyLearningPathClick = this.onCopyLearningPathClick.bind(this);
   }
   componentDidMount() {
-    const { localFetchLearingPath, params: { pathId } } = this.props;
-    if (window.location.pathname === `/learningpaths/${pathId}/edit`) {
+    const { pushRoute, localFetchLearingPath, match: { url, params: { pathId } } } = this.props;
+    if (url === `/learningpaths/${pathId}/edit`) {
       localFetchLearingPath(pathId, true);
+    } else if (url === `/learningpaths/${pathId}/first-step`) {
+      localFetchLearingPath(pathId, false).then(() => {
+        const stepId = this.props.learningPath.learningsteps[0].id;
+        pushRoute({ pathname: `/learningpaths/${pathId}/step/${stepId}` });
+      }).catch(() => {
+        pushRoute({ pathname: `/learningpaths/${pathId}` });
+      });
     } else {
       localFetchLearingPath(pathId, false);
     }
@@ -44,12 +62,17 @@ export class LearningPath extends Component {
     });
   }
   render() {
-    const { learningPath, isTableOfContentOpen, copyPath, params: { stepId }, sortLearningSteps, main } = this.props;
+    const { learningPath, isTableOfContentOpen, copyPath, match } = this.props;
     const { lang } = this.context;
-    const changeStatusButton = defined(this.props.changeStatusButton, null);
-    const addStepButton = defined(this.props.addStepButton, null);
-    const children = cloneElement(defined(main, this.props.children), { lang, learningPath });
-    const sortableTableOfContent = defined(sortLearningSteps, <LearningPathToC learningPath={learningPath} activeStepId={stepId} />);
+    const stepId = match.params.stepId;
+
+    const showButtonsUrls = ['/learningpaths/:pathId', '/learningpaths/:pathId/step/:stepId', '/learningpaths/:pathId/', '/learningpaths/:pathId/step/:stepId/'];
+
+    const changeStatusButton = showButtonsUrls.includes(match.path) && match.isExact ? <LearningPathToCButtons /> : null;
+    const addStepButton = showButtonsUrls.includes(match.path) && match.isExact ? <AddLearningPathStepButton /> : null;
+
+    const sortLearningSteps = match.url === `/learningpaths/${match.params.pathId}/step/sort`;
+    const sortableTableOfContent = sortLearningSteps ? <SortLearningPathSteps learningPath={learningPath} /> : <LearningPathToC learningPath={learningPath} activeStepId={stepId} />;
     const sortableTableOfContentButton = !sortLearningSteps ? <SortLearningStepsButton learningPath={learningPath} /> : null;
 
     const collapseClassName = () => classNames({
@@ -65,7 +88,7 @@ export class LearningPath extends Component {
     };
     return (
       <div className="wrapper">
-        <Masthead changeStatusButton={changeStatusButton} sortLearningSteps={sortLearningSteps} sortableTableOfContentButton={sortableTableOfContentButton}>
+        <Masthead changeStatusButton={changeStatusButton} sortableTableOfContentButton={sortableTableOfContentButton}>
           <div className="masthead_button masthead_button--left">
             <Icon.MoreVert />
             <span>Læringssti</span>
@@ -88,7 +111,14 @@ export class LearningPath extends Component {
             </div>
           </aside>
           <main className="two-column_col">
-            {children}
+            <Switch>
+              <PrivateRoute path={'/learningpaths/:pathId/edit'} component={EditLearningPath} />
+              <PrivateRoute path={'/learningpaths/:pathId/step/:stepId/edit'} component={EditLearningPathStep} />
+              <PrivateRoute path={'/learningpaths/:pathId/step/new'} component={CreateLearningPathStep} />
+              <PrivateRoute path={'/learningpaths/:pathId/step/sort'} component={LearningPathSummary} />
+              <Route path={'/learningpaths/:pathId/step/:stepId'} component={LearningPathStep} />
+              <Route path={'/learningpaths/:pathId'} component={LearningPathSummary} />
+            </Switch>
           </main>
         </div>
       </div>
@@ -98,17 +128,16 @@ export class LearningPath extends Component {
 
 LearningPath.propTypes = {
   learningPath: PropTypes.object.isRequired,
-  changeStatusButton: PropTypes.object,
-  addStepButton: PropTypes.object,
-  main: PropTypes.object,
-  params: PropTypes.shape({
-    pathId: PropTypes.string.isRequired,
-    stepId: PropTypes.string,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      pathId: PropTypes.string.isRequired,
+      stepId: PropTypes.string,
+    }).isRequired,
   }).isRequired,
-  sortLearningSteps: PropTypes.object,
   isTableOfContentOpen: PropTypes.bool.isRequired,
   localFetchLearingPath: PropTypes.func.isRequired,
   copyPath: PropTypes.func.isRequired,
+  pushRoute: PropTypes.func.isRequired,
 };
 
 LearningPath.contextTypes = {
@@ -117,7 +146,6 @@ LearningPath.contextTypes = {
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
   learningPath: getI18nLearningPath(state),
-  isPreview: ownProps.route.isPreview,
   sortLearningSteps: ownProps.sortLearningSteps,
   isTableOfContentOpen: state.sidebar.isLeftSideBarOpen,
 });
@@ -125,6 +153,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
 const mapDispatchToProps = {
   copyPath: copyLearningPath,
   localFetchLearingPath: fetchLearningPath,
+  pushRoute: routerActions.push,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LearningPath);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LearningPath));

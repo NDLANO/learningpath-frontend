@@ -6,9 +6,10 @@
  *
  */
 
+import queryString from 'query-string';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import Icon from '../../common/Icon';
 import { stepNumbers } from './PagerUtil';
@@ -20,7 +21,7 @@ export default function LinkPager(props) {
   const queryToPage = pageNumber => Object.assign({}, query, { page: pageNumber });
   const linkToPage = pageNumber => ({
     pathname: '/learningpaths',
-    query: queryToPage(pageNumber),
+    search: `?${queryString.stringify(queryToPage(pageNumber))}`,
   });
 
   const pageLinks = steps.map((n) => {

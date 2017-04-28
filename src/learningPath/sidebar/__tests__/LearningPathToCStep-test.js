@@ -10,7 +10,7 @@ import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
 import noop from 'lodash/noop';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { translatedLearningPath, translatedLearningPathNotEditable } from '../../../common/__tests__/translatedMockData';
 import LearningPathToCStep from '../LearningPathToCStep';
 
