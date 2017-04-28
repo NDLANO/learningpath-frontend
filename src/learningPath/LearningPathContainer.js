@@ -6,7 +6,8 @@
  *
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
 import LearningPathSearch from './search/LearningPathSearch';
 import PrivateRoute from '../main/PrivateRoute';
