@@ -31,7 +31,7 @@ import EditLearningPath from './edit/EditLearningPath';
 import SortLearningPathSteps from './step/sort/SortLearningPathSteps';
 import LearningPathToCButtons from './sidebar/LearningPathToCButtons';
 import AddLearningPathStepButton from './sidebar/AddLearningPathStepButton';
-
+import PinterestLightboxButton from '../pinterest/PinterestLightboxButton';
 
 export class LearningPath extends Component {
   constructor(props) {
@@ -70,7 +70,7 @@ export class LearningPath extends Component {
 
     const changeStatusButton = showButtonsUrls.includes(match.path) && match.isExact ? <LearningPathToCButtons /> : null;
     const addStepButton = showButtonsUrls.includes(match.path) && match.isExact ? <AddLearningPathStepButton /> : null;
-
+    const pinterestButton = match.path === '/learningpaths/:pathId/step/:stepId' && match.isExact ? <PinterestLightboxButton /> : null;
     const sortLearningSteps = match.url === `/learningpaths/${match.params.pathId}/step/sort`;
     const sortableTableOfContent = sortLearningSteps ? <SortLearningPathSteps learningPath={learningPath} /> : <LearningPathToC learningPath={learningPath} activeStepId={stepId} />;
     const sortableTableOfContentButton = !sortLearningSteps ? <SortLearningStepsButton learningPath={learningPath} /> : null;
@@ -101,6 +101,7 @@ export class LearningPath extends Component {
           <aside className={collapseClassName()}>
             <LearningPathGeneralInfo
               {...this.props}
+              pinterestButton={pinterestButton}
               onCopyLearningPathClick={this.onCopyLearningPathClick}
               addStepButton={addStepButton}
               changeStatusButton={changeStatusButton}
