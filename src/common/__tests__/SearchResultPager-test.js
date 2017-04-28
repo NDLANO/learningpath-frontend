@@ -8,8 +8,8 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Link } from 'react-router';
-
+import { Link } from 'react-router-dom';
+import queryString from 'query-string';
 import LinkPager from '../pager/LinkPager';
 import { getRange, stepNumbers } from '../pager/PagerUtil';
 
@@ -48,7 +48,7 @@ test('component/PagerUtil.stepNumbers', () => {
 });
 
 
-const pagerTest = ({ setup, expected }) => {
+function pagerTest({ setup, expected }) {
   test(`component/LinkPager page ${setup.page}/${setup.lastPage}`, () => {
     const steps = shallow(<LinkPager query={{}} {...setup} />)
       .find('.search-stepper_step');
@@ -70,20 +70,20 @@ const pagerTest = ({ setup, expected }) => {
           break;
         case 'back':
           expect(step.is('Link.search-stepper_step--back')).toBeTruthy();
-          expect(step.props().to.query.page).toBe(prev);
+          expect(parseInt(queryString.parse(step.props().to.search).page, 10)).toBe(prev);
           break;
         case 'forward':
           expect(step.is('Link.search-stepper_step--forward')).toBeTruthy();
-          expect(step.props().to.query.page).toBe(next);
+          expect(parseInt(queryString.parse(step.props().to.search).page, 10)).toBe(next);
           break;
         default:
           expect(step.is(Link)).toBeTruthy();
-          expect(step.props().to.query.page).toBe(value);
+          expect(parseInt(queryString.parse(step.props().to.search).page, 10)).toBe(value);
           expect(step.props().children).toBe(value);
       }
     });
   });
-};
+}
 
 pagerTest({
   setup: { page: 1, lastPage: 1 },

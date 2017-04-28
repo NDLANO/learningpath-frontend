@@ -69,7 +69,7 @@ export function fetchLearningPathStep(pathId, stepId, isEdit = false) {
       })
       .then((step) => {
         if (step.embedUrl) {
-          const oembedContent = oembedContentI18N(step, locale, true);
+          const oembedContent = oembedContentI18N(step, locale, false);
           if (oembedContent && oembedContent.url) {
             dispatch(fetchOembed({ url: oembedContent.url, embedType: oembedContent.embedType, maxwidth: Math.ceil(window.innerWidth) }));
           }

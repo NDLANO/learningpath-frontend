@@ -8,31 +8,17 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-
+import noop from 'lodash/noop';
 import { translatedLearningPath } from '../../common/__tests__/translatedMockData';
 import { LearningPath } from '../LearningPath';
+import SortLearningPathSteps from '../step/sort/SortLearningPathSteps';
 
-const Foo = () => <div />;
-const Bar = () => <div />;
 
 test('component/LearningPath', () => {
   expect(shallow(
-    <LearningPath learningPath={translatedLearningPath} params={{}} location={{ pathname: '' }}>
-      <Foo />
-    </LearningPath>, { context: { lang: 'nb' } }
-  ).find(Foo).length).toBe(2); // For some reason cloning an element results in two rendered components
-
-  expect(shallow(
     <LearningPath
-      learningPath={translatedLearningPath} params={{}} location={{ pathname: '' }}
-      main={React.createElement(Foo)}
+      learningPath={translatedLearningPath} match={{ url: `/learningpaths/${translatedLearningPath.id}/step/sort`, params: { pathId: translatedLearningPath.id.toString() } }} location={{ pathname: '' }}
+      isTableOfContentOpen={false} localFetchLearningPath={noop} copyPath={noop} pushRoute={noop}
     />, { context: { lang: 'nb' } }
-  ).find(Foo).length).toBe(1);
-
-  expect(shallow(
-    <LearningPath
-      learningPath={translatedLearningPath} params={{}} location={{ pathname: '' }} main={React.createElement(Bar)}
-      sortLearningSteps={React.createElement(Foo)}
-    />, { context: { lang: 'nb' } }
-  ).find(Foo).length).toBe(1);
+  ).find(SortLearningPathSteps).length).toBe(1);
 });

@@ -8,7 +8,7 @@
 
 
 import React from 'react';
-import { Route } from 'react-router';
+import { Route } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 
 import * as actions from './learningPathStepActions';

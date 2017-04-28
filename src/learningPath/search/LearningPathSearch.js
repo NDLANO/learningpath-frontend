@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import defined from 'defined';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import queryString from 'query-string';
 import { routerActions } from 'react-router-redux';
 import upperFirst from 'lodash/upperFirst';
 import LinkPager from '../../common/pager/LinkPager';
@@ -22,61 +23,76 @@ import { Wrapper, OneColumn, Footer } from '../../common/Layout';
 import {
   getLearningPathSearchResult,
   getLearningPathSearchTotalCount,
-} from './learningPathSearchSelectors';
+ } from './learningPathSearchSelectors';
 
 
-const LearningPathSearch = (props) => {
-  const { learningPaths, lastPage, location: { pathname, query }, pushRoute } = props;
-  const page = query.page ? parseInt(query.page, 10) : 1;
-  const navigateTo = (q) => {
-    pushRoute({ pathname, query: q });
-  };
+class LearningPathSearch extends React.Component {
 
-  const submitSearchQuery = (q, sort) => navigateTo(Object.assign({}, query, { query: q, page: 1, tag: '', sort }));
+  componentWillMount() {
+    this.props.searchLearningPaths(queryString.parse(this.props.location.search));
+  }
+  componentWillReceiveProps(nextProps) {
+    if (this.props.location.search !== nextProps.location.search) {
+      this.props.searchLearningPaths(queryString.parse(nextProps.location.search));
+    }
+  }
 
-  const changeSortOrder = sort => navigateTo(Object.assign({}, query, { sort }));
+  render() {
+    const { learningPaths, lastPage, location: { pathname, search }, pushRoute } = this.props;
+    const query = queryString.parse(search);
+    const page = query.page ? parseInt(query.page, 10) : 1;
+    const navigateTo = (q) => {
+      pushRoute({ pathname, search: `?${queryString.stringify(q)}` });
+    };
 
-  const changeSearchTag = tag => navigateTo(Object.assign({}, query, { tag, page: 1 }));
+    const submitSearchQuery = (q, sort) => navigateTo(Object.assign({}, query, { query: q, page: 1, tag: '', sort }));
 
-  const acitveTagTitle = query.tag ? <h1 className="search-results_active-tag">{upperFirst(query.tag)}</h1> : '';
+    const changeSortOrder = sort => navigateTo(Object.assign({}, query, { sort }));
 
-  return (
-    <Wrapper>
-      <OneColumn className={'one-colum--white-bg'}>
-        <Masthead />
-        <div className="page-header">
-          <SearchForm
-            {...query}
-            onSortOrderChange={changeSortOrder}
-            onSearchQuerySubmit={submitSearchQuery}
-          />
-        </div>
-        <div className="search-results">
-          {acitveTagTitle}
-          {learningPaths.map(path =>
+    const changeSearchTag = tag => navigateTo(Object.assign({}, query, { tag, page: 1 }));
+
+    const acitveTagTitle = query.tag ? <h1 className="search-results_active-tag">{upperFirst(query.tag)}</h1> : '';
+
+    return (
+      <Wrapper>
+        <OneColumn className={'one-colum--white-bg'}>
+          <Masthead />
+          <div className="page-header">
+            <SearchForm
+              {...query}
+              onSortOrderChange={changeSortOrder}
+              onSearchQuerySubmit={submitSearchQuery}
+            />
+          </div>
+          <div className="search-results">
+            {acitveTagTitle}
+            {learningPaths.map(path =>
             (<SearchResult key={path.id} path={path} pushRoute={pushRoute} onTagSearchQuery={changeSearchTag} query={query} />)
           )}
-          <LinkPager page={page} lastPage={lastPage} query={query} pathName="/learningpaths" />
-        </div>
-      </OneColumn>
-      <Footer />
-    </Wrapper>
-  );
-};
+            <LinkPager page={page} lastPage={lastPage} query={query} pathName="/learningpaths" />
+          </div>
+        </OneColumn>
+        <Footer />
+      </Wrapper>
+    );
+  }
+}
 
 LearningPathSearch.propTypes = {
   searchLearningPaths: PropTypes.func.isRequired,
   learningPaths: PropTypes.arrayOf(PropTypes.object).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
-    query: PropTypes.object.isRequired,
+    search: PropTypes.string.isRequired,
   }),
   lastPage: PropTypes.number.isRequired,
   pushRoute: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state, props) => {
-  const pageSize = defined(props.location.query.pageSize, '10');
+  const query = queryString.parse(props.location.search);
+  const pageSize = defined(query.pageSize, '10');
   const lastPage = Math.ceil(getLearningPathSearchTotalCount(state) / parseInt(pageSize, 10));
   return Object.assign({}, {
     lastPage,

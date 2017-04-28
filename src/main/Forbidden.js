@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import polyglot from '../i18n';
 
 export default function Forbidden() {

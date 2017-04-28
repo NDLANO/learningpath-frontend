@@ -9,24 +9,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, useRouterHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
-import { createHistory } from 'history';
+import { Router } from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory';
 import ErrorReporter from 'ndla-error-reporter';
 import { configureLocale, isValidLocale } from './locale/configureLocale';
 import configureStore from './configureStore';
-import configureRoutes from './main/routes';
 import { accessToken } from './sources/helpers';
+import App from './main/App';
 
-
-function configureBrowserHistory(path) {
+function generateBasename(path) {
   if (isValidLocale(path)) {
-    const basename = `/${path}/`;
-    return useRouterHistory(createHistory)({
-      basename,
-    });
+    return `/${path}/`;
   }
-  return useRouterHistory(createHistory)();
+  return undefined;
 }
 
 const paths = window.location.pathname.split('/');
@@ -34,7 +29,9 @@ const path = paths.length > 2 ? paths[1] : '/';
 const locale = paths.length > 2 && isValidLocale(paths[1]) ? paths[1] : 'nb';
 
 configureLocale(locale);
-const browserHistory = configureBrowserHistory(path);
+const basename = generateBasename(path);
+
+const browserHistory = basename ? createHistory({ basename }) : createHistory();
 
 const store = configureStore({
   authenticated: false,
@@ -50,13 +47,11 @@ const store = configureStore({
 const { logglyApiKey, logEnvironment, componentName } = window.config;
 window.errorReporter = ErrorReporter.getInstance({ store, logglyApiKey, environment: logEnvironment, componentName });
 
-const history = syncHistoryWithStore(browserHistory, store);
-const routes = configureRoutes(store);
 
 ReactDOM.render(
   <Provider store={store} locale={locale}>
-    <Router history={history} onUpdate={() => window.scrollTo(0, 0)}>
-      {routes}
+    <Router history={browserHistory}>
+      <App />
     </Router>
   </Provider>,
   document.getElementById('app-container')

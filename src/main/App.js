@@ -9,11 +9,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
+import { Switch, Route, withRouter } from 'react-router-dom';
 import { getLocale } from '../locale/localeSelectors';
 import { getMessages } from '../messages/messagesSelectors';
 import Alerts from '../messages/Alerts';
 import { checkAccessTokenOnEnter } from '../session/sessionActions';
+import ScrollToTop from './ScrollToTop';
+import Welcome from './Welcome';
+import PrivateRoute from './PrivateRoute';
+import NotFound from './NotFound';
+import Forbidden from './Forbidden';
+import MyPage from '../myPage/MyPage';
+import LTIEmbedded from '../ltiSearch/LTIEmbedded';
+import LoginProviders from '../session/LoginProviders';
+import LogoutSession from '../session/LogoutSession';
+import LearningPathContainer from '../learningPath/LearningPathContainer';
 
 export class App extends React.Component {
   getChildContext() {
@@ -26,12 +36,28 @@ export class App extends React.Component {
   }
 
   render() {
-    const { dispatch, children, messages } = this.props;
+    const { dispatch, messages } = this.props;
     return (
-      <div className="page-container">
-        {children}
-        <Alerts dispatch={dispatch} messages={messages} />
+      <div>
+        <div className="page-container">
+          <Switch>
+            <Route exact path="/" component={Welcome} />
+            <Route path="/login" component={LoginProviders} />
+            <Route path="/logout" component={LogoutSession} />
+
+            <PrivateRoute path="/minside" component={MyPage} />
+            <PrivateRoute path="/lti/:pathId/step/:stepId" component={LTIEmbedded} />
+            <PrivateRoute path="/lti/:pathId/step/new" component={LTIEmbedded} />
+            <Route path="/learningpaths" component={LearningPathContainer} />
+            <Route path="/forbidden" component={Forbidden} />
+            <Route path="/notfound" component={NotFound} />
+            <Route path="*" component={NotFound} />
+          </Switch>
+          <Alerts dispatch={dispatch} messages={messages} />
+        </div>
+        <ScrollToTop />
       </div>
+
     );
   }
 }
@@ -51,4 +77,4 @@ const mapStateToProps = state => ({
   messages: getMessages(state),
 });
 
-export default connect(mapStateToProps)(App);
+export default withRouter(connect(mapStateToProps)(App));

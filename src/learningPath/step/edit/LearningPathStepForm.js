@@ -10,7 +10,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import defined from 'defined';
 import { reduxForm, Fields, change } from 'redux-form';
 import { createValidator, required, oneOfIsRequired, licenseExistsIfDescriptionExists } from '../../../util/validation';

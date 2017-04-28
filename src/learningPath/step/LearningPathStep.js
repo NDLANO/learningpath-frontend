@@ -27,14 +27,14 @@ class LearningPathStep extends React.Component {
   }
 
   componentWillMount() {
-    const { localFetchLearningPathStep, params: { pathId, stepId } } = this.props;
+    const { localFetchLearningPathStep, match: { params: { pathId, stepId } } } = this.props;
     localFetchLearningPathStep(pathId, stepId).then(() => this.setState({ isLoading: false }));
   }
 
   componentWillUpdate(nextProps) {
-    const { localFetchLearningPathStep, params: { pathId, stepId } } = nextProps;
+    const { localFetchLearningPathStep, match: { params: { pathId, stepId } } } = nextProps;
 
-    if (this.props.params.stepId !== stepId || this.props.params.pathId !== pathId) {
+    if (this.props.match.params.stepId !== stepId || this.props.match.params.pathId !== pathId) {
       this.setState({ isLoading: true });
       localFetchLearningPathStep(pathId, stepId).then(() => this.setState({ isLoading: false }));
     }
@@ -44,7 +44,6 @@ class LearningPathStep extends React.Component {
     const { learningPathStep } = this.props;
     const { lang } = this.context;
     const oembedContent = learningPathStep.oembed;
-
     return (
       <div className="two-column_content--wide">
         <LearningPathStepPrevNext currentStepId={learningPathStep.id} lang={lang}>
@@ -62,9 +61,11 @@ LearningPathStep.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   learningPathStep: PropTypes.object.isRequired,
   localFetchLearningPathStep: PropTypes.func.isRequired,
-  params: PropTypes.shape({
-    pathId: PropTypes.string.isRequired,
-    stepId: PropTypes.string,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      pathId: PropTypes.string.isRequired,
+      stepId: PropTypes.string,
+    }).isRequired,
   }).isRequired,
 };
 

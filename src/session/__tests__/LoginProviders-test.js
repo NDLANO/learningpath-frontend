@@ -12,7 +12,7 @@ import LoginProviders from '../LoginProviders';
 
 
 test('component/LoginProviders', () => {
-  const component = shallow(<LoginProviders />);
+  const component = shallow(<LoginProviders match={{ url: '' }} />);
 
   const buttons = component.find('.cta-link');
 
@@ -22,7 +22,7 @@ test('component/LoginProviders', () => {
 });
 
 test('component/LoginProviders with message', () => {
-  const component = shallow(<LoginProviders message="A message to you, rudy" />);
+  const component = shallow(<LoginProviders message="A message to you, rudy" match={{ url: '' }} />);
 
   expect(component.findWhere(n => n.text() === 'A message to you, rudy').length).toBeTruthy();
 });
