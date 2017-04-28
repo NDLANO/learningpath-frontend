@@ -37,7 +37,7 @@ class LearningPathSearch extends React.Component {
   }
 
   render() {
-    const { learningPaths, match, lastPage, location: { pathname, search }, pushRoute } = this.props;
+    const { learningPaths, lastPage, location: { pathname, search }, pushRoute } = this.props;
     const query = parseQueryString(search);
     const page = query.page ? parseInt(query.page, 10) : 1;
     const navigateTo = (q) => {

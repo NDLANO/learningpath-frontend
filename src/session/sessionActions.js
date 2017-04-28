@@ -50,7 +50,6 @@ export function loginSocialMedia(type) {
 export function logout() {
   return dispatch => fetchNewToken()
     .then((token) => {
-      console.log('halla!');
       dispatch(setAccessToken(token.access_token));
       dispatch(setAuthenticated(false));
       dispatch(logoutAction());

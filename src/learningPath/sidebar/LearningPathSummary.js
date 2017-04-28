@@ -14,7 +14,6 @@ const LearningPathSummary = ({ learningPath }) => {
   if (!learningPath) {
     return null;
   }
-  console.log(learningPath);
   return (
     <div className="two-column_content">
       <div className="learning-path">

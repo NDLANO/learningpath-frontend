@@ -8,7 +8,6 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'url-search-params-polyfill';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
@@ -17,7 +16,7 @@ import { configureLocale, isValidLocale } from './locale/configureLocale';
 import configureStore from './configureStore';
 import { accessToken } from './sources/helpers';
 import App from './main/App';
-import configureHistory from './configureHistory';
+
 function generateBasename(path) {
   if (isValidLocale(path)) {
     return `/${path}/`;
@@ -32,7 +31,7 @@ const locale = paths.length > 2 && isValidLocale(paths[1]) ? paths[1] : 'nb';
 configureLocale(locale);
 const basename = generateBasename(path);
 
-const browserHistory = basename ? configureHistory(createHistory({ basename })) : configureHistory(createHistory());
+const browserHistory = basename ? createHistory({ basename }) : createHistory();
 
 const store = configureStore({
   authenticated: false,

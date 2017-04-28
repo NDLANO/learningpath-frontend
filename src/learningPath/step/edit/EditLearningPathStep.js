@@ -44,7 +44,6 @@ class EditLearningPathStep extends Component {
       learningPath,
       licenses,
     } = this.props;
-    console.log(step);
     if (!learningPath || !learningPath.id) {
       return null;
     }

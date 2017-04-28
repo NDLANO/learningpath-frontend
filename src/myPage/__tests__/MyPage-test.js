@@ -27,7 +27,7 @@ test('component/MyPage', (t) => {
     updatePathStatus: noop,
   };
 
-  const component = shallow(<MyPage {...requiredProps} learningPaths={translatedLearningPaths} />,
+  const component = shallow(<MyPage {...requiredProps} learningPaths={translatedLearningPaths} copyPath={noop} localFetchMyLearningPaths={noop} />,
       { context: { lang: 'nb' } });
 
   const links = component.find('.tile_bd').find(Link);
