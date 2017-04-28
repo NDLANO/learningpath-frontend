@@ -101,8 +101,7 @@
     "svg4everybody": "2.1.4",
     "tracekit": "^0.4.4",
     "svg4everybody": "^2.1.8",
-    "tracekit": "^0.4.4",
-    "url-search-params-polyfill": "^1.2.0"
+    "tracekit": "^0.4.4"
   },
   "repository": {
     "type": "git",

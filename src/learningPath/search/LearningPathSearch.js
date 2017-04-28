@@ -24,23 +24,22 @@ import {
   getLearningPathSearchResult,
   getLearningPathSearchTotalCount,
  } from './learningPathSearchSelectors';
-import parseQueryString from '../../util/parseQueryString';
 
 
 class LearningPathSearch extends React.Component {
 
   componentWillMount() {
-    this.props.searchLearningPaths(parseQueryString(this.props.location.search));
+    this.props.searchLearningPaths(queryString.parse(this.props.location.search));
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.location.search !== nextProps.location.search) {
-      this.props.searchLearningPaths(parseQueryString(nextProps.location.search));
+      this.props.searchLearningPaths(queryString.parse(nextProps.location.search));
     }
   }
 
   render() {
     const { learningPaths, lastPage, location: { pathname, search }, pushRoute } = this.props;
-    const query = parseQueryString(search);
+    const query = queryString.parse(search);
     const page = query.page ? parseInt(query.page, 10) : 1;
     const navigateTo = (q) => {
       pushRoute({ pathname, search: `?${queryString.stringify(q)}` });
@@ -92,7 +91,7 @@ LearningPathSearch.propTypes = {
 };
 
 const mapStateToProps = (state, props) => {
-  const query = parseQueryString(props.location.search);
+  const query = queryString.parse(props.location.search);
   const pageSize = defined(query.pageSize, '10');
   const lastPage = Math.ceil(getLearningPathSearchTotalCount(state) / parseInt(pageSize, 10));
   return Object.assign({}, {
