@@ -15,13 +15,18 @@ import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import requestProxy from 'express-request-proxy';
+import { Provider } from 'react-redux';
+import { StaticRouter } from 'react-router';
+import { matchPath } from 'react-router-dom';
+import App from '../src/main/App';
 
 import config from '../src/config';
 import webpackConfig from '../webpack.config.dev';
-import { getHtmlLang } from '../src/locale/configureLocale';
+import { getHtmlLang, isValidLocale } from '../src/locale/configureLocale';
 import Html from './Html';
 import { getToken, isTokenExpired, getExpireTime } from './auth';
 import Auth0SilentCallback from './Auth0SilentCallback';
+import configureStore from '../src/configureStore';
 
 const app = express();
 
@@ -51,7 +56,7 @@ app.use((req, res, next) => {
 });
 
 
-const findIEClass = (userAgentString) => {
+const getConditionalClassnames = (userAgentString) => {
   if (userAgentString.indexOf('MSIE') >= 0) {
     return 'ie lt-ie11';
   } else if (userAgentString.indexOf('Trident/7.0; rv:11.0') >= 0) {
@@ -59,6 +64,9 @@ const findIEClass = (userAgentString) => {
   }
   return '';
 };
+
+const renderHtmlString = (locale, userAgentString, state = {}, component = undefined) =>
+  renderToString(<Html lang={locale} state={state} component={component} className={getConditionalClassnames(userAgentString)} />);
 
 app.get('/pinterest-proxy/*', requestProxy({
   url: `${config.pinterestApiUrl}*`,
@@ -82,16 +90,66 @@ app.get('/get_token', (req, res) => {
   }).catch(err => res.status(500).send(err.message));
 });
 
-app.get('*', (req, res) => {
-  function renderOnClient() {
-    getToken().then((token) => {
-      const paths = req.url.split('/');
-      const lang = getHtmlLang(defined(paths[1], ''));
-      res.send('<!doctype html>\n' + renderToString(<Html lang={lang} className={findIEClass(req.headers['user-agent'])} token={token}/>)); // eslint-disable-line
-    }).catch(err => res.status(500).send(err.message));
+function prefetchData(url, dispatch) {
+  const promises =
+        routes
+            .map(route => ({ route, match: matchPath(url, route) }))
+            .filter(({ route, match }) => match && route.component.prefetch)
+            .map(({ route, match }) => dispatch(route.component.prefetch(match)));
+
+  return Promise.all(promises);
+}
+
+function handleResponse(req, res, token) {
+  const paths = req.url.split('/');
+  const locale = getHtmlLang(paths[1]);
+  const userAgentString = req.headers['user-agent'];
+
+  if (global.__DISABLE_SSR__) { // eslint-disable-line no-underscore-dangle
+    const htmlString = renderHtmlString(locale, userAgentString, { accessToken: token.access_token, locale });
+    res.send(`<!doctype html>\n${htmlString}`);
+    return;
+  }
+  console.log('SSR ENABLED');
+  const store = configureStore({ locale, accessToken: token.access_token });
+
+  const basename = isValidLocale(paths[1]) ? `${paths[1]}` : '';
+
+  const context = {};
+  const component =
+    (<Provider store={store} locale={locale}>
+      <StaticRouter
+        basename={basename}
+        location={req.url}
+        context={context}
+      >
+        <App />
+      </StaticRouter>
+    </Provider>);
+
+  console.log(component.props.children);
+  // Trigger sagas for components by rendering them
+  // https://github.com/yelouafi/redux-saga/issues/255#issuecomment-210275959
+  // renderToString(component);
+  console.log(matchPath(req.url));
+  if (context.url) {
+    res.writeHead(301, {
+      Location: context.url,
+    });
+    res.end();
+  } else {
+    const htmlString = renderHtmlString(locale, userAgentString, { accessToken: token.access_token, locale });
+    res.send(`<!doctype html>\n${htmlString}`);
   }
 
-  renderOnClient();
+  // Dispatch a close event so sagas stop listening after they have resolved
+}
+
+
+app.get('*', (req, res) => {
+  getToken().then((token) => {
+    handleResponse(req, res, token);
+  }).catch(err => res.status(500).send(err.message));
 });
 
 module.exports = app;

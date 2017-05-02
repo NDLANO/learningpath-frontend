@@ -10,7 +10,8 @@
     "copy-svg-polyfill": "mkdir -p htdocs/assets && cp node_modules/svg4everybody/dist/svg4everybody.min.js htdocs/assets/",
     "prebuild": "yarn run clean && yarn run copy-svg-polyfill",
     "build": "NODE_ENV=production webpack --config ./webpack.config.prod.js --bail",
-    "start": "NODE_ENV=development nodemon --watch server server/server.js",
+    "start": "NODE_ENV=development DISABLE_SSR=true nodemon --watch server server/server.js",
+    "start-with-ssr": "NODE_ENV=development nodemon --watch server server/server.js",
     "start-prod": "NODE_ENV=production node server/server.js",
     "lint": "eslint src server"
   },

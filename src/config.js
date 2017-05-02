@@ -42,6 +42,7 @@ module.exports = Object.assign({
   ltiActivated,
   auth0ClientID: process.env.AUTH0_CLIENT_ID,
   auth0Domain: process.env.AUTH0_DOMAIN,
+  disableSSR: process.env.DISABLE_SSR || false,
   app: {
     title: 'NDLA Læringsstier',
     head: {

@@ -28,8 +28,12 @@ import {
 
 class LearningPathSearch extends React.Component {
 
+  static fetchData(search, query) {
+    search(query);
+  }
+
   componentWillMount() {
-    this.props.searchLearningPaths(queryString.parse(this.props.location.search));
+    LearningPathSearch.fetchData(this.props.searchLearningPaths, queryString.parse(this.props.location.search));
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.location.search !== nextProps.location.search) {
