@@ -51,7 +51,7 @@ class EditLearningPathStep extends Component {
     }
 
     const handleSubmit = (values) => {
-      const descriptionHTML = convertToHTML({
+      const descriptionHTML = !values.description || !values.description.hasText() ? undefined : convertToHTML({
         styleToHTML: (style) => {
           if (style === 'UNDERLINE') {
             return <u />;
@@ -61,12 +61,13 @@ class EditLearningPathStep extends Component {
       })(values.description);
 
       const emptyEmbedUrl = !step.embedUrl.url ? [] : [{ url: '', language, embedType: 'oembed' }];
+      const emptyDescription = !step.description ? [] : [{ description: '', language }];
 
       const toSave = Object.assign({}, step, {
         type: values.type,
         showTitle: values.showTitle,
         title: [{ title: values.title, language }],
-        description: [{ description: descriptionHTML, language }],
+        description: descriptionHTML ? [{ description: descriptionHTML, language }] : emptyDescription,
         embedUrl: values.url && values.url.url ? [{ url: values.url.url, language, embedType: values.url.embedType }] : emptyEmbedUrl,
         license: values.license && values.license.license ? values.license.license : '',
       });
