@@ -59,12 +59,15 @@ class EditLearningPathStep extends Component {
           return undefined;
         },
       })(values.description);
+
+      const emptyEmbedUrl = !step.embedUrl.url ? [] : [{ url: '', language, embedType: 'oembed' }];
+
       const toSave = Object.assign({}, step, {
         type: values.type,
         showTitle: values.showTitle,
         title: [{ title: values.title, language }],
         description: [{ description: descriptionHTML, language }],
-        embedUrl: values.url && values.url.url ? [{ url: values.url.url, language, embedType: values.url.embedType }] : [{ url: '', language, embedType: 'oembed' }],
+        embedUrl: values.url && values.url.url ? [{ url: values.url.url, language, embedType: values.url.embedType }] : emptyEmbedUrl,
         license: values.license && values.license.license ? values.license.license : '',
       });
 
