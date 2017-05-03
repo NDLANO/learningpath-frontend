@@ -127,8 +127,8 @@ const LearningPathStepFields = (props) => {
             {url.meta.touched && url.meta.error && <span className="error_message error_message--red">{url.meta.error}</span>}
             <PreviewOembed content={oembedPreview} />
           </div>
+          {(url.meta.touched || description.meta.touched) && url.meta.error && <span className="error_message error_message--red">{url.meta.error}</span>}
         </div>
-        {(url.meta.touched || description.meta.touched) && url.meta.error && <span className="error_message error_message--red">{url.meta.error}</span>}
       </div>
     </div>
   );
