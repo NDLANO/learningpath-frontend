@@ -51,7 +51,7 @@ class EditLearningPathStep extends Component {
     }
 
     const handleSubmit = (values) => {
-      const descriptionHTML = !values.description.hasText() ? undefined : convertToHTML({
+      const descriptionHTML = !values.description || !values.description.hasText() ? undefined : convertToHTML({
         styleToHTML: (style) => {
           if (style === 'UNDERLINE') {
             return <u />;
