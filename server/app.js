@@ -27,6 +27,7 @@ import Html from './Html';
 import { getToken, isTokenExpired, getExpireTime } from './auth';
 import Auth0SilentCallback from './Auth0SilentCallback';
 import configureStore from '../src/configureStore';
+import { routes } from '../src/routes';
 
 const app = express();
 
@@ -91,11 +92,18 @@ app.get('/get_token', (req, res) => {
 });
 
 function prefetchData(url, dispatch) {
+  console.log(routes);
   const promises =
         routes
             .map(route => ({ route, match: matchPath(url, route) }))
-            .filter(({ route, match }) => match && route.component.prefetch)
-            .map(({ route, match }) => dispatch(route.component.prefetch(match)));
+            .filter(({ route, match }) => {
+              console.log(route.component);
+              return match && route.component.fetchData;
+            })
+            .map(({ route, match }) => {
+              console.log(route);
+              return dispatch(route.component.prefetch(match));
+            });
 
   return Promise.all(promises);
 }
@@ -127,11 +135,10 @@ function handleResponse(req, res, token) {
       </StaticRouter>
     </Provider>);
 
-  console.log(component.props.children);
   // Trigger sagas for components by rendering them
   // https://github.com/yelouafi/redux-saga/issues/255#issuecomment-210275959
   // renderToString(component);
-  console.log(matchPath(req.url));
+  prefetchData(req.url, store.dispatch);
   if (context.url) {
     res.writeHead(301, {
       Location: context.url,

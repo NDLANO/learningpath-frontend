@@ -16,6 +16,7 @@ import isEmpty from 'lodash/isEmpty';
 import { configureLocale, isValidLocale } from './locale/configureLocale';
 import configureStore from './configureStore';
 import App from './main/App';
+import { routes } from './routes';
 
 function generateBasename(path) {
   if (isValidLocale(path)) {
