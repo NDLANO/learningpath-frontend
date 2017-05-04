@@ -31,7 +31,6 @@ class PinterestBoardForm extends Component {
   }
 
   render() {
-    console.log(this.state);
     const disabledButton = isEmpty(this.state.boardName) || isEmpty(this.state.username);
     return (
       <form onSubmit={this.handleSubmit} className="pinterest-search-form">

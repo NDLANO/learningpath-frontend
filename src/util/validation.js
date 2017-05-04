@@ -9,7 +9,9 @@
 import polyglot from '../i18n';
 
 const isEmpty = (value) => {
-  if (value && value.hasText) { // handle draf-js ContentState
+  if (value && value.embedType) { // handle embed url with embed types
+    return value.url === undefined || value.url === null || value.url === '';
+  } else if (value && value.hasText) { // handle draf-js ContentState
     return !value.hasText();
   }
   return value === undefined || value === null || value === '';

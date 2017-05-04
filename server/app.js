@@ -48,10 +48,10 @@ app.use(express.static('htdocs', {
 }));
 app.use((req, res, next) => {
   res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
-  if (process.env.NODE_ENV !== 'development') {
+  if (process.env.NODE_ENV !== 'development' || process.env.NODE_ENV !== 'staging') {
     res.setHeader(
       'Content-Security-Policy',
-      'default-src \'self\'; script-src \'self\' \'unsafe-inline\' \'unsafe-eval\' https://*.ndla.no https://players.brightcove.net https://www.nrk.no https://www.googletagmanager.com https://www.google-analytics.com https://www.youtube.com https://s.ytimg.com https://cdn.auth0.com; style-src \'self\' https://fonts.googleapis.com https://fonts.gstatic.com; font-src \'self\' https://fonts.googleapis.com https://fonts.gstatic.com; connect-src \'self\' https://*.ndla.no https://logs-01.loggly.com; img-src https://*.ndla.no https://www.google-analytics.com https://stats.g.doubleclick.net;');
+      'default-src \'self\'; script-src \'self\' \'unsafe-inline\' \'unsafe-eval\' https://*.ndla.no https://players.brightcove.net https://www.nrk.no https://www.googletagmanager.com https://www.google-analytics.com https://www.youtube.com https://s.ytimg.com https://cdn.auth0.com; style-src \'self\' https://fonts.googleapis.com https://fonts.gstatic.com; font-src \'self\' https://fonts.googleapis.com https://fonts.gstatic.com; connect-src \'self\' https://*.ndla.no https://logs-01.loggly.com https://www.googleapis.com; img-src https://*.ndla.no https://www.google-analytics.com https://stats.g.doubleclick.net data: https://i.ytimg.com https://pi.tedcdn.com http://*.ndlap3.seria.net; frame-src *;');
   }
   next();
 });
@@ -103,7 +103,6 @@ function prefetchData(req, dispatch) {
         ...bindActionCreators(route.component.mapDispatchToProps, dispatch),
       }));
     }
-    console.log(match);
     return match;
   });
   return Promise.all(promises);
@@ -119,7 +118,6 @@ function handleResponse(req, res, token) {
     res.send(`<!doctype html>\n${htmlString}`);
     return;
   }
-  console.log('SSR ENABLED');
   const store = configureStore({ locale, accessToken: token.access_token });
 
   const basename = isValidLocale(paths[1]) ? `${paths[1]}` : '';
@@ -148,8 +146,8 @@ function handleResponse(req, res, token) {
     prefetchData(req, store.dispatch).then(() => {
       const htmlString = renderHtmlString(locale, userAgentString, store.getState(), component);
       res.send(`<!doctype html>\n${htmlString}`);
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
+      // console.log(err);
     });
   }
 

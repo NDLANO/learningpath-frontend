@@ -34,23 +34,22 @@ import AddLearningPathStepButton from './sidebar/AddLearningPathStepButton';
 import PinterestLightboxButton from '../pinterest/PinterestLightboxButton';
 
 export class LearningPath extends Component {
-
   static mapDispatchToProps = {
     copyPath: copyLearningPath,
     localFetchLearingPath: fetchLearningPath,
-    pushRoute: routerActions.push,
+    replaceRoute: routerActions.replace,
   };
 
   static fetchData(props) {
-    const { pushRoute, localFetchLearingPath, match: { url, params: { pathId } } } = props;
+    const { replaceRoute, localFetchLearingPath, match: { url, params: { pathId } } } = props;
     if (url === `/learningpaths/${pathId}/edit`) {
       return localFetchLearingPath(pathId, true);
     } else if (url === `/learningpaths/${pathId}/first-step`) {
       return localFetchLearingPath(pathId, false).then(() => {
         const stepId = this.props.learningPath.learningsteps[0].id;
-        pushRoute({ pathname: `/learningpaths/${pathId}/step/${stepId}` });
+        replaceRoute({ pathname: `/learningpaths/${pathId}/step/${stepId}` });
       }).catch(() => {
-        pushRoute({ pathname: `/learningpaths/${pathId}` });
+        replaceRoute({ pathname: `/learningpaths/${pathId}` });
       });
     }
     return localFetchLearingPath(pathId, false);
@@ -80,7 +79,7 @@ export class LearningPath extends Component {
 
     const changeStatusButton = showButtonsUrls.includes(match.path) && match.isExact ? <LearningPathToCButtons /> : null;
     const addStepButton = showButtonsUrls.includes(match.path) && match.isExact ? <AddLearningPathStepButton /> : null;
-    const pinterestButton = match.path === '/learningpaths/:pathId/step/:stepId' && match.isExact ? <PinterestLightboxButton /> : null;
+    const pinterestButton = match.path === '/learningpaths/:pathId/step/:stepId' && match.isExact ? <PinterestLightboxButton learningPath={learningPath} /> : null;
     const sortLearningSteps = match.url === `/learningpaths/${match.params.pathId}/step/sort`;
     const sortableTableOfContent = sortLearningSteps ? <SortLearningPathSteps learningPath={learningPath} /> : <LearningPathToC learningPath={learningPath} activeStepId={stepId} />;
     const sortableTableOfContentButton = !sortLearningSteps ? <SortLearningStepsButton learningPath={learningPath} /> : null;
@@ -148,7 +147,7 @@ LearningPath.propTypes = {
   isTableOfContentOpen: PropTypes.bool.isRequired,
   localFetchLearingPath: PropTypes.func.isRequired,
   copyPath: PropTypes.func.isRequired,
-  pushRoute: PropTypes.func.isRequired,
+  replaceRoute: PropTypes.func.isRequired,
 };
 
 LearningPath.contextTypes = {
@@ -160,6 +159,5 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
   sortLearningSteps: ownProps.sortLearningSteps,
   isTableOfContentOpen: state.sidebar.isLeftSideBarOpen,
 });
-
 
 export default withRouter(connect(mapStateToProps, LearningPath.mapDispatchToProps)(LearningPath));
