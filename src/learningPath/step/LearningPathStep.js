@@ -19,16 +19,25 @@ import { getI18nLearningPathStep } from './learningPathStepSelectors';
 import Spinner from '../../common/Spinner';
 
 class LearningPathStep extends React.Component {
+
+  static mapDispatchToProps = {
+    localFetchLearningPathStep: fetchLearningPathStep,
+  };
+
+  static fetchData(props) {
+    const { localFetchLearningPathStep, match: { params: { pathId, stepId } } } = props;
+    return localFetchLearningPathStep(pathId, stepId);
+  }
+
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true,
+      isLoading: __SERVER__ ? false : true,
     };
   }
 
   componentWillMount() {
-    const { localFetchLearningPathStep, match: { params: { pathId, stepId } } } = this.props;
-    localFetchLearningPathStep(pathId, stepId).then(() => this.setState({ isLoading: false }));
+    LearningPathStep.fetchData(this.props).then(() => this.setState({ isLoading: false }));
   }
 
   componentWillUpdate(nextProps) {
@@ -73,9 +82,6 @@ LearningPathStep.contextTypes = {
   lang: PropTypes.string.isRequired,
 };
 
-const mapDispatchToProps = {
-  localFetchLearningPathStep: fetchLearningPathStep,
-};
 
 const mapStateToProps = state => Object.assign({}, state, {
   authenticated: state.authenticated,
@@ -83,4 +89,4 @@ const mapStateToProps = state => Object.assign({}, state, {
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(LearningPathStep);
+export default connect(mapStateToProps, LearningPathStep.mapDispatchToProps)(LearningPathStep);

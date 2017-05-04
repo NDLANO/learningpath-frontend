@@ -37,7 +37,6 @@ export class App extends React.Component {
 
   render() {
     const { dispatch, messages } = this.props;
-    console.log(this.props);
     return (
       <div>
         <div className="page-container">

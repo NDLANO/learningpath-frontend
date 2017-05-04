@@ -9,7 +9,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import defined from 'defined';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 import { routerActions } from 'react-router-redux';
@@ -28,16 +27,22 @@ import {
 
 class LearningPathSearch extends React.Component {
 
-  static fetchData(search, query) {
-    search(query);
+  static mapDispatchToProps = {
+    localSearchLearningPaths: searchLearningPaths,
+    pushRoute: route => routerActions.push(route),
+  };
+
+  static fetchData(props) {
+    const { localSearchLearningPaths, location } = props;
+    return localSearchLearningPaths(queryString.parse(location.search));
   }
 
   componentWillMount() {
-    LearningPathSearch.fetchData(this.props.searchLearningPaths, queryString.parse(this.props.location.search));
+    LearningPathSearch.fetchData(this.props);
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.location.search !== nextProps.location.search) {
-      this.props.searchLearningPaths(queryString.parse(nextProps.location.search));
+      this.props.localSearchLearningPaths(queryString.parse(nextProps.location.search));
     }
   }
 
@@ -83,7 +88,7 @@ class LearningPathSearch extends React.Component {
 }
 
 LearningPathSearch.propTypes = {
-  searchLearningPaths: PropTypes.func.isRequired,
+  localSearchLearningPaths: PropTypes.func.isRequired,
   learningPaths: PropTypes.arrayOf(PropTypes.object).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
@@ -104,9 +109,5 @@ const mapStateToProps = (state, props) => {
   });
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  searchLearningPaths,
-  pushRoute: route => routerActions.push(route),
-}, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(LearningPathSearch);
+export default connect(mapStateToProps, LearningPathSearch.mapDispatchToProps)(LearningPathSearch);
