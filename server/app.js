@@ -10,12 +10,12 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import express from 'express';
 import compression from 'compression';
-import defined from 'defined';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import requestProxy from 'express-request-proxy';
 import { Provider } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { StaticRouter } from 'react-router';
 import { matchPath } from 'react-router-dom';
 import App from '../src/main/App';
@@ -91,20 +91,21 @@ app.get('/get_token', (req, res) => {
   }).catch(err => res.status(500).send(err.message));
 });
 
-function prefetchData(url, dispatch) {
-  console.log(routes);
-  const promises =
-        routes
-            .map(route => ({ route, match: matchPath(url, route) }))
-            .filter(({ route, match }) => {
-              console.log(route.component);
-              return match && route.component.fetchData;
-            })
-            .map(({ route, match }) => {
-              console.log(route);
-              return dispatch(route.component.prefetch(match));
-            });
+function prefetchData(req, dispatch) {
+  const promises = [];
 
+  routes.forEach((route) => {
+    const match = matchPath(req.url, route);
+    if (match && route.component.fetchData) {
+      promises.push(route.component.fetchData({
+        match,
+        location: { search: req.query },
+        ...bindActionCreators(route.component.mapDispatchToProps, dispatch),
+      }));
+    }
+    console.log(match);
+    return match;
+  });
   return Promise.all(promises);
 }
 
@@ -138,15 +139,18 @@ function handleResponse(req, res, token) {
   // Trigger sagas for components by rendering them
   // https://github.com/yelouafi/redux-saga/issues/255#issuecomment-210275959
   // renderToString(component);
-  prefetchData(req.url, store.dispatch);
   if (context.url) {
     res.writeHead(301, {
       Location: context.url,
     });
     res.end();
   } else {
-    const htmlString = renderHtmlString(locale, userAgentString, { accessToken: token.access_token, locale });
-    res.send(`<!doctype html>\n${htmlString}`);
+    prefetchData(req, store.dispatch).then(() => {
+      const htmlString = renderHtmlString(locale, userAgentString, store.getState(), component);
+      res.send(`<!doctype html>\n${htmlString}`);
+    }).catch((err) => {
+      console.log(err);
+    });
   }
 
   // Dispatch a close event so sagas stop listening after they have resolved

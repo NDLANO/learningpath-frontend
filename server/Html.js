@@ -8,6 +8,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { renderToString } from 'react-dom/server';
 import serialize from 'serialize-javascript';
 import config from '../src/config';
 import head from './Meta';
@@ -38,7 +39,9 @@ const GoogleTagMangerScript = () => {
 
 
 const Html = (props) => {
-  const { lang, className, state } = props;
+  const { lang, className, state, component } = props;
+  const content = component ? renderToString(component) : '';
+
   return (
     <html lang={lang} className={className}>
       <head>
@@ -55,7 +58,7 @@ const Html = (props) => {
       <body>
         <GoogleTagMangerNoScript />
         <GoogleTagMangerScript />
-        <div id="app-container" className="app-container" />
+        <div id="app-container" className="app-container" dangerouslySetInnerHTML={{ __html: content }} />
         <script dangerouslySetInnerHTML={{ __html: `window.initialState = ${serialize(state)}` }} />
         <script dangerouslySetInnerHTML={{ __html: `window.assets = ${serialize(assets)}` }} />
         <script dangerouslySetInnerHTML={{ __html: `window.config = ${serialize(config)}` }} />
@@ -70,6 +73,7 @@ Html.propTypes = {
   lang: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
   state: PropTypes.object.isRequired,
+  component: PropTypes.node,
 };
 
 export default Html;
