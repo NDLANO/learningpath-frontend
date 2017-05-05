@@ -21,6 +21,7 @@ const apiDomain = activatedForEnvironment({
   prod: 'https://api.ndla.no',
 },
   `https://${environment}.api.ndla.no`);
+
 const ltiActivated = activatedForEnvironment({ test: true, local: true }, false);
 const pinterestActivated = activatedForEnvironment({ test: true, local: true }, false);
 

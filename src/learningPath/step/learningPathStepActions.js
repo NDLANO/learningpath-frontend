@@ -27,6 +27,7 @@ export function fetchOembed(query) {
   if (query.embedType === 'oembed') {
     return (dispatch, getState) => fetchOembedUrl(getToken(getState), query)
       .then((object) => {
+        console.log(object);
         const clonedObject = Object.assign({}, object, { url: query.url, embedType: query.embedType, language: getState().locale });
         dispatch(setOembedObject(clonedObject));
         dispatch(setOembedPreview(clonedObject));
@@ -71,9 +72,11 @@ export function fetchLearningPathStep(pathId, stepId, isEdit = false) {
         if (step.embedUrl) {
           const oembedContent = oembedContentI18N(step, locale, false);
           if (oembedContent && oembedContent.url) {
-            dispatch(fetchOembed({ url: oembedContent.url, embedType: oembedContent.embedType, maxwidth: Math.ceil(window.innerWidth) }));
+            const innerWidth = __SERVER__ ? 1000 : window.innerWidth;
+            return dispatch(fetchOembed({ url: oembedContent.url, embedType: oembedContent.embedType, maxwidth: Math.ceil(innerWidth) }));
           }
         }
+        return {};
       })
     .catch((err) => {
       if (err.status === 404) {

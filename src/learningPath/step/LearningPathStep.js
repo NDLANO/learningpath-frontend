@@ -32,7 +32,7 @@ class LearningPathStep extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: __SERVER__ ? false : true,
+      isLoading: true,
     };
   }
 
@@ -42,8 +42,7 @@ class LearningPathStep extends React.Component {
 
   componentWillUpdate(nextProps) {
     const { localFetchLearningPathStep, match: { params: { pathId, stepId } } } = nextProps;
-
-    if (this.props.match.params.stepId !== stepId || this.props.match.params.pathId !== pathId) {
+    if (__CLIENT__ && (this.props.match.params.stepId !== stepId || this.props.match.params.pathId !== pathId)) {
       this.setState({ isLoading: true });
       localFetchLearningPathStep(pathId, stepId).then(() => this.setState({ isLoading: false }));
     }

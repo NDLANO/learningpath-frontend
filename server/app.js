@@ -144,10 +144,11 @@ function handleResponse(req, res, token) {
     res.end();
   } else {
     prefetchData(req, store.dispatch).then(() => {
+      console.log(store.getState());
       const htmlString = renderHtmlString(locale, userAgentString, store.getState(), component);
       res.send(`<!doctype html>\n${htmlString}`);
-    }).catch(() => {
-      // console.log(err);
+    }).catch((err) => {
+      console.log(err);
     });
   }
 
