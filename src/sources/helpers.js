@@ -10,6 +10,7 @@ import 'isomorphic-fetch';
 import defined from 'defined';
 import config from '../config';
 import formatUrl from '../util/formatUrlUtil';
+import fetchAuth from '../util/fetchAuth';
 
 const NDLA_API_URL = __SERVER__ ? config.ndlaApiUrl : window.config.ndlaApiUrl;
 const NDLA_ACCESS_TOKEN = __SERVER__ ? config.accessToken : window.config.accessToken;
@@ -105,7 +106,7 @@ export const authorizationHeader = token => `Bearer ${token}`;
 
 export function fetchAuthorized(path, method = 'GET') {
   const url = params => apiResourceUrl(formatUrl(path, params));
-  return (token, params = {}) => fetch(url(params), {
+  return (token, params = {}) => fetchAuth(url(params), {
     method, headers: { Authorization: authorizationHeader(token) },
   }).then(resolveJsonOrRejectWithError);
 }
@@ -113,7 +114,7 @@ export function fetchAuthorized(path, method = 'GET') {
 export function postAuthorized(path) {
   const url = params => apiResourceUrl(formatUrl(path, params));
 
-  return (token, params = {}, body) => fetch(url(params), {
+  return (token, params = {}, body) => fetchAuth(url(params), {
     headers: { Authorization: authorizationHeader(token) },
     method: 'POST',
     body: JSON.stringify(body),
@@ -133,7 +134,7 @@ export function putAuthorized(path) {
 export function patchAuthorized(path) {
   const url = params => apiResourceUrl(formatUrl(path, params));
 
-  return (token, params = {}, body) => fetch(url(params), {
+  return (token, params = {}, body) => fetchAuth(url(params), {
     headers: { Authorization: authorizationHeader(token) },
     method: 'PATCH',
     body: JSON.stringify(body),
@@ -142,7 +143,7 @@ export function patchAuthorized(path) {
 
 export function deleteAuthorized(path) {
   const url = params => apiResourceUrl(formatUrl(path, params));
-  return (token, params = {}) => fetch(url(params), {
+  return (token, params = {}) => fetchAuth(url(params), {
     headers: { Authorization: authorizationHeader(token) },
     method: 'DELETE',
   });

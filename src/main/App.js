@@ -13,7 +13,6 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import { getLocale } from '../locale/localeSelectors';
 import { getMessages } from '../messages/messagesSelectors';
 import Alerts from '../messages/Alerts';
-import { checkAccessTokenOnEnter } from '../session/sessionActions';
 import ScrollToTop from './ScrollToTop';
 import Welcome from './Welcome';
 import PrivateRoute from './PrivateRoute';
@@ -30,9 +29,6 @@ export class App extends React.Component {
     return {
       lang: this.props.locale,
     };
-  }
-  componentWillMount() {
-    this.props.dispatch(checkAccessTokenOnEnter());
   }
 
   render() {

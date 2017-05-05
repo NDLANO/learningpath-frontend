@@ -26,7 +26,7 @@ export class LogoutSession extends React.Component {
 LogoutSession.propTypes = {
   localLogout: PropTypes.func.isRequired,
   localIfAuthenticated: PropTypes.func.isRequired,
-  authenticated: PropTypes.func.isRequired,
+  authenticated: PropTypes.bool.isRequired,
 };
 
 const mapDispatchToProps = {

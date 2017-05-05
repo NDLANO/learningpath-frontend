@@ -10,7 +10,7 @@ import { createAction } from 'redux-actions';
 import auth0 from 'auth0-js';
 import { routerActions } from 'react-router-redux';
 import { locationOrigin, auth0ClientId, auth0Domain, getToken } from '../sources/helpers';
-import { decodeIdToken, getTimeToUpdateInMs } from '../util/jwtHelper';
+import { decodeToken, getTimeToUpdateInMs } from '../util/jwtHelper';
 import { fetchNewToken, isTokenValid } from '../sources/tokens';
 import { applicationError } from '../messages/messagesActions';
 
@@ -34,7 +34,7 @@ export function parseHash(hash) {
       if (authResult && authResult.accessToken && authResult.idToken) {
         dispatch(setIdToken(authResult.idToken));
         dispatch(setAuthenticated(true));
-        dispatch(setUserData(decodeIdToken(authResult.idToken)));
+        dispatch(setUserData(decodeToken(authResult.idToken)));
         dispatch(routerActions.replace('/minside'));
       }
     });
@@ -71,15 +71,16 @@ export function checkValidSession(token = undefined) {
 }
 
 export function renewAuth0Token() {
-  return (dispatch, getState) => {
+  return (dispatch, getState) => new Promise((resolve) => {
     auth.renewAuth({
       redirectUri: `${locationOrigin}/login/silent-callback`,
       usePostMessage: true,
     }, (err, authResult) => {
       if (process.env.NODE_ENV === 'development' && authResult && (authResult.source === '@devtools-page' || authResult.source === '@devtools-extension')) { // Temporarily fix for bug in auth0
-        isTokenValid(decodeIdToken(getState().idToken).exp).then((valid) => {
+        isTokenValid(decodeToken(getState().idToken).exp).then((valid) => {
           if (valid.isTokenExpired) {
             dispatch(logout());
+            resolve();
           }
         });
         return;
@@ -87,44 +88,31 @@ export function renewAuth0Token() {
       if (authResult && authResult.idToken) {
         dispatch(setIdToken(authResult.idToken));
         dispatch(setAuthenticated(true));
-        dispatch(setUserData(decodeIdToken(authResult.idToken)));
-        dispatch(checkValidSession(authResult.idToken));
+        dispatch(setUserData(decodeToken(authResult.idToken)));
+        resolve();
+        // dispatch(checkValidSession(authResult.idToken));
       } else {
         dispatch(logout());
+        resolve();
       }
     });
-  };
+  });
 }
 
 export function renewAuthToken() {
   return dispatch => fetchNewToken()
     .then((token) => {
       dispatch(setAccessToken(token.access_token));
-      dispatch(checkValidSession(token.access_token));
+      // dispatch(checkValidSession(token.access_token));
     });
 }
 
-export function refreshToken(getState) {
-  return (dispatch) => {
+export function refreshToken() {
+  return (dispatch, getState) => new Promise((resolve) => {
     if (getState().authenticated) {
-      dispatch(renewAuth0Token());
+      dispatch(renewAuth0Token()).then(() => resolve());
     } else {
-      dispatch(renewAuthToken());
+      dispatch(renewAuthToken()).then(() => resolve());
     }
-  };
-}
-
-export function checkAccessTokenOnEnter() {
-  return (dispatch, getState) => {
-    if (getState().authenticated && getState().idToken) {
-      isTokenValid(decodeIdToken(getState().idToken).exp).then((valid) => {
-        if (valid.isTokenExpired) {
-          dispatch(routerActions.replace('/'));
-        }
-        dispatch(renewAuth0Token());
-      });
-    } else {
-      dispatch(renewAuthToken());
-    }
-  };
+  });
 }

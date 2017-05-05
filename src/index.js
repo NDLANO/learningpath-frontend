@@ -12,6 +12,7 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import ErrorReporter from 'ndla-error-reporter';
+import TokenStatusHandler from './util/TokenStatusHandler';
 import { configureLocale, isValidLocale } from './locale/configureLocale';
 import configureStore from './configureStore';
 import { accessToken } from './sources/helpers';
@@ -46,7 +47,7 @@ const store = configureStore({
 
 const { logglyApiKey, logEnvironment, componentName } = window.config;
 window.errorReporter = ErrorReporter.getInstance({ store, logglyApiKey, environment: logEnvironment, componentName });
-
+window.tokenStatusHandler = TokenStatusHandler.getInstance({ store });
 
 ReactDOM.render(
   <Provider store={store} locale={locale}>
