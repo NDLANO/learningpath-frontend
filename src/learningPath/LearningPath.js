@@ -45,8 +45,8 @@ export class LearningPath extends Component {
     if (url === `/learningpaths/${pathId}/edit`) {
       return localFetchLearingPath(pathId, true);
     } else if (url === `/learningpaths/${pathId}/first-step`) {
-      return localFetchLearingPath(pathId, false).then(() => {
-        const stepId = this.props.learningPath.learningsteps[0].id;
+      return localFetchLearingPath(pathId, false).then((learningPath) => {
+        const stepId = learningPath.learningsteps[0].id;
         replaceRoute({ pathname: `/learningpaths/${pathId}/step/${stepId}` });
       }).catch(() => {
         replaceRoute({ pathname: `/learningpaths/${pathId}` });
