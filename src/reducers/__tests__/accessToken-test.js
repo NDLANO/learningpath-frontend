@@ -9,7 +9,7 @@
 import reducer from '../accessToken';
 
 test('reducers/accessToken', () => {
-  expect(reducer(undefined, {})).toBe('ndlatestapikey');
+  expect(reducer(undefined, {})).toBe('');
 
   expect(reducer(undefined, { type: 'SET_ACCESS_TOKEN', payload: '12345' })).toBe('12345');
 

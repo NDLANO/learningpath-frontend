@@ -27,7 +27,6 @@ export function fetchOembed(query) {
   if (query.embedType === 'oembed') {
     return (dispatch, getState) => fetchOembedUrl(getToken(getState), query)
       .then((object) => {
-        console.log(object);
         const clonedObject = Object.assign({}, object, { url: query.url, embedType: query.embedType, language: getState().locale });
         dispatch(setOembedObject(clonedObject));
         dispatch(setOembedPreview(clonedObject));
