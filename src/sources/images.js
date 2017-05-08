@@ -9,6 +9,7 @@
 import 'isomorphic-fetch';
 import queryString from 'query-string';
 import formatUrl from '../util/formatUrlUtil';
+import { fetchAuth } from '../util/fetchAuth';
 
 import { resolveJsonOrRejectWithError, apiResourceUrl, authorizationHeader } from './helpers';
 
@@ -17,13 +18,13 @@ const imagesUrl = apiResourceUrl('/image-api/v1/images');
 const fetchImages = (query = { 'page-size': 16, page: 1 }, token) => {
   let url = imagesUrl;
   url += `?${queryString.stringify(query)}`;
-  return fetch(url, { headers: { Authorization: authorizationHeader(token) } }).then(resolveJsonOrRejectWithError);
+  return fetchAuth(url, { headers: { Authorization: authorizationHeader(token) } }).then(resolveJsonOrRejectWithError);
 };
 const fetchImage = (imageId, token) => {
   const url = apiResourceUrl(formatUrl('/image-api/v1/images/:imageId', { imageId }));
-  return fetch(url, { headers: { Authorization: authorizationHeader(token) } }).then(resolveJsonOrRejectWithError);
+  return fetchAuth(url, { headers: { Authorization: authorizationHeader(token) } }).then(resolveJsonOrRejectWithError);
 };
-const fetchImageWithMetaUrl = (url, token) => fetch(url, { headers: { Authorization: authorizationHeader(token) } }).then(resolveJsonOrRejectWithError);
+const fetchImageWithMetaUrl = (url, token) => fetchAuth(url, { headers: { Authorization: authorizationHeader(token) } }).then(resolveJsonOrRejectWithError);
 
 export {
   fetchImages,

@@ -11,11 +11,12 @@ import queryString from 'query-string';
 import cloneDeep from 'lodash/cloneDeep';
 import map from 'lodash/map';
 import assureSequenceOrder from '../util/assureSequenceOrder';
+import { fetchAuth } from '../util/fetchAuth';
 import { fetchAuthorized, authorizationHeader, postAuthorized, putAuthorized, patchAuthorized, deleteAuthorized, resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';
 
 const fetchPath = fetchAuthorized('/learningpath-api/v1/learningpaths/:pathId');
 const fetchPathStep = fetchAuthorized(
-    '/learningpath-api/v1/learningpaths/:pathId/learningsteps/:stepId');
+  '/learningpath-api/v1/learningpaths/:pathId/learningsteps/:stepId');
 const fetchMyPaths = fetchAuthorized('/learningpath-api/v1/learningpaths/mine');
 const fetchPathTags = fetchAuthorized('/learningpath-api/v1/learningpaths/tags');
 const fetchPathLicenses = (token, filter) => {
@@ -24,7 +25,7 @@ const fetchPathLicenses = (token, filter) => {
     const query = { filter };
     url += `?${queryString.stringify(query)}`;
   }
-  return fetch(url, { headers: { Authorization: authorizationHeader(token) } }).then(resolveJsonOrRejectWithError);
+  return fetchAuth(url, { headers: { Authorization: authorizationHeader(token) } }).then(resolveJsonOrRejectWithError);
 };
 
 
@@ -34,13 +35,13 @@ const copyLearningPath = postAuthorized('/learningpath-api/v1/learningpaths/:cop
 
 const createPath = (token, props, body) =>
   postLearningPath(token, props, body)
-  .then(lpath => Promise.all(map(body.learningsteps, step =>
+    .then(lpath => Promise.all(map(body.learningsteps, step =>
       postLearningPathStep(token, { pathId: lpath.id }, step)
     )).then(steps => Object.assign({}, lpath, {
       learningsteps: assureSequenceOrder(steps),
     }))
-  )
-;
+    )
+  ;
 
 const copyPath = (token, { copyfrom }, body) =>
   copyLearningPath(token, { copyfrom }, body);
@@ -95,14 +96,14 @@ const fetchPaths = (token, query) => {
 
     url += `?${queryString.stringify(q)}`;
   }
-  return fetch(url, { headers: { Authorization: authorizationHeader(token) } }).then(resolveJsonOrRejectWithError);
+  return fetchAuth(url, { headers: { Authorization: authorizationHeader(token) } }).then(resolveJsonOrRejectWithError);
 };
 
 const oembedUrl = apiResourceUrl('/oembed-proxy/v1/oembed');
 const fetchOembedUrl = (token, query) => {
   let url = oembedUrl;
   url += `?${queryString.stringify(query)}`;
-  return fetch(url, { headers: { Authorization: authorizationHeader(token) } }).then(resolveJsonOrRejectWithError);
+  return fetchAuth(url, { headers: { Authorization: authorizationHeader(token) } }).then(resolveJsonOrRejectWithError);
 };
 
 
