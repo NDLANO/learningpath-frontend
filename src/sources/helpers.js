@@ -10,7 +10,7 @@ import 'isomorphic-fetch';
 import defined from 'defined';
 import config from '../config';
 import formatUrl from '../util/formatUrlUtil';
-import fetchAuth from '../util/fetchAuth';
+import { fetchAuth } from '../util/fetchAuth';
 
 const NDLA_API_URL = __SERVER__ ? config.ndlaApiUrl : window.config.ndlaApiUrl;
 const NDLA_ACCESS_TOKEN = __SERVER__ ? config.accessToken : window.config.accessToken;
@@ -124,7 +124,7 @@ export function postAuthorized(path) {
 export function putAuthorized(path) {
   const url = params => apiResourceUrl(formatUrl(path, params));
 
-  return (token, params = {}, body) => fetch(url(params), {
+  return (token, params = {}, body) => fetchAuth(url(params), {
     headers: { Authorization: authorizationHeader(token) },
     method: 'PUT',
     body: JSON.stringify(body),
