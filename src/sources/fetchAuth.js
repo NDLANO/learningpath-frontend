@@ -10,17 +10,18 @@ import { isTokenValid } from '../sources/tokens';
 import { decodeToken } from '../util/jwtHelper';
 
 export const fetchAuth = (input, init) => {
-  if (process.env.NODE_ENV !== 'unittest') {
-    const actions = require('../session/sessionActions'); //eslint-disable-line
-    const getState = () => window.tokenStatusHandler.getStoreState();
-    const dispatch = window.tokenStatusHandler.getDispatch();
-    const token = getState().authenticated ? getState().idToken : getState().accessToken;
-    return isTokenValid(decodeToken(token).exp).then((valid) => {
-      if (valid.isTokenExpired) {
-        return dispatch(actions.refreshToken()).then(() => fetch(input, init));
-      }
-      return fetch(input, init);
-    });
+  if (__SERVER__ || process.env.NODE_ENV === 'unittest') {
+    return fetch(input, init);
   }
-  return fetch(input, init);
+
+  const actions = require('../session/sessionActions'); //eslint-disable-line
+  const getState = () => window.tokenStatusHandler.getStoreState();
+  const dispatch = window.tokenStatusHandler.getDispatch();
+  const token = getState().authenticated ? getState().idToken : getState().accessToken;
+  return isTokenValid(decodeToken(token).exp).then((valid) => {
+    if (valid.isTokenExpired) {
+      return dispatch(actions.refreshToken()).then(() => fetch(input, init));
+    }
+    return fetch(input, init);
+  });
 };
