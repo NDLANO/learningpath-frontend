@@ -14,6 +14,7 @@ const entry = [
   'ndla-learningpath-styleguide/assets/favicon.ico',
   'ndla-learningpath-styleguide/assets/symbol-defs.svg',
   'ndla-learningpath-styleguide/assets/learningpath.jpg',
+  'ndla-learningpath-styleguide/assets/placeholder.png',
 ];
 
 module.exports = options => ({
