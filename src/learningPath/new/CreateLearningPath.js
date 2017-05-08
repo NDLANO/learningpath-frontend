@@ -51,6 +51,7 @@ class CreateLearningPath extends React.Component {
             maxLength="150"
             className="textarea"
             component={TextAreaField}
+            disableVerticalResize
           />
           <p className="learning-path_input-information">{polyglot.t('createLearningPath.descriptionMaxLength')}</p>
         </div>
