@@ -69,6 +69,11 @@ const getConditionalClassnames = (userAgentString) => {
 const renderHtmlString = (locale, userAgentString, state = {}, component = undefined) =>
   renderToString(<Html lang={locale} state={state} component={component} className={getConditionalClassnames(userAgentString)} />);
 
+
+app.get('/health', (req, res) => {
+  res.status(200).send("Health check OK");
+});
+
 app.get('/pinterest-proxy/*', requestProxy({
   url: `${config.pinterestApiUrl}*`,
   query: {
