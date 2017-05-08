@@ -8,10 +8,18 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 const TextAreaField = (props) => {
-  const { input, rows, cols, maxLength, label, placeholder, labelClassName, type, meta: { touched, error } } = props;
-  const inputClassName = touched && error ? 'textarea input--alert' : 'textarea';
+  const { input, disableVerticalResize, disableHorizontalResize, rows, cols, maxLength, label, placeholder, labelClassName, type, meta: { touched, error } } = props;
+
+  const inputClassName = classNames({
+    textarea: true,
+    'input--alert': touched && error,
+    'textarea--resize-vertical': disableVerticalResize,
+    'textarea--resize-horizontal': disableHorizontalResize,
+  });
+
   return (
     <div>
       <label className={labelClassName} htmlFor={input.name}>{label}</label>
@@ -30,6 +38,8 @@ TextAreaField.propTypes = {
   rows: PropTypes.string,
   cols: PropTypes.string,
   maxLength: PropTypes.string,
+  disableVerticalResize: PropTypes.bool,
+  disableHorizontalResize: PropTypes.bool,
 };
 TextAreaField.defaultProps = {
   type: 'text',
@@ -38,5 +48,7 @@ TextAreaField.defaultProps = {
   label: '',
   rows: '4',
   cols: '50',
+  disableVerticalResize: false,
+  disableHorizontalResize: false,
 };
 export default TextAreaField;
