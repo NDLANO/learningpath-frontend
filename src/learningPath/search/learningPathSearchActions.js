@@ -18,7 +18,7 @@ function fetchIsBasedOnPath(path) {
   return (dispatch, getState) => fetchPath(getToken(getState), { pathId: path.isBasedOn })
     .then((isBasedOnPath) => {
       dispatch(setLearningPathBasedOn({ isBasedOnPath, pathId: path.id }));
-    });
+    }).catch(() => {});
 }
 
 export function searchLearningPaths(query) {
