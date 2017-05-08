@@ -22,9 +22,9 @@ function Logo(props) {
   });
 
   return (
-    <button className={rootClasses} onClick={closeSidebars}>
-      <Link to="/" className="logo_link">{polyglot.t('logo.altText')}</Link>
-    </button>
+    <div className={rootClasses}>
+      <Link to="/" className="logo_link" onClick={closeSidebars}>{polyglot.t('logo.altText')}</Link>
+    </div>
   );
 }
 
