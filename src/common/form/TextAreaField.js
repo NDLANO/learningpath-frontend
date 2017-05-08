@@ -8,12 +8,17 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 const TextAreaField = (props) => {
   const { input, disableVerticalResize, disableHorizontalResize, rows, cols, maxLength, label, placeholder, labelClassName, type, meta: { touched, error } } = props;
-  let inputClassName = touched && error ? 'textarea input--alert' : 'textarea';
-  inputClassName += disableVerticalResize ? ' textarea--resize-vertical' : '';
-  inputClassName += disableHorizontalResize ? ' textarea--resize-horizontal' : '';
+
+  const inputClassName = classNames({
+    textarea: true,
+    'input--alert': touched && error,
+    'textarea--resize-vertical': disableVerticalResize,
+    'textarea--resize-horizontal': disableHorizontalResize,
+  });
 
   return (
     <div>
