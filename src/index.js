@@ -12,9 +12,9 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import ErrorReporter from 'ndla-error-reporter';
+import isEmpty from 'lodash/isEmpty';
 import { configureLocale, isValidLocale } from './locale/configureLocale';
 import configureStore from './configureStore';
-import { accessToken } from './sources/helpers';
 import App from './main/App';
 
 function generateBasename(path) {
@@ -33,16 +33,21 @@ const basename = generateBasename(path);
 
 const browserHistory = basename ? createHistory({ basename }) : createHistory();
 
-const store = configureStore({
+
+const emptyState = {
   authenticated: false,
-  accessToken,
+  accessToken: '',
   idToken: '',
   user: {},
   learningPathStep: {},
   learningPaths: [],
   messages: [],
   locale,
-}, browserHistory);
+};
+
+const initialState = !isEmpty(window.initialState) ? window.initialState : emptyState;
+
+const store = configureStore(initialState, browserHistory);
 
 const { logglyApiKey, logEnvironment, componentName } = window.config;
 window.errorReporter = ErrorReporter.getInstance({ store, logglyApiKey, environment: logEnvironment, componentName });

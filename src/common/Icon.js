@@ -9,13 +9,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import requireAssets from '../util/requireAssets';
+
 
 function Icon(props) {
   const { svgDefId, ...rest } = props;
 
   return (
     <svg {...rest} className={classNames('icon', props.className)}>
-      <use xlinkHref={`/assets/${window.assets['symbol-defs.svg']}#${svgDefId}`} />
+      <use xlinkHref={`/assets/${requireAssets['symbol-defs.svg']}#${svgDefId}`} />
     </svg>
   );
 }

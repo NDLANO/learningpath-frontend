@@ -55,6 +55,7 @@ export function fetchLearningPath(pathId, isEdit = false) {
       if (path.isBasedOn) {
         dispatch(fetchIsBasedOnPath(path));
       }
+      return path;
     })
     .catch((err) => {
       if (err.status === 403) {
