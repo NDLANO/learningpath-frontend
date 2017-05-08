@@ -40,7 +40,7 @@ export default class SearchResult extends Component {
       if (path.coverPhotoUrl && !this.state.imageError) {
         return <img className="search-result_img" role="presentation" src={scaleImage(path.coverPhotoUrl)} onError={this.handleImageError} />;
       }
-      return <img className="search-result_img" role="presentation" src={'https://placeholdit.imgix.net/~text?txtsize=33&txt=NDLA&w=190&h=120'} />;
+      return <img className="search-result_img" role="presentation" src={`/assets/${window.assets['placeholder.png']}`} />;
     };
 
     const tags = path.tags;
