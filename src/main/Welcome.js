@@ -16,7 +16,7 @@ import Logo from '../common/Logo';
 import polyglot from '../i18n';
 import Masthead from '../common/Masthead';
 import { Wrapper, OneColumn, Footer } from '../common/Layout';
-
+import requireAssets from '../util/requireAssets';
 
 class Welcome extends Component {
   constructor(props) {
@@ -35,7 +35,6 @@ class Welcome extends Component {
   }
 
   render() {
-    const assets = config.isProduction = require('../../server/developmentAssets'); // eslint-disable-line
     return (
       <Wrapper>
         <OneColumn>
@@ -60,7 +59,7 @@ class Welcome extends Component {
             <a href="/minside" className="hero_link cta-link cta-link-secondary cta-link--secondary-negative">{polyglot.t('welcomePage.newBtn')} »</a>
           </div>
           <div className="infoblock">
-            <img src={`/assets/${window.assets['learningpath.jpg']}`} alt="Placeholder" className="infoblock_img frontpage-intro_img" />
+            <img src={`/assets/${requireAssets['learningpath.jpg']}`} alt="Placeholder" className="infoblock_img frontpage-intro_img" />
             <div className="infoblock_text">
               <h2 id="feature">{polyglot.t('welcomePage.feature1Title')}</h2>
               <p>{polyglot.t('welcomePage.feature1Content')}</p>

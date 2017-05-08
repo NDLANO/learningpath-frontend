@@ -34,6 +34,27 @@ import AddLearningPathStepButton from './sidebar/AddLearningPathStepButton';
 import PinterestLightboxButton from '../pinterest/PinterestLightboxButton';
 
 export class LearningPath extends Component {
+  static mapDispatchToProps = {
+    copyPath: copyLearningPath,
+    localFetchLearingPath: fetchLearningPath,
+    replaceRoute: routerActions.replace,
+  };
+
+  static fetchData(props) {
+    const { replaceRoute, localFetchLearingPath, match: { url, params: { pathId } } } = props;
+    if (url === `/learningpaths/${pathId}/edit`) {
+      return localFetchLearingPath(pathId, true);
+    } else if (url === `/learningpaths/${pathId}/first-step`) {
+      return localFetchLearingPath(pathId, false).then((learningPath) => {
+        const stepId = learningPath.learningsteps[0].id;
+        replaceRoute({ pathname: `/learningpaths/${pathId}/step/${stepId}` });
+      }).catch(() => {
+        replaceRoute({ pathname: `/learningpaths/${pathId}` });
+      });
+    }
+    return localFetchLearingPath(pathId, false);
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -42,19 +63,7 @@ export class LearningPath extends Component {
     this.onCopyLearningPathClick = this.onCopyLearningPathClick.bind(this);
   }
   componentDidMount() {
-    const { replaceRoute, localFetchLearingPath, match: { url, params: { pathId } } } = this.props;
-    if (url === `/learningpaths/${pathId}/edit`) {
-      localFetchLearingPath(pathId, true);
-    } else if (url === `/learningpaths/${pathId}/first-step`) {
-      localFetchLearingPath(pathId, false).then(() => {
-        const stepId = this.props.learningPath.learningsteps[0].id;
-        replaceRoute({ pathname: `/learningpaths/${pathId}/step/${stepId}` });
-      }).catch(() => {
-        replaceRoute({ pathname: `/learningpaths/${pathId}` });
-      });
-    } else {
-      localFetchLearingPath(pathId, false);
-    }
+    LearningPath.fetchData(this.props);
   }
   onCopyLearningPathClick() {
     this.setState({
@@ -151,10 +160,4 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
   isTableOfContentOpen: state.sidebar.isLeftSideBarOpen,
 });
 
-const mapDispatchToProps = {
-  copyPath: copyLearningPath,
-  localFetchLearingPath: fetchLearningPath,
-  replaceRoute: routerActions.replace,
-};
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LearningPath));
+export default withRouter(connect(mapStateToProps, LearningPath.mapDispatchToProps)(LearningPath));

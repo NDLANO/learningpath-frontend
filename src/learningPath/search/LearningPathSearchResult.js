@@ -17,6 +17,7 @@ import LearningPathIntroduction from './LearningPathIntroduction';
 import IsBasedOn from '../../common/IsBasedOn';
 import LearningPathContributors from '../sidebar/LearningPathContributors';
 import { scaleImage } from '../../util/imageScaler';
+import requireAssets from '../../util/requireAssets';
 
 export default class SearchResult extends Component {
   constructor(props) {
@@ -40,7 +41,7 @@ export default class SearchResult extends Component {
       if (path.coverPhotoUrl && !this.state.imageError) {
         return <img className="search-result_img" role="presentation" src={scaleImage(path.coverPhotoUrl)} onError={this.handleImageError} />;
       }
-      return <img className="search-result_img" role="presentation" src={`/assets/${window.assets['placeholder.png']}`} />;
+      return <img className="search-result_img" role="presentation" src={`/assets/${requireAssets['placeholder.png']}`} />;
     };
 
     const tags = path.tags;

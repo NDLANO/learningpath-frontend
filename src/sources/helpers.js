@@ -27,6 +27,10 @@ const locationOrigin = (() => {
     return 'http://ndla-frontend';
   }
 
+  if (__SERVER__) {
+    return '';
+  }
+
   if (typeof location.origin === 'undefined') {
     location.origin = [location.protocol, '//', location.host, ':', location.port].join('');
   }

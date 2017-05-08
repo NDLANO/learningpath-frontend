@@ -8,13 +8,14 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import requireAssets from '../util/requireAssets';
 
 const EmbedSearchResultImage = ({ pagemap }) => {
   const imageSource = () => {
     if (pagemap && pagemap.cse_image && pagemap.cse_image.length > 0) {
       return pagemap.cse_image[0].src;
     }
-    return `/assets/${window.assets['placeholder.png']}`;
+    return `/assets/${requireAssets['placeholder.png']}`;
   };
 
   return (
