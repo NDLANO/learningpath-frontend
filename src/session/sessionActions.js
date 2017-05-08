@@ -103,7 +103,6 @@ export function renewAuthToken() {
   return dispatch => fetchNewToken()
     .then((token) => {
       dispatch(setAccessToken(token.access_token));
-      // dispatch(checkValidSession(token.access_token));
     });
 }
 

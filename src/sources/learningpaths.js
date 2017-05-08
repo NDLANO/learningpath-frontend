@@ -11,7 +11,7 @@ import queryString from 'query-string';
 import cloneDeep from 'lodash/cloneDeep';
 import map from 'lodash/map';
 import assureSequenceOrder from '../util/assureSequenceOrder';
-import { fetchAuth } from '../util/fetchAuth';
+import { fetchAuth } from '../sources/fetchAuth';
 import { fetchAuthorized, authorizationHeader, postAuthorized, putAuthorized, patchAuthorized, deleteAuthorized, resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';
 
 const fetchPath = fetchAuthorized('/learningpath-api/v1/learningpaths/:pathId');

@@ -9,7 +9,7 @@
 import 'isomorphic-fetch';
 import queryString from 'query-string';
 import formatUrl from '../util/formatUrlUtil';
-import { fetchAuth } from '../util/fetchAuth';
+import { fetchAuth } from '../sources/fetchAuth';
 
 import { resolveJsonOrRejectWithError, apiResourceUrl, authorizationHeader } from './helpers';
 

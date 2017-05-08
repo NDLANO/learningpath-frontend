@@ -10,7 +10,7 @@ import 'isomorphic-fetch';
 import defined from 'defined';
 import config from '../config';
 import formatUrl from '../util/formatUrlUtil';
-import { fetchAuth } from '../util/fetchAuth';
+import { fetchAuth } from '../sources/fetchAuth';
 
 const NDLA_API_URL = __SERVER__ ? config.ndlaApiUrl : window.config.ndlaApiUrl;
 const NDLA_ACCESS_TOKEN = __SERVER__ ? config.accessToken : window.config.accessToken;

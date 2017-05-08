@@ -15,12 +15,12 @@ export const fetchAuth = (input, init) => {
     const getState = () => window.tokenStatusHandler.getStoreState();
     const dispatch = window.tokenStatusHandler.getDispatch();
     const token = getState().authenticated ? getState().idToken : getState().accessToken;
-    isTokenValid(decodeToken(token).exp).then((valid) => {
+    return isTokenValid(decodeToken(token).exp).then((valid) => {
       if (valid.isTokenExpired) {
-        dispatch(actions.refreshToken()).then(() => fetch(input, init));
+        return dispatch(actions.refreshToken()).then(() => fetch(input, init));
       }
+      return fetch(input, init);
     });
-    return fetch(input, init);
   }
   return fetch(input, init);
 };
