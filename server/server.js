@@ -71,7 +71,7 @@ const renderHtmlString = (locale, userAgentString, state = {}, component = undef
 
 
 app.get('/health', (req, res) => {
-  res.status(200).send("Health check OK");
+  res.status(200).send('Health check OK');
 });
 
 app.get('/pinterest-proxy/*', requestProxy({
