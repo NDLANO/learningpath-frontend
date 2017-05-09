@@ -14,12 +14,12 @@ const errorMiddlewareReporter = store => next => (action) => {
     if (error instanceof ApiError) {
       const json = error.json;
       console.error(`${error.message} %o`, json.messages); // eslint-disable-line no-console
-      if (__SERVER__) {
+      if (__CLIENT__) {
         window.errorReporter.captureError(error, { serverResponse: error.json, requestUrl: error.url });
       }
     } else {
       console.error(action.payload, action, store.getState()); // eslint-disable-line no-console
-      if (__SERVER__) {
+      if (__CLIENT__) {
         window.errorReporter.captureError(error);
       }
     }
