@@ -9,8 +9,8 @@
 import { createAction } from 'redux-actions';
 import auth0 from 'auth0-js';
 import { routerActions } from 'react-router-redux';
-import { locationOrigin, auth0ClientId, auth0Domain, getToken } from '../sources/helpers';
-import { decodeToken, getTimeToUpdateInMs } from '../util/jwtHelper';
+import { locationOrigin, auth0ClientId, auth0Domain } from '../sources/helpers';
+import { decodeToken } from '../util/jwtHelper';
 import { fetchNewToken, isTokenValid } from '../sources/tokens';
 import { applicationError } from '../messages/messagesActions';
 
@@ -21,8 +21,8 @@ export const logoutAction = createAction('LOGOUT_ID_TOKEN');
 export const setIdToken = createAction('SET_ID_TOKEN');
 
 const auth = new auth0.WebAuth({
-  clientID: auth0ClientId,
-  domain: auth0Domain,
+  clientID: auth0ClientId || '',
+  domain: auth0Domain || '',
   responseType: 'token id_token',
   redirectUri: `${locationOrigin}/login/success`,
   scope: 'openid app_metadata name',

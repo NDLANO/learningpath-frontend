@@ -34,7 +34,6 @@ const basename = generateBasename(path);
 
 const browserHistory = basename ? createHistory({ basename }) : createHistory();
 
-
 const emptyState = {
   authenticated: false,
   accessToken: '',
@@ -52,7 +51,7 @@ const store = configureStore(initialState, browserHistory);
 
 const { logglyApiKey, logEnvironment, componentName } = window.config;
 window.errorReporter = ErrorReporter.getInstance({ store, logglyApiKey, environment: logEnvironment, componentName });
-window.tokenStatusHandler = TokenStatusHandler.getInstance({ store });
+TokenStatusHandler.getInstance({ store });
 
 ReactDOM.render(
   <Provider store={store} locale={locale}>
