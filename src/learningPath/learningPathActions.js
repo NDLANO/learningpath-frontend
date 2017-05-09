@@ -8,7 +8,6 @@
 
 import { createAction } from 'redux-actions';
 import { routerActions } from 'react-router-redux';
-
 import { fetchPath, createPath, deletePath, updatePath, copyPath, updateStatus, activateDeletedPath } from '../sources/learningpaths';
 import { applicationError, addMessage } from '../messages/messagesActions';
 import { createEmptyLearningPathStep } from './step/learningPathStepActions';
@@ -16,6 +15,7 @@ import polyglot from '../i18n';
 import { fetchLearningPathImageWithMetaUrl, setSelectedImage, setSavedImage } from '../imageSearch/imageActions';
 import { fetchMyLearningPaths } from '../myPage/myPageActions';
 import { getToken } from '../sources/helpers';
+import redirectAction from '../util/redirectAction';
 
 export const setLearningPath = createAction('SET_LEARNING_PATH');
 export const setLearningPathsStatus = createAction('UPDATE_LEARNING_PATHS_STATUS');
@@ -59,11 +59,11 @@ export function fetchLearningPath(pathId, isEdit = false) {
     })
     .catch((err) => {
       if (err.status === 403) {
-        dispatch(routerActions.push({ pathname: '/forbidden' }));
+        return dispatch(redirectAction('push', err, '/forbidden'));
       } else if (err.status === 404) {
-        dispatch(routerActions.push({ pathname: '/notfound' }));
+        return dispatch(redirectAction('push', err, '/notfound'));
       }
-      dispatch(applicationError(err));
+      return err;
     });
 }
 

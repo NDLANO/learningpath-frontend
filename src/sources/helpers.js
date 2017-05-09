@@ -67,7 +67,6 @@ const apiBaseUrl = (() => {
   return defined(NDLA_API_URL, locationOrigin);
 })();
 
-
 export function getToken(getState) {
   return getState().authenticated ? getState().idToken : getState().accessToken;
 }

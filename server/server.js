@@ -27,7 +27,7 @@ import Html from './Html';
 import { getToken, isTokenExpired, getExpireTime } from './auth';
 import Auth0SilentCallback from './Auth0SilentCallback';
 import configureStore from '../src/configureStore';
-import { routes } from '../src/routes';
+import { serverRoutes } from './serverRoutes';
 
 const app = express();
 
@@ -94,7 +94,7 @@ app.get('/get_token', (req, res) => {
 function prefetchData(req, dispatch) {
   const promises = [];
 
-  routes.forEach((route) => {
+  serverRoutes.forEach((route) => {
     const match = matchPath(req.url, route);
     if (match && route.component.fetchData) {
       promises.push(route.component.fetchData({
@@ -118,9 +118,10 @@ function handleResponse(req, res, token) {
     res.send(`<!doctype html>\n${htmlString}`);
     return;
   }
-  const store = configureStore({ locale, accessToken: token.access_token });
 
   const basename = isValidLocale(paths[1]) ? `${paths[1]}` : '';
+
+  const store = configureStore({ locale, accessToken: token.access_token });
 
   const context = {};
   const component =
@@ -143,6 +144,12 @@ function handleResponse(req, res, token) {
     prefetchData(req, store.dispatch).then(() => {
       const htmlString = renderHtmlString(locale, userAgentString, store.getState(), component);
       res.send(`<!doctype html>\n${htmlString}`);
+    }).catch((err) => {
+      if (err && (err.status === 403 || err.status === 404) && err.redirectPath) {
+        res.redirect(err.redirectPath);
+      } else {
+        res.redirect('/');
+      }
     });
   }
 }

@@ -17,6 +17,7 @@ import { setOembedPreview } from './edit/validateOembedActions';
 import polyglot from '../../i18n';
 import { oembedContentI18N } from '../../util/i18nFieldFinder';
 import { getToken } from '../../sources/helpers';
+import redirectAction from '../../util/redirectAction';
 
 export const setLearningPathStep = createAction('SET_LEARNING_PATH_STEP');
 export const sortLearningPathSteps = createAction('SORT_LEARNING_PATH_STEPS');
@@ -79,9 +80,10 @@ export function fetchLearningPathStep(pathId, stepId, isEdit = false) {
       })
     .catch((err) => {
       if (err.status === 404) {
-        dispatch(routerActions.push({ pathname: '/notfound' }));
+        return dispatch(redirectAction('push', err, '/notfound'));
       }
       dispatch(applicationError(err));
+      return err;
     });
   };
 }
