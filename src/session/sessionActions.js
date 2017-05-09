@@ -61,15 +61,6 @@ export function logout() {
     .catch(err => dispatch(applicationError(err)));
 }
 
-export function checkValidSession(token = undefined) {
-  return (dispatch, getState) => setTimeout(
-    () => {
-      dispatch(refreshToken(getState)); // eslint-disable-line
-    },
-    token ? getTimeToUpdateInMs(token) : getTimeToUpdateInMs(getToken(getState))
-  );
-}
-
 export function renewAuth0Token() {
   return (dispatch, getState) => new Promise((resolve) => {
     auth.renewAuth({
