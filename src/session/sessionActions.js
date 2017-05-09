@@ -90,7 +90,6 @@ export function renewAuth0Token() {
         dispatch(setAuthenticated(true));
         dispatch(setUserData(decodeToken(authResult.idToken)));
         resolve();
-        // dispatch(checkValidSession(authResult.idToken));
       } else {
         dispatch(logout());
         resolve();
