@@ -9,20 +9,19 @@
 import { createAction } from 'redux-actions';
 import { applicationError } from '../../messages/messagesActions';
 import { fetchPaths, fetchPath } from '../../sources/learningpaths';
-import { getToken } from '../../sources/helpers';
 
 export const setLearningPathBasedOn = createAction('SET_LEARNING_PATH_BASED_ON');
 export const setLearningPathSearchResults = createAction('SET_LEARNING_PATH_SEARCH_RESULTS');
 
 function fetchIsBasedOnPath(path) {
-  return (dispatch, getState) => fetchPath(getToken(getState), { pathId: path.isBasedOn })
+  return dispatch => fetchPath({ pathId: path.isBasedOn })
     .then((isBasedOnPath) => {
       dispatch(setLearningPathBasedOn({ isBasedOnPath, pathId: path.id }));
     }).catch(() => {});
 }
 
 export function searchLearningPaths(query) {
-  return (dispatch, getState) => fetchPaths(getToken(getState), query)
+  return dispatch => fetchPaths(query)
     .then((res) => {
       dispatch(setLearningPathSearchResults({
         results: res.results,

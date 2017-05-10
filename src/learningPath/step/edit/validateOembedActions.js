@@ -11,7 +11,6 @@ import { change } from 'redux-form';
 import get from 'lodash/get';
 import { fetchOembedUrl } from '../../../sources/learningpaths';
 import polyglot from '../../../i18n';
-import { getToken } from '../../../sources/helpers';
 
 export const removeOembedPreview = createAction('REMOVE_OEMBED_PREVIEW');
 export const setOembedPreview = createAction('SET_OEMBED_PREVIEW');
@@ -31,7 +30,7 @@ export function validateOembed(url, lang, embedType = 'omebed', fieldName = 'url
     }));
   }
 
-  return (dispatch, getState) => new Promise((resolve, reject) => fetchOembedUrl(getToken(getState), { url })
+  return (dispatch, getState) => new Promise((resolve, reject) => fetchOembedUrl({ url })
     .then((oembed) => {
       const state = getState();
       const currentOembedTitle = get(state, 'oembedPreview.oembedContent[0].title');

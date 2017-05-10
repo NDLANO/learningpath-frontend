@@ -12,20 +12,21 @@ import * as actions from '../session/sessionActions';
 import TokenStatusHandler from '../util/TokenStatusHandler';
 import { authorizationHeader, getToken } from '../sources/helpers';
 
-export const fetchAuth = (input, init) => {
-  if (__SERVER__ || process.env.NODE_ENV === 'unittest') {
-    return fetch(input, init);
-  }
-
+export const fetchAuth = (input, init = {}) => {
   const tokenStatusHandler = TokenStatusHandler.getInstance();
   const getState = tokenStatusHandler.getStoreState;
-  const dispatch = tokenStatusHandler.getDispatch();
   const token = getState().authenticated ? getState().idToken : getState().accessToken;
+  const headers = { ...init.headers, Authorization: authorizationHeader(getToken(getState)) };
+
+  if (__SERVER__ || process.env.NODE_ENV === 'unittest') {
+    return fetch(input, { ...init, headers });
+  }
 
   return isTokenValid(decodeToken(token).exp).then((valid) => {
     if (valid.isTokenExpired) {
+      const dispatch = tokenStatusHandler.getDispatch();
       return dispatch(actions.refreshToken()).then(() => fetch(input, { ...init, headers: { ...init.headers, Authorization: authorizationHeader(getToken(getState)) } }));
     }
-    return fetch(input, init);
+    return fetch(input, { ...init, headers });
   });
 };

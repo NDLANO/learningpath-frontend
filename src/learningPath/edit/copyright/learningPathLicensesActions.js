@@ -9,13 +9,12 @@
 import { createAction } from 'redux-actions';
 import { fetchPathLicenses } from '../../../sources/learningpaths';
 import { applicationError } from '../../../messages/messagesActions';
-import { getToken } from '../../../sources/helpers';
 
 export const setCreativeCommonLicenses = createAction('SET_CREATIVE_COMMON_LICENSES');
 export const setAllLicenses = createAction('SET_ALL_LICENSES');
 
 export function fetchLearningPathLicenses(filter = '') {
-  return (dispatch, getState) => fetchPathLicenses(getToken(getState), filter)
+  return dispatch => fetchPathLicenses(filter)
     .then((licenses) => {
       if (filter.length > 0) {
         dispatch(setCreativeCommonLicenses(licenses));

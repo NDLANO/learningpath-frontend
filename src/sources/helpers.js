@@ -109,16 +109,13 @@ export const authorizationHeader = token => `Bearer ${token}`;
 
 export function fetchAuthorized(path, method = 'GET') {
   const url = params => apiResourceUrl(formatUrl(path, params));
-  return (token, params = {}) => fetchAuth(url(params), {
-    method, headers: { Authorization: authorizationHeader(token) },
-  }).then(resolveJsonOrRejectWithError);
+  return (params = {}) => fetchAuth(url(params), { method }).then(resolveJsonOrRejectWithError);
 }
 
 export function postAuthorized(path) {
   const url = params => apiResourceUrl(formatUrl(path, params));
 
-  return (token, params = {}, body) => fetchAuth(url(params), {
-    headers: { Authorization: authorizationHeader(token) },
+  return (params = {}, body) => fetchAuth(url(params), {
     method: 'POST',
     body: JSON.stringify(body),
   }).then(resolveJsonOrRejectWithError);
@@ -127,8 +124,7 @@ export function postAuthorized(path) {
 export function putAuthorized(path) {
   const url = params => apiResourceUrl(formatUrl(path, params));
 
-  return (token, params = {}, body) => fetchAuth(url(params), {
-    headers: { Authorization: authorizationHeader(token) },
+  return (params = {}, body) => fetchAuth(url(params), {
     method: 'PUT',
     body: JSON.stringify(body),
   }).then(resolveJsonOrRejectWithError);
@@ -137,8 +133,7 @@ export function putAuthorized(path) {
 export function patchAuthorized(path) {
   const url = params => apiResourceUrl(formatUrl(path, params));
 
-  return (token, params = {}, body) => fetchAuth(url(params), {
-    headers: { Authorization: authorizationHeader(token) },
+  return (params = {}, body) => fetchAuth(url(params), {
     method: 'PATCH',
     body: JSON.stringify(body),
   }).then(resolveJsonOrRejectWithError);
@@ -146,8 +141,7 @@ export function patchAuthorized(path) {
 
 export function deleteAuthorized(path) {
   const url = params => apiResourceUrl(formatUrl(path, params));
-  return (token, params = {}) => fetchAuth(url(params), {
-    headers: { Authorization: authorizationHeader(token) },
+  return (params = {}) => fetchAuth(url(params), {
     method: 'DELETE',
   });
 }
