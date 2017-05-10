@@ -13,12 +13,16 @@ import TokenStatusHandler from '../util/TokenStatusHandler';
 import { authorizationHeader, getToken } from '../sources/helpers';
 
 export const fetchAuth = (url, options = {}) => {
+  if (process.env.NODE_ENV === 'unittest') {
+    return fetch(url, { ...options, headers: { ...options.headers, Authorization: authorizationHeader('12345678') } });
+  }
+
   const tokenStatusHandler = TokenStatusHandler.getInstance();
   const getState = tokenStatusHandler.getStoreState;
   const token = getToken(getState);
   const headers = { ...options.headers, Authorization: authorizationHeader(token) };
 
-  if (__SERVER__ || process.env.NODE_ENV === 'unittest') {
+  if (__SERVER__) {
     return fetch(url, { ...options, headers });
   }
 

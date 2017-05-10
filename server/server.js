@@ -28,6 +28,7 @@ import { getToken, isTokenExpired, getExpireTime } from './auth';
 import Auth0SilentCallback from './Auth0SilentCallback';
 import configureStore from '../src/configureStore';
 import { serverRoutes } from './serverRoutes';
+import TokenStatusHandler from '../src/util/TokenStatusHandler';
 
 const app = express();
 
@@ -122,6 +123,7 @@ function handleResponse(req, res, token) {
   const basename = isValidLocale(paths[1]) ? `${paths[1]}` : '';
 
   const store = configureStore({ locale, accessToken: token.access_token });
+  TokenStatusHandler.getInstance({ store });
 
   const context = {};
   const component =
