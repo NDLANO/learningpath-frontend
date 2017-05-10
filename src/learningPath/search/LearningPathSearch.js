@@ -34,7 +34,9 @@ class LearningPathSearch extends React.Component {
 
   static fetchData(props) {
     const { localSearchLearningPaths, location } = props;
-    return localSearchLearningPaths(queryString.parse(location.search));
+    const query = queryString.parse(location.search);
+    const queryWithSort = query.sort ? query : { ...query, sort: '-lastUpdated' };
+    return localSearchLearningPaths(queryWithSort);
   }
 
   componentWillMount() {
