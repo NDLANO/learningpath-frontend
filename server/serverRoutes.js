@@ -1,12 +1,12 @@
-import Welcome from './main/Welcome';
-import LoginProviders from './session/LoginProviders';
-import NotFound from './main/NotFound';
-import Forbidden from './main/Forbidden';
-import LearningPathSearch from './learningPath/search/LearningPathSearch';
-import LearningPath from './learningPath/LearningPath';
-import LearningPathStep from './learningPath/step/LearningPathStep';
+import Welcome from '../src/main/Welcome';
+import LoginProviders from '../src/session/LoginProviders';
+import NotFound from '../src/main/NotFound';
+import Forbidden from '../src/main/Forbidden';
+import LearningPathSearch from '../src/learningPath/search/LearningPathSearch';
+import LearningPath from '../src/learningPath/LearningPath';
+import LearningPathStep from '../src/learningPath/step/LearningPathStep';
 
-export const routes = [
+export const serverRoutes = [
   { path: '/',
     exact: true,
     component: Welcome,
@@ -20,11 +20,15 @@ export const routes = [
     component: LearningPathSearch,
   },
   { path: '/learningpaths/:pathId/step/:stepId',
-    exact: false,
+    exact: true,
     component: LearningPathStep,
   },
+  { path: '/learningpaths/:pathId/step/:stepId',
+    exact: true,
+    component: LearningPath,
+  },
   { path: '/learningpaths/:pathId',
-    exact: false,
+    exact: true,
     component: LearningPath,
   },
   { path: '/forbidden',

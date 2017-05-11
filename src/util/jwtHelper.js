@@ -9,7 +9,7 @@ export function getTokenIssuedAt(token) {
   return decoded.iat;
 }
 
-export const decodeIdToken = idToken => decode(idToken);
+export const decodeToken = idToken => decode(idToken);
 
 export function getTimeToUpdateInMs(token) {
   return (getTokenExpiration(token) - getTokenIssuedAt(token) - (60 * 3)) * 1000; // Removes 3 minutes from time to update

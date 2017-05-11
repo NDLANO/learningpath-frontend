@@ -13,6 +13,7 @@ import { Router } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import ErrorReporter from 'ndla-error-reporter';
 import isEmpty from 'lodash/isEmpty';
+import TokenStatusHandler from './util/TokenStatusHandler';
 import { configureLocale, isValidLocale } from './locale/configureLocale';
 import configureStore from './configureStore';
 import App from './main/App';
@@ -33,7 +34,6 @@ const basename = generateBasename(path);
 
 const browserHistory = basename ? createHistory({ basename }) : createHistory();
 
-
 const emptyState = {
   authenticated: false,
   accessToken: '',
@@ -51,7 +51,7 @@ const store = configureStore(initialState, browserHistory);
 
 const { logglyApiKey, logEnvironment, componentName } = window.config;
 window.errorReporter = ErrorReporter.getInstance({ store, logglyApiKey, environment: logEnvironment, componentName });
-
+TokenStatusHandler.getInstance({ store });
 
 ReactDOM.render(
   <Provider store={store} locale={locale}>
