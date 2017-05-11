@@ -78,6 +78,7 @@ export default class Oembed extends React.Component {
       return;
     }
 
+    /* Needed to enforce content to stay within iframe on Safari iOS */
     iframe.setAttribute('scrolling', 'no');
 
     const newHeight = parseInt(get(evt, 'data.height', 0), 10) + 55;
