@@ -4,4 +4,5 @@ npm-debug.log
 *.iml
 /.idea
 /.vscode
+jsconfig.json
 /htdocs/assets/

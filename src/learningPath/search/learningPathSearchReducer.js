@@ -24,7 +24,6 @@ export default handleActions({
       const nextState = cloneDeep(state);
       const results = nextState.results;
       const index = nextState.results.findIndex(path => path.id === action.payload.pathId);
-
       const updatedResults = [
         ...results.slice(0, index),
         { ...results[index], isBasedOnTitle: action.payload.isBasedOnPath.title },

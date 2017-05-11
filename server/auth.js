@@ -16,6 +16,7 @@ const NDLA_API_URL = config.ndlaApiUrl;
 const clientData = {
   grant_type: 'client_credentials',
 };
+
 const url = `${NDLA_API_URL}/auth/tokens`;
 
 const b64EncodeUnicode = str => btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (match, p1) => String.fromCharCode(`0x${p1}`)));

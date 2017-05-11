@@ -16,7 +16,7 @@ import { updateStep, createStep, deleteStep, fetchPathStep, updateSeqNo, activat
 import { setOembedPreview } from './edit/validateOembedActions';
 import polyglot from '../../i18n';
 import { oembedContentI18N } from '../../util/i18nFieldFinder';
-import { getToken } from '../../sources/helpers';
+import redirectAction from '../../util/redirectAction';
 
 export const setLearningPathStep = createAction('SET_LEARNING_PATH_STEP');
 export const sortLearningPathSteps = createAction('SORT_LEARNING_PATH_STEPS');
@@ -25,7 +25,7 @@ export const setOembedObject = createAction('SET_OEMBED_OBJECT');
 
 export function fetchOembed(query) {
   if (query.embedType === 'oembed') {
-    return (dispatch, getState) => fetchOembedUrl(getToken(getState), query)
+    return (dispatch, getState) => fetchOembedUrl(query)
       .then((object) => {
         const clonedObject = Object.assign({}, object, { url: query.url, embedType: query.embedType, language: getState().locale });
         dispatch(setOembedObject(clonedObject));
@@ -61,7 +61,7 @@ export function fetchLearningPathStep(pathId, stepId, isEdit = false) {
       }
     }
 
-    return fetchPathStep(getToken(getState), { pathId, stepId })
+    return fetchPathStep({ pathId, stepId })
       .then((step) => {
         dispatch(setLearningPathStep(step));
         canAccessLearningPathStep(pathId, step, isEdit, dispatch);
@@ -79,15 +79,16 @@ export function fetchLearningPathStep(pathId, stepId, isEdit = false) {
       })
     .catch((err) => {
       if (err.status === 404) {
-        dispatch(routerActions.push({ pathname: '/notfound' }));
+        return dispatch(redirectAction('push', err, '/notfound'));
       }
       dispatch(applicationError(err));
+      return err;
     });
   };
 }
 
 export function updateLearningPathStep(pathId, stepId, learningPathStep) {
-  return (dispatch, getState) => updateStep(getToken(getState), { pathId, stepId }, learningPathStep)
+  return dispatch => updateStep({ pathId, stepId }, learningPathStep)
     .then((lpspath) => {
       dispatch(addMessage({ message: polyglot.t('updateLearningPath.updatedMsg') }));
       dispatch(setLearningPathStep(lpspath));
@@ -100,7 +101,7 @@ export function updateLearningPathStep(pathId, stepId, learningPathStep) {
 }
 
 export function createLearningPathStep(pathId, learningPathStep) {
-  return (dispatch, getState) => createStep(getToken(getState), { pathId }, learningPathStep)
+  return dispatch => createStep({ pathId }, learningPathStep)
     .then((lpspath) => {
       dispatch(addMessage({ message: polyglot.t('updateLearningPath.updatedMsg') }));
       dispatch(fetchLearningPath(pathId));
@@ -112,15 +113,15 @@ export function createLearningPathStep(pathId, learningPathStep) {
 }
 
 export function activateDeletedLearningPathStep(pathId, stepId) {
-  return (dispatch, getState) =>
-    activateDeletedStep(getToken(getState), { pathId, stepId })
+  return dispatch =>
+    activateDeletedStep({ pathId, stepId })
       .then(() => dispatch(fetchLearningPath(pathId)))
   ;
 }
 
 export function deleteLearningPathStep(pathId, stepId, stepTitle) {
-  return (dispatch, getState) =>
-    deleteStep(getToken(getState), { pathId, stepId })
+  return dispatch =>
+    deleteStep({ pathId, stepId })
       .then(() => dispatch(
         addMessage(
           {
@@ -139,7 +140,7 @@ export function deleteLearningPathStep(pathId, stepId, stepTitle) {
 }
 
 export function updateStepSequenceNumber(pathId, stepId, seqNo) {
-  return (dispatch, getState) => updateSeqNo(getToken(getState), { pathId, stepId }, { seqNo })
+  return dispatch => updateSeqNo({ pathId, stepId }, { seqNo })
     .then(() => {
       dispatch(fetchLearningPath(pathId));
     })
