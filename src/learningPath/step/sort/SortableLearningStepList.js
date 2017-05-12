@@ -6,102 +6,50 @@
  *
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import flow from 'lodash/flow';
-import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
-import Icon from '../../../common/Icon';
-import createSortableItem from './SortableItem';
+import { SortableContainer } from 'react-sortable-hoc';
 import {
-  updateStepSequenceNumber,
   deleteLearningPathStep,
   sortLearningPathSteps,
 } from '../learningPathStepActions';
-import { titleI18N } from '../../../util/i18nFieldFinder';
+import SortableItem from './SortableItem';
 
-class SortableLearningStepList extends Component {
-  static findLearningStep(id, learningsteps) {
-    const step = learningsteps.find(c => c.id === id);
+const SortableLearningStepList = SortableContainer((props, { lang }) => {
+  const { learningsteps, deleteStep } = props;
 
-    return {
-      step,
-      index: learningsteps.indexOf(step),
-    };
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = { SortableItem: createSortableItem() };
-    this.moveLearningStep = this.moveLearningStep.bind(this);
-  }
-
-  moveLearningStep(id, atIndex) {
-    const { learningsteps, sortSteps } = this.props;
-    const { step, index } = SortableLearningStepList.findLearningStep(id, learningsteps);
-    learningsteps.splice(index, 1);
-    learningsteps.splice(atIndex, 0, step);
-    const updated = learningsteps.map((s, i) => Object.assign(s, { seqNo: i }));
-    sortSteps(updated);
-  }
-
-  render() {
-    const { lang } = this.context;
-    const { SortableItem } = this.state;
-    const { learningPathId, learningsteps, deleteStep, localUpdateStepSequenceNumber } = this.props;
-
-    if (!learningsteps || !learningPathId) {
-      return null;
-    }
-    return (
-      <div className="sortable">
-        <ul className="sortable_list">
-          {learningsteps.map((step, i) =>
+  return (
+    <div className="sortable">
+      <ul className="sortable_list">
+        {learningsteps.map((step, i) =>
             (<SortableItem
-              id={step.id} index={i} key={step.id} moveItem={this.moveLearningStep}
-              onDrop={(id, originalIndex, newIndex) => localUpdateStepSequenceNumber(learningPathId, step.id, newIndex)}
+              key={step.id}
+              index={i}
               placeholderClassName="sortable_placeholder"
-            >
-              <li className="sortable_item">
-                <div className="sortable_handle">
-                  <Icon.ImportExport className="icon--m" />
-                </div>
-                <div className="sortable_title">
-                  {titleI18N(step, lang, true)}
-                </div>
-                <div className="sortable_action">
-                  <button onClick={() => deleteStep(learningPathId, step.id, titleI18N(step, lang, true))} className="un-button">
-                    <Icon.Clear className="icon--m" />
-                  </button>
-                </div>
-              </li>
-            </SortableItem>)
+              step={step}
+              lang={lang}
+              deleteStep={deleteStep}
+            />)
           )}
-        </ul>
-      </div>
-    );
-  }
-}
+      </ul>
+    </div>
+  );
+});
 
 const mapStateToProps = state => state;
 
 export const mapDispatchToProps = {
   sortSteps: sortLearningPathSteps,
-  localUpdateStepSequenceNumber: updateStepSequenceNumber,
   deleteStep: deleteLearningPathStep,
 };
 
-export default flow(
-  new DragDropContext(HTML5Backend),
-  connect(mapStateToProps, mapDispatchToProps)
-)(SortableLearningStepList);
+export default connect(mapStateToProps, mapDispatchToProps)(SortableLearningStepList);
 
 SortableLearningStepList.propTypes = {
   sortSteps: PropTypes.func.isRequired,
   localUpdateStepSequenceNumber: PropTypes.func.isRequired,
   deleteStep: PropTypes.func.isRequired,
-  learningPathId: PropTypes.number,
   learningsteps: PropTypes.array,
 };
 

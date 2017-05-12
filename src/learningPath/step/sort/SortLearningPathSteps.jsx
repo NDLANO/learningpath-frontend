@@ -13,27 +13,63 @@ import { Link } from 'react-router-dom';
 import SortableLearningStepList from './SortableLearningStepList';
 import polyglot from '../../../i18n';
 import { getLearningPath } from '../../learningPathSelectors';
+import {
+  updateStepSequenceNumber,
+} from '../learningPathStepActions';
 
-const SortLearningPathSteps = ({ learningPath }) =>
-  <div>
-    <SortableLearningStepList learningPathId={learningPath.id} learningsteps={learningPath.learningsteps} />
-    <ul className="vertical-menu">
-      <li>
-        <Link className="cta-link cta-link--block" to={`/learningpaths/${learningPath.id}`}>
-          {polyglot.t('sortSteps.finish')}
-        </Link>
-      </li>
-    </ul>
-  </div>
-;
+class SortLearningPathSteps extends React.Component {
+
+  constructor(props) {
+    super();
+    this.state = {
+      items: props.learningPath && props.learningPath.learningsteps ? props.learningPath.learningsteps : [],
+    };
+  }
+
+  onSortEnd = (indexes) => {
+    console.log(indexes);
+    const learningsteps = this.props.learningPath.learningsteps;
+
+    const step = learningsteps[indexes.oldIndex];
+
+    console.log(step);
+    if (step) {
+      this.props.localUpdateStepSequenceNumber(this.props.learningPath.id, step.id, indexes.newIndex);
+    }
+  }
+  componentWillRecieveProps(nextProps) {
+
+  }
+  render() {
+    const { learningPath } = this.props;
+
+    return (
+      <div>
+        { (learningPath && learningPath.learningsteps && learningPath.id) ? <SortableLearningStepList learningPathId={learningPath.id} learningsteps={this.state.items} onSortEnd={this.onSortEnd} /> : null }
+        <ul className="vertical-menu">
+          <li>
+            <Link className="cta-link cta-link--block" to={`/learningpaths/${learningPath.id}`}>
+              {polyglot.t('sortSteps.finish')}
+            </Link>
+          </li>
+        </ul>
+      </div>
+    );
+  }
+}
 
 
 SortLearningPathSteps.propTypes = {
   learningPath: PropTypes.object.isRequired,
+  localUpdateStepSequenceNumber: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => Object.assign({}, state, {
   learningPath: getLearningPath(state),
 });
 
-export default connect(mapStateToProps)(SortLearningPathSteps);
+const mapDispatchToProps = {
+  localUpdateStepSequenceNumber: updateStepSequenceNumber,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SortLearningPathSteps);
