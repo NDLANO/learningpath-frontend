@@ -34,15 +34,6 @@ export const Footer = () =>
       <li className="footer_item">
         <a href="https://om.ndla.no/" className="footer_link">{polyglot.t('footer.aboutNDLA')}</a>
       </li>
-      <li className="footer_item">
-        <a href="https://om.ndla.no/" className="footer_link">{polyglot.t('footer.aboutLearningPath')}</a>
-      </li>
-      <li className="footer_item">
-        <a href="https://om.ndla.no/" className="footer_link">{polyglot.t('footer.feedback')}</a>
-      </li>
-      <li className="footer_item">
-        <a href="https://om.ndla.no/" className="footer_link">{polyglot.t('footer.privacy')}</a>
-      </li>
     </ul>
     <div className="footer_ruler" />
     <p className="footer_text">
