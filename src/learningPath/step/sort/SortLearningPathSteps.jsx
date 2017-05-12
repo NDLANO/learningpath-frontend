@@ -8,6 +8,9 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import {
+  arrayMove,
+} from 'react-sortable-hoc';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import SortableLearningStepList from './SortableLearningStepList';
@@ -23,22 +26,27 @@ class SortLearningPathSteps extends Component {
     super();
     this.state = {
       items: props.learningPath && props.learningPath.learningsteps ? props.learningPath.learningsteps : [],
+      loading: true,
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps.items);
+    const { learningPath } = nextProps;
+    if (this.state.loading) {
+      this.setState({ items: learningPath.learningsteps, loading: false });
+    }
   }
 
   onSortEnd = (indexes) => {
-    console.log(indexes);
     const learningsteps = this.props.learningPath.learningsteps;
 
     const step = learningsteps[indexes.oldIndex];
 
-    console.log(indexes.newIndex);
     if (step) {
-      console.log('Dispatching new index!');
+      this.setState(prevState => ({
+        items: arrayMove(prevState.items, indexes.oldIndex, indexes.newIndex),
+        loading: true,
+      }));
       this.props.localUpdateStepSequenceNumber(this.props.learningPath.id, step.id, indexes.newIndex);
     }
   }
@@ -48,7 +56,8 @@ class SortLearningPathSteps extends Component {
 
     return (
       <div>
-        {(learningPath && learningPath.learningsteps && learningPath.id) ? <SortableLearningStepList learningPathId={learningPath.id} learningsteps={this.state.items} onSortEnd={this.onSortEnd} /> : null}
+        {(learningPath && learningPath.learningsteps && learningPath.id) ?
+          <SortableLearningStepList learningPathId={learningPath.id} learningsteps={this.state.items} onSortEnd={this.onSortEnd} /> : null}
         <ul className="vertical-menu">
           <li>
             <Link className="cta-link cta-link--block" to={`/learningpaths/${learningPath.id}`}>
