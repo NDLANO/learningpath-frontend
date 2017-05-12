@@ -23,15 +23,15 @@ const SortableLearningStepList = SortableContainer((props, { lang }) => {
     <div className="sortable">
       <ul className="sortable_list">
         {learningsteps.map((step, i) =>
-            (<SortableItem
-              key={step.id}
-              index={i}
-              placeholderClassName="sortable_placeholder"
-              step={step}
-              lang={lang}
-              deleteStep={deleteStep}
-            />)
-          )}
+          (<SortableItem
+            key={step.id}
+            index={i}
+            placeholderClassName="sortable_placeholder"
+            step={step}
+            lang={lang}
+            deleteStep={deleteStep}
+          />)
+        )}
       </ul>
     </div>
   );
@@ -48,7 +48,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(SortableLearningStep
 
 SortableLearningStepList.propTypes = {
   sortSteps: PropTypes.func.isRequired,
-  localUpdateStepSequenceNumber: PropTypes.func.isRequired,
   deleteStep: PropTypes.func.isRequired,
   learningsteps: PropTypes.array,
 };
