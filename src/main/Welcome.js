@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { routerActions } from 'react-router-redux';
 import isEmpty from 'lodash/isEmpty';
-
+import queryString from 'query-string';
 import Logo from '../common/Logo';
 import polyglot from '../i18n';
 import Masthead from '../common/Masthead';
@@ -31,7 +31,7 @@ class Welcome extends Component {
     const { query } = this.state;
     e.preventDefault();
     const sort = (query && !isEmpty(query)) ? '-relevance' : '-lastUpdated';
-    this.props.pushRoute({ pathname: '/learningpaths', query: { query, page: 1, sort } });
+    this.props.pushRoute({ pathname: '/learningpaths', search: `?${queryString.stringify({ query, page: 1, sort })}` });
   }
 
   render() {
