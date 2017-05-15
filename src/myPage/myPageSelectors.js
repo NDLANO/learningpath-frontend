@@ -17,7 +17,6 @@ const getLearningPaths = state => state.learningPaths;
 export const getSortKey = state => state.myLearningPathsSortOrder || 'title';
 
 const sortPaths = (paths, field) => {
-  console.log(field);
   switch (field) {
     case 'title':
       return sortBy(paths, p => p.title);
