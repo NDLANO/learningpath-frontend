@@ -8,18 +8,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { SortableContainer } from 'react-sortable-hoc';
-import {
-  deleteLearningPathStep,
-  sortLearningPathSteps,
-} from '../learningPathStepActions';
 import SortableItem from './SortableItem';
 
-const SortableLearningStepList = SortableContainer((props, { lang }) => {
-  const { learningsteps, deleteStep } = props;
-
-  return (
+const SortableLearningStepList = SortableContainer(({ learningsteps, learningPathId, lang }) =>
+  (
     <div className="sortable">
       <ul className="sortable_list">
         {learningsteps.map((step, i) =>
@@ -29,29 +22,18 @@ const SortableLearningStepList = SortableContainer((props, { lang }) => {
             placeholderClassName="sortable_placeholder"
             step={step}
             lang={lang}
-            deleteStep={deleteStep}
+            learningPathId={learningPathId}
           />)
         )}
       </ul>
     </div>
-  );
-});
-
-const mapStateToProps = state => state;
-
-export const mapDispatchToProps = {
-  sortSteps: sortLearningPathSteps,
-  deleteStep: deleteLearningPathStep,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SortableLearningStepList);
+  ));
 
 SortableLearningStepList.propTypes = {
-  sortSteps: PropTypes.func.isRequired,
-  deleteStep: PropTypes.func.isRequired,
   learningsteps: PropTypes.array,
-};
-
-SortableLearningStepList.contextTypes = {
+  deleteStep: PropTypes.func.isRequired,
+  learningPathId: PropTypes.number.isRequired,
   lang: PropTypes.string.isRequired,
 };
+
+export default SortableLearningStepList;

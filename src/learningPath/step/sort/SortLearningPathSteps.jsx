@@ -16,9 +16,7 @@ import { Link } from 'react-router-dom';
 import SortableLearningStepList from './SortableLearningStepList';
 import polyglot from '../../../i18n';
 import { getLearningPath } from '../../learningPathSelectors';
-import {
-  updateStepSequenceNumber,
-} from '../learningPathStepActions';
+import { updateStepSequenceNumber } from '../learningPathStepActions';
 
 class SortLearningPathSteps extends Component {
 
@@ -42,7 +40,7 @@ class SortLearningPathSteps extends Component {
 
     const step = learningsteps[indexes.oldIndex];
 
-    if (step) {
+    if (step && (indexes.oldIndex !== indexes.newIndex)) {
       this.setState(prevState => ({
         items: arrayMove(prevState.items, indexes.oldIndex, indexes.newIndex),
         loading: true,
@@ -52,12 +50,11 @@ class SortLearningPathSteps extends Component {
   }
 
   render() {
-    const { learningPath } = this.props;
-
+    const { learningPath, lang } = this.props;
     return (
       <div>
         {(learningPath && learningPath.learningsteps && learningPath.id) ?
-          <SortableLearningStepList learningPathId={learningPath.id} learningsteps={this.state.items} onSortEnd={this.onSortEnd} /> : null}
+          <SortableLearningStepList learningPathId={learningPath.id} learningsteps={this.state.items} onSortEnd={this.onSortEnd} lang={lang} /> : null}
         <ul className="vertical-menu">
           <li>
             <Link className="cta-link cta-link--block" to={`/learningpaths/${learningPath.id}`}>
@@ -74,6 +71,7 @@ class SortLearningPathSteps extends Component {
 SortLearningPathSteps.propTypes = {
   learningPath: PropTypes.object.isRequired,
   localUpdateStepSequenceNumber: PropTypes.func.isRequired,
+  lang: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => Object.assign({}, state, {
