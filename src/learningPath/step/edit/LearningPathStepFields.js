@@ -90,26 +90,6 @@ const LearningPathStepFields = (props) => {
 
       <div className="learning-step-form_group">
         <div className="learning-step-form_left">
-          <DescriptionLicenseInfo />
-        </div>
-        <div className="learning-step-form_right">
-          <div className="learning-step-form_select">
-            <ObjectSelector
-              name="license"
-              className="learning-step-form_select"
-              idKey="license"
-              labelKey="description"
-              options={licenseOptions}
-              disabled={disableLicense()}
-              input={license.input}
-            />
-            {(description.meta.touched) && description.meta.error && <span className="error_message error_message--red">{description.meta.error}</span>}
-          </div>
-        </div>
-      </div>
-
-      <div className="learning-step-form_group">
-        <div className="learning-step-form_left">
           <span className="learning-step-form_icon-bg"><Icon.Create /></span>
           <OnClickCheckbox input={showTitle.input} />
         </div>
@@ -117,18 +97,37 @@ const LearningPathStepFields = (props) => {
           <OneLineEditor placeholder={polyglot.t('editPathStep.titlePlaceHolder')} wrapperClassName="learning-step-form_input learning-step-form_title" {...title} />
         </div>
       </div>
-      <DescriptionHTMLEditor input={description.input} lang={lang} onBlur={handleDescriptionBlur} />
-      <div className="learning-step-form_group">
-        <LearningPathStepEmbed learningPathId={learningPathId} step={step} handleEmbedUrlChange={handleEmbedUrlChange} />
-        <div className="learningsource-form">
-          <div>
-            <label className="mediatype-menu__label" htmlFor="url">{polyglot.t('editPathStep.urlLabel')}</label>
-            <input name="url" onBlur={handleUrlOnBlur} onChange={handleUrlOnBlur} value={url.input.value.url} placeholder={polyglot.t('editPathStep.urlPlaceholder')} type="url" />
-            {url.meta.touched && url.meta.error && <span className="error_message error_message--red">{url.meta.error}</span>}
-            <PreviewOembed content={oembedPreview} />
+      <div className="learning-step-form_box">
+        <DescriptionHTMLEditor input={description.input} lang={lang} onBlur={handleDescriptionBlur} />
+        <div className="learning-step-form_group license-learning-step-form_group">
+          <div className="learning-step-form_left">
+            <DescriptionLicenseInfo />
           </div>
-          {(url.meta.touched || description.meta.touched) && url.meta.error && <span className="error_message error_message--red">{url.meta.error}</span>}
+          <div className="learning-step-form_right">
+            <div className="learning-step-form_select">
+              <ObjectSelector
+                name="license"
+                className="learning-step-form_select"
+                idKey="license"
+                labelKey="description"
+                options={licenseOptions}
+                disabled={disableLicense()}
+                input={license.input}
+              />
+              {(description.meta.touched) && description.meta.error && <span className="error_message error_message--red">{description.meta.error}</span>}
+            </div>
+          </div>
         </div>
+      </div>
+      <LearningPathStepEmbed learningPathId={learningPathId} step={step} handleEmbedUrlChange={handleEmbedUrlChange} />
+      <div className="learningsource-form">
+        <div>
+          <label className="mediatype-menu__label" htmlFor="url">{polyglot.t('editPathStep.urlLabel')}</label>
+          <input name="url" onBlur={handleUrlOnBlur} onChange={handleUrlOnBlur} value={url.input.value.url} placeholder={polyglot.t('editPathStep.urlPlaceholder')} type="url" />
+          {url.meta.touched && url.meta.error && <span className="error_message error_message--red">{url.meta.error}</span>}
+          <PreviewOembed content={oembedPreview} />
+        </div>
+        {(url.meta.touched || description.meta.touched) && url.meta.error && <span className="error_message error_message--red">{url.meta.error}</span>}
       </div>
     </div>
   );
