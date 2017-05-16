@@ -21,7 +21,7 @@ function fetchIsBasedOnPath(path) {
 }
 
 export function searchLearningPaths(query) {
-  return dispatch => fetchPaths(query)
+  return (dispatch, getState) => fetchPaths(query, getState().locale)
     .then((res) => {
       dispatch(setLearningPathSearchResults({
         results: res.results,
