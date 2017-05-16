@@ -57,6 +57,7 @@ export function logout() {
         returnTo: `${locationOrigin}/`,
         client_id: auth0ClientId,
       });
+      window.localStorage.clear();
     })
     .catch(err => dispatch(applicationError(err)));
 }
