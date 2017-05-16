@@ -39,7 +39,7 @@ class Welcome extends Component {
       <Wrapper>
         <OneColumn>
           <div className="frontpage-masthead">
-            <Masthead logo={<Logo cssModifier="on-dark" />} />
+            <Masthead logo={<Logo beta cssModifier="on-dark" />} />
           </div>
           <div className="hero">
             <h1 className="hero_title">{polyglot.t('welcomePage.title1')}</h1>
