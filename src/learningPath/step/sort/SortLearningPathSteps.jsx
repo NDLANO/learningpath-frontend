@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 import SortableLearningStepList from './SortableLearningStepList';
 import polyglot from '../../../i18n';
 import { getLearningPath } from '../../learningPathSelectors';
-import { updateStepSequenceNumber } from '../learningPathStepActions';
+import { updateStepSequenceNumber, deleteLearningPathStep } from '../learningPathStepActions';
 
 class SortLearningPathSteps extends Component {
 
@@ -30,7 +30,7 @@ class SortLearningPathSteps extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { learningPath } = nextProps;
-    if (this.state.loading) {
+    if (this.state.loading || learningPath.learningsteps.length !== this.state.items.length) {
       this.setState({ items: learningPath.learningsteps, loading: false });
     }
   }
@@ -48,14 +48,29 @@ class SortLearningPathSteps extends Component {
       this.props.localUpdateStepSequenceNumber(this.props.learningPath.id, step.id, indexes.newIndex);
     }
   }
+  shouldCancelStart = (e) => {
+    for (let target = e.target; target !== this.contentDiv; target = target.parentElement) {
+      if (target && target.tagName.toLowerCase() === 'button') {
+        return true;
+      }
+    }
+    return false;
+  }
 
   render() {
-    const { learningPath, lang } = this.props;
+    const { learningPath, lang, deleteStep } = this.props;
     return (
-      <div>
+      <div ref={((contentDiv) => { this.contentDiv = contentDiv; })}>
         {(learningPath && learningPath.learningsteps && learningPath.id) ?
-          <SortableLearningStepList learningPathId={learningPath.id} learningsteps={this.state.items} onSortEnd={this.onSortEnd} lang={lang} /> : null}
-        <ul className="vertical-menu">
+          <SortableLearningStepList
+            learningPathId={learningPath.id}
+            learningsteps={this.state.items}
+            onSortEnd={this.onSortEnd}
+            lang={lang}
+            shouldCancelStart={this.shouldCancelStart}
+            deleteStep={deleteStep}
+          /> : null}
+        <ul className="vertical-menu" >
           <li>
             <Link className="cta-link cta-link--block" to={`/learningpaths/${learningPath.id}`}>
               {polyglot.t('sortSteps.finish')}
@@ -71,6 +86,7 @@ class SortLearningPathSteps extends Component {
 SortLearningPathSteps.propTypes = {
   learningPath: PropTypes.object.isRequired,
   localUpdateStepSequenceNumber: PropTypes.func.isRequired,
+  deleteStep: PropTypes.func.isRequired,
   lang: PropTypes.string.isRequired,
 };
 
@@ -80,6 +96,7 @@ const mapStateToProps = state => Object.assign({}, state, {
 
 const mapDispatchToProps = {
   localUpdateStepSequenceNumber: updateStepSequenceNumber,
+  deleteStep: deleteLearningPathStep,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SortLearningPathSteps);

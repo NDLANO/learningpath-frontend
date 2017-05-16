@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import { SortableContainer } from 'react-sortable-hoc';
 import SortableItem from './SortableItem';
 
-const SortableLearningStepList = SortableContainer(({ learningsteps, learningPathId, lang }) =>
+const SortableLearningStepList = SortableContainer(({ learningsteps, learningPathId, lang, deleteStep }) =>
   (
     <div className="sortable">
       <ul className="sortable_list">
@@ -23,6 +23,7 @@ const SortableLearningStepList = SortableContainer(({ learningsteps, learningPat
             step={step}
             lang={lang}
             learningPathId={learningPathId}
+            deleteStep={deleteStep}
           />)
         )}
       </ul>
