@@ -12,18 +12,16 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import polyglot from '../i18n';
 
-const IsBasedOn = ({ path, showText }) => {
-  const title = path.isBasedOnTitle ? path.isBasedOnTitle : polyglot.t('learningPath.isBasedOnPath');
-  const url = `/learningpaths/${path.isBasedOn}/first-step`;
-  return (
-    <span className="is-based-on_wrapper">
-      {showText ? <span>{polyglot.t('learningPath.isBasedOn')}</span> : ''}
-      <Link to={url} className="cta-link--primary cta-link--underline" target="_blank" rel="noopener noreferrer" >
-        {title}
+const IsBasedOn = ({ path, showText }) => (
+  <span className="is-based-on_wrapper">
+    {showText ? <span>{polyglot.t('learningPath.isBasedOn')}</span> : ''}
+    { path.isBasedOnTitle ?
+      <Link to={`/learningpaths/${path.isBasedOn}/first-step`} className="cta-link--primary cta-link--underline" target="_blank" rel="noopener noreferrer">
+        {path.isBasedOnTitle}
       </Link>
-    </span>
-  );
-};
+      : polyglot.t('learningPath.isBasedOnPath')}
+  </span>
+);
 
 IsBasedOn.propTypes = {
   path: PropTypes.object.isRequired,
