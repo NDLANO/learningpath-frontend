@@ -17,7 +17,7 @@ function fetchIsBasedOnPath(path) {
   return dispatch => fetchPath({ pathId: path.isBasedOn })
     .then((isBasedOnPath) => {
       dispatch(setLearningPathBasedOn({ isBasedOnPath, pathId: path.id }));
-    });
+    }).catch(() => {});
 }
 
 export function searchLearningPaths(query) {
