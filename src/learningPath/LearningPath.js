@@ -81,7 +81,7 @@ export class LearningPath extends Component {
     const addStepButton = showButtonsUrls.includes(match.path) && match.isExact ? <AddLearningPathStepButton /> : null;
     const pinterestButton = match.path === '/learningpaths/:pathId/step/:stepId' && match.isExact ? <PinterestLightboxButton learningPath={learningPath} /> : null;
     const sortLearningSteps = match.url === `/learningpaths/${match.params.pathId}/step/sort`;
-    const sortableTableOfContent = sortLearningSteps ? <SortLearningPathSteps learningPath={learningPath} /> : <LearningPathToC learningPath={learningPath} activeStepId={stepId} />;
+    const sortableTableOfContent = sortLearningSteps ? <SortLearningPathSteps learningPath={learningPath} lang={lang} /> : <LearningPathToC learningPath={learningPath} activeStepId={stepId} />;
     const sortableTableOfContentButton = !sortLearningSteps ? <SortLearningStepsButton learningPath={learningPath} /> : null;
 
     const collapseClassName = () => classNames({

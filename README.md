@@ -93,13 +93,9 @@ https://facebook.github.io/react/
 React package for working with the DOM.
 https://facebook.github.io/react/
 
-**react-dnd:**
+**react-sortable-hoc:**
 Drag and Drop for React
-https://github.com/gaearon/react-dnd
-
-**react-dnd-html5-backend:**
-HTML5 backend for React DnD
-https://github.com/gaearon/react-dnd-html5-backend
+https://github.com/clauderic/react-sortable-hoc
 
 **react-helmet:**
 A document head manager for React
@@ -272,7 +268,7 @@ http://github.com/webpack/extract-text-webpack-plugin
 ### Testing
 
 **jest**
-🃏 Painless JavaScript Testing. 
+🃏 Painless JavaScript Testing.
 https://github.com/facebook/jest
 
 **babel-jest**
