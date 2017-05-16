@@ -47,7 +47,7 @@ export function loginSocialMedia(type) {
   });
 }
 
-export function logout() {
+export function logout(federated = undefined) {
   return dispatch => fetchNewToken()
     .then((token) => {
       dispatch(setAccessToken(token.access_token));
@@ -56,6 +56,7 @@ export function logout() {
       auth.logout({
         returnTo: `${locationOrigin}/`,
         client_id: auth0ClientId,
+        federated,
       });
     })
     .catch(err => dispatch(applicationError(err)));
