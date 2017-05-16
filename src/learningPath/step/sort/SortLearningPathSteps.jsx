@@ -21,13 +21,14 @@ import { updateStepSequenceNumber, deleteLearningPathStep, sortLearningPathSteps
 class SortLearningPathSteps extends Component {
 
   onSortEnd = (indexes) => {
-    const learningsteps = this.props.learningPath.learningsteps;
+    const { sortSteps, localUpdateStepSequenceNumber, learningPath } = this.props;
+    // const learningsteps = this.props.learningPath.learningsteps;
 
-    const step = learningsteps[indexes.oldIndex];
+    const step = learningPath.learningsteps[indexes.oldIndex];
 
     if (step && (indexes.oldIndex !== indexes.newIndex)) {
-      this.props.sortSteps(arrayMove(learningsteps, indexes.oldIndex, indexes.newIndex));
-      this.props.localUpdateStepSequenceNumber(this.props.learningPath.id, step.id, indexes.newIndex);
+      sortSteps(arrayMove(learningPath.learningsteps, indexes.oldIndex, indexes.newIndex));
+      localUpdateStepSequenceNumber(learningPath.id, step.id, indexes.newIndex);
     }
   }
   shouldCancelStart = (e) => {
