@@ -22,12 +22,12 @@ class SortLearningPathSteps extends Component {
 
   onSortEnd = (indexes) => {
     const { sortSteps, localUpdateStepSequenceNumber, learningPath } = this.props;
-    // const learningsteps = this.props.learningPath.learningsteps;
+    const learningsteps = learningPath.learningsteps;
 
-    const step = learningPath.learningsteps[indexes.oldIndex];
+    const step = learningsteps[indexes.oldIndex];
 
     if (step && (indexes.oldIndex !== indexes.newIndex)) {
-      sortSteps(arrayMove(learningPath.learningsteps, indexes.oldIndex, indexes.newIndex));
+      sortSteps(arrayMove(learningsteps, indexes.oldIndex, indexes.newIndex));
       localUpdateStepSequenceNumber(learningPath.id, step.id, indexes.newIndex);
     }
   }
