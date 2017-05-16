@@ -16,24 +16,9 @@ import { Link } from 'react-router-dom';
 import SortableLearningStepList from './SortableLearningStepList';
 import polyglot from '../../../i18n';
 import { getLearningPath } from '../../learningPathSelectors';
-import { updateStepSequenceNumber, deleteLearningPathStep } from '../learningPathStepActions';
+import { updateStepSequenceNumber, deleteLearningPathStep, sortLearningPathSteps } from '../learningPathStepActions';
 
 class SortLearningPathSteps extends Component {
-
-  constructor(props) {
-    super();
-    this.state = {
-      items: props.learningPath && props.learningPath.learningsteps ? props.learningPath.learningsteps : [],
-      loading: true,
-    };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { learningPath } = nextProps;
-    if (this.state.loading || learningPath.learningsteps.length !== this.state.items.length) {
-      this.setState({ items: learningPath.learningsteps, loading: false });
-    }
-  }
 
   onSortEnd = (indexes) => {
     const learningsteps = this.props.learningPath.learningsteps;
@@ -41,10 +26,7 @@ class SortLearningPathSteps extends Component {
     const step = learningsteps[indexes.oldIndex];
 
     if (step && (indexes.oldIndex !== indexes.newIndex)) {
-      this.setState(prevState => ({
-        items: arrayMove(prevState.items, indexes.oldIndex, indexes.newIndex),
-        loading: true,
-      }));
+      this.props.sortSteps(arrayMove(learningsteps, indexes.oldIndex, indexes.newIndex));
       this.props.localUpdateStepSequenceNumber(this.props.learningPath.id, step.id, indexes.newIndex);
     }
   }
@@ -64,7 +46,7 @@ class SortLearningPathSteps extends Component {
         {(learningPath && learningPath.learningsteps && learningPath.id) ?
           <SortableLearningStepList
             learningPathId={learningPath.id}
-            learningsteps={this.state.items}
+            learningsteps={learningPath.learningsteps}
             onSortEnd={this.onSortEnd}
             lang={lang}
             shouldCancelStart={this.shouldCancelStart}
@@ -88,6 +70,7 @@ SortLearningPathSteps.propTypes = {
   localUpdateStepSequenceNumber: PropTypes.func.isRequired,
   deleteStep: PropTypes.func.isRequired,
   lang: PropTypes.string.isRequired,
+  sortSteps: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => Object.assign({}, state, {
@@ -97,6 +80,7 @@ const mapStateToProps = state => Object.assign({}, state, {
 const mapDispatchToProps = {
   localUpdateStepSequenceNumber: updateStepSequenceNumber,
   deleteStep: deleteLearningPathStep,
+  sortSteps: sortLearningPathSteps,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SortLearningPathSteps);
