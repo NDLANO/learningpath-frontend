@@ -27,6 +27,9 @@ const sortPaths = (paths, field) => {
     case '-lastUpdated':
       return reverse(sortBy(paths, 'lastUpdated'));
 
+    case 'status':
+      return reverse(sortBy(paths, 'status'));
+
     default:
       return sortBy(paths, field);
   }
