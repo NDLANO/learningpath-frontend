@@ -163,9 +163,6 @@ const phrases = {
   },
   footer: {
     aboutNDLA: 'About NDLA',
-    aboutLearningPath: 'About learning paths',
-    privacy: 'Privacy',
-    feedback: 'Feedback',
     footerInfo: 'This webapplication is developed by NDLA as Open Source code.',
     footerEditiorInChief: 'Editor in chief: ',
     footerManagingEditor: 'Managing editor: ',

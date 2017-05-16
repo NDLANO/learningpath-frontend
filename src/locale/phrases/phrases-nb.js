@@ -163,9 +163,6 @@ const phrases = {
   },
   footer: {
     aboutNDLA: 'Om NDLA',
-    aboutLearningPath: 'Om læringsstier',
-    privacy: 'Personvern',
-    feedback: 'Tilbakemelding',
     footerInfo: 'Nettstedet er utarbeidet av NDLA som åpen kildekode.',
     footerEditiorInChief: 'Ansvarlig redaktør: ',
     footerManagingEditor: 'Utgaveansvarlig: ',
