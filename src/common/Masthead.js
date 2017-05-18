@@ -109,7 +109,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
   changeStatusButton: get(ownProps, 'changeStatusButton', null),
   isLeftSideBarOpen: get(state, 'sidebar.isLeftSideBarOpen', false),
   isRightSidebarOpen: get(state, 'sidebar.isRightSidebarOpen', false),
-  logo: get(ownProps, 'logo', <Logo />),
+  logo: get(ownProps, 'logo', <Logo beta />),
 });
 const mapDispatchToProps = {
   localCloseSidebars: closeSidebars,
