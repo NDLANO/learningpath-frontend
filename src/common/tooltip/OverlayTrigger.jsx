@@ -6,7 +6,8 @@
  *
  */
 
-import React, { Component, PropTypes, cloneElement } from 'react';
+import React, { Component, cloneElement } from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import createChainedFunction from 'react-overlays/lib/utils/createChainedFunction';
 import Overlay from './Overlay';
