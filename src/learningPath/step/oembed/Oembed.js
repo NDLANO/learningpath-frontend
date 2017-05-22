@@ -82,7 +82,6 @@ export default class Oembed extends React.Component {
     iframe.setAttribute('scrolling', 'no');
 
     const newHeight = parseInt(get(evt, 'data.height', 0), 10) + 55;
-    const currentHeight = parseInt(get(iframe, 'style.height') || 0, 10);
 
     iframe.style.height = `${newHeight}px`;
 
