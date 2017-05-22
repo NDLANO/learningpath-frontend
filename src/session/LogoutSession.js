@@ -35,7 +35,7 @@ export class LogoutSession extends React.Component {
     return (
       <div className="one-column one-column--narrow logout-container">
         <button className="button--primary-outline cta-link--block" onClick={() => this.handleLogoutClick()}>{polyglot.t('logoutSession.logutLearningpathSite')}</button>
-        <b>{polyglot.t('logoutSession.or')}</b>
+        <strong>{polyglot.t('logoutSession.or')}</strong>
         <button className="button--primary-outline cta-link--block" onClick={() => this.handleLogoutClick(true)}>{polyglot.t('logoutSession.logoutWholeSession')}</button>
       </div>
     );
