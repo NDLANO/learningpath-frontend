@@ -28,6 +28,11 @@ const phrases = {
   loginProviders: {
     description: 'Log in with',
   },
+  logoutSession: {
+    or: 'or',
+    logoutWholeSession: 'Logout from all services',
+    logutLearningpathSite: 'Logout from learningpaths',
+  },
   logo: {
     altText: 'The Norwegian Digital Learning Arena',
   },

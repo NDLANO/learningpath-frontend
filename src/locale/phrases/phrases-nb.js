@@ -28,6 +28,11 @@ const phrases = {
   loginProviders: {
     description: 'Logg inn i NDLA med',
   },
+  logoutSession: {
+    or: 'eller',
+    logoutWholeSession: 'Logg helt ut av alle tjenester',
+    logutLearningpathSite: 'Logg ut av læringssti',
+  },
   logo: {
     altText: 'Nasjonal digital læringsarena',
   },

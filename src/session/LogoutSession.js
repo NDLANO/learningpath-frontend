@@ -9,29 +9,46 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import * as actions from './sessionActions';
-import ifAuthenticated from '../util/ifAuthenticated';
+import polyglot from '../i18n';
 
 export class LogoutSession extends React.Component {
-  componentWillMount() {
-    const { localLogout, authenticated, localIfAuthenticated } = this.props;
-    localIfAuthenticated(authenticated, localLogout);
+  constructor() {
+    super();
+    this.state = {
+      logoutClicked: false,
+    };
+  }
+
+  handleLogoutClick = (federated = undefined) => {
+    this.setState({ logoutClicked: true });
+    this.props.localLogout(federated);
   }
 
   render() {
-    return null;
+    const { authenticated } = this.props;
+    if (!authenticated && !this.state.logoutClicked) {
+      return <Redirect to="/forbidden" />;
+    }
+
+    return (
+      <div className="one-column one-column--narrow logout-container">
+        <button className="button--primary-outline cta-link--block" onClick={() => this.handleLogoutClick()}>{polyglot.t('logoutSession.logutLearningpathSite')}</button>
+        <strong>{polyglot.t('logoutSession.or')}</strong>
+        <button className="button--primary-outline cta-link--block" onClick={() => this.handleLogoutClick(true)}>{polyglot.t('logoutSession.logoutWholeSession')}</button>
+      </div>
+    );
   }
 }
 
 LogoutSession.propTypes = {
   localLogout: PropTypes.func.isRequired,
-  localIfAuthenticated: PropTypes.func.isRequired,
   authenticated: PropTypes.bool.isRequired,
 };
 
 const mapDispatchToProps = {
   localLogout: actions.logout,
-  localIfAuthenticated: ifAuthenticated,
 };
 
 export default connect(state => state, mapDispatchToProps)(LogoutSession);
