@@ -132,7 +132,7 @@ test('component/Oembed iframe resizing', () => {
     source: iframe.contentWindow, data: { height: '900' },
   });
 
-  expect(iframe.style.height).toBe('1055px');
+  expect(iframe.style.height).toBe('955px');
 
   expect(() => instance.handleResizeMessage()).not.toThrow();
 
@@ -140,7 +140,7 @@ test('component/Oembed iframe resizing', () => {
     source: { mysteryObject: true }, data: { height: '2000' },
   });
 
-  expect(iframe.style.height).toBe('1055px');
+  expect(iframe.style.height).toBe('955px');
 
 
   component.setProps({ oembedContent: oembed });
