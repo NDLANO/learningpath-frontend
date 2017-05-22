@@ -32,6 +32,7 @@ class SortLearningPathSteps extends Component {
     }
   }
   shouldCancelStart = (e) => {
+    // Iterates through each target from an event on click to check if it was button click or not. Cancels drag action if it was a click on a button.
     for (let target = e.target; target !== this.contentDiv; target = target.parentElement) {
       if (target && target.tagName.toLowerCase() === 'button') {
         return true;
