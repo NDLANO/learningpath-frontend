@@ -34,7 +34,7 @@ function fetchIsBasedOnPath(path) {
   return dispatch => fetchPath({ pathId: path.isBasedOn })
     .then((isBasedOnPath) => {
       dispatch(setLearningPath({ ...path, isBasedOnTitle: isBasedOnPath.title }));
-    }).catch(() => {});
+    }).catch(() => { });
 }
 
 export function fetchLearningPath(pathId, isEdit = false) {
@@ -77,7 +77,7 @@ export function createEmptyLearningPath() {
 }
 
 export function createLearningPath(learningPath) {
-  return dispatch => new Promise((resolve, reject) => createPath({ }, learningPath)
+  return dispatch => new Promise((resolve, reject) => createPath({}, learningPath)
     .then((lpath) => {
       dispatch(addMessage({ message: polyglot.t('createLearningPath.createdMsg') }));
       dispatch(setLearningPath(lpath));
@@ -91,7 +91,7 @@ export function createLearningPath(learningPath) {
       dispatch(applicationError(err));
       reject();
     }
-  ));
+    ));
 }
 
 export function updateLearningPath(pathId, learningPath, redirectUrl = `/learningpaths/${pathId}`) {
@@ -108,12 +108,12 @@ export function updateLearningPath(pathId, learningPath, redirectUrl = `/learnin
       dispatch(applicationError(err));
       reject();
     }
-  ));
+    ));
 }
 export function activateDeletedLearningPath(pathId, status) {
   return dispatch =>
     activateDeletedPath({ pathId, status })
-    .then(() => dispatch(fetchMyLearningPaths()));
+      .then(() => dispatch(fetchMyLearningPaths()));
 }
 export function deleteLearningPath(learningPath) {
   return dispatch => deletePath({ pathId: learningPath.id })
@@ -168,7 +168,7 @@ export function copyLearningPath(learningPath, locale) {
       dispatch(addMessage({ message: polyglot.t('copyLearningPath.copiedMessage') }));
       dispatch(setLearningPath(lpath));
       dispatch(routerActions.push({
-        pathname: `/learningpaths/${lpath.id}`,
+        pathname: lpath.learningsteps[0] ? `/learningpaths/${lpath.id}/step/${lpath.learningsteps[0].id}/` : `/learningpaths/${lpath.id}/`,
       }));
       resolve();
     })
@@ -176,5 +176,5 @@ export function copyLearningPath(learningPath, locale) {
       dispatch(applicationError(err));
       reject();
     }
-  ));
+    ));
 }
