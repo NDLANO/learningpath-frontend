@@ -22,7 +22,7 @@ export const getLearningPathSearchResult = createSelector(
       isBasedOnTitle: isBasedOnTitleI18N(result, lang, true),
       description: descriptionI18N(result, lang, true),
       introduction: introductionI18N(result, lang, true),
-      tags: defined(tagsI18N(result, lang, true), []),
+      tags: defined(tagsI18N(result, lang, false), []),
     }))
 );
 

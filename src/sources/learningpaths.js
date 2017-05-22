@@ -82,7 +82,7 @@ const learningPathsUrl = apiResourceUrl('/learningpath-api/v1/learningpaths');
 const updateSeqNo = ({ pathId, stepId }, body) =>
   putSequenceNumber({ pathId, stepId }, body);
 
-const fetchPaths = (query) => {
+const fetchPaths = (query, locale) => {
   let url = learningPathsUrl;
   if (query) {
     const q = cloneDeep(query);
@@ -93,6 +93,7 @@ const fetchPaths = (query) => {
     if (q.query === '') {
       delete q.query;
     }
+    q.language = locale || 'nb';
 
     url += `?${queryString.stringify(q)}`;
   }
