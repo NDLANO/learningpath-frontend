@@ -14,7 +14,7 @@ import { deleteLearningPath, createLearningPath, copyLearningPath, updateLearnin
 import Icon from '../common/Icon';
 import LabeledIcon from '../common/LabeledIcon';
 import polyglot from '../i18n';
-import { LearningPathDropdown } from './LearningPathDropdown';
+import LearningPathDropdown from './LearningPathDropdown';
 import formatDate from '../util/formatDate';
 import formatDuration from '../util/formatDuration';
 import Lightbox from '../common/Lightbox';
