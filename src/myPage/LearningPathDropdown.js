@@ -14,6 +14,8 @@ import Icon from '../common/Icon';
 import { learningPathStatuses } from '../util/learningPathStatuses';
 
 export function LearningPathDropdown({ onSelect, learningPath }) {
+  let dropDownMenuItemsRef;
+
   const makeOnClick = actionType => (evt) => {
     evt.preventDefault();
     onSelect(actionType, learningPath);
@@ -32,10 +34,33 @@ export function LearningPathDropdown({ onSelect, learningPath }) {
     active: learningPath.status === status,
   });
 
+  const handleDropDownOnClick = () => {
+    const isShowingMenu = dropDownMenuItemsRef.className.includes('dropdown-menu_items_show');
+
+    dropDownMenuItemsRef.className = classNames({
+      'dropdown-menu_items': true,
+      'dropdown-menu_items_show': !isShowingMenu,
+    });
+  };
+
+  const handleDropDownOnMouseEnter = () => {
+    dropDownMenuItemsRef.className = classNames({
+      'dropdown-menu_items': true,
+      'dropdown-menu_items_show': true,
+    });
+  };
+
+  const handleDropDownOnMouseLeave = () => {
+    dropDownMenuItemsRef.className = classNames({
+      'dropdown-menu_items': true,
+      'dropdown-menu_items_show': false,
+    });
+  };
+
   return (
-    <div className="dropdown-menu">
-      <span className="dropdown-menu_icon"><Icon.MoreVert /></span>
-      <ul className="dropdown-menu_items">
+    <div className="dropdown-menu" onMouseEnter={() => handleDropDownOnMouseEnter()} onMouseLeave={() => handleDropDownOnMouseLeave()}>
+      <button className="un-button dropdown-menu_icon" onClick={() => handleDropDownOnClick()}><Icon.MoreVert /></button>
+      <ul className="dropdown-menu_items" ref={(e) => { dropDownMenuItemsRef = e; }}>
         <li className="dropdown-menu_item">
           <button className="un-button dropdown-menu_link" onClick={makeOnClick('makecopy')}>
             <Icon.ContentCopy /> {polyglot.t('pathDropDown.makeCopy')}
