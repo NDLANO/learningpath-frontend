@@ -37,14 +37,6 @@ export default class LearningPathDropdown extends Component {
     }
   };
 
-  dropDownMenuItemsClassName = () =>
-    (
-      classNames({
-        'dropdown-menu_items': true,
-        'dropdown-menu_items_show': this.state.displayDropDown,
-      })
-    );
-
   dropDownMenuItemClassName = (status) => {
     const { learningPath } = this.props;
     return (
@@ -56,24 +48,27 @@ export default class LearningPathDropdown extends Component {
   }
 
   handleDropDownOnClick = () => {
-    const isShowingMenu = this.state.displayDropDown;
-    this.setState({ displayDropDown: !isShowingMenu });
+    this.setState(prevState => ({
+      displayDropDown: !prevState.displayDropDown,
+    }));
   };
 
-  handleDropDownOnMouseEnter = () => {
-    this.setState({ displayDropDown: true });
-  };
-
-  handleDropDownOnMouseLeave = () => {
-    this.setState({ displayDropDown: false });
+  handleDropDownOnMouseEvents = (displayDropDown) => {
+    this.setState({ displayDropDown });
   };
 
   render() {
     const { learningPath } = this.props;
+
+    const dropDownMenuItemsClassName = classNames({
+      'dropdown-menu_items': true,
+      'dropdown-menu_items_show': this.state.displayDropDown,
+    });
+
     return (
-      <div className="dropdown-menu" onMouseEnter={() => this.handleDropDownOnMouseEnter()} onMouseLeave={() => this.handleDropDownOnMouseLeave()}>
+      <div className="dropdown-menu" onMouseEnter={() => this.handleDropDownOnMouseEvents(true)} onMouseLeave={() => this.handleDropDownOnMouseEvents(false)}>
         <button className="un-button dropdown-menu_icon" onClick={() => this.handleDropDownOnClick()}><Icon.MoreVert /></button>
-        <ul className={this.dropDownMenuItemsClassName()}>
+        <ul className={dropDownMenuItemsClassName}>
           <li className="dropdown-menu_item">
             <button className="un-button dropdown-menu_link" onClick={this.makeOnClick('makecopy')}>
               <Icon.ContentCopy /> {polyglot.t('pathDropDown.makeCopy')}
