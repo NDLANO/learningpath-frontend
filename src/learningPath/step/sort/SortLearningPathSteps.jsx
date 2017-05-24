@@ -53,6 +53,7 @@ class SortLearningPathSteps extends Component {
             lang={lang}
             shouldCancelStart={this.shouldCancelStart}
             deleteStep={deleteStep}
+            pressDelay={200}
           /> : null}
         <ul className="vertical-menu" >
           <li>
