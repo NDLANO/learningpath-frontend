@@ -11,8 +11,8 @@ import { shallow } from 'enzyme';
 import { Link } from 'react-router-dom';
 
 import { SiteNav } from '../siteNav/SiteNav';
-import { SiteNavSessionAction } from '../siteNav/SiteNavSessionAction';
-import { SiteNavMyPage } from '../siteNav/SiteNavMyPage';
+import SiteNavSessionAction from '../siteNav/SiteNavSessionAction';
+import SiteNavMyPage from '../siteNav/SiteNavMyPage';
 
 test('component/SiteNav learningpaths', () => {
   const navLinks = shallow(<SiteNav authenticated={false} />).find(Link);

@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import polyglot from '../../i18n';
 import LabeledIcon from '../LabeledIcon';
 
-export const SiteNavSessionAction = ({ authenticated, userName, localCloseSidebars }) => {
+const SiteNavSessionAction = ({ authenticated, userName, localCloseSidebars }) => {
   if (authenticated) {
     return (
       <li className="site-nav_item">
