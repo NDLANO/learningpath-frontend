@@ -11,7 +11,7 @@ import { shallow } from 'enzyme';
 import { spy } from 'sinon';
 
 import { learningPaths } from '../../common/__tests__/mockData';
-import { LearningPathDropdown } from '../LearningPathDropdown';
+import LearningPathDropdown from '../LearningPathDropdown';
 
 const learningPath = learningPaths[0];
 const privateLearningPath = Object.assign({}, learningPath, { status: 'PRIVATE' });
@@ -27,7 +27,7 @@ test('component/LearningPathDropdown remove', () => {
   );
 
   component.find('.dropdown-menu_item').last().find('button')
-           .simulate('click', { preventDefault });
+    .simulate('click', { preventDefault });
 
   expect(preventDefault.calledOnce).toBeTruthy();
   expect(onSelect.calledOnce).toBeTruthy();
@@ -43,7 +43,7 @@ test('component/LearningPathDropdown de-publish', () => {
     { context: { lang: 'nb' } }
   );
   component.find('.dropdown-menu_item').at(1).find('button')
-           .simulate('click', { preventDefault });
+    .simulate('click', { preventDefault });
 
   expect(preventDefault.calledOnce).toBeTruthy();
   expect(onSelect.calledOnce).toBeTruthy();
@@ -60,7 +60,7 @@ test('component/LearningPathDropdown publish', () => {
   );
 
   component.find('.dropdown-menu_item').at(1).find('button')
-           .simulate('click', { preventDefault });
+    .simulate('click', { preventDefault });
 
   expect(preventDefault.calledOnce).toBeTruthy();
   expect(onSelect.calledOnce).toBeTruthy();
@@ -76,7 +76,7 @@ test('component/LearningPathDropdown make copy', () => {
     { context: { lang: 'nb' } }
   );
   component.find('.dropdown-menu_item').first().find('button')
-           .simulate('click', { preventDefault });
+    .simulate('click', { preventDefault });
 
   expect(preventDefault.calledOnce).toBeTruthy();
   expect(onSelect.calledOnce).toBeTruthy();
