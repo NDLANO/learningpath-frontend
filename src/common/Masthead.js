@@ -13,7 +13,7 @@ import classNames from 'classnames';
 import get from 'lodash/get';
 
 import Logo from './Logo';
-import SiteNav from './SiteNav';
+import SiteNav from './siteNav/SiteNav';
 import Icon from './Icon';
 
 import {
