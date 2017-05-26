@@ -11,41 +11,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import polyglot from '../i18n';
+import polyglot from '../../i18n';
+import LabeledIcon from '../LabeledIcon';
+import SiteNavMyPage from './SiteNavMyPage';
+import SiteNavSessionAction from './SiteNavSessionAction';
+import { closeSidebars } from '../sidebarActions';
 
-import LabeledIcon from './LabeledIcon';
-import { closeSidebars } from './sidebarActions';
-
-export function SiteNav({ authenticated, userName, cssModifier, localCloseSidebars }) {
-  let myPage;
-  let logInOut;
-
-  if (authenticated) {
-    myPage = (
-      <li className="site-nav_item">
-        <Link to="/minside" className="site-nav_link" onClick={() => localCloseSidebars()}>
-          <LabeledIcon.Apps labelText={polyglot.t('siteNav.myPage')} />
-        </Link>
-      </li>
-    );
-
-    logInOut = (
-      <li className="site-nav_item">
-        <Link to="/logout" className="site-nav_link" onClick={() => localCloseSidebars()}>
-          <LabeledIcon.Exit labelText={polyglot.t('siteNav.logout', { name: userName })} />
-        </Link>
-      </li>
-    );
-  } else {
-    logInOut = (
-      <li className="site-nav_item">
-        <Link to="/login" className="site-nav_link" onClick={() => localCloseSidebars()}>
-          <LabeledIcon.Exit labelText={polyglot.t('siteNav.login')} />
-        </Link>
-      </li>
-    );
-  }
-
+export const SiteNav = ({ authenticated, userName, cssModifier, localCloseSidebars }) => {
   const rootClasses = classNames({
     'site-nav': true,
     [`site-nav--${cssModifier}`]: cssModifier,
@@ -59,12 +31,12 @@ export function SiteNav({ authenticated, userName, cssModifier, localCloseSideba
             <LabeledIcon.Search labelText={polyglot.t('siteNav.search')} />
           </Link>
         </li>
-        {myPage}
-        {logInOut}
+        <SiteNavMyPage authenticated={authenticated} localCloseSidebars={localCloseSidebars} />
+        <SiteNavSessionAction authenticated={authenticated} userName={userName} localCloseSidebars={localCloseSidebars} />
       </ul>
     </div>
   );
-}
+};
 
 SiteNav.propTypes = {
   authenticated: PropTypes.bool,

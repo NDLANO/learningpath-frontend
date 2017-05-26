@@ -31,7 +31,6 @@ const LoginProviders = (props) => {
       <ul className="vertical-menu">
         <li className="vertical-menu_item"><button onClick={() => loginSocialMedia('google-oauth2')} className="un-button cta-link cta-link--block cta-link--gl">Google</button></li>
         <li className="vertical-menu_item"><button onClick={() => loginSocialMedia('facebook')} className="un-button cta-link cta-link--block cta-link--fb">Facebook</button></li>
-        <li className="vertical-menu_item"><button onClick={() => loginSocialMedia('twitter')} className="un-button cta-link cta-link--block cta-link--tw">Twitter</button></li>
       </ul>
     </div>
   );

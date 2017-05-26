@@ -10,23 +10,36 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Link } from 'react-router-dom';
 
-import { SiteNav } from '../SiteNav';
+import { SiteNav } from '../siteNav/SiteNav';
+import SiteNavSessionAction from '../siteNav/SiteNavSessionAction';
+import SiteNavMyPage from '../siteNav/SiteNavMyPage';
 
-test('component/SiteNav not authenticated', () => {
+test('component/SiteNav learningpaths', () => {
   const navLinks = shallow(<SiteNav authenticated={false} />).find(Link);
-
-  expect(navLinks.length).toBe(2);
-
+  expect(navLinks.length).toBe(1);
   expect(navLinks.at(0).props().to).toBe('/learningpaths');
-  expect(navLinks.at(1).props().to).toBe('/login');
 });
 
-test('component/SiteNav authenticated', () => {
-  const navLinks = shallow(<SiteNav authenticated userName="Alice" />).find(Link);
+test('component/SiteNavSessionAction not authenticated', () => {
+  const navLinks = shallow(<SiteNavSessionAction authenticated={false} />).find(Link);
+  expect(navLinks.length).toBe(1);
+  expect(navLinks.at(0).props().to).toBe('/login');
+});
 
-  expect(navLinks.length).toBe(3);
+test('component/SiteNavSessionAction authenticated', () => {
+  const navLinks = shallow(<SiteNavSessionAction authenticated />).find(Link);
+  expect(navLinks.length).toBe(1);
+  expect(navLinks.at(0).props().to).toBe('/logout');
+});
 
-  expect(navLinks.at(0).props().to).toBe('/learningpaths');
-  expect(navLinks.at(1).props().to).toBe('/minside');
-  expect(navLinks.at(2).props().to).toBe('/logout');
+test('component/SiteNavMyPage not authenticated', () => {
+  const navLinks = shallow(<SiteNavMyPage authenticated={false} />).find(Link);
+  expect(navLinks.length).toBe(0);
+  expect(navLinks.at(0).props().to).toBe(undefined);
+});
+
+test('component/SiteNavMyPage authenticated', () => {
+  const navLinks = shallow(<SiteNavMyPage authenticated />).find(Link);
+  expect(navLinks.length).toBe(1);
+  expect(navLinks.at(0).props().to).toBe('/minside');
 });
