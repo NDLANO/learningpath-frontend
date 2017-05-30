@@ -10,8 +10,8 @@ import { createAction } from 'redux-actions';
 import auth0 from 'auth0-js';
 import { routerActions } from 'react-router-redux';
 import { locationOrigin, auth0ClientId, auth0Domain } from '../sources/helpers';
-import { decodeToken } from '../util/jwtHelper';
-import { fetchNewToken, isTokenValid } from '../sources/tokens';
+import { decodeToken, getIdTokenExpireEpoch, getAccessTokenExpireEpoch } from '../util/jwtHelper';
+import { fetchNewToken } from '../sources/tokens';
 import { applicationError } from '../messages/messagesActions';
 
 export const setAuthenticated = createAction('SET_AUTHENTICATED');
@@ -32,7 +32,8 @@ export function parseHash(hash) {
   return (dispatch) => {
     auth.parseHash({ hash, _idTokenVerification: false }, (err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        dispatch(setIdToken(authResult.idToken));
+        const token = { token: authResult.idToken, expiresAt: getIdTokenExpireEpoch(authResult.idToken) };
+        dispatch(setIdToken(token));
         dispatch(setAuthenticated(true));
         dispatch(setUserData(decodeToken(authResult.idToken)));
         dispatch(routerActions.replace('/minside'));
@@ -70,16 +71,15 @@ export function renewAuth0Token() {
       usePostMessage: true,
     }, (err, authResult) => {
       if (process.env.NODE_ENV === 'development' && authResult && (authResult.source === '@devtools-page' || authResult.source === '@devtools-extension')) { // Temporarily fix for bug in auth0
-        isTokenValid(decodeToken(getState().idToken).exp).then((valid) => {
-          if (valid.isTokenExpired) {
-            dispatch(logout());
-            resolve();
-          }
-        });
+        if (new Date().getTime() >= getState().idToken.expiresAt) {
+          dispatch(logout());
+          resolve();
+        }
         return;
       }
       if (authResult && authResult.idToken) {
-        dispatch(setIdToken(authResult.idToken));
+        const token = { token: authResult.idToken, expiresAt: getIdTokenExpireEpoch(authResult.idToken) };
+        dispatch(setIdToken(token));
         dispatch(setAuthenticated(true));
         dispatch(setUserData(decodeToken(authResult.idToken)));
         resolve();
@@ -94,7 +94,7 @@ export function renewAuth0Token() {
 export function renewAuthToken() {
   return dispatch => fetchNewToken()
     .then((token) => {
-      dispatch(setAccessToken(token.access_token));
+      dispatch(setAccessToken({ token: token.access_token, expiresAt: getAccessTokenExpireEpoch(token.access_token) }));
     });
 }
 

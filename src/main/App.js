@@ -23,6 +23,8 @@ import LTIEmbedded from '../ltiSearch/LTIEmbedded';
 import LoginProviders from '../session/LoginProviders';
 import LogoutSession from '../session/LogoutSession';
 import LearningPathContainer from '../learningPath/LearningPathContainer';
+import LoginFailure from '../session/LoginFailure';
+import SessionInitializer from '../session/SessionInitializer';
 
 export class App extends React.Component {
   getChildContext() {
@@ -38,8 +40,10 @@ export class App extends React.Component {
         <div className="page-container">
           <Switch>
             <Route exact path="/" component={Welcome} />
-            <Route path="/login" component={LoginProviders} />
-            <Route path="/logout" component={LogoutSession} />
+            <Route exact path="/login" component={LoginProviders} />
+            <Route exact path="/login/success" component={SessionInitializer} />
+            <Route exact path="/login/failure" component={LoginFailure} />
+            <PrivateRoute path="/logout" component={LogoutSession} />
             <PrivateRoute path="/minside" component={MyPage} />
             <PrivateRoute path="/lti/:pathId/step/:stepId" component={LTIEmbedded} />
             <PrivateRoute path="/lti/:pathId/step/new" component={LTIEmbedded} />

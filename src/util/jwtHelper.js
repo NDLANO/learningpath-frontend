@@ -9,8 +9,14 @@ export function getTokenIssuedAt(token) {
   return decoded.iat;
 }
 
-export const decodeToken = idToken => decode(idToken);
-
-export function getTimeToUpdateInMs(token) {
-  return (getTokenExpiration(token) - getTokenIssuedAt(token) - (60 * 3)) * 1000; // Removes 3 minutes from time to update
+export function getIdTokenExpireEpoch(token) {
+  const decodedIdToken = decode(token);
+  return (((decodedIdToken.exp - decodedIdToken.iat) * 1000) + new Date().getTime()) - (60 * 1000);
 }
+
+export function getAccessTokenExpireEpoch(token) {
+  const decodedAccessToken = decode(token);
+  return (((decodedAccessToken.exp - decodedAccessToken.iat) * 1000) + new Date().getTime()) - (60 * 1000);
+}
+
+export const decodeToken = idToken => decode(idToken);

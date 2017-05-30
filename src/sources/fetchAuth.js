@@ -6,11 +6,9 @@
  *
  */
 
-import { isTokenValid } from '../sources/tokens';
-import { decodeToken } from '../util/jwtHelper';
 import * as actions from '../session/sessionActions';
 import TokenStatusHandler from '../util/TokenStatusHandler';
-import { authorizationHeader, getToken } from '../sources/helpers';
+import { authorizationHeader, getToken, getTokenExpiresAt } from '../sources/helpers';
 
 export const fetchAuth = (url, options = {}) => {
   if (process.env.NODE_ENV === 'unittest') {
@@ -26,11 +24,9 @@ export const fetchAuth = (url, options = {}) => {
     return fetch(url, { ...options, headers });
   }
 
-  return isTokenValid(decodeToken(token).exp).then((valid) => {
-    if (valid.isTokenExpired) {
-      const dispatch = tokenStatusHandler.getDispatch();
-      return dispatch(actions.refreshToken()).then(() => fetch(url, { ...options, headers: { ...options.headers, Authorization: authorizationHeader(getToken(getState)) } }));
-    }
-    return fetch(url, { ...options, headers });
-  });
+  if (new Date().getTime() >= getTokenExpiresAt(getState)) {
+    const dispatch = tokenStatusHandler.getDispatch();
+    return dispatch(actions.refreshToken()).then(() => fetch(url, { ...options, headers: { ...options.headers, Authorization: authorizationHeader(getToken(getState)) } }));
+  }
+  return fetch(url, { ...options, headers });
 };

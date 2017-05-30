@@ -17,6 +17,7 @@ import TokenStatusHandler from './util/TokenStatusHandler';
 import { configureLocale, isValidLocale } from './locale/configureLocale';
 import configureStore from './configureStore';
 import App from './main/App';
+import { getAccessTokenExpireEpoch } from './util/jwtHelper';
 
 function generateBasename(path) {
   if (isValidLocale(path)) {
@@ -36,8 +37,8 @@ const browserHistory = basename ? createHistory({ basename }) : createHistory();
 
 const emptyState = {
   authenticated: false,
-  accessToken: '',
-  idToken: '',
+  accessToken: {},
+  idToken: {},
   user: {},
   learningPathStep: {},
   learningPaths: [],
@@ -45,7 +46,8 @@ const emptyState = {
   locale,
 };
 
-const initialState = !isEmpty(window.initialState) ? window.initialState : emptyState;
+const initialState = !isEmpty(window.initialState) && window.initialState.accessToken ?
+  { ...window.initialState, accessToken: { token: window.initialState.accessToken, expiresAt: getAccessTokenExpireEpoch(window.initialState.accessToken) } } : emptyState;
 
 const store = configureStore(initialState, browserHistory);
 
