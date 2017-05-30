@@ -18,7 +18,6 @@ function fetchLearningPathContributors() {
     .catch(err => dispatch(applicationError(err)));
 }
 
-
 export function fetchLearningPathContributorsIfNeeded() {
   return (dispatch, getState) => {
     const { learningPathContributors } = getState();
