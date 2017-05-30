@@ -20,6 +20,7 @@ import learningPathStep from '../learningPath/step/learningPathStepReducer';
 import learningPaths from './learningPaths';
 import myLearningPathsSortOrder from './myLearningPathsSortOrder';
 import learningPathTags from '../learningPath/edit/tags/learningPathTagsReducer';
+import learningPathContributors from '../learningPath/edit/copyright/learningPathContributorsReducer';
 import learningPathLicenses from '../learningPath/edit/copyright/learningPathLicensesReducer';
 import oembedPreview from './oembedPreview';
 import messages from '../messages/messagesReducer';
@@ -44,6 +45,7 @@ const rootReducers = combineReducers({
   sidebar,
   oembedPreview,
   learningPathTags,
+  learningPathContributors,
   learningPathLicenses,
   imageSearch,
   embedSearch,

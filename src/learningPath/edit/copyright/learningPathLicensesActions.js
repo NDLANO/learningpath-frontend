@@ -7,7 +7,7 @@
  */
 
 import { createAction } from 'redux-actions';
-import { fetchPathLicenses } from '../../../sources/learningpaths';
+import { fetchPathLicenses, fetchPathContributors } from '../../../sources/learningpaths';
 import { applicationError } from '../../../messages/messagesActions';
 
 export const setCreativeCommonLicenses = createAction('SET_CREATIVE_COMMON_LICENSES');
@@ -31,5 +31,22 @@ export function fetchLearningPathLicensesIfNeeded(filter = '') {
     if ((filter.length > 0 && !learningPathLicenses.creativeCommonLicenses.hasFetched) || (filter.length === 0 && !learningPathLicenses.allLicenses.hasFetched)) {
       dispatch(fetchLearningPathLicenses(filter));
     }
+  };
+}
+
+function fetchLearningPathContributors() {
+  return dispatch => fetchPathContributors()
+    .then(contributors => dispatch(setLearningPathContributors(contributors)))
+    .catch(err => dispatch(applicationError(err)));
+}
+
+
+export function fetchLearningPathContributorsIfNeeded() {
+  return (dispatch, getState) => {
+    // const { learningPathCo } = getState();
+
+    // if (!learningPathTags.hasFetched) {
+    dispatch(fetchLearningPathContributors());
+    // }
   };
 }
