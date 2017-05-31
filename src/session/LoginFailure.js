@@ -13,7 +13,7 @@ import LabeledIcon from '../common/LabeledIcon';
 
 export default function LoginFailure() {
   return (
-    <div className="one-column one-column--narrow container--text-centered">
+    <div className="one-column one-column--narrow one-column--text-centered">
       <p>{polyglot.t('loginFailure.errorMessage')}</p>
       <Link className="cta-link--primary cta-link--underline" to="/login">
         <LabeledIcon.Exit labelText={polyglot.t('loginFailure.loginLink')} />
