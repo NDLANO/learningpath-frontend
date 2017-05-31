@@ -20,7 +20,7 @@ const mockStore = configureStore(middleware);
 const accessToken = '123345';
 const tags = [{ language: 'nb', tags: ['norsk', 'norge'] }, { language: 'en', tags: ['norwegian', 'norway'] }];
 
-test('actions/fetchLearningPathContributors', () => {
+test('actions/fetchLearningPathTags', () => {
   const done = (res) => {
     done(res);
     nock.cleanAll();
@@ -44,7 +44,7 @@ test('actions/fetchLearningPathContributors', () => {
 });
 
 
-test('actions/fetchLearningPathContributors access denied', () => {
+test('actions/fetchLearningPathTags access denied', () => {
   const done = (res) => {
     done(res);
     nock.cleanAll();
