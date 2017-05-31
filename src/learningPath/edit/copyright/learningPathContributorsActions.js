@@ -12,7 +12,7 @@ import { applicationError } from '../../../messages/messagesActions';
 
 export const setLearningPathContributors = createAction('SET_LEARNING_PATH_CONTRIBUTORS');
 
-function fetchLearningPathContributors() {
+export function fetchLearningPathContributors() {
   return dispatch => fetchPathContributors()
     .then(contributors => dispatch(setLearningPathContributors(contributors)))
     .catch(err => dispatch(applicationError(err)));

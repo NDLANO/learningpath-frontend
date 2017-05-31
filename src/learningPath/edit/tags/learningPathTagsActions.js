@@ -10,9 +10,9 @@ import { createAction } from 'redux-actions';
 import { fetchPathTags } from '../../../sources/learningpaths';
 import { applicationError } from '../../../messages/messagesActions';
 
-const setLearningPathTags = createAction('SET_LEARNING_PATH_TAGS');
+export const setLearningPathTags = createAction('SET_LEARNING_PATH_TAGS');
 
-function fetchLearningPathTags() {
+export function fetchLearningPathTags() {
   return dispatch => fetchPathTags()
     .then(tags => dispatch(setLearningPathTags(tags)))
     .catch(err => dispatch(applicationError(err)));

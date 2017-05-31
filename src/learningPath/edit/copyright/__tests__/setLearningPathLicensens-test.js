@@ -8,7 +8,7 @@
 
 import { isFSA } from 'flux-standard-action';
 
-import { setCreativeCommonLicenses, setAllLicenses } from '../edit/copyright/learningPathLicensesActions';
+import { setCreativeCommonLicenses, setAllLicenses } from '../learningPathLicensesActions';
 
 
 test('actions/setCreativeCommonLicenses', () => {
