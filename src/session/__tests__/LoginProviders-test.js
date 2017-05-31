@@ -20,9 +20,3 @@ test('component/LoginProviders', () => {
 
   expect(buttons.map(n => n.text())).toEqual(['Google', 'Facebook']);
 });
-
-test('component/LoginProviders with message', () => {
-  const component = shallow(<LoginProviders message="A message to you, rudy" match={{ url: '' }} />);
-
-  expect(component.findWhere(n => n.text() === 'A message to you, rudy').length).toBeTruthy();
-});
