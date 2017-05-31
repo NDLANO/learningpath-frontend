@@ -32,6 +32,7 @@ import SortLearningPathSteps from './step/sort/SortLearningPathSteps';
 import LearningPathToCButtons from './sidebar/LearningPathToCButtons';
 import AddLearningPathStepButton from './sidebar/AddLearningPathStepButton';
 import PinterestLightboxButton from '../pinterest/PinterestLightboxButton';
+import PinterestLightbox from '../pinterest/PinterestLightbox';
 
 export class LearningPath extends Component {
   static mapDispatchToProps = {
@@ -59,8 +60,10 @@ export class LearningPath extends Component {
     super(props);
     this.state = {
       displayCopyPath: false,
+      displayPinterest: false,
     };
     this.onCopyLearningPathClick = this.onCopyLearningPathClick.bind(this);
+    this.togglePinterest = this.togglePinterest.bind(this);
   }
   componentDidMount() {
     LearningPath.fetchData(this.props);
@@ -70,6 +73,12 @@ export class LearningPath extends Component {
       displayCopyPath: true,
     });
   }
+  togglePinterest() {
+    this.setState(prevState => ({
+      displayPinterest: !prevState.displayPinterest,
+    }));
+  }
+
   render() {
     const { learningPath, isTableOfContentOpen, copyPath, match } = this.props;
     const { lang } = this.context;
@@ -79,7 +88,8 @@ export class LearningPath extends Component {
 
     const changeStatusButton = showButtonsUrls.includes(match.path) && match.isExact ? <LearningPathToCButtons /> : null;
     const addStepButton = showButtonsUrls.includes(match.path) && match.isExact ? <AddLearningPathStepButton /> : null;
-    const pinterestButton = match.path === '/learningpaths/:pathId/step/:stepId' && match.isExact ? <PinterestLightboxButton learningPath={learningPath} /> : null;
+    const pinterestButton = match.path === '/learningpaths/:pathId/step/:stepId' && match.isExact ? <PinterestLightboxButton learningPath={learningPath} toggleLightBox={this.togglePinterest} /> : null;
+    const pinterestLightBox = match.path === '/learningpaths/:pathId/step/:stepId' && match.isExact ? <PinterestLightbox learningPath={learningPath} showLightBox={this.state.displayPinterest} toggleLightBox={this.togglePinterest} /> : null;
     const sortLearningSteps = match.url === `/learningpaths/${match.params.pathId}/step/sort`;
     const sortableTableOfContent = sortLearningSteps ? <SortLearningPathSteps learningPath={learningPath} lang={lang} /> : <LearningPathToC learningPath={learningPath} activeStepId={stepId} />;
     const sortableTableOfContentButton = !sortLearningSteps ? <SortLearningStepsButton learningPath={learningPath} /> : null;
@@ -106,6 +116,7 @@ export class LearningPath extends Component {
         <Lightbox display={this.state.displayCopyPath} onClose={onLightboxClose}>
           <CopyLearningPath learningPath={learningPath} onClose={onLightboxClose} onCopy={onCopy} />
         </Lightbox>
+        {pinterestLightBox}
         <div className="two-column">
           <aside className={collapseClassName()}>
             <LearningPathGeneralInfo
