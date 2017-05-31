@@ -43,7 +43,7 @@ export class App extends React.Component {
             <Route exact path="/login" component={LoginProviders} />
             <Route exact path="/login/success" component={SessionInitializer} />
             <Route exact path="/login/failure" component={LoginFailure} />
-            <PrivateRoute path="/logout" component={LogoutSession} />
+            <Route path="/logout" component={LogoutSession} />
             <PrivateRoute path="/minside" component={MyPage} />
             <PrivateRoute path="/lti/:pathId/step/:stepId" component={LTIEmbedded} />
             <PrivateRoute path="/lti/:pathId/step/new" component={LTIEmbedded} />
