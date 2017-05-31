@@ -17,16 +17,16 @@ export const fetchAuth = (url, options = {}) => {
 
   const tokenStatusHandler = TokenStatusHandler.getInstance();
   const getState = tokenStatusHandler.getStoreState;
-  const token = getToken(getState);
-  const headers = { ...options.headers, Authorization: authorizationHeader(token) };
+  const oldToken = getToken(getState);
+  const headers = { ...options.headers, Authorization: authorizationHeader(oldToken) };
 
   if (__SERVER__) {
     return fetch(url, { ...options, headers });
   }
 
-  if (new Date().getTime() >= getTokenExpiresAt(getState)) {
+  if (new Date().getTime() >= getTokenExpiresAt(oldToken)) {
     const dispatch = tokenStatusHandler.getDispatch();
-    return dispatch(actions.refreshToken()).then(() => fetch(url, { ...options, headers: { ...options.headers, Authorization: authorizationHeader(getToken(getState)) } }));
+    return dispatch(actions.refreshToken()).then(newToken => fetch(url, { ...options, headers: { ...options.headers, Authorization: authorizationHeader(newToken.token) } }));
   }
   return fetch(url, { ...options, headers });
 };

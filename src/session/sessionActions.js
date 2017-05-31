@@ -82,7 +82,7 @@ export function renewAuth0Token() {
         dispatch(setIdToken(token));
         dispatch(setAuthenticated(true));
         dispatch(setUserData(decodeToken(authResult.idToken)));
-        resolve();
+        resolve(token);
       } else {
         dispatch(logout());
         resolve();
@@ -95,15 +95,16 @@ export function renewAuthToken() {
   return dispatch => fetchNewToken()
     .then((token) => {
       dispatch(setAccessToken({ token: token.access_token, expiresAt: getAccessTokenExpireEpoch(token.access_token) }));
+      return { token: token.access_token, expiresAt: getAccessTokenExpireEpoch(token.access_token) };
     });
 }
 
 export function refreshToken() {
   return (dispatch, getState) => new Promise((resolve) => {
     if (getState().authenticated) {
-      dispatch(renewAuth0Token()).then(() => resolve());
+      dispatch(renewAuth0Token()).then(token => resolve(token));
     } else {
-      dispatch(renewAuthToken()).then(() => resolve());
+      dispatch(renewAuthToken()).then(token => resolve(token));
     }
   });
 }
