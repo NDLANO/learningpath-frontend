@@ -51,7 +51,8 @@ export function loginSocialMedia(type) {
 export function logout(federated = undefined) {
   return dispatch => fetchNewToken()
     .then((token) => {
-      dispatch(setAccessToken(token.access_token));
+      const newToken = { token: token.access_token, expiresAt: getAccessTokenExpireEpoch(token.access_token) };
+      dispatch(setAccessToken(newToken));
       dispatch(setAuthenticated(false));
       dispatch(logoutAction());
       auth.logout({
@@ -60,6 +61,7 @@ export function logout(federated = undefined) {
         federated,
       });
       window.localStorage.clear();
+      return newToken;
     })
     .catch(err => dispatch(applicationError(err)));
 }
@@ -72,8 +74,7 @@ export function renewAuth0Token() {
     }, (err, authResult) => {
       if (process.env.NODE_ENV === 'development' && authResult && (authResult.source === '@devtools-page' || authResult.source === '@devtools-extension')) { // Temporarily fix for bug in auth0
         if (new Date().getTime() >= getState().idToken.expiresAt) {
-          dispatch(logout());
-          resolve();
+          dispatch(logout()).then(token => resolve(token));
         }
         return;
       }
@@ -84,8 +85,7 @@ export function renewAuth0Token() {
         dispatch(setUserData(decodeToken(authResult.idToken)));
         resolve(token);
       } else {
-        dispatch(logout());
-        resolve();
+        dispatch(logout()).then(token => resolve(token));
       }
     });
   });
