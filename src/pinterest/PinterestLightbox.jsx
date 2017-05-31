@@ -11,35 +11,21 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import PinterestImport from './PinterestImport';
 import Lightbox from '../common/Lightbox';
-import polyglot from '../i18n';
-import Button from '../common/buttons/Button';
 import * as learningPathStepActions from '../learningPath/step/learningPathStepActions';
 import * as pinterestActions from './pinterestActions';
 import { getPins } from './pinterestSelectors';
 import { getLocale } from '../locale/localeSelectors';
-import { getLearningPathId } from '../learningPath/learningPathSelectors';
+import config from '../config';
+
+const PINTEREST_ENABLED = __SERVER__ ? config.pinterestEnabled : window.config.pinterestEnabled;
 
 class PinterestLightbox extends Component {
-
   constructor(props) {
     super(props);
-    this.state = {
-      displayLightbox: false,
-    };
-    this.openLightbox = this.openLightbox.bind(this);
-    this.closeLightbox = this.closeLightbox.bind(this);
     this.handleBoardNameSubmit = this.handleBoardNameSubmit.bind(this);
     this.handleCreateLearningPathStep = this.handleCreateLearningPathStep.bind(this);
   }
 
-  openLightbox() {
-    this.setState({ displayLightbox: true });
-  }
-
-  closeLightbox() {
-    this.setState({ displayLightbox: false });
-    this.props.localRemovePins();
-  }
 
   handleBoardNameSubmit(username, boardName) {
     this.props.localFetchPins(username, boardName);
@@ -47,8 +33,8 @@ class PinterestLightbox extends Component {
   }
 
   handleCreateLearningPathStep(pinId, title, url) {
-    const { createLearningPathStep, pins, localSetPins, learningPathId, locale: language } = this.props;
-    createLearningPathStep(learningPathId, {
+    const { createLearningPathStep, pins, localSetPins, learningPath, locale: language } = this.props;
+    createLearningPathStep(learningPath.id, {
       type: 'TEXT',
       showTitle: true,
       title: [{ title, language }],
@@ -59,14 +45,14 @@ class PinterestLightbox extends Component {
   }
 
   render() {
-    const { pins } = this.props;
+    const { pins, showLightBox, toggleLightBox, learningPath } = this.props;
+    if (!PINTEREST_ENABLED || !learningPath.canEdit) {
+      return null;
+    }
     return (
       <div className="pinterest-lightbox_container">
-        <Button className="button button--primary-outline cta-link--block pinterest-lightbox_button" onClick={this.openLightbox}>
-          {polyglot.t('pinterest.importFrom')}
-        </Button>
         <div className="big-lightbox_wrapper big-lightbox_wrapper--scroll">
-          <Lightbox display={this.state.displayLightbox} width="800px" onClose={this.closeLightbox}>
+          <Lightbox display={showLightBox} width="800px" onClose={toggleLightBox}>
             <PinterestImport
               handleCreateLearningPathStep={this.handleCreateLearningPathStep}
               handleBoardNameSubmit={this.handleBoardNameSubmit}
@@ -80,7 +66,6 @@ class PinterestLightbox extends Component {
 }
 
 PinterestLightbox.propTypes = {
-  learningPathId: PropTypes.number.isRequired,
   locale: PropTypes.string.isRequired,
   createLearningPathStep: PropTypes.func.isRequired,
   localSetPins: PropTypes.func.isRequired,
@@ -88,6 +73,9 @@ PinterestLightbox.propTypes = {
   localFetchPins: PropTypes.func.isRequired,
   localSetFetchingPins: PropTypes.func.isRequired,
   localRemovePins: PropTypes.func.isRequired,
+  showLightBox: PropTypes.bool.isRequired,
+  toggleLightBox: PropTypes.func.isRequired,
+  learningPath: PropTypes.object.isRequired,
 };
 
 const mapDispatchToProps = {
@@ -101,7 +89,6 @@ const mapDispatchToProps = {
 const mapStateToProps = state => ({
   locale: getLocale(state),
   pins: getPins(state),
-  learningPathId: getLearningPathId(state),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PinterestLightbox);
