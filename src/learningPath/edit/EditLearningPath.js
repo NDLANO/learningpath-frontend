@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
-
+import { Redirect } from 'react-router-dom';
 import LearningPathForm from './LearningPathForm';
 import { fetchLearningPathTagsIfNeeded } from './tags/learningPathTagsActions';
 import { getLearningPathTagsByLanguage } from './tags/learningPathTagsSelectors';
@@ -36,6 +36,10 @@ class EditLearningPath extends Component {
 
     if (!learningPath.id) {
       return null;
+    }
+
+    if (!learningPath.canEdit) {
+      return <Redirect to="/forbidden" />;
     }
 
     const handleTagsChange = changes => this.setState({ unsavedTags: changes });
