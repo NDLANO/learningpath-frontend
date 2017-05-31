@@ -31,9 +31,9 @@ const LearningPathToCStep = (props) => {
         {steps.length > 1 ? <div className="step-nav_line" /> : ''}
         <LearningPathStepIcon learningPathStepType={step.type} isCircle />
         <div className="step-nav_title">
-          <span>
+          <div className={isActiveAndCanEdit ? 'step-nav_title_can_edit' : ''}>
             {step.title}
-          </span>
+          </div>
           {isActiveAndCanEdit ? <Icon.Create /> : ''}
         </div>
       </Link>
