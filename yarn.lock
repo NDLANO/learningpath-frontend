@@ -3796,9 +3796,9 @@ ndla-error-reporter@^0.1.2:
   dependencies:
     raven-js "^3.9.2"
 
-ndla-learningpath-styleguide@^0.1.54:
-  version "0.1.54"
-  resolved "https://registry.yarnpkg.com/ndla-learningpath-styleguide/-/ndla-learningpath-styleguide-0.1.54.tgz#4bbcbf7351e18dbec78d091609e769e6b61d23ef"
+ndla-learningpath-styleguide@^0.1.55:
+  version "0.1.55"
+  resolved "https://registry.yarnpkg.com/ndla-learningpath-styleguide/-/ndla-learningpath-styleguide-0.1.55.tgz#4e7d7117518deb8caf5dc86e620a310829b5e3db"
 
 ndla-licenses@0.0.7:
   version "0.0.7"
