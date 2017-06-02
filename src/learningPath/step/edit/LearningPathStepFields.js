@@ -37,14 +37,13 @@ const LearningPathStepFields = (props) => {
 
   const handleDescriptionBlur = (value) => {
     if ((!showTitle.meta.touched && !step.id)) {
-      if (value.hasText()) {
+      if (value) {
         showTitle.input.onChange(true);
       } else {
         showTitle.input.onChange(false);
       }
     }
-
-    if (!value.hasText()) {
+    if (!value) {
       license.input.onChange({ description: polyglot.t('editPathStep.noLicenseChosen'), license: '' });
     }
 
@@ -65,12 +64,11 @@ const LearningPathStepFields = (props) => {
   const disableLicense = () => {
     if (description.input.value && description.input.value instanceof ContentState) {
       return !description.input.value.hasText();
-    } else if (description.input.value === '<p><br></p>') {
+    } else if (description.input.value === '' || description.input.value === undefined || description.input.value === null) {
       return true;
     }
     return false;
   };
-
   return (
     <div>
       <div className="learning-step-form_group">
@@ -94,7 +92,7 @@ const LearningPathStepFields = (props) => {
           <OnClickCheckbox input={showTitle.input} />
         </div>
         <div className="learning-step-form_right">
-          <OneLineEditor placeholder={polyglot.t('editPathStep.titlePlaceHolder')} wrapperClassName="learning-step-form_input learning-step-form_title" {...title} />
+          <OneLineEditor placeholder={polyglot.t('editPathStep.titlePlaceHolder')} wrapperClassName="learning-step-form_input learning-step-form_title" {...props.title} />
         </div>
       </div>
       <div className="learning-step-form_box">

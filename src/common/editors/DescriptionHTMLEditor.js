@@ -13,85 +13,22 @@ import classNames from 'classnames';
 import { convertFromHTML } from 'draft-convert';
 import Icon from '../Icon';
 import polyglot from '../../i18n';
-
-const StyleButton = ({ active, icon, style, onToggle }) => {
-  const handleToggle = (e) => {
-    e.preventDefault();
-    onToggle(style);
-  };
-  const className = classNames(
-    ['texformat-menu-item'],
-    { ' texformat-menu-item__selected': active }
-  );
-
-  return (
-    <li className={className} onMouseDown={handleToggle}>
-      {icon}
-    </li>
-  );
-};
-
-StyleButton.propTypes = {
-  style: PropTypes.string.isRequired,
-  active: PropTypes.bool.isRequired,
-  onToggle: PropTypes.func.isRequired,
-  icon: PropTypes.element.isRequired,
-};
-
-const STYLES = [
-  { label: 'Bold', style: 'BOLD', isInline: true, icon: <Icon.Bold /> },
-  { label: 'Italic', style: 'ITALIC', isInline: true, icon: <Icon.Italic /> },
-  { label: 'Underline', style: 'UNDERLINE', isInline: true, icon: <Icon.Underline /> },
-  { label: 'UL', style: 'unordered-list-item', isInline: false, icon: <Icon.Bulleted /> },
-  { label: 'OL', style: 'ordered-list-item', isInline: false, icon: <Icon.Numbered /> },
-];
-
-const StyleControls = (props) => {
-  const { editorState } = props;
-  const selection = editorState.getSelection();
-  const blockType = editorState.getCurrentContent().getBlockForKey(selection.getStartKey()).getType();
-
-  const currentInlineStyle = editorState.getCurrentInlineStyle();
-
-  return (
-    <ul className="textformat-menu">
-      {STYLES.map(type =>
-        <StyleButton
-          key={type.label}
-          active={(type.isInline && currentInlineStyle.has(type.style)) || (!type.isInline && type.style === blockType)}
-          label={type.label}
-          onToggle={type.isInline ? props.onToggleInline : props.onToggleBlock}
-          style={type.style}
-          icon={type.icon}
-        />
-      )}
-    </ul>
-  );
-};
-
-StyleControls.propTypes = {
-  editorState: PropTypes.object.isRequired,
-  onToggleInline: PropTypes.func.isRequired,
-  onToggleBlock: PropTypes.func.isRequired,
-};
+import StyleControls from './StyleControls';
+import { convertDraftJsToHtml } from '../../util/convertDraftJsStateToHtml';
 
 export default class DescriptionHTMLEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = { editorState: EditorState.createEmpty() };
 
-    const { input } = props;
-
     this.focus = () => this.editor.focus();
     this.blur = () => this.editor.blur();
-    this.onChange = editorState => this.setState({ editorState }, () => {
-      const contentState = editorState.getCurrentContent();
-      input.onChange(contentState);
-    });
 
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
     this.toggleBlockType = this.toggleBlockType.bind(this);
     this.toggleInlineStyle = this.toggleInlineStyle.bind(this);
+    this.handleDescriptionOnBlur = this.handleDescriptionOnBlur.bind(this);
+    this.handleDescriptionOnChange = this.handleDescriptionOnChange.bind(this);
   }
 
   componentWillMount() {
@@ -100,17 +37,11 @@ export default class DescriptionHTMLEditor extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (typeof nextProps.input.value === 'string') {
-      this.setEditorContentStateFromHTML(nextProps.input.value);
-    }
-  }
-
   setEditorContentStateFromHTML(htmlStr) {
     if (htmlStr !== undefined) {
       const contentState = convertFromHTML(htmlStr);
       const editorState = EditorState.createWithContent(contentState);
-      this.onChange(editorState);
+      this.setState({ editorState });
     }
   }
 
@@ -136,26 +67,36 @@ export default class DescriptionHTMLEditor extends React.Component {
     const { editorState } = this.state;
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
-      this.onChange(newState);
+      this.setState({ editorState: newState });
       return true;
     }
     return false;
   }
 
+  handleDescriptionOnChange(editorState) {
+    const { input } = this.props;
+    this.setState({ editorState }, () => {
+      const contentState = editorState.getCurrentContent();
+      input.onChange(convertDraftJsToHtml(contentState));
+    });
+  }
+
+  handleDescriptionOnBlur() {
+    const { editorState } = this.state;
+    const contentState = editorState.getCurrentContent();
+    const descriptionHTML = convertDraftJsToHtml(contentState);
+    this.props.input.onBlur(descriptionHTML);
+    this.props.onBlur(descriptionHTML, this.props.input.onBlur);
+  }
+
   render() {
     const { editorState } = this.state;
-
     const contentState = editorState.getCurrentContent();
 
     // If the user changes block type before entering any text, we can
     // either style the placeholder or hide it. Let's just hide it now.
     const commentAboveApplies = !contentState.hasText() &&
       contentState.getBlockMap().first().getType() !== 'unstyled';
-
-    const onBlur = () => {
-      this.props.input.onBlur(contentState);
-      this.props.onBlur(contentState, this.props.input.onBlur);
-    };
 
     const className = classNames({
       'RichEditor-editor learning-step-form_input learning-step-form_paragraph': true,
@@ -181,8 +122,8 @@ export default class DescriptionHTMLEditor extends React.Component {
               {/*eslint-enable*/}
               <Editor
                 editorState={editorState}
-                onChange={this.onChange}
-                onBlur={onBlur}
+                onChange={this.handleDescriptionOnChange}
+                onBlur={this.handleDescriptionOnBlur}
                 placeholder={this.props.placeholder}
                 ref={(editor) => { this.editor = editor; }}
                 spellCheck
@@ -197,14 +138,10 @@ export default class DescriptionHTMLEditor extends React.Component {
 
 
 DescriptionHTMLEditor.propTypes = {
-
   input: PropTypes.shape({
     onChange: PropTypes.func.isRequired,
     onBlur: PropTypes.func.isRequired,
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object,
-    ]),
+    value: PropTypes.string.isRequired,
   }),
   onBlur: PropTypes.func,
   placeholder: PropTypes.string,
