@@ -8,9 +8,14 @@
 
 import { handleActions } from 'redux-actions';
 
+const emptyAccessToken = {
+  token: '',
+  expiresAt: 0,
+};
+
 export default handleActions({
   SET_ACCESS_TOKEN: {
     next: (state, action) => action.payload,
     throw: state => state,
   },
-}, '');
+}, emptyAccessToken);

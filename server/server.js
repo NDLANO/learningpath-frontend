@@ -24,7 +24,7 @@ import config from '../src/config';
 import webpackConfig from '../webpack.config.dev';
 import { getHtmlLang, isValidLocale } from '../src/locale/configureLocale';
 import Html from './Html';
-import { getToken, isTokenExpired, getExpireTime } from './auth';
+import { getToken } from './auth';
 import Auth0SilentCallback from './Auth0SilentCallback';
 import configureStore from '../src/configureStore';
 import { serverRoutes } from './serverRoutes';
@@ -84,11 +84,6 @@ app.get('/pinterest-proxy/*', requestProxy({
 
 app.get('/login/silent-callback', (req, res) => {
   res.send('<!doctype html>\n' + Auth0SilentCallback); // eslint-disable-line
-});
-
-app.get('/is_token_valid', (req, res) => {
-  const idTokenExp = req.query.tokenExp;
-  res.send({ isTokenExpired: isTokenExpired(idTokenExp), expiresIn: getExpireTime(idTokenExp) });
 });
 
 app.get('/get_token', (req, res) => {

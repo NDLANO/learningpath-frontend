@@ -9,5 +9,3 @@
  import { resolveJsonOrRejectWithError } from './helpers';
 
  export const fetchNewToken = () => fetch('/get_token').then(resolveJsonOrRejectWithError);
-
- export const isTokenValid = tokenExp => fetch(`/is_token_valid?tokenExp=${tokenExp}`).then(resolveJsonOrRejectWithError);

@@ -9,11 +9,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import polyglot from '../i18n';
+import LabeledIcon from '../common/LabeledIcon';
 
 export default function LoginFailure() {
   return (
-    <div>
-      {polyglot.t('loginFailure.errorMessage')} <br /><br /> <Link to="/login">{polyglot.t('loginFailure.loginLink')}</Link>.
+    <div className="one-column one-column--narrow one-column--text-centered">
+      <p>{polyglot.t('loginFailure.errorMessage')}</p>
+      <Link className="cta-link--primary cta-link--underline" to="/login">
+        <LabeledIcon.Exit labelText={polyglot.t('loginFailure.loginLink')} />
+      </Link>
     </div>
   );
 }

@@ -10,8 +10,8 @@ import { createAction } from 'redux-actions';
 import auth0 from 'auth0-js';
 import { routerActions } from 'react-router-redux';
 import { locationOrigin, auth0ClientId, auth0Domain } from '../sources/helpers';
-import { decodeToken } from '../util/jwtHelper';
-import { fetchNewToken, isTokenValid } from '../sources/tokens';
+import { decodeToken, getIdTokenExpireEpoch, getAccessTokenExpireEpoch } from '../util/jwtHelper';
+import { fetchNewToken } from '../sources/tokens';
 import { applicationError } from '../messages/messagesActions';
 
 export const setAuthenticated = createAction('SET_AUTHENTICATED');
@@ -32,7 +32,8 @@ export function parseHash(hash) {
   return (dispatch) => {
     auth.parseHash({ hash, _idTokenVerification: false }, (err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        dispatch(setIdToken(authResult.idToken));
+        const token = { token: authResult.idToken, expiresAt: getIdTokenExpireEpoch(authResult.idToken) };
+        dispatch(setIdToken(token));
         dispatch(setAuthenticated(true));
         dispatch(setUserData(decodeToken(authResult.idToken)));
         dispatch(routerActions.replace('/minside'));
@@ -50,7 +51,8 @@ export function loginSocialMedia(type) {
 export function logout(federated = undefined) {
   return dispatch => fetchNewToken()
     .then((token) => {
-      dispatch(setAccessToken(token.access_token));
+      const newToken = { token: token.access_token, expiresAt: getAccessTokenExpireEpoch(token.access_token) };
+      dispatch(setAccessToken(newToken));
       dispatch(setAuthenticated(false));
       dispatch(logoutAction());
       auth.logout({
@@ -59,6 +61,7 @@ export function logout(federated = undefined) {
         federated,
       });
       window.localStorage.clear();
+      return newToken;
     })
     .catch(err => dispatch(applicationError(err)));
 }
@@ -70,22 +73,19 @@ export function renewAuth0Token() {
       usePostMessage: true,
     }, (err, authResult) => {
       if (process.env.NODE_ENV === 'development' && authResult && (authResult.source === '@devtools-page' || authResult.source === '@devtools-extension')) { // Temporarily fix for bug in auth0
-        isTokenValid(decodeToken(getState().idToken).exp).then((valid) => {
-          if (valid.isTokenExpired) {
-            dispatch(logout());
-            resolve();
-          }
-        });
+        if (new Date().getTime() >= getState().idToken.expiresAt) {
+          dispatch(logout()).then(token => resolve(token));
+        }
         return;
       }
       if (authResult && authResult.idToken) {
-        dispatch(setIdToken(authResult.idToken));
+        const token = { token: authResult.idToken, expiresAt: getIdTokenExpireEpoch(authResult.idToken) };
+        dispatch(setIdToken(token));
         dispatch(setAuthenticated(true));
         dispatch(setUserData(decodeToken(authResult.idToken)));
-        resolve();
+        resolve(token);
       } else {
-        dispatch(logout());
-        resolve();
+        dispatch(logout()).then(token => resolve(token));
       }
     });
   });
@@ -94,16 +94,17 @@ export function renewAuth0Token() {
 export function renewAuthToken() {
   return dispatch => fetchNewToken()
     .then((token) => {
-      dispatch(setAccessToken(token.access_token));
+      dispatch(setAccessToken({ token: token.access_token, expiresAt: getAccessTokenExpireEpoch(token.access_token) }));
+      return { token: token.access_token, expiresAt: getAccessTokenExpireEpoch(token.access_token) };
     });
 }
 
 export function refreshToken() {
   return (dispatch, getState) => new Promise((resolve) => {
     if (getState().authenticated) {
-      dispatch(renewAuth0Token()).then(() => resolve());
+      dispatch(renewAuth0Token()).then(token => resolve(token));
     } else {
-      dispatch(renewAuthToken()).then(() => resolve());
+      dispatch(renewAuthToken()).then(token => resolve(token));
     }
   });
 }

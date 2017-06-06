@@ -7,38 +7,17 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Route } from 'react-router-dom';
 import polyglot from '../i18n';
 import { loginSocialMedia } from './sessionActions';
-import LoginFailure from './LoginFailure';
-import SessionInitializer from './SessionInitializer';
 
-const LoginProviders = (props) => {
-  const { message, match } = props;
-  let messageEl;
-  if (message) {
-    messageEl = <p>{message}</p>;
-  }
-
-
-  return (
-    <div className="one-column one-column--narrow">
-      <Route path={`${match.url}/success`} component={SessionInitializer} />
-      <Route path={`${match.url}/failure(/)`} component={LoginFailure} />
-      <h3>{polyglot.t('loginProviders.description')}</h3>
-      {messageEl}
-      <ul className="vertical-menu">
-        <li className="vertical-menu_item"><button onClick={() => loginSocialMedia('google-oauth2')} className="un-button cta-link cta-link--block cta-link--gl">Google</button></li>
-        <li className="vertical-menu_item"><button onClick={() => loginSocialMedia('facebook')} className="un-button cta-link cta-link--block cta-link--fb">Facebook</button></li>
-      </ul>
-    </div>
+const LoginProviders = () => (
+  <div className="one-column one-column--narrow">
+    <h3>{polyglot.t('loginProviders.description')}</h3>
+    <ul className="vertical-menu">
+      <li className="vertical-menu_item"><button onClick={() => loginSocialMedia('google-oauth2')} className="un-button cta-link cta-link--block cta-link--gl">Google</button></li>
+      <li className="vertical-menu_item"><button onClick={() => loginSocialMedia('facebook')} className="un-button cta-link cta-link--block cta-link--fb">Facebook</button></li>
+    </ul>
+  </div>
   );
-};
-
-LoginProviders.propTypes = {
-  message: PropTypes.string,
-  match: PropTypes.object.isRequired,
-};
 
 export default LoginProviders;

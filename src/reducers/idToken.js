@@ -8,12 +8,16 @@
 
 import { handleActions } from 'redux-actions';
 
-const emptyIdToken = '';
+const emptyIdToken = {
+  token: '',
+  expiresAt: 0,
+};
 
 export default handleActions({
   SET_ID_TOKEN: {
     next: (state, action) => action.payload,
     throw: state => state,
   },
+
   LOGOUT_ID_TOKEN: () => emptyIdToken,
 }, emptyIdToken);
