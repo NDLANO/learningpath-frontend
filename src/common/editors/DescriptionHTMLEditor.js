@@ -13,67 +13,8 @@ import classNames from 'classnames';
 import { convertFromHTML } from 'draft-convert';
 import Icon from '../Icon';
 import polyglot from '../../i18n';
-
-const StyleButton = ({ active, icon, style, onToggle }) => {
-  const handleToggle = (e) => {
-    e.preventDefault();
-    onToggle(style);
-  };
-  const className = classNames(
-    ['texformat-menu-item'],
-    { ' texformat-menu-item__selected': active }
-  );
-
-  return (
-    <li className={className} onMouseDown={handleToggle}>
-      {icon}
-    </li>
-  );
-};
-
-StyleButton.propTypes = {
-  style: PropTypes.string.isRequired,
-  active: PropTypes.bool.isRequired,
-  onToggle: PropTypes.func.isRequired,
-  icon: PropTypes.element.isRequired,
-};
-
-const STYLES = [
-  { label: 'Bold', style: 'BOLD', isInline: true, icon: <Icon.Bold /> },
-  { label: 'Italic', style: 'ITALIC', isInline: true, icon: <Icon.Italic /> },
-  { label: 'Underline', style: 'UNDERLINE', isInline: true, icon: <Icon.Underline /> },
-  { label: 'UL', style: 'unordered-list-item', isInline: false, icon: <Icon.Bulleted /> },
-  { label: 'OL', style: 'ordered-list-item', isInline: false, icon: <Icon.Numbered /> },
-];
-
-const StyleControls = (props) => {
-  const { editorState } = props;
-  const selection = editorState.getSelection();
-  const blockType = editorState.getCurrentContent().getBlockForKey(selection.getStartKey()).getType();
-
-  const currentInlineStyle = editorState.getCurrentInlineStyle();
-
-  return (
-    <ul className="textformat-menu">
-      {STYLES.map(type =>
-        <StyleButton
-          key={type.label}
-          active={(type.isInline && currentInlineStyle.has(type.style)) || (!type.isInline && type.style === blockType)}
-          label={type.label}
-          onToggle={type.isInline ? props.onToggleInline : props.onToggleBlock}
-          style={type.style}
-          icon={type.icon}
-        />
-      )}
-    </ul>
-  );
-};
-
-StyleControls.propTypes = {
-  editorState: PropTypes.object.isRequired,
-  onToggleInline: PropTypes.func.isRequired,
-  onToggleBlock: PropTypes.func.isRequired,
-};
+import StyleControls from './StyleControls';
+import { convertDraftJsToHtml } from '../../util/convertDraftJsStateToHtml';
 
 export default class DescriptionHTMLEditor extends React.Component {
   constructor(props) {
@@ -100,11 +41,11 @@ export default class DescriptionHTMLEditor extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  /* componentWillReceiveProps(nextProps) {
     if (typeof nextProps.input.value === 'string') {
       this.setEditorContentStateFromHTML(nextProps.input.value);
     }
-  }
+  }*/
 
   setEditorContentStateFromHTML(htmlStr) {
     if (htmlStr !== undefined) {

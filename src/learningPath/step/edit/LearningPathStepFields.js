@@ -34,6 +34,7 @@ const LearningPathStepFields = (props) => {
     learningPathId,
     license,
   } = props;
+  console.log(title);
 
   const handleDescriptionBlur = (value) => {
     if ((!showTitle.meta.touched && !step.id)) {
@@ -70,7 +71,6 @@ const LearningPathStepFields = (props) => {
     }
     return false;
   };
-
   return (
     <div>
       <div className="learning-step-form_group">
