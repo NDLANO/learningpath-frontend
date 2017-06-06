@@ -34,7 +34,6 @@ const LearningPathStepFields = (props) => {
     learningPathId,
     license,
   } = props;
-  console.log(title);
 
   const handleDescriptionBlur = (value) => {
     if ((!showTitle.meta.touched && !step.id)) {

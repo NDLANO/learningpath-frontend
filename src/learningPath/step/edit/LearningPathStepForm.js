@@ -111,6 +111,7 @@ export default compose(
     form: formName,
     asyncValidate,
     validate,
+    enableReinitialize: true,
     asyncBlurFields: ['url'],
   })
 )(LearningPathStepForm);
