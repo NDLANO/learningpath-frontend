@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
 import defined from 'defined';
-import { reduxForm, Fields, change } from 'redux-form';
+import { reduxForm, Fields } from 'redux-form';
 import { createValidator, required, oneOfIsRequired, licenseExistsIfDescriptionExists } from '../../../util/validation';
 import LabeledIcon from '../../../common/LabeledIcon';
 import polyglot from '../../../i18n';
@@ -35,7 +35,6 @@ const LearningPathStepForm = (props) => {
   } = props;
 
   const abortUrl = step.id ? `/learningpaths/${learningPath.id}/step/${step.id}` : `/learningpaths/${learningPath.id}`;
-  console.log(props.initialValues);
   return (
     <form onSubmit={handleSubmit} className="learning-step-form">
       <div className="learning-step-form_group">

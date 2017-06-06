@@ -6,16 +6,16 @@
  *
  */
 
-import React from 'react';
-import { convertToHTML } from 'draft-convert';
+ import React from 'react';
+ import { convertToHTML } from 'draft-convert';
 
-export function convertDraftJsToHtml(contentState) {
-  return !contentState || !contentState.hasText() ? '' : convertToHTML({
-    styleToHTML: (style) => {
-      if (style === 'UNDERLINE') {
-        return <u />;
-      }
-      return undefined;
-    },
-  });
-}
+ export function convertDraftJsToHtml(contentState) {
+   return !contentState || !contentState.hasText() ? '' : convertToHTML({
+     styleToHTML: (style) => {
+       if (style === 'UNDERLINE') {
+         return <u />;
+       }
+       return undefined;
+     },
+   })(contentState);
+ }

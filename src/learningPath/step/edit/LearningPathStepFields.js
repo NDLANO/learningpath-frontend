@@ -44,7 +44,7 @@ const LearningPathStepFields = (props) => {
       }
     }
 
-    if (!value.hasText()) {
+    if (!value) {
       license.input.onChange({ description: polyglot.t('editPathStep.noLicenseChosen'), license: '' });
     }
 

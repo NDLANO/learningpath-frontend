@@ -21,42 +21,46 @@ export default class DescriptionHTMLEditor extends React.Component {
     super(props);
     this.state = { editorState: EditorState.createEmpty() };
 
-    const { input } = props;
-
     this.focus = () => this.editor.focus();
     this.blur = () => this.editor.blur();
-    this.onChange = editorState => this.setState({ editorState }, () => {
-      const contentState = editorState.getCurrentContent();
-      input.onChange(contentState);
-    });
 
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
     this.toggleBlockType = this.toggleBlockType.bind(this);
     this.toggleInlineStyle = this.toggleInlineStyle.bind(this);
+    this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+    this.handleDescriptionBlur = this.handleDescriptionBlur.bind(this);
   }
 
   componentWillMount() {
-    if (typeof this.props.input.value === 'string') {
-      this.setEditorContentStateFromHTML(this.props.input.value);
-    }
+    this.setEditorContentStateFromHTML(this.props.input.value);
   }
-
-  /* componentWillReceiveProps(nextProps) {
-    if (typeof nextProps.input.value === 'string') {
-      this.setEditorContentStateFromHTML(nextProps.input.value);
-    }
-  }*/
 
   setEditorContentStateFromHTML(htmlStr) {
     if (htmlStr !== undefined) {
       const contentState = convertFromHTML(htmlStr);
       const editorState = EditorState.createWithContent(contentState);
-      this.onChange(editorState);
+      this.handleDescriptionChange(editorState);
     }
   }
 
+  handleDescriptionChange(editorState) {
+    const { input } = this.props;
+
+    this.setState({ editorState }, () => {
+      const contentState = editorState.getCurrentContent();
+      const descriptionHTML = convertDraftJsToHtml(contentState);
+      input.onChange(descriptionHTML);
+    });
+  }
+
+  handleDescriptionBlur() {
+    const contentState = this.state.editorState.getCurrentContent();
+    const descriptionHTML = convertDraftJsToHtml(contentState);
+    this.props.onBlur(descriptionHTML);
+  }
+
   toggleBlockType(blockType) {
-    this.onChange(
+    this.handleDescriptionChange(
       RichUtils.toggleBlockType(
         this.state.editorState,
         blockType
@@ -65,7 +69,7 @@ export default class DescriptionHTMLEditor extends React.Component {
   }
 
   toggleInlineStyle(inlineStyle) {
-    this.onChange(
+    this.handleDescriptionChange(
       RichUtils.toggleInlineStyle(
         this.state.editorState,
         inlineStyle
@@ -77,7 +81,7 @@ export default class DescriptionHTMLEditor extends React.Component {
     const { editorState } = this.state;
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
-      this.onChange(newState);
+      this.handleDescriptionChange(newState);
       return true;
     }
     return false;
@@ -92,11 +96,6 @@ export default class DescriptionHTMLEditor extends React.Component {
     // either style the placeholder or hide it. Let's just hide it now.
     const commentAboveApplies = !contentState.hasText() &&
       contentState.getBlockMap().first().getType() !== 'unstyled';
-
-    const onBlur = () => {
-      this.props.input.onBlur(contentState);
-      this.props.onBlur(contentState, this.props.input.onBlur);
-    };
 
     const className = classNames({
       'RichEditor-editor learning-step-form_input learning-step-form_paragraph': true,
@@ -122,8 +121,8 @@ export default class DescriptionHTMLEditor extends React.Component {
               {/*eslint-enable*/}
               <Editor
                 editorState={editorState}
-                onChange={this.onChange}
-                onBlur={onBlur}
+                onChange={this.handleDescriptionChange}
+                onBlur={this.handleDescriptionBlur}
                 placeholder={this.props.placeholder}
                 ref={(editor) => { this.editor = editor; }}
                 spellCheck
