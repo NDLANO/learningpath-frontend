@@ -27,11 +27,33 @@ const GoogleTagMangerScript = () => {
   if (config.googleTagMangerId) {
     return (
       <script
-        dangerouslySetInnerHTML={{ __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+        dangerouslySetInnerHTML={{
+          __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
         var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;
         j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})
-        (window,document,'script','dataLayer','${config.googleTagMangerId}');` }}
+        (window,document,'script','dataLayer','${config.googleTagMangerId}');`,
+        }}
       />
+    );
+  }
+  return null;
+};
+
+const HotjarScript = () => {
+  if (config.hotjarSiteID) {
+    return (
+      <script>
+        dangerouslySetInnerHTML={{
+          __html: `(function(h,o,t,j,a,r){
+            h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
+            h._hjSettings={hjid:${config.hotjarSiteID},hjsv:5};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+          })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');`,
+        }}
+      </script>
     );
   }
   return null;
@@ -50,6 +72,7 @@ const Html = (props) => {
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         {head.title.toComponent()}
         {head.meta.toComponent()}
+        <HotjarScript />
         <SvgPolyfillScript className={className} />
         <link rel="stylesheet" type="text/css" href={`/assets/${assets['main.css']}`} />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic,300|Signika:400,600,300,700" />
