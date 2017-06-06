@@ -9,10 +9,10 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
-import payload403invalid from '../../actions/__tests__/payload403invalid';
+import payload403invalid from '../../../../actions/__tests__/payload403invalid';
 
-import { applicationError } from '../../messages/messagesActions';
-import { fetchLearningPathLicenses, setAllLicenses, setCreativeCommonLicenses } from '../edit/copyright/learningPathLicensesActions';
+import { applicationError } from '../../../../messages/messagesActions';
+import { fetchLearningPathLicenses, setAllLicenses, setCreativeCommonLicenses } from '../learningPathLicensesActions';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);

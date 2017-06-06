@@ -6,7 +6,6 @@
  *
  */
 
-
 const environment = process.env.NDLA_ENVIRONMENT || 'test';
 
 const activatedForEnvironment = (config, defaultValue) => {

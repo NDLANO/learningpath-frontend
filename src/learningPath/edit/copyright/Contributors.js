@@ -19,7 +19,7 @@ class Contributors extends Component {
   }
 
   render() {
-    const { input, onUnsavedChanges } = this.props;
+    const { input, onUnsavedChanges, contributorOptions } = this.props;
 
     if (typeof value === 'string') { // Handle redux form values witch are initialized as strings
       return null;
@@ -48,7 +48,7 @@ class Contributors extends Component {
 
     return (
       <Multiselect
-        data={[]}
+        data={contributorOptions}
         filter="contains"
         open={open}
         messages={messages}
@@ -70,6 +70,7 @@ Contributors.propTypes = {
     onBlur: PropTypes.func.isRequired,
     value: PropTypes.any.isRequired,
   }).isRequired,
+  contributorOptions: PropTypes.array.isRequired,
   onUnsavedChanges: PropTypes.func.isRequired,
 };
 
