@@ -58,12 +58,11 @@ export default class DescriptionHTMLEditor extends React.Component {
 
 
   handleDescriptionChange(editorState) {
-    const { input } = this.props;
     this.setState(prevState => ({ editorState, previousHasText: prevState.editorState.getCurrentContent().hasText() }), () => {
       const contentState = editorState.getCurrentContent();
       if (!this.state.previousHasText || !contentState.hasText()) {
         const descriptionHTML = convertDraftJsToHtml(contentState);
-        input.onChange(descriptionHTML);
+        this.props.input.onChange(descriptionHTML);
       }
     });
   }
