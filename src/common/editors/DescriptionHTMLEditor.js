@@ -19,7 +19,9 @@ import { convertDraftJsToHtml } from '../../util/convertDraftJsStateToHtml';
 export default class DescriptionHTMLEditor extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { editorState: EditorState.createEmpty() };
+    const htmlStr = props.input.value;
+    const editorState = htmlStr && htmlStr.length > 0 ? EditorState.createWithContent(convertFromHTML(htmlStr)) : EditorState.createEmpty();
+    this.state = { editorState, previousHasText: htmlStr.length > 0 };
 
     this.focus = () => this.editor.focus();
     this.blur = () => this.editor.blur();
@@ -33,6 +35,10 @@ export default class DescriptionHTMLEditor extends React.Component {
 
   componentWillMount() {
     this.setEditorContentStateFromHTML(this.props.input.value);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setEditorContentStateFromHTML(nextProps.input.value);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -50,13 +56,15 @@ export default class DescriptionHTMLEditor extends React.Component {
     }
   }
 
+
   handleDescriptionChange(editorState) {
     const { input } = this.props;
-
-    this.setState({ editorState }, () => {
+    this.setState(prevState => ({ editorState, previousHasText: prevState.editorState.getCurrentContent().hasText() }), () => {
       const contentState = editorState.getCurrentContent();
-      const descriptionHTML = convertDraftJsToHtml(contentState);
-      input.onChange(descriptionHTML);
+      if (!this.state.previousHasText || !contentState.hasText()) {
+        const descriptionHTML = convertDraftJsToHtml(contentState);
+        input.onChange(descriptionHTML);
+      }
     });
   }
 
@@ -144,14 +152,10 @@ export default class DescriptionHTMLEditor extends React.Component {
 
 
 DescriptionHTMLEditor.propTypes = {
-
   input: PropTypes.shape({
     onChange: PropTypes.func.isRequired,
     onBlur: PropTypes.func.isRequired,
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object,
-    ]),
+    value: PropTypes.string.isRequired,
   }),
   onBlur: PropTypes.func,
   placeholder: PropTypes.string,
