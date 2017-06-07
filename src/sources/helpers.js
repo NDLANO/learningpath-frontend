@@ -68,7 +68,11 @@ const apiBaseUrl = (() => {
 })();
 
 export function getToken(getState) {
-  return getState().authenticated ? getState().idToken : getState().accessToken;
+  return getState().authenticated ? getState().idToken.token : getState().accessToken.token;
+}
+
+export function getTokenExpiresAt(getState) {
+  return getState().authenticated ? getState().idToken.expiresAt : getState().accessToken.expiresAt;
 }
 
 export { locationOrigin, apiBaseUrl };

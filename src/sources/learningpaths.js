@@ -15,10 +15,16 @@ import { fetchAuth } from '../sources/fetchAuth';
 import { fetchAuthorized, postAuthorized, putAuthorized, patchAuthorized, deleteAuthorized, resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';
 
 const fetchPath = fetchAuthorized('/learningpath-api/v1/learningpaths/:pathId');
+
 const fetchPathStep = fetchAuthorized(
   '/learningpath-api/v1/learningpaths/:pathId/learningsteps/:stepId');
+
 const fetchMyPaths = fetchAuthorized('/learningpath-api/v1/learningpaths/mine');
+
 const fetchPathTags = fetchAuthorized('/learningpath-api/v1/learningpaths/tags');
+
+const fetchPathContributors = fetchAuthorized('/learningpath-api/v1/learningpaths/contributors');
+
 const fetchPathLicenses = (filter) => {
   let url = apiResourceUrl('/learningpath-api/v1/learningpaths/licenses');
   if (filter.length > 0) {
@@ -27,7 +33,6 @@ const fetchPathLicenses = (filter) => {
   }
   return fetchAuth(url).then(resolveJsonOrRejectWithError);
 };
-
 
 const postLearningPath = postAuthorized('/learningpath-api/v1/learningpaths');
 const postLearningPathStep = postAuthorized('/learningpath-api/v1/learningpaths/:pathId/learningsteps');
@@ -125,4 +130,5 @@ export {
   copyPath,
   fetchPathTags,
   fetchPathLicenses,
+  fetchPathContributors,
 };

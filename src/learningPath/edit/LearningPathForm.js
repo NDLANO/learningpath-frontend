@@ -51,6 +51,7 @@ const validate = (values) => {
 const LearningPathForm = (props) => {
   const {
     tagOptions,
+    contributorOptions,
     handleSubmit,
     submitting,
     valid,
@@ -101,7 +102,7 @@ const LearningPathForm = (props) => {
 
         <div className="learningPath-contributors">
           <label htmlFor="license" className="label--medium-bold  label--medium">{polyglot.t('learningPath.copyright.contributors')}</label>
-          <Field name="contributors" component={Contributors} id="contributors" onUnsavedChanges={onContributorChange} />
+          <Field name="contributors" component={Contributors} contributorOptions={contributorOptions} id="contributors" onUnsavedChanges={onContributorChange} />
         </div>
 
         <div className="block-container_fixed block-container_fixed--bottom--right">
@@ -126,6 +127,7 @@ LearningPathForm.propTypes = {
   valid: PropTypes.bool.isRequired,
   learningPath: PropTypes.object.isRequired,
   tagOptions: PropTypes.array.isRequired,
+  contributorOptions: PropTypes.array.isRequired,
   lang: PropTypes.string.isRequired,
   localFetchImages: PropTypes.func.isRequired,
   fetchImage: PropTypes.func.isRequired,
