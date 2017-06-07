@@ -37,7 +37,7 @@ const LearningPathStepFields = (props) => {
 
   const handleDescriptionBlur = (value) => {
     if ((!showTitle.meta.touched && !step.id)) {
-      if (value.hasText()) {
+      if (value) {
         showTitle.input.onChange(true);
       } else {
         showTitle.input.onChange(false);
@@ -62,14 +62,8 @@ const LearningPathStepFields = (props) => {
     }
   };
 
-  const disableLicense = () => {
-    if (description.input.value && description.input.value instanceof ContentState) {
-      return !description.input.value.hasText();
-    } else if (description.input.value === '<p><br></p>') {
-      return true;
-    }
-    return false;
-  };
+  const disableLicense = !description.input.value;
+
   return (
     <div>
       <div className="learning-step-form_group">
@@ -110,7 +104,7 @@ const LearningPathStepFields = (props) => {
                 idKey="license"
                 labelKey="description"
                 options={licenseOptions}
-                disabled={disableLicense()}
+                disabled={disableLicense}
                 input={license.input}
               />
               {(description.meta.touched) && description.meta.error && <span className="error_message error_message--red">{description.meta.error}</span>}
