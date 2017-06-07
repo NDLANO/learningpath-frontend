@@ -8,7 +8,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ContentState } from 'draft-js';
 import DescriptionHTMLEditor from '../../../common/editors/DescriptionHTMLEditor';
 import polyglot from '../../../i18n';
 import Icon from '../../../common/Icon';
