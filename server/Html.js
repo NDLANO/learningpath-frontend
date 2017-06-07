@@ -42,7 +42,7 @@ const GoogleTagMangerScript = () => {
 const HotjarScript = () => {
   if (config.hotjarSiteID) {
     return (
-      <script>
+      <script
         dangerouslySetInnerHTML={{
           __html: `(function(h,o,t,j,a,r){
             h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
@@ -53,7 +53,7 @@ const HotjarScript = () => {
             a.appendChild(r);
           })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');`,
         }}
-      </script>
+      />
     );
   }
   return null;
