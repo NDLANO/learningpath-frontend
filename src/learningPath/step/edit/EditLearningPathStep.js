@@ -10,7 +10,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import assign from 'lodash/assign';
-import { convertToHTML } from 'draft-convert';
 import get from 'lodash/get';
 
 import LearningPathStepForm from './LearningPathStepForm';
@@ -51,15 +50,6 @@ class EditLearningPathStep extends Component {
     }
 
     const handleSubmit = (values) => {
-      const descriptionHTML = !values.description || !values.description.hasText() ? undefined : convertToHTML({
-        styleToHTML: (style) => {
-          if (style === 'UNDERLINE') {
-            return <u />;
-          }
-          return undefined;
-        },
-      })(values.description);
-
       const emptyEmbedUrl = !step.embedUrl.url ? [] : [{ url: '', language, embedType: 'oembed' }];
       const emptyDescription = !step.description ? [] : [{ description: '', language }];
 
@@ -67,7 +57,7 @@ class EditLearningPathStep extends Component {
         type: values.type,
         showTitle: values.showTitle,
         title: [{ title: values.title, language }],
-        description: descriptionHTML ? [{ description: descriptionHTML, language }] : emptyDescription,
+        description: values.description ? [{ description: values.description, language }] : emptyDescription,
         embedUrl: values.url && values.url.url ? [{ url: values.url.url, language, embedType: values.url.embedType }] : emptyEmbedUrl,
         license: values.license && values.license.license ? values.license.license : '',
       });

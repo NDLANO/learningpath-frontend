@@ -15,14 +15,9 @@ export default class OneLineEditor extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { editorState: EditorState.createEmpty() };
-
-    const { input: { onChange }, maxlength } = props;
-
-    this.onChange = editorState => this.setState({ editorState }, () => {
-      const newValue = editorState.getCurrentContent().getPlainText();
-      onChange(newValue);
-    });
+    const { maxlength, input: { value } } = props;
+    const editorState = value ? EditorState.createWithContent(ContentState.createFromText(value)) : EditorState.createEmpty();
+    this.state = { editorState };
 
     this.handleReturn = () => {
       this.editor.blur();
@@ -43,6 +38,12 @@ export default class OneLineEditor extends React.Component {
     this.handlePastedText = (text, html) => false; // eslint-disable-line no-unused-vars
   }
 
+  componentWillMount() {
+    console.log(this.props);
+    const editorState = this.props.input.value ? EditorState.createWithContent(ContentState.createFromText(this.props.input.value)) : EditorState.createEmpty();
+    this.state = { editorState };
+  }
+
   componentWillReceiveProps(nextProps) {
     if (!this.state.editorState.getSelection().getHasFocus()) {
       this.updateEditorContentStateFromText(nextProps.input.value);
@@ -54,6 +55,13 @@ export default class OneLineEditor extends React.Component {
       const editorState = EditorState.createWithContent(ContentState.createFromText(text));
       this.setState({ editorState });
     }
+  }
+
+  handleOnChange(editorState) {
+    this.setState({ editorState }, () => {
+      const newValue = editorState.getCurrentContent().getPlainText();
+      this.props.input.onChange(newValue);
+    });
   }
 
   render() {
