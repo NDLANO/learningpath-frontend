@@ -7,6 +7,7 @@
  */
 
 const environment = process.env.NDLA_ENVIRONMENT || 'test';
+const hotjarSite = process.env[`HOTJAR_LEARNINGPATH_SITE_ID_${environment.toUpperCase()}`];
 
 const activatedForEnvironment = (config, defaultValue) => {
   if (config[environment] !== undefined) {
@@ -30,6 +31,7 @@ module.exports = Object.assign({
   port: process.env.LEARINGPATH_PORT || '3000',
   redirectPort: process.env.LEARNINGPATH_REDIRECT_PORT || '3001',
   googleTagMangerId: process.env.GOOGLE_TAG_MANGER_ID || undefined,
+  hotjarSiteID: hotjarSite || undefined,
   ndlaApiUrl: process.env.NDLA_API_URL || apiDomain,
   ndlaApiKey: process.env.NDLA_API_KEY || 'ndlalearningpathfrontend',
   googleSearchEngineId: process.env.NDLA_GOOGLE_SEARCH_ENGINE_ID,
