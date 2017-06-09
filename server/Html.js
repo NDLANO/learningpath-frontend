@@ -85,8 +85,8 @@ const Html = (props) => {
         <script dangerouslySetInnerHTML={{ __html: `window.assets = ${serialize(assets)}` }} />
         <script dangerouslySetInnerHTML={{ __html: `window.config = ${serialize(config)}` }} />
         <script src={`/assets/${assets['main.js']}`} />
-        <SvgPolyfillScriptInitalization className={className} />
         <HotjarScript />
+        <SvgPolyfillScriptInitalization className={className} />
       </body>
     </html>
   );

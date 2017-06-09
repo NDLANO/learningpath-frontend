@@ -7,7 +7,7 @@
  */
 
 const environment = process.env.NDLA_ENVIRONMENT || 'test';
-const hotjarSite = process.env[`HOTJAR_LEARNINGPATH_SITE_ID_${environment.toUpperCase()}`];
+const hotjarSite = environment === 'test' ? process.env.HOTJAR_LEARNINGPATH_SITE_ID : undefined;
 
 const activatedForEnvironment = (config, defaultValue) => {
   if (config[environment] !== undefined) {
