@@ -23,7 +23,10 @@ var serverConfig = require('./server');
 
 var server = http.createServer(serverConfig);
 
-server.listen(config.port);
+server.listen(config.port, () => {
+  server.keepAliveTimeout = 0;
+});
+
 server.on('listening', () => {
   console.log('Listening on ' + config.port);
 });
