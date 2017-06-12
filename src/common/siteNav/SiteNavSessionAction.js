@@ -17,7 +17,7 @@ const SiteNavSessionAction = ({ authenticated, userName, localCloseSidebars }) =
     return (
       <li className="site-nav_item">
         <Link to="/logout" className="site-nav_link" onClick={() => localCloseSidebars()}>
-          <LabeledIcon.Exit labelText={polyglot.t('siteNav.logout', { name: userName })} />
+          <LabeledIcon.Exit hotjarMasked labelText={polyglot.t('siteNav.logout', { name: userName })} />
         </Link>
       </li>
     );
