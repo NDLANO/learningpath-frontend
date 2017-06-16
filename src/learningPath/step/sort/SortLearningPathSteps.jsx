@@ -55,13 +55,6 @@ class SortLearningPathSteps extends Component {
             deleteStep={deleteStep}
             pressDelay={200}
           /> : null}
-        <ul className="vertical-menu" >
-          <li>
-            <Link className="cta-link cta-link--block" to={`/learningpaths/${learningPath.id}`}>
-              {polyglot.t('sortSteps.finish')}
-            </Link>
-          </li>
-        </ul>
       </div>
     );
   }
