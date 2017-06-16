@@ -12,9 +12,7 @@ import {
   arrayMove,
 } from 'react-sortable-hoc';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import SortableLearningStepList from './SortableLearningStepList';
-import polyglot from '../../../i18n';
 import { getLearningPath } from '../../learningPathSelectors';
 import { updateStepSequenceNumber, deleteLearningPathStep, sortLearningPathSteps } from '../learningPathStepActions';
 
