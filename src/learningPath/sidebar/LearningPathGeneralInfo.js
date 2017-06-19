@@ -56,8 +56,6 @@ const LearningPathGeneralInfo = (props, context) => {
           </div>
           {authenticated ? actions : ' '}
         </div>
-        {/* {addStepButton}
-        {pinterestButton}*/}
       </div>
     </div>
   );
