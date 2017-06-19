@@ -26,4 +26,4 @@ COPY server $APP_PATH/server
 WORKDIR $APP_PATH
 RUN yarn run build
 
-CMD ["npm", "run", "start-prod"]
+CMD ["yarn", "start-prod"]
