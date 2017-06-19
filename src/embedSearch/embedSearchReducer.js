@@ -22,7 +22,7 @@ const typeBaseDefaultState = (filterKey, name, type) => ({
 });
 
 const initialState = {
-  ndla: typeBaseDefaultState('more:ndla', 'NDLA', 'oembed'),
+  ndla: typeBaseDefaultState('more:ndla more:pagemap:metatags-nodetype:fagstoff', 'NDLA', 'oembed'),
   external: typeBaseDefaultState('more:youtube', 'Youtube', 'oembed'),
 };
 export default handleActions({
