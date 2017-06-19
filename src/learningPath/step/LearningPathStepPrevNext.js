@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
 import classNames from 'classnames';
+import Icon from '../../common/Icon';
 import polyglot from '../../i18n';
 import { titleI18N } from '../../util/i18nFieldFinder';
 
@@ -26,14 +27,15 @@ export function LearningPathPrevNext(props) {
     'learning-step_stepper': true,
     'learning-step_stepper--right': isRight,
   });
-  const stepperTag = (stepObject, text, isRight) => (stepObject ? <Link className={stepperClassName(isRight)} to={stepObject.url}> {text} </Link> : null);
+  const stepperTag = (stepObject, text, isRight) => (
+    stepObject ? <Link className={stepperClassName(isRight)} to={stepObject.url}>{!isRight ? <Icon.ArrowBack /> : null} {text} {isRight ? <Icon.ArrowForward /> : null} </Link> : null
+  );
   return (
     <div>
-      <div className="learning-step learning-step--padding-top">
-        {stepperTag(prevStep, polyglot.t('learningPath.previous', { title: prevStep ? prevStep.title : '' }), false)}
-      </div>
+      <div className="learning-step learning-step--padding-top" />
       {children}
-      <div className="learning-step learning-step--padding-bottom learning-step--padding-top">
+      <div className="learning-step learning-step--footer learning-step--footer-fixed">
+        {stepperTag(prevStep, polyglot.t('learningPath.previous', { title: prevStep ? prevStep.title : '' }), false)}
         {stepperTag(nextStep, polyglot.t('learningPath.next', { title: nextStep ? nextStep.title : '' }), true)}
       </div>
     </div>
