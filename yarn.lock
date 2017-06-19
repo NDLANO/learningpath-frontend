@@ -1360,14 +1360,7 @@ create-hmac@^1.1.0, create-hmac@^1.1.2:
     create-hash "^1.1.0"
     inherits "^2.0.1"
 
-create-react-class@^15.5.1:
-  version "15.5.2"
-  resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.5.2.tgz#6a8758348df660b88326a0e764d569f274aad681"
-  dependencies:
-    fbjs "^0.8.9"
-    object-assign "^4.1.1"
-
-create-react-class@^15.6.0:
+create-react-class@^15.5.1, create-react-class@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.6.0.tgz#ab448497c26566e1e29413e883207d57cfe7bed4"
   dependencies:
@@ -3916,9 +3909,9 @@ ndla-error-reporter@^0.1.2:
   dependencies:
     raven-js "^3.9.2"
 
-ndla-learningpath-styleguide@^0.1.55:
-  version "0.1.55"
-  resolved "https://registry.yarnpkg.com/ndla-learningpath-styleguide/-/ndla-learningpath-styleguide-0.1.55.tgz#4e7d7117518deb8caf5dc86e620a310829b5e3db"
+ndla-learningpath-styleguide@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/ndla-learningpath-styleguide/-/ndla-learningpath-styleguide-0.2.0.tgz#1b0da61ca2bfc55a989a57d44b33b57371225c83"
 
 ndla-licenses@0.0.7:
   version "0.0.7"
@@ -4672,18 +4665,18 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.0.0, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8:
-  version "15.5.8"
-  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.8.tgz#6b7b2e141083be38c8595aa51fc55775c7199394"
-  dependencies:
-    fbjs "^0.8.9"
-
-prop-types@^15.5.10:
+prop-types@^15.0.0, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7:
   version "15.5.10"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
   dependencies:
     fbjs "^0.8.9"
     loose-envify "^1.3.1"
+
+prop-types@^15.5.8:
+  version "15.5.8"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.8.tgz#6b7b2e141083be38c8595aa51fc55775c7199394"
+  dependencies:
+    fbjs "^0.8.9"
 
 propagate@0.4.0:
   version "0.4.0"
