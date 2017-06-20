@@ -44,11 +44,13 @@ class LearningPathStep extends React.Component {
     const { lang } = this.context;
     const oembedContent = learningPathStep.oembed;
     return (
-      <div className="two-column_content--wide">
+      <div className={oembedContent ? 'learning-step--header' : null}>
         <LearningPathStepPrevNext currentStepId={learningPathStep.id} lang={lang}>
-          <Helmet title={polyglot.t('htmlTitleTemplates.learningPathStep', { title: learningPathStep.title || '' })} />
-          <LearningPathStepInformation learningPathStep={learningPathStep} stepTitle={learningPathStep.title} />
-          {oembedContent ? <Oembed oembedContent={oembedContent} /> : ''}
+          <div className="two-column_content--wide">
+            <Helmet title={polyglot.t('htmlTitleTemplates.learningPathStep', { title: learningPathStep.title || '' })} />
+            <LearningPathStepInformation learningPathStep={learningPathStep} stepTitle={learningPathStep.title} />
+            {oembedContent ? <Oembed oembedContent={oembedContent} /> : ''}
+          </div>
         </LearningPathStepPrevNext>
       </div>
     );
