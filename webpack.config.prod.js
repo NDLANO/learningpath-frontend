@@ -21,6 +21,8 @@ module.exports = require('./webpack.config.base')({
   fileLoader: 'file-loader?name=[name]-[hash].[ext]',
 
   plugins: [
+    // Enable Scope Hoisting
+    new webpack.optimize.ModuleConcatenationPlugin(),
 
     // Minify and optimize the JavaScript
     new webpack.optimize.UglifyJsPlugin({
