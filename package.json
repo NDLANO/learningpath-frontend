@@ -84,7 +84,7 @@
     "jwt-decode": "^2.2.0",
     "lodash": "4.17.4",
     "ndla-error-reporter": "^0.1.5",
-    "ndla-learningpath-styleguide": "^0.2.1",
+    "ndla-learningpath-styleguide": "^0.2.2",
     "ndla-licenses": "^0.0.8",
     "ndla-ui": "^0.5.8",
     "ndla-util": "^0.1.1",
