@@ -67,17 +67,11 @@ export function logout(federated = undefined) {
 }
 
 export function renewAuth0Token() {
-  return (dispatch, getState) => new Promise((resolve) => {
+  return dispatch => new Promise((resolve) => {
     auth.renewAuth({
       redirectUri: `${locationOrigin}/login/silent-callback`,
       usePostMessage: true,
     }, (err, authResult) => {
-      if (process.env.NODE_ENV === 'development' && authResult && (authResult.source === '@devtools-page' || authResult.source === '@devtools-extension')) { // Temporarily fix for bug in auth0
-        if (new Date().getTime() >= getState().idToken.expiresAt) {
-          dispatch(logout()).then(token => resolve(token));
-        }
-        return;
-      }
       if (authResult && authResult.idToken) {
         const token = { token: authResult.idToken, expiresAt: getIdTokenExpireEpoch(authResult.idToken) };
         dispatch(setIdToken(token));

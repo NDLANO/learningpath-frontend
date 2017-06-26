@@ -20,7 +20,7 @@ import { getI18nLearningPath } from '../learningPathSelectors';
 import LearningPathContributors from './LearningPathContributors';
 
 const LearningPathGeneralInfo = (props, context) => {
-  const { authenticated, learningPath, localCloseSidebars, onCopyLearningPathClick, changeStatusButton, addStepButton, pinterestButton } = props;
+  const { authenticated, learningPath, localCloseSidebars, onCopyLearningPathClick, changeStatusButton } = props;
   const { lang } = context;
   const borderBoxClassName = classNames({
     'border-box_wrapper': true,
@@ -47,17 +47,15 @@ const LearningPathGeneralInfo = (props, context) => {
         </div>
         <div className="learningpath-general-info_b">
           <div className={borderBoxClassName}>
-            <div className="border-box border-box--block">
+            <div className="border-box">
               <LabeledIcon.Today labelText={formatDate(learningPath.lastUpdated, lang)} tagName="time" />
             </div>
-            <div className="border-box border-box--block">
+            <div className="border-box">
               <LabeledIcon.QueryBuilder labelText={formatDuration(learningPath.duration, lang)} tagName="time" />
             </div>
           </div>
-          { authenticated ? actions : ' '}
+          {authenticated ? actions : ' '}
         </div>
-        {addStepButton}
-        {pinterestButton}
       </div>
     </div>
   );

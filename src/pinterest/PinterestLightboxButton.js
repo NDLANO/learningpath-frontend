@@ -11,9 +11,12 @@ const PinterestLightboxButton = ({ learningPath, toggleLightBox }) => {
     return null;
   }
   return (
-    <Button className="button button--primary-outline cta-link--block pinterest-lightbox_button" onClick={toggleLightBox}>
-      {polyglot.t('pinterest.importFrom')}
-    </Button>
+    <div className="add-from-pinterest">
+      <Button className="button button--primary-outline cta-link--block pinterest-lightbox_button" onClick={toggleLightBox}>
+        <div className="pinterest-sign--circle">P</div>
+        {polyglot.t('pinterest.importFrom')}
+      </Button>
+    </div>
   );
 };
 

@@ -12,9 +12,7 @@ import {
   arrayMove,
 } from 'react-sortable-hoc';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import SortableLearningStepList from './SortableLearningStepList';
-import polyglot from '../../../i18n';
 import { getLearningPath } from '../../learningPathSelectors';
 import { updateStepSequenceNumber, deleteLearningPathStep, sortLearningPathSteps } from '../learningPathStepActions';
 
@@ -55,13 +53,6 @@ class SortLearningPathSteps extends Component {
             deleteStep={deleteStep}
             pressDelay={200}
           /> : null}
-        <ul className="vertical-menu" >
-          <li>
-            <Link className="cta-link cta-link--block" to={`/learningpaths/${learningPath.id}`}>
-              {polyglot.t('sortSteps.finish')}
-            </Link>
-          </li>
-        </ul>
       </div>
     );
   }

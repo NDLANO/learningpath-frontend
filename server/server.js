@@ -9,6 +9,7 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import express from 'express';
+import helmet from 'helmet';
 import compression from 'compression';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
@@ -47,16 +48,48 @@ app.use(compression());
 app.use(express.static('htdocs', {
   maxAge: 1000 * 60 * 60 * 24 * 365, // One year
 }));
-app.use((req, res, next) => {
-  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
-  if (process.env.NODE_ENV !== 'development') {
-    res.setHeader(
-      'Content-Security-Policy',
-      'default-src \'self\'; script-src \'self\' \'unsafe-inline\' \'unsafe-eval\' https://*.ndla.no https://players.brightcove.net https://www.nrk.no https://www.googletagmanager.com https://www.google-analytics.com https://www.youtube.com https://s.ytimg.com https://cdn.auth0.com; style-src \'self\' https://fonts.googleapis.com https://fonts.gstatic.com; font-src \'self\' https://fonts.googleapis.com https://fonts.gstatic.com; connect-src \'self\' https://*.ndla.no https://logs-01.loggly.com https://www.googleapis.com; img-src https://*.ndla.no https://www.google-analytics.com https://stats.g.doubleclick.net data: https://i.ytimg.com https://pi.tedcdn.com http://*.ndlap3.seria.net; frame-src *;');
-  }
-  next();
-});
 
+
+app.use(helmet({
+  hsts: {
+    maxAge: 31536000,
+    includeSubDomains: true,
+    preload: true,
+  },
+  contentSecurityPolicy: process.env.NODE_ENV !== 'development' ? {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: [
+        "'self'",
+        "'unsafe-inline'",
+        "'unsafe-eval'",
+        'ws://*.hotjar.com',
+        'wss://*.hotjar.com',
+        'https://*.hotjar.com',
+        'https://*.ndla.no',
+        'https://players.brightcove.net',
+        'https://www.nrk.no',
+        'https://www.googletagmanager.com',
+        'https://www.google-analytics.com',
+        'https://www.youtube.com',
+        'https://s.ytimg.com',
+        'https://cdn.auth0.com',
+      ],
+      styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com', 'https://fonts.gstatic.com'],
+      fontSrc: ["'self'", 'https://*.hotjar.com', 'https://fonts.googleapis.com', 'https://fonts.gstatic.com'],
+      imgSrc: ['https://*.hotjar.com', 'https://*.ndla.no', 'https://www.google-analytics.com', 'https://stats.g.doubleclick.net', 'data: https://i.ytimg.com https://pi.tedcdn.com http://*.ndlap3.seria.net'],
+      connectSrc: ["'self'", 'ws://*.hotjar.com wss://*.hotjar.com', 'https://*.hotjar.com', 'https://*.ndla.no', 'https://logs-01.loggly.com', 'https://www.googleapis.com'],
+      frameSrc: ['*'],
+      childSrc: ['https://*.hotjar.com'],
+      objectSrc: ["'none'"],
+      upgradeInsecureRequests: true,
+    },
+  } : undefined,
+  frameguard: process.env.NODE_ENV !== 'development' ? {
+    action: 'allow-from',
+    domain: 'https://*.hotjar.com',
+  } : undefined,
+}));
 
 const getConditionalClassnames = (userAgentString) => {
   if (userAgentString.indexOf('MSIE') >= 0) {

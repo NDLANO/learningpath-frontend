@@ -12,17 +12,19 @@ import get from 'lodash/get';
 import Icon from './Icon';
 
 function LabeledIcon(props) {
-  const { iconName, labelText } = props;
+  const { iconName, labelText, hotjarMasked } = props;
+  const hjMasked = hotjarMasked ? { 'data-hj-masked': true } : '';
   const tagName = get(props, 'tagName', 'span');
   const icon = React.createElement(Icon[iconName], { className: 'icon--with-label' });
   const label = React.createElement(tagName, { className: 'labeled-icon_text' }, labelText);
-  return (<span className="labeled-icon">{icon}{label}</span>);
+  return (<span {...hjMasked} className="labeled-icon">{icon}{label}</span>);
 }
 
 LabeledIcon.propTypes = {
   labelText: PropTypes.string.isRequired,
   iconName: PropTypes.string.isRequired,
   tagName: PropTypes.string,
+  hotjarMasked: PropTypes.bool,
 };
 
 
@@ -42,4 +44,5 @@ export default LabeledIcon;
 
 LabeledIcon.defaultProps = {
   labelText: '',
+  hjMasked: false,
 };

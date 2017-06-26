@@ -29,6 +29,7 @@ import CreateLearningPathStep from './step/create/CreateLearningPathStep';
 import EditLearningPathStep from './step/edit/EditLearningPathStep';
 import EditLearningPath from './edit/EditLearningPath';
 import SortLearningPathSteps from './step/sort/SortLearningPathSteps';
+import SortLearningStepsSaveButton from './step/sort/SortLearningPathStepsSaveButton';
 import LearningPathToCButtons from './sidebar/LearningPathToCButtons';
 import AddLearningPathStepButton from './sidebar/AddLearningPathStepButton';
 import PinterestLightboxButton from '../pinterest/PinterestLightboxButton';
@@ -88,11 +89,17 @@ export class LearningPath extends Component {
 
     const changeStatusButton = showButtonsUrls.includes(match.path) && match.isExact ? <LearningPathToCButtons /> : null;
     const addStepButton = showButtonsUrls.includes(match.path) && match.isExact ? <AddLearningPathStepButton /> : null;
-    const pinterestButton = match.path === '/learningpaths/:pathId/step/:stepId' && match.isExact ? <PinterestLightboxButton learningPath={learningPath} toggleLightBox={this.togglePinterest} /> : null;
-    const pinterestLightBox = match.path === '/learningpaths/:pathId/step/:stepId' && match.isExact ? <PinterestLightbox learningPath={learningPath} showLightBox={this.state.displayPinterest} toggleLightBox={this.togglePinterest} /> : null;
+    const pinterestButton = showButtonsUrls.includes(match.path) && match.isExact ? <PinterestLightboxButton learningPath={learningPath} toggleLightBox={this.togglePinterest} /> : null;
+    const pinterestLightBox = showButtonsUrls.includes(match.path) && match.isExact ?
+      (<PinterestLightbox
+        learningPath={learningPath}
+        showLightBox={this.state.displayPinterest}
+        toggleLightBox={this.togglePinterest}
+      />) : null;
     const sortLearningSteps = match.url === `/learningpaths/${match.params.pathId}/step/sort`;
     const sortableTableOfContent = sortLearningSteps ? <SortLearningPathSteps learningPath={learningPath} lang={lang} /> : <LearningPathToC learningPath={learningPath} activeStepId={stepId} />;
     const sortableTableOfContentButton = !sortLearningSteps ? <SortLearningStepsButton learningPath={learningPath} /> : null;
+    const sortableTableOfContentSaveButton = sortLearningSteps ? <SortLearningStepsSaveButton learningPath={learningPath} lang={lang} /> : null;
 
     const collapseClassName = () => classNames({
       'two-column_col table-of-content': true,
@@ -121,13 +128,16 @@ export class LearningPath extends Component {
           <aside className={collapseClassName()}>
             <LearningPathGeneralInfo
               {...this.props}
-              pinterestButton={pinterestButton}
               onCopyLearningPathClick={this.onCopyLearningPathClick}
-              addStepButton={addStepButton}
               changeStatusButton={changeStatusButton}
             />
-            <div className="step-nav_wrapper">
+            <div>
+              {addStepButton}
+              {pinterestButton}
+              {sortableTableOfContentSaveButton}
               {sortableTableOfContentButton}
+            </div>
+            <div className="step-nav_wrapper">
               {sortableTableOfContent}
             </div>
           </aside>
