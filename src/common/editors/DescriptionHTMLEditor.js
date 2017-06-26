@@ -26,7 +26,6 @@ export default class DescriptionHTMLEditor extends React.Component {
     this.focus = () => this.editor.focus();
     this.blur = () => this.editor.blur();
 
-    this.handleKeyCommand = this.handleKeyCommand.bind(this);
     this.toggleBlockType = this.toggleBlockType.bind(this);
     this.toggleInlineStyle = this.toggleInlineStyle.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
@@ -89,16 +88,6 @@ export default class DescriptionHTMLEditor extends React.Component {
         inlineStyle
       )
     );
-  }
-
-  handleKeyCommand(command) {
-    const { editorState } = this.state;
-    const newState = RichUtils.handleKeyCommand(editorState, command);
-    if (newState) {
-      this.handleDescriptionChange(newState);
-      return true;
-    }
-    return false;
   }
 
   render() {
