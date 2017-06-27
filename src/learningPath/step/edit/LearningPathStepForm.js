@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
 import defined from 'defined';
-import { reduxForm, Fields, change } from 'redux-form';
+import { reduxForm, Fields } from 'redux-form';
 import { createValidator, required, oneOfIsRequired, licenseExistsIfDescriptionExists } from '../../../util/validation';
 import LabeledIcon from '../../../common/LabeledIcon';
 import polyglot from '../../../i18n';
@@ -35,6 +35,7 @@ const LearningPathStepForm = (props) => {
   } = props;
 
   const abortUrl = step.id ? `/learningpaths/${learningPath.id}/step/${step.id}` : `/learningpaths/${learningPath.id}`;
+
   return (
     <form onSubmit={handleSubmit} className="learning-step-form">
       <div className="learning-step-form_group">
@@ -73,7 +74,6 @@ LearningPathStepForm.propTypes = {
   oembedPreview: PropTypes.object,
   validateOembedUrl: PropTypes.func.isRequired,
   licenseOptions: PropTypes.array.isRequired,
-  localChange: PropTypes.func.isRequired,
   valid: PropTypes.bool.isRequired,
 };
 
@@ -92,7 +92,6 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = {
   validateOembedUrl: (embedContent, lang, embedType) => validateOembed(embedContent, lang, embedType),
-  localChange: (form, field, value) => change(form, field, value),
 };
 
 const asyncValidate = (values, dispatch, props) => {
@@ -112,6 +111,7 @@ export default compose(
     form: formName,
     asyncValidate,
     validate,
+    enableReinitialize: true,
     asyncBlurFields: ['url'],
   })
 )(LearningPathStepForm);

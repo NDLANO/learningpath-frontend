@@ -43,6 +43,12 @@ export default class OneLineEditor extends React.Component {
     this.handlePastedText = (text, html) => false; // eslint-disable-line no-unused-vars
   }
 
+  componentWillMount() {
+    if (!this.state.editorState.getSelection().getHasFocus()) {
+      this.updateEditorContentStateFromText(this.props.input.value);
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if (!this.state.editorState.getSelection().getHasFocus()) {
       this.updateEditorContentStateFromText(nextProps.input.value);
