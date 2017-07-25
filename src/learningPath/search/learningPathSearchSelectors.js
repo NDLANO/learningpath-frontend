@@ -8,7 +8,6 @@
 
 import { createSelector } from 'reselect';
 import defined from 'defined';
-import { titleI18N, descriptionI18N, introductionI18N, tagsI18N, isBasedOnTitleI18N } from '../../util/i18nFieldFinder';
 import { getLocale } from '../../locale/localeSelectors';
 
 const getLearningPathSearchResultFromState = state => state.learningPathSearch.results;
@@ -16,13 +15,13 @@ const getLearningPathSearchTotalCountFromState = state => state.learningPathSear
 
 export const getLearningPathSearchResult = createSelector(
     [getLearningPathSearchResultFromState, getLocale],
-    (results, lang) => results.map(result => ({
+    results => results.map(result => ({
       ...result,
-      title: titleI18N(result, lang, true),
-      isBasedOnTitle: isBasedOnTitleI18N(result, lang, true),
-      description: descriptionI18N(result, lang, true),
-      introduction: introductionI18N(result, lang, true),
-      tags: defined(tagsI18N(result, lang, false), []),
+      title: result.title,
+      isBasedOnTitle: result.isBasedOnTitle,
+      description: result.description,
+      introduction: result.introduction,
+      tags: defined(result.tags),
     }))
 );
 

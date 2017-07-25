@@ -82,7 +82,7 @@ const updateStatus = ({ pathId }, body) =>
 
 export const activateDeletedPath = ({ pathId, status }) => putLearningPathStatus({ pathId }, { status });
 
-const learningPathsUrl = apiResourceUrl('/learningpath-api/v1/learningpaths');
+const learningPathsUrl = apiResourceUrl('/learningpath-api/v2/learningpaths');
 
 const updateSeqNo = ({ pathId, stepId }, body) =>
   putSequenceNumber({ pathId, stepId }, body);
