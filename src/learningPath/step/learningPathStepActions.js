@@ -15,7 +15,6 @@ import { fetchLearningPath } from '../learningPathActions';
 import { updateStep, createStep, deleteStep, fetchPathStep, updateSeqNo, activateDeletedStep, fetchOembedUrl } from '../../sources/learningpaths';
 import { setOembedPreview } from './edit/validateOembedActions';
 import polyglot from '../../i18n';
-import { oembedContentI18N } from '../../util/i18nFieldFinder';
 import redirectAction from '../../util/redirectAction';
 
 export const setLearningPathStep = createAction('SET_LEARNING_PATH_STEP');
@@ -51,8 +50,7 @@ function canAccessLearningPathStep(pathId, step, isEdit = false, dispatch) {
 
 export function fetchLearningPathStep(pathId, stepId, isEdit = false) {
   return (dispatch, getState) => {
-    const { learningPath, locale } = getState();
-
+    const { learningPath } = getState();
     if (get(learningPath, 'id') === pathId) {
       const step = get(learningPath, 'learningsteps', []).find(s => s.id === stepId);
       if (step) {

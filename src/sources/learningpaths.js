@@ -17,7 +17,7 @@ import { fetchAuthorized, postAuthorized, putAuthorized, patchAuthorized, delete
 const fetchPath = fetchAuthorized('/learningpath-api/v1/learningpaths/:pathId');
 
 const fetchPathStep = fetchAuthorized(
-  '/learningpath-api/v1/learningpaths/:pathId/learningsteps/:stepId');
+  '/learningpath-api/v2/learningpaths/:pathId/learningsteps/:stepId');
 
 const fetchMyPaths = fetchAuthorized('/learningpath-api/v1/learningpaths/mine');
 
