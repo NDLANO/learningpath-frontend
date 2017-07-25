@@ -35,7 +35,7 @@ const fetchPathLicenses = (filter) => {
 };
 
 const postLearningPath = postAuthorized('/learningpath-api/v1/learningpaths');
-const postLearningPathStep = postAuthorized('/learningpath-api/v1/learningpaths/:pathId/learningsteps');
+const postLearningPathStep = postAuthorized('/learningpath-api/v2/learningpaths/:pathId/learningsteps');
 const copyLearningPath = postAuthorized('/learningpath-api/v1/learningpaths/:copyfrom/copy');
 
 const createPath = (props, body) =>

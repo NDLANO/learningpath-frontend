@@ -23,8 +23,9 @@ export const getI18NEmbedContent = createSelector(
 
 export const getI18nLearningPathStep = createSelector(
   [getLearningPathStep, getLocale],
-  learningPathStep => ({
+  (learningPathStep, lang) => ({
     ...learningPathStep,
+    language: lang,
     title: learningPathStep.title,
     description: learningPathStep.description,
     embedUrl: {
