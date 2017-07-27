@@ -14,7 +14,6 @@ import get from 'lodash/get';
 import classNames from 'classnames';
 import Icon from '../../common/Icon';
 import polyglot from '../../i18n';
-import { titleI18N } from '../../util/i18nFieldFinder';
 
 export function LearningPathPrevNext(props) {
   const {
@@ -53,7 +52,7 @@ LearningPathPrevNext.propTypes = {
 
 
 const mapStateToProps = (state, props) => {
-  const { currentStepId, lang } = props;
+  const { currentStepId } = props;
   const learningsteps = get(state.learningPath, 'learningsteps', []);
   const learningPathId = get(state.learningPath, 'id', -1);
   const currentStep = learningsteps.find(step => step.id === currentStepId);
@@ -61,8 +60,8 @@ const mapStateToProps = (state, props) => {
 
   const base = `/learningpaths/${learningPathId}`;
 
-  const prevStep = learningsteps[currentSeqNo - 1] ? { url: `${base}/step/${learningsteps[currentSeqNo - 1].id}`, title: titleI18N(learningsteps[currentSeqNo - 1], lang, true) } : undefined;
-  const nextStep = learningsteps[currentSeqNo + 1] ? { url: `${base}/step/${learningsteps[currentSeqNo + 1].id}`, title: titleI18N(learningsteps[currentSeqNo + 1], lang, true) } : undefined;
+  const prevStep = learningsteps[currentSeqNo - 1] ? { url: `${base}/step/${learningsteps[currentSeqNo - 1].id}`, title: learningsteps[currentSeqNo - 1].title } : undefined;
+  const nextStep = learningsteps[currentSeqNo + 1] ? { url: `${base}/step/${learningsteps[currentSeqNo + 1].id}`, title: learningsteps[currentSeqNo + 1].title } : undefined;
   return Object.assign({}, state, {
     prevStep,
     nextStep,

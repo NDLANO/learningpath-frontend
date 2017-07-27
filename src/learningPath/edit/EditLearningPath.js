@@ -15,10 +15,10 @@ import { Redirect } from 'react-router-dom';
 import LearningPathForm from './LearningPathForm';
 import { fetchLearningPathTagsIfNeeded } from './tags/learningPathTagsActions';
 import { fetchLearningPathContributorsIfNeeded } from './copyright/learningPathContributorsActions';
-import { getLearningPathTagsByLanguage } from './tags/learningPathTagsSelectors';
+import { getLearningPathTags } from './tags/learningPathTagsSelectors';
 import { fetchLearningPathImages, fetchLearningPathImage, fetchLearningPathImageWithMetaUrl } from '../../imageSearch/imageActions';
 import { updateLearningPath } from '../learningPathActions';
-import { getI18nLearningPath, getI18nLearningPathSteps } from '../learningPathSelectors';
+import { getI18nLearningPath } from '../learningPathSelectors';
 import { getLocale } from '../../locale/localeSelectors';
 
 class EditLearningPath extends Component {
@@ -28,8 +28,8 @@ class EditLearningPath extends Component {
   }
 
   componentDidMount() {
-    const { fetchLearningPathTags, fetchLearningPathContributors } = this.props;
-    fetchLearningPathTags();
+    const { lang, fetchLearningPathTags, fetchLearningPathContributors } = this.props;
+    fetchLearningPathTags(lang);
     fetchLearningPathContributors();
   }
 
@@ -69,11 +69,12 @@ class EditLearningPath extends Component {
       }
 
       return localUpdateLearningPath(learningPath.id, {
-        title: [{ title: values.title, language }],
-        description: [{ description: values.description, language }],
+        language,
+        title: values.title,
+        description: values.description,
         revision: learningPath.revision,
         duration: (values.duration.replace(/,/g, '.')) * 60,
-        tags: [{ tags: tagValues, language }],
+        tags: tagValues,
         copyright: {
           license: {
             license: 'by-sa',
@@ -100,7 +101,6 @@ class EditLearningPath extends Component {
 EditLearningPath.propTypes = {
   learningPath: PropTypes.object.isRequired,
   lang: PropTypes.string.isRequired,
-  learningSteps: PropTypes.array.isRequired,
   tags: PropTypes.array.isRequired,
   contributors: PropTypes.array.isRequired,
   localUpdateLearningPath: PropTypes.func.isRequired,
@@ -113,8 +113,7 @@ EditLearningPath.propTypes = {
 
 const mapStateToProps = state => Object.assign({}, state, {
   learningPath: getI18nLearningPath(state),
-  learningSteps: getI18nLearningPathSteps(state),
-  tags: getLearningPathTagsByLanguage(state),
+  tags: getLearningPathTags(state),
   contributors: get(state, 'learningPathContributors.all', []),
   licenses: get(state, 'learningPathLicenses.creativeCommonLicenses.all', []),
   lang: getLocale(state),

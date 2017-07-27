@@ -97,7 +97,7 @@ export class LearningPath extends Component {
         toggleLightBox={this.togglePinterest}
       />) : null;
     const sortLearningSteps = match.url === `/learningpaths/${match.params.pathId}/step/sort`;
-    const sortableTableOfContent = sortLearningSteps ? <SortLearningPathSteps learningPath={learningPath} lang={lang} /> : <LearningPathToC learningPath={learningPath} activeStepId={stepId} />;
+    const sortableTableOfContent = sortLearningSteps ? <SortLearningPathSteps learningPath={learningPath} /> : <LearningPathToC learningPath={learningPath} activeStepId={stepId} />;
     const sortableTableOfContentButton = !sortLearningSteps ? <SortLearningStepsButton learningPath={learningPath} /> : null;
     const sortableTableOfContentSaveButton = sortLearningSteps ? <SortLearningStepsSaveButton learningPath={learningPath} lang={lang} /> : null;
 

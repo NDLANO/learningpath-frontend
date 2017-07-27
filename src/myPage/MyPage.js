@@ -51,7 +51,6 @@ export class MyPage extends React.Component {
     const items = learningPaths.map((lp) => {
       const duration = formatDuration(lp.duration, lang);
       const lastUpdated = formatDate(lp.lastUpdated, lang);
-
       const onDropDownSelect = (actionType) => {
         switch (actionType) {
           case 'delete':
@@ -109,8 +108,9 @@ export class MyPage extends React.Component {
 
     const onCreateLearningPathSubmit = (values) => {
       createPath({
-        title: [{ title: values.title, language: lang }],
-        description: [{ description: values.description, language: lang }],
+        title: values.title,
+        description: values.description,
+        language: lang,
         duration: 1,
         coverPhoto: { url: '', metaUrl: '' },
         copyright: { license: { license: 'by-sa', description: 'Creative Commons Attribution-ShareAlike 2.0 Generic', url: 'https://creativecommons.org/licenses/by-sa/2.0/' }, contributors: [] },

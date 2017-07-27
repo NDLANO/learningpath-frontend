@@ -8,7 +8,6 @@
 
 import { createSelector } from 'reselect';
 import defined from 'defined';
-import { titleI18N, descriptionI18N, tagsI18N, isBasedOnTitleI18N } from '../util/i18nFieldFinder';
 import { getLocale } from '../locale/localeSelectors';
 
 export const getLearningPath = state => state.learningPath;
@@ -17,27 +16,14 @@ export const getLearningPathId = state => state.learningPath.id;
 
 export const getI18nLearningPath = createSelector(
   [getLearningPath, getLocale],
-  (learningPath, lang) => ({
+  learningPath => ({
     ...learningPath,
-    title: titleI18N(learningPath, lang, true),
-    isBasedOnTitle: isBasedOnTitleI18N(learningPath, lang, true),
-    description: descriptionI18N(learningPath, lang, true),
+    title: learningPath.title,
+    isBasedOnTitle: learningPath.isBasedOnTitle,
+    description: learningPath.description,
     learningsteps: learningPath.learningsteps ? learningPath.learningsteps.map(step => ({
       ...step,
-      title: titleI18N(step, lang, true),
+      title: step.title,
     })) : [],
-    tags: defined(tagsI18N(learningPath, lang, true), []),
+    tags: defined(learningPath.tags, []),
   }));
-
-
-export const getI18nLearningPathSteps = createSelector(
-  [getLearningPath, getLocale],
-  (learningPath, lang) => {
-    if (learningPath.learningsteps) {
-      return learningPath.learningsteps.map(step => ({
-        ...step,
-        title: titleI18N(step, lang, true),
-      }));
-    }
-    return [];
-  });

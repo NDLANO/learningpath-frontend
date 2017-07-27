@@ -14,7 +14,7 @@ export const setMyLearningPathsSortOrder = createAction('SET_MY_LEARNING_PATHS_S
 export const setLearningPaths = createAction('SET_LEARNING_PATHS');
 
 export function fetchMyLearningPaths() {
-  return (dispatch, getState) => fetchMyPaths(getState().idToken)
+  return (dispatch, getState) => fetchMyPaths(getState().locale, getState().idToken)
     .then(paths => dispatch(setLearningPaths(paths)))
     .catch(err => dispatch(applicationError(err)));
 }
