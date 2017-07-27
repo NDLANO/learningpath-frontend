@@ -27,3 +27,15 @@ export const getI18nLearningPath = createSelector(
     })) : [],
     tags: defined(learningPath.tags, []),
   }));
+
+export const getI18nLearningPathSteps = createSelector(
+  [getLearningPath],
+  (learningPath) => {
+    if (learningPath.learningsteps) {
+      return learningPath.learningsteps.map(step => ({
+        ...step,
+        title: step.title,
+      }));
+    }
+    return [];
+  });

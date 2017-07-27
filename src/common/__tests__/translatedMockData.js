@@ -31,7 +31,8 @@ const translatedLearningPaths = [
 const translatedLearningPath = {
   id: 4,
   title: 'Kristofers private bokmål',
-  description: 'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
+  description: `Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden.
+      Kurset fokuserer på kunst og kultur på et verdensperspektiv.`,
   metaUrl: 'http://api.test.ndla.no/learningpaths/4',
   learningsteps: [
     {
@@ -128,6 +129,7 @@ const translatedLearningStep = {
   seqNo: 2,
   title: 'En annen tittel her',
   description: '<h1>Beskrivelse</h1>',
+  language: 'nb',
   embedUrl: {
     url: 'https://www.youtube.com/watch?v=RYLlSFmGfm0',
     embedType: 'oembed',

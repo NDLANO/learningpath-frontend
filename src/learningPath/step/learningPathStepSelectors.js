@@ -7,6 +7,7 @@
  */
 
 import { createSelector } from 'reselect';
+import defined from 'defined';
 import { oembedContentI18N } from '../../util/i18nFieldFinder';
 import { getLocale } from '../../locale/localeSelectors';
 
@@ -28,9 +29,6 @@ export const getI18nLearningPathStep = createSelector(
     language: lang,
     title: learningPathStep.title,
     description: learningPathStep.description,
-    embedUrl: {
-      url: learningPathStep.embedUrl && learningPathStep.embedUrl.url,
-      embedType: learningPathStep.embedUrl && learningPathStep.embedUrl.embedType,
-    },
+    embedUrl: defined(learningPathStep.embedUrl, { url: '', embedType: '' }),
   })
 );
