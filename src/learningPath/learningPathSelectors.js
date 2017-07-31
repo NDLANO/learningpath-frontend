@@ -7,35 +7,17 @@
  */
 
 import { createSelector } from 'reselect';
-import defined from 'defined';
-import { getLocale } from '../locale/localeSelectors';
 
 export const getLearningPath = state => state.learningPath;
 
 export const getLearningPathId = state => state.learningPath.id;
 
 export const getI18nLearningPath = createSelector(
-  [getLearningPath, getLocale],
-  learningPath => ({
-    ...learningPath,
-    title: learningPath.title,
-    isBasedOnTitle: learningPath.isBasedOnTitle,
-    description: learningPath.description,
-    learningsteps: learningPath.learningsteps ? learningPath.learningsteps.map(step => ({
-      ...step,
-      title: step.title,
-    })) : [],
-    tags: defined(learningPath.tags, []),
-  }));
+  [getLearningPath],
+  learningPath => learningPath
+);
 
 export const getI18nLearningPathSteps = createSelector(
   [getLearningPath],
-  (learningPath) => {
-    if (learningPath.learningsteps) {
-      return learningPath.learningsteps.map(step => ({
-        ...step,
-        title: step.title,
-      }));
-    }
-    return [];
-  });
+  learningPath => learningPath.learningsteps
+);
