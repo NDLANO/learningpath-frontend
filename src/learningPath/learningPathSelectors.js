@@ -6,18 +6,8 @@
  *
  */
 
-import { createSelector } from 'reselect';
-
 export const getLearningPath = state => state.learningPath;
 
 export const getLearningPathId = state => state.learningPath.id;
 
-export const getI18nLearningPath = createSelector(
-  [getLearningPath],
-  learningPath => learningPath
-);
-
-export const getI18nLearningPathSteps = createSelector(
-  [getLearningPath],
-  learningPath => learningPath.learningsteps
-);
+export const getLearningPathSteps = state => state.learningPath.learningsteps;

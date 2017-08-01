@@ -173,15 +173,4 @@ const nbOembedContent = {
   language: 'nb',
 };
 
-const enOembedContent = {
-  type: 'rich',
-  version: '1.0',
-  title: 'You should become journalist',
-  width: 800,
-  height: 800,
-  html: '<iframe src="http://api.test.ndla.no/article-converter/html/en/60" frameborder="0" />',
-  url: 'http://api.test.ndla.no:8082/article/60',
-  language: 'en',
-};
-
-export { translatedLearningPaths, translatedLearningPath, translatedLearningPathNotEditable, translatedLearningStep, translatedNdlaLearningStep, nbOembedContent, enOembedContent };
+export { translatedLearningPaths, translatedLearningPath, translatedLearningPathNotEditable, translatedLearningStep, translatedNdlaLearningStep, nbOembedContent };

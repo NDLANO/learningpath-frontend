@@ -22,7 +22,7 @@ import Masthead from '../common/Masthead';
 import CreateLearningPath from '../learningPath/new/CreateLearningPath';
 import { Wrapper, OneColumn, Footer } from '../common/Layout';
 import { setMyLearningPathsSortOrder, fetchMyLearningPaths } from './myPageActions';
-import { getI18NLearningPaths, getSortKey } from './myPageSelectors';
+import { getSortedLearningPaths, getSortKey } from './myPageSelectors';
 
 export class MyPage extends React.Component {
   constructor(props) {
@@ -162,7 +162,7 @@ MyPage.contextTypes = {
 
 export function mapStateToProps(state) {
   const sortKey = getSortKey(state);
-  const learningPaths = getI18NLearningPaths(state);
+  const learningPaths = getSortedLearningPaths(state);
 
   return Object.assign({}, state, { learningPaths, sortKey });
 }

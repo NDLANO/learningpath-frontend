@@ -9,9 +9,8 @@
 import { createSelector } from 'reselect';
 import sortBy from 'lodash/sortBy';
 import reverse from 'lodash/reverse';
-import { getLocale } from '../locale/localeSelectors';
 
-const getLearningPaths = state => state.learningPaths;
+const getLearningPathsFromState = state => state.learningPaths;
 export const getSortKey = state => state.myLearningPathsSortOrder || 'title';
 
 const sortPaths = (paths, field) => {
@@ -33,7 +32,7 @@ const sortPaths = (paths, field) => {
   }
 };
 
-export const getI18NLearningPaths = createSelector(
-    [getLearningPaths, getLocale, getSortKey],
-    (learningPaths, lang, sortKey) => sortPaths(learningPaths, sortKey)
+export const getSortedLearningPaths = createSelector(
+    [getLearningPathsFromState, getSortKey],
+    (learningPaths, sortKey) => sortPaths(learningPaths, sortKey)
 );

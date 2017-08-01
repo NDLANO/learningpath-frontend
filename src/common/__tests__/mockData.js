@@ -223,28 +223,16 @@ const ndlaLearningStep = {
 };
 
 const oembedPreview = {
-  oembedContent: [
-    {
-      type: 'rich',
-      version: '1.0',
-      title: 'Klart du bør bli journalist',
-      width: 800,
-      height: 800,
-      html: '<iframe src="http://api.test.ndla.no/article-converter/html/nb/60" frameborder="0" />',
-      url: 'http://api.test.ndla.no:8082/article/60',
-      language: 'nb',
-    },
-    {
-      type: 'rich',
-      version: '1.0',
-      title: 'You should become journalist',
-      width: 800,
-      height: 800,
-      html: '<iframe src="http://api.test.ndla.no/article-converter/html/en/60" frameborder="0" />',
-      url: 'http://api.test.ndla.no:8082/article/60',
-      language: 'en',
-    },
-  ],
+  oembedContent: {
+    type: 'rich',
+    version: '1.0',
+    title: 'Klart du bør bli journalist',
+    width: 800,
+    height: 800,
+    html: '<iframe src="http://api.test.ndla.no/article-converter/html/nb/60" frameborder="0" />',
+    url: 'http://api.test.ndla.no:8082/article/60',
+    language: 'nb',
+  },
 };
 
 export { learningPaths, learningPath, learningPathNotEditable, learningStep, ndlaLearningStep, oembedPreview };

@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import polyglot from '../../i18n';
 import { updateLearningPathStatus } from '../learningPathActions';
 import { closeSidebars } from '../../common/sidebarActions';
-import { getI18nLearningPath } from '../learningPathSelectors';
+import { getLearningPath } from '../learningPathSelectors';
 import { learningPathStatuses } from '../../util/learningPathStatuses';
 
 export const LearningPathToCButtons = ({ learningPath, updatePathStatus, localCloseSidebars }) => {
@@ -44,7 +44,7 @@ LearningPathToCButtons.propTypes = {
 };
 
 const mapStateToProps = state => Object.assign({}, state, {
-  learningPath: getI18nLearningPath(state),
+  learningPath: getLearningPath(state),
 });
 
 const mapDispatchToProps = {

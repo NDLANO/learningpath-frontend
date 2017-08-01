@@ -23,7 +23,7 @@ import Icon from '../common/Icon';
 import SortLearningStepsButton from './sidebar/SortLearningStepsButton';
 import LearningPathSummary from './sidebar/LearningPathSummary';
 import { fetchLearningPath, copyLearningPath } from './learningPathActions';
-import { getI18nLearningPath } from './learningPathSelectors';
+import { getLearningPath } from './learningPathSelectors';
 import LearningPathStep from './step/LearningPathStep';
 import CreateLearningPathStep from './step/create/CreateLearningPathStep';
 import EditLearningPathStep from './step/edit/EditLearningPathStep';
@@ -176,7 +176,7 @@ LearningPath.contextTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
-  learningPath: getI18nLearningPath(state),
+  learningPath: getLearningPath(state),
   sortLearningSteps: ownProps.sortLearningSteps,
   isTableOfContentOpen: state.sidebar.isLeftSideBarOpen,
 });

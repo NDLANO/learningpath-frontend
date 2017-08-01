@@ -6,13 +6,7 @@
  *
  */
 
-import defined from 'defined';
 
-import createFieldByLanguageFinder, { findFallbackTranslation } from './createFieldByLanguageFinder';
+import createFieldByLanguageFinder from './createFieldByLanguageFinder';
 
 export const tagsI18N = createFieldByLanguageFinder('tags');
-
-export function oembedContentI18N(learningPathStep, lang, withFallback = false) {
-  const translations = defined(learningPathStep.embedUrl, []);
-  return defined(translations.find(d => d.language === lang), withFallback ? findFallbackTranslation(translations) : undefined);
-}
