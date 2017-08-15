@@ -25,7 +25,7 @@ test('actions/fetchImages', () => {
   };
 
   const apiMock = nock('http://ndla-api')
-    .get('/image-api/v1/images')
+    .get('/image-api/v2/images')
     .query({ page: 3, pageSize: 25 })
     .reply(200, {
       totalCount: 2,
@@ -61,7 +61,7 @@ test('actions/fetchImages with url access denied', () => {
   };
 
   const apiMock = nock('http://ndla-api')
-    .get('/image-api/v1/images')
+    .get('/image-api/v2/images')
     .query({ page: 3, pageSize: 25 })
     .reply(403, { message: 'Invalid' });
 
@@ -70,7 +70,7 @@ test('actions/fetchImages with url access denied', () => {
   store.dispatch(fetchLearningPathImages({ page: 3, pageSize: 25 }))
     .then(() => {
       expect(store.getActions()).toEqual([
-        applicationError(payload403invalid('http://ndla-api/image-api/v1/images?page=3&pageSize=25')),
+        applicationError(payload403invalid('http://ndla-api/image-api/v2/images?page=3&pageSize=25')),
       ]);
       expect(() => apiMock.done()).not.toThrow();
       done();
