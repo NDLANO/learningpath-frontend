@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import { SortableContainer } from 'react-sortable-hoc';
 import SortableItem from './SortableItem';
 
-const SortableLearningStepList = SortableContainer(({ learningsteps, learningPathId, lang, deleteStep }) =>
+const SortableLearningStepList = SortableContainer(({ learningsteps, learningPathId, deleteStep }) =>
   (
     <div className="sortable">
       <ul className="sortable_list">
@@ -21,7 +21,6 @@ const SortableLearningStepList = SortableContainer(({ learningsteps, learningPat
             index={i}
             placeholderClassName="sortable_placeholder"
             step={step}
-            lang={lang}
             learningPathId={learningPathId}
             deleteStep={deleteStep}
           />)
@@ -34,7 +33,6 @@ SortableLearningStepList.propTypes = {
   learningsteps: PropTypes.array,
   deleteStep: PropTypes.func.isRequired,
   learningPathId: PropTypes.number.isRequired,
-  lang: PropTypes.string.isRequired,
 };
 
 export default SortableLearningStepList;

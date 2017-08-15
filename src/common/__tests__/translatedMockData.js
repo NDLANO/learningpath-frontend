@@ -31,7 +31,8 @@ const translatedLearningPaths = [
 const translatedLearningPath = {
   id: 4,
   title: 'Kristofers private bokmål',
-  description: 'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
+  description: `Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden.
+      Kurset fokuserer på kunst og kultur på et verdensperspektiv.`,
   metaUrl: 'http://api.test.ndla.no/learningpaths/4',
   learningsteps: [
     {
@@ -128,6 +129,7 @@ const translatedLearningStep = {
   seqNo: 2,
   title: 'En annen tittel her',
   description: '<h1>Beskrivelse</h1>',
+  language: 'nb',
   embedUrl: {
     url: 'https://www.youtube.com/watch?v=RYLlSFmGfm0',
     embedType: 'oembed',
@@ -171,15 +173,4 @@ const nbOembedContent = {
   language: 'nb',
 };
 
-const enOembedContent = {
-  type: 'rich',
-  version: '1.0',
-  title: 'You should become journalist',
-  width: 800,
-  height: 800,
-  html: '<iframe src="http://api.test.ndla.no/article-converter/html/en/60" frameborder="0" />',
-  url: 'http://api.test.ndla.no:8082/article/60',
-  language: 'en',
-};
-
-export { translatedLearningPaths, translatedLearningPath, translatedLearningPathNotEditable, translatedLearningStep, translatedNdlaLearningStep, nbOembedContent, enOembedContent };
+export { translatedLearningPaths, translatedLearningPath, translatedLearningPathNotEditable, translatedLearningStep, translatedNdlaLearningStep, nbOembedContent };

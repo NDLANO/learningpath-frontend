@@ -7,15 +7,16 @@
  */
 
 import { handleActions } from 'redux-actions';
-import assignOrPushPropReducer from '../util/assignOrPushPropReducer';
 
 const intitalState = {
-  oembedContent: [],
+  oembedContent: {},
 };
 
 export default handleActions({
   SET_OEMBED_PREVIEW: {
-    next: assignOrPushPropReducer('oembedContent'),
+    next(state, action) {
+      return { oembedContent: action.payload };
+    },
     throw(state) { return state; },
   },
   SET_LEARNING_PATH_STEP: {

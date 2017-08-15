@@ -12,18 +12,18 @@ import { applicationError } from '../../../messages/messagesActions';
 
 export const setLearningPathTags = createAction('SET_LEARNING_PATH_TAGS');
 
-export function fetchLearningPathTags() {
-  return dispatch => fetchPathTags()
+export function fetchLearningPathTags(locale) {
+  return dispatch => fetchPathTags(locale)
     .then(tags => dispatch(setLearningPathTags(tags)))
     .catch(err => dispatch(applicationError(err)));
 }
 
 export function fetchLearningPathTagsIfNeeded() {
   return (dispatch, getState) => {
-    const { learningPathTags } = getState();
+    const { learningPathTags, locale } = getState();
 
     if (!learningPathTags.hasFetched) {
-      dispatch(fetchLearningPathTags());
+      dispatch(fetchLearningPathTags(locale));
     }
   };
 }

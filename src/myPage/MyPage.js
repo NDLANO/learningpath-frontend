@@ -22,7 +22,7 @@ import Masthead from '../common/Masthead';
 import CreateLearningPath from '../learningPath/new/CreateLearningPath';
 import { Wrapper, OneColumn, Footer } from '../common/Layout';
 import { setMyLearningPathsSortOrder, fetchMyLearningPaths } from './myPageActions';
-import { getI18NLearningPaths, getSortKey } from './myPageSelectors';
+import { getSortedLearningPaths, getSortKey } from './myPageSelectors';
 
 export class MyPage extends React.Component {
   constructor(props) {
@@ -51,7 +51,6 @@ export class MyPage extends React.Component {
     const items = learningPaths.map((lp) => {
       const duration = formatDuration(lp.duration, lang);
       const lastUpdated = formatDate(lp.lastUpdated, lang);
-
       const onDropDownSelect = (actionType) => {
         switch (actionType) {
           case 'delete':
@@ -109,8 +108,9 @@ export class MyPage extends React.Component {
 
     const onCreateLearningPathSubmit = (values) => {
       createPath({
-        title: [{ title: values.title, language: lang }],
-        description: [{ description: values.description, language: lang }],
+        title: values.title,
+        description: values.description,
+        language: lang,
         duration: 1,
         coverPhoto: { url: '', metaUrl: '' },
         copyright: { license: { license: 'by-sa', description: 'Creative Commons Attribution-ShareAlike 2.0 Generic', url: 'https://creativecommons.org/licenses/by-sa/2.0/' }, contributors: [] },
@@ -162,7 +162,7 @@ MyPage.contextTypes = {
 
 export function mapStateToProps(state) {
   const sortKey = getSortKey(state);
-  const learningPaths = getI18NLearningPaths(state);
+  const learningPaths = getSortedLearningPaths(state);
 
   return Object.assign({}, state, { learningPaths, sortKey });
 }

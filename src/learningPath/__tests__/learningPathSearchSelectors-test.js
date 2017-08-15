@@ -7,7 +7,7 @@
  */
 
 import { learningPath } from '../../common/__tests__/mockData';
-import { getI18nLearningPath, getI18nLearningPathSteps, getLearningPathId } from '../learningPathSelectors';
+import { getLearningPath, getLearningPathSteps, getLearningPathId } from '../learningPathSelectors';
 import { translatedLearningPath } from '../../common/__tests__/translatedMockData';
 
 test('selectors/getI18nLearningPath', () => {
@@ -16,15 +16,15 @@ test('selectors/getI18nLearningPath', () => {
     locale: 'nb',
   };
 
-  expect(getI18nLearningPath(state)).toEqual(translatedLearningPath);
+  expect(getLearningPath(state)).toEqual(translatedLearningPath);
 });
 
-test('selectors/getI18nLearningPathSteps', () => {
+test('selectors/getLearningPathSteps', () => {
   const state = {
     learningPath,
     locale: 'nb',
   };
-  expect(getI18nLearningPathSteps(state)).toEqual(translatedLearningPath.learningsteps);
+  expect(getLearningPathSteps(state)).toEqual(translatedLearningPath.learningsteps);
 });
 
 test('selectors/getLearningPathId', () => {

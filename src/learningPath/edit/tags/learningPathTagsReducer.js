@@ -19,7 +19,7 @@ export default handleActions({
     next(state, action) {
       return Object.assign({},
         {
-          all: action.payload,
+          all: action.payload.tags,
           hasFetched: true,
         }
       );

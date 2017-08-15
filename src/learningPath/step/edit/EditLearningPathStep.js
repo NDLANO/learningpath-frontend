@@ -20,8 +20,8 @@ import {
 } from '../learningPathStepActions';
 import { fetchLearningPathLicensesIfNeeded } from '../../edit/copyright/learningPathLicensesActions';
 import polyglot from '../../../i18n';
-import { getI18nLearningPathStep } from '../learningPathStepSelectors';
-import { getI18nLearningPath } from '../../learningPathSelectors';
+import { getLearningPathSteps } from '../learningPathStepSelectors';
+import { getLearningPath } from '../../learningPathSelectors';
 
 class EditLearningPathStep extends Component {
 
@@ -50,15 +50,15 @@ class EditLearningPathStep extends Component {
     }
 
     const handleSubmit = (values) => {
-      const emptyEmbedUrl = !step.embedUrl.url ? [] : [{ url: '', language, embedType: 'oembed' }];
-      const emptyDescription = !step.description ? [] : [{ description: '', language }];
+      const emptyEmbedUrl = !step.embedUrl.url ? {} : { url: '', embedType: 'oembed' };
+      const emptyDescription = !step.description ? {} : { description: '' };
 
       const toSave = Object.assign({}, step, {
         type: values.type,
         showTitle: values.showTitle,
-        title: [{ title: values.title, language }],
-        description: values.description ? [{ description: values.description, language }] : emptyDescription,
-        embedUrl: values.url && values.url.url ? [{ url: values.url.url, language, embedType: values.url.embedType }] : emptyEmbedUrl,
+        title: values.title,
+        description: values.description ? values.description : emptyDescription,
+        embedUrl: values.url && values.url.url ? { url: values.url.url, embedType: values.url.embedType } : emptyEmbedUrl,
         license: values.license && values.license.license ? values.license.license : '',
       });
 
@@ -107,8 +107,8 @@ EditLearningPathStep.contextTypes = {
 };
 
 export const mapStateToProps = state => assign({}, state, {
-  step: getI18nLearningPathStep(state),
-  learningPath: getI18nLearningPath(state),
+  step: getLearningPathSteps(state),
+  learningPath: getLearningPath(state),
   licenses: [{ description: polyglot.t('editPathStep.noLicenseChosen'), license: '' }].concat(get(state, 'learningPathLicenses.creativeCommonLicenses.all', [])),
 });
 

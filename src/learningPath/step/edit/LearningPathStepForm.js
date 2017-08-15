@@ -18,7 +18,7 @@ import LabeledIcon from '../../../common/LabeledIcon';
 import polyglot from '../../../i18n';
 import LearningPathStepFields from './LearningPathStepFields';
 import { validateOembed } from './validateOembedActions';
-import { getI18NEmbedContent } from '../learningPathStepSelectors';
+import { getEmbedContent } from '../learningPathStepSelectors';
 
 const formName = 'learning-path-step';
 const LearningPathStepForm = (props) => {
@@ -79,7 +79,7 @@ LearningPathStepForm.propTypes = {
 
 
 const mapStateToProps = (state, props) => ({
-  oembedPreview: getI18NEmbedContent(state),
+  oembedPreview: getEmbedContent(state),
   initialValues: {
     showTitle: defined(props.step.showTitle, false),
     title: props.step.title,

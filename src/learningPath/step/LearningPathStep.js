@@ -15,7 +15,7 @@ import polyglot from '../../i18n';
 import { fetchLearningPathStep } from './learningPathStepActions';
 import LearningPathStepInformation from './LearningPathStepInformation';
 import LearningPathStepPrevNext from './LearningPathStepPrevNext';
-import { getI18nLearningPathStep } from './learningPathStepSelectors';
+import { getLearningPathSteps } from './learningPathStepSelectors';
 
 class LearningPathStep extends React.Component {
 
@@ -76,7 +76,7 @@ LearningPathStep.contextTypes = {
 
 const mapStateToProps = state => Object.assign({}, state, {
   authenticated: state.authenticated,
-  learningPathStep: getI18nLearningPathStep(state),
+  learningPathStep: getLearningPathSteps(state),
 });
 
 

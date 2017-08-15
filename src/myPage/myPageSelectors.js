@@ -7,13 +7,10 @@
  */
 
 import { createSelector } from 'reselect';
-import defined from 'defined';
 import sortBy from 'lodash/sortBy';
 import reverse from 'lodash/reverse';
-import { titleI18N, descriptionI18N, introductionI18N, tagsI18N } from '../util/i18nFieldFinder';
-import { getLocale } from '../locale/localeSelectors';
 
-const getLearningPaths = state => state.learningPaths;
+const getLearningPathsFromState = state => state.learningPaths;
 export const getSortKey = state => state.myLearningPathsSortOrder || 'title';
 
 const sortPaths = (paths, field) => {
@@ -35,16 +32,7 @@ const sortPaths = (paths, field) => {
   }
 };
 
-export const getI18NLearningPaths = createSelector(
-    [getLearningPaths, getLocale, getSortKey],
-    (learningPaths, lang, sortKey) => {
-      const newLearningPaths = learningPaths.map(learningPath => ({
-        ...learningPath,
-        title: titleI18N(learningPath, lang, true),
-        description: descriptionI18N(learningPath, lang, true),
-        introduction: introductionI18N(learningPath, lang, true),
-        tags: defined(tagsI18N(learningPath, lang, true), []),
-      }));
-      return sortPaths(newLearningPaths, sortKey);
-    }
+export const getSortedLearningPaths = createSelector(
+    [getLearningPathsFromState, getSortKey],
+    (learningPaths, sortKey) => sortPaths(learningPaths, sortKey)
 );
