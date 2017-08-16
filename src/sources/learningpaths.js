@@ -14,10 +14,10 @@ import assureSequenceOrder from '../util/assureSequenceOrder';
 import { fetchAuth } from '../sources/fetchAuth';
 import { fetchAuthorized, postAuthorized, putAuthorized, patchAuthorized, deleteAuthorized, resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';
 
-const fetchPath = fetchAuthorized('/learningpath-api/v1/learningpaths/:pathId');
+const fetchPath = fetchAuthorized('/learningpath-api/v2/learningpaths/:pathId');
 
 const fetchPathStep = fetchAuthorized(
-  '/learningpath-api/v1/learningpaths/:pathId/learningsteps/:stepId');
+  '/learningpath-api/v2/learningpaths/:pathId/learningsteps/:stepId');
 
 const fetchMyPaths = fetchAuthorized('/learningpath-api/v1/learningpaths/mine');
 
@@ -82,7 +82,7 @@ const updateStatus = ({ pathId }, body) =>
 
 export const activateDeletedPath = ({ pathId, status }) => putLearningPathStatus({ pathId }, { status });
 
-const learningPathsUrl = apiResourceUrl('/learningpath-api/v1/learningpaths');
+const learningPathsUrl = apiResourceUrl('/learningpath-api/v2/learningpaths');
 
 const updateSeqNo = ({ pathId, stepId }, body) =>
   putSequenceNumber({ pathId, stepId }, body);

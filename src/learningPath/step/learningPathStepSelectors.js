@@ -7,7 +7,9 @@
  */
 
 import { createSelector } from 'reselect';
-import { titleI18N, descriptionI18N, oembedUrlI18N, oembedContentI18N, embedTypeUrlI18N } from '../../util/i18nFieldFinder';
+import { convertFieldWithFallback } from '../../util/convertFieldWithFallback';
+
+import { oembedContentI18N } from '../../util/i18nFieldFinder';
 import { getLocale } from '../../locale/localeSelectors';
 
 const getLearningPathStep = state => state.learningPathStep;
@@ -22,14 +24,10 @@ export const getI18NEmbedContent = createSelector(
 );
 
 export const getI18nLearningPathStep = createSelector(
-  [getLearningPathStep, getLocale],
-  (learningPathStep, lang) => ({
+  [getLearningPathStep],
+  learningPathStep => ({
     ...learningPathStep,
-    title: titleI18N(learningPathStep, lang, true),
-    description: descriptionI18N(learningPathStep, lang, true),
-    embedUrl: {
-      url: oembedUrlI18N(learningPathStep, lang, false),
-      embedType: embedTypeUrlI18N(learningPathStep, lang, false),
-    },
+    title: convertFieldWithFallback(learningPathStep, 'title', ''),
+    description: convertFieldWithFallback(learningPathStep, 'description', ''),
   })
 );

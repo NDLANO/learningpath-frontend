@@ -18,7 +18,6 @@ export const embedTypeUrlI18N = createFieldByLanguageFinder('embedUrl', 'embedTy
 export const tagsI18N = createFieldByLanguageFinder('tags');
 export const alttextsI18N = createFieldByLanguageFinder('alttexts');
 export const introductionI18N = createFieldByLanguageFinder('introduction');
-export const isBasedOnTitleI18N = createFieldByLanguageFinder('isBasedOnTitle', 'title');
 export const embedUrlI18N = createFieldByLanguageFinder('embedUrl');
 
 export function oembedContentI18N(learningPathStep, lang, withFallback = false) {
