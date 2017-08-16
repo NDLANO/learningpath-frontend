@@ -108,9 +108,12 @@ export class MyPage extends React.Component {
     );
 
     const onCreateLearningPathSubmit = (values) => {
+      console.log('values', values)
       createPath({
-        title: [{ title: values.title, language: lang }],
-        description: [{ description: values.description, language: lang }],
+        title: values.title,
+        description: values.description,
+        tags: [],
+        language: lang,
         duration: 1,
         coverPhoto: { url: '', metaUrl: '' },
         copyright: { license: { license: 'by-sa', description: 'Creative Commons Attribution-ShareAlike 2.0 Generic', url: 'https://creativecommons.org/licenses/by-sa/2.0/' }, contributors: [] },

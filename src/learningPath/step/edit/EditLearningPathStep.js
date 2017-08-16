@@ -50,15 +50,13 @@ class EditLearningPathStep extends Component {
     }
 
     const handleSubmit = (values) => {
-      const emptyEmbedUrl = !step.embedUrl.url ? [] : [{ url: '', language, embedType: 'oembed' }];
-      const emptyDescription = !step.description ? [] : [{ description: '', language }];
-
       const toSave = Object.assign({}, step, {
         type: values.type,
         showTitle: values.showTitle,
-        title: [{ title: values.title, language }],
-        description: values.description ? [{ description: values.description, language }] : emptyDescription,
-        embedUrl: values.url && values.url.url ? [{ url: values.url.url, language, embedType: values.url.embedType }] : emptyEmbedUrl,
+        title: values.title,
+        language,
+        description: values.description ? values.description : '',
+        embedUrl: values.url && values.url.url ? { url: values.url.url, embedType: values.url.embedType } : { url: '', embedType: 'oembed' },
         license: values.license && values.license.license ? values.license.license : '',
       });
 

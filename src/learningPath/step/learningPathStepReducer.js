@@ -32,9 +32,9 @@ export default handleActions({
   CREATE_EMPTY_LEARNING_PATH_STEP: {
     next() {
       return {
-        title: [],
-        description: [],
-        embedUrl: [],
+        title: {},
+        description: {},
+        embedUrl: {},
         type: 'TEXT',
         license: '',
       };

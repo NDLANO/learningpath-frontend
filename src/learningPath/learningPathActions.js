@@ -68,8 +68,8 @@ export function fetchLearningPath(pathId, isEdit = false) {
 
 export function createEmptyLearningPath() {
   return setLearningPath({
-    title: [],
-    description: [],
+    title: {},
+    description: {},
     learningsteps: [],
     duration: 1, // https://support.knowit.no/support/browse/NDLA-198
     coverPhotoMetaUrl: '',
@@ -156,12 +156,9 @@ export function updateLearningPathStatus(pathId, status, redirectUrl = false) {
 }
 
 export function copyLearningPath(learningPath, locale) {
+  console.log("learningpath", learningPath)
   const copiedTitle = polyglot.t('copyLearningPath.copy').concat(learningPath.title.toString());
-  const clonedLearningPathTitle = {
-    title: [
-      { title: copiedTitle, language: locale },
-    ],
-  };
+  const clonedLearningPathTitle = { title: copiedTitle, language: locale };
 
   return dispatch => new Promise((resolve, reject) => copyPath({ copyfrom: learningPath.id }, clonedLearningPathTitle)
     .then((lpath) => {

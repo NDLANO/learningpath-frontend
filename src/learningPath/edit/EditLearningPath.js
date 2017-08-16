@@ -69,11 +69,12 @@ class EditLearningPath extends Component {
       }
 
       return localUpdateLearningPath(learningPath.id, {
-        title: [{ title: values.title, language }],
-        description: [{ description: values.description, language }],
+        title: values.title,
+        description: values.description,
+        language,
         revision: learningPath.revision,
         duration: (values.duration.replace(/,/g, '.')) * 60,
-        tags: [{ tags: tagValues, language }],
+        tags: tagValues,
         copyright: {
           license: {
             license: 'by-sa',
