@@ -19,14 +19,14 @@ const fetchPath = fetchAuthorized('/learningpath-api/v2/learningpaths/:pathId');
 const fetchPathStep = fetchAuthorized(
   '/learningpath-api/v2/learningpaths/:pathId/learningsteps/:stepId');
 
-const fetchMyPaths = fetchAuthorized('/learningpath-api/v1/learningpaths/mine');
+const fetchMyPaths = fetchAuthorized('/learningpath-api/v2/learningpaths/mine');
 
-const fetchPathTags = fetchAuthorized('/learningpath-api/v1/learningpaths/tags');
+const fetchPathTags = fetchAuthorized('/learningpath-api/v2/learningpaths/tags');
 
-const fetchPathContributors = fetchAuthorized('/learningpath-api/v1/learningpaths/contributors');
+const fetchPathContributors = fetchAuthorized('/learningpath-api/v2/learningpaths/contributors');
 
 const fetchPathLicenses = (filter) => {
-  let url = apiResourceUrl('/learningpath-api/v1/learningpaths/licenses');
+  let url = apiResourceUrl('/learningpath-api/v2/learningpaths/licenses');
   if (filter.length > 0) {
     const query = { filter };
     url += `?${queryString.stringify(query)}`;

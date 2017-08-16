@@ -15,10 +15,10 @@ import { Redirect } from 'react-router-dom';
 import LearningPathForm from './LearningPathForm';
 import { fetchLearningPathTagsIfNeeded } from './tags/learningPathTagsActions';
 import { fetchLearningPathContributorsIfNeeded } from './copyright/learningPathContributorsActions';
-import { getLearningPathTagsByLanguage } from './tags/learningPathTagsSelectors';
+import { getLearningPathTags } from './tags/learningPathTagsSelectors';
 import { fetchLearningPathImages, fetchLearningPathImage, fetchLearningPathImageWithMetaUrl } from '../../imageSearch/imageActions';
 import { updateLearningPath } from '../learningPathActions';
-import { getI18nLearningPath, getI18nLearningPathSteps } from '../learningPathSelectors';
+import { getLearningPath, getLearningPathSteps } from '../learningPathSelectors';
 import { getLocale } from '../../locale/localeSelectors';
 
 class EditLearningPath extends Component {
@@ -112,9 +112,9 @@ EditLearningPath.propTypes = {
 };
 
 const mapStateToProps = state => Object.assign({}, state, {
-  learningPath: getI18nLearningPath(state),
-  learningSteps: getI18nLearningPathSteps(state),
-  tags: getLearningPathTagsByLanguage(state),
+  learningPath: getLearningPath(state),
+  learningSteps: getLearningPathSteps(state),
+  tags: getLearningPathTags(state),
   contributors: get(state, 'learningPathContributors.all', []),
   licenses: get(state, 'learningPathLicenses.creativeCommonLicenses.all', []),
   lang: getLocale(state),

@@ -10,12 +10,10 @@ import { createSelector } from 'reselect';
 import { convertFieldWithFallback } from '../util/convertFieldWithFallback';
 
 
-export const getLearningPath = state => state.learningPath;
+export const getLearningPathWithState = state => state.learningPath;
 
-export const getLearningPathId = state => state.learningPath.id;
-
-export const getI18nLearningPath = createSelector(
-  [getLearningPath],
+export const getLearningPath = createSelector(
+  [getLearningPathWithState],
   learningPath => ({
     ...learningPath,
     title: convertFieldWithFallback(learningPath, 'title', ''),
@@ -28,8 +26,8 @@ export const getI18nLearningPath = createSelector(
   }));
 
 
-export const getI18nLearningPathSteps = createSelector(
-  [getLearningPath],
+export const getLearningPathSteps = createSelector(
+  [getLearningPathWithState],
   (learningPath) => {
     if (learningPath.learningsteps) {
       return learningPath.learningsteps.map(step => ({

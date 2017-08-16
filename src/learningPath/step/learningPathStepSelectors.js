@@ -12,19 +12,19 @@ import { convertFieldWithFallback } from '../../util/convertFieldWithFallback';
 import { oembedContentI18N } from '../../util/i18nFieldFinder';
 import { getLocale } from '../../locale/localeSelectors';
 
-const getLearningPathStep = state => state.learningPathStep;
+const getLearningPathStepWithState = state => state.learningPathStep;
 
-const getEmbedContent = state => state.oembedPreview.oembedContent;
+const getEmbedContentWithState = state => state.oembedPreview.oembedContent;
 
 export const getI18NEmbedContent = createSelector(
-  [getEmbedContent, getLocale],
+  [getEmbedContentWithState, getLocale],
   (embedContent, lang) => ({
     ...oembedContentI18N({ embedUrl: embedContent }, lang),
   })
 );
 
-export const getI18nLearningPathStep = createSelector(
-  [getLearningPathStep],
+export const getLearningPathStep = createSelector(
+  [getLearningPathStepWithState],
   learningPathStep => ({
     ...learningPathStep,
     title: convertFieldWithFallback(learningPathStep, 'title', ''),

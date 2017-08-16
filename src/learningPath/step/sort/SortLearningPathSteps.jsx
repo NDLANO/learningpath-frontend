@@ -40,7 +40,7 @@ class SortLearningPathSteps extends Component {
   }
 
   render() {
-    const { learningPath, lang, deleteStep } = this.props;
+    const { learningPath, deleteStep } = this.props;
     return (
       <div ref={((contentDiv) => { this.contentDiv = contentDiv; })}>
         {(learningPath && learningPath.learningsteps && learningPath.id) ?
@@ -48,7 +48,6 @@ class SortLearningPathSteps extends Component {
             learningPathId={learningPath.id}
             learningsteps={learningPath.learningsteps}
             onSortEnd={this.onSortEnd}
-            lang={lang}
             shouldCancelStart={this.shouldCancelStart}
             deleteStep={deleteStep}
             pressDelay={200}
@@ -63,7 +62,6 @@ SortLearningPathSteps.propTypes = {
   learningPath: PropTypes.object.isRequired,
   localUpdateStepSequenceNumber: PropTypes.func.isRequired,
   deleteStep: PropTypes.func.isRequired,
-  lang: PropTypes.string.isRequired,
   sortSteps: PropTypes.func.isRequired,
 };
 

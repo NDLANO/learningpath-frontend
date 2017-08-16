@@ -9,7 +9,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getI18nLearningPath } from '../learningPathSelectors';
+import { getLearningPath } from '../learningPathSelectors';
 
 const LearningPathSummary = ({ learningPath }) => {
   if (!learningPath) {
@@ -36,7 +36,7 @@ LearningPathSummary.propTypes = {
 };
 
 const mapStateToProps = state => Object.assign({}, state, {
-  learningPath: getI18nLearningPath(state),
+  learningPath: getLearningPath(state),
 });
 
 

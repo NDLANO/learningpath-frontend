@@ -7,13 +7,11 @@
  */
 
 import { createSelector } from 'reselect';
-import defined from 'defined';
 import sortBy from 'lodash/sortBy';
 import reverse from 'lodash/reverse';
-import { titleI18N, descriptionI18N, introductionI18N, tagsI18N } from '../util/i18nFieldFinder';
-import { getLocale } from '../locale/localeSelectors';
+import { convertFieldWithFallback } from '../util/convertFieldWithFallback';
 
-const getLearningPaths = state => state.learningPaths;
+const getLearningPathsWithState = state => state.learningPaths;
 export const getSortKey = state => state.myLearningPathsSortOrder || 'title';
 
 const sortPaths = (paths, field) => {
@@ -35,15 +33,15 @@ const sortPaths = (paths, field) => {
   }
 };
 
-export const getI18NLearningPaths = createSelector(
-    [getLearningPaths, getLocale, getSortKey],
-    (learningPaths, lang, sortKey) => {
+export const getLearningPaths = createSelector(
+    [getLearningPathsWithState, getSortKey],
+    (learningPaths, sortKey) => {
       const newLearningPaths = learningPaths.map(learningPath => ({
         ...learningPath,
-        title: titleI18N(learningPath, lang, true),
-        description: descriptionI18N(learningPath, lang, true),
-        introduction: introductionI18N(learningPath, lang, true),
-        tags: defined(tagsI18N(learningPath, lang, true), []),
+        title: convertFieldWithFallback(learningPath, 'title', ''),
+        description: convertFieldWithFallback(learningPath, 'description', ''),
+        introduction: convertFieldWithFallback(learningPath, 'introduction', ''),
+        tags: convertFieldWithFallback(learningPath, 'tags', []),
       }));
       return sortPaths(newLearningPaths, sortKey);
     }
