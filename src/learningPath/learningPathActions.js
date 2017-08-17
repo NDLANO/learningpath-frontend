@@ -156,7 +156,6 @@ export function updateLearningPathStatus(pathId, status, redirectUrl = false) {
 }
 
 export function copyLearningPath(learningPath, locale) {
-  console.log("learningpath", learningPath)
   const copiedTitle = polyglot.t('copyLearningPath.copy').concat(learningPath.title.toString());
   const clonedLearningPathTitle = { title: copiedTitle, language: locale };
 

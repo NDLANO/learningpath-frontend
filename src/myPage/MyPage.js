@@ -108,7 +108,6 @@ export class MyPage extends React.Component {
     );
 
     const onCreateLearningPathSubmit = (values) => {
-      console.log('values', values)
       createPath({
         title: values.title,
         description: values.description,
