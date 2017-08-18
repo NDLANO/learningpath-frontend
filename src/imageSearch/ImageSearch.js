@@ -43,7 +43,7 @@ export function Images(props) {
     evt.preventDefault();
     localFetchImages(q, false);
   };
-  const base = '/image-api/v1/images';
+  const base = '/image-api/v2/images';
 
   const onSaveImage = (evt, image) => {
     closeLightBox();

@@ -16,7 +16,7 @@ import { closeSidebars } from '../../common/sidebarActions';
 import LabeledIcon from '../../common/LabeledIcon';
 import LearningPathTitle from './LearningPathTitle';
 import LearningPathActionType from './LearningPathActionType';
-import { getI18nLearningPath } from '../learningPathSelectors';
+import { getLearningPath } from '../learningPathSelectors';
 import LearningPathContributors from './LearningPathContributors';
 
 const LearningPathGeneralInfo = (props, context) => {
@@ -76,7 +76,7 @@ LearningPathGeneralInfo.contextTypes = {
 };
 
 const mapStateToProps = state => Object.assign({}, state, {
-  learningPath: getI18nLearningPath(state),
+  learningPath: getLearningPath(state),
   authenticated: state.authenticated,
 });
 

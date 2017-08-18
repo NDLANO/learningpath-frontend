@@ -8,17 +8,19 @@
 
 import { createSelector } from 'reselect';
 import get from 'lodash/get';
-import { tagsI18N } from '../util/i18nFieldFinder';
-import { getLocale } from '../locale/localeSelectors';
+import { convertFieldWithFallback } from '../util/convertFieldWithFallback';
 
 const getImageSearch = state => state.imageSearch;
 const getPageSize = state => state.imageSearch.imageSearchQuery['page-size'];
 
 export const getSelectedImage = createSelector(
-  [getImageSearch, getLocale],
-  (imageSearch, lang) => ({
+  [getImageSearch],
+  imageSearch => ({
     ...imageSearch.selectedImage,
-    tags: imageSearch.selectedImage ? tagsI18N(imageSearch.selectedImage, lang) : [],
+    title: convertFieldWithFallback(imageSearch.selectedImage, 'title', ''),
+    tags: convertFieldWithFallback(imageSearch.selectedImage, 'tags', []),
+    alttext: convertFieldWithFallback(imageSearch.selectedImage, 'alttext', ''),
+    caption: convertFieldWithFallback(imageSearch.selectedImage, 'caption', ''),
   })
 );
 

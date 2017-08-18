@@ -10,18 +10,17 @@ import React from 'react';
 import { SortableElement } from 'react-sortable-hoc';
 import PropTypes from 'prop-types';
 import Icon from '../../../common/Icon';
-import { titleI18N } from '../../../util/i18nFieldFinder';
 
-const SortableItem = SortableElement(({ deleteStep, step, learningPathId, lang }) => (
+const SortableItem = SortableElement(({ deleteStep, step, learningPathId }) => (
   <li className="sortable_item">
     <div className="sortable_handle">
       <Icon.ImportExport className="icon--m" />
     </div>
     <div className="sortable_title">
-      {titleI18N(step, lang, true)}
+      {step.title}
     </div>
     <div className="sortable_action">
-      <button onClick={() => deleteStep(learningPathId, step.id, titleI18N(step, lang, true))} className="un-button">
+      <button onClick={() => deleteStep(learningPathId, step.id, step.title)} className="un-button">
         <Icon.Clear className="icon--m" />
       </button>
     </div>
@@ -33,7 +32,6 @@ SortableItem.propTypes = {
   step: PropTypes.object.isRequired,
   learningPathId: PropTypes.number.isRequired,
   deleteStep: PropTypes.func.isRequired,
-  lang: PropTypes.string.isRequired,
 };
 
 

@@ -7,36 +7,32 @@
  */
 
 import { createSelector } from 'reselect';
-import defined from 'defined';
-import { titleI18N, descriptionI18N, tagsI18N, isBasedOnTitleI18N } from '../util/i18nFieldFinder';
-import { getLocale } from '../locale/localeSelectors';
+import { convertFieldWithFallback } from '../util/convertFieldWithFallback';
 
-export const getLearningPath = state => state.learningPath;
 
-export const getLearningPathId = state => state.learningPath.id;
+export const getLearningPathFromState = state => state.learningPath;
 
-export const getI18nLearningPath = createSelector(
-  [getLearningPath, getLocale],
-  (learningPath, lang) => ({
+export const getLearningPath = createSelector(
+  [getLearningPathFromState],
+  learningPath => ({
     ...learningPath,
-    title: titleI18N(learningPath, lang, true),
-    isBasedOnTitle: isBasedOnTitleI18N(learningPath, lang, true),
-    description: descriptionI18N(learningPath, lang, true),
+    title: convertFieldWithFallback(learningPath, 'title', ''),
+    description: convertFieldWithFallback(learningPath, 'description', ''),
     learningsteps: learningPath.learningsteps ? learningPath.learningsteps.map(step => ({
       ...step,
-      title: titleI18N(step, lang, true),
+      title: convertFieldWithFallback(step, 'title', ''),
     })) : [],
-    tags: defined(tagsI18N(learningPath, lang, true), []),
+    tags: convertFieldWithFallback(learningPath, 'tags', []),
   }));
 
 
-export const getI18nLearningPathSteps = createSelector(
-  [getLearningPath, getLocale],
-  (learningPath, lang) => {
+export const getLearningPathSteps = createSelector(
+  [getLearningPathFromState],
+  (learningPath) => {
     if (learningPath.learningsteps) {
       return learningPath.learningsteps.map(step => ({
         ...step,
-        title: titleI18N(step, lang, true),
+        title: convertFieldWithFallback(step, 'title', ''),
       }));
     }
     return [];

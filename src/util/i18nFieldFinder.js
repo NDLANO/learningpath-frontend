@@ -8,18 +8,7 @@
 
 import defined from 'defined';
 
-import createFieldByLanguageFinder, { findFallbackTranslation } from './createFieldByLanguageFinder';
-
-export const titleI18N = createFieldByLanguageFinder('title');
-export const titlesI18N = createFieldByLanguageFinder('titles', 'title');
-export const descriptionI18N = createFieldByLanguageFinder('description');
-export const oembedUrlI18N = createFieldByLanguageFinder('embedUrl', 'url');
-export const embedTypeUrlI18N = createFieldByLanguageFinder('embedUrl', 'embedType');
-export const tagsI18N = createFieldByLanguageFinder('tags');
-export const alttextsI18N = createFieldByLanguageFinder('alttexts');
-export const introductionI18N = createFieldByLanguageFinder('introduction');
-export const isBasedOnTitleI18N = createFieldByLanguageFinder('isBasedOnTitle', 'title');
-export const embedUrlI18N = createFieldByLanguageFinder('embedUrl');
+import { findFallbackTranslation } from './createFieldByLanguageFinder';
 
 export function oembedContentI18N(learningPathStep, lang, withFallback = false) {
   const translations = defined(learningPathStep.embedUrl, []);

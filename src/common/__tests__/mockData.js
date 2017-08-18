@@ -9,38 +9,19 @@
 const learningPaths = [
   {
     id: '1',
-    title: [
-      { title: 'Hva er kunst og kultur?', language: 'nb' },
-      { title: 'Kva er kunst og kultur?', language: 'nn' },
-      { title: 'What is art and culture?', language: 'en' },
-    ],
-    introduction: [
-      {
-        introduction: '<p>Norsk test id 1</p>',
-        language: 'nb',
-      },
-      {
-        introduction: '<p>Testing id 1</p>',
-        language: 'en',
-      },
-    ],
-    description: [
-      { description: `Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden.
-        Kurset fokuserer på kunst og kultur på et verdensperspektiv.`,
-        language: 'nb' },
-      { description: `Kurset dekker innføring og vil gje deg grunnleggjande forståing for vanlege omgrep i kunst og kultur verda.
-        Kurset fokuserer på kunst og kultur på eit verdsperspektiv.`,
-        language: 'nn' },
-      { description: `The course covers the introduction and will give you a basic understanding of common concepts in the arts world.
-        The course focuses on art and culture in a world perspective`,
-        language: 'en' },
-    ],
-    tags: [
-      {
-        tags: ['kristofer'],
-        language: 'nb',
-      },
-    ],
+    title: { title: 'Hva er kunst og kultur?', language: 'nb' },
+    introduction: {
+      introduction: '<p>Norsk test id 1</p>',
+      language: 'nb',
+    },
+    description: {
+      description: 'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
+      language: 'nb',
+    },
+    tags: {
+      tags: ['kristofer'],
+      language: 'nb',
+    },
     isBasedOnTitle: undefined,
     metaUrl: 'http://api.test.ndla.no/learningpaths/1',
     duration: 1080,
@@ -50,30 +31,16 @@ const learningPaths = [
   },
   {
     id: '2',
-    title: [
-      { title: 'Leselighet og skrift', language: 'nb' },
-      { title: 'Leselighet og skrift', language: 'nn' },
-    ],
-    description: [
-      { description: 'Uttrykkene "leselighet" og "lesbarhet" brukes om hverandre i norsk fagterminologi, og ofte uten klare forestillinger om hva begrepene står for.', language: 'nb' },
-      { description: 'Uttrykka "leselighet" og "lesbarhet" vert brukt om kvarandre i norsk fagterminologi, og ofte utan klåre førestillingar om kva omgrepa står for.', language: 'nn' },
-    ],
-    introduction: [
-      {
-        introduction: '<p>Norsk test</p>',
-        language: 'nb',
-      },
-      {
-        introduction: '<p>Testing</p>',
-        language: 'en',
-      },
-    ],
-    tags: [
-      {
-        tags: ['kristofer'],
-        language: 'nb',
-      },
-    ],
+    title: { title: 'Leselighet og skrift', language: 'nb' },
+    description: { description: 'Uttrykkene "leselighet" og "lesbarhet" brukes om hverandre i norsk fagterminologi, og ofte uten klare forestillinger om hva begrepene står for.', language: 'nb' },
+    introduction: {
+      introduction: '<p>Norsk test</p>',
+      language: 'nb',
+    },
+    tags: {
+      tags: ['kristofer'],
+      language: 'nb',
+    },
     isBasedOnTitle: undefined,
     metaUrl: 'http://api.test.ndla.no/learningpaths/2',
     duration: 45,
@@ -85,46 +52,24 @@ const learningPaths = [
 
 const learningPath = {
   id: 4,
-  title: [
-    {
-      title: 'Kristofers private bokmål',
-      language: 'nb',
-    },
-    {
-      title: 'Kristofers private nynorsk',
-      language: 'nn',
-    },
-    {
-      title: 'Kristofers private english',
-      language: 'en',
-    },
-  ],
+  title: {
+    title: 'Kristofers private bokmål',
+    language: 'nb',
+  },
   isBasedOnTitle: undefined,
-  description: [
-    {
-      description: 'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
-      language: 'nb',
-    },
-    {
-      description: 'Kurset dekker innføring og vil gje deg grunnleggjande forståing for vanlege omgrep i kunst og kultur verda. Kurset fokuserer på kunst og kultur på eit verdsperspektiv.',
-      language: 'nn',
-    },
-    {
-      description: 'The course covers the introduction and will give you a basic understanding of common concepts in the arts world. The course focuses on art and culture in a world perspective',
-      language: 'en',
-    },
-  ],
+  description: {
+    description: 'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
+    language: 'nb',
+  },
   metaUrl: 'http://api.test.ndla.no/learningpaths/4',
   learningsteps: [
     {
       id: 7,
       seqNo: 1,
-      title: [
-        {
-          title: 'Tittel her',
-          language: 'nb',
-        },
-      ],
+      title: {
+        title: 'Tittel her',
+        language: 'nb',
+      },
       type: 'TEXT',
       license: 'by-nc-sa',
       metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/7',
@@ -132,12 +77,10 @@ const learningPath = {
     {
       id: 8,
       seqNo: 2,
-      title: [
-        {
-          title: 'En annen tittel her',
-          language: 'nb',
-        },
-      ],
+      title: {
+        title: 'En annen tittel her',
+        language: 'nb',
+      },
       type: 'TEXT',
       metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/8',
     },
@@ -148,12 +91,10 @@ const learningPath = {
   verificationStatus: 'VERIFIED_BY_NDLA',
   lastUpdated: '2016-02-02T10:44:06Z',
   canEdit: true,
-  tags: [
-    {
-      tags: ['kristofer'],
-      language: 'nb',
-    },
-  ],
+  tags: {
+    tags: ['kristofer'],
+    language: 'nb',
+  },
   author: {
     type: 'Forfatter',
     name: 'KristoferForfatter',
@@ -162,51 +103,27 @@ const learningPath = {
 
 const learningPathNotEditable = {
   id: 4,
-  title: [
-    {
-      title: 'Kristofers private bokmål',
-      language: 'nb',
-    },
-    {
-      title: 'Kristofers private nynorsk',
-      language: 'nn',
-    },
-    {
-      title: 'Kristofers private english',
-      language: 'en',
-    },
-  ],
-  description: [
-    {
-      description: 'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
-      language: 'nb',
-    },
-    {
-      description: 'Kurset dekker innføring og vil gje deg grunnleggjande forståing for vanlege omgrep i kunst og kultur verda. Kurset fokuserer på kunst og kultur på eit verdsperspektiv.',
-      language: 'nn',
-    },
-    {
-      description: 'The course covers the introduction and will give you a basic understanding of common concepts in the arts world. The course focuses on art and culture in a world perspective',
-      language: 'en',
-    },
-  ],
+  title: {
+    title: 'Kristofers private bokmål',
+    language: 'nb',
+  },
+  description: {
+    description: 'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
+    language: 'nb',
+  },
   metaUrl: 'http://api.test.ndla.no/learningpaths/4',
   learningsteps: [
     {
       id: 7,
       seqNo: 1,
-      title: [
-        {
-          title: 'Tittel her',
-          language: 'nb',
-        },
-      ],
-      description: [
-        {
-          description: 'Beskrivelse',
-          language: 'nb',
-        },
-      ],
+      title: {
+        title: 'Tittel her',
+        language: 'nb',
+      },
+      description: {
+        description: 'Beskrivelse',
+        language: 'nb',
+      },
       embedUrl: [
         {
           url: 'http://ndla.no/nb/node/24049',
@@ -225,18 +142,14 @@ const learningPathNotEditable = {
     {
       id: 8,
       seqNo: 2,
-      title: [
-        {
-          title: 'En annen tittel her',
-          language: 'nb',
-        },
-      ],
-      description: [
-        {
-          description: 'Beskrivelse',
-          language: 'nb',
-        },
-      ],
+      title: {
+        title: 'En annen tittel her',
+        language: 'nb',
+      },
+      description: {
+        description: 'Beskrivelse',
+        language: 'nb',
+      },
       embedUrl: [
         {
           url: 'http://ndla.no/nb/node/24049',
@@ -258,12 +171,10 @@ const learningPathNotEditable = {
   verificationStatus: 'VERIFIED_BY_NDLA',
   lastUpdated: '2016-02-02T10:44:06Z',
   canEdit: false,
-  tags: [
-    {
-      tag: 'kristofer',
-      language: 'nb',
-    },
-  ],
+  tags: {
+    tag: 'kristofer',
+    language: 'nb',
+  },
   author: {
     type: 'Forfatter',
     name: 'KristoferForfatter',
@@ -273,25 +184,18 @@ const learningPathNotEditable = {
 const learningStep = {
   id: 8,
   seqNo: 2,
-  title: [
-    {
-      title: 'En annen tittel her',
-      language: 'nb',
-    },
-  ],
-  description: [
-    {
-      description: '<h1>Beskrivelse</h1>',
-      language: 'nb',
-    },
-  ],
-  embedUrl: [
-    {
-      url: 'https://www.youtube.com/watch?v=RYLlSFmGfm0',
-      language: 'nb',
-      embedType: 'oembed',
-    },
-  ],
+  title: {
+    title: 'En annen tittel her',
+    language: 'nb',
+  },
+  description: {
+    description: '<h1>Beskrivelse</h1>',
+    language: 'nb',
+  },
+  embedUrl: {
+    url: 'https://www.youtube.com/watch?v=RYLlSFmGfm0',
+    embedType: 'oembed',
+  },
   oembed: {
     title: 'NDLA',
     url: 'https://www.youtube.com/watch?v=RYLlSFmGfm0',
@@ -304,18 +208,14 @@ const learningStep = {
 const ndlaLearningStep = {
   id: 9,
   seqNo: 3,
-  title: [
-    {
-      title: 'En annen tittel her',
-      language: 'nb',
-    },
-  ],
-  description: [
-    {
-      description: 'Beskrivelse',
-      language: 'nb',
-    },
-  ],
+  title: {
+    title: 'En annen tittel her',
+    language: 'nb',
+  },
+  description: {
+    description: 'Beskrivelse',
+    language: 'nb',
+  },
   embedUrl: [
     {
       url: 'http://ndla.no/nb/node/24049',

@@ -7,16 +7,16 @@
  */
 
 import { oembedPreview, learningStep } from '../../../common/__tests__/mockData';
-import { getI18nLearningPathStep, getI18NEmbedContent } from '../learningPathStepSelectors';
+import { getLearningPathStep, getI18NEmbedContent } from '../learningPathStepSelectors';
 import { translatedLearningStep, nbOembedContent, enOembedContent } from '../../../common/__tests__/translatedMockData';
 
-test('selectors/getI18nLearningPathStep', () => {
+test('selectors/getLearningPathStep', () => {
   const state = {
     learningPathStep: learningStep,
     locale: 'nb',
   };
 
-  expect(getI18nLearningPathStep(state)).toEqual(translatedLearningStep);
+  expect(getLearningPathStep(state)).toEqual(translatedLearningStep);
 });
 
 

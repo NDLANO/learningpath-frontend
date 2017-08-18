@@ -13,7 +13,7 @@ import { fetchAuth } from '../sources/fetchAuth';
 
 import { resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';
 
-const imagesUrl = apiResourceUrl('/image-api/v1/images');
+const imagesUrl = apiResourceUrl('/image-api/v2/images');
 
 const fetchImages = (query = { 'page-size': 16, page: 1 }) => {
   let url = imagesUrl;
@@ -21,7 +21,7 @@ const fetchImages = (query = { 'page-size': 16, page: 1 }) => {
   return fetchAuth(url).then(resolveJsonOrRejectWithError);
 };
 const fetchImage = (imageId) => {
-  const url = apiResourceUrl(formatUrl('/image-api/v1/images/:imageId', { imageId }));
+  const url = apiResourceUrl(formatUrl('/image-api/v2/images/:imageId', { imageId }));
   return fetchAuth(url).then(resolveJsonOrRejectWithError);
 };
 const fetchImageWithMetaUrl = url => fetchAuth(url).then(resolveJsonOrRejectWithError);

@@ -40,7 +40,7 @@ const ChangeImage = (props) => {
         <p className="learning-path_input-information">{polyglot.t('learningPath.image.imageInformation')}</p>
       </div>
       <div className="image-preview_information">
-        <h2 className="image-preview_title">{savedImage.titles[0].title}</h2>
+        <h2 className="image-preview_title">{savedImage.title}</h2>
         <div className="image-prieview_copyright-author">
           <b>
             {polyglot.t('learningPath.image.authors')}

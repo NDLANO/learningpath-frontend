@@ -6,45 +6,7 @@
  *
  */
 
-import { oembedContentI18N, titleI18N } from '../i18nFieldFinder';
-
-test('util/i18nFieldFinder titleI18N', () => {
-  const learningPathStep = {
-    title: [
-      { title: 'Bokmål', language: 'nb' },
-      { title: 'Nynorsk', language: 'nn' },
-      { title: 'English', language: 'en' },
-    ],
-  };
-
-  expect(titleI18N(learningPathStep, 'nb')).toEqual('Bokmål');
-  expect(titleI18N(learningPathStep, 'nn')).toEqual('Nynorsk');
-  expect(titleI18N(learningPathStep, 'en')).toEqual('English');
-  expect(titleI18N(learningPathStep, 'es')).toEqual(undefined);
-});
-
-test('util/i18nFieldFinder titleI18N with fallback', () => {
-  const learningPathStep1 = {
-    title: [
-      { title: 'Bokmål', language: 'nb' },
-      { title: 'English', language: 'en' },
-    ],
-  };
-
-  expect(titleI18N(learningPathStep1, 'nb', true)).toEqual('Bokmål');
-  expect(titleI18N(learningPathStep1, 'en', true)).toEqual('English');
-  expect(titleI18N(learningPathStep1, 'nn', true)).toEqual('Bokmål');
-
-  const learningPathStep2 = {
-    title: [
-      { title: 'English', language: 'en' },
-    ],
-  };
-
-  expect(titleI18N(learningPathStep2, 'nb', true)).toEqual('English');
-  expect(titleI18N(learningPathStep2, 'en', true)).toEqual('English');
-  expect(titleI18N(learningPathStep2, 'es', true)).toEqual('English');
-});
+import { oembedContentI18N } from '../i18nFieldFinder';
 
 test('util/i18nFieldFinder oembedContentI18N', () => {
   expect(typeof oembedContentI18N).toBe('function');

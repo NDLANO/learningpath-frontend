@@ -19,7 +19,7 @@ const mockStore = configureStore(middleware);
 
 const imageId = 123;
 
-const imageMetaUrl = 'http://ndla-api:80/image-api/v1/images/123';
+const imageMetaUrl = 'http://ndla-api:80/image-api/v2/images/123';
 
 
 test('actions/fetchImage with id', () => {
@@ -29,7 +29,7 @@ test('actions/fetchImage with id', () => {
   };
 
   const apiMock = nock('http://ndla-api')
-    .get(`/image-api/v1/images/${imageId}`)
+    .get(`/image-api/v2/images/${imageId}`)
     .reply(200, { id: imageId });
 
   const store = mockStore({});
@@ -52,7 +52,7 @@ test('actions/fetchImage with url', () => {
   };
 
   const apiMock = nock('http://ndla-api')
-    .get(`/image-api/v1/images/${imageId}`)
+    .get(`/image-api/v2/images/${imageId}`)
     .reply(200, { id: imageId });
 
   const store = mockStore({});
@@ -75,7 +75,7 @@ test('actions/fetchImage with id access denied', () => {
   };
 
   const apiMock = nock('http://ndla-api')
-    .get(`/image-api/v1/images/${imageId}`)
+    .get(`/image-api/v2/images/${imageId}`)
     .reply(403, { message: 'Invalid' });
 
   const store = mockStore();
@@ -83,7 +83,7 @@ test('actions/fetchImage with id access denied', () => {
   store.dispatch(fetchLearningPathImage(imageId))
     .then(() => {
       expect(store.getActions()).toEqual([
-        applicationError(payload403invalid(`http://ndla-api/image-api/v1/images/${imageId}`)),
+        applicationError(payload403invalid(`http://ndla-api/image-api/v2/images/${imageId}`)),
       ]);
       expect(() => apiMock.done()).not.toThrow();
       done();
@@ -98,7 +98,7 @@ test('actions/fetchImage with url access denied', () => {
   };
 
   const apiMock = nock('http://ndla-api')
-    .get(`/image-api/v1/images/${imageId}`)
+    .get(`/image-api/v2/images/${imageId}`)
     .reply(403, { message: 'Invalid' });
 
   const store = mockStore();
@@ -106,7 +106,7 @@ test('actions/fetchImage with url access denied', () => {
   store.dispatch(fetchLearningPathImageWithMetaUrl(imageMetaUrl))
     .then(() => {
       expect(store.getActions()).toEqual([
-        applicationError(payload403invalid(`http://ndla-api:80/image-api/v1/images/${imageId}`)),
+        applicationError(payload403invalid(`http://ndla-api:80/image-api/v2/images/${imageId}`)),
       ]);
       expect(() => apiMock.done()).not.toThrow();
       done();

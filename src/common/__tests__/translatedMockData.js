@@ -2,8 +2,7 @@ const translatedLearningPaths = [
   {
     id: '1',
     title: 'Hva er kunst og kultur?',
-    description: `Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden.
-        Kurset fokuserer på kunst og kultur på et verdensperspektiv.`,
+    description: 'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
     introduction: '<p>Norsk test id 1</p>',
     tags: ['kristofer'],
     isBasedOnTitle: undefined,
@@ -69,7 +68,6 @@ const translatedLearningPathNotEditable = {
   id: 4,
   title: 'Kristofers private bokmål',
   description: 'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
-
   metaUrl: 'http://api.test.ndla.no/learningpaths/4',
   learningsteps: [
     {

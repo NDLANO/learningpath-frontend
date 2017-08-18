@@ -23,7 +23,7 @@ import Icon from '../common/Icon';
 import SortLearningStepsButton from './sidebar/SortLearningStepsButton';
 import LearningPathSummary from './sidebar/LearningPathSummary';
 import { fetchLearningPath, copyLearningPath } from './learningPathActions';
-import { getI18nLearningPath } from './learningPathSelectors';
+import { getLearningPath } from './learningPathSelectors';
 import LearningPathStep from './step/LearningPathStep';
 import CreateLearningPathStep from './step/create/CreateLearningPathStep';
 import EditLearningPathStep from './step/edit/EditLearningPathStep';
@@ -97,9 +97,9 @@ export class LearningPath extends Component {
         toggleLightBox={this.togglePinterest}
       />) : null;
     const sortLearningSteps = match.url === `/learningpaths/${match.params.pathId}/step/sort`;
-    const sortableTableOfContent = sortLearningSteps ? <SortLearningPathSteps learningPath={learningPath} lang={lang} /> : <LearningPathToC learningPath={learningPath} activeStepId={stepId} />;
+    const sortableTableOfContent = sortLearningSteps ? <SortLearningPathSteps learningPath={learningPath} /> : <LearningPathToC learningPath={learningPath} activeStepId={stepId} />;
     const sortableTableOfContentButton = !sortLearningSteps ? <SortLearningStepsButton learningPath={learningPath} /> : null;
-    const sortableTableOfContentSaveButton = sortLearningSteps ? <SortLearningStepsSaveButton learningPath={learningPath} lang={lang} /> : null;
+    const sortableTableOfContentSaveButton = sortLearningSteps ? <SortLearningStepsSaveButton learningPath={learningPath} /> : null;
 
     const collapseClassName = () => classNames({
       'two-column_col table-of-content': true,
@@ -176,7 +176,7 @@ LearningPath.contextTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
-  learningPath: getI18nLearningPath(state),
+  learningPath: getLearningPath(state),
   sortLearningSteps: ownProps.sortLearningSteps,
   isTableOfContentOpen: state.sidebar.isLeftSideBarOpen,
 });

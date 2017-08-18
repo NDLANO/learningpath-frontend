@@ -7,22 +7,19 @@
  */
 
 import { createSelector } from 'reselect';
-import defined from 'defined';
-import { titleI18N, descriptionI18N, introductionI18N, tagsI18N, isBasedOnTitleI18N } from '../../util/i18nFieldFinder';
-import { getLocale } from '../../locale/localeSelectors';
+import { convertFieldWithFallback } from '../../util/convertFieldWithFallback';
 
 const getLearningPathSearchResultFromState = state => state.learningPathSearch.results;
 const getLearningPathSearchTotalCountFromState = state => state.learningPathSearch.totalCount;
 
 export const getLearningPathSearchResult = createSelector(
-    [getLearningPathSearchResultFromState, getLocale],
-    (results, lang) => results.map(result => ({
+    [getLearningPathSearchResultFromState],
+    results => results.map(result => ({
       ...result,
-      title: titleI18N(result, lang, true),
-      isBasedOnTitle: isBasedOnTitleI18N(result, lang, true),
-      description: descriptionI18N(result, lang, true),
-      introduction: introductionI18N(result, lang, true),
-      tags: defined(tagsI18N(result, lang, false), []),
+      title: convertFieldWithFallback(result, 'title', ''),
+      description: convertFieldWithFallback(result, 'description', ''),
+      introduction: convertFieldWithFallback(result, 'introduction', ''),
+      tags: convertFieldWithFallback(result, 'tags', []),
     }))
 );
 
