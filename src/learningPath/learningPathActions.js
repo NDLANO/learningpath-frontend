@@ -33,7 +33,7 @@ function canAccessLearningPath(path, isEdit = false, dispatch) {
 function fetchIsBasedOnPath(path) {
   return dispatch => fetchPath({ pathId: path.isBasedOn })
     .then((isBasedOnPath) => {
-      dispatch(setLearningPath({ ...path, isBasedOnTitle: isBasedOnPath.title }));
+      dispatch(setLearningPath({ ...path, isBasedOnTitle: isBasedOnPath.title.title }));
     }).catch(() => { });
 }
 
