@@ -17,7 +17,7 @@ const IsBasedOn = ({ path, showText }) => (
     {showText ? <span>{polyglot.t('learningPath.isBasedOn')}</span> : ''}
     { path.isBasedOnTitle ?
       <Link to={`/learningpaths/${path.isBasedOn}/first-step`} className="cta-link--primary cta-link--underline" target="_blank" rel="noopener noreferrer">
-        {path.isBasedOnTitle.title}
+        {path.isBasedOnTitle}
       </Link>
       : polyglot.t('learningPath.isBasedOnPath')}
   </span>
