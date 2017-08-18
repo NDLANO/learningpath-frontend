@@ -11,7 +11,7 @@ import sortBy from 'lodash/sortBy';
 import reverse from 'lodash/reverse';
 import { convertFieldWithFallback } from '../util/convertFieldWithFallback';
 
-const getLearningPathsWithState = state => state.learningPaths;
+const getLearningPathsFromState = state => state.learningPaths;
 export const getSortKey = state => state.myLearningPathsSortOrder || 'title';
 
 const sortPaths = (paths, field) => {
@@ -34,7 +34,7 @@ const sortPaths = (paths, field) => {
 };
 
 export const getLearningPaths = createSelector(
-    [getLearningPathsWithState, getSortKey],
+    [getLearningPathsFromState, getSortKey],
     (learningPaths, sortKey) => {
       const newLearningPaths = learningPaths.map(learningPath => ({
         ...learningPath,
