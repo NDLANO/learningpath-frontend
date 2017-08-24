@@ -22,7 +22,7 @@ import { Wrapper, OneColumn, Footer } from '../../common/Layout';
 import {
   getLearningPathSearchResult,
   getLearningPathSearchTotalCount,
- } from './learningPathSearchSelectors';
+} from './learningPathSearchSelectors';
 
 
 class LearningPathSearch extends React.Component {
@@ -64,6 +64,9 @@ class LearningPathSearch extends React.Component {
 
     const acitveTagTitle = query.tag ? <h1 className="search-results_active-tag">{upperFirst(query.tag)}</h1> : '';
 
+    const queryWithSort = query.sort ? query : { ...query, sort: '-lastUpdated' };
+
+
     return (
       <Wrapper>
         <OneColumn className={'one-colum--white-bg'}>
@@ -78,9 +81,9 @@ class LearningPathSearch extends React.Component {
           <div className="search-results">
             {acitveTagTitle}
             {learningPaths.map(path =>
-            (<SearchResult key={path.id} path={path} pushRoute={pushRoute} onTagSearchQuery={changeSearchTag} query={query} />)
-          )}
-            <LinkPager page={page} lastPage={lastPage} query={query} pathName="/learningpaths" />
+              (<SearchResult key={path.id} path={path} pushRoute={pushRoute} onTagSearchQuery={changeSearchTag} query={query} />)
+            )}
+            <LinkPager page={page} lastPage={lastPage} query={queryWithSort} pathName="/learningpaths" />
           </div>
         </OneColumn>
         <Footer />
