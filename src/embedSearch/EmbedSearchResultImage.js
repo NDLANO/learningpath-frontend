@@ -12,8 +12,8 @@ import requireAssets from '../util/requireAssets';
 
 const EmbedSearchResultImage = ({ pagemap }) => {
   const imageSource = () => {
-    if (pagemap && pagemap.cse_image && pagemap.cse_image.length > 0) {
-      return pagemap.cse_image[0].src;
+    if (pagemap && pagemap.cse_thumbnail && pagemap.cse_thumbnail.length > 0) {
+      return pagemap.cse_thumbnail[0].src;
     }
     return `/assets/${requireAssets['placeholder.png']}`;
   };

@@ -84,7 +84,7 @@ const mapStateToProps = (state, props) => ({
     showTitle: defined(props.step.showTitle, false),
     title: props.step.title,
     description: props.step.description,
-    url: { url: defined(props.step.embedUrl.url, ''), embedType: defined(props.step.embedUrl.embedType, 'oembed') },
+    url: { url: props.step.embedUrl ? defined(props.step.embedUrl.url, '') : '', embedType: props.step.embedUrl ? defined(props.step.embedUrl.embedType, 'oembed') : '' },
     type: props.learningPath.learningsteps && props.learningPath.learningsteps.length > 0 ? props.step.type : 'INTRODUCTION',
     license: defined(props.step.license, ''),
   },
