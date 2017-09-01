@@ -68,7 +68,7 @@ export default class Oembed extends React.Component {
   }
 
   handleResizeMessage(evt) {
-    if (!this.state.listeningToResize) {
+    if (!this.state.listeningToResize || !evt.data.height) {
       return;
     }
 
@@ -84,7 +84,6 @@ export default class Oembed extends React.Component {
     const newHeight = parseInt(get(evt, 'data.height', 0), 10) + 55;
 
     iframe.style.height = `${newHeight}px`;
-
     this.setState({ isLoadingResource: false });
   }
 
