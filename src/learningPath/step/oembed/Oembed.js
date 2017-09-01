@@ -68,7 +68,7 @@ export default class Oembed extends React.Component {
   }
 
   handleResizeMessage(evt) {
-    if (!this.state.listeningToResize || !evt.data.height) {
+    if (!this.state.listeningToResize || !evt || !evt.data || !evt.data.height) {
       return;
     }
 
