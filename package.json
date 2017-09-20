@@ -76,7 +76,6 @@
     "eslint": "^3.10.2",
     "express": "^4.15.3",
     "express-request-proxy": "2.0.0",
-    "express-robots": "^0.1.6",
     "form-data": "^2.2.0",
     "helmet": "^3.6.1",
     "history": "^4.6.3",
