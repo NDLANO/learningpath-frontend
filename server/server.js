@@ -10,6 +10,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import express from 'express';
 import helmet from 'helmet';
+import robots from 'express-robots';
 import compression from 'compression';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
@@ -44,6 +45,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(webpackHotMiddleware(compiler, {}));
 }
 
+app.use(robots({ UserAgent: '*', Disallow: '/' }));
 app.use(compression());
 app.use(express.static('htdocs', {
   maxAge: 1000 * 60 * 60 * 24 * 365, // One year
