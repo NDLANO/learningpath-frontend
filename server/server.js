@@ -67,6 +67,7 @@ app.use(helmet({
         'wss://*.hotjar.com',
         'https://*.hotjar.com',
         'https://*.ndla.no',
+        'https://ndla.no',
         'https://players.brightcove.net',
         'https://www.nrk.no',
         'https://www.googletagmanager.com',
