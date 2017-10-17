@@ -10,7 +10,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import requireAssets from '../util/requireAssets';
 
-const EmbedSearchResultImage = ({ pagemap }) => {
+const EmbedSearchResultImage = ({ pagemap, title }) => {
   const imageSource = () => {
     if (pagemap && pagemap.cse_thumbnail && pagemap.cse_thumbnail.length > 0) {
       return pagemap.cse_thumbnail[0].src;
@@ -20,13 +20,14 @@ const EmbedSearchResultImage = ({ pagemap }) => {
 
   return (
     <div className="embed-search_result-img">
-      <img role="presentation" src={imageSource()} />
+      <img role="presentation" src={imageSource()} alt={title}/>
     </div>
   );
 };
 
 EmbedSearchResultImage.propTypes = {
   pagemap: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default EmbedSearchResultImage;

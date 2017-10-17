@@ -27,7 +27,7 @@ export default function LearningPathDuration(props) {
     <div>
       <ul className="duration-menu">
         {durations.map(newDuration => (
-          <li key={newDuration} className={durationClassName(newDuration)} onClick={() => onChange(newDuration)}> {newDuration}</li>  // eslint-disable-line jsx-a11y/no-static-element-interactions
+          <li key={newDuration} role="presentation" className={durationClassName(newDuration)} onClick={() => onChange(newDuration)}> {newDuration}</li>  // eslint-disable-line jsx-a11y/no-static-element-interactions
         ))}
       </ul>
       <input id={props.id} className="input-duration" {...props.input} onChange={evt => inputChange(evt)} />

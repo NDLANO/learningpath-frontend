@@ -121,7 +121,7 @@ export default class DescriptionHTMLEditor extends React.Component {
           <div className="learning-step-form_right">
             {/*eslint-disable*/}
             <div className={className} onClick={this.focus}>
-              {/*eslint-enable*/}
+              {/* eslint-enable */}
               <Editor
                 editorState={editorState}
                 onChange={this.handleDescriptionChange}
