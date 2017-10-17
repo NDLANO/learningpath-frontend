@@ -172,6 +172,7 @@ const phrases = {
     footerEditiorInChief: 'Ansvarlig redaktør: ',
     footerManagingEditor: 'Utgaveansvarlig: ',
     selectLanguage: 'Velg språk (language): ',
+    reportProblem: 'Rapportér feil',
   },
   duration: {
     zero: 'Ukjent lengde',

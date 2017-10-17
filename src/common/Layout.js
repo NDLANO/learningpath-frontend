@@ -34,6 +34,9 @@ export const Footer = () =>
       <li className="footer_item">
         <a href="https://om.ndla.no/" className="footer_link">{polyglot.t('footer.aboutNDLA')}</a>
       </li>
+      <li className="footer_item">
+        <a href="https://ndla.zendesk.com/hc/no/requests/new" rel="noopener noreferrer" target="_blank" className="footer_link">{polyglot.t('footer.reportProblem')}</a>
+      </li>
     </ul>
     <div className="footer_ruler" />
     <p className="footer_text">
