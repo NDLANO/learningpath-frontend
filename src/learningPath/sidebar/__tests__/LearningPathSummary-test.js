@@ -16,9 +16,12 @@ import { learningPath } from '../../../common/__tests__/mockData';
 
 import { translatedLearningPath } from '../../../common/__tests__/translatedMockData';
 import LearningPathSummary from '../LearningPathSummary';
+import enzymeAdapter from '../../../common/__tests__/enzymeAdapter';
 
+enzymeAdapter();
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
+
 test('component/LearningPathSummary', () => {
   const component = shallow(<LearningPathSummary learningPath={translatedLearningPath} lang="nb" store={mockStore({ learningPath, authenticated: true, localCloseSidebars: noop })} />);
 

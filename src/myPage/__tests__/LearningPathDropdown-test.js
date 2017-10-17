@@ -12,11 +12,12 @@ import { spy } from 'sinon';
 
 import { learningPaths } from '../../common/__tests__/mockData';
 import LearningPathDropdown from '../LearningPathDropdown';
+import enzymeAdapter from '../../common/__tests__/enzymeAdapter';
 
 const learningPath = learningPaths[0];
 const privateLearningPath = Object.assign({}, learningPath, { status: 'PRIVATE' });
 
-
+enzymeAdapter();
 test('component/LearningPathDropdown remove', () => {
   const preventDefault = spy();
   const onSelect = spy();

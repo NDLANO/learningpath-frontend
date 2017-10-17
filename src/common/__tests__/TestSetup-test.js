@@ -15,7 +15,9 @@ import PropTypes from 'prop-types';
 import { shallow, mount, render } from 'enzyme';
 
 import { locationOrigin, apiBaseUrl, accessToken } from '../../sources/helpers';
+import enzymeAdapter from './enzymeAdapter';
 
+enzymeAdapter();
 class Selfie extends Component {
   componentDidMount() {
   }

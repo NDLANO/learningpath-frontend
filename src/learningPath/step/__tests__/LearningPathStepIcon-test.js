@@ -12,9 +12,11 @@ import { shallow } from 'enzyme';
 import { translatedLearningStep } from '../../../common/__tests__/translatedMockData';
 
 import LearningPathStepIcon from '../LearningPathStepIcon';
+import enzymeAdapter from '../../../common/__tests__/enzymeAdapter';
 
+enzymeAdapter();
 test('component/LearningPathStepIcon', () => {
-  const component = shallow(<LearningPathStepIcon learningPathStep={translatedLearningStep} isCircle />);
+  const component = shallow(<LearningPathStepIcon learningPathStep={translatedLearningStep} learningPathStepType="INTRODUCTION" isCircle />);
 
   const iconNode = component.find('.step-nav_circle');
 

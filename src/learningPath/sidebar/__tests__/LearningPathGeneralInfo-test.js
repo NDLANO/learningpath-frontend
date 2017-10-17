@@ -15,7 +15,9 @@ import thunk from 'redux-thunk';
 import { translatedLearningPath } from '../../../common/__tests__/translatedMockData';
 import { learningPath } from '../../../common/__tests__/mockData';
 import LearningPathGeneralInfo from '../LearningPathGeneralInfo';
+import enzymeAdapter from '../../../common/__tests__/enzymeAdapter';
 
+enzymeAdapter();
 const Foo = () => <div />;
 const Bar = () => <div />;
 

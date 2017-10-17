@@ -10,6 +10,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import Lightbox from '../Lightbox';
+import enzymeAdapter from '../../common/__tests__/enzymeAdapter';
+
+enzymeAdapter();
 
 test('component/Lightbox', () => {
   const component = shallow(<Lightbox display onClose={() => { }}><h1>enlighted!</h1></Lightbox>);

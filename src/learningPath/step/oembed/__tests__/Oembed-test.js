@@ -13,11 +13,13 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { spy } from 'sinon';
+import enzymeAdapter from '../../../../common/__tests__/enzymeAdapter';
 
 import { translatedLearningStep, translatedNdlaLearningStep } from '../../../../common/__tests__/translatedMockData';
 
 import Oembed, { urlIsNDLA } from '../Oembed';
 
+enzymeAdapter();
 test('component/Oembed urlIsNDLA', () => {
   expect(urlIsNDLA('http://ndla.no/nb/node/12345')).toBeTruthy();
   expect(urlIsNDLA('http://exampe.com/ndla.no/nb/node/12345')).toBeFalsy();

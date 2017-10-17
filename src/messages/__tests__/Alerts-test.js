@@ -13,9 +13,10 @@ import { uuid } from 'ndla-util';
 
 import { Alerts, Alert, Action } from '../Alerts';
 import { clearMessage } from '../../messages/messagesActions';
+import enzymeAdapter from '../../common/__tests__/enzymeAdapter';
 
 const noop = () => { };
-
+enzymeAdapter();
 test('component/Alerts one message', () => {
   const alertMessages = [{ id: uuid(), message: 'Testmessage' }];
   const component = shallow(<Alerts messages={alertMessages} dispatch={noop} />);
