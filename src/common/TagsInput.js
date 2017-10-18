@@ -20,10 +20,10 @@ class TagsInput extends Component {
   }
 
   render() {
-    const { tagOptions, input, onUnsavedChanges } = this.props;
+    const { tagOptions, input } = this.props;
 
     const messages = {
-      createOption: polyglot.t('tagInput.createNew'),
+      createOption: (props) => <span><b>{`"${props.searchTerm}"`}</b> {polyglot.t('tagInput.createOption')}</span>,
       emptyFilter: polyglot.t('tagInput.emptyFilter'),
       emptyList: polyglot.t('tagInput.emptyList'),
     };
@@ -43,9 +43,9 @@ class TagsInput extends Component {
     };
 
     const handleSearch = (searchTerm) => {
-      onUnsavedChanges(searchTerm);
       this.setState({ open: searchTerm.length > 2 });
     };
+
     return (
       <Multiselect
         data={tagOptions}
@@ -70,7 +70,6 @@ TagsInput.propTypes = {
     value: PropTypes.any.isRequired,
   }).isRequired,
   tagOptions: PropTypes.array.isRequired,
-  onUnsavedChanges: PropTypes.func.isRequired,
 };
 
 export default TagsInput;

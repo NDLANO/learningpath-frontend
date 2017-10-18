@@ -19,14 +19,14 @@ class Contributors extends Component {
   }
 
   render() {
-    const { input, onUnsavedChanges, contributorOptions } = this.props;
+    const { input, contributorOptions } = this.props;
 
     if (typeof value === 'string') { // Handle redux form values witch are initialized as strings
       return null;
     }
 
     const messages = {
-      createOption: polyglot.t('copyrightInput.createNew'),
+      createOption: (props) => <span><b>{`"${props.searchTerm}"`}</b> {polyglot.t('copyrightInput.createOption')}</span>,
       emptyFilter: polyglot.t('copyrightInput.emptyFilter'),
       emptyList: '',
     };
@@ -42,9 +42,12 @@ class Contributors extends Component {
     };
 
     const handleSearch = (searchTerm) => {
-      onUnsavedChanges(searchTerm);
       this.setState({ open: searchTerm.length > 2 });
     };
+    const test = () => {
+      console.log(input.value)
+      input.onBlur(input.value)
+    }
 
     return (
       <Multiselect
@@ -54,7 +57,7 @@ class Contributors extends Component {
         messages={messages}
         value={input.value}
         textField="name"
-        onBlur={() => input.onBlur(input.value)}
+        onBlur={test}
         onChange={input.onChange}
         onCreate={handleAdd}
         onToggle={() => { }}
@@ -71,7 +74,6 @@ Contributors.propTypes = {
     value: PropTypes.any.isRequired,
   }).isRequired,
   contributorOptions: PropTypes.array.isRequired,
-  onUnsavedChanges: PropTypes.func.isRequired,
 };
 
 export default Contributors;
