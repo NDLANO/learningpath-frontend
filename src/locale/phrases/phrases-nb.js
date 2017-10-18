@@ -210,12 +210,12 @@ const phrases = {
     updatedMsg: 'Lagret OK',
   },
   tagInput: {
-    createNew: 'Opprett ny tag',
+    createOption: 'Opprett ny tag',
     emptyList: 'Det er ingen tagger i denne listen',
     emptyFilter: 'Fant ingen passende tagger',
   },
   copyrightInput: {
-    createNew: 'Opprett ny bidragsyter',
+    createOption: 'Opprett ny bidragsyter',
     emptyFilter: 'Ingen bidragsytere funnet. Legg derfor til bidragsyter',
   },
   updateLearningPathStatus: {

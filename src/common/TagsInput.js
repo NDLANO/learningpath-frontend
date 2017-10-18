@@ -23,7 +23,7 @@ class TagsInput extends Component {
     const { tagOptions, input, onUnsavedChanges } = this.props;
 
     const messages = {
-      createNew: polyglot.t('tagInput.createNew'),
+      createOption: polyglot.t('tagInput.createNew'),
       emptyFilter: polyglot.t('tagInput.emptyFilter'),
       emptyList: polyglot.t('tagInput.emptyList'),
     };

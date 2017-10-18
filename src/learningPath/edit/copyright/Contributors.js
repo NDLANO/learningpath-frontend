@@ -26,7 +26,7 @@ class Contributors extends Component {
     }
 
     const messages = {
-      createNew: polyglot.t('copyrightInput.createNew'),
+      createOption: polyglot.t('copyrightInput.createNew'),
       emptyFilter: polyglot.t('copyrightInput.emptyFilter'),
       emptyList: '',
     };
