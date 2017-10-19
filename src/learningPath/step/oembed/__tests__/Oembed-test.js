@@ -58,7 +58,6 @@ test('component/Oembed ndla resource', () => {
   expect(addEventListener.callCount).toBe(1);
   expect(addEventListener.firstCall.args).toEqual(['message', component.instance().handleResizeMessage]);
 
-  window.addEventListener.restore();
 });
 
 test('component/Oembed resize message listener', () => {
@@ -99,8 +98,6 @@ test('component/Oembed resize message listener', () => {
   expect(add.callCount).toBe(2);
   expect(remove.callCount).toBe(1);
 
-  window.addEventListener.restore();
-  window.removeEventListener.restore();
 });
 
 test('component/Oembed iframe resizing', () => {

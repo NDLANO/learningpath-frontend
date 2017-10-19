@@ -44,10 +44,6 @@ class Contributors extends Component {
     const handleSearch = (searchTerm) => {
       this.setState({ open: searchTerm.length > 2 });
     };
-    const test = () => {
-      console.log(input.value)
-      input.onBlur(input.value)
-    }
 
     return (
       <Multiselect
@@ -57,7 +53,7 @@ class Contributors extends Component {
         messages={messages}
         value={input.value}
         textField="name"
-        onBlur={test}
+        onBlur={() => input.onBlur(input.value)}
         onChange={input.onChange}
         onCreate={handleAdd}
         onToggle={() => { }}
