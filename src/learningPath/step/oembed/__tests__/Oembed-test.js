@@ -12,21 +12,31 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-
 import { translatedLearningStep, translatedNdlaLearningStep } from '../../../../common/__tests__/translatedMockData';
 
-import Oembed, { urlIsNDLA } from '../Oembed';
+import Oembed from '../Oembed';
 
-test('component/Oembed urlIsNDLA', () => {
-  expect(urlIsNDLA('http://ndla.no/nb/node/12345')).toBeTruthy();
-  expect(urlIsNDLA('http://exampe.com/ndla.no/nb/node/12345')).toBeFalsy();
-  expect(urlIsNDLA()).toBeFalsy();
+let component;
+let add;
+let remove;
+
+beforeEach(() => {
+  add = jest.spyOn(window, 'addEventListener');
+  remove = jest.spyOn(window, 'removeEventListener');
 });
 
+afterEach(() => {
+  add.mockReset();
+  add.mockRestore();
+  remove.mockReset();
+  remove.mockRestore();
+  component.unmount();
+});
+
+// TODO: Check why addEventListener is called six times and not one.
 test('component/Oembed', () => {
   const oembed = translatedLearningStep.oembed;
-  const component = mount(<Oembed oembedContent={oembed} />);
-
+  component = mount(<Oembed oembedContent={oembed} />);
   const div = component.find('.learning-step');
 
   expect(div.length).toBe(1);
@@ -38,10 +48,8 @@ test('component/Oembed', () => {
 });
 
 test('component/Oembed ndla resource', () => {
-  // const addEventListener = spy(window, 'addEventListener');
-
   const oembed = translatedNdlaLearningStep.oembed;
-  const component = mount(<Oembed oembedContent={oembed} />);
+  component = mount(<Oembed oembedContent={oembed} />);
 
   const div = component.find('.learning-step');
 
@@ -51,61 +59,50 @@ test('component/Oembed ndla resource', () => {
 
   expect(component.state('isNDLAResource')).toBeTruthy();
   expect(component.state('listeningToResize')).toBeTruthy();
+  // expect(add).toHaveBeenCalledTimes(1);
+  expect(add).toHaveBeenCalledWith('message', component.instance().handleResizeMessage);
 
-  // expect(addEventListener.callCount).toBe(1);
-  // expect(addEventListener.firstCall.args).toEqual(['message', component.instance().handleResizeMessage]);
-
-  // window.addEventListener.restore();
-  component.unmount()
 });
 
 test('component/Oembed resize message listener', () => {
-  // const add = spy(window, 'addEventListener');
-  // const remove = spy(window, 'removeEventListener');
-
   const oembed = translatedLearningStep.oembed;
   const ndlaOembed1 = translatedNdlaLearningStep.oembed;
   const ndlaOembed2 = Object.assign({}, ndlaOembed1, { url: `${ndlaOembed1.url}?another` });
   const ndlaOembed3 = Object.assign({}, ndlaOembed1, { url: `${ndlaOembed1.url}?yetanother` });
 
   // initialize with ndla resource
-  const component = mount(<Oembed oembedContent={ndlaOembed1} />);
+  component = mount(<Oembed oembedContent={ndlaOembed1} />);
 
-  // expect(add.callCount).toBe(1);
-  // expect(remove.callCount).toBe(0);
+  // expect(add).toHaveBeenCalledTimes(1);
+  // expect(remove).toHaveBeenCalledTimes(0);
 
   // update with other ndla resource
   component.setProps({ oembedContent: ndlaOembed2 });
 
-  // expect(add.callCount).toBe(1);
-  // expect(remove.callCount).toBe(0);
+  // expect(add).toHaveBeenCalledTimes(1);
+  // expect(remove).toHaveBeenCalledTimes(0);
 
   // update with non-ndla resource
   component.setProps({ oembedContent: oembed });
 
-  // expect(add.callCount).toBe(1);
-  // expect(remove.callCount).toBe(1);
+  // expect(add).toHaveBeenCalledTimes(1);
+  // expect(remove).toHaveBeenCalledTimes(1);
 
   expect(component.state('isNDLAResource')).toBeFalsy();
   expect(component.state('listeningToResize')).toBeFalsy();
 
-  // expect(remove.firstCall.args).toEqual(['message', component.instance().handleResizeMessage]);
+  expect(remove).toHaveBeenCalledWith('message', component.instance().handleResizeMessage);
 
   // update with other ndla resource
   component.setProps({ oembedContent: ndlaOembed3 });
 
-  // expect(add.callCount).toBe(2);
-  // expect(remove.callCount).toBe(1);
-
-  // window.addEventListener.restore();
-  // window.removeEventListener.restore();
 });
 
 test('component/Oembed iframe resizing', () => {
   const ndlaOembed = translatedNdlaLearningStep.oembed;
   const oembed = translatedLearningStep.oembed;
 
-  const component = mount(<Oembed oembedContent={ndlaOembed} />);
+  component = mount(<Oembed oembedContent={ndlaOembed} />);
   const instance = component.instance();
 
   const iframe = instance.getIframeDOM();
