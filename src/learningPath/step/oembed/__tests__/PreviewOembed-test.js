@@ -10,9 +10,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { spy } from 'sinon';
 import PreviewOembed from '../PreviewOembed';
-import enzymeAdapter from '../../../../common/__tests__/enzymeAdapter';
-
-enzymeAdapter();
 
 test('component/PreviewOembed click button', () => {
   const preventDefault = spy();

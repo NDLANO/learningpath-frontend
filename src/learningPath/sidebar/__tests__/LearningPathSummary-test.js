@@ -16,9 +16,7 @@ import { learningPath } from '../../../common/__tests__/mockData';
 
 import { translatedLearningPath } from '../../../common/__tests__/translatedMockData';
 import LearningPathSummary from '../LearningPathSummary';
-import enzymeAdapter from '../../../common/__tests__/enzymeAdapter';
 
-enzymeAdapter();
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 

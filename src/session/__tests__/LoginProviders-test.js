@@ -9,9 +9,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import LoginProviders from '../LoginProviders';
-import enzymeAdapter from '../../common/__tests__/enzymeAdapter';
-
-enzymeAdapter();
 
 test('component/LoginProviders', () => {
   const component = shallow(<LoginProviders match={{ url: '' }} />);

@@ -13,9 +13,7 @@ import noop from 'lodash/noop';
 import { SiteNav } from '../siteNav/SiteNav';
 import SiteNavSessionAction from '../siteNav/SiteNavSessionAction';
 import SiteNavMyPage from '../siteNav/SiteNavMyPage';
-import enzymeAdapter from './enzymeAdapter';
 
-enzymeAdapter();
 test('component/SiteNav learningpaths', () => {
   const navLinks = shallow(<SiteNav authenticated={false} localCloseSidebars={noop} />).find(Link);
   expect(navLinks.length).toBe(1);

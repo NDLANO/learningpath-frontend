@@ -12,9 +12,6 @@ import noop from 'lodash/noop';
 import { translatedLearningPath } from '../../../common/__tests__/translatedMockData';
 import { LearningPathToC } from '../LearningPathToC';
 import LearningPathToCStep from '../LearningPathToCStep';
-import enzymeAdapter from '../../../common/__tests__/enzymeAdapter';
-
-enzymeAdapter();
 
 test('component/LearningPathToC', () => {
   const component = shallow(<LearningPathToC learningPath={translatedLearningPath} localCloseSidebars={noop} />,

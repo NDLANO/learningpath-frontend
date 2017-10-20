@@ -16,13 +16,14 @@
     "lint": "eslint src server"
   },
   "jest": {
+    "setupFiles": [
+      "raf/polyfill",
+      "./src/common/__tests__/enzymeSetup.js"
+    ],
     "moduleDirectories": [
       "src",
       "server",
       "node_modules"
-    ],
-    "setupFiles": [
-      "raf/polyfill"
     ],
     "testRegex": "(/__tests__/.*)(-test.js?)",
     "globals": {

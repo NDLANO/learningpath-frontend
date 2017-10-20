@@ -13,13 +13,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { spy } from 'sinon';
-import enzymeAdapter from '../../../../common/__tests__/enzymeAdapter';
 
 import { translatedLearningStep, translatedNdlaLearningStep } from '../../../../common/__tests__/translatedMockData';
 
 import Oembed, { urlIsNDLA } from '../Oembed';
 
-enzymeAdapter();
 test('component/Oembed urlIsNDLA', () => {
   expect(urlIsNDLA('http://ndla.no/nb/node/12345')).toBeTruthy();
   expect(urlIsNDLA('http://exampe.com/ndla.no/nb/node/12345')).toBeFalsy();
@@ -54,13 +52,14 @@ test('component/Oembed ndla resource', () => {
 
   expect(component.state('isNDLAResource')).toBeTruthy();
   expect(component.state('listeningToResize')).toBeTruthy();
-
   expect(addEventListener.callCount).toBe(1);
   expect(addEventListener.firstCall.args).toEqual(['message', component.instance().handleResizeMessage]);
+  addEventListener.restore();
 
 });
 
 test('component/Oembed resize message listener', () => {
+  window.addEventListener.restore()
   const add = spy(window, 'addEventListener');
   const remove = spy(window, 'removeEventListener');
 
@@ -98,6 +97,8 @@ test('component/Oembed resize message listener', () => {
   expect(add.callCount).toBe(2);
   expect(remove.callCount).toBe(1);
 
+  add.restore();
+  remove.restore();
 });
 
 test('component/Oembed iframe resizing', () => {

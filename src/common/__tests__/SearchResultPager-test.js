@@ -12,9 +12,7 @@ import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 import LinkPager from '../pager/LinkPager';
 import { getRange, stepNumbers } from '../pager/PagerUtil';
-import enzymeAdapter from './enzymeAdapter';
 
-enzymeAdapter();
 test('component/PagerUtil.getRange', () => {
   expect(getRange(1, 5)).toEqual([1, 5], '1,5');
   expect(getRange(2, 5)).toEqual([1, 5], '1,5');

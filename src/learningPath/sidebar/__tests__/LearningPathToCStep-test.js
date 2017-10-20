@@ -12,9 +12,7 @@ import noop from 'lodash/noop';
 import { Link } from 'react-router-dom';
 import { translatedLearningPath, translatedLearningPathNotEditable } from '../../../common/__tests__/translatedMockData';
 import LearningPathToCStep from '../LearningPathToCStep';
-import enzymeAdapter from '../../../common/__tests__/enzymeAdapter';
 
-enzymeAdapter();
 test('component/LearningPathToCStep first step with no add step button', () => {
   const component = shallow(
     <LearningPathToCStep learningPath={translatedLearningPath} step={translatedLearningPath.learningsteps[0]} steps={translatedLearningPath.learningsteps} activeStepId="" localCloseSidebars={noop} />,

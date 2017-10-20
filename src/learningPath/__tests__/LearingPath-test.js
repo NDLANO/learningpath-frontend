@@ -12,9 +12,7 @@ import noop from 'lodash/noop';
 import { translatedLearningPath } from '../../common/__tests__/translatedMockData';
 import { LearningPath } from '../LearningPath';
 import SortLearningPathSteps from '../step/sort/SortLearningPathSteps';
-import enzymeAdapter from '../../common/__tests__/enzymeAdapter';
 
-enzymeAdapter();
 test('component/LearningPath', () => {
   expect(shallow(
     <LearningPath

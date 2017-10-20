@@ -10,9 +10,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import noop from 'lodash/noop';
 import EmbedSearchResults from '../EmbedSearchResults';
-import enzymeAdapter from '../../common/__tests__/enzymeAdapter';
 
-enzymeAdapter();
 const propsWithNoItems = {
   items: [],
   onPreviewClick: noop,

@@ -14,9 +14,6 @@ import { translatedLearningPaths } from '../../common/__tests__/translatedMockDa
 import { learningPaths } from '../../common/__tests__/mockData';
 
 import { MyPage, mapStateToProps } from '../MyPage';
-import enzymeAdapter from '../../common/__tests__/enzymeAdapter';
-
-enzymeAdapter();
 
 test('component/MyPage', () => {
   const noop = () => {};
