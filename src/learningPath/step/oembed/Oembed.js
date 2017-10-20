@@ -56,7 +56,6 @@ export default class Oembed extends React.Component {
 
   enableIframeResizing() {
     if (!this.state.listeningToResize) {
-      console.log("YO!")
       window.addEventListener('message', this.handleResizeMessage);
       this.setState({ listeningToResize: true });
     }
@@ -69,7 +68,6 @@ export default class Oembed extends React.Component {
   }
 
   handleResizeMessage(evt) {
-    console.log(evt)
     if (!this.state.listeningToResize || !evt || !evt.data || !evt.data.height) {
       return;
     }
