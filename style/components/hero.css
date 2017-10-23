@@ -1,0 +1,29 @@
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+.hero {
+  height: 500px;
+  text-align: center;
+  color: white;
+  background-color: var(--blue-1);
+}
+
+.hero_title {
+  text-align: center;
+  margin-top: 0;
+}
+
+.hero_link {
+  margin: 0 .5em;
+}
+
+@media (--medium-viewport) {
+  .hero {
+    height: 400px;
+  }
+}

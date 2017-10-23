@@ -1,0 +1,64 @@
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+.learningsource--wrapper {
+  margin-top: 2em;
+  border: 2px solid var(--gray-11);
+  position: relative;
+  background-color: white;
+}
+
+.learningsource__frame {
+  border: none;
+  padding-top: 2em;
+  width: 100%;
+  padding-bottom: 5em;
+  text-align: center;
+}
+
+.learningsource__expand {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 90px 0 50px 0;
+  text-decoration: none;
+  background-image: linear-gradient(to top, white, transparent);
+}
+
+.learningsource-form {
+  border-radius: 5px;
+  padding: 1.5em 2em 2em 2em;
+  background-color: var(--gray-12);
+  border: 1px solid var(--gray-8);
+  margin-bottom: 4em;
+}
+
+.learningsource-form input {
+  width: 100%;
+  display: inline-block;
+}
+
+.learningsource-showhide {
+  border-radius: 5px;
+  background-color: white;
+  padding: 1em;
+}
+
+.learningsource__frame--hidden {
+  height: 250px;
+  overflow: hidden;
+}
+
+@media (--medium-viewport) {
+  .learningsource-form {
+    padding: 1.5em 1em 2em 1em;
+  }
+}

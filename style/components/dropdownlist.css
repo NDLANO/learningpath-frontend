@@ -1,0 +1,54 @@
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+.rw-dropdownlist .rw-i {
+  display: inline-block;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1em;
+  font-variant: normal;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.rw-select.rw-btn, .rw-select>.rw-btn {
+  height: 100%;
+  vertical-align: middle;
+  outline: 0;
+}
+.rw-widget>.rw-select {
+  border-left: 1px solid #ccc;
+}
+.rw-select {
+  position: absolute;
+  width: 1.9em;
+  height: 100%;
+  right: 0;
+  top: 0;
+}
+.rw-btn {
+  cursor: pointer;
+}
+.rw-btn {
+  color: #333;
+  line-height: 3.2em;
+  width: 3em;
+  display: inline-block;
+  margin: 0;
+  text-align: center;
+  vertical-align: middle;
+  background: none;
+  background-image: none;
+  border: 1px solid transparent;
+  padding: 0;
+  white-space: nowrap;
+  font-size: 0.8em;
+}
+.rw-i-caret-down::before {
+  content: "\25BC";
+}

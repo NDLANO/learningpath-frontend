@@ -1,0 +1,120 @@
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+
+.footer {
+  flex: none;
+  background-color: #fff;
+  padding: 3.5em 8%;
+  margin-top: 3em;
+}
+
+.footer--bold {
+  font-weight: 600;
+}
+
+.footer_list {
+  margin-bottom: 2em;
+  float: right;
+  padding-right: 5%;
+}
+
+.footer_language-form {
+  padding-left: 5%;
+  display: inline;
+}
+
+.footer_language-select {
+  display: inline-block;
+  min-width: 2em;
+  background-color: var(--gray-9);
+}
+
+.footer_language-label {
+  padding-right: 1em;
+  display: inline-block;
+}
+
+.footer_item {
+  display: inline;
+  margin-right: 1.5em;
+  padding-left: 0;
+}
+
+.footer_item:last-child {
+  margin-right: 0;
+}
+
+.footer_ruler {
+  width: 100%;
+  border-top: 1px solid var(--gray-8);
+  padding-bottom: 1em;
+  margin-top: 1em;
+}
+
+.footer_link:any-link {
+  color: var(--gray-1);
+}
+
+
+.footer_text {
+  padding-left: 5%;
+  color: var(--gray-3);
+  margin-bottom: 0;
+  margin-top: 0.3em;
+}
+
+.footer_editor:last-child {
+  padding-left: 2em;
+}
+
+@media (--xlarge-viewport) {
+  .footer {
+    padding: 3.5em 15%;
+  }
+
+  .footer_item {
+    margin-right: 2em;
+  }
+}
+
+@media (max-width: 1000px) {
+  .footer_list {
+    float: none;
+  }
+}
+
+@media (--medium-viewport) {
+
+  .footer {
+    padding: 2em;
+  }
+  .footer_editor {
+    display: block;
+  }
+  .footer_language-form {
+    padding-left: 0;
+  }
+  .footer_editor:last-child {
+    padding-left: 0;
+  }
+  .footer_list {
+    padding-left: 0;
+  }
+  .footer_text {
+    padding-left: 0;
+  }
+  .footer_form {
+    display: block;
+  }
+
+  .footer_item {
+    display: block;
+    margin-bottom: 2em;
+  }
+}

@@ -1,0 +1,109 @@
+.embed-search_container {
+  display: none;
+  transition: .3s max-height;
+  padding: 0 2em;
+}
+.embed-search_open-button {
+  margin-bottom: 2em;
+}
+.embed-search_container--active {
+  display: inherit;
+  margin-bottom: 2em;
+  border: 1px solid var(--gray-8);
+}
+
+.embed-search_form-filters > .embed-search_form-filter {
+  display: inline-block;
+  cursor: pointer;
+  padding: 10px 15px;
+  color: var(--gray-6);
+  font-size: 15px;
+}
+.embed-search_forms {
+  margin-bottom: -1px;
+}
+.embed-search_form-filters > .embed-search_form-filter--active {
+  border-bottom: 3px solid var(--blue-1);
+  color: var(--blue-1);
+}
+
+.embed-search_form, .embed-search_results {
+  min-height: 2em;
+}
+
+.embed-search_result {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 2em 0;
+}
+.embed-search_result-img {
+  width: 30%;
+  display: inline-block;
+}
+.embed-search_result-img > img {
+  max-width: 100%;
+}
+.embed-search_result-information {
+  width: 70%;
+  display: inline-block;
+  padding: 0 2em;
+}
+.embed-search_result-title {
+  display: block;
+  margin: 0;
+}
+.embed-search_container a, .embed-search_container a:any-link, .google-custom-search_add-button {
+  color: var(--blue-1);
+  text-decoration: underline;
+  word-break: break-all;
+}
+.embed-search_preview-button {
+  text-decoration: underline;
+  margin-left: 1em;
+}
+.external-oembed_preview .learning-step_embed {
+  border: none;
+}
+.external-oembed_preview {
+  display: none;
+}
+.external-oembed_preview--active {
+  display: block;
+  border: 1px solid var(--gray-8);
+}
+
+.external-oembed_preview--active .close-dialog {
+  margin: 0;
+}
+
+@media (--medium-viewport) {
+  .embed-search_form, .embed-search_results {
+    padding: 0 1em;
+  }
+  .embed-search_result {
+    flex-direction: column;
+  }
+  .embed-search_result:not(:first-child) {
+    border-top: 1px solid var(--gray-8);
+  }
+  .embed-search_result-information {
+    width: 100%;
+    display: block;
+  }
+  .embed-search_result-img {
+    width: 100%;
+    display: block;
+  }
+  .embed-search_result-information {
+    padding: 0;
+  }
+  .embed-search_preview-button {
+    margin-left: 0;
+  }
+  .google-custom-search_add-button, .embed-search_preview-button {
+    display: block;
+    height: 2em;
+  }
+}

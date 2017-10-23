@@ -1,0 +1,49 @@
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  font-size: 1em;
+  vertical-align: bottom;
+}
+
+.icon--m {
+  font-size: 1.5em;
+}
+
+.icon--l {
+  font-size: 2em;
+}
+
+.icon--white {
+  color: white;
+}
+
+.icon--gray {
+  color: var(--gray-6);
+}
+
+.icon--with-label {
+  vertical-align: middle;
+}
+
+.labeled-icon_text {
+  padding: 0 .2em;
+  font-size: 16px;
+}
+
+/* =======================================================================================
+Example showing how to change the color/size of the icons:
+.icon-name {
+	font-size: 32px; // works because "width" & "height" were set using em units
+	color: red; // works for single-colored icons, because "fill" was set to "currentColor"
+}
+======================================================================================== */

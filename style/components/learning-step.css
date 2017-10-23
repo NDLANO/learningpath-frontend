@@ -1,0 +1,107 @@
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+.learning-step {
+  margin: 0 auto;
+  min-height: 1em;
+
+}
+.learning-step--padding-bottom {
+  margin-top: -4em;
+}
+
+.learning-step--padding-top {
+  padding-top: 6em;
+}
+
+.learning-step--header {
+  height: 20em;
+  margin-bottom: -14em;
+  background-color: var(--blue-6);
+}
+
+.learning-step--footer {
+  padding: 1em 14% 1em;
+  border-top: 1px solid var(--gray-10);
+}
+
+.learning-step--footer a {
+  max-width: 50%;
+  display: inline-block;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.learning-step--footer-fixed {
+  position: fixed;
+  height: inherit;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-bottom: 0;
+  background-color: white;
+}
+
+.learning-step_embed {
+  background-color: white;
+  padding: 2em;
+  border: 1px solid var(--gray-10);
+  border-radius: 0;
+  text-align: center;
+}
+
+.learning-step iframe {
+  padding-top: 1em;
+  border: 0 none;
+  max-width: 100%;
+}
+.learningsource__frame > .learning-step_embed {
+  border: none;
+}
+
+.learning-step--without-dimensions iframe {
+  width: 1px; /* Needed to enforce content to stay within iframe on Safari iOS */
+  min-width: 100%;
+}
+
+.learning-step_lti iframe {
+  width: 100%;
+  height: 600px;
+}
+
+.learning-step_license, .learning-step_license a {
+  font-size: 0.9em;
+  margin-top: -0.67em;
+  color: var(--gray-3);
+}
+
+.learning-step_stepper:any-link {
+  color: var(--blue-1);
+  font-size: 1.125em;
+  font-weight: 600;
+}
+
+.learning-step_stepper--right {
+  float: right;
+}
+
+@media(--large-viewport) {
+  .learning-step--footer-fixed {
+    position: fixed;
+    bottom: 0;
+    left: 330px;
+    right: 0;
+    margin-bottom: 0;
+    background-color: white;
+  }
+}
+@media(--medium-viewport) {
+  .learning-step--footer {
+    padding: 1em 1% 2em;
+  }
+}

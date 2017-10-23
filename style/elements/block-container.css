@@ -1,0 +1,36 @@
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+.block-container_fixed {
+  position: fixed;
+  margin-top: 2em;
+}
+
+.block-container_fixed--bottom--right {
+  right: 50px;
+  bottom: 90px;
+}
+.block-container_fixed--bottom--left {
+  left: 50px;
+  bottom: 90px;
+}
+
+@media(--xxlarge-viewport-max) {
+  .block-container_fixed {
+    position: relative;
+    margin-bottom: 2em;
+  }
+  .block-container_fixed--bottom--right {
+    bottom: 0;
+    right: 0;
+  }
+  .block-container_fixed--bottom--left {
+    left: 0;
+    bottom: 0;
+  }
+}

@@ -1,0 +1,46 @@
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+.textformat-menu {
+  margin: 1em 0 0 0;
+  display: block;
+  padding: 0;
+}
+
+.texformat-menu-item {
+  display: inline;
+  font-size: 1.3em;
+  padding: .2em .5em .4em .5em;
+  background-color: var(--gray-10);
+  border: 1px solid var(--gray-7);
+  border-left: none;
+}
+
+.texformat-menu-item:hover {
+  background-color: var(--gray-7);
+}
+
+.texformat-menu-item__selected {
+  background-color: var(--blue-1);
+  color: white;
+}
+
+.texformat-menu-item__selected:hover {
+  background-color: var(--blue-2);
+  color: white;
+}
+
+.texformat-menu-item:first-child {
+  border-radius: 5px 0 0 5px;
+  border-left: 1px solid var(--gray-7);
+}
+
+
+.texformat-menu-item:last-child {
+  border-radius: 0 5px 5px 0;
+}

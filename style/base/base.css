@@ -1,0 +1,67 @@
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+* {
+  box-sizing: border-box;
+}
+html {
+  height: 100%;
+}
+
+body {
+  font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+  color: var(--gray-1);
+  background-color: var(--gray-12);
+  height: 100%;
+}
+
+a:any-link {
+  font-size: 1em;
+  color: var(--gray-1);
+}
+
+a:hover, a:active {
+  color: color(var(--blue-1) blackness(+ 30%));
+}
+
+p {
+  line-height: 1.625em;
+  font-size: 16px;
+  max-width: 700px;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: Source Sans Pro,Helvetica,Arial,sans-serif;
+  font-weight: 700;
+}
+
+li {
+  margin-bottom: 1em;
+}
+
+aside {
+  background-color: white;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+.clear {
+  clear: both;
+}
+
+.ie {
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}

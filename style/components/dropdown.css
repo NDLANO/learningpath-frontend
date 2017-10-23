@@ -1,0 +1,89 @@
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+.dropdown-menu {
+  display: inline-block;
+  position: relative;
+  font-size: 1.1188em;
+  background-color: var(--gray-9);
+  border-radius: 4em;
+  margin: -.1em -1.5em 0 0;
+  transition: all 0.5s ease;
+}
+
+.dropdown-menu:hover {
+  background-color: var(--gray-7);
+  color: white;
+}
+
+
+.dropdown-menu_icon {
+  padding: 3px 9px 10px 9px;
+  display: inline-block;
+  color: var(--gray-6);
+}
+
+.dropdown-menu_items {
+  position: absolute;
+  width: 150px;
+  top: 100%;
+  left: -205%;
+  box-shadow: 0 4px 7px rgba(0,0,0,.1), 0 0 2px rgba(0,0,0,.2);
+  list-style: none;
+  background-color: white;
+  padding: 0;
+  margin: 0;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  -webkit-margin-start: 0;
+  -webkit-margin-end: 0;
+  -webkit-padding-start: 0;
+  visibility: hidden;
+}
+
+.dropdown-menu_items:after {
+  position: absolute;
+  left: 55%;
+  top: -10px;
+  width: 0;
+  height: 0;
+  content: '';
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid white;
+}
+
+.dropdown-menu_item {
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-menu_item_icon {
+  padding-right: .3em;
+  padding-top: .1em;
+  font-size: 1.5em;
+}
+
+.dropdown-menu_item {
+  padding: .6em 1em 0.8em 1em;
+}
+
+.dropdown-menu_item:hover {
+  background-color: var(--gray-11);
+}
+
+.dropdown-menu_link, .dropdown-menu_link:any-link {
+  display: block;
+  color: var(--gray-6);
+  text-decoration: none;
+  text-align: left;
+}
+
+.dropdown-menu_items_show {
+  visibility: visible;
+}

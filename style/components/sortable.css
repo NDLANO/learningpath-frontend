@@ -1,0 +1,58 @@
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+.sortable {
+  padding: 0 0 1em;
+  margin-bottom: 1em;
+}
+
+.sortable_list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+.sortable_item {
+  margin: 0;
+  border-top: 1px solid var(--gray-9);
+  border-bottom: 1px solid var(--gray-9);
+  padding: 1.5em 2em 1.7em 2em;
+  display: flex;
+  align-items: center;
+  margin-bottom: -1px;
+  cursor: move;
+  background-color: white;
+}
+
+.sortable_placeholder {
+  margin: 0;
+  background-color: var(--gray-7);
+  height: 5.6em;
+}
+
+.sortable_action {
+  flex-grow: 1;
+  text-align: right;
+  color: var(--red-1);
+
+  &:hover {
+    color: color(var(--red-1) saturation(+ 100%));
+  }
+}
+
+.sortable_handle {
+  background-color: rgb(238, 238, 238);
+  padding: 6px;
+  border-radius: 50%;
+}
+
+.sortable_title {
+  flex-grow: 2;
+  margin-left: 30px;
+}

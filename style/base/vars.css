@@ -1,0 +1,69 @@
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+:root {
+  --gray-1: gray(34);
+  --gray-2: gray(68);
+  --gray-3: gray(92);
+  --gray-4: gray(102);
+  --gray-5: gray(121);
+  --gray-6: gray(136);
+  --gray-7: gray(216);
+  --gray-8: gray(221);
+  --gray-9: gray(230);
+  --gray-10: gray(234);
+  --gray-11: gray(238);
+  --gray-12: gray(248);
+
+
+  --blue-1: #20588f;
+  --blue-2: #3a72a9;
+  --blue-3: #538bc2;
+  --blue-4: #6da5dc;
+  --blue-5: #86bef5;
+  --blue-6: #cdddec;
+
+  --red-1: #e4655f;
+
+  --yellow-1: #efe574;
+
+  --green-1: #6fce72;
+  @custom-media --xxlarge-viewport-max (max-width: 1400px);
+  @custom-media --xlarge-viewport (min-width: 1200px);
+  @custom-media --large-viewport (min-width: 800px);
+  @custom-media --medium-viewport (max-width: 800px);
+  @custom-media --small-viewport (max-width: 600px);
+  @custom-media --xsmall-viewport (max-width: 400px);
+
+  --sidebar-width: 330px;
+}
+
+/* stylelint-disable */
+.color-ex { padding: 5px; margin: 0; }
+.color-ex--gray-1  { color: color(var(--gray-1)  contrast(50%)); background-color: var(--gray-1); }
+.color-ex--gray-2  { color: color(var(--gray-2)  contrast(50%)); background-color: var(--gray-2); }
+.color-ex--gray-3  { color: color(var(--gray-3)  contrast(50%)); background-color: var(--gray-3); }
+.color-ex--gray-4  { color: color(var(--gray-4)  contrast(50%)); background-color: var(--gray-4); }
+.color-ex--gray-5  { color: color(var(--gray-5)  contrast(50%)); background-color: var(--gray-5); }
+.color-ex--gray-6  { color: color(var(--gray-6)  contrast(50%)); background-color: var(--gray-6); }
+.color-ex--gray-7  { color: color(var(--gray-7)  contrast(50%)); background-color: var(--gray-7); }
+.color-ex--gray-8  { color: color(var(--gray-8)  contrast(50%)); background-color: var(--gray-8); }
+.color-ex--gray-9  { color: color(var(--gray-9)  contrast(50%)); background-color: var(--gray-9); }
+.color-ex--gray-10 { color: color(var(--gray-10) contrast(50%)); background-color: var(--gray-10); }
+.color-ex--gray-11 { color: color(var(--gray-11) contrast(50%)); background-color: var(--gray-11); }
+.color-ex--gray-12 { color: color(var(--gray-12) contrast(50%)); background-color: var(--gray-12); }
+
+.color-ex--blue-1  { color: color(var(--blue-1)  contrast(50%)); background-color: var(--blue-1); }
+.color-ex--blue-2  { color: color(var(--blue-2)  contrast(50%)); background-color: var(--blue-2); }
+.color-ex--blue-3  { color: color(var(--blue-3)  contrast(50%)); background-color: var(--blue-3); }
+.color-ex--blue-4  { color: color(var(--blue-4)  contrast(50%)); background-color: var(--blue-4); }
+.color-ex--blue-5  { color: color(var(--blue-5)  contrast(50%)); background-color: var(--blue-5); }
+.color-ex--red-1   { color: color(var(--red-1)  contrast(50%)); background-color: var(--red-1); }
+.color-ex--yellow-1 { color: color(var(--yellow-1)  contrast(50%)); background-color: var(--yellow-1); }
+.color-ex--green-1  { color: color(var(--green-1)  contrast(50%)); background-color: var(--green-1); }
+/* stylelint-enable */
