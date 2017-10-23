@@ -25,7 +25,7 @@
       "server",
       "node_modules"
     ],
-    "testRegex": "(/__tests__/.*)(-test.js?)",
+    "testRegex": "/__tests__/.*-test.(js|jsx)$",
     "globals": {
       "__CLIENT__": false,
       "__SERVER__": true,
@@ -112,7 +112,7 @@
     "react-widgets": "^4.0.2",
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
-    "redux-form": "^7.1.1",
+    "redux-form": "^6.8.0",
     "redux-localstorage": "0.4.1",
     "redux-thunk": "2.2.0",
     "reselect": "^3.0.1",

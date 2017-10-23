@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`util/saveStepObject description and embedUrl 1`] = `
+Object {
+  "description": "test",
+  "embedUrl": Object {
+    "embedType": "oembed",
+    "url": "https://ndla.no/id/3",
+  },
+  "language": "nb",
+  "license": "by-sa",
+  "showTitle": false,
+  "someOtherField": "test",
+  "title": "Test",
+  "type": undefined,
+}
+`;
+
+exports[`util/saveStepObject only description 1`] = `
+Object {
+  "description": "test",
+  "embedUrl": undefined,
+  "language": "nb",
+  "license": "by-sa",
+  "showTitle": false,
+  "someOtherField": "test",
+  "title": "Test",
+  "type": undefined,
+}
+`;
+
+exports[`util/saveStepObject only url 1`] = `
+Object {
+  "description": "",
+  "embedUrl": Object {
+    "embedType": "oembed",
+    "url": "https://ndla.no/id/3",
+  },
+  "language": "nb",
+  "license": "by-sa",
+  "showTitle": false,
+  "someOtherField": "test",
+  "title": "Test",
+  "type": undefined,
+}
+`;
