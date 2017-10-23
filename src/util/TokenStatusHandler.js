@@ -6,7 +6,7 @@
  *
  */
 
-/* eslint-disable no-unused-vars*/
+/* eslint-disable no-unused-vars */
 import * as sessionActions from '../session/sessionActions';
 /* eslint-enable */
 

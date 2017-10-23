@@ -13,7 +13,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { shallow, mount, render } from 'enzyme';
-
 import { locationOrigin, apiBaseUrl, accessToken } from '../../sources/helpers';
 
 class Selfie extends Component {
@@ -28,23 +27,20 @@ class Selfie extends Component {
 Selfie.propTypes = { foo: PropTypes.string };
 Selfie.defaultProps = { foo: 'default bar' };
 
+test('components/TestSetup selftest - unit test mocking', () => {
+  expect(locationOrigin).toBe('http://ndla-frontend');
+  expect(apiBaseUrl).toBe('http://ndla-api');
+  expect(accessToken).toBe('ndlatestapikey');
+});
 
-test('components/TestSetup selftest', () => {
-  test('- unit test mocking', () => {
-    expect(locationOrigin).toBe('http://ndla-frontend');
-    expect(apiBaseUrl).toBe('http://ndla-api');
-    expect(accessToken).toBe('ndlatestapikey');
-  });
+test('components/TestSetup selftest - Enzyme shallow rendering', () => {
+  expect(() => shallow(<Selfie />)).not.toThrow();
+});
 
-  test('- Enzyme shallow rendering', () => {
-    expect(() => shallow(<Selfie />)).not.toThrow();
-  });
+test('components/TestSetup selftest - Enzyme full dom rendering', () => {
+  expect(() => mount(<Selfie />)).not.toThrow();
+});
 
-  test('- Enzyme full dom rendering', () => {
-    expect(() => mount(<Selfie />)).not.toThrow();
-  });
-
-  test('- Enzyme static rendering', () => {
-    expect(() => render(<Selfie />)).not.toThrow();
-  });
+test('components/TestSetup selftest - Enzyme static rendering', () => {
+  expect(() => render(<Selfie />)).not.toThrow();
 });

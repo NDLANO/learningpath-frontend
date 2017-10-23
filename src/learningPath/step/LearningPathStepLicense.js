@@ -9,7 +9,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getLicenseByAbbreviation from 'ndla-licenses';
-import LicenseIconList from 'ndla-ui/lib/license/LicenseIconList';
+import { LicenseByline } from 'ndla-ui';
 import polyglot from '../../i18n';
 
 const LearningPathStepLicense = ({ learningPathStep }) => {
@@ -17,7 +17,7 @@ const LearningPathStepLicense = ({ learningPathStep }) => {
     return null;
   }
   const license = getLicenseByAbbreviation(learningPathStep.license.license);
-  const licenseText = license.rights.length === 0 ? polyglot.t('learningPathStep.license', { license: learningPathStep.license.description }) : <LicenseIconList licenseRights={license.rights} />;
+  const licenseText = license.rights.length === 0 ? polyglot.t('learningPathStep.license', { license: learningPathStep.license.description }) : <LicenseByline licenseRights={license.rights} />;
   return (
     <span className="learning-step_license">
       {learningPathStep.license.url ?

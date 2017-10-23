@@ -15,7 +15,6 @@ import { learningPaths } from '../../common/__tests__/mockData';
 
 import { MyPage, mapStateToProps } from '../MyPage';
 
-
 test('component/MyPage', () => {
   const noop = () => {};
 

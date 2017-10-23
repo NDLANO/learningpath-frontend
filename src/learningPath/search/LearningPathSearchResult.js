@@ -39,9 +39,9 @@ export default class SearchResult extends Component {
     const { lang } = this.context;
     const image = () => {
       if (path.coverPhotoUrl && !this.state.imageError) {
-        return <img className="search-result_img" role="presentation" src={scaleImage(path.coverPhotoUrl)} onError={this.handleImageError} />;
+        return <img className="search-result_img" role="presentation" src={scaleImage(path.coverPhotoUrl)} onError={this.handleImageError} alt={path.title}/>;
       }
-      return <img className="search-result_img" role="presentation" src={`/assets/${requireAssets['placeholder.png']}`} />;
+      return <img className="search-result_img" role="presentation" src={`/assets/${requireAssets['placeholder.png']}`} alt="placeholder"/>;
     };
 
     const tags = path.tags;

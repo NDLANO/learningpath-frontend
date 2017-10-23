@@ -60,8 +60,6 @@ const LearningPathForm = (props) => {
     localFetchImages,
     fetchImage,
     formValues,
-    onTagsChange,
-    onContributorChange,
   } = props;
 
   const learningPathTitle = defined(formValues.title, '');
@@ -97,12 +95,12 @@ const LearningPathForm = (props) => {
 
         <div className="learning-path-tags">
           <label htmlFor="tags" className="label--medium-bold  label--medium">{polyglot.t('learningPath.tags')}</label>
-          <Field name="tags" component={TagsInput} id="tags" tagOptions={tagOptions} onUnsavedChanges={onTagsChange} />
+          <Field name="tags" component={TagsInput} id="tags" tagOptions={tagOptions} />
         </div>
 
         <div className="learningPath-contributors">
           <label htmlFor="license" className="label--medium-bold  label--medium">{polyglot.t('learningPath.copyright.contributors')}</label>
-          <Field name="contributors" component={Contributors} contributorOptions={contributorOptions} id="contributors" onUnsavedChanges={onContributorChange} />
+          <Field name="contributors" component={Contributors} contributorOptions={contributorOptions} id="contributors" />
         </div>
 
         <div className="block-container_fixed block-container_fixed--bottom--right">
@@ -132,8 +130,6 @@ LearningPathForm.propTypes = {
   localFetchImages: PropTypes.func.isRequired,
   fetchImage: PropTypes.func.isRequired,
   formValues: PropTypes.object.isRequired,
-  onTagsChange: PropTypes.func.isRequired,
-  onContributorChange: PropTypes.func.isRequired,
 };
 
 const convertedDuration = (value) => {

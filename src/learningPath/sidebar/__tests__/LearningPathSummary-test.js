@@ -19,6 +19,7 @@ import LearningPathSummary from '../LearningPathSummary';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
+
 test('component/LearningPathSummary', () => {
   const component = shallow(<LearningPathSummary learningPath={translatedLearningPath} lang="nb" store={mockStore({ learningPath, authenticated: true, localCloseSidebars: noop })} />);
 

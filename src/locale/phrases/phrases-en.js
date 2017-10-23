@@ -211,12 +211,12 @@ const phrases = {
     updatedMsg: 'Saved OK',
   },
   tagInput: {
-    createNew: 'Create new tag',
+    createOption: 'Create new tag',
     emptyList: 'No tags available',
     emptyFilter: 'No matching tags found',
   },
   copyrightInput: {
-    createNew: 'Create a new contributer',
+    createOption: 'Create a new contributer',
     emptyFilter: 'No contributers found. Add a contributer',
   },
   updateLearningPathStatus: {

@@ -25,8 +25,8 @@ const propsWithNoItems = {
 };
 const propsWithItems = {
   items: [
-    { title: 'hei' },
-    { title: 'heisann' },
+    { title: 'hei', cacheId: 1 },
+    { title: 'heisann', cacheId: 2 },
   ],
   onPreviewClick: noop,
   addEmbedResult: noop,

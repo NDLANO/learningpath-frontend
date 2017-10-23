@@ -21,7 +21,7 @@ const StyleButton = ({ active, icon, style, onToggle }) => {
   );
 
   return (
-    <li className={className} onMouseDown={handleToggle}>
+    <li role="presentation" className={className} onMouseDown={handleToggle}>
       {icon}
     </li>
   );

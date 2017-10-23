@@ -15,7 +15,7 @@ export default function PreviewImage({ image, onSaveImage }) {
   return (
     <div className="image-preview">
       <div className="image-preview_image">
-        <img role="presentation" src={scaleImage(image.imageUrl)} />
+        <img role="presentation" src={scaleImage(image.imageUrl)} alt={image.alttext} />
       </div>
       <div className="image-preview_information">
         <h2 className="image-preview_title">{image.title}</h2>
@@ -39,8 +39,8 @@ export default function PreviewImage({ image, onSaveImage }) {
         </div>
         <div className="image-preview_tags">
           <b>{polyglot.t('learningPath.image.tags')}</b>
-          {image.tags.map((tag, index) =>
-            <span key={`${tag}_${index}`} className="tag_item">{`#${tag}`}</span>
+          {image.tags.map((tag) =>
+            <span key={tag} className="tag_item">{`#${tag}`}</span>
           )}
         </div>
         <button className="button button--primary button--block" onClick={onSaveImage}>{polyglot.t('learningPath.image.choseImage')}</button>

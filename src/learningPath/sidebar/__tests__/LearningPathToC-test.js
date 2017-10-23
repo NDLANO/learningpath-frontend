@@ -8,12 +8,13 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
+import noop from 'lodash/noop';
 import { translatedLearningPath } from '../../../common/__tests__/translatedMockData';
 import { LearningPathToC } from '../LearningPathToC';
 import LearningPathToCStep from '../LearningPathToCStep';
 
 test('component/LearningPathToC', () => {
-  const component = shallow(<LearningPathToC learningPath={translatedLearningPath} />,
+  const component = shallow(<LearningPathToC learningPath={translatedLearningPath} localCloseSidebars={noop} />,
     { context: { lang: 'nb' } });
 
   const steps = component.find(LearningPathToCStep);

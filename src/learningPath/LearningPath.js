@@ -38,23 +38,23 @@ import PinterestLightbox from '../pinterest/PinterestLightbox';
 export class LearningPath extends Component {
   static mapDispatchToProps = {
     copyPath: copyLearningPath,
-    localFetchLearingPath: fetchLearningPath,
+    localFetchLearningPath: fetchLearningPath,
     replaceRoute: routerActions.replace,
   };
 
   static fetchData(props) {
-    const { replaceRoute, localFetchLearingPath, match: { url, params: { pathId } } } = props;
+    const { replaceRoute, localFetchLearningPath, match: { url, params: { pathId } } } = props;
     if (url === `/learningpaths/${pathId}/edit`) {
-      return localFetchLearingPath(pathId, true);
+      return localFetchLearningPath(pathId, true);
     } else if (url === `/learningpaths/${pathId}/first-step`) {
-      return localFetchLearingPath(pathId, false).then((learningPath) => {
+      return localFetchLearningPath(pathId, false).then((learningPath) => {
         const stepId = learningPath.learningsteps[0].id;
         replaceRoute({ pathname: `/learningpaths/${pathId}/step/${stepId}` });
       }).catch(() => {
         replaceRoute({ pathname: `/learningpaths/${pathId}` });
       });
     }
-    return localFetchLearingPath(pathId, false);
+    return localFetchLearningPath(pathId, false);
   }
 
   constructor(props) {
@@ -166,7 +166,7 @@ LearningPath.propTypes = {
     }).isRequired,
   }).isRequired,
   isTableOfContentOpen: PropTypes.bool.isRequired,
-  localFetchLearingPath: PropTypes.func.isRequired,
+  localFetchLearningPath: PropTypes.func.isRequired,
   copyPath: PropTypes.func.isRequired,
   replaceRoute: PropTypes.func.isRequired,
 };

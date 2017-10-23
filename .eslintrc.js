@@ -9,6 +9,7 @@ module.exports = {
     'react/no-string-refs': 1,
     'react/no-find-dom-node': 1,
     'react/prop-types': [2, { 'ignore': ['children', 'className'] }],
+    'react/forbid-prop-types': 0,
 
     'react/prefer-stateless-function': 1,
     "comma-dangle": ["error", {

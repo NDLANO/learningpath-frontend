@@ -18,7 +18,7 @@ const assets = process.env.NODE_ENV === 'development' ? require('./developmentAs
 
 const GoogleTagMangerNoScript = () => {
   if (config.googleTagMangerId) {
-    return <noscript><iframe src={`//www.googletagmanager.com/ns.html?id=${config.googleTagMangerId}`} height="0" width="0" style={{ display: 'none', visibility: 'hidden' }} /></noscript>;
+    return <noscript><iframe title="Google Tag Manager" src={`//www.googletagmanager.com/ns.html?id=${config.googleTagMangerId}`} height="0" width="0" style={{ display: 'none', visibility: 'hidden' }} /></noscript>;
   }
   return null;
 };

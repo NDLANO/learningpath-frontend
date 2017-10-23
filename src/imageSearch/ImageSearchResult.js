@@ -17,12 +17,12 @@ export default function ImageSearch({ image, onImageClick, selectedImage, onSave
     'image_list-item': true,
     'image_list-item--active': selectedImage.id === image.id,
   });
-
+  const alttext = image.altText ? image.altText.alttext : '';
   return (
     <div key={image.id} className={activeClassName()}>
       <div className="image_list-item-inner">
         <button className="un-button" onClick={evt => onImageClick(evt, image)}>
-          <img role="presentation" src={scaleImage(image.previewUrl)} />
+          <img role="presentation" src={scaleImage(image.previewUrl)} alt={alttext}/>
         </button>
       </div>
       {selectedImage.id === image.id ? <PreviewImage image={selectedImage} onSaveImage={evt => onSaveImage(evt, selectedImage)} /> : ''}

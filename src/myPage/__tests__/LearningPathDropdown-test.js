@@ -16,7 +16,6 @@ import LearningPathDropdown from '../LearningPathDropdown';
 const learningPath = learningPaths[0];
 const privateLearningPath = Object.assign({}, learningPath, { status: 'PRIVATE' });
 
-
 test('component/LearningPathDropdown remove', () => {
   const preventDefault = spy();
   const onSelect = spy();
