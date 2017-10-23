@@ -6,7 +6,7 @@
  *
  */
 
-import { formattedEmbedDescription, formattedEmbedUrl, formattedEmbedLicense } from '../formOperationsUtil';
+import { formattedEmbedDescription, formattedEmbedUrl, formattedEmbedLicense } from '../formatFormFieldsUtil';
 
 test('util/formattedEmbedUrl', () => {
   const embedObject = {

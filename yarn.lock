@@ -1824,7 +1824,7 @@ draft-convert@^2.0.0:
     immutable "~3.7.4"
     invariant "^2.2.1"
 
-draft-js@^0.10.3:
+draft-js@^0.10.1:
   version "0.10.3"
   resolved "https://registry.yarnpkg.com/draft-js/-/draft-js-0.10.3.tgz#5f3c3025af9f494c62f00a9066006ccdc1b3c943"
   dependencies:

@@ -22,7 +22,7 @@ import { fetchLearningPathLicensesIfNeeded } from '../../edit/copyright/learning
 import polyglot from '../../../i18n';
 import { getLearningPathStep } from '../learningPathStepSelectors';
 import { getLearningPath } from '../../learningPathSelectors';
-import { formattedEmbedUrl, formattedEmbedDescription, formattedEmbedLicense } from '../../../util/formOperationsUtil';
+import { formattedEmbedUrl, formattedEmbedDescription, formattedEmbedLicense } from '../../../util/formatFormFieldsUtil';
 
 export const saveStepObject = (step, values, language) => Object.assign({}, step, {
   type: values.type,
