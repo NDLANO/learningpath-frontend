@@ -16,13 +16,14 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.rw-select.rw-btn, .rw-select>.rw-btn {
+.rw-select.rw-btn,
+.rw-select > .rw-btn {
   height: 100%;
   vertical-align: middle;
   outline: 0;
 }
 
-.rw-widget>.rw-select {
+.rw-widget > .rw-select {
   border-left: 1px solid #ccc;
 }
 

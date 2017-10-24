@@ -10,7 +10,7 @@
   background-color: #fff;
   border: 1px solid var(--gray-10);
   border-radius: 5px;
-  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, .1);
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.1);
   margin: 1em;
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
   font-weight: 300;
@@ -65,7 +65,7 @@
 }
 
 .alert_action-text {
-  padding-left: .3em;
+  padding-left: 0.3em;
   font-size: 1.1em;
   font-weight: 400;
   text-decoration: underline;

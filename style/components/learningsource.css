@@ -28,14 +28,14 @@
   width: 100%;
   text-align: center;
   margin: 0;
-  padding: 90px 0 50px 0;
+  padding: 90px 0 50px;
   text-decoration: none;
   background-image: linear-gradient(to top, white, transparent);
 }
 
 .learningsource-form {
   border-radius: 5px;
-  padding: 1.5em 2em 2em 2em;
+  padding: 1.5em 2em 2em;
   background-color: var(--gray-12);
   border: 1px solid var(--gray-8);
   margin-bottom: 4em;
@@ -59,6 +59,6 @@
 
 @media (--medium-viewport) {
   .learningsource-form {
-    padding: 1.5em 1em 2em 1em;
+    padding: 1.5em 1em 2em;
   }
 }

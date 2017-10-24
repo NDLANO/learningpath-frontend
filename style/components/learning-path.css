@@ -90,7 +90,6 @@
     font-weight: 600;
     font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
   }
-
 }
 
 .learning-path-input__paragraph {
@@ -139,7 +138,6 @@
   margin-right: 10px;
 }
 
-
 .duration-menu {
   display: inline;
   padding: 0;
@@ -152,11 +150,10 @@
   margin-right: 10px;
 }
 
-
 .duration-menu-item {
   display: inline;
   font-size: 1em;
-  padding: .6em .8em;
+  padding: 0.6em 0.8em;
   background-color: var(--gray-10);
   border: 1px solid var(--gray-7);
   border-left: none;
@@ -182,7 +179,6 @@
   border-radius: 5px 0 0 5px;
   border-left: 1px solid var(--gray-7);
 }
-
 
 .duration-menu-item:last-child {
   border-radius: 0 5px 5px 0;
@@ -229,7 +225,8 @@
   }
 }
 
-.sort-steps_button, .sort-steps_button_save {
+.sort-steps_button,
+.sort-steps_button_save {
   margin-top: 1em;
   text-align: left;
   text-decoration: none;
@@ -240,17 +237,20 @@
   display: block;
 }
 
-.sort-steps_button:any-link, .sort-steps_button_save:any-link {
+.sort-steps_button:any-link,
+.sort-steps_button_save:any-link {
   color: white;
 }
 
-.sort-steps_button:any-link:hover, .sort-steps_button_save:any-link:hover {
+.sort-steps_button:any-link:hover,
+.sort-steps_button_save:any-link:hover {
   background-color: white;
   color: var(--blue-1);
   border-top: 1px solid var(--gray-9);
 }
 
-.sort-steps_button > .icon, .sort-steps_button_save > .icon {
+.sort-steps_button > .icon,
+.sort-steps_button_save > .icon {
   font-size: 1.2em;
   margin-right: 0.7em;
   margin-left: 1.4em;
@@ -276,7 +276,7 @@
   padding: 0.6em 1em;
 }
 
-@media(--medium-viewport) {
+@media (--medium-viewport) {
   .copy_learning-path .button {
     width: 100%;
     margin: 0;
@@ -293,7 +293,7 @@
   }
 }
 
-@media(--xsmall-viewport) {
+@media (--xsmall-viewport) {
   .duration-menu {
     width: 100%;
     height: 2.5em;

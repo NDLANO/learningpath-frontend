@@ -12,7 +12,7 @@ select {
   background: white;
   min-height: 1.5em;
   color: var(--gray-2);
-  padding: .5em 1.4em .5em 1em;
+  padding: 0.5em 1.4em 0.5em 1em;
   max-width: 100%;
 
   /* Enable custom select styling */
@@ -48,10 +48,9 @@ select:focus {
   border-color: var(--gray-9);
 }
 
-
 label {
   display: block;
-  margin: 1em 0 .5em 0;
+  margin: 1em 0 0.5em;
 }
 
 .label--bold {
@@ -71,7 +70,7 @@ label {
 }
 
 .textarea {
-  padding: .6em 1em;
+  padding: 0.6em 1em;
   box-shadow: inset 1px 1px color(black alpha(3%));
   border: 1px solid var(--gray-9);
   background: white;
@@ -95,7 +94,7 @@ label {
 }
 
 input {
-  padding: .6em 1em;
+  padding: 0.6em 1em;
   box-shadow: inset 1px 1px color(black alpha(3%));
   border: 1px solid var(--gray-9);
   background: white;
@@ -111,12 +110,12 @@ input:focus {
 
 .input--success {
   border-color: var(--green-1);
-  box-shadow: 0 0 6px color(var(--green-1) alpha(.2));
+  box-shadow: 0 0 6px color(var(--green-1) alpha(0.2));
 }
 
 .input--alert {
   border-color: var(--red-1);
-  box-shadow: 0 0 6px color(var(--red-1) alpha(.2));
+  box-shadow: 0 0 6px color(var(--red-1) alpha(0.2));
 }
 
 .error_message {

@@ -13,7 +13,7 @@
 
 .learningpath-general-info_h h3 {
   margin: 0;
-  margin-right: .3em;
+  margin-right: 0.3em;
   display: inline;
 }
 
@@ -71,7 +71,8 @@
   padding-left: 0.5em;
 }
 
-.learningpath-general-actions a:any-link, .learningpath-general-actions button.copy-learningpath_button {
+.learningpath-general-actions a:any-link,
+.learningpath-general-actions button.copy-learningpath_button {
   width: 100%;
   padding: 0.6em 0.5em 0.5em 0.8em;
   border-radius: 3px;
@@ -79,18 +80,18 @@
   font-size: 16px;
 }
 
-.learningpath-general-actions button, .learningpath-general-actions a.learningpath-action-type_button a:any-link, .learningpath-general-actions a.learningpath-action-type_button {
+.learningpath-general-actions button,
+.learningpath-general-actions a.learningpath-action-type_button a:any-link,
+.learningpath-general-actions a.learningpath-action-type_button {
   width: 100%;
   padding: 0.6em 0.5em 0.5em 1.2em;
   border-radius: 3px;
   text-align: left;
   font-size: 16px;
-
 }
 
 .learningpath-general-actions a.learningpath-action-type_button {
   margin-top: 0.56em;
-
 }
 
 .learningpath-general-info .border-box_wrapper {
@@ -167,7 +168,8 @@
   margin-top: 0.3em;
 }
 
-.learningpath-general-info_is-basedon-button:hover, .learningpath-general-info_is-basedon-button:focus {
+.learningpath-general-info_is-basedon-button:hover,
+.learningpath-general-info_is-basedon-button:focus {
   color: color(var(--blue-1) blackness(+ 20%));
 }
 
@@ -175,7 +177,6 @@
   max-width: 100%;
   text-align: left;
 }
-
 
 @media (--medium-viewport) {
   .learningpath-contributors {

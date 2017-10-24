@@ -18,26 +18,24 @@
   display: inline;
   border: 2px solid var(--gray-7);
   padding: 1em 1.45em;
-  margin: 1em .3em 0 .3em;
+  margin: 1em 0.3em 0;
   border-radius: 5px;
   text-decoration: none;
   background-color: transparent;
   color: black;
 }
 
-
 .search-stepper_step:hover {
   background-color: var(--gray-7);
   border-color: var(--gray-7);
 }
-
 
 .search-stepper_step--active {
   background-color: var(--gray-7);
   border-color: var(--gray-7);
 }
 
-@media(--medium-viewport) {
+@media (--medium-viewport) {
   .search-stepper {
     max-width: 100%;
   }

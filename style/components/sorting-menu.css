@@ -13,10 +13,10 @@
 }
 
 .sorting-button {
-  padding: 0.6em 1em 1em 1em;
+  padding: 0.6em 1em 1em;
   display: block;
   border-radius: 5px;
-  margin-right: .5em;
+  margin-right: 0.5em;
   background-color: color(var(--blue-1) blackness(+ 20%));
 }
 

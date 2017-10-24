@@ -6,7 +6,6 @@
  *
  */
 
-
 .footer {
   flex: none;
   background-color: #fff;
@@ -60,7 +59,6 @@
 .footer_link:any-link {
   color: var(--gray-1);
 }
-
 
 .footer_text {
   padding-left: 5%;

@@ -76,7 +76,8 @@ div:not(.frontpage-masthead) > .masthead_wrapper {
     height: 64px;
   }
 
-  .table-of-content, .masthead--desktop {
+  .table-of-content,
+  .masthead--desktop {
     overflow: hidden;
     display: block;
     transition: width 0.2s;
@@ -95,7 +96,6 @@ div:not(.frontpage-masthead) > .masthead_wrapper {
       white-space: pre-wrap;
       overflow-y: auto;
     }
-
   }
 
   .table-of-content {
@@ -165,7 +165,7 @@ div:not(.frontpage-masthead) > .masthead_wrapper {
 
   .masthead_button {
     font-size: 1.5em;
-    padding: 0.7em 0.7em;
+    padding: 0.7em;
     color: black;
 
     & > .icon {
@@ -190,14 +190,14 @@ div:not(.frontpage-masthead) > .masthead_wrapper {
   }
 }
 
-@media(--small-viewport) {
+@media (--small-viewport) {
   .table-of-content.sidebar--open,
   .masthead--desktop.sidebar--open {
     width: 70%;
   }
 }
 
-@media(--xsmall-viewport) {
+@media (--xsmall-viewport) {
   .masthead--margin-bottom {
     height: 42px;
   }
@@ -217,5 +217,4 @@ div:not(.frontpage-masthead) > .masthead_wrapper {
     padding-left: 0.2em;
     padding-right: 0.2em;
   }
-
 }

@@ -90,7 +90,7 @@
 .learning-step-form_mediatype-icon {
   position: absolute;
   display: block;
-  margin-top: .7em;
+  margin-top: 0.7em;
   margin-left: 10px;
   color: var(--gray-4);
   border-radius: 40px;
@@ -102,7 +102,7 @@
   display: inline-block;
   margin: 0.7rem 0.5rem 0 0;
   background-color: var(--gray-11);
-  padding: 0 6px 9px 6px;
+  padding: 0 6px 9px;
   color: var(--gray-6);
 }
 
@@ -150,7 +150,7 @@
   margin-bottom: 2em;
 }
 
-@media(--medium-viewport) {
+@media (--medium-viewport) {
   .learning-step-form_select {
     max-width: 100%;
   }
@@ -163,7 +163,8 @@
     max-width: 100%;
   }
 
-  .learning-step-form_right, .learning-step-form_left {
+  .learning-step-form_right,
+  .learning-step-form_left {
     width: 100%;
     float: none;
     margin-left: 0;
@@ -174,7 +175,7 @@
   }
 }
 
-@media(--small-viewport) {
+@media (--small-viewport) {
   .learning-step-form_title .DraftEditor-root {
     min-height: 3em;
   }

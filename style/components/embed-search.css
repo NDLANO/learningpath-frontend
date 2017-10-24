@@ -1,11 +1,13 @@
 .embed-search_container {
   display: none;
-  transition: .3s max-height;
+  transition: 0.3s max-height;
   padding: 0 2em;
 }
+
 .embed-search_open-button {
   margin-bottom: 2em;
 }
+
 .embed-search_container--active {
   display: inherit;
   margin-bottom: 2em;

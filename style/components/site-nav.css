@@ -26,11 +26,12 @@
 .site-nav_link:any-link {
   color: var(--gray-1);
   text-decoration: none;
-  padding: .7em;
+  padding: 0.7em;
   display: block;
 }
 
-.site-nav_link:hover, .site-nav_link:active {
+.site-nav_link:hover,
+.site-nav_link:active {
   text-decoration: underline;
 }
 
@@ -45,9 +46,8 @@
 }
 
 .logo--on-dark {
-  margin: .2em 0 0 1em;
+  margin: 0.2em 0 0 1em;
 }
-
 
 @media (--medium-viewport) {
   .site-nav_item {

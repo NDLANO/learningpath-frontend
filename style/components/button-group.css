@@ -7,12 +7,13 @@
  */
 
 .button-group {
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   display: inline-block;
   border-radius: 10em;
 }
 
-.button-group > *, .button-group > *:any-link {
+.button-group > *,
+.button-group > *:any-link {
   padding: 0.8em 1.2em;
   border-radius: 0;
   float: left;

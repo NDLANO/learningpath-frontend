@@ -22,7 +22,7 @@
 input[type=text].search-form_query {
   flex: 2;
   width: 100%;
-  padding: .7em 1em;
+  padding: 0.7em 1em;
 
   &:focus {
     box-shadow: none;
@@ -36,7 +36,7 @@ input[type=text].search-form_query {
 .search-form_btn {
   background-color: var(--blue-1);
   border: 1px solid var(--blue-1);
-  padding: .7em 2em;
+  padding: 0.7em 2em;
   margin-left: -1px;
   border-radius: 0;
 }
@@ -72,13 +72,13 @@ input[type=text].search-form_query--gray {
   display: inline-block;
   border-width: 2px;
   float: left;
-  border-radius: 5px 0 0 5px ;
+  border-radius: 5px 0 0 5px;
 }
 
 .search-form_sort-order {
   margin-left: 2em;
   min-width: 6em;
-  padding: .7em 1em;
+  padding: 0.7em 1em;
 }
 
 @media (--medium-viewport) {

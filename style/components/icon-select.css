@@ -6,11 +6,8 @@
  *
  */
 
-.icon-select {
-}
-
 .icon-select_item {
-  margin: 0 .5em;
+  margin: 0 0.5em;
   display: inline-block;
   position: relative;
   width: 20%;
