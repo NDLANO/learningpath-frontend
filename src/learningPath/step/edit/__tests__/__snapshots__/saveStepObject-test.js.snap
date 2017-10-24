@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`util/saveStepObject description and embedUrl with no step id 1`] = `
+Object {
+  "description": "test",
+  "embedUrl": Object {
+    "embedType": "oembed",
+    "url": "https://ndla.no/id/3",
+  },
+  "language": "nb",
+  "license": "by-sa",
+  "showTitle": false,
+  "someOtherField": "test",
+  "title": "Test",
+  "type": undefined,
+}
+`;
+
+exports[`util/saveStepObject description and embedUrl with step id 1`] = `
+Object {
+  "description": "test",
+  "embedUrl": Object {
+    "embedType": "oembed",
+    "url": "https://ndla.no/id/3",
+  },
+  "id": 1,
+  "language": "nb",
+  "license": "by-sa",
+  "showTitle": false,
+  "someOtherField": "test",
+  "title": "Test",
+  "type": undefined,
+}
+`;
+
+exports[`util/saveStepObject only description with no step id 1`] = `
+Object {
+  "description": "test",
+  "embedUrl": undefined,
+  "language": "nb",
+  "license": "by-sa",
+  "showTitle": false,
+  "someOtherField": "test",
+  "title": "Test",
+  "type": undefined,
+}
+`;
+
+exports[`util/saveStepObject only description with step id 1`] = `
+Object {
+  "description": "test",
+  "embedUrl": Object {
+    "embedType": "oembed",
+    "url": "",
+  },
+  "id": 1,
+  "language": "nb",
+  "license": "by-sa",
+  "showTitle": false,
+  "someOtherField": "test",
+  "title": "Test",
+  "type": undefined,
+}
+`;
+
+exports[`util/saveStepObject only url with no step id 1`] = `
+Object {
+  "description": undefined,
+  "embedUrl": Object {
+    "embedType": "oembed",
+    "url": "https://ndla.no/id/3",
+  },
+  "language": "nb",
+  "license": "by-sa",
+  "showTitle": false,
+  "someOtherField": "test",
+  "title": "Test",
+  "type": undefined,
+}
+`;
+
+exports[`util/saveStepObject only url with step id 1`] = `
+Object {
+  "description": "",
+  "embedUrl": Object {
+    "embedType": "oembed",
+    "url": "https://ndla.no/id/3",
+  },
+  "id": 1,
+  "language": "nb",
+  "license": "by-sa",
+  "showTitle": false,
+  "someOtherField": "test",
+  "title": "Test",
+  "type": undefined,
+}
+`;

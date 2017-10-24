@@ -22,6 +22,17 @@ import { fetchLearningPathLicensesIfNeeded } from '../../edit/copyright/learning
 import polyglot from '../../../i18n';
 import { getLearningPathStep } from '../learningPathStepSelectors';
 import { getLearningPath } from '../../learningPathSelectors';
+import { formattedEmbedUrl, formattedEmbedDescription, formattedEmbedLicense } from '../../../util/formatFormFieldsUtil';
+
+export const saveStepObject = (step, values, language) => Object.assign({}, step, {
+  type: values.type,
+  showTitle: values.showTitle,
+  title: values.title,
+  language,
+  description: formattedEmbedDescription(step, values.description),
+  embedUrl: formattedEmbedUrl(step, values.url),
+  license: formattedEmbedLicense(values.license),
+});
 
 class EditLearningPathStep extends Component {
 
@@ -50,16 +61,7 @@ class EditLearningPathStep extends Component {
     }
 
     const handleSubmit = (values) => {
-      const toSave = Object.assign({}, step, {
-        type: values.type,
-        showTitle: values.showTitle,
-        title: values.title,
-        language,
-        description: values.description ? values.description : '',
-        embedUrl: values.url && values.url.url ? { url: values.url.url, embedType: values.url.embedType } : { url: '', embedType: 'oembed' },
-        license: values.license && values.license.license ? values.license.license : '',
-      });
-
+      const toSave = saveStepObject(step, values, language);
       return saveLearningPathStep(learningPath.id, toSave);
     };
 

@@ -8,7 +8,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Editor, EditorState, ContentState } from 'draft-js';
+import { Editor, EditorState, ContentState} from 'draft-js';
 import polyglot from '../../i18n';
 
 export default class OneLineEditor extends React.Component {
@@ -43,19 +43,14 @@ export default class OneLineEditor extends React.Component {
     this.handlePastedText = (text, html) => false; // eslint-disable-line no-unused-vars
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (!this.state.editorState.getSelection().getHasFocus()) {
       this.updateEditorContentStateFromText(this.props.input.value);
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!this.state.editorState.getSelection().getHasFocus()) {
-      this.updateEditorContentStateFromText(nextProps.input.value);
-    }
-  }
-
   updateEditorContentStateFromText(text) {
+
     if (text !== undefined) {
       const editorState = EditorState.createWithContent(ContentState.createFromText(text));
       this.setState({ editorState });
