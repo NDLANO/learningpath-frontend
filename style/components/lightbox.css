@@ -32,9 +32,11 @@
 .big-lightbox_wrapper .lightbox .lightbox_content {
   max-width: 870px;
 }
+
 .big-lightbox_wrapper--scroll .lightbox, .big-lightbox_wrapper--scroll .lightbox .lightbox_content {
   overflow-x: scroll;
 }
+
 .big-lightbox_wrapper--center .lightbox {
   text-align: center;
 }
@@ -47,6 +49,7 @@
     z-index: 26;
   }
 }
+
 @media(--xsmall-viewport) {
   .lightbox {
     top: 43px;

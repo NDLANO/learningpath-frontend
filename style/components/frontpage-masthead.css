@@ -8,22 +8,27 @@
 
 .frontpage-masthead {
   text-align: start;
+
   & .masthead--desktop {
     background-color: var(--blue-1);
     border: 1px solid var(--blue-1);
   }
+
   & .site-nav_link:any-link {
     color: white;
   }
+
   & .masthead--mobile {
     background-color: var(--blue-1);
     border-bottom: 0;
     color: white;
   }
+
   & .masthead-button--right {
     border: 0;
     color: white;
   }
+
   & .masthead-button--right:hover {
     background-color: var(--blue-2);
   }
@@ -35,22 +40,27 @@
       background-color: var(--blue-1);
       border: 1px solid var(--blue-1);
     }
+
     & .masthead--desktop.sidebar--open {
       background-color: var(--blue-2);
       border: 1px solid var(--blue-2);
     }
+
     & .site-nav_link:any-link {
       color: white;
     }
+
     & .masthead--mobile {
       background-color: var(--blue-1);
       border-bottom: 0;
       color: white;
     }
+
     & .masthead_button--right {
       border: 0;
       color: white;
     }
+
     & .masthead_button--right:hover, & .masthead_button--right.active {
       background-color: var(--blue-2);
     }

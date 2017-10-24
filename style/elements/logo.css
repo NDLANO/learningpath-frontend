@@ -46,6 +46,7 @@
   & .logo_link {
     background-image: url('/assets/ndla-logo-white.png');
   }
+
   & .logo_link:any-link {
     color: white;
   }

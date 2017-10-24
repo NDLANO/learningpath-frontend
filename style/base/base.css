@@ -9,6 +9,7 @@
 * {
   box-sizing: border-box;
 }
+
 html {
   height: 100%;
 }
@@ -25,7 +26,8 @@ a:any-link {
   color: var(--gray-1);
 }
 
-a:hover, a:active {
+a:hover,
+a:active {
   color: color(var(--blue-1) blackness(+ 30%));
 }
 
@@ -35,7 +37,11 @@ p {
   max-width: 700px;
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-family: Source Sans Pro,Helvetica,Arial,sans-serif;
   font-weight: 700;
 }
@@ -55,9 +61,10 @@ aside {
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0,0,0,0);
+  clip: rect(0, 0, 0, 0);
   border: 0;
 }
+
 .clear {
   clear: both;
 }

@@ -90,25 +90,30 @@
 }
 
 @media (--medium-viewport) {
-
   .footer {
     padding: 2em;
   }
+
   .footer_editor {
     display: block;
   }
+
   .footer_language-form {
     padding-left: 0;
   }
+
   .footer_editor:last-child {
     padding-left: 0;
   }
+
   .footer_list {
     padding-left: 0;
   }
+
   .footer_text {
     padding-left: 0;
   }
+
   .footer_form {
     display: block;
   }

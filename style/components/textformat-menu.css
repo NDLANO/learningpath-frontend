@@ -7,7 +7,7 @@
  */
 
 .textformat-menu {
-  margin: 1em 0 0 0;
+  margin: 1em 0 0;
   display: block;
   padding: 0;
 }
@@ -15,7 +15,7 @@
 .texformat-menu-item {
   display: inline;
   font-size: 1.3em;
-  padding: .2em .5em .4em .5em;
+  padding: 0.2em 0.5em 0.4em;
   background-color: var(--gray-10);
   border: 1px solid var(--gray-7);
   border-left: none;
@@ -39,7 +39,6 @@
   border-radius: 5px 0 0 5px;
   border-left: 1px solid var(--gray-7);
 }
-
 
 .texformat-menu-item:last-child {
   border-radius: 0 5px 5px 0;

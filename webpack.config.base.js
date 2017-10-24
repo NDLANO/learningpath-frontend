@@ -25,7 +25,7 @@ module.exports = options => ({
   }, options.output), // Merge with env dependent settings
 
   module: {
-    rules: [
+    rules: options.rules.concat([
       {
         test: /\.jsx?|\.js?$/, // Transform all .js and .jsx files required somewhere with Babel
         exclude: [/node_modules/], // See .babelrc
@@ -46,7 +46,7 @@ module.exports = options => ({
           loader: 'json-loader',
         },
       },
-    ],
+    ]),
   },
   plugins: options.plugins.concat([
     // Show Webpack progress

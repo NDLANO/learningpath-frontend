@@ -222,9 +222,11 @@
   cursor: pointer;
   outline: none;
 }
+
 .rw-multiselect-tag-btn {
   line-height: 1.4rem;
 }
+
 .rw-btn-select {
   background-color: var(--gray-10);
 }

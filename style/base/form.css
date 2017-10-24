@@ -14,6 +14,7 @@ select {
   color: var(--gray-2);
   padding: .5em 1.4em .5em 1em;
   max-width: 100%;
+
   /* Enable custom select styling */
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -42,6 +43,7 @@ select:focus {
 .select--white-border {
   border-color: white;
 }
+
 .select--gray-border {
   border-color: var(--gray-9);
 }
@@ -51,15 +53,19 @@ label {
   display: block;
   margin: 1em 0 .5em 0;
 }
+
 .label--bold {
   font-weight: bold;
 }
+
 .label--medium-bold {
   font-weight: 500;
 }
+
 .label--medium {
   font-size: 1.2em;
 }
+
 .label--large {
   font-size: 2.5em;
 }

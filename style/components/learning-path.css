@@ -48,9 +48,11 @@
   border-radius: 40px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
+
 .learningPath-copyright {
   margin-bottom: 2em;
 }
+
 .learningPath-copyright .rw-open {
   margin-bottom: 240px;
 }
@@ -81,8 +83,6 @@
 }
 
 .learning-path-input__title {
-
-
   & input {
     width: 100%;
     font-size: 1.2em;
@@ -103,6 +103,7 @@
     line-height: 1.6em;
   }
 }
+
 .learning-path_input-information {
   font-size: 0.9em;
   color: var(--gray-6);
@@ -118,12 +119,15 @@
   padding: 0.7em 1em;
   margin-bottom: 1em;
 }
+
 .learning-path-image .image-preview_image {
   padding-left: 0;
 }
+
 .learning-path-image .image-preview_information {
   padding-right: 0;
 }
+
 .learning-path-image .image-preview_information b {
   display: block;
   margin-bottom: 0.2em;
@@ -183,6 +187,7 @@
 .duration-menu-item:last-child {
   border-radius: 0 5px 5px 0;
 }
+
 .duration-menu-item__disabled {
   pointer-events: none;
   background-color: var(--gray-8);
@@ -201,6 +206,7 @@
     border: 2px solid var(--blue-1);
     margin-right: 1%;
   }
+
   & .button-copy_abort:hover {
     background-color: var(--blue-1);
     color: white;
@@ -214,6 +220,7 @@
     border: 2px solid var(--blue-1);
     margin-right: 1%;
   }
+
   & .button-copy_save:hover {
     background-color: white;
     color: var(--blue-1);
@@ -221,6 +228,7 @@
     margin-right: 1%;
   }
 }
+
 .sort-steps_button, .sort-steps_button_save {
   margin-top: 1em;
   text-align: left;
@@ -231,19 +239,23 @@
   color: white;
   display: block;
 }
+
 .sort-steps_button:any-link, .sort-steps_button_save:any-link {
   color: white;
 }
+
 .sort-steps_button:any-link:hover, .sort-steps_button_save:any-link:hover {
   background-color: white;
   color: var(--blue-1);
   border-top: 1px solid var(--gray-9);
 }
+
 .sort-steps_button > .icon, .sort-steps_button_save > .icon {
   font-size: 1.2em;
   margin-right: 0.7em;
   margin-left: 1.4em;
 }
+
 .add-learningpath-step_line {
   border-left: 6px solid  var(--gray-11);
   height: 19px;
@@ -271,9 +283,11 @@
     margin-top: 1em;
     display: block;
   }
+
   .learning-path-image .image-preview_information {
     padding-left: 0;
   }
+
   .learningPath-copyright > * {
     max-width: 100%;
   }

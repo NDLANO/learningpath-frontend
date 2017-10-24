@@ -19,20 +19,16 @@
   --gray-10: gray(234);
   --gray-11: gray(238);
   --gray-12: gray(248);
-
-
   --blue-1: #20588f;
   --blue-2: #3a72a9;
   --blue-3: #538bc2;
   --blue-4: #6da5dc;
   --blue-5: #86bef5;
   --blue-6: #cdddec;
-
   --red-1: #e4655f;
-
   --yellow-1: #efe574;
-
   --green-1: #6fce72;
+
   @custom-media --xxlarge-viewport-max (max-width: 1400px);
   @custom-media --xlarge-viewport (min-width: 1200px);
   @custom-media --large-viewport (min-width: 800px);

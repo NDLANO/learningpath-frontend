@@ -10,7 +10,7 @@
   width: 22%;
   margin: 1.5% 1.5% 1em;
   background-color: white;
-  box-shadow: 0 4px 5px rgba(0,0,0,.1),0 0 3px rgba(0,0,0,.2);
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1), 0 0 3px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -21,7 +21,7 @@
 .tile:hover {
   transform: scale(1.01);
   transition: all 0.5s ease;
-  box-shadow: 0 15px 20px rgba(0,0,0,.1),0 3px 10px rgba(0,0,0,.3);
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.1), 0 3px 10px rgba(0, 0, 0, 0.3);
 }
 
 .tile_hd {
@@ -32,11 +32,10 @@
 }
 
 .tile_bd {
-  padding: .5em 2.5em 0;
+  padding: 0.5em 2.5em 0;
   flex-grow: 5;
   word-break: break-word;
 }
-
 
 a.tile_bd:any-link {
   display: block;
@@ -46,10 +45,9 @@ a.tile_bd:any-link {
 .tile_date {
   color: var(--gray-6);
   font-weight: 200;
-  letter-spacing: .05em;
+  letter-spacing: 0.05em;
   align-self: flex-end;
 }
-
 
 .tile_title {
   font-weight: 600;
@@ -70,10 +68,9 @@ a.tile_bd:any-link {
 .tile_property-description {
   flex-grow: 2;
   margin: 0;
-  padding: 0 0 0 .4em;
+  padding: 0 0 0 0.4em;
   font-weight: 800;
 }
-
 
 @media (max-width: 1450px) {
   .tile {
@@ -82,7 +79,6 @@ a.tile_bd:any-link {
     margin-bottom: 1em;
   }
 }
-
 
 @media (max-width: 900px) {
   .tile {

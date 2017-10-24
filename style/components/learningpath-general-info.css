@@ -21,6 +21,7 @@
   text-align: center;
   padding: 0.6em 0;
 }
+
 .add-learningpath-step_button:any-link {
   font-size: 1.125em;
   border: none;
@@ -99,27 +100,33 @@
   text-align: center;
   padding-right: 0.5em;
 }
+
 .learningpath-general-info .border-box_wrapper.border-box_wrapper--full-width {
   width: 100%;
   padding: 0;
 }
+
 .learningpath-general-info .border-box {
   padding: 0.6em 0;
   width: 100%;
   border-width: 1px;
   border-radius: 0;
 }
+
 .c-license-icons__list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
+
 .c-license-icons__item {
   display: inline-block;
 }
+
 .c-license-icons__item + .c-license-icons__item {
   margin-left: 0.2em;
 }
+
 .c-license-icons__icon {
   width: 1.5em;
   height: 1.5em;

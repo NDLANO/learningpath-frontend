@@ -6,7 +6,9 @@
  *
  */
 
-button, .button, .button:any-link {
+button,
+.button,
+.button:any-link {
   display: inline-block;
   padding: 1.1em;
   border: none;
@@ -21,12 +23,15 @@ button, .button, .button:any-link {
   background-color: color(var(--gray-3) blackness(+ 100%));
 }
 
-.button.disabled, .button[disabled], fieldset[disabled] .button {
-  opacity: .3;
+.button.disabled,
+.button[disabled],
+fieldset[disabled] .button {
+  opacity: 0.3;
   cursor: not-allowed;
 }
 
-.button--outline, .button--outline:any-link {
+.button--outline,
+.button--outline:any-link {
   background-color: white;
   border: 1px solid var(--gray-3);
   color: var(--gray-3);
@@ -63,7 +68,8 @@ button, .button, .button:any-link {
   background-color: white;
 }
 
-.button--primary, .button--primary:any-link {
+.button--primary,
+.button--primary:any-link {
   background-color: var(--blue-1);
 }
 
@@ -91,11 +97,13 @@ button, .button, .button:any-link {
   background-color: transparent;
   outline: none;
 }
+
 .un-button:focus {
   outline: none;
 }
 
-.button--secondary, .button--secondary:any-link {
+.button--secondary,
+.button--secondary:any-link {
   background-color: var(--blue-2);
 }
 

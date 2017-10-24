@@ -6,7 +6,6 @@
   width: 3em;
   height: 3em;
   animation: spinner-spin 0.7s linear infinite;
-
   position: fixed;
   left: var(--sidebar-width);
   right: 0;
@@ -21,12 +20,13 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
 
-@media(--medium-viewport) {
+@media (--medium-viewport) {
   .spinner {
     left: 0;
   }

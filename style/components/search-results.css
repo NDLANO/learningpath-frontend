@@ -96,6 +96,7 @@
 .search-result_introduction {
   height: 0;
   overflow: hidden;
+
   &.search-result_introduction--open {
     height: inherit;
     overflow: inherit;
@@ -110,6 +111,7 @@
   font-weight: 600;
   display: block;
   cursor: pointer;
+
   & .icon {
     font-size: 1.2em;
   }

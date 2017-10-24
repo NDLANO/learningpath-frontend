@@ -48,10 +48,12 @@
   padding: 0 25% 2em;
 }
 
-@media(--medium-viewport) {
-  .two-column_content, .two-column_content--wide {
+@media (--medium-viewport) {
+  .two-column_content,
+  .two-column_content--wide {
     padding: 0 5% 9em;
   }
+
   .two-column_col {
     max-width: 100%;
   }

@@ -21,12 +21,14 @@
   border-radius: 4px;
 }
 
-.tooltip--top, .tooltip--bottom {
+.tooltip--top,
+.tooltip--bottom {
   padding: 5px 0;
   margin-top: -3px;
 }
 
-.tooltip--left, .tooltip--right {
+.tooltip--left,
+.tooltip--right {
   padding: 0 5px;
   margin-left: -3px;
 }

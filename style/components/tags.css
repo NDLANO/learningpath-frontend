@@ -13,8 +13,8 @@
 .tag_item {
   display: inline-block;
   color: var(--gray-3);
-  margin-right: .5em;
-  margin-bottom: .4em;
+  margin-right: 0.5em;
+  margin-bottom: 0.4em;
 }
 
 .tag_item:hover {
@@ -22,7 +22,8 @@
   text-decoration: underline;
 }
 
-.tag_item--active, .tag_item--active:hover {
+.tag_item--active,
+.tag_item--active:hover {
   color: var(--blue-2);
   text-decoration: underline;
 }

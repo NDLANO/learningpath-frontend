@@ -21,9 +21,11 @@
   vertical-align: middle;
   outline: 0;
 }
+
 .rw-widget>.rw-select {
   border-left: 1px solid #ccc;
 }
+
 .rw-select {
   position: absolute;
   width: 1.9em;
@@ -31,9 +33,11 @@
   right: 0;
   top: 0;
 }
+
 .rw-btn {
   cursor: pointer;
 }
+
 .rw-btn {
   color: #333;
   line-height: 3.2em;
@@ -49,6 +53,7 @@
   white-space: nowrap;
   font-size: 0.8em;
 }
+
 .rw-i-caret-down::before {
   content: "\25BC";
 }
