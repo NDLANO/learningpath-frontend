@@ -1,0 +1,182 @@
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+.learning-step-form {
+  padding-top: 4em;
+  display: flex;
+  flex-direction: column;
+  max-width: 900px;
+}
+
+.learning-step-form_box {
+  padding: 0 2em 2em 1em;
+  border: 1px solid var(--blue-1);
+  margin: 2em 0;
+  border-radius: 3px;
+}
+
+.learning-step-form_group {
+  padding-top: 1em;
+  margin-left: 10%;
+}
+
+.learning-step-form_group-paragraph {
+  padding-top: 0.3em;
+}
+
+.learning-step-form_group.license-learning-step-form_group {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.learning-step-form_left {
+  padding-right: 0.5em;
+  width: 15%;
+  float: left;
+  margin-left: -15%;
+}
+
+.learning-step-form_right {
+  width: 85%;
+}
+
+.learning-step-form_input {
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  width: 100%;
+  background-color: transparent;
+}
+
+.learning-step-form_input:focus {
+  outline-style: none;
+  color: black;
+}
+
+.learning-step-form_title {
+  font-size: 2.5em;
+  line-height: 1.5em;
+  margin-top: 0;
+  font-weight: 600;
+  font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+}
+
+.learning-step-form_paragraph {
+  font-size: 1.2em;
+  margin-top: 0.45em;
+  font-weight: 200;
+  line-height: 1.6em;
+  margin-bottom: 1.5em;
+}
+
+.learning-step-form_select {
+  border: none;
+  margin-top: 0.9em;
+}
+
+.learning-step-form_mediatype-dd {
+  background-color: var(--gray-12);
+  border: none;
+  height: 44px;
+  border-left: 30px solid var(--gray-12);
+  border-right: 15px solid var(--gray-12);
+}
+
+.learning-step-form_mediatype-icon {
+  position: absolute;
+  display: block;
+  margin-top: 0.7em;
+  margin-left: 10px;
+  color: var(--gray-4);
+  border-radius: 40px;
+}
+
+.learning-step-form_icon-bg {
+  float: right;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0.7rem 0.5rem 0 0;
+  background-color: var(--gray-11);
+  padding: 0 6px 9px;
+  color: var(--gray-6);
+}
+
+.learning-step-form_icon-bg svg {
+  max-height: 12px;
+}
+
+.learning-step-form_show_license_info {
+  cursor: pointer;
+}
+
+.learning-step-form_show_license_info:hover {
+  color: color(var(--gray-6) blackness(+ 20%));
+  background-color: color(var(--gray-11) blackness(+ 20%));
+}
+
+.learning-step-form_show_license_info--active {
+  color: white;
+  background-color: var(--blue-1);
+}
+
+.learning-step-form_show_license_info--active:hover {
+  background-color: color(var(--blue-1) blackness(+ 20%));
+}
+
+.learning-step-form_show-title {
+  cursor: pointer;
+}
+
+.learning-step-form_show-title:hover {
+  color: color(var(--gray-6) blackness(+ 20%));
+  background-color: color(var(--gray-11) blackness(+ 20%));
+}
+
+.learning-step-form_show-title--active {
+  color: white;
+  background-color: var(--blue-1);
+}
+
+.learning-step-form_show-title--active:hover {
+  background-color: color(var(--blue-1) blackness(+ 20%));
+}
+
+.learning-step-embed_group {
+  margin-bottom: 2em;
+}
+
+@media (--medium-viewport) {
+  .learning-step-form_select {
+    max-width: 100%;
+  }
+
+  .learning-step-form_group {
+    margin-left: 0;
+  }
+
+  .learning-step-form_group select {
+    max-width: 100%;
+  }
+
+  .learning-step-form_right,
+  .learning-step-form_left {
+    width: 100%;
+    float: none;
+    margin-left: 0;
+  }
+
+  .learning-step-form_icon-bg {
+    float: none;
+  }
+}
+
+@media (--small-viewport) {
+  .learning-step-form_title .DraftEditor-root {
+    min-height: 3em;
+  }
+}

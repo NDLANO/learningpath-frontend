@@ -1,0 +1,175 @@
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+.step-nav {
+  padding: 0;
+}
+
+.step-nav_wrapper {
+  border-top: 1px solid var(--gray-9);
+  overflow-x: hidden;
+}
+
+.step-nav_wrapper > div:last-child {
+  margin-bottom: 76px;
+}
+
+.step-nav_list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.step-nav_item {
+  margin: 0;
+  background: linear-gradient(to right, transparent 0, transparent 44px, gray(186) 0, gray(186) 51px, transparent 10px, transparent 100%);
+}
+
+.step-nav_item:first-child .step-nav_item--active {
+  margin: 0;
+  background: linear-gradient(to right, transparent 0, transparent 44px, gray(186) 0, gray(186) 51px, transparent 10px, transparent 100%);
+}
+
+.step-nav_item:not(.step-nav_item--bottom_border):last-child {
+  background: none;
+}
+
+.step-nav_item:not(.step-nav_item--bottom_border):last-child .step-nav_line {
+  border-left: 6px solid gray(186);
+  margin-left: 12px;
+  padding-left: 31px;
+  margin-top: -25px;
+  height: 20px;
+}
+
+.step-nav_item--active:not(.step-nav_item--bottom_border):last-child .step-nav_line {
+  border-left: 6px solid var(--blue-1);
+}
+
+.step-nav_item--bottom_border .step-nav_title {
+  margin-left: 12px;
+  padding-left: 31px;
+  margin-bottom: -30px;
+  padding-bottom: 30px;
+  margin-top: -18px;
+}
+
+.step-nav_title {
+  margin-left: 40px;
+  margin-top: -17px;
+  max-height: 115px;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+}
+
+.step-nav_title_can_edit {
+  max-width: 90%;
+}
+
+.step-nav_title .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.step-nav_item:only-child .step-nav_line {
+  border-left: 0;
+}
+
+.step-nav_item:first-child .step-nav_link::before {
+  border-left: 6px solid var(--gray-5);
+  padding-left: 0;
+  margin-left: 3em;
+}
+
+.step-nav_item:only-child .step-nav_link::before {
+  border-left: 0;
+  padding-left: 0;
+  margin-left: 3em;
+}
+
+.step-nav_item:first-child .step-nav_link {
+  background: none;
+}
+
+.step-nav_item:last-child .step-nav_link {
+  background: none;
+}
+
+.step-nav_item--active:first-child .step-nav_link:any-link {
+  color: var(--blue-1);
+  background-color: var(--gray-12);
+}
+
+.step-nav_item--active:last-child .step-nav_link:any-link {
+  color: white;
+  background-color: var(--blue-1);
+}
+
+.step-nav_link {
+  display: block;
+  line-height: 1.2em;
+  padding: 1.5em 2em 1.7em;
+  border-right: solid 4px transparent;
+}
+
+.step-nav_link:any-link {
+  text-decoration: none;
+  color: var(--gray-5);
+  transition: background-color 0s;
+}
+
+.step-nav_item--active .step-nav_link:hover {
+  color: var(--blue-1);
+  background: linear-gradient(to right, transparent 0, transparent 45px, var(--blue-1) 0, var(--blue-1) 50px, transparent 10px, transparent 100%);
+  background-color: var(--gray-12);
+}
+
+.step-nav_item--active .step-nav_link:any-link {
+  color: var(--blue-1);
+  font-weight: 500;
+  background: linear-gradient(to right, transparent 0, transparent 45px, var(--blue-1) 0, var(--blue-1) 50px, transparent 10px, transparent 100%);
+  background-color: var(--gray-12);
+  border-top: 1px solid var(--gray-7);
+  border-bottom: 1px solid var(--gray-7);
+}
+
+.step-nav_item--active:not(.step-nav_item--bottom_border):last-child .step-nav_link:any-link {
+  background: none;
+  color: var(--blue-1);
+  background-color: var(--gray-12);
+}
+
+.step-nav_circle {
+  margin-right: 0.7em;
+  background-color: white;
+  border: 1px solid var(--gray-7);
+  padding: 4px 8px 7px;
+  margin-left: -1px;
+  color: var(--gray-6);
+  border-radius: 40px;
+  display: inline;
+}
+
+.step-nav_item--active .step-nav_circle {
+  padding: 4px 8px 7px;
+  margin-left: -1px;
+  color: var(--blue-1);
+  background-color: var(--gray-12);
+  border: 1px solid;
+}
+
+@media (--medium-viewport) {
+  .step-nav_item--active::after {
+    display: none;
+  }
+
+  .step-nav_title {
+    white-space: normal;
+  }
+}

@@ -1,0 +1,25 @@
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+.page-header_ctrls {
+  display: flex;
+  max-height: 44px;
+  margin: 1em;
+}
+
+.sorting-button {
+  padding: 0.6em 1em 1em;
+  display: block;
+  border-radius: 5px;
+  margin-right: 0.5em;
+  background-color: color(var(--blue-1) blackness(+ 20%));
+}
+
+.sorting-button:any-link {
+  color: white;
+}

@@ -23,6 +23,13 @@ module.exports = require('./webpack.config.base')({
     filename: '[name].js',
   },
 
+  rules: [
+    {
+      test: /\.css$/,
+      use: ['style-loader', 'css-loader', 'postcss-loader'],
+    },
+  ],
+
   // Add development plugins
   plugins,
 

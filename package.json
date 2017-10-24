@@ -13,7 +13,9 @@
     "start": "NODE_ENV=development DISABLE_SSR=true nodemon --watch server server",
     "start-with-ssr": "NODE_ENV=development nodemon --watch server server",
     "start-prod": "NODE_ENV=production node server",
-    "lint": "eslint src server"
+    "lint": "yarn lint-css && yarn lint-es",
+    "lint-es": "eslint src server",
+    "lint-css": "stylelint style/**/*.css"
   },
   "jest": {
     "setupFiles": [
@@ -55,6 +57,11 @@
     "json-loader": "0.5.7",
     "nock": "9.0.22",
     "nodemon": "1.12.1",
+    "postcss-cssnext": "3.0.2",
+    "postcss-easy-import": "3.0.0",
+    "postcss-focus": "3.0.0",
+    "postcss-loader": "2.0.8",
+    "postcss-nested": "2.1.2",
     "raf": "^3.4.0",
     "react-addons-test-utils": "^15.6.2",
     "react-test-renderer": "^15.6.1",
@@ -62,6 +69,8 @@
     "rimraf": "^2.6.2",
     "sinon": "^4.0.1",
     "style-loader": "^0.19.0",
+    "stylelint": "8.2.0",
+    "stylelint-config-standard": "17.0.0",
     "webpack": "^3.8.1",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.20.0",
@@ -91,7 +100,6 @@
     "lodash": "4.17.4",
     "ndla-article-scripts": "^0.1.1",
     "ndla-error-reporter": "^0.1.13",
-    "ndla-learningpath-styleguide": "^0.2.5",
     "ndla-licenses": "^0.1.0",
     "ndla-ui": "^0.8.11",
     "ndla-util": "^0.1.7",

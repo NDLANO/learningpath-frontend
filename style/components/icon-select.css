@@ -1,0 +1,52 @@
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+.icon-select_item {
+  margin: 0 0.5em;
+  display: inline-block;
+  position: relative;
+  width: 20%;
+}
+
+.icon-select_input {
+  display: inline;
+  opacity: 0;
+  position: absolute;
+}
+
+.icon-select_label {
+  display: inline-block;
+  cursor: pointer;
+  padding: 1.5em 1.5em 1em 1em;
+  color: black;
+  border-radius: 3px;
+  border: 2px solid var(--gray-7);
+  text-decoration: none;
+  width: 100%;
+  height: 100px;
+
+  &:hover {
+    border: 2px solid var(--blue-1);
+    color: var(--blue-1);
+  }
+
+  @nest .icon-select_input:checked + & {
+    background-color: var(--gray-11);
+  }
+}
+
+.icon-select_label-text {
+  display: block;
+}
+
+@media (max-width: 800px) {
+  .icon-select_item {
+    width: 100%;
+    margin: 0;
+  }
+}
