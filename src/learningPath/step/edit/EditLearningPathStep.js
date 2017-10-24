@@ -29,8 +29,8 @@ export const saveStepObject = (step, values, language) => Object.assign({}, step
   showTitle: values.showTitle,
   title: values.title,
   language,
-  description: formattedEmbedDescription(values.description),
-  embedUrl: formattedEmbedUrl(values.url),
+  description: formattedEmbedDescription(step, values.description),
+  embedUrl: formattedEmbedUrl(step, values.url),
   license: formattedEmbedLicense(values.license),
 });
 

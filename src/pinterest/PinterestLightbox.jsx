@@ -37,8 +37,9 @@ class PinterestLightbox extends Component {
     createLearningPathStep(learningPath.id, {
       type: 'TEXT',
       showTitle: true,
-      title: [{ title, language }],
-      embedUrl: [{ url, language, embedType: 'oembed' }],
+      title,
+      language,
+      embedUrl: { url, embedType: 'oembed' },
     }).then(() => {
       localSetPins(pins.filter(pin => pin.id !== pinId));
     });
