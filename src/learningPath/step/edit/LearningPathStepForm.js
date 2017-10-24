@@ -35,7 +35,7 @@ const LearningPathStepForm = (props) => {
   } = props;
 
   const abortUrl = step.id ? `/learningpaths/${learningPath.id}/step/${step.id}` : `/learningpaths/${learningPath.id}`;
-
+  console.log(props);
   return (
     <form onSubmit={handleSubmit} className="learning-step-form">
       <div className="learning-step-form_group">
@@ -109,9 +109,10 @@ export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   reduxForm({
     form: formName,
-    asyncValidate,
     validate,
-    enableReinitialize: true,
     asyncBlurFields: ['url'],
+    asyncValidate,
+    shouldAsyncValidate: () => true,
+    enableReinitialize: true,
   })
 )(LearningPathStepForm);
