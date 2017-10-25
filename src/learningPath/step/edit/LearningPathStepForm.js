@@ -109,9 +109,10 @@ export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   reduxForm({
     form: formName,
-    asyncValidate,
     validate,
-    enableReinitialize: true,
     asyncBlurFields: ['url'],
+    asyncValidate,
+    shouldAsyncValidate: () => true,
+    enableReinitialize: true,
   })
 )(LearningPathStepForm);
