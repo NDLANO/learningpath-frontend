@@ -67,7 +67,7 @@ app.use(helmet({
         'wss://*.hotjar.com',
         'https://*.hotjar.com',
         'https://*.ndla.no',
-        'https://assets.zendesk.com',
+        'https://*.zendesk.com',
         'https://ndla.no',
         'https://players.brightcove.net',
         'https://www.nrk.no',
