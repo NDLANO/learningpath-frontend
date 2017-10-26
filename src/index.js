@@ -55,7 +55,7 @@ const { logglyApiKey, logEnvironment, componentName } = window.config;
 window.errorReporter = ErrorReporter.getInstance({ store, logglyApiKey, environment: logEnvironment, componentName });
 TokenStatusHandler.getInstance({ store });
 
-ReactDOM.render(
+ReactDOM.hydrate(
   <Provider store={store} locale={locale}>
     <Router history={browserHistory}>
       <App />

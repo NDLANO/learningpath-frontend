@@ -19,47 +19,56 @@ import LearningPathActionType from './LearningPathActionType';
 import { getLearningPath } from '../learningPathSelectors';
 import LearningPathContributors from './LearningPathContributors';
 
-const LearningPathGeneralInfo = (props, context) => {
-  const { authenticated, learningPath, localCloseSidebars, onCopyLearningPathClick, changeStatusButton } = props;
-  const { lang } = context;
-  const borderBoxClassName = classNames({
-    'border-box_wrapper': true,
-    'border-box_wrapper--full-width': !authenticated,
-  });
-  const actions = (
-    <div className="learningpath-general-actions">
-      {changeStatusButton}
-      <LearningPathActionType
-        hasChangeStatusButton={changeStatusButton !== null}
-        authenticated={authenticated}
-        learningPath={learningPath}
-        localCloseSidebars={localCloseSidebars}
-        onCopyLearningPathClick={onCopyLearningPathClick}
-      />
-    </div>
-  );
-  return (
-    <div>
-      <div className="learningpath-general-info">
-        <LearningPathTitle learningPath={learningPath} />
-        <div className="learningpath-contributors">
-          <LearningPathContributors copyright={learningPath.copyright} />
-        </div>
-        <div className="learningpath-general-info_b">
-          <div className={borderBoxClassName}>
-            <div className="border-box">
-              <LabeledIcon.Today labelText={formatDate(learningPath.lastUpdated, lang)} tagName="time" />
-            </div>
-            <div className="border-box">
-              <LabeledIcon.QueryBuilder labelText={formatDuration(learningPath.duration, lang)} tagName="time" />
-            </div>
+class LearningPathGeneralInfo extends React.Component {
+  constructor() {
+    super();
+    this.state = { isClient: false };
+  }
+  componentDidMount() {
+    this.setState({isClient: true}); // eslint-disable-line
+  }
+  render() {
+    const { authenticated, learningPath, localCloseSidebars, onCopyLearningPathClick, changeStatusButton } = this.props;
+    const { lang } = this.context;
+    const borderBoxClassName = classNames({
+      'border-box_wrapper': true,
+      'border-box_wrapper--full-width': !authenticated || !this.state.isClient,
+    });
+    const actions = (
+      <div className="learningpath-general-actions">
+        {changeStatusButton}
+        <LearningPathActionType
+          hasChangeStatusButton={changeStatusButton !== null}
+          authenticated={authenticated}
+          learningPath={learningPath}
+          localCloseSidebars={localCloseSidebars}
+          onCopyLearningPathClick={onCopyLearningPathClick}
+        />
+      </div>
+    );
+    return (
+      <div>
+        <div className="learningpath-general-info">
+          <LearningPathTitle learningPath={learningPath} />
+          <div className="learningpath-contributors">
+            <LearningPathContributors copyright={learningPath.copyright} />
           </div>
-          {authenticated ? actions : ' '}
+          <div className="learningpath-general-info_b">
+            <div className={borderBoxClassName}>
+              <div className="border-box">
+                <LabeledIcon.Today labelText={formatDate(learningPath.lastUpdated, lang)} tagName="time" />
+              </div>
+              <div className="border-box">
+                <LabeledIcon.QueryBuilder labelText={formatDuration(learningPath.duration, lang)} tagName="time" />
+              </div>
+            </div>
+            {authenticated && this.state.isClient ? actions : ' '}
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
+}
 
 LearningPathGeneralInfo.propTypes = {
   authenticated: PropTypes.bool.isRequired,
