@@ -79,7 +79,7 @@ app.use(helmet({
         'https://cdn.auth0.com',
       ],
       styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com', 'https://fonts.gstatic.com'],
-      fontSrc: ["'self'", 'https://*.hotjar.com', 'https://*.zopim.com', 'https://fonts.googleapis.com', 'https://fonts.gstatic.com'],
+      fontSrc: ["'self'", 'https://*.hotjar.com', 'https://*.zopim.com', 'https://fonts.googleapis.com', 'https://fonts.gstatic.com', 'data:application/font-woff'],
       imgSrc: ['https://*.hotjar.com', 'https://*.zopim.com', 'https://*.ndla.no', 'https://www.google-analytics.com', 'https://stats.g.doubleclick.net', 'https://ssl-ndla.tns-cs.net', 'data: https://i.ytimg.com https://pi.tedcdn.com http://*.ndlap3.seria.net https://*.gstatic.com'],
       connectSrc: ["'self'", 'ws://*.hotjar.com wss://*.hotjar.com', 'https://*.hotjar.com', 'wss://*.zopim.com', 'https://*.zendesk.com', 'https://*.zopim.com', 'https://*.ndla.no', 'https://logs-01.loggly.com', 'https://www.googleapis.com'],
       frameSrc: ['*'],
