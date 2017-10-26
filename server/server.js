@@ -68,6 +68,7 @@ app.use(helmet({
         'https://*.hotjar.com',
         'https://*.ndla.no',
         'https://*.zendesk.com',
+        'https://v2.zopim.com',
         'https://ndla.no',
         'https://players.brightcove.net',
         'https://www.nrk.no',
