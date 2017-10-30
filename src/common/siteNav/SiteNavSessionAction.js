@@ -12,24 +12,36 @@ import { Link } from 'react-router-dom';
 import polyglot from '../../i18n';
 import LabeledIcon from '../LabeledIcon';
 
-const SiteNavSessionAction = ({ authenticated, userName, localCloseSidebars }) => {
-  if (authenticated) {
-    return (
-      <li className="site-nav_item">
-        <Link to="/logout" className="site-nav_link" onClick={() => localCloseSidebars()}>
-          <LabeledIcon.Exit hotjarMasked labelText={polyglot.t('siteNav.logout', { name: userName })} />
-        </Link>
-      </li>
-    );
+class SiteNavSessionAction extends React.Component {
+  constructor() {
+    super();
+    this.state = {isClient: false};
   }
-  return (
-    <li className="site-nav_item">
-      <Link to="/login" className="site-nav_link" onClick={() => localCloseSidebars()}>
-        <LabeledIcon.Exit labelText={polyglot.t('siteNav.login')} />
-      </Link>
-    </li>
-  );
-};
+
+  componentDidMount() {
+    this.setState({isClient: true}); // eslint-disable-line
+  }
+  
+  render() {
+    const { authenticated, userName, localCloseSidebars } = this.props;
+      if (authenticated && this.state.isClient) {
+        return (
+          <li className="site-nav_item">
+            <Link to="/logout" className="site-nav_link" onClick={() => localCloseSidebars()}>
+              <LabeledIcon.Exit hotjarMasked labelText={polyglot.t('siteNav.logout', { name: userName })} />
+            </Link>
+          </li>
+        );
+      }
+      return (
+        <li className="site-nav_item">
+          <Link to="/login" className="site-nav_link" onClick={() => localCloseSidebars()}>
+            <LabeledIcon.Exit labelText={polyglot.t('siteNav.login')} />
+          </Link>
+        </li>
+      );
+    }
+}
 
 SiteNavSessionAction.propTypes = {
   authenticated: PropTypes.bool,
