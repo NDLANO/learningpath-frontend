@@ -153,8 +153,8 @@ function handleResponse(req, res, token) {
   const paths = req.url.split('/');
   const locale = getHtmlLang(paths[1]);
   const userAgentString = req.headers['user-agent'];
-
-  if (global.__DISABLE_SSR__) { // eslint-disable-line no-underscore-dangle
+  const match = serverRoutes.find(r => matchPath(req.url, r));
+  if (global.__DISABLE_SSR__ || match.notFound) { // eslint-disable-line no-underscore-dangle
     const htmlString = renderHtmlString(locale, userAgentString, { accessToken: token.access_token, locale });
     res.send(`<!doctype html>\n${htmlString}`);
     return;
