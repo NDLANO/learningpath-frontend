@@ -12,8 +12,9 @@ RUN mkdir -p $APP_PATH/htdocs/assets/ && \
     yarn
 
 # Copy necessary source files for server and client build
-COPY .babelrc webpack.config.base.js webpack.config.prod.js webpack.config.dev.js $APP_PATH/
+COPY .babelrc webpack.config.base.js webpack.config.prod.js webpack.config.dev.js postcss.config.js $APP_PATH/
 COPY src $APP_PATH/src
+COPY style $APP_PATH/style
 COPY server $APP_PATH/server
 
 # Build client code
