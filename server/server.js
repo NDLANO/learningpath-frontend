@@ -77,6 +77,7 @@ app.use(helmet({
         'https://www.youtube.com',
         'https://s.ytimg.com',
         'https://cdn.auth0.com',
+        'https://tagmanager.google.com',
       ],
       styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com', 'https://fonts.gstatic.com'],
       fontSrc: ["'self'", 'https://*.hotjar.com', 'https://*.zopim.com', 'https://fonts.googleapis.com', 'https://fonts.gstatic.com', 'data:'],
