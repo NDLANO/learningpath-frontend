@@ -59,6 +59,20 @@ const HotjarScript = () => {
   return null;
 };
 
+const ZendeskScript = () => <script dangerouslySetInnerHTML={{
+  __html: `/*<![CDATA[*/window.zEmbed||function(e,t){var n,o,d,i,s,a=[],r=document.createElement("iframe");window.zEmbed=function(){a.push(arguments)},window.zE=window.zE||window.zEmbed,r.src="javascript:false",r.title="",r.role="presentation",(r.frameElement||r).style.cssText="display: none",d=document.getElementsByTagName("script"),d=d[d.length-1],d.parentNode.insertBefore(r,d),i=r.contentWindow,s=i.document;try{o=s}catch(e){n=document.domain,r.src='javascript:var d=document.open();d.domain="'+n+'";void(0);',o=s}o.open()._l=function(){var e=this.createElement("script");n&&(this.domain=n),e.id="js-iframe-async",e.src="https://assets.zendesk.com/embeddable_framework/main.js",this.t=+new Date,this.zendeskHost="ndla.zendesk.com",this.zEQueue=a,this.body.appendChild(e)},o.write('<body onload="document._l();">'),o.close()}();
+  /*]]>*/`,
+}}/>;
+
+const ZendeskLocale = ({lang}) => <script dangerouslySetInnerHTML={{__html: `
+  zE(function() {
+    zE.setLocale('${lang}');
+  });`,
+}}/>;
+
+ZendeskLocale.propTypes = {
+  lang: PropTypes.string.isRequired,
+};
 
 const Html = (props) => {
   const { lang, className, state, component } = props;
@@ -72,6 +86,7 @@ const Html = (props) => {
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         {head.title.toComponent()}
         {head.meta.toComponent()}
+        <GoogleTagMangerScript />
         <SvgPolyfillScript className={className} />
         <link rel="stylesheet" type="text/css" href={`/assets/${assets['main.css']}`} />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic,300|Signika:400,600,300,700" />
@@ -79,13 +94,14 @@ const Html = (props) => {
       </head>
       <body>
         <GoogleTagMangerNoScript />
-        <GoogleTagMangerScript />
         <div id="app-container" className="app-container" dangerouslySetInnerHTML={{ __html: content }} />
         <script dangerouslySetInnerHTML={{ __html: `window.initialState = ${serialize(state)}` }} />
         <script dangerouslySetInnerHTML={{ __html: `window.assets = ${serialize(assets)}` }} />
         <script dangerouslySetInnerHTML={{ __html: `window.config = ${serialize(config)}` }} />
         <script src={`/assets/${assets['main.js']}`} />
         <HotjarScript />
+        <ZendeskScript />
+        <ZendeskLocale lang={lang}/>
         <SvgPolyfillScriptInitalization className={className} />
       </body>
     </html>

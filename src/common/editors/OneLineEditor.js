@@ -49,6 +49,13 @@ export default class OneLineEditor extends React.Component {
     }
   }
 
+  // Needed for titles sat by the embed picker
+  componentWillReceiveProps(nextProps) {
+    if (!this.state.editorState.getSelection().getHasFocus() && nextProps.input.value !== this.props.input.value) {
+      this.updateEditorContentStateFromText(nextProps.input.value);
+    }
+  }
+
   updateEditorContentStateFromText(text) {
 
     if (text !== undefined) {

@@ -172,7 +172,6 @@ const phrases = {
     footerEditiorInChief: 'Editor in chief: ',
     footerManagingEditor: 'Managing editor: ',
     selectLanguage: 'Choose language (språk): ',
-    reportProblem: 'Report an error',
   },
   duration: {
     zero: 'Unknown length',

@@ -67,6 +67,8 @@ app.use(helmet({
         'wss://*.hotjar.com',
         'https://*.hotjar.com',
         'https://*.ndla.no',
+        'https://*.zendesk.com',
+        'https://*.zopim.com',
         'https://ndla.no',
         'https://players.brightcove.net',
         'https://www.nrk.no',
@@ -75,11 +77,12 @@ app.use(helmet({
         'https://www.youtube.com',
         'https://s.ytimg.com',
         'https://cdn.auth0.com',
+        'https://tagmanager.google.com',
       ],
-      styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com', 'https://fonts.gstatic.com'],
-      fontSrc: ["'self'", 'https://*.hotjar.com', 'https://fonts.googleapis.com', 'https://fonts.gstatic.com'],
-      imgSrc: ['https://*.hotjar.com', 'https://*.ndla.no', 'https://www.google-analytics.com', 'https://stats.g.doubleclick.net', 'https://ssl-ndla.tns-cs.net', 'data: https://i.ytimg.com https://pi.tedcdn.com http://*.ndlap3.seria.net https://*.gstatic.com'],
-      connectSrc: ["'self'", 'ws://*.hotjar.com wss://*.hotjar.com', 'https://*.hotjar.com', 'https://*.ndla.no', 'https://logs-01.loggly.com', 'https://www.googleapis.com'],
+      styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com', 'https://fonts.gstatic.com', 'https://tagmanager.google.com'],
+      fontSrc: ["'self'", 'https://*.hotjar.com', 'https://*.zopim.com', 'https://fonts.googleapis.com', 'https://fonts.gstatic.com', 'data:'],
+      imgSrc: ['https://*.hotjar.com', 'https://*.zopim.com', 'https://*.ndla.no', 'https://www.google-analytics.com', 'https://stats.g.doubleclick.net', 'https://ssl-ndla.tns-cs.net', 'data: https://i.ytimg.com https://pi.tedcdn.com http://*.ndlap3.seria.net https://*.gstatic.com'],
+      connectSrc: ["'self'", 'ws://*.hotjar.com wss://*.hotjar.com', 'https://*.hotjar.com', 'wss://*.zopim.com', 'https://*.zendesk.com', 'https://*.zopim.com', 'https://*.ndla.no', 'https://logs-01.loggly.com', 'https://www.googleapis.com'],
       frameSrc: ['*'],
       childSrc: ['https://*.hotjar.com'],
       objectSrc: ["'none'"],
@@ -151,8 +154,8 @@ function handleResponse(req, res, token) {
   const paths = req.url.split('/');
   const locale = getHtmlLang(paths[1]);
   const userAgentString = req.headers['user-agent'];
-
-  if (global.__DISABLE_SSR__) { // eslint-disable-line no-underscore-dangle
+  const match = serverRoutes.find(r => matchPath(req.url, r));
+  if (global.__DISABLE_SSR__ || match.notFound) { // eslint-disable-line no-underscore-dangle
     const htmlString = renderHtmlString(locale, userAgentString, { accessToken: token.access_token, locale });
     res.send(`<!doctype html>\n${htmlString}`);
     return;

@@ -25,12 +25,16 @@ const apiDomain = activatedForEnvironment({
 const ltiActivated = activatedForEnvironment({ test: true, local: true }, false);
 const pinterestActivated = activatedForEnvironment({ test: true, local: true }, false);
 
+const googleTagMangerId  = activatedForEnvironment({
+  test: process.env.GOOGLE_TAG_MANGER_ID_TEST,
+}, process.env.GOOGLE_TAG_MANGER_ID || undefined)
+
 module.exports = Object.assign({
   componentName: process.env.npm_package_name,
   host: process.env.LEARINGPATH_HOST || 'localhost',
   port: process.env.LEARINGPATH_PORT || '3000',
   redirectPort: process.env.LEARNINGPATH_REDIRECT_PORT || '3001',
-  googleTagMangerId: process.env.GOOGLE_TAG_MANGER_ID || undefined,
+  googleTagMangerId,
   hotjarSiteID,
   ndlaApiUrl: process.env.NDLA_API_URL || apiDomain,
   ndlaApiKey: process.env.NDLA_API_KEY || 'ndlalearningpathfrontend',
@@ -49,9 +53,9 @@ module.exports = Object.assign({
     title: 'NDLA Læringsstier',
     head: {
       meta: [
-        { name: 'description', content: 'NDLA Læringsstier meta description' },
         { property: 'og:site_name', content: 'NDLA Læringsstier' },
       ],
     },
   },
+  isProduction: process.env.NODE_ENV === 'production',
 }, environment);

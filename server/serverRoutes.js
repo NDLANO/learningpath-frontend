@@ -41,6 +41,7 @@ export const serverRoutes = [
   },
   { path: '*',
     exact: true,
+    notFound: true,
     component: NotFound,
   },
 ];

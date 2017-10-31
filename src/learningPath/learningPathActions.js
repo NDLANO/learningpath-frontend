@@ -20,7 +20,7 @@ export const setLearningPath = createAction('SET_LEARNING_PATH');
 export const setLearningPathsStatus = createAction('UPDATE_LEARNING_PATHS_STATUS');
 export const removeLearningPath = createAction('REMOVE_LEARNING_PATH');
 export const setLearningPathStatus = createAction('UPDATE_LEARNING_PATH_STATUS');
-
+export const setLearningPathRevision = createAction('UPDATE_LEARNING_PATH_REVISION');
 
 function canAccessLearningPath(path, isEdit = false, dispatch) {
   if ((isEdit && !path.canEdit)) {
@@ -134,7 +134,8 @@ export function deleteLearningPath(learningPath) {
 }
 function updateLPStatus(pathId, status, redirectUrl, setStatus) {
   return dispatch => updateStatus({ pathId }, { status })
-    .then(() => {
+    .then((lpath) => {
+      dispatch(setLearningPathRevision(lpath));
       dispatch(setStatus);
       dispatch(addMessage({ message: polyglot.t('updateLearningPathStatus.updateStatusMsg') }));
       if (redirectUrl) {
