@@ -1,5 +1,8 @@
 import config from '../config';
 
-const requireAssets = config.isProduction ? require('../../htdocs/assets/assets') : require('../../server/developmentAssets');
+const clientAssets = window.config.isProduction ? require('../../htdocs/assets/assets') : require('../../server/developmentAssets');
+const serverAssets = config.isProduction ? require('../../htdocs/assets/assets') : require('../../server/developmentAssets');
+
+const requireAssets = window ? clientAssets : serverAssets;
 
 export default requireAssets;
