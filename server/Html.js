@@ -86,6 +86,7 @@ const Html = (props) => {
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         {head.title.toComponent()}
         {head.meta.toComponent()}
+        <GoogleTagMangerScript />
         <SvgPolyfillScript className={className} />
         <link rel="stylesheet" type="text/css" href={`/assets/${assets['main.css']}`} />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic,300|Signika:400,600,300,700" />
@@ -93,7 +94,6 @@ const Html = (props) => {
       </head>
       <body>
         <GoogleTagMangerNoScript />
-        <GoogleTagMangerScript />
         <div id="app-container" className="app-container" dangerouslySetInnerHTML={{ __html: content }} />
         <script dangerouslySetInnerHTML={{ __html: `window.initialState = ${serialize(state)}` }} />
         <script dangerouslySetInnerHTML={{ __html: `window.assets = ${serialize(assets)}` }} />
