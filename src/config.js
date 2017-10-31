@@ -16,6 +16,8 @@ const activatedForEnvironment = (config, defaultValue) => {
   return defaultValue;
 };
 
+const isProduction = environment !== 'development';
+
 const apiDomain = activatedForEnvironment({
   local: 'http://proxy.ndla-local',
   prod: 'https://api.ndla.no',
@@ -58,4 +60,5 @@ module.exports = Object.assign({
       ],
     },
   },
+  isProduction,
 }, environment);
