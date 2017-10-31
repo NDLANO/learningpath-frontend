@@ -53,7 +53,6 @@ module.exports = Object.assign({
     title: 'NDLA Læringsstier',
     head: {
       meta: [
-        { name: 'description', content: 'NDLA Læringsstier meta description' },
         { property: 'og:site_name', content: 'NDLA Læringsstier' },
       ],
     },
