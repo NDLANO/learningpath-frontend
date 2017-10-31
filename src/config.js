@@ -16,7 +16,7 @@ const activatedForEnvironment = (config, defaultValue) => {
   return defaultValue;
 };
 
-const isProduction = environment !== 'development';
+const isProduction = environment === 'test' || environment === 'staging' || environment === 'prod';
 
 const apiDomain = activatedForEnvironment({
   local: 'http://proxy.ndla-local',
