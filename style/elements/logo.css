@@ -25,7 +25,7 @@
   width: 100%;
   padding-left: 100%;
   overflow: hidden;
-  background: url('/assets/logo.png') no-repeat;
+  background: url('assets/logo.png') no-repeat;
   background-size: contain;
   vertical-align: top;
 
@@ -35,7 +35,7 @@
 }
 
 .logo_link-beta {
-  background: url('/assets/logo-beta.png') no-repeat;
+  background: url('assets/logo-beta.png') no-repeat;
   background-size: contain;
 }
 
@@ -44,7 +44,7 @@
   width: 60px;
 
   & .logo_link {
-    background-image: url('/assets/ndla-logo-white.png');
+    background-image: url('assets/ndla-logo-white.png');
   }
 
   & .logo_link:any-link {
@@ -57,6 +57,6 @@
   width: 90px;
 
   & .logo_link-beta {
-    background-image: url('/assets/ndla-logo-white-beta.png');
+    background-image: url('assets/ndla-logo-white-beta.png');
   }
 }
