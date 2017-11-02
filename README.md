@@ -44,18 +44,35 @@ Test framework: tap/tape with enzyme.
 ```
 $ npm test
 ```
+
+### Code & CSS style
+
+Run both eslint and stylelint with:
+```
+$ npm run lint
+```
+
 ### Code style
 
-*tl;dr*: Use eslint! Rules: [Airbnb Styleguide]https://github.com/airbnb/javascript.
+*tl;dr*: Use eslint! Rules: [Airbnb Styleguide](https://github.com/airbnb/javascript).
 
 Lint code with [eslint](http://eslint.org/), including [eslint react plugin](https://github.com/yannickcr/eslint-plugin-react), [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-import), [eslint-plugin-jsx-a11y](https://github.com/evcohen/eslint-plugin-jsx-a11y#readme).
 Beside linting with globally installed eslint, eslint can be invoked with `npm`:
 
 ```
-$ npm run lint
+$ npm run lint-es
 ```
 
 Rules are configured in `./.eslintrc.js` and extends [eslint-config-airbnb](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb). If feeling brave, try `eslint --fix`.
+
+### CSS style
+Check for errors with [stylelint](https://github.com/stylelint/stylelint):
+
+```
+$ npm run lint-css
+```
+
+Rules are configured in `./.stylelintrc.js` and extends [stylelint-config-standard](https://github.com/stylelint/stylelint-config-standard).
 
 
 ## Other scripts
@@ -245,6 +262,10 @@ https://github.com/webpack/file-loader
 CSS loader module for webpack
 https://github.com/webpack/css-loader#readme
 
+**style-loader**
+Style loader module for webpack.
+https://github.com/webpack-contrib/style-loader
+
 **webpack-dev-middleware:**
 Offers a dev middleware for webpack, which arguments a live bundle to a directory
 http://github.com/webpack/webpack-dev-middleware
@@ -324,3 +345,13 @@ https://github.com/evcohen/eslint-plugin-jsx-a11y#readme
 **eslint-plugin-react:**
 React specific linting rules for ESLint.
 https://github.com/yannickcr/eslint-plugin-react
+
+### CSS Style
+
+**stylelint:**
+A mighty, modern CSS linter.
+https://github.com/stylelint/stylelint
+
+**stylelint-config-standard:**
+The standard shareable config for stylelint.
+https://github.com/stylelint/stylelint-config-standard
