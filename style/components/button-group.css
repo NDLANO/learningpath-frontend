@@ -1,0 +1,57 @@
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+.button-group {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  display: inline-block;
+  border-radius: 10em;
+}
+
+.button-group > *,
+.button-group > *:any-link {
+  padding: 0.8em 1.2em;
+  border-radius: 0;
+  float: left;
+}
+
+.button-group > *:first-child {
+  border-radius: 10em 0 0 10em;
+}
+
+.button-group > *:last-child {
+  border-radius: 0 10em 10em 0;
+}
+
+.button-group--square {
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.button-group--square > *:first-child {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.button-group--square > *:last-child {
+  border-radius: 0;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.button-group--block {
+  width: 100%;
+}
+
+.button-group--block > *:first-child {
+  width: 50%;
+  border-right: 0;
+}
+
+.button-group--block > *:last-child {
+  width: 50%;
+}

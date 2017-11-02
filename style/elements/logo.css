@@ -1,0 +1,62 @@
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+.logo {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  height: 15px;
+  width: 50px;
+}
+
+.logo--beta {
+  height: 40px;
+  width: 150px;
+}
+
+.logo_link {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  padding-left: 100%;
+  overflow: hidden;
+  background: url('/assets/logo.png') no-repeat;
+  background-size: contain;
+  vertical-align: top;
+
+  &:any-link {
+    text-decoration: none;
+  }
+}
+
+.logo_link-beta {
+  background: url('/assets/logo-beta.png') no-repeat;
+  background-size: contain;
+}
+
+.logo--on-dark {
+  height: 23px;
+  width: 60px;
+
+  & .logo_link {
+    background-image: url('/assets/ndla-logo-white.png');
+  }
+
+  & .logo_link:any-link {
+    color: white;
+  }
+}
+
+.logo--on-dark--beta {
+  height: 30px;
+  width: 90px;
+
+  & .logo_link-beta {
+    background-image: url('/assets/ndla-logo-white-beta.png');
+  }
+}

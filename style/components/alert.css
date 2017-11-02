@@ -1,0 +1,73 @@
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+.alert {
+  background-color: #fff;
+  border: 1px solid var(--gray-10);
+  border-radius: 5px;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.1);
+  margin: 1em;
+  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  display: flex;
+  flex-direction: row;
+}
+
+.alert--success {
+  border-color: color(var(--green-1) lightness(+ 20%));
+  color: color(var(--gray-1) blend(var(--green-1) 35%));
+}
+
+.alert--info {
+  color: var(--gray-3);
+}
+
+.alert--warning {
+  border-color: color(var(--yellow-1) lightness(+ 0%));
+  color: color(var(--gray-1) blend(var(--yellow-1) 35%));
+}
+
+.alert--danger {
+  border-color: color(var(--red-1) lightness(+ 15%));
+  color: color(var(--gray-1) blend(var(--red-1) 35%));
+}
+
+.alert_msg {
+  padding: 1.2em 1em 1em 1.5em;
+  line-height: 1.625em;
+  font-size: 16px;
+  flex: 15;
+  order: 1;
+}
+
+.alert_dismiss {
+  flex: 1 1 auto;
+  order: 3;
+}
+
+.alert_action {
+  flex: 1 1 auto;
+  text-align: center;
+  order: 2;
+}
+
+.alert_action:hover {
+  color: var(--blue-1);
+}
+
+.alert_action .icon {
+  vertical-align: text-top;
+}
+
+.alert_action-text {
+  padding-left: 0.3em;
+  font-size: 1.1em;
+  font-weight: 400;
+  text-decoration: underline;
+  text-transform: uppercase;
+}

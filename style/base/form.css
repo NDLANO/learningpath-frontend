@@ -1,0 +1,127 @@
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+select {
+  border: 1px solid #000;
+  border-radius: 3px;
+  background: white;
+  min-height: 1.5em;
+  color: var(--gray-2);
+  padding: 0.5em 1.4em 0.5em 1em;
+  max-width: 100%;
+
+  /* Enable custom select styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20fill%3D%22%23555555%22%20%0A%09%20width%3D%2224px%22%20height%3D%2224px%22%20viewBox%3D%22-261%20145.2%2024%2024%22%20style%3D%22enable-background%3Anew%20-261%20145.2%2024%2024%3B%22%20xml%3Aspace%3D%22preserve%22%3E%0A%3Cpath%20d%3D%22M-245.3%2C156.1l-3.6-6.5l-3.7%2C6.5%20M-252.7%2C159l3.7%2C6.5l3.6-6.5%22%2F%3E%0A%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+select:disabled {
+  background: var(--gray-8);
+  color: var(--gray-2);
+  border-color: var(--gray-2);
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20fill%3D%22%23555555%22%20%0A%09%20width%3D%2224px%22%20height%3D%2224px%22%20viewBox%3D%22-261%20145.2%2024%2024%22%20style%3D%22enable-background%3Anew%20-261%20145.2%2024%2024%3B%22%20xml%3Aspace%3D%22preserve%22%3E%0A%3Cpath%20d%3D%22M-245.3%2C156.1l-3.6-6.5l-3.7%2C6.5%20M-252.7%2C159l3.7%2C6.5l3.6-6.5%22%2F%3E%0A%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.ie select::-ms-expand {
+  display: none;
+}
+
+select:focus {
+  outline: none;
+}
+
+.select--white-border {
+  border-color: white;
+}
+
+.select--gray-border {
+  border-color: var(--gray-9);
+}
+
+label {
+  display: block;
+  margin: 1em 0 0.5em;
+}
+
+.label--bold {
+  font-weight: bold;
+}
+
+.label--medium-bold {
+  font-weight: 500;
+}
+
+.label--medium {
+  font-size: 1.2em;
+}
+
+.label--large {
+  font-size: 2.5em;
+}
+
+.textarea {
+  padding: 0.6em 1em;
+  box-shadow: inset 1px 1px color(black alpha(3%));
+  border: 1px solid var(--gray-9);
+  background: white;
+  min-height: 1.5em;
+  font-size: 1em;
+  color: var(--gray-2);
+  width: 100%;
+}
+
+.textarea--resize-vertical {
+  resize: vertical;
+}
+
+.textarea--resize-horizontal {
+  resize: horizontal;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--blue-5);
+}
+
+input {
+  padding: 0.6em 1em;
+  box-shadow: inset 1px 1px color(black alpha(3%));
+  border: 1px solid var(--gray-9);
+  background: white;
+  min-height: 1.5em;
+  font-size: 1em;
+  color: var(--gray-2);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--blue-5);
+}
+
+.input--success {
+  border-color: var(--green-1);
+  box-shadow: 0 0 6px color(var(--green-1) alpha(0.2));
+}
+
+.input--alert {
+  border-color: var(--red-1);
+  box-shadow: 0 0 6px color(var(--red-1) alpha(0.2));
+}
+
+.error_message {
+  margin: 0;
+}
+
+.error_message--red {
+  color: var(--red-1);
+}

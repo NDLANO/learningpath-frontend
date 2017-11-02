@@ -1,0 +1,60 @@
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+.two-column {
+  display: flex;
+  flex: 1 0 auto;
+  align-items: stretch;
+  background-color: var(--gray-12);
+}
+
+.ie .two-column {
+  min-height: 100vh;
+}
+
+.two-column_col {
+  flex-direction: column;
+}
+
+.two-column_col:nth-child(1) {
+  flex: 0 1 var(--sidebar-width);
+  border-right: 1px solid var(--gray-7);
+}
+
+.two-column_col:nth-child(2) {
+  flex: 1 1 770px;
+}
+
+.two-column_col--white-bg {
+  background-color: white;
+  min-height: 100%;
+}
+
+.two-column_content--white-bg {
+  background-color: white;
+  min-height: 100vh;
+}
+
+.two-column_content--wide {
+  padding: 0 14% 9em;
+}
+
+.two-column_content {
+  padding: 0 25% 2em;
+}
+
+@media (--medium-viewport) {
+  .two-column_content,
+  .two-column_content--wide {
+    padding: 0 5% 9em;
+  }
+
+  .two-column_col {
+    max-width: 100%;
+  }
+}

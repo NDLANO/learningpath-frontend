@@ -1,0 +1,24 @@
+.lti-iframe_wrapper iframe {
+  width: 100%;
+  height: 600px;
+  display: block;
+  border: 1px solid var(--gray-8);
+  margin: 0 auto;
+}
+
+.lti-search_form-filters > .lti-search_form-filter {
+  display: inline-block;
+  cursor: pointer;
+  padding: 10px 15px;
+  color: var(--gray-8);
+  font-size: 15px;
+}
+
+.lti-search_forms {
+  margin-bottom: -1px;
+}
+
+.lti-search_form-filters > .lti-search_form-filter--active {
+  border-bottom: 3px solid var(--blue-1);
+  color: var(--blue-1);
+}

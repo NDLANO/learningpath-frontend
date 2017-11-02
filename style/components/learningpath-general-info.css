@@ -1,0 +1,185 @@
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+.learningpath-general-info {
+  padding: 1.3em 1.2em 0.3em 1.3em;
+  background-color: white;
+}
+
+.learningpath-general-info_h h3 {
+  margin: 0;
+  margin-right: 0.3em;
+  display: inline;
+}
+
+.add-learningpath-step_button {
+  text-align: center;
+  padding: 0.6em 0;
+}
+
+.add-learningpath-step_button:any-link {
+  font-size: 1.125em;
+  border: none;
+  text-align: left;
+  padding: 0.6em 1.8em;
+}
+
+.learningpath-general-info .learningpath-contributors {
+  margin-top: 0.2em;
+}
+
+.add-learningpath-step_button > .plus-sign--circle {
+  border: 1px solid var(--blue-1);
+  padding: 0 9px 3px;
+  color: var(--blue-1);
+  border-radius: 40px;
+  display: inline;
+  margin-right: 0.6em;
+  font-size: 1em;
+}
+
+.add-learningpath-step_button:hover {
+  border-radius: 0;
+}
+
+.add-learningpath-step_button:hover > .plus-sign--circle {
+  background-color: var(--blue-1);
+  color: white;
+  border: 1px solid white;
+}
+
+.learningpath-general-info_b {
+  font-size: 0.9em;
+  display: flex;
+  margin: 1em 0;
+}
+
+.learningpath-general-info .learningpath-license {
+  margin: 0;
+  font-size: 0.8em;
+  height: 1.8em;
+}
+
+.learningpath-general-actions {
+  width: 50%;
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.learningpath-general-actions a:any-link,
+.learningpath-general-actions button.copy-learningpath_button {
+  width: 100%;
+  padding: 0.6em 0.5em 0.5em 0.8em;
+  border-radius: 3px;
+  text-align: left;
+  font-size: 16px;
+}
+
+.learningpath-general-actions button,
+.learningpath-general-actions a.learningpath-action-type_button a:any-link,
+.learningpath-general-actions a.learningpath-action-type_button {
+  width: 100%;
+  padding: 0.6em 0.5em 0.5em 1.2em;
+  border-radius: 3px;
+  text-align: left;
+  font-size: 16px;
+}
+
+.learningpath-general-actions a.learningpath-action-type_button {
+  margin-top: 0.56em;
+}
+
+.learningpath-general-info .border-box_wrapper {
+  width: 50%;
+  padding: 0;
+  display: inline-block;
+  text-align: center;
+  padding-right: 0.5em;
+}
+
+.learningpath-general-info .border-box_wrapper.border-box_wrapper--full-width {
+  width: 100%;
+  padding: 0;
+}
+
+.learningpath-general-info .border-box {
+  padding: 0.6em 0;
+  width: 100%;
+  border-width: 1px;
+  border-radius: 0;
+}
+
+.c-license-icons__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.c-license-icons__item {
+  display: inline-block;
+}
+
+.c-license-icons__item + .c-license-icons__item {
+  margin-left: 0.2em;
+}
+
+.c-license-icons__icon {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.learningpath-general-info_title h3 {
+  max-width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: block;
+}
+
+.learningpath-general-info_title--open h3 {
+  max-width: 100%;
+  white-space: initial;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: inline;
+}
+
+.learningpath-general-info_title--open {
+  display: inline;
+}
+
+.learningpath-general-info_is-basedon {
+  display: none;
+}
+
+.learningpath-general-info_is-basedon--open {
+  display: block;
+  white-space: initial;
+}
+
+.learningpath-general-info_is-basedon-button {
+  color: var(--blue-1);
+  text-decoration: none;
+  margin-top: 0.3em;
+}
+
+.learningpath-general-info_is-basedon-button:hover,
+.learningpath-general-info_is-basedon-button:focus {
+  color: color(var(--blue-1) blackness(+ 20%));
+}
+
+.learningpath-general-info_title button {
+  max-width: 100%;
+  text-align: left;
+}
+
+@media (--medium-viewport) {
+  .learningpath-contributors {
+    white-space: normal;
+  }
+}

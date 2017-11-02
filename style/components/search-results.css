@@ -1,0 +1,162 @@
+/**
+ * Copyright (c) 2016-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+.search-results {
+  padding: 0 0 3em;
+  max-width: 920px;
+  margin: 0 auto;
+  margin-top: 2em;
+}
+
+.search-results a {
+  text-decoration: none;
+}
+
+.search-results .search-results_active-tag {
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--gray-8);
+}
+
+.search-result {
+  display: flex;
+  margin: 0 1em 0 0;
+  padding: 3em 5em 3em 2em;
+  border-bottom: 1px solid var(--gray-8);
+  transition: all 0.1s;
+}
+
+.search-result_title,
+.search-result_description,
+.search-result_img_container {
+  cursor: pointer;
+}
+
+.search-result:hover {
+  background: color(var(--blue-1) a(5%));
+}
+
+.search-result_img {
+  max-width: 100%;
+}
+
+.ie .search-result_img {
+  max-height: 250px;
+}
+
+.search-result_img_container {
+  margin: 1em;
+  padding-top: 0.82em;
+  width: 20%;
+  order: 0;
+}
+
+.search-result_bd {
+  padding: 0.5em 0.3em 0.5em 2em;
+  flex: 1;
+  order: 1;
+  width: 60%;
+}
+
+.search-result_title {
+  font-size: 1.8em;
+  margin-bottom: 0.2em;
+}
+
+.search-result_meta {
+  font-size: 1em;
+  font-weight: 100;
+  padding-top: 0.3em;
+  padding-bottom: 0.8em;
+}
+
+.search-result:hover {
+  transition: all 0.25s ease;
+}
+
+.search-result .border-box_wrapper {
+  width: 20%;
+  text-align: center;
+  order: 2;
+}
+
+.search-result .border-box {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.search-result_description {
+  font-size: 1.2em;
+  font-weight: 100;
+  margin-top: 0.5em;
+}
+
+.search-result_introduction {
+  height: 0;
+  overflow: hidden;
+
+  &.search-result_introduction--open {
+    height: inherit;
+    overflow: inherit;
+  }
+}
+
+.show-introduction_button {
+  color: var(--blue-1);
+  text-decoration: underline;
+  font-size: 0.9em;
+  padding: 1em 0;
+  font-weight: 600;
+  display: block;
+  cursor: pointer;
+
+  & .icon {
+    font-size: 1.2em;
+  }
+}
+
+.ndla-approved {
+  border-radius: 5px;
+  color: var(--blue-1);
+  border: 2px solid var(--blue-1);
+  padding: 0.4em;
+  border-left: 1em solid var(--blue-1);
+}
+
+.search-result .is-based-on_wrapper {
+  margin-bottom: 1em;
+  display: block;
+}
+
+@media (--medium-viewport) {
+  .search-result {
+    flex-flow: row wrap;
+    padding: 2em 1em;
+    margin: 0;
+  }
+
+  .search-result_img_container {
+    order: 0;
+    margin: 0;
+    text-align: center;
+  }
+
+  .search-result_bd {
+    order: 2;
+  }
+
+  .search-result .border-box_wrapper {
+    order: 1;
+    width: 100%;
+  }
+
+  .search-result_bd,
+  .search-result_img_container {
+    padding: 0;
+    flex: 1 100%;
+  }
+}
