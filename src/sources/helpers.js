@@ -67,14 +67,6 @@ const apiBaseUrl = (() => {
   return defined(NDLA_API_URL, locationOrigin);
 })();
 
-export function getToken(getState) {
-  return getState().authenticated ? getState().accessToken.token : getState().accessToken.token;
-}
-
-export function getTokenExpiresAt(getState) {
-  return getState().authenticated ? getState().accessToken.expiresAt : getState().accessToken.expiresAt;
-}
-
 export { locationOrigin, apiBaseUrl };
 
 export function apiResourceUrl(path) { return apiBaseUrl + path; }

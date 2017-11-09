@@ -8,7 +8,7 @@
 
 import * as actions from '../session/sessionActions';
 import TokenStatusHandler from '../util/TokenStatusHandler';
-import { authorizationHeader, getToken, getTokenExpiresAt } from '../sources/helpers';
+import { authorizationHeader} from '../sources/helpers';
 
 export const fetchAuth = (url, options = {}) => {
   if (process.env.NODE_ENV === 'unittest') {
@@ -17,14 +17,13 @@ export const fetchAuth = (url, options = {}) => {
 
   const tokenStatusHandler = TokenStatusHandler.getInstance();
   const getState = tokenStatusHandler.getStoreState;
-  const oldToken = getToken(getState);
-  const headers = { ...options.headers, Authorization: authorizationHeader(oldToken) };
+  const headers = { ...options.headers, Authorization: authorizationHeader(getState().accessToken.token) };
 
   if (__SERVER__) {
     return fetch(url, { ...options, headers });
   }
 
-  if (new Date().getTime() >= getTokenExpiresAt(getState)) {
+  if (new Date().getTime() >= getState().accessToken.expiresAt) {
     const dispatch = tokenStatusHandler.getDispatch();
     return dispatch(actions.renewAuth()).then(newToken => fetch(url, { ...options, headers: { ...options.headers, Authorization: authorizationHeader(newToken.token) } }));
   }
