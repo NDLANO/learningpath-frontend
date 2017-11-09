@@ -10,8 +10,8 @@ import { createAction } from 'redux-actions';
 import auth0 from 'auth0-js';
 import { routerActions } from 'react-router-redux';
 import { locationOrigin, ndlaPersonalClientId, auth0Domain } from '../sources/helpers';
-import { getIdTokenExpireEpoch, getAccessTokenExpireEpoch } from '../util/jwtHelper';
-import { fetchNewToken } from '../sources/tokens';
+import { getTokenExpireAt } from '../util/jwtHelper';
+import { fetchNewSystemToken } from '../sources/tokens';
 import { applicationError } from '../messages/messagesActions';
 
 export const setAuthenticated = createAction('SET_AUTHENTICATED');
@@ -32,7 +32,7 @@ export function parseHash(hash) {
   return (dispatch) => {
     auth.parseHash({ hash, _idTokenVerification: false }, (err, authResult) => {
       if (authResult && authResult.accessToken) {
-        const token = { token: authResult.accessToken, expiresAt: getIdTokenExpireEpoch(authResult.accessToken) };
+        const token = { token: authResult.accessToken, expiresAt: getTokenExpireAt(authResult.accessToken) };
         dispatch(setIdToken(token));
         dispatch(setAuthenticated(true));
         dispatch(routerActions.replace('/minside'));
@@ -41,17 +41,17 @@ export function parseHash(hash) {
   };
 }
 
-export function loginSocialMedia(type) {
+export function loginPersonalAuth(type) {
   auth.authorize({
     connection: type,
   });
 }
 
-export function logout(federated = undefined) {
-  return dispatch => fetchNewToken()
+export function logoutPersonalAuth(federated = undefined) {
+  return dispatch => fetchNewSystemToken()
     .then((token) => {
-      const newToken = { token: token.access_token, expiresAt: getAccessTokenExpireEpoch(token.access_token) };
-      dispatch(setAccessToken(newToken));
+      const storedTokenInfo = { token: token.access_token, expiresAt: getTokenExpireAt(token.access_token) };
+      dispatch(setAccessToken(storedTokenInfo));
       dispatch(setAuthenticated(false));
       dispatch(logoutAction());
       auth.logout({
@@ -59,44 +59,44 @@ export function logout(federated = undefined) {
         client_id: ndlaPersonalClientId,
         federated,
       });
-      window.localStorage.clear();
-      return newToken;
+      return storedTokenInfo;
     })
     .catch(err => dispatch(applicationError(err)));
 }
 
-export function renewAuth0Token() {
+export function renewPersonalAuth() {
   return dispatch => new Promise((resolve) => {
     auth.renewAuth({
       redirectUri: `${locationOrigin}/login/silent-callback`,
       usePostMessage: true,
     }, (err, authResult) => {
       if (authResult && authResult.accessToken) {
-        const token = { token: authResult.accessToken, expiresAt: getIdTokenExpireEpoch(authResult.accessToken) };
-        dispatch(setIdToken(token));
+        const storedTokenInfo = { token: authResult.accessToken, expiresAt: getTokenExpireAt(authResult.accessToken) };
+        dispatch(setIdToken(storedTokenInfo));
         dispatch(setAuthenticated(true));
-        resolve(token);
+        resolve(storedTokenInfo);
       } else {
-        dispatch(logout()).then(token => resolve(token));
+        dispatch(logoutPersonalAuth()).then(token => resolve(token));
       }
     });
   });
 }
 
-export function renewAuthToken() {
-  return dispatch => fetchNewToken()
+export function renewSystemAuth() {
+  return dispatch => fetchNewSystemToken()
     .then((token) => {
-      dispatch(setAccessToken({ token: token.access_token, expiresAt: getAccessTokenExpireEpoch(token.access_token) }));
-      return { token: token.access_token, expiresAt: getAccessTokenExpireEpoch(token.access_token) };
+      const storedTokenInfo = { token: token.access_token, expiresAt: getTokenExpireAt(token.access_token) };
+      dispatch(setAccessToken(storedTokenInfo));
+      return storedTokenInfo;
     });
 }
 
-export function refreshToken() {
+export function renewAuth() {
   return (dispatch, getState) => new Promise((resolve) => {
     if (getState().authenticated) {
-      dispatch(renewAuth0Token()).then(token => resolve(token));
+      dispatch(renewPersonalAuth()).then(token => resolve(token));
     } else {
-      dispatch(renewAuthToken()).then(token => resolve(token));
+      dispatch(renewSystemAuth()).then(token => resolve(token));
     }
   });
 }

@@ -26,7 +26,7 @@ export const fetchAuth = (url, options = {}) => {
 
   if (new Date().getTime() >= getTokenExpiresAt(getState)) {
     const dispatch = tokenStatusHandler.getDispatch();
-    return dispatch(actions.refreshToken()).then(newToken => fetch(url, { ...options, headers: { ...options.headers, Authorization: authorizationHeader(newToken.token) } }));
+    return dispatch(actions.renewAuth()).then(newToken => fetch(url, { ...options, headers: { ...options.headers, Authorization: authorizationHeader(newToken.token) } }));
   }
   return fetch(url, { ...options, headers });
 };

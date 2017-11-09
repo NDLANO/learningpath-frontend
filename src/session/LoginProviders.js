@@ -8,14 +8,14 @@
 
 import React from 'react';
 import polyglot from '../i18n';
-import { loginSocialMedia } from './sessionActions';
+import { loginPersonalAuth } from './sessionActions';
 
 const LoginProviders = () => (
   <div className="one-column one-column--narrow">
     <h3>{polyglot.t('loginProviders.description')}</h3>
     <ul className="vertical-menu">
-      <li className="vertical-menu_item"><button onClick={() => loginSocialMedia('google-oauth2')} className="un-button cta-link cta-link--block cta-link--gl">Google</button></li>
-      <li className="vertical-menu_item"><button onClick={() => loginSocialMedia('facebook')} className="un-button cta-link cta-link--block cta-link--fb">Facebook</button></li>
+      <li className="vertical-menu_item"><button onClick={() => loginPersonalAuth('google-oauth2')} className="un-button cta-link cta-link--block cta-link--gl">Google</button></li>
+      <li className="vertical-menu_item"><button onClick={() => loginPersonalAuth('facebook')} className="un-button cta-link cta-link--block cta-link--fb">Facebook</button></li>
     </ul>
   </div>
   );
