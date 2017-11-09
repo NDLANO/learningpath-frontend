@@ -32,8 +32,8 @@ export function parseHash(hash) {
   return (dispatch) => {
     auth.parseHash({ hash, _idTokenVerification: false }, (err, authResult) => {
       if (authResult && authResult.accessToken) {
-        const token = { token: authResult.accessToken, expiresAt: getTokenExpireAt(authResult.accessToken) };
-        dispatch(setIdToken(token));
+        const storedTokenInfo = { token: authResult.accessToken, expiresAt: getTokenExpireAt(authResult.accessToken) };
+        dispatch(setIdToken(storedTokenInfo));
         dispatch(setAuthenticated(true));
         dispatch(routerActions.replace('/minside'));
       }
