@@ -15,7 +15,7 @@ import { fetchAuth } from '../sources/fetchAuth';
 const NDLA_API_URL = __SERVER__ ? config.ndlaApiUrl : window.config.ndlaApiUrl;
 const NDLA_ACCESS_TOKEN = __SERVER__ ? config.accessToken : window.config.accessToken;
 const AUTH0_DOMAIN = __SERVER__ ? config.auth0Domain : window.config.auth0Domain;
-const AUTH0_CLIENT_ID = __SERVER__ ? config.auth0ClientID : window.config.auth0ClientID;
+const NDLA_PERSONAL_CLIENT_ID = __SERVER__ ? config.ndlaPersonalClientId : window.config.ndlaPersonalClientId;
 
 
 if (process.env.NODE_ENV === 'unittest') {
@@ -38,11 +38,11 @@ const locationOrigin = (() => {
   return location.origin;
 })();
 
-export const auth0ClientId = (() => {
+export const ndlaPersonalClientId = (() => {
   if (process.env.NODE_ENV === 'unittest') {
     return '123456789';
   }
-  return AUTH0_CLIENT_ID;
+  return NDLA_PERSONAL_CLIENT_ID;
 })();
 
 export const auth0Domain = (() => {
