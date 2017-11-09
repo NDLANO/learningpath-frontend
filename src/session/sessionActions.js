@@ -16,8 +16,6 @@ import { applicationError } from '../messages/messagesActions';
 
 export const setAuthenticated = createAction('SET_AUTHENTICATED');
 export const setAccessToken = createAction('SET_ACCESS_TOKEN');
-export const logoutAction = createAction('LOGOUT_ID_TOKEN');
-export const setIdToken = createAction('SET_ID_TOKEN');
 
 const auth = new auth0.WebAuth({
   clientID: ndlaPersonalClientId || '',
@@ -33,7 +31,7 @@ export function parseHash(hash) {
     auth.parseHash({ hash, _idTokenVerification: false }, (err, authResult) => {
       if (authResult && authResult.accessToken) {
         const storedTokenInfo = { token: authResult.accessToken, expiresAt: getTokenExpireAt(authResult.accessToken) };
-        dispatch(setIdToken(storedTokenInfo));
+        dispatch(setAccessToken(storedTokenInfo));
         dispatch(setAuthenticated(true));
         dispatch(routerActions.replace('/minside'));
       }
@@ -53,7 +51,6 @@ export function logoutPersonalAuth(federated = undefined) {
       const storedTokenInfo = { token: token.access_token, expiresAt: getTokenExpireAt(token.access_token) };
       dispatch(setAccessToken(storedTokenInfo));
       dispatch(setAuthenticated(false));
-      dispatch(logoutAction());
       auth.logout({
         returnTo: `${locationOrigin}/`,
         client_id: ndlaPersonalClientId,
@@ -72,7 +69,7 @@ export function renewPersonalAuth() {
     }, (err, authResult) => {
       if (authResult && authResult.accessToken) {
         const storedTokenInfo = { token: authResult.accessToken, expiresAt: getTokenExpireAt(authResult.accessToken) };
-        dispatch(setIdToken(storedTokenInfo));
+        dispatch(setAccessToken(storedTokenInfo));
         dispatch(setAuthenticated(true));
         resolve(storedTokenInfo);
       } else {
@@ -87,6 +84,7 @@ export function renewSystemAuth() {
     .then((token) => {
       const storedTokenInfo = { token: token.access_token, expiresAt: getTokenExpireAt(token.access_token) };
       dispatch(setAccessToken(storedTokenInfo));
+      dispatch(setAuthenticated(false))
       return storedTokenInfo;
     });
 }

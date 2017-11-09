@@ -52,7 +52,7 @@ SiteNav.defaultProps = {
 };
 
 
-const selectUserName = ({authenticated, idToken}) => authenticated  ? decodeToken(idToken.token)['https://ndla.no/user_name'] : '';
+const selectUserName = ({authenticated, accessToken}) => authenticated  ? decodeToken(accessToken.token)['https://ndla.no/user_name'] : '';
 
 const mapStateToProps = state => Object.assign({}, state, {
   userName: selectUserName(state),

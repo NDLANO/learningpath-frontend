@@ -17,7 +17,7 @@ import { applicationError } from '../../messages/messagesActions';
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-const idToken = '123345';
+const accessToken = '123345';
 
 test('actions/fetchMyLearningPaths', () => {
   const done = (res) => {
@@ -25,11 +25,11 @@ test('actions/fetchMyLearningPaths', () => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${idToken}` } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get('/learningpath-api/v1/learningpaths/mine')
     .reply(200, [{ id: '123' }, { id: '456' }]);
 
-  const store = mockStore({ idToken });
+  const store = mockStore({ accessToken });
 
   store.dispatch(fetchMyLearningPaths())
     .then(() => {
@@ -48,11 +48,11 @@ test('actions/fetchLearningPaths access denied', () => {
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${idToken}` } })
+  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
     .get('/learningpath-api/v1/learningpaths/mine')
     .reply(403, { message: 'Invalid' });
 
-  const store = mockStore({ idToken });
+  const store = mockStore({ accessToken });
 
   store.dispatch(fetchMyLearningPaths())
     .then(() => {

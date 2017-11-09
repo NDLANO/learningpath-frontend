@@ -38,8 +38,6 @@ const browserHistory = basename ? createHistory({ basename }) : createHistory();
 const emptyState = {
   authenticated: false,
   accessToken: {},
-  idToken: {},
-  user: {},
   learningPathStep: {},
   learningPaths: [],
   messages: [],
