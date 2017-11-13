@@ -4314,9 +4314,9 @@ ndla-article-scripts@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/ndla-article-scripts/-/ndla-article-scripts-0.1.1.tgz#0b18afbef5e7265de60c37e6a6c356cd8eb09814"
 
-ndla-error-reporter@^0.1.13:
-  version "0.1.13"
-  resolved "https://registry.yarnpkg.com/ndla-error-reporter/-/ndla-error-reporter-0.1.13.tgz#6c1502abe9d220a73441830fa2fca577e6acce39"
+ndla-error-reporter@^0.1.14:
+  version "0.1.14"
+  resolved "https://registry.yarnpkg.com/ndla-error-reporter/-/ndla-error-reporter-0.1.14.tgz#3f7385af8cd175a3f62f8df0d39b6b8d628160cf"
   dependencies:
     raven-js "^3.9.2"
 
