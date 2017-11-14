@@ -8,6 +8,8 @@
 
 import { ApiError } from '../sources/helpers';
 
+const warningCodes = [401, 404];
+
 const errorMiddlewareReporter = store => next => (action) => {
   if (action.error) {
     const error = action.payload;
@@ -15,7 +17,11 @@ const errorMiddlewareReporter = store => next => (action) => {
       const json = error.json;
       console.error(`${error.message} %o`, json.messages); // eslint-disable-line no-console
       if (__CLIENT__) {
-        window.errorReporter.captureError(error, { serverResponse: error.json, requestUrl: error.url });
+        if (warningCodes.includes(error.status)) {
+          window.errorReporter.captureWarning(error, { serverResponse: error.json, requestUrl: error.url });
+        } else {
+          window.errorReporter.captureError(error, { serverResponse: error.json, requestUrl: error.url });
+        }
       }
     } else {
       console.error(action.payload, action, store.getState()); // eslint-disable-line no-console
