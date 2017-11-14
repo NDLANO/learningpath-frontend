@@ -11,7 +11,7 @@ import config from '../config';
 const requireAssets = __CLIENT__ // eslint-disable-line no-nested-ternary
   ? window.assets
   : config.isProduction
-    ? require('../../htdocs/assets/assets')
+    ? require('../../htdocs/assets/assets') // eslint-disable-line import/no-unresolved
     : require('../../server/developmentAssets'); // eslint-disable-line import/no-unresolved
 
 export default requireAssets;
