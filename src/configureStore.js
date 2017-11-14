@@ -31,7 +31,7 @@ export default function configureStore(initialState, history) {
       errorReporter,
       middleware
     ),
-    __CLIENT__ ? persistState(['authenticated', 'accessToken', 'user', 'accessToken'], { key: 'ndla:sti', slicer }) : f => f,
+    __CLIENT__ ? persistState(['authenticated', 'accessToken'], { key: 'ndla:sti', slicer }) : f => f,
     __CLIENT__ && window && window.devToolsExtension ? window.devToolsExtension() : f => f
   )(createStore);
 
