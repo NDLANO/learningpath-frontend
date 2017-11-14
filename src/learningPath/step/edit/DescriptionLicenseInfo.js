@@ -19,11 +19,15 @@ const DescriptionLicenseInfo = () => {
     'learning-step-form_show_license_info': true,
     'learning-step-form_show_license_info--active': false,
   };
-  const tooltip = <Tooltip id="showLicenseInfoTooltip">{polyglot.t('editPathStep.showLicenseInfo')}</Tooltip>;
+  const tooltip = (
+    <Tooltip id="showLicenseInfoTooltip">
+      {polyglot.t('editPathStep.showLicenseInfo')}
+    </Tooltip>
+  );
 
   return (
     <OverlayTrigger placement="top" overlay={tooltip}>
-      <span className={classNames(classes)} >
+      <span className={classNames(classes)}>
         <Icon.HelpOutline />
       </span>
     </OverlayTrigger>

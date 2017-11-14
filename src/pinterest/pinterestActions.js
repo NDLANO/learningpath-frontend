@@ -16,12 +16,20 @@ export const setFetchingPins = createAction('SET_FETCHING_PINS');
 export const removePins = createAction('REMOVE_PINS');
 
 export function fetchPinterestPins(username, boardName) {
-  return dispatch => fetchPins(username, boardName)
-    .then((pins) => {
-      dispatch(setPins(pins.data));
-      dispatch(setFetchingPins(false));
-    }).catch(() => {
-      dispatch(setFetchingPins(false));
-      dispatch(addMessage({ message: polyglot.t('pinterest.error'), timeToLive: 7000, severity: 'danger' }));
-    });
+  return dispatch =>
+    fetchPins(username, boardName)
+      .then(pins => {
+        dispatch(setPins(pins.data));
+        dispatch(setFetchingPins(false));
+      })
+      .catch(() => {
+        dispatch(setFetchingPins(false));
+        dispatch(
+          addMessage({
+            message: polyglot.t('pinterest.error'),
+            timeToLive: 7000,
+            severity: 'danger',
+          }),
+        );
+      });
 }

@@ -14,9 +14,7 @@ const oembed = {
   url: 'test.no',
 };
 test('actions/setEmbedPreview', () => {
-  const actual = setEmbedPreview(
-    oembed
-  );
+  const actual = setEmbedPreview(oembed);
 
   expect(isFSA(actual)).toBeTruthy();
 

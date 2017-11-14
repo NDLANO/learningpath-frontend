@@ -9,10 +9,10 @@
 import { isFSA } from 'flux-standard-action';
 import { setUserData } from '../sessionActions';
 
-
 test('actions/setUserData', () => {
   const actual = setUserData({
-    name: 'Alice', email: 'alice@example.com',
+    name: 'Alice',
+    email: 'alice@example.com',
   });
 
   expect(isFSA(actual)).toBeTruthy();

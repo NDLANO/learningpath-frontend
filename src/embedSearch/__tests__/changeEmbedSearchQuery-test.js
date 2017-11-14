@@ -17,9 +17,7 @@ const query = {
 };
 
 test('actions/changeEmbedSearchQuery', () => {
-  const actual = changeEmbedSearchQuery(
-    query
-  );
+  const actual = changeEmbedSearchQuery(query);
 
   expect(isFSA(actual)).toBeTruthy();
 

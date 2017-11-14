@@ -13,7 +13,11 @@ import get from 'lodash/get';
 import EmbedSearchForm from '../embedSearch/EmbedSearchForm';
 import * as actions from '../embedSearch/embedSearchActions';
 import ExternalOembedPreview from './ExternalOembedPreview';
-import { getEmbedResultFromState, getEmbedQueryFromState, getOembedContentFromState } from '../embedSearch/embedSearchSelectors';
+import {
+  getEmbedResultFromState,
+  getEmbedQueryFromState,
+  getOembedContentFromState,
+} from '../embedSearch/embedSearchSelectors';
 import polyglot from '../i18n';
 import EmbedSearchResult from '../embedSearch/EmbedSearchResult';
 import EmbedSearchPager from '../embedSearch/EmbedSearchPager';
@@ -46,8 +50,24 @@ class ExternalOembedSearch extends React.Component {
   }
 
   render() {
-    const { result, localFetchEmbedSearch, oembedPreview, query, addEmbedResult, handleTextQueryChange, textQuery } = this.props;
-    const oembed = oembedPreview ? <ExternalOembedPreview oembedPreview={oembedPreview} oembedDisplay={this.state.oembedDisplay} onPreviewboxClose={this.onPreviewClose} /> : '';
+    const {
+      result,
+      localFetchEmbedSearch,
+      oembedPreview,
+      query,
+      addEmbedResult,
+      handleTextQueryChange,
+      textQuery,
+    } = this.props;
+    const oembed = oembedPreview ? (
+      <ExternalOembedPreview
+        oembedPreview={oembedPreview}
+        oembedDisplay={this.state.oembedDisplay}
+        onPreviewboxClose={this.onPreviewClose}
+      />
+    ) : (
+      ''
+    );
     const resultItems = get(result, 'items', []);
     const emptyResult = resultItems.length === 0;
     return (
@@ -62,12 +82,20 @@ class ExternalOembedSearch extends React.Component {
         />
 
         <div className="embed-search_results">
-          { !emptyResult ? resultItems.map(item =>
-            <div key={item.cacheId} >
-              <EmbedSearchResult item={item} onPreviewClick={this.previewOembed} addEmbedResult={addEmbedResult} />
-              {oembedPreview && oembedPreview.url === item.link ? oembed : ''}
-            </div>
-          ) : <p>{polyglot.t('embedSearch.results.noResults')}</p>}
+          {!emptyResult ? (
+            resultItems.map(item => (
+              <div key={item.cacheId}>
+                <EmbedSearchResult
+                  item={item}
+                  onPreviewClick={this.previewOembed}
+                  addEmbedResult={addEmbedResult}
+                />
+                {oembedPreview && oembedPreview.url === item.link ? oembed : ''}
+              </div>
+            ))
+          ) : (
+            <p>{polyglot.t('embedSearch.results.noResults')}</p>
+          )}
           <EmbedSearchPager query={query} pagerAction={localFetchEmbedSearch} />
         </div>
       </div>
@@ -99,10 +127,13 @@ const mapDispatchToProps = {
   localChangeEmbedSearchQuery: actions.changeEmbedSearchQuery,
 };
 
-const mapStateToProps = state => Object.assign({}, state, {
-  result: getEmbedResultFromState(state, searchType),
-  query: getEmbedQueryFromState(state, searchType),
-  oembedPreview: getOembedContentFromState(state, searchType),
-});
+const mapStateToProps = state =>
+  Object.assign({}, state, {
+    result: getEmbedResultFromState(state, searchType),
+    query: getEmbedQueryFromState(state, searchType),
+    oembedPreview: getOembedContentFromState(state, searchType),
+  });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExternalOembedSearch);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ExternalOembedSearch,
+);

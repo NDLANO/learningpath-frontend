@@ -13,11 +13,14 @@ const emptyIdToken = {
   expiresAt: 0,
 };
 
-export default handleActions({
-  SET_ID_TOKEN: {
-    next: (state, action) => action.payload,
-    throw: state => state,
-  },
+export default handleActions(
+  {
+    SET_ID_TOKEN: {
+      next: (state, action) => action.payload,
+      throw: state => state,
+    },
 
-  LOGOUT_ID_TOKEN: () => emptyIdToken,
-}, emptyIdToken);
+    LOGOUT_ID_TOKEN: () => emptyIdToken,
+  },
+  emptyIdToken,
+);

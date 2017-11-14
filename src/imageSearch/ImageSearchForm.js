@@ -17,9 +17,14 @@ class ImageSearch extends React.Component {
     this.state = { showTotalCount: true };
   }
   render() {
-    const { onSubmit, query, localChangeImageSearchQuery, totalCount } = this.props;
+    const {
+      onSubmit,
+      query,
+      localChangeImageSearchQuery,
+      totalCount,
+    } = this.props;
     const textQuery = query.query;
-    const onQueryChange = (evt) => {
+    const onQueryChange = evt => {
       const newQuery = {
         query: evt.target.value,
         'page-size': 16,
@@ -29,29 +34,44 @@ class ImageSearch extends React.Component {
       this.setState({ showTotalCount: false });
       localChangeImageSearchQuery(newQuery);
     };
-    const submitImageSearchQuery = (evt) => {
+    const submitImageSearchQuery = evt => {
       evt.preventDefault();
       this.setState({ showTotalCount: true });
       onSubmit(evt, query);
     };
-    const onKeyPress = (evt) => {
+    const onKeyPress = evt => {
       if (evt.key === 'Enter') {
         submitImageSearchQuery(evt);
       }
     };
 
-    const totalCountText = totalCount === 1 ?
-      polyglot.t('learningPath.image.imageSearchOneTotalCount', { textQuery }) : polyglot.t('learningPath.image.imageSearchTotalCount', { textQuery, totalCount });
+    const totalCountText =
+      totalCount === 1
+        ? polyglot.t('learningPath.image.imageSearchOneTotalCount', {
+            textQuery,
+          })
+        : polyglot.t('learningPath.image.imageSearchTotalCount', {
+            textQuery,
+            totalCount,
+          });
 
     return (
       <div className="image-search">
         <h2>{polyglot.t('learningPath.image.search')}</h2>
         <div className="image-search_form">
           <input
-            type="text" value={textQuery} onChange={onQueryChange}
-            onKeyPress={onKeyPress} placeholder={polyglot.t('learningPath.image.searchPlaceholder')} className="search-form_query--gray"
+            type="text"
+            value={textQuery}
+            onChange={onQueryChange}
+            onKeyPress={onKeyPress}
+            placeholder={polyglot.t('learningPath.image.searchPlaceholder')}
+            className="search-form_query--gray"
           />
-          <button className="search-form_btn--gray" onClick={submitImageSearchQuery}><Icon.Search /></button>
+          <button
+            className="search-form_btn--gray"
+            onClick={submitImageSearchQuery}>
+            <Icon.Search />
+          </button>
         </div>
         <div className="image-search_border" />
         <div className="image-search_text">
@@ -69,4 +89,4 @@ ImageSearch.propTypes = {
   totalCount: PropTypes.number,
 };
 
-export default (ImageSearch);
+export default ImageSearch;

@@ -12,7 +12,13 @@ import EmbedSearchResult from './EmbedSearchResult';
 import polyglot from '../i18n';
 import EmbedSearchPager from './EmbedSearchPager';
 
-const EmbedSearchResults = ({ items, onPreviewClick, addEmbedResult, query, pagerAction }) => {
+const EmbedSearchResults = ({
+  items,
+  onPreviewClick,
+  addEmbedResult,
+  query,
+  pagerAction,
+}) => {
   if (!items || items.length === 0) {
     return (
       <div className="embed-search_results">
@@ -23,12 +29,16 @@ const EmbedSearchResults = ({ items, onPreviewClick, addEmbedResult, query, page
 
   return (
     <div className="embed-search_results">
-      {items.map(item =>
-        <EmbedSearchResult key={item.cacheId} item={item} onPreviewClick={onPreviewClick} addEmbedResult={addEmbedResult} />
-      )}
+      {items.map(item => (
+        <EmbedSearchResult
+          key={item.cacheId}
+          item={item}
+          onPreviewClick={onPreviewClick}
+          addEmbedResult={addEmbedResult}
+        />
+      ))}
       <EmbedSearchPager query={query} pagerAction={pagerAction} />
     </div>
-
   );
 };
 EmbedSearchResults.propTypes = {

@@ -15,31 +15,41 @@ import SiteNavSessionAction from '../siteNav/SiteNavSessionAction';
 import SiteNavMyPage from '../siteNav/SiteNavMyPage';
 
 test('component/SiteNav learningpaths', () => {
-  const navLinks = shallow(<SiteNav authenticated={false} localCloseSidebars={noop} />).find(Link);
+  const navLinks = shallow(
+    <SiteNav authenticated={false} localCloseSidebars={noop} />,
+  ).find(Link);
   expect(navLinks.length).toBe(1);
   expect(navLinks.at(0).props().to).toBe('/learningpaths');
 });
 
 test('component/SiteNavSessionAction not authenticated', () => {
-  const navLinks = shallow(<SiteNavSessionAction authenticated={false} localCloseSidebars={noop} />).find(Link);
+  const navLinks = shallow(
+    <SiteNavSessionAction authenticated={false} localCloseSidebars={noop} />,
+  ).find(Link);
   expect(navLinks.length).toBe(1);
   expect(navLinks.at(0).props().to).toBe('/login');
 });
 
 test('component/SiteNavSessionAction authenticated', () => {
-  const navLinks = shallow(<SiteNavSessionAction authenticated localCloseSidebars={noop} />).find(Link);
+  const navLinks = shallow(
+    <SiteNavSessionAction authenticated localCloseSidebars={noop} />,
+  ).find(Link);
   expect(navLinks.length).toBe(1);
   expect(navLinks.at(0).props().to).toBe('/logout');
 });
 
 test('component/SiteNavMyPage not authenticated', () => {
-  const navLinks = shallow(<SiteNavMyPage authenticated={false} localCloseSidebars={noop} />).find(Link);
+  const navLinks = shallow(
+    <SiteNavMyPage authenticated={false} localCloseSidebars={noop} />,
+  ).find(Link);
   expect(navLinks.length).toBe(0);
   expect(navLinks.at(0).props().to).toBe(undefined);
 });
 
 test('component/SiteNavMyPage authenticated', () => {
-  const navLinks = shallow(<SiteNavMyPage authenticated localCloseSidebars={noop} />).find(Link);
+  const navLinks = shallow(
+    <SiteNavMyPage authenticated localCloseSidebars={noop} />,
+  ).find(Link);
   expect(navLinks.length).toBe(1);
   expect(navLinks.at(0).props().to).toBe('/minside');
 });

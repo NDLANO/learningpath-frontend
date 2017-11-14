@@ -10,8 +10,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const TextAreaField = (props) => {
-  const { input, disableVerticalResize, disableHorizontalResize, rows, cols, maxLength, label, placeholder, labelClassName, type, meta: { touched, error } } = props;
+const TextAreaField = props => {
+  const {
+    input,
+    disableVerticalResize,
+    disableHorizontalResize,
+    rows,
+    cols,
+    maxLength,
+    label,
+    placeholder,
+    labelClassName,
+    type,
+    meta: { touched, error },
+  } = props;
 
   const inputClassName = classNames({
     textarea: true,
@@ -22,9 +34,22 @@ const TextAreaField = (props) => {
 
   return (
     <div>
-      <label className={labelClassName} htmlFor={input.name}>{label}</label>
-      <textarea {...input} rows={rows} cols={cols} maxLength={maxLength} placeholder={placeholder} type={type} className={inputClassName} />
-      {touched && error && <span className="error_message error_message--red">{error}</span>}
+      <label className={labelClassName} htmlFor={input.name}>
+        {label}
+      </label>
+      <textarea
+        {...input}
+        rows={rows}
+        cols={cols}
+        maxLength={maxLength}
+        placeholder={placeholder}
+        type={type}
+        className={inputClassName}
+      />
+      {touched &&
+        error && (
+          <span className="error_message error_message--red">{error}</span>
+        )}
     </div>
   );
 };

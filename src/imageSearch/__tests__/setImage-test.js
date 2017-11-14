@@ -6,15 +6,11 @@
  *
  */
 
-
 import { isFSA } from 'flux-standard-action';
 import { setSelectedImage, setSavedImage } from '../imageActions';
 
-
 test('actions/setSelecteImage', () => {
-  const actual = setSelectedImage(
-    { id: '123345' }
-  );
+  const actual = setSelectedImage({ id: '123345' });
 
   expect(isFSA(actual)).toBeTruthy();
 
@@ -33,11 +29,8 @@ test('actions/setSelecteImage with error', () => {
   expect(actual.error).toBeTruthy();
 });
 
-
 test('actions/setSavedImage', () => {
-  const actual = setSavedImage(
-    { id: '123345' }
-  );
+  const actual = setSavedImage({ id: '123345' });
 
   expect(isFSA(actual)).toBeTruthy();
 

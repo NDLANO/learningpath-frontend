@@ -32,14 +32,18 @@ export default class Lightbox extends React.Component {
 
     const style = width ? { maxWidth: width } : undefined;
 
-    return this.state.display ? <div className="lightbox">
-      <div className="lightbox_content" style={style}>
-        <button className="un-button close-dialog" onClick={this.onCloseButtonClick}>
-          <Icon.Clear />
-        </button>
-        {children}
+    return this.state.display ? (
+      <div className="lightbox">
+        <div className="lightbox_content" style={style}>
+          <button
+            className="un-button close-dialog"
+            onClick={this.onCloseButtonClick}>
+            <Icon.Clear />
+          </button>
+          {children}
+        </div>
       </div>
-    </div> : null;
+    ) : null;
   }
 }
 

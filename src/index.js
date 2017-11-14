@@ -46,13 +46,26 @@ const emptyState = {
   locale,
 };
 
-const initialState = !isEmpty(window.initialState) && window.initialState.accessToken ?
-  { ...window.initialState, accessToken: { token: window.initialState.accessToken, expiresAt: getAccessTokenExpireEpoch(window.initialState.accessToken) } } : emptyState;
+const initialState =
+  !isEmpty(window.initialState) && window.initialState.accessToken
+    ? {
+        ...window.initialState,
+        accessToken: {
+          token: window.initialState.accessToken,
+          expiresAt: getAccessTokenExpireEpoch(window.initialState.accessToken),
+        },
+      }
+    : emptyState;
 
 const store = configureStore(initialState, browserHistory);
 
 const { logglyApiKey, logEnvironment, componentName } = window.config;
-window.errorReporter = ErrorReporter.getInstance({ store, logglyApiKey, environment: logEnvironment, componentName });
+window.errorReporter = ErrorReporter.getInstance({
+  store,
+  logglyApiKey,
+  environment: logEnvironment,
+  componentName,
+});
 TokenStatusHandler.getInstance({ store });
 
 ReactDOM.hydrate(
@@ -61,5 +74,5 @@ ReactDOM.hydrate(
       <App />
     </Router>
   </Provider>,
-  document.getElementById('app-container')
+  document.getElementById('app-container'),
 );

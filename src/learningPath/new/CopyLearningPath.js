@@ -10,7 +10,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import polyglot from '../../i18n';
 
-
 export default function CopyLearningPath({ onClose, onCopy }) {
   return (
     <div className="copy_learning-path">

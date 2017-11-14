@@ -4,7 +4,9 @@ import config from '../config';
 import Button from '../common/buttons/Button';
 import polyglot from '../i18n';
 
-const PINTEREST_ENABLED = __SERVER__ ? config.pinterestEnabled : window.config.pinterestEnabled;
+const PINTEREST_ENABLED = __SERVER__
+  ? config.pinterestEnabled
+  : window.config.pinterestEnabled;
 
 const PinterestLightboxButton = ({ learningPath, toggleLightBox }) => {
   if (!PINTEREST_ENABLED || !learningPath.canEdit) {
@@ -12,7 +14,9 @@ const PinterestLightboxButton = ({ learningPath, toggleLightBox }) => {
   }
   return (
     <div className="add-from-pinterest">
-      <Button className="button button--primary-outline cta-link--block pinterest-lightbox_button" onClick={toggleLightBox}>
+      <Button
+        className="button button--primary-outline cta-link--block pinterest-lightbox_button"
+        onClick={toggleLightBox}>
         <div className="pinterest-sign--circle">P</div>
         {polyglot.t('pinterest.importFrom')}
       </Button>

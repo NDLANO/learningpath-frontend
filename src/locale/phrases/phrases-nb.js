@@ -89,7 +89,8 @@ const phrases = {
     of: 'av',
     description: 'Beskrivelse',
     descriptionPlaceholder: 'Skriv en kort beskrivelse av læringsstien.',
-    descriptionInformation: 'Maks 150 tegn og du har %{remainingDescriptionLength} igen. Beskrivelsen blir synlig i søk.',
+    descriptionInformation:
+      'Maks 150 tegn og du har %{remainingDescriptionLength} igen. Beskrivelsen blir synlig i søk.',
     title: 'Tittel på læringssti',
     imagePick: 'Søk og velg bilde til læringsstien',
     duration: 'Varighet',
@@ -143,8 +144,10 @@ const phrases = {
       summary: 'Oppsummering',
     },
     validation: {
-      oneOfDescriptionOrUrlIsRequired: 'Enten Beskrivelse eller Url feltet må fylles ut.',
-      licenseAndDescription: 'Ved utfyllelse av beskrivelse må lisens være valgt.',
+      oneOfDescriptionOrUrlIsRequired:
+        'Enten Beskrivelse eller Url feltet må fylles ut.',
+      licenseAndDescription:
+        'Ved utfyllelse av beskrivelse må lisens være valgt.',
     },
     edit: 'Rediger læringssteg',
     urlPlaceholder: 'Lim inn lenke',
@@ -152,7 +155,8 @@ const phrases = {
     titlePlaceHolder: 'Skriv en tittel her',
     previewOembed: 'Forhåndsvis hele artikkelen',
     noLicenseChosen: 'Ingen lisens valgt',
-    showLicenseInfo: 'Lisensen gjelder kun for beskrivelsen av det valgte steget',
+    showLicenseInfo:
+      'Lisensen gjelder kun for beskrivelsen av det valgte steget',
     showTitle: 'Velg om titelen skal vises eller skjules',
   },
   sortSteps: {
@@ -190,7 +194,8 @@ const phrases = {
   },
   copyLearningPath: {
     makeCopy: 'Lag kopi',
-    copyText: 'Ønsker du å ta utgangspunkt i denne læringsstien for å lage en ny læringssti? Vi åpner en kopi og blir lagret sammen med dine andre læringsstier.',
+    copyText:
+      'Ønsker du å ta utgangspunkt i denne læringsstien for å lage en ny læringssti? Vi åpner en kopi og blir lagret sammen med dine andre læringsstier.',
     createCopy: 'Kopier læringssti',
     abortCopy: 'Avbryt',
     copyTitle: 'Kopier annens læringssti',

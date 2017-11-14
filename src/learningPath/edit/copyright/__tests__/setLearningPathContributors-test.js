@@ -11,13 +11,19 @@ import { isFSA } from 'flux-standard-action';
 import { setLearningPathContributors } from '../learningPathContributorsActions';
 
 test('actions/setLearningPathContributors', () => {
-  const actual = setLearningPathContributors([{ type: 'Forfatter', name: 'Christian' }, { type: 'Forfatter', name: 'Sebastian' }]);
+  const actual = setLearningPathContributors([
+    { type: 'Forfatter', name: 'Christian' },
+    { type: 'Forfatter', name: 'Sebastian' },
+  ]);
 
   expect(isFSA(actual)).toBeTruthy();
 
   expect(actual.type).toBe('SET_LEARNING_PATH_CONTRIBUTORS');
   expect(actual.payload).toBeTruthy();
-  expect(actual.payload).toEqual([{ type: 'Forfatter', name: 'Christian' }, { type: 'Forfatter', name: 'Sebastian' }]);
+  expect(actual.payload).toEqual([
+    { type: 'Forfatter', name: 'Christian' },
+    { type: 'Forfatter', name: 'Sebastian' },
+  ]);
   expect(actual.error).toBeFalsy();
 });
 

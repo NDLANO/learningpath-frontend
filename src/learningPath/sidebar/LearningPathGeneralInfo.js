@@ -25,10 +25,16 @@ class LearningPathGeneralInfo extends React.Component {
     this.state = { isClient: false };
   }
   componentDidMount() {
-    this.setState({isClient: true}); // eslint-disable-line
+    this.setState({ isClient: true }); // eslint-disable-line
   }
   render() {
-    const { authenticated, learningPath, localCloseSidebars, onCopyLearningPathClick, changeStatusButton } = this.props;
+    const {
+      authenticated,
+      learningPath,
+      localCloseSidebars,
+      onCopyLearningPathClick,
+      changeStatusButton,
+    } = this.props;
     const { lang } = this.context;
     const borderBoxClassName = classNames({
       'border-box_wrapper': true,
@@ -56,10 +62,16 @@ class LearningPathGeneralInfo extends React.Component {
           <div className="learningpath-general-info_b">
             <div className={borderBoxClassName}>
               <div className="border-box">
-                <LabeledIcon.Today labelText={formatDate(learningPath.lastUpdated, lang)} tagName="time" />
+                <LabeledIcon.Today
+                  labelText={formatDate(learningPath.lastUpdated, lang)}
+                  tagName="time"
+                />
               </div>
               <div className="border-box">
-                <LabeledIcon.QueryBuilder labelText={formatDuration(learningPath.duration, lang)} tagName="time" />
+                <LabeledIcon.QueryBuilder
+                  labelText={formatDuration(learningPath.duration, lang)}
+                  tagName="time"
+                />
               </div>
             </div>
             {authenticated && this.state.isClient ? actions : ' '}
@@ -67,7 +79,7 @@ class LearningPathGeneralInfo extends React.Component {
         </div>
       </div>
     );
-  };
+  }
 }
 
 LearningPathGeneralInfo.propTypes = {
@@ -84,13 +96,16 @@ LearningPathGeneralInfo.contextTypes = {
   lang: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = state => Object.assign({}, state, {
-  learningPath: getLearningPath(state),
-  authenticated: state.authenticated,
-});
+const mapStateToProps = state =>
+  Object.assign({}, state, {
+    learningPath: getLearningPath(state),
+    authenticated: state.authenticated,
+  });
 
 const mapDispatchToProps = {
   localCloseSidebars: closeSidebars,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LearningPathGeneralInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  LearningPathGeneralInfo,
+);

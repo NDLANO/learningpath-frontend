@@ -7,39 +7,48 @@ import LearningPath from '../src/learningPath/LearningPath';
 import LearningPathStep from '../src/learningPath/step/LearningPathStep';
 
 export const serverRoutes = [
-  { path: '/',
+  {
+    path: '/',
     exact: true,
     component: Welcome,
   },
-  { path: '/login',
+  {
+    path: '/login',
     exact: true,
     component: LoginProviders,
   },
-  { path: '/learningpaths',
+  {
+    path: '/learningpaths',
     exact: true,
     component: LearningPathSearch,
   },
-  { path: '/learningpaths/:pathId/step/:stepId',
+  {
+    path: '/learningpaths/:pathId/step/:stepId',
     exact: true,
     component: LearningPathStep,
   },
-  { path: '/learningpaths/:pathId/step/:stepId',
+  {
+    path: '/learningpaths/:pathId/step/:stepId',
     exact: true,
     component: LearningPath,
   },
-  { path: '/learningpaths/:pathId',
+  {
+    path: '/learningpaths/:pathId',
     exact: true,
     component: LearningPath,
   },
-  { path: '/forbidden',
+  {
+    path: '/forbidden',
     exact: true,
     component: Forbidden,
   },
-  { path: '/notfound',
+  {
+    path: '/notfound',
     exact: true,
     component: NotFound,
   },
-  { path: '*',
+  {
+    path: '*',
     exact: true,
     notFound: true,
     component: NotFound,

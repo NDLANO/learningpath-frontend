@@ -9,7 +9,6 @@
 import { createSelector } from 'reselect';
 import { convertFieldWithFallback } from '../util/convertFieldWithFallback';
 
-
 export const getLearningPathFromState = state => state.learningPath;
 
 export const getLearningPath = createSelector(
@@ -18,17 +17,19 @@ export const getLearningPath = createSelector(
     ...learningPath,
     title: convertFieldWithFallback(learningPath, 'title', ''),
     description: convertFieldWithFallback(learningPath, 'description', ''),
-    learningsteps: learningPath.learningsteps ? learningPath.learningsteps.map(step => ({
-      ...step,
-      title: convertFieldWithFallback(step, 'title', ''),
-    })) : [],
+    learningsteps: learningPath.learningsteps
+      ? learningPath.learningsteps.map(step => ({
+          ...step,
+          title: convertFieldWithFallback(step, 'title', ''),
+        }))
+      : [],
     tags: convertFieldWithFallback(learningPath, 'tags', []),
-  }));
-
+  }),
+);
 
 export const getLearningPathSteps = createSelector(
   [getLearningPathFromState],
-  (learningPath) => {
+  learningPath => {
     if (learningPath.learningsteps) {
       return learningPath.learningsteps.map(step => ({
         ...step,
@@ -36,4 +37,5 @@ export const getLearningPathSteps = createSelector(
       }));
     }
     return [];
-  });
+  },
+);

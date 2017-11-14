@@ -24,7 +24,7 @@ export class LogoutSession extends React.Component {
   handleLogoutClick = (federated = undefined) => {
     this.setState({ logoutClicked: true });
     this.props.localLogout(federated);
-  }
+  };
 
   render() {
     const { authenticated } = this.props;
@@ -34,9 +34,17 @@ export class LogoutSession extends React.Component {
 
     return (
       <div className="one-column one-column--narrow logout-container one-column--text-centered">
-        <button className="button--primary-outline cta-link--block" onClick={() => this.handleLogoutClick()}>{polyglot.t('logoutSession.logutLearningpathSite')}</button>
+        <button
+          className="button--primary-outline cta-link--block"
+          onClick={() => this.handleLogoutClick()}>
+          {polyglot.t('logoutSession.logutLearningpathSite')}
+        </button>
         <strong>{polyglot.t('logoutSession.or')}</strong>
-        <button className="button--primary-outline cta-link--block" onClick={() => this.handleLogoutClick(true)}>{polyglot.t('logoutSession.logoutWholeSession')}</button>
+        <button
+          className="button--primary-outline cta-link--block"
+          onClick={() => this.handleLogoutClick(true)}>
+          {polyglot.t('logoutSession.logoutWholeSession')}
+        </button>
       </div>
     );
   }

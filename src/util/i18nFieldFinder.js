@@ -10,7 +10,14 @@ import defined from 'defined';
 
 import { findFallbackTranslation } from './createFieldByLanguageFinder';
 
-export function oembedContentI18N(learningPathStep, lang, withFallback = false) {
+export function oembedContentI18N(
+  learningPathStep,
+  lang,
+  withFallback = false,
+) {
   const translations = defined(learningPathStep.embedUrl, []);
-  return defined(translations.find(d => d.language === lang), withFallback ? findFallbackTranslation(translations) : undefined);
+  return defined(
+    translations.find(d => d.language === lang),
+    withFallback ? findFallbackTranslation(translations) : undefined,
+  );
 }

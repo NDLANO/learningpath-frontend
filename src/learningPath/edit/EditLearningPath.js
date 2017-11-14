@@ -16,13 +16,19 @@ import LearningPathForm from './LearningPathForm';
 import { fetchLearningPathTagsIfNeeded } from './tags/learningPathTagsActions';
 import { fetchLearningPathContributorsIfNeeded } from './copyright/learningPathContributorsActions';
 import { getLearningPathTags } from './tags/learningPathTagsSelectors';
-import { fetchLearningPathImages, fetchLearningPathImage, fetchLearningPathImageWithMetaUrl } from '../../imageSearch/imageActions';
+import {
+  fetchLearningPathImages,
+  fetchLearningPathImage,
+  fetchLearningPathImageWithMetaUrl,
+} from '../../imageSearch/imageActions';
 import { updateLearningPath } from '../learningPathActions';
-import { getLearningPath, getLearningPathSteps } from '../learningPathSelectors';
+import {
+  getLearningPath,
+  getLearningPathSteps,
+} from '../learningPathSelectors';
 import { getLocale } from '../../locale/localeSelectors';
 
 class EditLearningPath extends Component {
-
   componentDidMount() {
     const { fetchLearningPathTags, fetchLearningPathContributors } = this.props;
     fetchLearningPathTags();
@@ -30,7 +36,15 @@ class EditLearningPath extends Component {
   }
 
   render() {
-    const { learningPath, localFetchImages, localUpdateLearningPath, localFetchImage, lang: language, tags, contributors } = this.props;
+    const {
+      learningPath,
+      localFetchImages,
+      localUpdateLearningPath,
+      localFetchImage,
+      lang: language,
+      tags,
+      contributors,
+    } = this.props;
 
     if (!learningPath.id) {
       return null;
@@ -40,12 +54,13 @@ class EditLearningPath extends Component {
       return <Redirect to="/forbidden" />;
     }
 
-    const handleSubmit = (values) => localUpdateLearningPath(learningPath.id, {
+    const handleSubmit = values =>
+      localUpdateLearningPath(learningPath.id, {
         title: values.title,
         description: values.description,
         language,
         revision: learningPath.revision,
-        duration: (values.duration.replace(/,/g, '.')) * 60,
+        duration: values.duration.replace(/,/g, '.') * 60,
         tags: values.tags,
         copyright: {
           license: {
@@ -53,16 +68,25 @@ class EditLearningPath extends Component {
             description: 'Creative Commons Attribution-ShareAlike 2.0 Generic',
             url: 'https://creativecommons.org/licenses/by-sa/2.0/',
           },
-          contributors: !isEmpty(values.contributors) ? values.contributors : undefined,
+          contributors: !isEmpty(values.contributors)
+            ? values.contributors
+            : undefined,
         },
-        coverPhotoMetaUrl: !isEmpty(values.coverPhotoMetaUrl) ? values.coverPhotoMetaUrl : undefined,
+        coverPhotoMetaUrl: !isEmpty(values.coverPhotoMetaUrl)
+          ? values.coverPhotoMetaUrl
+          : undefined,
       });
 
     return (
       <div className="two-column_content">
         <LearningPathForm
-          learningPath={learningPath} tagOptions={tags} contributorOptions={contributors} onSubmit={handleSubmit} localFetchImages={localFetchImages}
-          fetchImage={localFetchImage} lang={language}
+          learningPath={learningPath}
+          tagOptions={tags}
+          contributorOptions={contributors}
+          onSubmit={handleSubmit}
+          localFetchImages={localFetchImages}
+          fetchImage={localFetchImage}
+          lang={language}
         />
       </div>
     );
@@ -83,14 +107,15 @@ EditLearningPath.propTypes = {
   fetchLearningPathContributors: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => Object.assign({}, state, {
-  learningPath: getLearningPath(state),
-  learningSteps: getLearningPathSteps(state),
-  tags: getLearningPathTags(state),
-  contributors: get(state, 'learningPathContributors.all', []),
-  licenses: get(state, 'learningPathLicenses.creativeCommonLicenses.all', []),
-  lang: getLocale(state),
-});
+const mapStateToProps = state =>
+  Object.assign({}, state, {
+    learningPath: getLearningPath(state),
+    learningSteps: getLearningPathSteps(state),
+    tags: getLearningPathTags(state),
+    contributors: get(state, 'learningPathContributors.all', []),
+    licenses: get(state, 'learningPathLicenses.creativeCommonLicenses.all', []),
+    lang: getLocale(state),
+  });
 
 const mapDispatchToProps = {
   localUpdateLearningPath: updateLearningPath,

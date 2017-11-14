@@ -12,7 +12,6 @@ import Multiselect from 'react-widgets/lib/Multiselect';
 
 import polyglot from '../i18n';
 
-
 class TagsInput extends Component {
   constructor() {
     super();
@@ -23,18 +22,23 @@ class TagsInput extends Component {
     const { tagOptions, input } = this.props;
 
     const messages = {
-      createOption: (props) => <span><b>{`"${props.searchTerm}"`}</b> {polyglot.t('tagInput.createOption')}</span>,
+      createOption: props => (
+        <span>
+          <b>{`"${props.searchTerm}"`}</b> {polyglot.t('tagInput.createOption')}
+        </span>
+      ),
       emptyFilter: polyglot.t('tagInput.emptyFilter'),
       emptyList: polyglot.t('tagInput.emptyList'),
     };
 
-    if (typeof value === 'string') { // Handle redux form values witch are initialized as strings
+    if (typeof value === 'string') {
+      // Handle redux form values witch are initialized as strings
       return null;
     }
 
     const { open } = this.state;
 
-    const handleAdd = (tag) => {
+    const handleAdd = tag => {
       if (input.value.includes(tag)) {
         return;
       }
@@ -42,7 +46,7 @@ class TagsInput extends Component {
       input.onChange(input.value);
     };
 
-    const handleSearch = (searchTerm) => {
+    const handleSearch = searchTerm => {
       this.setState({ open: searchTerm.length > 2 });
     };
 
@@ -56,7 +60,7 @@ class TagsInput extends Component {
         onBlur={() => input.onBlur(input.value)}
         onChange={input.onChange}
         onCreate={handleAdd}
-        onToggle={() => { }}
+        onToggle={() => {}}
         onSearch={handleSearch}
       />
     );

@@ -11,12 +11,17 @@ import PropTypes from 'prop-types';
 import ButtonPager from '../common/pager/ButtonPager';
 
 const EmbedSearchPager = ({ query, pagerAction }) => {
-  const onPagerButtonClicked = (q) => {
-    const nextIndex = query.start + ((q.page - query.page) * 10);
+  const onPagerButtonClicked = q => {
+    const nextIndex = query.start + (q.page - query.page) * 10;
     pagerAction(Object.assign({}, q, { start: nextIndex }));
   };
   return (
-    <ButtonPager page={query.page} lastPage={query.numberOfPages} query={query} pagerAction={onPagerButtonClicked} />
+    <ButtonPager
+      page={query.page}
+      lastPage={query.numberOfPages}
+      query={query}
+      pagerAction={onPagerButtonClicked}
+    />
   );
 };
 EmbedSearchPager.propTypes = {

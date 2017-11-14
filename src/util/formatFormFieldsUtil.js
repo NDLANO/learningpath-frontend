@@ -1,7 +1,8 @@
-
 export function formattedEmbedUrl(step, url) {
   const defaultValue = step.id ? { url: '', embedType: 'oembed' } : undefined;
-  return url && url.url ? { url: url.url, embedType: url.embedType } : defaultValue;
+  return url && url.url
+    ? { url: url.url, embedType: url.embedType }
+    : defaultValue;
 }
 
 export function formattedEmbedLicense(license) {

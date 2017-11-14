@@ -22,8 +22,12 @@ const OnClickCheckbox = ({ input }) => {
     'learning-step-form_show-title': true,
     'learning-step-form_show-title--active': input.value,
   };
-  const tooltip = <Tooltip id="showTitleTooltip">{polyglot.t('editPathStep.showTitle')}</Tooltip>;
-  const handleClick = (evt) => {
+  const tooltip = (
+    <Tooltip id="showTitleTooltip">
+      {polyglot.t('editPathStep.showTitle')}
+    </Tooltip>
+  );
+  const handleClick = evt => {
     evt.preventDefault();
     input.onChange(!input.value);
     input.onBlur(!input.value);
@@ -31,10 +35,16 @@ const OnClickCheckbox = ({ input }) => {
 
   return (
     <OverlayTrigger placement="top" overlay={tooltip}>
-      <button className={classNames(classes)} onClick={handleClick} >
+      <button className={classNames(classes)} onClick={handleClick}>
         {input.value ? <Icon.Visibility /> : <Icon.VisibilityOff />}
         <label htmlFor="visibility" className="sr-only">
-          <input id="visibility" type="checkbox" {...input} onClick={handleClick} onBlur={noop} />
+          <input
+            id="visibility"
+            type="checkbox"
+            {...input}
+            onClick={handleClick}
+            onBlur={noop}
+          />
         </label>
       </button>
     </OverlayTrigger>

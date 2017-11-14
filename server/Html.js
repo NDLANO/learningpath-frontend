@@ -12,13 +12,31 @@ import { renderToString } from 'react-dom/server';
 import serialize from 'serialize-javascript';
 import config from '../src/config';
 import head from './Meta';
-import { SvgPolyfillScript, SvgPolyfillScriptInitalization } from './svgPolyfill';
+import {
+  SvgPolyfillScript,
+  SvgPolyfillScriptInitalization,
+} from './svgPolyfill';
 
-const assets = process.env.NODE_ENV === 'development' ? require('./developmentAssets') : require('../htdocs/assets/assets'); // eslint-disable-line import/no-unresolved
+const assets =
+  process.env.NODE_ENV === 'development'
+    ? require('./developmentAssets')
+    : require('../htdocs/assets/assets'); // eslint-disable-line import/no-unresolved
 
 const GoogleTagMangerNoScript = () => {
   if (config.googleTagMangerId) {
-    return <noscript><iframe title="Google Tag Manager" src={`//www.googletagmanager.com/ns.html?id=${config.googleTagMangerId}`} height="0" width="0" style={{ display: 'none', visibility: 'hidden' }} /></noscript>;
+    return (
+      <noscript>
+        <iframe
+          title="Google Tag Manager"
+          src={`//www.googletagmanager.com/ns.html?id=${
+            config.googleTagMangerId
+          }`}
+          height="0"
+          width="0"
+          style={{ display: 'none', visibility: 'hidden' }}
+        />
+      </noscript>
+    );
   }
   return null;
 };
@@ -59,22 +77,31 @@ const HotjarScript = () => {
   return null;
 };
 
-const ZendeskScript = () => <script dangerouslySetInnerHTML={{
-  __html: `/*<![CDATA[*/window.zEmbed||function(e,t){var n,o,d,i,s,a=[],r=document.createElement("iframe");window.zEmbed=function(){a.push(arguments)},window.zE=window.zE||window.zEmbed,r.src="javascript:false",r.title="",r.role="presentation",(r.frameElement||r).style.cssText="display: none",d=document.getElementsByTagName("script"),d=d[d.length-1],d.parentNode.insertBefore(r,d),i=r.contentWindow,s=i.document;try{o=s}catch(e){n=document.domain,r.src='javascript:var d=document.open();d.domain="'+n+'";void(0);',o=s}o.open()._l=function(){var e=this.createElement("script");n&&(this.domain=n),e.id="js-iframe-async",e.src="https://assets.zendesk.com/embeddable_framework/main.js",this.t=+new Date,this.zendeskHost="ndla.zendesk.com",this.zEQueue=a,this.body.appendChild(e)},o.write('<body onload="document._l();">'),o.close()}();
+const ZendeskScript = () => (
+  <script
+    dangerouslySetInnerHTML={{
+      __html: `/*<![CDATA[*/window.zEmbed||function(e,t){var n,o,d,i,s,a=[],r=document.createElement("iframe");window.zEmbed=function(){a.push(arguments)},window.zE=window.zE||window.zEmbed,r.src="javascript:false",r.title="",r.role="presentation",(r.frameElement||r).style.cssText="display: none",d=document.getElementsByTagName("script"),d=d[d.length-1],d.parentNode.insertBefore(r,d),i=r.contentWindow,s=i.document;try{o=s}catch(e){n=document.domain,r.src='javascript:var d=document.open();d.domain="'+n+'";void(0);',o=s}o.open()._l=function(){var e=this.createElement("script");n&&(this.domain=n),e.id="js-iframe-async",e.src="https://assets.zendesk.com/embeddable_framework/main.js",this.t=+new Date,this.zendeskHost="ndla.zendesk.com",this.zEQueue=a,this.body.appendChild(e)},o.write('<body onload="document._l();">'),o.close()}();
   /*]]>*/`,
-}}/>;
+    }}
+  />
+);
 
-const ZendeskLocale = ({lang}) => <script dangerouslySetInnerHTML={{__html: `
+const ZendeskLocale = ({ lang }) => (
+  <script
+    dangerouslySetInnerHTML={{
+      __html: `
   zE(function() {
     zE.setLocale('${lang}');
   });`,
-}}/>;
+    }}
+  />
+);
 
 ZendeskLocale.propTypes = {
   lang: PropTypes.string.isRequired,
 };
 
-const Html = (props) => {
+const Html = props => {
   const { lang, className, state, component } = props;
   const content = component ? renderToString(component) : '';
 
@@ -88,20 +115,47 @@ const Html = (props) => {
         {head.meta.toComponent()}
         <GoogleTagMangerScript />
         <SvgPolyfillScript className={className} />
-        <link rel="stylesheet" type="text/css" href={`/assets/${assets['main.css']}`} />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic,300|Signika:400,600,300,700" />
-        <link rel="shortcut icon" href={`/assets/${assets['favicon.ico']}`} type="image/x-icon" />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href={`/assets/${assets['main.css']}`}
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic,300|Signika:400,600,300,700"
+        />
+        <link
+          rel="shortcut icon"
+          href={`/assets/${assets['favicon.ico']}`}
+          type="image/x-icon"
+        />
       </head>
       <body>
         <GoogleTagMangerNoScript />
-        <div id="app-container" className="app-container" dangerouslySetInnerHTML={{ __html: content }} />
-        <script dangerouslySetInnerHTML={{ __html: `window.initialState = ${serialize(state)}` }} />
-        <script dangerouslySetInnerHTML={{ __html: `window.assets = ${serialize(assets)}` }} />
-        <script dangerouslySetInnerHTML={{ __html: `window.config = ${serialize(config)}` }} />
+        <div
+          id="app-container"
+          className="app-container"
+          dangerouslySetInnerHTML={{ __html: content }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.initialState = ${serialize(state)}`,
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.assets = ${serialize(assets)}`,
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.config = ${serialize(config)}`,
+          }}
+        />
         <script src={`/assets/${assets['main.js']}`} />
         <HotjarScript />
         <ZendeskScript />
-        <ZendeskLocale lang={lang}/>
+        <ZendeskLocale lang={lang} />
         <SvgPolyfillScriptInitalization className={className} />
       </body>
     </html>

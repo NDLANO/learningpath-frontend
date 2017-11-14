@@ -45,8 +45,14 @@ export class App extends React.Component {
             <Route exact path="/login/failure" component={LoginFailure} />
             <Route path="/logout" component={LogoutSession} />
             <PrivateRoute path="/minside" component={MyPage} />
-            <PrivateRoute path="/lti/:pathId/step/:stepId" component={LTIEmbedded} />
-            <PrivateRoute path="/lti/:pathId/step/new" component={LTIEmbedded} />
+            <PrivateRoute
+              path="/lti/:pathId/step/:stepId"
+              component={LTIEmbedded}
+            />
+            <PrivateRoute
+              path="/lti/:pathId/step/new"
+              component={LTIEmbedded}
+            />
             <Route path="/learningpaths" component={LearningPathContainer} />
             <Route path="/forbidden" component={Forbidden} />
             <Route path="/notfound" component={NotFound} />
@@ -56,7 +62,6 @@ export class App extends React.Component {
         </div>
         <ScrollToTop />
       </div>
-
     );
   }
 }

@@ -32,7 +32,8 @@ class PinterestBoardForm extends Component {
   }
 
   render() {
-    const disabledButton = isEmpty(this.state.boardName) || isEmpty(this.state.username);
+    const disabledButton =
+      isEmpty(this.state.boardName) || isEmpty(this.state.username);
     return (
       <form onSubmit={this.handleSubmit} className="pinterest-search-form">
         <input
@@ -52,11 +53,12 @@ class PinterestBoardForm extends Component {
         <button
           type="submit"
           className="button button--primary-outline cta-link--block pinterest_button"
-          disabled={disabledButton}
-        >
+          disabled={disabledButton}>
           {polyglot.t('pinterest.form.submit')}
         </button>
-        <p className="learning-path_input-information">{polyglot.t('pinterest.form.requiredFields')}</p>
+        <p className="learning-path_input-information">
+          {polyglot.t('pinterest.form.requiredFields')}
+        </p>
       </form>
     );
   }

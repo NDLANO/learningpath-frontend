@@ -9,9 +9,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-  closeSidebars,
-} from './sidebarActions';
+import { closeSidebars } from './sidebarActions';
 
 export default function withCloseSidebars(Component) {
   function CloseSidebarsOnClickComponent({ localCloseSidebars, ...rest }) {
@@ -25,5 +23,7 @@ export default function withCloseSidebars(Component) {
     localCloseSidebars: closeSidebars,
   };
 
-  return connect(state => state, mapDispatchToProps)(CloseSidebarsOnClickComponent);
+  return connect(state => state, mapDispatchToProps)(
+    CloseSidebarsOnClickComponent,
+  );
 }

@@ -15,9 +15,13 @@ import LoginProviders from './LoginProviders';
 
 export default function requireAuthentication(Component) {
   function AuthenticatedComponent(props) {
-    return props.authenticated ?
-      <Component {...props} /> :
-      <LoginProviders message={polyglot.t('requireAuthentication.errorMessage')} />;
+    return props.authenticated ? (
+      <Component {...props} />
+    ) : (
+      <LoginProviders
+        message={polyglot.t('requireAuthentication.errorMessage')}
+      />
+    );
   }
 
   AuthenticatedComponent.propTypes = {

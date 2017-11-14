@@ -20,7 +20,7 @@ const EmbedSearchResultImage = ({ pagemap, title }) => {
 
   return (
     <div className="embed-search_result-img">
-      <img role="presentation" src={imageSource()} alt={title}/>
+      <img role="presentation" src={imageSource()} alt={title} />
     </div>
   );
 };

@@ -12,7 +12,12 @@ import nock from 'nock';
 import payload403invalid from '../../actions/__tests__/payload403invalid';
 
 import { applicationError } from '../../messages/messagesActions';
-import { fetchLearningPathImage, setSavedImage, setSelectedImage, fetchLearningPathImageWithMetaUrl } from '../../imageSearch/imageActions';
+import {
+  fetchLearningPathImage,
+  setSavedImage,
+  setSelectedImage,
+  fetchLearningPathImageWithMetaUrl,
+} from '../../imageSearch/imageActions';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
@@ -21,9 +26,8 @@ const imageId = 123;
 
 const imageMetaUrl = 'http://ndla-api:80/image-api/v2/images/123';
 
-
 test('actions/fetchImage with id', () => {
-  const done = (res) => {
+  const done = res => {
     done(res);
     nock.cleanAll();
   };
@@ -34,11 +38,10 @@ test('actions/fetchImage with id', () => {
 
   const store = mockStore({});
 
-  store.dispatch(fetchLearningPathImage(imageId))
+  store
+    .dispatch(fetchLearningPathImage(imageId))
     .then(() => {
-      expect(store.getActions()).toEqual([
-        setSelectedImage({ id: imageId }),
-      ]);
+      expect(store.getActions()).toEqual([setSelectedImage({ id: imageId })]);
       expect(() => apiMock.done()).not.toThrow();
       done();
     })
@@ -46,7 +49,7 @@ test('actions/fetchImage with id', () => {
 });
 
 test('actions/fetchImage with url', () => {
-  const done = (res) => {
+  const done = res => {
     done(res);
     nock.cleanAll();
   };
@@ -57,11 +60,10 @@ test('actions/fetchImage with url', () => {
 
   const store = mockStore({});
 
-  store.dispatch(fetchLearningPathImageWithMetaUrl(imageMetaUrl))
+  store
+    .dispatch(fetchLearningPathImageWithMetaUrl(imageMetaUrl))
     .then(() => {
-      expect(store.getActions()).toEqual([
-        setSavedImage({ id: 123 }),
-      ]);
+      expect(store.getActions()).toEqual([setSavedImage({ id: 123 })]);
       expect(() => apiMock.done()).not.toThrow();
       done();
     })
@@ -69,7 +71,7 @@ test('actions/fetchImage with url', () => {
 });
 
 test('actions/fetchImage with id access denied', () => {
-  const done = (res) => {
+  const done = res => {
     done(res);
     nock.cleanAll();
   };
@@ -80,10 +82,13 @@ test('actions/fetchImage with id access denied', () => {
 
   const store = mockStore();
 
-  store.dispatch(fetchLearningPathImage(imageId))
+  store
+    .dispatch(fetchLearningPathImage(imageId))
     .then(() => {
       expect(store.getActions()).toEqual([
-        applicationError(payload403invalid(`http://ndla-api/image-api/v2/images/${imageId}`)),
+        applicationError(
+          payload403invalid(`http://ndla-api/image-api/v2/images/${imageId}`),
+        ),
       ]);
       expect(() => apiMock.done()).not.toThrow();
       done();
@@ -92,7 +97,7 @@ test('actions/fetchImage with id access denied', () => {
 });
 
 test('actions/fetchImage with url access denied', () => {
-  const done = (res) => {
+  const done = res => {
     done(res);
     nock.cleanAll();
   };
@@ -103,10 +108,15 @@ test('actions/fetchImage with url access denied', () => {
 
   const store = mockStore();
 
-  store.dispatch(fetchLearningPathImageWithMetaUrl(imageMetaUrl))
+  store
+    .dispatch(fetchLearningPathImageWithMetaUrl(imageMetaUrl))
     .then(() => {
       expect(store.getActions()).toEqual([
-        applicationError(payload403invalid(`http://ndla-api:80/image-api/v2/images/${imageId}`)),
+        applicationError(
+          payload403invalid(
+            `http://ndla-api:80/image-api/v2/images/${imageId}`,
+          ),
+        ),
       ]);
       expect(() => apiMock.done()).not.toThrow();
       done();

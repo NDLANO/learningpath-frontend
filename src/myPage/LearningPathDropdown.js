@@ -22,14 +22,13 @@ export default class LearningPathDropdown extends Component {
     };
   }
 
-  makeOnClick = actionType => (evt) => {
+  makeOnClick = actionType => evt => {
     const { learningPath, onSelect } = this.props;
     evt.preventDefault();
     onSelect(actionType, learningPath);
   };
 
-
-  publishAction = status => (evt) => {
+  publishAction = status => evt => {
     const { learningPath, onSelect } = this.props;
     evt.preventDefault();
     if (status.status !== learningPath.status) {
@@ -37,15 +36,13 @@ export default class LearningPathDropdown extends Component {
     }
   };
 
-  dropDownMenuItemClassName = (status) => {
+  dropDownMenuItemClassName = status => {
     const { learningPath } = this.props;
-    return (
-      classNames({
-        'dropdown-menu_item': true,
-        active: learningPath.status === status,
-      })
-    );
-  }
+    return classNames({
+      'dropdown-menu_item': true,
+      active: learningPath.status === status,
+    });
+  };
 
   handleDropDownOnClick = () => {
     this.setState(prevState => ({
@@ -53,7 +50,7 @@ export default class LearningPathDropdown extends Component {
     }));
   };
 
-  handleDropDownOnMouseEvents = (displayDropDown) => {
+  handleDropDownOnMouseEvents = displayDropDown => {
     this.setState({ displayDropDown });
   };
 
@@ -66,23 +63,43 @@ export default class LearningPathDropdown extends Component {
     });
 
     return (
-      <div className="dropdown-menu" onMouseEnter={() => this.handleDropDownOnMouseEvents(true)} onMouseLeave={() => this.handleDropDownOnMouseEvents(false)}>
-        <button className="un-button dropdown-menu_icon" onClick={() => this.handleDropDownOnClick()}><Icon.MoreVert /></button>
+      <div
+        className="dropdown-menu"
+        onMouseEnter={() => this.handleDropDownOnMouseEvents(true)}
+        onMouseLeave={() => this.handleDropDownOnMouseEvents(false)}>
+        <button
+          className="un-button dropdown-menu_icon"
+          onClick={() => this.handleDropDownOnClick()}>
+          <Icon.MoreVert />
+        </button>
         <ul className={dropDownMenuItemsClassName}>
           <li className="dropdown-menu_item">
-            <button className="un-button dropdown-menu_link" onClick={this.makeOnClick('makecopy')}>
+            <button
+              className="un-button dropdown-menu_link"
+              onClick={this.makeOnClick('makecopy')}>
               <Icon.ContentCopy /> {polyglot.t('pathDropDown.makeCopy')}
             </button>
           </li>
-          {learningPathStatuses.filter(status => status.status !== learningPath.status).map(status =>
-            <li key={status.action} className={this.dropDownMenuItemClassName(status.status)}>
-              <button className="un-button dropdown-menu_link" onClick={this.publishAction(status)}>
-                <Icon.Input /> {polyglot.t(`pathDropDown.${learningPath.status}.${status.action}`)}
-              </button>
-            </li>
-          )}
+          {learningPathStatuses
+            .filter(status => status.status !== learningPath.status)
+            .map(status => (
+              <li
+                key={status.action}
+                className={this.dropDownMenuItemClassName(status.status)}>
+                <button
+                  className="un-button dropdown-menu_link"
+                  onClick={this.publishAction(status)}>
+                  <Icon.Input />{' '}
+                  {polyglot.t(
+                    `pathDropDown.${learningPath.status}.${status.action}`,
+                  )}
+                </button>
+              </li>
+            ))}
           <li className="dropdown-menu_item">
-            <button className="un-button dropdown-menu_link" onClick={this.makeOnClick('delete')}>
+            <button
+              className="un-button dropdown-menu_link"
+              onClick={this.makeOnClick('delete')}>
               <Icon.Delete /> {polyglot.t('pathDropDown.delete')}
             </button>
           </li>

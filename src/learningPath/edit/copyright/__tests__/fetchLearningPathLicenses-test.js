@@ -12,53 +12,67 @@ import nock from 'nock';
 import payload403invalid from '../../../../actions/__tests__/payload403invalid';
 
 import { applicationError } from '../../../../messages/messagesActions';
-import { fetchLearningPathLicenses, setAllLicenses, setCreativeCommonLicenses } from '../learningPathLicensesActions';
+import {
+  fetchLearningPathLicenses,
+  setAllLicenses,
+  setCreativeCommonLicenses,
+} from '../learningPathLicensesActions';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
 const accessToken = '123345';
-const licenses = [{ license: 'GPL v3', description: 'En lisens', url: 'ndla.no' }, { license: 'Copyright v3', description: 'En lisens', url: 'ndla.no' }];
+const licenses = [
+  { license: 'GPL v3', description: 'En lisens', url: 'ndla.no' },
+  { license: 'Copyright v3', description: 'En lisens', url: 'ndla.no' },
+];
 test('actions/fetchLearningPathLicenses with creative-common sat to false', () => {
-  const done = (res) => {
+  const done = res => {
     done(res);
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
+  const apiMock = nock('http://ndla-api', {
+    reqheaders: { Authorization: `Bearer ${accessToken}` },
+  })
     .get('/learningpath-api/v1/learningpaths/licenses')
     .reply(200, licenses);
 
   const store = mockStore({ accessToken });
 
-  store.dispatch(fetchLearningPathLicenses())
+  store
+    .dispatch(fetchLearningPathLicenses())
     .then(() => {
-      expect(store.getActions()).toEqual([
-        setAllLicenses(licenses),
-      ]);
+      expect(store.getActions()).toEqual([setAllLicenses(licenses)]);
       expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);
 });
-
 
 test('actions/fetchLearningPathLicenses with creative-common sat to false access denied', () => {
-  const done = (res) => {
+  const done = res => {
     done(res);
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
+  const apiMock = nock('http://ndla-api', {
+    reqheaders: { Authorization: `Bearer ${accessToken}` },
+  })
     .get('/learningpath-api/v1/learningpaths/licenses')
     .reply(403, { message: 'Invalid' });
 
   const store = mockStore({ accessToken });
 
-  store.dispatch(fetchLearningPathLicenses())
+  store
+    .dispatch(fetchLearningPathLicenses())
     .then(() => {
       expect(store.getActions()).toEqual([
-        applicationError(payload403invalid('http://ndla-api/learningpath-api/v1/learningpaths/licenses')),
+        applicationError(
+          payload403invalid(
+            'http://ndla-api/learningpath-api/v1/learningpaths/licenses',
+          ),
+        ),
       ]);
       expect(() => apiMock.done()).not.toThrow();
       done();
@@ -66,49 +80,55 @@ test('actions/fetchLearningPathLicenses with creative-common sat to false access
     .catch(done);
 });
 
-
 test('actions/fetchLearningPathLicenses with creative-common sat to false', () => {
-  const done = (res) => {
+  const done = res => {
     done(res);
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
+  const apiMock = nock('http://ndla-api', {
+    reqheaders: { Authorization: `Bearer ${accessToken}` },
+  })
     .get('/learningpath-api/v1/learningpaths/licenses')
     .query({ filter: 'by' })
     .reply(200, licenses);
 
   const store = mockStore({ accessToken });
 
-  store.dispatch(fetchLearningPathLicenses('by'))
+  store
+    .dispatch(fetchLearningPathLicenses('by'))
     .then(() => {
-      expect(store.getActions()).toEqual([
-        setCreativeCommonLicenses(licenses),
-      ]);
+      expect(store.getActions()).toEqual([setCreativeCommonLicenses(licenses)]);
       expect(() => apiMock.done()).not.toThrow();
       done();
     })
     .catch(done);
 });
 
-
 test('actions/fetchLearningPathLicenses with creative-common sat to true access denied', () => {
-  const done = (res) => {
+  const done = res => {
     done(res);
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
+  const apiMock = nock('http://ndla-api', {
+    reqheaders: { Authorization: `Bearer ${accessToken}` },
+  })
     .get('/learningpath-api/v1/learningpaths/licenses')
     .query({ filter: 'by' })
     .reply(403, { message: 'Invalid' });
 
   const store = mockStore({ accessToken });
 
-  store.dispatch(fetchLearningPathLicenses('by'))
+  store
+    .dispatch(fetchLearningPathLicenses('by'))
     .then(() => {
       expect(store.getActions()).toEqual([
-        applicationError(payload403invalid('http://ndla-api/learningpath-api/v1/learningpaths/licenses?filter=by')),
+        applicationError(
+          payload403invalid(
+            'http://ndla-api/learningpath-api/v1/learningpaths/licenses?filter=by',
+          ),
+        ),
       ]);
       expect(() => apiMock.done()).not.toThrow();
       done();

@@ -9,7 +9,6 @@
 import { isFSA } from 'flux-standard-action';
 import { setAccessToken } from '../sessionActions';
 
-
 test('actions/setAccessToken', () => {
   const actual = setAccessToken('12345');
 

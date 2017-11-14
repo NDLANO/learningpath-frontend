@@ -11,13 +11,19 @@ import { isFSA } from 'flux-standard-action';
 import { setLearningPathTags } from '../learningPathTagsActions';
 
 test('actions/setLearningPathTags', () => {
-  const actual = setLearningPathTags([{ language: 'nb', tags: ['norsk', 'norge'] }, { language: 'en', tags: ['norwegian', 'norway'] }]);
+  const actual = setLearningPathTags([
+    { language: 'nb', tags: ['norsk', 'norge'] },
+    { language: 'en', tags: ['norwegian', 'norway'] },
+  ]);
 
   expect(isFSA(actual)).toBeTruthy();
 
   expect(actual.type).toBe('SET_LEARNING_PATH_TAGS');
   expect(actual.payload).toBeTruthy();
-  expect(actual.payload).toEqual([{ language: 'nb', tags: ['norsk', 'norge'] }, { language: 'en', tags: ['norwegian', 'norway'] }]);
+  expect(actual.payload).toEqual([
+    { language: 'nb', tags: ['norsk', 'norge'] },
+    { language: 'en', tags: ['norwegian', 'norway'] },
+  ]);
   expect(actual.error).toBeFalsy();
 });
 

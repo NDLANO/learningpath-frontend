@@ -20,7 +20,7 @@ export const getI18NEmbedContent = createSelector(
   [getEmbedContentFromState, getLocale],
   (embedContent, lang) => ({
     ...oembedContentI18N({ embedUrl: embedContent }, lang),
-  })
+  }),
 );
 
 export const getLearningPathStep = createSelector(
@@ -29,5 +29,5 @@ export const getLearningPathStep = createSelector(
     ...learningPathStep,
     title: convertFieldWithFallback(learningPathStep, 'title', ''),
     description: convertFieldWithFallback(learningPathStep, 'description', ''),
-  })
+  }),
 );

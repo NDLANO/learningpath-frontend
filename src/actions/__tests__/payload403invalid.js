@@ -9,5 +9,7 @@
 import { createErrorPayload } from '../../sources/helpers';
 
 export default function payload403invalid(url) {
-  return createErrorPayload({ status: 403, url }, 'Invalid', { message: 'Invalid' });
+  return createErrorPayload({ status: 403, url }, 'Invalid', {
+    message: 'Invalid',
+  });
 }

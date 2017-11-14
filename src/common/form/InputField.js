@@ -9,14 +9,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
-const InputField = ({ input, label, placeholder, labelClassName, type, maxLength, meta: { touched, error } }) => {
+const InputField = ({
+  input,
+  label,
+  placeholder,
+  labelClassName,
+  type,
+  maxLength,
+  meta: { touched, error },
+}) => {
   const inputClassName = touched && error ? 'input--alert' : '';
   return (
     <div>
-      <label className={labelClassName} htmlFor={input.name}>{label}</label>
-      <input {...input} placeholder={placeholder} type={type} className={inputClassName} maxLength={maxLength} />
-      {touched && error && <span className="error_message error_message--red">{error}</span>}
+      <label className={labelClassName} htmlFor={input.name}>
+        {label}
+      </label>
+      <input
+        {...input}
+        placeholder={placeholder}
+        type={type}
+        className={inputClassName}
+        maxLength={maxLength}
+      />
+      {touched &&
+        error && (
+          <span className="error_message error_message--red">{error}</span>
+        )}
     </div>
   );
 };

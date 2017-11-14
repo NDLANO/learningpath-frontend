@@ -30,8 +30,11 @@ class Welcome extends Component {
   handleSubmit(e) {
     const { query } = this.state;
     e.preventDefault();
-    const sort = (query && !isEmpty(query)) ? '-relevance' : '-lastUpdated';
-    this.props.pushRoute({ pathname: '/learningpaths', search: `?${queryString.stringify({ query, page: 1, sort })}` });
+    const sort = query && !isEmpty(query) ? '-relevance' : '-lastUpdated';
+    this.props.pushRoute({
+      pathname: '/learningpaths',
+      search: `?${queryString.stringify({ query, page: 1, sort })}`,
+    });
   }
 
   render() {
@@ -45,21 +48,38 @@ class Welcome extends Component {
             <h1 className="hero_title">{polyglot.t('welcomePage.title1')}</h1>
             <h3 className="hero_title">{polyglot.t('welcomePage.title2')}</h3>
 
-            <form onSubmit={this.handleSubmit} className="search-form search-form--on-dark">
+            <form
+              onSubmit={this.handleSubmit}
+              className="search-form search-form--on-dark">
               <input
-                type="text" name="query"
+                type="text"
+                name="query"
                 onChange={e => this.setState({ query: e.target.value })}
                 placeholder={polyglot.t('welcomePage.placeholder')}
                 className="search-form_query"
               />
-              <button type="submit" className="search-form_btn">{polyglot.t('welcomePage.searchBtn')}</button>
+              <button type="submit" className="search-form_btn">
+                {polyglot.t('welcomePage.searchBtn')}
+              </button>
             </form>
 
-            <a href="#feature" className="hero_link cta-link cta-link--negative">{polyglot.t('welcomePage.explanationBtn')}</a>
-            <a href="/minside" className="hero_link cta-link cta-link-secondary cta-link--secondary-negative">{polyglot.t('welcomePage.newBtn')} »</a>
+            <a
+              href="#feature"
+              className="hero_link cta-link cta-link--negative">
+              {polyglot.t('welcomePage.explanationBtn')}
+            </a>
+            <a
+              href="/minside"
+              className="hero_link cta-link cta-link-secondary cta-link--secondary-negative">
+              {polyglot.t('welcomePage.newBtn')} »
+            </a>
           </div>
           <div className="infoblock">
-            <img src={`/assets/${requireAssets['learningpath.jpg']}`} alt="Placeholder" className="infoblock_img frontpage-intro_img" />
+            <img
+              src={`/assets/${requireAssets['learningpath.jpg']}`}
+              alt="Placeholder"
+              className="infoblock_img frontpage-intro_img"
+            />
             <div className="infoblock_text">
               <h2 id="feature">{polyglot.t('welcomePage.feature1Title')}</h2>
               <p>{polyglot.t('welcomePage.feature1Content')}</p>

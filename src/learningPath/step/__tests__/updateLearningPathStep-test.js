@@ -12,8 +12,14 @@ import nock from 'nock';
 import { routerActions } from 'react-router-redux';
 import payload403invalid from '../../../actions/__tests__/payload403invalid';
 
-import { applicationError, addMessage } from '../../../messages/messagesActions';
-import { setLearningPathStep, updateLearningPathStep } from '../learningPathStepActions';
+import {
+  applicationError,
+  addMessage,
+} from '../../../messages/messagesActions';
+import {
+  setLearningPathStep,
+  updateLearningPathStep,
+} from '../learningPathStepActions';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
@@ -22,9 +28,8 @@ const accessToken = '123345';
 const pathId = 123;
 const stepId = 321;
 
-
 test('actions/updateLearningPathStep', () => {
-  const done = (res) => {
+  const done = res => {
     done(res);
     nock.cleanAll();
   };
@@ -32,23 +37,33 @@ test('actions/updateLearningPathStep', () => {
   const learningStep = {
     title: [{ language: 'nb', title: 'Goat' }],
     description: [{ language: 'nb', description: 'this is a description' }],
-    embedUrl: [{ language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY' }],
+    embedUrl: [
+      { language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY' },
+    ],
   };
 
   const learningStepReply = Object.assign({}, learningStep, { id: stepId });
 
-  const patchPathStepApi = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
-    .patch(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`, learningStep)
+  const patchPathStepApi = nock('http://ndla-api', {
+    reqheaders: { Authorization: `Bearer ${accessToken}` },
+  })
+    .patch(
+      `/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`,
+      learningStep,
+    )
     .reply(200, learningStepReply);
 
   const store = mockStore({ accessToken });
 
-  store.dispatch(updateLearningPathStep(pathId, stepId, learningStep))
+  store
+    .dispatch(updateLearningPathStep(pathId, stepId, learningStep))
     .then(() => {
       expect(store.getActions()).toEqual([
         addMessage({ message: 'Lagret OK' }),
         setLearningPathStep(learningStepReply),
-        routerActions.push({ pathname: `/learningpaths/${pathId}/step/${stepId}` }),
+        routerActions.push({
+          pathname: `/learningpaths/${pathId}/step/${stepId}`,
+        }),
       ]);
 
       expect(() => patchPathStepApi.done()).not.toThrow();
@@ -59,7 +74,7 @@ test('actions/updateLearningPathStep', () => {
 });
 
 test('actions/updateLearningPathStep access denied', () => {
-  const done = (res) => {
+  const done = res => {
     done(res);
     nock.cleanAll();
   };
@@ -67,19 +82,33 @@ test('actions/updateLearningPathStep access denied', () => {
   const learningStep = {
     title: [{ language: 'nb', title: 'Goat' }],
     description: [{ language: 'nb', description: 'this is a description' }],
-    embedUrl: [{ language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY' }],
+    embedUrl: [
+      { language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY' },
+    ],
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
-    .patch(`/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`, learningStep)
+  const apiMock = nock('http://ndla-api', {
+    reqheaders: { Authorization: `Bearer ${accessToken}` },
+  })
+    .patch(
+      `/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`,
+      learningStep,
+    )
     .reply(403, { message: 'Invalid' });
 
   const store = mockStore({ accessToken });
 
-  store.dispatch(updateLearningPathStep(pathId, stepId, learningStep))
+  store
+    .dispatch(updateLearningPathStep(pathId, stepId, learningStep))
     .then(() => {
       expect(store.getActions()).toEqual([
-        applicationError(payload403invalid(`http://ndla-api/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`)),
+        applicationError(
+          payload403invalid(
+            `http://ndla-api/learningpath-api/v1/learningpaths/${
+              pathId
+            }/learningsteps/${stepId}`,
+          ),
+        ),
       ]);
       expect(() => apiMock.done()).not.toThrow();
 

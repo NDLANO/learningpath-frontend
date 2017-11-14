@@ -21,19 +21,26 @@ export const getSelectedImage = createSelector(
     tags: convertFieldWithFallback(imageSearch.selectedImage, 'tags', []),
     alttext: convertFieldWithFallback(imageSearch.selectedImage, 'alttext', ''),
     caption: convertFieldWithFallback(imageSearch.selectedImage, 'caption', ''),
-  })
+  }),
 );
 
-export const getImageSearchQuery = state => get(state, 'imageSearch.imageSearchQuery', { query: '', page: 1, 'page-size': 16 });
+export const getImageSearchQuery = state =>
+  get(state, 'imageSearch.imageSearchQuery', {
+    query: '',
+    page: 1,
+    'page-size': 16,
+  });
 
 export const getResults = createSelector(
   [getImageSearch],
-  imageSearch => imageSearch.images.results
+  imageSearch => imageSearch.images.results,
 );
 
 export const getLastPage = createSelector(
   [getImageSearch, getPageSize],
-  (imageSearch, pageSize) => Math.ceil(imageSearch.images.totalCount / (pageSize || 1))
+  (imageSearch, pageSize) =>
+    Math.ceil(imageSearch.images.totalCount / (pageSize || 1)),
 );
 
-export const getTotalCount = state => get(state, 'imageSearch.images.totalCount', 0);
+export const getTotalCount = state =>
+  get(state, 'imageSearch.images.totalCount', 0);

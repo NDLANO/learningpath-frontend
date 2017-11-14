@@ -6,7 +6,11 @@
  *
  */
 
-import { configureLocale, getHtmlLang, isValidLocale } from '../configureLocale';
+import {
+  configureLocale,
+  getHtmlLang,
+  isValidLocale,
+} from '../configureLocale';
 
 test('configureLocale configureLocale()', () => {
   expect(configureLocale('en').currentLocale).toBe('en');

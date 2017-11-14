@@ -11,7 +11,6 @@ import PropTypes from 'prop-types';
 import Multiselect from 'react-widgets/lib/Multiselect';
 import polyglot from '../../../i18n';
 
-
 class Contributors extends Component {
   constructor() {
     super();
@@ -21,19 +20,25 @@ class Contributors extends Component {
   render() {
     const { input, contributorOptions } = this.props;
 
-    if (typeof value === 'string') { // Handle redux form values witch are initialized as strings
+    if (typeof value === 'string') {
+      // Handle redux form values witch are initialized as strings
       return null;
     }
 
     const messages = {
-      createOption: (props) => <span><b>{`"${props.searchTerm}"`}</b> {polyglot.t('copyrightInput.createOption')}</span>,
+      createOption: props => (
+        <span>
+          <b>{`"${props.searchTerm}"`}</b>{' '}
+          {polyglot.t('copyrightInput.createOption')}
+        </span>
+      ),
       emptyFilter: polyglot.t('copyrightInput.emptyFilter'),
       emptyList: '',
     };
 
     const { open } = this.state;
 
-    const handleAdd = (contributor) => {
+    const handleAdd = contributor => {
       if (input.value.includes(contributor)) {
         return;
       }
@@ -41,7 +46,7 @@ class Contributors extends Component {
       input.onChange(input.value);
     };
 
-    const handleSearch = (searchTerm) => {
+    const handleSearch = searchTerm => {
       this.setState({ open: searchTerm.length > 2 });
     };
 
@@ -56,7 +61,7 @@ class Contributors extends Component {
         onBlur={() => input.onBlur(input.value)}
         onChange={input.onChange}
         onCreate={handleAdd}
-        onToggle={() => { }}
+        onToggle={() => {}}
         onSearch={handleSearch}
       />
     );

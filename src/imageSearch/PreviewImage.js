@@ -15,7 +15,11 @@ export default function PreviewImage({ image, onSaveImage }) {
   return (
     <div className="image-preview">
       <div className="image-preview_image">
-        <img role="presentation" src={scaleImage(image.imageUrl)} alt={image.alttext} />
+        <img
+          role="presentation"
+          src={scaleImage(image.imageUrl)}
+          alt={image.alttext}
+        />
       </div>
       <div className="image-preview_information">
         <h2 className="image-preview_title">{image.title}</h2>
@@ -24,9 +28,7 @@ export default function PreviewImage({ image, onSaveImage }) {
             {polyglot.t('learningPath.image.authors')}
           </b>
           <span className="image-preview_text--right">
-            {image.copyright.authors.map(author =>
-              author.name
-            ).join(', ')}
+            {image.copyright.authors.map(author => author.name).join(', ')}
           </span>
         </div>
         <div className="image-prieview_license">
@@ -39,11 +41,15 @@ export default function PreviewImage({ image, onSaveImage }) {
         </div>
         <div className="image-preview_tags">
           <b>{polyglot.t('learningPath.image.tags')}</b>
-          {image.tags.map((tag) =>
+          {image.tags.map(tag => (
             <span key={tag} className="tag_item">{`#${tag}`}</span>
-          )}
+          ))}
         </div>
-        <button className="button button--primary button--block" onClick={onSaveImage}>{polyglot.t('learningPath.image.choseImage')}</button>
+        <button
+          className="button button--primary button--block"
+          onClick={onSaveImage}>
+          {polyglot.t('learningPath.image.choseImage')}
+        </button>
       </div>
       <div className="clear" />
     </div>

@@ -12,7 +12,10 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import { translatedLearningStep, translatedNdlaLearningStep } from '../../../../common/__tests__/translatedMockData';
+import {
+  translatedLearningStep,
+  translatedNdlaLearningStep,
+} from '../../../../common/__tests__/translatedMockData';
 
 import Oembed from '../Oembed';
 
@@ -60,15 +63,21 @@ test('component/Oembed ndla resource', () => {
   expect(component.state('isNDLAResource')).toBeTruthy();
   expect(component.state('listeningToResize')).toBeTruthy();
   // expect(add).toHaveBeenCalledTimes(1);
-  expect(add).toHaveBeenCalledWith('message', component.instance().handleResizeMessage);
-
+  expect(add).toHaveBeenCalledWith(
+    'message',
+    component.instance().handleResizeMessage,
+  );
 });
 
 test('component/Oembed resize message listener', () => {
   const oembed = translatedLearningStep.oembed;
   const ndlaOembed1 = translatedNdlaLearningStep.oembed;
-  const ndlaOembed2 = Object.assign({}, ndlaOembed1, { url: `${ndlaOembed1.url}?another` });
-  const ndlaOembed3 = Object.assign({}, ndlaOembed1, { url: `${ndlaOembed1.url}?yetanother` });
+  const ndlaOembed2 = Object.assign({}, ndlaOembed1, {
+    url: `${ndlaOembed1.url}?another`,
+  });
+  const ndlaOembed3 = Object.assign({}, ndlaOembed1, {
+    url: `${ndlaOembed1.url}?yetanother`,
+  });
 
   // initialize with ndla resource
   component = mount(<Oembed oembedContent={ndlaOembed1} />);
@@ -91,11 +100,13 @@ test('component/Oembed resize message listener', () => {
   expect(component.state('isNDLAResource')).toBeFalsy();
   expect(component.state('listeningToResize')).toBeFalsy();
 
-  expect(remove).toHaveBeenCalledWith('message', component.instance().handleResizeMessage);
+  expect(remove).toHaveBeenCalledWith(
+    'message',
+    component.instance().handleResizeMessage,
+  );
 
   // update with other ndla resource
   component.setProps({ oembedContent: ndlaOembed3 });
-
 });
 
 test('component/Oembed iframe resizing', () => {
@@ -110,23 +121,23 @@ test('component/Oembed iframe resizing', () => {
   expect(iframe).toBeTruthy();
   expect(iframe.src).toBe('http://ndla.no/nb/node/24049/oembed');
 
-
   instance.handleResizeMessage({
-    source: iframe.contentWindow, data: { height: '800' },
+    source: iframe.contentWindow,
+    data: { height: '800' },
   });
 
   expect(iframe.style.height).toBe('855px');
 
-
   instance.handleResizeMessage({
-    source: iframe.contentWindow, data: { height: '1000' },
+    source: iframe.contentWindow,
+    data: { height: '1000' },
   });
 
   expect(iframe.style.height).toBe('1055px');
 
-
   instance.handleResizeMessage({
-    source: iframe.contentWindow, data: { height: '900' },
+    source: iframe.contentWindow,
+    data: { height: '900' },
   });
 
   expect(iframe.style.height).toBe('955px');
@@ -134,11 +145,11 @@ test('component/Oembed iframe resizing', () => {
   expect(() => instance.handleResizeMessage()).not.toThrow();
 
   instance.handleResizeMessage({
-    source: { mysteryObject: true }, data: { height: '2000' },
+    source: { mysteryObject: true },
+    data: { height: '2000' },
   });
 
   expect(iframe.style.height).toBe('955px');
-
 
   component.setProps({ oembedContent: oembed });
 
@@ -146,7 +157,8 @@ test('component/Oembed iframe resizing', () => {
   expect(nextIframe.style.height).toBe('');
 
   instance.handleResizeMessage({
-    source: nextIframe.contentWindow, data: { height: '2000' },
+    source: nextIframe.contentWindow,
+    data: { height: '2000' },
   });
 
   expect(nextIframe.style.height).toBe('');

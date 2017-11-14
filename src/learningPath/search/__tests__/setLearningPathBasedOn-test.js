@@ -9,7 +9,6 @@
 import { isFSA } from 'flux-standard-action';
 import { setLearningPathBasedOn } from '../learningPathSearchActions';
 
-
 test('actions/setLearningPathBasedOn', () => {
   const actual = setLearningPathBasedOn({
     results: { title: 'hei' },

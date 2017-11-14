@@ -24,10 +24,7 @@ const propsWithNoItems = {
   pagerAction: noop,
 };
 const propsWithItems = {
-  items: [
-    { title: 'hei', cacheId: 1 },
-    { title: 'heisann', cacheId: 2 },
-  ],
+  items: [{ title: 'hei', cacheId: 1 }, { title: 'heisann', cacheId: 2 }],
   onPreviewClick: noop,
   addEmbedResult: noop,
   query: {

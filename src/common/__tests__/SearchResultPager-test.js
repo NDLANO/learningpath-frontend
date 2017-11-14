@@ -47,11 +47,11 @@ test('component/PagerUtil.stepNumbers', () => {
   expect(stepNumbers(5, 5)).toEqual([1, 2, 3, 4, 5]);
 });
 
-
 function pagerTest({ setup, expected }) {
   test(`component/LinkPager page ${setup.page}/${setup.lastPage}`, () => {
-    const steps = shallow(<LinkPager query={{}} {...setup} />)
-      .find('.search-stepper_step');
+    const steps = shallow(<LinkPager query={{}} {...setup} />).find(
+      '.search-stepper_step',
+    );
 
     const prev = setup.page - 1;
     const next = setup.page + 1;
@@ -70,15 +70,21 @@ function pagerTest({ setup, expected }) {
           break;
         case 'back':
           expect(step.is('Link.search-stepper_step--back')).toBeTruthy();
-          expect(parseInt(queryString.parse(step.props().to.search).page, 10)).toBe(prev);
+          expect(
+            parseInt(queryString.parse(step.props().to.search).page, 10),
+          ).toBe(prev);
           break;
         case 'forward':
           expect(step.is('Link.search-stepper_step--forward')).toBeTruthy();
-          expect(parseInt(queryString.parse(step.props().to.search).page, 10)).toBe(next);
+          expect(
+            parseInt(queryString.parse(step.props().to.search).page, 10),
+          ).toBe(next);
           break;
         default:
           expect(step.is(Link)).toBeTruthy();
-          expect(parseInt(queryString.parse(step.props().to.search).page, 10)).toBe(value);
+          expect(
+            parseInt(queryString.parse(step.props().to.search).page, 10),
+          ).toBe(value);
           expect(step.props().children).toBe(value);
       }
     });

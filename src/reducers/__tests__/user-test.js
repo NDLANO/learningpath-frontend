@@ -15,15 +15,26 @@ const payload = { name, email };
 test('reducers/user', () => {
   expect(JSON.stringify(reducer(undefined, {}))).toBe('{}');
 
-  expect(reducer(undefined, { type: 'SET_USER_DATA', payload })).toEqual({ name, email });
+  expect(reducer(undefined, { type: 'SET_USER_DATA', payload })).toEqual({
+    name,
+    email,
+  });
 
-  expect(reducer({ name: 'Bob' }, { type: 'SET_USER_DATA', payload })).toEqual({ name, email });
+  expect(reducer({ name: 'Bob' }, { type: 'SET_USER_DATA', payload })).toEqual({
+    name,
+    email,
+  });
 
-  expect(reducer({ name: 'Bob' },
-    { type: 'DO_NOT_SET_USER_DATA', payload })).toEqual({ name: 'Bob' });
+  expect(
+    reducer({ name: 'Bob' }, { type: 'DO_NOT_SET_USER_DATA', payload }),
+  ).toEqual({ name: 'Bob' });
 
-  expect(reducer({ name, email },
-    { type: 'SET_USER_DATA', payload: new Error('fail'), error: true })).toEqual({ name, email });
+  expect(
+    reducer(
+      { name, email },
+      { type: 'SET_USER_DATA', payload: new Error('fail'), error: true },
+    ),
+  ).toEqual({ name, email });
 
   expect(reducer({ name: 'Bob' }, { type: 'LOGOUT' })).toEqual({});
 });

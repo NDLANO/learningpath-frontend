@@ -23,7 +23,9 @@ class LearningPathStepEmbed extends React.Component {
     };
     this.handleExternalDisplayOpen = this.handleExternalDisplayOpen.bind(this);
 
-    this.handleExternalDisplayClose = this.handleExternalDisplayClose.bind(this);
+    this.handleExternalDisplayClose = this.handleExternalDisplayClose.bind(
+      this,
+    );
     this.toggleNdlaDisplay = this.toggleNdlaDisplay.bind(this);
   }
 
@@ -49,8 +51,16 @@ class LearningPathStepEmbed extends React.Component {
     return (
       <div className="learning-step-embed_group">
         <div className="button-group button-group--square button-group--block">
-          <button className="button--primary-outline" onClick={this.toggleNdlaDisplay}>{polyglot.t('embedSearch.ndlaButton')}</button>
-          <button className="button--primary-outline" onClick={this.handleExternalDisplayOpen}>{polyglot.t('embedSearch.externalButton')}</button>
+          <button
+            className="button--primary-outline"
+            onClick={this.toggleNdlaDisplay}>
+            {polyglot.t('embedSearch.ndlaButton')}
+          </button>
+          <button
+            className="button--primary-outline"
+            onClick={this.handleExternalDisplayOpen}>
+            {polyglot.t('embedSearch.externalButton')}
+          </button>
         </div>
         <ExternalEmbedSearch
           learningPathId={learningPathId}
@@ -79,4 +89,6 @@ LearningPathStepEmbed.propTypes = {
   removeOembed: PropTypes.func.isRequired,
 };
 
-export default connect(state => state, mapDispatchToProps)(LearningPathStepEmbed);
+export default connect(state => state, mapDispatchToProps)(
+  LearningPathStepEmbed,
+);

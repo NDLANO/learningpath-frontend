@@ -11,8 +11,13 @@ import PropTypes from 'prop-types';
 import Icon from '../common/Icon';
 import polyglot from '../i18n';
 
-const EmbedSearchForm = ({ localFetchEmbedSearch, handleTextQueryChange, query, textQuery }) => {
-  const submitEmbedSearch = (evt) => {
+const EmbedSearchForm = ({
+  localFetchEmbedSearch,
+  handleTextQueryChange,
+  query,
+  textQuery,
+}) => {
+  const submitEmbedSearch = evt => {
     evt.preventDefault();
     const newQuery = Object.assign({}, query, {
       start: textQuery === query.textQuery ? query.start : 1,
@@ -22,7 +27,7 @@ const EmbedSearchForm = ({ localFetchEmbedSearch, handleTextQueryChange, query, 
     localFetchEmbedSearch(newQuery);
   };
 
-  const onKeyPress = (evt) => {
+  const onKeyPress = evt => {
     if (evt.key === 'Enter') {
       submitEmbedSearch(evt);
     }
@@ -31,13 +36,16 @@ const EmbedSearchForm = ({ localFetchEmbedSearch, handleTextQueryChange, query, 
   return (
     <div className="embed-search_form">
       <input
-        type="text" className="search-form_query--gray"
+        type="text"
+        className="search-form_query--gray"
         onChange={handleTextQueryChange}
         onKeyPress={onKeyPress}
         placeholder={polyglot.t('embedSearch.form.placeholder')}
         value={textQuery}
       />
-      <button className="search-form_btn--gray" onClick={submitEmbedSearch}><Icon.Search /></button>
+      <button className="search-form_btn--gray" onClick={submitEmbedSearch}>
+        <Icon.Search />
+      </button>
     </div>
   );
 };

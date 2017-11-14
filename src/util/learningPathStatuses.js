@@ -6,4 +6,7 @@
  *
  */
 
-export const learningPathStatuses = [{ status: 'PRIVATE', action: 'unpublish' }, { status: 'PUBLISHED', action: 'publish' }];
+export const learningPathStatuses = [
+  { status: 'PRIVATE', action: 'unpublish' },
+  { status: 'PUBLISHED', action: 'publish' },
+];

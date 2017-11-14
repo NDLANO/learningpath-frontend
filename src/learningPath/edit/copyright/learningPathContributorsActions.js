@@ -10,12 +10,15 @@ import { createAction } from 'redux-actions';
 import { fetchPathContributors } from '../../../sources/learningpaths';
 import { applicationError } from '../../../messages/messagesActions';
 
-export const setLearningPathContributors = createAction('SET_LEARNING_PATH_CONTRIBUTORS');
+export const setLearningPathContributors = createAction(
+  'SET_LEARNING_PATH_CONTRIBUTORS',
+);
 
 export function fetchLearningPathContributors() {
-  return dispatch => fetchPathContributors()
-    .then(contributors => dispatch(setLearningPathContributors(contributors)))
-    .catch(err => dispatch(applicationError(err)));
+  return dispatch =>
+    fetchPathContributors()
+      .then(contributors => dispatch(setLearningPathContributors(contributors)))
+      .catch(err => dispatch(applicationError(err)));
 }
 
 export function fetchLearningPathContributorsIfNeeded() {
