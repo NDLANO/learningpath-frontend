@@ -11,12 +11,9 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 const Spinner = ({ hasMargins }) => {
-  const classes = classNames(
-    'spinner',
-    {
-      'spinner--margins': hasMargins,
-    }
-  );
+  const classes = classNames('spinner', {
+    'spinner--margins': hasMargins,
+  });
   return <div className={classes} />;
 };
 

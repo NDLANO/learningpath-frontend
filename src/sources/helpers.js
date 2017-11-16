@@ -13,10 +13,15 @@ import formatUrl from '../util/formatUrlUtil';
 import { fetchAuth } from '../sources/fetchAuth';
 
 const NDLA_API_URL = __SERVER__ ? config.ndlaApiUrl : window.config.ndlaApiUrl;
-const NDLA_ACCESS_TOKEN = __SERVER__ ? config.accessToken : window.config.accessToken;
-const AUTH0_DOMAIN = __SERVER__ ? config.auth0Domain : window.config.auth0Domain;
-const AUTH0_CLIENT_ID = __SERVER__ ? config.auth0ClientID : window.config.auth0ClientID;
-
+const NDLA_ACCESS_TOKEN = __SERVER__
+  ? config.accessToken
+  : window.config.accessToken;
+const AUTH0_DOMAIN = __SERVER__
+  ? config.auth0Domain
+  : window.config.auth0Domain;
+const AUTH0_CLIENT_ID = __SERVER__
+  ? config.auth0ClientID
+  : window.config.auth0ClientID;
 
 if (process.env.NODE_ENV === 'unittest') {
   global.__SERVER__ = false; //eslint-disable-line
@@ -32,7 +37,13 @@ const locationOrigin = (() => {
   }
 
   if (typeof location.origin === 'undefined') {
-    location.origin = [location.protocol, '//', location.host, ':', location.port].join('');
+    location.origin = [
+      location.protocol,
+      '//',
+      location.host,
+      ':',
+      location.port,
+    ].join('');
   }
 
   return location.origin;
@@ -68,16 +79,22 @@ const apiBaseUrl = (() => {
 })();
 
 export function getToken(getState) {
-  return getState().authenticated ? getState().idToken.token : getState().accessToken.token;
+  return getState().authenticated
+    ? getState().idToken.token
+    : getState().accessToken.token;
 }
 
 export function getTokenExpiresAt(getState) {
-  return getState().authenticated ? getState().idToken.expiresAt : getState().accessToken.expiresAt;
+  return getState().authenticated
+    ? getState().idToken.expiresAt
+    : getState().accessToken.expiresAt;
 }
 
 export { locationOrigin, apiBaseUrl };
 
-export function apiResourceUrl(path) { return apiBaseUrl + path; }
+export function apiResourceUrl(path) {
+  return apiBaseUrl + path;
+}
 
 export function ApiError(message, res = {}, json) {
   this.name = 'ApiError';
@@ -94,7 +111,11 @@ ApiError.prototype = Object.create(Error.prototype);
 ApiError.prototype.constructor = ApiError;
 
 export function createErrorPayload(res, message, json) {
-  return new ApiError(`${res.status} ${message} ${json.code} ${json.description}`, res, json);
+  return new ApiError(
+    `${res.status} ${message} ${json.code} ${json.description}`,
+    res,
+    json,
+  );
 }
 
 export function resolveJsonOrRejectWithError(res) {
@@ -102,50 +123,57 @@ export function resolveJsonOrRejectWithError(res) {
     if (res.ok) {
       return res.status === 204 ? resolve() : resolve(res.json());
     }
-    return res.json()
-      .then(json => createErrorPayload(res, defined(json.message, res.statusText), json))
+    return res
+      .json()
+      .then(json =>
+        createErrorPayload(res, defined(json.message, res.statusText), json),
+      )
       .then(reject);
   });
 }
 
 export const authorizationHeader = token => `Bearer ${token}`;
 
-
 export function fetchAuthorized(path, method = 'GET') {
   const url = params => apiResourceUrl(formatUrl(path, params));
-  return (params = {}) => fetchAuth(url(params), { method }).then(resolveJsonOrRejectWithError);
+  return (params = {}) =>
+    fetchAuth(url(params), { method }).then(resolveJsonOrRejectWithError);
 }
 
 export function postAuthorized(path) {
   const url = params => apiResourceUrl(formatUrl(path, params));
 
-  return (params = {}, body) => fetchAuth(url(params), {
-    method: 'POST',
-    body: JSON.stringify(body),
-  }).then(resolveJsonOrRejectWithError);
+  return (params = {}, body) =>
+    fetchAuth(url(params), {
+      method: 'POST',
+      body: JSON.stringify(body),
+    }).then(resolveJsonOrRejectWithError);
 }
 
 export function putAuthorized(path) {
   const url = params => apiResourceUrl(formatUrl(path, params));
 
-  return (params = {}, body) => fetchAuth(url(params), {
-    method: 'PUT',
-    body: JSON.stringify(body),
-  }).then(resolveJsonOrRejectWithError);
+  return (params = {}, body) =>
+    fetchAuth(url(params), {
+      method: 'PUT',
+      body: JSON.stringify(body),
+    }).then(resolveJsonOrRejectWithError);
 }
 
 export function patchAuthorized(path) {
   const url = params => apiResourceUrl(formatUrl(path, params));
 
-  return (params = {}, body) => fetchAuth(url(params), {
-    method: 'PATCH',
-    body: JSON.stringify(body),
-  }).then(resolveJsonOrRejectWithError);
+  return (params = {}, body) =>
+    fetchAuth(url(params), {
+      method: 'PATCH',
+      body: JSON.stringify(body),
+    }).then(resolveJsonOrRejectWithError);
 }
 
 export function deleteAuthorized(path) {
   const url = params => apiResourceUrl(formatUrl(path, params));
-  return (params = {}) => fetchAuth(url(params), {
-    method: 'DELETE',
-  });
+  return (params = {}) =>
+    fetchAuth(url(params), {
+      method: 'DELETE',
+    });
 }

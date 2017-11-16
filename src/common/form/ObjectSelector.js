@@ -9,9 +9,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ObjectSelector = (props) => {
-  const { options, labelKey, idKey, input: { onChange, onBlur, value }, disabled, ...rest } = props;
-  const parse = event => options.find(option => option[idKey] === event.target.value);
+const ObjectSelector = props => {
+  const {
+    options,
+    labelKey,
+    idKey,
+    input: { onChange, onBlur, value },
+    disabled,
+    ...rest
+  } = props;
+  const parse = event =>
+    options.find(option => option[idKey] === event.target.value);
 
   return (
     <div>
@@ -20,11 +28,14 @@ const ObjectSelector = (props) => {
         onChange={event => onChange(parse(event))}
         value={value[idKey]}
         disabled={disabled}
-        {...rest.input}
-      >
-        {options.map(option =>
-          <option key={option[idKey] ? option[idKey] : 'undefined'} value={option[idKey]}>{option[labelKey]}</option>
-        )}
+        {...rest.input}>
+        {options.map(option => (
+          <option
+            key={option[idKey] ? option[idKey] : 'undefined'}
+            value={option[idKey]}>
+            {option[labelKey]}
+          </option>
+        ))}
       </select>
     </div>
   );

@@ -19,16 +19,28 @@ export const removeEmbedPreview = createAction('REMOVE_EMBED_PREVIEW');
 export const changeEmbedSearchQuery = createAction('CHANGE_EMBED_SEARCH_QUERY');
 
 function fetchEmbedSearch(query, type) {
-  return (dispatch, getState) => fetchGoogleContent(query)
-    .then((result) => {
-      const newResult = (type === 'ndla') ? { ...result, items: result.items.map(item => ({ ...item, link: transformNdlaUrl(item.link) })) } : result;
-      dispatch(setEmbedResults({ type, result: newResult }));
-    })
-    .then(() => {
-      const updatedQuery = Object.assign({}, query, { numberOfPages: getNumberOfPages(getState(), type) });
-      dispatch(changeEmbedSearchQuery({ type, query: updatedQuery }));
-    })
-    .catch(err => dispatch(applicationError(err)));
+  return (dispatch, getState) =>
+    fetchGoogleContent(query)
+      .then(result => {
+        const newResult =
+          type === 'ndla'
+            ? {
+                ...result,
+                items: result.items.map(item => ({
+                  ...item,
+                  link: transformNdlaUrl(item.link),
+                })),
+              }
+            : result;
+        dispatch(setEmbedResults({ type, result: newResult }));
+      })
+      .then(() => {
+        const updatedQuery = Object.assign({}, query, {
+          numberOfPages: getNumberOfPages(getState(), type),
+        });
+        dispatch(changeEmbedSearchQuery({ type, query: updatedQuery }));
+      })
+      .catch(err => dispatch(applicationError(err)));
 }
 
 export function fetchExternalEmbedSearch(query) {
@@ -39,16 +51,23 @@ export function fetchNdlaEmbedSearch(query) {
   return fetchEmbedSearch(query, 'ndla');
 }
 
-
 function fetchOembed(url, lang, type) {
-  return dispatch => fetchOembedUrl({ url })
-    .then((oembed) => {
-      dispatch(setEmbedPreview({ type, oembedContent: Object.assign({}, oembed, { url, language: lang }) }));
-    })
-    .catch((err) => {
-      dispatch(setEmbedPreview({ type, oembedContent: { error: true, url } }));
-      dispatch(applicationError(err));
-    });
+  return dispatch =>
+    fetchOembedUrl({ url })
+      .then(oembed => {
+        dispatch(
+          setEmbedPreview({
+            type,
+            oembedContent: Object.assign({}, oembed, { url, language: lang }),
+          }),
+        );
+      })
+      .catch(err => {
+        dispatch(
+          setEmbedPreview({ type, oembedContent: { error: true, url } }),
+        );
+        dispatch(applicationError(err));
+      });
 }
 
 export function fetchExternalOembed(url, lang) {

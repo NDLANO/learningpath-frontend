@@ -20,7 +20,9 @@ export function SortLearningStepsSaveButton({ learningPath }) {
 
   return (
     <div>
-      <Link className="sort-steps_button_save" to={`/learningpaths/${learningPath.id}`}>
+      <Link
+        className="sort-steps_button_save"
+        to={`/learningpaths/${learningPath.id}`}>
         <Icon.Save />
         {polyglot.t('sortSteps.finish')}
       </Link>

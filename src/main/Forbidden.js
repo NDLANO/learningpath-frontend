@@ -14,7 +14,9 @@ export default function Forbidden() {
   return (
     <div className="status-response_container">
       <h2>403: {polyglot.t('htmlStatus.forbidden')}</h2>
-      <Link to="/" className="cta-link--primary">{polyglot.t('htmlStatus.backToFrontpage')}</Link>
+      <Link to="/" className="cta-link--primary">
+        {polyglot.t('htmlStatus.backToFrontpage')}
+      </Link>
     </div>
   );
 }

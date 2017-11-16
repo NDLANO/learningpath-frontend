@@ -15,7 +15,11 @@ import EmbedSearchForm from '../embedSearch/EmbedSearchForm';
 import * as actions from '../embedSearch/embedSearchActions';
 import EmbedSearchResults from '../embedSearch/EmbedSearchResults';
 import EmbedSearchPreview from '../embedSearch/EmbedSearchPreview';
-import { getEmbedResultFromState, getEmbedQueryFromState, getOembedContentFromState } from '../embedSearch/embedSearchSelectors';
+import {
+  getEmbedResultFromState,
+  getEmbedQueryFromState,
+  getOembedContentFromState,
+} from '../embedSearch/embedSearchSelectors';
 import polyglot from '../i18n';
 
 const searchType = 'ndla';
@@ -58,7 +62,13 @@ class NdlaEmbedSearch extends React.Component {
   }
 
   render() {
-    const { result, localFetchEmbedSearch, oembedPreview, query, display } = this.props;
+    const {
+      result,
+      localFetchEmbedSearch,
+      oembedPreview,
+      query,
+      display,
+    } = this.props;
     const containerClass = {
       'embed-search_container': true,
       'embed-search_container--active': display,
@@ -83,7 +93,11 @@ class NdlaEmbedSearch extends React.Component {
             pagerAction={localFetchEmbedSearch}
             query={query}
           />
-          <EmbedSearchPreview oembedPreview={oembedPreview} oembedDisplay={this.state.oembedDisplay} onImageLightboxClose={this.onImageLightboxClose} />
+          <EmbedSearchPreview
+            oembedPreview={oembedPreview}
+            oembedDisplay={this.state.oembedDisplay}
+            onImageLightboxClose={this.onImageLightboxClose}
+          />
         </div>
       </div>
     );
@@ -110,10 +124,11 @@ const mapDispatchToProps = {
   localChangeEmbedSearchQuery: actions.changeEmbedSearchQuery,
 };
 
-const mapStateToProps = state => Object.assign({}, state, {
-  result: getEmbedResultFromState(state, searchType),
-  query: getEmbedQueryFromState(state, searchType),
-  oembedPreview: getOembedContentFromState(state, searchType),
-});
+const mapStateToProps = state =>
+  Object.assign({}, state, {
+    result: getEmbedResultFromState(state, searchType),
+    query: getEmbedQueryFromState(state, searchType),
+    oembedPreview: getOembedContentFromState(state, searchType),
+  });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NdlaEmbedSearch);

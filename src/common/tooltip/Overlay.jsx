@@ -17,11 +17,7 @@ const Overlay = ({ children, ...props }) => {
     className: classNames(children.props.className, 'in'),
   });
 
-  return (
-    <BaseOverlay {...props} >
-      {child}
-    </BaseOverlay>
-  );
+  return <BaseOverlay {...props}>{child}</BaseOverlay>;
 };
 
 Overlay.propTypes = {
@@ -30,6 +26,5 @@ Overlay.propTypes = {
   target: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
   placement: PropTypes.oneOf(PLACEMENTS).isRequired,
 };
-
 
 export default Overlay;

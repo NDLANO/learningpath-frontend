@@ -11,15 +11,29 @@ import PropTypes from 'prop-types';
 import LTISearch from '../ltiSearch/LTISearch';
 import ExternalOembedSearch from './ExternalOembedSearch';
 
-const ExternalEmbedSearchContainer = (props) => {
-  const { currentFilter, learningPathId, addEmbedResult, handleTextQueryChange, textQuery } = props;
+const ExternalEmbedSearchContainer = props => {
+  const {
+    currentFilter,
+    learningPathId,
+    addEmbedResult,
+    handleTextQueryChange,
+    textQuery,
+  } = props;
   if (currentFilter.type === 'lti') {
     return (
-      <LTISearch filter={currentFilter} addEmbedResult={addEmbedResult} learningPathId={learningPathId} />
+      <LTISearch
+        filter={currentFilter}
+        addEmbedResult={addEmbedResult}
+        learningPathId={learningPathId}
+      />
     );
   }
   return (
-    <ExternalOembedSearch addEmbedResult={addEmbedResult} handleTextQueryChange={handleTextQueryChange} textQuery={textQuery} />
+    <ExternalOembedSearch
+      addEmbedResult={addEmbedResult}
+      handleTextQueryChange={handleTextQueryChange}
+      textQuery={textQuery}
+    />
   );
 };
 

@@ -19,37 +19,52 @@ const initialState = {
     'page-size': 16,
   },
 };
-export default handleActions({
-  SET_IMAGES: {
-    next(state, action) {
-      const nextState = cloneDeep(state);
-      nextState.images = action.payload;
-      return nextState;
+export default handleActions(
+  {
+    SET_IMAGES: {
+      next(state, action) {
+        const nextState = cloneDeep(state);
+        nextState.images = action.payload;
+        return nextState;
+      },
+      throw(state) {
+        return state;
+      },
     },
-    throw(state) { return state; },
-  },
-  SET_SELECTED_IMAGE: {
-    next(state, action) {
-      const nextState = cloneDeep(state);
-      nextState.selectedImage = action.payload;
-      return nextState;
+    SET_SELECTED_IMAGE: {
+      next(state, action) {
+        const nextState = cloneDeep(state);
+        nextState.selectedImage = action.payload;
+        return nextState;
+      },
+      throw(state) {
+        return state;
+      },
     },
-    throw(state) { return state; },
-  },
-  SET_SAVED_IMAGE: {
-    next(state, action) {
-      const nextState = cloneDeep(state);
-      nextState.savedImage = action.payload;
-      return nextState;
+    SET_SAVED_IMAGE: {
+      next(state, action) {
+        const nextState = cloneDeep(state);
+        nextState.savedImage = action.payload;
+        return nextState;
+      },
+      throw(state) {
+        return state;
+      },
     },
-    throw(state) { return state; },
-  },
-  CHANGE_IMAGE_SEARCH_QUERY: {
-    next(state, action) {
-      const nextState = cloneDeep(state);
-      nextState.imageSearchQuery = Object.assign({}, state.imageSearchQuery, action.payload);// action.payload;
-      return nextState;
+    CHANGE_IMAGE_SEARCH_QUERY: {
+      next(state, action) {
+        const nextState = cloneDeep(state);
+        nextState.imageSearchQuery = Object.assign(
+          {},
+          state.imageSearchQuery,
+          action.payload,
+        ); // action.payload;
+        return nextState;
+      },
+      throw(state) {
+        return state;
+      },
     },
-    throw(state) { return state; },
   },
-}, initialState);
+  initialState,
+);

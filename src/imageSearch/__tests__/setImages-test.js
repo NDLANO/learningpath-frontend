@@ -6,22 +6,16 @@
  *
  */
 
-
 import { isFSA } from 'flux-standard-action';
 import { setImages } from '../imageActions';
 
-
 test('actions/setImages', () => {
-  const actual = setImages(
-    {
-      page: 1,
-      'page-size': 16,
-      totalCount: 2,
-      results: [
-        { id: '12345' }, { id: '67890' },
-      ],
-    }
-  );
+  const actual = setImages({
+    page: 1,
+    'page-size': 16,
+    totalCount: 2,
+    results: [{ id: '12345' }, { id: '67890' }],
+  });
 
   expect(isFSA(actual)).toBeTruthy();
 
@@ -30,9 +24,7 @@ test('actions/setImages', () => {
     page: 1,
     'page-size': 16,
     totalCount: 2,
-    results: [
-      { id: '12345' }, { id: '67890' },
-    ],
+    results: [{ id: '12345' }, { id: '67890' }],
   });
   expect(actual.error).toBeFalsy();
 });

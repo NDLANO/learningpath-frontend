@@ -2,7 +2,8 @@ const translatedLearningPaths = [
   {
     id: '1',
     title: 'Hva er kunst og kultur?',
-    description: 'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
+    description:
+      'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
     introduction: '<p>Norsk test id 1</p>',
     tags: ['kristofer'],
     isBasedOnTitle: undefined,
@@ -15,7 +16,8 @@ const translatedLearningPaths = [
   {
     id: '2',
     title: 'Leselighet og skrift',
-    description: 'Uttrykkene "leselighet" og "lesbarhet" brukes om hverandre i norsk fagterminologi, og ofte uten klare forestillinger om hva begrepene står for.',
+    description:
+      'Uttrykkene "leselighet" og "lesbarhet" brukes om hverandre i norsk fagterminologi, og ofte uten klare forestillinger om hva begrepene står for.',
     introduction: '<p>Norsk test</p>',
     tags: ['kristofer'],
     isBasedOnTitle: undefined,
@@ -30,7 +32,8 @@ const translatedLearningPaths = [
 const translatedLearningPath = {
   id: 4,
   title: 'Kristofers private bokmål',
-  description: 'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
+  description:
+    'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
   metaUrl: 'http://api.test.ndla.no/learningpaths/4',
   learningsteps: [
     {
@@ -63,11 +66,11 @@ const translatedLearningPath = {
   },
 };
 
-
 const translatedLearningPathNotEditable = {
   id: 4,
   title: 'Kristofers private bokmål',
-  description: 'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
+  description:
+    'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
   metaUrl: 'http://api.test.ndla.no/learningpaths/4',
   learningsteps: [
     {
@@ -83,7 +86,8 @@ const translatedLearningPathNotEditable = {
       oembed: {
         title: 'NDLA',
         url: 'http://ndla.no/nb/node/24049',
-        html: '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>',
+        html:
+          '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>',
       },
       type: 'TEXT',
       license: 'by-nc-sa',
@@ -102,7 +106,8 @@ const translatedLearningPathNotEditable = {
       oembed: {
         title: 'NDLA',
         url: 'http://ndla.no/nb/node/24049',
-        html: '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>',
+        html:
+          '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>',
       },
       type: 'TEXT',
       metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/8',
@@ -133,7 +138,8 @@ const translatedLearningStep = {
   oembed: {
     title: 'NDLA',
     url: 'https://www.youtube.com/watch?v=RYLlSFmGfm0',
-    html: '<iframe src="https://www.youtube.com/embed/RYLlSFmGfm0?feature=oembed" allowfullscreen></iframe>',
+    html:
+      '<iframe src="https://www.youtube.com/embed/RYLlSFmGfm0?feature=oembed" allowfullscreen></iframe>',
   },
   type: 'TEXT',
   metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/8',
@@ -152,7 +158,8 @@ const translatedNdlaLearningStep = {
   oembed: {
     title: 'NDLA',
     url: 'http://ndla.no/nb/node/24049',
-    html: '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>',
+    html:
+      '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>',
   },
   type: 'TEXT',
   metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/9',
@@ -164,7 +171,8 @@ const nbOembedContent = {
   title: 'Klart du bør bli journalist',
   width: 800,
   height: 800,
-  html: '<iframe src="http://api.test.ndla.no/article-converter/html/nb/60" frameborder="0" />',
+  html:
+    '<iframe src="http://api.test.ndla.no/article-converter/html/nb/60" frameborder="0" />',
   url: 'http://api.test.ndla.no:8082/article/60',
   language: 'nb',
 };
@@ -175,9 +183,18 @@ const enOembedContent = {
   title: 'You should become journalist',
   width: 800,
   height: 800,
-  html: '<iframe src="http://api.test.ndla.no/article-converter/html/en/60" frameborder="0" />',
+  html:
+    '<iframe src="http://api.test.ndla.no/article-converter/html/en/60" frameborder="0" />',
   url: 'http://api.test.ndla.no:8082/article/60',
   language: 'en',
 };
 
-export { translatedLearningPaths, translatedLearningPath, translatedLearningPathNotEditable, translatedLearningStep, translatedNdlaLearningStep, nbOembedContent, enOembedContent };
+export {
+  translatedLearningPaths,
+  translatedLearningPath,
+  translatedLearningPathNotEditable,
+  translatedLearningStep,
+  translatedNdlaLearningStep,
+  nbOembedContent,
+  enOembedContent,
+};

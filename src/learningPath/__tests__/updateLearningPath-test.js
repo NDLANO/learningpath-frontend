@@ -22,22 +22,29 @@ const accessToken = '123345';
 const pathId = 123;
 
 test('actions/updateLearningPath', () => {
-  const done = (res) => {
+  const done = res => {
     done(res);
     nock.cleanAll();
   };
 
-  const patchPathApi = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
+  const patchPathApi = nock('http://ndla-api', {
+    reqheaders: { Authorization: `Bearer ${accessToken}` },
+  })
     .patch(`/learningpaths/${pathId}`, {
-      id: pathId, isRequest: true,
+      id: pathId,
+      isRequest: true,
     })
     .reply(200, { id: pathId, isResponse: true });
 
   const store = mockStore({ accessToken });
 
-  store.dispatch(updateLearningPath(pathId, {
-    id: pathId, isRequest: true,
-  }))
+  store
+    .dispatch(
+      updateLearningPath(pathId, {
+        id: pathId,
+        isRequest: true,
+      }),
+    )
     .then(() => {
       expect(store.getActions()).toEqual([
         addMessage({ message: 'Lagret OK' }),
@@ -56,23 +63,28 @@ test('actions/updateLearningPath', () => {
 });
 
 test('actions/updateLearningPath with redirect', () => {
-  const done = (res) => {
+  const done = res => {
     done(res);
     nock.cleanAll();
   };
 
-  const patchPathApi = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
+  const patchPathApi = nock('http://ndla-api', {
+    reqheaders: { Authorization: `Bearer ${accessToken}` },
+  })
     .patch(`/learningpaths/${pathId}`, { id: pathId })
     .reply(200, { id: pathId });
 
   const store = mockStore({ accessToken });
 
-  store.dispatch(updateLearningPath(pathId, { id: pathId }, '/goto/dev/null'))
+  store
+    .dispatch(updateLearningPath(pathId, { id: pathId }, '/goto/dev/null'))
     .then(() => {
       const actual = store.getActions();
 
       expect(actual.length).toBe(3);
-      expect(actual[2]).toEqual(routerActions.push({ pathname: '/goto/dev/null' }));
+      expect(actual[2]).toEqual(
+        routerActions.push({ pathname: '/goto/dev/null' }),
+      );
 
       expect(() => patchPathApi.done()).not.toThrow();
 
@@ -82,12 +94,14 @@ test('actions/updateLearningPath with redirect', () => {
 });
 
 test('actions/updateLearningPath access denied', () => {
-  const done = (res) => {
+  const done = res => {
     done(res);
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
+  const apiMock = nock('http://ndla-api', {
+    reqheaders: { Authorization: `Bearer ${accessToken}` },
+  })
     .patch(`/learningpaths/${pathId}`, {
       id: pathId,
       foo: 'bar',
@@ -96,10 +110,13 @@ test('actions/updateLearningPath access denied', () => {
 
   const store = mockStore({ accessToken });
 
-  store.dispatch(updateLearningPath(pathId, { id: pathId, foo: 'bar' }))
+  store
+    .dispatch(updateLearningPath(pathId, { id: pathId, foo: 'bar' }))
     .then(() => {
       expect(store.getActions()).toEqual([
-        applicationError(payload403invalid(`http://ndla-api/learningpaths/${pathId}`)),
+        applicationError(
+          payload403invalid(`http://ndla-api/learningpaths/${pathId}`),
+        ),
       ]);
       expect(() => apiMock.done()).not.toThrow();
 

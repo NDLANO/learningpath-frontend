@@ -16,8 +16,7 @@ import { shallow, mount, render } from 'enzyme';
 import { locationOrigin, apiBaseUrl, accessToken } from '../../sources/helpers';
 
 class Selfie extends Component {
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   render() {
     return <div className="selfie-content">{this.props.foo}</div>;

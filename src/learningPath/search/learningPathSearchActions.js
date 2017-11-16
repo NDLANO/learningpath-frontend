@@ -10,24 +10,35 @@ import { createAction } from 'redux-actions';
 import { applicationError } from '../../messages/messagesActions';
 import { fetchPaths, fetchPath } from '../../sources/learningpaths';
 
-export const setLearningPathBasedOn = createAction('SET_LEARNING_PATH_BASED_ON');
-export const setLearningPathSearchResults = createAction('SET_LEARNING_PATH_SEARCH_RESULTS');
+export const setLearningPathBasedOn = createAction(
+  'SET_LEARNING_PATH_BASED_ON',
+);
+export const setLearningPathSearchResults = createAction(
+  'SET_LEARNING_PATH_SEARCH_RESULTS',
+);
 
 function fetchIsBasedOnPath(path) {
-  return dispatch => fetchPath({ pathId: path.isBasedOn })
-    .then((isBasedOnPath) => {
-      dispatch(setLearningPathBasedOn({ isBasedOnPath, pathId: path.id }));
-    }).catch(() => {});
+  return dispatch =>
+    fetchPath({ pathId: path.isBasedOn })
+      .then(isBasedOnPath => {
+        dispatch(setLearningPathBasedOn({ isBasedOnPath, pathId: path.id }));
+      })
+      .catch(() => {});
 }
 
 export function searchLearningPaths(query) {
-  return (dispatch, getState) => fetchPaths(query, getState().locale)
-    .then((res) => {
-      dispatch(setLearningPathSearchResults({
-        results: res.results,
-        totalCount: res.totalCount,
-      }));
-      res.results.filter(path => path.isBasedOn).map(path => dispatch(fetchIsBasedOnPath(path)));
-    })
-    .catch(err => dispatch(applicationError(err)));
+  return (dispatch, getState) =>
+    fetchPaths(query, getState().locale)
+      .then(res => {
+        dispatch(
+          setLearningPathSearchResults({
+            results: res.results,
+            totalCount: res.totalCount,
+          }),
+        );
+        res.results
+          .filter(path => path.isBasedOn)
+          .map(path => dispatch(fetchIsBasedOnPath(path)));
+      })
+      .catch(err => dispatch(applicationError(err)));
 }

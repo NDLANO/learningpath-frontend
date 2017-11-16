@@ -25,7 +25,12 @@ function Logo(props) {
 
   return (
     <div className={rootClasses}>
-      <Link to="/" className={beta ? 'logo_link logo_link-beta' : 'logo_link'} onClick={closeSidebars}>{polyglot.t('logo.altText')}</Link>
+      <Link
+        to="/"
+        className={beta ? 'logo_link logo_link-beta' : 'logo_link'}
+        onClick={closeSidebars}>
+        {polyglot.t('logo.altText')}
+      </Link>
     </div>
   );
 }
@@ -35,6 +40,5 @@ Logo.propTypes = {
   closeSidebars: PropTypes.func.isRequired,
   beta: PropTypes.bool,
 };
-
 
 export default withCloseSidebars(Logo);

@@ -17,15 +17,18 @@ import { getPins } from './pinterestSelectors';
 import { getLocale } from '../locale/localeSelectors';
 import config from '../config';
 
-const PINTEREST_ENABLED = __SERVER__ ? config.pinterestEnabled : window.config.pinterestEnabled;
+const PINTEREST_ENABLED = __SERVER__
+  ? config.pinterestEnabled
+  : window.config.pinterestEnabled;
 
 class PinterestLightbox extends Component {
   constructor(props) {
     super(props);
     this.handleBoardNameSubmit = this.handleBoardNameSubmit.bind(this);
-    this.handleCreateLearningPathStep = this.handleCreateLearningPathStep.bind(this);
+    this.handleCreateLearningPathStep = this.handleCreateLearningPathStep.bind(
+      this,
+    );
   }
-
 
   handleBoardNameSubmit(username, boardName) {
     this.props.localFetchPins(username, boardName);
@@ -33,7 +36,13 @@ class PinterestLightbox extends Component {
   }
 
   handleCreateLearningPathStep(pinId, title, url) {
-    const { createLearningPathStep, pins, localSetPins, learningPath, locale: language } = this.props;
+    const {
+      createLearningPathStep,
+      pins,
+      localSetPins,
+      learningPath,
+      locale: language,
+    } = this.props;
     createLearningPathStep(learningPath.id, {
       type: 'TEXT',
       showTitle: true,
@@ -53,7 +62,10 @@ class PinterestLightbox extends Component {
     return (
       <div className="pinterest-lightbox_container">
         <div className="big-lightbox_wrapper big-lightbox_wrapper--scroll">
-          <Lightbox display={showLightBox} width="800px" onClose={toggleLightBox}>
+          <Lightbox
+            display={showLightBox}
+            width="800px"
+            onClose={toggleLightBox}>
             <PinterestImport
               handleCreateLearningPathStep={this.handleCreateLearningPathStep}
               handleBoardNameSubmit={this.handleBoardNameSubmit}
@@ -80,7 +92,8 @@ PinterestLightbox.propTypes = {
 };
 
 const mapDispatchToProps = {
-  createLearningPathStep: (learningPathId, step) => learningPathStepActions.createLearningPathStep(learningPathId, step),
+  createLearningPathStep: (learningPathId, step) =>
+    learningPathStepActions.createLearningPathStep(learningPathId, step),
   localSetPins: pinterestActions.setPins,
   localSetFetchingPins: pinterestActions.setFetchingPins,
   localFetchPins: pinterestActions.fetchPinterestPins,

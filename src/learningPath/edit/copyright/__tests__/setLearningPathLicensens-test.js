@@ -8,8 +8,10 @@
 
 import { isFSA } from 'flux-standard-action';
 
-import { setCreativeCommonLicenses, setAllLicenses } from '../learningPathLicensesActions';
-
+import {
+  setCreativeCommonLicenses,
+  setAllLicenses,
+} from '../learningPathLicensesActions';
 
 test('actions/setCreativeCommonLicenses', () => {
   const actual = setCreativeCommonLicenses([{ id: '12345' }, { id: '123456' }]);
@@ -31,7 +33,6 @@ test('actions/setCreativeCommonLicenses with error', () => {
   expect(actual.payload.message).toBe('fail!');
   expect(actual.error).toBeTruthy();
 });
-
 
 test('actions/setAllLicenses', () => {
   const actual = setAllLicenses([{ id: '12345' }, { id: '123456' }]);

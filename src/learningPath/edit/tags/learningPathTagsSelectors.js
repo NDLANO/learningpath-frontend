@@ -12,6 +12,6 @@ import defined from 'defined';
 const getLearningPathTagsFromState = state => state.learningPathTags.all;
 
 export const getLearningPathTags = createSelector(
-    [getLearningPathTagsFromState],
-    tags => defined(tags.tags, [])
+  [getLearningPathTagsFromState],
+  tags => defined(tags.tags, []),
 );

@@ -19,7 +19,7 @@ const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
 test('actions/searchLearningPaths', () => {
-  const done = (res) => {
+  const done = res => {
     done(res);
     nock.cleanAll();
   };
@@ -35,7 +35,8 @@ test('actions/searchLearningPaths', () => {
 
   const store = mockStore({});
 
-  store.dispatch(searchLearningPaths())
+  store
+    .dispatch(searchLearningPaths())
     .then(() => {
       expect(store.getActions()).toEqual([
         setLearningPathSearchResults({
@@ -51,11 +52,10 @@ test('actions/searchLearningPaths', () => {
 });
 
 test('actions/searchLearningPaths with query', () => {
-  const done = (res) => {
+  const done = res => {
     done(res);
     nock.cleanAll();
   };
-
 
   const apiMock = nock('http://ndla-api')
     .get('/learningpath-api/v1/learningpaths')
@@ -78,7 +78,8 @@ test('actions/searchLearningPaths with query', () => {
 
   const store = mockStore(initialState);
 
-  store.dispatch(searchLearningPaths())
+  store
+    .dispatch(searchLearningPaths())
     .then(() => {
       expect(store.getActions()).toEqual([
         setLearningPathSearchResults({
@@ -97,7 +98,7 @@ test('actions/searchLearningPaths with query', () => {
 });
 
 test('actions/searchLearningPaths with query without search term', () => {
-  const done = (res) => {
+  const done = res => {
     done(res);
     nock.cleanAll();
   };
@@ -122,7 +123,8 @@ test('actions/searchLearningPaths with query without search term', () => {
 
   const store = mockStore(initialState);
 
-  store.dispatch(searchLearningPaths())
+  store
+    .dispatch(searchLearningPaths())
     .then(() => {
       expect(store.getActions()).toEqual([
         setLearningPathSearchResults({

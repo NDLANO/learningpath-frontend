@@ -11,23 +11,25 @@ import cloneDeep from 'lodash/cloneDeep';
 
 const initalState = { pins: [], fetchingPins: false };
 
-
-export default handleActions({
-  SET_PINS: {
-    next(state, action) {
-      const nextState = cloneDeep(state);
-      nextState.pins = action.payload;
-      return nextState;
+export default handleActions(
+  {
+    SET_PINS: {
+      next(state, action) {
+        const nextState = cloneDeep(state);
+        nextState.pins = action.payload;
+        return nextState;
+      },
+      throw: state => state,
     },
-    throw: state => state,
-  },
-  SET_FETCHING_PINS: {
-    next(state, action) {
-      const nextState = cloneDeep(state);
-      nextState.fetchingPins = action.payload;
-      return nextState;
+    SET_FETCHING_PINS: {
+      next(state, action) {
+        const nextState = cloneDeep(state);
+        nextState.fetchingPins = action.payload;
+        return nextState;
+      },
+      throw: state => state,
     },
-    throw: state => state,
+    REMOVE_PINS: () => initalState,
   },
-  REMOVE_PINS: () => initalState,
-}, initalState);
+  initalState,
+);

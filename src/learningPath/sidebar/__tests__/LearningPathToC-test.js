@@ -14,8 +14,13 @@ import { LearningPathToC } from '../LearningPathToC';
 import LearningPathToCStep from '../LearningPathToCStep';
 
 test('component/LearningPathToC', () => {
-  const component = shallow(<LearningPathToC learningPath={translatedLearningPath} localCloseSidebars={noop} />,
-    { context: { lang: 'nb' } });
+  const component = shallow(
+    <LearningPathToC
+      learningPath={translatedLearningPath}
+      localCloseSidebars={noop}
+    />,
+    { context: { lang: 'nb' } },
+  );
 
   const steps = component.find(LearningPathToCStep);
 

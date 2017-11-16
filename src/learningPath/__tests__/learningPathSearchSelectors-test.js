@@ -7,7 +7,10 @@
  */
 
 import { learningPath } from '../../common/__tests__/mockData';
-import { getLearningPath, getLearningPathSteps } from '../learningPathSelectors';
+import {
+  getLearningPath,
+  getLearningPathSteps,
+} from '../learningPathSelectors';
 import { translatedLearningPath } from '../../common/__tests__/translatedMockData';
 
 test('selectors/getLearningPath', () => {
@@ -24,5 +27,7 @@ test('selectors/getLearningPathSteps', () => {
     learningPath,
     locale: 'nb',
   };
-  expect(getLearningPathSteps(state)).toEqual(translatedLearningPath.learningsteps);
+  expect(getLearningPathSteps(state)).toEqual(
+    translatedLearningPath.learningsteps,
+  );
 });

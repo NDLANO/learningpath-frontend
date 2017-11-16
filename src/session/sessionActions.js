@@ -10,7 +10,11 @@ import { createAction } from 'redux-actions';
 import auth0 from 'auth0-js';
 import { routerActions } from 'react-router-redux';
 import { locationOrigin, auth0ClientId, auth0Domain } from '../sources/helpers';
-import { decodeToken, getIdTokenExpireEpoch, getAccessTokenExpireEpoch } from '../util/jwtHelper';
+import {
+  decodeToken,
+  getIdTokenExpireEpoch,
+  getAccessTokenExpireEpoch,
+} from '../util/jwtHelper';
 import { fetchNewToken } from '../sources/tokens';
 import { applicationError } from '../messages/messagesActions';
 
@@ -29,10 +33,13 @@ const auth = new auth0.WebAuth({
 });
 
 export function parseHash(hash) {
-  return (dispatch) => {
+  return dispatch => {
     auth.parseHash({ hash, _idTokenVerification: false }, (err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        const token = { token: authResult.idToken, expiresAt: getIdTokenExpireEpoch(authResult.idToken) };
+        const token = {
+          token: authResult.idToken,
+          expiresAt: getIdTokenExpireEpoch(authResult.idToken),
+        };
         dispatch(setIdToken(token));
         dispatch(setAuthenticated(true));
         dispatch(setUserData(decodeToken(authResult.idToken)));
@@ -49,56 +56,76 @@ export function loginSocialMedia(type) {
 }
 
 export function logout(federated = undefined) {
-  return dispatch => fetchNewToken()
-    .then((token) => {
-      const newToken = { token: token.access_token, expiresAt: getAccessTokenExpireEpoch(token.access_token) };
-      dispatch(setAccessToken(newToken));
-      dispatch(setAuthenticated(false));
-      dispatch(logoutAction());
-      auth.logout({
-        returnTo: `${locationOrigin}/`,
-        client_id: auth0ClientId,
-        federated,
-      });
-      window.localStorage.clear();
-      return newToken;
-    })
-    .catch(err => dispatch(applicationError(err)));
+  return dispatch =>
+    fetchNewToken()
+      .then(token => {
+        const newToken = {
+          token: token.access_token,
+          expiresAt: getAccessTokenExpireEpoch(token.access_token),
+        };
+        dispatch(setAccessToken(newToken));
+        dispatch(setAuthenticated(false));
+        dispatch(logoutAction());
+        auth.logout({
+          returnTo: `${locationOrigin}/`,
+          client_id: auth0ClientId,
+          federated,
+        });
+        window.localStorage.clear();
+        return newToken;
+      })
+      .catch(err => dispatch(applicationError(err)));
 }
 
 export function renewAuth0Token() {
-  return dispatch => new Promise((resolve) => {
-    auth.renewAuth({
-      redirectUri: `${locationOrigin}/login/silent-callback`,
-      usePostMessage: true,
-    }, (err, authResult) => {
-      if (authResult && authResult.idToken) {
-        const token = { token: authResult.idToken, expiresAt: getIdTokenExpireEpoch(authResult.idToken) };
-        dispatch(setIdToken(token));
-        dispatch(setAuthenticated(true));
-        dispatch(setUserData(decodeToken(authResult.idToken)));
-        resolve(token);
-      } else {
-        dispatch(logout()).then(token => resolve(token));
-      }
+  return dispatch =>
+    new Promise(resolve => {
+      auth.renewAuth(
+        {
+          redirectUri: `${locationOrigin}/login/silent-callback`,
+          usePostMessage: true,
+        },
+        (err, authResult) => {
+          if (authResult && authResult.idToken) {
+            const token = {
+              token: authResult.idToken,
+              expiresAt: getIdTokenExpireEpoch(authResult.idToken),
+            };
+            dispatch(setIdToken(token));
+            dispatch(setAuthenticated(true));
+            dispatch(setUserData(decodeToken(authResult.idToken)));
+            resolve(token);
+          } else {
+            dispatch(logout()).then(token => resolve(token));
+          }
+        },
+      );
     });
-  });
 }
 
 export function renewAuthToken() {
-  return dispatch => fetchNewToken()
-    .then((token) => {
-      dispatch(setAccessToken({ token: token.access_token, expiresAt: getAccessTokenExpireEpoch(token.access_token) }));
-      return { token: token.access_token, expiresAt: getAccessTokenExpireEpoch(token.access_token) };
+  return dispatch =>
+    fetchNewToken().then(token => {
+      dispatch(
+        setAccessToken({
+          token: token.access_token,
+          expiresAt: getAccessTokenExpireEpoch(token.access_token),
+        }),
+      );
+      return {
+        token: token.access_token,
+        expiresAt: getAccessTokenExpireEpoch(token.access_token),
+      };
     });
 }
 
 export function refreshToken() {
-  return (dispatch, getState) => new Promise((resolve) => {
-    if (getState().authenticated) {
-      dispatch(renewAuth0Token()).then(token => resolve(token));
-    } else {
-      dispatch(renewAuthToken()).then(token => resolve(token));
-    }
-  });
+  return (dispatch, getState) =>
+    new Promise(resolve => {
+      if (getState().authenticated) {
+        dispatch(renewAuth0Token()).then(token => resolve(token));
+      } else {
+        dispatch(renewAuthToken()).then(token => resolve(token));
+      }
+    });
 }

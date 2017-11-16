@@ -19,7 +19,7 @@ import PreviewOembed from '../oembed/PreviewOembed';
 import LearningPathStepIcon from '../LearningPathStepIcon';
 import LearningPathStepEmbed from './LearningPathStepEmbed';
 
-const LearningPathStepFields = (props) => {
+const LearningPathStepFields = props => {
   const {
     step,
     lang,
@@ -34,8 +34,8 @@ const LearningPathStepFields = (props) => {
     license,
   } = props;
 
-  const handleDescriptionBlur = (value) => {
-    if ((!showTitle.meta.touched && !step.id)) {
+  const handleDescriptionBlur = value => {
+    if (!showTitle.meta.touched && !step.id) {
       if (value) {
         showTitle.input.onChange(true);
       } else {
@@ -44,7 +44,10 @@ const LearningPathStepFields = (props) => {
     }
 
     if (!value) {
-      license.input.onChange({ description: polyglot.t('editPathStep.noLicenseChosen'), license: '' });
+      license.input.onChange({
+        description: polyglot.t('editPathStep.noLicenseChosen'),
+        license: '',
+      });
     }
 
     description.input.onBlur(value);
@@ -54,7 +57,7 @@ const LearningPathStepFields = (props) => {
     url.input.onBlur({ url: embedUrl, embedType });
   };
 
-  const handleUrlOnBlur = (evt) => {
+  const handleUrlOnBlur = evt => {
     const value = evt.target.value;
     if (url.input.value.url !== value) {
       url.input.onBlur({ url: value, embedType: 'oembed' });
@@ -67,30 +70,58 @@ const LearningPathStepFields = (props) => {
     <div>
       <div className="learning-step-form_group">
         <span className="learning-step-form_mediatype-icon">
-          <LearningPathStepIcon learningPathStepType={type.input.value} isCircle={false} />
+          <LearningPathStepIcon
+            learningPathStepType={type.input.value}
+            isCircle={false}
+          />
         </span>
 
-        <select {...type.input} name="type" className="learning-step-form_mediatype-dd">
-          <option value="INTRODUCTION">{polyglot.t('editPathStep.mediatype.introduction')}</option>
-          <option value="TEXT">{polyglot.t('editPathStep.mediatype.text')}</option>
-          <option value="MULTIMEDIA">{polyglot.t('editPathStep.mediatype.multimedia')}</option>
-          <option value="QUIZ">{polyglot.t('editPathStep.mediatype.quiz')}</option>
-          <option value="TASK">{polyglot.t('editPathStep.mediatype.task')}</option>
-          <option value="SUMMARY">{polyglot.t('editPathStep.mediatype.summary')}</option>
+        <select
+          {...type.input}
+          name="type"
+          className="learning-step-form_mediatype-dd">
+          <option value="INTRODUCTION">
+            {polyglot.t('editPathStep.mediatype.introduction')}
+          </option>
+          <option value="TEXT">
+            {polyglot.t('editPathStep.mediatype.text')}
+          </option>
+          <option value="MULTIMEDIA">
+            {polyglot.t('editPathStep.mediatype.multimedia')}
+          </option>
+          <option value="QUIZ">
+            {polyglot.t('editPathStep.mediatype.quiz')}
+          </option>
+          <option value="TASK">
+            {polyglot.t('editPathStep.mediatype.task')}
+          </option>
+          <option value="SUMMARY">
+            {polyglot.t('editPathStep.mediatype.summary')}
+          </option>
         </select>
       </div>
 
       <div className="learning-step-form_group">
         <div className="learning-step-form_left">
-          <span className="learning-step-form_icon-bg"><Icon.Create /></span>
+          <span className="learning-step-form_icon-bg">
+            <Icon.Create />
+          </span>
           <OnClickCheckbox input={showTitle.input} />
         </div>
         <div className="learning-step-form_right">
-          <OneLineEditor placeholder={polyglot.t('editPathStep.titlePlaceHolder')} wrapperClassName="learning-step-form_input learning-step-form_title" {...title} />
+          <OneLineEditor
+            placeholder={polyglot.t('editPathStep.titlePlaceHolder')}
+            wrapperClassName="learning-step-form_input learning-step-form_title"
+            {...title}
+          />
         </div>
       </div>
       <div className="learning-step-form_box">
-        <DescriptionHTMLEditor input={description.input} lang={lang} onBlur={handleDescriptionBlur} />
+        <DescriptionHTMLEditor
+          input={description.input}
+          lang={lang}
+          onBlur={handleDescriptionBlur}
+        />
         <div className="learning-step-form_group license-learning-step-form_group">
           <div className="learning-step-form_left">
             <DescriptionLicenseInfo />
@@ -106,24 +137,46 @@ const LearningPathStepFields = (props) => {
                 disabled={disableLicense}
                 input={license.input}
               />
-              {(description.meta.touched) && description.meta.error && <span className="error_message error_message--red">{description.meta.error}</span>}
+              {description.meta.touched &&
+                description.meta.error && (
+                  <span className="error_message error_message--red">
+                    {description.meta.error}
+                  </span>
+                )}
             </div>
           </div>
         </div>
       </div>
-      <LearningPathStepEmbed learningPathId={learningPathId} step={step} handleEmbedUrlChange={handleEmbedUrlChange} />
+      <LearningPathStepEmbed
+        learningPathId={learningPathId}
+        step={step}
+        handleEmbedUrlChange={handleEmbedUrlChange}
+      />
       <div className="learningsource-form">
         <div>
-          <label className="mediatype-menu__label" htmlFor="url">{polyglot.t('editPathStep.urlLabel')}</label>
-          <input name="url" onBlur={handleUrlOnBlur} onChange={handleUrlOnBlur} value={url.input.value.url} placeholder={polyglot.t('editPathStep.urlPlaceholder')} type="url" />
-          {(url.meta.touched || description.meta.touched) && url.meta.error && <span className="error_message error_message--red">{url.meta.error}</span>}
+          <label className="mediatype-menu__label" htmlFor="url">
+            {polyglot.t('editPathStep.urlLabel')}
+          </label>
+          <input
+            name="url"
+            onBlur={handleUrlOnBlur}
+            onChange={handleUrlOnBlur}
+            value={url.input.value.url}
+            placeholder={polyglot.t('editPathStep.urlPlaceholder')}
+            type="url"
+          />
+          {(url.meta.touched || description.meta.touched) &&
+            url.meta.error && (
+              <span className="error_message error_message--red">
+                {url.meta.error}
+              </span>
+            )}
           <PreviewOembed content={oembedPreview} />
         </div>
       </div>
     </div>
   );
 };
-
 
 LearningPathStepFields.propTypes = {
   lang: PropTypes.string.isRequired,

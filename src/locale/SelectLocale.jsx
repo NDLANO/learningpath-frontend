@@ -15,21 +15,28 @@ import { withRouter } from 'react-router-dom';
 import { availableLocales } from './localeConstants';
 import { getLocale } from './localeSelectors';
 
-const SelectLocale = (props) => {
+const SelectLocale = props => {
   const { locale, location: { pathname, search } } = props;
-  const handleChange = (newLocale) => {
+  const handleChange = newLocale => {
     const path = pathname.startsWith('/') ? pathname.substring(1) : pathname;
     createHistory().push(`/${newLocale}/${path}${search}`); // Need create new history or else basename is included
     window.location.reload();
   };
 
   return (
-    <select onChange={(evt) => { handleChange(evt.target.value); }} value={locale}>
-      {availableLocales.map(l => <option key={l.abbreviation} value={l.abbreviation}>{l.name}</option>)}
+    <select
+      onChange={evt => {
+        handleChange(evt.target.value);
+      }}
+      value={locale}>
+      {availableLocales.map(l => (
+        <option key={l.abbreviation} value={l.abbreviation}>
+          {l.name}
+        </option>
+      ))}
     </select>
   );
-}
-;
+};
 
 SelectLocale.propTypes = {
   locale: PropTypes.string.isRequired,

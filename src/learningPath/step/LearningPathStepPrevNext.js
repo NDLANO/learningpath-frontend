@@ -16,26 +16,39 @@ import Icon from '../../common/Icon';
 import polyglot from '../../i18n';
 
 export function LearningPathPrevNext(props) {
-  const {
-    nextStep,
-    prevStep,
-    children,
-  } = props;
+  const { nextStep, prevStep, children } = props;
 
-  const stepperClassName = isRight => classNames({
-    'learning-step_stepper': true,
-    'learning-step_stepper--right': isRight,
-  });
-  const stepperTag = (stepObject, text, isRight) => (
-    stepObject ? <Link className={stepperClassName(isRight)} to={stepObject.url}>{!isRight ? <Icon.ArrowBack /> : null} {text} {isRight ? <Icon.ArrowForward /> : null} </Link> : null
-  );
+  const stepperClassName = isRight =>
+    classNames({
+      'learning-step_stepper': true,
+      'learning-step_stepper--right': isRight,
+    });
+  const stepperTag = (stepObject, text, isRight) =>
+    stepObject ? (
+      <Link className={stepperClassName(isRight)} to={stepObject.url}>
+        {!isRight ? <Icon.ArrowBack /> : null} {text}{' '}
+        {isRight ? <Icon.ArrowForward /> : null}{' '}
+      </Link>
+    ) : null;
   return (
     <div>
       <div className="learning-step learning-step--padding-top" />
       {children}
       <div className="learning-step learning-step--footer learning-step--footer-fixed">
-        {stepperTag(prevStep, polyglot.t('learningPath.previous', { title: prevStep ? prevStep.title : '' }), false)}
-        {stepperTag(nextStep, polyglot.t('learningPath.next', { title: nextStep ? nextStep.title : '' }), true)}
+        {stepperTag(
+          prevStep,
+          polyglot.t('learningPath.previous', {
+            title: prevStep ? prevStep.title : '',
+          }),
+          false,
+        )}
+        {stepperTag(
+          nextStep,
+          polyglot.t('learningPath.next', {
+            title: nextStep ? nextStep.title : '',
+          }),
+          true,
+        )}
       </div>
     </div>
   );
@@ -50,7 +63,6 @@ LearningPathPrevNext.propTypes = {
   lastPageNumber: PropTypes.number,
 };
 
-
 const mapStateToProps = (state, props) => {
   const { currentStepId } = props;
   const learningsteps = get(state.learningPath, 'learningsteps', []);
@@ -60,8 +72,18 @@ const mapStateToProps = (state, props) => {
 
   const base = `/learningpaths/${learningPathId}`;
 
-  const prevStep = learningsteps[currentSeqNo - 1] ? { url: `${base}/step/${learningsteps[currentSeqNo - 1].id}`, title: learningsteps[currentSeqNo - 1].title.title } : undefined;
-  const nextStep = learningsteps[currentSeqNo + 1] ? { url: `${base}/step/${learningsteps[currentSeqNo + 1].id}`, title: learningsteps[currentSeqNo + 1].title.title } : undefined;
+  const prevStep = learningsteps[currentSeqNo - 1]
+    ? {
+        url: `${base}/step/${learningsteps[currentSeqNo - 1].id}`,
+        title: learningsteps[currentSeqNo - 1].title.title,
+      }
+    : undefined;
+  const nextStep = learningsteps[currentSeqNo + 1]
+    ? {
+        url: `${base}/step/${learningsteps[currentSeqNo + 1].id}`,
+        title: learningsteps[currentSeqNo + 1].title.title,
+      }
+    : undefined;
   return Object.assign({}, state, {
     prevStep,
     nextStep,

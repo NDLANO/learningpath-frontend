@@ -9,8 +9,10 @@
 import polyglot from '../i18n';
 import { availableLocales, NB } from './localeConstants';
 
-export const configureLocale = (localeAbbreviation) => {
-  const locale = availableLocales.find(l => l.abbreviation === localeAbbreviation);
+export const configureLocale = localeAbbreviation => {
+  const locale = availableLocales.find(
+    l => l.abbreviation === localeAbbreviation,
+  );
 
   if (locale) {
     polyglot.locale(locale.abbreviation);
@@ -24,9 +26,13 @@ export const configureLocale = (localeAbbreviation) => {
   return polyglot;
 };
 
-export const isValidLocale = localeAbbreviation => availableLocales.find(l => l.abbreviation === localeAbbreviation) !== undefined;
+export const isValidLocale = localeAbbreviation =>
+  availableLocales.find(l => l.abbreviation === localeAbbreviation) !==
+  undefined;
 
-export const getHtmlLang = (localeAbbreviation) => {
-  const locale = availableLocales.find(l => l.abbreviation === localeAbbreviation);
+export const getHtmlLang = localeAbbreviation => {
+  const locale = availableLocales.find(
+    l => l.abbreviation === localeAbbreviation,
+  );
   return locale ? locale.abbreviation : 'nb'; // Defaults to nb if not found
 };

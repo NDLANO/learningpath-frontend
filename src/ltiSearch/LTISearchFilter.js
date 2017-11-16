@@ -28,7 +28,9 @@ class LTISearchFilter extends React.Component {
 
   componentDidMount() {
     const { stepId, learningPathId } = this.props;
-    const returnUrl = stepId ? `${window.location.origin}/lti/${learningPathId}/step/${stepId}` : `${window.location.origin}/lti/${learningPathId}/step/new`;
+    const returnUrl = stepId
+      ? `${window.location.origin}/lti/${learningPathId}/step/${stepId}`
+      : `${window.location.origin}/lti/${learningPathId}/step/new`;
     const query = { key: 'khan_academy', returnUrl };
     this.props.onFilterClick(query);
   }
@@ -36,25 +38,32 @@ class LTISearchFilter extends React.Component {
   handleLTIFilterChange(evt, filter) {
     evt.preventDefault();
     const { stepId, learningPathId } = this.props;
-    const returnUrl = stepId ? `${window.location.origin}/lti/${learningPathId}/step/${stepId}` : `${window.location.origin}/lti/${learningPathId}/step/new`;
+    const returnUrl = stepId
+      ? `${window.location.origin}/lti/${learningPathId}/step/${stepId}`
+      : `${window.location.origin}/lti/${learningPathId}/step/new`;
     const query = { ...filter, returnUrl };
     this.setState({ filter: filter.key });
     this.props.onFilterClick(query);
   }
 
-
   render() {
-    const filterClass = filter => classNames({
-      'un-button': true,
-      'lti-search_form-filter ': true,
-      'lti-search_form-filter--active': this.state.filter === filter,
-    });
+    const filterClass = filter =>
+      classNames({
+        'un-button': true,
+        'lti-search_form-filter ': true,
+        'lti-search_form-filter--active': this.state.filter === filter,
+      });
 
     return (
       <div className="lti-search_form-filters">
-        {this.state.filters.map(filter =>
-          <button key={filter.key} className={filterClass(filter.key)} onClick={evt => this.handleLTIFilterChange(evt, filter)}>{filter.name}</button>
-        )}
+        {this.state.filters.map(filter => (
+          <button
+            key={filter.key}
+            className={filterClass(filter.key)}
+            onClick={evt => this.handleLTIFilterChange(evt, filter)}>
+            {filter.name}
+          </button>
+        ))}
       </div>
     );
   }

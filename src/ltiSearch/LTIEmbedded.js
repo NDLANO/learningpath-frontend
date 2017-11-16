@@ -12,11 +12,15 @@ import polyglot from '../i18n';
 class LTIEmbedded extends React.Component {
   componentDidMount() {
     if (window.location.search) {
-      const params = window.location.search.substr(1).split('&').map(param => param.split('=')).reduce((obj, cur) => {
-        const newObj = obj;
-        newObj[cur[0]] = cur[1];
-        return newObj;
-      }, {});
+      const params = window.location.search
+        .substr(1)
+        .split('&')
+        .map(param => param.split('='))
+        .reduce((obj, cur) => {
+          const newObj = obj;
+          newObj[cur[0]] = cur[1];
+          return newObj;
+        }, {});
       const obj = { params, type: 'ltiParams' };
       parent.postMessage(obj, window.location.href);
     }

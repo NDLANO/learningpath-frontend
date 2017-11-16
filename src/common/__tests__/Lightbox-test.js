@@ -12,7 +12,11 @@ import { shallow } from 'enzyme';
 import Lightbox from '../Lightbox';
 
 test('component/Lightbox', () => {
-  const component = shallow(<Lightbox display onClose={() => { }}><h1>enlighted!</h1></Lightbox>);
+  const component = shallow(
+    <Lightbox display onClose={() => {}}>
+      <h1>enlighted!</h1>
+    </Lightbox>,
+  );
   expect(component.hasClass('lightbox')).toBeTruthy();
 
   const contentContainer = component.find('.lightbox_content');

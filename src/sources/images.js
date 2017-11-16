@@ -20,14 +20,13 @@ const fetchImages = (query = { 'page-size': 16, page: 1 }) => {
   url += `?${queryString.stringify(query)}`;
   return fetchAuth(url).then(resolveJsonOrRejectWithError);
 };
-const fetchImage = (imageId) => {
-  const url = apiResourceUrl(formatUrl('/image-api/v2/images/:imageId', { imageId }));
+const fetchImage = imageId => {
+  const url = apiResourceUrl(
+    formatUrl('/image-api/v2/images/:imageId', { imageId }),
+  );
   return fetchAuth(url).then(resolveJsonOrRejectWithError);
 };
-const fetchImageWithMetaUrl = url => fetchAuth(url).then(resolveJsonOrRejectWithError);
+const fetchImageWithMetaUrl = url =>
+  fetchAuth(url).then(resolveJsonOrRejectWithError);
 
-export {
-  fetchImages,
-  fetchImage,
-  fetchImageWithMetaUrl,
-};
+export { fetchImages, fetchImage, fetchImageWithMetaUrl };

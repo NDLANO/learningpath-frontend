@@ -25,8 +25,15 @@ test('component/MyPage', () => {
     updatePathStatus: noop,
   };
 
-  const component = shallow(<MyPage {...requiredProps} learningPaths={translatedLearningPaths} copyPath={noop} localFetchMyLearningPaths={noop} />,
-      { context: { lang: 'nb' } });
+  const component = shallow(
+    <MyPage
+      {...requiredProps}
+      learningPaths={translatedLearningPaths}
+      copyPath={noop}
+      localFetchMyLearningPaths={noop}
+    />,
+    { context: { lang: 'nb' } },
+  );
 
   const links = component.find('.tile_bd').find(Link);
 
@@ -57,21 +64,21 @@ test('component/MyPage mapStateToProps', () => {
   expect(actual.sortKey).toBe('title');
   expect(actual.learningPaths.map(d => d.id)).toEqual(['1', '2']);
 
-
   expect(
-    translatedLearningPaths[0].lastUpdated < translatedLearningPaths[1].lastUpdated
+    translatedLearningPaths[0].lastUpdated <
+      translatedLearningPaths[1].lastUpdated,
   ).toBeTruthy();
 
-  actual = mapStateToProps(Object.assign({},
-    state, { myLearningPathsSortOrder: '-lastUpdated' }
-  ));
+  actual = mapStateToProps(
+    Object.assign({}, state, { myLearningPathsSortOrder: '-lastUpdated' }),
+  );
 
   expect(actual.sortKey).toBe('-lastUpdated');
   expect(actual.learningPaths.map(d => d.id)).toEqual(['2', '1']);
 
-  actual = mapStateToProps(Object.assign({},
-    state, { myLearningPathsSortOrder: 'lastUpdated' }
-  ));
+  actual = mapStateToProps(
+    Object.assign({}, state, { myLearningPathsSortOrder: 'lastUpdated' }),
+  );
 
   expect(actual.sortKey).toBe('lastUpdated');
   expect(actual.learningPaths.map(d => d.id)).toEqual(['1', '2']);

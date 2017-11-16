@@ -16,16 +16,16 @@ const SortableItem = SortableElement(({ deleteStep, step, learningPathId }) => (
     <div className="sortable_handle">
       <Icon.ImportExport className="icon--m" />
     </div>
-    <div className="sortable_title">
-      {step.title}
-    </div>
+    <div className="sortable_title">{step.title}</div>
     <div className="sortable_action">
-      <button onClick={() => deleteStep(learningPathId, step.id, step.title)} className="un-button">
+      <button
+        onClick={() => deleteStep(learningPathId, step.id, step.title)}
+        className="un-button">
         <Icon.Clear className="icon--m" />
       </button>
     </div>
   </li>
-  ));
+));
 
 SortableItem.propTypes = {
   index: PropTypes.number.isRequired,
@@ -33,6 +33,5 @@ SortableItem.propTypes = {
   learningPathId: PropTypes.number.isRequired,
   deleteStep: PropTypes.func.isRequired,
 };
-
 
 export default SortableItem;

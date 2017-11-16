@@ -17,13 +17,22 @@ test('reducers/myLearningPathsSortOrder', () => {
   );
   */
 
-  let actual = reducer(undefined, { type: 'SET_MY_LEARNING_PATHS_SORT_ORDER', payload: 'status' });
+  let actual = reducer(undefined, {
+    type: 'SET_MY_LEARNING_PATHS_SORT_ORDER',
+    payload: 'status',
+  });
   expect(actual).toBe('status');
 
-  actual = reducer('status', { type: 'SET_MY_LEARNING_PATHS_SORT_ORDER', payload: 'title' });
+  actual = reducer('status', {
+    type: 'SET_MY_LEARNING_PATHS_SORT_ORDER',
+    payload: 'title',
+  });
   expect(actual).toBe('title');
 
-  actual = reducer('status', { type: 'DO_NOT_SET_MY_LEARNING_PATHS_SORT_ORDER', payload: 'title' });
+  actual = reducer('status', {
+    type: 'DO_NOT_SET_MY_LEARNING_PATHS_SORT_ORDER',
+    payload: 'title',
+  });
   expect(actual).toEqual('status');
 
   actual = reducer('status', { type: 'LOGOUT' });
