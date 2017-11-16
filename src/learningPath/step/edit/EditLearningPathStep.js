@@ -22,24 +22,34 @@ import { fetchLearningPathLicensesIfNeeded } from '../../edit/copyright/learning
 import polyglot from '../../../i18n';
 import { getLearningPathStep } from '../learningPathStepSelectors';
 import { getLearningPath } from '../../learningPathSelectors';
-import { formattedEmbedUrl, formattedEmbedDescription, formattedEmbedLicense } from '../../../util/formatFormFieldsUtil';
+import {
+  formattedEmbedUrl,
+  formattedEmbedDescription,
+  formattedEmbedLicense,
+} from '../../../util/formatFormFieldsUtil';
 
-export const saveStepObject = (step, values, language) => Object.assign({}, step, {
-  type: values.type,
-  showTitle: values.showTitle,
-  title: values.title,
-  language,
-  description: formattedEmbedDescription(step, values.description),
-  embedUrl: formattedEmbedUrl(step, values.url),
-  license: formattedEmbedLicense(values.license),
-});
+export const saveStepObject = (step, values, language) =>
+  Object.assign({}, step, {
+    type: values.type,
+    showTitle: values.showTitle,
+    title: values.title,
+    language,
+    description: formattedEmbedDescription(step, values.description),
+    embedUrl: formattedEmbedUrl(step, values.url),
+    license: formattedEmbedLicense(values.license),
+  });
 
 class EditLearningPathStep extends Component {
-
   componentWillMount() {
-    const { authenticated, localIfAuthenticated, localCreateEmptyLearningPathStep, fetchLearningPathLicenses, localFetchLearningPathStep, match: { params: { pathId, stepId } } } = this.props;
+    const {
+      authenticated,
+      localIfAuthenticated,
+      localCreateEmptyLearningPathStep,
+      fetchLearningPathLicenses,
+      localFetchLearningPathStep,
+      match: { params: { pathId, stepId } },
+    } = this.props;
     fetchLearningPathLicenses('4.0');
-
 
     if (localIfAuthenticated && localCreateEmptyLearningPathStep) {
       localIfAuthenticated(authenticated, localCreateEmptyLearningPathStep);
@@ -50,22 +60,20 @@ class EditLearningPathStep extends Component {
 
   render() {
     const { lang: language } = this.context;
-    const {
-      step,
-      saveLearningPathStep,
-      learningPath,
-      licenses,
-    } = this.props;
+    const { step, saveLearningPathStep, learningPath, licenses } = this.props;
     if (!learningPath || !learningPath.id) {
       return null;
     }
 
-    const handleSubmit = (values) => {
+    const handleSubmit = values => {
       const toSave = saveStepObject(step, values, language);
       return saveLearningPathStep(learningPath.id, toSave);
     };
 
-    if (this.props.match.path === '/learningpaths/:pathId/step/new' && step.id) {
+    if (
+      this.props.match.path === '/learningpaths/:pathId/step/new' &&
+      step.id
+    ) {
       return null;
     }
 
@@ -106,16 +114,24 @@ EditLearningPathStep.contextTypes = {
   lang: PropTypes.string.isRequired,
 };
 
-export const mapStateToProps = state => assign({}, state, {
-  step: getLearningPathStep(state),
-  learningPath: getLearningPath(state),
-  licenses: [{ description: polyglot.t('editPathStep.noLicenseChosen'), license: '' }].concat(get(state, 'learningPathLicenses.creativeCommonLicenses.all', [])),
-});
+export const mapStateToProps = state =>
+  assign({}, state, {
+    step: getLearningPathStep(state),
+    learningPath: getLearningPath(state),
+    licenses: [
+      { description: polyglot.t('editPathStep.noLicenseChosen'), license: '' },
+    ].concat(get(state, 'learningPathLicenses.creativeCommonLicenses.all', [])),
+  });
 
 export const mapDispatchToProps = {
-  saveLearningPathStep: (learningPathId, lps) => (lps.id ? updateLearningPathStep(learningPathId, lps.id, lps) : createLearningPathStep(learningPathId, lps)),
+  saveLearningPathStep: (learningPathId, lps) =>
+    lps.id
+      ? updateLearningPathStep(learningPathId, lps.id, lps)
+      : createLearningPathStep(learningPathId, lps),
   fetchLearningPathLicenses: fetchLearningPathLicensesIfNeeded,
   localFetchLearningPathStep: fetchLearningPathStep,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditLearningPathStep);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  EditLearningPathStep,
+);

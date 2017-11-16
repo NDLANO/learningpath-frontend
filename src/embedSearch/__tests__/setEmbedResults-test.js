@@ -11,18 +11,12 @@ import { setEmbedResults } from '../embedSearchActions';
 
 const results = {
   queries: {
-    request: [
-      { totalResults: 20 },
-    ],
-    items: [
-      { title: 'hei' },
-    ],
+    request: [{ totalResults: 20 }],
+    items: [{ title: 'hei' }],
   },
 };
 test('actions/setEmbedResults', () => {
-  const actual = setEmbedResults(
-    results
-  );
+  const actual = setEmbedResults(results);
 
   expect(isFSA(actual)).toBeTruthy();
 

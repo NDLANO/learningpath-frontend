@@ -14,7 +14,6 @@ import Overlay from './Overlay';
 import { PLACEMENTS } from './constants';
 
 class OverlayTrigger extends Component {
-
   constructor(args) {
     super(args);
     this.handleShow = this.handleShow.bind(this);
@@ -51,11 +50,7 @@ class OverlayTrigger extends Component {
       placement: this.props.placement,
     });
 
-    return (
-      <Overlay {...props}>
-        {overlay}
-      </Overlay>
-    );
+    return <Overlay {...props}>{overlay}</Overlay>;
   }
 
   handleShow() {
@@ -72,7 +67,9 @@ class OverlayTrigger extends Component {
 
   renderOverlay() {
     ReactDOM.unstable_renderSubtreeIntoContainer(
-      this, this.overlay, this.mountNode
+      this,
+      this.overlay,
+      this.mountNode,
     );
   }
 
@@ -88,8 +85,14 @@ class OverlayTrigger extends Component {
     this.overlay = this.getOverlay();
 
     const props = {
-      onMouseOver: createChainedFunction(this.handleShow, triggerProps.onMouseOver),
-      onMouseOut: createChainedFunction(this.handleHide, triggerProps.onMouseOut),
+      onMouseOver: createChainedFunction(
+        this.handleShow,
+        triggerProps.onMouseOver,
+      ),
+      onMouseOut: createChainedFunction(
+        this.handleHide,
+        triggerProps.onMouseOut,
+      ),
       onFocus: createChainedFunction(this.handleShow, triggerProps.onFocus),
       onBlur: createChainedFunction(this.handleHide, triggerProps.onBlur),
       'aria-describedby': this.props.overlay.props.id,

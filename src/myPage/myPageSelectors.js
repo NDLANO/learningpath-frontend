@@ -34,15 +34,15 @@ const sortPaths = (paths, field) => {
 };
 
 export const getLearningPaths = createSelector(
-    [getLearningPathsFromState, getSortKey],
-    (learningPaths, sortKey) => {
-      const newLearningPaths = learningPaths.map(learningPath => ({
-        ...learningPath,
-        title: convertFieldWithFallback(learningPath, 'title', ''),
-        description: convertFieldWithFallback(learningPath, 'description', ''),
-        introduction: convertFieldWithFallback(learningPath, 'introduction', ''),
-        tags: convertFieldWithFallback(learningPath, 'tags', []),
-      }));
-      return sortPaths(newLearningPaths, sortKey);
-    }
+  [getLearningPathsFromState, getSortKey],
+  (learningPaths, sortKey) => {
+    const newLearningPaths = learningPaths.map(learningPath => ({
+      ...learningPath,
+      title: convertFieldWithFallback(learningPath, 'title', ''),
+      description: convertFieldWithFallback(learningPath, 'description', ''),
+      introduction: convertFieldWithFallback(learningPath, 'introduction', ''),
+      tags: convertFieldWithFallback(learningPath, 'tags', []),
+    }));
+    return sortPaths(newLearningPaths, sortKey);
+  },
 );

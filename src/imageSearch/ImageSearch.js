@@ -13,7 +13,13 @@ import ImageSearchForm from './ImageSearchForm';
 import ImageSearchResult from './ImageSearchResult';
 import ButtonPager from '../common/pager/ButtonPager';
 import { changeImageSearchQuery, setSavedImage } from './imageActions';
-import { getSelectedImage, getImageSearchQuery, getResults, getLastPage, getTotalCount } from './imageSelectors';
+import {
+  getSelectedImage,
+  getImageSearchQuery,
+  getResults,
+  getLastPage,
+  getTotalCount,
+} from './imageSelectors';
 
 export function Images(props) {
   const {
@@ -54,13 +60,29 @@ export function Images(props) {
   return (
     <div>
       <div>
-        <ImageSearchForm onSubmit={submitImageSearchQuery} query={imageSearchQuery} localChangeImageSearchQuery={localChangeImageSearchQuery} totalCount={totalCount} />
+        <ImageSearchForm
+          onSubmit={submitImageSearchQuery}
+          query={imageSearchQuery}
+          localChangeImageSearchQuery={localChangeImageSearchQuery}
+          totalCount={totalCount}
+        />
         <div className="image_list">
-          {images.map(image =>
-            <ImageSearchResult key={image.id} image={image} onImageClick={onImageClick} selectedImage={selectedImage} onSaveImage={onSaveImage} />
-          )}
+          {images.map(image => (
+            <ImageSearchResult
+              key={image.id}
+              image={image}
+              onImageClick={onImageClick}
+              selectedImage={selectedImage}
+              onSaveImage={onSaveImage}
+            />
+          ))}
         </div>
-        <ButtonPager page={imageSearchQuery.page} lastPage={lastPage} query={imageSearchQuery} pagerAction={localFetchImages} />
+        <ButtonPager
+          page={imageSearchQuery.page}
+          lastPage={lastPage}
+          query={imageSearchQuery}
+          pagerAction={localFetchImages}
+        />
       </div>
     </div>
   );
@@ -84,13 +106,14 @@ Images.contextTypes = {
   lang: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = state => Object.assign({}, state, {
-  images: getResults(state),
-  selectedImage: getSelectedImage(state),
-  lastPage: getLastPage(state),
-  totalCount: getTotalCount(state),
-  imageSearchQuery: getImageSearchQuery(state),
-});
+const mapStateToProps = state =>
+  Object.assign({}, state, {
+    images: getResults(state),
+    selectedImage: getSelectedImage(state),
+    lastPage: getLastPage(state),
+    totalCount: getTotalCount(state),
+    imageSearchQuery: getImageSearchQuery(state),
+  });
 
 const mapDispatchToProps = {
   localChangeImageSearchQuery: changeImageSearchQuery,

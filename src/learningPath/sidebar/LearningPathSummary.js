@@ -22,9 +22,7 @@ const LearningPathSummary = ({ learningPath }) => {
           <h1 className="learning-path_title">{learningPath.title}</h1>
         </div>
         <div className="learning-path_bd">
-          <div>
-            {learningPath.description}
-          </div>
+          <div>{learningPath.description}</div>
         </div>
       </div>
     </div>
@@ -35,9 +33,9 @@ LearningPathSummary.propTypes = {
   learningPath: PropTypes.object,
 };
 
-const mapStateToProps = state => Object.assign({}, state, {
-  learningPath: getLearningPath(state),
-});
-
+const mapStateToProps = state =>
+  Object.assign({}, state, {
+    learningPath: getLearningPath(state),
+  });
 
 export default connect(mapStateToProps)(LearningPathSummary);

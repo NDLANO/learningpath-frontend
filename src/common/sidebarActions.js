@@ -1,4 +1,3 @@
-
 /**
  * Copyright (c) 2016-present, NDLA.
  *
@@ -8,7 +7,6 @@
  */
 
 import { createAction } from 'redux-actions';
-
 
 export const closeSidebars = createAction('CLOSE_SIDEBARS');
 export const openLeftSidebar = createAction('OPEN_LEFT_SIDEBAR');

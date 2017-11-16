@@ -8,16 +8,25 @@
 
 import * as actions from '../session/sessionActions';
 import TokenStatusHandler from '../util/TokenStatusHandler';
-import { authorizationHeader} from '../sources/helpers';
+import { authorizationHeader } from '../sources/helpers';
 
 export const fetchAuth = (url, options = {}) => {
   if (process.env.NODE_ENV === 'unittest') {
-    return fetch(url, { ...options, headers: { ...options.headers, Authorization: authorizationHeader('12345678') } });
+    return fetch(url, {
+      ...options,
+      headers: {
+        ...options.headers,
+        Authorization: authorizationHeader('12345678'),
+      },
+    });
   }
 
   const tokenStatusHandler = TokenStatusHandler.getInstance();
   const getState = tokenStatusHandler.getStoreState;
-  const headers = { ...options.headers, Authorization: authorizationHeader(getState().accessToken.token) };
+  const headers = {
+    ...options.headers,
+    Authorization: authorizationHeader(getState().accessToken.token),
+  };
 
   if (__SERVER__) {
     return fetch(url, { ...options, headers });
@@ -25,7 +34,15 @@ export const fetchAuth = (url, options = {}) => {
 
   if (new Date().getTime() >= getState().accessToken.expiresAt) {
     const dispatch = tokenStatusHandler.getDispatch();
-    return dispatch(actions.renewAuth()).then(newToken => fetch(url, { ...options, headers: { ...options.headers, Authorization: authorizationHeader(newToken.token) } }));
+    return dispatch(actions.renewAuth()).then(newToken =>
+      fetch(url, {
+        ...options,
+        headers: {
+          ...options.headers,
+          Authorization: authorizationHeader(newToken.token),
+        },
+      }),
+    );
   }
   return fetch(url, { ...options, headers });
 };

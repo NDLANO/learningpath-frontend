@@ -10,7 +10,6 @@ import { isFSA } from 'flux-standard-action';
 
 import { setLearningPath } from '../learningPathActions';
 
-
 test('actions/setLearningPath', () => {
   const actual = setLearningPath({ id: '12345' });
 

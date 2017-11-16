@@ -22,10 +22,22 @@ const Bar = () => <div />;
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 test('component/LearningPathGeneralInfo', () => {
-  expect(shallow(
-    <LearningPathGeneralInfo
-      learningPath={translatedLearningPath} onCopyLearningPathClick={noop} addStepButton={React.createElement(Bar)}
-      changeStatusButton={React.createElement(Foo)} store={mockStore({ learningPath, authenticated: true, localCloseSidebars: noop })}
-    />, { context: { lang: 'nb' } }
-).dive().find(Foo).length).toBe(1);
+  expect(
+    shallow(
+      <LearningPathGeneralInfo
+        learningPath={translatedLearningPath}
+        onCopyLearningPathClick={noop}
+        addStepButton={React.createElement(Bar)}
+        changeStatusButton={React.createElement(Foo)}
+        store={mockStore({
+          learningPath,
+          authenticated: true,
+          localCloseSidebars: noop,
+        })}
+      />,
+      { context: { lang: 'nb' } },
+    )
+      .dive()
+      .find(Foo).length,
+  ).toBe(1);
 });

@@ -19,10 +19,10 @@ class SiteNavMyPage extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({isClient: true}); // eslint-disable-line
+    this.setState({ isClient: true }); // eslint-disable-line
   }
 
-  render(){
+  render() {
     const { authenticated, localCloseSidebars } = this.props;
     if (!authenticated || !this.state.isClient) {
       return null;
@@ -30,7 +30,10 @@ class SiteNavMyPage extends React.Component {
 
     return (
       <li className="site-nav_item">
-        <Link to="/minside" className="site-nav_link" onClick={() => localCloseSidebars()}>
+        <Link
+          to="/minside"
+          className="site-nav_link"
+          onClick={() => localCloseSidebars()}>
           <LabeledIcon.Apps labelText={polyglot.t('siteNav.myPage')} />
         </Link>
       </li>

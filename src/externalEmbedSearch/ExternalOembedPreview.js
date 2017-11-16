@@ -13,9 +13,15 @@ import Oembed from '../learningPath/step/oembed/Oembed';
 import polyglot from '../i18n';
 import Icon from '../common/Icon';
 
-const ExternalOembedPreview = ({ oembedPreview, oembedDisplay, onPreviewboxClose }) => {
-  const embedHasError = oembedPreview && oembedPreview.length > 0 ? oembedPreview.error : false;
-  const embedContent = oembedPreview && !embedHasError ? oembedPreview : oembedPreview;
+const ExternalOembedPreview = ({
+  oembedPreview,
+  oembedDisplay,
+  onPreviewboxClose,
+}) => {
+  const embedHasError =
+    oembedPreview && oembedPreview.length > 0 ? oembedPreview.error : false;
+  const embedContent =
+    oembedPreview && !embedHasError ? oembedPreview : oembedPreview;
   const divClassName = classNames({
     'external-oembed_preview': true,
     'external-oembed_preview--active': oembedDisplay,
@@ -25,7 +31,11 @@ const ExternalOembedPreview = ({ oembedPreview, oembedDisplay, onPreviewboxClose
       <button className="un-button close-dialog" onClick={onPreviewboxClose}>
         <Icon.Clear />
       </button>
-      {oembedPreview.error ? <p>{polyglot.t('embedSearch.preview.error')}</p> : <Oembed oembedContent={embedContent} embedType="oembed" />}
+      {oembedPreview.error ? (
+        <p>{polyglot.t('embedSearch.preview.error')}</p>
+      ) : (
+        <Oembed oembedContent={embedContent} embedType="oembed" />
+      )}
     </div>
   );
 };

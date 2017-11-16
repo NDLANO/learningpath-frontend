@@ -24,9 +24,7 @@ import {
   getLearningPathSearchTotalCount,
 } from './learningPathSearchSelectors';
 
-
 class LearningPathSearch extends React.Component {
-
   static mapDispatchToProps = {
     localSearchLearningPaths: searchLearningPaths,
     pushRoute: route => routerActions.push(route),
@@ -35,7 +33,9 @@ class LearningPathSearch extends React.Component {
   static fetchData(props) {
     const { localSearchLearningPaths, location } = props;
     const query = queryString.parse(location.search);
-    const queryWithSort = query.sort ? query : { ...query, sort: '-lastUpdated' };
+    const queryWithSort = query.sort
+      ? query
+      : { ...query, sort: '-lastUpdated' };
     return localSearchLearningPaths(queryWithSort);
   }
 
@@ -44,28 +44,45 @@ class LearningPathSearch extends React.Component {
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.location.search !== nextProps.location.search) {
-      this.props.localSearchLearningPaths(queryString.parse(nextProps.location.search));
+      this.props.localSearchLearningPaths(
+        queryString.parse(nextProps.location.search),
+      );
     }
   }
 
   render() {
-    const { learningPaths, lastPage, location: { pathname, search }, pushRoute } = this.props;
+    const {
+      learningPaths,
+      lastPage,
+      location: { pathname, search },
+      pushRoute,
+    } = this.props;
     const query = queryString.parse(search);
     const page = query.page ? parseInt(query.page, 10) : 1;
-    const navigateTo = (q) => {
+    const navigateTo = q => {
       pushRoute({ pathname, search: `?${queryString.stringify(q)}` });
     };
 
-    const submitSearchQuery = (q, sort) => navigateTo(Object.assign({}, query, { query: q, page: 1, tag: '', sort }));
+    const submitSearchQuery = (q, sort) =>
+      navigateTo(
+        Object.assign({}, query, { query: q, page: 1, tag: '', sort }),
+      );
 
-    const changeSortOrder = sort => navigateTo(Object.assign({}, query, { sort }));
+    const changeSortOrder = sort =>
+      navigateTo(Object.assign({}, query, { sort }));
 
-    const changeSearchTag = tag => navigateTo(Object.assign({}, query, { tag, page: 1 }));
+    const changeSearchTag = tag =>
+      navigateTo(Object.assign({}, query, { tag, page: 1 }));
 
-    const acitveTagTitle = query.tag ? <h1 className="search-results_active-tag">{upperFirst(query.tag)}</h1> : '';
+    const acitveTagTitle = query.tag ? (
+      <h1 className="search-results_active-tag">{upperFirst(query.tag)}</h1>
+    ) : (
+      ''
+    );
 
-    const queryWithSort = query.sort ? query : { ...query, sort: '-lastUpdated' };
-
+    const queryWithSort = query.sort
+      ? query
+      : { ...query, sort: '-lastUpdated' };
 
     return (
       <Wrapper>
@@ -80,10 +97,21 @@ class LearningPathSearch extends React.Component {
           </div>
           <div className="search-results">
             {acitveTagTitle}
-            {learningPaths.map(path =>
-              (<SearchResult key={path.id} path={path} pushRoute={pushRoute} onTagSearchQuery={changeSearchTag} query={query} />)
-            )}
-            <LinkPager page={page} lastPage={lastPage} query={queryWithSort} pathName="/learningpaths" />
+            {learningPaths.map(path => (
+              <SearchResult
+                key={path.id}
+                path={path}
+                pushRoute={pushRoute}
+                onTagSearchQuery={changeSearchTag}
+                query={query}
+              />
+            ))}
+            <LinkPager
+              page={page}
+              lastPage={lastPage}
+              query={queryWithSort}
+              pathName="/learningpaths"
+            />
           </div>
         </OneColumn>
         <Footer />
@@ -107,12 +135,18 @@ LearningPathSearch.propTypes = {
 const mapStateToProps = (state, props) => {
   const query = queryString.parse(props.location.search);
   const pageSize = defined(query.pageSize, '10');
-  const lastPage = Math.ceil(getLearningPathSearchTotalCount(state) / parseInt(pageSize, 10));
-  return Object.assign({}, {
-    lastPage,
-    learningPaths: getLearningPathSearchResult(state),
-  });
+  const lastPage = Math.ceil(
+    getLearningPathSearchTotalCount(state) / parseInt(pageSize, 10),
+  );
+  return Object.assign(
+    {},
+    {
+      lastPage,
+      learningPaths: getLearningPathSearchResult(state),
+    },
+  );
 };
 
-
-export default connect(mapStateToProps, LearningPathSearch.mapDispatchToProps)(LearningPathSearch);
+export default connect(mapStateToProps, LearningPathSearch.mapDispatchToProps)(
+  LearningPathSearch,
+);

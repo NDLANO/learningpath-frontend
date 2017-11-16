@@ -6,17 +6,16 @@
  *
  */
 
+import React from 'react';
 
- import React from 'react';
+class ScrollToTop extends React.Component {
+  componentDidUpdate() {
+    window.scrollTo(0, 0);
+  }
 
- class ScrollToTop extends React.Component {
-   componentDidUpdate() {
-     window.scrollTo(0, 0);
-   }
-
-   render() {
-     return null;
-   }
+  render() {
+    return null;
+  }
 }
 
- export default ScrollToTop;
+export default ScrollToTop;

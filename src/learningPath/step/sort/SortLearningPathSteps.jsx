@@ -8,42 +8,54 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  arrayMove,
-} from 'react-sortable-hoc';
+import { arrayMove } from 'react-sortable-hoc';
 import { connect } from 'react-redux';
 import SortableLearningStepList from './SortableLearningStepList';
 import { getLearningPath } from '../../learningPathSelectors';
-import { updateStepSequenceNumber, deleteLearningPathStep, sortLearningPathSteps } from '../learningPathStepActions';
+import {
+  updateStepSequenceNumber,
+  deleteLearningPathStep,
+  sortLearningPathSteps,
+} from '../learningPathStepActions';
 
 class SortLearningPathSteps extends Component {
-
-  onSortEnd = (indexes) => {
-    const { sortSteps, localUpdateStepSequenceNumber, learningPath } = this.props;
+  onSortEnd = indexes => {
+    const {
+      sortSteps,
+      localUpdateStepSequenceNumber,
+      learningPath,
+    } = this.props;
     const learningsteps = learningPath.learningsteps;
 
     const step = learningsteps[indexes.oldIndex];
 
-    if (step && (indexes.oldIndex !== indexes.newIndex)) {
+    if (step && indexes.oldIndex !== indexes.newIndex) {
       sortSteps(arrayMove(learningsteps, indexes.oldIndex, indexes.newIndex));
       localUpdateStepSequenceNumber(learningPath.id, step.id, indexes.newIndex);
     }
-  }
-  shouldCancelStart = (e) => {
+  };
+  shouldCancelStart = e => {
     // Iterates through each target from an event on click to check if it was button click or not. Cancels drag action if it was a click on a button.
-    for (let target = e.target; target !== this.contentDiv; target = target.parentElement) {
+    for (
+      let target = e.target;
+      target !== this.contentDiv;
+      target = target.parentElement
+    ) {
       if (target && target.tagName.toLowerCase() === 'button') {
         return true;
       }
     }
     return false;
-  }
+  };
 
   render() {
     const { learningPath, deleteStep } = this.props;
     return (
-      <div ref={((contentDiv) => { this.contentDiv = contentDiv; })}>
-        {(learningPath && learningPath.learningsteps && learningPath.id) ?
+      <div
+        ref={contentDiv => {
+          this.contentDiv = contentDiv;
+        }}>
+        {learningPath && learningPath.learningsteps && learningPath.id ? (
           <SortableLearningStepList
             learningPathId={learningPath.id}
             learningsteps={learningPath.learningsteps}
@@ -51,12 +63,12 @@ class SortLearningPathSteps extends Component {
             shouldCancelStart={this.shouldCancelStart}
             deleteStep={deleteStep}
             pressDelay={200}
-          /> : null}
+          />
+        ) : null}
       </div>
     );
   }
 }
-
 
 SortLearningPathSteps.propTypes = {
   learningPath: PropTypes.object.isRequired,
@@ -65,9 +77,10 @@ SortLearningPathSteps.propTypes = {
   sortSteps: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => Object.assign({}, state, {
-  learningPath: getLearningPath(state),
-});
+const mapStateToProps = state =>
+  Object.assign({}, state, {
+    learningPath: getLearningPath(state),
+  });
 
 const mapDispatchToProps = {
   localUpdateStepSequenceNumber: updateStepSequenceNumber,
@@ -75,4 +88,6 @@ const mapDispatchToProps = {
   sortSteps: sortLearningPathSteps,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SortLearningPathSteps);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  SortLearningPathSteps,
+);

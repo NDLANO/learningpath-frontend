@@ -13,7 +13,11 @@ import ExternalEmbedSearchFilter from './ExternalEmbedSearchFilter';
 import ExternalEmbedSearchContainer from './ExternalEmbedSearchContainer';
 import Lightbox from '../common/Lightbox';
 import * as actions from '../embedSearch/embedSearchActions';
-import { getEmbedResultFromState, getEmbedQueryFromState, getOembedContentFromState } from '../embedSearch/embedSearchSelectors';
+import {
+  getEmbedResultFromState,
+  getEmbedQueryFromState,
+  getOembedContentFromState,
+} from '../embedSearch/embedSearchSelectors';
 
 class ExternalEmbedSearch extends React.Component {
   constructor(props) {
@@ -30,7 +34,14 @@ class ExternalEmbedSearch extends React.Component {
 
   componentWillMount() {
     if (this.state.filter.type === 'oembed') {
-      this.props.localFetchEmbedSearch(Object.assign({}, this.props.query, { page: 1, start: 1, filter: this.state.filter, textQuery: '' }));
+      this.props.localFetchEmbedSearch(
+        Object.assign({}, this.props.query, {
+          page: 1,
+          start: 1,
+          filter: this.state.filter,
+          textQuery: '',
+        }),
+      );
     }
   }
 
@@ -38,7 +49,14 @@ class ExternalEmbedSearch extends React.Component {
     evt.preventDefault();
     this.setState({ filter, textQuery: '' });
     if (filter.type === 'oembed') {
-      this.props.localFetchEmbedSearch(Object.assign({}, this.props.query, { page: 1, start: 1, filter, textQuery: '' }));
+      this.props.localFetchEmbedSearch(
+        Object.assign({}, this.props.query, {
+          page: 1,
+          start: 1,
+          filter,
+          textQuery: '',
+        }),
+      );
     }
   }
 
@@ -57,7 +75,12 @@ class ExternalEmbedSearch extends React.Component {
     return (
       <div className="big-lightbox_wrapper big-lightbox_wrapper--scroll">
         <Lightbox display={display} onClose={handleDisplayClose}>
-          <ExternalEmbedSearchFilter currentFilter={this.state.filter} onFilterChange={this.onFilterChange} learningPathId={learningPathId} stepId={stepId} />
+          <ExternalEmbedSearchFilter
+            currentFilter={this.state.filter}
+            onFilterChange={this.onFilterChange}
+            learningPathId={learningPathId}
+            stepId={stepId}
+          />
           <ExternalEmbedSearchContainer
             currentFilter={this.state.filter}
             learningPathId={learningPathId}
@@ -81,14 +104,17 @@ ExternalEmbedSearch.propTypes = {
   handleDisplayClose: PropTypes.func.isRequired,
   display: PropTypes.bool.isRequired,
 };
-const mapStateToProps = state => Object.assign({}, state, {
-  result: getEmbedResultFromState(state, 'external'),
-  query: getEmbedQueryFromState(state, 'external'),
-  oembedPreview: getOembedContentFromState(state, 'external'),
-});
+const mapStateToProps = state =>
+  Object.assign({}, state, {
+    result: getEmbedResultFromState(state, 'external'),
+    query: getEmbedQueryFromState(state, 'external'),
+    oembedPreview: getOembedContentFromState(state, 'external'),
+  });
 const mapDispatchToProps = {
   localFetchEmbedSearch: actions.fetchExternalEmbedSearch,
   removeOembed: actions.removeEmbedPreview,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExternalEmbedSearch);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ExternalEmbedSearch,
+);

@@ -13,7 +13,11 @@ import IsBasedOn from '../../common/IsBasedOn';
 import polyglot from '../../i18n';
 import Icon from '../../common/Icon';
 
-const ClickableLearningPathTitle = ({ learningPath, onShowToggle, showTitle }) => {
+const ClickableLearningPathTitle = ({
+  learningPath,
+  onShowToggle,
+  showTitle,
+}) => {
   if (learningPath.title.length < 30) {
     return <h3>{learningPath.title}</h3>;
   }
@@ -25,9 +29,7 @@ const ClickableLearningPathTitle = ({ learningPath, onShowToggle, showTitle }) =
   return (
     <div className={titleClassName}>
       <button className="un-button" onClick={() => onShowToggle('showTitle')}>
-        <h3>
-          {learningPath.title}
-        </h3>
+        <h3>{learningPath.title}</h3>
       </button>
     </div>
   );
@@ -58,7 +60,6 @@ class LearningPathTitle extends Component {
       return null;
     }
 
-
     const isBasedOnClassName = classNames({
       'learningpath-general-info_is-basedon': true,
       'learningpath-general-info_is-basedon--open': this.state.showIsBasedOn,
@@ -66,18 +67,28 @@ class LearningPathTitle extends Component {
 
     return (
       <div className="learningpath-general-info_h">
-        <ClickableLearningPathTitle learningPath={learningPath} showTitle={this.state.showTitle} onShowToggle={this.onShowToggle} />
-        {learningPath.isBasedOn ?
+        <ClickableLearningPathTitle
+          learningPath={learningPath}
+          showTitle={this.state.showTitle}
+          onShowToggle={this.onShowToggle}
+        />
+        {learningPath.isBasedOn ? (
           <div>
-            <button className="un-button learningpath-general-info_is-basedon-button" onClick={() => this.onShowToggle('showIsBasedOn')}>
-              {this.state.showIsBasedOn ? polyglot.t('learningPath.hideIsBasedOn') : polyglot.t('learningPath.showIsBasedOn')}
+            <button
+              className="un-button learningpath-general-info_is-basedon-button"
+              onClick={() => this.onShowToggle('showIsBasedOn')}>
+              {this.state.showIsBasedOn
+                ? polyglot.t('learningPath.hideIsBasedOn')
+                : polyglot.t('learningPath.showIsBasedOn')}
               {this.state.showIsBasedOn ? <Icon.ArrowUp /> : <Icon.ArrowDown />}
             </button>
             <div className={isBasedOnClassName}>
               <IsBasedOn path={learningPath} showText={false} />
             </div>
           </div>
-          : ''}
+        ) : (
+          ''
+        )}
       </div>
     );
   }

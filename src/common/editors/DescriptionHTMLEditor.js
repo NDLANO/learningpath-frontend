@@ -20,7 +20,10 @@ export default class DescriptionHTMLEditor extends React.Component {
   constructor(props) {
     super(props);
     const htmlStr = props.input.value;
-    const editorState = htmlStr && htmlStr.length > 0 ? EditorState.createWithContent(convertFromHTML(htmlStr)) : EditorState.createEmpty();
+    const editorState =
+      htmlStr && htmlStr.length > 0
+        ? EditorState.createWithContent(convertFromHTML(htmlStr))
+        : EditorState.createEmpty();
     this.state = { editorState, previousHasText: htmlStr.length > 0 };
 
     this.focus = () => this.editor.focus();
@@ -55,15 +58,20 @@ export default class DescriptionHTMLEditor extends React.Component {
     }
   }
 
-
   handleDescriptionChange(editorState) {
-    this.setState(prevState => ({ editorState, previousHasText: prevState.editorState.getCurrentContent().hasText() }), () => {
-      const contentState = editorState.getCurrentContent();
-      if (!this.state.previousHasText || !contentState.hasText()) {
-        const descriptionHTML = convertDraftJsToHtml(contentState);
-        this.props.input.onChange(descriptionHTML);
-      }
-    });
+    this.setState(
+      prevState => ({
+        editorState,
+        previousHasText: prevState.editorState.getCurrentContent().hasText(),
+      }),
+      () => {
+        const contentState = editorState.getCurrentContent();
+        if (!this.state.previousHasText || !contentState.hasText()) {
+          const descriptionHTML = convertDraftJsToHtml(contentState);
+          this.props.input.onChange(descriptionHTML);
+        }
+      },
+    );
   }
 
   handleDescriptionBlur() {
@@ -74,19 +82,13 @@ export default class DescriptionHTMLEditor extends React.Component {
 
   toggleBlockType(blockType) {
     this.handleDescriptionChange(
-      RichUtils.toggleBlockType(
-        this.state.editorState,
-        blockType
-      )
+      RichUtils.toggleBlockType(this.state.editorState, blockType),
     );
   }
 
   toggleInlineStyle(inlineStyle) {
     this.handleDescriptionChange(
-      RichUtils.toggleInlineStyle(
-        this.state.editorState,
-        inlineStyle
-      )
+      RichUtils.toggleInlineStyle(this.state.editorState, inlineStyle),
     );
   }
 
@@ -97,8 +99,12 @@ export default class DescriptionHTMLEditor extends React.Component {
 
     // If the user changes block type before entering any text, we can
     // either style the placeholder or hide it. Let's just hide it now.
-    const commentAboveApplies = !contentState.hasText() &&
-      contentState.getBlockMap().first().getType() !== 'unstyled';
+    const commentAboveApplies =
+      !contentState.hasText() &&
+      contentState
+        .getBlockMap()
+        .first()
+        .getType() !== 'unstyled';
 
     const className = classNames({
       'RichEditor-editor learning-step-form_input learning-step-form_paragraph': true,
@@ -116,7 +122,9 @@ export default class DescriptionHTMLEditor extends React.Component {
         </div>
         <div className="learning-step-form_group">
           <div className="learning-step-form_left">
-            <span className="learning-step-form_icon-bg"><Icon.Create /></span>
+            <span className="learning-step-form_icon-bg">
+              <Icon.Create />
+            </span>
           </div>
           <div className="learning-step-form_right">
             {/*eslint-disable*/}
@@ -127,7 +135,9 @@ export default class DescriptionHTMLEditor extends React.Component {
                 onChange={this.handleDescriptionChange}
                 onBlur={this.handleDescriptionBlur}
                 placeholder={this.props.placeholder}
-                ref={(editor) => { this.editor = editor; }}
+                ref={editor => {
+                  this.editor = editor;
+                }}
                 spellCheck
               />
             </div>
@@ -137,7 +147,6 @@ export default class DescriptionHTMLEditor extends React.Component {
     );
   }
 }
-
 
 DescriptionHTMLEditor.propTypes = {
   input: PropTypes.shape({

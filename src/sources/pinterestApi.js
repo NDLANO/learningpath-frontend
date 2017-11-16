@@ -9,4 +9,9 @@
 import fetch from 'isomorphic-fetch';
 import { resolveJsonOrRejectWithError } from './helpers';
 
-export const fetchPins = (username, boardName) => fetch(`/pinterest-proxy/boards/${username}/${boardName}/pins/?fields=id,link,note,url,original_link`).then(resolveJsonOrRejectWithError);
+export const fetchPins = (username, boardName) =>
+  fetch(
+    `/pinterest-proxy/boards/${username}/${
+      boardName
+    }/pins/?fields=id,link,note,url,original_link`,
+  ).then(resolveJsonOrRejectWithError);

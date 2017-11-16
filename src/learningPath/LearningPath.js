@@ -6,7 +6,6 @@
  *
  */
 
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -43,16 +42,22 @@ export class LearningPath extends Component {
   };
 
   static fetchData(props) {
-    const { replaceRoute, localFetchLearningPath, match: { url, params: { pathId } } } = props;
+    const {
+      replaceRoute,
+      localFetchLearningPath,
+      match: { url, params: { pathId } },
+    } = props;
     if (url === `/learningpaths/${pathId}/edit`) {
       return localFetchLearningPath(pathId, true);
     } else if (url === `/learningpaths/${pathId}/first-step`) {
-      return localFetchLearningPath(pathId, false).then((learningPath) => {
-        const stepId = learningPath.learningsteps[0].id;
-        replaceRoute({ pathname: `/learningpaths/${pathId}/step/${stepId}` });
-      }).catch(() => {
-        replaceRoute({ pathname: `/learningpaths/${pathId}` });
-      });
+      return localFetchLearningPath(pathId, false)
+        .then(learningPath => {
+          const stepId = learningPath.learningsteps[0].id;
+          replaceRoute({ pathname: `/learningpaths/${pathId}/step/${stepId}` });
+        })
+        .catch(() => {
+          replaceRoute({ pathname: `/learningpaths/${pathId}` });
+        });
     }
     return localFetchLearningPath(pathId, false);
   }
@@ -85,27 +90,56 @@ export class LearningPath extends Component {
     const { lang } = this.context;
     const stepId = match.params.stepId;
 
-    const showButtonsUrls = ['/learningpaths/:pathId', '/learningpaths/:pathId/step/:stepId', '/learningpaths/:pathId/', '/learningpaths/:pathId/step/:stepId/'];
+    const showButtonsUrls = [
+      '/learningpaths/:pathId',
+      '/learningpaths/:pathId/step/:stepId',
+      '/learningpaths/:pathId/',
+      '/learningpaths/:pathId/step/:stepId/',
+    ];
 
-    const changeStatusButton = showButtonsUrls.includes(match.path) && match.isExact ? <LearningPathToCButtons /> : null;
-    const addStepButton = showButtonsUrls.includes(match.path) && match.isExact ? <AddLearningPathStepButton /> : null;
-    const pinterestButton = showButtonsUrls.includes(match.path) && match.isExact ? <PinterestLightboxButton learningPath={learningPath} toggleLightBox={this.togglePinterest} /> : null;
-    const pinterestLightBox = showButtonsUrls.includes(match.path) && match.isExact ?
-      (<PinterestLightbox
-        learningPath={learningPath}
-        showLightBox={this.state.displayPinterest}
-        toggleLightBox={this.togglePinterest}
-      />) : null;
-    const sortLearningSteps = match.url === `/learningpaths/${match.params.pathId}/step/sort`;
-    const sortableTableOfContent = sortLearningSteps ? <SortLearningPathSteps learningPath={learningPath} /> : <LearningPathToC learningPath={learningPath} activeStepId={stepId} />;
-    const sortableTableOfContentButton = !sortLearningSteps ? <SortLearningStepsButton learningPath={learningPath} /> : null;
-    const sortableTableOfContentSaveButton = sortLearningSteps ? <SortLearningStepsSaveButton learningPath={learningPath} /> : null;
+    const changeStatusButton =
+      showButtonsUrls.includes(match.path) && match.isExact ? (
+        <LearningPathToCButtons />
+      ) : null;
+    const addStepButton =
+      showButtonsUrls.includes(match.path) && match.isExact ? (
+        <AddLearningPathStepButton />
+      ) : null;
+    const pinterestButton =
+      showButtonsUrls.includes(match.path) && match.isExact ? (
+        <PinterestLightboxButton
+          learningPath={learningPath}
+          toggleLightBox={this.togglePinterest}
+        />
+      ) : null;
+    const pinterestLightBox =
+      showButtonsUrls.includes(match.path) && match.isExact ? (
+        <PinterestLightbox
+          learningPath={learningPath}
+          showLightBox={this.state.displayPinterest}
+          toggleLightBox={this.togglePinterest}
+        />
+      ) : null;
+    const sortLearningSteps =
+      match.url === `/learningpaths/${match.params.pathId}/step/sort`;
+    const sortableTableOfContent = sortLearningSteps ? (
+      <SortLearningPathSteps learningPath={learningPath} />
+    ) : (
+      <LearningPathToC learningPath={learningPath} activeStepId={stepId} />
+    );
+    const sortableTableOfContentButton = !sortLearningSteps ? (
+      <SortLearningStepsButton learningPath={learningPath} />
+    ) : null;
+    const sortableTableOfContentSaveButton = sortLearningSteps ? (
+      <SortLearningStepsSaveButton learningPath={learningPath} />
+    ) : null;
 
-    const collapseClassName = () => classNames({
-      'two-column_col table-of-content': true,
-      'sidebar--collapsed': !isTableOfContentOpen,
-      'sidebar--open': isTableOfContentOpen,
-    });
+    const collapseClassName = () =>
+      classNames({
+        'two-column_col table-of-content': true,
+        'sidebar--collapsed': !isTableOfContentOpen,
+        'sidebar--open': isTableOfContentOpen,
+      });
 
     const onLightboxClose = () => this.setState({ displayCopyPath: false });
     const onCopy = () => {
@@ -114,14 +148,22 @@ export class LearningPath extends Component {
     };
     return (
       <div className="wrapper">
-        <Masthead changeStatusButton={changeStatusButton} sortableTableOfContentButton={sortableTableOfContentButton}>
+        <Masthead
+          changeStatusButton={changeStatusButton}
+          sortableTableOfContentButton={sortableTableOfContentButton}>
           <div className="masthead_button masthead_button--left">
             <Icon.MoreVert />
             <span>Læringssti</span>
           </div>
         </Masthead>
-        <Lightbox display={this.state.displayCopyPath} onClose={onLightboxClose}>
-          <CopyLearningPath learningPath={learningPath} onClose={onLightboxClose} onCopy={onCopy} />
+        <Lightbox
+          display={this.state.displayCopyPath}
+          onClose={onLightboxClose}>
+          <CopyLearningPath
+            learningPath={learningPath}
+            onClose={onLightboxClose}
+            onCopy={onCopy}
+          />
         </Lightbox>
         {pinterestLightBox}
         <div className="two-column">
@@ -137,18 +179,34 @@ export class LearningPath extends Component {
               {sortableTableOfContentSaveButton}
               {sortableTableOfContentButton}
             </div>
-            <div className="step-nav_wrapper">
-              {sortableTableOfContent}
-            </div>
+            <div className="step-nav_wrapper">{sortableTableOfContent}</div>
           </aside>
           <main className="two-column_col">
             <Switch>
-              <PrivateRoute path={'/learningpaths/:pathId/edit'} component={EditLearningPath} />
-              <PrivateRoute path={'/learningpaths/:pathId/step/:stepId/edit'} component={EditLearningPathStep} />
-              <PrivateRoute path={'/learningpaths/:pathId/step/new'} component={CreateLearningPathStep} />
-              <PrivateRoute path={'/learningpaths/:pathId/step/sort'} component={LearningPathSummary} />
-              <Route path={'/learningpaths/:pathId/step/:stepId'} component={LearningPathStep} />
-              <Route path={'/learningpaths/:pathId'} component={LearningPathSummary} />
+              <PrivateRoute
+                path={'/learningpaths/:pathId/edit'}
+                component={EditLearningPath}
+              />
+              <PrivateRoute
+                path={'/learningpaths/:pathId/step/:stepId/edit'}
+                component={EditLearningPathStep}
+              />
+              <PrivateRoute
+                path={'/learningpaths/:pathId/step/new'}
+                component={CreateLearningPathStep}
+              />
+              <PrivateRoute
+                path={'/learningpaths/:pathId/step/sort'}
+                component={LearningPathSummary}
+              />
+              <Route
+                path={'/learningpaths/:pathId/step/:stepId'}
+                component={LearningPathStep}
+              />
+              <Route
+                path={'/learningpaths/:pathId'}
+                component={LearningPathSummary}
+              />
             </Switch>
           </main>
         </div>
@@ -175,10 +233,13 @@ LearningPath.contextTypes = {
   lang: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, state, {
-  learningPath: getLearningPath(state),
-  sortLearningSteps: ownProps.sortLearningSteps,
-  isTableOfContentOpen: state.sidebar.isLeftSideBarOpen,
-});
+const mapStateToProps = (state, ownProps) =>
+  Object.assign({}, state, {
+    learningPath: getLearningPath(state),
+    sortLearningSteps: ownProps.sortLearningSteps,
+    isTableOfContentOpen: state.sidebar.isLeftSideBarOpen,
+  });
 
-export default withRouter(connect(mapStateToProps, LearningPath.mapDispatchToProps)(LearningPath));
+export default withRouter(
+  connect(mapStateToProps, LearningPath.mapDispatchToProps)(LearningPath),
+);

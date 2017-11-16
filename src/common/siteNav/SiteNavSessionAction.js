@@ -15,32 +15,41 @@ import LabeledIcon from '../LabeledIcon';
 class SiteNavSessionAction extends React.Component {
   constructor() {
     super();
-    this.state = {isClient: false};
+    this.state = { isClient: false };
   }
 
   componentDidMount() {
-    this.setState({isClient: true}); // eslint-disable-line
+    this.setState({ isClient: true }); // eslint-disable-line
   }
-  
+
   render() {
     const { authenticated, userName, localCloseSidebars } = this.props;
-      if (authenticated && this.state.isClient) {
-        return (
-          <li className="site-nav_item">
-            <Link to="/logout" className="site-nav_link" onClick={() => localCloseSidebars()}>
-              <LabeledIcon.Exit hotjarMasked labelText={polyglot.t('siteNav.logout', { name: userName })} />
-            </Link>
-          </li>
-        );
-      }
+    if (authenticated && this.state.isClient) {
       return (
         <li className="site-nav_item">
-          <Link to="/login" className="site-nav_link" onClick={() => localCloseSidebars()}>
-            <LabeledIcon.Exit labelText={polyglot.t('siteNav.login')} />
+          <Link
+            to="/logout"
+            className="site-nav_link"
+            onClick={() => localCloseSidebars()}>
+            <LabeledIcon.Exit
+              hotjarMasked
+              labelText={polyglot.t('siteNav.logout', { name: userName })}
+            />
           </Link>
         </li>
       );
     }
+    return (
+      <li className="site-nav_item">
+        <Link
+          to="/login"
+          className="site-nav_link"
+          onClick={() => localCloseSidebars()}>
+          <LabeledIcon.Exit labelText={polyglot.t('siteNav.login')} />
+        </Link>
+      </li>
+    );
+  }
 }
 
 SiteNavSessionAction.propTypes = {
@@ -53,6 +62,5 @@ SiteNavSessionAction.defaultProps = {
   authenticated: false,
   userName: '',
 };
-
 
 export default SiteNavSessionAction;

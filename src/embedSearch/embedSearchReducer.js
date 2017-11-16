@@ -22,39 +22,53 @@ const typeBaseDefaultState = (filterKey, name, type) => ({
 });
 
 const initialState = {
-  ndla: typeBaseDefaultState('more:ndla more:pagemap:metatags-nodetype:fagstoff', 'NDLA', 'oembed'),
+  ndla: typeBaseDefaultState(
+    'more:ndla more:pagemap:metatags-nodetype:fagstoff',
+    'NDLA',
+    'oembed',
+  ),
   external: typeBaseDefaultState('more:youtube', 'Youtube', 'oembed'),
 };
-export default handleActions({
-  SET_EMBED_RESULTS: {
-    next(state, action) {
-      const nextState = cloneDeep(state);
-      nextState[action.payload.type].result = action.payload.result;
-      return nextState;
+export default handleActions(
+  {
+    SET_EMBED_RESULTS: {
+      next(state, action) {
+        const nextState = cloneDeep(state);
+        nextState[action.payload.type].result = action.payload.result;
+        return nextState;
+      },
+      throw(state) {
+        return state;
+      },
     },
-    throw(state) { return state; },
-  },
-  SET_EMBED_PREVIEW: {
-    next(state, action) {
-      const nextState = cloneDeep(state);
-      nextState[action.payload.type].oembedContent = action.payload.oembedContent;
-      return nextState;
+    SET_EMBED_PREVIEW: {
+      next(state, action) {
+        const nextState = cloneDeep(state);
+        nextState[action.payload.type].oembedContent =
+          action.payload.oembedContent;
+        return nextState;
+      },
+      throw(state) {
+        return state;
+      },
     },
-    throw(state) { return state; },
-  },
-  CHANGE_EMBED_SEARCH_QUERY: {
-    next(state, action) {
-      const nextState = cloneDeep(state);
-      nextState[action.payload.type].query = action.payload.query;
-      return nextState;
+    CHANGE_EMBED_SEARCH_QUERY: {
+      next(state, action) {
+        const nextState = cloneDeep(state);
+        nextState[action.payload.type].query = action.payload.query;
+        return nextState;
+      },
+    },
+    REMOVE_EMBED_PREVIEW: {
+      next(state, action) {
+        const nextState = cloneDeep(state);
+        nextState[action.payload.type].oembedContent = {};
+        return nextState;
+      },
+      throw(state) {
+        return state;
+      },
     },
   },
-  REMOVE_EMBED_PREVIEW: {
-    next(state, action) {
-      const nextState = cloneDeep(state);
-      nextState[action.payload.type].oembedContent = {};
-      return nextState;
-    },
-    throw(state) { return state; },
-  },
-}, initialState);
+  initialState,
+);

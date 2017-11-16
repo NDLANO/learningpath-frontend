@@ -12,10 +12,11 @@ import classNames from 'classnames';
 import get from 'lodash/get';
 import Spinner from '../../../common/Spinner';
 
-export const urlIsNDLA = url => (/^(http|https):\/\/ndla.no/).test(url);
-export const urlIsApiNDLA = url => (/^(http|https):\/\/ndla-frontend.(test.|staging.)?api.ndla.no/).test(url);
-export const urlIsLocalNdla = url => (/^http:\/\/proxy.ndla-local:30017/).test(url);
-
+export const urlIsNDLA = url => /^(http|https):\/\/ndla.no/.test(url);
+export const urlIsApiNDLA = url =>
+  /^(http|https):\/\/ndla-frontend.(test.|staging.)?api.ndla.no/.test(url);
+export const urlIsLocalNdla = url =>
+  /^http:\/\/proxy.ndla-local:30017/.test(url);
 
 export default class Oembed extends React.Component {
   constructor(props) {
@@ -68,7 +69,12 @@ export default class Oembed extends React.Component {
   }
 
   handleResizeMessage(evt) {
-    if (!this.state.listeningToResize || !evt || !evt.data || !evt.data.height) {
+    if (
+      !this.state.listeningToResize ||
+      !evt ||
+      !evt.data ||
+      !evt.data.height
+    ) {
       return;
     }
 
@@ -102,7 +108,9 @@ export default class Oembed extends React.Component {
             'learning-step_oembed': embedType === 'oembed',
           })}
           dangerouslySetInnerHTML={{ __html: html }}
-          ref={(iframeDiv) => { this.iframeDiv = iframeDiv; }}
+          ref={iframeDiv => {
+            this.iframeDiv = iframeDiv;
+          }}
         />
       </div>
     );

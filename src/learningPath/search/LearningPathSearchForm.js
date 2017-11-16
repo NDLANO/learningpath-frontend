@@ -43,26 +43,38 @@ export default class SearchForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className="search-form" >
+      <form onSubmit={this.handleSubmit} className="search-form">
         <input
-          type="text" className="search-form_query"
+          type="text"
+          className="search-form_query"
           onChange={this.handleQueryChange}
           value={this.state.query}
           placeholder={polyglot.t('searchForm.placeholder')}
         />
 
-        <button className="search-form_btn">{polyglot.t('searchForm.btn')}</button>
+        <button className="search-form_btn">
+          {polyglot.t('searchForm.btn')}
+        </button>
 
         <select
           className="search-form_sort-order select--gray-border"
           onChange={this.handleSortChange}
-          value={this.state.sort}
-        >
-          <option value="-relevance">{polyglot.t('searchForm.order.relevance')}</option>
-          <option value="-lastUpdated">{polyglot.t('searchForm.order.newest')}</option>
-          <option value="lastUpdated">{polyglot.t('searchForm.order.oldest')}</option>
-          <option value="-duration">{polyglot.t('searchForm.order.longest')}</option>
-          <option value="duration">{polyglot.t('searchForm.order.shortest')}</option>
+          value={this.state.sort}>
+          <option value="-relevance">
+            {polyglot.t('searchForm.order.relevance')}
+          </option>
+          <option value="-lastUpdated">
+            {polyglot.t('searchForm.order.newest')}
+          </option>
+          <option value="lastUpdated">
+            {polyglot.t('searchForm.order.oldest')}
+          </option>
+          <option value="-duration">
+            {polyglot.t('searchForm.order.longest')}
+          </option>
+          <option value="duration">
+            {polyglot.t('searchForm.order.shortest')}
+          </option>
           <option value="title">{polyglot.t('searchForm.order.title')}</option>
         </select>
       </form>
@@ -78,5 +90,6 @@ SearchForm.propTypes = {
 };
 
 SearchForm.defaultProps = {
-  sort: '-lastUpdated', query: '',
+  sort: '-lastUpdated',
+  query: '',
 };

@@ -15,9 +15,15 @@ if (process.env.NODE_ENV === 'unittest') {
   window.config = config;
 }
 
-const GOOGLE_API_URL = __SERVER__ ? config.googleApiUrl : window.config.googleApiUrl;
-const GOOGLE_API_KEY = __SERVER__ ? config.googleApiKey : window.config.googleApiKey;
-const GOOGLE_SEARCH_ENGINE_ID = __SERVER__ ? config.googleSearchEngineId : window.config.googleSearchEngineId;
+const GOOGLE_API_URL = __SERVER__
+  ? config.googleApiUrl
+  : window.config.googleApiUrl;
+const GOOGLE_API_KEY = __SERVER__
+  ? config.googleApiKey
+  : window.config.googleApiKey;
+const GOOGLE_SEARCH_ENGINE_ID = __SERVER__
+  ? config.googleSearchEngineId
+  : window.config.googleSearchEngineId;
 
 const apiEmbedUrl = (() => {
   if (process.env.NODE_ENV === 'unittest') {
@@ -42,7 +48,7 @@ const apiEmbedEngingeId = (() => {
 
 const apiEmbedResourceUrl = path => apiEmbedUrl + path;
 
-const fetchGoogleContent = (query) => {
+const fetchGoogleContent = query => {
   let url = apiEmbedResourceUrl('/customsearch/v1/');
   const params = {
     key: apiEmbedKey,
@@ -54,6 +60,4 @@ const fetchGoogleContent = (query) => {
   return fetch(url).then(resolveJsonOrRejectWithError);
 };
 
-export {
-  fetchGoogleContent,
-};
+export { fetchGoogleContent };

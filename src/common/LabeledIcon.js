@@ -15,9 +15,20 @@ function LabeledIcon(props) {
   const { iconName, labelText, hotjarMasked } = props;
   const hjMasked = hotjarMasked ? { 'data-hj-masked': true } : '';
   const tagName = get(props, 'tagName', 'span');
-  const icon = React.createElement(Icon[iconName], { className: 'icon--with-label' });
-  const label = React.createElement(tagName, { className: 'labeled-icon_text' }, labelText);
-  return (<span {...hjMasked} className="labeled-icon">{icon}{label}</span>);
+  const icon = React.createElement(Icon[iconName], {
+    className: 'icon--with-label',
+  });
+  const label = React.createElement(
+    tagName,
+    { className: 'labeled-icon_text' },
+    labelText,
+  );
+  return (
+    <span {...hjMasked} className="labeled-icon">
+      {icon}
+      {label}
+    </span>
+  );
 }
 
 LabeledIcon.propTypes = {
@@ -27,19 +38,24 @@ LabeledIcon.propTypes = {
   hotjarMasked: PropTypes.bool,
 };
 
-
-LabeledIcon.Person = props => (<LabeledIcon {...props} iconName="Person" />);
-LabeledIcon.Today = props => (<LabeledIcon {...props} iconName="Today" />);
-LabeledIcon.QueryBuilder = props => (<LabeledIcon {...props} iconName="QueryBuilder" />);
-LabeledIcon.Save = props => (<LabeledIcon {...props} iconName="Save" />);
-LabeledIcon.Add = props => (<LabeledIcon {...props} iconName="Add" />);
-LabeledIcon.Search = props => (<LabeledIcon {...props} iconName="Search" />);
-LabeledIcon.Exit = props => (<LabeledIcon {...props} iconName="Exit" />);
-LabeledIcon.Apps = props => (<LabeledIcon {...props} iconName="Apps" />);
-LabeledIcon.Clear = props => (<LabeledIcon {...props} iconName="Clear" />);
-LabeledIcon.Delete = props => (<LabeledIcon {...props} iconName="Delete" />);
-LabeledIcon.ContentCopy = props => (<LabeledIcon {...props} iconName="ContentCopy" />);
-LabeledIcon.Copyright = props => (<LabeledIcon {...props} iconName="Copyright" />);
+LabeledIcon.Person = props => <LabeledIcon {...props} iconName="Person" />;
+LabeledIcon.Today = props => <LabeledIcon {...props} iconName="Today" />;
+LabeledIcon.QueryBuilder = props => (
+  <LabeledIcon {...props} iconName="QueryBuilder" />
+);
+LabeledIcon.Save = props => <LabeledIcon {...props} iconName="Save" />;
+LabeledIcon.Add = props => <LabeledIcon {...props} iconName="Add" />;
+LabeledIcon.Search = props => <LabeledIcon {...props} iconName="Search" />;
+LabeledIcon.Exit = props => <LabeledIcon {...props} iconName="Exit" />;
+LabeledIcon.Apps = props => <LabeledIcon {...props} iconName="Apps" />;
+LabeledIcon.Clear = props => <LabeledIcon {...props} iconName="Clear" />;
+LabeledIcon.Delete = props => <LabeledIcon {...props} iconName="Delete" />;
+LabeledIcon.ContentCopy = props => (
+  <LabeledIcon {...props} iconName="ContentCopy" />
+);
+LabeledIcon.Copyright = props => (
+  <LabeledIcon {...props} iconName="Copyright" />
+);
 export default LabeledIcon;
 
 LabeledIcon.defaultProps = {

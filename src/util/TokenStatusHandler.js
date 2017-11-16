@@ -34,6 +34,6 @@ const TokenStatusHandler = (function Singleton() {
       return instance;
     },
   };
-}());
+})();
 
 export default TokenStatusHandler;

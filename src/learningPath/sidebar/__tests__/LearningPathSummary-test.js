@@ -21,7 +21,17 @@ const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
 test('component/LearningPathSummary', () => {
-  const component = shallow(<LearningPathSummary learningPath={translatedLearningPath} lang="nb" store={mockStore({ learningPath, authenticated: true, localCloseSidebars: noop })} />);
+  const component = shallow(
+    <LearningPathSummary
+      learningPath={translatedLearningPath}
+      lang="nb"
+      store={mockStore({
+        learningPath,
+        authenticated: true,
+        localCloseSidebars: noop,
+      })}
+    />,
+  );
 
   const titleNode = component.dive().find('.learning-path_title');
   expect(titleNode.length).toBe(1);
@@ -29,5 +39,7 @@ test('component/LearningPathSummary', () => {
 
   const bodyNode = component.dive().find('.learning-path_bd');
   expect(bodyNode.length).toBe(1);
-  expect(bodyNode.text().substring(0, 50)).toBe('Kurset dekker innføring og vil gi deg grunnleggend');
+  expect(bodyNode.text().substring(0, 50)).toBe(
+    'Kurset dekker innføring og vil gi deg grunnleggend',
+  );
 });

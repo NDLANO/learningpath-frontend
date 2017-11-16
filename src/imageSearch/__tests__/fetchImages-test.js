@@ -10,7 +10,11 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 
-import { fetchLearningPathImages, setImages, changeImageSearchQuery } from '../imageActions';
+import {
+  fetchLearningPathImages,
+  setImages,
+  changeImageSearchQuery,
+} from '../imageActions';
 import payload403invalid from '../../actions/__tests__/payload403invalid';
 
 import { applicationError } from '../../messages/messagesActions';
@@ -19,7 +23,7 @@ const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
 test('actions/fetchImages', () => {
-  const done = (res) => {
+  const done = res => {
     done(res);
     nock.cleanAll();
   };
@@ -35,7 +39,8 @@ test('actions/fetchImages', () => {
     });
   const store = mockStore({});
 
-  store.dispatch(fetchLearningPathImages({ page: 3, pageSize: 25 }))
+  store
+    .dispatch(fetchLearningPathImages({ page: 3, pageSize: 25 }))
     .then(() => {
       expect(store.getActions()).toEqual([
         setImages({
@@ -43,8 +48,7 @@ test('actions/fetchImages', () => {
           page: 3,
           pageSize: 25,
           results: [{ id: '123' }, { id: '456' }],
-        }
-        ),
+        }),
         changeImageSearchQuery({ page: 3, pageSize: 25 }),
       ]);
 
@@ -55,7 +59,7 @@ test('actions/fetchImages', () => {
 });
 
 test('actions/fetchImages with url access denied', () => {
-  const done = (res) => {
+  const done = res => {
     done(res);
     nock.cleanAll();
   };
@@ -67,10 +71,15 @@ test('actions/fetchImages with url access denied', () => {
 
   const store = mockStore();
 
-  store.dispatch(fetchLearningPathImages({ page: 3, pageSize: 25 }))
+  store
+    .dispatch(fetchLearningPathImages({ page: 3, pageSize: 25 }))
     .then(() => {
       expect(store.getActions()).toEqual([
-        applicationError(payload403invalid('http://ndla-api/image-api/v2/images?page=3&pageSize=25')),
+        applicationError(
+          payload403invalid(
+            'http://ndla-api/image-api/v2/images?page=3&pageSize=25',
+          ),
+        ),
       ]);
       expect(() => apiMock.done()).not.toThrow();
       done();

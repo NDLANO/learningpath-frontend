@@ -9,7 +9,11 @@
 import { createAction } from 'redux-actions';
 import auth0 from 'auth0-js';
 import { routerActions } from 'react-router-redux';
-import { locationOrigin, ndlaPersonalClientId, auth0Domain } from '../sources/helpers';
+import {
+  locationOrigin,
+  ndlaPersonalClientId,
+  auth0Domain,
+} from '../sources/helpers';
 import { getTokenExpireAt } from '../util/jwtHelper';
 import { fetchNewSystemToken } from '../sources/tokens';
 import { applicationError } from '../messages/messagesActions';
@@ -25,12 +29,14 @@ const auth = new auth0.WebAuth({
   audience: 'ndla_system',
 });
 
-
 export function parseHash(hash) {
-  return (dispatch) => {
+  return dispatch => {
     auth.parseHash({ hash, _idTokenVerification: false }, (err, authResult) => {
       if (authResult && authResult.accessToken) {
-        const storedTokenInfo = { token: authResult.accessToken, expiresAt: getTokenExpireAt(authResult.accessToken) };
+        const storedTokenInfo = {
+          token: authResult.accessToken,
+          expiresAt: getTokenExpireAt(authResult.accessToken),
+        };
         dispatch(setAccessToken(storedTokenInfo));
         dispatch(setAuthenticated(true));
         dispatch(routerActions.replace('/minside'));
@@ -46,55 +52,70 @@ export function loginPersonalAuth(type) {
 }
 
 export function logoutPersonalAuth(federated = undefined) {
-  return dispatch => fetchNewSystemToken()
-    .then((token) => {
-      const storedTokenInfo = { token: token.access_token, expiresAt: getTokenExpireAt(token.access_token) };
-      dispatch(setAccessToken(storedTokenInfo));
-      dispatch(setAuthenticated(false));
-      auth.logout({
-        returnTo: `${locationOrigin}/`,
-        client_id: ndlaPersonalClientId,
-        federated,
-      });
-      return storedTokenInfo;
-    })
-    .catch(err => dispatch(applicationError(err)));
+  return dispatch =>
+    fetchNewSystemToken()
+      .then(token => {
+        const storedTokenInfo = {
+          token: token.access_token,
+          expiresAt: getTokenExpireAt(token.access_token),
+        };
+        dispatch(setAccessToken(storedTokenInfo));
+        dispatch(setAuthenticated(false));
+        auth.logout({
+          returnTo: `${locationOrigin}/`,
+          client_id: ndlaPersonalClientId,
+          federated,
+        });
+        return storedTokenInfo;
+      })
+      .catch(err => dispatch(applicationError(err)));
 }
 
 export function renewPersonalAuth() {
-  return dispatch => new Promise((resolve) => {
-    auth.renewAuth({
-      redirectUri: `${locationOrigin}/login/silent-callback`,
-      usePostMessage: true,
-    }, (err, authResult) => {
-      if (authResult && authResult.accessToken) {
-        const storedTokenInfo = { token: authResult.accessToken, expiresAt: getTokenExpireAt(authResult.accessToken) };
-        dispatch(setAccessToken(storedTokenInfo));
-        dispatch(setAuthenticated(true));
-        resolve(storedTokenInfo);
-      } else {
-        dispatch(logoutPersonalAuth()).then(token => resolve(token));
-      }
+  return dispatch =>
+    new Promise(resolve => {
+      auth.renewAuth(
+        {
+          redirectUri: `${locationOrigin}/login/silent-callback`,
+          usePostMessage: true,
+        },
+        (err, authResult) => {
+          if (authResult && authResult.accessToken) {
+            const storedTokenInfo = {
+              token: authResult.accessToken,
+              expiresAt: getTokenExpireAt(authResult.accessToken),
+            };
+            dispatch(setAccessToken(storedTokenInfo));
+            dispatch(setAuthenticated(true));
+            resolve(storedTokenInfo);
+          } else {
+            dispatch(logoutPersonalAuth()).then(token => resolve(token));
+          }
+        },
+      );
     });
-  });
 }
 
 export function renewSystemAuth() {
-  return dispatch => fetchNewSystemToken()
-    .then((token) => {
-      const storedTokenInfo = { token: token.access_token, expiresAt: getTokenExpireAt(token.access_token) };
+  return dispatch =>
+    fetchNewSystemToken().then(token => {
+      const storedTokenInfo = {
+        token: token.access_token,
+        expiresAt: getTokenExpireAt(token.access_token),
+      };
       dispatch(setAccessToken(storedTokenInfo));
-      dispatch(setAuthenticated(false))
+      dispatch(setAuthenticated(false));
       return storedTokenInfo;
     });
 }
 
 export function renewAuth() {
-  return (dispatch, getState) => new Promise((resolve) => {
-    if (getState().authenticated) {
-      dispatch(renewPersonalAuth()).then(token => resolve(token));
-    } else {
-      dispatch(renewSystemAuth()).then(token => resolve(token));
-    }
-  });
+  return (dispatch, getState) =>
+    new Promise(resolve => {
+      if (getState().authenticated) {
+        dispatch(renewPersonalAuth()).then(token => resolve(token));
+      } else {
+        dispatch(renewSystemAuth()).then(token => resolve(token));
+      }
+    });
 }

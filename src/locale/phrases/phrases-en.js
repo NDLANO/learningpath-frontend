@@ -89,7 +89,8 @@ const phrases = {
     of: 'of',
     description: 'Description',
     descriptionPlaceholder: 'Write a short description for the learning path.',
-    descriptionInformation: 'Max 150 characters. You have %{remainingDescriptionLength} remaining. Description will be shown in search results.',
+    descriptionInformation:
+      'Max 150 characters. You have %{remainingDescriptionLength} remaining. Description will be shown in search results.',
     title: 'Learning path title',
     imagePick: 'Search and choose picture for learning path',
     duration: 'Duration',
@@ -114,7 +115,8 @@ const phrases = {
       searchPlaceholder: 'Search and find an illustrative picture',
       choseImage: 'Use picture',
       imageInformation: 'Picture will be shown in search results.',
-      imageSearchTotalCount: 'Search for "%{textQuery}" yielded %{totalCount} results',
+      imageSearchTotalCount:
+        'Search for "%{textQuery}" yielded %{totalCount} results',
       imageSearchOneTotalCount: 'Search for "%{textQuery}" yielded 1 result',
     },
   },
@@ -122,7 +124,8 @@ const phrases = {
     learningpathShortDescriptionTitle: 'Introduction',
     savePathBtn: 'Save',
     addStepBtn: 'Add new learning step',
-    shortDescriptionPlaceholder: 'Write a short description (max 150 characters)',
+    shortDescriptionPlaceholder:
+      'Write a short description (max 150 characters)',
     titlePlaceHolder: 'Write title here',
     oneLineEditorDefaultPlaceholder: 'Write here',
     deletePathBtn: 'Delete',
@@ -143,8 +146,10 @@ const phrases = {
       summary: 'Summary',
     },
     validation: {
-      oneOfDescriptionOrUrlIsRequired: 'Either Description and Url must be provided.',
-      licenseAndDescription: 'When description is added, a license has to be chosen.',
+      oneOfDescriptionOrUrlIsRequired:
+        'Either Description and Url must be provided.',
+      licenseAndDescription:
+        'When description is added, a license has to be chosen.',
     },
     edit: 'Edit learning path step',
     urlPlaceholder: 'Paste link',
@@ -152,7 +157,8 @@ const phrases = {
     titlePlaceHolder: 'Write a title here',
     previewOembed: 'Preview whole article',
     noLicenseChosen: 'No license chosen',
-    showLicenseInfo: 'The license applies only to the description of the selected step',
+    showLicenseInfo:
+      'The license applies only to the description of the selected step',
     showTitle: 'Chose if the title should be visible or hidden',
   },
   sortSteps: {
@@ -190,10 +196,11 @@ const phrases = {
   },
   copyLearningPath: {
     makeCopy: 'Make copy',
-    copyText: 'Do you wish to base a new learning path og this learning path? We will make a copy which will be saved with your learning paths',
+    copyText:
+      'Do you wish to base a new learning path og this learning path? We will make a copy which will be saved with your learning paths',
     createCopy: 'Copy learning path',
     abortCopy: 'Cancel',
-    copyTitle: 'Copy another\'s learning paths',
+    copyTitle: "Copy another's learning paths",
     copy: 'COPY: ',
     copiedMessage: 'Learning path was copied.',
   },

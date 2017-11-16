@@ -11,7 +11,11 @@ import thunk from 'redux-thunk';
 import nock from 'nock';
 import { change } from 'redux-form';
 
-import { validateOembed, removeOembedPreview, setOembedPreview } from '../validateOembedActions';
+import {
+  validateOembed,
+  removeOembedPreview,
+  setOembedPreview,
+} from '../validateOembedActions';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
@@ -38,19 +42,27 @@ const stepFormWithTitle = {
   },
 };
 
-
-const testValidateOembed = (url, embedType, store, apiReply, expectedActions) => {
+const testValidateOembed = (
+  url,
+  embedType,
+  store,
+  apiReply,
+  expectedActions,
+) => {
   const done = () => {
     // t.end(res);
     nock.cleanAll();
   };
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
+  const apiMock = nock('http://ndla-api', {
+    reqheaders: { Authorization: `Bearer ${accessToken}` },
+  })
     .get('/oembed-proxy/v1/oembed')
     .query({ url })
     .reply(200, apiReply);
 
-  store.dispatch(validateOembed(url, 'nb', embedType))
+  store
+    .dispatch(validateOembed(url, 'nb', embedType))
     .then(() => {
       expect(store.getActions()).toEqual(expectedActions);
 
@@ -67,7 +79,10 @@ test('actions/validiateOembed valid url and no step title', () => {
 
   const apiReply = { embedType: 'oembed', title: 'test', url, language: 'nb' };
 
-  const store = mockStore({ accessToken, form: { 'learning-path-step': stepFormWithoutTitle } });
+  const store = mockStore({
+    accessToken,
+    form: { 'learning-path-step': stepFormWithoutTitle },
+  });
   const expectedActions = [
     setOembedPreview(apiReply),
     change('learning-path-step', 'title', apiReply.title),
@@ -79,7 +94,10 @@ test('actions/validiateOembed valid url and with step title', () => {
   const url = 'https://www.youtube.com/watch?v=BTqu9iMiPIU';
   const embedType = 'oembed';
   const apiReply = { embedType, title: 'test', url, language: 'nb' };
-  const store = mockStore({ accessToken, form: { 'learning-path-step': stepFormWithTitle } });
+  const store = mockStore({
+    accessToken,
+    form: { 'learning-path-step': stepFormWithTitle },
+  });
   const expectedActions = [setOembedPreview(apiReply)];
   testValidateOembed(url, embedType, store, apiReply, expectedActions);
 });
@@ -88,7 +106,11 @@ test('actions/validiateOembed valid url and replace step title if current form t
   const url = 'http://ndla.no/nb/node/166201?fag=17&meny=15554';
   const embedType = 'oembed';
   const apiReply = { embedType, title: 'test', url, language: 'nb' };
-  const store = mockStore({ oembedPreview: { oembedContent: [{ title: 'Youtube film' }] }, accessToken, form: { 'learning-path-step': stepFormWithTitle } });
+  const store = mockStore({
+    oembedPreview: { oembedContent: [{ title: 'Youtube film' }] },
+    accessToken,
+    form: { 'learning-path-step': stepFormWithTitle },
+  });
   const expectedActions = [
     setOembedPreview(apiReply),
     change('learning-path-step', 'title', apiReply.title),
@@ -100,10 +122,12 @@ test('actions/validiateOembed valid url and do not replace step title if current
   const url = 'http://ndla.no/nb/node/166201?fag=17&meny=15554';
   const embedType = 'oembed';
   const apiReply = { embedType, title: 'test', url, language: 'nb' };
-  const store = mockStore({ oembedPreview: { oembedContent: [{ title: 'ndla no' }] }, accessToken, form: { 'learning-path-step': stepFormWithTitle } });
-  const expectedActions = [
-    setOembedPreview(apiReply),
-  ];
+  const store = mockStore({
+    oembedPreview: { oembedContent: [{ title: 'ndla no' }] },
+    accessToken,
+    form: { 'learning-path-step': stepFormWithTitle },
+  });
+  const expectedActions = [setOembedPreview(apiReply)];
   testValidateOembed(url, embedType, store, apiReply, expectedActions);
 });
 
@@ -114,20 +138,23 @@ test('actions/validiateOembed invalid url', () => {
   };
   const url = 'thisIsAnInvalidUrl';
 
-  const apiMock = nock('http://ndla-api', { reqheaders: { Authorization: `Bearer ${accessToken}` } })
+  const apiMock = nock('http://ndla-api', {
+    reqheaders: { Authorization: `Bearer ${accessToken}` },
+  })
     .get('/oembed-proxy/v1/oembed')
     .query({ url })
     .reply(501, { type: 'introduction', title: 'sup' });
 
   const store = mockStore({ accessToken });
 
-  store.dispatch(validateOembed(url, 'nb', 'oembed', 'url', 'feil'))
+  store
+    .dispatch(validateOembed(url, 'nb', 'oembed', 'url', 'feil'))
     .then(() => {
       expect(() => apiMock.done()).not.toThrow();
       done.fail('Promise should be rejected.');
       done();
     })
-    .catch((error) => {
+    .catch(error => {
       expect(() => apiMock.done()).not.toThrow();
       expect({ url: 'feil' }).toEqual(error);
       done();
@@ -142,9 +169,7 @@ test('actions/validiateOembed', () => {
   const store = mockStore({ accessToken });
 
   store.dispatch(validateOembed(''));
-  expect(store.getActions()).toEqual([
-    removeOembedPreview(),
-  ]);
+  expect(store.getActions()).toEqual([removeOembedPreview()]);
 
   // done();
 });

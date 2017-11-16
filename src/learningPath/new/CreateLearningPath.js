@@ -15,17 +15,12 @@ import TextAreaField from '../../common/form/TextAreaField';
 import { createValidator, required } from '../../util/validation';
 
 class CreateLearningPath extends React.Component {
-
   componentWillUnmount() {
     const { dispatch } = this.props;
     dispatch(reset('create-learning-path'));
   }
   render() {
-    const {
-      submitting,
-      handleSubmit,
-      valid,
-    } = this.props;
+    const { submitting, handleSubmit, valid } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <h1>{polyglot.t('createLearningPath.createNew')}</h1>
@@ -38,25 +33,36 @@ class CreateLearningPath extends React.Component {
             label={polyglot.t('createLearningPath.title')}
             maxLength="75"
           />
-          <p className="learning-path_input-information">{polyglot.t('createLearningPath.titleMaxLength')}</p>
+          <p className="learning-path_input-information">
+            {polyglot.t('createLearningPath.titleMaxLength')}
+          </p>
         </div>
         <div>
-          <label htmlFor="description">{polyglot.t('createLearningPath.description')}</label>
+          <label htmlFor="description">
+            {polyglot.t('createLearningPath.description')}
+          </label>
           <Field
             id="description"
             rows="4"
             cols="50"
             name="description"
-            placeholder={polyglot.t('createLearningPath.descriptionPlaceholder')}
+            placeholder={polyglot.t(
+              'createLearningPath.descriptionPlaceholder',
+            )}
             maxLength="150"
             className="textarea"
             component={TextAreaField}
             disableVerticalResize
           />
-          <p className="learning-path_input-information">{polyglot.t('createLearningPath.descriptionMaxLength')}</p>
+          <p className="learning-path_input-information">
+            {polyglot.t('createLearningPath.descriptionMaxLength')}
+          </p>
         </div>
         <br />
-        <button className="button cta-link cta-link--block" disabled={submitting || !valid} type="submit">
+        <button
+          className="button cta-link cta-link--block"
+          disabled={submitting || !valid}
+          type="submit">
           {polyglot.t('createLearningPath.createButton')}
         </button>
       </form>

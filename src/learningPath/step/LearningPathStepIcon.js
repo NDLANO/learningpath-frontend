@@ -12,8 +12,11 @@ import classNames from 'classnames';
 
 import Icon from '../../common/Icon';
 
-export default function LearningPathStepIcon({ learningPathStepType, isCircle }) {
-  const iconClassName = (type) => {
+export default function LearningPathStepIcon({
+  learningPathStepType,
+  isCircle,
+}) {
+  const iconClassName = type => {
     switch (type) {
       case 'INTRODUCTION':
       case 'TEXT':
@@ -29,14 +32,13 @@ export default function LearningPathStepIcon({ learningPathStepType, isCircle })
     }
   };
 
-  const divClassName = () => classNames({
-    'step-nav_circle': isCircle,
-  });
+  const divClassName = () =>
+    classNames({
+      'step-nav_circle': isCircle,
+    });
 
   return (
-    <div className={divClassName()}>
-      {iconClassName(learningPathStepType)}
-    </div>
+    <div className={divClassName()}>{iconClassName(learningPathStepType)}</div>
   );
 }
 

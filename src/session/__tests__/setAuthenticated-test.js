@@ -9,7 +9,6 @@
 import { isFSA } from 'flux-standard-action';
 import { setAuthenticated } from '../sessionActions';
 
-
 test('actions/setAuthenticated', () => {
   const actual = setAuthenticated(true);
 

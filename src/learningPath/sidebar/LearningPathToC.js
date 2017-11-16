@@ -21,7 +21,7 @@ export function LearningPathToC(props) {
     <div>
       <div className="step-nav">
         <ul className="step-nav_list">
-          {(steps.map(step => (
+          {steps.map(step => (
             <LearningPathToCStep
               key={step.id}
               step={step}
@@ -30,7 +30,7 @@ export function LearningPathToC(props) {
               activeStepId={activeStepId}
               steps={steps}
             />
-          )))}
+          ))}
         </ul>
       </div>
     </div>
@@ -51,10 +51,10 @@ LearningPathToC.defaultProps = {
   activeStepId: '',
 };
 
-
-const mapStateToProps = state => Object.assign({}, state, {
-  learningPath: getLearningPath(state),
-});
+const mapStateToProps = state =>
+  Object.assign({}, state, {
+    learningPath: getLearningPath(state),
+  });
 
 const mapDispatchToProps = {
   localCloseSidebars: closeSidebars,

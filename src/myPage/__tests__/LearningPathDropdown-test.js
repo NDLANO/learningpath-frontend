@@ -14,7 +14,9 @@ import { learningPaths } from '../../common/__tests__/mockData';
 import LearningPathDropdown from '../LearningPathDropdown';
 
 const learningPath = learningPaths[0];
-const privateLearningPath = Object.assign({}, learningPath, { status: 'PRIVATE' });
+const privateLearningPath = Object.assign({}, learningPath, {
+  status: 'PRIVATE',
+});
 
 test('component/LearningPathDropdown remove', () => {
   const preventDefault = spy();
@@ -22,10 +24,13 @@ test('component/LearningPathDropdown remove', () => {
 
   const component = shallow(
     <LearningPathDropdown learningPath={learningPath} onSelect={onSelect} />,
-    { context: { lang: 'nb' } }
+    { context: { lang: 'nb' } },
   );
 
-  component.find('.dropdown-menu_item').last().find('button')
+  component
+    .find('.dropdown-menu_item')
+    .last()
+    .find('button')
     .simulate('click', { preventDefault });
 
   expect(preventDefault.calledOnce).toBeTruthy();
@@ -39,9 +44,12 @@ test('component/LearningPathDropdown de-publish', () => {
 
   const component = shallow(
     <LearningPathDropdown learningPath={learningPath} onSelect={onSelect} />,
-    { context: { lang: 'nb' } }
+    { context: { lang: 'nb' } },
   );
-  component.find('.dropdown-menu_item').at(1).find('button')
+  component
+    .find('.dropdown-menu_item')
+    .at(1)
+    .find('button')
     .simulate('click', { preventDefault });
 
   expect(preventDefault.calledOnce).toBeTruthy();
@@ -54,11 +62,17 @@ test('component/LearningPathDropdown publish', () => {
   const preventDefault = spy();
 
   const component = shallow(
-    <LearningPathDropdown learningPath={privateLearningPath} onSelect={onSelect} />,
-    { context: { lang: 'nb' } }
+    <LearningPathDropdown
+      learningPath={privateLearningPath}
+      onSelect={onSelect}
+    />,
+    { context: { lang: 'nb' } },
   );
 
-  component.find('.dropdown-menu_item').at(1).find('button')
+  component
+    .find('.dropdown-menu_item')
+    .at(1)
+    .find('button')
     .simulate('click', { preventDefault });
 
   expect(preventDefault.calledOnce).toBeTruthy();
@@ -72,9 +86,12 @@ test('component/LearningPathDropdown make copy', () => {
 
   const component = shallow(
     <LearningPathDropdown learningPath={learningPath} onSelect={onSelect} />,
-    { context: { lang: 'nb' } }
+    { context: { lang: 'nb' } },
   );
-  component.find('.dropdown-menu_item').first().find('button')
+  component
+    .find('.dropdown-menu_item')
+    .first()
+    .find('button')
     .simulate('click', { preventDefault });
 
   expect(preventDefault.calledOnce).toBeTruthy();

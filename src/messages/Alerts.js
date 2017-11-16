@@ -13,11 +13,11 @@ import classNames from 'classnames';
 import Icon from '../common/Icon';
 import { timeoutMessage, clearMessage } from '../messages/messagesActions';
 
-
-export const Action = ({ title, onClick }) =>
+export const Action = ({ title, onClick }) => (
   <button onClick={onClick} className="un-button alert_action">
     <span className="alert_action-text">{title}</span>
-  </button>;
+  </button>
+);
 
 Action.propTypes = {
   title: PropTypes.string.isRequired,
@@ -34,13 +34,15 @@ export const Alert = ({ message, dispatch }) => {
 
   return (
     <div className={`alert alert--${severity}`}>
-      <div className="alert_msg">
-        {message.message}
-      </div>
-      <button className="alert_dismiss un-button" onClick={() => dispatch(clearMessage(message.id))}>
+      <div className="alert_msg">{message.message}</div>
+      <button
+        className="alert_dismiss un-button"
+        onClick={() => dispatch(clearMessage(message.id))}>
         <Icon.Clear />
       </button>
-      {message.action ? <Action title={message.action.title} onClick={onClick} /> : null}
+      {message.action ? (
+        <Action title={message.action.title} onClick={onClick} />
+      ) : null}
     </div>
   );
 };
@@ -58,13 +60,15 @@ export const Alerts = ({ dispatch, messages }) => {
     'alert-overlay--hidden': isHidden,
   });
 
-  messages.filter(m => m.timeToLive > 0).forEach(item => dispatch(timeoutMessage(item)));
+  messages
+    .filter(m => m.timeToLive > 0)
+    .forEach(item => dispatch(timeoutMessage(item)));
 
   return (
     <div className={overlayClasses}>
-      {messages.map(message =>
+      {messages.map(message => (
         <Alert key={message.id} dispatch={dispatch} message={message} />
-      )}
+      ))}
     </div>
   );
 };

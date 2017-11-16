@@ -9,9 +9,12 @@
 import { isFSA } from 'flux-standard-action';
 import { changeImageSearchQuery } from '../imageActions';
 
-
 test('actions/changeImageSearchQuery', () => {
-  const actual = changeImageSearchQuery({ query: 'test', 'page-size': 16, page: 1 });
+  const actual = changeImageSearchQuery({
+    query: 'test',
+    'page-size': 16,
+    page: 1,
+  });
 
   expect(isFSA(actual)).toBeTruthy();
 

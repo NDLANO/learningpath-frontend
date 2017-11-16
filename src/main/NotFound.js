@@ -14,7 +14,9 @@ export default function NotFound() {
   return (
     <div className="status-response_container">
       <h2>404: {polyglot.t('htmlStatus.notFound')}</h2>
-      <Link to="/" className="cta-link--primary">{polyglot.t('htmlStatus.backToFrontpage')}</Link>
+      <Link to="/" className="cta-link--primary">
+        {polyglot.t('htmlStatus.backToFrontpage')}
+      </Link>
     </div>
   );
 }

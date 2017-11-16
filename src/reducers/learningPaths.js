@@ -12,24 +12,27 @@ import find from 'lodash/find';
 import reject from 'lodash/reject';
 import set from 'lodash/set';
 
-export default handleActions({
-  SET_LEARNING_PATHS: {
-    next: (state, action) => action.payload,
-    throw: state => state,
-  },
-
-  REMOVE_LEARNING_PATH: {
-    next: (state, action) => reject(cloneDeep(state), { id: action.payload }),
-    throw: state => state,
-  },
-
-  UPDATE_LEARNING_PATHS_STATUS: {
-    next(state, action) {
-      const { id, status } = action.payload;
-      const nextState = cloneDeep(state);
-      set(find(nextState, { id }), 'status', status);
-      return nextState;
+export default handleActions(
+  {
+    SET_LEARNING_PATHS: {
+      next: (state, action) => action.payload,
+      throw: state => state,
     },
-    throw: state => state,
+
+    REMOVE_LEARNING_PATH: {
+      next: (state, action) => reject(cloneDeep(state), { id: action.payload }),
+      throw: state => state,
+    },
+
+    UPDATE_LEARNING_PATHS_STATUS: {
+      next(state, action) {
+        const { id, status } = action.payload;
+        const nextState = cloneDeep(state);
+        set(find(nextState, { id }), 'status', status);
+        return nextState;
+      },
+      throw: state => state,
+    },
   },
-}, []);
+  [],
+);

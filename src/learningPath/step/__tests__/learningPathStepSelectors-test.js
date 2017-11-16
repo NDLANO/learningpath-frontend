@@ -6,9 +6,19 @@
  *
  */
 
-import { oembedPreview, learningStep } from '../../../common/__tests__/mockData';
-import { getLearningPathStep, getI18NEmbedContent } from '../learningPathStepSelectors';
-import { translatedLearningStep, nbOembedContent, enOembedContent } from '../../../common/__tests__/translatedMockData';
+import {
+  oembedPreview,
+  learningStep,
+} from '../../../common/__tests__/mockData';
+import {
+  getLearningPathStep,
+  getI18NEmbedContent,
+} from '../learningPathStepSelectors';
+import {
+  translatedLearningStep,
+  nbOembedContent,
+  enOembedContent,
+} from '../../../common/__tests__/translatedMockData';
 
 test('selectors/getLearningPathStep', () => {
   const state = {
@@ -18,7 +28,6 @@ test('selectors/getLearningPathStep', () => {
 
   expect(getLearningPathStep(state)).toEqual(translatedLearningStep);
 });
-
 
 test('selectors/getI18NEmbedContent norwegian', () => {
   const state = {

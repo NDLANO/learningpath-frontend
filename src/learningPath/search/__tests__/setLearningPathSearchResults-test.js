@@ -9,7 +9,6 @@
 import { isFSA } from 'flux-standard-action';
 import { setLearningPathSearchResults } from '../learningPathSearchActions';
 
-
 test('actions/setLearningPathSearchResults', () => {
   const actual = setLearningPathSearchResults({
     results: [{ id: '12345' }, { id: '67890' }],

@@ -10,7 +10,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { deleteLearningPath, createLearningPath, copyLearningPath, updateLearningPathsStatus } from '../learningPath/learningPathActions';
+import {
+  deleteLearningPath,
+  createLearningPath,
+  copyLearningPath,
+  updateLearningPathsStatus,
+} from '../learningPath/learningPathActions';
 import Icon from '../common/Icon';
 import LabeledIcon from '../common/LabeledIcon';
 import polyglot from '../i18n';
@@ -21,7 +26,10 @@ import Lightbox from '../common/Lightbox';
 import Masthead from '../common/Masthead';
 import CreateLearningPath from '../learningPath/new/CreateLearningPath';
 import { Wrapper, OneColumn, Footer } from '../common/Layout';
-import { setMyLearningPathsSortOrder, fetchMyLearningPaths } from './myPageActions';
+import {
+  setMyLearningPathsSortOrder,
+  fetchMyLearningPaths,
+} from './myPageActions';
 import { getLearningPaths, getSortKey } from './myPageSelectors';
 
 export class MyPage extends React.Component {
@@ -46,13 +54,21 @@ export class MyPage extends React.Component {
   }
 
   render() {
-    const { learningPaths, sortKey, setSortKey, deletePath, updatePathStatus, createPath, copyPath } = this.props;
+    const {
+      learningPaths,
+      sortKey,
+      setSortKey,
+      deletePath,
+      updatePathStatus,
+      createPath,
+      copyPath,
+    } = this.props;
     const { lang } = this.context;
-    const items = learningPaths.map((lp) => {
+    const items = learningPaths.map(lp => {
       const duration = formatDuration(lp.duration, lang);
       const lastUpdated = formatDate(lp.lastUpdated, lang);
 
-      const onDropDownSelect = (actionType) => {
+      const onDropDownSelect = actionType => {
         switch (actionType) {
           case 'delete':
             deletePath(lp);
@@ -75,7 +91,10 @@ export class MyPage extends React.Component {
           <div className="tile_hd">
             <div className="tile_date">{lastUpdated}</div>
             <div className="tile_context-menu">
-              <LearningPathDropdown onSelect={onDropDownSelect} learningPath={lp} />
+              <LearningPathDropdown
+                onSelect={onDropDownSelect}
+                learningPath={lp}
+              />
             </div>
           </div>
           <Link className="tile_bd" to={`/learningpaths/${lp.id}/first-step`}>
@@ -84,13 +103,21 @@ export class MyPage extends React.Component {
           </Link>
           <div className="tile_ft">
             <div className="tile_property">
-              <div className="tile_property-icon"><Icon.Duration /></div>
-              <p className="tile_property-description">{polyglot.t('myPage.path.duration')}</p>
+              <div className="tile_property-icon">
+                <Icon.Duration />
+              </div>
+              <p className="tile_property-description">
+                {polyglot.t('myPage.path.duration')}
+              </p>
               <p>{duration}</p>
             </div>
             <div className="tile_property">
-              <div className="tile_property-icon"><Icon.Visibility /></div>
-              <p className="tile_property-description">{polyglot.t('myPage.path.status')}</p>
+              <div className="tile_property-icon">
+                <Icon.Visibility />
+              </div>
+              <p className="tile_property-description">
+                {polyglot.t('myPage.path.status')}
+              </p>
               <p>{polyglot.t(`myPage.path.statusValue.${lp.status}`)}</p>
             </div>
           </div>
@@ -99,15 +126,20 @@ export class MyPage extends React.Component {
     });
 
     const sortOrderSelect = (
-      <select className="select--white-border" value={sortKey} onChange={evt => setSortKey(evt.target.value)}>
+      <select
+        className="select--white-border"
+        value={sortKey}
+        onChange={evt => setSortKey(evt.target.value)}>
         <option value="title">{polyglot.t('myPage.order.title')}</option>
-        <option value="-lastUpdated">{polyglot.t('myPage.order.newest')}</option>
+        <option value="-lastUpdated">
+          {polyglot.t('myPage.order.newest')}
+        </option>
         <option value="lastUpdated">{polyglot.t('myPage.order.oldest')}</option>
         <option value="status">{polyglot.t('myPage.order.status')}</option>
       </select>
     );
 
-    const onCreateLearningPathSubmit = (values) => {
+    const onCreateLearningPathSubmit = values => {
       createPath({
         title: values.title,
         description: values.description,
@@ -115,7 +147,14 @@ export class MyPage extends React.Component {
         language: lang,
         duration: 1,
         coverPhoto: { url: '', metaUrl: '' },
-        copyright: { license: { license: 'by-sa', description: 'Creative Commons Attribution-ShareAlike 2.0 Generic', url: 'https://creativecommons.org/licenses/by-sa/2.0/' }, contributors: [] },
+        copyright: {
+          license: {
+            license: 'by-sa',
+            description: 'Creative Commons Attribution-ShareAlike 2.0 Generic',
+            url: 'https://creativecommons.org/licenses/by-sa/2.0/',
+          },
+          contributors: [],
+        },
       });
     };
 
@@ -126,16 +165,20 @@ export class MyPage extends React.Component {
         <OneColumn>
           <Masthead />
           <div className="page-header page-header--primary">
-            <h2 className="page-header_name">{polyglot.t('myPage.pageHeader')}</h2>
-            <div className="page-header_ctrls">
-              {sortOrderSelect}
-            </div>
+            <h2 className="page-header_name">
+              {polyglot.t('myPage.pageHeader')}
+            </h2>
+            <div className="page-header_ctrls">{sortOrderSelect}</div>
           </div>
           <div className="tiles">{items}</div>
-          <button className="cta-link new-learningpath-button" onClick={this.onCreateLearningPathClick}>
+          <button
+            className="cta-link new-learningpath-button"
+            onClick={this.onCreateLearningPathClick}>
             <LabeledIcon.Add labelText={polyglot.t('myPage.newBtn')} />
           </button>
-          <Lightbox display={this.state.displayCreatePath} onClose={onLightboxClose}>
+          <Lightbox
+            display={this.state.displayCreatePath}
+            onClose={onLightboxClose}>
             <CreateLearningPath onSubmit={onCreateLearningPathSubmit} />
           </Lightbox>
         </OneColumn>

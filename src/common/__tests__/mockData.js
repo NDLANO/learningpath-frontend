@@ -15,7 +15,8 @@ const learningPaths = [
       language: 'nb',
     },
     description: {
-      description: 'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
+      description:
+        'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
       language: 'nb',
     },
     tags: {
@@ -32,7 +33,11 @@ const learningPaths = [
   {
     id: '2',
     title: { title: 'Leselighet og skrift', language: 'nb' },
-    description: { description: 'Uttrykkene "leselighet" og "lesbarhet" brukes om hverandre i norsk fagterminologi, og ofte uten klare forestillinger om hva begrepene står for.', language: 'nb' },
+    description: {
+      description:
+        'Uttrykkene "leselighet" og "lesbarhet" brukes om hverandre i norsk fagterminologi, og ofte uten klare forestillinger om hva begrepene står for.',
+      language: 'nb',
+    },
     introduction: {
       introduction: '<p>Norsk test</p>',
       language: 'nb',
@@ -58,7 +63,8 @@ const learningPath = {
   },
   isBasedOnTitle: undefined,
   description: {
-    description: 'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
+    description:
+      'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
     language: 'nb',
   },
   metaUrl: 'http://api.test.ndla.no/learningpaths/4',
@@ -108,7 +114,8 @@ const learningPathNotEditable = {
     language: 'nb',
   },
   description: {
-    description: 'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
+    description:
+      'Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.',
     language: 'nb',
   },
   metaUrl: 'http://api.test.ndla.no/learningpaths/4',
@@ -133,7 +140,8 @@ const learningPathNotEditable = {
       oembed: {
         title: 'NDLA',
         url: 'http://ndla.no/nb/node/24049',
-        html: '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>',
+        html:
+          '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>',
       },
       type: 'TEXT',
       license: 'by-nc-sa',
@@ -159,7 +167,8 @@ const learningPathNotEditable = {
       oembed: {
         title: 'NDLA',
         url: 'http://ndla.no/nb/node/24049',
-        html: '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>',
+        html:
+          '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>',
       },
       type: 'TEXT',
       metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/8',
@@ -199,7 +208,8 @@ const learningStep = {
   oembed: {
     title: 'NDLA',
     url: 'https://www.youtube.com/watch?v=RYLlSFmGfm0',
-    html: '<iframe src="https://www.youtube.com/embed/RYLlSFmGfm0?feature=oembed" allowfullscreen></iframe>',
+    html:
+      '<iframe src="https://www.youtube.com/embed/RYLlSFmGfm0?feature=oembed" allowfullscreen></iframe>',
   },
   type: 'TEXT',
   metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/8',
@@ -225,7 +235,8 @@ const ndlaLearningStep = {
   oembed: {
     title: 'NDLA',
     url: 'http://ndla.no/nb/node/24049',
-    html: '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>',
+    html:
+      '<iframe src="http://ndla.no/nb/node/24049/oembed" allowfullscreen></iframe>',
   },
   type: 'TEXT',
   metaUrl: 'http://api.test.ndla.no/learningpaths/4/learningsteps/9',
@@ -239,7 +250,8 @@ const oembedPreview = {
       title: 'Klart du bør bli journalist',
       width: 800,
       height: 800,
-      html: '<iframe src="http://api.test.ndla.no/article-converter/html/nb/60" frameborder="0" />',
+      html:
+        '<iframe src="http://api.test.ndla.no/article-converter/html/nb/60" frameborder="0" />',
       url: 'http://api.test.ndla.no:8082/article/60',
       language: 'nb',
     },
@@ -249,11 +261,19 @@ const oembedPreview = {
       title: 'You should become journalist',
       width: 800,
       height: 800,
-      html: '<iframe src="http://api.test.ndla.no/article-converter/html/en/60" frameborder="0" />',
+      html:
+        '<iframe src="http://api.test.ndla.no/article-converter/html/en/60" frameborder="0" />',
       url: 'http://api.test.ndla.no:8082/article/60',
       language: 'en',
     },
   ],
 };
 
-export { learningPaths, learningPath, learningPathNotEditable, learningStep, ndlaLearningStep, oembedPreview };
+export {
+  learningPaths,
+  learningPath,
+  learningPathNotEditable,
+  learningStep,
+  ndlaLearningStep,
+  oembedPreview,
+};

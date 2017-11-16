@@ -17,7 +17,7 @@ test('actions/timeoutMessage', () => {
     timeToLive: 500,
   };
 
-  timeoutMessage(message)((actual) => {
+  timeoutMessage(message)(actual => {
     expect(isFSA(actual)).toBeTruthy();
     expect(actual).toEqual(clearMessage(message.id));
     // done();

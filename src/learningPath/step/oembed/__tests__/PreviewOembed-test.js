@@ -13,11 +13,16 @@ import PreviewOembed from '../PreviewOembed';
 
 test('component/PreviewOembed click button', () => {
   const preventDefault = spy();
-  const content = { url: 'http://ndla.no/nb/node/142542', html: '<iframe src="http://ndla.no/nb/node/142542/oembed" allowfullscreen>' };
+  const content = {
+    url: 'http://ndla.no/nb/node/142542',
+    html: '<iframe src="http://ndla.no/nb/node/142542/oembed" allowfullscreen>',
+  };
   const component = shallow(<PreviewOembed content={content} />);
 
   let frame = component.find('.learningsource__frame');
-  expect(frame.prop('className')).toBe('learningsource__frame learningsource__frame--hidden');
+  expect(frame.prop('className')).toBe(
+    'learningsource__frame learningsource__frame--hidden',
+  );
 
   frame.find('button').simulate('click', { preventDefault });
 

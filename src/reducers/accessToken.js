@@ -13,9 +13,12 @@ const emptyAccessToken = {
   expiresAt: 0,
 };
 
-export default handleActions({
-  SET_ACCESS_TOKEN: {
-    next: (state, action) => action.payload,
-    throw: state => state,
+export default handleActions(
+  {
+    SET_ACCESS_TOKEN: {
+      next: (state, action) => action.payload,
+      throw: state => state,
+    },
   },
-}, emptyAccessToken);
+  emptyAccessToken,
+);

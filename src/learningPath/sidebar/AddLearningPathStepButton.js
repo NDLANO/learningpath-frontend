@@ -13,7 +13,10 @@ import { Link } from 'react-router-dom';
 import polyglot from '../../i18n';
 import { closeSidebars } from '../../common/sidebarActions';
 
-export function AddLearningPathStepButton({ learningPath, localCloseSidebars }) {
+export function AddLearningPathStepButton({
+  learningPath,
+  localCloseSidebars,
+}) {
   if (!learningPath.canEdit) {
     return null;
   }
@@ -21,7 +24,10 @@ export function AddLearningPathStepButton({ learningPath, localCloseSidebars }) 
   const newStepTarget = `/learningpaths/${learningPath.id}/step/new`;
   return (
     <div className="add-learningpath-step">
-      <Link to={newStepTarget} className="add-learningpath-step_button cta-link cta-link--block cta-link--secondary" onClick={() => localCloseSidebars()}>
+      <Link
+        to={newStepTarget}
+        className="add-learningpath-step_button cta-link cta-link--block cta-link--secondary"
+        onClick={() => localCloseSidebars()}>
         <div className="plus-sign--circle">+</div>
         {polyglot.t('editPage.addStepBtn')}
       </Link>
@@ -38,4 +44,6 @@ const mapDispatchToProps = {
   localCloseSidebars: closeSidebars,
 };
 
-export default connect(state => state, mapDispatchToProps)(AddLearningPathStepButton);
+export default connect(state => state, mapDispatchToProps)(
+  AddLearningPathStepButton,
+);

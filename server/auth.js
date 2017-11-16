@@ -10,16 +10,17 @@ import 'isomorphic-fetch';
 
 const url = `https://ndla.eu.auth0.com/oauth/token`;
 
-export const getToken = () => fetch(url, {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    grant_type: 'client_credentials',
-    client_id: `${process.env.NDLA_LEARNING_PATH_CLIENT_ID}`,
-    client_secret: `${process.env.NDLA_LEARNING_PATH_CLIENT_SECRET}`,
-    audience: 'ndla_system',
-  }),
-  json: true,
-}).then(res => res.json());
+export const getToken = () =>
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      grant_type: 'client_credentials',
+      client_id: `${process.env.NDLA_LEARNING_PATH_CLIENT_ID}`,
+      client_secret: `${process.env.NDLA_LEARNING_PATH_CLIENT_SECRET}`,
+      audience: 'ndla_system',
+    }),
+    json: true,
+  }).then(res => res.json());

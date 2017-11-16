@@ -14,7 +14,13 @@ import { translatedLearningStep } from '../../../common/__tests__/translatedMock
 import LearningPathStepIcon from '../LearningPathStepIcon';
 
 test('component/LearningPathStepIcon', () => {
-  const component = shallow(<LearningPathStepIcon learningPathStep={translatedLearningStep} learningPathStepType="INTRODUCTION" isCircle />);
+  const component = shallow(
+    <LearningPathStepIcon
+      learningPathStep={translatedLearningStep}
+      learningPathStepType="INTRODUCTION"
+      isCircle
+    />,
+  );
 
   const iconNode = component.find('.step-nav_circle');
 
