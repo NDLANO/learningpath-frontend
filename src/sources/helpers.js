@@ -19,9 +19,9 @@ const NDLA_ACCESS_TOKEN = __SERVER__
 const AUTH0_DOMAIN = __SERVER__
   ? config.auth0Domain
   : window.config.auth0Domain;
-const AUTH0_CLIENT_ID = __SERVER__
-  ? config.auth0ClientID
-  : window.config.auth0ClientID;
+const NDLA_PERSONAL_CLIENT_ID = __SERVER__
+  ? config.ndlaPersonalClientId
+  : window.config.ndlaPersonalClientId;
 
 if (process.env.NODE_ENV === 'unittest') {
   global.__SERVER__ = false; //eslint-disable-line
@@ -49,11 +49,11 @@ const locationOrigin = (() => {
   return location.origin;
 })();
 
-export const auth0ClientId = (() => {
+export const ndlaPersonalClientId = (() => {
   if (process.env.NODE_ENV === 'unittest') {
     return '123456789';
   }
-  return AUTH0_CLIENT_ID;
+  return NDLA_PERSONAL_CLIENT_ID;
 })();
 
 export const auth0Domain = (() => {
@@ -77,18 +77,6 @@ const apiBaseUrl = (() => {
 
   return defined(NDLA_API_URL, locationOrigin);
 })();
-
-export function getToken(getState) {
-  return getState().authenticated
-    ? getState().idToken.token
-    : getState().accessToken.token;
-}
-
-export function getTokenExpiresAt(getState) {
-  return getState().authenticated
-    ? getState().idToken.expiresAt
-    : getState().accessToken.expiresAt;
-}
 
 export { locationOrigin, apiBaseUrl };
 

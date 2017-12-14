@@ -17,7 +17,7 @@ export const setLearningPaths = createAction('SET_LEARNING_PATHS');
 
 export function fetchMyLearningPaths() {
   return (dispatch, getState) =>
-    fetchMyPaths(getState().idToken)
+    fetchMyPaths(getState().accessToken)
       .then(paths => dispatch(setLearningPaths(paths)))
       .catch(err => dispatch(applicationError(err)));
 }

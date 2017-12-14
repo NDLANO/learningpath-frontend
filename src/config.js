@@ -52,7 +52,6 @@ module.exports = Object.assign(
     googleTagMangerId,
     hotjarSiteID,
     ndlaApiUrl: process.env.NDLA_API_URL || apiDomain,
-    ndlaApiKey: process.env.NDLA_API_KEY || 'ndlalearningpathfrontend',
     googleSearchEngineId: process.env.NDLA_GOOGLE_SEARCH_ENGINE_ID,
     googleApiKey: process.env.NDLA_GOOGLE_API_KEY,
     googleApiUrl:
@@ -64,7 +63,7 @@ module.exports = Object.assign(
     pinterestEnabled:
       process.env.PINTEREST_ACCESS_TOKEN !== undefined && pinterestActivated,
     ltiActivated,
-    auth0ClientID: process.env.AUTH0_CLIENT_ID || '',
+    ndlaPersonalClientId: process.env.NDLA_PERSONAL_CLIENT_ID || '',
     auth0Domain: process.env.AUTH0_DOMAIN || '',
     disableSSR: process.env.DISABLE_SSR || false,
     app: {

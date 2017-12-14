@@ -8,5 +8,5 @@
 
 import { resolveJsonOrRejectWithError } from './helpers';
 
-export const fetchNewToken = () =>
+export const fetchNewSystemToken = () =>
   fetch('/get_token').then(resolveJsonOrRejectWithError);

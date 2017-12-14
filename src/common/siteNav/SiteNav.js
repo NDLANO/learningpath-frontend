@@ -16,6 +16,7 @@ import LabeledIcon from '../LabeledIcon';
 import SiteNavMyPage from './SiteNavMyPage';
 import SiteNavSessionAction from './SiteNavSessionAction';
 import { closeSidebars } from '../sidebarActions';
+import { decodeToken } from '../../util/jwtHelper';
 
 export const SiteNav = ({
   authenticated,
@@ -65,12 +66,10 @@ SiteNav.defaultProps = {
   userName: '',
 };
 
-const selectUserName = state => {
-  if (state.authenticated) {
-    return state.user.name;
-  }
-  return '';
-};
+const selectUserName = ({ authenticated, accessToken }) =>
+  authenticated
+    ? decodeToken(accessToken.token)['https://ndla.no/user_name']
+    : '';
 
 const mapStateToProps = state =>
   Object.assign({}, state, {

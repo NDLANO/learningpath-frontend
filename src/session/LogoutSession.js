@@ -56,7 +56,7 @@ LogoutSession.propTypes = {
 };
 
 const mapDispatchToProps = {
-  localLogout: actions.logout,
+  localLogout: actions.logoutPersonalAuth,
 };
 
 export default connect(state => state, mapDispatchToProps)(LogoutSession);

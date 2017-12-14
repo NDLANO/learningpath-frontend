@@ -28,7 +28,7 @@ export default function configureStore(initialState, history) {
   const createFinalStore = compose(
     applyMiddleware(thunkMiddleware, errorReporter, middleware),
     __CLIENT__
-      ? persistState(['authenticated', 'idToken', 'user'], {
+      ? persistState(['authenticated', 'accessToken'], {
           key: 'ndla:sti',
           slicer,
         })

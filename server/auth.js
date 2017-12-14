@@ -7,35 +7,20 @@
  */
 
 import 'isomorphic-fetch';
-import queryString from 'query-string';
-import btoa from 'btoa';
-import config from '../src/config';
 
-const NDLA_API_URL = config.ndlaApiUrl;
-
-const clientData = {
-  grant_type: 'client_credentials',
-};
-
-const url = `${NDLA_API_URL}/auth/tokens`;
-
-const b64EncodeUnicode = str =>
-  btoa(
-    encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (match, p1) =>
-      String.fromCharCode(`0x${p1}`),
-    ),
-  );
+const url = `https://ndla.eu.auth0.com/oauth/token`;
 
 export const getToken = () =>
   fetch(url, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-      Authorization: `Basic ${b64EncodeUnicode(
-        `${process.env.NDLA_LEARNING_PATH_CLIENT_ID}:${
-          process.env.NDLA_LEARNING_PATH_CLIENT_SECRET
-        }`,
-      )}`,
+      'Content-Type': 'application/json',
     },
-    body: queryString.stringify(clientData),
+    body: JSON.stringify({
+      grant_type: 'client_credentials',
+      client_id: `${process.env.NDLA_LEARNING_PATH_CLIENT_ID}`,
+      client_secret: `${process.env.NDLA_LEARNING_PATH_CLIENT_SECRET}`,
+      audience: 'ndla_system',
+    }),
+    json: true,
   }).then(res => res.json());
