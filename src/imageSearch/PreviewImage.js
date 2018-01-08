@@ -12,6 +12,9 @@ import polyglot from '../i18n';
 import { scaleImage } from '../util/imageScaler';
 
 export default function PreviewImage({ image, onSaveImage }) {
+  const authors = image.copyright.creators
+    .concat(image.copyright.rightsholders)
+    .concat(image.copyright.processors);
   return (
     <div className="image-preview">
       <div className="image-preview_image">
@@ -28,7 +31,7 @@ export default function PreviewImage({ image, onSaveImage }) {
             {polyglot.t('learningPath.image.authors')}
           </b>
           <span className="image-preview_text--right">
-            {image.copyright.authors.map(author => author.name).join(', ')}
+            {authors.map(author => author.name).join(', ')}
           </span>
         </div>
         <div className="image-prieview_license">
