@@ -35,6 +35,10 @@ ChoseImage.propTypes = {
 
 const ChangeImage = props => {
   const { onImageLightboxOpen, savedImage } = props;
+  const authors = savedImage.copyright.creators
+    .concat(savedImage.copyright.rightsholders)
+    .concat(savedImage.copyright.processors);
+
   return (
     <div>
       <div className="image-preview_image">
@@ -51,9 +55,7 @@ const ChangeImage = props => {
         <h2 className="image-preview_title">{savedImage.title}</h2>
         <div className="image-prieview_copyright-author">
           <b>{polyglot.t('learningPath.image.authors')}</b>
-          <span>
-            {savedImage.copyright.authors.map(author => author.name).join(', ')}
-          </span>
+          <span>{authors.map(author => author.name).join(', ')}</span>
         </div>
         <Button
           className="button button--primary"
