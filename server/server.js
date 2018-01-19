@@ -84,6 +84,7 @@ app.use(
                 'https://s.ytimg.com',
                 'https://cdn.auth0.com',
                 'https://tagmanager.google.com',
+                'https://sb.scorecardresearch.com',
               ],
               styleSrc: [
                 "'self'",
