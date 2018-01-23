@@ -97,9 +97,7 @@ test('actions/createLearningPathStep access denied', () => {
       expect(store.getActions()).toEqual([
         applicationError(
           payload403invalid(
-            `http://ndla-api/learningpath-api/v1/learningpaths/${
-              pathId
-            }/learningsteps`,
+            `http://ndla-api/learningpath-api/v1/learningpaths/${pathId}/learningsteps`,
           ),
         ),
       ]);
