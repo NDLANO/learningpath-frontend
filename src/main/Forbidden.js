@@ -7,13 +7,15 @@
  */
 
 import React from 'react';
+import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
 import polyglot from '../i18n';
 
 export default function Forbidden() {
   return (
     <div className="status-response_container">
-      <h2>403: {polyglot.t('htmlStatus.forbidden')}</h2>
+      <Helmet title={polyglot.t('htmlStatus.forbidden.title')} />
+      <h2>403: {polyglot.t('htmlStatus.forbidden.description')}</h2>
       <Link to="/" className="cta-link--primary">
         {polyglot.t('htmlStatus.backToFrontpage')}
       </Link>

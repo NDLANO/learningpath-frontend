@@ -9,10 +9,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import defined from 'defined';
+import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 import { routerActions } from 'react-router-redux';
 import upperFirst from 'lodash/upperFirst';
+import polyglot from '../../i18n';
 import LinkPager from '../../common/pager/LinkPager';
 import SearchForm from './LearningPathSearchForm';
 import SearchResult from './LearningPathSearchResult';
@@ -86,6 +88,7 @@ class LearningPathSearch extends React.Component {
 
     return (
       <Wrapper>
+        <Helmet title={polyglot.t('learningPathSearch.title')} />
         <OneColumn className={'one-colum--white-bg'}>
           <Masthead />
           <div className="page-header">

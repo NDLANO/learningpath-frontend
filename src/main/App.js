@@ -10,6 +10,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Switch, Route, withRouter } from 'react-router-dom';
+import Helmet from 'react-helmet';
 import { getLocale } from '../locale/localeSelectors';
 import { getMessages } from '../messages/messagesSelectors';
 import Alerts from '../messages/Alerts';
@@ -37,6 +38,7 @@ export class App extends React.Component {
     const { dispatch, messages } = this.props;
     return (
       <div>
+        <Helmet title="" titleTemplate="%s - Læringssti NDLA" />
         <div className="page-container">
           <Switch>
             <Route exact path="/" component={Welcome} />

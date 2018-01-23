@@ -10,8 +10,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { renderToString } from 'react-dom/server';
 import serialize from 'serialize-javascript';
+import Helmet from 'react-helmet';
 import config from '../src/config';
-import head from './Meta';
 import {
   SvgPolyfillScript,
   SvgPolyfillScriptInitalization,
@@ -104,6 +104,7 @@ ZendeskLocale.propTypes = {
 const Html = props => {
   const { lang, className, state, component } = props;
   const content = component ? renderToString(component) : '';
+  const head = Helmet.rewind();
 
   return (
     <html lang={lang} className={className}>

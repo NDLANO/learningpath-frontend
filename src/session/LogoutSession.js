@@ -8,6 +8,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import * as actions from './sessionActions';
@@ -34,6 +35,7 @@ export class LogoutSession extends React.Component {
 
     return (
       <div className="one-column one-column--narrow logout-container one-column--text-centered">
+        <Helmet title={polyglot.t('logoutSession.title')} />
         <button
           className="button--primary-outline cta-link--block"
           onClick={() => this.handleLogoutClick()}>

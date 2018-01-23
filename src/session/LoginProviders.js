@@ -7,11 +7,13 @@
  */
 
 import React from 'react';
+import Helmet from 'react-helmet';
 import polyglot from '../i18n';
 import { loginPersonalAuth } from './sessionActions';
 
 const LoginProviders = () => (
   <div className="one-column one-column--narrow">
+    <Helmet title={polyglot.t('loginProviders.title')} />
     <h3>{polyglot.t('loginProviders.description')}</h3>
     <ul className="vertical-menu">
       <li className="vertical-menu_item">

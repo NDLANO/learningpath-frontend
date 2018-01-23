@@ -7,6 +7,9 @@
  */
 
 const phrases = {
+  learningPathSearch: {
+    title: 'Søk',
+  },
   searchForm: {
     placeholder: 'Søk etter læringsstier',
     btn: 'Søk',
@@ -22,13 +25,19 @@ const phrases = {
     },
   },
   loginFailure: {
+    title: 'Innlogging feilet',
     errorMessage: 'Beklager. Innlogging feilet.',
     loginLink: 'Logg inn',
   },
+  sessionInitializer: {
+    title: 'Logget inn',
+  },
   loginProviders: {
+    title: 'Logg inn',
     description: 'Logg inn i NDLA med',
   },
   logoutSession: {
+    title: 'Logg ut',
     or: 'eller',
     logoutWholeSession: 'Logg helt ut av alle tjenester',
     logutLearningpathSite: 'Logg ut av læringssti',
@@ -37,6 +46,7 @@ const phrases = {
     altText: 'Nasjonal digital læringsarena',
   },
   myPage: {
+    title: 'Min side',
     order: {
       title: 'Alfabetisk',
       newest: 'Nyeste',
@@ -69,6 +79,7 @@ const phrases = {
     errorMessage: 'Denne siden krever innlogging.',
   },
   welcomePage: {
+    title: 'Forsiden',
     placeholder: 'Søk etter læringsstier',
     title1: 'Læringsstier',
     title2: 'Nasjonal digital læringsarena',
@@ -120,6 +131,7 @@ const phrases = {
     },
   },
   editPage: {
+    title: 'Rediger læringssti',
     learningpathShortDescriptionTitle: 'Introduksjon',
     savePathBtn: 'Lagre',
     addStepBtn: 'Legg til nytt læringssteg',
@@ -134,6 +146,8 @@ const phrases = {
     publish: 'Publiser',
   },
   editPathStep: {
+    editTitle: 'Rediger læringssteg',
+    createTitle: 'Opprett læringssteg',
     urlLabel: 'Lim inn lenke (URL) fra ndla.no eller youtube.com',
     mediatype: {
       introduction: 'Introduksjon',
@@ -183,6 +197,7 @@ const phrases = {
     minutes: '%{smart_count} minutt |||| %{smart_count} minutter',
   },
   createLearningPath: {
+    pageTitle: 'Opprett sti',
     createdMsg: 'Lagret OK',
     createNew: 'Opprett ny læringssti',
     title: 'Tittel',
@@ -226,8 +241,8 @@ const phrases = {
   updateLearningPathStatus: {
     updateStatusMsg: 'Oppdatert status OK',
   },
-  htmlTitleTemplates: {
-    learningPathStep: '%{title} (Læringssti fra NDLA.no)',
+  htmlTitles: {
+    sortLearningPathSteps: 'Sorter eller slett læringssteg',
   },
   validation: {
     required: 'Feltet er påkrevd.',
@@ -286,8 +301,15 @@ const phrases = {
     },
   },
   htmlStatus: {
-    notFound: 'Denne siden finnes ikke',
-    forbidden: 'Du har ikke tilgang til denne siden',
+    notFound: {
+      title: 'Siden finnes ikke',
+      description: 'Denne siden finnes ikke',
+    },
+    forbidden: {
+      title: 'Ikke tilgang',
+      description: 'Du har ikke tilgang til denne siden',
+    },
+
     backToFrontpage: 'Tilbake til forsiden',
   },
 };

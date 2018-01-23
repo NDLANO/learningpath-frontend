@@ -8,6 +8,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import assign from 'lodash/assign';
 import get from 'lodash/get';
@@ -79,6 +80,13 @@ class EditLearningPathStep extends Component {
 
     return (
       <div className="two-column_content--wide learning-path-step two-column_content--white-bg">
+        <Helmet
+          title={
+            step.id
+              ? polyglot.t('editPathStep.editTitle')
+              : polyglot.t('editPathStep.createTitle')
+          }
+        />
         <LearningPathStepForm
           step={step}
           learningPath={learningPath}

@@ -8,6 +8,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
@@ -88,6 +89,7 @@ export class MyPage extends React.Component {
 
       return (
         <div key={lp.id} className="tile">
+          <Helmet title={polyglot.t('myPage.title')} />
           <div className="tile_hd">
             <div className="tile_date">{lastUpdated}</div>
             <div className="tile_context-menu">

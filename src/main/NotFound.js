@@ -7,13 +7,15 @@
  */
 
 import React from 'react';
+import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
 import polyglot from '../i18n';
 
 export default function NotFound() {
   return (
     <div className="status-response_container">
-      <h2>404: {polyglot.t('htmlStatus.notFound')}</h2>
+      <Helmet title={polyglot.t('htmlStatus.notFound.title')} />
+      <h2>404: {polyglot.t('htmlStatus.notFound.description')}</h2>
       <Link to="/" className="cta-link--primary">
         {polyglot.t('htmlStatus.backToFrontpage')}
       </Link>

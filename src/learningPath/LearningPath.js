@@ -8,6 +8,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { routerActions } from 'react-router-redux';
@@ -148,6 +149,7 @@ export class LearningPath extends Component {
     };
     return (
       <div className="wrapper">
+        <Helmet title={learningPath.title || ''} />
         <Masthead
           changeStatusButton={changeStatusButton}
           sortableTableOfContentButton={sortableTableOfContentButton}>

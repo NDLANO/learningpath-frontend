@@ -11,7 +11,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import Oembed from './oembed/Oembed';
-import polyglot from '../../i18n';
 import { fetchLearningPathStep } from './learningPathStepActions';
 import LearningPathStepInformation from './LearningPathStepInformation';
 import LearningPathStepPrevNext from './LearningPathStepPrevNext';
@@ -58,11 +57,7 @@ class LearningPathStep extends React.Component {
           currentStepId={learningPathStep.id}
           lang={lang}>
           <div className="two-column_content--wide">
-            <Helmet
-              title={polyglot.t('htmlTitleTemplates.learningPathStep', {
-                title: learningPathStep.title || '',
-              })}
-            />
+            <Helmet title={learningPathStep.title || ''} />
             <LearningPathStepInformation
               learningPathStep={learningPathStep}
               stepTitle={learningPathStep.title}

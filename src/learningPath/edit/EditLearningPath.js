@@ -8,6 +8,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
@@ -27,6 +28,7 @@ import {
   getLearningPathSteps,
 } from '../learningPathSelectors';
 import { getLocale } from '../../locale/localeSelectors';
+import polyglot from '../../i18n';
 
 class EditLearningPath extends Component {
   componentDidMount() {
@@ -79,6 +81,7 @@ class EditLearningPath extends Component {
 
     return (
       <div className="two-column_content">
+        <Helmet title={polyglot.t('editPage.title')} />
         <LearningPathForm
           learningPath={learningPath}
           tagOptions={tags}

@@ -8,6 +8,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { routerActions } from 'react-router-redux';
 import isEmpty from 'lodash/isEmpty';
@@ -40,6 +41,7 @@ class Welcome extends Component {
   render() {
     return (
       <Wrapper>
+        <Helmet title={polyglot.t('welcomePage.title')} />
         <OneColumn>
           <div className="frontpage-masthead">
             <Masthead logo={<Logo beta cssModifier="on-dark" />} />
