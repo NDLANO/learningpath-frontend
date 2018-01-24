@@ -8,7 +8,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
 import { reduxForm, reset, Field } from 'redux-form';
 import polyglot from '../../i18n';
 import InputField from '../../common/form/InputField';
@@ -24,7 +23,6 @@ class CreateLearningPath extends React.Component {
     const { submitting, handleSubmit, valid } = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        <Helmet title={polyglot.t('htmlTitles.createLearningPath')} />
         <h1>{polyglot.t('createLearningPath.createNew')}</h1>
         <div>
           <Field

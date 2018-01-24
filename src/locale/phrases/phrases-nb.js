@@ -21,7 +21,6 @@ const phrases = {
     editLearningPath: 'Rediger læringssti',
     createLearningPath: 'Opprett læringssti',
     editLearningPathStep: 'Rediger læringssteg',
-    createLearningPathStep: 'Opprett læringssteg',
     sortLearningPathSteps: 'Sorter eller slett læringssteg',
   },
   searchForm: {

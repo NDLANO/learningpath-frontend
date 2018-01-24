@@ -18,7 +18,6 @@ const phrases = {
     forbidden: 'No access',
     notFound: 'Not found',
     editLearningPath: 'Edit learning path',
-    createLearningPath: 'Create learning path',
     editLearningPathStep: 'Edit learning path step',
     createLearningPathStep: 'Create learning path step',
     sortLearningPathSteps: 'Sort or delete learning path steps',
