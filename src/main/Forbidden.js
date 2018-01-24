@@ -14,7 +14,7 @@ import polyglot from '../i18n';
 export default function Forbidden() {
   return (
     <div className="status-response_container">
-      <Helmet title={polyglot.t('htmlStatus.forbidden.title')} />
+      <Helmet title={polyglot.t('htmlTitles.forbidden')} />
       <h2>403: {polyglot.t('htmlStatus.forbidden.description')}</h2>
       <Link to="/" className="cta-link--primary">
         {polyglot.t('htmlStatus.backToFrontpage')}

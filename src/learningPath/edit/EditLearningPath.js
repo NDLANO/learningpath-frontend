@@ -81,7 +81,7 @@ class EditLearningPath extends Component {
 
     return (
       <div className="two-column_content">
-        <Helmet title={polyglot.t('editPage.title')} />
+        <Helmet title={polyglot.t('htmlTitles.editLearningPath')} />
         <LearningPathForm
           learningPath={learningPath}
           tagOptions={tags}

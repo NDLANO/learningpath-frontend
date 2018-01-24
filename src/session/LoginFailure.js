@@ -15,7 +15,7 @@ import LabeledIcon from '../common/LabeledIcon';
 export default function LoginFailure() {
   return (
     <div className="one-column one-column--narrow one-column--text-centered">
-      <Helmet title={polyglot.t('loginFailure.title')} />
+      <Helmet title={polyglot.t('htmlTitles.loginFailure')} />
       <p>{polyglot.t('loginFailure.errorMessage')}</p>
       <Link className="cta-link--primary cta-link--underline" to="/login">
         <LabeledIcon.Exit labelText={polyglot.t('loginFailure.loginLink')} />

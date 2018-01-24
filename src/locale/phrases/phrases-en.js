@@ -7,8 +7,21 @@
  */
 
 const phrases = {
-  learningPathSearch: {
-    title: 'Search',
+  htmlTitles: {
+    welcomePage: 'Frontpage',
+    learningPathSearch: 'Search',
+    sessionInitializer: 'Logged in',
+    loginFailure: 'Login failed',
+    logoutSession: 'Logout',
+    loginProviders: 'Log in',
+    myPage: 'My page',
+    forbidden: 'No access',
+    notFound: 'Not found',
+    editLearningPath: 'Edit learning path',
+    createLearningPath: 'Create learning path',
+    editLearningPathStep: 'Edit learning path step',
+    createLearningPathStep: 'Create learning path step',
+    sortLearningPathSteps: 'Sort or delete learning path steps',
   },
   searchForm: {
     placeholder: 'Search learning paths',
@@ -25,16 +38,11 @@ const phrases = {
     },
   },
   loginFailure: {
-    title: 'Login failed',
     errorMessage: 'Sorry. Login failed.',
     loginLink: 'Log in',
   },
   loginProviders: {
-    title: 'Log in',
     description: 'Log in with',
-  },
-  sessionInitializer: {
-    title: 'Logged in',
   },
   logoutSession: {
     title: 'Logout',
@@ -46,7 +54,6 @@ const phrases = {
     altText: 'The Norwegian Digital Learning Arena',
   },
   myPage: {
-    title: 'My page',
     order: {
       title: 'Alphabetical',
       newest: 'Newest',
@@ -79,7 +86,6 @@ const phrases = {
     errorMessage: 'This page requires you to be logged in.',
   },
   welcomePage: {
-    title: 'Frontpage',
     placeholder: 'Search for learning paths',
     title1: 'Learning paths',
     title2: 'The Norwegian Digital Learning Arena',
@@ -132,7 +138,6 @@ const phrases = {
     },
   },
   editPage: {
-    title: 'Edit learning path',
     learningpathShortDescriptionTitle: 'Introduction',
     savePathBtn: 'Save',
     addStepBtn: 'Add new learning step',
@@ -148,8 +153,6 @@ const phrases = {
     publish: 'Publish',
   },
   editPathStep: {
-    editTitle: 'Edit learning path step',
-    createTitle: 'Create learning path step',
     urlLabel: 'Paste link (URL) from ndla.no or youtube.com',
     mediatype: {
       introduction: 'Introduction',
@@ -199,7 +202,6 @@ const phrases = {
     minutes: '%{smart_count} minute |||| %{smart_count} minutes',
   },
   createLearningPath: {
-    pageTitle: 'Create learning path',
     createdMsg: 'Saved OK',
     createNew: 'Create new learning path',
     title: 'Title',
@@ -242,9 +244,6 @@ const phrases = {
   },
   updateLearningPathStatus: {
     updateStatusMsg: 'Status updated',
-  },
-  htmlTitles: {
-    sortLearningPathSteps: 'Sort or delete learning path steps',
   },
   validation: {
     required: 'The field is required.',
@@ -304,11 +303,9 @@ const phrases = {
   },
   htmlStatus: {
     notFound: {
-      title: 'Not found',
       description: 'The page cannot be found',
     },
     forbidden: {
-      title: 'No access',
       description: 'You do not have access to this page',
     },
     backToFrontpage: 'Go to frontpage',

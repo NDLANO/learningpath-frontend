@@ -22,7 +22,7 @@ export class SessionInitializer extends React.Component {
   render() {
     return (
       <div>
-        <Helmet title={polyglot.t('sessionInitializer.title')} />
+        <Helmet title={polyglot.t('htmlTitles.sessionInitializer')} />
       </div>
     );
   }

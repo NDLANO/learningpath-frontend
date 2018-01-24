@@ -88,7 +88,7 @@ class LearningPathSearch extends React.Component {
 
     return (
       <Wrapper>
-        <Helmet title={polyglot.t('learningPathSearch.title')} />
+        <Helmet title={polyglot.t('htmlTitles.learningPathSearch')} />
         <OneColumn className={'one-colum--white-bg'}>
           <Masthead />
           <div className="page-header">

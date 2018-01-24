@@ -152,7 +152,8 @@ export class LearningPath extends Component {
         <Helmet title={learningPath.title || ''} />
         <Masthead
           changeStatusButton={changeStatusButton}
-          sortableTableOfContentButton={sortableTableOfContentButton}>
+          sortableTableOfContentButton={sortableTableOfContentButton}
+        >
           <div className="masthead_button masthead_button--left">
             <Icon.MoreVert />
             <span>Læringssti</span>
@@ -160,7 +161,8 @@ export class LearningPath extends Component {
         </Masthead>
         <Lightbox
           display={this.state.displayCopyPath}
-          onClose={onLightboxClose}>
+          onClose={onLightboxClose}
+        >
           <CopyLearningPath
             learningPath={learningPath}
             onClose={onLightboxClose}

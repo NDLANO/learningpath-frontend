@@ -83,8 +83,8 @@ class EditLearningPathStep extends Component {
         <Helmet
           title={
             step.id
-              ? polyglot.t('editPathStep.editTitle')
-              : polyglot.t('editPathStep.createTitle')
+              ? polyglot.t('htmlTitles.editLearningPathStep')
+              : polyglot.t('htmlTitles.createLearningPathStep')
           }
         />
         <LearningPathStepForm

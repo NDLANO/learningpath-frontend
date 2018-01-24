@@ -24,7 +24,7 @@ class CreateLearningPath extends React.Component {
     const { submitting, handleSubmit, valid } = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        <Helmet title={polyglot.t('createLearningPath.pageTitle')} />
+        <Helmet title={polyglot.t('htmlTitles.createLearningPath')} />
         <h1>{polyglot.t('createLearningPath.createNew')}</h1>
         <div>
           <Field
@@ -64,7 +64,8 @@ class CreateLearningPath extends React.Component {
         <button
           className="button cta-link cta-link--block"
           disabled={submitting || !valid}
-          type="submit">
+          type="submit"
+        >
           {polyglot.t('createLearningPath.createButton')}
         </button>
       </form>

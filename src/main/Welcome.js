@@ -41,7 +41,7 @@ class Welcome extends Component {
   render() {
     return (
       <Wrapper>
-        <Helmet title={polyglot.t('welcomePage.title')} />
+        <Helmet title={polyglot.t('htmlTitles.welcomePage')} />
         <OneColumn>
           <div className="frontpage-masthead">
             <Masthead logo={<Logo beta cssModifier="on-dark" />} />
@@ -52,7 +52,8 @@ class Welcome extends Component {
 
             <form
               onSubmit={this.handleSubmit}
-              className="search-form search-form--on-dark">
+              className="search-form search-form--on-dark"
+            >
               <input
                 type="text"
                 name="query"
@@ -67,12 +68,14 @@ class Welcome extends Component {
 
             <a
               href="#feature"
-              className="hero_link cta-link cta-link--negative">
+              className="hero_link cta-link cta-link--negative"
+            >
               {polyglot.t('welcomePage.explanationBtn')}
             </a>
             <a
               href="/minside"
-              className="hero_link cta-link cta-link-secondary cta-link--secondary-negative">
+              className="hero_link cta-link cta-link-secondary cta-link--secondary-negative"
+            >
               {polyglot.t('welcomePage.newBtn')} »
             </a>
           </div>
