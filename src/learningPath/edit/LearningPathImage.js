@@ -15,6 +15,7 @@ import ImageSearch from '../../imageSearch/ImageSearch';
 import Lightbox from '../../common/Lightbox';
 import polyglot from '../../i18n';
 import Button from '../../common/buttons/Button';
+import { getSavedImage } from '../../imageSearch/imageSelectors';
 
 const ChoseImage = props => {
   const { onImageLightboxOpen } = props;
@@ -35,10 +36,10 @@ ChoseImage.propTypes = {
 
 const ChangeImage = props => {
   const { onImageLightboxOpen, savedImage } = props;
+
   const authors = savedImage.copyright.creators
     .concat(savedImage.copyright.rightsholders)
     .concat(savedImage.copyright.processors);
-
   return (
     <div>
       <div className="image-preview_image">
@@ -109,7 +110,7 @@ class LearningPathImage extends React.Component {
             className="label--medium-bold label--medium">
             {polyglot.t('learningPath.image.title')}
           </label>
-          {savedImage && !isEmpty(savedImage) ? (
+          {savedImage && savedImage.id && !isEmpty(savedImage) ? (
             <ChangeImage
               onImageLightboxOpen={onImageLightboxOpen}
               savedImage={savedImage}
@@ -148,7 +149,7 @@ LearningPathImage.propTypes = {
 
 const mapStateToProps = state =>
   Object.assign({}, state, {
-    savedImage: state.imageSearch ? state.imageSearch.savedImage : undefined,
+    savedImage: state.imageSearch ? getSavedImage(state) : undefined,
   });
 
 export default connect(mapStateToProps)(LearningPathImage);
