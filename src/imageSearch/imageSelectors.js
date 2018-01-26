@@ -24,6 +24,14 @@ export const getSelectedImage = createSelector(
   }),
 );
 
+export const getSavedImage = createSelector([getImageSearch], imageSearch => ({
+  ...imageSearch.savedImage,
+  title: convertFieldWithFallback(imageSearch.savedImage, 'title', ''),
+  tags: convertFieldWithFallback(imageSearch.savedImage, 'tags', []),
+  alttext: convertFieldWithFallback(imageSearch.savedImage, 'alttext', ''),
+  caption: convertFieldWithFallback(imageSearch.savedImage, 'caption', ''),
+}));
+
 export const getImageSearchQuery = state =>
   get(state, 'imageSearch.imageSearchQuery', {
     query: '',
