@@ -38,15 +38,13 @@ export class LogoutSession extends React.Component {
         <Helmet title={polyglot.t('htmlTitles.logoutSession')} />
         <button
           className="button--primary-outline cta-link--block"
-          onClick={() => this.handleLogoutClick()}
-        >
+          onClick={() => this.handleLogoutClick()}>
           {polyglot.t('logoutSession.logutLearningpathSite')}
         </button>
         <strong>{polyglot.t('logoutSession.or')}</strong>
         <button
           className="button--primary-outline cta-link--block"
-          onClick={() => this.handleLogoutClick(true)}
-        >
+          onClick={() => this.handleLogoutClick(true)}>
           {polyglot.t('logoutSession.logoutWholeSession')}
         </button>
       </div>

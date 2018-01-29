@@ -74,8 +74,7 @@ class LearningPathStep extends React.Component {
       <div className={oembedContent ? 'learning-step--header' : null}>
         <LearningPathStepPrevNext
           currentStepId={learningPathStep.id}
-          lang={lang}
-        >
+          lang={lang}>
           <div className="two-column_content--wide">
             <Helmet title={this.constructor.getDocumentTitle(this.props)} />
             <LearningPathStepInformation

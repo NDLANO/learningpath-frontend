@@ -62,8 +62,7 @@ class CreateLearningPath extends React.Component {
         <button
           className="button cta-link cta-link--block"
           disabled={submitting || !valid}
-          type="submit"
-        >
+          type="submit">
           {polyglot.t('createLearningPath.createButton')}
         </button>
       </form>

@@ -131,8 +131,7 @@ export class MyPage extends React.Component {
       <select
         className="select--white-border"
         value={sortKey}
-        onChange={evt => setSortKey(evt.target.value)}
-      >
+        onChange={evt => setSortKey(evt.target.value)}>
         <option value="title">{polyglot.t('myPage.order.title')}</option>
         <option value="-lastUpdated">
           {polyglot.t('myPage.order.newest')}
@@ -176,14 +175,12 @@ export class MyPage extends React.Component {
           <div className="tiles">{items}</div>
           <button
             className="cta-link new-learningpath-button"
-            onClick={this.onCreateLearningPathClick}
-          >
+            onClick={this.onCreateLearningPathClick}>
             <LabeledIcon.Add labelText={polyglot.t('myPage.newBtn')} />
           </button>
           <Lightbox
             display={this.state.displayCreatePath}
-            onClose={onLightboxClose}
-          >
+            onClose={onLightboxClose}>
             <CreateLearningPath onSubmit={onCreateLearningPathSubmit} />
           </Lightbox>
         </OneColumn>
