@@ -66,6 +66,21 @@ window.errorReporter = ErrorReporter.getInstance({
 });
 TokenStatusHandler.getInstance({ store });
 
+window.historyTracker = [];
+window.historyTracker.push({
+  url: `${location.pathname}${location.search}${location.hash}`,
+  tracked: false,
+});
+browserHistory.listen(location => {
+  console.log(
+    `The current URL is ${location.pathname}${location.search}${location.hash}`,
+  );
+  window.historyTracker.push({
+    url: `${location.pathname}${location.search}${location.hash}`,
+    tracked: false,
+  });
+});
+
 ReactDOM.hydrate(
   <Provider store={store} locale={locale}>
     <Router history={browserHistory}>

@@ -20,6 +20,7 @@ import PrivateRoute from '../main/PrivateRoute';
 import CopyLearningPath from '../learningPath/new/CopyLearningPath';
 import Masthead from '../common/Masthead';
 import Icon from '../common/Icon';
+import withTracker from '../common/withTracker';
 import SortLearningStepsButton from './sidebar/SortLearningStepsButton';
 import LearningPathSummary from './sidebar/LearningPathSummary';
 import { fetchLearningPath, copyLearningPath } from './learningPathActions';
@@ -63,6 +64,21 @@ export class LearningPath extends Component {
     return localFetchLearningPath(pathId, false);
   }
 
+  static getDocumentTitle(props) {
+    const { learningPath } = props;
+    return learningPath && learningPath.title ? learningPath.title : '';
+  }
+
+  static willTrackPageView(trackPageView, currentProps) {
+    if (
+      currentProps.learningPath.id &&
+      currentProps.learningPath.id.toString() ===
+        currentProps.match.params.pathId
+    ) {
+      trackPageView(currentProps);
+    }
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -72,9 +88,11 @@ export class LearningPath extends Component {
     this.onCopyLearningPathClick = this.onCopyLearningPathClick.bind(this);
     this.togglePinterest = this.togglePinterest.bind(this);
   }
+
   componentDidMount() {
     LearningPath.fetchData(this.props);
   }
+
   onCopyLearningPathClick() {
     this.setState({
       displayCopyPath: true,
@@ -149,7 +167,7 @@ export class LearningPath extends Component {
     };
     return (
       <div className="wrapper">
-        <Helmet title={learningPath.title || ''} />
+        <Helmet title={this.constructor.getDocumentTitle(this.props)} />
         <Masthead
           changeStatusButton={changeStatusButton}
           sortableTableOfContentButton={sortableTableOfContentButton}
@@ -245,5 +263,7 @@ const mapStateToProps = (state, ownProps) =>
   });
 
 export default withRouter(
-  connect(mapStateToProps, LearningPath.mapDispatchToProps)(LearningPath),
+  connect(mapStateToProps, LearningPath.mapDispatchToProps)(
+    withTracker(LearningPath),
+  ),
 );

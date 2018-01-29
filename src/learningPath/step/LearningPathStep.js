@@ -15,6 +15,7 @@ import { fetchLearningPathStep } from './learningPathStepActions';
 import LearningPathStepInformation from './LearningPathStepInformation';
 import LearningPathStepPrevNext from './LearningPathStepPrevNext';
 import { getLearningPathStep } from './learningPathStepSelectors';
+import withTracker from '../../common/withTracker';
 
 class LearningPathStep extends React.Component {
   static mapDispatchToProps = {
@@ -27,6 +28,24 @@ class LearningPathStep extends React.Component {
       match: { params: { pathId, stepId } },
     } = props;
     return localFetchLearningPathStep(pathId, stepId);
+  }
+
+  static getDocumentTitle(props) {
+    const { learningPathStep } = props;
+    return learningPathStep && learningPathStep.title
+      ? learningPathStep.title
+      : '';
+  }
+
+  static willTrackPageView(trackPageView, currentProps) {
+    if (
+      currentProps.learningPathStep &&
+      currentProps.learningPathStep.id &&
+      currentProps.learningPathStep.id.toString() ===
+        currentProps.match.params.stepId
+    ) {
+      trackPageView(currentProps);
+    }
   }
 
   componentWillMount() {
@@ -55,9 +74,10 @@ class LearningPathStep extends React.Component {
       <div className={oembedContent ? 'learning-step--header' : null}>
         <LearningPathStepPrevNext
           currentStepId={learningPathStep.id}
-          lang={lang}>
+          lang={lang}
+        >
           <div className="two-column_content--wide">
-            <Helmet title={learningPathStep.title || ''} />
+            <Helmet title={this.constructor.getDocumentTitle(this.props)} />
             <LearningPathStepInformation
               learningPathStep={learningPathStep}
               stepTitle={learningPathStep.title}
@@ -93,5 +113,5 @@ const mapStateToProps = state =>
   });
 
 export default connect(mapStateToProps, LearningPathStep.mapDispatchToProps)(
-  LearningPathStep,
+  withTracker(LearningPathStep),
 );
