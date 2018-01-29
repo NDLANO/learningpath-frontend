@@ -8,6 +8,7 @@
 
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
+import { hasCurrentPageBeenTracked, sendPageView } from './tracker';
 
 const mountedInstances = [];
 
@@ -15,18 +16,19 @@ const withTracker = WrappedComponent => {
   const Tracker = class extends Component {
     static trackPageView(props) {
       const lastMountedInstance = mountedInstances[mountedInstances.length - 1];
-      const url = window.historyTracker[window.historyTracker.length - 1];
 
       if (
-        url === undefined ||
-        lastMountedInstance !== WrappedComponent ||
-        url.tracked === true
+        hasCurrentPageBeenTracked() ||
+        lastMountedInstance !== WrappedComponent
       ) {
         return;
       }
-      url.tracked = true;
+
       const title = WrappedComponent.getDocumentTitle(props);
-      console.log(`track ${title} - ${url.url}`);
+      const dimensions = WrappedComponent.getDimensions
+        ? WrappedComponent.getDimensions(props)
+        : undefined;
+      sendPageView({ title, dimensions });
     }
 
     componentWillMount() {

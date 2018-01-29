@@ -18,6 +18,7 @@ import { configureLocale, isValidLocale } from './locale/configureLocale';
 import configureStore from './configureStore';
 import App from './main/App';
 import { getTokenExpireAt } from './util/jwtHelper';
+import { configureTracker } from './common/tracker';
 
 function generateBasename(path) {
   if (isValidLocale(path)) {
@@ -66,19 +67,10 @@ window.errorReporter = ErrorReporter.getInstance({
 });
 TokenStatusHandler.getInstance({ store });
 
-window.historyTracker = [];
-window.historyTracker.push({
-  url: `${location.pathname}${location.search}${location.hash}`,
-  tracked: false,
-});
-browserHistory.listen(location => {
-  console.log(
-    `The current URL is ${location.pathname}${location.search}${location.hash}`,
-  );
-  window.historyTracker.push({
-    url: `${location.pathname}${location.search}${location.hash}`,
-    tracked: false,
-  });
+configureTracker({
+  listen: browserHistory.listen,
+  gaTrackingID: window.config.gaTrackingID,
+  debug: true,
 });
 
 ReactDOM.hydrate(
