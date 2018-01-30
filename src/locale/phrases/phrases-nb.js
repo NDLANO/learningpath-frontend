@@ -6,23 +6,26 @@
  *
  */
 
+const titleTemplate = ' - Læringssti NDLA';
+
 const phrases = {
   htmlTitles: {
     // key equals component where title is used
-    welcomePage: 'Forsiden - Læringssti NDLA',
-    learningPathSearch: 'Søk - Læringssti NDLA',
-    sessionInitializer: 'Logget inn - Læringssti NDLA',
-    loginFailure: 'Innlogging feilet - Læringssti NDLA',
-    logoutSession: 'Logg ut - Læringssti NDLA',
-    loginProviders: 'Logg inn - Læringssti NDLA',
-    myPage: 'Min side - Læringssti NDLA',
-    forbidden: 'Ikke tilgang - Læringssti NDLA',
-    notFound: 'Siden finnes ikke - Læringssti NDLA',
-    editLearningPath: 'Rediger læringssti - Læringssti NDLA',
-    createLearningPath: 'Opprett læringssti - Læringssti NDLA',
-    editLearningPathStep: 'Rediger læringssteg - Læringssti NDLA',
-    createLearningPathStep: 'Opprett læringssteg - Læringssti NDLA',
-    sortLearningPathSteps: 'Sorter eller slett læringssteg - Læringssti NDLA',
+    titleTemplate,
+    welcomePage: `Forsiden${titleTemplate}`,
+    learningPathSearch: `Søk${titleTemplate}`,
+    sessionInitializer: `Logget inn${titleTemplate}`,
+    loginFailure: `Innlogging feilet${titleTemplate}`,
+    logoutSession: `Logg ut${titleTemplate}`,
+    loginProviders: `Logg inn${titleTemplate}`,
+    myPage: `Min side${titleTemplate}`,
+    forbidden: `Ikke tilgang${titleTemplate}`,
+    notFound: `Siden finnes ikke${titleTemplate}`,
+    editLearningPath: `Rediger læringssti${titleTemplate}`,
+    createLearningPath: `Opprett læringssti${titleTemplate}`,
+    editLearningPathStep: `Rediger læringssteg${titleTemplate}`,
+    createLearningPathStep: `Opprett læringssteg${titleTemplate}`,
+    sortLearningPathSteps: `Sorter eller slett læringssteg${titleTemplate}`,
   },
   searchForm: {
     placeholder: 'Søk etter læringsstier',

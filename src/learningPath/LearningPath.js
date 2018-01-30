@@ -35,6 +35,7 @@ import LearningPathToCButtons from './sidebar/LearningPathToCButtons';
 import AddLearningPathStepButton from './sidebar/AddLearningPathStepButton';
 import PinterestLightboxButton from '../pinterest/PinterestLightboxButton';
 import PinterestLightbox from '../pinterest/PinterestLightbox';
+import polyglot from '../i18n';
 
 export class LearningPath extends Component {
   static mapDispatchToProps = {
@@ -66,7 +67,7 @@ export class LearningPath extends Component {
 
   static getDocumentTitle(props) {
     const { learningPath } = props;
-    return learningPath && learningPath.title ? learningPath.title : '';
+    return learningPath.title + polyglot.t('htmlTitles.titleTemplate');
   }
 
   static willTrackPageView(trackPageView, currentProps) {

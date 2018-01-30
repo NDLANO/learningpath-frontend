@@ -16,6 +16,7 @@ import LearningPathStepInformation from './LearningPathStepInformation';
 import LearningPathStepPrevNext from './LearningPathStepPrevNext';
 import { getLearningPathStep } from './learningPathStepSelectors';
 import withTracker from '../../common/withTracker';
+import polyglot from '../../i18n';
 
 class LearningPathStep extends React.Component {
   static mapDispatchToProps = {
@@ -32,9 +33,7 @@ class LearningPathStep extends React.Component {
 
   static getDocumentTitle(props) {
     const { learningPathStep } = props;
-    return learningPathStep && learningPathStep.title
-      ? learningPathStep.title
-      : '';
+    return learningPathStep.title + polyglot.t('htmlTitles.titleTemplate');
   }
 
   static willTrackPageView(trackPageView, currentProps) {

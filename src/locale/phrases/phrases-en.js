@@ -6,22 +6,24 @@
  *
  */
 
+const titleTemplate = ' - Læringssti NDLA';
+
 const phrases = {
   htmlTitles: {
-    welcomePage: 'Frontpage - Læringssti NDLA',
-    learningPathSearch: 'Search - Læringssti NDLA',
-    sessionInitializer: 'Logged in - Læringssti NDLA',
-    loginFailure: 'Login failed - Læringssti NDLA',
-    logoutSession: 'Logout - Læringssti NDLA',
-    loginProviders: 'Log in - Læringssti NDLA',
-    myPage: 'My page - Læringssti NDLA',
-    forbidden: 'No access - Læringssti NDLA',
-    notFound: 'Not found - Læringssti NDLA',
-    editLearningPath: 'Edit learning path - Læringssti NDLA',
-    editLearningPathStep: 'Edit learning path step - Læringssti NDLA',
-    createLearningPathStep: 'Create learning path step - Læringssti NDLA',
-    sortLearningPathSteps:
-      'Sort or delete learning path steps - Læringssti NDLA',
+    titleTemplate,
+    welcomePage: `Frontpage${titleTemplate}`,
+    learningPathSearch: `Search${titleTemplate}`,
+    sessionInitializer: `Logged in${titleTemplate}`,
+    loginFailure: `Login failed${titleTemplate}`,
+    logoutSession: `Logout${titleTemplate}`,
+    loginProviders: `Log in${titleTemplate}`,
+    myPage: `My page${titleTemplate}`,
+    forbidden: `No access${titleTemplate}`,
+    notFound: `Not found${titleTemplate}`,
+    editLearningPath: `Edit learning path${titleTemplate}`,
+    editLearningPathStep: `Edit learning path step${titleTemplate}`,
+    createLearningPathStep: `Create learning path step${titleTemplate}`,
+    sortLearningPathSteps: `Sort or delete learning path steps${titleTemplate}`,
   },
   searchForm: {
     placeholder: 'Search learning paths',
