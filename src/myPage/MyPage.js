@@ -8,7 +8,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
@@ -31,6 +30,7 @@ import {
   setMyLearningPathsSortOrder,
   fetchMyLearningPaths,
 } from './myPageActions';
+import HelmetWithTracker from '../common/HelmetWithTracker';
 import { getLearningPaths, getSortKey } from './myPageSelectors';
 
 export class MyPage extends React.Component {
@@ -89,7 +89,7 @@ export class MyPage extends React.Component {
 
       return (
         <div key={lp.id} className="tile">
-          <Helmet title={polyglot.t('htmlTitles.myPage')} />
+          <HelmetWithTracker title={polyglot.t('htmlTitles.myPage')} />
           <div className="tile_hd">
             <div className="tile_date">{lastUpdated}</div>
             <div className="tile_context-menu">

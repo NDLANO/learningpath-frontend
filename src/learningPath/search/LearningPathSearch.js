@@ -9,12 +9,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import defined from 'defined';
-import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 import { routerActions } from 'react-router-redux';
 import upperFirst from 'lodash/upperFirst';
-import withTracker from '../../common/withTracker';
+import HelmetWithTracker from '../../common/HelmetWithTracker';
 import polyglot from '../../i18n';
 import LinkPager from '../../common/pager/LinkPager';
 import SearchForm from './LearningPathSearchForm';
@@ -40,10 +39,6 @@ class LearningPathSearch extends React.Component {
       ? query
       : { ...query, sort: '-lastUpdated' };
     return localSearchLearningPaths(queryWithSort);
-  }
-
-  static getDocumentTitle() {
-    return polyglot.t('htmlTitles.learningPathSearch');
   }
 
   componentWillMount() {
@@ -94,7 +89,9 @@ class LearningPathSearch extends React.Component {
 
     return (
       <Wrapper>
-        <Helmet title={this.constructor.getDocumentTitle()} />
+        <HelmetWithTracker
+          title={polyglot.t('htmlTitles.learningPathSearch')}
+        />
         <OneColumn className={'one-colum--white-bg'}>
           <Masthead />
           <div className="page-header">
@@ -156,8 +153,6 @@ const mapStateToProps = (state, props) => {
   );
 };
 
-export default withTracker(
-  connect(mapStateToProps, LearningPathSearch.mapDispatchToProps)(
-    LearningPathSearch,
-  ),
+export default connect(mapStateToProps, LearningPathSearch.mapDispatchToProps)(
+  LearningPathSearch,
 );

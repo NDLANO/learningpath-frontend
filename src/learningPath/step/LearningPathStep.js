@@ -38,11 +38,11 @@ class LearningPathStep extends React.Component {
   }
 
   static willTrackPageView(trackPageView, currentProps) {
+    const { learningPathStep, match } = currentProps;
     if (
-      currentProps.learningPathStep &&
-      currentProps.learningPathStep.id &&
-      currentProps.learningPathStep.id.toString() ===
-        currentProps.match.params.stepId
+      learningPathStep &&
+      learningPathStep.id &&
+      learningPathStep.id.toString() === match.params.stepId
     ) {
       trackPageView(currentProps);
     }

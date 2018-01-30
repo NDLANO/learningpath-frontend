@@ -8,7 +8,6 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
 import { arrayMove } from 'react-sortable-hoc';
 import { connect } from 'react-redux';
 import SortableLearningStepList from './SortableLearningStepList';
@@ -19,6 +18,7 @@ import {
   sortLearningPathSteps,
 } from '../learningPathStepActions';
 import polyglot from '../../../i18n';
+import HelmetWithTracker from '../../../common/HelmetWithTracker';
 
 class SortLearningPathSteps extends Component {
   onSortEnd = indexes => {
@@ -57,7 +57,9 @@ class SortLearningPathSteps extends Component {
         ref={contentDiv => {
           this.contentDiv = contentDiv;
         }}>
-        <Helmet title={polyglot.t('htmlTitles.sortLearningPathSteps')} />
+        <HelmetWithTracker
+          title={polyglot.t('htmlTitles.sortLearningPathSteps')}
+        />
         {learningPath && learningPath.learningsteps && learningPath.id ? (
           <SortableLearningStepList
             learningPathId={learningPath.id}

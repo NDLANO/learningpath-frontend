@@ -8,19 +8,20 @@
 
 const phrases = {
   htmlTitles: {
-    welcomePage: 'Frontpage',
-    learningPathSearch: 'Search',
-    sessionInitializer: 'Logged in',
-    loginFailure: 'Login failed',
-    logoutSession: 'Logout',
-    loginProviders: 'Log in',
-    myPage: 'My page',
-    forbidden: 'No access',
-    notFound: 'Not found',
-    editLearningPath: 'Edit learning path',
-    editLearningPathStep: 'Edit learning path step',
-    createLearningPathStep: 'Create learning path step',
-    sortLearningPathSteps: 'Sort or delete learning path steps',
+    welcomePage: 'Frontpage - Læringssti NDLA',
+    learningPathSearch: 'Search - Læringssti NDLA',
+    sessionInitializer: 'Logged in - Læringssti NDLA',
+    loginFailure: 'Login failed - Læringssti NDLA',
+    logoutSession: 'Logout - Læringssti NDLA',
+    loginProviders: 'Log in - Læringssti NDLA',
+    myPage: 'My page - Læringssti NDLA',
+    forbidden: 'No access - Læringssti NDLA',
+    notFound: 'Not found - Læringssti NDLA',
+    editLearningPath: 'Edit learning path - Læringssti NDLA',
+    editLearningPathStep: 'Edit learning path step - Læringssti NDLA',
+    createLearningPathStep: 'Create learning path step - Læringssti NDLA',
+    sortLearningPathSteps:
+      'Sort or delete learning path steps - Læringssti NDLA',
   },
   searchForm: {
     placeholder: 'Search learning paths',

@@ -132,7 +132,8 @@
     "serialize-javascript": "1.4.0",
     "source-map-support": "^0.5.0",
     "svg4everybody": "^2.1.9",
-    "tracekit": "^0.4.5"
+    "tracekit": "^0.4.5",
+    "warning": "3.0.0"
   },
   "repository": {
     "type": "git",

@@ -70,10 +70,11 @@ export class LearningPath extends Component {
   }
 
   static willTrackPageView(trackPageView, currentProps) {
+    const { learningPath, match: { url, params: { pathId } } } = currentProps;
     if (
-      currentProps.learningPath.id &&
-      currentProps.learningPath.id.toString() ===
-        currentProps.match.params.pathId
+      learningPath.id &&
+      learningPath.id.toString() === pathId &&
+      !url.includes('first-step') // Skip first-step which is just a redirect
     ) {
       trackPageView(currentProps);
     }
