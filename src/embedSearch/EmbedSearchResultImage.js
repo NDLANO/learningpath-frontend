@@ -8,25 +8,15 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import requireAssets from '../util/requireAssets';
 
-const EmbedSearchResultImage = ({ pagemap, title }) => {
-  const imageSource = () => {
-    if (pagemap && pagemap.cse_thumbnail && pagemap.cse_thumbnail.length > 0) {
-      return pagemap.cse_thumbnail[0].src;
-    }
-    return `/assets/${requireAssets['placeholder.png']}`;
-  };
-
-  return (
+const EmbedSearchResultImage = ({ thumbnail, title }) => (
     <div className="embed-search_result-img">
-      <img role="presentation" src={imageSource()} alt={title} />
+      <img role="presentation" src={thumbnail} alt={title} />
     </div>
   );
-};
 
 EmbedSearchResultImage.propTypes = {
-  pagemap: PropTypes.object.isRequired,
+  thumbnail: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 };
 

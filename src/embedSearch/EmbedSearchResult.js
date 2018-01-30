@@ -14,13 +14,13 @@ import polyglot from '../i18n';
 
 const EmbedSearchResult = ({ item, onPreviewClick, addEmbedResult }) => (
   <div className="embed-search_result">
-    <EmbedSearchResultImage pagemap={item.pagemap} title={item.title} />
+    <EmbedSearchResultImage thumbnail={item.thumbnail} title={item.title} />
     <div className="embed-search_result-information">
       <h3 className="embed-search_result-title">{item.title}</h3>
       <a href={item.link} target="_blank" rel="noopener noreferrer">
         {item.link}
       </a>
-      <p>{item.snippet}</p>
+      <p>{item.description}</p>
       <div>
         <button
           onClick={evt => addEmbedResult(evt, item.link)}

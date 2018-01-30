@@ -10,7 +10,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import get from 'lodash/get';
 import EmbedSearchForm from '../embedSearch/EmbedSearchForm';
 import * as actions from '../embedSearch/embedSearchActions';
 import EmbedSearchResults from '../embedSearch/EmbedSearchResults';
@@ -21,6 +20,8 @@ import {
   getOembedContentFromState,
 } from '../embedSearch/embedSearchSelectors';
 import polyglot from '../i18n';
+import { fetchArticleSearch} from './articleActions';
+import { getArticleResultFromState } from './articleSelectors';
 
 const searchType = 'ndla';
 
@@ -39,7 +40,7 @@ class NdlaEmbedSearch extends React.Component {
     this.onImageLightboxClose = this.onImageLightboxClose.bind(this);
   }
   componentWillMount() {
-    this.props.localFetchEmbedSearch(this.props.query, 'ndla');
+    this.props.articleSearch(this.props.query, 'ndla');
   }
 
   onImageLightboxClose() {
@@ -63,34 +64,35 @@ class NdlaEmbedSearch extends React.Component {
 
   render() {
     const {
-      result,
+      results,
       localFetchEmbedSearch,
       oembedPreview,
       query,
       display,
+      articleSearch,
     } = this.props;
     const containerClass = {
       'embed-search_container': true,
       'embed-search_container--active': display,
     };
 
-    const resultItems = get(result, 'items', []);
-
     return (
       <div>
         <div className={classNames(containerClass)}>
           <h4>{polyglot.t('embedSearch.form.ndlaTitle')}</h4>
+          <p>hei</p>
           <EmbedSearchForm
             query={query}
             handleTextQueryChange={this.handleTextQueryChange}
-            localFetchEmbedSearch={localFetchEmbedSearch}
+            localFetchEmbedSearch={articleSearch}
             textQuery={this.state.textQuery}
+            type="ndla"
           />
           <EmbedSearchResults
-            items={resultItems}
+            items={results}
             onPreviewClick={this.previewOembed}
             addEmbedResult={this.addEmbedResult}
-            pagerAction={localFetchEmbedSearch}
+            pagerAction={articleSearch}
             query={query}
           />
           <EmbedSearchPreview
@@ -106,7 +108,7 @@ class NdlaEmbedSearch extends React.Component {
 
 NdlaEmbedSearch.propTypes = {
   localFetchEmbedSearch: PropTypes.func.isRequired,
-  result: PropTypes.object.isRequired,
+  results: PropTypes.array.isRequired,
   localFetchOembed: PropTypes.func.isRequired,
   oembedPreview: PropTypes.object,
   removeOembed: PropTypes.func.isRequired,
@@ -122,11 +124,12 @@ const mapDispatchToProps = {
   localFetchOembed: actions.fetchNdlaOembed,
   removeOembed: actions.removeEmbedPreview,
   localChangeEmbedSearchQuery: actions.changeEmbedSearchQuery,
+  articleSearch: fetchArticleSearch,
 };
 
 const mapStateToProps = state =>
   Object.assign({}, state, {
-    result: getEmbedResultFromState(state, searchType),
+    results: getArticleResultFromState(state),
     query: getEmbedQueryFromState(state, searchType),
     oembedPreview: getOembedContentFromState(state, searchType),
   });
