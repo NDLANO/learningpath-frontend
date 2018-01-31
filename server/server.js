@@ -84,6 +84,7 @@ app.use(
                 'https://s.ytimg.com',
                 'https://cdn.auth0.com',
                 'https://tagmanager.google.com',
+                'https://sb.scorecardresearch.com',
               ],
               styleSrc: [
                 "'self'",
@@ -108,6 +109,7 @@ app.use(
                 'https://www.google-analytics.com',
                 'https://stats.g.doubleclick.net',
                 'https://ssl-ndla.tns-cs.net',
+                'https://sb.scorecardresearch.com',
                 'data: https://i.ytimg.com https://pi.tedcdn.com http://*.ndlap3.seria.net https://*.gstatic.com',
               ],
               connectSrc: [
