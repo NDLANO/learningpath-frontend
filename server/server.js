@@ -101,6 +101,7 @@ app.use(
                 'data:',
               ],
               imgSrc: [
+                "'self'",
                 'https://*.hotjar.com',
                 'https://*.zopim.com',
                 'https://*.ndla.no',

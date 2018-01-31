@@ -54,6 +54,7 @@ module.exports = Object.assign(
     ndlaApiUrl: process.env.NDLA_API_URL || apiDomain,
     googleSearchEngineId: process.env.NDLA_GOOGLE_SEARCH_ENGINE_ID,
     googleApiKey: process.env.NDLA_GOOGLE_API_KEY,
+    gaTrackingID: process.env.NDLA_GA_TRACKING_ID,
     googleApiUrl:
       process.env.NDLA_GOOGLE_API_URL || 'https://www.googleapis.com',
     logEnvironment: process.env.NDLA_ENVIRONMENT || 'local',

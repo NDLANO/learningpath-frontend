@@ -23,12 +23,12 @@ const assets =
     : require('../htdocs/assets/assets'); // eslint-disable-line import/no-unresolved
 
 const GoogleTagMangerNoScript = () => {
-  if (config.googleTagMangerId) {
+  if (config.googleTagMangerId && !config.gaTrackingID) {
     return (
       <noscript>
         <iframe
           title="Google Tag Manager"
-          src={`//www.googletagmanager.com/ns.html?id=${
+          src={`https://www.googletagmanager.com/ns.html?id=${
             config.googleTagMangerId
           }`}
           height="0"
@@ -42,13 +42,13 @@ const GoogleTagMangerNoScript = () => {
 };
 
 const GoogleTagMangerScript = () => {
-  if (config.googleTagMangerId) {
+  if (config.googleTagMangerId && !config.gaTrackingID) {
     return (
       <script
         dangerouslySetInnerHTML={{
           __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
         var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;
-        j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})
+        j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})
         (window,document,'script','dataLayer','${config.googleTagMangerId}');`,
         }}
       />
@@ -69,7 +69,7 @@ const HotjarScript = () => {
             r=o.createElement('script');r.async=1;
             r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
             a.appendChild(r);
-          })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');`,
+          })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`,
         }}
       />
     );
@@ -115,12 +115,17 @@ const Html = props => {
         {head.title.toComponent()}
         {head.meta.toComponent()}
         <GoogleTagMangerScript />
+        {config.gaTrackingID && (
+          <script async src="https://www.google-analytics.com/analytics.js" />
+        )}
         <SvgPolyfillScript className={className} />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href={`/assets/${assets['main.css']}`}
-        />
+        {config.isProduction ? (
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href={`/assets/${assets['main.css']}`}
+          />
+        ) : null}
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic,300|Signika:400,600,300,700"

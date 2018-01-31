@@ -70,7 +70,6 @@ TokenStatusHandler.getInstance({ store });
 configureTracker({
   listen: browserHistory.listen,
   gaTrackingID: window.config.gaTrackingID,
-  debug: true,
 });
 
 ReactDOM.hydrate(

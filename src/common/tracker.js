@@ -56,7 +56,7 @@ export const sendPageView = ({ title, dimensions }) => {
       console.info('With dimensions: ', dimensions);
     }
   }
-  // console.log(title);
+
   window.ga('send', {
     hitType: 'pageview',
     page: current.url,
