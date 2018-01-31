@@ -15,12 +15,11 @@ import * as actions from '../embedSearch/embedSearchActions';
 import EmbedSearchResults from '../embedSearch/EmbedSearchResults';
 import EmbedSearchPreview from '../embedSearch/EmbedSearchPreview';
 import {
-  getEmbedResultFromState,
   getEmbedQueryFromState,
   getOembedContentFromState,
 } from '../embedSearch/embedSearchSelectors';
 import polyglot from '../i18n';
-import { fetchArticleSearch} from './articleActions';
+import { fetchArticleSearch } from './articleActions';
 import { getArticleResultFromState } from './articleSelectors';
 
 const searchType = 'ndla';
@@ -40,7 +39,7 @@ class NdlaEmbedSearch extends React.Component {
     this.onImageLightboxClose = this.onImageLightboxClose.bind(this);
   }
   componentWillMount() {
-    this.props.articleSearch(this.props.query, 'ndla');
+    this.props.articleSearch(this.props.query);
   }
 
   onImageLightboxClose() {
@@ -48,7 +47,7 @@ class NdlaEmbedSearch extends React.Component {
     this.setState({ oembedDisplay: false });
   }
 
-  previewOembed(evt, item) {
+  async previewOembed(evt, item) {
     evt.preventDefault();
     this.props.localFetchOembed(item.link, this.context.lang, searchType);
     this.setState({ oembedDisplay: true });

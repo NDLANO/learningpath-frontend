@@ -19,6 +19,14 @@ const activatedForEnvironment = (config, defaultValue) => {
   return defaultValue;
 };
 
+const ndlaFrontendDomain = activatedForEnvironment(
+  {
+    local: 'http://localhost:30017',
+    prod: 'https://beta.ndla.no/',
+  },
+  `https://ndla-frontend.${environment}.api.ndla.no`,
+);
+
 const apiDomain = activatedForEnvironment(
   {
     local: 'http://proxy.ndla-local',
@@ -51,6 +59,7 @@ module.exports = Object.assign(
     redirectPort: process.env.LEARNINGPATH_REDIRECT_PORT || '3001',
     googleTagMangerId,
     hotjarSiteID,
+    ndlaFrontendDomain,
     ndlaApiUrl: process.env.NDLA_API_URL || apiDomain,
     googleSearchEngineId: process.env.NDLA_GOOGLE_SEARCH_ENGINE_ID,
     googleApiKey: process.env.NDLA_GOOGLE_API_KEY,

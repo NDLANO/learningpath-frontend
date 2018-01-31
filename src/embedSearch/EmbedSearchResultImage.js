@@ -10,10 +10,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const EmbedSearchResultImage = ({ thumbnail, title }) => (
-    <div className="embed-search_result-img">
-      <img role="presentation" src={thumbnail} alt={title} />
-    </div>
-  );
+  <div className="embed-search_result-img">
+    <img role="presentation" src={thumbnail} alt={title} />
+  </div>
+);
 
 EmbedSearchResultImage.propTypes = {
   thumbnail: PropTypes.string.isRequired,

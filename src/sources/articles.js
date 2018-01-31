@@ -38,7 +38,4 @@ const fetchArticles = (query, locale) => {
   return fetchAuth(url).then(resolveJsonOrRejectWithError);
 };
 
-export {
-  fetchArticle,
-  fetchArticles,
-};
+export { fetchArticle, fetchArticles };

@@ -9,7 +9,7 @@
 import { createSelector } from 'reselect';
 import requireAssets from '../util/requireAssets';
 
-const imageSource = (pagemap) => {
+const imageSource = pagemap => {
   if (pagemap && pagemap.cse_thumbnail && pagemap.cse_thumbnail.length > 0) {
     return pagemap.cse_thumbnail[0].src;
   }
@@ -32,24 +32,18 @@ export const getNumberOfPages = createSelector(
 );
 
 export const getEmbedResultFromState = (state, type) => {
-  if (type === 'ndla') {
-    const result = state.embedSearch[type].result;
-    console.log(result)
-    return result;
-  }
   const result = state.embedSearch[type].result;
-  console.log("RES", result)
-  const newr=  result && result.items ? result.items.map((item) => ({
-      id: item.cacheId,
-      title: item.title,
-      link: item.link,
-      description: item.snippet,
-      thumbnail: imageSource(item.pagemap),
-    })) : [];
-    console.log(newr);
-  return newr;
-
-}
+  return result && result.items
+    ? result.items.map(item => ({
+        id: item.cacheId,
+        title: item.title,
+        link: item.link,
+        description: item.snippet,
+        thumbnail: imageSource(item.pagemap),
+        showUrl: true,
+      }))
+    : [];
+};
 
 export const getEmbedQueryFromState = (state, type) =>
   state.embedSearch[type].query;

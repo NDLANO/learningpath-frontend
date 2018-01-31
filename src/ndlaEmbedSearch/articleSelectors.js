@@ -9,27 +9,37 @@
 import { createSelector } from 'reselect';
 import requireAssets from '../util/requireAssets';
 import { convertFieldWithFallback } from '../util/convertFieldWithFallback';
+import config from '../config';
 
-const getTotalResultsFromState = (state) => {
+const ndlaFrontendUrl = __SERVER__
+  ? config.ndlaFrontendDomain
+  : window.config.ndlaFrontendDomain;
+
+const getTotalResultsFromState = state => {
   const result = state.embedSearch.ndla.result;
   return result.totalCount ? result.totalCount / result.pageSize : 0;
 };
 
 export const getNumberOfArticlePages = createSelector(
   [getTotalResultsFromState],
-  totalResults => totalResults ? Math.ceil(totalResults / 10) : 1,
+  totalResults => (totalResults ? Math.ceil(totalResults / 10) : 1),
 );
 
-export const getArticleResultFromState = (state) => {
-  const results = state.embedSearch.ndla.result && state.embedSearch.ndla.result.results ? state.embedSearch.ndla.result.results : [];
-  return results.map((item) => ({
+export const getArticleResultFromState = state => {
+  const results =
+    state.embedSearch.ndla.result && state.embedSearch.ndla.result.results
+      ? state.embedSearch.ndla.result.results
+      : [];
+  return results.map(item => ({
     id: item.id,
-    description: convertFieldWithFallback(item, 'description', ''),
+    description: convertFieldWithFallback(item, 'introduction', ''),
     title: convertFieldWithFallback(item, 'title', ''),
-    link: `https://ndla-frontend.test.api.ndla.no/article/${item.id}`,
+    link: item.link || `${ndlaFrontendUrl}/article/${item.id}`,
     thumbnail: `/assets/${requireAssets['placeholder.png']}`,
+    showUrl: false,
+    disable: item.disable,
   }));
-}
+};
 
 export const getEmbedQueryFromState = (state, type) =>
   state.embedSearch.ndla.query;
