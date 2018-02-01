@@ -62,4 +62,10 @@ export const sendPageView = ({ title, dimensions }) => {
     page: current.url,
     title,
   });
+
+  window.dataLayer.push({
+    page_title: title,
+    event: 'Pageview',
+    url: current.url,
+  });
 };
