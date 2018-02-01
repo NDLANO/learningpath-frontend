@@ -12,8 +12,12 @@ import ButtonPager from '../common/pager/ButtonPager';
 
 const EmbedSearchPager = ({ query, pagerAction }) => {
   const onPagerButtonClicked = q => {
-    const nextIndex = query.start + (q.page - query.page) * 10;
-    pagerAction(Object.assign({}, q, { start: nextIndex }));
+    if (query.start) {
+      const nextIndex = query.start + (q.page - query.page) * 10;
+      pagerAction(Object.assign({}, q, { start: nextIndex }));
+    } else {
+      pagerAction(q);
+    }
   };
   return (
     <ButtonPager

@@ -9,7 +9,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import NdlaEmbedSearch from '../../../ndlaEmbedSearch/NdlaEmbedSearch';
+import ArticleSearch from '../../../articleSearch/ArticleSearch';
 import ExternalEmbedSearch from '../../../externalEmbedSearch/ExternalEmbedSearch';
 import * as actions from '../../../embedSearch/embedSearchActions';
 import polyglot from '../../../i18n';
@@ -69,7 +69,7 @@ class LearningPathStepEmbed extends React.Component {
           handleDisplayClose={this.handleExternalDisplayClose}
           display={this.state.external}
         />
-        <NdlaEmbedSearch
+        <ArticleSearch
           urlOnBlur={handleEmbedUrlChange}
           display={this.state.ndla}
           toggleNdlaDisplay={this.toggleNdlaDisplay}

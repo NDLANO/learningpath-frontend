@@ -23,6 +23,11 @@ button,
   background-color: color(var(--gray-3) blackness(+ 100%));
 }
 
+button[disabled] {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
 .button.disabled,
 .button[disabled],
 fieldset[disabled] .button {

@@ -9,11 +9,6 @@
 import { createSelector } from 'reselect';
 import requireAssets from '../util/requireAssets';
 import { convertFieldWithFallback } from '../util/convertFieldWithFallback';
-import config from '../config';
-
-const ndlaFrontendUrl = __SERVER__
-  ? config.ndlaFrontendDomain
-  : window.config.ndlaFrontendDomain;
 
 const getTotalResultsFromState = state => {
   const result = state.embedSearch.ndla.result;
@@ -31,18 +26,10 @@ export const getArticleResultFromState = state => {
       ? state.embedSearch.ndla.result.results
       : [];
   return results.map(item => ({
-    id: item.id,
+    ...item,
     description: convertFieldWithFallback(item, 'introduction', ''),
     title: convertFieldWithFallback(item, 'title', ''),
-    link: item.link || `${ndlaFrontendUrl}/article/${item.id}`,
     thumbnail: `/assets/${requireAssets['placeholder.png']}`,
     showUrl: false,
-    disable: item.disable,
   }));
 };
-
-export const getEmbedQueryFromState = (state, type) =>
-  state.embedSearch.ndla.query;
-
-export const getOembedContentFromState = (state, type) =>
-  state.embedSearch[type].oembedContent;

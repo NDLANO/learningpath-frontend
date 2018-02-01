@@ -21,10 +21,11 @@ import {
 import polyglot from '../i18n';
 import { fetchArticleSearch } from './articleActions';
 import { getArticleResultFromState } from './articleSelectors';
+import { getLocale } from '../locale/localeSelectors';
 
 const searchType = 'ndla';
 
-class NdlaEmbedSearch extends React.Component {
+class ArticleSearch extends React.Component {
   constructor(props) {
     super(props);
 
@@ -39,7 +40,7 @@ class NdlaEmbedSearch extends React.Component {
     this.onImageLightboxClose = this.onImageLightboxClose.bind(this);
   }
   componentWillMount() {
-    this.props.articleSearch(this.props.query);
+    this.props.articleSearch(this.props.query, this.props.language);
   }
 
   onImageLightboxClose() {
@@ -64,11 +65,11 @@ class NdlaEmbedSearch extends React.Component {
   render() {
     const {
       results,
-      localFetchEmbedSearch,
       oembedPreview,
       query,
       display,
       articleSearch,
+      language,
     } = this.props;
     const containerClass = {
       'embed-search_container': true,
@@ -79,19 +80,17 @@ class NdlaEmbedSearch extends React.Component {
       <div>
         <div className={classNames(containerClass)}>
           <h4>{polyglot.t('embedSearch.form.ndlaTitle')}</h4>
-          <p>hei</p>
           <EmbedSearchForm
             query={query}
             handleTextQueryChange={this.handleTextQueryChange}
-            localFetchEmbedSearch={articleSearch}
+            localFetchEmbedSearch={(q) => articleSearch(q, language)}
             textQuery={this.state.textQuery}
-            type="ndla"
           />
           <EmbedSearchResults
             items={results}
             onPreviewClick={this.previewOembed}
             addEmbedResult={this.addEmbedResult}
-            pagerAction={articleSearch}
+            pagerAction={(q) => articleSearch(q, language)}
             query={query}
           />
           <EmbedSearchPreview
@@ -105,8 +104,8 @@ class NdlaEmbedSearch extends React.Component {
   }
 }
 
-NdlaEmbedSearch.propTypes = {
-  localFetchEmbedSearch: PropTypes.func.isRequired,
+ArticleSearch.propTypes = {
+  articleSearch: PropTypes.func.isRequired,
   results: PropTypes.array.isRequired,
   localFetchOembed: PropTypes.func.isRequired,
   oembedPreview: PropTypes.object,
@@ -115,11 +114,11 @@ NdlaEmbedSearch.propTypes = {
   query: PropTypes.object.isRequired,
   localChangeEmbedSearchQuery: PropTypes.func.isRequired,
   display: PropTypes.bool.isRequired,
+  language: PropTypes.string.isRequired,
   toggleNdlaDisplay: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = {
-  localFetchEmbedSearch: actions.fetchNdlaEmbedSearch,
   localFetchOembed: actions.fetchNdlaOembed,
   removeOembed: actions.removeEmbedPreview,
   localChangeEmbedSearchQuery: actions.changeEmbedSearchQuery,
@@ -131,6 +130,7 @@ const mapStateToProps = state =>
     results: getArticleResultFromState(state),
     query: getEmbedQueryFromState(state, searchType),
     oembedPreview: getOembedContentFromState(state, searchType),
+    language: getLocale(state),
   });
 
-export default connect(mapStateToProps, mapDispatchToProps)(NdlaEmbedSearch);
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleSearch);

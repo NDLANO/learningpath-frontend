@@ -6,25 +6,30 @@
  *
  */
 
-import { createAction } from 'redux-actions';
 import { applicationError } from '../messages/messagesActions';
 import { fetchArticles } from '../sources/articles';
 import { fetchResource } from '../sources/taxonomy';
 import config from '../config';
+import {
+  changeEmbedSearchQuery,
+  setEmbedResults,
+} from '../embedSearch/embedSearchActions';
+import { getNumberOfArticlePages } from './articleSelectors';
 
 const ndlaFrontendUrl = __SERVER__
   ? config.ndlaFrontendDomain
   : window.config.ndlaFrontendDomain;
 
-export const setEmbedPreview = createAction('SET_EMBED_PREVIEW');
-export const setEmbedResults = createAction('SET_EMBED_RESULTS');
-export const removeEmbedPreview = createAction('REMOVE_EMBED_PREVIEW');
-export const changeEmbedSearchQuery = createAction('CHANGE_EMBED_SEARCH_QUERY');
-
-export function fetchArticleSearch(query) {
-  return async dispatch => {
+export function fetchArticleSearch(query, language) {
+  const ndlaQuery = {
+    query: query.textQuery,
+    page: query.page,
+    'page-size': 10,
+    language,
+  };
+  return async (dispatch, getState) => {
     try {
-      const result = await fetchArticles(query);
+      const result = await fetchArticles(ndlaQuery);
       const newItems = await Promise.all(
         result.results.map(async item => {
           const resource = await fetchResource(item.id);
@@ -35,7 +40,7 @@ export function fetchArticleSearch(query) {
                 ? `${ndlaFrontendUrl}/article${resource[0].path
                     .split('/')
                     .join('/urn:')}/${item.id}`
-                : undefined, // TODO: Find a better way to use taxonomy api.
+                : undefined, // TODO: Find a better way to use taxonomy paths.
             disable: resource.length === 0,
           };
         }),
@@ -46,15 +51,12 @@ export function fetchArticleSearch(query) {
           result: { ...result, results: newItems },
         }),
       );
+      const updatedQuery = Object.assign({}, query, {
+        numberOfPages: getNumberOfArticlePages(getState()),
+      });
+      dispatch(changeEmbedSearchQuery({ type: 'ndla', query: updatedQuery }));
     } catch (err) {
       dispatch(applicationError(err));
     }
   };
-  /* return (dispatch) =>
-    fetchArticles(query)
-      .then(result => {
-        dispatch(setEmbedResults({ type: 'ndla', result }));
-      })
-      .catch(err => dispatch(applicationError(err)));
-      */
 }
