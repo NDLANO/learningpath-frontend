@@ -116,6 +116,8 @@ app.use(
                 "'self'",
                 'ws://*.hotjar.com wss://*.hotjar.com',
                 'https://*.hotjar.com',
+                'https://*.hotjar.com:*',
+                'https://www.google-analytics.com',
                 'wss://*.zopim.com',
                 'https://*.zendesk.com',
                 'https://*.zopim.com',
