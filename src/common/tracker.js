@@ -19,7 +19,6 @@ function initializeGA(gaTrackingId) {
 
 function resetDatalayer(googleTagManagerId) {
   if (window.google_tag_manager && googleTagManagerId) {
-    console.log('reset');
     window.google_tag_manager[googleTagManagerId].dataLayer.reset();
   }
 }
