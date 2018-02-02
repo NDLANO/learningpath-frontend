@@ -119,7 +119,7 @@ const Html = props => {
         {head.title.toComponent()}
         {head.meta.toComponent()}
         <GoogleTagMangerScript />
-        {config.gaTrackingID && (
+        {config.gaTrackingId && (
           <script async src="https://www.google-analytics.com/analytics.js" />
         )}
         <SvgPolyfillScript className={className} />

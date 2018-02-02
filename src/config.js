@@ -43,7 +43,7 @@ module.exports = Object.assign(
     port: process.env.LEARINGPATH_PORT || '3000',
     redirectPort: process.env.LEARNINGPATH_REDIRECT_PORT || '3001',
     googleTagManagerId: process.env.GOOGLE_TAG_MANAGER_ID,
-    gaTrackingID: process.env.NDLA_GA_TRACKING_ID,
+    gaTrackingId: process.env.NDLA_GA_TRACKING_ID,
     hotjarSiteID,
     ndlaApiUrl: process.env.NDLA_API_URL || apiDomain,
     googleSearchEngineId: process.env.NDLA_GOOGLE_SEARCH_ENGINE_ID,

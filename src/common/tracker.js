@@ -10,15 +10,27 @@
 
 const pageViewHistory = [];
 
-function initializeGA(gaTrackingID) {
+function initializeGA(gaTrackingId) {
   // prettier-ignore
   window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)}; //eslint-disable-line
   window.ga.l = +new Date();
-  window.ga('create', gaTrackingID, 'auto');
+  window.ga('create', gaTrackingId, 'auto');
 }
 
-export const configureTracker = ({ listen, debug, gaTrackingID }) => {
-  initializeGA(gaTrackingID);
+function resetDatalayer(googleTagManagerId) {
+  if (window.google_tag_manager && googleTagManagerId) {
+    console.log('reset');
+    window.google_tag_manager[googleTagManagerId].dataLayer.reset();
+  }
+}
+
+export const configureTracker = ({
+  listen,
+  debug,
+  gaTrackingId,
+  googleTagManagerId,
+}) => {
+  initializeGA(gaTrackingId);
 
   // Push current page and start listning
   pageViewHistory.push({
@@ -35,6 +47,9 @@ export const configureTracker = ({ listen, debug, gaTrackingID }) => {
         }`,
       );
     }
+
+    resetDatalayer(googleTagManagerId);
+
     pageViewHistory.push({
       url: `${location.pathname}${location.search}${location.hash}`,
       tracked: false,

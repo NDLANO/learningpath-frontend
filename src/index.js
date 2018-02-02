@@ -69,7 +69,8 @@ TokenStatusHandler.getInstance({ store });
 
 configureTracker({
   listen: browserHistory.listen,
-  gaTrackingID: window.config.gaTrackingID,
+  gaTrackingId: window.config.gaTrackingId,
+  googleTagManagerId: window.config.googleTagManagerId,
 });
 
 ReactDOM.hydrate(
