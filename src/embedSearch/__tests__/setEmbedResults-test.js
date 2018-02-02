@@ -12,7 +12,7 @@ import { setEmbedResults } from '../embedSearchActions';
 const results = {
   queries: {
     request: [{ totalResults: 20 }],
-    items: [{ title: 'hei' }],
+    items: [{ id: 1, title: 'hei' }],
   },
 };
 test('actions/setEmbedResults', () => {

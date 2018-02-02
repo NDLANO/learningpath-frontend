@@ -31,7 +31,7 @@ const EmbedSearchResults = ({
     <div className="embed-search_results">
       {items.map(item => (
         <EmbedSearchResult
-          key={item.cacheId}
+          key={item.id}
           item={item}
           onPreviewClick={onPreviewClick}
           addEmbedResult={addEmbedResult}

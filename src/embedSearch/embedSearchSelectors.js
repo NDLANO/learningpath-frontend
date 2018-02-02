@@ -38,7 +38,7 @@ export const getEmbedResultFromState = (state, type) => {
         id: item.cacheId,
         title: item.title,
         link: item.link,
-        description: item.snippet,
+        introduction: item.snippet,
         thumbnail: imageSource(item.pagemap),
         showUrl: true,
       }))

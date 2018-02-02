@@ -35,7 +35,9 @@ export default class Oembed extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    this.handleIframeResizing(props);
+    if (this.props.oembedContent.url !== props.oembedContent.url) {
+      this.handleIframeResizing(props);
+    }
   }
 
   componentWillUnmount() {

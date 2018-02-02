@@ -11,7 +11,7 @@ import cloneDeep from 'lodash/cloneDeep';
 
 const initialState = {
   ndla: {
-    query:  {
+    query: {
       textQuery: '',
       page: 1,
       'page-size': 10,
@@ -20,7 +20,7 @@ const initialState = {
     oembedContent: {},
     result: {},
   },
-  external:   {
+  external: {
     query: {
       start: 1,
       textQuery: '',

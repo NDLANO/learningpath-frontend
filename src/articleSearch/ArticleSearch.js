@@ -39,12 +39,13 @@ class ArticleSearch extends React.Component {
     this.handleTextQueryChange = this.handleTextQueryChange.bind(this);
     this.onImageLightboxClose = this.onImageLightboxClose.bind(this);
   }
+
   componentWillMount() {
     this.props.articleSearch(this.props.query, this.props.language);
   }
 
   onImageLightboxClose() {
-    this.props.removeOembed({ type: 'ndla' });
+    this.props.removeOembed({ type: searchType });
     this.setState({ oembedDisplay: false });
   }
 
@@ -83,14 +84,14 @@ class ArticleSearch extends React.Component {
           <EmbedSearchForm
             query={query}
             handleTextQueryChange={this.handleTextQueryChange}
-            localFetchEmbedSearch={(q) => articleSearch(q, language)}
+            localFetchEmbedSearch={q => articleSearch(q, language)}
             textQuery={this.state.textQuery}
           />
           <EmbedSearchResults
             items={results}
             onPreviewClick={this.previewOembed}
             addEmbedResult={this.addEmbedResult}
-            pagerAction={(q) => articleSearch(q, language)}
+            pagerAction={q => articleSearch(q, language)}
             query={query}
           />
           <EmbedSearchPreview

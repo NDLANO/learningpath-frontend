@@ -27,7 +27,7 @@ export const getArticleResultFromState = state => {
       : [];
   return results.map(item => ({
     ...item,
-    description: convertFieldWithFallback(item, 'introduction', ''),
+    introduction: convertFieldWithFallback(item, 'introduction', ''),
     title: convertFieldWithFallback(item, 'title', ''),
     thumbnail: `/assets/${requireAssets['placeholder.png']}`,
     showUrl: false,

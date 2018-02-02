@@ -24,7 +24,7 @@ const EmbedSearchResult = ({ item, onPreviewClick, addEmbedResult }) => (
       ) : (
         ''
       )}
-      <p>{item.description}</p>
+      <p>{item.introduction}</p>
       <span className="error_message error_message--red">
         {item.disable ? 'Denne resursen kan ikke brukes.' : ''}
       </span>
