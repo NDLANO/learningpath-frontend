@@ -17,9 +17,10 @@ function initializeGA(gaTrackingId) {
   window.ga('create', gaTrackingId, 'auto');
 }
 
-function resetDatalayer(googleTagManagerId) {
-  if (window.google_tag_manager && googleTagManagerId) {
+function resetDataLayer(googleTagManagerId) {
+  if (window.dataLayer && window.google_tag_manager && googleTagManagerId) {
     window.google_tag_manager[googleTagManagerId].dataLayer.reset();
+    window.dataLayer.push(window.originalLocation);
   }
 }
 
@@ -47,12 +48,11 @@ export const configureTracker = ({
       );
     }
 
-    resetDatalayer(googleTagManagerId);
-
     pageViewHistory.push({
       url: `${location.pathname}${location.search}${location.hash}`,
       tracked: false,
       debug,
+      resetDataLayer: () => resetDataLayer(googleTagManagerId),
     });
   });
 };
@@ -69,6 +69,11 @@ export const sendPageView = ({ title, dimensions }) => {
     if (dimensions) {
       console.info('With dimensions: ', dimensions);
     }
+  }
+
+  // Always reset dataLayer before pushing new page events
+  if (current.resetDataLayer) {
+    current.resetDataLayer();
   }
 
   window.ga('send', {

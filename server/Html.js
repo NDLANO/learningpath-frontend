@@ -146,7 +146,8 @@ const Html = props => {
           dangerouslySetInnerHTML={{
             __html: `
           window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({ originalLocation: document.location.protocol + '//' + document.location.hostname + document.location.pathname + document.location.search });`,
+          window.originalLocation = { originalLocation: document.location.protocol + '//' + document.location.hostname + document.location.pathname + document.location.search };
+          window.dataLayer.push(window.originalLocation);`,
           }}
         />
         <div
