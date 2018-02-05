@@ -9,7 +9,7 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
-
+import { testError } from '../../../common/__tests__/testError';
 import {
   searchLearningPaths,
   setLearningPathSearchResults,
@@ -17,15 +17,13 @@ import {
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
+const accessToken = '12345678';
 
-test('actions/searchLearningPaths', () => {
-  const done = res => {
-    done(res);
-    nock.cleanAll();
-  };
-
-  const apiMock = nock('http://ndla-api')
-    .get('/learningpath-api/v1/learningpaths')
+test('actions/searchLearningPaths', done => {
+  const apiMock = nock('http://ndla-api', {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  })
+    .get('/learningpath-api/v2/learningpaths')
     .reply(200, {
       totalCount: 2,
       page: 3,
@@ -33,7 +31,7 @@ test('actions/searchLearningPaths', () => {
       results: [{ id: '123' }, { id: '456' }],
     });
 
-  const store = mockStore({});
+  const store = mockStore({ accessToken });
 
   store
     .dispatch(searchLearningPaths())
@@ -44,22 +42,24 @@ test('actions/searchLearningPaths', () => {
           totalCount: 2,
         }),
       ]);
-
       expect(() => apiMock.done()).not.toThrow();
       done();
     })
-    .catch(done);
+    .catch(testError);
 });
 
-test('actions/searchLearningPaths with query', () => {
-  const done = res => {
-    done(res);
-    nock.cleanAll();
-  };
-
-  const apiMock = nock('http://ndla-api')
-    .get('/learningpath-api/v1/learningpaths')
-    .query({ query: 'foobar', page: 4, 'page-size': 15, sort: '-relevance' })
+test('actions/searchLearningPaths with query', done => {
+  const apiMock = nock('http://ndla-api', {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  })
+    .get('/learningpath-api/v2/learningpaths')
+    .query({
+      query: 'foobar',
+      page: 4,
+      'page-size': 15,
+      sort: '-relevance',
+      language: 'nb',
+    })
     .reply(200, {
       totalCount: 400,
       page: 4,
@@ -74,12 +74,13 @@ test('actions/searchLearningPaths with query', () => {
       page: 4,
       pageSize: 15, // OBS! not page-size
     },
+    accessToken,
   };
 
   const store = mockStore(initialState);
 
   store
-    .dispatch(searchLearningPaths())
+    .dispatch(searchLearningPaths(initialState.learningPathQuery))
     .then(() => {
       expect(store.getActions()).toEqual([
         setLearningPathSearchResults({
@@ -87,29 +88,29 @@ test('actions/searchLearningPaths with query', () => {
           totalCount: 400,
         }),
       ]);
-
       expect(() => apiMock.done()).not.toThrow();
       expect(initialState.learningPathQuery.pageSize).toBe(15);
       expect(initialState.learningPathQuery['page-size']).toBeFalsy();
-
       done();
     })
-    .catch(done);
+    .catch(testError);
 });
 
-test('actions/searchLearningPaths with query without search term', () => {
-  const done = res => {
-    done(res);
-    nock.cleanAll();
-  };
-
+test('actions/searchLearningPaths with query without search term', done => {
   const page = 3;
   const pageSize = 10;
   const sort = '-relevance';
 
-  const apiMock = nock('http://ndla-api')
-    .get('/learningpath-api/v1/learningpaths')
-    .query({ page, sort, 'page-size': pageSize /* OBS! no query */ })
+  const apiMock = nock('http://ndla-api', {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  })
+    .get('/learningpath-api/v2/learningpaths')
+    .query({
+      language: 'nb',
+      page,
+      sort,
+      'page-size': pageSize /* OBS! no query */,
+    })
     .reply(200, {
       page,
       pageSize,
@@ -119,12 +120,13 @@ test('actions/searchLearningPaths with query without search term', () => {
 
   const initialState = {
     learningPathQuery: { sort, page, pageSize, query: '' },
+    accessToken,
   };
 
   const store = mockStore(initialState);
 
   store
-    .dispatch(searchLearningPaths())
+    .dispatch(searchLearningPaths(initialState.learningPathQuery))
     .then(() => {
       expect(store.getActions()).toEqual([
         setLearningPathSearchResults({
@@ -132,10 +134,9 @@ test('actions/searchLearningPaths with query without search term', () => {
           totalCount: 400,
         }),
       ]);
-
       expect(() => apiMock.done()).not.toThrow();
       expect(initialState.learningPathQuery.query).toBe('');
       done();
     })
-    .catch(done);
+    .catch(testError);
 });
