@@ -14,7 +14,10 @@ import nock from 'nock';
 
 // import { applicationError } from '../../../messages/messagesActions';
 import { fetchArticleSearch } from '../articleActions';
-import { setEmbedResults } from '../../embedSearch/embedSearchReducer';
+import {
+  setEmbedResults,
+  changeEmbedSearchQuery,
+} from '../../embedSearch/embedSearchActions';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
@@ -32,19 +35,16 @@ const apiResponse = {
         id: 1,
         title: { title: 'Test', language: 'nb' },
         introduction: { introduction: 'Test', language: 'nb' },
-        disabled: false,
       },
       {
         id: 2,
         title: { title: 'Test3', language: 'nb' },
         introduction: { introduction: 'Test3', language: 'nb' },
-        disabled: false,
       },
       {
         id: 3,
         title: { title: 'Test2', language: 'nb' },
         introduction: { introduction: 'Test2', language: 'nb' },
-        disabled: false,
       },
     ],
     totalCount: 3,
@@ -52,12 +52,38 @@ const apiResponse = {
   },
 };
 
-test('actions/fetchArticleSearch', () => {
-  const done = res => {
-    done(res);
-    nock.cleanAll();
-  };
+const expectedValue = {
+  results: [
+    {
+      id: 1,
+      title: { title: 'Test', language: 'nb' },
+      introduction: { introduction: 'Test', language: 'nb' },
+      disable: false,
+      link:
+        'https://ndla-frontend.test.api.ndla.no/article/urn:resource:1/urn:subject:2/urn:something:3/1',
+    },
+    {
+      id: 2,
+      title: { title: 'Test3', language: 'nb' },
+      introduction: { introduction: 'Test3', language: 'nb' },
+      disable: false,
+      link:
+        'https://ndla-frontend.test.api.ndla.no/article/urn:resource:1/urn:subject:2/urn:something:3/2',
+    },
+    {
+      id: 3,
+      title: { title: 'Test2', language: 'nb' },
+      introduction: { introduction: 'Test2', language: 'nb' },
+      disable: false,
+      link:
+        'https://ndla-frontend.test.api.ndla.no/article/urn:resource:1/urn:subject:2/urn:something:3/3',
+    },
+  ],
+  totalCount: 3,
+  pageSize: 10,
+};
 
+test('actions/fetchArticleSearch', () => {
   const apiMock = nock('http://ndla-api', {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
@@ -65,7 +91,19 @@ test('actions/fetchArticleSearch', () => {
     .query({ query: 'hei', 'page-size': 10, page: 1, language: 'nb' })
     .reply(200, { ...apiResponse.result });
 
-  const store = mockStore({ accessToken });
+  const taxonomyMocks = apiResponse.result.results.map(item =>
+    nock('http://ndla-api', {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    })
+      .get('/taxonomy/v1/queries/resources')
+      .query({ contentURI: `urn:article:${item.id}`, language: 'nb' })
+      .reply(200, [{ path: '/resource:1/subject:2/something:3' }]),
+  );
+
+  const store = mockStore({
+    accessToken,
+    embedSearch: { ndla: { result: {} } },
+  });
 
   store
     .dispatch(fetchArticleSearch(query, 'nb'))
@@ -73,11 +111,21 @@ test('actions/fetchArticleSearch', () => {
       expect(store.getActions()).toEqual([
         setEmbedResults({
           type: 'ndla',
-          result: apiResponse.result,
+          result: expectedValue,
+        }),
+        changeEmbedSearchQuery({
+          query: {
+            textQuery: 'hei',
+            page: 1,
+            numberOfPages: 1,
+          },
+          type: 'ndla',
         }),
       ]);
       expect(() => apiMock.done()).not.toThrow();
-      done();
+      taxonomyMocks.map(mock => expect(() => mock.done()).not.toThrow());
     })
-    .catch(done);
+    .catch(() => {
+      nock.cleanAll();
+    });
 });

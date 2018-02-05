@@ -35,7 +35,6 @@ const fetchArticles = (query, locale) => {
 
     url += `?${queryString.stringify(q)}`;
   }
-  console.log(url)
   return fetchAuth(url).then(resolveJsonOrRejectWithError);
 };
 

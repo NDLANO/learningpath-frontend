@@ -27,11 +27,9 @@ export function fetchArticleSearch(query, language) {
     'page-size': 10,
     language,
   };
-  console.log(ndlaQuery);
   return async (dispatch, getState) => {
     try {
       const result = await fetchArticles(ndlaQuery);
-      console.log("RES:", result);
       const newItems = await Promise.all(
         result.results.map(async item => {
           const resource = await fetchResource(item.id);
@@ -47,7 +45,7 @@ export function fetchArticleSearch(query, language) {
           };
         }),
       );
-      dispatch(
+      await dispatch(
         setEmbedResults({
           type: 'ndla',
           result: { ...result, results: newItems },
@@ -58,7 +56,6 @@ export function fetchArticleSearch(query, language) {
       });
       dispatch(changeEmbedSearchQuery({ type: 'ndla', query: updatedQuery }));
     } catch (err) {
-      console.log('ERR', err);
       dispatch(applicationError(err));
     }
   };
