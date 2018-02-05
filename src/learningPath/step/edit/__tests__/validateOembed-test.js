@@ -20,7 +20,7 @@ import {
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-const accessToken = '123345678';
+const accessToken = '12345678';
 
 const stepFormWithoutTitle = {
   values: {
