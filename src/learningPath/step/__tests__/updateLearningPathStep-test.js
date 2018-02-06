@@ -11,7 +11,7 @@ import thunk from 'redux-thunk';
 import nock from 'nock';
 import { routerActions } from 'react-router-redux';
 import payload403invalid from '../../../actions/__tests__/payload403invalid';
-
+import { testError } from '../../../common/__tests__/testError';
 import {
   applicationError,
   addMessage,
@@ -24,16 +24,11 @@ import {
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-const accessToken = '123345';
+const accessToken = '12345678';
 const pathId = 123;
 const stepId = 321;
 
-test('actions/updateLearningPathStep', () => {
-  const done = res => {
-    done(res);
-    nock.cleanAll();
-  };
-
+test('actions/updateLearningPathStep', done => {
   const learningStep = {
     title: [{ language: 'nb', title: 'Goat' }],
     description: [{ language: 'nb', description: 'this is a description' }],
@@ -45,10 +40,10 @@ test('actions/updateLearningPathStep', () => {
   const learningStepReply = Object.assign({}, learningStep, { id: stepId });
 
   const patchPathStepApi = nock('http://ndla-api', {
-    reqheaders: { Authorization: `Bearer ${accessToken}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
   })
     .patch(
-      `/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`,
+      `/learningpath-api/v2/learningpaths/${pathId}/learningsteps/${stepId}`,
       learningStep,
     )
     .reply(200, learningStepReply);
@@ -65,20 +60,13 @@ test('actions/updateLearningPathStep', () => {
           pathname: `/learningpaths/${pathId}/step/${stepId}`,
         }),
       ]);
-
       expect(() => patchPathStepApi.done()).not.toThrow();
-
       done();
     })
-    .catch(done);
+    .catch(testError);
 });
 
-test('actions/updateLearningPathStep access denied', () => {
-  const done = res => {
-    done(res);
-    nock.cleanAll();
-  };
-
+test('actions/updateLearningPathStep access denied', done => {
   const learningStep = {
     title: [{ language: 'nb', title: 'Goat' }],
     description: [{ language: 'nb', description: 'this is a description' }],
@@ -88,10 +76,10 @@ test('actions/updateLearningPathStep access denied', () => {
   };
 
   const apiMock = nock('http://ndla-api', {
-    reqheaders: { Authorization: `Bearer ${accessToken}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
   })
     .patch(
-      `/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`,
+      `/learningpath-api/v2/learningpaths/${pathId}/learningsteps/${stepId}`,
       learningStep,
     )
     .reply(403, { message: 'Invalid' });
@@ -111,8 +99,7 @@ test('actions/updateLearningPathStep access denied', () => {
         ),
       ]);
       expect(() => apiMock.done()).not.toThrow();
-
       done();
     })
-    .catch(done);
+    .catch(testError);
 });

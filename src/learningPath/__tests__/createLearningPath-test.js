@@ -10,48 +10,52 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 import { routerActions } from 'react-router-redux';
-
 import payload403invalid from '../../actions/__tests__/payload403invalid';
 import { applicationError, addMessage } from '../../messages/messagesActions';
 import { createLearningPath, setLearningPath } from '../learningPathActions';
 import { createEmptyLearningPathStep } from '../step/learningPathStepActions';
+import { testError } from '../../common/__tests__/testError';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-const accessToken = '123345';
+const accessToken = '12345678';
 const pathId = 123;
 
-test('actions/createLearningPath', () => {
-  const done = res => {
-    done(res);
-    nock.cleanAll();
-  };
-
+test('actions/createLearningPath', done => {
   const learningsteps = [{ seqNo: 1 }, { seqNo: 0 }, { seqNo: 2 }];
 
   const postPathApi = nock('http://ndla-api', {
-    reqheaders: { Authorization: `Bearer ${accessToken}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .post('/learningpaths', { isRequest: true, learningsteps })
+    .post('/learningpath-api/v2/learningpaths', {
+      isRequest: true,
+      learningsteps,
+    })
     .reply(200, { id: pathId, isResponse: true });
 
   const postStep1Api = nock('http://ndla-api', {
-    reqheaders: { Authorization: `Bearer ${accessToken}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .post(`/learningpaths/${pathId}/learningsteps`, { seqNo: 0 })
+    .post(`/learningpath-api/v2/learningpaths/${pathId}/learningsteps`, {
+      seqNo: 0,
+    })
     .reply(200, { id: 12, seqNo: 0, isResponse: true });
 
   const postStep2Api = nock('http://ndla-api', {
-    reqheaders: { Authorization: `Bearer ${accessToken}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .post(`/learningpaths/${pathId}/learningsteps`, { seqNo: 1 })
+    .post(`/learningpath-api/v2/learningpaths/${pathId}/learningsteps`, {
+      seqNo: 1,
+    })
     .reply(200, { id: 34, seqNo: 1, isResponse: true });
 
   const postStep3Api = nock('http://ndla-api', {
-    reqheaders: { Authorization: `Bearer ${accessToken}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .post(`/learningpaths/${pathId}/learningsteps`, { seqNo: 2 })
+    .post(`/learningpath-api/v2/learningpaths/${pathId}/learningsteps`, {
+      seqNo: 2,
+    })
     .reply(200, { id: 56, seqNo: 2, isResponse: true });
 
   const store = mockStore({ accessToken });
@@ -78,22 +82,16 @@ test('actions/createLearningPath', () => {
       expect(() => postStep1Api.done()).not.toThrow();
       expect(() => postStep2Api.done()).not.toThrow();
       expect(() => postStep3Api.done()).not.toThrow();
-
       done();
     })
-    .catch(done);
+    .catch(testError);
 });
 
-test('actions/createLearningPath access denied', () => {
-  const done = res => {
-    done(res);
-    nock.cleanAll();
-  };
-
+test('actions/createLearningPath access denied', done => {
   const apiMock = nock('http://ndla-api', {
-    reqheaders: { Authorization: `Bearer ${accessToken}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .post('/learningpaths', {
+    .post('/learningpath-api/v2/learningpaths', {
       foo: 'bar',
     })
     .reply(403, { message: 'Invalid' });
@@ -103,12 +101,17 @@ test('actions/createLearningPath access denied', () => {
   store
     .dispatch(createLearningPath({ foo: 'bar' }))
     .then(() => {
+      testError('Should not be here');
+    })
+    .catch(() => {
       expect(store.getActions()).toEqual([
-        applicationError(payload403invalid('http://ndla-api/learningpaths')),
+        applicationError(
+          payload403invalid(
+            'http://ndla-api/learningpath-api/v2/learningpaths',
+          ),
+        ),
       ]);
       expect(() => apiMock.done()).not.toThrow();
-
       done();
-    })
-    .catch(done);
+    });
 });

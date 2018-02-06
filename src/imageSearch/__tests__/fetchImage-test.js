@@ -10,6 +10,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 import payload403invalid from '../../actions/__tests__/payload403invalid';
+import { testError } from '../../common/__tests__/testError';
 
 import { applicationError } from '../../messages/messagesActions';
 import {
@@ -26,12 +27,7 @@ const imageId = 123;
 
 const imageMetaUrl = 'http://ndla-api:80/image-api/v2/images/123';
 
-test('actions/fetchImage with id', () => {
-  const done = res => {
-    done(res);
-    nock.cleanAll();
-  };
-
+test('actions/fetchImage with id', done => {
   const apiMock = nock('http://ndla-api')
     .get(`/image-api/v2/images/${imageId}`)
     .reply(200, { id: imageId });
@@ -45,15 +41,10 @@ test('actions/fetchImage with id', () => {
       expect(() => apiMock.done()).not.toThrow();
       done();
     })
-    .catch(done);
+    .catch(testError);
 });
 
-test('actions/fetchImage with url', () => {
-  const done = res => {
-    done(res);
-    nock.cleanAll();
-  };
-
+test('actions/fetchImage with url', done => {
   const apiMock = nock('http://ndla-api')
     .get(`/image-api/v2/images/${imageId}`)
     .reply(200, { id: imageId });
@@ -67,15 +58,10 @@ test('actions/fetchImage with url', () => {
       expect(() => apiMock.done()).not.toThrow();
       done();
     })
-    .catch(done);
+    .catch(testError);
 });
 
-test('actions/fetchImage with id access denied', () => {
-  const done = res => {
-    done(res);
-    nock.cleanAll();
-  };
-
+test('actions/fetchImage with id access denied', done => {
   const apiMock = nock('http://ndla-api')
     .get(`/image-api/v2/images/${imageId}`)
     .reply(403, { message: 'Invalid' });
@@ -93,15 +79,10 @@ test('actions/fetchImage with id access denied', () => {
       expect(() => apiMock.done()).not.toThrow();
       done();
     })
-    .catch(done);
+    .catch(testError);
 });
 
-test('actions/fetchImage with url access denied', () => {
-  const done = res => {
-    done(res);
-    nock.cleanAll();
-  };
-
+test('actions/fetchImage with url access denied', done => {
   const apiMock = nock('http://ndla-api')
     .get(`/image-api/v2/images/${imageId}`)
     .reply(403, { message: 'Invalid' });
@@ -121,5 +102,5 @@ test('actions/fetchImage with url access denied', () => {
       expect(() => apiMock.done()).not.toThrow();
       done();
     })
-    .catch(done);
+    .catch(testError);
 });
