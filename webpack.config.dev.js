@@ -22,6 +22,12 @@ module.exports = require('./webpack.config.base')({
   output: {
     filename: '[name].js',
   },
+  
+  babelPresetTargets: {
+    chrome: 56,
+    firefox: 52,
+    safari: 10,
+  },
 
   rules: [
     {
