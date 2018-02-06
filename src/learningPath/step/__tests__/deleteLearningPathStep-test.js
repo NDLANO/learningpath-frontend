@@ -9,35 +9,30 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
-
 import { deleteLearningPathStep } from '../learningPathStepActions';
+import { testError } from '../../../common/__tests__/testError';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-const accessToken = '123345';
+const accessToken = '12345678';
 const pathId = 123;
 const stepId = 321;
 
-test('actions/deleteLearningPathStep with id', () => {
-  const done = res => {
-    done(res);
-    nock.cleanAll();
-  };
-
+test('actions/deleteLearningPathStep with id', done => {
   // GET /learningpaths/:pathId
   nock('http://ndla-api', {
-    reqheaders: { Authorization: `Bearer ${accessToken}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .get(`/learningpath-api/v1/learningpaths/${pathId}`)
+    .get(`/learningpath-api/v2/learningpaths/${pathId}`)
     .reply(200, { id: pathId });
 
   // DELETE /learningpaths/:pathId/learningsteps/:stepId
   nock('http://ndla-api', {
-    reqheaders: { Authorization: `Bearer ${accessToken}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
   })
     .delete(
-      `/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`,
+      `/learningpath-api/v2/learningpaths/${pathId}/learningsteps/${stepId}`,
     )
     .reply(204);
 
@@ -56,5 +51,5 @@ test('actions/deleteLearningPathStep with id', () => {
       expect(() => nock.isDone()).not.toThrow();
       done();
     })
-    .catch(done);
+    .catch(testError);
 });

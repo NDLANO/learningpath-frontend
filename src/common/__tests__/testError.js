@@ -6,7 +6,9 @@
  *
  */
 
-import { configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import nock from 'nock';
 
-configure({ adapter: new Adapter() });
+export const testError = err => {
+  console.error(err); // eslint-disable-line
+  nock.cleanAll();
+};

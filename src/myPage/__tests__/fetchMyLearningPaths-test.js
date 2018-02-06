@@ -10,25 +10,20 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 import payload403invalid from '../../actions/__tests__/payload403invalid';
-
+import { testError } from '../../common/__tests__/testError';
 import { fetchMyLearningPaths, setLearningPaths } from '../myPageActions';
 import { applicationError } from '../../messages/messagesActions';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-const accessToken = '123345';
+const accessToken = '12345678';
 
-test('actions/fetchMyLearningPaths', () => {
-  const done = res => {
-    done(res);
-    nock.cleanAll();
-  };
-
+test('actions/fetchMyLearningPaths', done => {
   const apiMock = nock('http://ndla-api', {
-    reqheaders: { Authorization: `Bearer ${accessToken}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .get('/learningpath-api/v1/learningpaths/mine')
+    .get('/learningpath-api/v2/learningpaths/mine')
     .reply(200, [{ id: '123' }, { id: '456' }]);
 
   const store = mockStore({ accessToken });
@@ -42,19 +37,14 @@ test('actions/fetchMyLearningPaths', () => {
       expect(() => apiMock.done()).not.toThrow();
       done();
     })
-    .catch(done);
+    .catch(testError);
 });
 
-test('actions/fetchLearningPaths access denied', () => {
-  const done = res => {
-    done(res);
-    nock.cleanAll();
-  };
-
+test('actions/fetchLearningPaths access denied', done => {
   const apiMock = nock('http://ndla-api', {
     reqheaders: { Authorization: `Bearer ${accessToken}` },
   })
-    .get('/learningpath-api/v1/learningpaths/mine')
+    .get('/learningpath-api/v2/learningpaths/mine')
     .reply(403, { message: 'Invalid' });
 
   const store = mockStore({ accessToken });
@@ -65,12 +55,12 @@ test('actions/fetchLearningPaths access denied', () => {
       expect(store.getActions()).toEqual([
         applicationError(
           payload403invalid(
-            'http://ndla-api/learningpath-api/v1/learningpaths/mine',
+            'http://ndla-api/learningpath-api/v2/learningpaths/mine',
           ),
         ),
       ]);
       expect(() => apiMock.done()).not.toThrow();
       done();
     })
-    .catch(done);
+    .catch(testError);
 });

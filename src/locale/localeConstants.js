@@ -7,10 +7,11 @@
  */
 
 import nb from '../locale/phrases/phrases-nb';
+import nn from '../locale/phrases/phrases-nn';
 import en from '../locale/phrases/phrases-en';
 
 export const NB = { name: 'Bokmål', abbreviation: 'nb', phrases: nb };
-export const NN = { name: 'Nynorsk', abbreviation: 'nn', phrases: nb };
+export const NN = { name: 'Nynorsk', abbreviation: 'nn', phrases: nn };
 export const EN = { name: 'English', abbreviation: 'en', phrases: en };
 
 export const availableLocales = [NB, NN, EN];

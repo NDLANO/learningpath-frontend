@@ -110,7 +110,7 @@ const phrases = {
     description: 'Beskrivelse',
     descriptionPlaceholder: 'Skriv en kort beskrivelse av læringsstien.',
     descriptionInformation:
-      'Maks 150 tegn og du har %{remainingDescriptionLength} igen. Beskrivelsen blir synlig i søk.',
+      'Maks 150 tegn og du har %{remainingDescriptionLength} igjen. Beskrivelsen blir synlig i søk.',
     title: 'Tittel på læringssti',
     imagePick: 'Søk og velg bilde til læringsstien',
     duration: 'Varighet',
@@ -136,7 +136,7 @@ const phrases = {
       choseImage: 'Bruk bildet',
       imageInformation: 'Bildet blir synlig i søk på læringssti.',
       imageSearchTotalCount: 'Søk på "%{textQuery}" ga %{totalCount} resulater',
-      imageSearchOneTotalCount: 'Søk på "%{textQuery}" ga 1 resulat',
+      imageSearchOneTotalCount: 'Søk på "%{textQuery}" ga 1 resultat',
     },
   },
   editPage: {
@@ -165,9 +165,9 @@ const phrases = {
     },
     validation: {
       oneOfDescriptionOrUrlIsRequired:
-        'Enten Beskrivelse eller Url feltet må fylles ut.',
+        'Enten Beskrivelse- eller Url-feltet må fylles ut.',
       licenseAndDescription:
-        'Ved utfyllelse av beskrivelse må lisens være valgt.',
+        'Ved utfylling av beskrivelse må lisens være valgt.',
     },
     edit: 'Rediger læringssteg',
     urlPlaceholder: 'Lim inn lenke',
@@ -177,7 +177,7 @@ const phrases = {
     noLicenseChosen: 'Ingen lisens valgt',
     showLicenseInfo:
       'Lisensen gjelder kun for beskrivelsen av det valgte steget',
-    showTitle: 'Velg om titelen skal vises eller skjules',
+    showTitle: 'Velg om tittelen skal vises eller skjules',
   },
   sortSteps: {
     sortOrDelete: 'Sorter eller slett læringssteg',
@@ -215,7 +215,7 @@ const phrases = {
   copyLearningPath: {
     makeCopy: 'Lag kopi',
     copyText:
-      'Ønsker du å ta utgangspunkt i denne læringsstien for å lage en ny læringssti? Vi åpner en kopi og blir lagret sammen med dine andre læringsstier.',
+      'Ønsker du å ta utgangspunkt i denne læringsstien for å lage en ny læringssti? Vi åpner en kopi som blir lagret sammen med dine andre læringsstier.',
     createCopy: 'Kopier læringssti',
     abortCopy: 'Avbryt',
     copyTitle: 'Kopier annens læringssti',
@@ -235,7 +235,7 @@ const phrases = {
     updatedMsg: 'Lagret OK',
   },
   tagInput: {
-    createOption: 'Opprett ny tag',
+    createOption: 'Opprett ny tagg',
     emptyList: 'Det er ingen tagger i denne listen',
     emptyFilter: 'Fant ingen passende tagger',
   },
@@ -257,7 +257,7 @@ const phrases = {
     title: 'Tittel mangler.',
     description: 'Beskrivelse mangler.',
     duration: 'Mangler varighet.',
-    durationMinus: 'Varighet må være større en null.',
+    durationMinus: 'Varighet må være større enn null.',
     durationNaN: 'Ugyldig variget. Tast inn antall timer.',
     durationDecimals: 'Antall desimaler er maks to.',
   },
@@ -299,7 +299,7 @@ const phrases = {
     error: 'Fant ikke tavlen under dette brukernavnet.',
     pinForm: {
       create: 'Opprett læringssteg',
-      viewSource: 'Se kilde lenke',
+      viewSource: 'Se kildelenke',
     },
   },
   htmlStatus: {
