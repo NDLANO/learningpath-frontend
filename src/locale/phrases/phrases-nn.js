@@ -6,7 +6,27 @@
  *
  */
 
+const titleTemplate = ' - Læringssti NDLA';
+
 const phrases = {
+  htmlTitles: {
+    // key equals component where title is used
+    titleTemplate,
+    welcomePage: `Framsida${titleTemplate}`,
+    learningPathSearch: `Søk${titleTemplate}`,
+    sessionInitializer: `Logget inn${titleTemplate}`,
+    loginFailure: `Innlogginga feila${titleTemplate}`,
+    logoutSession: `Logg ut${titleTemplate}`,
+    loginProviders: `Logg inn${titleTemplate}`,
+    myPage: `Min side${titleTemplate}`,
+    forbidden: `Ikkje tilgang${titleTemplate}`,
+    notFound: `Sida finst ikkje${titleTemplate}`,
+    editLearningPath: `Rediger læringssti${titleTemplate}`,
+    createLearningPath: `Opprett læringssti${titleTemplate}`,
+    editLearningPathStep: `Rediger læringssteg${titleTemplate}`,
+    createLearningPathStep: `Opprett læringssteg${titleTemplate}`,
+    sortLearningPathSteps: `Sorter eller slett læringssteg${titleTemplate}`,
+  },
   searchForm: {
     placeholder: 'Søk etter læringsstiar',
     btn: 'Søk',
@@ -284,8 +304,12 @@ const phrases = {
     },
   },
   htmlStatus: {
-    notFound: 'Denne sida finst ikkje',
-    forbidden: 'Du har ikkje tilgong til denne sida',
+    notFound: {
+      description: 'Denne sida finst ikkje',
+    },
+    forbidden: {
+      description: 'Du har ikkje tilgong til denne sida',
+    },
     backToFrontpage: 'Tilbake til framsida',
   },
 };
