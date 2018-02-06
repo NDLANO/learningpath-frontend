@@ -146,8 +146,7 @@ const phrases = {
     validation: {
       oneOfDescriptionOrUrlIsRequired:
         'Skildring- og/eller Url-feltet treng innhald.',
-      licenseAndDescription:
-        'Ved utfylling av skildring må lisens vera vald.',
+      licenseAndDescription: 'Ved utfylling av skildring må lisens vera vald.',
     },
     edit: 'Rediger læringssteg',
     urlPlaceholder: 'Lim inn lenke',
@@ -155,8 +154,7 @@ const phrases = {
     titlePlaceHolder: 'Skriv ein tittel her',
     previewOembed: 'Forhåndsvis heile artikkelen',
     noLicenseChosen: 'Ingen lisens vald',
-    showLicenseInfo:
-      'Lisensen gjeld kun for skildringa av det valde steget',
+    showLicenseInfo: 'Lisensen gjeld kun for skildringa av det valde steget',
     showTitle: 'Vel om tittelen skal visast eller vera skjult',
   },
   sortSteps: {
