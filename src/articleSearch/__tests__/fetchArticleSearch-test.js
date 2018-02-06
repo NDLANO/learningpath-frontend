@@ -9,10 +9,7 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
-// import { routerActions } from 'react-router-redux';
-// import payload403invalid from '../../../actions/__tests__/payload403invalid';
-
-// import { applicationError } from '../../../messages/messagesActions';
+import { testError } from '../../common/__tests__/testError';
 import { fetchArticleSearch } from '../articleActions';
 import {
   setEmbedResults,
@@ -83,7 +80,7 @@ const expectedValue = {
   pageSize: 10,
 };
 
-test('actions/fetchArticleSearch', () => {
+test('actions/fetchArticleSearch', done => {
   const apiMock = nock('http://ndla-api', {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
@@ -124,8 +121,7 @@ test('actions/fetchArticleSearch', () => {
       ]);
       expect(() => apiMock.done()).not.toThrow();
       taxonomyMocks.map(mock => expect(() => mock.done()).not.toThrow());
+      done();
     })
-    .catch(() => {
-      nock.cleanAll();
-    });
+    .catch(testError);
 });
