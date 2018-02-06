@@ -30,6 +30,21 @@ module.exports = options => ({
         test: /\.jsx?|\.js?$/, // Transform all .js and .jsx files required somewhere with Babel
         exclude: [/node_modules/], // See .babelrc
         loaders: 'babel-loader',
+        options: {
+          babelrc: false,
+          presets: [
+            'react',
+            [
+              'env',
+              {
+                targets: options.babelPresetTargets,
+                useBuiltIns: true,
+                modules: false,
+              },
+            ],
+          ],
+          plugins: ['transform-object-rest-spread'],
+        },
       },
       {
         test: /\.jpe?g$|\.gif$|\.png$|\.ico|\.svg$|\.woff$|\.ttf$/,
