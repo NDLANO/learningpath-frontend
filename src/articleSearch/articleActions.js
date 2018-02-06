@@ -37,9 +37,7 @@ export function fetchArticleSearch(query, language) {
             ...item,
             link:
               resource.length > 0
-                ? `${ndlaFrontendUrl}/article${resource[0].path
-                    .split('/')
-                    .join('/urn:')}/${item.id}`
+                ? `${ndlaFrontendUrl}/subjects${resource[0].path}`
                 : undefined, // TODO: Find a better way to use taxonomy paths.
             disable: resource.length === 0,
           };

@@ -57,7 +57,7 @@ const expectedValue = {
       introduction: { introduction: 'Test', language: 'nb' },
       disable: false,
       link:
-        'https://ndla-frontend.test.api.ndla.no/article/urn:resource:1/urn:subject:2/urn:something:3/1',
+        'https://ndla-frontend.test.api.ndla.no/subjects/resource:1/subject:2/something:3',
     },
     {
       id: 2,
@@ -65,7 +65,7 @@ const expectedValue = {
       introduction: { introduction: 'Test3', language: 'nb' },
       disable: false,
       link:
-        'https://ndla-frontend.test.api.ndla.no/article/urn:resource:1/urn:subject:2/urn:something:3/2',
+        'https://ndla-frontend.test.api.ndla.no/subjects/resource:1/subject:2/something:3',
     },
     {
       id: 3,
@@ -73,7 +73,7 @@ const expectedValue = {
       introduction: { introduction: 'Test2', language: 'nb' },
       disable: false,
       link:
-        'https://ndla-frontend.test.api.ndla.no/article/urn:resource:1/urn:subject:2/urn:something:3/3',
+        'https://ndla-frontend.test.api.ndla.no/subjects/resource:1/subject:2/something:3',
     },
   ],
   totalCount: 3,

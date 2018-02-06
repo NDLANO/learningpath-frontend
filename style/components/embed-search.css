@@ -44,6 +44,11 @@
   padding: 2em 0;
 }
 
+.embed-search_result--disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
 .embed-search_result-img {
   width: 30%;
   display: inline-block;
