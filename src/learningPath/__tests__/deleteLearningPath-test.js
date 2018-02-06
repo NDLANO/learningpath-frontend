@@ -9,24 +9,19 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
-
 import { deleteLearningPath } from '../learningPathActions';
+import { testError } from '../../common/__tests__/testError';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-const accessToken = '123345';
+const accessToken = '12345678';
 
-test('actions/deleteLearningPath', () => {
-  const done = res => {
-    done(res);
-    nock.cleanAll();
-  };
-
+test('actions/deleteLearningPath', done => {
   const apiMock = nock('http://ndla-api', {
-    reqheaders: { Authorization: `Bearer ${accessToken}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .delete('/learningpath-api/v1/learningpaths/123')
+    .delete('/learningpath-api/v2/learningpaths/123')
     .reply(204);
 
   const store = mockStore({ accessToken });
@@ -40,9 +35,8 @@ test('actions/deleteLearningPath', () => {
       });
       expect(store.getActions()[1].type).toBe('ADD_MESSAGE');
       expect(store.getActions()[1].payload.action).toBeTruthy();
-
       expect(() => apiMock.done()).not.toThrow();
       done();
     })
-    .catch(done);
+    .catch(testError);
 });

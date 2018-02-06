@@ -10,7 +10,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 import payload403invalid from '../../../../actions/__tests__/payload403invalid';
-
+import { testError } from '../../../../common/__tests__/testError';
 import { applicationError } from '../../../../messages/messagesActions';
 import {
   fetchLearningPathTags,
@@ -20,22 +20,17 @@ import {
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-const accessToken = '123345';
+const accessToken = '12345678';
 const tags = [
   { language: 'nb', tags: ['norsk', 'norge'] },
   { language: 'en', tags: ['norwegian', 'norway'] },
 ];
 
-test('actions/fetchLearningPathTags', () => {
-  const done = res => {
-    done(res);
-    nock.cleanAll();
-  };
-
+test('actions/fetchLearningPathTags', done => {
   const apiMock = nock('http://ndla-api', {
-    reqheaders: { Authorization: `Bearer ${accessToken}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .get('/learningpath-api/v1/learningpaths/tags')
+    .get('/learningpath-api/v2/learningpaths/tags')
     .reply(200, tags);
 
   const store = mockStore({ accessToken });
@@ -47,19 +42,14 @@ test('actions/fetchLearningPathTags', () => {
       expect(() => apiMock.done()).not.toThrow();
       done();
     })
-    .catch(done);
+    .catch(testError);
 });
 
-test('actions/fetchLearningPathTags access denied', () => {
-  const done = res => {
-    done(res);
-    nock.cleanAll();
-  };
-
+test('actions/fetchLearningPathTags access denied', done => {
   const apiMock = nock('http://ndla-api', {
-    reqheaders: { Authorization: `Bearer ${accessToken}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .get('/learningpath-api/v1/learningpaths/tags')
+    .get('/learningpath-api/v2/learningpaths/tags')
     .reply(403, { message: 'Invalid' });
 
   const store = mockStore({ accessToken });
@@ -70,12 +60,12 @@ test('actions/fetchLearningPathTags access denied', () => {
       expect(store.getActions()).toEqual([
         applicationError(
           payload403invalid(
-            'http://ndla-api/learningpath-api/v1/learningpaths/contributors',
+            'http://ndla-api/learningpath-api/v2/learningpaths/tags',
           ),
         ),
       ]);
       expect(() => apiMock.done()).not.toThrow();
       done();
     })
-    .catch(done);
+    .catch(testError);
 });

@@ -10,24 +10,19 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 import payload403invalid from '../../../actions/__tests__/payload403invalid';
-
+import { testError } from '../../../common/__tests__/testError';
 import { applicationError } from '../../../messages/messagesActions';
 import { updateStepSequenceNumber } from '../learningPathStepActions';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-const accessToken = '123345';
+const accessToken = '12345678';
 const pathId = 123;
 const stepId = 321;
 const seqNo = 3;
 
-test('actions/updateStepSequenceNumber sucessfully', () => {
-  const done = res => {
-    done(res);
-    nock.cleanAll();
-  };
-
+test('actions/updateStepSequenceNumber sucessfully', done => {
   const body = {
     seqNo: 3,
   };
@@ -36,10 +31,10 @@ test('actions/updateStepSequenceNumber sucessfully', () => {
 
   // updateSeqNo
   nock('http://ndla-api', {
-    reqheaders: { Authorization: `Bearer ${accessToken}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
   })
     .put(
-      `/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${
+      `/learningpath-api/v2/learningpaths/${pathId}/learningsteps/${
         stepId
       }/seqNo`,
       body,
@@ -47,9 +42,9 @@ test('actions/updateStepSequenceNumber sucessfully', () => {
     .reply(200, learningStepReply);
   // fetchLearningPath
   nock('http://ndla-api', {
-    reqheaders: { Authorization: `Bearer ${accessToken}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .get(`/learningpaths/${pathId}`)
+    .get(`/learningpath-api/v2/learningpaths/${pathId}`)
     .reply(200, { id: pathId });
 
   const store = mockStore({ accessToken });
@@ -59,28 +54,22 @@ test('actions/updateStepSequenceNumber sucessfully', () => {
     .then(() => {
       expect(store.getActions()).toEqual([]);
       expect(() => nock.isDone()).not.toThrow();
-
       done();
     })
-    .catch(done);
+    .catch(testError);
 });
 
-test('actions/updateStepSequenceNumber access denied', () => {
-  const done = res => {
-    done(res);
-    nock.cleanAll();
-  };
-
+test('actions/updateStepSequenceNumber access denied', done => {
   const body = {
     seqNo: 3,
   };
 
   // updateSeqNo
   nock('http://ndla-api', {
-    reqheaders: { Authorization: `Bearer ${accessToken}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
   })
     .put(
-      `/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${
+      `/learningpath-api/v2/learningpaths/${pathId}/learningsteps/${
         stepId
       }/seqNo`,
       body,
@@ -89,9 +78,9 @@ test('actions/updateStepSequenceNumber access denied', () => {
 
   // fetchLearningPath
   nock('http://ndla-api', {
-    reqheaders: { Authorization: `Bearer ${accessToken}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .get(`/learningpath-api/v1/learningpaths/${pathId}`)
+    .get(`/learningpath-api/v2/learningpaths/${pathId}`)
     .reply(200, { id: pathId });
 
   const store = mockStore({ accessToken });
@@ -102,15 +91,14 @@ test('actions/updateStepSequenceNumber access denied', () => {
       expect(store.getActions()).toEqual([
         applicationError(
           payload403invalid(
-            `http://ndla-api/learningpath-api/v1/learningpaths/${
+            `http://ndla-api/learningpath-api/v2/learningpaths/${
               pathId
             }/learningsteps/${stepId}/seqNo`,
           ),
         ),
       ]);
       expect(() => nock.isDone()).not.toThrow();
-
       done();
     })
-    .catch(done);
+    .catch(testError);
 });

@@ -11,26 +11,21 @@ import thunk from 'redux-thunk';
 import nock from 'nock';
 import { routerActions } from 'react-router-redux';
 import payload403invalid from '../../actions/__tests__/payload403invalid';
-
+import { testError } from '../../common/__tests__/testError';
 import { applicationError, addMessage } from '../../messages/messagesActions';
 import { updateLearningPath, setLearningPath } from '../learningPathActions';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-const accessToken = '123345';
+const accessToken = '12345678';
 const pathId = 123;
 
-test('actions/updateLearningPath', () => {
-  const done = res => {
-    done(res);
-    nock.cleanAll();
-  };
-
+test('actions/updateLearningPath', done => {
   const patchPathApi = nock('http://ndla-api', {
-    reqheaders: { Authorization: `Bearer ${accessToken}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .patch(`/learningpaths/${pathId}`, {
+    .patch(`/learningpath-api/v2/learningpaths/${pathId}`, {
       id: pathId,
       isRequest: true,
     })
@@ -54,24 +49,17 @@ test('actions/updateLearningPath', () => {
         }),
         routerActions.push({ pathname: `/learningpaths/${pathId}` }),
       ]);
-
       expect(() => patchPathApi.done()).not.toThrow();
-
       done();
     })
-    .catch(done);
+    .catch(testError);
 });
 
-test('actions/updateLearningPath with redirect', () => {
-  const done = res => {
-    done(res);
-    nock.cleanAll();
-  };
-
+test('actions/updateLearningPath with redirect', done => {
   const patchPathApi = nock('http://ndla-api', {
-    reqheaders: { Authorization: `Bearer ${accessToken}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .patch(`/learningpaths/${pathId}`, { id: pathId })
+    .patch(`/learningpath-api/v2/learningpaths/${pathId}`, { id: pathId })
     .reply(200, { id: pathId });
 
   const store = mockStore({ accessToken });
@@ -85,42 +73,37 @@ test('actions/updateLearningPath with redirect', () => {
       expect(actual[2]).toEqual(
         routerActions.push({ pathname: '/goto/dev/null' }),
       );
-
       expect(() => patchPathApi.done()).not.toThrow();
-
       done();
     })
-    .catch(done);
+    .catch(testError);
 });
 
-test('actions/updateLearningPath access denied', () => {
-  const done = res => {
-    done(res);
-    nock.cleanAll();
-  };
-
-  const apiMock = nock('http://ndla-api', {
-    reqheaders: { Authorization: `Bearer ${accessToken}` },
+test('actions/updateLearningPath access denied', done => {
+  const apiMock = nock('http://ndla-api:80', {
+    headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .patch(`/learningpaths/${pathId}`, {
+    .patch(`/learningpath-api/v2/learningpaths/${pathId}`, {
       id: pathId,
       foo: 'bar',
     })
     .reply(403, { message: 'Invalid' });
 
   const store = mockStore({ accessToken });
-
   store
     .dispatch(updateLearningPath(pathId, { id: pathId, foo: 'bar' }))
     .then(() => {
+      testError('Should have failed');
+    })
+    .catch(() => {
       expect(store.getActions()).toEqual([
         applicationError(
-          payload403invalid(`http://ndla-api/learningpaths/${pathId}`),
+          payload403invalid(
+            `http://ndla-api/learningpath-api/v2/learningpaths/${pathId}`,
+          ),
         ),
       ]);
       expect(() => apiMock.done()).not.toThrow();
-
       done();
-    })
-    .catch(done);
+    });
 });
