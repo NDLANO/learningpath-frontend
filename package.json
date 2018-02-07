@@ -65,7 +65,7 @@
     "postcss-focus": "3.0.0",
     "postcss-loader": "2.0.8",
     "postcss-nested": "2.1.2",
-    "prettier": "1.8.2",
+    "prettier": "1.10.2",
     "raf": "^3.4.0",
     "react-addons-test-utils": "^15.6.2",
     "react-test-renderer": "^16.0.0",
@@ -98,6 +98,7 @@
     "form-data": "^2.3.1",
     "helmet": "^3.9.0",
     "history": "^4.7.2",
+    "hoist-non-react-statics": "2.3.1",
     "immutable": "3.8.2",
     "isomorphic-fetch": "2.2.1",
     "jwt-decode": "^2.2.0",
@@ -131,7 +132,8 @@
     "serialize-javascript": "1.4.0",
     "source-map-support": "^0.5.0",
     "svg4everybody": "^2.1.9",
-    "tracekit": "^0.4.5"
+    "tracekit": "^0.4.5",
+    "warning": "3.0.0"
   },
   "repository": {
     "type": "git",

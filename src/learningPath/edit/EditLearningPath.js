@@ -27,6 +27,8 @@ import {
   getLearningPathSteps,
 } from '../learningPathSelectors';
 import { getLocale } from '../../locale/localeSelectors';
+import polyglot from '../../i18n';
+import HelmetWithTracker from '../../common/HelmetWithTracker';
 
 class EditLearningPath extends Component {
   componentDidMount() {
@@ -79,6 +81,7 @@ class EditLearningPath extends Component {
 
     return (
       <div className="two-column_content">
+        <HelmetWithTracker title={polyglot.t('htmlTitles.editLearningPath')} />
         <LearningPathForm
           learningPath={learningPath}
           tagOptions={tags}

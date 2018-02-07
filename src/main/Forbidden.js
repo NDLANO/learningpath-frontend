@@ -9,11 +9,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import polyglot from '../i18n';
+import HelmetWithTracker from '../common/HelmetWithTracker';
 
 export default function Forbidden() {
   return (
     <div className="status-response_container">
-      <h2>403: {polyglot.t('htmlStatus.forbidden')}</h2>
+      <HelmetWithTracker title={polyglot.t('htmlTitles.forbidden')} />
+      <h2>403: {polyglot.t('htmlStatus.forbidden.description')}</h2>
       <Link to="/" className="cta-link--primary">
         {polyglot.t('htmlStatus.backToFrontpage')}
       </Link>

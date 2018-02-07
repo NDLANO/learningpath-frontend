@@ -11,11 +11,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import Oembed from './oembed/Oembed';
-import polyglot from '../../i18n';
 import { fetchLearningPathStep } from './learningPathStepActions';
 import LearningPathStepInformation from './LearningPathStepInformation';
 import LearningPathStepPrevNext from './LearningPathStepPrevNext';
 import { getLearningPathStep } from './learningPathStepSelectors';
+import withTracker from '../../common/withTracker';
+import polyglot from '../../i18n';
 
 class LearningPathStep extends React.Component {
   static mapDispatchToProps = {
@@ -28,6 +29,22 @@ class LearningPathStep extends React.Component {
       match: { params: { pathId, stepId } },
     } = props;
     return localFetchLearningPathStep(pathId, stepId);
+  }
+
+  static getDocumentTitle(props) {
+    const { learningPathStep } = props;
+    return learningPathStep.title + polyglot.t('htmlTitles.titleTemplate');
+  }
+
+  static willTrackPageView(trackPageView, currentProps) {
+    const { learningPathStep, match } = currentProps;
+    if (
+      learningPathStep &&
+      learningPathStep.id &&
+      learningPathStep.id.toString() === match.params.stepId
+    ) {
+      trackPageView(currentProps);
+    }
   }
 
   componentWillMount() {
@@ -58,11 +75,7 @@ class LearningPathStep extends React.Component {
           currentStepId={learningPathStep.id}
           lang={lang}>
           <div className="two-column_content--wide">
-            <Helmet
-              title={polyglot.t('htmlTitleTemplates.learningPathStep', {
-                title: learningPathStep.title || '',
-              })}
-            />
+            <Helmet title={this.constructor.getDocumentTitle(this.props)} />
             <LearningPathStepInformation
               learningPathStep={learningPathStep}
               stepTitle={learningPathStep.title}
@@ -98,5 +111,5 @@ const mapStateToProps = state =>
   });
 
 export default connect(mapStateToProps, LearningPathStep.mapDispatchToProps)(
-  LearningPathStep,
+  withTracker(LearningPathStep),
 );

@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import * as actions from './sessionActions';
 import polyglot from '../i18n';
+import HelmetWithTracker from '../common/HelmetWithTracker';
 
 export class LogoutSession extends React.Component {
   constructor() {
@@ -34,6 +35,7 @@ export class LogoutSession extends React.Component {
 
     return (
       <div className="one-column one-column--narrow logout-container one-column--text-centered">
+        <HelmetWithTracker title={polyglot.t('htmlTitles.logoutSession')} />
         <button
           className="button--primary-outline cta-link--block"
           onClick={() => this.handleLogoutClick()}>

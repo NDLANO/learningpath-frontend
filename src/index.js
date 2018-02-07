@@ -18,6 +18,7 @@ import { configureLocale, isValidLocale } from './locale/configureLocale';
 import configureStore from './configureStore';
 import App from './main/App';
 import { getTokenExpireAt } from './util/jwtHelper';
+import { configureTracker } from './common/tracker';
 
 function generateBasename(path) {
   if (isValidLocale(path)) {
@@ -65,6 +66,12 @@ window.errorReporter = ErrorReporter.getInstance({
   componentName,
 });
 TokenStatusHandler.getInstance({ store });
+
+configureTracker({
+  listen: browserHistory.listen,
+  gaTrackingId: window.config.gaTrackingId,
+  googleTagManagerId: window.config.googleTagManagerId,
+});
 
 ReactDOM.hydrate(
   <Provider store={store} locale={locale}>

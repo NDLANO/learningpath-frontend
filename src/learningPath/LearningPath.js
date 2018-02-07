@@ -8,6 +8,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { routerActions } from 'react-router-redux';
@@ -19,6 +20,7 @@ import PrivateRoute from '../main/PrivateRoute';
 import CopyLearningPath from '../learningPath/new/CopyLearningPath';
 import Masthead from '../common/Masthead';
 import Icon from '../common/Icon';
+import withTracker from '../common/withTracker';
 import SortLearningStepsButton from './sidebar/SortLearningStepsButton';
 import LearningPathSummary from './sidebar/LearningPathSummary';
 import { fetchLearningPath, copyLearningPath } from './learningPathActions';
@@ -33,6 +35,7 @@ import LearningPathToCButtons from './sidebar/LearningPathToCButtons';
 import AddLearningPathStepButton from './sidebar/AddLearningPathStepButton';
 import PinterestLightboxButton from '../pinterest/PinterestLightboxButton';
 import PinterestLightbox from '../pinterest/PinterestLightbox';
+import polyglot from '../i18n';
 
 export class LearningPath extends Component {
   static mapDispatchToProps = {
@@ -62,6 +65,22 @@ export class LearningPath extends Component {
     return localFetchLearningPath(pathId, false);
   }
 
+  static getDocumentTitle(props) {
+    const { learningPath } = props;
+    return learningPath.title + polyglot.t('htmlTitles.titleTemplate');
+  }
+
+  static willTrackPageView(trackPageView, currentProps) {
+    const { learningPath, match: { url, params: { pathId } } } = currentProps;
+    if (
+      learningPath.id &&
+      learningPath.id.toString() === pathId &&
+      !url.includes('first-step') // Skip first-step which is just a redirect
+    ) {
+      trackPageView(currentProps);
+    }
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -71,9 +90,11 @@ export class LearningPath extends Component {
     this.onCopyLearningPathClick = this.onCopyLearningPathClick.bind(this);
     this.togglePinterest = this.togglePinterest.bind(this);
   }
+
   componentDidMount() {
     LearningPath.fetchData(this.props);
   }
+
   onCopyLearningPathClick() {
     this.setState({
       displayCopyPath: true,
@@ -148,6 +169,7 @@ export class LearningPath extends Component {
     };
     return (
       <div className="wrapper">
+        <Helmet title={this.constructor.getDocumentTitle(this.props)} />
         <Masthead
           changeStatusButton={changeStatusButton}
           sortableTableOfContentButton={sortableTableOfContentButton}>
@@ -241,5 +263,7 @@ const mapStateToProps = (state, ownProps) =>
   });
 
 export default withRouter(
-  connect(mapStateToProps, LearningPath.mapDispatchToProps)(LearningPath),
+  connect(mapStateToProps, LearningPath.mapDispatchToProps)(
+    withTracker(LearningPath),
+  ),
 );

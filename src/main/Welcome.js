@@ -17,6 +17,7 @@ import polyglot from '../i18n';
 import Masthead from '../common/Masthead';
 import { Wrapper, OneColumn, Footer } from '../common/Layout';
 import requireAssets from '../util/requireAssets';
+import HelmetWithTracker from '../common/HelmetWithTracker';
 
 class Welcome extends Component {
   constructor(props) {
@@ -40,6 +41,7 @@ class Welcome extends Component {
   render() {
     return (
       <Wrapper>
+        <HelmetWithTracker title={polyglot.t('htmlTitles.welcomePage')} />
         <OneColumn>
           <div className="frontpage-masthead">
             <Masthead logo={<Logo beta cssModifier="on-dark" />} />

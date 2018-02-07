@@ -36,20 +36,14 @@ const pinterestActivated = activatedForEnvironment(
   false,
 );
 
-const googleTagMangerId = activatedForEnvironment(
-  {
-    test: process.env.GOOGLE_TAG_MANGER_ID_TEST,
-  },
-  process.env.GOOGLE_TAG_MANGER_ID || undefined,
-);
-
 module.exports = Object.assign(
   {
     componentName: process.env.npm_package_name,
     host: process.env.LEARINGPATH_HOST || 'localhost',
     port: process.env.LEARINGPATH_PORT || '3000',
     redirectPort: process.env.LEARNINGPATH_REDIRECT_PORT || '3001',
-    googleTagMangerId,
+    googleTagManagerId: process.env.GOOGLE_TAG_MANAGER_ID,
+    gaTrackingId: process.env.NDLA_GA_TRACKING_ID,
     hotjarSiteID,
     ndlaApiUrl: process.env.NDLA_API_URL || apiDomain,
     googleSearchEngineId: process.env.NDLA_GOOGLE_SEARCH_ENGINE_ID,

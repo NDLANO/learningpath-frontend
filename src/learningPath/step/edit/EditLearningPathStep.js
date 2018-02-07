@@ -8,6 +8,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import assign from 'lodash/assign';
 import get from 'lodash/get';
@@ -27,6 +28,7 @@ import {
   formattedEmbedDescription,
   formattedEmbedLicense,
 } from '../../../util/formatFormFieldsUtil';
+import withTracker from '../../../common/withTracker';
 
 export const saveStepObject = (step, values, language) =>
   Object.assign({}, step, {
@@ -40,6 +42,12 @@ export const saveStepObject = (step, values, language) =>
   });
 
 class EditLearningPathStep extends Component {
+  static getDocumentTitle(props) {
+    return props.step.id
+      ? polyglot.t('htmlTitles.editLearningPathStep')
+      : polyglot.t('htmlTitles.createLearningPathStep');
+  }
+
   componentWillMount() {
     const {
       authenticated,
@@ -79,6 +87,7 @@ class EditLearningPathStep extends Component {
 
     return (
       <div className="two-column_content--wide learning-path-step two-column_content--white-bg">
+        <Helmet title={this.constructor.getDocumentTitle(this.props)} />
         <LearningPathStepForm
           step={step}
           learningPath={learningPath}
@@ -133,5 +142,5 @@ export const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  EditLearningPathStep,
+  withTracker(EditLearningPathStep),
 );

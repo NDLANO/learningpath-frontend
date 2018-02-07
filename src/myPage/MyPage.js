@@ -30,6 +30,7 @@ import {
   setMyLearningPathsSortOrder,
   fetchMyLearningPaths,
 } from './myPageActions';
+import HelmetWithTracker from '../common/HelmetWithTracker';
 import { getLearningPaths, getSortKey } from './myPageSelectors';
 
 export class MyPage extends React.Component {
@@ -88,6 +89,7 @@ export class MyPage extends React.Component {
 
       return (
         <div key={lp.id} className="tile">
+          <HelmetWithTracker title={polyglot.t('htmlTitles.myPage')} />
           <div className="tile_hd">
             <div className="tile_date">{lastUpdated}</div>
             <div className="tile_context-menu">

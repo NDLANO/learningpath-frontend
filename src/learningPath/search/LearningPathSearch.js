@@ -13,6 +13,8 @@ import { connect } from 'react-redux';
 import queryString from 'query-string';
 import { routerActions } from 'react-router-redux';
 import upperFirst from 'lodash/upperFirst';
+import HelmetWithTracker from '../../common/HelmetWithTracker';
+import polyglot from '../../i18n';
 import LinkPager from '../../common/pager/LinkPager';
 import SearchForm from './LearningPathSearchForm';
 import SearchResult from './LearningPathSearchResult';
@@ -42,6 +44,7 @@ class LearningPathSearch extends React.Component {
   componentWillMount() {
     LearningPathSearch.fetchData(this.props);
   }
+
   componentWillReceiveProps(nextProps) {
     if (this.props.location.search !== nextProps.location.search) {
       this.props.localSearchLearningPaths(
@@ -86,6 +89,9 @@ class LearningPathSearch extends React.Component {
 
     return (
       <Wrapper>
+        <HelmetWithTracker
+          title={polyglot.t('htmlTitles.learningPathSearch')}
+        />
         <OneColumn className={'one-colum--white-bg'}>
           <Masthead />
           <div className="page-header">

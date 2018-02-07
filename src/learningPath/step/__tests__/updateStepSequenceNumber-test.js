@@ -34,9 +34,7 @@ test('actions/updateStepSequenceNumber sucessfully', done => {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
     .put(
-      `/learningpath-api/v2/learningpaths/${pathId}/learningsteps/${
-        stepId
-      }/seqNo`,
+      `/learningpath-api/v2/learningpaths/${pathId}/learningsteps/${stepId}/seqNo`,
       body,
     )
     .reply(200, learningStepReply);
@@ -69,9 +67,7 @@ test('actions/updateStepSequenceNumber access denied', done => {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
     .put(
-      `/learningpath-api/v2/learningpaths/${pathId}/learningsteps/${
-        stepId
-      }/seqNo`,
+      `/learningpath-api/v2/learningpaths/${pathId}/learningsteps/${stepId}/seqNo`,
       body,
     )
     .reply(403, { message: 'Invalid' });
@@ -91,9 +87,7 @@ test('actions/updateStepSequenceNumber access denied', done => {
       expect(store.getActions()).toEqual([
         applicationError(
           payload403invalid(
-            `http://ndla-api/learningpath-api/v2/learningpaths/${
-              pathId
-            }/learningsteps/${stepId}/seqNo`,
+            `http://ndla-api/learningpath-api/v2/learningpaths/${pathId}/learningsteps/${stepId}/seqNo`,
           ),
         ),
       ]);

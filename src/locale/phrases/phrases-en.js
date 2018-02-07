@@ -6,7 +6,25 @@
  *
  */
 
+const titleTemplate = ' - Læringssti NDLA';
+
 const phrases = {
+  htmlTitles: {
+    titleTemplate,
+    welcomePage: `Frontpage${titleTemplate}`,
+    learningPathSearch: `Search${titleTemplate}`,
+    sessionInitializer: `Logged in${titleTemplate}`,
+    loginFailure: `Login failed${titleTemplate}`,
+    logoutSession: `Logout${titleTemplate}`,
+    loginProviders: `Log in${titleTemplate}`,
+    myPage: `My page${titleTemplate}`,
+    forbidden: `No access${titleTemplate}`,
+    notFound: `Not found${titleTemplate}`,
+    editLearningPath: `Edit learning path${titleTemplate}`,
+    editLearningPathStep: `Edit learning path step${titleTemplate}`,
+    createLearningPathStep: `Create learning path step${titleTemplate}`,
+    sortLearningPathSteps: `Sort or delete learning path steps${titleTemplate}`,
+  },
   searchForm: {
     placeholder: 'Search learning paths',
     btn: 'Search',
@@ -29,6 +47,7 @@ const phrases = {
     description: 'Log in with',
   },
   logoutSession: {
+    title: 'Logout',
     or: 'or',
     logoutWholeSession: 'Logout from all services',
     logutLearningpathSite: 'Logout from learningpaths',
@@ -228,9 +247,6 @@ const phrases = {
   updateLearningPathStatus: {
     updateStatusMsg: 'Status updated',
   },
-  htmlTitleTemplates: {
-    learningPathStep: '%{title} (learning path from NDLA.no)',
-  },
   validation: {
     required: 'The field is required.',
     integer: 'Must be a number.',
@@ -288,8 +304,12 @@ const phrases = {
     },
   },
   htmlStatus: {
-    notFound: 'The page cannot be found',
-    forbidden: 'You do not have access to this page',
+    notFound: {
+      description: 'The page cannot be found',
+    },
+    forbidden: {
+      description: 'You do not have access to this page',
+    },
     backToFrontpage: 'Go to frontpage',
   },
 };

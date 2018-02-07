@@ -6,7 +6,27 @@
  *
  */
 
+const titleTemplate = ' - Læringssti NDLA';
+
 const phrases = {
+  htmlTitles: {
+    // key equals component where title is used
+    titleTemplate,
+    welcomePage: `Forsiden${titleTemplate}`,
+    learningPathSearch: `Søk${titleTemplate}`,
+    sessionInitializer: `Logget inn${titleTemplate}`,
+    loginFailure: `Innlogging feilet${titleTemplate}`,
+    logoutSession: `Logg ut${titleTemplate}`,
+    loginProviders: `Logg inn${titleTemplate}`,
+    myPage: `Min side${titleTemplate}`,
+    forbidden: `Ikke tilgang${titleTemplate}`,
+    notFound: `Siden finnes ikke${titleTemplate}`,
+    editLearningPath: `Rediger læringssti${titleTemplate}`,
+    createLearningPath: `Opprett læringssti${titleTemplate}`,
+    editLearningPathStep: `Rediger læringssteg${titleTemplate}`,
+    createLearningPathStep: `Opprett læringssteg${titleTemplate}`,
+    sortLearningPathSteps: `Sorter eller slett læringssteg${titleTemplate}`,
+  },
   searchForm: {
     placeholder: 'Søk etter læringsstier',
     btn: 'Søk',
@@ -226,9 +246,6 @@ const phrases = {
   updateLearningPathStatus: {
     updateStatusMsg: 'Oppdatert status OK',
   },
-  htmlTitleTemplates: {
-    learningPathStep: '%{title} (Læringssti fra NDLA.no)',
-  },
   validation: {
     required: 'Feltet er påkrevd.',
     integer: 'Må være et tall.',
@@ -286,8 +303,13 @@ const phrases = {
     },
   },
   htmlStatus: {
-    notFound: 'Denne siden finnes ikke',
-    forbidden: 'Du har ikke tilgang til denne siden',
+    notFound: {
+      description: 'Denne siden finnes ikke',
+    },
+    forbidden: {
+      description: 'Du har ikke tilgang til denne siden',
+    },
+
     backToFrontpage: 'Tilbake til forsiden',
   },
 };

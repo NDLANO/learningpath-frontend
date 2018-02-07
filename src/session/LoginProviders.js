@@ -9,9 +9,11 @@
 import React from 'react';
 import polyglot from '../i18n';
 import { loginPersonalAuth } from './sessionActions';
+import HelmetWithTracker from '../common/HelmetWithTracker';
 
 const LoginProviders = () => (
   <div className="one-column one-column--narrow">
+    <HelmetWithTracker title={polyglot.t('htmlTitles.loginProviders')} />
     <h3>{polyglot.t('loginProviders.description')}</h3>
     <ul className="vertical-menu">
       <li className="vertical-menu_item">

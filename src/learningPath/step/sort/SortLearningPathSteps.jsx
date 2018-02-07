@@ -17,6 +17,8 @@ import {
   deleteLearningPathStep,
   sortLearningPathSteps,
 } from '../learningPathStepActions';
+import polyglot from '../../../i18n';
+import HelmetWithTracker from '../../../common/HelmetWithTracker';
 
 class SortLearningPathSteps extends Component {
   onSortEnd = indexes => {
@@ -55,6 +57,9 @@ class SortLearningPathSteps extends Component {
         ref={contentDiv => {
           this.contentDiv = contentDiv;
         }}>
+        <HelmetWithTracker
+          title={polyglot.t('htmlTitles.sortLearningPathSteps')}
+        />
         {learningPath && learningPath.learningsteps && learningPath.id ? (
           <SortableLearningStepList
             learningPathId={learningPath.id}

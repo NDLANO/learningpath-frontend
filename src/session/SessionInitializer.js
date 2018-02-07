@@ -9,6 +9,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Helmet from 'react-helmet';
+import polyglot from '../i18n';
 import { parseHash } from './sessionActions';
 
 export class SessionInitializer extends React.Component {
@@ -18,7 +20,11 @@ export class SessionInitializer extends React.Component {
   }
 
   render() {
-    return <div />;
+    return (
+      <div>
+        <Helmet title={polyglot.t('htmlTitles.sessionInitializer')} />
+      </div>
+    );
   }
 }
 
