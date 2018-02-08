@@ -11,6 +11,10 @@ module.exports = require('./webpack.config.base')({
   // In production, we skip all hot-reloading stuff
   entry: [],
 
+  babelPresetTargets: {
+    browsers: ['last 2 versions', 'IE >= 12'],
+  },
+
   // Utilize long-term caching by adding content hashes (not compilation hashes) to compiled assets
   output: {
     filename: '[name].[chunkhash].js',

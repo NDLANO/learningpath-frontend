@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`selectors/getArticleResultFromState 1`] = `
+Array [
+  Object {
+    "disabled": false,
+    "id": 1,
+    "introduction": "Test",
+    "showUrl": false,
+    "thumbnail": "/assets/placeholder.png",
+    "title": "Test",
+  },
+  Object {
+    "disabled": false,
+    "id": 2,
+    "introduction": "Test3",
+    "showUrl": false,
+    "thumbnail": "/assets/placeholder.png",
+    "title": "Test3",
+  },
+  Object {
+    "disabled": false,
+    "id": 3,
+    "introduction": "Test2",
+    "showUrl": false,
+    "thumbnail": "/assets/placeholder.png",
+    "title": "Test2",
+  },
+]
+`;

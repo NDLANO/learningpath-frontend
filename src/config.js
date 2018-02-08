@@ -19,9 +19,17 @@ const activatedForEnvironment = (config, defaultValue) => {
   return defaultValue;
 };
 
+const ndlaFrontendDomain = activatedForEnvironment(
+  {
+    local: 'http://api-gateway.ndla-local:30017',
+    prod: 'https://beta.ndla.no/',
+  },
+  `https://ndla-frontend.${environment}.api.ndla.no`,
+);
+
 const apiDomain = activatedForEnvironment(
   {
-    local: 'http://proxy.ndla-local',
+    local: 'http://api-gateway.ndla-local',
     prod: 'https://api.ndla.no',
   },
   `https://${environment}.api.ndla.no`,
@@ -45,6 +53,7 @@ module.exports = Object.assign(
     googleTagManagerId: process.env.GOOGLE_TAG_MANAGER_ID,
     gaTrackingId: process.env.NDLA_GA_TRACKING_ID,
     hotjarSiteID,
+    ndlaFrontendDomain,
     ndlaApiUrl: process.env.NDLA_API_URL || apiDomain,
     googleSearchEngineId: process.env.NDLA_GOOGLE_SEARCH_ENGINE_ID,
     googleApiKey: process.env.NDLA_GOOGLE_API_KEY,

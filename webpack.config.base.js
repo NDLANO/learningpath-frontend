@@ -30,6 +30,41 @@ module.exports = options => ({
         test: /\.jsx?|\.js?$/, // Transform all .js and .jsx files required somewhere with Babel
         exclude: [/node_modules/], // See .babelrc
         loaders: 'babel-loader',
+        options: {
+          babelrc: false,
+          presets: [
+            'react',
+            [
+              'env',
+              {
+                targets: options.babelPresetTargets,
+                useBuiltIns: true,
+                modules: false,
+                exclude: [
+                  'es6.symbol',
+                  'es6.map',
+                  'es6.set',
+                  'es6.weak-map',
+                  'es6.weak-set',
+                  'es6.typed.array-buffer',
+                  'es6.typed.int8-array',
+                  'es6.typed.uint8-array',
+                  'es6.typed.uint8-clamped-array',
+                  'es6.typed.int16-array',
+                  'es6.typed.uint16-array',
+                  'es6.typed.int32-array',
+                  'es6.typed.uint32-array',
+                  'es6.typed.float32-array',
+                  'es6.typed.float64-array',
+                ],
+              },
+            ],
+          ],
+          plugins: [
+            'transform-object-rest-spread',
+            'transform-class-properties',
+          ],
+        },
       },
       {
         test: /\.jpe?g$|\.gif$|\.png$|\.ico|\.svg$|\.woff$|\.ttf$/,

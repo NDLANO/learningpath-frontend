@@ -20,7 +20,7 @@ test('component/Alerts one message', () => {
   const component = shallow(
     <Alerts messages={alertMessages} dispatch={noop} />,
   );
-  const alertElement = component.find('Alert');
+  const alertElement = component.find(Alert);
 
   expect(alertElement.length).toBe(1);
 });
@@ -35,7 +35,7 @@ test('component/Alerts two messages', () => {
     <Alerts messages={alertMessages} dispatch={noop} />,
   );
 
-  const alertElement = component.find('Alert');
+  const alertElement = component.find(Alert);
   expect(alertElement.length).toBe(2);
 });
 

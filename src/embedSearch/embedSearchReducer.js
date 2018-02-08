@@ -9,25 +9,28 @@
 import { handleActions } from 'redux-actions';
 import cloneDeep from 'lodash/cloneDeep';
 
-const typeBaseDefaultState = (filterKey, name, type) => ({
-  result: {},
-  query: {
-    start: 1,
-    textQuery: '',
-    filter: { key: filterKey, name, type },
-    page: 1,
-    numberOfPages: 1,
-  },
-  oembedContent: {},
-});
-
 const initialState = {
-  ndla: typeBaseDefaultState(
-    'more:ndla more:pagemap:metatags-nodetype:fagstoff',
-    'NDLA',
-    'oembed',
-  ),
-  external: typeBaseDefaultState('more:youtube', 'Youtube', 'oembed'),
+  ndla: {
+    query: {
+      textQuery: '',
+      page: 1,
+      'page-size': 10,
+      numberOfPages: 1,
+    },
+    oembedContent: {},
+    result: {},
+  },
+  external: {
+    query: {
+      start: 1,
+      textQuery: '',
+      filter: { key: 'more:youtube', name: 'Youtube', type: 'oembed' },
+      page: 1,
+      numberOfPages: 1,
+    },
+    result: {},
+    oembedContent: {},
+  },
 };
 export default handleActions(
   {

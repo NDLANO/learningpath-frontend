@@ -9,7 +9,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import get from 'lodash/get';
 import EmbedSearchForm from '../embedSearch/EmbedSearchForm';
 import * as actions from '../embedSearch/embedSearchActions';
 import ExternalOembedPreview from './ExternalOembedPreview';
@@ -51,7 +50,7 @@ class ExternalOembedSearch extends React.Component {
 
   render() {
     const {
-      result,
+      results,
       localFetchEmbedSearch,
       oembedPreview,
       query,
@@ -68,8 +67,7 @@ class ExternalOembedSearch extends React.Component {
     ) : (
       ''
     );
-    const resultItems = get(result, 'items', []);
-    const emptyResult = resultItems.length === 0;
+    const emptyResult = results.length === 0;
     return (
       <div className="embed-search_container embed-search_container--active">
         <h4>{polyglot.t('embedSearch.form.externalTitle')}</h4>
@@ -83,8 +81,8 @@ class ExternalOembedSearch extends React.Component {
 
         <div className="embed-search_results">
           {!emptyResult ? (
-            resultItems.map(item => (
-              <div key={item.cacheId}>
+            results.map(item => (
+              <div key={item.id}>
                 <EmbedSearchResult
                   item={item}
                   onPreviewClick={this.previewOembed}
@@ -105,7 +103,7 @@ class ExternalOembedSearch extends React.Component {
 
 ExternalOembedSearch.propTypes = {
   localFetchEmbedSearch: PropTypes.func.isRequired,
-  result: PropTypes.object.isRequired,
+  results: PropTypes.array.isRequired,
   localFetchOembed: PropTypes.func.isRequired,
   oembedPreview: PropTypes.object,
   removeOembed: PropTypes.func.isRequired,
@@ -129,7 +127,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state =>
   Object.assign({}, state, {
-    result: getEmbedResultFromState(state, searchType),
+    results: getEmbedResultFromState(state, searchType),
     query: getEmbedQueryFromState(state, searchType),
     oembedPreview: getOembedContentFromState(state, searchType),
   });

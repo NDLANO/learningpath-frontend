@@ -7,6 +7,14 @@
  */
 
 import { createSelector } from 'reselect';
+import requireAssets from '../util/requireAssets';
+
+const imageSource = pagemap => {
+  if (pagemap && pagemap.cse_thumbnail && pagemap.cse_thumbnail.length > 0) {
+    return pagemap.cse_thumbnail[0].src;
+  }
+  return `/assets/${requireAssets['placeholder.png']}`;
+};
 
 const getTotalResultsFromState = (state, type) => {
   const result = state.embedSearch[type].result;
@@ -23,8 +31,19 @@ export const getNumberOfPages = createSelector(
   },
 );
 
-export const getEmbedResultFromState = (state, type) =>
-  state.embedSearch[type].result;
+export const getEmbedResultFromState = (state, type) => {
+  const result = state.embedSearch[type].result;
+  return result && result.items
+    ? result.items.map(item => ({
+        id: item.cacheId,
+        title: item.title,
+        link: item.link,
+        introduction: item.snippet,
+        thumbnail: imageSource(item.pagemap),
+        showUrl: true,
+      }))
+    : [];
+};
 
 export const getEmbedQueryFromState = (state, type) =>
   state.embedSearch[type].query;
