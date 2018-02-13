@@ -50,7 +50,7 @@ export const Footer = () => (
     <p className="footer_text">
       <span className="footer_editor">
         {polyglot.t('footer.footerEditiorInChief')}
-        <strong>Øivind Høines</strong>
+        <strong>Christer Gundersen</strong>
       </span>
       <span className="footer_editor">
         {polyglot.t('footer.footerManagingEditor')}{' '}
