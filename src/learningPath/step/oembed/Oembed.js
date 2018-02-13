@@ -79,7 +79,7 @@ export default class Oembed extends React.Component {
     ) {
       return;
     }
-
+    
     const iframe = this.getIframeDOM();
 
     if (iframe.contentWindow !== get(evt, 'source')) {
@@ -89,7 +89,7 @@ export default class Oembed extends React.Component {
     /* Needed to enforce content to stay within iframe on Safari iOS */
     iframe.setAttribute('scrolling', 'no');
 
-    const newHeight = parseInt(get(evt, 'data.height', 0), 10) + 55;
+    const newHeight = parseInt(get(evt, 'data.height', 0), 10);
 
     iframe.style.height = `${newHeight}px`;
     this.setState({ isLoadingResource: false });
