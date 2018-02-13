@@ -12,7 +12,7 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import assign from 'lodash/assign';
 import get from 'lodash/get';
-
+import { withTracker } from 'ndla-tracker';
 import LearningPathStepForm from './LearningPathStepForm';
 import {
   fetchLearningPathStep,
@@ -28,7 +28,6 @@ import {
   formattedEmbedDescription,
   formattedEmbedLicense,
 } from '../../../util/formatFormFieldsUtil';
-import withTracker from '../../../common/withTracker';
 
 export const saveStepObject = (step, values, language) =>
   Object.assign({}, step, {

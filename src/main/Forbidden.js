@@ -8,8 +8,8 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { HelmetWithTracker } from 'ndla-tracker';
 import polyglot from '../i18n';
-import HelmetWithTracker from '../common/HelmetWithTracker';
 
 export default function Forbidden() {
   return (

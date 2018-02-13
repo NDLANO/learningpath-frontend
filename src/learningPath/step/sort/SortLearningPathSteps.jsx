@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { arrayMove } from 'react-sortable-hoc';
 import { connect } from 'react-redux';
+import { HelmetWithTracker } from 'ndla-tracker';
 import SortableLearningStepList from './SortableLearningStepList';
 import { getLearningPath } from '../../learningPathSelectors';
 import {
@@ -18,7 +19,6 @@ import {
   sortLearningPathSteps,
 } from '../learningPathStepActions';
 import polyglot from '../../../i18n';
-import HelmetWithTracker from '../../../common/HelmetWithTracker';
 
 class SortLearningPathSteps extends Component {
   onSortEnd = indexes => {

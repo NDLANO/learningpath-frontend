@@ -7,9 +7,9 @@
  */
 
 import React from 'react';
+import { HelmetWithTracker } from 'ndla-tracker';
 import polyglot from '../i18n';
 import { loginPersonalAuth } from './sessionActions';
-import HelmetWithTracker from '../common/HelmetWithTracker';
 
 const LoginProviders = () => (
   <div className="one-column one-column--narrow">

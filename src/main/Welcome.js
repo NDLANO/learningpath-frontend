@@ -11,13 +11,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { routerActions } from 'react-router-redux';
 import isEmpty from 'lodash/isEmpty';
+import { HelmetWithTracker } from 'ndla-tracker';
 import queryString from 'query-string';
 import Logo from '../common/Logo';
 import polyglot from '../i18n';
 import Masthead from '../common/Masthead';
 import { Wrapper, OneColumn, Footer } from '../common/Layout';
 import requireAssets from '../util/requireAssets';
-import HelmetWithTracker from '../common/HelmetWithTracker';
 
 class Welcome extends Component {
   constructor(props) {

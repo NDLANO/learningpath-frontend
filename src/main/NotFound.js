@@ -7,9 +7,9 @@
  */
 
 import React from 'react';
+import { HelmetWithTracker } from 'ndla-tracker';
 import { Link } from 'react-router-dom';
 import polyglot from '../i18n';
-import HelmetWithTracker from '../common/HelmetWithTracker';
 
 export default function NotFound() {
   return (

@@ -10,6 +10,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { HelmetWithTracker } from 'ndla-tracker';
 import {
   deleteLearningPath,
   createLearningPath,
@@ -30,7 +31,6 @@ import {
   setMyLearningPathsSortOrder,
   fetchMyLearningPaths,
 } from './myPageActions';
-import HelmetWithTracker from '../common/HelmetWithTracker';
 import { getLearningPaths, getSortKey } from './myPageSelectors';
 
 export class MyPage extends React.Component {

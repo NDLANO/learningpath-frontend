@@ -106,6 +106,7 @@
     "ndla-article-scripts": "^0.1.1",
     "ndla-error-reporter": "^0.1.14",
     "ndla-licenses": "^0.1.0",
+    "ndla-tracker": "0.0.6",
     "ndla-ui": "^0.8.11",
     "ndla-util": "^0.1.7",
     "node-polyglot": "2.2.2",
