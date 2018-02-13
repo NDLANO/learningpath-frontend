@@ -72,6 +72,7 @@ configureTracker({
   listen: browserHistory.listen,
   gaTrackingId: window.config.gaTrackingId,
   googleTagManagerId: window.config.googleTagManagerId,
+  debug: true,
 });
 
 ReactDOM.hydrate(

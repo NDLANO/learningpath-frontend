@@ -36,6 +36,7 @@ import AddLearningPathStepButton from './sidebar/AddLearningPathStepButton';
 import PinterestLightboxButton from '../pinterest/PinterestLightboxButton';
 import PinterestLightbox from '../pinterest/PinterestLightbox';
 import polyglot from '../i18n';
+import { convertToGaOrGtmDimension } from '../util/trackingUtil';
 
 export class LearningPath extends Component {
   static mapDispatchToProps = {
@@ -79,6 +80,17 @@ export class LearningPath extends Component {
     ) {
       trackPageView(currentProps);
     }
+  }
+
+  static getDimensions(props) {
+    const { learningPath } = props;
+    const dimensions = {
+      13: learningPath.learningsteps.length,
+    };
+    return {
+      ga: convertToGaOrGtmDimension(dimensions, 'ga'),
+      gtm: convertToGaOrGtmDimension(dimensions, 'gtm'),
+    };
   }
 
   constructor(props) {
