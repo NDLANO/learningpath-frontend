@@ -79,7 +79,7 @@ export default class Oembed extends React.Component {
     ) {
       return;
     }
-    
+
     const iframe = this.getIframeDOM();
 
     if (iframe.contentWindow !== get(evt, 'source')) {
