@@ -188,6 +188,7 @@ const phrases = {
     login: 'Logg inn',
     search: 'Finn læringssti',
     myPage: 'Mine læringsstier',
+    createLearningPath: 'Lag læringssti',
     logout: 'Logg ut %{name}',
   },
   footer: {
