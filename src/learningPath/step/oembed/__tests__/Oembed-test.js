@@ -126,21 +126,21 @@ test('component/Oembed iframe resizing', () => {
     data: { height: '800' },
   });
 
-  expect(iframe.style.height).toBe('855px');
+  expect(iframe.style.height).toBe('800px');
 
   instance.handleResizeMessage({
     source: iframe.contentWindow,
     data: { height: '1000' },
   });
 
-  expect(iframe.style.height).toBe('1055px');
+  expect(iframe.style.height).toBe('1000px');
 
   instance.handleResizeMessage({
     source: iframe.contentWindow,
     data: { height: '900' },
   });
 
-  expect(iframe.style.height).toBe('955px');
+  expect(iframe.style.height).toBe('900px');
 
   expect(() => instance.handleResizeMessage()).not.toThrow();
 
@@ -149,7 +149,7 @@ test('component/Oembed iframe resizing', () => {
     data: { height: '2000' },
   });
 
-  expect(iframe.style.height).toBe('955px');
+  expect(iframe.style.height).toBe('900px');
 
   component.setProps({ oembedContent: oembed });
 
