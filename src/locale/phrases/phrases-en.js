@@ -188,6 +188,7 @@ const phrases = {
   siteNav: {
     login: 'Log in',
     search: 'Find learning path',
+    createLearningPath: 'Create learningpath',
     myPage: 'My learning paths',
     logout: 'Log out %{name}',
   },

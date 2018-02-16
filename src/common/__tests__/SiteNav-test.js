@@ -18,8 +18,9 @@ test('component/SiteNav learningpaths', () => {
   const navLinks = shallow(
     <SiteNav authenticated={false} localCloseSidebars={noop} />,
   ).find(Link);
-  expect(navLinks.length).toBe(1);
-  expect(navLinks.at(0).props().to).toBe('/learningpaths');
+  expect(navLinks.length).toBe(2);
+  expect(navLinks.at(0).props().to).toBe('/minside');
+  expect(navLinks.at(1).props().to).toBe('/learningpaths');
 });
 
 test('component/SiteNavSessionAction not authenticated', () => {

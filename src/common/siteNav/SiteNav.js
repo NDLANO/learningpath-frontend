@@ -34,6 +34,16 @@ export const SiteNav = ({
       <ul className="site-nav_list">
         <li className="site-nav_item">
           <Link
+            to="/minside"
+            className="site-nav_link"
+            onClick={() => localCloseSidebars()}>
+            <LabeledIcon.Add
+              labelText={polyglot.t('siteNav.createLearningPath')}
+            />
+          </Link>
+        </li>
+        <li className="site-nav_item">
+          <Link
             to="/learningpaths"
             className="site-nav_link"
             onClick={() => localCloseSidebars()}>
