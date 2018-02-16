@@ -11,6 +11,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
+import { configureTracker } from 'ndla-tracker';
 import createHistory from 'history/createBrowserHistory';
 import ErrorReporter from 'ndla-error-reporter';
 import isEmpty from 'lodash/isEmpty';
@@ -19,7 +20,6 @@ import { configureLocale, isValidLocale } from './locale/configureLocale';
 import configureStore from './configureStore';
 import App from './main/App';
 import { getTokenExpireAt } from './util/jwtHelper';
-import { configureTracker } from './common/tracker';
 
 function generateBasename(path) {
   if (isValidLocale(path)) {

@@ -10,13 +10,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
+import { withTracker } from 'ndla-tracker';
 import Oembed from './oembed/Oembed';
 import { fetchLearningPathStep } from './learningPathStepActions';
 import LearningPathStepInformation from './LearningPathStepInformation';
 import LearningPathStepPrevNext from './LearningPathStepPrevNext';
 import { getLearningPathStep } from './learningPathStepSelectors';
-import withTracker from '../../common/withTracker';
 import polyglot from '../../i18n';
+import { convertToGaOrGtmDimension } from '../../util/trackingUtil';
 
 class LearningPathStep extends React.Component {
   static mapDispatchToProps = {
@@ -37,14 +38,32 @@ class LearningPathStep extends React.Component {
   }
 
   static willTrackPageView(trackPageView, currentProps) {
-    const { learningPathStep, match } = currentProps;
+    const { learningPath, learningPathStep, match } = currentProps;
     if (
+      learningPath &&
+      learningPath.id &&
       learningPathStep &&
       learningPathStep.id &&
       learningPathStep.id.toString() === match.params.stepId
     ) {
       trackPageView(currentProps);
     }
+  }
+
+  static getDimensions(props) {
+    const { learningPath, learningPathStep } = props;
+    const position =
+      learningPath.learningsteps.length === learningPathStep.seqNo + 1
+        ? 'Siste'
+        : learningPathStep.seqNo;
+    const dimensions = {
+      13: learningPath.learningsteps.length,
+      14: position,
+    };
+    return {
+      ga: convertToGaOrGtmDimension(dimensions, 'ga'),
+      gtm: convertToGaOrGtmDimension(dimensions, 'gtm'),
+    };
   }
 
   componentWillMount() {
