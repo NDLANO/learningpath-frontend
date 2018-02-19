@@ -31,7 +31,6 @@ export default class Oembed extends React.Component {
   }
 
   componentWillMount() {
-    console.log("HALLA!")
     this.handleIframeResizing(this.props);
   }
 
@@ -72,7 +71,6 @@ export default class Oembed extends React.Component {
   }
 
   handleResizeMessage(evt) {
-    console.log("hei0", evt.data)
     if (
       !this.state.listeningToResize ||
       !evt ||
@@ -83,22 +81,16 @@ export default class Oembed extends React.Component {
     }
 
     const iframe = this.getIframeDOM();
-    console.log("hei")
     if (iframe.contentWindow !== get(evt, 'source')) {
       return;
     }
-    console.log("hei1")
 
     /* Needed to enforce content to stay within iframe on Safari iOS */
     iframe.setAttribute('scrolling', 'no');
-    console.log("hei3")
 
     const newHeight = parseInt(get(evt, 'data.height', 0), 10);
-    console.log("hei4")
     iframe.style.height = `${newHeight}px`;
-    console.log("hei5")
     this.setState({ isLoadingResource: false });
-    console.log("hei6")
   }
 
   render() {
