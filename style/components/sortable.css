@@ -15,19 +15,21 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
-  position: relative;
 }
 
 .sortable_item {
   margin: 0;
   border-top: 1px solid var(--gray-9);
   border-bottom: 1px solid var(--gray-9);
-  padding: 1.5em 2em 1.7em;
-  display: flex;
-  align-items: center;
-  margin-bottom: -1px;
   cursor: move;
   background-color: white;
+  margin-bottom: -1px;
+}
+
+.sortable_container {
+  display: flex;
+  align-items: center;
+  padding: 1.5em 2em 1.7em;
 }
 
 .sortable_placeholder {
@@ -55,4 +57,5 @@
 .sortable_title {
   flex-grow: 2;
   margin-left: 30px;
+  user-select: none;
 }
