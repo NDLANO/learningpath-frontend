@@ -82,7 +82,6 @@ export default class Oembed extends React.Component {
     }
 
     const iframe = this.getIframeDOM();
-
     if (iframe.contentWindow !== get(evt, 'source')) {
       return;
     }
@@ -91,7 +90,6 @@ export default class Oembed extends React.Component {
     iframe.setAttribute('scrolling', 'no');
 
     const newHeight = parseInt(get(evt, 'data.height', 0), 10);
-
     iframe.style.height = `${newHeight}px`;
     this.setState({ isLoadingResource: false });
   }

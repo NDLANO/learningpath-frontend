@@ -14,7 +14,7 @@ import SortableItem from './SortableItem';
 const SortableLearningStepList = SortableContainer(
   ({ learningsteps, learningPathId, deleteStep }) => (
     <div className="sortable">
-      <ul className="sortable_list">
+      <div className="sortable_list">
         {learningsteps.map((step, i) => (
           <SortableItem
             key={step.id}
@@ -25,7 +25,7 @@ const SortableLearningStepList = SortableContainer(
             deleteStep={deleteStep}
           />
         ))}
-      </ul>
+      </div>
     </div>
   ),
 );

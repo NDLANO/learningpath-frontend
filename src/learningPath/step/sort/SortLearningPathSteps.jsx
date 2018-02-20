@@ -21,6 +21,27 @@ import {
 import polyglot from '../../../i18n';
 
 class SortLearningPathSteps extends Component {
+  constructor() {
+    super();
+    this.state = { learningsteps: [] };
+  }
+  componentWillMount() {
+    if (this.props.learningPath) {
+      this.setState({ learningsteps: this.props.learningPath.learningsteps });
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    const { learningPath } = this.props;
+    const { learningPath: nextLearningPath } = nextProps;
+    if (
+      learningPath &&
+      nextLearningPath &&
+      learningPath.learningsteps.length !==
+        nextLearningPath.learningsteps.length
+    ) {
+      this.setState({ learningsteps: nextLearningPath.learningsteps });
+    }
+  }
   onSortEnd = indexes => {
     const {
       sortSteps,
@@ -28,14 +49,20 @@ class SortLearningPathSteps extends Component {
       learningPath,
     } = this.props;
     const learningsteps = learningPath.learningsteps;
-
     const step = learningsteps[indexes.oldIndex];
 
     if (step && indexes.oldIndex !== indexes.newIndex) {
-      sortSteps(arrayMove(learningsteps, indexes.oldIndex, indexes.newIndex));
+      const sorted = arrayMove(
+        learningsteps,
+        indexes.oldIndex,
+        indexes.newIndex,
+      );
+      this.setState({ learningsteps: sorted });
+      sortSteps(sorted);
       localUpdateStepSequenceNumber(learningPath.id, step.id, indexes.newIndex);
     }
   };
+
   shouldCancelStart = e => {
     // Iterates through each target from an event on click to check if it was button click or not. Cancels drag action if it was a click on a button.
     for (
@@ -63,11 +90,10 @@ class SortLearningPathSteps extends Component {
         {learningPath && learningPath.learningsteps && learningPath.id ? (
           <SortableLearningStepList
             learningPathId={learningPath.id}
-            learningsteps={learningPath.learningsteps}
+            learningsteps={this.state.learningsteps}
             onSortEnd={this.onSortEnd}
             shouldCancelStart={this.shouldCancelStart}
             deleteStep={deleteStep}
-            pressDelay={200}
           />
         ) : null}
       </div>

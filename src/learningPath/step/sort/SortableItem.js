@@ -12,19 +12,21 @@ import PropTypes from 'prop-types';
 import Icon from '../../../common/Icon';
 
 const SortableItem = SortableElement(({ deleteStep, step, learningPathId }) => (
-  <li className="sortable_item">
-    <div className="sortable_handle">
-      <Icon.ImportExport className="icon--m" />
+  <div className="sortable_item">
+    <div className="sortable_container">
+      <div className="sortable_handle">
+        <Icon.ImportExport className="icon--m" />
+      </div>
+      <div className="sortable_title">{step.title}</div>
+      <div className="sortable_action">
+        <button
+          onClick={() => deleteStep(learningPathId, step.id, step.title)}
+          className="un-button">
+          <Icon.Clear className="icon--m" />
+        </button>
+      </div>
     </div>
-    <div className="sortable_title">{step.title}</div>
-    <div className="sortable_action">
-      <button
-        onClick={() => deleteStep(learningPathId, step.id, step.title)}
-        className="un-button">
-        <Icon.Clear className="icon--m" />
-      </button>
-    </div>
-  </li>
+  </div>
 ));
 
 SortableItem.propTypes = {
