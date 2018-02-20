@@ -61,10 +61,6 @@
   max-width: 100%;
 }
 
-.learning-step_ndla_embed--loading {
-  min-height: 100vh;
-}
-
 .learningsource__frame > .learning-step_embed {
   border: none;
 }
@@ -77,6 +73,11 @@
 .learning-step_lti iframe {
   width: 100%;
   height: 600px;
+}
+
+.learning-step_ndla_embed--loading,
+.learning-step_ndla_embed--loading iframe {
+  height: 100vh;
 }
 
 .learning-step_license,
