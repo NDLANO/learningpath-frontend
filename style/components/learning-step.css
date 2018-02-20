@@ -61,6 +61,10 @@
   max-width: 100%;
 }
 
+.learning-step_ndla_embed--loading {
+  min-height: 100vh;
+}
+
 .learningsource__frame > .learning-step_embed {
   border: none;
 }

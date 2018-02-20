@@ -105,6 +105,8 @@ export default class Oembed extends React.Component {
             'learning-step': true,
             'learning-step_embed': true,
             'learning-step--without-dimensions': this.state.isNDLAResource,
+            'learning-step_ndla_embed--loading':
+              this.state.isNDLAResource && this.state.isLoadingResource,
             'learning-step_lti': embedType === 'lti',
             'learning-step_oembed': embedType === 'oembed',
           })}
