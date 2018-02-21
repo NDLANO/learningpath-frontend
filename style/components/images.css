@@ -145,6 +145,20 @@
   text-decoration: none;
 }
 
+@media (--xlarge-viewport) {
+  .image_list-item:nth-of-type(4n+2) .image-preview {
+    margin-left: -100%;
+  }
+
+  .image_list-item:nth-of-type(4n+3) .image-preview {
+    margin-left: -200%;
+  }
+
+  .image_list-item:nth-of-type(4n+4) .image-preview {
+    margin-left: -300%;
+  }
+}
+
 @media (--large-viewport) {
   .image_list-item:nth-of-type(4n+2) .image-preview {
     margin-left: -100%;

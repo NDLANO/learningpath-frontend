@@ -23,7 +23,7 @@ test('actions/fetchMyLearningPaths', done => {
   const apiMock = nock('http://ndla-api', {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .get('/learningpath-api/v2/learningpaths/mine')
+    .get('/learningpath-api/v2/learningpaths/mine/')
     .reply(200, [{ id: '123' }, { id: '456' }]);
 
   const store = mockStore({ accessToken });
@@ -44,7 +44,7 @@ test('actions/fetchLearningPaths access denied', done => {
   const apiMock = nock('http://ndla-api', {
     reqheaders: { Authorization: `Bearer ${accessToken}` },
   })
-    .get('/learningpath-api/v2/learningpaths/mine')
+    .get('/learningpath-api/v2/learningpaths/mine/')
     .reply(403, { message: 'Invalid' });
 
   const store = mockStore({ accessToken });
@@ -55,7 +55,7 @@ test('actions/fetchLearningPaths access denied', done => {
       expect(store.getActions()).toEqual([
         applicationError(
           payload403invalid(
-            'http://ndla-api/learningpath-api/v2/learningpaths/mine',
+            'http://ndla-api/learningpath-api/v2/learningpaths/mine/',
           ),
         ),
       ]);
