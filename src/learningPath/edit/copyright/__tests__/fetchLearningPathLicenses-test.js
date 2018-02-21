@@ -30,7 +30,7 @@ test('actions/fetchLearningPathLicenses with creative-common sat to false', done
   const apiMock = nock('http://ndla-api', {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .get('/learningpath-api/v2/learningpaths/licenses')
+    .get('/learningpath-api/v2/learningpaths/licenses/')
     .reply(200, licenses);
 
   const store = mockStore({ accessToken });
@@ -49,7 +49,7 @@ test('actions/fetchLearningPathLicenses with creative-common sat to false access
   const apiMock = nock('http://ndla-api', {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .get('/learningpath-api/v2/learningpaths/licenses')
+    .get('/learningpath-api/v2/learningpaths/licenses/')
     .reply(403, { message: 'Invalid' });
 
   const store = mockStore({ accessToken });
@@ -60,7 +60,7 @@ test('actions/fetchLearningPathLicenses with creative-common sat to false access
       expect(store.getActions()).toEqual([
         applicationError(
           payload403invalid(
-            'http://ndla-api/learningpath-api/v1/learningpaths/licenses',
+            'http://ndla-api/learningpath-api/v1/learningpaths/licenses/',
           ),
         ),
       ]);
@@ -74,7 +74,7 @@ test('actions/fetchLearningPathLicenses with creative-common sat to false', done
   const apiMock = nock('http://ndla-api', {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .get('/learningpath-api/v2/learningpaths/licenses')
+    .get('/learningpath-api/v2/learningpaths/licenses/')
     .query({ filter: 'by' })
     .reply(200, licenses);
 
@@ -94,7 +94,7 @@ test('actions/fetchLearningPathLicenses with creative-common sat to true access 
   const apiMock = nock('http://ndla-api', {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .get('/learningpath-api/v2/learningpaths/licenses')
+    .get('/learningpath-api/v2/learningpaths/licenses/')
     .query({ filter: 'by' })
     .reply(403, { message: 'Invalid' });
 
@@ -106,7 +106,7 @@ test('actions/fetchLearningPathLicenses with creative-common sat to true access 
       expect(store.getActions()).toEqual([
         applicationError(
           payload403invalid(
-            'http://ndla-api/learningpath-api/v1/learningpaths/licenses?filter=by',
+            'http://ndla-api/learningpath-api/v1/learningpaths/licenses/?filter=by',
           ),
         ),
       ]);

@@ -28,18 +28,20 @@ const fetchPathStep = fetchAuthorized(
   '/learningpath-api/v2/learningpaths/:pathId/learningsteps/:stepId',
 );
 
-const fetchMyPaths = fetchAuthorized('/learningpath-api/v2/learningpaths/mine');
+const fetchMyPaths = fetchAuthorized(
+  '/learningpath-api/v2/learningpaths/mine/',
+);
 
 const fetchPathTags = fetchAuthorized(
-  '/learningpath-api/v2/learningpaths/tags',
+  '/learningpath-api/v2/learningpaths/tags/',
 );
 
 const fetchPathContributors = fetchAuthorized(
-  '/learningpath-api/v2/learningpaths/contributors',
+  '/learningpath-api/v2/learningpaths/contributors/',
 );
 
 const fetchPathLicenses = filter => {
-  let url = apiResourceUrl('/learningpath-api/v2/learningpaths/licenses');
+  let url = apiResourceUrl('/learningpath-api/v2/learningpaths/licenses/');
   if (filter.length > 0) {
     const query = { filter };
     url += `?${queryString.stringify(query)}`;
@@ -52,7 +54,7 @@ const postLearningPathStep = postAuthorized(
   '/learningpath-api/v2/learningpaths/:pathId/learningsteps',
 );
 const copyLearningPath = postAuthorized(
-  '/learningpath-api/v2/learningpaths/:copyfrom/copy',
+  '/learningpath-api/v2/learningpaths/:copyfrom/copy/',
 );
 
 const createPath = (props, body) =>
@@ -78,7 +80,7 @@ const patchLearningPathStep = patchAuthorized(
 );
 
 const putSequenceNumber = putAuthorized(
-  '/learningpath-api/v2/learningpaths/:pathId/learningsteps/:stepId/seqNo',
+  '/learningpath-api/v2/learningpaths/:pathId/learningsteps/:stepId/seqNo/',
 );
 
 const updatePath = ({ pathId }, body) => patchLearningPath({ pathId }, body);
@@ -106,7 +108,7 @@ export const activateDeletedStep = ({ pathId, stepId }) =>
   putLearningPathStepStatus({ pathId, stepId }, { status: 'ACTIVE' });
 
 const putLearningPathStatus = putAuthorized(
-  '/learningpath-api/v2/learningpaths/:pathId/status',
+  '/learningpath-api/v2/learningpaths/:pathId/status/',
 );
 const updateStatus = ({ pathId }, body) =>
   putLearningPathStatus({ pathId }, body);
