@@ -49,9 +49,9 @@ const fetchPathLicenses = filter => {
   return fetchAuth(url).then(resolveJsonOrRejectWithError);
 };
 
-const postLearningPath = postAuthorized('/learningpath-api/v2/learningpaths');
+const postLearningPath = postAuthorized('/learningpath-api/v2/learningpaths/');
 const postLearningPathStep = postAuthorized(
-  '/learningpath-api/v2/learningpaths/:pathId/learningsteps',
+  '/learningpath-api/v2/learningpaths/:pathId/learningsteps/',
 );
 const copyLearningPath = postAuthorized(
   '/learningpath-api/v2/learningpaths/:copyfrom/copy/',

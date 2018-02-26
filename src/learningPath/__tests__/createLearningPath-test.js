@@ -28,7 +28,7 @@ test('actions/createLearningPath', done => {
   const postPathApi = nock('http://ndla-api', {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .post('/learningpath-api/v2/learningpaths', {
+    .post('/learningpath-api/v2/learningpaths/', {
       isRequest: true,
       learningsteps,
     })
@@ -37,7 +37,7 @@ test('actions/createLearningPath', done => {
   const postStep1Api = nock('http://ndla-api', {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .post(`/learningpath-api/v2/learningpaths/${pathId}/learningsteps`, {
+    .post(`/learningpath-api/v2/learningpaths/${pathId}/learningsteps/`, {
       seqNo: 0,
     })
     .reply(200, { id: 12, seqNo: 0, isResponse: true });
@@ -45,7 +45,7 @@ test('actions/createLearningPath', done => {
   const postStep2Api = nock('http://ndla-api', {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .post(`/learningpath-api/v2/learningpaths/${pathId}/learningsteps`, {
+    .post(`/learningpath-api/v2/learningpaths/${pathId}/learningsteps/`, {
       seqNo: 1,
     })
     .reply(200, { id: 34, seqNo: 1, isResponse: true });
@@ -53,7 +53,7 @@ test('actions/createLearningPath', done => {
   const postStep3Api = nock('http://ndla-api', {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .post(`/learningpath-api/v2/learningpaths/${pathId}/learningsteps`, {
+    .post(`/learningpath-api/v2/learningpaths/${pathId}/learningsteps/`, {
       seqNo: 2,
     })
     .reply(200, { id: 56, seqNo: 2, isResponse: true });
@@ -91,7 +91,7 @@ test('actions/createLearningPath access denied', done => {
   const apiMock = nock('http://ndla-api', {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .post('/learningpath-api/v2/learningpaths', {
+    .post('/learningpath-api/v2/learningpaths/', {
       foo: 'bar',
     })
     .reply(403, { message: 'Invalid' });
@@ -107,7 +107,7 @@ test('actions/createLearningPath access denied', done => {
       expect(store.getActions()).toEqual([
         applicationError(
           payload403invalid(
-            'http://ndla-api/learningpath-api/v2/learningpaths',
+            'http://ndla-api/learningpath-api/v2/learningpaths/',
           ),
         ),
       ]);

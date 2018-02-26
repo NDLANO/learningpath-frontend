@@ -39,7 +39,7 @@ test('actions/createLearningPathStep', done => {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
     .post(
-      `/learningpath-api/v2/learningpaths/${pathId}/learningsteps`,
+      `/learningpath-api/v2/learningpaths/${pathId}/learningsteps/`,
       learningStep,
     )
     .reply(200, learningStepReply);
@@ -73,7 +73,7 @@ test('actions/createLearningPathStep access denied', done => {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
     .post(
-      `/learningpath-api/v2/learningpaths/${pathId}/learningsteps`,
+      `/learningpath-api/v2/learningpaths/${pathId}/learningsteps/`,
       learningStep,
     )
     .reply(403, { message: 'Invalid' });
@@ -86,7 +86,7 @@ test('actions/createLearningPathStep access denied', done => {
       expect(store.getActions()).toEqual([
         applicationError(
           payload403invalid(
-            `http://ndla-api/learningpath-api/v1/learningpaths/${pathId}/learningsteps`,
+            `http://ndla-api/learningpath-api/v1/learningpaths/${pathId}/learningsteps/`,
           ),
         ),
       ]);
