@@ -55,7 +55,6 @@ const expectedValue = {
       id: 1,
       title: { title: 'Test', language: 'nb' },
       introduction: { introduction: 'Test', language: 'nb' },
-      disable: false,
       link:
         'https://ndla-frontend.test.api.ndla.no/subjects/resource:1/subject:2/something:3',
     },
@@ -63,7 +62,6 @@ const expectedValue = {
       id: 2,
       title: { title: 'Test3', language: 'nb' },
       introduction: { introduction: 'Test3', language: 'nb' },
-      disable: false,
       link:
         'https://ndla-frontend.test.api.ndla.no/subjects/resource:1/subject:2/something:3',
     },
@@ -71,7 +69,6 @@ const expectedValue = {
       id: 3,
       title: { title: 'Test2', language: 'nb' },
       introduction: { introduction: 'Test2', language: 'nb' },
-      disable: false,
       link:
         'https://ndla-frontend.test.api.ndla.no/subjects/resource:1/subject:2/something:3',
     },
