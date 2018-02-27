@@ -38,8 +38,7 @@ export function fetchArticleSearch(query, language) {
             link:
               resource.length > 0
                 ? `${ndlaFrontendUrl}/subjects${resource[0].path}`
-                : undefined, // TODO: Find a better way to use taxonomy paths.
-            disable: resource.length === 0,
+                : `${ndlaFrontendUrl}/article/${item.id}`, // TODO: Find a better way to use taxonomy paths.
           };
         }),
       );
