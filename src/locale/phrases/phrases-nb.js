@@ -27,6 +27,7 @@ const phrases = {
     createLearningPathStep: `Opprett læringssteg${titleTemplate}`,
     sortLearningPathSteps: `Sorter eller slett læringssteg${titleTemplate}`,
   },
+  askNDLA: 'Spør NDLA',
   searchForm: {
     placeholder: 'Søk etter læringsstier',
     btn: 'Søk',
