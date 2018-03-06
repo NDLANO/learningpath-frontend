@@ -25,6 +25,7 @@ const phrases = {
     createLearningPathStep: `Create learning path step${titleTemplate}`,
     sortLearningPathSteps: `Sort or delete learning path steps${titleTemplate}`,
   },
+  askNDLA: 'Ask NDLA',
   searchForm: {
     placeholder: 'Search learning paths',
     btn: 'Search',
