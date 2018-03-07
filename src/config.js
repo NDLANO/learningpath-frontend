@@ -69,6 +69,7 @@ module.exports = Object.assign(
     ndlaPersonalClientId: process.env.NDLA_PERSONAL_CLIENT_ID || '',
     auth0Domain: process.env.AUTH0_DOMAIN || '',
     disableSSR: process.env.DISABLE_SSR || false,
+    zendeskHost: process.env.NDLA_ZENDESK_HOST,
     app: {
       title: 'NDLA Læringsstier',
       head: {

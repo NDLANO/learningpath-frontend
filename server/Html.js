@@ -16,7 +16,7 @@ import {
   SvgPolyfillScript,
   SvgPolyfillScriptInitalization,
 } from './svgPolyfill';
-import ZendeskWidget from './ZendeskWidget';
+import Zendesk from './Zendesk';
 
 const assets =
   process.env.NODE_ENV === 'development'
@@ -149,7 +149,7 @@ const Html = props => {
         />
         <script src={`/assets/${assets['main.js']}`} />
         <HotjarScript />
-        <ZendeskWidget lang={lang} />
+        <Zendesk lang={lang} />
         <SvgPolyfillScriptInitalization className={className} />
       </body>
     </html>
