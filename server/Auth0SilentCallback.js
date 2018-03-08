@@ -12,7 +12,7 @@ const Auth0SilentCallback = `
   <html lang="no">
     <head />
     <body>
-      <script src="https://cdn.auth0.com/js/auth0/8.4.0/auth0.min.js"></script>
+      <script src="https://cdn.auth0.com/js/auth0/9.3.2/auth0.min.js"></script>
       <script type="text/javascript">
         var webAuth = new auth0.WebAuth({
           domain: '${config.auth0Domain}',
