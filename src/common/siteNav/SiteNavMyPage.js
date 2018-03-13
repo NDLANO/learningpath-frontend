@@ -32,6 +32,7 @@ class SiteNavMyPage extends React.Component {
       <li className="site-nav_item">
         <Link
           to="/minside"
+          data-cy="sitenav-my-page"
           className="site-nav_link"
           onClick={() => localCloseSidebars()}>
           <LabeledIcon.Apps labelText={polyglot.t('siteNav.myPage')} />

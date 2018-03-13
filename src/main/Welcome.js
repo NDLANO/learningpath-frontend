@@ -47,8 +47,8 @@ class Welcome extends Component {
             <Masthead logo={<Logo beta cssModifier="on-dark" />} />
           </div>
           <div className="hero">
-            <h1 className="hero_title">{polyglot.t('welcomePage.title1')}</h1>
-            <h3 className="hero_title">{polyglot.t('welcomePage.title2')}</h3>
+            <h1 className="hero_title" data-cy="welcomepage-title1">{polyglot.t('welcomePage.title1')}</h1>
+            <h3 className="hero_title" data-cy="welcomepage-title2">{polyglot.t('welcomePage.title2')}</h3>
 
             <form
               onSubmit={this.handleSubmit}
@@ -59,20 +59,23 @@ class Welcome extends Component {
                 onChange={e => this.setState({ query: e.target.value })}
                 placeholder={polyglot.t('welcomePage.placeholder')}
                 className="search-form_query"
+                data-cy="query"
               />
-              <button type="submit" className="search-form_btn">
+              <button type="submit" className="search-form_btn" data-cy="submit">
                 {polyglot.t('welcomePage.searchBtn')}
               </button>
             </form>
 
             <a
               href="#feature"
-              className="hero_link cta-link cta-link--negative">
+              className="hero_link cta-link cta-link--negative"
+              data-cy="feature-link">
               {polyglot.t('welcomePage.explanationBtn')}
             </a>
             <a
               href="/minside"
-              className="hero_link cta-link cta-link-secondary cta-link--secondary-negative">
+              className="hero_link cta-link cta-link-secondary cta-link--secondary-negative"
+              data-cy="mypage-link">
               {polyglot.t('welcomePage.newBtn')} »
             </a>
           </div>

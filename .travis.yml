@@ -1,9 +1,12 @@
 language: node_js
 node_js:
 - '8'
+before_script:
+  - yarn start --silent &
 script:
 - yarn test
 - yarn run build
+- yarn run cypress:run
 notifications:
   slack:
     on_success: change

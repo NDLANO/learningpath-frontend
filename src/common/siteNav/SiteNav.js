@@ -36,7 +36,8 @@ export const SiteNav = ({
           <Link
             to="/minside"
             className="site-nav_link"
-            onClick={() => localCloseSidebars()}>
+            onClick={() => localCloseSidebars()}
+            data-cy="sitenav-create-path">
             <LabeledIcon.Add
               labelText={polyglot.t('siteNav.createLearningPath')}
             />
@@ -46,7 +47,8 @@ export const SiteNav = ({
           <Link
             to="/learningpaths"
             className="site-nav_link"
-            onClick={() => localCloseSidebars()}>
+            onClick={() => localCloseSidebars()}
+            data-cy="sitenav-find-paths">
             <LabeledIcon.Search labelText={polyglot.t('siteNav.search')} />
           </Link>
         </li>

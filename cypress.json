@@ -1,0 +1,9 @@
+{
+  "baseUrl": "http://localhost:8484",
+  "integrationFolder": "end-to-end-tests/integration",
+  "fixturesFolder": "end-to-end-tests/fixtures",
+  "pluginsFile": "end-to-end-tests/plugins/index.js",
+  "supportFile": "end-to-end-tests/support/index.js",
+  "screenshotsFolder": "end-to-end-tests/screenshots",
+  "videosFolder": "end-to-end-tests/videos"
+}
