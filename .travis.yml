@@ -6,7 +6,7 @@ before_script:
 script:
 - yarn test
 - yarn run build
-- yarn run cypress:run
+- yarn run cypress run
 notifications:
   slack:
     on_success: change
