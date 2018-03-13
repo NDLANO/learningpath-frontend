@@ -47,8 +47,12 @@ class Welcome extends Component {
             <Masthead logo={<Logo beta cssModifier="on-dark" />} />
           </div>
           <div className="hero">
-            <h1 className="hero_title" data-cy="welcomepage-title1">{polyglot.t('welcomePage.title1')}</h1>
-            <h3 className="hero_title" data-cy="welcomepage-title2">{polyglot.t('welcomePage.title2')}</h3>
+            <h1 className="hero_title" data-cy="welcomepage-title1">
+              {polyglot.t('welcomePage.title1')}
+            </h1>
+            <h3 className="hero_title" data-cy="welcomepage-title2">
+              {polyglot.t('welcomePage.title2')}
+            </h3>
 
             <form
               onSubmit={this.handleSubmit}
@@ -61,7 +65,10 @@ class Welcome extends Component {
                 className="search-form_query"
                 data-cy="query"
               />
-              <button type="submit" className="search-form_btn" data-cy="submit">
+              <button
+                type="submit"
+                className="search-form_btn"
+                data-cy="submit">
                 {polyglot.t('welcomePage.searchBtn')}
               </button>
             </form>
