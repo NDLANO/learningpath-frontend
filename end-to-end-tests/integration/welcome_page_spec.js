@@ -1,13 +1,14 @@
-
+import { getTokenExpireAt } from '../../src/util/jwtHelper';
 
 describe('Welcome page', () => {
-  beforeEach(() => {
-    cy.visit('http://localhost:3000');
-  });
+
 
   describe('No session welcome page', () => {
+    beforeEach(() => {
+      cy.visit('http://localhost:3000');
+    });
     it('should search for Norge in the welcome page search field', () => {
-      cy.get('[data-cy=query]').type('Norge', {delay: 1000});
+      cy.get('[data-cy=query]').type('Norge', {delay: 100});
       cy.get('[data-cy=submit]').click();
       cy.location().should((location) => {
         expect(location.hash).to.be.empty
@@ -58,6 +59,47 @@ describe('Welcome page', () => {
         expect(location.hash).to.be.empty
         expect(location.pathname).to.eq('/learningpaths')
         expect(location.search).to.be.empty
+      })
+    });
+  });
+
+  describe('Session welcome page', () => {
+    beforeEach(() => {
+      const options = {
+        method: 'POST',
+        url: 'https://ndla.eu.auth0.com/oauth/token',
+        body: {
+          "client_id": Cypress.env('NDLA_END_TO_END_TESTING_CLIENT_ID'),
+          "client_secret": Cypress.env('NDLA_END_TO_END_TESTING_CLIENT_SECRET'),
+          "grant_type": Cypress.env('NDLA_END_TO_END_TESTING_GRANT_TYPE'),
+          "audience": Cypress.env('NDLA_END_TO_END_TESTING_AUDIENCE'),
+        },
+      }
+      cy.request(options).then(res => {
+        window.localStorage.setItem("ndla:sti", `{ "accessToken": { "token": "${res.body.access_token}", "expiresAt": ${getTokenExpireAt(res.body.access_token)} }, "authenticated": true}`);
+      }).then(() => {
+        cy.visit('http://localhost:3000');
+      })
+    });
+
+    it('should access /minside when create new learning path', () => {
+      cy.get('[data-cy=sitenav-create-path]').click();
+      cy.location().should((location) => {
+        expect(location.pathname).to.eq('/minside');
+      });
+    });
+
+    it('should go to /minside when not logged in on mypage link click', () => {
+      cy.get('[data-cy=mypage-link]').click();
+      cy.location().should((location) => {
+        expect(location.pathname).to.eq('/minside');
+      })
+    });
+
+    it('should go to /logout when logut link is clicked', () => {
+      cy.get('[data-cy=sitenav-logout]').click();
+      cy.location().should((location) => {
+        expect(location.pathname).to.eq('/logout');
       })
     });
   });

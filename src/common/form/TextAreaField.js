@@ -45,6 +45,7 @@ const TextAreaField = props => {
         placeholder={placeholder}
         type={type}
         className={inputClassName}
+        data-cy={props['data-cy']}
       />
       {touched &&
         error && (
@@ -65,6 +66,7 @@ TextAreaField.propTypes = {
   maxLength: PropTypes.string,
   disableVerticalResize: PropTypes.bool,
   disableHorizontalResize: PropTypes.bool,
+  'data-cy': PropTypes.string,
 };
 TextAreaField.defaultProps = {
   type: 'text',
