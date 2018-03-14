@@ -14,7 +14,7 @@ require('source-map-support').install();
 let log;
 
 if (!log) {
-  log = bunyan.createLogger({ name: 'ndla-frontend' });
+  log = bunyan.createLogger({ name: 'learningpath-frontend' });
 }
 
 log.logAndReturnValue = (level, msg, value) => {
