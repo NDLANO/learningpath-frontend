@@ -19,8 +19,15 @@ import { Provider } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { StaticRouter } from 'react-router';
 import { matchPath } from 'react-router-dom';
+import bodyParser from 'body-parser';
+import {
+  OK,
+  INTERNAL_SERVER_ERROR,
+  FORBIDDEN,
+  NOT_FOUND,
+  NOT_ACCEPTABLE,
+} from 'http-status';
 import App from '../src/main/App';
-
 import config from '../src/config';
 import webpackConfig from '../webpack.config.dev';
 import { getHtmlLang, isValidLocale } from '../src/locale/configureLocale';
@@ -30,8 +37,11 @@ import Auth0SilentCallback from './Auth0SilentCallback';
 import configureStore from '../src/configureStore';
 import { serverRoutes } from './serverRoutes';
 import TokenStatusHandler from '../src/util/TokenStatusHandler';
+import contentSecurityPolicy from './contentSecurityPolicy';
+import errorLogger from '../src/util/logger';
 
 const app = express();
+const allowedBodyContentTypes = ['application/csp-report', 'application/json'];
 
 if (process.env.NODE_ENV === 'development') {
   const compiler = webpack(webpackConfig);
@@ -45,6 +55,12 @@ if (process.env.NODE_ENV === 'development') {
   );
   app.use(webpackHotMiddleware(compiler, {}));
 }
+
+app.use(
+  bodyParser.json({
+    type: req => allowedBodyContentTypes.includes(req.headers['content-type']),
+  }),
+);
 
 app.use(compression());
 app.use(
@@ -60,78 +76,7 @@ app.use(
       includeSubDomains: true,
       preload: true,
     },
-    contentSecurityPolicy:
-      process.env.NODE_ENV !== 'development'
-        ? {
-            directives: {
-              defaultSrc: ["'self'"],
-              scriptSrc: [
-                "'self'",
-                "'unsafe-inline'",
-                "'unsafe-eval'",
-                'ws://*.hotjar.com',
-                'wss://*.hotjar.com',
-                'https://*.hotjar.com',
-                'https://*.ndla.no',
-                'https://*.zendesk.com',
-                'https://*.zopim.com',
-                'https://ndla.no',
-                'https://players.brightcove.net',
-                'https://www.nrk.no',
-                'https://www.googletagmanager.com',
-                'https://www.google-analytics.com',
-                'https://www.youtube.com',
-                'https://s.ytimg.com',
-                'https://cdn.auth0.com',
-                'https://tagmanager.google.com',
-                'https://sb.scorecardresearch.com',
-              ],
-              styleSrc: [
-                "'self'",
-                "'unsafe-inline'",
-                'https://fonts.googleapis.com',
-                'https://fonts.gstatic.com',
-                'https://tagmanager.google.com',
-              ],
-              fontSrc: [
-                "'self'",
-                'https://*.hotjar.com',
-                'https://*.zopim.com',
-                'https://fonts.googleapis.com',
-                'https://fonts.gstatic.com',
-                'data:',
-              ],
-              imgSrc: [
-                "'self'",
-                'https://*.hotjar.com',
-                'https://*.zopim.com',
-                'https://*.ndla.no',
-                'https://www.google-analytics.com',
-                'https://stats.g.doubleclick.net',
-                'https://ssl-ndla.tns-cs.net',
-                'https://sb.scorecardresearch.com',
-                'data: https://i.ytimg.com https://pi.tedcdn.com http://*.ndlap3.seria.net https://*.gstatic.com',
-              ],
-              connectSrc: [
-                "'self'",
-                'ws://*.hotjar.com wss://*.hotjar.com',
-                'https://*.hotjar.com',
-                'https://*.hotjar.com:*',
-                'https://www.google-analytics.com',
-                'wss://*.zopim.com',
-                'https://*.zendesk.com',
-                'https://*.zopim.com',
-                'https://*.ndla.no',
-                'https://logs-01.loggly.com',
-                'https://www.googleapis.com',
-              ],
-              frameSrc: ['*'],
-              childSrc: ['https://*.hotjar.com'],
-              objectSrc: ["'none'"],
-              upgradeInsecureRequests: true,
-            },
-          }
-        : undefined,
+    contentSecurityPolicy,
     frameguard:
       process.env.NODE_ENV !== 'development'
         ? {
@@ -172,7 +117,7 @@ app.get('/robots.txt', (req, res) => {
 });
 
 app.get('/health', (req, res) => {
-  res.status(200).send('Health check OK');
+  res.status(OK).send('Health check OK');
 });
 
 app.get(
@@ -194,7 +139,23 @@ app.get('/get_token', (req, res) => {
     .then(token => {
       res.send(token);
     })
-    .catch(err => res.status(500).send(err.message));
+    .catch(err => res.status(INTERNAL_SERVER_ERROR).send(err.message));
+});
+
+app.post('/csp-report', (req, res) => {
+  const { body } = req;
+  if (body && body['csp-report']) {
+    const cspReport = body['csp-report'];
+    const errorMessage = `Refused to load the resource because it violates the following Content Security Policy directive: ${
+      cspReport['violated-directive']
+    }`;
+    errorLogger.error(errorMessage, cspReport);
+    res.status(OK).json({ status: OK, text: 'CSP Error recieved' });
+  } else {
+    res
+      .status(NOT_ACCEPTABLE)
+      .json({ status: NOT_ACCEPTABLE, text: 'CSP Error not recieved' });
+  }
 });
 
 function prefetchData(req, dispatch) {
@@ -264,7 +225,7 @@ function handleResponse(req, res, token) {
       .catch(err => {
         if (
           err &&
-          (err.status === 403 || err.status === 404) &&
+          (err.status === FORBIDDEN || err.status === NOT_FOUND) &&
           err.redirectPath
         ) {
           res.redirect(err.redirectPath);
@@ -280,7 +241,7 @@ app.get('*', (req, res) => {
     .then(token => {
       handleResponse(req, res, token);
     })
-    .catch(err => res.status(500).send(err.message));
+    .catch(err => res.status(INTERNAL_SERVER_ERROR).send(err.message));
 });
 
 module.exports = app;
