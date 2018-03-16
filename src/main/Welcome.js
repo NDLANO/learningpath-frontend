@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { routerActions } from 'react-router-redux';
+import { Link } from 'react-router-dom';
 import isEmpty from 'lodash/isEmpty';
 import { HelmetWithTracker } from 'ndla-tracker';
 import queryString from 'query-string';
@@ -79,12 +80,12 @@ class Welcome extends Component {
               data-cy="feature-link">
               {polyglot.t('welcomePage.explanationBtn')}
             </a>
-            <a
-              href="/minside"
+            <Link
+              to="/minside"
               className="hero_link cta-link cta-link-secondary cta-link--secondary-negative"
               data-cy="mypage-link">
               {polyglot.t('welcomePage.newBtn')} »
-            </a>
+            </Link>
           </div>
           <div className="infoblock">
             <img

@@ -6,3 +6,5 @@ npm-debug.log
 /.vscode
 jsconfig.json
 /htdocs/assets/
+/e2e/videos
+/e2e/screenshots

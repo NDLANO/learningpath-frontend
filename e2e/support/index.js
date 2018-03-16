@@ -18,3 +18,9 @@ import './commands';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+export const visitOptions = {
+  onBeforeLoad: (win) => {
+    win.fetch = null //eslint-disable-line
+  }
+};
