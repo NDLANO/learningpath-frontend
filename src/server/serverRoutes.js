@@ -1,10 +1,10 @@
-import Welcome from '../src/main/Welcome';
-import LoginProviders from '../src/session/LoginProviders';
-import NotFound from '../src/main/NotFound';
-import Forbidden from '../src/main/Forbidden';
-import LearningPathSearch from '../src/learningPath/search/LearningPathSearch';
-import LearningPath from '../src/learningPath/LearningPath';
-import LearningPathStep from '../src/learningPath/step/LearningPathStep';
+import Welcome from '../main/Welcome';
+import LoginProviders from '../session/LoginProviders';
+import NotFound from '../main/NotFound';
+import Forbidden from '../main/Forbidden';
+import LearningPathSearch from '../learningPath/search/LearningPathSearch';
+import LearningPath from '../learningPath/LearningPath';
+import LearningPathStep from '../learningPath/step/LearningPathStep';
 
 export const serverRoutes = [
   {

@@ -11,17 +11,14 @@ import PropTypes from 'prop-types';
 import { renderToString } from 'react-dom/server';
 import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
-import config from '../src/config';
+import config from '../config';
 import {
   SvgPolyfillScript,
   SvgPolyfillScriptInitalization,
 } from './svgPolyfill';
 import Zendesk from './Zendesk';
 
-const assets =
-  process.env.NODE_ENV === 'development'
-    ? require('./developmentAssets')
-    : require('../htdocs/assets/assets'); // eslint-disable-line import/no-unresolved
+const assets = require(process.env.RAZZLE_ASSETS_MANIFEST); //eslint-disable-line
 
 const GoogleTagMangerNoScript = () => {
   if (config.googleTagManagerId) {
@@ -86,7 +83,7 @@ const Html = props => {
   const { lang, className, state, component } = props;
   const content = component ? renderToString(component) : '';
   const head = Helmet.rewind();
-
+  console.log(assets);
   return (
     <html lang={lang} className={className}>
       <head>
@@ -100,20 +97,19 @@ const Html = props => {
           <script async src="https://www.google-analytics.com/analytics.js" />
         )}
         <SvgPolyfillScript className={className} />
-        {config.isProduction ? (
-          <link
-            rel="stylesheet"
-            type="text/css"
-            href={`/assets/${assets['main.css']}`}
-          />
-        ) : null}
+        {assets.css && <link
+          rel="stylesheet"
+          type="text/css"
+          href={assets.css}
+        />
+        }
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic,300|Signika:400,600,300,700"
         />
         <link
           rel="shortcut icon"
-          href={`/assets/${assets['favicon.ico']}`}
+          href={`/favicon.ico}`}
           type="image/x-icon"
         />
       </head>
@@ -147,7 +143,12 @@ const Html = props => {
             __html: `window.config = ${serialize(config)}`,
           }}
         />
-        <script src={`/assets/${assets['main.js']}`} />
+          <script
+            type="text/javascript"
+            src={assets.client.js}
+            defer
+            crossOrigin={(process.env.NODE_ENV !== 'production').toString()}
+          />
         <HotjarScript />
         <Zendesk lang={lang} />
         <SvgPolyfillScriptInitalization className={className} />

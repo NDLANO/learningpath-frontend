@@ -11,9 +11,6 @@ import { renderToString } from 'react-dom/server';
 import express from 'express';
 import helmet from 'helmet';
 import compression from 'compression';
-import webpack from 'webpack';
-import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
 import requestProxy from 'express-request-proxy';
 import { Provider } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -27,34 +24,20 @@ import {
   NOT_FOUND,
   NOT_ACCEPTABLE,
 } from 'http-status';
-import App from '../src/main/App';
-import config from '../src/config';
-import webpackConfig from '../webpack.config.dev';
-import { getHtmlLang, isValidLocale } from '../src/locale/configureLocale';
+import App from '../main/App';
+import config from '../config';
+import { getHtmlLang, isValidLocale } from '../locale/configureLocale';
 import Html from './Html';
 import { getToken } from './auth';
 import Auth0SilentCallback from './Auth0SilentCallback';
-import configureStore from '../src/configureStore';
+import configureStore from '../configureStore';
 import { serverRoutes } from './serverRoutes';
-import TokenStatusHandler from '../src/util/TokenStatusHandler';
+import TokenStatusHandler from '../util/TokenStatusHandler';
 import contentSecurityPolicy from './contentSecurityPolicy';
-import errorLogger from '../src/util/logger';
+import errorLogger from '../util/logger';
 
 const app = express();
 const allowedBodyContentTypes = ['application/csp-report', 'application/json'];
-
-if (process.env.NODE_ENV === 'development') {
-  const compiler = webpack(webpackConfig);
-  app.use(
-    webpackDevMiddleware(compiler, {
-      stats: {
-        colors: true,
-      },
-      publicPath: webpackConfig.output.publicPath,
-    }),
-  );
-  app.use(webpackHotMiddleware(compiler, {}));
-}
 
 app.use(
   bodyParser.json({
@@ -64,7 +47,7 @@ app.use(
 
 app.use(compression());
 app.use(
-  express.static('htdocs', {
+  express.static(process.env.RAZZLE_PUBLIC_DIR, {
     maxAge: 1000 * 60 * 60 * 24 * 365, // One year
   }),
 );

@@ -10,7 +10,7 @@ import React from 'react';
 import polyglot from '../i18n';
 import config from '../config';
 
-const zendeskHost = __SERVER__ ? config.zendeskHost : window.config.zendeskHost;
+const zendeskHost = config.zendeskHost;
 
 const ZendeskButton = () =>
   zendeskHost ? (

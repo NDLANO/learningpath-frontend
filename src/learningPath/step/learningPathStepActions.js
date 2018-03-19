@@ -93,7 +93,8 @@ export function fetchLearningPathStep(pathId, stepId, isEdit = false) {
       })
       .then(step => {
         if (step.embedUrl && step.embedUrl.url) {
-          const innerWidth = __SERVER__ ? 1000 : window.innerWidth;
+          const innerWidth =
+            process.env.BUILD_TARGET === 'server' ? 1000 : window.innerWidth;
           return dispatch(
             fetchOembed({
               url: step.embedUrl.url,

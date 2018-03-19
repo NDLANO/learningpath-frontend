@@ -76,7 +76,7 @@ class LearningPathStep extends React.Component {
       match: { params: { pathId, stepId } },
     } = nextProps;
     if (
-      __CLIENT__ &&
+      process.env.BUILD_TARGET === 'client' &&
       (this.props.match.params.stepId !== stepId ||
         this.props.match.params.pathId !== pathId)
     ) {

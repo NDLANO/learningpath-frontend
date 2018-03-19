@@ -56,7 +56,7 @@ const scriptSrc = (() => {
   ];
 
   if (process.env.NODE_ENV === 'development') {
-    return [...defaultScriptSrc, 'http://localhost:3000'];
+    return [...defaultScriptSrc, 'http://localhost:3001'];
   }
   return defaultScriptSrc;
 })();

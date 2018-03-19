@@ -4,9 +4,7 @@ import config from '../config';
 import Button from '../common/buttons/Button';
 import polyglot from '../i18n';
 
-const PINTEREST_ENABLED = __SERVER__
-  ? config.pinterestEnabled
-  : window.config.pinterestEnabled;
+const PINTEREST_ENABLED = config.pinterestEnabled;
 
 const PinterestLightboxButton = ({ learningPath, toggleLightBox }) => {
   if (!PINTEREST_ENABLED || !learningPath.canEdit) {

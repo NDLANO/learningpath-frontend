@@ -6,12 +6,11 @@
  *
  */
 
-import config from '../config';
+const assets = require(process.env.RAZZLE_ASSETS_MANIFEST); //eslint-disable-line
 
-const requireAssets = __CLIENT__ // eslint-disable-line no-nested-ternary
-  ? window.assets
-  : config.isProduction
-    ? require('../../htdocs/assets/assets') // eslint-disable-line import/no-unresolved
-    : require('../../server/developmentAssets'); // eslint-disable-line import/no-unresolved
+const requireAssets =
+  process.env.BUILD_TARGET === 'server' || process.env.NODE_ENV === 'unittest'
+    ? assets
+    : window.assets;
 
 export default requireAssets;

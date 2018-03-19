@@ -4,7 +4,7 @@ import { applicationError } from '../messages/messagesActions';
 export default function redirectAction(action, error, redirectPath) {
   return dispatch =>
     new Promise((resolve, reject) => {
-      if (__SERVER__) {
+      if (process.env.BUILD_TARGET === 'server') {
         reject({ ...error, redirectPath, action });
       } else {
         dispatch(routerActions[action]({ pathname: redirectPath }));
