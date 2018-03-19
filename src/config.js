@@ -96,7 +96,6 @@ const config = {
 };
 
 export function getUniversalConfig() {
-  console.log(process.env.NODE_ENV);
   return process.env.BUILD_TARGET === 'server' ||
     process.env.NODE_ENV === 'unittest'
     ? config

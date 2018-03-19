@@ -83,7 +83,7 @@ const Html = props => {
   const { lang, className, state, component } = props;
   const content = component ? renderToString(component) : '';
   const head = Helmet.rewind();
-  console.log(assets);
+
   return (
     <html lang={lang} className={className}>
       <head>
@@ -97,21 +97,14 @@ const Html = props => {
           <script async src="https://www.google-analytics.com/analytics.js" />
         )}
         <SvgPolyfillScript className={className} />
-        {assets.css && <link
-          rel="stylesheet"
-          type="text/css"
-          href={assets.css}
-        />
-        }
+        {assets.css && (
+          <link rel="stylesheet" type="text/css" href={assets.css} />
+        )}
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic,300|Signika:400,600,300,700"
         />
-        <link
-          rel="shortcut icon"
-          href={`/favicon.ico}`}
-          type="image/x-icon"
-        />
+        <link rel="shortcut icon" href={`/favicon.ico}`} type="image/x-icon" />
       </head>
       <body>
         <GoogleTagMangerNoScript />
@@ -143,12 +136,12 @@ const Html = props => {
             __html: `window.config = ${serialize(config)}`,
           }}
         />
-          <script
-            type="text/javascript"
-            src={assets.client.js}
-            defer
-            crossOrigin={(process.env.NODE_ENV !== 'production').toString()}
-          />
+        <script
+          type="text/javascript"
+          src={assets.client.js}
+          defer
+          crossOrigin={(process.env.NODE_ENV !== 'production').toString()}
+        />
         <HotjarScript />
         <Zendesk lang={lang} />
         <SvgPolyfillScriptInitalization className={className} />

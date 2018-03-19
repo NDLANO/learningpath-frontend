@@ -29,10 +29,7 @@
       "server",
       "node_modules"
     ],
-    "testRegex": "/__tests__/.*-test.(js|jsx)$",
-    "globals": {
-      "__DISABLE_SSR__": true
-    }
+    "testRegex": "/__tests__/.*-test.(js|jsx)$"
   },
   "engines": {
     "node": ">=8.0.0",

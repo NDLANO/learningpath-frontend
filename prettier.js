@@ -44,7 +44,7 @@ try {
 } catch (e) {
   if (!shouldWrite) {
     // prettier-ignore
-    console.log(
+    console.log( //eslint-disable-line
       `${chalk.red(`\nThis project uses prettier to format all JavaScript code.\n`) +
         chalk.dim(`Please run `) +
         chalk.reset('yarn prettier') +

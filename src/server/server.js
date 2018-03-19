@@ -166,7 +166,7 @@ function handleResponse(req, res, token) {
   const userAgentString = req.headers['user-agent'];
   const match = serverRoutes.find(r => matchPath(req.url, r));
   // eslint-disable-next-line no-underscore-dangle
-  if (global.__DISABLE_SSR__ || match.notFound) {
+  if (config.disableSSR || match.notFound) {
     const htmlString = renderHtmlString(locale, userAgentString, {
       accessToken: token.access_token,
       locale,
