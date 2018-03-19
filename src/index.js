@@ -65,6 +65,7 @@ window.errorReporter = ErrorReporter.getInstance({
   logglyApiKey,
   environment: logEnvironment,
   componentName,
+  ignoreUrls: [/https:\/\/.*hotjar\.com.*/],
 });
 TokenStatusHandler.getInstance({ store });
 
