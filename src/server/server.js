@@ -228,4 +228,4 @@ app.get('*', (req, res) => {
     .catch(err => res.status(INTERNAL_SERVER_ERROR).send(err.message));
 });
 
-module.exports = app;
+export default app;

@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 
 export const SvgPolyfillScript = ({ className }) => {
   if (className !== '') {
-    return <script src="/assets/svg4everybody.min.js" />;
+    return <script src="/svg4everybody.min.js" />;
   }
   return null;
 };
