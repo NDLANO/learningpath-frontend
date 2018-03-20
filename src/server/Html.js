@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import { renderToString } from 'react-dom/server';
 import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
+import useragent from 'useragent';
 import config from '../config';
 import {
   SvgPolyfillScript,
@@ -80,7 +81,7 @@ const HotjarScript = () => {
 };
 
 const Html = props => {
-  const { lang, className, state, component } = props;
+  const { lang, className, state, component, userAgentString } = props;
   const content = component ? renderToString(component) : '';
   const head = Helmet.rewind();
 
@@ -92,6 +93,13 @@ const Html = props => {
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         {head.title.toComponent()}
         {head.meta.toComponent()}
+        {useragent.parse(userAgentString).family === 'IE' && (
+          <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"
+            defer
+            async
+          />
+        )}
         <GoogleTagMangerScript />
         {config.gaTrackingId && (
           <script async src="https://www.google-analytics.com/analytics.js" />
@@ -155,6 +163,7 @@ Html.propTypes = {
   className: PropTypes.string.isRequired,
   state: PropTypes.object.isRequired,
   component: PropTypes.node,
+  userAgentString: PropTypes.string.isRequired,
 };
 
 export default Html;

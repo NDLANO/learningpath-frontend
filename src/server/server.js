@@ -89,6 +89,7 @@ const renderHtmlString = (
     <Html
       lang={locale}
       state={state}
+      userAgentString={userAgentString}
       component={component}
       className={getConditionalClassnames(userAgentString)}
     />,
