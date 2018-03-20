@@ -23,8 +23,8 @@ const LearningPathStepLicense = ({ learningPathStep }) => {
         license: learningPathStep.license.description,
       })
     ) : (
-      <LicenseByline licenseRights={license.rights} />
-    );
+        <LicenseByline licenseRights={license.rights} />
+      );
   return (
     <span className="learning-step_license">
       {learningPathStep.license.url ? (
@@ -35,8 +35,8 @@ const LearningPathStepLicense = ({ learningPathStep }) => {
           {licenseText}
         </a>
       ) : (
-        licenseText
-      )}
+          licenseText
+        )}
     </span>
   );
 };
