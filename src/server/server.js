@@ -25,7 +25,7 @@ import {
   NOT_ACCEPTABLE,
 } from 'http-status';
 import App from '../main/App';
-import config from '../config';
+import config, { getEnvironmentVariabel } from '../config';
 import { getHtmlLang, isValidLocale } from '../locale/configureLocale';
 import Html from './Html';
 import { getToken } from './auth';
@@ -109,7 +109,7 @@ app.get(
   requestProxy({
     url: `${config.pinterestApiUrl}*`,
     query: {
-      access_token: process.env.PINTEREST_ACCESS_TOKEN,
+      access_token: getEnvironmentVariabel('PINTEREST_ACCESS_TOKEN'),
     },
   }),
 );

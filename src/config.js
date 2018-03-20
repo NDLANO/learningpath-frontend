@@ -62,20 +62,17 @@ const config = {
   gaTrackingId: getEnvironmentVariabel('NDLA_LEARNING_PATH_GA_TRACKING_ID'),
   hotjarSiteID,
   ndlaFrontendDomain,
-  ndlaApiUrl: getEnvironmentVariabel('process.env.NDLA_API_URL', apiDomain),
+  ndlaApiUrl: getEnvironmentVariabel('NDLA_API_URL', apiDomain),
   googleSearchEngineId: getEnvironmentVariabel('NDLA_GOOGLE_SEARCH_ENGINE_ID'),
   googleApiKey: getEnvironmentVariabel('NDLA_GOOGLE_API_KEY'),
   googleApiUrl: getEnvironmentVariabel(
     'NDLA_GOOGLE_API_URL',
     'https://www.googleapis.com',
   ),
-  logEnvironment: getEnvironmentVariabel(
-    'process.env.NDLA_ENVIRONMENT',
-    'local',
-  ),
-  logglyApiKey: getEnvironmentVariabel('process.env.LOGGLY_API_KEY'),
+  logEnvironment: getEnvironmentVariabel('NDLA_ENVIRONMENT', 'local'),
+  logglyApiKey: getEnvironmentVariabel('LOGGLY_API_KEY'),
   pinterestApiUrl: getEnvironmentVariabel(
-    'process.env.PINTEREST_API_URL',
+    'PINTEREST_API_URL',
     'https://api.pinterest.com/v1/',
   ),
   pinterestEnabled:
