@@ -87,6 +87,14 @@
   color: var(--gray-3);
 }
 
+.learning-step_licence-description {
+  background-color: white;
+  padding: 2em;
+  border: 1px solid var(--gray-10);
+  border-radius: 0;
+  margin-bottom: 2em;
+}
+
 .learning-step_stepper:any-link {
   color: var(--blue-1);
   font-size: 1.125em;
