@@ -59,7 +59,8 @@ const initialState =
 
 const store = configureStore(initialState, browserHistory);
 
-const { logglyApiKey, logEnvironment, componentName } = config;
+const { logglyApiKey, logEnvironment, componentName, disableSSR } = config;
+
 window.errorReporter = ErrorReporter.getInstance({
   store,
   logglyApiKey,
@@ -67,6 +68,7 @@ window.errorReporter = ErrorReporter.getInstance({
   componentName,
   ignoreUrls: [/https:\/\/.*hotjar\.com.*/],
 });
+
 TokenStatusHandler.getInstance({ store });
 
 configureTracker({
@@ -75,7 +77,9 @@ configureTracker({
   googleTagManagerId: config.googleTagManagerId,
 });
 
-ReactDOM.hydrate(
+const renderOrHydrate = disableSSR ? ReactDOM.render : ReactDOM.hydrate;
+
+renderOrHydrate(
   <Provider store={store} locale={locale}>
     <Router history={browserHistory}>
       <App />
