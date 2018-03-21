@@ -6,7 +6,7 @@ describe('Welcome page', () => {
     beforeEach(() => {
       cy.visit('http://localhost:3000', visitOptions);
     });
-    
+
     it('should search for Norge in the welcome page search field', () => {
       cy.get('[data-cy=query]').type('Norge', { delay: 100 });
       cy.get('[data-cy=submit]').click();
@@ -89,24 +89,27 @@ describe('Welcome page', () => {
             }", "expiresAt": ${getTokenExpireAt(
               res.body.access_token,
             )} }, "authenticated": true}`,
-          )
-        }).then(() => {
-          cy.fixture('mineLearningpaths.json').then((learningPaths) => {
-            cy.server()
-            cy.route({
-              method: 'GET',
-              url: '**/mine/',
-              response: learningPaths
-            }).as('getMineLearningPaths');
+          );
+        })
+        .then(() => {
+          cy.fixture('mineLearningpaths.json').then(learningPaths => {
+            cy.server();
+            cy
+              .route({
+                method: 'GET',
+                url: '**/mine/',
+                response: learningPaths,
+              })
+              .as('getMineLearningPaths');
             cy.route({
               method: 'OPTIONS',
               url: '**/mine/',
               status: 204,
-              response: {}
+              response: {},
             });
           });
           cy.visit('http://localhost:3000', visitOptions);
-      });
+        });
     });
 
     it('should access /minside when create new learning path', () => {

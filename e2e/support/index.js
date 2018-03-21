@@ -20,7 +20,7 @@ import './commands';
 // require('./commands')
 
 export const visitOptions = {
-  onBeforeLoad: (win) => {
-    win.fetch = null //eslint-disable-line
-  }
+  onBeforeLoad: win => {
+    win.fetch = null; //eslint-disable-line
+  },
 };
