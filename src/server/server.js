@@ -220,7 +220,7 @@ function handleResponse(req, res, token) {
   }
 }
 
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
   getToken()
     .then(token => {
       handleResponse(req, res, token);

@@ -7,16 +7,16 @@
     "test": "BABEL_ENV=test NODE_ENV=unittest jest",
     "tdd": "BABEL_ENV=test NODE_ENV=unittest jest --watch",
     "copy-svg-polyfill": "mkdir -p htdocs/assets && cp node_modules/svg4everybody/dist/svg4everybody.min.js build/public/",
+    "postbuild": "cp build/assets.json build/public/assets.json",
     "build": "razzle build",
     "start": "razzle start",
-    "start-without-ssr": "cross-env DISABLE_SSR=true razzle start",
-    "start-prod": "cross-env NODE_ENV=production node build/server",
+    "start-without-ssr": "DISABLE_SSR=true razzle start",
+    "start-prod": "NODE_ENV=production node build/server",
     "lint": "yarn lint-css && yarn lint-es && yarn lint-prettier",
     "lint-es": "eslint src server",
     "lint-css": "stylelint style/**/*.css",
     "lint-prettier": "node prettier.js lint",
-    "prettier": "node prettier.js write",
-    "postbuild": "cp build/assets.json build/public/assets.json"
+    "prettier": "node prettier.js write"
   },
   "jest": {
     "setupFiles": [
