@@ -105,9 +105,10 @@ const Html = props => {
           <script async src="https://www.google-analytics.com/analytics.js" />
         )}
         <SvgPolyfillScript className={className} />
-        {assets.client && assets.client.css && (
-          <link rel="stylesheet" type="text/css" href={assets.client.css} />
-        )}
+        {assets.client &&
+          assets.client.css && (
+            <link rel="stylesheet" type="text/css" href={assets.client.css} />
+          )}
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic,300|Signika:400,600,300,700"
