@@ -105,8 +105,8 @@ const Html = props => {
           <script async src="https://www.google-analytics.com/analytics.js" />
         )}
         <SvgPolyfillScript className={className} />
-        {assets.css && (
-          <link rel="stylesheet" type="text/css" href={assets.css} />
+        {assets.client && assets.client.css && (
+          <link rel="stylesheet" type="text/css" href={assets.client.css} />
         )}
         <link
           rel="stylesheet"
@@ -132,11 +132,6 @@ const Html = props => {
         <script
           dangerouslySetInnerHTML={{
             __html: `window.initialState = ${serialize(state)}`,
-          }}
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.assets = ${serialize(assets)}`,
           }}
         />
         <script
