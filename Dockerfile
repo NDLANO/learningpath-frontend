@@ -20,4 +20,4 @@ COPY src $APP_PATH/public
 ENV NODE_ENV=production
 WORKDIR $APP_PATH
 RUN yarn run build
-CMD ["yarn", "start-prod"]
+CMD ["node", "build/server", "|", "bunyan"]
