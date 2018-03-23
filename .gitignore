@@ -7,3 +7,5 @@ yarn-error.log
 /.vscode
 jsconfig.json
 /htdocs/assets/
+/e2e/videos
+/e2e/screenshots

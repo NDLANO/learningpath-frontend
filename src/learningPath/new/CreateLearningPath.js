@@ -32,6 +32,7 @@ class CreateLearningPath extends React.Component {
             component={InputField}
             label={polyglot.t('createLearningPath.title')}
             maxLength="75"
+            data-cy="create-path-input-title"
           />
           <p className="learning-path_input-information">
             {polyglot.t('createLearningPath.titleMaxLength')}
@@ -53,6 +54,7 @@ class CreateLearningPath extends React.Component {
             className="textarea"
             component={TextAreaField}
             disableVerticalResize
+            data-cy="create-path-input-description"
           />
           <p className="learning-path_input-information">
             {polyglot.t('createLearningPath.descriptionMaxLength')}

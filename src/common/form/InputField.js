@@ -9,15 +9,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const InputField = ({
-  input,
-  label,
-  placeholder,
-  labelClassName,
-  type,
-  maxLength,
-  meta: { touched, error },
-}) => {
+const InputField = props => {
+  const {
+    input,
+    label,
+    placeholder,
+    labelClassName,
+    type,
+    maxLength,
+    meta: { touched, error },
+  } = props;
   const inputClassName = touched && error ? 'input--alert' : '';
   return (
     <div>
@@ -30,6 +31,7 @@ const InputField = ({
         type={type}
         className={inputClassName}
         maxLength={maxLength}
+        data-cy={props['data-cy']}
       />
       {touched &&
         error && (
@@ -46,6 +48,7 @@ InputField.propTypes = {
   labelClassName: PropTypes.string,
   placeholder: PropTypes.string,
   maxLength: PropTypes.string,
+  'data-cy': PropTypes.string,
 };
 InputField.defaultProps = {
   type: 'text',

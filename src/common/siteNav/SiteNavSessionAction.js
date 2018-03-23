@@ -30,7 +30,8 @@ class SiteNavSessionAction extends React.Component {
           <Link
             to="/logout"
             className="site-nav_link"
-            onClick={() => localCloseSidebars()}>
+            onClick={() => localCloseSidebars()}
+            data-cy="sitenav-logout">
             <LabeledIcon.Exit
               hotjarMasked
               labelText={polyglot.t('siteNav.logout', { name: userName })}
@@ -44,7 +45,8 @@ class SiteNavSessionAction extends React.Component {
         <Link
           to="/login"
           className="site-nav_link"
-          onClick={() => localCloseSidebars()}>
+          onClick={() => localCloseSidebars()}
+          data-cy="sitenav-login">
           <LabeledIcon.Exit labelText={polyglot.t('siteNav.login')} />
         </Link>
       </li>

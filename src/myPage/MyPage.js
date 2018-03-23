@@ -175,7 +175,8 @@ export class MyPage extends React.Component {
           <div className="tiles">{items}</div>
           <button
             className="cta-link new-learningpath-button"
-            onClick={this.onCreateLearningPathClick}>
+            onClick={this.onCreateLearningPathClick}
+            data-cy="mypage-new-learningpath-button">
             <LabeledIcon.Add labelText={polyglot.t('myPage.newBtn')} />
           </button>
           <Lightbox
