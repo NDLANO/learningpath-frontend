@@ -37,6 +37,7 @@
   "devDependencies": {
     "chalk": "2.3.0",
     "css-loader": "^0.28.7",
+    "cypress": "2.1.0",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.2",
     "eslint-config-ndla": "0.3.4",

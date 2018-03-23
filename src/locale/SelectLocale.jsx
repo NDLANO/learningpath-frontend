@@ -28,7 +28,8 @@ const SelectLocale = props => {
       onChange={evt => {
         handleChange(evt.target.value);
       }}
-      value={locale}>
+      value={locale}
+      data-cy="select-locale">
       {availableLocales.map(l => (
         <option key={l.abbreviation} value={l.abbreviation}>
           {l.name}

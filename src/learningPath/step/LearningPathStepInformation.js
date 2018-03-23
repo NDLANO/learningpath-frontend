@@ -12,21 +12,14 @@ import LearningPathStepLicense from './LearningPathStepLicense';
 
 const LearningPathStepInformation = ({ learningPathStep, stepTitle }) => (
   <div className="learning-step">
-    {learningPathStep.showTitle ? (
-      <div className="learning-step_hd">
-        <h1 className="learning-step_title">{stepTitle}</h1>
+    {learningPathStep.showTitle ? <h1>{stepTitle}</h1> : null}
+    {learningPathStep.description ? (
+      <div className="learning-step_licence-description">
+        <LearningPathStepLicense learningPathStep={learningPathStep} />
+        <div
+          dangerouslySetInnerHTML={{ __html: learningPathStep.description }}
+        />
       </div>
-    ) : null}
-    {learningPathStep.description ? (
-      <LearningPathStepLicense learningPathStep={learningPathStep} />
-    ) : (
-      ''
-    )}
-    {learningPathStep.description ? (
-      <div
-        className="learning-step_bd"
-        dangerouslySetInnerHTML={{ __html: learningPathStep.description }}
-      />
     ) : (
       ''
     )}
