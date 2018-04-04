@@ -1734,14 +1734,6 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-create-react-class@^15.6.0:
-  version "15.6.2"
-  resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.6.2.tgz#cf1ed15f12aad7f14ef5f2dfe05e6c42f91ef02a"
-  dependencies:
-    fbjs "^0.8.9"
-    loose-envify "^1.3.1"
-    object-assign "^4.1.1"
-
 cross-spawn@^5.0.1, cross-spawn@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
@@ -2798,7 +2790,7 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "^2.0.0"
 
-fbjs@^0.8.15, fbjs@^0.8.16, fbjs@^0.8.9:
+fbjs@^0.8.15, fbjs@^0.8.16:
   version "0.8.16"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.16.tgz#5e67432f550dc41b572bf55847b8aca64e5337db"
   dependencies:
@@ -2915,6 +2907,12 @@ flux-standard-action@1.2.0:
   resolved "https://registry.yarnpkg.com/flux-standard-action/-/flux-standard-action-1.2.0.tgz#d2d41612dde4cebddd11a76cfead8e84fc69ebdc"
   dependencies:
     lodash "^4.0.0"
+
+focus-trap@^2.4.3:
+  version "2.4.3"
+  resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-2.4.3.tgz#95edc23e77829b7772cb2486d61fd6371ce112f9"
+  dependencies:
+    tabbable "^1.0.3"
 
 for-each@^0.3.2:
   version "0.3.2"
@@ -4209,6 +4207,10 @@ jsx-ast-utils@^2.0.0:
   dependencies:
     array-includes "^3.0.3"
 
+jump.js@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/jump.js/-/jump.js-1.0.2.tgz#e0641b47f40a38f2139c25fda0500bf28e43015a"
+
 just-extend@^1.1.22:
   version "1.1.22"
   resolved "https://registry.yarnpkg.com/just-extend/-/just-extend-1.1.22.tgz#3330af756cab6a542700c64b2e4e4aa062d52fff"
@@ -4478,7 +4480,7 @@ lodash@4.17.4, "lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.12.0, lodash@^4.13.1,
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
-lodash@4.17.5:
+lodash@4.17.5, lodash@^4.17.5:
   version "4.17.5"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
 
@@ -4745,9 +4747,12 @@ ncp@~2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ncp/-/ncp-2.0.0.tgz#195a21d6c46e361d2fb1281ba38b91e9df7bdbb3"
 
-ndla-article-scripts@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/ndla-article-scripts/-/ndla-article-scripts-0.1.1.tgz#0b18afbef5e7265de60c37e6a6c356cd8eb09814"
+ndla-article-scripts@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/ndla-article-scripts/-/ndla-article-scripts-0.3.3.tgz#f382fefffec86499891f5b83687a38f29b35f8b0"
+  dependencies:
+    focus-trap "^2.4.3"
+    jump.js "^1.0.2"
 
 ndla-error-reporter@^0.2.0:
   version "0.2.0"
@@ -4755,24 +4760,31 @@ ndla-error-reporter@^0.2.0:
   dependencies:
     raven-js "^3.22.3"
 
-ndla-licenses@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/ndla-licenses/-/ndla-licenses-0.1.0.tgz#24f8d97e8dbb14ecbe9df485b414cd731a74cbd4"
+ndla-icons@0.2.13:
+  version "0.2.13"
+  resolved "https://registry.yarnpkg.com/ndla-icons/-/ndla-icons-0.2.13.tgz#48a21048083542e54635d99c40b44727b5d3e4c5"
+
+ndla-licenses@^0.1.8:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/ndla-licenses/-/ndla-licenses-0.1.8.tgz#d8add06c68448e1e5407ecfc6647b99dd127a0f0"
   dependencies:
     defined "1.0.0"
 
-ndla-tracker@0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/ndla-tracker/-/ndla-tracker-0.0.6.tgz#4d6b0eeba205dcbb830d1551c8e39be2b2b7dd00"
+ndla-tracker@0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/ndla-tracker/-/ndla-tracker-0.1.0.tgz#3cb7595f8b0d7104ee25948115bd7c33c2b375b6"
 
-ndla-ui@^0.8.11:
-  version "0.8.11"
-  resolved "https://registry.yarnpkg.com/ndla-ui/-/ndla-ui-0.8.11.tgz#88db9a11f8cf2fd516cc892184c8f08460891387"
+ndla-ui@^0.11.1:
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/ndla-ui/-/ndla-ui-0.11.1.tgz#2b91a669f1f7cb274bec72b0978ea90320437df4"
   dependencies:
     classnames "2.2.5"
+    focus-trap "^2.4.3"
+    jump.js "^1.0.2"
+    lodash "^4.17.5"
     react-bem-helper "1.4.1"
     react-prop-types "0.4.0"
-    react-sticky-header "^0.1.6"
+    react-transition-group "^2.2.1"
 
 ndla-util@^0.1.7:
   version "0.1.7"
@@ -6220,12 +6232,6 @@ react-sortable-hoc@^0.6.8:
     lodash "^4.12.0"
     prop-types "^15.5.7"
 
-react-sticky-header@^0.1.6:
-  version "0.1.9"
-  resolved "https://registry.yarnpkg.com/react-sticky-header/-/react-sticky-header-0.1.9.tgz#a03fe20bf4c91b88fc579d9052102586a77df505"
-  dependencies:
-    react "^15.5.4"
-
 react-test-renderer@^16.0.0, react-test-renderer@^16.0.0-0:
   version "16.0.0"
   resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.0.0.tgz#9fe7b8308f2f71f29fc356d4102086f131c9cb15"
@@ -6239,6 +6245,16 @@ react-transition-group@^2.2.0:
   dependencies:
     chain-function "^1.0.0"
     classnames "^2.2.5"
+    dom-helpers "^3.2.0"
+    loose-envify "^1.3.1"
+    prop-types "^15.5.8"
+    warning "^3.0.0"
+
+react-transition-group@^2.2.1:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.3.0.tgz#8dd1af58f6af284b19fd057f512e74f20438ad31"
+  dependencies:
+    chain-function "^1.0.0"
     dom-helpers "^3.2.0"
     loose-envify "^1.3.1"
     prop-types "^15.5.8"
@@ -6259,16 +6275,6 @@ react-widgets@^4.0.2:
     spy-on-component "^1.0.2"
     uncontrollable "^4.0.0"
     warning "^2.0.0"
-
-react@^15.5.4:
-  version "15.6.2"
-  resolved "https://registry.yarnpkg.com/react/-/react-15.6.2.tgz#dba0434ab439cfe82f108f0f511663908179aa72"
-  dependencies:
-    create-react-class "^15.6.0"
-    fbjs "^0.8.9"
-    loose-envify "^1.1.0"
-    object-assign "^4.1.0"
-    prop-types "^15.5.10"
 
 react@^16.0.0:
   version "16.0.0"
@@ -7206,6 +7212,10 @@ symbol-observable@^1.0.3:
 symbol-tree@^3.2.1:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.2.tgz#ae27db38f660a7ae2e1c3b7d1bc290819b8519e6"
+
+tabbable@^1.0.3:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-1.1.2.tgz#b171680aea6e0a3e9281ff23532e2e5de11c0d94"
 
 table@^4.0.1:
   version "4.0.2"
