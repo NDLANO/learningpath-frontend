@@ -7,7 +7,6 @@
  */
 
 import { createSelector } from 'reselect';
-import requireAssets from '../util/requireAssets';
 import { convertFieldWithFallback } from '../util/convertFieldWithFallback';
 
 const getTotalResultsFromState = state => {
@@ -29,7 +28,7 @@ export const getArticleResultFromState = state => {
     ...item,
     introduction: convertFieldWithFallback(item, 'introduction', ''),
     title: convertFieldWithFallback(item, 'title', ''),
-    thumbnail: `/assets/${requireAssets['placeholder.png']}`,
+    thumbnail: `/placeholder.png`,
     showUrl: false,
   }));
 };

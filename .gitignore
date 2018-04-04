@@ -1,6 +1,6 @@
 node_modules
 npm-debug.log
-yarn-error.log
+/build/
 .DS_Store
 *.iml
 /.idea
@@ -9,3 +9,4 @@ jsconfig.json
 /htdocs/assets/
 /e2e/videos
 /e2e/screenshots
+yarn-error.log

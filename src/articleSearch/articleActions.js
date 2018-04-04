@@ -16,9 +16,7 @@ import {
 } from '../embedSearch/embedSearchActions';
 import { getNumberOfArticlePages } from './articleSelectors';
 
-const ndlaFrontendUrl = __SERVER__
-  ? config.ndlaFrontendDomain
-  : window.config.ndlaFrontendDomain;
+const ndlaFrontendUrl = config.ndlaFrontendDomain;
 
 export function fetchArticleSearch(query, language) {
   const ndlaQuery = {

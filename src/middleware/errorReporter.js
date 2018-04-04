@@ -16,7 +16,7 @@ const errorMiddlewareReporter = store => next => action => {
     if (error instanceof ApiError) {
       const json = error.json;
       console.error(`${error.message} %o`, json.messages); // eslint-disable-line no-console
-      if (__CLIENT__) {
+      if (process.env.BUILD_TARGET === 'client') {
         if (warningCodes.includes(error.status)) {
           window.errorReporter.captureWarning(error, {
             serverResponse: error.json,
@@ -31,7 +31,7 @@ const errorMiddlewareReporter = store => next => action => {
       }
     } else {
       console.error(action.payload, action, store.getState()); // eslint-disable-line no-console
-      if (__CLIENT__) {
+      if (process.env.BUILD_TARGET === 'client') {
         window.errorReporter.captureError(error);
       }
     }

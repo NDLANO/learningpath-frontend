@@ -6,80 +6,34 @@
  *
  */
 
-import 'babel-polyfill';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { Router } from 'react-router-dom';
-import { configureTracker } from 'ndla-tracker';
-import createHistory from 'history/createBrowserHistory';
-import ErrorReporter from 'ndla-error-reporter';
-import isEmpty from 'lodash/isEmpty';
-import TokenStatusHandler from './util/TokenStatusHandler';
-import { configureLocale, isValidLocale } from './locale/configureLocale';
-import configureStore from './configureStore';
-import App from './main/App';
-import { getTokenExpireAt } from './util/jwtHelper';
+/*  eslint-disable no-console, global-require */
 
-function generateBasename(path) {
-  if (isValidLocale(path)) {
-    return `/${path}/`;
+import http from 'http';
+
+import config from './config';
+
+import app from './server/server';
+
+const server = http.createServer(app);
+
+let currentApp = app;
+
+server.listen(config.port, error => {
+  if (error) {
+    console.log(error);
   }
-  return undefined;
+
+  console.log('🚀  Server started!');
+});
+
+if (module.hot) {
+  console.log('✅  Server-side HMR Enabled!');
+
+  module.hot.accept('./server/server', () => {
+    console.log('🔁  HMR Reloading `./server/server`...');
+    server.removeListener('request', currentApp);
+    const newApp = require('./server/server').default;
+    server.on('request', newApp);
+    currentApp = newApp;
+  });
 }
-
-const paths = window.location.pathname.split('/');
-const path = paths.length > 2 ? paths[1] : '/';
-const locale = paths.length > 2 && isValidLocale(paths[1]) ? paths[1] : 'nb';
-
-configureLocale(locale);
-const basename = generateBasename(path);
-
-const browserHistory = basename ? createHistory({ basename }) : createHistory();
-
-const emptyState = {
-  authenticated: false,
-  accessToken: {},
-  learningPathStep: {},
-  learningPaths: [],
-  messages: [],
-  locale,
-};
-
-const initialState =
-  !isEmpty(window.initialState) && window.initialState.accessToken
-    ? {
-        ...window.initialState,
-        accessToken: {
-          token: window.initialState.accessToken,
-          expiresAt: getTokenExpireAt(window.initialState.accessToken),
-        },
-      }
-    : emptyState;
-
-const store = configureStore(initialState, browserHistory);
-
-const { logglyApiKey, logEnvironment, componentName } = window.config;
-window.errorReporter = ErrorReporter.getInstance({
-  store,
-  logglyApiKey,
-  environment: logEnvironment,
-  componentName,
-  ignoreUrls: [/https:\/\/.*hotjar\.com.*/],
-});
-TokenStatusHandler.getInstance({ store });
-
-configureTracker({
-  listen: browserHistory.listen,
-  gaTrackingId: window.config.gaTrackingId,
-  googleTagManagerId: window.config.googleTagManagerId,
-});
-
-ReactDOM.hydrate(
-  <Provider store={store} locale={locale}>
-    <Router history={browserHistory}>
-      <App />
-    </Router>
-  </Provider>,
-  document.getElementById('app-container'),
-);

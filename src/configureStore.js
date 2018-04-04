@@ -27,13 +27,13 @@ export default function configureStore(initialState, history) {
   const middleware = routerMiddleware(history);
   const createFinalStore = compose(
     applyMiddleware(thunkMiddleware, errorReporter, middleware),
-    __CLIENT__
+    process.env.BUILD_TARGET === 'client'
       ? persistState(['authenticated', 'accessToken'], {
           key: 'ndla:sti',
           slicer,
         })
       : f => f,
-    __CLIENT__ && window && window.devToolsExtension
+    process.env.BUILD_TARGET === 'client' && window && window.devToolsExtension
       ? window.devToolsExtension()
       : f => f,
   )(createStore);

@@ -1,5 +1,5 @@
 export function scaleImage(imageUrl) {
-  if (__SERVER__) {
+  if (process.env.BUILD_TARGET === 'server') {
     return 400;
   }
   const newImageWidth =

@@ -4,15 +4,14 @@
   "description": "NDLA Learning Path Frontend",
   "scripts": {
     "pretest": "yarn run lint",
-    "clean": "rimraf ./htdocs/assets/*",
-    "test": "NODE_ENV=unittest jest",
-    "tdd": "NODE_ENV=unittest jest --watch",
-    "copy-svg-polyfill": "mkdir -p htdocs/assets && cp node_modules/svg4everybody/dist/svg4everybody.min.js htdocs/assets/",
-    "prebuild": "yarn run clean && yarn run copy-svg-polyfill",
-    "build": "NODE_ENV=production webpack --config ./webpack.config.prod.js --bail",
-    "start": "NODE_ENV=development DISABLE_SSR=true nodemon --watch server server",
-    "start-with-ssr": "NODE_ENV=development nodemon --watch server server",
-    "start-prod": "NODE_ENV=production node server",
+    "test": "BABEL_ENV=test NODE_ENV=unittest jest",
+    "tdd": "BABEL_ENV=test NODE_ENV=unittest jest --watch",
+    "copy-svg-polyfill": "mkdir -p htdocs/assets && cp node_modules/svg4everybody/dist/svg4everybody.min.js build/public/",
+    "postbuild": "cp build/assets.json build/public/assets.json",
+    "build": "razzle build",
+    "start": "razzle start",
+    "start-without-ssr": "DISABLE_SSR=true razzle start",
+    "start-prod": "NODE_ENV=production node build/server",
     "lint": "yarn lint-css && yarn lint-es && yarn lint-prettier",
     "lint-es": "eslint src server",
     "lint-css": "stylelint style/**/*.css",
@@ -29,33 +28,19 @@
       "server",
       "node_modules"
     ],
-    "testRegex": "/__tests__/.*-test.(js|jsx)$",
-    "globals": {
-      "__CLIENT__": false,
-      "__SERVER__": true,
-      "__DISABLE_SSR__": true
-    }
+    "testRegex": "/__tests__/.*-test.(js|jsx)$"
   },
   "engines": {
     "node": ">=8.0.0",
     "npm": ">=5.0.0"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-jest": "^21.2.0",
-    "babel-loader": "^7.1.2",
-    "babel-plugin-transform-class-properties": "^6.23.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "1.6.1",
-    "babel-preset-react": "^6.24.1",
     "chalk": "2.3.0",
     "css-loader": "^0.28.7",
     "cypress": "2.1.0",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.2",
     "eslint-config-ndla": "0.3.4",
-    "extract-text-webpack-plugin": "^3.0.1",
-    "file-loader": "^1.1.5",
     "flux-standard-action": "1.2.0",
     "jest": "^21.2.1",
     "json-loader": "0.5.7",
@@ -68,6 +53,7 @@
     "postcss-nested": "2.1.2",
     "prettier": "1.10.2",
     "raf": "^3.4.0",
+    "razzle-config-utils": "0.1.0",
     "react-addons-test-utils": "^15.6.2",
     "react-test-renderer": "^16.0.0",
     "redux-mock-store": "^1.3.0",
@@ -76,16 +62,10 @@
     "style-loader": "^0.19.0",
     "stylelint": "8.2.0",
     "stylelint-config-standard": "17.0.0",
-    "webpack": "^3.8.1",
-    "webpack-dev-middleware": "^1.12.0",
-    "webpack-hot-middleware": "^2.20.0",
-    "webpack-manifest-plugin": "1.3.2"
+    "webpack-bundle-analyzer": "2.11.1"
   },
   "dependencies": {
     "auth0-js": "9.3.2",
-    "babel-polyfill": "^6.26.0",
-    "babel-register": "^6.26.0",
-    "babel-runtime": "^6.26.0",
     "body-parser": "1.18.2",
     "btoa": "1.1.2",
     "bunyan": "1.8.12",
@@ -117,6 +97,7 @@
     "node-polyglot": "2.2.2",
     "prop-types": "^15.6.0",
     "query-string": "^5.0.0",
+    "razzle": "0.8.12",
     "react": "^16.0.0",
     "react-bem-helper": "^1.4.1",
     "react-dom": "^16.0.0",
@@ -139,6 +120,7 @@
     "source-map-support": "^0.5.0",
     "svg4everybody": "^2.1.9",
     "tracekit": "^0.4.5",
+    "useragent": "2.3.0",
     "warning": "3.0.0"
   },
   "repository": {

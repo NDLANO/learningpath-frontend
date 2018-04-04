@@ -6,7 +6,7 @@
  *
  */
 
-import config from '../src/config';
+import config from '../config';
 
 const Auth0SilentCallback = `
   <html lang="no">
