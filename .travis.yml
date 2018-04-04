@@ -2,11 +2,15 @@ language: node_js
 node_js:
 - '8'
 before_script:
-  - yarn run start-without-ssr -- --silent &
+  -
 script:
 - yarn test
 - yarn run build
+- yarn run start-prod -- --silent &
 - yarn run cypress run
+
+after_script:
+
 notifications:
   slack:
     on_success: change
