@@ -12,41 +12,35 @@ import config from '../config';
 import formatUrl from '../util/formatUrlUtil';
 import { fetchAuth } from '../sources/fetchAuth';
 
-const NDLA_API_URL = __SERVER__ ? config.ndlaApiUrl : window.config.ndlaApiUrl;
-const NDLA_ACCESS_TOKEN = __SERVER__
-  ? config.accessToken
-  : window.config.accessToken;
-const AUTH0_DOMAIN = __SERVER__
-  ? config.auth0Domain
-  : window.config.auth0Domain;
-const NDLA_PERSONAL_CLIENT_ID = __SERVER__
-  ? config.ndlaPersonalClientId
-  : window.config.ndlaPersonalClientId;
+const NDLA_API_URL = config.ndlaApiUrl;
+const NDLA_ACCESS_TOKEN = config.accessToken;
+const AUTH0_DOMAIN = config.auth0Domain;
+const NDLA_PERSONAL_CLIENT_ID = config.ndlaPersonalClientId;
 
-if (process.env.NODE_ENV === 'unittest') {
+/* if (process.env.NODE_ENV === 'unittest') {
   global.__SERVER__ = false; //eslint-disable-line
-}
+} */
 
 const locationOrigin = (() => {
   if (process.env.NODE_ENV === 'unittest') {
     return 'http://ndla-frontend';
   }
 
-  if (__SERVER__) {
+  if (process.env.BUILD_TARGET === 'server') {
     return '';
   }
 
-  if (typeof location.origin === 'undefined') {
-    location.origin = [
-      location.protocol,
+  if (typeof window.location.origin === 'undefined') {
+    window.location.origin = [
+      window.location.protocol,
       '//',
-      location.host,
+      window.location.host,
       ':',
-      location.port,
+      window.location.port,
     ].join('');
   }
 
-  return location.origin;
+  return window.location.origin;
 })();
 
 export const ndlaPersonalClientId = (() => {

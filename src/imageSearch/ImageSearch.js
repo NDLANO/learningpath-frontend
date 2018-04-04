@@ -20,6 +20,7 @@ import {
   getLastPage,
   getTotalCount,
 } from './imageSelectors';
+import config from '../config';
 
 export function Images(props) {
   const {
@@ -53,7 +54,7 @@ export function Images(props) {
 
   const onSaveImage = (evt, image) => {
     closeLightBox();
-    const coverPhotoMetaUrl = `${window.config.ndlaApiUrl}${base}/${image.id}`;
+    const coverPhotoMetaUrl = `${config.ndlaApiUrl}${base}/${image.id}`;
     onChange(coverPhotoMetaUrl);
     localSetSavedImage(image);
   };

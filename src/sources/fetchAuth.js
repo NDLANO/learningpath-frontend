@@ -28,7 +28,7 @@ export const fetchAuth = (url, options = {}) => {
     Authorization: authorizationHeader(getState().accessToken.token),
   };
 
-  if (__SERVER__) {
+  if (process.env.BUILD_TARGET === 'server') {
     return fetch(url, { ...options, headers });
   }
 

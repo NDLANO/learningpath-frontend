@@ -17,9 +17,7 @@ import { getPins } from './pinterestSelectors';
 import { getLocale } from '../locale/localeSelectors';
 import config from '../config';
 
-const PINTEREST_ENABLED = __SERVER__
-  ? config.pinterestEnabled
-  : window.config.pinterestEnabled;
+const PINTEREST_ENABLED = config.pinterestEnabled;
 
 class PinterestLightbox extends Component {
   constructor(props) {

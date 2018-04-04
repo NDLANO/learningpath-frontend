@@ -11,9 +11,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import config from '../config';
 
-const LTI_ENABLED = __SERVER__
-  ? config.ltiActivated
-  : window.config.ltiActivated;
+const LTI_ENABLED = config.ltiActivated;
 
 const ExternalEmbedSearchFilter = ({
   currentFilter,

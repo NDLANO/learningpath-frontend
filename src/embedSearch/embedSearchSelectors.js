@@ -7,13 +7,12 @@
  */
 
 import { createSelector } from 'reselect';
-import requireAssets from '../util/requireAssets';
 
 const imageSource = pagemap => {
   if (pagemap && pagemap.cse_thumbnail && pagemap.cse_thumbnail.length > 0) {
     return pagemap.cse_thumbnail[0].src;
   }
-  return `/assets/${requireAssets['placeholder.png']}`;
+  return `/placeholder.png`;
 };
 
 const getTotalResultsFromState = (state, type) => {

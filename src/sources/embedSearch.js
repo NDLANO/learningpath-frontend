@@ -11,19 +11,9 @@ import queryString from 'query-string';
 import config from '../config';
 import { resolveJsonOrRejectWithError } from './helpers';
 
-if (process.env.NODE_ENV === 'unittest') {
-  window.config = config;
-}
-
-const GOOGLE_API_URL = __SERVER__
-  ? config.googleApiUrl
-  : window.config.googleApiUrl;
-const GOOGLE_API_KEY = __SERVER__
-  ? config.googleApiKey
-  : window.config.googleApiKey;
-const GOOGLE_SEARCH_ENGINE_ID = __SERVER__
-  ? config.googleSearchEngineId
-  : window.config.googleSearchEngineId;
+const GOOGLE_API_URL = config.googleApiUrl;
+const GOOGLE_API_KEY = config.googleApiKey;
+const GOOGLE_SEARCH_ENGINE_ID = config.googleSearchEngineId;
 
 const apiEmbedUrl = (() => {
   if (process.env.NODE_ENV === 'unittest') {

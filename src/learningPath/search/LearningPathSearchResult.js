@@ -17,7 +17,6 @@ import LearningPathIntroduction from './LearningPathIntroduction';
 import IsBasedOn from '../../common/IsBasedOn';
 import LearningPathContributors from '../sidebar/LearningPathContributors';
 import { scaleImage } from '../../util/imageScaler';
-import requireAssets from '../../util/requireAssets';
 
 export default class SearchResult extends Component {
   constructor(props) {
@@ -53,7 +52,7 @@ export default class SearchResult extends Component {
         <img
           className="search-result_img"
           role="presentation"
-          src={`/assets/${requireAssets['placeholder.png']}`}
+          src={`/placeholder.png`}
           alt="placeholder"
         />
       );

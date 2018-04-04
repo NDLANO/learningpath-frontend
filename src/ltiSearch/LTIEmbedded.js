@@ -22,7 +22,7 @@ class LTIEmbedded extends React.Component {
           return newObj;
         }, {});
       const obj = { params, type: 'ltiParams' };
-      parent.postMessage(obj, window.location.href);
+      window.parent.postMessage(obj, window.location.href);
     }
   }
   render() {

@@ -18,7 +18,6 @@ import Logo from '../common/Logo';
 import polyglot from '../i18n';
 import Masthead from '../common/Masthead';
 import { Wrapper, OneColumn, Footer } from '../common/Layout';
-import requireAssets from '../util/requireAssets';
 
 class Welcome extends Component {
   constructor(props) {
@@ -89,7 +88,7 @@ class Welcome extends Component {
           </div>
           <div className="infoblock">
             <img
-              src={`/assets/${requireAssets['learningpath.jpg']}`}
+              src={`/learningpath.jpg`}
               alt="Placeholder"
               className="infoblock_img frontpage-intro_img"
             />

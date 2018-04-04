@@ -7,7 +7,7 @@ Array [
     "id": 1,
     "introduction": "Test",
     "showUrl": false,
-    "thumbnail": "/assets/placeholder.png",
+    "thumbnail": "/placeholder.png",
     "title": "Test",
   },
   Object {
@@ -15,7 +15,7 @@ Array [
     "id": 2,
     "introduction": "Test3",
     "showUrl": false,
-    "thumbnail": "/assets/placeholder.png",
+    "thumbnail": "/placeholder.png",
     "title": "Test3",
   },
   Object {
@@ -23,7 +23,7 @@ Array [
     "id": 3,
     "introduction": "Test2",
     "showUrl": false,
-    "thumbnail": "/assets/placeholder.png",
+    "thumbnail": "/placeholder.png",
     "title": "Test2",
   },
 ]

@@ -7,6 +7,7 @@
  */
 
 import 'isomorphic-fetch';
+import { getEnvironmentVariabel } from '../config';
 
 const url = `https://ndla.eu.auth0.com/oauth/token`;
 
@@ -18,8 +19,10 @@ export const getToken = () =>
     },
     body: JSON.stringify({
       grant_type: 'client_credentials',
-      client_id: `${process.env.NDLA_LEARNING_PATH_CLIENT_ID}`,
-      client_secret: `${process.env.NDLA_LEARNING_PATH_CLIENT_SECRET}`,
+      client_id: `${getEnvironmentVariabel('NDLA_LEARNING_PATH_CLIENT_ID')}`,
+      client_secret: `${getEnvironmentVariabel(
+        'NDLA_LEARNING_PATH_CLIENT_SECRET',
+      )}`,
       audience: 'ndla_system',
     }),
     json: true,
