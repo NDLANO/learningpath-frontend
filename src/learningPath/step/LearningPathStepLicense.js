@@ -8,8 +8,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import getLicenseByAbbreviation from 'ndla-licenses';
-import { LicenseByline } from 'ndla-ui';
+import { getLicenseByAbbreviation } from 'ndla-licenses/lib/licenses';
+import LicenseByline from 'ndla-ui/lib/LicenseByline';
 import polyglot from '../../i18n';
 
 const LearningPathStepLicense = ({ learningPathStep }) => {
@@ -25,6 +25,7 @@ const LearningPathStepLicense = ({ learningPathStep }) => {
     ) : (
       <LicenseByline licenseRights={license.rights} />
     );
+
   return (
     <span className="learning-step_license">
       {learningPathStep.license.url ? (
