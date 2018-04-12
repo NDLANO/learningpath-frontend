@@ -47,7 +47,7 @@ test('component/Oembed', () => {
   expect(div.prop('dangerouslySetInnerHTML')).toEqual({ __html: oembed.html });
 
   expect(component.state('isNDLAResource')).toBeFalsy();
-  expect(component.state('listeningToResize')).toBeFalsy();
+  expect(component.state('listeningToMessages')).toBeFalsy();
 });
 
 test('component/Oembed ndla resource', () => {
@@ -61,11 +61,11 @@ test('component/Oembed ndla resource', () => {
   expect(div.prop('dangerouslySetInnerHTML')).toEqual({ __html: oembed.html });
 
   expect(component.state('isNDLAResource')).toBeTruthy();
-  expect(component.state('listeningToResize')).toBeTruthy();
+  expect(component.state('listeningToMessages')).toBeTruthy();
   // expect(add).toHaveBeenCalledTimes(1);
   expect(add).toHaveBeenCalledWith(
     'message',
-    component.instance().handleResizeMessage,
+    component.instance().handleIframeMessages,
   );
 });
 
@@ -98,11 +98,11 @@ test('component/Oembed resize message listener', () => {
   // expect(remove).toHaveBeenCalledTimes(1);
 
   expect(component.state('isNDLAResource')).toBeFalsy();
-  expect(component.state('listeningToResize')).toBeFalsy();
+  expect(component.state('listeningToIframeMessages')).toBeFalsy();
 
   expect(remove).toHaveBeenCalledWith(
     'message',
-    component.instance().handleResizeMessage,
+    component.instance().handleIframeMessages,
   );
 
   // update with other ndla resource
@@ -121,32 +121,35 @@ test('component/Oembed iframe resizing', () => {
   expect(iframe).toBeTruthy();
   expect(iframe.src).toBe('http://ndla.no/nb/node/24049/oembed');
 
-  instance.handleResizeMessage({
+  instance.handleIframeMessages({
     source: iframe.contentWindow,
-    data: { height: '800' },
+    data: {
+      height: '800',
+      event: 'resize',
+    },
   });
 
   expect(iframe.style.height).toBe('800px');
 
-  instance.handleResizeMessage({
+  instance.handleIframeMessages({
     source: iframe.contentWindow,
-    data: { height: '1000' },
+    data: { height: '1000', event: 'resize' },
   });
 
   expect(iframe.style.height).toBe('1000px');
 
-  instance.handleResizeMessage({
+  instance.handleIframeMessages({
     source: iframe.contentWindow,
-    data: { height: '900' },
+    data: { height: '900', event: 'resize' },
   });
 
   expect(iframe.style.height).toBe('900px');
 
-  expect(() => instance.handleResizeMessage()).not.toThrow();
+  expect(() => instance.handleIframeMessages()).not.toThrow();
 
-  instance.handleResizeMessage({
+  instance.handleIframeMessages({
     source: { mysteryObject: true },
-    data: { height: '2000' },
+    data: { height: '2000', event: 'resize' },
   });
 
   expect(iframe.style.height).toBe('900px');
@@ -156,9 +159,9 @@ test('component/Oembed iframe resizing', () => {
   const nextIframe = instance.getIframeDOM();
   expect(nextIframe.style.height).toBe('');
 
-  instance.handleResizeMessage({
+  instance.handleIframeMessages({
     source: nextIframe.contentWindow,
-    data: { height: '2000' },
+    data: { height: '2000', event: 'resize' },
   });
 
   expect(nextIframe.style.height).toBe('');
