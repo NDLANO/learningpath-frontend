@@ -12,6 +12,7 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
+import sinon from 'sinon';
 import {
   translatedLearningStep,
   translatedNdlaLearningStep,
@@ -165,4 +166,24 @@ test('component/Oembed iframe resizing', () => {
   });
 
   expect(nextIframe.style.height).toBe('');
+});
+
+test('component/Oembed iframe scrollTo message', () => {
+  const ndlaOembed = translatedNdlaLearningStep.oembed;
+
+  component = mount(<Oembed oembedContent={ndlaOembed} />);
+  const instance = component.instance();
+  instance.handleIframeMessages = sinon.spy();
+  const iframe = instance.getIframeDOM();
+
+  instance.handleIframeMessages({
+    source: iframe.contentWindow,
+    data: {
+      height: '800',
+      event: 'scrollTo',
+      top: 3000,
+    },
+  });
+
+  expect(instance.handleIframeMessages.calledOnce).toBeTruthy();
 });
