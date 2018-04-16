@@ -12,7 +12,6 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import sinon from 'sinon';
 import {
   translatedLearningStep,
   translatedNdlaLearningStep,
@@ -173,7 +172,7 @@ test('component/Oembed iframe scrollTo message', () => {
 
   component = mount(<Oembed oembedContent={ndlaOembed} />);
   const instance = component.instance();
-  instance.handleIframeMessages = sinon.spy();
+  const spy = jest.spyOn(instance, 'handleIframeMessages');
   const iframe = instance.getIframeDOM();
 
   instance.handleIframeMessages({
@@ -185,5 +184,5 @@ test('component/Oembed iframe scrollTo message', () => {
     },
   });
 
-  expect(instance.handleIframeMessages.calledOnce).toBeTruthy();
+  expect(spy).toHaveBeenCalledTimes(1);
 });
