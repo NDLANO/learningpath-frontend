@@ -24,11 +24,13 @@ export default class Oembed extends React.Component {
     super(props);
     this.state = {
       isNDLAResource: false,
-      listeningToResize: false,
+      listeningToMessages: false,
       isLoadingResource: true,
     };
 
-    this.handleResizeMessage = this.handleResizeMessage.bind(this);
+    this.handleIframeMessages = this.handleIframeMessages.bind(this);
+    this.handleResize = this.handleResize.bind(this);
+    this.handleScrollTo = this.handleScrollTo.bind(this);
   }
 
   componentWillMount() {
@@ -42,7 +44,7 @@ export default class Oembed extends React.Component {
   }
 
   componentWillUnmount() {
-    this.disableIframeResizing();
+    this.disableIframeMessageListener();
     this.setState({ isLoadingResource: false });
   }
 
@@ -52,46 +54,71 @@ export default class Oembed extends React.Component {
 
   handleIframeResizing({ oembedContent: { url } }) {
     if (urlIsNDLA(url) || urlIsNewNDLA(url) || urlIsLocalNdla(url)) {
-      this.setState({ isNDLAResource: true }, this.enableIframeResizing);
+      this.setState({ isNDLAResource: true }, this.enableIframeMessageListener);
     } else {
-      this.setState({ isNDLAResource: false }, this.disableIframeResizing);
+      this.setState(
+        { isNDLAResource: false },
+        this.disableIframeMessageListener,
+      );
     }
   }
 
-  enableIframeResizing() {
-    if (!this.state.listeningToResize) {
-      window.addEventListener('message', this.handleResizeMessage);
-      this.setState({ listeningToResize: true });
+  enableIframeMessageListener() {
+    if (!this.state.listeningToMessages) {
+      window.addEventListener('message', this.handleIframeMessages);
+      this.setState({ listeningToMessages: true });
     }
   }
 
-  disableIframeResizing() {
-    window.removeEventListener('message', this.handleResizeMessage);
-    this.setState({ listeningToResize: false });
+  disableIframeMessageListener() {
+    window.removeEventListener('message', this.handleIframeMessages);
+    this.setState({ listeningToMessages: false });
     this.setState({ isLoadingResource: false });
   }
 
-  handleResizeMessage(evt) {
+  handleScrollTo(evt) {
+    const iframe = this.getIframeDOM();
+    const rect = iframe.getBoundingClientRect();
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    const top = evt.data.top + rect.top + scrollTop;
+    window.scroll({ top });
+  }
+
+  handleResize(evt) {
+    if (!evt.data.height) {
+      return;
+    }
+    const iframe = this.getIframeDOM();
+    const newHeight = parseInt(get(evt, 'data.height', 0), 10);
+    iframe.style.height = `${newHeight}px`; // eslint-disable-line no-param-reassign
+    this.setState({ isLoadingResource: false });
+  }
+
+  handleIframeMessages(event) {
+    const iframe = this.getIframeDOM();
+    /* Needed to enforce content to stay within iframe on Safari iOS */
+    iframe.setAttribute('scrolling', 'no');
+
     if (
-      !this.state.listeningToResize ||
-      !evt ||
-      !evt.data ||
-      !evt.data.height
+      !this.state.listeningToMessages ||
+      !event ||
+      !event.data ||
+      iframe.contentWindow !== event.source
     ) {
       return;
     }
 
-    const iframe = this.getIframeDOM();
-    if (iframe.contentWindow !== get(evt, 'source')) {
-      return;
+    switch (event.data.event) {
+      case 'resize':
+        this.handleResize(event);
+        break;
+      case 'scrollTo':
+        this.handleScrollTo(event);
+        break;
+      default:
+        break;
     }
-
-    /* Needed to enforce content to stay within iframe on Safari iOS */
-    iframe.setAttribute('scrolling', 'no');
-
-    const newHeight = parseInt(get(evt, 'data.height', 0), 10);
-    iframe.style.height = `${newHeight}px`;
-    this.setState({ isLoadingResource: false });
   }
 
   render() {
