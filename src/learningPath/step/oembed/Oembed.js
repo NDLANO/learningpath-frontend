@@ -14,7 +14,7 @@ import Spinner from '../../../common/Spinner';
 
 export const urlIsNDLA = url => /^(http|https):\/\/ndla.no/.test(url);
 export const urlIsNewNDLA = url =>
-  /^(http|https):\/\/ndla-frontend.*.api.ndla.no/.test(url) ||
+  /^(http|https):\/\/ndla-frontend.([a-zA-Z]+.)api.ndla.no/.test(url) ||
   /^https:\/\/beta.ndla.no/.test(url);
 export const urlIsLocalNdla = url =>
   /^http:\/\/proxy.ndla-local:30017/.test(url);
