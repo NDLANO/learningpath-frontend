@@ -35,6 +35,7 @@ import { serverRoutes } from './serverRoutes';
 import TokenStatusHandler from '../util/TokenStatusHandler';
 import contentSecurityPolicy from './contentSecurityPolicy';
 import errorLogger from '../util/logger';
+import { getTokenExpireAt } from '../util/jwtHelper';
 
 const app = express();
 const allowedBodyContentTypes = ['application/csp-report', 'application/json'];
@@ -144,7 +145,6 @@ app.post('/csp-report', (req, res) => {
 
 function prefetchData(req, dispatch) {
   const promises = [];
-
   serverRoutes.forEach(route => {
     const match = matchPath(req.url, route);
     if (match && route.component.fetchData) {
@@ -167,9 +167,13 @@ function handleResponse(req, res, token) {
   const userAgentString = req.headers['user-agent'];
   const match = serverRoutes.find(r => matchPath(req.url, r));
   // eslint-disable-next-line no-underscore-dangle
+  const storedTokenInfo = {
+    token: token.access_token,
+    expiresAt: getTokenExpireAt(token.access_token),
+  };
   if (config.disableSSR || match.notFound) {
     const htmlString = renderHtmlString(locale, userAgentString, {
-      accessToken: token.access_token,
+      accessToken: storedTokenInfo,
       locale,
     });
     res.send(`<!doctype html>\n${htmlString}`);
@@ -178,7 +182,7 @@ function handleResponse(req, res, token) {
 
   const basename = isValidLocale(paths[1]) ? `${paths[1]}` : '';
 
-  const store = configureStore({ locale, accessToken: token.access_token });
+  const store = configureStore({ locale, accessToken: storedTokenInfo });
   TokenStatusHandler.getInstance({ store });
 
   const context = {};

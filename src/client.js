@@ -47,12 +47,14 @@ const emptyState = {
 };
 
 const initialState =
-  !isEmpty(window.initialState) && window.initialState.accessToken
+  !isEmpty(window.initialState) &&
+  window.initialState.accessToken &&
+  window.initialState.accessToken.token
     ? {
         ...window.initialState,
         accessToken: {
-          token: window.initialState.accessToken,
-          expiresAt: getTokenExpireAt(window.initialState.accessToken),
+          token: window.initialState.accessToken.token,
+          expiresAt: getTokenExpireAt(window.initialState.accessToken.token),
         },
       }
     : emptyState;
