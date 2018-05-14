@@ -179,6 +179,9 @@ export class LearningPath extends Component {
       copyPath(learningPath, lang);
       onLightboxClose();
     };
+
+    const { copyright } = learningPath;
+
     return (
       <div className="wrapper">
         <Helmet title={this.constructor.getDocumentTitle(this.props)} />
@@ -235,7 +238,9 @@ export class LearningPath extends Component {
               />
               <Route
                 path={'/learningpaths/:pathId/step/:stepId'}
-                component={LearningPathStep}
+                render={props => (
+                  <LearningPathStep copyright={copyright} {...props} />
+                )}
               />
               <Route
                 path={'/learningpaths/:pathId'}

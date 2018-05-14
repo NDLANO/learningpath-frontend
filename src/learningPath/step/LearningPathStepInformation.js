@@ -10,12 +10,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import LearningPathStepLicense from './LearningPathStepLicense';
 
-const LearningPathStepInformation = ({ learningPathStep, stepTitle }) => (
+const LearningPathStepInformation = ({
+  learningPathStep,
+  copyright,
+  stepTitle,
+}) => (
   <div className="learning-step">
     {learningPathStep.showTitle ? <h1>{stepTitle}</h1> : null}
     {learningPathStep.description ? (
       <div className="learning-step_licence-description">
-        <LearningPathStepLicense learningPathStep={learningPathStep} />
+        <LearningPathStepLicense
+          copyright={copyright}
+          learningPathStep={learningPathStep}
+        />
         <div
           dangerouslySetInnerHTML={{ __html: learningPathStep.description }}
         />
@@ -29,6 +36,10 @@ const LearningPathStepInformation = ({ learningPathStep, stepTitle }) => (
 LearningPathStepInformation.propTypes = {
   learningPathStep: PropTypes.object.isRequired,
   stepTitle: PropTypes.string,
+  copyright: PropTypes.shape({
+    licence: PropTypes.shape({}),
+    contributors: PropTypes.arrayOf(PropTypes.shape({})),
+  }),
 };
 
 export default LearningPathStepInformation;
