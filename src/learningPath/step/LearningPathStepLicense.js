@@ -12,6 +12,7 @@ import { getLicenseByAbbreviation } from 'ndla-licenses/lib/licenses';
 import LicenseByline from 'ndla-ui/lib/LicenseByline';
 import LearningPathContributors from '../sidebar/LearningPathContributors';
 import polyglot from '../../i18n';
+import { CopyrightObjectShape } from '../../shapes';
 
 const LearningPathStepLicense = ({ learningPathStep, copyright }) => {
   if (!learningPathStep.license || !learningPathStep.license.license) {
@@ -49,10 +50,7 @@ const LearningPathStepLicense = ({ learningPathStep, copyright }) => {
 
 LearningPathStepLicense.propTypes = {
   learningPathStep: PropTypes.object.isRequired,
-  copyright: PropTypes.shape({
-    licence: PropTypes.shape({}),
-    contributors: PropTypes.arrayOf(PropTypes.shape({})),
-  }),
+  copyright: CopyrightObjectShape,
 };
 
 export default LearningPathStepLicense;

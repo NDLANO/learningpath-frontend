@@ -18,6 +18,7 @@ import LearningPathStepPrevNext from './LearningPathStepPrevNext';
 import { getLearningPathStep } from './learningPathStepSelectors';
 import polyglot from '../../i18n';
 import { convertToGaOrGtmDimension } from '../../util/trackingUtil';
+import { CopyrightObjectShape } from '../../shapes';
 
 class LearningPathStep extends React.Component {
   static mapDispatchToProps = {
@@ -112,10 +113,7 @@ LearningPathStep.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   learningPathStep: PropTypes.object.isRequired,
   localFetchLearningPathStep: PropTypes.func.isRequired,
-  copyright: PropTypes.shape({
-    licence: PropTypes.shape({}),
-    contributors: PropTypes.arrayOf(PropTypes.shape({})),
-  }),
+  copyright: CopyrightObjectShape,
   match: PropTypes.shape({
     params: PropTypes.shape({
       pathId: PropTypes.string.isRequired,

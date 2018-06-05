@@ -7,9 +7,9 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
 import Icon from '../../common/Icon';
+import { CopyrightObjectShape } from '../../shapes';
 
 const LearningPathContributors = ({ copyright }) => {
   if (
@@ -27,7 +27,7 @@ const LearningPathContributors = ({ copyright }) => {
   );
 };
 LearningPathContributors.propTypes = {
-  copyright: PropTypes.object,
+  copyright: CopyrightObjectShape,
 };
 
 export default LearningPathContributors;

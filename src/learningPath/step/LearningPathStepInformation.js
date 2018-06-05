@@ -9,6 +9,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import LearningPathStepLicense from './LearningPathStepLicense';
+import { CopyrightObjectShape } from '../../shapes';
 
 const LearningPathStepInformation = ({
   learningPathStep,
@@ -36,10 +37,7 @@ const LearningPathStepInformation = ({
 LearningPathStepInformation.propTypes = {
   learningPathStep: PropTypes.object.isRequired,
   stepTitle: PropTypes.string,
-  copyright: PropTypes.shape({
-    licence: PropTypes.shape({}),
-    contributors: PropTypes.arrayOf(PropTypes.shape({})),
-  }),
+  copyright: CopyrightObjectShape,
 };
 
 export default LearningPathStepInformation;
