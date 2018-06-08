@@ -97,7 +97,7 @@
     "node-polyglot": "2.2.2",
     "prop-types": "^15.6.0",
     "query-string": "^5.0.0",
-    "razzle": "0.8.12",
+    "razzle": "2.0.0",
     "react": "^16.0.0",
     "react-bem-helper": "^1.4.1",
     "react-dom": "^16.0.0",
