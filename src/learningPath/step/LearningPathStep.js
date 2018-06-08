@@ -18,6 +18,7 @@ import LearningPathStepPrevNext from './LearningPathStepPrevNext';
 import { getLearningPathStep } from './learningPathStepSelectors';
 import polyglot from '../../i18n';
 import { convertToGaOrGtmDimension } from '../../util/trackingUtil';
+import { CopyrightObjectShape } from '../../shapes';
 
 class LearningPathStep extends React.Component {
   static mapDispatchToProps = {
@@ -85,7 +86,7 @@ class LearningPathStep extends React.Component {
   }
 
   render() {
-    const { learningPathStep } = this.props;
+    const { learningPathStep, copyright } = this.props;
     const { lang } = this.context;
     const oembedContent = learningPathStep.oembed;
     return (
@@ -96,6 +97,7 @@ class LearningPathStep extends React.Component {
           <div className="two-column_content--wide">
             <Helmet title={this.constructor.getDocumentTitle(this.props)} />
             <LearningPathStepInformation
+              copyright={copyright}
               learningPathStep={learningPathStep}
               stepTitle={learningPathStep.title}
             />
@@ -111,6 +113,7 @@ LearningPathStep.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   learningPathStep: PropTypes.object.isRequired,
   localFetchLearningPathStep: PropTypes.func.isRequired,
+  copyright: CopyrightObjectShape,
   match: PropTypes.shape({
     params: PropTypes.shape({
       pathId: PropTypes.string.isRequired,

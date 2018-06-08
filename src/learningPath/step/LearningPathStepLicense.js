@@ -10,9 +10,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getLicenseByAbbreviation } from 'ndla-licenses/lib/licenses';
 import LicenseByline from 'ndla-ui/lib/LicenseByline';
+import LearningPathContributors from '../sidebar/LearningPathContributors';
 import polyglot from '../../i18n';
+import { CopyrightObjectShape } from '../../shapes';
 
-const LearningPathStepLicense = ({ learningPathStep }) => {
+const LearningPathStepLicense = ({ learningPathStep, copyright }) => {
   if (!learningPathStep.license || !learningPathStep.license.license) {
     return null;
   }
@@ -29,12 +31,16 @@ const LearningPathStepLicense = ({ learningPathStep }) => {
   return (
     <span className="learning-step_license">
       {learningPathStep.license.url ? (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href={learningPathStep.license.url}>
-          {licenseText}
-        </a>
+        <div>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={learningPathStep.license.url}>
+            {licenseText}
+          </a>
+          {' - '}
+          <LearningPathContributors copyright={copyright} />
+        </div>
       ) : (
         licenseText
       )}
@@ -44,6 +50,7 @@ const LearningPathStepLicense = ({ learningPathStep }) => {
 
 LearningPathStepLicense.propTypes = {
   learningPathStep: PropTypes.object.isRequired,
+  copyright: CopyrightObjectShape,
 };
 
 export default LearningPathStepLicense;
