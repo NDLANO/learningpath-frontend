@@ -120,4 +120,7 @@ const mapDispatchToProps = {
   localChangeImageSearchQuery: changeImageSearchQuery,
   localSetSavedImage: setSavedImage,
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Images);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Images);

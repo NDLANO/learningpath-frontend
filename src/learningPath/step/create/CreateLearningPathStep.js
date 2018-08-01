@@ -28,6 +28,7 @@ const extendMapDispatchToProps = assign({}, mapDispatchToProps, {
   localCreateEmptyLearningPathStep: actions.createEmptyLearningPathStep,
 });
 
-export default connect(extendMapStateToProps, extendMapDispatchToProps)(
-  EditLearningPathStep,
-);
+export default connect(
+  extendMapStateToProps,
+  extendMapDispatchToProps,
+)(EditLearningPathStep);

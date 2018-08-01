@@ -134,4 +134,7 @@ const mapStateToProps = state =>
     language: getLocale(state),
   });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleSearch);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ArticleSearch);

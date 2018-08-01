@@ -112,4 +112,7 @@ const mapDispatchToProps = {
   pushRoute: routerActions.push,
 };
 
-export default connect(state => state, mapDispatchToProps)(Welcome);
+export default connect(
+  state => state,
+  mapDispatchToProps,
+)(Welcome);

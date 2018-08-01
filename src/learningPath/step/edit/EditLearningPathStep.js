@@ -48,7 +48,9 @@ class EditLearningPathStep extends Component {
       localCreateEmptyLearningPathStep,
       fetchLearningPathLicenses,
       localFetchLearningPathStep,
-      match: { params: { pathId, stepId } },
+      match: {
+        params: { pathId, stepId },
+      },
     } = this.props;
     fetchLearningPathLicenses('4.0');
 
@@ -140,6 +142,7 @@ export const mapDispatchToProps = {
   localFetchLearningPathStep: fetchLearningPathStep,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withTracker(EditLearningPathStep),
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withTracker(EditLearningPathStep));

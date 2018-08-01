@@ -122,7 +122,9 @@ export default class Oembed extends React.Component {
   }
 
   render() {
-    const { oembedContent: { html, embedType } } = this.props;
+    const {
+      oembedContent: { html, embedType },
+    } = this.props;
 
     return (
       <div>

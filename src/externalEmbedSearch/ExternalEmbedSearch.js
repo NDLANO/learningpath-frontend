@@ -115,6 +115,7 @@ const mapDispatchToProps = {
   removeOembed: actions.removeEmbedPreview,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ExternalEmbedSearch,
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ExternalEmbedSearch);

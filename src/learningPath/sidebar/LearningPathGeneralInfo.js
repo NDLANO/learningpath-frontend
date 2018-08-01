@@ -106,6 +106,7 @@ const mapDispatchToProps = {
   localCloseSidebars: closeSidebars,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  LearningPathGeneralInfo,
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(LearningPathGeneralInfo);

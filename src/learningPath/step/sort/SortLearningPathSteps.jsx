@@ -119,6 +119,7 @@ const mapDispatchToProps = {
   sortSteps: sortLearningPathSteps,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  SortLearningPathSteps,
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SortLearningPathSteps);

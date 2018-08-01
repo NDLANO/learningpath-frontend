@@ -132,6 +132,7 @@ const mapStateToProps = state =>
     oembedPreview: getOembedContentFromState(state, searchType),
   });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ExternalOembedSearch,
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ExternalOembedSearch);

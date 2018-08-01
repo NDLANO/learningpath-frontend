@@ -133,4 +133,7 @@ const mapDispatchToProps = {
   openRight: openRightSidebar,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Masthead);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Masthead);

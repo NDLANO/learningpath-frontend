@@ -153,6 +153,7 @@ const mapStateToProps = (state, props) => {
   );
 };
 
-export default connect(mapStateToProps, LearningPathSearch.mapDispatchToProps)(
-  LearningPathSearch,
-);
+export default connect(
+  mapStateToProps,
+  LearningPathSearch.mapDispatchToProps,
+)(LearningPathSearch);

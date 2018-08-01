@@ -28,7 +28,9 @@ class LearningPathStep extends React.Component {
   static fetchData(props) {
     const {
       localFetchLearningPathStep,
-      match: { params: { pathId, stepId } },
+      match: {
+        params: { pathId, stepId },
+      },
     } = props;
     return localFetchLearningPathStep(pathId, stepId);
   }
@@ -53,7 +55,9 @@ class LearningPathStep extends React.Component {
   componentWillUpdate(nextProps) {
     const {
       localFetchLearningPathStep,
-      match: { params: { pathId, stepId } },
+      match: {
+        params: { pathId, stepId },
+      },
     } = nextProps;
     if (
       process.env.BUILD_TARGET === 'client' &&
@@ -132,6 +136,7 @@ const mapStateToProps = state =>
     learningPathStep: getLearningPathStep(state),
   });
 
-export default connect(mapStateToProps, LearningPathStep.mapDispatchToProps)(
-  withTracker(LearningPathStep),
-);
+export default connect(
+  mapStateToProps,
+  LearningPathStep.mapDispatchToProps,
+)(withTracker(LearningPathStep));

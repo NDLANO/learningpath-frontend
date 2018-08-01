@@ -224,4 +224,7 @@ const mapDispatchToProps = {
   localFetchMyLearningPaths: fetchMyLearningPaths,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(MyPage);

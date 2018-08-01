@@ -89,6 +89,7 @@ LearningPathStepEmbed.propTypes = {
   removeOembed: PropTypes.func.isRequired,
 };
 
-export default connect(state => state, mapDispatchToProps)(
-  LearningPathStepEmbed,
-);
+export default connect(
+  state => state,
+  mapDispatchToProps,
+)(LearningPathStepEmbed);

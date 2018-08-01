@@ -17,7 +17,10 @@ export default class OneLineEditor extends React.Component {
 
     this.state = { editorState: EditorState.createEmpty() };
 
-    const { input: { onChange }, maxlength } = props;
+    const {
+      input: { onChange },
+      maxlength,
+    } = props;
 
     this.onChange = editorState =>
       this.setState({ editorState }, () => {

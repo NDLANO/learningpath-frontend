@@ -23,7 +23,8 @@ export default function withCloseSidebars(Component) {
     localCloseSidebars: closeSidebars,
   };
 
-  return connect(state => state, mapDispatchToProps)(
-    CloseSidebarsOnClickComponent,
-  );
+  return connect(
+    state => state,
+    mapDispatchToProps,
+  )(CloseSidebarsOnClickComponent);
 }

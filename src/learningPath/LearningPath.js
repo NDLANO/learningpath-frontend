@@ -49,7 +49,10 @@ export class LearningPath extends Component {
     const {
       replaceRoute,
       localFetchLearningPath,
-      match: { url, params: { pathId } },
+      match: {
+        url,
+        params: { pathId },
+      },
     } = props;
     if (url === `/learningpaths/${pathId}/edit`) {
       return localFetchLearningPath(pathId, true);
@@ -67,7 +70,13 @@ export class LearningPath extends Component {
   }
 
   static willTrackPageView(trackPageView, currentProps) {
-    const { learningPath, match: { url, params: { pathId } } } = currentProps;
+    const {
+      learningPath,
+      match: {
+        url,
+        params: { pathId },
+      },
+    } = currentProps;
     if (
       learningPath.id &&
       learningPath.id.toString() === pathId &&
@@ -281,7 +290,8 @@ const mapStateToProps = (state, ownProps) =>
   });
 
 export default withRouter(
-  connect(mapStateToProps, LearningPath.mapDispatchToProps)(
-    withTracker(LearningPath),
-  ),
+  connect(
+    mapStateToProps,
+    LearningPath.mapDispatchToProps,
+  )(withTracker(LearningPath)),
 );
