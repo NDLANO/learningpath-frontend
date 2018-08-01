@@ -26,17 +26,16 @@ const prettier = isWindows ? 'prettier.cmd' : 'prettier';
 const prettierCmd = path.resolve(__dirname, `node_modules/.bin/${prettier}`);
 
 const options = {
-  'jsx-bracket-same-line': 'true',
-  'single-quote': 'true',
-  'trailing-comma': 'all',
+  config: './.prettierrc.js',
 };
+
 
 // prettier-ignore
 const args = Object.keys(options)
   .map(key => `--${key}=${options[key]}`)
   .concat(
     `--${shouldWrite ? 'write' : 'l'}`,
-    '"{src,server,e2e}/**/*(*.js|*.jsx)"'
+    '"{src,e2e}/**/*(*.js|*.jsx)"'
   );
 
 try {
@@ -46,10 +45,10 @@ try {
     // prettier-ignore
     console.log( //eslint-disable-line
       `${chalk.red(`\nThis project uses prettier to format all JavaScript code.\n`) +
-        chalk.dim(`Please run `) +
-        chalk.reset('yarn prettier') +
-        chalk.dim(` and add changes to files listed above to your commit.`)
-       }\n`
+      chalk.dim(`Please run `) +
+      chalk.reset('yarn prettier') +
+      chalk.dim(` and add changes to files listed above to your commit.`)
+      }\n`
     );
     process.exitCode = 1;
   }

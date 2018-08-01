@@ -41,12 +41,6 @@ export const saveStepObject = (step, values, language) =>
   });
 
 class EditLearningPathStep extends Component {
-  static getDocumentTitle(props) {
-    return props.step.id
-      ? polyglot.t('htmlTitles.editLearningPathStep')
-      : polyglot.t('htmlTitles.createLearningPathStep');
-  }
-
   componentWillMount() {
     const {
       authenticated,
@@ -63,6 +57,12 @@ class EditLearningPathStep extends Component {
     } else if (stepId) {
       localFetchLearningPathStep(pathId, stepId, true);
     }
+  }
+
+  static getDocumentTitle(props) {
+    return props.step.id
+      ? polyglot.t('htmlTitles.editLearningPathStep')
+      : polyglot.t('htmlTitles.createLearningPathStep');
   }
 
   render() {

@@ -66,11 +66,6 @@ export class LearningPath extends Component {
     return localFetchLearningPath(pathId, false);
   }
 
-  static getDocumentTitle(props) {
-    const { learningPath } = props;
-    return learningPath.title + polyglot.t('htmlTitles.titleTemplate');
-  }
-
   static willTrackPageView(trackPageView, currentProps) {
     const { learningPath, match: { url, params: { pathId } } } = currentProps;
     if (
@@ -80,17 +75,6 @@ export class LearningPath extends Component {
     ) {
       trackPageView(currentProps);
     }
-  }
-
-  static getDimensions(props) {
-    const { learningPath } = props;
-    const dimensions = {
-      13: learningPath.learningsteps.length,
-    };
-    return {
-      ga: convertToGaOrGtmDimension(dimensions, 'ga'),
-      gtm: convertToGaOrGtmDimension(dimensions, 'gtm'),
-    };
   }
 
   constructor(props) {
@@ -112,6 +96,23 @@ export class LearningPath extends Component {
       displayCopyPath: true,
     });
   }
+
+  static getDimensions(props) {
+    const { learningPath } = props;
+    const dimensions = {
+      13: learningPath.learningsteps.length,
+    };
+    return {
+      ga: convertToGaOrGtmDimension(dimensions, 'ga'),
+      gtm: convertToGaOrGtmDimension(dimensions, 'gtm'),
+    };
+  }
+
+  static getDocumentTitle(props) {
+    const { learningPath } = props;
+    return learningPath.title + polyglot.t('htmlTitles.titleTemplate');
+  }
+
   togglePinterest() {
     this.setState(prevState => ({
       displayPinterest: !prevState.displayPinterest,

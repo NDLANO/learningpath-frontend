@@ -33,11 +33,6 @@ class LearningPathStep extends React.Component {
     return localFetchLearningPathStep(pathId, stepId);
   }
 
-  static getDocumentTitle(props) {
-    const { learningPathStep } = props;
-    return learningPathStep.title + polyglot.t('htmlTitles.titleTemplate');
-  }
-
   static willTrackPageView(trackPageView, currentProps) {
     const { learningPath, learningPathStep, match } = currentProps;
     if (
@@ -48,6 +43,24 @@ class LearningPathStep extends React.Component {
       learningPathStep.id.toString() === match.params.stepId
     ) {
       trackPageView(currentProps);
+    }
+  }
+
+  componentWillMount() {
+    LearningPathStep.fetchData(this.props);
+  }
+
+  componentWillUpdate(nextProps) {
+    const {
+      localFetchLearningPathStep,
+      match: { params: { pathId, stepId } },
+    } = nextProps;
+    if (
+      process.env.BUILD_TARGET === 'client' &&
+      (this.props.match.params.stepId !== stepId ||
+        this.props.match.params.pathId !== pathId)
+    ) {
+      localFetchLearningPathStep(pathId, stepId);
     }
   }
 
@@ -67,22 +80,9 @@ class LearningPathStep extends React.Component {
     };
   }
 
-  componentWillMount() {
-    LearningPathStep.fetchData(this.props);
-  }
-
-  componentWillUpdate(nextProps) {
-    const {
-      localFetchLearningPathStep,
-      match: { params: { pathId, stepId } },
-    } = nextProps;
-    if (
-      process.env.BUILD_TARGET === 'client' &&
-      (this.props.match.params.stepId !== stepId ||
-        this.props.match.params.pathId !== pathId)
-    ) {
-      localFetchLearningPathStep(pathId, stepId);
-    }
+  static getDocumentTitle(props) {
+    const { learningPathStep } = props;
+    return learningPathStep.title + polyglot.t('htmlTitles.titleTemplate');
   }
 
   render() {

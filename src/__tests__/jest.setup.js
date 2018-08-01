@@ -6,7 +6,8 @@
  *
  */
 
-import { configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+const jestTimeout = process.env.JEST_TIMEOUT
+  ? parseInt(process.env.JEST_TIMEOUT, 10)
+  : 30000;
 
-configure({ adapter: new Adapter() });
+jest.setTimeout(jestTimeout);
