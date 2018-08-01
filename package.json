@@ -5,6 +5,7 @@
   "scripts": {
     "pretest": "yarn run lint",
     "test": "cross-env BABEL_ENV=test NODE_ENV=unittest jest",
+    "test-ci": "cross-env BABEL_ENV=test NODE_ENV=unittest jest --maxWorkers=4 --ci",
     "tdd": "cross-env BABEL_ENV=test NODE_ENV=unittest jest --watch",
     "copy-svg-polyfill": "mkdir -p htdocs/assets && cp node_modules/svg4everybody/dist/svg4everybody.min.js build/public/",
     "postbuild": "cp build/assets.json build/public/assets.json",
@@ -13,7 +14,7 @@
     "start-without-ssr": "cross-env DISABLE_SSR=true razzle start",
     "start-prod": "cross-env NODE_ENV=production node build/server",
     "lint": "yarn lint-css && yarn lint-es && yarn lint-prettier",
-    "lint-es": "eslint src",
+    "lint-es": "eslint --cache --cache-location '.eslintcache/' --ext .js --ext .jsx src",
     "lint-css": "stylelint style/**/*.css",
     "lint-prettier": "node prettier.js lint",
     "prettier": "node prettier.js write"
