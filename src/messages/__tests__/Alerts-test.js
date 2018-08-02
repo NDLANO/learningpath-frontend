@@ -12,7 +12,7 @@ import sinon from 'sinon';
 import { uuid } from 'ndla-util';
 
 import { Alerts, Alert, Action } from '../Alerts';
-import { clearMessage } from '../../messages/messagesActions';
+import { clearMessage } from '../messagesActions';
 
 const noop = () => {};
 test('component/Alerts one message', () => {

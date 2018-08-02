@@ -1,4 +1,4 @@
-import { fetchAuth } from '../sources/fetchAuth';
+import { fetchAuth } from './fetchAuth';
 import { resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';
 
 const baseUrl = apiResourceUrl('/taxonomy/v1');

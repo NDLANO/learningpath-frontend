@@ -150,7 +150,7 @@ export default class Oembed extends React.Component {
 }
 
 Oembed.propTypes = {
-  oembedContent: PropTypes.object.isRequired,
+  oembedContent: PropTypes.object,
   embedType: PropTypes.string,
 };
 

@@ -12,7 +12,8 @@ const isEmpty = value => {
   if (value && value.embedType) {
     // handle embed url with embed types
     return value.url === undefined || value.url === null || value.url === '';
-  } else if (value && value.hasText) {
+  }
+  if (value && value.hasText) {
     // handle draf-js ContentState
     return !value.hasText();
   }

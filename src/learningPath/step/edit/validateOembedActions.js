@@ -70,6 +70,8 @@ export function validateOembed(
           }
           resolve();
         })
-        .catch(() => reject({ [fieldName]: polyglot.t(msgKey, lang) })),
+        .catch(() =>
+          reject(new Error({ [fieldName]: polyglot.t(msgKey, lang) })),
+        ),
     );
 }

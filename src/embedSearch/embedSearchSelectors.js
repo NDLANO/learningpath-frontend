@@ -16,7 +16,7 @@ const imageSource = pagemap => {
 };
 
 const getTotalResultsFromState = (state, type) => {
-  const result = state.embedSearch[type].result;
+  const { result } = state.embedSearch[type];
   return result.queries.request
     ? result.queries.request[0].totalResults
     : undefined;
@@ -31,7 +31,7 @@ export const getNumberOfPages = createSelector(
 );
 
 export const getEmbedResultFromState = (state, type) => {
-  const result = state.embedSearch[type].result;
+  const { result } = state.embedSearch[type];
   return result && result.items
     ? result.items.map(item => ({
         id: item.cacheId,

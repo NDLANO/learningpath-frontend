@@ -174,6 +174,7 @@ export class MyPage extends React.Component {
           </div>
           <div className="tiles">{items}</div>
           <button
+            type="button"
             className="cta-link new-learningpath-button"
             onClick={this.onCreateLearningPathClick}
             data-cy="mypage-new-learningpath-button">

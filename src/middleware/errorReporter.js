@@ -14,7 +14,7 @@ const errorMiddlewareReporter = store => next => action => {
   if (action.error) {
     const error = action.payload;
     if (error instanceof ApiError) {
-      const json = error.json;
+      const { json } = error;
       console.error(`${error.message} %o`, json.messages); // eslint-disable-line no-console
       if (process.env.BUILD_TARGET === 'client') {
         if (warningCodes.includes(error.status)) {

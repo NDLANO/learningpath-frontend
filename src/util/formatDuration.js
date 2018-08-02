@@ -9,7 +9,7 @@
 import polyglot from '../i18n';
 
 export default function formatDuration(duration) {
-  if (duration <= 0 || isNaN(duration)) {
+  if (duration <= 0 || Number.isNaN(duration)) {
     return polyglot.t('duration.zero');
   }
 

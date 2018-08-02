@@ -41,10 +41,10 @@ const Tooltip = props => {
 
 Tooltip.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, // Accessibility
-  placement: PropTypes.oneOf(PLACEMENTS).isRequired,
+  placement: PropTypes.oneOf(PLACEMENTS),
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
-  show: PropTypes.bool.isRequired,
+  show: PropTypes.bool,
   positionTop: PropTypes.number,
   positionLeft: PropTypes.number,
 };

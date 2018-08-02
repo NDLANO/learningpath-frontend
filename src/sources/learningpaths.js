@@ -11,7 +11,7 @@ import queryString from 'query-string';
 import cloneDeep from 'lodash/cloneDeep';
 import map from 'lodash/map';
 import assureSequenceOrder from '../util/assureSequenceOrder';
-import { fetchAuth } from '../sources/fetchAuth';
+import { fetchAuth } from './fetchAuth';
 import {
   fetchAuthorized,
   postAuthorized,

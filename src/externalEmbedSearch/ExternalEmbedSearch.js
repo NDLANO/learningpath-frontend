@@ -23,7 +23,6 @@ class ExternalEmbedSearch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      type: props.query,
       filter: props.query.filter,
       textQuery: props.query.textQuery,
     };

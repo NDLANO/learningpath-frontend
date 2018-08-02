@@ -32,6 +32,7 @@ export default function LearningPathDuration(props) {
             key={newDuration}
             role="presentation"
             className={durationClassName(newDuration)}
+            onKeyPress={() => onChange(newDuration)}
             onClick={() => onChange(newDuration)}>
             {' '}
             {newDuration}
@@ -44,7 +45,7 @@ export default function LearningPathDuration(props) {
         {...props.input}
         onChange={evt => inputChange(evt)}
       />
-      <span>{'time(r)'}</span>
+      <span>time(r)</span>
       <br />
       {props.meta.touched &&
         props.meta.error && (

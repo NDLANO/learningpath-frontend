@@ -18,13 +18,15 @@ class LTIEmbedded extends React.Component {
         .map(param => param.split('='))
         .reduce((obj, cur) => {
           const newObj = obj;
-          newObj[cur[0]] = cur[1];
+          const cur1 = cur[1];
+          newObj[cur[0]] = cur1;
           return newObj;
         }, {});
       const obj = { params, type: 'ltiParams' };
       window.parent.postMessage(obj, window.location.href);
     }
   }
+
   render() {
     return (
       <div className="embed-search_form-filters">

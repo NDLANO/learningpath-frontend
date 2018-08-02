@@ -44,6 +44,7 @@ export default class PreviewOembed extends React.Component {
 
     const previewButton = !this.state.previewOembed ? (
       <button
+        type="button"
         className="un-button learningsource__expand"
         onClick={this.onPreviewClick}>
         <span className="button button--outline">

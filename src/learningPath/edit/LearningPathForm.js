@@ -36,14 +36,14 @@ const validate = values => {
   }
   if (!values.duration) {
     errors.duration = polyglot.t('errors.duration');
-  } else if (!values.duration && !isNaN(values.duration)) {
+  } else if (!values.duration && !Number.isNaN(values.duration)) {
     errors.duration = polyglot.t('errors.duration');
   } else if (values.duration <= 0) {
     errors.duration = polyglot.t('errors.durationMinus');
   } else if (
     values.duration &&
-    isNaN(values.duration.replace(/,/g, '.')) &&
-    isNaN(values.duration)
+    Number.isNaN(values.duration.replace(/,/g, '.')) &&
+    Number.isNaN(values.duration)
   ) {
     errors.duration = polyglot.t('errors.durationNaN');
   } else if (

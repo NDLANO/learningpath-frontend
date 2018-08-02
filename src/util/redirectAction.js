@@ -5,7 +5,7 @@ export default function redirectAction(action, error, redirectPath) {
   return dispatch =>
     new Promise((resolve, reject) => {
       if (process.env.BUILD_TARGET === 'server') {
-        reject({ ...error, redirectPath, action });
+        reject(new Error({ ...error, redirectPath, action }));
       } else {
         dispatch(routerActions[action]({ pathname: redirectPath }));
         dispatch(applicationError(error));

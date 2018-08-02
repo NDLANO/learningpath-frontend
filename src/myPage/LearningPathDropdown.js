@@ -68,6 +68,7 @@ export default class LearningPathDropdown extends Component {
         onMouseEnter={() => this.handleDropDownOnMouseEvents(true)}
         onMouseLeave={() => this.handleDropDownOnMouseEvents(false)}>
         <button
+          type="button"
           className="un-button dropdown-menu_icon"
           onClick={() => this.handleDropDownOnClick()}>
           <Icon.MoreVert />
@@ -75,6 +76,7 @@ export default class LearningPathDropdown extends Component {
         <ul className={dropDownMenuItemsClassName}>
           <li className="dropdown-menu_item">
             <button
+              type="button"
               className="un-button dropdown-menu_link"
               onClick={this.makeOnClick('makecopy')}>
               <Icon.ContentCopy /> {polyglot.t('pathDropDown.makeCopy')}
@@ -87,6 +89,7 @@ export default class LearningPathDropdown extends Component {
                 key={status.action}
                 className={this.dropDownMenuItemClassName(status.status)}>
                 <button
+                  type="button"
                   className="un-button dropdown-menu_link"
                   onClick={this.publishAction(status)}>
                   <Icon.Input />{' '}
@@ -98,6 +101,7 @@ export default class LearningPathDropdown extends Component {
             ))}
           <li className="dropdown-menu_item">
             <button
+              type="button"
               className="un-button dropdown-menu_link"
               onClick={this.makeOnClick('delete')}>
               <Icon.Delete /> {polyglot.t('pathDropDown.delete')}

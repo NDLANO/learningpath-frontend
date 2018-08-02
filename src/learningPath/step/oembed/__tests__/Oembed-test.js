@@ -38,7 +38,7 @@ afterEach(() => {
 
 // TODO: Check why addEventListener is called six times and not one.
 test('component/Oembed', () => {
-  const oembed = translatedLearningStep.oembed;
+  const { oembed } = translatedLearningStep;
   component = mount(<Oembed oembedContent={oembed} />);
   const div = component.find('.learning-step');
 
@@ -51,7 +51,7 @@ test('component/Oembed', () => {
 });
 
 test('component/Oembed ndla resource', () => {
-  const oembed = translatedNdlaLearningStep.oembed;
+  const { oembed } = translatedNdlaLearningStep;
   component = mount(<Oembed oembedContent={oembed} />);
 
   const div = component.find('.learning-step');
@@ -70,7 +70,7 @@ test('component/Oembed ndla resource', () => {
 });
 
 test('component/Oembed resize message listener', () => {
-  const oembed = translatedLearningStep.oembed;
+  const { oembed } = translatedLearningStep;
   const ndlaOembed1 = translatedNdlaLearningStep.oembed;
   const ndlaOembed2 = Object.assign({}, ndlaOembed1, {
     url: `${ndlaOembed1.url}?another`,
@@ -111,7 +111,7 @@ test('component/Oembed resize message listener', () => {
 
 test('component/Oembed iframe resizing', () => {
   const ndlaOembed = translatedNdlaLearningStep.oembed;
-  const oembed = translatedLearningStep.oembed;
+  const { oembed } = translatedLearningStep;
 
   component = mount(<Oembed oembedContent={ndlaOembed} />);
   const instance = component.instance();

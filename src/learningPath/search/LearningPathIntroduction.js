@@ -27,7 +27,9 @@ export default class SearchResult extends Component {
     }
     const onClickShowIntroduction = evt => {
       evt.preventDefault();
-      this.setState({ showIntroduction: !this.state.showIntroduction });
+      this.setState(prevState => ({
+        showIntroduction: !prevState.showIntroduction,
+      }));
     };
 
     const introductionClassName = () =>
@@ -42,6 +44,7 @@ export default class SearchResult extends Component {
     return (
       <div>
         <button
+          type="button"
           className="un-button show-introduction_button"
           onClick={onClickShowIntroduction}>
           {introductionButtonText}{' '}

@@ -116,7 +116,7 @@ OneLineEditor.propTypes = {
   placeholder: PropTypes.string,
   maxlength: PropTypes.number,
   meta: PropTypes.object.isRequired,
-  wrapperClassName: PropTypes.string.isRequired,
+  wrapperClassName: PropTypes.string,
 };
 
 OneLineEditor.defaultProps = {

@@ -5,9 +5,15 @@ npm-debug.log
 .DS_Store
 *.iml
 /.idea
-/.vscode
 jsconfig.json
 /htdocs/assets/
 /e2e/videos
 /e2e/screenshots
 yarn-error.log
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json

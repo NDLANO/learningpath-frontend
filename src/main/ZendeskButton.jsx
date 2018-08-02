@@ -10,11 +10,12 @@ import React from 'react';
 import polyglot from '../i18n';
 import config from '../config';
 
-const zendeskHost = config.zendeskHost;
+const { zendeskHost } = config;
 
 const ZendeskButton = () =>
   zendeskHost ? (
     <button
+      type="button"
       onClick={() => (window && window.zE ? window.zE.activate() : undefined)}
       className="c-zendesk__button">
       {polyglot.t('askNDLA')}

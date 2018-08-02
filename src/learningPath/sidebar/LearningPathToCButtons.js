@@ -36,6 +36,7 @@ export const LearningPathToCButtons = ({
         .filter(status => status.status !== learningPath.status)
         .map(status => (
           <button
+            type="button"
             key={status.status}
             className="button--primary-outline cta-link--block"
             onClick={publishAction(status)}>

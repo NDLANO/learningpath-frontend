@@ -25,11 +25,13 @@ class SortLearningPathSteps extends Component {
     super();
     this.state = { learningsteps: [] };
   }
+
   componentWillMount() {
     if (this.props.learningPath) {
       this.setState({ learningsteps: this.props.learningPath.learningsteps });
     }
   }
+
   componentWillReceiveProps(nextProps) {
     const { learningPath } = this.props;
     const { learningPath: nextLearningPath } = nextProps;
@@ -42,13 +44,14 @@ class SortLearningPathSteps extends Component {
       this.setState({ learningsteps: nextLearningPath.learningsteps });
     }
   }
+
   onSortEnd = indexes => {
     const {
       sortSteps,
       localUpdateStepSequenceNumber,
       learningPath,
     } = this.props;
-    const learningsteps = learningPath.learningsteps;
+    const { learningsteps } = learningPath;
     const step = learningsteps[indexes.oldIndex];
 
     if (step && indexes.oldIndex !== indexes.newIndex) {
@@ -66,7 +69,7 @@ class SortLearningPathSteps extends Component {
   shouldCancelStart = e => {
     // Iterates through each target from an event on click to check if it was button click or not. Cancels drag action if it was a click on a button.
     for (
-      let target = e.target;
+      let { target } = e;
       target !== this.contentDiv;
       target = target.parentElement
     ) {

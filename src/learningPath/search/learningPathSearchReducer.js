@@ -23,7 +23,7 @@ export default handleActions(
     SET_LEARNING_PATH_BASED_ON: {
       next: (state, action) => {
         const nextState = cloneDeep(state);
-        const results = nextState.results;
+        const { results } = nextState;
         const index = nextState.results.findIndex(
           path => path.id === action.payload.pathId,
         );

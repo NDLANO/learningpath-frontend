@@ -87,7 +87,8 @@ export function fetchLearningPath(pathId, isEdit = false) {
       .catch(err => {
         if (err.status === 403) {
           return dispatch(redirectAction('push', err, '/forbidden'));
-        } else if (err.status === 404) {
+        }
+        if (err.status === 404) {
           return dispatch(redirectAction('push', err, '/notfound'));
         }
         return err;

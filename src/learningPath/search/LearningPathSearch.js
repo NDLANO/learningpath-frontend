@@ -92,7 +92,7 @@ class LearningPathSearch extends React.Component {
         <HelmetWithTracker
           title={polyglot.t('htmlTitles.learningPathSearch')}
         />
-        <OneColumn className={'one-colum--white-bg'}>
+        <OneColumn className="one-colum--white-bg">
           <Masthead />
           <div className="page-header">
             <SearchForm

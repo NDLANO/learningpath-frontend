@@ -24,9 +24,11 @@ class LearningPathGeneralInfo extends React.Component {
     super();
     this.state = { isClient: false };
   }
+
   componentDidMount() {
     this.setState({ isClient: true }); // eslint-disable-line
   }
+
   render() {
     const {
       authenticated,

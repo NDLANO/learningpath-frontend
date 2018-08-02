@@ -19,6 +19,7 @@ class CreateLearningPath extends React.Component {
     const { dispatch } = this.props;
     dispatch(reset('create-learning-path'));
   }
+
   render() {
     const { submitting, handleSubmit, valid } = this.props;
     return (

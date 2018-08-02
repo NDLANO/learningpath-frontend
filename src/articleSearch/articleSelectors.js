@@ -10,7 +10,7 @@ import { createSelector } from 'reselect';
 import { convertFieldWithFallback } from '../util/convertFieldWithFallback';
 
 const getTotalResultsFromState = state => {
-  const result = state.embedSearch.ndla.result;
+  const { result } = state.embedSearch.ndla;
   return result.totalCount ? result.totalCount / result.pageSize : 0;
 };
 

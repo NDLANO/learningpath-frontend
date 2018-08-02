@@ -8,7 +8,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Icon from '../../common/Icon';
+import Icon from '../Icon';
 
 import { stepNumbers } from './PagerUtil';
 
@@ -37,6 +37,7 @@ export default function ButtonPager(props) {
     return (
       <button
         key={n}
+        type="button"
         className="search-stepper_step"
         onClick={handleClickToPage(n)}>
         {n}
@@ -49,6 +50,7 @@ export default function ButtonPager(props) {
   if (steps[0] < page) {
     prevPageLink = (
       <button
+        type="button"
         className="search-stepper_step search-stepper_step--back"
         onClick={handleClickToPage(page - 1)}>
         <Icon.Back />
@@ -59,6 +61,7 @@ export default function ButtonPager(props) {
   if (page < lastPage) {
     nextPageLink = (
       <button
+        type="button"
         className="search-stepper_step search-stepper_step--forward"
         onClick={handleClickToPage(page + 1)}>
         <Icon.Forward />

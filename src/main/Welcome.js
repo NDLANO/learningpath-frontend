@@ -88,7 +88,7 @@ class Welcome extends Component {
           </div>
           <div className="infoblock">
             <img
-              src={`/learningpath.jpg`}
+              src="/learningpath.jpg"
               alt="Placeholder"
               className="infoblock_img frontpage-intro_img"
             />

@@ -18,7 +18,7 @@ import LearningPathGeneralInfo from './sidebar/LearningPathGeneralInfo';
 import LearningPathToC from './sidebar/LearningPathToC';
 import Lightbox from '../common/Lightbox';
 import PrivateRoute from '../main/PrivateRoute';
-import CopyLearningPath from '../learningPath/new/CopyLearningPath';
+import CopyLearningPath from './new/CopyLearningPath';
 import Masthead from '../common/Masthead';
 import Icon from '../common/Icon';
 import SortLearningStepsButton from './sidebar/SortLearningStepsButton';
@@ -56,7 +56,8 @@ export class LearningPath extends Component {
     } = props;
     if (url === `/learningpaths/${pathId}/edit`) {
       return localFetchLearningPath(pathId, true);
-    } else if (url === `/learningpaths/${pathId}/first-step`) {
+    }
+    if (url === `/learningpaths/${pathId}/first-step`) {
       return localFetchLearningPath(pathId, false)
         .then(learningPath => {
           const stepId = learningPath.learningsteps[0].id;
@@ -131,7 +132,7 @@ export class LearningPath extends Component {
   render() {
     const { learningPath, isTableOfContentOpen, copyPath, match } = this.props;
     const { lang } = this.context;
-    const stepId = match.params.stepId;
+    const { stepId } = match.params;
 
     const showButtonsUrls = [
       '/learningpaths/:pathId',
@@ -231,29 +232,29 @@ export class LearningPath extends Component {
           <main className="two-column_col">
             <Switch>
               <PrivateRoute
-                path={'/learningpaths/:pathId/edit'}
+                path="/learningpaths/:pathId/edit"
                 component={EditLearningPath}
               />
               <PrivateRoute
-                path={'/learningpaths/:pathId/step/:stepId/edit'}
+                path="/learningpaths/:pathId/step/:stepId/edit"
                 component={EditLearningPathStep}
               />
               <PrivateRoute
-                path={'/learningpaths/:pathId/step/new'}
+                path="/learningpaths/:pathId/step/new"
                 component={CreateLearningPathStep}
               />
               <PrivateRoute
-                path={'/learningpaths/:pathId/step/sort'}
+                path="/learningpaths/:pathId/step/sort"
                 component={LearningPathSummary}
               />
               <Route
-                path={'/learningpaths/:pathId/step/:stepId'}
+                path="/learningpaths/:pathId/step/:stepId"
                 render={props => (
                   <LearningPathStep copyright={copyright} {...props} />
                 )}
               />
               <Route
-                path={'/learningpaths/:pathId'}
+                path="/learningpaths/:pathId"
                 component={LearningPathSummary}
               />
             </Switch>

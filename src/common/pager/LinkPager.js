@@ -11,7 +11,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import Icon from '../../common/Icon';
+import Icon from '../Icon';
 import { stepNumbers } from './PagerUtil';
 
 export default function LinkPager(props) {

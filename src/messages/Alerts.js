@@ -11,10 +11,10 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import Icon from '../common/Icon';
-import { timeoutMessage, clearMessage } from '../messages/messagesActions';
+import { timeoutMessage, clearMessage } from './messagesActions';
 
 export const Action = ({ title, onClick }) => (
-  <button onClick={onClick} className="un-button alert_action">
+  <button type="button" onClick={onClick} className="un-button alert_action">
     <span className="alert_action-text">{title}</span>
   </button>
 );
@@ -36,6 +36,7 @@ export const Alert = ({ message, dispatch }) => {
     <div className={`alert alert--${severity}`}>
       <div className="alert_msg">{message.message}</div>
       <button
+        type="button"
         className="alert_dismiss un-button"
         onClick={() => dispatch(clearMessage(message.id))}>
         <Icon.Clear />

@@ -36,6 +36,7 @@ export default class Lightbox extends React.Component {
       <div className="lightbox">
         <div className="lightbox_content" style={style}>
           <button
+            type="button"
             className="un-button close-dialog"
             onClick={this.onCloseButtonClick}>
             <Icon.Clear />

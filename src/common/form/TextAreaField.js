@@ -57,7 +57,7 @@ const TextAreaField = props => {
 TextAreaField.propTypes = {
   input: PropTypes.object.isRequired,
   meta: PropTypes.object.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   type: PropTypes.string,
   labelClassName: PropTypes.string,
   placeholder: PropTypes.string,
