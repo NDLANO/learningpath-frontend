@@ -146,7 +146,7 @@ test('actions/validateOembed invalid url', done => {
     })
     .catch(error => {
       expect(() => apiMock.done()).not.toThrow();
-      expect({ url: 'feil' }).toEqual(error);
+      expect(new Error({ url: 'feil' })).toEqual(error);
       nock.cleanAll();
       done();
     });
