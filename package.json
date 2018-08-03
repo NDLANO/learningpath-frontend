@@ -17,7 +17,7 @@
     "e2e-use-fixtures": "cross-env CYPRESS_USE_FIXTURES=true cypress open",
     "e2e-record-fixtures": "cross-env CYPRESS_RECORD_FIXTURES=true cypress open",
     "pree2e-ci": "cross-env NDLA_ENVIRONMENT=mock NODE_ENV=production node build/server &",
-    "e2e-ci": "cross-env CYPRESS_USE_FIXTURES=true cypress run --record",
+    "e2e-ci": "cross-env CYPRESS_USE_FIXTURES=true cypress run",
     "lint": "yarn lint-css && yarn lint-es && yarn lint-prettier",
     "lint-es": "eslint --cache --cache-location '.eslintcache/' --ext .js --ext .jsx src",
     "lint-css": "stylelint style/**/*.css",
