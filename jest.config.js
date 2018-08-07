@@ -4,17 +4,3 @@ module.exports = {
   setupTestFrameworkScriptFile: './src/__tests__/jest.setup.js',
   testURL: 'http://localhost/', // Needed until fixed: https://github.com/jsdom/jsdom/issues/2304
 };
-
-
-/* "jest": {
-  "setupFiles": [
-    "raf/polyfill",
-    "./src/common/__tests__/enzymeSetup.js"
-  ],
-  "moduleDirectories": [
-    "src",
-    "server",
-    "node_modules"
-  ],
-  "testRegex": "/__tests__/.*-test.(js|jsx)$"
-}, */
