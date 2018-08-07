@@ -28,20 +28,22 @@ class ExternalOembedSearch extends React.Component {
     super(props);
 
     this.state = {
-      active: false,
       oembedDisplay: false,
     };
     this.previewOembed = this.previewOembed.bind(this);
     this.onPreviewClose = this.onPreviewClose.bind(this);
   }
+
   componentWillMount() {
     this.props.localFetchEmbedSearch(this.props.query);
   }
+
   onPreviewClose(evt) {
     evt.preventDefault();
     this.props.removeOembed({ type: 'external' });
     this.setState({ oembedDisplay: false });
   }
+
   previewOembed(evt, item) {
     evt.preventDefault();
     this.props.localFetchOembed(item.link, this.context.lang, searchType);
@@ -132,6 +134,7 @@ const mapStateToProps = state =>
     oembedPreview: getOembedContentFromState(state, searchType),
   });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ExternalOembedSearch,
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ExternalOembedSearch);

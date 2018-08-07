@@ -32,8 +32,8 @@ function LabeledIcon(props) {
 }
 
 LabeledIcon.propTypes = {
-  labelText: PropTypes.string.isRequired,
-  iconName: PropTypes.string.isRequired,
+  labelText: PropTypes.string,
+  iconName: PropTypes.string,
   tagName: PropTypes.string,
   hotjarMasked: PropTypes.bool,
 };
@@ -60,5 +60,5 @@ export default LabeledIcon;
 
 LabeledIcon.defaultProps = {
   labelText: '',
-  hjMasked: false,
+  hotjarMasked: false,
 };

@@ -103,4 +103,7 @@ const mapStateToProps = state => ({
   pins: getPins(state),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PinterestLightbox);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(PinterestLightbox);

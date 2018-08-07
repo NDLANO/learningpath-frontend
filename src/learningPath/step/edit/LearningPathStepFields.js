@@ -58,7 +58,7 @@ const LearningPathStepFields = props => {
   };
 
   const handleUrlOnBlur = evt => {
-    const value = evt.target.value;
+    const { value } = evt.target;
     if (url.input.value.url !== value) {
       url.input.onBlur({ url: value, embedType: 'oembed' });
     }

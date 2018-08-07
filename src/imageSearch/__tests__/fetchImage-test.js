@@ -18,7 +18,7 @@ import {
   setSavedImage,
   setSelectedImage,
   fetchLearningPathImageWithMetaUrl,
-} from '../../imageSearch/imageActions';
+} from '../imageActions';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);

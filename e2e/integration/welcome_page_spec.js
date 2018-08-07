@@ -35,12 +35,14 @@ describe('Welcome page', () => {
       cy.location().should(location => {
         expect(location.pathname).to.eq('/en/');
       });
-      cy
-        .get('[data-cy=welcomepage-title1]')
-        .should('contain', 'Learning paths');
-      cy
-        .get('[data-cy=welcomepage-title2]')
-        .should('contain', 'The Norwegian Digital Learning Arena');
+      cy.get('[data-cy=welcomepage-title1]').should(
+        'contain',
+        'Learning paths',
+      );
+      cy.get('[data-cy=welcomepage-title2]').should(
+        'contain',
+        'The Norwegian Digital Learning Arena',
+      );
     });
 
     it('should go to /login when login link is clicked', () => {
@@ -79,8 +81,7 @@ describe('Welcome page', () => {
           audience: Cypress.env('NDLA_END_TO_END_TESTING_AUDIENCE'),
         },
       };
-      cy
-        .request(options)
+      cy.request(options)
         .then(res => {
           window.localStorage.setItem(
             'ndla:sti',
@@ -94,13 +95,11 @@ describe('Welcome page', () => {
         .then(() => {
           cy.fixture('mineLearningpaths.json').then(learningPaths => {
             cy.server();
-            cy
-              .route({
-                method: 'GET',
-                url: '**/mine/',
-                response: learningPaths,
-              })
-              .as('getMineLearningPaths');
+            cy.route({
+              method: 'GET',
+              url: '**/mine/',
+              response: learningPaths,
+            }).as('getMineLearningPaths');
             cy.route({
               method: 'OPTIONS',
               url: '**/mine/',

@@ -15,7 +15,10 @@ import { parseHash } from './sessionActions';
 
 export class SessionInitializer extends React.Component {
   componentWillMount() {
-    const { localParseHash, location: { hash } } = this.props;
+    const {
+      localParseHash,
+      location: { hash },
+    } = this.props;
     localParseHash(hash);
   }
 
@@ -36,4 +39,7 @@ SessionInitializer.propTypes = {
 const mapDispatchToProps = {
   localParseHash: parseHash,
 };
-export default connect(state => state, mapDispatchToProps)(SessionInitializer);
+export default connect(
+  state => state,
+  mapDispatchToProps,
+)(SessionInitializer);

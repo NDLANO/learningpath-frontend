@@ -37,12 +37,14 @@ export class LogoutSession extends React.Component {
       <div className="one-column one-column--narrow logout-container one-column--text-centered">
         <HelmetWithTracker title={polyglot.t('htmlTitles.logoutSession')} />
         <button
+          type="button"
           className="button--primary-outline cta-link--block"
           onClick={() => this.handleLogoutClick()}>
           {polyglot.t('logoutSession.logutLearningpathSite')}
         </button>
         <strong>{polyglot.t('logoutSession.or')}</strong>
         <button
+          type="button"
           className="button--primary-outline cta-link--block"
           onClick={() => this.handleLogoutClick(true)}>
           {polyglot.t('logoutSession.logoutWholeSession')}
@@ -61,4 +63,7 @@ const mapDispatchToProps = {
   localLogout: actions.logoutPersonalAuth,
 };
 
-export default connect(state => state, mapDispatchToProps)(LogoutSession);
+export default connect(
+  state => state,
+  mapDispatchToProps,
+)(LogoutSession);

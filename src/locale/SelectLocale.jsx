@@ -16,7 +16,10 @@ import { availableLocales } from './localeConstants';
 import { getLocale } from './localeSelectors';
 
 const SelectLocale = props => {
-  const { locale, location: { pathname, search } } = props;
+  const {
+    locale,
+    location: { pathname, search },
+  } = props;
   const handleChange = newLocale => {
     const path = pathname.startsWith('/') ? pathname.substring(1) : pathname;
     createHistory().push(`/${newLocale}/${path}${search}`); // Need create new history or else basename is included

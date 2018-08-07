@@ -24,7 +24,6 @@ export default class SearchResult extends Component {
     this.state = {
       imageError: false,
       tag: null,
-      showIntroduction: false,
     };
     this.handleImageError = this.handleImageError.bind(this);
   }
@@ -52,13 +51,13 @@ export default class SearchResult extends Component {
         <img
           className="search-result_img"
           role="presentation"
-          src={`/placeholder.png`}
+          src="/placeholder.png"
           alt="placeholder"
         />
       );
     };
 
-    const tags = path.tags;
+    const { tags } = path;
     const onTagClick = (evt, tag) => {
       evt.preventDefault();
       this.setState({ tag }, () => {
@@ -111,6 +110,7 @@ export default class SearchResult extends Component {
           <div>
             {tags.map(tag => (
               <button
+                type="button"
                 key={tag}
                 className={tagsClassName(tag)}
                 onClick={evt => onTagClick(evt, tag)}

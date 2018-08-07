@@ -129,4 +129,7 @@ const mapDispatchToProps = {
   localFetchImageWithMetaUrl: fetchLearningPathImageWithMetaUrl,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditLearningPath);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(EditLearningPath);

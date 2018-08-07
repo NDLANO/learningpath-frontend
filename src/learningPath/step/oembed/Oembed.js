@@ -122,7 +122,9 @@ export default class Oembed extends React.Component {
   }
 
   render() {
-    const { oembedContent: { html, embedType } } = this.props;
+    const {
+      oembedContent: { html, embedType },
+    } = this.props;
 
     return (
       <div>
@@ -148,7 +150,7 @@ export default class Oembed extends React.Component {
 }
 
 Oembed.propTypes = {
-  oembedContent: PropTypes.object.isRequired,
+  oembedContent: PropTypes.object,
   embedType: PropTypes.string,
 };
 

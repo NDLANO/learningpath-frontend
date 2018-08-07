@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import polyglot from '../i18n';
-import withCloseSidebars from '../common/withCloseSidebars';
+import withCloseSidebars from './withCloseSidebars';
 
 function Logo(props) {
   const { cssModifier, closeSidebars, beta } = props;

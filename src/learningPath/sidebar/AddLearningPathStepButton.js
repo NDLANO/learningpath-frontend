@@ -44,6 +44,7 @@ const mapDispatchToProps = {
   localCloseSidebars: closeSidebars,
 };
 
-export default connect(state => state, mapDispatchToProps)(
-  AddLearningPathStepButton,
-);
+export default connect(
+  state => state,
+  mapDispatchToProps,
+)(AddLearningPathStepButton);

@@ -65,6 +65,7 @@ export function Masthead(props) {
   const mastheadPageOverlay =
     isLeftSideBarOpen || isRightSidebarOpen ? (
       <button
+        type="button"
         className="masthead_page-overlay"
         onClick={() => localCloseSidebars()}
       />
@@ -86,6 +87,7 @@ export function Masthead(props) {
           {cloneChildren}
           {logo}
           <button
+            type="button"
             className={activeButtonClassName(false, isRightSidebarOpen)}
             onClick={() => rightNavButtonClicked()}>
             <Icon.Menu />
@@ -133,4 +135,7 @@ const mapDispatchToProps = {
   openRight: openRightSidebar,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Masthead);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Masthead);

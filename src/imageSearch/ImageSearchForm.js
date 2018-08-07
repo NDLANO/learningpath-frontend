@@ -16,6 +16,7 @@ class ImageSearch extends React.Component {
     super(props);
     this.state = { showTotalCount: true };
   }
+
   render() {
     const {
       onSubmit,
@@ -68,6 +69,7 @@ class ImageSearch extends React.Component {
             className="search-form_query--gray"
           />
           <button
+            type="button"
             className="search-form_btn--gray"
             onClick={submitImageSearchQuery}>
             <Icon.Search />

@@ -2,11 +2,18 @@ language: node_js
 node_js:
 - '8'
 
+cache:
+  yarn: true
+  directories:
+    - ~/.npm
+    - ~/.cache/Cypress/
+    - .eslintcache
+    - node_modules
+
 script:
 - yarn test
-- yarn run build
-- yarn run start-prod -- --silent &
-- yarn run cypress run
+- yarn build
+- yarn e2e-ci
 
 notifications:
   slack:

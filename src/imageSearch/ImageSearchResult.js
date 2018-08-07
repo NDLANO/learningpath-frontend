@@ -27,7 +27,10 @@ export default function ImageSearch({
   return (
     <div key={image.id} className={activeClassName()}>
       <div className="image_list-item-inner">
-        <button className="un-button" onClick={evt => onImageClick(evt, image)}>
+        <button
+          type="button"
+          className="un-button"
+          onClick={evt => onImageClick(evt, image)}>
           <img
             role="presentation"
             src={scaleImage(image.previewUrl)}

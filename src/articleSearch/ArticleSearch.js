@@ -30,7 +30,6 @@ class ArticleSearch extends React.Component {
     super(props);
 
     this.state = {
-      active: false,
       oembedDisplay: false,
       textQuery: props.query.textQuery,
     };
@@ -54,11 +53,13 @@ class ArticleSearch extends React.Component {
     this.props.localFetchOembed(item.link, this.context.lang, searchType);
     this.setState({ oembedDisplay: true });
   }
+
   addEmbedResult(evt, url) {
     evt.preventDefault();
     this.props.urlOnBlur(url, 'oembed');
     this.props.toggleNdlaDisplay(evt);
   }
+
   handleTextQueryChange(evt) {
     this.setState({ textQuery: evt.target.value });
   }
@@ -134,4 +135,7 @@ const mapStateToProps = state =>
     language: getLocale(state),
   });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleSearch);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ArticleSearch);

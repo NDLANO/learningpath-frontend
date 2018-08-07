@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 import last from 'lodash/last';
-import LearningPathStepIcon from '../../learningPath/step/LearningPathStepIcon';
+import LearningPathStepIcon from '../step/LearningPathStepIcon';
 import Icon from '../../common/Icon';
 
 const LearningPathToCStep = props => {

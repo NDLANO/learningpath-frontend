@@ -36,6 +36,7 @@ export const LearningPathToCButtons = ({
         .filter(status => status.status !== learningPath.status)
         .map(status => (
           <button
+            type="button"
             key={status.status}
             className="button--primary-outline cta-link--block"
             onClick={publishAction(status)}>
@@ -62,6 +63,7 @@ const mapDispatchToProps = {
   localCloseSidebars: closeSidebars,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  LearningPathToCButtons,
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(LearningPathToCButtons);

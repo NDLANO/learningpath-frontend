@@ -92,4 +92,7 @@ const mapDispatchToProps = {
   localCloseSidebars: closeSidebars,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SiteNav);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SiteNav);

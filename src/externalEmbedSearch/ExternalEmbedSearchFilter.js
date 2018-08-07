@@ -42,6 +42,7 @@ const ExternalEmbedSearchFilter = ({
     <div className="embed-search_form-filters">
       {filteredFilters.map(filter => (
         <button
+          type="button"
           key={filter.key}
           onClick={evt => onFilterChange(evt, filter)}
           className={filterClass(filter.key)}>

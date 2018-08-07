@@ -35,7 +35,10 @@ const OnClickCheckbox = ({ input }) => {
 
   return (
     <OverlayTrigger placement="top" overlay={tooltip}>
-      <button className={classNames(classes)} onClick={handleClick}>
+      <button
+        type="button"
+        className={classNames(classes)}
+        onClick={handleClick}>
         {input.value ? <Icon.Visibility /> : <Icon.VisibilityOff />}
         <label htmlFor="visibility" className="sr-only">
           <input

@@ -28,7 +28,10 @@ const ExternalOembedPreview = ({
   });
   return (
     <div className={divClassName}>
-      <button className="un-button close-dialog" onClick={onPreviewboxClose}>
+      <button
+        type="button"
+        className="un-button close-dialog"
+        onClick={onPreviewboxClose}>
         <Icon.Clear />
       </button>
       {oembedPreview.error ? (

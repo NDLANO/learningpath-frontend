@@ -28,7 +28,10 @@ const ClickableLearningPathTitle = ({
 
   return (
     <div className={titleClassName}>
-      <button className="un-button" onClick={() => onShowToggle('showTitle')}>
+      <button
+        type="button"
+        className="un-button"
+        onClick={() => onShowToggle('showTitle')}>
         <h3>{learningPath.title}</h3>
       </button>
     </div>
@@ -54,6 +57,7 @@ class LearningPathTitle extends Component {
   onShowToggle(name) {
     this.setState(prevState => ({ [name]: !prevState[name] }));
   }
+
   render() {
     const { learningPath } = this.props;
     if (!learningPath.title) {
@@ -75,6 +79,7 @@ class LearningPathTitle extends Component {
         {learningPath.isBasedOn ? (
           <div>
             <button
+              type="button"
               className="un-button learningpath-general-info_is-basedon-button"
               onClick={() => this.onShowToggle('showIsBasedOn')}>
               {this.state.showIsBasedOn

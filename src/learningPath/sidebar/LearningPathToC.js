@@ -60,4 +60,7 @@ const mapDispatchToProps = {
   localCloseSidebars: closeSidebars,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LearningPathToC);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(LearningPathToC);

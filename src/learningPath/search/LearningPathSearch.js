@@ -92,7 +92,7 @@ class LearningPathSearch extends React.Component {
         <HelmetWithTracker
           title={polyglot.t('htmlTitles.learningPathSearch')}
         />
-        <OneColumn className={'one-colum--white-bg'}>
+        <OneColumn className="one-colum--white-bg">
           <Masthead />
           <div className="page-header">
             <SearchForm
@@ -153,6 +153,7 @@ const mapStateToProps = (state, props) => {
   );
 };
 
-export default connect(mapStateToProps, LearningPathSearch.mapDispatchToProps)(
-  LearningPathSearch,
-);
+export default connect(
+  mapStateToProps,
+  LearningPathSearch.mapDispatchToProps,
+)(LearningPathSearch);

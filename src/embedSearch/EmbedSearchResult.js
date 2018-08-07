@@ -36,6 +36,7 @@ const EmbedSearchResult = ({ item, onPreviewClick, addEmbedResult }) => {
         </span>
         <div>
           <button
+            type="button"
             onClick={evt => addEmbedResult(evt, item.link)}
             className="un-button google-custom-search_add-button"
             disabled={item.disable}>
@@ -43,6 +44,7 @@ const EmbedSearchResult = ({ item, onPreviewClick, addEmbedResult }) => {
             {polyglot.t('embedSearch.results.useInPath')}
           </button>
           <button
+            type="button"
             onClick={evt => onPreviewClick(evt, item)}
             className="un-button embed-search_preview-button"
             disabled={item.disable}>

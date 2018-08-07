@@ -20,6 +20,7 @@ const SortableItem = SortableElement(({ deleteStep, step, learningPathId }) => (
       <div className="sortable_title">{step.title}</div>
       <div className="sortable_action">
         <button
+          type="button"
           onClick={() => deleteStep(learningPathId, step.id, step.title)}
           className="un-button">
           <Icon.Clear className="icon--m" />

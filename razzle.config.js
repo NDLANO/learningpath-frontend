@@ -10,6 +10,7 @@ module.exports = {
       rule.use.push({ loader: 'postcss-loader' });
     });
 
+    appConfig.module.rules.shift(); // remove eslint-loader
     if (target === 'web') {
       appConfig.output.filename = dev
         ? 'static/js/[name].js'
@@ -24,10 +25,14 @@ module.exports = {
           }),
           new webpack.optimize.ModuleConcatenationPlugin(),
         );
-        appConfig.devtool = 'source-map';
       }
+      appConfig.performance = {
+        hints: false,
+      };
     }
-
+    if (!dev) {
+      appConfig.devtool = 'source-map';
+    }
     return appConfig;
   },
 };

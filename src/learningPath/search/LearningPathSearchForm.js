@@ -52,7 +52,7 @@ export default class SearchForm extends Component {
           placeholder={polyglot.t('searchForm.placeholder')}
         />
 
-        <button className="search-form_btn">
+        <button type="button" className="search-form_btn">
           {polyglot.t('searchForm.btn')}
         </button>
 

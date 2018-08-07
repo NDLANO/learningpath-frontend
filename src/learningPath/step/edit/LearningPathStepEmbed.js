@@ -52,11 +52,13 @@ class LearningPathStepEmbed extends React.Component {
       <div className="learning-step-embed_group">
         <div className="button-group button-group--square button-group--block">
           <button
+            type="button"
             className="button--primary-outline"
             onClick={this.toggleNdlaDisplay}>
             {polyglot.t('embedSearch.ndlaButton')}
           </button>
           <button
+            type="button"
             className="button--primary-outline"
             onClick={this.handleExternalDisplayOpen}>
             {polyglot.t('embedSearch.externalButton')}
@@ -89,6 +91,7 @@ LearningPathStepEmbed.propTypes = {
   removeOembed: PropTypes.func.isRequired,
 };
 
-export default connect(state => state, mapDispatchToProps)(
-  LearningPathStepEmbed,
-);
+export default connect(
+  state => state,
+  mapDispatchToProps,
+)(LearningPathStepEmbed);

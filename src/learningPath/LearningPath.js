@@ -18,7 +18,7 @@ import LearningPathGeneralInfo from './sidebar/LearningPathGeneralInfo';
 import LearningPathToC from './sidebar/LearningPathToC';
 import Lightbox from '../common/Lightbox';
 import PrivateRoute from '../main/PrivateRoute';
-import CopyLearningPath from '../learningPath/new/CopyLearningPath';
+import CopyLearningPath from './new/CopyLearningPath';
 import Masthead from '../common/Masthead';
 import Icon from '../common/Icon';
 import SortLearningStepsButton from './sidebar/SortLearningStepsButton';
@@ -49,11 +49,15 @@ export class LearningPath extends Component {
     const {
       replaceRoute,
       localFetchLearningPath,
-      match: { url, params: { pathId } },
+      match: {
+        url,
+        params: { pathId },
+      },
     } = props;
     if (url === `/learningpaths/${pathId}/edit`) {
       return localFetchLearningPath(pathId, true);
-    } else if (url === `/learningpaths/${pathId}/first-step`) {
+    }
+    if (url === `/learningpaths/${pathId}/first-step`) {
       return localFetchLearningPath(pathId, false)
         .then(learningPath => {
           const stepId = learningPath.learningsteps[0].id;
@@ -66,13 +70,14 @@ export class LearningPath extends Component {
     return localFetchLearningPath(pathId, false);
   }
 
-  static getDocumentTitle(props) {
-    const { learningPath } = props;
-    return learningPath.title + polyglot.t('htmlTitles.titleTemplate');
-  }
-
   static willTrackPageView(trackPageView, currentProps) {
-    const { learningPath, match: { url, params: { pathId } } } = currentProps;
+    const {
+      learningPath,
+      match: {
+        url,
+        params: { pathId },
+      },
+    } = currentProps;
     if (
       learningPath.id &&
       learningPath.id.toString() === pathId &&
@@ -80,17 +85,6 @@ export class LearningPath extends Component {
     ) {
       trackPageView(currentProps);
     }
-  }
-
-  static getDimensions(props) {
-    const { learningPath } = props;
-    const dimensions = {
-      13: learningPath.learningsteps.length,
-    };
-    return {
-      ga: convertToGaOrGtmDimension(dimensions, 'ga'),
-      gtm: convertToGaOrGtmDimension(dimensions, 'gtm'),
-    };
   }
 
   constructor(props) {
@@ -112,6 +106,23 @@ export class LearningPath extends Component {
       displayCopyPath: true,
     });
   }
+
+  static getDimensions(props) {
+    const { learningPath } = props;
+    const dimensions = {
+      13: learningPath.learningsteps.length,
+    };
+    return {
+      ga: convertToGaOrGtmDimension(dimensions, 'ga'),
+      gtm: convertToGaOrGtmDimension(dimensions, 'gtm'),
+    };
+  }
+
+  static getDocumentTitle(props) {
+    const { learningPath } = props;
+    return learningPath.title + polyglot.t('htmlTitles.titleTemplate');
+  }
+
   togglePinterest() {
     this.setState(prevState => ({
       displayPinterest: !prevState.displayPinterest,
@@ -121,7 +132,7 @@ export class LearningPath extends Component {
   render() {
     const { learningPath, isTableOfContentOpen, copyPath, match } = this.props;
     const { lang } = this.context;
-    const stepId = match.params.stepId;
+    const { stepId } = match.params;
 
     const showButtonsUrls = [
       '/learningpaths/:pathId',
@@ -221,29 +232,29 @@ export class LearningPath extends Component {
           <main className="two-column_col">
             <Switch>
               <PrivateRoute
-                path={'/learningpaths/:pathId/edit'}
+                path="/learningpaths/:pathId/edit"
                 component={EditLearningPath}
               />
               <PrivateRoute
-                path={'/learningpaths/:pathId/step/:stepId/edit'}
+                path="/learningpaths/:pathId/step/:stepId/edit"
                 component={EditLearningPathStep}
               />
               <PrivateRoute
-                path={'/learningpaths/:pathId/step/new'}
+                path="/learningpaths/:pathId/step/new"
                 component={CreateLearningPathStep}
               />
               <PrivateRoute
-                path={'/learningpaths/:pathId/step/sort'}
+                path="/learningpaths/:pathId/step/sort"
                 component={LearningPathSummary}
               />
               <Route
-                path={'/learningpaths/:pathId/step/:stepId'}
+                path="/learningpaths/:pathId/step/:stepId"
                 render={props => (
                   <LearningPathStep copyright={copyright} {...props} />
                 )}
               />
               <Route
-                path={'/learningpaths/:pathId'}
+                path="/learningpaths/:pathId"
                 component={LearningPathSummary}
               />
             </Switch>
@@ -280,7 +291,8 @@ const mapStateToProps = (state, ownProps) =>
   });
 
 export default withRouter(
-  connect(mapStateToProps, LearningPath.mapDispatchToProps)(
-    withTracker(LearningPath),
-  ),
+  connect(
+    mapStateToProps,
+    LearningPath.mapDispatchToProps,
+  )(withTracker(LearningPath)),
 );

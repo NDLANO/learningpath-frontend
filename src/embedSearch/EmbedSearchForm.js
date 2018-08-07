@@ -43,7 +43,10 @@ const EmbedSearchForm = ({
         placeholder={polyglot.t('embedSearch.form.placeholder')}
         value={textQuery}
       />
-      <button className="search-form_btn--gray" onClick={submitEmbedSearch}>
+      <button
+        type="button"
+        className="search-form_btn--gray"
+        onClick={submitEmbedSearch}>
         <Icon.Search />
       </button>
     </div>

@@ -32,9 +32,11 @@ const LearningPathActionType = ({
         {polyglot.t('editPage.edit')}
       </Link>
     );
-  } else if (authenticated) {
+  }
+  if (authenticated) {
     return (
       <button
+        type="button"
         className="cta-link cta-link--primary-outline cta-link--block copy-learningpath_button"
         onClick={onCopyLearningPathClick}>
         {polyglot.t('copyLearningPath.createCopy')}

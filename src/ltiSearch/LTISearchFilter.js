@@ -58,6 +58,7 @@ class LTISearchFilter extends React.Component {
       <div className="lti-search_form-filters">
         {this.state.filters.map(filter => (
           <button
+            type="button"
             key={filter.key}
             className={filterClass(filter.key)}
             onClick={evt => this.handleLTIFilterChange(evt, filter)}>

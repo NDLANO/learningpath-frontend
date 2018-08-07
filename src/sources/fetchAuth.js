@@ -8,7 +8,7 @@
 
 import * as actions from '../session/sessionActions';
 import TokenStatusHandler from '../util/TokenStatusHandler';
-import { authorizationHeader } from '../sources/helpers';
+import { authorizationHeader } from './helpers';
 
 export const fetchAuth = (url, options = {}) => {
   if (process.env.NODE_ENV === 'unittest') {
