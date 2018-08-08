@@ -1,4 +1,4 @@
-FROM node:8.5.0-alpine
+FROM node:8.11-alpine
 
 ENV HOME=/home/app
 ENV APP_PATH=$HOME/learningpath-frontend
