@@ -113,7 +113,7 @@ const Html = props => {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300italic,300|Signika:400,600,300,700"
         />
-        <link rel="shortcut icon" href={`/favicon.ico}`} type="image/x-icon" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
       </head>
       <body>
         <GoogleTagMangerNoScript />
