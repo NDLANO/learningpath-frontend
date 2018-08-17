@@ -13,8 +13,8 @@ import { applicationError } from '../../../messages/messagesActions';
 export const setLearningPathTags = createAction('SET_LEARNING_PATH_TAGS');
 
 export function fetchLearningPathTags() {
-  return dispatch =>
-    fetchPathTags()
+  return (dispatch, getState) =>
+    fetchPathTags({}, getState().locale)
       .then(tags => dispatch(setLearningPathTags(tags)))
       .catch(err => dispatch(applicationError(err)));
 }

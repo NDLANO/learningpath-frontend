@@ -51,8 +51,8 @@ function canAccessLearningPath(path, isEdit = false, dispatch) {
 }
 
 function fetchIsBasedOnPath(path) {
-  return dispatch =>
-    fetchPath({ pathId: path.isBasedOn })
+  return (dispatch, getState) =>
+    fetchPath({ pathId: path.isBasedOn }, getState().locale)
       .then(isBasedOnPath => {
         dispatch(
           setLearningPath({
@@ -65,8 +65,8 @@ function fetchIsBasedOnPath(path) {
 }
 
 export function fetchLearningPath(pathId, isEdit = false) {
-  return dispatch =>
-    fetchPath({ pathId })
+  return (dispatch, getState) =>
+    fetchPath({ pathId }, getState().locale)
       .then(path => {
         canAccessLearningPath(path, isEdit, dispatch);
         dispatch(setLearningPath(path));
