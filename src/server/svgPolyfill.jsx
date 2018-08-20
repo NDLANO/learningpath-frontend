@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 
 export const SvgPolyfillScript = ({ className }) => {
   if (className !== '') {
-    return <script src="/svg4everybody.min.js" />;
+    return <script type="text/javascript" src="/svg4everybody.min.js" />;
   }
   return null;
 };
@@ -22,7 +22,12 @@ SvgPolyfillScript.propTypes = {
 
 export const SvgPolyfillScriptInitalization = ({ className }) => {
   if (className !== '') {
-    return <script dangerouslySetInnerHTML={{ __html: 'svg4everybody();' }} />;
+    return (
+      <script
+        type="text/javascript"
+        dangerouslySetInnerHTML={{ __html: 'svg4everybody();' }}
+      />
+    );
   }
   return null;
 };

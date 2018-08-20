@@ -7,7 +7,7 @@
     "test": "cross-env BABEL_ENV=test NODE_ENV=unittest jest",
     "test-ci": "cross-env BABEL_ENV=test NODE_ENV=unittest jest --maxWorkers=4 --ci",
     "tdd": "cross-env BABEL_ENV=test NODE_ENV=unittest jest --watch",
-    "copy-svg-polyfill": "mkdir -p htdocs/assets && cp node_modules/svg4everybody/dist/svg4everybody.min.js build/public/",
+    "copy-svg-polyfill": "cp node_modules/svg4everybody/dist/svg4everybody.min.js public/",
     "postbuild": "cp build/assets.json build/public/assets.json",
     "build": "razzle build",
     "start": "razzle start",
