@@ -18,8 +18,8 @@ export const setLearningPathSearchResults = createAction(
 );
 
 function fetchIsBasedOnPath(path) {
-  return dispatch =>
-    fetchPath({ pathId: path.isBasedOn })
+  return (dispatch, getState) =>
+    fetchPath({ pathId: path.isBasedOn }, getState().locale)
       .then(isBasedOnPath => {
         dispatch(setLearningPathBasedOn({ isBasedOnPath, pathId: path.id }));
       })
