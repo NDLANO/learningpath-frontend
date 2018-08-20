@@ -7,6 +7,7 @@ npm-debug.log
 /.idea
 jsconfig.json
 /htdocs/assets/
+/public/svg4everybody.min.js
 /e2e/videos
 /e2e/screenshots
 yarn-error.log

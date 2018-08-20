@@ -19,6 +19,7 @@ COPY public $APP_PATH/public
 # Build client code
 ENV NODE_ENV=production
 WORKDIR $APP_PATH
+RUN yarn copy-svg-polyfill
 RUN yarn run build
 
 CMD ["node", "build/server", "|", "bunyan"]
