@@ -39,10 +39,6 @@ export default class DescriptionHTMLEditor extends React.Component {
     this.setEditorContentStateFromHTML(this.props.input.value);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setEditorContentStateFromHTML(nextProps.input.value);
-  }
-
   shouldComponentUpdate(nextProps) {
     if (nextProps.input.value !== this.props.input.value) {
       return false;
