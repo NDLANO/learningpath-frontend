@@ -55,6 +55,7 @@
     "sinon": "^6.1.4",
     "stylelint": "9.4.0",
     "stylelint-config-standard": "18.2.0",
+    "svg4everybody": "^2.1.9",
     "webpack-bundle-analyzer": "2.13.1"
   },
   "dependencies": {
@@ -111,7 +112,6 @@
     "reselect": "^3.0.1",
     "serialize-javascript": "1.5.0",
     "source-map-support": "^0.5.6",
-    "svg4everybody": "^2.1.9",
     "tracekit": "^0.4.5",
     "useragent": "2.3.0",
     "warning": "4.0.1"
