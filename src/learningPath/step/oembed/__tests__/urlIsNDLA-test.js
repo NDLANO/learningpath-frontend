@@ -1,7 +1,9 @@
-import { urlIsNDLA } from '../Oembed';
+import { urlIsProductionNDLA } from '../Oembed';
 
 test('component/Oembed urlIsNDLA', () => {
-  expect(urlIsNDLA('http://ndla.no/nb/node/12345')).toBeTruthy();
-  expect(urlIsNDLA('http://exampe.com/ndla.no/nb/node/12345')).toBeFalsy();
-  expect(urlIsNDLA()).toBeFalsy();
+  expect(urlIsProductionNDLA('http://ndla.no/nb/node/12345')).toBeTruthy();
+  expect(
+    urlIsProductionNDLA('http://exampe.com/ndla.no/nb/node/12345'),
+  ).toBeFalsy();
+  expect(urlIsProductionNDLA()).toBeFalsy();
 });

@@ -12,10 +12,9 @@ import classNames from 'classnames';
 import get from 'lodash/get';
 import Spinner from '../../../common/Spinner';
 
-export const urlIsNDLA = url => /^(http|https):\/\/ndla.no/.test(url);
-export const urlIsNewNDLA = url =>
-  /^(http|https):\/\/ndla-frontend.([a-zA-Z]+.)api.ndla.no/.test(url) ||
-  /^https:\/\/beta.ndla.no/.test(url);
+export const urlIsProductionNDLA = url => /^(http|https):\/\/ndla.no/.test(url);
+export const urlIsTestNDLA = url =>
+  /^(http|https):\/\/ndla-frontend.([a-zA-Z]+.)api.ndla.no/.test(url);
 export const urlIsLocalNdla = url =>
   /^http:\/\/proxy.ndla-local:30017/.test(url);
 
@@ -53,7 +52,7 @@ export default class Oembed extends React.Component {
   }
 
   handleIframeResizing({ oembedContent: { url } }) {
-    if (urlIsNDLA(url) || urlIsNewNDLA(url) || urlIsLocalNdla(url)) {
+    if (urlIsProductionNDLA(url) || urlIsTestNDLA(url) || urlIsLocalNdla(url)) {
       this.setState({ isNDLAResource: true }, this.enableIframeMessageListener);
     } else {
       this.setState(

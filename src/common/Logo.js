@@ -14,21 +14,16 @@ import polyglot from '../i18n';
 import withCloseSidebars from './withCloseSidebars';
 
 function Logo(props) {
-  const { cssModifier, closeSidebars, beta } = props;
+  const { cssModifier, closeSidebars } = props;
   const rootClasses = classNames({
     logo: true,
     'un-button': true,
     [`logo--${cssModifier}`]: cssModifier,
-    'logo--beta': beta,
-    [`logo--${cssModifier}--beta`]: beta,
   });
 
   return (
     <div className={rootClasses}>
-      <Link
-        to="/"
-        className={beta ? 'logo_link logo_link-beta' : 'logo_link'}
-        onClick={closeSidebars}>
+      <Link to="/" className="logo_link" onClick={closeSidebars}>
         {polyglot.t('logo.altText')}
       </Link>
     </div>
@@ -38,7 +33,6 @@ function Logo(props) {
 Logo.propTypes = {
   cssModifier: PropTypes.string,
   closeSidebars: PropTypes.func.isRequired,
-  beta: PropTypes.bool,
 };
 
 export default withCloseSidebars(Logo);
