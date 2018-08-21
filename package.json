@@ -115,7 +115,6 @@
     "useragent": "2.3.0",
     "warning": "4.0.1",
     "webpack-bundle-analyzer": "2.13.1"
-
   },
   "repository": {
     "type": "git",
