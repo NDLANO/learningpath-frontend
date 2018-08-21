@@ -41,21 +41,14 @@
     "json-loader": "0.5.7",
     "nock": "9.4.4",
     "nodemon": "1.18.3",
-    "postcss-cssnext": "3.1.0",
-    "postcss-easy-import": "3.0.0",
-    "postcss-focus": "3.0.0",
-    "postcss-loader": "2.1.6",
-    "postcss-nested": "3.0.0",
     "prettier": "1.14.0",
-    "razzle-config-utils": "0.1.0",
     "react-addons-test-utils": "^15.6.2",
     "react-test-renderer": "^16.4.2",
     "redux-mock-store": "^1.5.3",
     "rimraf": "^2.6.2",
     "sinon": "^6.1.4",
     "stylelint": "9.4.0",
-    "stylelint-config-standard": "18.2.0",
-    "webpack-bundle-analyzer": "2.13.1"
+    "stylelint-config-standard": "18.2.0"
   },
   "dependencies": {
     "auth0-js": "9.7.3",
@@ -88,9 +81,15 @@
     "ndla-ui": "^0.13.1",
     "ndla-util": "^0.2.1",
     "node-polyglot": "2.3.0",
+    "postcss-cssnext": "3.1.0",
+    "postcss-easy-import": "3.0.0",
+    "postcss-focus": "3.0.0",
+    "postcss-loader": "2.1.6",
+    "postcss-nested": "3.0.0",
     "prop-types": "^15.6.2",
     "query-string": "^5.1.1",
     "razzle": "2.4.0",
+    "razzle-config-utils": "0.1.0",
     "react": "^16.4.2",
     "react-bem-helper": "^1.4.1",
     "react-dom": "^16.4.2",
@@ -114,7 +113,9 @@
     "svg4everybody": "^2.1.9",
     "tracekit": "^0.4.5",
     "useragent": "2.3.0",
-    "warning": "4.0.1"
+    "warning": "4.0.1",
+    "webpack-bundle-analyzer": "2.13.1"
+
   },
   "repository": {
     "type": "git",
