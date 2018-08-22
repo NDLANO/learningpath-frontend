@@ -44,7 +44,7 @@ class Welcome extends Component {
         <HelmetWithTracker title={polyglot.t('htmlTitles.welcomePage')} />
         <OneColumn>
           <div className="frontpage-masthead">
-            <Masthead logo={<Logo beta cssModifier="on-dark" />} />
+            <Masthead logo={<Logo cssModifier="on-dark" />} />
           </div>
           <div className="hero">
             <h1 className="hero_title" data-cy="welcomepage-title1">

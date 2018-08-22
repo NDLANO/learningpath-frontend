@@ -89,6 +89,8 @@ const config = {
       meta: [{ property: 'og:site_name', content: 'NDLA Læringsstier' }],
     },
   },
+  isProductionEnvironment:
+    getEnvironmentVariabel('NDLA_ENVIRONMENT', 'test') === 'prod',
   isProduction: getEnvironmentVariabel('NODE_ENV') === 'production',
 };
 

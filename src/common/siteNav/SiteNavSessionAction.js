@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import polyglot from '../../i18n';
 import LabeledIcon from '../LabeledIcon';
+import config from '../../config';
 
 class SiteNavSessionAction extends React.Component {
   constructor() {
@@ -23,6 +24,10 @@ class SiteNavSessionAction extends React.Component {
   }
 
   render() {
+    if (config.isProductionEnvironment) {
+      return null;
+    }
+
     const { authenticated, userName, localCloseSidebars } = this.props;
     if (authenticated && this.state.isClient) {
       return (

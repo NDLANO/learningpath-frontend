@@ -10,14 +10,10 @@
   display: inline-block;
   margin: 0;
   padding: 0;
-  height: 15px;
-  width: 50px;
-}
-
-.logo--beta {
   height: 40px;
   width: 150px;
 }
+
 
 .logo_link {
   display: inline-block;
@@ -34,14 +30,9 @@
   }
 }
 
-.logo_link-beta {
-  background: url('/logo-beta.png') no-repeat;
-  background-size: contain;
-}
-
 .logo--on-dark {
-  height: 23px;
-  width: 60px;
+  height: 30px;
+  width: 90px;
 
   & .logo_link {
     background-image: url('/ndla-logo-white.png');
@@ -49,14 +40,5 @@
 
   & .logo_link:any-link {
     color: white;
-  }
-}
-
-.logo--on-dark--beta {
-  height: 30px;
-  width: 90px;
-
-  & .logo_link-beta {
-    background-image: url('/ndla-logo-white-beta.png');
   }
 }
