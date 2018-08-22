@@ -90,7 +90,7 @@ const config = {
     },
   },
   isProductionEnvironment:
-    getEnvironmentVariabel('NDLA_ENVIRONMENT', 'test') !== 'prod',
+    getEnvironmentVariabel('NDLA_ENVIRONMENT', 'test') === 'prod',
   isProduction: getEnvironmentVariabel('NODE_ENV') === 'production',
 };
 
