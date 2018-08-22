@@ -9,6 +9,7 @@
 import * as actions from '../session/sessionActions';
 import TokenStatusHandler from '../util/TokenStatusHandler';
 import { authorizationHeader } from './helpers';
+import config from '../config';
 
 export const fetchAuth = (url, options = {}) => {
   if (process.env.NODE_ENV === 'unittest') {
@@ -29,6 +30,20 @@ export const fetchAuth = (url, options = {}) => {
   };
   if (process.env.BUILD_TARGET === 'server') {
     return fetch(url, { ...options, headers });
+  }
+
+  // TODO: Remove when login is supported.
+  if (getState().authenticated && config.isProduction) {
+    const dispatch = tokenStatusHandler.getDispatch();
+    return dispatch(actions.logoutPersonalAuth()).then(newToken =>
+      fetch(url, {
+        ...options,
+        headers: {
+          ...options.headers,
+          Authorization: authorizationHeader(newToken.token),
+        },
+      }),
+    );
   }
 
   if (new Date().getTime() >= getState().accessToken.expiresAt) {

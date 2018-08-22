@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import polyglot from '../../i18n';
 import LabeledIcon from '../LabeledIcon';
+import config from '../../config';
 
 class SiteNavMyPage extends React.Component {
   constructor() {
@@ -24,7 +25,7 @@ class SiteNavMyPage extends React.Component {
 
   render() {
     const { authenticated, localCloseSidebars } = this.props;
-    if (!authenticated || !this.state.isClient) {
+    if (!authenticated || !this.state.isClient || config.isProduction) {
       return null;
     }
 
