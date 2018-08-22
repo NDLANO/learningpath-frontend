@@ -33,7 +33,7 @@ export const SiteNav = ({
   return (
     <div className={rootClasses}>
       <ul className="site-nav_list">
-        {!config.isProduction && (
+        {!config.isProductionEnvironment && (
           <li className="site-nav_item">
             <Link
               to="/minside"

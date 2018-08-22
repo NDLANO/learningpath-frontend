@@ -33,7 +33,7 @@ export const fetchAuth = (url, options = {}) => {
   }
 
   // TODO: Remove when login is supported.
-  if (getState().authenticated && config.isProduction) {
+  if (getState().authenticated && config.isProductionEnvironment) {
     const dispatch = tokenStatusHandler.getDispatch();
     return dispatch(actions.logoutPersonalAuth()).then(newToken =>
       fetch(url, {

@@ -89,9 +89,9 @@ const config = {
       meta: [{ property: 'og:site_name', content: 'NDLA Læringsstier' }],
     },
   },
-  isProduction:
-    getEnvironmentVariabel('NODE_ENV') === 'production' &&
-    getEnvironmentVariabel('NDLA_ENVIRONMENT') !== 'mock',
+  isProductionEnvironment:
+    getEnvironmentVariabel('NDLA_ENVIRONMENT', 'test') !== 'prod',
+  isProduction: getEnvironmentVariabel('NODE_ENV') === 'production',
 };
 
 export function getUniversalConfig() {

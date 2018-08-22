@@ -25,7 +25,11 @@ class SiteNavMyPage extends React.Component {
 
   render() {
     const { authenticated, localCloseSidebars } = this.props;
-    if (!authenticated || !this.state.isClient || config.isProduction) {
+    if (
+      !authenticated ||
+      !this.state.isClient ||
+      config.isProductionEnvironment
+    ) {
       return null;
     }
 

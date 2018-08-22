@@ -24,7 +24,7 @@ class SiteNavSessionAction extends React.Component {
   }
 
   render() {
-    if (config.isProduction) {
+    if (config.isProductionEnvironment) {
       return null;
     }
 

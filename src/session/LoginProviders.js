@@ -14,7 +14,7 @@ import { loginPersonalAuth } from './sessionActions';
 import config from '../config';
 
 const LoginProviders = () => {
-  if (config.isProduction) {
+  if (config.isProductionEnvironment) {
     return <Redirect to="/notfound" />;
   }
   return (
