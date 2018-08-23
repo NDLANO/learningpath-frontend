@@ -3,6 +3,8 @@ FROM node:8.11-alpine
 ENV HOME=/home/app
 ENV APP_PATH=$HOME/learningpath-frontend
 
+RUN npm install pm2 -g
+
 # Copy necessary files for installing dependencies
 COPY yarn.lock package.json $APP_PATH/
 
@@ -22,4 +24,4 @@ WORKDIR $APP_PATH
 RUN yarn copy-svg-polyfill
 RUN yarn run build
 
-CMD ["node", "build/server", "|", "bunyan"]
+CMD ["pm2-runtime", "-i", "max", "build/server.js", "|", "bunyan"]
