@@ -7,18 +7,13 @@
  */
 
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import { HelmetWithTracker } from 'ndla-tracker';
 import polyglot from '../i18n';
 import { loginPersonalAuth } from './sessionActions';
-import config from '../config';
 
-const LoginProviders = () => {
-  if (config.isProductionEnvironment) {
-    return <Redirect to="/notfound" />;
-  }
-  return (
-    <div className="one-column one-column--narrow">
+const LoginProviders = () => (
+  <React.Fragment>
+    <div className="one-column one-column--narrow logout-container one-column--text-centered">
       <HelmetWithTracker title={polyglot.t('htmlTitles.loginProviders')} />
       <h3>{polyglot.t('loginProviders.description')}</h3>
       <ul className="vertical-menu">
@@ -41,7 +36,17 @@ const LoginProviders = () => {
         </li>
       </ul>
     </div>
-  );
-};
+    <p className="privacy-text">
+      {polyglot.t('loginProviders.privacyFirstPart')}
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://om.ndla.no/samtykke">
+        {polyglot.t('loginProviders.privacyLinkText')}
+      </a>
+      {polyglot.t('loginProviders.privacySecondPart')}
+    </p>
+  </React.Fragment>
+);
 
 export default LoginProviders;

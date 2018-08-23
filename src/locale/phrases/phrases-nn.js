@@ -48,6 +48,11 @@ const phrases = {
   },
   loginProviders: {
     description: 'Logg inn i NDLA med',
+    privacyFirstPart:
+      'Ved å logge på denne tenesten aksepterer eg med dette prinsippa i NDLA sin ',
+    privacyLinkText: 'personvernpolicy',
+    privacySecondPart:
+      ', og eg gir samtykke til at NDLA kan bruke min personlege informasjon.',
   },
   logoutSession: {
     or: 'eller',
