@@ -17,7 +17,6 @@ import SiteNavMyPage from './SiteNavMyPage';
 import SiteNavSessionAction from './SiteNavSessionAction';
 import { closeSidebars } from '../sidebarActions';
 import { decodeToken } from '../../util/jwtHelper';
-import config from '../../config';
 
 export const SiteNav = ({
   authenticated,
@@ -33,19 +32,17 @@ export const SiteNav = ({
   return (
     <div className={rootClasses}>
       <ul className="site-nav_list">
-        {!config.isProductionEnvironment && (
-          <li className="site-nav_item">
-            <Link
-              to="/minside"
-              className="site-nav_link"
-              onClick={() => localCloseSidebars()}
-              data-cy="sitenav-create-path">
-              <LabeledIcon.Add
-                labelText={polyglot.t('siteNav.createLearningPath')}
-              />
-            </Link>
-          </li>
-        )}
+        <li className="site-nav_item">
+          <Link
+            to="/minside"
+            className="site-nav_link"
+            onClick={() => localCloseSidebars()}
+            data-cy="sitenav-create-path">
+            <LabeledIcon.Add
+              labelText={polyglot.t('siteNav.createLearningPath')}
+            />
+          </Link>
+        </li>
         <li className="site-nav_item">
           <Link
             to="/learningpaths"

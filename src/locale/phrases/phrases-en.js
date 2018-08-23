@@ -46,6 +46,11 @@ const phrases = {
   },
   loginProviders: {
     description: 'Log in with',
+    privacyFirstPart:
+      'By signing in to this service I am hereby accepting the principles in the NDLA ',
+    privacyLinkText: 'privacy policy',
+    privacySecondPart:
+      ' and I am giving my consent to NDLA’s use of my personal information.',
   },
   logoutSession: {
     title: 'Logout',
