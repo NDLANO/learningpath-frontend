@@ -75,7 +75,7 @@ aside {
 
 .c-zendesk__button {
   position: fixed;
-  left: 2rem;
+  right: 2rem;
   bottom: 2rem;
   border: 2px solid var(--blue-1);
   background-color: white;
@@ -85,7 +85,10 @@ aside {
 
   &:hover,
   &:focus {
-    color: color(var(--blue-1) blackness(+ 10%));
+    color: white;
+    background-color: var(--blue-1);
+    border: 2px solid var(--blue-1);
+    border-radius: 3px;
   }
 }
 
