@@ -13,7 +13,7 @@ import get from 'lodash/get';
 
 export const urlIsProductionNDLA = url => /^(http|https):\/\/ndla.no/.test(url);
 export const urlIsTestNDLA = url =>
-  /^(http|https):\/\/ndla-frontend.([a-zA-Z]+.)api.ndla.no/.test(url)
+  /^(http|https):\/\/ndla-frontend.([a-zA-Z]+.)api.ndla.no/.test(url);
 
 export const urlIsLocalNdla = url =>
   /^http:\/\/proxy.ndla-local:30017/.test(url);
