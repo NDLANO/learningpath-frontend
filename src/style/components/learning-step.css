@@ -68,6 +68,7 @@
 .learning-step--without-dimensions iframe {
   width: 1px; /* Needed to enforce content to stay within iframe on Safari iOS */
   min-width: 100%;
+  height: 100vh;
 }
 
 .learning-step_lti iframe {
