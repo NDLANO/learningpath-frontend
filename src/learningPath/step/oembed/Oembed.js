@@ -10,7 +10,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import get from 'lodash/get';
-import Spinner from '../../../common/Spinner';
 
 export const urlIsProductionNDLA = url => /^(http|https):\/\/ndla.no/.test(url);
 export const urlIsTestNDLA = url =>
@@ -25,7 +24,6 @@ export default class Oembed extends React.Component {
     this.state = {
       isNDLAResource: false,
       listeningToMessages: false,
-      isLoadingResource: true,
     };
 
     this.handleIframeMessages = this.handleIframeMessages.bind(this);
@@ -45,7 +43,6 @@ export default class Oembed extends React.Component {
 
   componentWillUnmount() {
     this.disableIframeMessageListener();
-    this.setState({ isLoadingResource: false });
   }
 
   getIframeDOM() {
@@ -73,7 +70,6 @@ export default class Oembed extends React.Component {
   disableIframeMessageListener() {
     window.removeEventListener('message', this.handleIframeMessages);
     this.setState({ listeningToMessages: false });
-    this.setState({ isLoadingResource: false });
   }
 
   handleScrollTo(evt) {
@@ -92,7 +88,6 @@ export default class Oembed extends React.Component {
     const iframe = this.getIframeDOM();
     const newHeight = parseInt(get(evt, 'data.height', 0), 10);
     iframe.style.height = `${newHeight}px`; // eslint-disable-line no-param-reassign
-    this.setState({ isLoadingResource: false });
   }
 
   handleIframeMessages(event) {
@@ -128,14 +123,11 @@ export default class Oembed extends React.Component {
 
     return (
       <div>
-        {this.state.isLoadingResource && <Spinner hasMargins />}
         <div
           className={classNames({
             'learning-step': true,
             'learning-step_embed': true,
             'learning-step--without-dimensions': this.state.isNDLAResource,
-            'learning-step_ndla_embed--loading':
-              this.state.isNDLAResource && this.state.isLoadingResource,
             'learning-step_lti': embedType === 'lti',
             'learning-step_oembed': embedType === 'oembed',
           })}
