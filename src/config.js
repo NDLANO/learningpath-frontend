@@ -66,10 +66,7 @@ const config = {
   port: getEnvironmentVariabel('LEARINGPATH_PORT', '3000'),
   redirectPort: getEnvironmentVariabel('LEARNINGPATH_REDIRECT_PORT', '3001'),
   googleTagManagerId: getEnvironmentVariabel('NDLA_GOOGLE_TAG_MANAGER_ID'),
-  gaTrackingId: getEnvironmentVariabel(
-    'NDLA_LEARNING_PATH_GA_TRACKING_ID',
-    gaTrackingId,
-  ),
+  gaTrackingId: getEnvironmentVariabel('UNKNOWN', gaTrackingId),
   hotjarSiteID,
   ndlaFrontendDomain,
   ndlaApiUrl: getEnvironmentVariabel('NDLA_API_URL', apiDomain),
