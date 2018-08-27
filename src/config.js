@@ -50,6 +50,13 @@ const pinterestActivated = activatedForEnvironment(
   false,
 );
 
+const gaTrackingId = activatedForEnvironment(
+  {
+    prod: 'UA-9036010-26',
+  },
+  `UA-9036010-29`,
+);
+
 const config = {
   componentName: getEnvironmentVariabel(
     'npm_package_name',
@@ -59,7 +66,10 @@ const config = {
   port: getEnvironmentVariabel('LEARINGPATH_PORT', '3000'),
   redirectPort: getEnvironmentVariabel('LEARNINGPATH_REDIRECT_PORT', '3001'),
   googleTagManagerId: getEnvironmentVariabel('NDLA_GOOGLE_TAG_MANAGER_ID'),
-  gaTrackingId: getEnvironmentVariabel('NDLA_LEARNING_PATH_GA_TRACKING_ID'),
+  gaTrackingId: getEnvironmentVariabel(
+    'NDLA_LEARNING_PATH_GA_TRACKING_ID',
+    gaTrackingId,
+  ),
   hotjarSiteID,
   ndlaFrontendDomain,
   ndlaApiUrl: getEnvironmentVariabel('NDLA_API_URL', apiDomain),
