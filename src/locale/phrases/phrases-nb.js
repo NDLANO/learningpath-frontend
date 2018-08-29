@@ -77,16 +77,22 @@ const phrases = {
       statusValue: {
         PRIVATE: 'Privat',
         PUBLISHED: 'Søkbar',
-        NOT_LISTED: 'Åpen',
+        UNLISTED: 'Åpen',
       },
     },
   },
   pathDropDown: {
     PRIVATE: {
+      unlist: 'Gjør åpen',
       publish: 'Publiser',
     },
     PUBLISHED: {
       unpublish: 'Gjør privat',
+      unlist: 'Gjør åpen',
+    },
+    UNLISTED: {
+      unpublish: 'Gjør privat',
+      publish: 'Publiser',
     },
     delete: 'Slett',
     makeCopy: 'Lag kopi',

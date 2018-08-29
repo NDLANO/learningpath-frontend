@@ -74,8 +74,8 @@ export class MyPage extends React.Component {
           case 'delete':
             deletePath(lp);
             break;
-          case 'publish':
-            updatePathStatus(lp.id, 'PUBLISHED');
+          case 'unlist':
+            updatePathStatus(lp.id, 'UNLISTED');
             break;
           case 'unpublish':
             updatePathStatus(lp.id, 'PRIVATE');

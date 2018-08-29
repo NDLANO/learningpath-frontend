@@ -8,5 +8,5 @@
 
 export const learningPathStatuses = [
   { status: 'PRIVATE', action: 'unpublish' },
-  { status: 'PUBLISHED', action: 'publish' },
+  { status: 'UNLISTED', action: 'unlist' },
 ];

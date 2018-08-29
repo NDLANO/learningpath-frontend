@@ -57,7 +57,7 @@ test('component/LearningPathDropdown de-publish', () => {
   expect(onSelect.firstCall.args).toEqual(['unpublish', learningPath]);
 });
 
-test('component/LearningPathDropdown publish', () => {
+test('component/LearningPathDropdown unlist', () => {
   const onSelect = spy();
   const preventDefault = spy();
 
@@ -77,7 +77,7 @@ test('component/LearningPathDropdown publish', () => {
 
   expect(preventDefault.calledOnce).toBeTruthy();
   expect(onSelect.calledOnce).toBeTruthy();
-  expect(onSelect.firstCall.args).toEqual(['publish', privateLearningPath]);
+  expect(onSelect.firstCall.args).toEqual(['unlist', privateLearningPath]);
 });
 
 test('component/LearningPathDropdown make copy', () => {

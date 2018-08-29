@@ -76,16 +76,22 @@ const phrases = {
       statusValue: {
         PRIVATE: 'Private',
         PUBLISHED: 'Searchable',
-        NOT_LISTED: 'Open',
+        UNLISTED: 'Open',
       },
     },
   },
   pathDropDown: {
     PRIVATE: {
+      unlist: 'Make open',
       publish: 'Publish',
     },
     PUBLISHED: {
+      unpublish: 'Make privat',
+      unlist: 'Make open',
+    },
+    UNLISTED: {
       unpublish: 'Make private',
+      publish: 'Publish',
     },
     delete: 'Delete',
     makeCopy: 'Make copy',
