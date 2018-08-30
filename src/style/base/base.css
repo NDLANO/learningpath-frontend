@@ -73,29 +73,6 @@ aside {
   -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
-.c-zendesk__button {
-  position: fixed;
-  right: 2rem;
-  bottom: 2rem;
-  border: 2px solid var(--blue-1);
-  background-color: white;
-  color: var(--blue-1);
-  padding: 0.4rem 0.6rem;
-  border-radius: 2px;
-
-  &:hover,
-  &:focus {
-    color: white;
-    background-color: var(--blue-1);
-    border: 2px solid var(--blue-1);
-    border-radius: 3px;
-  }
-}
-
-.zEWidget-launcher {
-  display: none;
-}
-
 .privacy-text {
   margin: 0 auto;
   text-align: center;

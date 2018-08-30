@@ -13,12 +13,12 @@
 
 .block-container_fixed--bottom--right {
   right: 50px;
-  bottom: 90px;
+  bottom: 30px;
 }
 
 .block-container_fixed--bottom--left {
   left: 50px;
-  bottom: 90px;
+  bottom: 30px;
 }
 
 @media (--xxlarge-viewport-max) {
