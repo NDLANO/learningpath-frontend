@@ -255,7 +255,10 @@ const phrases = {
     emptyFilter: 'Ingen bidragsytarar funne. Legg difor til bidragsytar',
   },
   updateLearningPathStatus: {
-    updateStatusMsg: 'Oppdatert status OK',
+    UNLISTED:
+      'Oppdatert status til åpen. Dette betyr at den er tilgjenglig via url, men ikkje søk.',
+    PUBLISHED: 'Opdatert status til publisert.',
+    PRIVATE: 'Oppdatert status til privat.',
   },
   htmlTitleTemplates: {
     learningPathStep: '%{title} (Læringssti frå NDLA.no)',
