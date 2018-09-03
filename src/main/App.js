@@ -19,6 +19,7 @@ import PrivateRoute from './PrivateRoute';
 import NotFound from './NotFound';
 import Forbidden from './Forbidden';
 import MyPage from '../myPage/MyPage';
+import Admin from '../admin/Admin';
 import LTIEmbedded from '../ltiSearch/LTIEmbedded';
 import LoginProviders from '../session/LoginProviders';
 import LogoutSession from '../session/LogoutSession';
@@ -56,6 +57,7 @@ export class App extends React.Component {
               component={LTIEmbedded}
             />
             <Route path="/learningpaths" component={LearningPathContainer} />
+            <PrivateRoute path="/admin" component={Admin} />
             <Route path="/forbidden" component={Forbidden} />
             <Route path="/notfound" component={NotFound} />
             <Route path="*" component={NotFound} />

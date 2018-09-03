@@ -13,7 +13,7 @@ import polyglot from '../i18n';
 import Icon from '../common/Icon';
 import { learningPathStatuses } from '../learningPath/learningPathUtil';
 
-export default class LearningPathDropdown extends Component {
+export default class AdminDropdown extends Component {
   constructor(props) {
     super(props);
 
@@ -74,14 +74,6 @@ export default class LearningPathDropdown extends Component {
           <Icon.MoreVert />
         </button>
         <ul className={dropDownMenuItemsClassName}>
-          <li className="dropdown-menu_item">
-            <button
-              type="button"
-              className="un-button dropdown-menu_link"
-              onClick={this.makeOnClick('makecopy')}>
-              <Icon.ContentCopy /> {polyglot.t('pathDropDown.makeCopy')}
-            </button>
-          </li>
           {learningPathStatuses
             .filter(
               status => status.status !== learningPath.status && !status.admin,
@@ -114,7 +106,8 @@ export default class LearningPathDropdown extends Component {
     );
   }
 }
-LearningPathDropdown.propTypes = {
+
+AdminDropdown.propTypes = {
   onSelect: PropTypes.func.isRequired,
   learningPath: PropTypes.object.isRequired,
 };

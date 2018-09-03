@@ -13,7 +13,7 @@ import polyglot from '../../i18n';
 import { updateLearningPathStatus } from '../learningPathActions';
 import { closeSidebars } from '../../common/sidebarActions';
 import { getLearningPath } from '../learningPathSelectors';
-import { learningPathStatuses } from '../../util/learningPathStatuses';
+import { learningPathStatuses } from "../learningPathUtil";
 
 export const LearningPathToCButtons = ({
   learningPath,
