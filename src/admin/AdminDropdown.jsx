@@ -70,37 +70,25 @@ export default class AdminDropdown extends Component {
         <button
           type="button"
           className="un-button dropdown-menu_icon"
-          onClick={() => this.handleDropDownOnClick()}>
+          onClick={this.handleDropDownOnClick}>
           <Icon.MoreVert />
         </button>
         <ul className={dropDownMenuItemsClassName}>
-          {learningPathStatuses
-            .filter(
-              status => status.status !== learningPath.status && !status.admin,
-            )
-            .map(status => (
-              <li
-                key={status.action}
-                className={this.dropDownMenuItemClassName(status.status)}>
-                <button
-                  type="button"
-                  className="un-button dropdown-menu_link"
-                  onClick={this.publishAction(status)}>
-                  <Icon.Input />{' '}
-                  {polyglot.t(
-                    `pathDropDown.${learningPath.status}.${status.action}`,
-                  )}
-                </button>
-              </li>
-            ))}
-          <li className="dropdown-menu_item">
-            <button
-              type="button"
-              className="un-button dropdown-menu_link"
-              onClick={this.makeOnClick('delete')}>
-              <Icon.Delete /> {polyglot.t('pathDropDown.delete')}
-            </button>
-          </li>
+          {learningPathStatuses[learningPath.status].map(status => (
+            <li
+              key={status.action}
+              className={this.dropDownMenuItemClassName(status.status)}>
+              <button
+                type="button"
+                className="un-button dropdown-menu_link"
+                onClick={this.publishAction(status)}>
+                <Icon.Input />{' '}
+                {polyglot.t(
+                  `pathDropDown.${learningPath.status}.${status.action}`,
+                )}
+              </button>
+            </li>
+          ))}
         </ul>
       </div>
     );

@@ -9,21 +9,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { HelmetWithTracker } from 'ndla-tracker';
-import {
-  deleteLearningPath,
-  updateLearningPathsStatus,
-} from '../learningPath/learningPathActions';
-import Icon from '../common/Icon';
+import { updateLearningPathsStatus } from '../learningPath/learningPathActions';
 import polyglot from '../i18n';
-import formatDate from '../util/formatDate';
-import formatDuration from '../util/formatDuration';
 import Masthead from '../common/Masthead';
 import { Wrapper, OneColumn, Footer } from '../common/Layout';
 import { fetchRequestedForPublishPaths } from '../sources/learningpaths';
 import AdminDropdown from './AdminDropdown';
 import { convertLearningPath } from '../learningPath/learningPathUtil';
+import LearningPathTile from '../learningPath/tile/LearningPathTile';
+import SelectSortTiles from '../learningPath/tile/SelectSortTiles';
 
 export class Admin extends React.Component {
   constructor(props) {
@@ -43,11 +38,8 @@ export class Admin extends React.Component {
   }
 
   onDropDownSelect(actionType, learningPath) {
-    const { deletePath, updatePathStatus } = this.props;
+    const { updatePathStatus } = this.props;
     switch (actionType) {
-      case 'delete':
-        deletePath(learningPath);
-        break;
       case 'unlist':
         updatePathStatus(learningPath.id, 'UNLISTED');
         break;
@@ -67,77 +59,34 @@ export class Admin extends React.Component {
 
   render() {
     const { learningPaths, sortKey } = this.state;
-    const { lang } = this.context;
+
     const items = learningPaths.map(learningPath => {
-      const duration = formatDuration(learningPath.duration, lang);
-      const lastUpdated = formatDate(learningPath.lastUpdated, lang);
+      const dropdown = (
+        <AdminDropdown
+          onSelect={this.onDropDownSelect}
+          learningPath={learningPath}
+        />
+      );
       return (
-        <div key={learningPath.id} className="tile">
-          <HelmetWithTracker title={polyglot.t('htmlTitles.myPage')} />
-          <div className="tile_hd">
-            <div className="tile_date">{lastUpdated}</div>
-            <div className="tile_context-menu">
-              <AdminDropdown
-                onSelect={this.onDropDownSelect}
-                learningPath={learningPath}
-              />
-            </div>
-          </div>
-          <Link
-            className="tile_bd"
-            to={`/learningpaths/${learningPath.id}/first-step`}>
-            <h3 className="tile_title">{learningPath.title}</h3>
-            <p>{learningPath.description}</p>
-          </Link>
-          <div className="tile_ft">
-            <div className="tile_property">
-              <div className="tile_property-icon">
-                <Icon.Duration />
-              </div>
-              <p className="tile_property-description">
-                {polyglot.t('myPage.path.duration')}
-              </p>
-              <p>{duration}</p>
-            </div>
-            <div className="tile_property">
-              <div className="tile_property-icon">
-                <Icon.Visibility />
-              </div>
-              <p className="tile_property-description">
-                {polyglot.t('myPage.path.status')}
-              </p>
-              <p>
-                {polyglot.t(`myPage.path.statusValue.${learningPath.status}`)}
-              </p>
-            </div>
-          </div>
-        </div>
+        <LearningPathTile
+          key={learningPath.id}
+          dropdown={dropdown}
+          learningPath={learningPath}
+        />
       );
     });
-
-    const sortOrderSelect = (
-      <select
-        className="select--white-border"
-        value={sortKey}
-        onChange={this.setSortKey}>
-        <option value="title">{polyglot.t('myPage.order.title')}</option>
-        <option value="-lastUpdated">
-          {polyglot.t('myPage.order.newest')}
-        </option>
-        <option value="lastUpdated">{polyglot.t('myPage.order.oldest')}</option>
-        <option value="status">{polyglot.t('myPage.order.status')}</option>
-      </select>
-    );
-
     return (
       <Wrapper>
         <OneColumn>
+          <HelmetWithTracker title={polyglot.t('htmlTitles.adminPage')} />
           <Masthead />
           <div className="page-header page-header--primary">
             <h2 className="page-header_name">
-              {polyglot.t('myPage.pageHeader')}
+              {polyglot.t('adminPage.pageHeader')}
             </h2>
-            <div className="page-header_ctrls">{sortOrderSelect}</div>
+            <div className="page-header_ctrls">
+              <SelectSortTiles sortKey={sortKey} onChange={this.setSortKey} />
+            </div>
           </div>
           <div className="tiles">{items}</div>
         </OneColumn>
@@ -148,7 +97,6 @@ export class Admin extends React.Component {
 }
 
 Admin.propTypes = {
-  deletePath: PropTypes.func.isRequired,
   updatePathStatus: PropTypes.func.isRequired,
   localFetchMyLearningPaths: PropTypes.func.isRequired,
 };
@@ -158,7 +106,6 @@ Admin.contextTypes = {
 };
 
 const mapDispatchToProps = {
-  deletePath: deleteLearningPath,
   updatePathStatus: updateLearningPathsStatus,
 };
 

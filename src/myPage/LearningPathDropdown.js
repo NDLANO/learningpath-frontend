@@ -82,25 +82,21 @@ export default class LearningPathDropdown extends Component {
               <Icon.ContentCopy /> {polyglot.t('pathDropDown.makeCopy')}
             </button>
           </li>
-          {learningPathStatuses
-            .filter(
-              status => status.status !== learningPath.status && !status.admin,
-            )
-            .map(status => (
-              <li
-                key={status.action}
-                className={this.dropDownMenuItemClassName(status.status)}>
-                <button
-                  type="button"
-                  className="un-button dropdown-menu_link"
-                  onClick={this.publishAction(status)}>
-                  <Icon.Input />{' '}
-                  {polyglot.t(
-                    `pathDropDown.${learningPath.status}.${status.action}`,
-                  )}
-                </button>
-              </li>
-            ))}
+          {learningPathStatuses[learningPath.status].map(status => (
+            <li
+              key={status.action}
+              className={this.dropDownMenuItemClassName(status.status)}>
+              <button
+                type="button"
+                className="un-button dropdown-menu_link"
+                onClick={this.publishAction(status)}>
+                <Icon.Input />{' '}
+                {polyglot.t(
+                  `pathDropDown.${learningPath.status}.${status.action}`,
+                )}
+              </button>
+            </li>
+          ))}
           <li className="dropdown-menu_item">
             <button
               type="button"

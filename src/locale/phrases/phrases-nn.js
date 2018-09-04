@@ -18,6 +18,7 @@ const phrases = {
     loginFailure: `Innlogginga feila${titleTemplate}`,
     logoutSession: `Logg ut${titleTemplate}`,
     loginProviders: `Logg inn${titleTemplate}`,
+    adminPage: `Admin side${titleTemplate}`,
     myPage: `Min side${titleTemplate}`,
     forbidden: `Ikkje tilgang${titleTemplate}`,
     notFound: `Sida finst ikkje${titleTemplate}`,
@@ -62,15 +63,20 @@ const phrases = {
   logo: {
     altText: 'Nasjonal digital læringsarena',
   },
+  adminPage: {
+    pageHeader: 'Adminpanel',
+  },
   myPage: {
+    pageHeader: 'Mine læringsstiar',
+    newBtn: 'Opprett ny læringssti',
+  },
+  tilePage: {
     order: {
       title: 'Alfabetisk',
       newest: 'Nyaste',
       oldest: 'Eldste',
       status: 'Publisert',
     },
-    pageHeader: 'Mine læringsstiar',
-    newBtn: 'Opprett ny læringssti',
     path: {
       duration: 'Tidslengd',
       status: 'Synleg',
@@ -78,13 +84,14 @@ const phrases = {
         PRIVATE: 'Privat',
         PUBLISHED: 'Søkbar',
         UNLISTED: 'Open',
+        REQUESTED: 'Forespør publisering',
       },
     },
   },
   pathDropDown: {
     PRIVATE: {
       unlist: 'Gjer åpen',
-      publish: 'Publiser',
+      request: 'Forespør publisering',
     },
     PUBLISHED: {
       unpublish: 'Gjer privat',
@@ -92,6 +99,11 @@ const phrases = {
     },
     UNLISTED: {
       unpublish: 'Gjer privat',
+      request: 'Forespør publisering',
+    },
+    REQUESTED: {
+      unpublish: 'Gjer privat',
+      unlist: 'Gjer åpen',
       publish: 'Publiser',
     },
     delete: 'Slett',

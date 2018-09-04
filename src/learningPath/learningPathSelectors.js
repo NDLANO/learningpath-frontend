@@ -14,7 +14,7 @@ export const getLearningPathFromState = state => state.learningPath;
 
 export const getLearningPath = createSelector(
   [getLearningPathFromState],
-  learningPath => convertLearningPath(learningPath)
+  learningPath => convertLearningPath(learningPath),
 );
 
 export const getLearningPathSteps = createSelector(

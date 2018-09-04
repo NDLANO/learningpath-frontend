@@ -8,22 +8,27 @@
 
 import { convertFieldWithFallback } from '../util/convertFieldWithFallback';
 
-export const learningPathStatuses = [
-  { status: 'PRIVATE', action: 'unpublish' },
-  { status: 'UNLISTED', action: 'unlist' },
-  { status: 'PUBLISHED', action: 'publish', admin: true },
-  { status: 'REQUESTED', action: 'request' },
-];
+const statusPrivate = { status: 'PRIVATE', action: 'unpublish' };
+const statusPublished = { status: 'PUBLISHED', action: 'publish', admin: true };
+const statusRequested = { status: 'REQUESTED', action: 'request' };
+const statusUnlisted = { status: 'UNLISTED', action: 'unlist' };
 
-export const convertLearningPath = (learningPath) => ({
-    ...learningPath,
-    title: convertFieldWithFallback(learningPath, 'title', ''),
-    description: convertFieldWithFallback(learningPath, 'description', ''),
-    learningsteps: learningPath.learningsteps
-      ? learningPath.learningsteps.map(step => ({
-          ...step,
-          title: convertFieldWithFallback(step, 'title', ''),
-        }))
-      : [],
-    tags: convertFieldWithFallback(learningPath, 'tags', []),
-  })
+export const learningPathStatuses = {
+  PRIVATE: [statusUnlisted, statusRequested],
+  PUBLISHED: [statusPrivate, statusUnlisted],
+  UNLISTED: [statusPrivate, statusRequested],
+  REQUESTED: [statusPrivate, statusUnlisted, statusPublished],
+};
+
+export const convertLearningPath = learningPath => ({
+  ...learningPath,
+  title: convertFieldWithFallback(learningPath, 'title', ''),
+  description: convertFieldWithFallback(learningPath, 'description', ''),
+  learningsteps: learningPath.learningsteps
+    ? learningPath.learningsteps.map(step => ({
+        ...step,
+        title: convertFieldWithFallback(step, 'title', ''),
+      }))
+    : [],
+  tags: convertFieldWithFallback(learningPath, 'tags', []),
+});

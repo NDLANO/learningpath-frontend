@@ -17,6 +17,7 @@ const phrases = {
     loginFailure: `Login failed${titleTemplate}`,
     logoutSession: `Logout${titleTemplate}`,
     loginProviders: `Log in${titleTemplate}`,
+    adminPage: `Admin page${titleTemplate}`,
     myPage: `My page${titleTemplate}`,
     forbidden: `No access${titleTemplate}`,
     notFound: `Not found${titleTemplate}`,
@@ -61,15 +62,20 @@ const phrases = {
   logo: {
     altText: 'The Norwegian Digital Learning Arena',
   },
+  adminPage: {
+    pageHeader: 'Adminpanel',
+  },
   myPage: {
+    pageHeader: 'My learning paths',
+    newBtn: 'Create new learning path',
+  },
+  tilePage: {
     order: {
       title: 'Alphabetical',
       newest: 'Newest',
       oldest: 'Oldest',
       status: 'Published',
     },
-    pageHeader: 'My learning paths',
-    newBtn: 'Create new learning path',
     path: {
       duration: 'Duration',
       status: 'Visibility',
@@ -77,20 +83,26 @@ const phrases = {
         PRIVATE: 'Private',
         PUBLISHED: 'Searchable',
         UNLISTED: 'Open',
+        REQUESTED: 'Request publish',
       },
     },
   },
   pathDropDown: {
     PRIVATE: {
       unlist: 'Make open',
-      publish: 'Publish',
+      request: 'Request publish',
     },
     PUBLISHED: {
-      unpublish: 'Make privat',
+      unpublish: 'Make private',
       unlist: 'Make open',
     },
     UNLISTED: {
       unpublish: 'Make private',
+      request: 'Request publish',
+    },
+    REQUESTED: {
+      unpublish: 'Make private',
+      unlist: 'Make open',
       publish: 'Publish',
     },
     delete: 'Delete',
