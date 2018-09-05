@@ -5,7 +5,12 @@ import { Redirect, Route } from 'react-router-dom';
 import { getScope } from '../util/jwtHelper';
 import config from '../config';
 
-const AdminRoute = ({ authenticated, isAdmin, component: Component, ...rest }) => (
+const AdminRoute = ({
+  authenticated,
+  isAdmin,
+  component: Component,
+  ...rest
+}) => (
   <Route
     {...rest}
     render={props =>
@@ -30,10 +35,13 @@ AdminRoute.propTypes = {
   location: PropTypes.object.isRequired,
 };
 
-
 const mapStateToProps = state =>
   Object.assign({}, state, {
-    isAdmin: state.authenticated ? getScope(state.accessToken.token).includes(`learningpath-${config.environment}:publish`) : false,
+    isAdmin: state.authenticated
+      ? getScope(state.accessToken.token).includes(
+          `learningpath-${config.environment}:publish`,
+        )
+      : false,
   });
 
 export default connect(mapStateToProps)(AdminRoute);

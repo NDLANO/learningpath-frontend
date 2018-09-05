@@ -13,7 +13,7 @@ import polyglot from '../../i18n';
 import { updateLearningPathStatus } from '../learningPathActions';
 import { closeSidebars } from '../../common/sidebarActions';
 import { getLearningPath } from '../learningPathSelectors';
-import { learningPathStatuses, learningPathStatusFromStatus  } from '../learningPathUtil';
+import { learningPathStatusFromStatus } from '../learningPathUtil';
 
 export const LearningPathToCButtons = ({
   learningPath,
@@ -33,13 +33,13 @@ export const LearningPathToCButtons = ({
   const status = learningPathStatusFromStatus(learningPath.status);
   return (
     <div>
-        <button
-          type="button"
-          key={status.status}
-          className="button--primary-outline cta-link--block"
-          onClick={publishAction(status)}>
-          {polyglot.t(`pathDropDown.${learningPath.status}.${status.action}`)}
-        </button>
+      <button
+        type="button"
+        key={status.status}
+        className="button--primary-outline cta-link--block"
+        onClick={publishAction(status)}>
+        {polyglot.t(`pathDropDown.${learningPath.status}.${status.action}`)}
+      </button>
     </div>
   );
 };

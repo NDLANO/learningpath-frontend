@@ -59,7 +59,7 @@ export const SiteNav = ({
           isAdmin={isAdmin}
           authenticated={authenticated}
           localCloseSidebars={localCloseSidebars}
-          />
+        />
         <SiteNavMyPage
           authenticated={authenticated}
           localCloseSidebars={localCloseSidebars}
@@ -87,14 +87,19 @@ SiteNav.defaultProps = {
   userName: '',
 };
 
-const selectUserName = ({ authenticated, accessToken }) => authenticated
+const selectUserName = ({ authenticated, accessToken }) =>
+  authenticated
     ? decodeToken(accessToken.token)['https://ndla.no/user_name']
     : '';
 
 const mapStateToProps = state =>
   Object.assign({}, state, {
     userName: selectUserName(state),
-    isAdmin: state.authenticated ? getScope(state.accessToken.token).includes(`learningpath-${config.environment}:publish`) : false,
+    isAdmin: state.authenticated
+      ? getScope(state.accessToken.token).includes(
+          `learningpath-${config.environment}:publish`,
+        )
+      : false,
   });
 
 const mapDispatchToProps = {

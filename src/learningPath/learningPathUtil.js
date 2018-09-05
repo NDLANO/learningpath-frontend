@@ -33,7 +33,7 @@ export const convertLearningPath = learningPath => ({
   tags: convertFieldWithFallback(learningPath, 'tags', []),
 });
 
-export const learningPathStatusFromStatus = (status) => {
+export const learningPathStatusFromStatus = status => {
   switch (status) {
     case statusPrivate.status:
       return statusSubmitted;
