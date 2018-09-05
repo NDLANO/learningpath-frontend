@@ -13,16 +13,19 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import polyglot from '../../i18n';
 import LabeledIcon from '../LabeledIcon';
+import SiteNavAdmin from './SiteNavAdmin';
 import SiteNavMyPage from './SiteNavMyPage';
 import SiteNavSessionAction from './SiteNavSessionAction';
 import { closeSidebars } from '../sidebarActions';
-import { decodeToken } from '../../util/jwtHelper';
+import { decodeToken, getScope } from '../../util/jwtHelper';
+import config from '../../config';
 
 export const SiteNav = ({
   authenticated,
   userName,
   cssModifier,
   localCloseSidebars,
+  isAdmin,
 }) => {
   const rootClasses = classNames({
     'site-nav': true,
@@ -52,6 +55,11 @@ export const SiteNav = ({
             <LabeledIcon.Search labelText={polyglot.t('siteNav.search')} />
           </Link>
         </li>
+        <SiteNavAdmin
+          isAdmin={isAdmin}
+          authenticated={authenticated}
+          localCloseSidebars={localCloseSidebars}
+          />
         <SiteNavMyPage
           authenticated={authenticated}
           localCloseSidebars={localCloseSidebars}
@@ -71,6 +79,7 @@ SiteNav.propTypes = {
   userName: PropTypes.string,
   localCloseSidebars: PropTypes.func.isRequired,
   cssModifier: PropTypes.string,
+  isAdmin: PropTypes.bool.isRequired,
 };
 
 SiteNav.defaultProps = {
@@ -78,14 +87,14 @@ SiteNav.defaultProps = {
   userName: '',
 };
 
-const selectUserName = ({ authenticated, accessToken }) =>
-  authenticated
+const selectUserName = ({ authenticated, accessToken }) => authenticated
     ? decodeToken(accessToken.token)['https://ndla.no/user_name']
     : '';
 
 const mapStateToProps = state =>
   Object.assign({}, state, {
     userName: selectUserName(state),
+    isAdmin: state.authenticated ? getScope(state.accessToken.token).includes(`learningpath-${config.environment}:publish`) : false,
   });
 
 const mapDispatchToProps = {

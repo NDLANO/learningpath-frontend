@@ -84,14 +84,14 @@ const phrases = {
         PRIVATE: 'Privat',
         PUBLISHED: 'Søkbar',
         UNLISTED: 'Open',
-        REQUESTED: 'Forespør publisering',
+        SUBMITTED: 'Til publisering',
       },
     },
   },
   pathDropDown: {
     PRIVATE: {
       unlist: 'Gjer åpen',
-      request: 'Forespør publisering',
+      submit: 'Til publisering',
     },
     PUBLISHED: {
       unpublish: 'Gjer privat',
@@ -99,9 +99,9 @@ const phrases = {
     },
     UNLISTED: {
       unpublish: 'Gjer privat',
-      request: 'Forespør publisering',
+      submit: 'Til publisering',
     },
-    REQUESTED: {
+    SUBMITTED: {
       unpublish: 'Gjer privat',
       unlist: 'Gjer åpen',
       publish: 'Publiser',
@@ -208,6 +208,7 @@ const phrases = {
   },
   siteNav: {
     login: 'Logg inn',
+    admin: 'Admin',
     search: 'Finn læringssti',
     createLearningPath: 'Lag læringssti',
     myPage: 'Mine læringsstiar',

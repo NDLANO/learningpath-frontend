@@ -62,6 +62,7 @@ const config = {
     'npm_package_name',
     'learningpath-frontend',
   ),
+  environment,
   host: getEnvironmentVariabel('LEARINGPATH_HOST', 'localhost'),
   port: getEnvironmentVariabel('LEARINGPATH_PORT', '3000'),
   redirectPort: getEnvironmentVariabel('LEARNINGPATH_REDIRECT_PORT', '3001'),

@@ -82,8 +82,8 @@ export class MyPage extends React.Component {
       case 'unpublish':
         updatePathStatus(learningPath.id, 'PRIVATE');
         break;
-      case 'request':
-        updatePathStatus(learningPath.id, 'REQUESTED');
+      case 'submit':
+        updatePathStatus(learningPath.id, 'SUBMITTED');
         break;
       case 'makecopy':
         copyPath(learningPath, lang);

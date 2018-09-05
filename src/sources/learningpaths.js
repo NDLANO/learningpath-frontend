@@ -32,7 +32,7 @@ const fetchMyPaths = fetchAuthorized(
   '/learningpath-api/v2/learningpaths/mine/',
 );
 
-const fetchRequestedForPublishPaths = fetchAuthorized(
+const fetchSubmittedPaths = fetchAuthorized(
   '/learningpath-api/v2/learningpaths/mine/',
 );
 
@@ -157,7 +157,7 @@ export {
   createPath,
   updatePath,
   fetchMyPaths,
-  fetchRequestedForPublishPaths,
+  fetchSubmittedPaths,
   deletePath,
   fetchOembedUrl,
   updateStatus,

@@ -83,14 +83,14 @@ const phrases = {
         PRIVATE: 'Private',
         PUBLISHED: 'Searchable',
         UNLISTED: 'Open',
-        REQUESTED: 'Request publish',
+        SUBMITTED: 'Submitted',
       },
     },
   },
   pathDropDown: {
     PRIVATE: {
       unlist: 'Make open',
-      request: 'Request publish',
+      submit: 'Submit',
     },
     PUBLISHED: {
       unpublish: 'Make private',
@@ -98,9 +98,9 @@ const phrases = {
     },
     UNLISTED: {
       unpublish: 'Make private',
-      request: 'Request publish',
+      submit: 'Submit',
     },
-    REQUESTED: {
+    SUBMITTED: {
       unpublish: 'Make private',
       unlist: 'Make open',
       publish: 'Publish',
@@ -211,6 +211,7 @@ const phrases = {
   },
   siteNav: {
     login: 'Log in',
+    admin: 'Admin',
     search: 'Find learning path',
     createLearningPath: 'Create learningpath',
     myPage: 'My learning paths',

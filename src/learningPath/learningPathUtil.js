@@ -10,14 +10,14 @@ import { convertFieldWithFallback } from '../util/convertFieldWithFallback';
 
 const statusPrivate = { status: 'PRIVATE', action: 'unpublish' };
 const statusPublished = { status: 'PUBLISHED', action: 'publish', admin: true };
-const statusRequested = { status: 'REQUESTED', action: 'request' };
+const statusSubmitted = { status: 'SUBMITTED', action: 'submit' };
 const statusUnlisted = { status: 'UNLISTED', action: 'unlist' };
 
 export const learningPathStatuses = {
-  PRIVATE: [statusUnlisted, statusRequested],
+  PRIVATE: [statusUnlisted, statusSubmitted],
   PUBLISHED: [statusPrivate, statusUnlisted],
-  UNLISTED: [statusPrivate, statusRequested],
-  REQUESTED: [statusPrivate, statusUnlisted, statusPublished],
+  UNLISTED: [statusPrivate, statusSubmitted],
+  SUBMITTED: [statusPrivate, statusUnlisted, statusPublished],
 };
 
 export const convertLearningPath = learningPath => ({
@@ -32,3 +32,18 @@ export const convertLearningPath = learningPath => ({
     : [],
   tags: convertFieldWithFallback(learningPath, 'tags', []),
 });
+
+export const learningPathStatusFromStatus = (status) => {
+  switch (status) {
+    case statusPrivate.status:
+      return statusSubmitted;
+    case statusUnlisted.status:
+      return statusSubmitted;
+    case statusPublished.status:
+      return statusPrivate;
+    case statusSubmitted.status:
+      return statusUnlisted;
+    default:
+      return statusPrivate;
+  }
+};

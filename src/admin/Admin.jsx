@@ -14,7 +14,7 @@ import { updateLearningPathsStatus } from '../learningPath/learningPathActions';
 import polyglot from '../i18n';
 import Masthead from '../common/Masthead';
 import { Wrapper, OneColumn, Footer } from '../common/Layout';
-import { fetchRequestedForPublishPaths } from '../sources/learningpaths';
+import { fetchSubmittedPaths } from '../sources/learningpaths';
 import AdminDropdown from './AdminDropdown';
 import { convertLearningPath } from '../learningPath/learningPathUtil';
 import LearningPathTile from '../learningPath/tile/LearningPathTile';
@@ -33,7 +33,7 @@ export class Admin extends React.Component {
   }
 
   async componentDidMount() {
-    const learningPaths = await fetchRequestedForPublishPaths();
+    const learningPaths = await fetchSubmittedPaths();
     this.setState({ learningPaths: learningPaths.map(convertLearningPath) });
   }
 
@@ -98,7 +98,6 @@ export class Admin extends React.Component {
 
 Admin.propTypes = {
   updatePathStatus: PropTypes.func.isRequired,
-  localFetchMyLearningPaths: PropTypes.func.isRequired,
 };
 
 Admin.contextTypes = {
