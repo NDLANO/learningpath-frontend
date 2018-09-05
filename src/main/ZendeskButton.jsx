@@ -17,13 +17,14 @@ const { zendeskHost } = config;
 class ZendeskButton extends React.Component {
   constructor() {
     super();
-    this.state = { lastScrollPos: 0, isOpen: false, location: null };
+    this.state = { lastScrollPos: 0, isOpen: true, location: null };
 
     this.handleScroll = this.handleScroll.bind(this);
   }
 
   componentDidMount() {
     document.addEventListener('scroll', this.handleScroll);
+    setTimeout(() => this.setState({ isOpen: false }), 2000);
   }
 
   componentWillUnmount() {
@@ -34,7 +35,7 @@ class ZendeskButton extends React.Component {
     if (prevState.location === null) {
       return {
         location: nextProps.location,
-        isOpen: false,
+        isOpen: true,
       };
     }
     const { location } = nextProps;
