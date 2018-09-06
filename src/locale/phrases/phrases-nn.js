@@ -77,16 +77,22 @@ const phrases = {
       statusValue: {
         PRIVATE: 'Privat',
         PUBLISHED: 'Søkbar',
-        NOT_LISTED: 'Open',
+        UNLISTED: 'Open',
       },
     },
   },
   pathDropDown: {
     PRIVATE: {
+      unlist: 'Gjer åpen',
       publish: 'Publiser',
     },
     PUBLISHED: {
       unpublish: 'Gjer privat',
+      unlist: 'Gjer åpen',
+    },
+    UNLISTED: {
+      unpublish: 'Gjer privat',
+      publish: 'Publiser',
     },
     delete: 'Slett',
     makeCopy: 'Lag kopi',
@@ -249,7 +255,10 @@ const phrases = {
     emptyFilter: 'Ingen bidragsytarar funne. Legg difor til bidragsytar',
   },
   updateLearningPathStatus: {
-    updateStatusMsg: 'Oppdatert status OK',
+    UNLISTED:
+      'Oppdatert status til åpen. Dette betyr at den er tilgjenglig via url, men ikkje søk.',
+    PUBLISHED: 'Opdatert status til publisert.',
+    PRIVATE: 'Oppdatert status til privat.',
   },
   htmlTitleTemplates: {
     learningPathStep: '%{title} (Læringssti frå NDLA.no)',
