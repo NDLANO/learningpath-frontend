@@ -52,6 +52,7 @@
   },
   "dependencies": {
     "auth0-js": "9.7.3",
+    "babel-polyfill": "6.26.0",
     "body-parser": "1.18.3",
     "btoa": "1.2.1",
     "bunyan": "1.8.12",
