@@ -19,6 +19,7 @@ import AdminDropdown from './AdminDropdown';
 import { convertLearningPath } from '../learningPath/learningPathUtil';
 import LearningPathTile from '../learningPath/tile/LearningPathTile';
 import SelectSortTiles from '../learningPath/tile/SelectSortTiles';
+import AdminRejectedMessageForm from './AdminRejectedMessageForm';
 
 export class Admin extends React.Component {
   constructor(props) {
@@ -27,9 +28,17 @@ export class Admin extends React.Component {
     this.state = {
       sortKey: 'title',
       learningPaths: [],
+      showMessageLightbox: false,
+      learningPathChanged: undefined,
+      recjectMessage: '',
+
     };
     this.onDropDownSelect = this.onDropDownSelect.bind(this);
     this.setSortKey = this.setSortKey.bind(this);
+    this.onRejectLearningPath = this.onRejectLearningPath.bind(this);
+    this.onRejectSubmit = this.onRejectSubmit.bind(this);
+    this.onMessageChange = this.onMessageChange.bind(this);
+    this.onLightboxClose = this.onLightboxClose.bind(this);
   }
 
   async componentDidMount() {
@@ -39,18 +48,43 @@ export class Admin extends React.Component {
 
   onDropDownSelect(actionType, learningPath) {
     const { updatePathStatus } = this.props;
+    console.log("LEL", actionType)
     switch (actionType) {
       case 'unlist':
-        updatePathStatus(learningPath.id, 'UNLISTED');
+        this.onRejectLearningPath(learningPath, 'UNLISTED');
         break;
       case 'publish':
         updatePathStatus(learningPath.id, 'PUBLISHED');
         break;
       case 'private':
-        updatePathStatus(learningPath.id, 'PRIVATE');
+        this.onRejectLearningPath(learningPath, 'PRIVATE');
         break;
       default:
     }
+  }
+
+  onRejectLearningPath(learningPath, newStatus) {
+    const { updatePathStatus } = this.props;
+    console.log("lel")
+    // if(learningPath.status === 'SUBMITTED') {
+      this.setState({showMessageLightbox: true, learningPathChanged: {id: learningPath.id, status: newStatus}})
+    /* } else {
+      updatePathStatus(learningPath.id, newStatus);
+    } */
+  }
+
+  onRejectSubmit() {
+    const { updatePathStatus } = this.props;
+    const {learningPathChanged, status} = this.state;
+    updatePathStatus(learningPathChanged.id, status);
+  }
+
+  onMessageChange(evt) {
+    this.setState({recjectMessage: evt.target.value});
+  }
+
+  onLightboxClose() {
+    this.setState({showMessageLightbox: false, learningPathChanged: undefined})
   }
 
   setSortKey(evt) {
@@ -58,8 +92,7 @@ export class Admin extends React.Component {
   }
 
   render() {
-    const { learningPaths, sortKey } = this.state;
-
+    const { learningPaths, sortKey, recjectMessage, showMessageLightbox } = this.state;
     const items = learningPaths.map(learningPath => {
       const dropdown = (
         <AdminDropdown
@@ -80,7 +113,7 @@ export class Admin extends React.Component {
         <OneColumn>
           <HelmetWithTracker title={polyglot.t('htmlTitles.adminPage')} />
           <Masthead />
-          <div className="page-header page-header--primary">
+          <div className="page-header page-header--admin">
             <h2 className="page-header_name">
               {polyglot.t('adminPage.pageHeader')}
             </h2>
@@ -91,6 +124,13 @@ export class Admin extends React.Component {
           <div className="tiles">{items}</div>
         </OneColumn>
         <Footer />
+        <AdminRejectedMessageForm
+          message={recjectMessage}
+          onSubmit={this.onRejectSubmit}
+          onClose={this.onLightboxClose}
+          show={showMessageLightbox}
+          onChange={this.onMessageChange}
+          />
       </Wrapper>
     );
   }
@@ -103,6 +143,7 @@ Admin.propTypes = {
 Admin.contextTypes = {
   lang: PropTypes.string.isRequired,
 };
+
 
 const mapDispatchToProps = {
   updatePathStatus: updateLearningPathsStatus,

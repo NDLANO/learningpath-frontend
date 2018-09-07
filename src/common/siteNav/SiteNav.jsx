@@ -97,7 +97,7 @@ const mapStateToProps = state =>
     userName: selectUserName(state),
     isAdmin: state.authenticated
       ? getScope(state.accessToken.token).includes(
-          `learningpath-${config.environment}:publish`,
+          `learningpath-${config.environment}:admin`,
         )
       : false,
   });

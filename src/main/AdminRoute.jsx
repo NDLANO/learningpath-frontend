@@ -39,7 +39,7 @@ const mapStateToProps = state =>
   Object.assign({}, state, {
     isAdmin: state.authenticated
       ? getScope(state.accessToken.token).includes(
-          `learningpath-${config.environment}:publish`,
+          `learningpath-${config.environment}:admin`,
         )
       : false,
   });
