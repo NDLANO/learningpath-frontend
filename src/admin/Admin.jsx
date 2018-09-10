@@ -39,6 +39,7 @@ export class Admin extends React.Component {
     this.onRejectSubmit = this.onRejectSubmit.bind(this);
     this.onMessageChange = this.onMessageChange.bind(this);
     this.onLightboxClose = this.onLightboxClose.bind(this);
+    this.updateStatusAndFetchLearningPaths = this.updateStatusAndFetchLearningPaths.bind(this);
   }
 
   async componentDidMount() {
@@ -47,16 +48,14 @@ export class Admin extends React.Component {
   }
 
   onDropDownSelect(actionType, learningPath) {
-    const { updatePathStatus } = this.props;
-    console.log("LEL", actionType)
     switch (actionType) {
       case 'unlist':
         this.onRejectLearningPath(learningPath, 'UNLISTED');
         break;
       case 'publish':
-        updatePathStatus(learningPath.id, 'PUBLISHED');
+        this.updateStatusAndFetchLearningPaths(learningPath.id, 'PUBLISHED');
         break;
-      case 'private':
+      case 'unpublish':
         this.onRejectLearningPath(learningPath, 'PRIVATE');
         break;
       default:
@@ -64,19 +63,18 @@ export class Admin extends React.Component {
   }
 
   onRejectLearningPath(learningPath, newStatus) {
-    const { updatePathStatus } = this.props;
-    console.log("lel")
     // if(learningPath.status === 'SUBMITTED') {
       this.setState({showMessageLightbox: true, learningPathChanged: {id: learningPath.id, status: newStatus}})
     /* } else {
-      updatePathStatus(learningPath.id, newStatus);
+      this.updateStatusAndFetchLearningPaths(learningPath.id, newStatus);
     } */
   }
 
-  onRejectSubmit() {
-    const { updatePathStatus } = this.props;
-    const {learningPathChanged, status} = this.state;
-    updatePathStatus(learningPathChanged.id, status);
+  async onRejectSubmit(evt) {
+    evt.preventDefault();
+    const {learningPathChanged } = this.state;
+    this.onLightboxClose();
+    this.updateStatusAndFetchLearningPaths(learningPathChanged.id, learningPathChanged.status);
   }
 
   onMessageChange(evt) {
@@ -84,11 +82,19 @@ export class Admin extends React.Component {
   }
 
   onLightboxClose() {
-    this.setState({showMessageLightbox: false, learningPathChanged: undefined})
+    this.setState({showMessageLightbox: false, learningPathChanged: undefined, recjectMessage: ''})
   }
+
 
   setSortKey(evt) {
     this.setState({ sortKey: evt.target.value });
+  }
+
+  async updateStatusAndFetchLearningPaths(id, status) {
+    const { updatePathStatus } = this.props;
+    await updatePathStatus(id, status);
+    const learningPaths = await fetchSubmittedPaths();
+    this.setState({ learningPaths: learningPaths.map(convertLearningPath) });
   }
 
   render() {
