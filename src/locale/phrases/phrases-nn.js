@@ -80,6 +80,10 @@ const phrases = {
     path: {
       duration: 'Tidslengd',
       status: 'Synleg',
+      owner: {
+        name: 'Namn',
+        email: 'E-post',
+      },
       statusValue: {
         PRIVATE: 'Privat',
         PUBLISHED: 'Søkbar',

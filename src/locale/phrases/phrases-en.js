@@ -79,6 +79,10 @@ const phrases = {
     path: {
       duration: 'Duration',
       status: 'Visibility',
+      owner: {
+        name: 'Name',
+        email: 'Email',
+      },
       statusValue: {
         PRIVATE: 'Private',
         PUBLISHED: 'Searchable',

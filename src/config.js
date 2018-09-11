@@ -89,6 +89,7 @@ const config = {
   ltiActivated,
   ndlaPersonalClientId: getEnvironmentVariabel('NDLA_PERSONAL_CLIENT_ID', ''),
   auth0Domain: getEnvironmentVariabel('AUTH0_DOMAIN', ''),
+  auth0Api: 'https://ndla.eu.auth0.com/api/v2/',
   disableSSR: getEnvironmentVariabel('DISABLE_SSR', false),
   zendeskHost: getEnvironmentVariabel('NDLA_ZENDESK_HOST'),
   app: {
@@ -97,6 +98,7 @@ const config = {
       meta: [{ property: 'og:site_name', content: 'NDLA Læringsstier' }],
     },
   },
+
   isProduction: getEnvironmentVariabel('NODE_ENV') === 'production',
 };
 

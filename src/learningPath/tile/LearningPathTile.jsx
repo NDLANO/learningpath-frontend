@@ -14,6 +14,7 @@ import polyglot from '../../i18n';
 import formatDate from '../../util/formatDate';
 import formatDuration from '../../util/formatDuration';
 import Icon from '../../common/Icon';
+import TileUserInformation from './TileUserInformation';
 
 const classes = new BEMHelper({
   name: 'tile',
@@ -56,6 +57,7 @@ const LearningPathTile = ({ learningPath, dropdown }, { lang }) => {
             {polyglot.t(`tilePage.path.statusValue.${learningPath.status}`)}
           </p>
         </div>
+        <TileUserInformation owner={learningPath.owner} />
       </div>
     </div>
   );

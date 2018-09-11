@@ -33,7 +33,7 @@ const fetchMyPaths = fetchAuthorized(
 );
 
 const fetchSubmittedPaths = fetchAuthorized(
-  '/learningpath-api/v2/learningpaths/mine/',
+  '/learningpath-api/v2/learningpaths/status/SUBMITTED',
 );
 
 const fetchPathTags = fetchAuthorized(

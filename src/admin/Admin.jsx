@@ -45,9 +45,18 @@ export class Admin extends React.Component {
   }
 
   async componentDidMount() {
-    const t = await fetchOwners();
     const learningPaths = await fetchSubmittedPaths();
-    this.setState({ learningPaths: learningPaths.map(convertLearningPath) });
+    const ownerIds = learningPaths.map(learningPath => learningPath.ownerId);
+    const users = await fetchOwners(ownerIds);
+
+    this.setState({
+      learningPaths: learningPaths.map(learningPath => ({
+        ...convertLearningPath(learningPath),
+        owner: users.find(
+          user => user.app_metadata.ndla_id === learningPath.ownerId,
+        ),
+      })),
+    });
   }
 
   onDropDownSelect(actionType, learningPath) {
@@ -66,14 +75,14 @@ export class Admin extends React.Component {
   }
 
   onRejectLearningPath(learningPath, newStatus) {
-    // if(learningPath.status === 'SUBMITTED') {
-    this.setState({
-      showMessageLightbox: true,
-      learningPathChanged: { id: learningPath.id, status: newStatus },
-    });
-    /* } else {
+    if (learningPath.status === 'SUBMITTED') {
+      this.setState({
+        showMessageLightbox: true,
+        learningPathChanged: { id: learningPath.id, status: newStatus },
+      });
+    } else {
       this.updateStatusAndFetchLearningPaths(learningPath.id, newStatus);
-    } */
+    }
   }
 
   async onRejectSubmit(evt) {
@@ -116,6 +125,7 @@ export class Admin extends React.Component {
       recjectMessage,
       showMessageLightbox,
     } = this.state;
+
     const items = learningPaths.map(learningPath => {
       const dropdown = (
         <AdminDropdown

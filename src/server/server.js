@@ -18,7 +18,7 @@ import { StaticRouter } from 'react-router';
 import { matchPath } from 'react-router-dom';
 import bodyParser from 'body-parser';
 import jwt from 'express-jwt';
-import jwksRsa from 'jwks-rsa'
+import jwksRsa from 'jwks-rsa';
 import {
   OK,
   INTERNAL_SERVER_ERROR,
@@ -30,7 +30,7 @@ import App from '../main/App';
 import config, { getEnvironmentVariabel } from '../config';
 import { getHtmlLang, isValidLocale } from '../locale/configureLocale';
 import Html from './Html';
-import { getToken } from './auth';
+import { getToken, getUsers } from './auth';
 import Auth0SilentCallback from './Auth0SilentCallback';
 import configureStore from '../configureStore';
 import { serverRoutes } from './serverRoutes';
@@ -123,19 +123,30 @@ app.get(
   jwt({
     secret: jwksRsa.expressJwtSecret({
       cache: true,
-      jwksUri: 'https://ndla.eu.auth0.com/.well-known/jwks.json',
+      jwksUri: `https://${config.auth0Domain}/.well-known/jwks.json`,
     }),
     audience: 'ndla_system',
-    issuer: "https://ndla.eu.auth0.com/",
+    issuer: `https://${config.auth0Domain}/`,
     algorithms: ['RS256'],
-
   }),
-  (req, res) => {
-    const isAdmin = req.user && req.user.scope.includes('learningpath-test:admin')
+  async (req, res) => {
+    const {
+      user,
+      query: { ownerIds },
+    } = req;
+    const isAdmin = user && user.scope.includes('learningpath-test:admin');
     if (!isAdmin) {
-      res.status(FORBIDDEN).json({ status: FORBIDDEN, text: 'No access allowed' });;
+      res
+        .status(FORBIDDEN)
+        .json({ status: FORBIDDEN, text: 'No access allowed' });
     } else {
-      res.status(OK)
+      try {
+        const managementToken = await getToken(config.auth0Api);
+        const users = await getUsers(managementToken, ownerIds);
+        res.status(OK).json(users);
+      } catch (err) {
+        res.status(INTERNAL_SERVER_ERROR).send(err.message);
+      }
     }
   },
 );
@@ -145,7 +156,7 @@ app.get('/login/silent-callback', (req, res) => {
 });
 
 app.get('/get_token', (req, res) => {
-  getToken()
+  getToken('ndla_sytem')
     .then(token => {
       res.send(token);
     })
@@ -250,7 +261,7 @@ function handleResponse(req, res, token) {
 }
 
 app.get('/*', (req, res) => {
-  getToken()
+  getToken('ndla_system')
     .then(token => {
       handleResponse(req, res, token);
     })
