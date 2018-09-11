@@ -134,7 +134,7 @@ app.get(
       user,
       query: { ownerIds },
     } = req;
-    const isAdmin = user && user.scope.includes('learningpath-test:admin');
+    const isAdmin = user && user.scope.includes(`learningpath-${config.environment}:admin`);
     if (!isAdmin) {
       res
         .status(FORBIDDEN)
