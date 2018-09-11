@@ -15,6 +15,7 @@ import polyglot from '../i18n';
 import Masthead from '../common/Masthead';
 import { Wrapper, OneColumn, Footer } from '../common/Layout';
 import { fetchSubmittedPaths } from '../sources/learningpaths';
+import { fetchOwners } from '../sources/fetchOwners';
 import AdminDropdown from './AdminDropdown';
 import { convertLearningPath } from '../learningPath/learningPathUtil';
 import LearningPathTile from '../learningPath/tile/LearningPathTile';
@@ -44,6 +45,7 @@ export class Admin extends React.Component {
   }
 
   async componentDidMount() {
+    const t = await fetchOwners();
     const learningPaths = await fetchSubmittedPaths();
     this.setState({ learningPaths: learningPaths.map(convertLearningPath) });
   }

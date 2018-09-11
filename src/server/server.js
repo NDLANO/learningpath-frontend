@@ -18,6 +18,7 @@ import { StaticRouter } from 'react-router';
 import { matchPath } from 'react-router-dom';
 import bodyParser from 'body-parser';
 import jwt from 'express-jwt';
+import jwksRsa from 'jwks-rsa'
 import {
   OK,
   INTERNAL_SERVER_ERROR,
@@ -118,16 +119,23 @@ app.get(
 );
 
 app.get(
-  '/protected',
+  '/get_owners',
   jwt({
-    secret: `${getEnvironmentVariabel('NDLA_LEARNING_PATH_CLIENT_SECRET')}`,
+    secret: jwksRsa.expressJwtSecret({
+      cache: true,
+      jwksUri: 'https://ndla.eu.auth0.com/.well-known/jwks.json',
+    }),
+    audience: 'ndla_system',
+    issuer: "https://ndla.eu.auth0.com/",
+    algorithms: ['RS256'],
+
   }),
   (req, res) => {
-    console.log(req);
-    if (!req.user.admin) {
-      res.sendStatus(401);
+    const isAdmin = req.user && req.user.scope.includes('learningpath-test:admin')
+    if (!isAdmin) {
+      res.status(FORBIDDEN).json({ status: FORBIDDEN, text: 'No access allowed' });;
     } else {
-      res.sendStatus(200);
+      res.status(OK)
     }
   },
 );
