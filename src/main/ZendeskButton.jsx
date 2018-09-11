@@ -24,7 +24,6 @@ class ZendeskButton extends React.Component {
 
   componentDidMount() {
     document.addEventListener('scroll', this.handleScroll);
-    setTimeout(() => this.setState({ isOpen: false }), 2000);
   }
 
   componentWillUnmount() {
