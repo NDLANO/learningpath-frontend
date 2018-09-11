@@ -31,7 +31,6 @@ export class Admin extends React.Component {
       showMessageLightbox: false,
       learningPathChanged: undefined,
       recjectMessage: '',
-
     };
     this.onDropDownSelect = this.onDropDownSelect.bind(this);
     this.setSortKey = this.setSortKey.bind(this);
@@ -39,7 +38,9 @@ export class Admin extends React.Component {
     this.onRejectSubmit = this.onRejectSubmit.bind(this);
     this.onMessageChange = this.onMessageChange.bind(this);
     this.onLightboxClose = this.onLightboxClose.bind(this);
-    this.updateStatusAndFetchLearningPaths = this.updateStatusAndFetchLearningPaths.bind(this);
+    this.updateStatusAndFetchLearningPaths = this.updateStatusAndFetchLearningPaths.bind(
+      this,
+    );
   }
 
   async componentDidMount() {
@@ -64,7 +65,10 @@ export class Admin extends React.Component {
 
   onRejectLearningPath(learningPath, newStatus) {
     // if(learningPath.status === 'SUBMITTED') {
-      this.setState({showMessageLightbox: true, learningPathChanged: {id: learningPath.id, status: newStatus}})
+    this.setState({
+      showMessageLightbox: true,
+      learningPathChanged: { id: learningPath.id, status: newStatus },
+    });
     /* } else {
       this.updateStatusAndFetchLearningPaths(learningPath.id, newStatus);
     } */
@@ -72,19 +76,25 @@ export class Admin extends React.Component {
 
   async onRejectSubmit(evt) {
     evt.preventDefault();
-    const {learningPathChanged } = this.state;
+    const { learningPathChanged } = this.state;
     this.onLightboxClose();
-    this.updateStatusAndFetchLearningPaths(learningPathChanged.id, learningPathChanged.status);
+    this.updateStatusAndFetchLearningPaths(
+      learningPathChanged.id,
+      learningPathChanged.status,
+    );
   }
 
   onMessageChange(evt) {
-    this.setState({recjectMessage: evt.target.value});
+    this.setState({ recjectMessage: evt.target.value });
   }
 
   onLightboxClose() {
-    this.setState({showMessageLightbox: false, learningPathChanged: undefined, recjectMessage: ''})
+    this.setState({
+      showMessageLightbox: false,
+      learningPathChanged: undefined,
+      recjectMessage: '',
+    });
   }
-
 
   setSortKey(evt) {
     this.setState({ sortKey: evt.target.value });
@@ -98,7 +108,12 @@ export class Admin extends React.Component {
   }
 
   render() {
-    const { learningPaths, sortKey, recjectMessage, showMessageLightbox } = this.state;
+    const {
+      learningPaths,
+      sortKey,
+      recjectMessage,
+      showMessageLightbox,
+    } = this.state;
     const items = learningPaths.map(learningPath => {
       const dropdown = (
         <AdminDropdown
@@ -136,7 +151,7 @@ export class Admin extends React.Component {
           onClose={this.onLightboxClose}
           show={showMessageLightbox}
           onChange={this.onMessageChange}
-          />
+        />
       </Wrapper>
     );
   }
@@ -149,7 +164,6 @@ Admin.propTypes = {
 Admin.contextTypes = {
   lang: PropTypes.string.isRequired,
 };
-
 
 const mapDispatchToProps = {
   updatePathStatus: updateLearningPathsStatus,

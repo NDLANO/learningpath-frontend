@@ -17,6 +17,7 @@ import { bindActionCreators } from 'redux';
 import { StaticRouter } from 'react-router';
 import { matchPath } from 'react-router-dom';
 import bodyParser from 'body-parser';
+import jwt from 'express-jwt';
 import {
   OK,
   INTERNAL_SERVER_ERROR,
@@ -114,6 +115,21 @@ app.get(
       access_token: getEnvironmentVariabel('PINTEREST_ACCESS_TOKEN'),
     },
   }),
+);
+
+app.get(
+  '/protected',
+  jwt({
+    secret: `${getEnvironmentVariabel('NDLA_LEARNING_PATH_CLIENT_SECRET')}`,
+  }),
+  (req, res) => {
+    console.log(req);
+    if (!req.user.admin) {
+      res.sendStatus(401);
+    } else {
+      res.sendStatus(200);
+    }
+  },
 );
 
 app.get('/login/silent-callback', (req, res) => {
