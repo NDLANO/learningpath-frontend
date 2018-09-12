@@ -48,7 +48,6 @@ export class Admin extends React.Component {
     const learningPaths = await fetchSubmittedPaths();
     const ownerIds = learningPaths.map(learningPath => learningPath.ownerId);
     const users = await fetchOwners(ownerIds);
-
     this.setState({
       learningPaths: learningPaths.map(learningPath => ({
         ...convertLearningPath(learningPath),
@@ -87,11 +86,12 @@ export class Admin extends React.Component {
 
   async onRejectSubmit(evt) {
     evt.preventDefault();
-    const { learningPathChanged } = this.state;
+    const { learningPathChanged, recjectMessage } = this.state;
     this.onLightboxClose();
     this.updateStatusAndFetchLearningPaths(
       learningPathChanged.id,
       learningPathChanged.status,
+      recjectMessage,
     );
   }
 
@@ -111,9 +111,9 @@ export class Admin extends React.Component {
     this.setState({ sortKey: evt.target.value });
   }
 
-  async updateStatusAndFetchLearningPaths(id, status) {
+  async updateStatusAndFetchLearningPaths(id, status, recjectMessage) {
     const { updatePathStatus } = this.props;
-    await updatePathStatus(id, status);
+    await updatePathStatus(id, status, false, recjectMessage);
     const learningPaths = await fetchSubmittedPaths();
     this.setState({ learningPaths: learningPaths.map(convertLearningPath) });
   }

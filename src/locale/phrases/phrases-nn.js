@@ -69,6 +69,12 @@ const phrases = {
   myPage: {
     pageHeader: 'Mine læringsstiar',
     newBtn: 'Opprett ny læringssti',
+    rejectedMessageAlert: {
+      message:
+        'Læringssti med tittel %{title} ble avist. Se medling for begrunnelse: %{message}',
+      action: 'Fjern melding',
+      messageRemoved: 'Medling fjernet for sti med tittel: %{title}',
+    },
   },
   tilePage: {
     order: {

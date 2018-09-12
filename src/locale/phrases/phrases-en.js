@@ -68,6 +68,12 @@ const phrases = {
   myPage: {
     pageHeader: 'My learning paths',
     newBtn: 'Create new learning path',
+    rejectedMessageAlert: {
+      message:
+        'Learningpath with title %{title} was rejected. See the message: %{message}',
+      action: 'Remove message',
+      messageRemoved: 'Message removed for learningpath with title: %{title}',
+    },
   },
   tilePage: {
     order: {

@@ -134,7 +134,9 @@ app.get(
       user,
       query: { ownerIds },
     } = req;
-    const isAdmin = user && user.scope.includes(`learningpath-${config.environment}:admin`);
+    const isAdmin =
+      user && user.scope.includes(`learningpath-${config.environment}:admin`);
+
     if (!isAdmin) {
       res
         .status(FORBIDDEN)
@@ -156,7 +158,7 @@ app.get('/login/silent-callback', (req, res) => {
 });
 
 app.get('/get_token', (req, res) => {
-  getToken('ndla_sytem')
+  getToken('ndla_system')
     .then(token => {
       res.send(token);
     })
