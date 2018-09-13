@@ -198,9 +198,7 @@ function updateLPStatus(pathId, status, redirectUrl, setStatus, rejectMessage) {
         dispatch(setStatus);
         dispatch(
           addMessage({
-            message: polyglot.t(
-              `updateLearningPathStatus.updateStatusMsg.${status}`,
-            ),
+            message: polyglot.t(`updateLearningPathStatus.${status}`),
           }),
         );
         if (redirectUrl) {

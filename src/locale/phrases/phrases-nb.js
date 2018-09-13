@@ -65,6 +65,7 @@ const phrases = {
   },
   adminPage: {
     pageHeader: 'Adminpanel',
+    noPaths: 'Det finnes ingen læringsstier med status til publisering',
   },
   myPage: {
     pageHeader: 'Mine læringsstier',
@@ -72,8 +73,8 @@ const phrases = {
     rejectedMessageAlert: {
       message:
         'Læringssti med tittel %{title} ble avist. Se medling for begrunnelse: %{message}',
-      action: 'Fjern melding',
-      messageRemoved: 'Medling fjernet for sti med tittel: %{title}',
+      action: 'Slett melding',
+      messageRemoved: 'Medling slettet for sti med tittel: %{title}',
     },
   },
   tilePage: {
@@ -280,12 +281,11 @@ const phrases = {
     emptyFilter: 'Ingen bidragsytere funnet. Legg derfor til bidragsyter',
   },
   updateLearningPathStatus: {
-    updateStatusMsg: {
-      UNLISTED:
-        'Oppdatert status til åpen. Dette betyr at den er tilgjenglig via url, men ikke søk.',
-      PUBLISHED: 'Opdatert status til publisert.',
-      PRIVATE: 'Oppdatert status til privat.',
-    },
+    UNLISTED:
+      'Oppdatert status til åpen. Dette betyr at den er tilgjenglig via url, men ikke søk.',
+    PUBLISHED: 'Opdatert status til publisert.',
+    PRIVATE: 'Oppdatert status til privat.',
+    SUBMITTED: 'Oppdatert status til til publsiering.',
   },
   validation: {
     required: 'Feltet er påkrevd.',

@@ -64,6 +64,7 @@ const phrases = {
   },
   adminPage: {
     pageHeader: 'Adminpanel',
+    noPaths: 'There are no learningpaths with status submitted',
   },
   myPage: {
     pageHeader: 'My learning paths',
@@ -71,8 +72,8 @@ const phrases = {
     rejectedMessageAlert: {
       message:
         'Learningpath with title %{title} was rejected. See the message: %{message}',
-      action: 'Remove message',
-      messageRemoved: 'Message removed for learningpath with title: %{title}',
+      action: 'Delete message',
+      messageRemoved: 'Message deleted for learningpath with title: %{title}',
     },
   },
   tilePage: {
@@ -285,6 +286,7 @@ const phrases = {
       'Updated status to open. This means that it is reachable by url, but does not appear in the search.',
     PUBLISHED: 'Updated status to published.',
     PRIVATE: 'Updated status to private.',
+    SUBMITTED: 'Updated status to submitted.',
   },
   validation: {
     required: 'The field is required.',

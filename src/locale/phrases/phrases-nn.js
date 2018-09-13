@@ -65,6 +65,7 @@ const phrases = {
   },
   adminPage: {
     pageHeader: 'Adminpanel',
+    noPaths: 'Det finnes ingen læringsstier med status til publisering',
   },
   myPage: {
     pageHeader: 'Mine læringsstiar',
@@ -72,8 +73,8 @@ const phrases = {
     rejectedMessageAlert: {
       message:
         'Læringssti med tittel %{title} ble avist. Se medling for begrunnelse: %{message}',
-      action: 'Fjern melding',
-      messageRemoved: 'Medling fjernet for sti med tittel: %{title}',
+      action: 'Slett melding',
+      messageRemoved: 'Medling slettet for sti med tittel: %{title}',
     },
   },
   tilePage: {
@@ -282,6 +283,7 @@ const phrases = {
       'Oppdatert status til åpen. Dette betyr at den er tilgjenglig via url, men ikkje søk.',
     PUBLISHED: 'Opdatert status til publisert.',
     PRIVATE: 'Oppdatert status til privat.',
+    SUBMITTED: 'Oppdatert status til til publsiering.',
   },
   htmlTitleTemplates: {
     learningPathStep: '%{title} (Læringssti frå NDLA.no)',

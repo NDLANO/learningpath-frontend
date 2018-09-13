@@ -17,15 +17,19 @@ export const setMyLearningPathsSortOrder = createAction(
 export const setLearningPaths = createAction('SET_LEARNING_PATHS');
 
 export function removeRejectedMessage(learningPath) {
-  return dispatch =>
+  return (dispatch, getState) =>
     updatePath(
       { pathId: learningPath.id },
-      { revision: learningPath.revision, deleteMessage: true },
+      {
+        revision: learningPath.revision,
+        deleteMessage: true,
+        language: getState().locale,
+      },
     )
       .then(path => {
         dispatch(
           addMessage({
-            message: polyglot('myPage.rejectedMessageAlert.messageRemoved', {
+            message: polyglot.t('myPage.rejectedMessageAlert.messageRemoved', {
               title: path.title.title,
             }),
           }),
@@ -43,12 +47,12 @@ export function fetchMyLearningPaths() {
             dispatch(
               addMessage({
                 severity: 'danger',
-                message: polyglot('myPage.rejectedMessageAlert.message', {
+                message: polyglot.t('myPage.rejectedMessageAlert.message', {
                   message: path.message,
                   title: path.title.title,
                 }),
                 action: {
-                  title: polyglot('myPage.rejectedMessageAlert.action'),
+                  title: polyglot.t('myPage.rejectedMessageAlert.action'),
                   onClick: () => dispatch(removeRejectedMessage(path)),
                 },
                 timeToLive: 0,

@@ -154,7 +154,14 @@ export class Admin extends React.Component {
               <SelectSortTiles sortKey={sortKey} onChange={this.setSortKey} />
             </div>
           </div>
-          <div className="tiles">{items}</div>
+
+          <div className="tiles">
+            {items && items.length > 0 ? (
+              items
+            ) : (
+              <p>{polyglot.t('adminPage.noPaths')}</p>
+            )}
+          </div>
         </OneColumn>
         <Footer />
         <AdminRejectedMessageForm
