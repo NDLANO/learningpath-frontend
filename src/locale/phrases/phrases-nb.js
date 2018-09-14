@@ -77,16 +77,22 @@ const phrases = {
       statusValue: {
         PRIVATE: 'Privat',
         PUBLISHED: 'Søkbar',
-        NOT_LISTED: 'Åpen',
+        UNLISTED: 'Åpen',
       },
     },
   },
   pathDropDown: {
     PRIVATE: {
+      unlist: 'Gjør åpen',
       publish: 'Publiser',
     },
     PUBLISHED: {
       unpublish: 'Gjør privat',
+      unlist: 'Gjør åpen',
+    },
+    UNLISTED: {
+      unpublish: 'Gjør privat',
+      publish: 'Publiser',
     },
     delete: 'Slett',
     makeCopy: 'Lag kopi',
@@ -251,7 +257,12 @@ const phrases = {
     emptyFilter: 'Ingen bidragsytere funnet. Legg derfor til bidragsyter',
   },
   updateLearningPathStatus: {
-    updateStatusMsg: 'Oppdatert status OK',
+    updateStatusMsg: {
+      UNLISTED:
+        'Oppdatert status til åpen. Dette betyr at den er tilgjenglig via url, men ikke søk.',
+      PUBLISHED: 'Opdatert status til publisert.',
+      PRIVATE: 'Oppdatert status til privat.',
+    },
   },
   validation: {
     required: 'Feltet er påkrevd.',

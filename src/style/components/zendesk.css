@@ -8,8 +8,6 @@
   color: var(--blue-1);
   padding: 0.4rem 0.6rem;
   border-radius: 2px;
-  opacity:0;
-  visibility: hidden;
   &:hover,
   &:focus {
     color: white;
@@ -18,7 +16,7 @@
     border-radius: 3px;
   }
 
-  &--open {
+  /*&--open {
     opacity: 1;
     visibility: visible;
     animation: fadein 1s;
@@ -29,7 +27,7 @@
     visibility: hidden;
     animation: fadeout 1s;
 
-  }
+  }*/
 }
 
 .zEWidget-launcher {

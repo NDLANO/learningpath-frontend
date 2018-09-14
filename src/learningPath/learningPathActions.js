@@ -189,6 +189,7 @@ export function deleteLearningPath(learningPath) {
         ),
       );
 }
+
 function updateLPStatus(pathId, status, redirectUrl, setStatus) {
   return dispatch =>
     updateStatus({ pathId }, { status })
@@ -197,7 +198,9 @@ function updateLPStatus(pathId, status, redirectUrl, setStatus) {
         dispatch(setStatus);
         dispatch(
           addMessage({
-            message: polyglot.t('updateLearningPathStatus.updateStatusMsg'),
+            message: polyglot.t(
+              `updateLearningPathStatus.updateStatusMsg.${status}`,
+            ),
           }),
         );
         if (redirectUrl) {
@@ -210,6 +213,7 @@ function updateLPStatus(pathId, status, redirectUrl, setStatus) {
       })
       .catch(err => dispatch(applicationError(err)));
 }
+
 export function updateLearningPathsStatus(pathId, status, redirectUrl = false) {
   const setStatus = setLearningPathsStatus({ id: pathId, status });
   return updateLPStatus(pathId, status, redirectUrl, setStatus);
