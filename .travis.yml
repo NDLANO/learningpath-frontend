@@ -1,23 +1,31 @@
 language: node_js
 node_js:
-- '8'
-
+  - '8'
 cache:
   yarn: true
   directories:
-    - ~/.npm
-    - ~/.cache/Cypress/
-    - .eslintcache
+    - '~/.npm'
+    - '~/.cache/Cypress/'
+    - '.eslintcache'
     - node_modules
-
 script:
-- yarn test
-- yarn build
-- yarn e2e-ci
+  - yarn test
+  - yarn build
+  - yarn e2e-ci
+
+after_success:
+  - travis_wait node scripts/run-ndla-script.js now-travis --npm
 
 notifications:
   slack:
     on_success: change
     on_failure: always
     rooms:
-      secure: nsj9HxReGKIgNMTO3sahfZg0JCDakTJbLcieshisvsI89QlZZYuZH+gNbpwxa6OyfpcZBdnVMgGWrByMEuv6AzTFzZK7VzpRWlMDbntpKPk5LRMjp1GNIDpbalFTllM2hsrBC1yaHCwsR/0jHYgmkQrjfvzj4yOO1b6gEu7LTCJ8qA5Dho52g4gKdKv5UtskGYKoVQpc6VpWrKYCdZ6PM8D4ikoFW+UlvnixQH4yJoxDP+aUnnZkq8/NmPpoMOqEOVyVWA92FHJRGrsW/oZ3llOdZqmGnS8ySFgzrnOHaQBpImgmXh7StYMYkAGna/0EyKkOCAiiejlP7HgMxXXzVjBbLqPCMlgJOiOJP6bgp1/ZvMNI3NS51DeZtLuPaCiZBGc1Z4UGAzIuK+GnC6EL/HEyqc6o/6sdiJdXZPe8G0gP83Fwir2r1tW2XoL0BTl/lPxpxS/xJuEsVCf6/D8gSfr8yrAw53TUxLmFPFaXvhZkBWU8lUPZD6Se7gHrA6Bk6SbvKRRbwfS2f1xHN8XVFhz1TMkpckqVWBALySd0H2lY1DkQkm67Zb+Ap4OwEiEljYRMBMJncI8FmDlooDYKL8LUNwb1Nlf7X/TEzebhr0Xh11eo6mrSXdBgbXh6potuh8EhQrLgwW6M4ZlSbBJKH1QXfuTZgfrrehVE39dSqyg=
+      secure:
+        nsj9HxReGKIgNMTO3sahfZg0JCDakTJbLcieshisvsI89QlZZYuZH+gNbpwxa6OyfpcZBdnVMgGWrByMEuv6AzTFzZK7VzpRWlMDbntpKPk5LRMjp1GNIDpbalFTllM2hsrBC1yaHCwsR/0jHYgmkQrjfvzj4yOO1b6gEu7LTCJ8qA5Dho52g4gKdKv5UtskGYKoVQpc6VpWrKYCdZ6PM8D4ikoFW+UlvnixQH4yJoxDP+aUnnZkq8/NmPpoMOqEOVyVWA92FHJRGrsW/oZ3llOdZqmGnS8ySFgzrnOHaQBpImgmXh7StYMYkAGna/0EyKkOCAiiejlP7HgMxXXzVjBbLqPCMlgJOiOJP6bgp1/ZvMNI3NS51DeZtLuPaCiZBGc1Z4UGAzIuK+GnC6EL/HEyqc6o/6sdiJdXZPe8G0gP83Fwir2r1tW2XoL0BTl/lPxpxS/xJuEsVCf6/D8gSfr8yrAw53TUxLmFPFaXvhZkBWU8lUPZD6Se7gHrA6Bk6SbvKRRbwfS2f1xHN8XVFhz1TMkpckqVWBALySd0H2lY1DkQkm67Zb+Ap4OwEiEljYRMBMJncI8FmDlooDYKL8LUNwb1Nlf7X/TEzebhr0Xh11eo6mrSXdBgbXh6potuh8EhQrLgwW6M4ZlSbBJKH1QXfuTZgfrrehVE39dSqyg=
+env:
+  global:
+    - secure:
+        Q1ulFB+rlqV605ciExApO9UO4JqWpkGlBEnSjwYQc/GtHOZp3Cnu21V1tw7iJwWoPB9DNhc/mMmLYpGz6Fp6Hy+9BhyGoKDBn/4DeWMTgStpTmf+bQ5o2FfQb82P4tRJgpCNH3F5UgDwEB3l539O/sBMdWszoZ2BXR0f7iAJ20Qcy93imh1OwOCGxPJlrKWNyaqKD4FDxk+V/hhkxWzDIOY413XRTAKec87Se/zY+WfPeHB87aBMLb1C8Vm/elTxWgEP5ORAyI16BfH5POdOnpUziJvE8tZb9+ov7kDGjPqpK652A9755i27J+am74j4fHDNxEc5tdXk3TLPtRZeHSK0NJ8oLZkMlyiTkrgxKOi5dO+uuWo6ubwmNMdQVFc6YiOHOG7aBlD+RfAbOt1QPn52IL/+v2wrFl0tiq40D64IqZCAHIDJcxh+zMVz7JMxmimx1RE4kHL1p6+gfwWJSCLuAlCJn0nS2CEwuvNyegydxPp1YFQCG2RYfo5ZqMajU4T01soTjuD/YkgDsc6PpbLFCNatmNSezWuWZsByUfmbSx6N+A1KVPY1iy8pVdapS2yw6uh6TYoCvQL7B530ZHfZh0ukYrCPl/79vgaHKc5vY/ZCvkh329XLihKnbAmYrHP14wfsDm3xNLqKVlhZTOXmIpoyKmDPWlpftG8IQrA=
+    - secure:
+        C3RXNALpp9JGQXpT4rv6U2dhEZL32DTZovLPxH37rxKkYgNS0PKODgilHg6wFkf9osQ+5zpn8dDqB5+xmNP/w7+FJ8mO/dfXR8aWv/FN9BcWJEm0Wiv7wG4g1/TKPziTrv5XjUk8OqrwZhnsguXH/zlUaDZpqU36HP0jRm7y4XX3rmCKLrh/0rW0QXD6IngaFg6Z1iGJ/hNFOmNGEu8CyUi2IXHHlmfSi9TDESgKwNb4uZ4WbQNbEcBrGuK45HOCKfnwf+Gu6FVW0qeOUhBYP2wE2EobRPSg8yYg1KVC4U4Mc0D/k7V9+qwtWo07uylHlgb1TTECtVProm3EgtKgdlWC7bjvzjjiBfr00E3Jo5e0FnQQwN+B6VHdKWp0NviwyMLiFhBD5+53IZLuAD2d9gnBFF3FWSBt8eCj9gh4qXpB8PhU3sqEbrsuYYiB2zL3SUXaQcVkhDNNrCOnQg3E0gd2Y1wXL3PDXZn4Yt8ATLe3yQrZ9d349xA85kLyBgCLyRYb9pkgt+hFbfLrpHx+yniaxiKmXJ9YPvK93NzxUB8YNo3rN+jvCDJiWwyijgTwG1OmooUSn2GptHkjIRCn4hOVuhWpFQ18OEsoVab9GV2guEsWnJ7LdNsNtbRd6LYvwT79ED7fPRsmoozJeyLZYhhuNV2AZcRFQF4FuGoQ88g=
