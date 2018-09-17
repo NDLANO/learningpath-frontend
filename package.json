@@ -22,8 +22,7 @@
     "lint-es": "eslint --cache --cache-location '.eslintcache/' --ext .js --ext .jsx src",
     "lint-css": "stylelint style/**/*.css",
     "lint-prettier": "node prettier.js lint",
-    "now-build": "echo noop",
-    "now-start": "NODE_ENV=production node build/server",
+    "now-start": "NODE_ENV=production NOW=true node build/server",
     "prettier": "node prettier.js write"
   },
   "engines": {
