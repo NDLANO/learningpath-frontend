@@ -65,6 +65,11 @@ const phrases = {
   adminPage: {
     pageHeader: 'Adminpanel',
     noPaths: 'There are no learningpaths with status submitted',
+    rejectedPathMessage: {
+      message: 'Feedback on rejected learningpath',
+      placeholder: 'Explain why the learningpath was not accepted',
+      button: 'Send message and change status',
+    },
   },
   myPage: {
     pageHeader: 'My learning paths',

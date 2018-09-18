@@ -65,7 +65,12 @@ const phrases = {
   },
   adminPage: {
     pageHeader: 'Adminpanel',
-    noPaths: 'Det finnes ingen læringsstier med status til publisering',
+    noPaths: 'Det finnes ingen læringsstiar med status til publisering',
+    rejectedPathMessage: {
+      message: 'Tilbakemelding på avvist læringssti',
+      placeholder: 'Forklar kvifor læringsstia ikkje ble godkjent',
+      button: 'Send melding og endre status',
+    },
   },
   myPage: {
     pageHeader: 'Mine læringsstiar',
@@ -283,7 +288,7 @@ const phrases = {
       'Oppdatert status til åpen. Dette betyr at den er tilgjenglig via url, men ikkje søk.',
     PUBLISHED: 'Opdatert status til publisert.',
     PRIVATE: 'Oppdatert status til privat.',
-    SUBMITTED: 'Oppdatert status til til publsiering.',
+    SUBMITTED: 'Oppdatert status til til publisering.',
   },
   htmlTitleTemplates: {
     learningPathStep: '%{title} (Læringssti frå NDLA.no)',

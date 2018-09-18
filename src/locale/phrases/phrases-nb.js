@@ -66,6 +66,11 @@ const phrases = {
   adminPage: {
     pageHeader: 'Adminpanel',
     noPaths: 'Det finnes ingen læringsstier med status til publisering',
+    rejectedPathMessage: {
+      message: 'Tilbakemelding på avvist læringssti',
+      placeholder: 'Forklar hvorfor læringssti ikke ble godkjent',
+      button: 'Send melding og endre status',
+    },
   },
   myPage: {
     pageHeader: 'Mine læringsstier',

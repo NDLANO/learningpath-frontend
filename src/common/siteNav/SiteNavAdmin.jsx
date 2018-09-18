@@ -12,35 +12,23 @@ import { Link } from 'react-router-dom';
 import polyglot from '../../i18n';
 import LabeledIcon from '../LabeledIcon';
 
-class SiteNavAdmin extends React.Component {
-  constructor() {
-    super();
-    this.state = { isClient: false };
+const SiteNavAdmin = ({ authenticated, isAdmin, localCloseSidebars }) => {
+  if (!authenticated || !isAdmin || process.env.BUILD_TARGET === 'server') {
+    return null;
   }
 
-  componentDidMount() {
-    this.setState({ isClient: true }); // eslint-disable-line
-  }
-
-  render() {
-    const { authenticated, isAdmin, localCloseSidebars } = this.props;
-    if (!authenticated || !isAdmin || !this.state.isClient) {
-      return null;
-    }
-
-    return (
-      <li className="site-nav_item">
-        <Link
-          to="/admin"
-          className="site-nav_link"
-          onClick={() => localCloseSidebars()}
-          data-cy="sitenav-find-paths">
-          <LabeledIcon.Person labelText={polyglot.t('siteNav.admin')} />
-        </Link>
-      </li>
-    );
-  }
-}
+  return (
+    <li className="site-nav_item">
+      <Link
+        to="/admin"
+        className="site-nav_link"
+        onClick={() => localCloseSidebars()}
+        data-cy="sitenav-find-paths">
+        <LabeledIcon.Person labelText={polyglot.t('siteNav.admin')} />
+      </Link>
+    </li>
+  );
+};
 SiteNavAdmin.propTypes = {
   authenticated: PropTypes.bool,
   isAdmin: PropTypes.bool,

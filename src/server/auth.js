@@ -40,7 +40,6 @@ export async function getToken(audience = 'ndla_system') {
   return response.json();
 }
 
-
 export const getUsers = (managementToken, ownerIds) => {
   const query = ownerIds
     .split(',')

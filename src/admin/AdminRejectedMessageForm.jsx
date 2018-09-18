@@ -10,6 +10,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import BEMHelper from 'react-bem-helper';
 import Lightbox from '../common/Lightbox';
+import polyglot from '../i18n';
 
 const classes = new BEMHelper({
   name: 'admin',
@@ -24,16 +25,16 @@ const AdminRejectedMessageForm = ({
   message,
 }) => (
   <Lightbox display={show} onClose={onClose}>
-    <h3>Tilbakemelding på avvist læringssti</h3>
+    <h3>{polyglot('adminPage.rejectedPathMessage.message')}</h3>
     <form onSubmit={onSubmit} {...classes('message-form')}>
       <textarea
-        placeholder="Forklar hvorfor læringssti ikke ble godkjent"
+        placeholder={polyglot.t('adminPage.rejectedPathMessage.placeholder')}
         value={message}
         rows="10"
         onChange={onChange}
       />
       <input
-        value="Send melding og endre status"
+        value={polyglot.t('adminPage.rejectedPathMessage.button')}
         className="button button--primary button--block"
         type="submit"
       />
