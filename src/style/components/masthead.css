@@ -195,6 +195,19 @@ div:not(.frontpage-masthead) > .masthead_wrapper {
   .masthead--desktop.sidebar--open {
     width: 70%;
   }
+  .masthead_button {
+    font-size: 1em;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+  }
+  .masthead--margin-bottom {
+    height: 42px;
+  }
+
+  .table-of-content,
+  .masthead--desktop {
+    top: 42px;
+  }
 }
 
 @media (--xsmall-viewport) {

@@ -285,7 +285,7 @@ const phrases = {
       'Oppdatert status til åpen. Dette betyr at den er tilgjenglig via url, men ikke søk.',
     PUBLISHED: 'Opdatert status til publisert.',
     PRIVATE: 'Oppdatert status til privat.',
-    SUBMITTED: 'Oppdatert status til til publsiering.',
+    SUBMITTED: 'Oppdatert status til til publisering.',
   },
   validation: {
     required: 'Feltet er påkrevd.',
