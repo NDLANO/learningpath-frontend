@@ -1,0 +1,9 @@
+User-agent: *
+# Private routes
+Disallow: /minside
+Disallow: /lti
+Disallow: /learningpaths/new
+Disallow: /learningpaths/*/edit
+Disallow: /learningpaths/*/step/new
+Disallow: /learningpaths/*/step/sort
+Disallow: /learningpaths/*/step/*/edit

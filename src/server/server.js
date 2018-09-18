@@ -98,8 +98,12 @@ const renderHtmlString = (
   );
 
 app.get('/robots.txt', (req, res) => {
-  res.type('text/plain');
-  res.send('User-agent: *\nDisallow: /');
+  if (req.hostname === 'stier.ndla.no') {
+    res.sendFile('robots.txt', { root: './src/server/' });
+  } else {
+    res.type('text/plain');
+    res.send('User-agent: *\nDisallow: /');
+  }
 });
 
 app.get('/health', (req, res) => {
