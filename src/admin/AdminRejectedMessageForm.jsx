@@ -25,7 +25,7 @@ const AdminRejectedMessageForm = ({
   message,
 }) => (
   <Lightbox display={show} onClose={onClose}>
-    <h3>{polyglot('adminPage.rejectedPathMessage.message')}</h3>
+    <h3>{polyglot.t('adminPage.rejectedPathMessage.message')}</h3>
     <form onSubmit={onSubmit} {...classes('message-form')}>
       <textarea
         placeholder={polyglot.t('adminPage.rejectedPathMessage.placeholder')}
