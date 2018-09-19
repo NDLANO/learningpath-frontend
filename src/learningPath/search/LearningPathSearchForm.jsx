@@ -51,11 +51,11 @@ export default class SearchForm extends Component {
           value={this.state.query}
           placeholder={polyglot.t('searchForm.placeholder')}
         />
-
-        <button type="button" className="search-form_btn">
-          {polyglot.t('searchForm.btn')}
-        </button>
-
+        <input
+          type="submit"
+          className="search-form_btn"
+          value={polyglot.t('searchForm.btn')}
+        />
         <select
           className="search-form_sort-order select--gray-border"
           onChange={this.handleSortChange}

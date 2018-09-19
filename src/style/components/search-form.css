@@ -36,6 +36,7 @@ input[type=text].search-form_query {
 .search-form_btn {
   background-color: var(--blue-1);
   border: 1px solid var(--blue-1);
+  color: white;
   padding: 0.7em 2em;
   margin-left: -1px;
   border-radius: 0;
