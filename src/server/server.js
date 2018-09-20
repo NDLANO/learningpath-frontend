@@ -147,7 +147,7 @@ app.get(
         .json({ status: FORBIDDEN, text: 'No access allowed' });
     } else {
       try {
-        const managementToken = await getToken(config.auth0Api);
+        const managementToken = await getToken(`${config.auth0url}/api/v2/`);
         const users = await getUsers(managementToken, ownerIds);
         res.status(OK).json(users);
       } catch (err) {

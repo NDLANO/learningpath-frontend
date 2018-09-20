@@ -9,7 +9,7 @@
 import 'isomorphic-fetch';
 import config, { getEnvironmentVariabel } from '../config';
 
-const url = `https://ndla.eu.auth0.com/oauth/token`;
+const url = `${config.auth0Url}/oauth/token`;
 
 function getClientSecret() {
   if (getEnvironmentVariabel('NOW') === 'true') {
@@ -45,7 +45,7 @@ export const getUsers = (managementToken, ownerIds) => {
     .split(',')
     .map(ownerId => `app_metadata.ndla_id:"${ownerId}"`)
     .join(' OR ');
-  return fetch(`${config.auth0Api}users?q=${query}`, {
+  return fetch(`${config.auth0Url}/api/v2/users?q=${query}`, {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${managementToken.access_token}`,

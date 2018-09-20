@@ -89,7 +89,7 @@ const config = {
   ltiActivated,
   ndlaPersonalClientId: getEnvironmentVariabel('NDLA_PERSONAL_CLIENT_ID', ''),
   auth0Domain: getEnvironmentVariabel('AUTH0_DOMAIN', ''),
-  auth0Api: 'https://ndla.eu.auth0.com/api/v2/',
+  auth0Url: 'https://ndla.eu.auth0.com',
   disableSSR: getEnvironmentVariabel('DISABLE_SSR', false),
   zendeskHost: getEnvironmentVariabel('NDLA_ZENDESK_HOST'),
   app: {
