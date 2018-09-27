@@ -45,6 +45,7 @@ export const getUsers = (managementToken, ownerIds) => {
     .split(',')
     .map(ownerId => `app_metadata.ndla_id:"${ownerId}"`)
     .join(' OR ');
+
   return fetch(`${config.auth0Url}/api/v2/users?q=${query}`, {
     headers: {
       'Content-Type': 'application/json',
