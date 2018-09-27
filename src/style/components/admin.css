@@ -6,7 +6,10 @@
  *
  */
 
-export const learningPathStatuses = [
-  { status: 'PRIVATE', action: 'unpublish' },
-  { status: 'UNLISTED', action: 'unlist' },
-];
+.c-admin {
+  &__message-form textarea {
+      max-width: 100%;
+      min-width: 100%;
+      width: 100%;
+  }
+}

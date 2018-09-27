@@ -18,6 +18,7 @@ const phrases = {
     loginFailure: `Innlogginga feila${titleTemplate}`,
     logoutSession: `Logg ut${titleTemplate}`,
     loginProviders: `Logg inn${titleTemplate}`,
+    adminPage: `Admin side${titleTemplate}`,
     myPage: `Min side${titleTemplate}`,
     forbidden: `Ikkje tilgang${titleTemplate}`,
     notFound: `Sida finst ikkje${titleTemplate}`,
@@ -62,29 +63,51 @@ const phrases = {
   logo: {
     altText: 'Nasjonal digital læringsarena',
   },
+  adminPage: {
+    pageHeader: 'Adminpanel',
+    noPaths: 'Det finnes ingen læringsstiar med status til publisering',
+    rejectedPathMessage: {
+      message: 'Tilbakemelding på avvist læringssti',
+      placeholder: 'Forklar kvifor læringsstia ikkje ble godkjent',
+      button: 'Send melding og endre status',
+    },
+  },
   myPage: {
+    pageHeader: 'Mine læringsstiar',
+    newBtn: 'Opprett ny læringssti',
+    rejectedMessageAlert: {
+      message:
+        'Læringssti med tittel %{title} ble avist. Se medling for begrunnelse: %{message}',
+      action: 'Slett melding',
+      messageRemoved: 'Medling slettet for sti med tittel: %{title}',
+    },
+  },
+  tilePage: {
     order: {
       title: 'Alfabetisk',
       newest: 'Nyaste',
       oldest: 'Eldste',
       status: 'Publisert',
     },
-    pageHeader: 'Mine læringsstiar',
-    newBtn: 'Opprett ny læringssti',
     path: {
       duration: 'Tidslengd',
       status: 'Synleg',
+      owner: {
+        name: 'Namn',
+        email: 'E-post',
+      },
       statusValue: {
         PRIVATE: 'Privat',
         PUBLISHED: 'Søkbar',
         UNLISTED: 'Open',
+        SUBMITTED: 'Til publisering',
       },
     },
   },
   pathDropDown: {
     PRIVATE: {
       unlist: 'Gjer åpen',
-      publish: 'Publiser',
+      submit: 'Til publisering',
     },
     PUBLISHED: {
       unpublish: 'Gjer privat',
@@ -92,6 +115,11 @@ const phrases = {
     },
     UNLISTED: {
       unpublish: 'Gjer privat',
+      submit: 'Til publisering',
+    },
+    SUBMITTED: {
+      unpublish: 'Gjer privat',
+      unlist: 'Gjer åpen',
       publish: 'Publiser',
     },
     delete: 'Slett',
@@ -196,6 +224,7 @@ const phrases = {
   },
   siteNav: {
     login: 'Logg inn',
+    admin: 'Admin',
     search: 'Finn læringssti',
     createLearningPath: 'Lag læringssti',
     myPage: 'Mine læringsstiar',
@@ -259,6 +288,7 @@ const phrases = {
       'Oppdatert status til åpen. Dette betyr at den er tilgjenglig via url, men ikkje søk.',
     PUBLISHED: 'Opdatert status til publisert.',
     PRIVATE: 'Oppdatert status til privat.',
+    SUBMITTED: 'Oppdatert status til til publisering.',
   },
   htmlTitleTemplates: {
     learningPathStep: '%{title} (Læringssti frå NDLA.no)',

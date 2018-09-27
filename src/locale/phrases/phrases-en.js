@@ -17,6 +17,7 @@ const phrases = {
     loginFailure: `Login failed${titleTemplate}`,
     logoutSession: `Logout${titleTemplate}`,
     loginProviders: `Log in${titleTemplate}`,
+    adminPage: `Admin page${titleTemplate}`,
     myPage: `My page${titleTemplate}`,
     forbidden: `No access${titleTemplate}`,
     notFound: `Not found${titleTemplate}`,
@@ -61,36 +62,63 @@ const phrases = {
   logo: {
     altText: 'The Norwegian Digital Learning Arena',
   },
+  adminPage: {
+    pageHeader: 'Adminpanel',
+    noPaths: 'There are no learningpaths with status submitted',
+    rejectedPathMessage: {
+      message: 'Feedback on rejected learningpath',
+      placeholder: 'Explain why the learningpath was not accepted',
+      button: 'Send message and change status',
+    },
+  },
   myPage: {
+    pageHeader: 'My learning paths',
+    newBtn: 'Create new learning path',
+    rejectedMessageAlert: {
+      message:
+        'Learningpath with title %{title} was rejected. See the message: %{message}',
+      action: 'Delete message',
+      messageRemoved: 'Message deleted for learningpath with title: %{title}',
+    },
+  },
+  tilePage: {
     order: {
       title: 'Alphabetical',
       newest: 'Newest',
       oldest: 'Oldest',
       status: 'Published',
     },
-    pageHeader: 'My learning paths',
-    newBtn: 'Create new learning path',
     path: {
       duration: 'Duration',
       status: 'Visibility',
+      owner: {
+        name: 'Name',
+        email: 'Email',
+      },
       statusValue: {
         PRIVATE: 'Private',
         PUBLISHED: 'Searchable',
         UNLISTED: 'Open',
+        SUBMITTED: 'Submitted',
       },
     },
   },
   pathDropDown: {
     PRIVATE: {
       unlist: 'Make open',
-      publish: 'Publish',
+      submit: 'Submit',
     },
     PUBLISHED: {
-      unpublish: 'Make privat',
+      unpublish: 'Make private',
       unlist: 'Make open',
     },
     UNLISTED: {
       unpublish: 'Make private',
+      submit: 'Submit',
+    },
+    SUBMITTED: {
+      unpublish: 'Make private',
+      unlist: 'Make open',
       publish: 'Publish',
     },
     delete: 'Delete',
@@ -199,6 +227,7 @@ const phrases = {
   },
   siteNav: {
     login: 'Log in',
+    admin: 'Admin',
     search: 'Find learning path',
     createLearningPath: 'Create learningpath',
     myPage: 'My learning paths',
@@ -262,6 +291,7 @@ const phrases = {
       'Updated status to open. This means that it is reachable by url, but does not appear in the search.',
     PUBLISHED: 'Updated status to published.',
     PRIVATE: 'Updated status to private.',
+    SUBMITTED: 'Updated status to submitted.',
   },
   validation: {
     required: 'The field is required.',

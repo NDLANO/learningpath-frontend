@@ -7,9 +7,9 @@
  */
 
 import 'isomorphic-fetch';
-import { getEnvironmentVariabel } from '../config';
+import config, { getEnvironmentVariabel } from '../config';
 
-const url = `https://ndla.eu.auth0.com/oauth/token`;
+const url = `${config.auth0Url}/oauth/token`;
 
 function getClientSecret() {
   if (getEnvironmentVariabel('NOW') === 'true') {
@@ -23,7 +23,7 @@ function getClientSecret() {
   return getEnvironmentVariabel('NDLA_LEARNING_PATH_CLIENT_SECRET');
 }
 
-export async function getToken() {
+export async function getToken(audience = 'ndla_system') {
   const response = await fetch(url, {
     method: 'POST',
     headers: {
@@ -33,9 +33,23 @@ export async function getToken() {
       grant_type: 'client_credentials',
       client_id: getEnvironmentVariabel('NDLA_LEARNING_PATH_CLIENT_ID'),
       client_secret: getClientSecret(),
-      audience: 'ndla_system',
+      audience,
     }),
     json: true,
   });
   return response.json();
 }
+
+export const getUsers = (managementToken, ownerIds) => {
+  const query = ownerIds
+    .split(',')
+    .map(ownerId => `app_metadata.ndla_id:"${ownerId}"`)
+    .join(' OR ');
+  return fetch(`${config.auth0Url}/api/v2/users?q=${query}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${managementToken.access_token}`,
+    },
+    json: true,
+  }).then(res => res.json());
+};

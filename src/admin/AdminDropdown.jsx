@@ -13,7 +13,7 @@ import polyglot from '../i18n';
 import Icon from '../common/Icon';
 import { learningPathStatuses } from '../learningPath/learningPathUtil';
 
-export default class LearningPathDropdown extends Component {
+export default class AdminDropdown extends Component {
   constructor(props) {
     super(props);
 
@@ -70,18 +70,10 @@ export default class LearningPathDropdown extends Component {
         <button
           type="button"
           className="un-button dropdown-menu_icon"
-          onClick={() => this.handleDropDownOnClick()}>
+          onClick={this.handleDropDownOnClick}>
           <Icon.MoreVert />
         </button>
         <ul className={dropDownMenuItemsClassName}>
-          <li className="dropdown-menu_item">
-            <button
-              type="button"
-              className="un-button dropdown-menu_link"
-              onClick={this.makeOnClick('makecopy')}>
-              <Icon.ContentCopy /> {polyglot.t('pathDropDown.makeCopy')}
-            </button>
-          </li>
           {learningPathStatuses[learningPath.status].map(status => (
             <li
               key={status.action}
@@ -97,20 +89,13 @@ export default class LearningPathDropdown extends Component {
               </button>
             </li>
           ))}
-          <li className="dropdown-menu_item">
-            <button
-              type="button"
-              className="un-button dropdown-menu_link"
-              onClick={this.makeOnClick('delete')}>
-              <Icon.Delete /> {polyglot.t('pathDropDown.delete')}
-            </button>
-          </li>
         </ul>
       </div>
     );
   }
 }
-LearningPathDropdown.propTypes = {
+
+AdminDropdown.propTypes = {
   onSelect: PropTypes.func.isRequired,
   learningPath: PropTypes.object.isRequired,
 };

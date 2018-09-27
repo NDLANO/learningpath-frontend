@@ -62,6 +62,7 @@ const config = {
     'npm_package_name',
     'learningpath-frontend',
   ),
+  environment,
   host: getEnvironmentVariabel('LEARINGPATH_HOST', 'localhost'),
   port: getEnvironmentVariabel('LEARINGPATH_PORT', '3000'),
   redirectPort: getEnvironmentVariabel('LEARNINGPATH_REDIRECT_PORT', '3001'),
@@ -88,6 +89,7 @@ const config = {
   ltiActivated,
   ndlaPersonalClientId: getEnvironmentVariabel('NDLA_PERSONAL_CLIENT_ID', ''),
   auth0Domain: getEnvironmentVariabel('AUTH0_DOMAIN', ''),
+  auth0Url: 'https://ndla.eu.auth0.com',
   disableSSR: getEnvironmentVariabel('DISABLE_SSR', false),
   zendeskHost: getEnvironmentVariabel('NDLA_ZENDESK_HOST'),
   app: {
@@ -96,6 +98,7 @@ const config = {
       meta: [{ property: 'og:site_name', content: 'NDLA Læringsstier' }],
     },
   },
+
   isProduction: getEnvironmentVariabel('NODE_ENV') === 'production',
 };
 

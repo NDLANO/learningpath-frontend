@@ -24,3 +24,8 @@
   background-color: var(--blue-1);
   color: white;
 }
+
+.page-header--admin {
+  background-color: var(--red-1);
+  color: white;
+}

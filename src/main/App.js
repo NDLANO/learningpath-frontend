@@ -16,9 +16,11 @@ import Alerts from '../messages/Alerts';
 import ScrollToTop from './ScrollToTop';
 import Welcome from './Welcome';
 import PrivateRoute from './PrivateRoute';
+import AdminRoute from './AdminRoute';
 import NotFound from './NotFound';
 import Forbidden from './Forbidden';
 import MyPage from '../myPage/MyPage';
+import Admin from '../admin/Admin';
 import LTIEmbedded from '../ltiSearch/LTIEmbedded';
 import LoginProviders from '../session/LoginProviders';
 import LogoutSession from '../session/LogoutSession';
@@ -56,6 +58,7 @@ export class App extends React.Component {
               component={LTIEmbedded}
             />
             <Route path="/learningpaths" component={LearningPathContainer} />
+            <AdminRoute path="/admin" component={Admin} />
             <Route path="/forbidden" component={Forbidden} />
             <Route path="/notfound" component={NotFound} />
             <Route path="*" component={NotFound} />

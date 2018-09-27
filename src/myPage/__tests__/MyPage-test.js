@@ -8,12 +8,10 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Link } from 'react-router-dom';
-
 import { translatedLearningPaths } from '../../common/__tests__/translatedMockData';
 import { learningPaths } from '../../common/__tests__/mockData';
-
 import { MyPage, mapStateToProps } from '../MyPage';
+import LearningPathTile from '../../learningPath/tile/LearningPathTile';
 
 test('component/MyPage', () => {
   const noop = () => {};
@@ -33,16 +31,11 @@ test('component/MyPage', () => {
       localFetchMyLearningPaths={noop}
     />,
     { context: { lang: 'nb' } },
-  );
+  ).dive();
+  const tiles = component.find(LearningPathTile);
 
-  const links = component.find('.tile_bd').find(Link);
-
-  expect(links.map(n => n.prop('to'))).toEqual([
-    '/learningpaths/1/first-step',
-    '/learningpaths/2/first-step',
-  ]);
-
-  expect(links.find('.tile_title').map(n => n.prop('children'))).toEqual([
+  expect(tiles).toHaveLength(2);
+  expect(tiles.map(n => n.prop('learningPath').title)).toEqual([
     'Hva er kunst og kultur?',
     'Leselighet og skrift',
   ]);
