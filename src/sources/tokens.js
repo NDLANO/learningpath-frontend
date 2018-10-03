@@ -9,4 +9,10 @@
 import { resolveJsonOrRejectWithError } from './helpers';
 
 export const fetchNewSystemToken = () =>
-  fetch('/get_token').then(resolveJsonOrRejectWithError);
+  fetch('/get_token', {
+    headers: {
+      'Cache-control': 'no-cache, no-store',
+      Pragma: 'no-cache',
+      Expires: 0,
+    },
+  }).then(resolveJsonOrRejectWithError);
