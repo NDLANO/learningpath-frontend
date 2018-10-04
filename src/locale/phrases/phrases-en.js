@@ -96,29 +96,29 @@ const phrases = {
         email: 'Email',
       },
       statusValue: {
-        PRIVATE: 'Private',
-        PUBLISHED: 'Searchable',
-        UNLISTED: 'Open',
-        SUBMITTED: 'Submitted',
+        PRIVATE: 'Draft',
+        PUBLISHED: 'Public',
+        UNLISTED: 'Private',
+        SUBMITTED: 'Submitted for public',
       },
     },
   },
   pathDropDown: {
     PRIVATE: {
-      unlist: 'Make open',
-      submit: 'Submit',
+      unlist: 'Make private',
+      submit: 'Make public',
     },
     PUBLISHED: {
-      unpublish: 'Make private',
-      unlist: 'Make open',
+      unpublish: 'Make draft',
+      unlist: 'Make private',
     },
     UNLISTED: {
-      unpublish: 'Make private',
-      submit: 'Submit',
+      unpublish: 'Make draft',
+      submit: 'Make public',
     },
     SUBMITTED: {
-      unpublish: 'Make private',
-      unlist: 'Make open',
+      unpublish: 'Make draft',
+      unlist: 'Make private',
       publish: 'Publish',
     },
     delete: 'Delete',
@@ -288,10 +288,10 @@ const phrases = {
   },
   updateLearningPathStatus: {
     UNLISTED:
-      'Updated status to open. This means that it is reachable by url, but does not appear in the search.',
-    PUBLISHED: 'Updated status to published.',
-    PRIVATE: 'Updated status to private.',
-    SUBMITTED: 'Updated status to submitted.',
+      'Updated status to private. This means that it is reachable by url, but does not appear in the search.',
+    PUBLISHED: 'Updated status to public.',
+    PRIVATE: 'Updated status to draft.',
+    SUBMITTED: 'Updated status to submitted for public.',
   },
   validation: {
     required: 'The field is required.',
