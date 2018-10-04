@@ -291,6 +291,14 @@ const phrases = {
     PUBLISHED: 'Opdatert status til offentlig.',
     PRIVATE: 'Oppdatert status til kladd.',
     SUBMITTED: 'Oppdatert status til til offentliggjøring.',
+    consequence: {
+      UNLISTED:
+        'Ved å oppdatere til privat vil læringsstien være tilgjenglig ved bruk av url, men ikke ved søk',
+      PUBLISHED: 'Læringssti vil være tilgjenglig både ved søk og url.',
+      PRIVATE: 'Bare du kan se denne læringsstien',
+      SUBMITTED:
+        'Vil være offentlig ved url og søk etter at en adminstrator har godkjent læringsstien',
+    },
   },
   validation: {
     required: 'Feltet er påkrevd.',

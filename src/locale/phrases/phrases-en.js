@@ -292,6 +292,14 @@ const phrases = {
     PUBLISHED: 'Updated status to public.',
     PRIVATE: 'Updated status to draft.',
     SUBMITTED: 'Updated status to submitted for public.',
+    consequence: {
+      UNLISTED:
+        'By updating to private will this learningpath only be accesible by the url.',
+      PUBLISHED: 'Learningpath will be accesible by search and url.',
+      PRIVATE: 'Only you can see the learningpath.',
+      SUBMITTED:
+        'Will be accesible by search and url after approval by an admin.',
+    },
   },
   validation: {
     required: 'The field is required.',

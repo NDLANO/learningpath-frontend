@@ -38,7 +38,7 @@ const apiDomain = activatedForEnvironment(
     local: 'http://api-gateway.ndla-local',
     prod: 'https://api.ndla.no',
   },
-  `https://${environment}.api.ndla.no`,
+  `https://staging.api.ndla.no`,
 );
 
 const ltiActivated = activatedForEnvironment(
