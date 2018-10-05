@@ -59,6 +59,7 @@ test('actions/searchLearningPaths with query', done => {
       'page-size': 15,
       sort: '-relevance',
       language: 'nb',
+      fallback: true,
     })
     .reply(200, {
       totalCount: 400,
@@ -107,6 +108,7 @@ test('actions/searchLearningPaths with query without search term', done => {
     .get('/learningpath-api/v2/learningpaths')
     .query({
       language: 'nb',
+      fallback: true,
       page,
       sort,
       'page-size': pageSize /* OBS! no query */,

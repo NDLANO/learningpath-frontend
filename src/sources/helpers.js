@@ -119,7 +119,7 @@ export const authorizationHeader = token => `Bearer ${token}`;
 export function fetchAuthorized(path, method = 'GET') {
   const url = params => apiResourceUrl(formatUrl(path, params));
   return (params = {}, language) => {
-    const query = language ? `?language=${language}` : '';
+    const query = language ? `?language=${language}&fallback=true` : '';
     return fetchAuth(`${url(params)}${query}`, { method }).then(
       resolveJsonOrRejectWithError,
     );
