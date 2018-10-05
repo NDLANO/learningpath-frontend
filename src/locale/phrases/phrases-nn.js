@@ -286,16 +286,16 @@ const phrases = {
   updateLearningPathStatus: {
     UNLISTED:
       'Oppdatert status til privat. Dette betyr at den er tilgjenglig via url, men ikkje søk.',
-    PUBLISHED: 'Opdatert status til offentlegg.',
+    PUBLISHED: 'Opdatert status til offentleg.',
     PRIVATE: 'Oppdatert status til kladd.',
     SUBMITTED: 'Oppdatert status til til offentleggjering.',
     consequence: {
       UNLISTED:
-        'Ved å oppdatere til privat vil læringsstien være tilgjengleg ved bruk av url, men ikkje ved søk',
-      PUBLISHED: 'Læringssti vil være tilgjenglig både ved søk og url.',
-      PRIVATE: 'Bare du kan se denne læringsstien',
+        'Læringsstien vil være tilgjengleg ved bruk av url, men ikkje ved søk',
+      PUBLISHED: 'Læringsstien vil være tilgjenglig både ved søk og url.',
+      PRIVATE: 'Berre du kan sjå denne læringsstien.',
       SUBMITTED:
-        'Vil være offentleg ved url og søk etter at en adminstrator har godkjent læringsstien',
+        'Læringsstien vil være offentleg ved url og søk etter at ein adminstrator har godkjent læringsstien',
     },
   },
   htmlTitleTemplates: {
