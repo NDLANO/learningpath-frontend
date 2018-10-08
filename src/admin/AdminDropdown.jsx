@@ -12,6 +12,7 @@ import classNames from 'classnames';
 import polyglot from '../i18n';
 import Icon from '../common/Icon';
 import { learningPathStatuses } from '../learningPath/learningPathUtil';
+import ActionToolTip from '../myPage/ActionToolTip';
 
 export default class AdminDropdown extends Component {
   constructor(props) {
@@ -75,19 +76,19 @@ export default class AdminDropdown extends Component {
         </button>
         <ul className={dropDownMenuItemsClassName}>
           {learningPathStatuses[learningPath.status].map(status => (
-            <li
-              key={status.action}
-              className={this.dropDownMenuItemClassName(status.status)}>
-              <button
-                type="button"
-                className="un-button dropdown-menu_link"
-                onClick={this.publishAction(status)}>
-                <Icon.Input />{' '}
-                {polyglot.t(
-                  `pathDropDown.${learningPath.status}.${status.action}`,
-                )}
-              </button>
-            </li>
+            <ActionToolTip key={status.action} status={status.status}>
+              <li className={this.dropDownMenuItemClassName(status.status)}>
+                <button
+                  type="button"
+                  className="un-button dropdown-menu_link"
+                  onClick={this.publishAction(status)}>
+                  <Icon.Input />{' '}
+                  {polyglot.t(
+                    `pathDropDown.${learningPath.status}.${status.action}`,
+                  )}
+                </button>
+              </li>
+            </ActionToolTip>
           ))}
         </ul>
       </div>

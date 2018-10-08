@@ -74,9 +74,9 @@
 .learningpath-general-actions a:any-link,
 .learningpath-general-actions button.copy-learningpath_button {
   width: 100%;
-  padding: 0.6em 0.5em 0.5em 0.8em;
+  padding: 0.6em 0.2em 0.5em 0.2em;
   border-radius: 3px;
-  text-align: left;
+  text-align: center;
   font-size: 16px;
 }
 
@@ -84,9 +84,9 @@
 .learningpath-general-actions a.learningpath-action-type_button a:any-link,
 .learningpath-general-actions a.learningpath-action-type_button {
   width: 100%;
-  padding: 0.6em 0.5em 0.5em 1.2em;
+  padding: 0.6em 0.2em 0.5em 0.2em;
   border-radius: 3px;
-  text-align: left;
+  text-align: center;
   font-size: 16px;
 }
 

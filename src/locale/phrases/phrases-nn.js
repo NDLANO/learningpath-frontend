@@ -97,30 +97,30 @@ const phrases = {
         email: 'E-post',
       },
       statusValue: {
-        PRIVATE: 'Privat',
-        PUBLISHED: 'Søkbar',
-        UNLISTED: 'Open',
-        SUBMITTED: 'Til publisering',
+        PRIVATE: 'Kladd',
+        PUBLISHED: 'Offentleg',
+        UNLISTED: 'Privat',
+        SUBMITTED: 'Til offentleggjering',
       },
     },
   },
   pathDropDown: {
     PRIVATE: {
-      unlist: 'Gjer åpen',
-      submit: 'Til publisering',
+      unlist: 'Gjør privat',
+      submit: 'Til offentleggjering',
     },
     PUBLISHED: {
-      unpublish: 'Gjer privat',
-      unlist: 'Gjer åpen',
+      unpublish: 'Gjør til kladd',
+      unlist: 'Gjør privat',
     },
     UNLISTED: {
-      unpublish: 'Gjer privat',
-      submit: 'Til publisering',
+      unpublish: 'Gjør til kladd',
+      submit: 'Til offentleggjering',
     },
     SUBMITTED: {
-      unpublish: 'Gjer privat',
-      unlist: 'Gjer åpen',
-      publish: 'Publiser',
+      unpublish: 'Gjør til kladd',
+      unlist: 'Gjør privat',
+      publish: 'Offentleggjer',
     },
     delete: 'Slett',
     makeCopy: 'Lag kopi',
@@ -285,10 +285,18 @@ const phrases = {
   },
   updateLearningPathStatus: {
     UNLISTED:
-      'Oppdatert status til åpen. Dette betyr at den er tilgjenglig via url, men ikkje søk.',
-    PUBLISHED: 'Opdatert status til publisert.',
-    PRIVATE: 'Oppdatert status til privat.',
-    SUBMITTED: 'Oppdatert status til til publisering.',
+      'Oppdatert status til privat. Dette betyr at den er tilgjenglig via url, men ikkje søk.',
+    PUBLISHED: 'Opdatert status til offentleg.',
+    PRIVATE: 'Oppdatert status til kladd.',
+    SUBMITTED: 'Oppdatert status til til offentleggjering.',
+    consequence: {
+      UNLISTED:
+        'Læringsstien vil være tilgjengleg ved bruk av url, men ikkje ved søk',
+      PUBLISHED: 'Læringsstien vil være tilgjenglig både ved søk og url.',
+      PRIVATE: 'Berre du kan sjå denne læringsstien.',
+      SUBMITTED:
+        'Læringsstien vil være offentleg ved url og søk etter at ein adminstrator har godkjent læringsstien',
+    },
   },
   htmlTitleTemplates: {
     learningPathStep: '%{title} (Læringssti frå NDLA.no)',

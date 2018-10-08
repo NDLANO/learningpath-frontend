@@ -97,30 +97,30 @@ const phrases = {
         email: 'E-post',
       },
       statusValue: {
-        PRIVATE: 'Privat',
-        PUBLISHED: 'Søkbar',
-        UNLISTED: 'Åpen',
-        SUBMITTED: 'Til publisering',
+        PRIVATE: 'Kladd',
+        PUBLISHED: 'Offentlig',
+        UNLISTED: 'Privat',
+        SUBMITTED: 'Til offentliggjøring',
       },
     },
   },
   pathDropDown: {
     PRIVATE: {
-      unlist: 'Gjør åpen',
-      submit: 'Til publisering',
+      unlist: 'Gjør privat',
+      submit: 'Til offentliggjøring',
     },
     PUBLISHED: {
-      unpublish: 'Gjør privat',
-      unlist: 'Gjør åpen',
+      unpublish: 'Gjør til kladd',
+      unlist: 'Gjør privat',
     },
     UNLISTED: {
-      unpublish: 'Gjør privat',
-      submit: 'Til publisering',
+      unpublish: 'Gjør til kladd',
+      submit: 'Til offentliggjøring',
     },
     SUBMITTED: {
-      unpublish: 'Gjør privat',
-      unlist: 'Gjør åpen',
-      publish: 'Publiser',
+      unpublish: 'Gjør til kladd',
+      unlist: 'Gjør privat',
+      publish: 'Offentliggjør',
     },
     delete: 'Slett',
     makeCopy: 'Lag kopi',
@@ -287,10 +287,18 @@ const phrases = {
   },
   updateLearningPathStatus: {
     UNLISTED:
-      'Oppdatert status til åpen. Dette betyr at den er tilgjenglig via url, men ikke søk.',
-    PUBLISHED: 'Opdatert status til publisert.',
-    PRIVATE: 'Oppdatert status til privat.',
-    SUBMITTED: 'Oppdatert status til til publisering.',
+      'Oppdatert status til privat. Dette betyr at den er tilgjenglig via url, men ikke søk.',
+    PUBLISHED: 'Opdatert status til offentlig.',
+    PRIVATE: 'Oppdatert status til kladd.',
+    SUBMITTED: 'Oppdatert status til til offentliggjøring.',
+    consequence: {
+      UNLISTED:
+        'Læringsstien vil være tilgjenglig ved bruk av url, men ikke ved søk',
+      PUBLISHED: 'Læringsstien vil være tilgjenglig både ved søk og url.',
+      PRIVATE: 'Bare du kan se denne læringsstien',
+      SUBMITTED:
+        'Læringsstien vil være offentlig ved url og søk etter at en adminstrator har godkjent læringsstien',
+    },
   },
   validation: {
     required: 'Feltet er påkrevd.',

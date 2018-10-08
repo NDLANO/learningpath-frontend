@@ -15,6 +15,7 @@ import formatDate from '../../util/formatDate';
 import formatDuration from '../../util/formatDuration';
 import Icon from '../../common/Icon';
 import TileUserInformation from './TileUserInformation';
+import ActionToolTip from '../../myPage/ActionToolTip';
 
 const classes = new BEMHelper({
   name: 'tile',
@@ -46,17 +47,19 @@ const LearningPathTile = ({ learningPath, dropdown }, { lang }) => {
           </p>
           <p>{duration}</p>
         </div>
-        <div {...classes('property')}>
-          <div {...classes('propterty-icon')}>
-            <Icon.Visibility />
+        <ActionToolTip status={learningPath.status}>
+          <div {...classes('property')}>
+            <div {...classes('propterty-icon')}>
+              <Icon.Visibility />
+            </div>
+            <p {...classes('property-description')}>
+              {polyglot.t('tilePage.path.status')}
+            </p>
+            <p>
+              {polyglot.t(`tilePage.path.statusValue.${learningPath.status}`)}
+            </p>
           </div>
-          <p {...classes('property-description')}>
-            {polyglot.t('tilePage.path.status')}
-          </p>
-          <p>
-            {polyglot.t(`tilePage.path.statusValue.${learningPath.status}`)}
-          </p>
-        </div>
+        </ActionToolTip>
         <TileUserInformation owner={learningPath.owner} />
       </div>
     </div>
