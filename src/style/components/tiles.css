@@ -6,13 +6,29 @@
  *
  */
 
+.tiles-header {
+  max-width: 1700px;
+  margin: 0 auto;
+  padding: 3rem 5rem 0 5rem;
+
+
+  & > h2 {
+    display: inline-block;
+    margin-right: 1rem;
+    margin-left: 1.5%;
+  }
+}
+
 .tiles {
   display: flex;
   background-color: transparent;
   flex-wrap: wrap;
-  padding: 3em 5em;
+  padding: 0 5rem 3rem 5rem;
   max-width: 1700px;
   margin: 0 auto;
+  & > p {
+        margin-left: 1.5%;
+  }
 }
 
 @media (max-width: 1450px) {

@@ -10,8 +10,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import polyglot from '../../i18n';
 
-const SelectSortTiles = ({ sortKey, onChange }) => (
-  <select className="select--white-border" value={sortKey} onChange={onChange}>
+const SelectSortTiles = ({ sortKey, onChange, className }) => (
+  <select className={className} value={sortKey} onChange={onChange}>
     <option value="title">{polyglot.t('tilePage.order.title')}</option>
     <option value="-lastUpdated">{polyglot.t('tilePage.order.newest')}</option>
     <option value="lastUpdated">{polyglot.t('tilePage.order.oldest')}</option>
