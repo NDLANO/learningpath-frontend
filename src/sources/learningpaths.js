@@ -137,7 +137,7 @@ const fetchPaths = (query, locale) => {
       delete q.query;
     }
     q.language = locale || 'nb';
-
+    q.fallback = true;
     url += `?${queryString.stringify(q)}`;
   }
   return fetchAuth(url).then(resolveJsonOrRejectWithError);
