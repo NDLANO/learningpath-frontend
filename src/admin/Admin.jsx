@@ -20,6 +20,7 @@ import { convertLearningPath } from '../learningPath/learningPathUtil';
 import SelectSortTiles from '../learningPath/tile/SelectSortTiles';
 import AdminRejectedMessageForm from './AdminRejectedMessageForm';
 import AdminLearningPaths from './AdminLearningPaths';
+import { sortPaths } from '../util/sortUtil';
 
 const getLearningPathsWithOwner = (learningPaths, users) =>
   learningPaths.map(learningPath => ({
@@ -122,6 +123,10 @@ export class Admin extends React.Component {
   setSortKey(statusType, value) {
     this.setState(prevState => ({
       sortKey: { ...prevState.sortKey, [statusType]: value },
+      learningPaths: {
+        ...prevState.learningPaths,
+        [statusType]: sortPaths(prevState.learningPaths[statusType], value),
+      },
     }));
   }
 
@@ -137,12 +142,18 @@ export class Admin extends React.Component {
       learningPath => learningPath.ownerId,
     );
     const users = await fetchOwners(ownerIds);
-    this.setState({
+    this.setState(prevState => ({
       learningPaths: {
-        SUBMITTED: getLearningPathsWithOwner(submittedLearningPaths, users),
-        UNLISTED: getLearningPathsWithOwner(unlistedLearningPaths, users),
+        SUBMITTED: sortPaths(
+          getLearningPathsWithOwner(submittedLearningPaths, users),
+          prevState.sortKey.SUBMITTED,
+        ),
+        UNLISTED: sortPaths(
+          getLearningPathsWithOwner(unlistedLearningPaths, users),
+          prevState.sortKey.UNLISTED,
+        ),
       },
-    });
+    }));
   }
 
   async updateStatusAndFetchLearningPaths(id, status, recjectMessage) {
