@@ -1,0 +1,206 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`util/sortUtil sortPaths 1`] = `
+Array [
+  Object {
+    "author": Object {
+      "name": "Snurre Sprett",
+      "type": "Forfatter",
+    },
+    "description": "Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.",
+    "duration": 1080,
+    "id": "1",
+    "introduction": "<p>Norsk test id 1</p>",
+    "isBasedOnTitle": undefined,
+    "lastUpdated": 2015-03-07T13:00:00.000Z,
+    "metaUrl": "http://api.test.ndla.no/learningpaths/1",
+    "status": "PUBLISHED",
+    "tags": Array [
+      "kristofer",
+    ],
+    "title": "Hva er kunst og kultur?",
+  },
+  Object {
+    "author": Object {
+      "name": "Kaptein Sabeltann",
+      "type": "Forfatter",
+    },
+    "description": "Uttrykkene \\"leselighet\\" og \\"lesbarhet\\" brukes om hverandre i norsk fagterminologi, og ofte uten klare forestillinger om hva begrepene står for.",
+    "duration": 45,
+    "id": "2",
+    "introduction": "<p>Norsk test</p>",
+    "isBasedOnTitle": undefined,
+    "lastUpdated": 2016-02-01T11:00:00.000Z,
+    "metaUrl": "http://api.test.ndla.no/learningpaths/2",
+    "status": "PRIVATE",
+    "tags": Array [
+      "kristofer",
+    ],
+    "title": "Leselighet og skrift",
+  },
+]
+`;
+
+exports[`util/sortUtil sortPaths 2`] = `
+Array [
+  Object {
+    "author": Object {
+      "name": "Snurre Sprett",
+      "type": "Forfatter",
+    },
+    "description": "Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.",
+    "duration": 1080,
+    "id": "1",
+    "introduction": "<p>Norsk test id 1</p>",
+    "isBasedOnTitle": undefined,
+    "lastUpdated": 2015-03-07T13:00:00.000Z,
+    "metaUrl": "http://api.test.ndla.no/learningpaths/1",
+    "status": "PUBLISHED",
+    "tags": Array [
+      "kristofer",
+    ],
+    "title": "Hva er kunst og kultur?",
+  },
+  Object {
+    "author": Object {
+      "name": "Kaptein Sabeltann",
+      "type": "Forfatter",
+    },
+    "description": "Uttrykkene \\"leselighet\\" og \\"lesbarhet\\" brukes om hverandre i norsk fagterminologi, og ofte uten klare forestillinger om hva begrepene står for.",
+    "duration": 45,
+    "id": "2",
+    "introduction": "<p>Norsk test</p>",
+    "isBasedOnTitle": undefined,
+    "lastUpdated": 2016-02-01T11:00:00.000Z,
+    "metaUrl": "http://api.test.ndla.no/learningpaths/2",
+    "status": "PRIVATE",
+    "tags": Array [
+      "kristofer",
+    ],
+    "title": "Leselighet og skrift",
+  },
+]
+`;
+
+exports[`util/sortUtil sortPaths 3`] = `
+Array [
+  Object {
+    "author": Object {
+      "name": "Snurre Sprett",
+      "type": "Forfatter",
+    },
+    "description": "Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.",
+    "duration": 1080,
+    "id": "1",
+    "introduction": "<p>Norsk test id 1</p>",
+    "isBasedOnTitle": undefined,
+    "lastUpdated": 2015-03-07T13:00:00.000Z,
+    "metaUrl": "http://api.test.ndla.no/learningpaths/1",
+    "status": "PUBLISHED",
+    "tags": Array [
+      "kristofer",
+    ],
+    "title": "Hva er kunst og kultur?",
+  },
+  Object {
+    "author": Object {
+      "name": "Kaptein Sabeltann",
+      "type": "Forfatter",
+    },
+    "description": "Uttrykkene \\"leselighet\\" og \\"lesbarhet\\" brukes om hverandre i norsk fagterminologi, og ofte uten klare forestillinger om hva begrepene står for.",
+    "duration": 45,
+    "id": "2",
+    "introduction": "<p>Norsk test</p>",
+    "isBasedOnTitle": undefined,
+    "lastUpdated": 2016-02-01T11:00:00.000Z,
+    "metaUrl": "http://api.test.ndla.no/learningpaths/2",
+    "status": "PRIVATE",
+    "tags": Array [
+      "kristofer",
+    ],
+    "title": "Leselighet og skrift",
+  },
+]
+`;
+
+exports[`util/sortUtil sortPaths 4`] = `
+Array [
+  Object {
+    "author": Object {
+      "name": "Kaptein Sabeltann",
+      "type": "Forfatter",
+    },
+    "description": "Uttrykkene \\"leselighet\\" og \\"lesbarhet\\" brukes om hverandre i norsk fagterminologi, og ofte uten klare forestillinger om hva begrepene står for.",
+    "duration": 45,
+    "id": "2",
+    "introduction": "<p>Norsk test</p>",
+    "isBasedOnTitle": undefined,
+    "lastUpdated": 2016-02-01T11:00:00.000Z,
+    "metaUrl": "http://api.test.ndla.no/learningpaths/2",
+    "status": "PRIVATE",
+    "tags": Array [
+      "kristofer",
+    ],
+    "title": "Leselighet og skrift",
+  },
+  Object {
+    "author": Object {
+      "name": "Snurre Sprett",
+      "type": "Forfatter",
+    },
+    "description": "Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.",
+    "duration": 1080,
+    "id": "1",
+    "introduction": "<p>Norsk test id 1</p>",
+    "isBasedOnTitle": undefined,
+    "lastUpdated": 2015-03-07T13:00:00.000Z,
+    "metaUrl": "http://api.test.ndla.no/learningpaths/1",
+    "status": "PUBLISHED",
+    "tags": Array [
+      "kristofer",
+    ],
+    "title": "Hva er kunst og kultur?",
+  },
+]
+`;
+
+exports[`util/sortUtil sortPaths 5`] = `
+Array [
+  Object {
+    "author": Object {
+      "name": "Kaptein Sabeltann",
+      "type": "Forfatter",
+    },
+    "description": "Uttrykkene \\"leselighet\\" og \\"lesbarhet\\" brukes om hverandre i norsk fagterminologi, og ofte uten klare forestillinger om hva begrepene står for.",
+    "duration": 45,
+    "id": "2",
+    "introduction": "<p>Norsk test</p>",
+    "isBasedOnTitle": undefined,
+    "lastUpdated": 2016-02-01T11:00:00.000Z,
+    "metaUrl": "http://api.test.ndla.no/learningpaths/2",
+    "status": "PRIVATE",
+    "tags": Array [
+      "kristofer",
+    ],
+    "title": "Leselighet og skrift",
+  },
+  Object {
+    "author": Object {
+      "name": "Snurre Sprett",
+      "type": "Forfatter",
+    },
+    "description": "Kurset dekker innføring og vil gi deg grunnleggende forståelse for vanlige begrep i kunst og kultur verden. Kurset fokuserer på kunst og kultur på et verdensperspektiv.",
+    "duration": 1080,
+    "id": "1",
+    "introduction": "<p>Norsk test id 1</p>",
+    "isBasedOnTitle": undefined,
+    "lastUpdated": 2015-03-07T13:00:00.000Z,
+    "metaUrl": "http://api.test.ndla.no/learningpaths/1",
+    "status": "PUBLISHED",
+    "tags": Array [
+      "kristofer",
+    ],
+    "title": "Hva er kunst og kultur?",
+  },
+]
+`;

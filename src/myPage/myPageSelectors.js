@@ -7,31 +7,11 @@
  */
 
 import { createSelector } from 'reselect';
-import sortBy from 'lodash/sortBy';
-import reverse from 'lodash/reverse';
 import { convertFieldWithFallback } from '../util/convertFieldWithFallback';
+import { sortPaths } from '../util/sortUtil';
 
 const getLearningPathsFromState = state => state.learningPaths;
 export const getSortKey = state => state.myLearningPathsSortOrder || 'title';
-
-const sortPaths = (paths, field) => {
-  switch (field) {
-    case 'title':
-      return sortBy(paths, p => p.title);
-
-    case 'lastUpdated':
-      return sortBy(paths, field);
-
-    case '-lastUpdated':
-      return reverse(sortBy(paths, 'lastUpdated'));
-
-    case 'status':
-      return reverse(sortBy(paths, 'status'));
-
-    default:
-      return sortBy(paths, field);
-  }
-};
 
 export const getLearningPaths = createSelector(
   [getLearningPathsFromState, getSortKey],

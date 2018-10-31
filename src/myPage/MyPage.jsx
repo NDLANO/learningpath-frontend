@@ -128,6 +128,7 @@ export class MyPage extends React.Component {
             </h2>
             <div className="page-header_ctrls">
               <SelectSortTiles
+                className="select--white-border"
                 sortKey={sortKey}
                 onChange={evt => setSortKey(evt.target.value)}
               />

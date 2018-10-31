@@ -64,7 +64,14 @@ const phrases = {
   },
   adminPage: {
     pageHeader: 'Adminpanel',
-    noPaths: 'There are no learningpaths with status submitted',
+    noPaths: {
+      submitted: 'There are no learningpaths with status submitted',
+      unlisted: 'There are no learningpaths with status unlisted',
+    },
+    statusHeader: {
+      submitted: 'Submitted learningpaths',
+      unlisted: 'Unlisted learningpaths',
+    },
     rejectedPathMessage: {
       message: 'Feedback on rejected learningpath',
       placeholder: 'Explain why the learningpath was not accepted',

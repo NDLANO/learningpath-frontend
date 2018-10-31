@@ -65,7 +65,14 @@ const phrases = {
   },
   adminPage: {
     pageHeader: 'Adminpanel',
-    noPaths: 'Det finnes ingen læringsstiar med status til publisering',
+    noPaths: {
+      submitted: 'Det finnes ingen læringsstiar med status til publisering.',
+      unlisted: 'Det finnes ingen læringsstiar med status til privat.',
+    },
+    statusHeader: {
+      submitted: 'Læringsstiar til publisering',
+      unlisted: 'Læringsstiar med status privat',
+    },
     rejectedPathMessage: {
       message: 'Tilbakemelding på avvist læringssti',
       placeholder: 'Forklar kvifor læringsstia ikkje ble godkjent',
