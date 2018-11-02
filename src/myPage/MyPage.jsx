@@ -60,9 +60,10 @@ export class MyPage extends React.Component {
       coverPhoto: { url: '', metaUrl: '' },
       copyright: {
         license: {
-          license: 'by-sa',
-          description: 'Creative Commons Attribution-ShareAlike 2.0 Generic',
-          url: 'https://creativecommons.org/licenses/by-sa/2.0/',
+          description:
+            'Creative Commons Attribution-ShareAlike 4.0 International',
+          license: 'CC-BY-SA-4.0',
+          url: 'https://creativecommons.org/licenses/by-sa/4.0/',
         },
         contributors: [],
       },
