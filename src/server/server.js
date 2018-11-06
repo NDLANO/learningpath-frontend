@@ -254,7 +254,6 @@ function handleResponse(req, res, token) {
         res.send(`<!doctype html>\n${htmlString}`);
       })
       .catch(err => {
-        console.log('error', err);
         if (
           err &&
           (err.status === FORBIDDEN || err.status === NOT_FOUND) &&
@@ -269,10 +268,8 @@ function handleResponse(req, res, token) {
 }
 
 app.get('/*', (req, res) => {
-  console.log('Getting /*');
   getToken('ndla_system')
     .then(token => {
-      console.log(token);
       handleResponse(req, res, token);
     })
     .catch(err => res.status(INTERNAL_SERVER_ERROR).send(err.message));

@@ -15,7 +15,6 @@ import { parseHash } from './sessionActions';
 
 export class SessionInitializer extends React.Component {
   componentWillMount() {
-    console.log('SEssion initializer!');
     const {
       localParseHash,
       location: { hash },

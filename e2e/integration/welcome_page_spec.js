@@ -1,4 +1,5 @@
 import { getTokenExpireAt } from '../../src/util/jwtHelper';
+import { saveAccessToken } from '../../src/sources/helpers';
 import { visitOptions } from '../support';
 
 describe('Welcome page', () => {
@@ -83,14 +84,11 @@ describe('Welcome page', () => {
       };
       cy.request(options)
         .then(res => {
-          window.localStorage.setItem(
-            'ndla:sti',
-            `{ "accessToken": { "token": "${
-              res.body.access_token
-            }", "expiresAt": ${getTokenExpireAt(
-              res.body.access_token,
-            )} }, "authenticated": true}`,
-          );
+          saveAccessToken({
+            token: saveAccessToken,
+            expires: getTokenExpireAt(res.body.access_token),
+            authenticated: true,
+          });
         })
         .then(() => {
           cy.fixture('mineLearningpaths.json').then(learningPaths => {

@@ -181,7 +181,6 @@ export const isValid = accessToken => {
 
 export const getSessionFromLocalStorage = () => {
   const token = getAccessToken();
-  console.log('going to check token validity');
   if (!isValid(token)) return {};
   return {
     token,
