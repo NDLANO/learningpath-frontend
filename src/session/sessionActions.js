@@ -13,10 +13,10 @@ import {
   locationOrigin,
   ndlaPersonalClientId,
   auth0Domain,
-  saveAccessToken,
 } from '../sources/helpers';
 import { getTokenExpireAt } from '../util/jwtHelper';
 import { fetchNewSystemToken } from '../sources/tokens';
+import { saveAccessToken } from '../sources/localStorage';
 import { applicationError } from '../messages/messagesActions';
 
 export const setAuthenticated = createAction('SET_AUTHENTICATED');

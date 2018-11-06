@@ -18,7 +18,10 @@ import TokenStatusHandler from './util/TokenStatusHandler';
 import { configureLocale, isValidLocale } from './locale/configureLocale';
 import configureStore from './configureStore';
 import App from './main/App';
-import { saveAccessToken, getSessionFromLocalStorage } from './sources/helpers';
+import {
+  saveAccessToken,
+  getSessionFromLocalStorage,
+} from './sources/localStorage';
 
 import { getTokenExpireAt } from './util/jwtHelper';
 import config from './config';

@@ -17,7 +17,7 @@ import SiteNavAdmin from './SiteNavAdmin';
 import SiteNavMyPage from './SiteNavMyPage';
 import SiteNavSessionAction from './SiteNavSessionAction';
 import { closeSidebars } from '../sidebarActions';
-import { getAccessToken } from '../../sources/helpers';
+import { getAccessToken } from '../../sources/localStorage';
 import { decodeToken, getScope } from '../../util/jwtHelper';
 
 import config from '../../config';

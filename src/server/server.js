@@ -225,7 +225,7 @@ function handleResponse(req, res, token) {
 
   const basename = isValidLocale(paths[1]) ? `${paths[1]}` : '';
 
-  const store = configureStore({ locale, accessToken: storedTokenInfo });
+  const store = configureStore({ locale });
   TokenStatusHandler.getInstance({ store });
 
   const context = {};
@@ -248,7 +248,7 @@ function handleResponse(req, res, token) {
         const htmlString = renderHtmlString(
           locale,
           userAgentString,
-          store.getState(),
+          { ...store.getState(), accessToken: storedTokenInfo },
           component,
         );
         res.send(`<!doctype html>\n${htmlString}`);

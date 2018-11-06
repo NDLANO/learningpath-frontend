@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 import { getScope } from '../util/jwtHelper';
-import { getAccessToken } from '../sources/helpers';
+import { getAccessToken } from '../sources/localStorage';
 import config from '../config';
 
 const AdminRoute = ({

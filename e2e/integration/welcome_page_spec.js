@@ -1,5 +1,5 @@
 import { getTokenExpireAt } from '../../src/util/jwtHelper';
-import { saveAccessToken } from '../../src/sources/helpers';
+import { saveAccessToken } from '../../src/sources/localStorage';
 import { visitOptions } from '../support';
 
 describe('Welcome page', () => {
@@ -85,7 +85,7 @@ describe('Welcome page', () => {
       cy.request(options)
         .then(res => {
           saveAccessToken({
-            token: res.body.access_token,
+            token: saveAccessToken,
             expires: getTokenExpireAt(res.body.access_token),
             authenticated: true,
           });

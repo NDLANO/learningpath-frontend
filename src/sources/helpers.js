@@ -8,8 +8,7 @@
 
 import 'isomorphic-fetch';
 import defined from 'defined';
-import storage from 'local-storage-fallback';
-import decode from 'jwt-decode';
+
 import config from '../config';
 import formatUrl from '../util/formatUrlUtil';
 import { fetchAuth } from './fetchAuth';
@@ -157,34 +156,3 @@ export function deleteAuthorized(path) {
       method: 'DELETE',
     });
 }
-
-export const getAccessToken = () =>
-  storage.getItem('learningpath_access_token');
-export const getAccessTokenExpires = () =>
-  storage.getItem('learningpath_access_token_expires_at');
-export const getIsAuthenticated = () => storage.getItem('isAuthenticated');
-
-export const saveAccessToken = ({ token, expires, authenticated }) => {
-  storage.setItem('learningpath_access_token', token);
-  storage.setItem('learningpath_access_token_expires_at', expires);
-  storage.setItem('isAuthenticated', authenticated);
-};
-
-export const isValid = accessToken => {
-  try {
-    decode(accessToken);
-    return true;
-  } catch (e) {
-    return false;
-  }
-};
-
-export const getSessionFromLocalStorage = () => {
-  const token = getAccessToken();
-  if (!isValid(token)) return {};
-  return {
-    token,
-    expires: getAccessTokenExpires(),
-    authenticated: getIsAuthenticated(),
-  };
-};
