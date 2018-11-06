@@ -13,13 +13,13 @@ import {
   locationOrigin,
   ndlaPersonalClientId,
   auth0Domain,
+  saveAccessToken,
 } from '../sources/helpers';
 import { getTokenExpireAt } from '../util/jwtHelper';
 import { fetchNewSystemToken } from '../sources/tokens';
 import { applicationError } from '../messages/messagesActions';
 
 export const setAuthenticated = createAction('SET_AUTHENTICATED');
-export const setAccessToken = createAction('SET_ACCESS_TOKEN');
 
 const auth = new auth0.WebAuth({
   clientID: ndlaPersonalClientId || '',
@@ -33,11 +33,12 @@ export function parseHash(hash) {
   return dispatch => {
     auth.parseHash({ hash, _idTokenVerification: false }, (err, authResult) => {
       if (authResult && authResult.accessToken) {
-        const storedTokenInfo = {
+        saveAccessToken({
           token: authResult.accessToken,
-          expiresAt: getTokenExpireAt(authResult.accessToken),
-        };
-        dispatch(setAccessToken(storedTokenInfo));
+          expires: getTokenExpireAt(authResult.accessToken),
+          authenticated: true,
+        });
+
         dispatch(setAuthenticated(true));
         dispatch(routerActions.replace('/minside'));
       }
@@ -59,7 +60,11 @@ export function logoutPersonalAuth(federated = undefined) {
           token: token.access_token,
           expiresAt: getTokenExpireAt(token.access_token),
         };
-        dispatch(setAccessToken(storedTokenInfo));
+        saveAccessToken({
+          token: token.access_token,
+          expires: getTokenExpireAt(token.access_token),
+          authenticated: false,
+        });
         dispatch(setAuthenticated(false));
         auth.logout({
           returnTo: `${locationOrigin}/`,
@@ -85,7 +90,12 @@ export function renewPersonalAuth() {
               token: authResult.accessToken,
               expiresAt: getTokenExpireAt(authResult.accessToken),
             };
-            dispatch(setAccessToken(storedTokenInfo));
+            saveAccessToken({
+              token: authResult.accessToken,
+              expires: getTokenExpireAt(authResult.accessToken),
+              authenticated: true,
+            });
+
             dispatch(setAuthenticated(true));
             resolve(storedTokenInfo);
           } else {
@@ -103,7 +113,12 @@ export function renewSystemAuth() {
         token: token.access_token,
         expiresAt: getTokenExpireAt(token.access_token),
       };
-      dispatch(setAccessToken(storedTokenInfo));
+      saveAccessToken({
+        token: token.access_token,
+        expires: getTokenExpireAt(token.access_token),
+        authenticated: false,
+      });
+
       dispatch(setAuthenticated(false));
       return storedTokenInfo;
     });

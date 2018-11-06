@@ -11,7 +11,6 @@ import { routerReducer } from 'react-router-redux';
 import { reducer as formReducer } from 'redux-form';
 
 import authenticated from './authenticated';
-import accessToken from './accessToken';
 import learningPath from '../learningPath/learningPathReducer';
 import learningPathSearch from '../learningPath/search/learningPathSearchReducer';
 import learningPathStep from '../learningPath/step/learningPathStepReducer';
@@ -30,7 +29,6 @@ import pinterest from '../pinterest/pinterestReducer';
 
 const rootReducers = combineReducers({
   authenticated,
-  accessToken,
   locale,
   learningPath,
   learningPathSearch,
