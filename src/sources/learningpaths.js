@@ -106,7 +106,7 @@ const deleteStep = ({ pathId, stepId }) =>
   deleteLearningPathStep({ pathId, stepId });
 
 const putLearningPathStepStatus = putAuthorized(
-  '/learningpath-api/v2/learningpaths/:pathId/learningsteps/:stepId/status',
+  '/learningpath-api/v2/learningpaths/:pathId/learningsteps/:stepId/status/',
 );
 export const activateDeletedStep = ({ pathId, stepId }) =>
   putLearningPathStepStatus({ pathId, stepId }, { status: 'ACTIVE' });
