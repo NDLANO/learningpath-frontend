@@ -21,6 +21,7 @@ test('component/MyPage', () => {
     createPath: noop,
     deletePath: noop,
     updatePathStatus: noop,
+    location: { search: '', pathname: '/minside' },
   };
 
   const component = shallow(

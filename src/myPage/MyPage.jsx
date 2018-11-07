@@ -9,6 +9,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import queryString from 'query-string';
 import { HelmetWithTracker } from 'ndla-tracker';
 import {
   deleteLearningPath,
@@ -30,6 +31,7 @@ import {
 import { getLearningPaths, getSortKey } from './myPageSelectors';
 import LearningPathTile from '../learningPath/tile/LearningPathTile';
 import SelectSortTiles from '../learningPath/tile/SelectSortTiles';
+import { LocationShape } from '../shapes';
 
 export class MyPage extends React.Component {
   constructor(props) {
@@ -37,6 +39,7 @@ export class MyPage extends React.Component {
 
     this.state = {
       displayCreatePath: false,
+      location: null,
     };
     this.toggleLightBox = this.toggleLightBox.bind(this);
     this.onCreateLearningPath = this.onCreateLearningPath.bind(this);
@@ -44,7 +47,9 @@ export class MyPage extends React.Component {
   }
 
   componentDidMount() {
-    const { localFetchMyLearningPaths } = this.props;
+    const { localFetchMyLearningPaths, location } = this.props;
+    const { openModal } = queryString.parse(location.search);
+    this.setState({ displayCreatePath: !!openModal });
     localFetchMyLearningPaths();
   }
 
@@ -91,6 +96,25 @@ export class MyPage extends React.Component {
         break;
       default:
     }
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { location } = nextProps;
+
+    if (prevState.location === null) {
+      const { openModal } = queryString.parse(location.search);
+      return {
+        location,
+        displayCreatePath: openModal === 'true',
+      };
+    }
+
+    const navigated = location !== prevState.location;
+    if (navigated) {
+      const { openModal } = queryString.parse(location.search);
+      return { location, displayCreatePath: openModal === 'true' };
+    }
+    return null;
   }
 
   toggleLightBox() {
@@ -164,6 +188,7 @@ MyPage.propTypes = {
   learningPaths: PropTypes.array,
   copyPath: PropTypes.func.isRequired,
   localFetchMyLearningPaths: PropTypes.func.isRequired,
+  location: LocationShape,
 };
 
 MyPage.defaultProps = { learningPaths: [], sortKey: 'title' };
