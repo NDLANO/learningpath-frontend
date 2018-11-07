@@ -85,7 +85,7 @@ describe('Welcome page', () => {
       cy.request(options)
         .then(res => {
           saveAccessToken({
-            token: saveAccessToken,
+            token: res.body.access_token,
             expires: getTokenExpireAt(res.body.access_token),
             authenticated: true,
           });
