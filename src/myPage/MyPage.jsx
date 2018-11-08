@@ -9,6 +9,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import queryString from 'query-string';
 import { HelmetWithTracker } from 'ndla-tracker';
 import {
   deleteLearningPath,
@@ -30,6 +31,7 @@ import {
 import { getLearningPaths, getSortKey } from './myPageSelectors';
 import LearningPathTile from '../learningPath/tile/LearningPathTile';
 import SelectSortTiles from '../learningPath/tile/SelectSortTiles';
+import { LocationShape, HistoryShape } from '../shapes';
 
 export class MyPage extends React.Component {
   constructor(props) {
@@ -38,7 +40,7 @@ export class MyPage extends React.Component {
     this.state = {
       displayCreatePath: false,
     };
-    this.toggleLightBox = this.toggleLightBox.bind(this);
+    this.onClose = this.onClose.bind(this);
     this.onCreateLearningPath = this.onCreateLearningPath.bind(this);
     this.onDropDownSelect = this.onDropDownSelect.bind(this);
   }
@@ -93,14 +95,15 @@ export class MyPage extends React.Component {
     }
   }
 
-  toggleLightBox() {
-    this.setState(prevState => ({
-      displayCreatePath: !prevState.displayCreatePath,
-    }));
+  onClose() {
+    const { history, location } = this.props;
+    this.setState({ displayCreatePath: false }, () => {
+      history.push(location.pathname);
+    });
   }
 
   render() {
-    const { learningPaths, sortKey, setSortKey } = this.props;
+    const { learningPaths, sortKey, setSortKey, location } = this.props;
 
     const items = learningPaths.map(learningPath => {
       const dropdown = (
@@ -118,6 +121,10 @@ export class MyPage extends React.Component {
       );
     });
 
+    const { openModal } = queryString.parse(location.search);
+
+    const displayLightbox =
+      this.state.displayCreatePath || openModal === 'true';
     return (
       <Wrapper>
         <OneColumn>
@@ -139,13 +146,13 @@ export class MyPage extends React.Component {
           <button
             type="button"
             className="cta-link new-learningpath-button"
-            onClick={this.toggleLightBox}
+            onClick={() => {
+              this.setState({ displayCreatePath: true });
+            }}
             data-cy="mypage-new-learningpath-button">
             <LabeledIcon.Add labelText={polyglot.t('myPage.newBtn')} />
           </button>
-          <Lightbox
-            display={this.state.displayCreatePath}
-            onClose={this.toggleLightBox}>
+          <Lightbox display={displayLightbox} onClose={this.onClose}>
             <CreateLearningPath onSubmit={this.onCreateLearningPath} />
           </Lightbox>
         </OneColumn>
@@ -164,6 +171,8 @@ MyPage.propTypes = {
   learningPaths: PropTypes.array,
   copyPath: PropTypes.func.isRequired,
   localFetchMyLearningPaths: PropTypes.func.isRequired,
+  location: LocationShape,
+  history: HistoryShape,
 };
 
 MyPage.defaultProps = { learningPaths: [], sortKey: 'title' };

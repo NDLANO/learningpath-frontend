@@ -25,6 +25,7 @@ import {
   getLearningPathSearchResult,
   getLearningPathSearchTotalCount,
 } from './learningPathSearchSelectors';
+import { LocationShape } from '../../shapes';
 
 class LearningPathSearch extends React.Component {
   static mapDispatchToProps = {
@@ -129,10 +130,7 @@ class LearningPathSearch extends React.Component {
 LearningPathSearch.propTypes = {
   localSearchLearningPaths: PropTypes.func.isRequired,
   learningPaths: PropTypes.arrayOf(PropTypes.object).isRequired,
-  location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired,
-    search: PropTypes.string.isRequired,
-  }),
+  location: LocationShape,
   lastPage: PropTypes.number.isRequired,
   pushRoute: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,

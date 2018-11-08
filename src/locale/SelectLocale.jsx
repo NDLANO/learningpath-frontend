@@ -11,9 +11,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import createHistory from 'history/createBrowserHistory';
 import { withRouter } from 'react-router-dom';
-
 import { availableLocales } from './localeConstants';
 import { getLocale } from './localeSelectors';
+import { LocationShape } from '../shapes';
 
 const SelectLocale = props => {
   const {
@@ -44,7 +44,7 @@ const SelectLocale = props => {
 
 SelectLocale.propTypes = {
   locale: PropTypes.string.isRequired,
-  location: PropTypes.object.isRequired,
+  location: LocationShape.isRequired,
 };
 
 const mapStateToProps = state => ({

@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import polyglot from '../i18n';
 import { parseHash } from './sessionActions';
+import { LocationShape } from '../shapes';
 
 export class SessionInitializer extends React.Component {
   componentWillMount() {
@@ -33,7 +34,7 @@ export class SessionInitializer extends React.Component {
 
 SessionInitializer.propTypes = {
   localParseHash: PropTypes.func.isRequired,
-  location: PropTypes.shape({ hash: PropTypes.string }),
+  location: LocationShape,
 };
 
 const mapDispatchToProps = {
