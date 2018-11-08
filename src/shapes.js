@@ -27,3 +27,9 @@ export const LocationShape = PropTypes.shape({
   hash: PropTypes.string,
   search: PropTypes.string,
 });
+
+export const HistoryShape = PropTypes.shape({
+  push: PropTypes.func.isRequired,
+  go: PropTypes.func.isRequired,
+  location: LocationShape,
+});
