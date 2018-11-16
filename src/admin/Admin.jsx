@@ -9,7 +9,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { HelmetWithTracker } from 'ndla-tracker';
+import { HelmetWithTracker } from '@ndla/tracker';
 import { updateLearningPathsStatus } from '../learningPath/learningPathActions';
 import polyglot from '../i18n';
 import Masthead from '../common/Masthead';

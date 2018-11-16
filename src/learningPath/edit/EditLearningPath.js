@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import { Redirect } from 'react-router-dom';
-import { HelmetWithTracker } from 'ndla-tracker';
+import { HelmetWithTracker } from '@ndla/tracker';
 import LearningPathForm from './LearningPathForm';
 import { fetchLearningPathTagsIfNeeded } from './tags/learningPathTagsActions';
 import { fetchLearningPathContributorsIfNeeded } from './copyright/learningPathContributorsActions';
