@@ -66,9 +66,10 @@ class EditLearningPath extends Component {
         tags: values.tags,
         copyright: {
           license: {
-            license: 'by-sa',
-            description: 'Creative Commons Attribution-ShareAlike 2.0 Generic',
-            url: 'https://creativecommons.org/licenses/by-sa/2.0/',
+            license: 'CC-BY-SA-4.0',
+            description:
+              'Creative Commons Attribution-ShareAlike 4.0 International',
+            url: 'https://creativecommons.org/licenses/by-sa/4.0/',
           },
           contributors: !isEmpty(values.contributors)
             ? values.contributors
