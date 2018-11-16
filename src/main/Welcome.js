@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import { routerActions } from 'react-router-redux';
 import { Link } from 'react-router-dom';
 import isEmpty from 'lodash/isEmpty';
-import { HelmetWithTracker } from 'ndla-tracker';
+import { HelmetWithTracker } from '@ndla/tracker';
 import queryString from 'query-string';
 import Logo from '../common/Logo';
 import polyglot from '../i18n';

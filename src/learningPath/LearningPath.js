@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { routerActions } from 'react-router-redux';
 import classNames from 'classnames';
-import { withTracker } from 'ndla-tracker';
+import { withTracker } from '@ndla/tracker';
 import LearningPathGeneralInfo from './sidebar/LearningPathGeneralInfo';
 import LearningPathToC from './sidebar/LearningPathToC';
 import Lightbox from '../common/Lightbox';

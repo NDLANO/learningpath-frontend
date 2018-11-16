@@ -7,7 +7,7 @@
  */
 
 import { handleActions } from 'redux-actions';
-import { uuid } from 'ndla-util';
+import { uuid } from '@ndla/util';
 
 export default handleActions(
   {
