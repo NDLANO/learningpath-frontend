@@ -25,6 +25,8 @@ import {
   FORBIDDEN,
   NOT_FOUND,
   NOT_ACCEPTABLE,
+  MOVED_PERMANENTLY,
+  TEMPORARY_REDIRECT,
 } from 'http-status';
 import App from '../main/App';
 import config, { getEnvironmentVariabel } from '../config';
@@ -38,6 +40,8 @@ import TokenStatusHandler from '../util/TokenStatusHandler';
 import contentSecurityPolicy from './contentSecurityPolicy';
 import errorLogger from '../util/logger';
 import { getTokenExpireAt } from '../util/jwtHelper';
+import { getLocaleInfoFromPath } from '../i18n';
+import { errorRoute, defaultRoute } from './routes';
 
 const app = express();
 const allowedBodyContentTypes = ['application/csp-report', 'application/json'];
@@ -82,6 +86,45 @@ const getConditionalClassnames = userAgentString => {
   }
   return '';
 };
+
+async function sendInternalServerError(req, res) {
+  if (res.getHeader('Content-Type') === 'application/json') {
+    res.status(INTERNAL_SERVER_ERROR).json('Internal server error');
+  } else {
+    const { data } = await errorRoute(req);
+    res.status(INTERNAL_SERVER_ERROR).send(data);
+  }
+}
+
+function sendResponse(res, data, status = OK) {
+  if (status === MOVED_PERMANENTLY || status === TEMPORARY_REDIRECT) {
+    res.writeHead(status, data);
+    res.end();
+  } else if (res.getHeader('Content-Type') === 'application/json') {
+    res.status(status).json(data);
+  } else {
+    res.status(status).send(data);
+  }
+}
+
+async function handleRequest(req, res, route) {
+  try {
+    const token = await getToken();
+    // storeAccessToken(token.access_token);
+    try {
+      const { data, status } = await route(req, res, token);
+      sendResponse(res, data, status);
+    } catch (e) {
+      console.log('ERROR1', e);
+      // handleError(e);
+      await sendInternalServerError(req, res);
+    }
+  } catch (e) {
+    console.log('ERROR2', e);
+    // handleError(e);
+    await sendInternalServerError(req, res);
+  }
+}
 
 const renderHtmlString = (
   locale,
@@ -205,6 +248,7 @@ function prefetchData(req, dispatch) {
 }
 
 function handleResponse(req, res, token) {
+  console.log(req.path);
   const paths = req.url.split('/');
   const locale = getHtmlLang(paths[1]);
   const userAgentString = req.headers['user-agent'];
@@ -268,11 +312,14 @@ function handleResponse(req, res, token) {
 }
 
 app.get('/*', (req, res) => {
-  getToken('ndla_system')
+  /* getToken('ndla_system')
     .then(token => {
       handleResponse(req, res, token);
     })
-    .catch(err => res.status(INTERNAL_SERVER_ERROR).send(err.message));
+    .catch(async err => {
+      await sendInternalServerError(req, res);
+    }); */
+  handleRequest(req, res, defaultRoute);
 });
 
 export default app;

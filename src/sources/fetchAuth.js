@@ -23,6 +23,7 @@ export const fetchAuth = (url, options = {}) => {
 
   const tokenStatusHandler = TokenStatusHandler.getInstance();
   const getState = tokenStatusHandler.getStoreState;
+  console.log('getstate', getState());
   const headers = {
     ...options.headers,
     Authorization: authorizationHeader(getState().accessToken.token),

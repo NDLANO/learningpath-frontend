@@ -31,14 +31,26 @@ import ZendeskButton from './ZendeskButton';
 import '../style/index.css';
 
 export class App extends React.Component {
+  constructor() {
+    super();
+    this.state = { hasError: false };
+  }
+
   getChildContext() {
     return {
       lang: this.props.locale,
     };
   }
 
+  componentDidCatch(error, info) {
+    this.setState({ hasError: true });
+  }
+
   render() {
     const { dispatch, messages } = this.props;
+    if (this.state.hasError) {
+      return <p>ups</p>;
+    }
     return (
       <div>
         <div className="page-container">

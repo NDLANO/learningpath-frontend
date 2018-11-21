@@ -80,7 +80,6 @@ configureTracker({
 });
 
 const renderOrHydrate = disableSSR ? ReactDOM.render : ReactDOM.hydrate;
-
 renderOrHydrate(
   <Provider store={store} locale={locale}>
     <Router history={browserHistory}>
