@@ -17,7 +17,7 @@ export function getLocaleInfoFromPath(path) {
   return {
     basepath,
     basename,
-    ...getHtmlLang(basename),
+    locale: getHtmlLang(basename),
   };
 }
 

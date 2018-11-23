@@ -15,17 +15,17 @@ import config from '../../config';
 import {
   SvgPolyfillScript,
   SvgPolyfillScriptInitalization,
-} from '../svgPolyfill';
-import Zendesk from '../Zendesk';
+} from './svgPolyfill';
+import Zendesk from './Zendesk';
 import { GoogleTagMangerNoScript, GoogleTagMangerScript } from './Gtm';
 import HotjarScript from './Hotjar';
 
 const Document = props => {
-  const { lang, className, state, userAgentString, assets } = props;
+  const { locale, className, state, userAgentString, assets } = props;
   const head = Helmet.rewind();
 
   return (
-    <html lang={lang} className={className}>
+    <html lang={locale} className={className}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -77,14 +77,18 @@ const Document = props => {
             __html: `window.config = ${serialize(config)}`,
           }}
         />
-        <script
-          type="text/javascript"
-          src={assets.client.js}
-          defer
-          crossOrigin={(process.env.NODE_ENV !== 'production').toString()}
-        />
+
+        {assets.js.map(js => (
+          <script
+            key={js}
+            type="text/javascript"
+            src={js}
+            defer
+            crossOrigin={(process.env.NODE_ENV !== 'production').toString()}
+          />
+        ))}
         <HotjarScript />
-        <Zendesk lang={lang} />
+        <Zendesk lang={locale} />
         <SvgPolyfillScriptInitalization className={className} />
       </body>
     </html>
@@ -92,7 +96,7 @@ const Document = props => {
 };
 
 Document.propTypes = {
-  lang: PropTypes.string.isRequired,
+  locale: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
   state: PropTypes.object.isRequired,
   userAgentString: PropTypes.string.isRequired,

@@ -12,7 +12,6 @@ import { StaticRouter } from 'react-router';
 import { matchPath } from 'react-router-dom';
 import App from '../../main/App';
 import config from '../../config';
-import { getHtmlLang, isValidLocale } from '../../locale/configureLocale';
 import configureStore from '../../configureStore';
 import { serverRoutes } from '../serverRoutes';
 import TokenStatusHandler from '../../util/TokenStatusHandler';
@@ -25,18 +24,20 @@ const assets = require(process.env.RAZZLE_ASSETS_MANIFEST); //eslint-disable-lin
 
 const getAssets = () => ({
   css: assets.client.css ? assets.client.css : undefined,
-  js: [assets.client.js],
+  js: assets.client.js ? [assets.client.js] : [],
 });
 
 async function doRender(req, res, token) {
-  const paths = req.url.split('/');
-  const locale = getHtmlLang(paths[1]);
-  const match = serverRoutes.find(r => matchPath(req.url, r));
+  const { locale, basepath, basename } = getLocaleInfoFromPath(req.path);
+
+  // const locale = getHtmlLang(paths[1]);
+  const match = serverRoutes.find(r => matchPath(basepath, r));
   // eslint-disable-next-line no-underscore-dangle
   const storedTokenInfo = {
     token: token.access_token,
     expiresAt: getTokenExpireAt(token.access_token),
   };
+
   if (config.disableSSR || match.notFound) {
     const { html, ...docProps } = renderPage('', getAssets(), {
       accessToken: storedTokenInfo,
@@ -49,11 +50,10 @@ async function doRender(req, res, token) {
     };
   }
 
-  const basename = isValidLocale(paths[1]) ? `${paths[1]}` : '';
-
   const store = configureStore({ locale, accessToken: storedTokenInfo });
   TokenStatusHandler.getInstance({ store });
   const context = {};
+
   const Page = (
     <Provider store={store} locale={locale}>
       <StaticRouter basename={basename} location={req.url} context={context}>
@@ -73,6 +73,5 @@ async function doRender(req, res, token) {
 
 export async function defaultRoute(req, res, token) {
   const { html, context, docProps } = await doRender(req, res, token);
-  console.log(html);
   return renderHtml(req, html, context, docProps);
 }

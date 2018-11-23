@@ -18,7 +18,6 @@ import config from '../../config';
 export function renderPage(Page, assets, state = {}) {
   const htmlString = renderToString(Page);
   const helmet = Helmet.renderStatic();
-  console.log('PAGE', Page, 'STATE', state);
   return {
     html: htmlString,
     helmet,

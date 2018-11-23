@@ -28,7 +28,6 @@ import LearningPathContainer from '../learningPath/LearningPathContainer';
 import LoginFailure from '../session/LoginFailure';
 import SessionInitializer from '../session/SessionInitializer';
 import ZendeskButton from './ZendeskButton';
-import '../style/index.css';
 
 export class App extends React.Component {
   constructor() {
@@ -43,13 +42,14 @@ export class App extends React.Component {
   }
 
   componentDidCatch(error, info) {
+    console.log('ERROR', error, info);
     this.setState({ hasError: true });
   }
 
   render() {
     const { dispatch, messages } = this.props;
     if (this.state.hasError) {
-      return <p>ups</p>;
+      return <p>upsi</p>;
     }
     return (
       <div>
