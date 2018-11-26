@@ -12,7 +12,6 @@ import { connect } from 'react-redux';
 import createHistory from 'history/createBrowserHistory';
 import { availableLocales } from './localeConstants';
 import { getLocale } from './localeSelectors';
-import { LocationShape } from '../shapes';
 
 const SelectLocale = props => {
   const { locale } = props;
@@ -47,7 +46,6 @@ const SelectLocale = props => {
 
 SelectLocale.propTypes = {
   locale: PropTypes.string.isRequired,
-  location: LocationShape.isRequired,
 };
 
 const mapStateToProps = state => ({

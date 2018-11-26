@@ -30,7 +30,6 @@ export function renderPage(Page, assets, state = {}) {
 export async function renderHtml(req, html, context, props) {
   const userAgentString = req.headers['user-agent'];
   const className = getConditionalClassnames(userAgentString);
-
   const doc = renderToStaticMarkup(
     <Document
       className={className}

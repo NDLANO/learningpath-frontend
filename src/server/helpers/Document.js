@@ -21,9 +21,9 @@ import { GoogleTagMangerNoScript, GoogleTagMangerScript } from './Gtm';
 import HotjarScript from './Hotjar';
 
 const Document = props => {
-  const { locale, className, state, userAgentString, assets } = props;
+  const { className, state, userAgentString, assets } = props;
   const head = Helmet.rewind();
-
+  const { locale } = state;
   return (
     <html lang={locale} className={className}>
       <head>
@@ -96,7 +96,6 @@ const Document = props => {
 };
 
 Document.propTypes = {
-  locale: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
   state: PropTypes.object.isRequired,
   userAgentString: PropTypes.string.isRequired,

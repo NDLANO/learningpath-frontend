@@ -29,6 +29,7 @@ import LoginFailure from '../session/LoginFailure';
 import SessionInitializer from '../session/SessionInitializer';
 import ZendeskButton from './ZendeskButton';
 import ErrorPage from '../errorPage/ErrorPage';
+import '../style/index.css';
 
 export class App extends React.Component {
   constructor(props) {
