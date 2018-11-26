@@ -25,6 +25,8 @@ module.exports = {
           }),
           new webpack.optimize.ModuleConcatenationPlugin(),
         );
+      } else {
+        appConfig.entry.injectCss = ['./src/style/index.css'];
       }
       appConfig.performance = {
         hints: false,

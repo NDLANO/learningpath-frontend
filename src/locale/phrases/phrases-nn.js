@@ -28,6 +28,11 @@ const phrases = {
     createLearningPathStep: `Opprett læringssteg${titleTemplate}`,
     sortLearningPathSteps: `Sorter eller slett læringssteg${titleTemplate}`,
   },
+  errorPage: {
+    title: 'Ops, noe gikk galt',
+    subTitle: 'Beklager, en feil oppsto.',
+    imageAlt: 'Noe gikk galt.',
+  },
   askNDLA: 'Spør NDLA',
   searchForm: {
     placeholder: 'Søk etter læringsstiar',

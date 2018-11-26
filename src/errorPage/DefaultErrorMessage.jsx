@@ -9,7 +9,16 @@
 import React from 'react';
 import polyglot from '../i18n';
 
-export const DefaultErrorMessage = () => <p>ups</p>;
-
-// DefaultErrorMessage.propTypes = {};
-// export default injectT(DefaultErrorMessage);
+export const DefaultErrorMessage = () => (
+  <div className="infoblock-error">
+    <div>
+      <h1>{polyglot.t('errorPage.title')}</h1>
+      <span>{polyglot.t('errorPage.subTitle')}</span>
+    </div>
+    <img
+      role="presentation"
+      src="/oops.gif"
+      alt={polyglot.t('errorPage.imageAlt')}
+    />
+  </div>
+);

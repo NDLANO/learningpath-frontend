@@ -7,8 +7,7 @@
  */
 
 import React from 'react';
-import Masthead from '../common/Masthead';
-import { Wrapper, OneColumn } from '../common/Layout';
+import { Wrapper, OneColumn, Footer } from '../common/Layout';
 import { DefaultErrorMessage } from './DefaultErrorMessage';
 
 const ErrorPage = () => (
@@ -16,6 +15,7 @@ const ErrorPage = () => (
     <OneColumn>
       <DefaultErrorMessage />
     </OneColumn>
+    <Footer />
   </Wrapper>
 );
 export default ErrorPage;

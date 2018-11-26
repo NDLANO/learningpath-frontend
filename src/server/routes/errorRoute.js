@@ -19,16 +19,16 @@ const assets = require(process.env.RAZZLE_ASSETS_MANIFEST); //eslint-disable-lin
 const getAssets = () => ({
   css: assets.client.css ? assets.client.css : undefined,
   // Error page is a static page, only use js to inject css under development
-  js: assets.client.js ? [assets.client.js] : [],
+  js: assets.injectCss ? [assets.injectCss.js] : [],
 });
 
 async function doRenderError(req, status = INTERNAL_SERVER_ERROR) {
-  const { abbreviation } = getLocaleInfoFromPath(req.path);
-  const store = configureStore({ locale: abbreviation });
+  const { locale } = getLocaleInfoFromPath(req.path);
+  const store = configureStore({ locale });
   const context = { status };
   const Page = (
-    <Provider store={store} locale={abbreviation}>
-      <ErrorPage local={abbreviation} />
+    <Provider store={store} locale={locale}>
+      <ErrorPage local={locale} />
     </Provider>
   );
 

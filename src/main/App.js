@@ -28,10 +28,11 @@ import LearningPathContainer from '../learningPath/LearningPathContainer';
 import LoginFailure from '../session/LoginFailure';
 import SessionInitializer from '../session/SessionInitializer';
 import ZendeskButton from './ZendeskButton';
+import ErrorPage from '../errorPage/ErrorPage';
 
 export class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = { hasError: false };
   }
 
@@ -41,15 +42,14 @@ export class App extends React.Component {
     };
   }
 
-  componentDidCatch(error, info) {
-    console.log('ERROR', error, info);
+  componentDidCatch() {
     this.setState({ hasError: true });
   }
 
   render() {
-    const { dispatch, messages } = this.props;
+    const { dispatch, messages, locale } = this.props;
     if (this.state.hasError) {
-      return <p>upsi</p>;
+      return <ErrorPage locale={locale} />;
     }
     return (
       <div>

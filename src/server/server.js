@@ -22,7 +22,7 @@ import {
   TEMPORARY_REDIRECT,
 } from 'http-status';
 import config, { getEnvironmentVariabel } from '../config';
-import { getToken, getUsers } from './auth';
+import { getToken, getUsers } from './helpers/auth';
 import Auth0SilentCallback from './helpers/Auth0SilentCallback';
 import contentSecurityPolicy from './contentSecurityPolicy';
 import errorLogger from '../util/logger';

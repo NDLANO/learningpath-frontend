@@ -33,6 +33,13 @@
   margin-right: 0;
 }
 
+.infoblock-error {
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+  padding-top: 4rem;
+}
+
 @media (--medium-viewport) {
   .infoblock {
     justify-content: flex-start;
