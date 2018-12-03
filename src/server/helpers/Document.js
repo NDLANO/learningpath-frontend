@@ -24,6 +24,7 @@ const Document = props => {
   const { className, state, userAgentString, assets } = props;
   const head = Helmet.rewind();
   const { locale } = state;
+
   return (
     <html lang={locale} className={className}>
       <head>
@@ -44,9 +45,9 @@ const Document = props => {
           <script async src="https://www.google-analytics.com/analytics.js" />
         )}
         <SvgPolyfillScript className={className} />
-        {assets.client &&
-          assets.client.css && (
-            <link rel="stylesheet" type="text/css" href={assets.client.css} />
+        {assets.css &&
+          assets.css && (
+            <link rel="stylesheet" type="text/css" href={assets.css} />
           )}
         <link
           rel="stylesheet"
