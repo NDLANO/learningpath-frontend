@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { HelmetWithTracker } from 'ndla-tracker';
+import { HelmetWithTracker } from '@ndla/tracker';
 import polyglot from '../i18n';
 import { loginPersonalAuth } from './sessionActions';
 

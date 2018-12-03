@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import { Redirect } from 'react-router-dom';
-import { HelmetWithTracker } from 'ndla-tracker';
+import { HelmetWithTracker } from '@ndla/tracker';
 import LearningPathForm from './LearningPathForm';
 import { fetchLearningPathTagsIfNeeded } from './tags/learningPathTagsActions';
 import { fetchLearningPathContributorsIfNeeded } from './copyright/learningPathContributorsActions';
@@ -66,9 +66,10 @@ class EditLearningPath extends Component {
         tags: values.tags,
         copyright: {
           license: {
-            license: 'by-sa',
-            description: 'Creative Commons Attribution-ShareAlike 2.0 Generic',
-            url: 'https://creativecommons.org/licenses/by-sa/2.0/',
+            license: 'CC-BY-SA-4.0',
+            description:
+              'Creative Commons Attribution-ShareAlike 4.0 International',
+            url: 'https://creativecommons.org/licenses/by-sa/4.0/',
           },
           contributors: !isEmpty(values.contributors)
             ? values.contributors

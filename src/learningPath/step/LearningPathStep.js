@@ -10,7 +10,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { withTracker } from 'ndla-tracker';
+import { withTracker } from '@ndla/tracker';
 import Oembed from './oembed/Oembed';
 import { fetchLearningPathStep } from './learningPathStepActions';
 import LearningPathStepInformation from './LearningPathStepInformation';

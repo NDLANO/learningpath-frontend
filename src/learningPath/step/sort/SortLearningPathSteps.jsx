@@ -10,7 +10,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { arrayMove } from 'react-sortable-hoc';
 import { connect } from 'react-redux';
-import { HelmetWithTracker } from 'ndla-tracker';
+import { HelmetWithTracker } from '@ndla/tracker';
 import SortableLearningStepList from './SortableLearningStepList';
 import { getLearningPath } from '../../learningPathSelectors';
 import {
