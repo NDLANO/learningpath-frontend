@@ -8,11 +8,19 @@
 
 import React from 'react';
 import { Wrapper, OneColumn, Footer } from '../common/Layout';
+import Logo from '../common/Logo';
 import { DefaultErrorMessage } from './DefaultErrorMessage';
 
 const ErrorPage = () => (
   <Wrapper>
     <OneColumn>
+      <div className="masthead_wrapper">
+        <div className="masthead">
+          <div className="masthead_left--desktop">
+            <Logo />
+          </div>
+        </div>
+      </div>
       <DefaultErrorMessage />
     </OneColumn>
     <Footer />
