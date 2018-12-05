@@ -1,0 +1,25 @@
+/**
+ * Copyright (c) 2017-present, NDLA.
+ *
+ * This source code is licensed under the GPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * @jest-environment jsdom
+ */
+
+import React from 'react';
+import { Provider } from 'react-redux';
+import renderer from 'react-test-renderer';
+import ErrorPage from '../ErrorPage';
+import configureStore from '../../configureStore';
+
+test('ErrorPage renderers correctly', () => {
+  const store = configureStore({ locale: 'nb' });
+  const component = renderer.create(
+    <Provider store={store} locale="nb">
+      <ErrorPage />
+    </Provider>,
+  );
+
+  expect(component.toJSON()).toMatchSnapshot();
+});
