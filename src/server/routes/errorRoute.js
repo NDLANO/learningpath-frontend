@@ -13,6 +13,7 @@ import ErrorPage from '../../errorPage/ErrorPage';
 import { getLocaleInfoFromPath } from '../../i18n';
 import { renderHtml, renderPage } from '../helpers/render';
 import configureStore from '../../configureStore';
+import { configureLocale } from '../../locale/configureLocale';
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST); //eslint-disable-line
 
@@ -25,10 +26,11 @@ const getAssets = () => ({
 async function doRenderError(req, status = INTERNAL_SERVER_ERROR) {
   const { locale } = getLocaleInfoFromPath(req.path);
   const store = configureStore({ locale });
+  configureLocale(locale);
   const context = { status };
   const Page = (
     <Provider store={store} locale={locale}>
-      <ErrorPage local={locale} />
+      <ErrorPage locale={locale} />
     </Provider>
   );
 
