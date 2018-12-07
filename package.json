@@ -14,7 +14,7 @@
     "pree2e-ci": "cross-env NDLA_ENVIRONMENT=mock NODE_ENV=production node build/server &",
     "format": "node prettier.js write",
     "format-check": "node prettier.js lint",
-    "lint": "yarn lint-css && yarn lint-es && yarn lint-prettier",
+    "lint": "yarn format-check && yarn lint-es && yarn lint-css",
     "lint-css": "stylelint style/**/*.css",
     "lint-es": "eslint  --max-warnings=0 --cache --cache-location '.eslintcache/' --ext .js --ext .jsx src",
     "now-start": "NODE_ENV=production NOW=true node build/server",
