@@ -9,10 +9,18 @@
 import 'isomorphic-fetch';
 import formatUrl from '../util/formatUrlUtil';
 import { fetchAuth } from './fetchAuth';
-import { resolveJsonOrRejectWithError } from './resolveJsonOrRejectWithError';
+import {
+  resolveJsonOrRejectWithError,
+  createErrorPayload,
+} from './resolveJsonOrRejectWithError';
 import { apiBaseUrl, locationOrigin } from './apiConstants';
 
-export { locationOrigin, apiBaseUrl, resolveJsonOrRejectWithError };
+export {
+  locationOrigin,
+  createErrorPayload,
+  apiBaseUrl,
+  resolveJsonOrRejectWithError,
+};
 
 export function apiResourceUrl(path) {
   return apiBaseUrl + path;
