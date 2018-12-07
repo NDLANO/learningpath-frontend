@@ -18,6 +18,7 @@ import {
   activateDeletedPath,
 } from '../sources/learningpaths';
 import { applicationError, addMessage } from '../messages/messagesActions';
+// eslint-disable-next-line import/no-cycle
 import { createEmptyLearningPathStep } from './step/learningPathStepActions';
 import polyglot from '../i18n';
 import {
