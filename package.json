@@ -110,6 +110,7 @@
     "redux-form": "^7.4.2",
     "redux-localstorage": "0.4.1",
     "redux-thunk": "2.3.0",
+    "request": "2.88.0",
     "reselect": "^3.0.1",
     "serialize-javascript": "1.5.0",
     "source-map-support": "^0.5.6",
@@ -117,7 +118,8 @@
     "tracekit": "^0.4.5",
     "useragent": "2.3.0",
     "warning": "4.0.1",
-    "webpack-bundle-analyzer": "2.13.1"
+    "webpack-bundle-analyzer": "2.13.1",
+    "yamlparser": "0.0.2"
   },
   "repository": {
     "type": "git",
