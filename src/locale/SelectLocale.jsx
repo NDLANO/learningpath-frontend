@@ -10,19 +10,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import createHistory from 'history/createBrowserHistory';
-import { withRouter } from 'react-router-dom';
 import { availableLocales } from './localeConstants';
 import { getLocale } from './localeSelectors';
-import { LocationShape } from '../shapes';
 
 const SelectLocale = props => {
-  const {
-    locale,
-    location: { pathname, search },
-  } = props;
+  const { locale } = props;
   const handleChange = newLocale => {
-    const path = pathname.startsWith('/') ? pathname.substring(1) : pathname;
-    createHistory().push(`/${newLocale}/${path}${search}`); // Need create new history or else basename is included
+    const { pathname, search } = window.location;
+    const basePath = pathname.startsWith(`/${locale}/`)
+      ? pathname.replace(`/${locale}/`, '/')
+      : pathname;
+    const newPath =
+      newLocale === 'nb'
+        ? `${basePath}${search}`
+        : `/${newLocale}${basePath}${search}`;
+    createHistory().push(newPath); // Need create new history or else basename is included
     window.location.reload();
   };
 
@@ -44,11 +46,10 @@ const SelectLocale = props => {
 
 SelectLocale.propTypes = {
   locale: PropTypes.string.isRequired,
-  location: LocationShape.isRequired,
 };
 
 const mapStateToProps = state => ({
   locale: getLocale(state),
 });
 
-export default withRouter(connect(mapStateToProps)(SelectLocale));
+export default connect(mapStateToProps)(SelectLocale);
