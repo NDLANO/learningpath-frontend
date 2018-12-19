@@ -11,19 +11,24 @@ import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 import defined from 'defined';
 import { OK, MOVED_PERMANENTLY } from 'http-status';
 import Helmet from 'react-helmet';
+import { extractCritical } from 'emotion-server';
 import getConditionalClassnames from './getConditionalClassnames';
 import Document from './Document';
 import config from '../../config';
 
 export function renderPage(Page, assets, state = {}) {
-  const htmlString = renderToString(Page);
+  const { html, ids, css } = extractCritical(renderToString(Page));
   const helmet = Helmet.renderStatic();
   return {
-    html: htmlString,
+    html,
     helmet,
     assets,
-    config,
     state,
+    css,
+    data: {
+      ids,
+      config,
+    },
   };
 }
 

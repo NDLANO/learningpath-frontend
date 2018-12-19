@@ -52,31 +52,26 @@ export class App extends React.Component {
       return <ErrorPage locale={locale} />;
     }
     return (
-      <div>
-        <div className="page-container">
-          <Switch>
-            <Route exact path="/" component={Welcome} />
-            <Route exact path="/login" component={LoginProviders} />
-            <Route exact path="/login/success" component={SessionInitializer} />
-            <Route exact path="/login/failure" component={LoginFailure} />
-            <Route path="/logout" component={LogoutSession} />
-            <PrivateRoute path="/minside" component={MyPage} />
-            <PrivateRoute
-              path="/lti/:pathId/step/:stepId"
-              component={LTIEmbedded}
-            />
-            <PrivateRoute
-              path="/lti/:pathId/step/new"
-              component={LTIEmbedded}
-            />
-            <Route path="/learningpaths" component={LearningPathContainer} />
-            <AdminRoute path="/admin" component={Admin} />
-            <Route path="/forbidden" component={Forbidden} />
-            <Route path="/notfound" component={NotFound} />
-            <Route path="*" component={NotFound} />
-          </Switch>
-          <Alerts dispatch={dispatch} messages={messages} />
-        </div>
+      <div className="page-container">
+        <Switch>
+          <Route exact path="/" component={Welcome} />
+          <Route exact path="/login" component={LoginProviders} />
+          <Route exact path="/login/success" component={SessionInitializer} />
+          <Route exact path="/login/failure" component={LoginFailure} />
+          <Route path="/logout" component={LogoutSession} />
+          <PrivateRoute path="/minside" component={MyPage} />
+          <PrivateRoute
+            path="/lti/:pathId/step/:stepId"
+            component={LTIEmbedded}
+          />
+          <PrivateRoute path="/lti/:pathId/step/new" component={LTIEmbedded} />
+          <Route path="/learningpaths" component={LearningPathContainer} />
+          <AdminRoute path="/admin" component={Admin} />
+          <Route path="/forbidden" component={Forbidden} />
+          <Route path="/notfound" component={NotFound} />
+          <Route path="*" component={NotFound} />
+        </Switch>
+        <Alerts dispatch={dispatch} messages={messages} />
         <ScrollToTop />
       </div>
     );
