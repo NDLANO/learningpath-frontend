@@ -135,6 +135,7 @@ LearningPathSearch.propTypes = {
   location: LocationShape,
   lastPage: PropTypes.number.isRequired,
   pushRoute: PropTypes.func.isRequired,
+  locale: PropTypes.string.isRequired,
   match: PropTypes.object.isRequired,
 };
 

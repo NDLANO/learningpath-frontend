@@ -168,6 +168,7 @@ export class MyPage extends React.Component {
 
 MyPage.propTypes = {
   sortKey: PropTypes.oneOf(['title', 'lastUpdated', '-lastUpdated', 'status']),
+  locale: PropTypes.string.isRequired,
   setSortKey: PropTypes.func.isRequired,
   deletePath: PropTypes.func.isRequired,
   updatePathStatus: PropTypes.func.isRequired,

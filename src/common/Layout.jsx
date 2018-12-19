@@ -8,9 +8,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import ZendeskButton from '@ndla/zendesk';
 import polyglot from '../i18n';
 import SelectLocale from '../locale/SelectLocale';
-import ZendeskButton from '@ndla/zendesk';
 import config from '../config';
 
 export const Wrapper = ({ children }) => (
@@ -70,3 +70,7 @@ export const Footer = ({ locale }) => (
     <p className="footer_text">{polyglot.t('footer.footerInfo')}</p>
   </footer>
 );
+
+Footer.propTypes = {
+  locale: PropTypes.string.isRequired,
+};

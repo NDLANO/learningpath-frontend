@@ -228,6 +228,7 @@ export class Admin extends React.Component {
 
 Admin.propTypes = {
   updatePathStatus: PropTypes.func.isRequired,
+  locale: PropTypes.string.isRequired,
 };
 
 Admin.contextTypes = {

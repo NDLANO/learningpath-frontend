@@ -108,6 +108,7 @@ class Welcome extends Component {
 
 Welcome.propTypes = {
   pushRoute: PropTypes.func.isRequired,
+  locale: PropTypes.string.isRequired,
 };
 
 const mapDispatchToProps = {

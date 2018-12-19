@@ -7,6 +7,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Wrapper, OneColumn, Footer } from '../common/Layout';
 import Logo from '../common/Logo';
 import { DefaultErrorMessage } from './DefaultErrorMessage';
@@ -26,5 +27,9 @@ const ErrorPage = ({ locale }) => (
     <Footer locale={locale} />
   </Wrapper>
 );
+
+ErrorPage.propTypes = {
+  locale: PropTypes.string.isRequired,
+};
 
 export default ErrorPage;

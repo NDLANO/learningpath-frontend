@@ -126,6 +126,14 @@ exports[`ErrorPage renderers correctly 1`] = `
         </strong>
       </span>
     </p>
+    <button
+      className="css-chnad3 e1ljv5qk0"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Spør NDLA
+    </button>
     <p
       className="footer_text"
     >
