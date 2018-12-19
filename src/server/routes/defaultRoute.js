@@ -17,7 +17,7 @@ import { serverRoutes } from '../serverRoutes';
 import TokenStatusHandler from '../../util/TokenStatusHandler';
 import { getTokenExpireAt } from '../../util/jwtHelper';
 import prefetchData from '../helpers/prefetchData';
-import { getLocaleInfoFromPath } from '../../i18n';
+import { getLocaleInfoFromPath } from '../../locale/configureLocale';
 import { renderHtml, renderPage } from '../helpers/render';
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST); //eslint-disable-line
