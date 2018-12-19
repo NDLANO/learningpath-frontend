@@ -63,7 +63,10 @@ export const Footer = ({ locale }) => (
       </span>
     </p>
     {config.zendeskWidgetKey && (
-      <ZendeskButton locale={locale} widgetKey={config.zendeskWidgetKey}>
+      <ZendeskButton
+        locale={locale}
+        style={{ bottom: '5.5rem' }}
+        widgetKey={config.zendeskWidgetKey}>
         {polyglot.t('askNDLA')}
       </ZendeskButton>
     )}
