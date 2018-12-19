@@ -6,38 +6,27 @@
  *
  */
 
-import React from 'react';
-import { renderToString } from 'react-dom/server';
 import express from 'express';
 import helmet from 'helmet';
-import compression from 'compression';
 import requestProxy from 'express-request-proxy';
-import { Provider } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { StaticRouter } from 'react-router';
-import { matchPath } from 'react-router-dom';
 import bodyParser from 'body-parser';
 import jwt from 'express-jwt';
 import jwksRsa from 'jwks-rsa';
+import compression from 'compression';
 import {
   OK,
   INTERNAL_SERVER_ERROR,
   FORBIDDEN,
-  NOT_FOUND,
   NOT_ACCEPTABLE,
+  MOVED_PERMANENTLY,
+  TEMPORARY_REDIRECT,
 } from 'http-status';
-import App from '../main/App';
 import config, { getEnvironmentVariabel } from '../config';
-import { getHtmlLang, isValidLocale } from '../locale/configureLocale';
-import Html from './Html';
-import { getToken, getUsers } from './auth';
-import Auth0SilentCallback from './Auth0SilentCallback';
-import configureStore from '../configureStore';
-import { serverRoutes } from './serverRoutes';
-import TokenStatusHandler from '../util/TokenStatusHandler';
+import { getToken, getUsers } from './helpers/auth';
+import Auth0SilentCallback from './helpers/Auth0SilentCallback';
 import contentSecurityPolicy from './contentSecurityPolicy';
 import errorLogger from '../util/logger';
-import { getTokenExpireAt } from '../util/jwtHelper';
+import { errorRoute, defaultRoute } from './routes';
 
 const app = express();
 const allowedBodyContentTypes = ['application/csp-report', 'application/json'];
@@ -63,41 +52,45 @@ app.use(
       preload: true,
     },
     contentSecurityPolicy,
-    frameguard:
-      process.env.NODE_ENV !== 'development'
-        ? {
-            action: 'allow-from',
-            domain: 'https://*.hotjar.com',
-          }
-        : undefined,
   }),
 );
 
-const getConditionalClassnames = userAgentString => {
-  if (userAgentString && userAgentString.indexOf('MSIE') >= 0) {
-    return 'ie lt-ie11';
+async function sendInternalServerError(req, res) {
+  if (res.getHeader('Content-Type') === 'application/json') {
+    res.status(INTERNAL_SERVER_ERROR).json('Internal server error');
+  } else {
+    const { data } = await errorRoute(req);
+    res.status(INTERNAL_SERVER_ERROR).send(data);
   }
-  if (userAgentString && userAgentString.indexOf('Trident/7.0; rv:11.0') >= 0) {
-    return 'ie gt-ie10';
-  }
-  return '';
-};
+}
 
-const renderHtmlString = (
-  locale,
-  userAgentString,
-  state = {},
-  component = undefined,
-) =>
-  renderToString(
-    <Html
-      lang={locale}
-      state={state}
-      userAgentString={userAgentString}
-      component={component}
-      className={getConditionalClassnames(userAgentString)}
-    />,
-  );
+function sendResponse(res, data, status = OK) {
+  if (status === MOVED_PERMANENTLY || status === TEMPORARY_REDIRECT) {
+    res.writeHead(status, data);
+    res.end();
+  } else if (res.getHeader('Content-Type') === 'application/json') {
+    res.status(status).json(data);
+  } else {
+    res.status(status).send(data);
+  }
+}
+
+async function handleRequest(req, res, route) {
+  try {
+    const token = await getToken();
+    // storeAccessToken(token.access_token);
+    try {
+      const { data, status } = await route(req, res, token);
+      sendResponse(res, data, status);
+    } catch (err) {
+      errorLogger.error(err);
+      await sendInternalServerError(req, res);
+    }
+  } catch (err) {
+    errorLogger.error(err);
+    await sendInternalServerError(req, res);
+  }
+}
 
 app.get('/robots.txt', (req, res) => {
   if (req.hostname === 'stier.ndla.no') {
@@ -152,7 +145,8 @@ app.get(
         const users = await getUsers(managementToken, ownerIds);
         res.status(OK).json(users);
       } catch (err) {
-        res.status(INTERNAL_SERVER_ERROR).send(err.message);
+        sendInternalServerError(req, res);
+        errorLogger.error(err);
       }
     }
   },
@@ -162,12 +156,14 @@ app.get('/login/silent-callback', (req, res) => {
   res.send('<!doctype html>\n' + Auth0SilentCallback); // eslint-disable-line
 });
 
-app.get('/get_token', (req, res) => {
-  getToken('ndla_system')
-    .then(token => {
-      res.send(token);
-    })
-    .catch(err => res.status(INTERNAL_SERVER_ERROR).send(err.message));
+app.get('/get_token', async (req, res) => {
+  try {
+    const token = await getToken('ndla_system');
+    res.send(token);
+  } catch (err) {
+    errorLogger.error(err);
+    sendInternalServerError(req, res);
+  }
 });
 
 app.post('/csp-report', (req, res) => {
@@ -186,93 +182,8 @@ app.post('/csp-report', (req, res) => {
   }
 });
 
-function prefetchData(req, dispatch) {
-  const promises = [];
-  serverRoutes.forEach(route => {
-    const match = matchPath(req.url, route);
-    if (match && route.component.fetchData) {
-      promises.push(
-        route.component.fetchData({
-          match,
-          location: { search: req.query },
-          ...bindActionCreators(route.component.mapDispatchToProps, dispatch),
-        }),
-      );
-    }
-    return match;
-  });
-  return Promise.all(promises);
-}
-
-function handleResponse(req, res, token) {
-  const paths = req.url.split('/');
-  const locale = getHtmlLang(paths[1]);
-  const userAgentString = req.headers['user-agent'];
-  const match = serverRoutes.find(r => matchPath(req.url, r));
-  // eslint-disable-next-line no-underscore-dangle
-  const storedTokenInfo = {
-    token: token.access_token,
-    expiresAt: getTokenExpireAt(token.access_token),
-  };
-  if (config.disableSSR || match.notFound) {
-    const htmlString = renderHtmlString(locale, userAgentString, {
-      accessToken: storedTokenInfo,
-      locale,
-    });
-    res.send(`<!doctype html>\n${htmlString}`);
-    return;
-  }
-
-  const basename = isValidLocale(paths[1]) ? `${paths[1]}` : '';
-
-  const store = configureStore({ locale, accessToken: storedTokenInfo });
-  TokenStatusHandler.getInstance({ store });
-
-  const context = {};
-  const component = (
-    <Provider store={store} locale={locale}>
-      <StaticRouter basename={basename} location={req.url} context={context}>
-        <App />
-      </StaticRouter>
-    </Provider>
-  );
-
-  if (context.url) {
-    res.writeHead(301, {
-      Location: context.url,
-    });
-    res.end();
-  } else {
-    prefetchData(req, store.dispatch)
-      .then(() => {
-        const htmlString = renderHtmlString(
-          locale,
-          userAgentString,
-          store.getState(),
-          component,
-        );
-        res.send(`<!doctype html>\n${htmlString}`);
-      })
-      .catch(err => {
-        if (
-          err &&
-          (err.status === FORBIDDEN || err.status === NOT_FOUND) &&
-          err.redirectPath
-        ) {
-          res.redirect(err.redirectPath);
-        } else {
-          res.redirect('/');
-        }
-      });
-  }
-}
-
 app.get('/*', (req, res) => {
-  getToken('ndla_system')
-    .then(token => {
-      handleResponse(req, res, token);
-    })
-    .catch(err => res.status(INTERNAL_SERVER_ERROR).send(err.message));
+  handleRequest(req, res, defaultRoute);
 });
 
 export default app;

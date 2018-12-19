@@ -57,6 +57,17 @@ const gaTrackingId = activatedForEnvironment(
   `UA-9036010-29`,
 );
 
+const getAuth0Hostname = () => {
+  switch (process.env.NDLA_ENVIRONMENT) {
+    case 'prod':
+      return 'ndla.eu.auth0.com';
+    case 'staging':
+      return 'ndla-staging.eu.auth0.com';
+    default:
+      return 'ndla-test.eu.auth0.com';
+  }
+};
+
 const config = {
   componentName: getEnvironmentVariabel(
     'npm_package_name',
@@ -88,8 +99,8 @@ const config = {
     pinterestActivated,
   ltiActivated,
   ndlaPersonalClientId: getEnvironmentVariabel('NDLA_PERSONAL_CLIENT_ID', ''),
-  auth0Domain: getEnvironmentVariabel('AUTH0_DOMAIN', ''),
-  auth0Url: 'https://ndla.eu.auth0.com',
+  auth0Domain: getAuth0Hostname(),
+  auth0Url: `https://${getAuth0Hostname()}`,
   disableSSR: getEnvironmentVariabel('DISABLE_SSR', false),
   zendeskHost: getEnvironmentVariabel('NDLA_ZENDESK_HOST'),
   app: {

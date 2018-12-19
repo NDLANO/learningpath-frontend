@@ -28,17 +28,30 @@ import LearningPathContainer from '../learningPath/LearningPathContainer';
 import LoginFailure from '../session/LoginFailure';
 import SessionInitializer from '../session/SessionInitializer';
 import ZendeskButton from './ZendeskButton';
+import ErrorPage from '../errorPage/ErrorPage';
 import '../style/index.css';
 
 export class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
   getChildContext() {
     return {
       lang: this.props.locale,
     };
   }
 
+  componentDidCatch() {
+    this.setState({ hasError: true });
+  }
+
   render() {
-    const { dispatch, messages } = this.props;
+    const { dispatch, messages, locale } = this.props;
+    if (this.state.hasError) {
+      return <ErrorPage locale={locale} />;
+    }
     return (
       <div>
         <div className="page-container">

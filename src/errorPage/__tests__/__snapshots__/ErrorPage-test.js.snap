@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorPage renderers correctly 1`] = `
+<div
+  className="wrapper"
+>
+  <div
+    className="one-column"
+  >
+    <div
+      className="masthead_wrapper"
+    >
+      <div
+        className="masthead"
+      >
+        <div
+          className="masthead_left--desktop"
+        >
+          <div
+            className="logo un-button"
+          >
+            <a
+              className="logo_link"
+              href="/"
+              onClick={[Function]}
+            >
+              Nasjonal digital læringsarena
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="infoblock-error"
+    >
+      <img
+        alt="Noe gikk galt."
+        role="presentation"
+        src="/oops.gif"
+        style={
+          Object {
+            "maxWidth": "100%",
+          }
+        }
+      />
+      <div>
+        <h1>
+          Ops, noe gikk galt
+        </h1>
+        <span>
+          Beklager, en feil oppsto.
+        </span>
+      </div>
+    </div>
+  </div>
+  <footer
+    className="footer"
+  >
+    <form
+      className="footer_language-form"
+    >
+      <label
+        className="footer_language-label footer--bold"
+        htmlFor="language-select"
+      >
+        Velg språk (language): 
+      </label>
+      <select
+        data-cy="select-locale"
+        onChange={[Function]}
+        value="nb"
+      >
+        <option
+          value="nb"
+        >
+          Bokmål
+        </option>
+        <option
+          value="nn"
+        >
+          Nynorsk
+        </option>
+        <option
+          value="en"
+        >
+          English
+        </option>
+      </select>
+    </form>
+    <ul
+      className="footer_list footer--bold"
+    >
+      <li
+        className="footer_item"
+      >
+        <a
+          className="footer_link"
+          data-cy="footer-about-ndla"
+          href="https://om.ndla.no/"
+        >
+          Om NDLA
+        </a>
+      </li>
+    </ul>
+    <div
+      className="footer_ruler"
+    />
+    <p
+      className="footer_text"
+    >
+      <span
+        className="footer_editor"
+      >
+        Ansvarlig redaktør: 
+        <strong>
+          Christer Gundersen
+        </strong>
+      </span>
+      <span
+        className="footer_editor"
+      >
+        Utgaveansvarlig: 
+         
+        <strong>
+          Pål Frønsdal
+        </strong>
+      </span>
+    </p>
+    <p
+      className="footer_text"
+    >
+      Nettstedet er utarbeidet av NDLA som åpen kildekode.
+    </p>
+  </footer>
+</div>
+`;
