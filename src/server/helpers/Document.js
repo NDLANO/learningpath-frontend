@@ -16,7 +16,6 @@ import {
   SvgPolyfillScript,
   SvgPolyfillScriptInitalization,
 } from './svgPolyfill';
-import Zendesk from './Zendesk';
 import { GoogleTagMangerNoScript, GoogleTagMangerScript } from './Gtm';
 import HotjarScript from './Hotjar';
 
@@ -89,7 +88,6 @@ const Document = props => {
           />
         ))}
         <HotjarScript />
-        <Zendesk lang={locale} />
         <SvgPolyfillScriptInitalization className={className} />
       </body>
     </html>

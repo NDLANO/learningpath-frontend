@@ -27,7 +27,6 @@ import LogoutSession from '../session/LogoutSession';
 import LearningPathContainer from '../learningPath/LearningPathContainer';
 import LoginFailure from '../session/LoginFailure';
 import SessionInitializer from '../session/SessionInitializer';
-import ZendeskButton from './ZendeskButton';
 import ErrorPage from '../errorPage/ErrorPage';
 import '../style/index.css';
 
@@ -79,7 +78,6 @@ export class App extends React.Component {
           <Alerts dispatch={dispatch} messages={messages} />
         </div>
         <ScrollToTop />
-        <ZendeskButton />
       </div>
     );
   }

@@ -34,7 +34,6 @@ export async function renderHtml(req, html, context, props) {
     <Document
       className={className}
       userAgentString={userAgentString}
-      useZendesk
       {...props}
     />,
   );
