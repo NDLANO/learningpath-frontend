@@ -6,7 +6,7 @@
  *
  */
 
-import { resolveJsonOrRejectWithError } from './helpers';
+import { resolveJsonOrRejectWithError } from './resolveJsonOrRejectWithError';
 
 export const fetchNewSystemToken = () =>
   fetch('/get_token', {

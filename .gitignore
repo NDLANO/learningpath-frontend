@@ -11,10 +11,4 @@ jsconfig.json
 /e2e/videos
 /e2e/screenshots
 yarn-error.log
-
-### VisualStudioCode ###
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+.vscode
