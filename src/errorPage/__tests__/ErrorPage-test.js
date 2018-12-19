@@ -21,7 +21,7 @@ test('ErrorPage renderers correctly', () => {
   const store = configureStore({ locale: 'nb' });
   const component = renderer.create(
     <Provider store={store} locale="nb">
-      <ErrorPage />
+      <ErrorPage locale="nb" />
     </Provider>,
   );
 

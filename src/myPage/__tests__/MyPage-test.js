@@ -29,6 +29,7 @@ test('component/MyPage', () => {
       {...requiredProps}
       learningPaths={translatedLearningPaths}
       copyPath={noop}
+      locale="nb"
       localFetchMyLearningPaths={noop}
     />,
     { context: { lang: 'nb' } },
