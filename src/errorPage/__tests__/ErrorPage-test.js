@@ -13,6 +13,10 @@ import renderer from 'react-test-renderer';
 import ErrorPage from '../ErrorPage';
 import configureStore from '../../configureStore';
 
+jest.mock('../../config', () => ({
+  zendeskWidgetKey: '123',
+}));
+
 test('ErrorPage renderers correctly', () => {
   const store = configureStore({ locale: 'nb' });
   const component = renderer.create(

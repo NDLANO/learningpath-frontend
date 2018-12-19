@@ -39,6 +39,7 @@
     "eslint": "^5.9.0",
     "eslint-config-ndla": "1.0.1",
     "flux-standard-action": "2.0.3",
+    "jest-emotion": "^9.2.7",
     "json-loader": "0.5.7",
     "nock": "9.4.4",
     "nodemon": "1.18.3",
