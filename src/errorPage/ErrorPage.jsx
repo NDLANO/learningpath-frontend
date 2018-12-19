@@ -11,7 +11,7 @@ import { Wrapper, OneColumn, Footer } from '../common/Layout';
 import Logo from '../common/Logo';
 import { DefaultErrorMessage } from './DefaultErrorMessage';
 
-const ErrorPage = () => (
+const ErrorPage = ({ locale }) => (
   <Wrapper>
     <OneColumn>
       <div className="masthead_wrapper">
@@ -23,7 +23,8 @@ const ErrorPage = () => (
       </div>
       <DefaultErrorMessage />
     </OneColumn>
-    <Footer />
+    <Footer locale={locale} />
   </Wrapper>
 );
+
 export default ErrorPage;
