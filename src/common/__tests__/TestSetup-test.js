@@ -13,10 +13,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { shallow, mount, render } from 'enzyme';
-import {
-  locationOrigin,
-  apiBaseUrl,
-} from '../../sources/apiConstants';
+import { locationOrigin, apiBaseUrl } from '../../sources/apiConstants';
 
 class Selfie extends Component {
   componentDidMount() {}
