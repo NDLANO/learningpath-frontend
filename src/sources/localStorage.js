@@ -32,7 +32,9 @@ const isValid = accessToken => {
 
 export const getSessionFromLocalStorage = () => {
   const token = getAccessToken();
-  if (!isValid(token)) return {};
+  if (!isValid(token)) {
+    return {};
+  }
   return {
     token,
     expires: getAccessTokenExpires(),
