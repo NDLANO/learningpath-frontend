@@ -50,7 +50,7 @@ async function doRender(req, res, token) {
     };
   }
 
-  const store = configureStore({ locale, accessToken: storedTokenInfo });
+  const store = configureStore({ locale });
   TokenStatusHandler.getInstance({ store });
   const context = {};
 
