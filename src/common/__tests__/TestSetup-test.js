@@ -13,11 +13,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { shallow, mount, render } from 'enzyme';
-import {
-  locationOrigin,
-  apiBaseUrl,
-  accessToken,
-} from '../../sources/apiConstants';
+import { locationOrigin, apiBaseUrl } from '../../sources/apiConstants';
 
 class Selfie extends Component {
   componentDidMount() {}
@@ -33,7 +29,6 @@ Selfie.defaultProps = { foo: 'default bar' };
 test('components/TestSetup selftest - unit test mocking', () => {
   expect(locationOrigin).toBe('http://ndla-frontend');
   expect(apiBaseUrl).toBe('http://ndla-api');
-  expect(accessToken).toBe('ndlatestapikey');
 });
 
 test('components/TestSetup selftest - Enzyme shallow rendering', () => {

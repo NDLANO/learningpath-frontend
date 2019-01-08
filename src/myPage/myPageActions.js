@@ -39,8 +39,8 @@ export function removeRejectedMessage(learningPath) {
 }
 
 export function fetchMyLearningPaths() {
-  return (dispatch, getState) =>
-    fetchMyPaths(getState().accessToken)
+  return dispatch =>
+    fetchMyPaths()
       .then(paths => {
         paths.forEach(path => {
           if (path.message && path.message.length > 0) {

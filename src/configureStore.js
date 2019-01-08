@@ -8,31 +8,15 @@
 
 import { compose, createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import persistState from 'redux-localstorage';
 import { routerMiddleware } from 'react-router-redux';
 
 import reducers from './reducers';
 import { errorReporter } from './middleware';
 
-const slicer = paths =>
-  // custom slicer because default slicer does not store falsy values
-  state =>
-    paths.reduce((acc, path) => {
-      // eslint-disable-next-line no-param-reassign
-      acc[path] = state[path];
-      return acc;
-    }, {});
-
 export default function configureStore(initialState, history) {
   const middleware = routerMiddleware(history);
   const createFinalStore = compose(
     applyMiddleware(thunkMiddleware, errorReporter, middleware),
-    process.env.BUILD_TARGET === 'client'
-      ? persistState(['authenticated', 'accessToken'], {
-          key: 'ndla:sti',
-          slicer,
-        })
-      : f => f,
     process.env.BUILD_TARGET === 'client' && window && window.devToolsExtension
       ? window.devToolsExtension()
       : f => f,

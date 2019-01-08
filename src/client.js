@@ -19,6 +19,11 @@ import TokenStatusHandler from './util/TokenStatusHandler';
 import { configureLocale, isValidLocale } from './locale/configureLocale';
 import configureStore from './configureStore';
 import App from './main/App';
+import {
+  saveAccessToken,
+  getSessionFromLocalStorage,
+} from './sources/localStorage';
+
 import { getTokenExpireAt } from './util/jwtHelper';
 
 function generateBasename(path) {
@@ -42,26 +47,30 @@ const basename = generateBasename(path);
 const browserHistory = basename ? createHistory({ basename }) : createHistory();
 
 const emptyState = {
-  authenticated: false,
-  accessToken: {},
   learningPathStep: {},
   learningPaths: [],
   messages: [],
   locale,
 };
 
-const initialState =
+const tokenStoredOnServer =
   !isEmpty(window.initialState) &&
   window.initialState.accessToken &&
-  window.initialState.accessToken.token
-    ? {
-        ...window.initialState,
-        accessToken: {
-          token: window.initialState.accessToken.token,
-          expiresAt: getTokenExpireAt(window.initialState.accessToken.token),
-        },
-      }
-    : emptyState;
+  window.initialState.accessToken.token;
+
+const { token, authenticated } = getSessionFromLocalStorage();
+
+if (!token && tokenStoredOnServer) {
+  saveAccessToken({
+    token: tokenStoredOnServer,
+    expires: getTokenExpireAt(tokenStoredOnServer),
+  });
+}
+
+const initialState = {
+  ...emptyState,
+  authenticated: authenticated === 'true',
+};
 
 const store = configureStore(initialState, browserHistory);
 

@@ -17,7 +17,9 @@ import SiteNavAdmin from './SiteNavAdmin';
 import SiteNavMyPage from './SiteNavMyPage';
 import SiteNavSessionAction from './SiteNavSessionAction';
 import { closeSidebars } from '../sidebarActions';
+import { getAccessToken } from '../../sources/localStorage';
 import { decodeToken, getScope } from '../../util/jwtHelper';
+
 import config from '../../config';
 
 export const SiteNav = ({
@@ -90,20 +92,17 @@ SiteNav.defaultProps = {
   userName: '',
 };
 
-const selectUserName = ({ authenticated, accessToken }) =>
-  authenticated
-    ? decodeToken(accessToken.token)['https://ndla.no/user_name']
-    : '';
-
-const mapStateToProps = state =>
-  Object.assign({}, state, {
-    userName: selectUserName(state),
+const mapStateToProps = state => {
+  const token = getAccessToken();
+  return Object.assign({}, state, {
+    username: state.authenticated
+      ? decodeToken(token)['https://ndla.no/user_name']
+      : '',
     isAdmin: state.authenticated
-      ? getScope(state.accessToken.token).includes(
-          `learningpath-${config.environment}:admin`,
-        )
+      ? getScope(token).includes(`learningpath-${config.environment}:admin`)
       : false,
   });
+};
 
 const mapDispatchToProps = {
   localCloseSidebars: closeSidebars,
