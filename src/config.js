@@ -102,7 +102,7 @@ const config = {
   auth0Domain: getAuth0Hostname(),
   auth0Url: `https://${getAuth0Hostname()}`,
   disableSSR: getEnvironmentVariabel('DISABLE_SSR', false),
-  zendeskHost: getEnvironmentVariabel('NDLA_ZENDESK_HOST'),
+  zendeskWidgetKey: getEnvironmentVariabel('NDLA_ZENDESK_WIDGET_KEY'),
   app: {
     title: 'NDLA Læringsstier',
     head: {
@@ -117,7 +117,7 @@ export function getUniversalConfig() {
   return process.env.BUILD_TARGET === 'server' ||
     process.env.NODE_ENV === 'unittest'
     ? config
-    : window.config;
+    : window.DATA.config;
 }
 
 export default getUniversalConfig();

@@ -8,8 +8,10 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import ZendeskButton from '@ndla/zendesk';
 import polyglot from '../i18n';
 import SelectLocale from '../locale/SelectLocale';
+import config from '../config';
 
 export const Wrapper = ({ children }) => (
   <div className="wrapper">{children}</div>
@@ -29,7 +31,7 @@ OneColumn.propTypes = {
   className: PropTypes.string,
 };
 
-export const Footer = () => (
+export const Footer = ({ locale }) => (
   <footer className="footer">
     <form className="footer_language-form">
       <label
@@ -60,6 +62,18 @@ export const Footer = () => (
         <strong>Pål Frønsdal</strong>
       </span>
     </p>
+    {config.zendeskWidgetKey && (
+      <ZendeskButton
+        locale={locale}
+        style={{ bottom: '5.5rem' }}
+        widgetKey={config.zendeskWidgetKey}>
+        {polyglot.t('askNDLA')}
+      </ZendeskButton>
+    )}
     <p className="footer_text">{polyglot.t('footer.footerInfo')}</p>
   </footer>
 );
+
+Footer.propTypes = {
+  locale: PropTypes.string.isRequired,
+};

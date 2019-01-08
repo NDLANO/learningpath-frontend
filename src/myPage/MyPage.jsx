@@ -32,6 +32,7 @@ import { getLearningPaths, getSortKey } from './myPageSelectors';
 import LearningPathTile from '../learningPath/tile/LearningPathTile';
 import SelectSortTiles from '../learningPath/tile/SelectSortTiles';
 import { LocationShape, HistoryShape } from '../shapes';
+import { getLocale } from '../locale/localeSelectors';
 
 export class MyPage extends React.Component {
   constructor(props) {
@@ -51,13 +52,12 @@ export class MyPage extends React.Component {
   }
 
   onCreateLearningPath(values) {
-    const { createPath } = this.props;
-    const { lang } = this.context;
+    const { createPath, locale: language } = this.props;
     createPath({
       title: values.title,
       description: values.description,
       tags: [],
-      language: lang,
+      language,
       duration: 1,
       coverPhoto: { url: '', metaUrl: '' },
       copyright: {
@@ -73,8 +73,12 @@ export class MyPage extends React.Component {
   }
 
   onDropDownSelect(actionType, learningPath) {
-    const { deletePath, updatePathStatus, copyPath } = this.props;
-    const { lang } = this.context;
+    const {
+      deletePath,
+      updatePathStatus,
+      copyPath,
+      locale: language,
+    } = this.props;
     switch (actionType) {
       case 'delete':
         deletePath(learningPath);
@@ -89,7 +93,7 @@ export class MyPage extends React.Component {
         updatePathStatus(learningPath.id, 'SUBMITTED');
         break;
       case 'makecopy':
-        copyPath(learningPath, lang);
+        copyPath(learningPath, language);
         break;
       default:
     }
@@ -103,7 +107,7 @@ export class MyPage extends React.Component {
   }
 
   render() {
-    const { learningPaths, sortKey, setSortKey, location } = this.props;
+    const { learningPaths, sortKey, locale, setSortKey, location } = this.props;
 
     const items = learningPaths.map(learningPath => {
       const dropdown = (
@@ -156,7 +160,7 @@ export class MyPage extends React.Component {
             <CreateLearningPath onSubmit={this.onCreateLearningPath} />
           </Lightbox>
         </OneColumn>
-        <Footer />
+        <Footer locale={locale} />
       </Wrapper>
     );
   }
@@ -164,6 +168,7 @@ export class MyPage extends React.Component {
 
 MyPage.propTypes = {
   sortKey: PropTypes.oneOf(['title', 'lastUpdated', '-lastUpdated', 'status']),
+  locale: PropTypes.string.isRequired,
   setSortKey: PropTypes.func.isRequired,
   deletePath: PropTypes.func.isRequired,
   updatePathStatus: PropTypes.func.isRequired,
@@ -177,15 +182,12 @@ MyPage.propTypes = {
 
 MyPage.defaultProps = { learningPaths: [], sortKey: 'title' };
 
-MyPage.contextTypes = {
-  lang: PropTypes.string.isRequired,
-};
-
 export function mapStateToProps(state) {
   const sortKey = getSortKey(state);
   const learningPaths = getLearningPaths(state);
+  const locale = getLocale(state);
 
-  return Object.assign({}, state, { learningPaths, sortKey });
+  return Object.assign({}, state, { learningPaths, sortKey, locale });
 }
 
 const mapDispatchToProps = {

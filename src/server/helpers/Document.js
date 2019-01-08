@@ -16,12 +16,11 @@ import {
   SvgPolyfillScript,
   SvgPolyfillScriptInitalization,
 } from './svgPolyfill';
-import Zendesk from './Zendesk';
 import { GoogleTagMangerNoScript, GoogleTagMangerScript } from './Gtm';
 import HotjarScript from './Hotjar';
 
 const Document = props => {
-  const { className, state, userAgentString, assets } = props;
+  const { className, state, userAgentString, assets, css, data } = props;
   const head = Helmet.rewind();
   const { locale } = state;
 
@@ -45,6 +44,7 @@ const Document = props => {
           <script async src="https://www.google-analytics.com/analytics.js" />
         )}
         <SvgPolyfillScript className={className} />
+        {css && <style dangerouslySetInnerHTML={{ __html: css }} />}
         {assets.css &&
           assets.css && (
             <link rel="stylesheet" type="text/css" href={assets.css} />
@@ -74,11 +74,11 @@ const Document = props => {
           }}
         />
         <script
+          type="text/javascript"
           dangerouslySetInnerHTML={{
-            __html: `window.config = ${serialize(config)}`,
+            __html: `window.DATA = ${serialize(data)}; `,
           }}
         />
-
         {assets.js.map(js => (
           <script
             key={js}
@@ -89,7 +89,6 @@ const Document = props => {
           />
         ))}
         <HotjarScript />
-        <Zendesk lang={locale} />
         <SvgPolyfillScriptInitalization className={className} />
       </body>
     </html>
@@ -97,7 +96,9 @@ const Document = props => {
 };
 
 Document.propTypes = {
+  data: PropTypes.object.isRequired,
   className: PropTypes.string.isRequired,
+  css: PropTypes.string.isRequired,
   state: PropTypes.object.isRequired,
   userAgentString: PropTypes.string.isRequired,
   assets: PropTypes.shape({

@@ -26,6 +26,7 @@ import {
   getLearningPathSearchTotalCount,
 } from './learningPathSearchSelectors';
 import { LocationShape } from '../../shapes';
+import { getLocale } from '../../locale/localeSelectors';
 
 class LearningPathSearch extends React.Component {
   static mapDispatchToProps = {
@@ -58,6 +59,7 @@ class LearningPathSearch extends React.Component {
     const {
       learningPaths,
       lastPage,
+      locale,
       location: { pathname, search },
       pushRoute,
     } = this.props;
@@ -121,7 +123,7 @@ class LearningPathSearch extends React.Component {
             />
           </div>
         </OneColumn>
-        <Footer />
+        <Footer locale={locale} />
       </Wrapper>
     );
   }
@@ -133,6 +135,7 @@ LearningPathSearch.propTypes = {
   location: LocationShape,
   lastPage: PropTypes.number.isRequired,
   pushRoute: PropTypes.func.isRequired,
+  locale: PropTypes.string.isRequired,
   match: PropTypes.object.isRequired,
 };
 
@@ -146,6 +149,7 @@ const mapStateToProps = (state, props) => {
     {},
     {
       lastPage,
+      locale: getLocale(state),
       learningPaths: getLearningPathSearchResult(state),
     },
   );

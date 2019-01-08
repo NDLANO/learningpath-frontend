@@ -1,10 +1,12 @@
 {
+  "version": 1,
   "env": {
     "NDLA_LEARNING_PATH_CLIENT_ID": "@ndla_learning_path_client_id",
     "NDLA_LEARNING_PATH_CLIENT_SECRET": "@ndla_learning_path_client_secret",
     "NDLA_GOOGLE_API_KEY": "@ndla_google_api_key",
     "NDLA_GOOGLE_SEARCH_ENGINE_ID": "@ndla_google_search_engine_id",
     "NDLA_PERSONAL_CLIENT_ID": "@ndla_personal_client_id",
+    "NDLA_ZENDESK_WIDGET_KEY": "@ndla_zendesk_widget_key",
     "AUTH0_DOMAIN": "@auth0_domain",
     "AUTH0_CLIENT_ID": "@auth0_client_id",
     "NODE_ENV": "production"
