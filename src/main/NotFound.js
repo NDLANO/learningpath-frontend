@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { HelmetWithTracker } from 'ndla-tracker';
+import { HelmetWithTracker } from '@ndla/tracker';
 import { Link } from 'react-router-dom';
 import polyglot from '../i18n';
 

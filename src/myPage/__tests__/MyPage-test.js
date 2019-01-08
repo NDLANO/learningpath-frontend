@@ -21,6 +21,7 @@ test('component/MyPage', () => {
     createPath: noop,
     deletePath: noop,
     updatePathStatus: noop,
+    location: { search: '', pathname: '/minside' },
   };
 
   const component = shallow(
@@ -28,6 +29,7 @@ test('component/MyPage', () => {
       {...requiredProps}
       learningPaths={translatedLearningPaths}
       copyPath={noop}
+      locale="nb"
       localFetchMyLearningPaths={noop}
     />,
     { context: { lang: 'nb' } },

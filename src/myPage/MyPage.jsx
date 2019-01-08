@@ -9,7 +9,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { HelmetWithTracker } from 'ndla-tracker';
+import queryString from 'query-string';
+import { HelmetWithTracker } from '@ndla/tracker';
 import {
   deleteLearningPath,
   createLearningPath,
@@ -30,6 +31,8 @@ import {
 import { getLearningPaths, getSortKey } from './myPageSelectors';
 import LearningPathTile from '../learningPath/tile/LearningPathTile';
 import SelectSortTiles from '../learningPath/tile/SelectSortTiles';
+import { LocationShape, HistoryShape } from '../shapes';
+import { getLocale } from '../locale/localeSelectors';
 
 export class MyPage extends React.Component {
   constructor(props) {
@@ -38,7 +41,7 @@ export class MyPage extends React.Component {
     this.state = {
       displayCreatePath: false,
     };
-    this.toggleLightBox = this.toggleLightBox.bind(this);
+    this.onClose = this.onClose.bind(this);
     this.onCreateLearningPath = this.onCreateLearningPath.bind(this);
     this.onDropDownSelect = this.onDropDownSelect.bind(this);
   }
@@ -49,13 +52,12 @@ export class MyPage extends React.Component {
   }
 
   onCreateLearningPath(values) {
-    const { createPath } = this.props;
-    const { lang } = this.context;
+    const { createPath, locale: language } = this.props;
     createPath({
       title: values.title,
       description: values.description,
       tags: [],
-      language: lang,
+      language,
       duration: 1,
       coverPhoto: { url: '', metaUrl: '' },
       copyright: {
@@ -71,8 +73,12 @@ export class MyPage extends React.Component {
   }
 
   onDropDownSelect(actionType, learningPath) {
-    const { deletePath, updatePathStatus, copyPath } = this.props;
-    const { lang } = this.context;
+    const {
+      deletePath,
+      updatePathStatus,
+      copyPath,
+      locale: language,
+    } = this.props;
     switch (actionType) {
       case 'delete':
         deletePath(learningPath);
@@ -87,20 +93,21 @@ export class MyPage extends React.Component {
         updatePathStatus(learningPath.id, 'SUBMITTED');
         break;
       case 'makecopy':
-        copyPath(learningPath, lang);
+        copyPath(learningPath, language);
         break;
       default:
     }
   }
 
-  toggleLightBox() {
-    this.setState(prevState => ({
-      displayCreatePath: !prevState.displayCreatePath,
-    }));
+  onClose() {
+    const { history, location } = this.props;
+    this.setState({ displayCreatePath: false }, () => {
+      history.push(location.pathname);
+    });
   }
 
   render() {
-    const { learningPaths, sortKey, setSortKey } = this.props;
+    const { learningPaths, sortKey, locale, setSortKey, location } = this.props;
 
     const items = learningPaths.map(learningPath => {
       const dropdown = (
@@ -118,6 +125,10 @@ export class MyPage extends React.Component {
       );
     });
 
+    const { openModal } = queryString.parse(location.search);
+
+    const displayLightbox =
+      this.state.displayCreatePath || openModal === 'true';
     return (
       <Wrapper>
         <OneColumn>
@@ -139,17 +150,17 @@ export class MyPage extends React.Component {
           <button
             type="button"
             className="cta-link new-learningpath-button"
-            onClick={this.toggleLightBox}
+            onClick={() => {
+              this.setState({ displayCreatePath: true });
+            }}
             data-cy="mypage-new-learningpath-button">
             <LabeledIcon.Add labelText={polyglot.t('myPage.newBtn')} />
           </button>
-          <Lightbox
-            display={this.state.displayCreatePath}
-            onClose={this.toggleLightBox}>
+          <Lightbox display={displayLightbox} onClose={this.onClose}>
             <CreateLearningPath onSubmit={this.onCreateLearningPath} />
           </Lightbox>
         </OneColumn>
-        <Footer />
+        <Footer locale={locale} />
       </Wrapper>
     );
   }
@@ -157,6 +168,7 @@ export class MyPage extends React.Component {
 
 MyPage.propTypes = {
   sortKey: PropTypes.oneOf(['title', 'lastUpdated', '-lastUpdated', 'status']),
+  locale: PropTypes.string.isRequired,
   setSortKey: PropTypes.func.isRequired,
   deletePath: PropTypes.func.isRequired,
   updatePathStatus: PropTypes.func.isRequired,
@@ -164,19 +176,18 @@ MyPage.propTypes = {
   learningPaths: PropTypes.array,
   copyPath: PropTypes.func.isRequired,
   localFetchMyLearningPaths: PropTypes.func.isRequired,
+  location: LocationShape,
+  history: HistoryShape,
 };
 
 MyPage.defaultProps = { learningPaths: [], sortKey: 'title' };
 
-MyPage.contextTypes = {
-  lang: PropTypes.string.isRequired,
-};
-
 export function mapStateToProps(state) {
   const sortKey = getSortKey(state);
   const learningPaths = getLearningPaths(state);
+  const locale = getLocale(state);
 
-  return Object.assign({}, state, { learningPaths, sortKey });
+  return Object.assign({}, state, { learningPaths, sortKey, locale });
 }
 
 const mapDispatchToProps = {

@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import queryString from 'query-string';
 import { routerActions } from 'react-router-redux';
 import upperFirst from 'lodash/upperFirst';
-import { HelmetWithTracker } from 'ndla-tracker';
+import { HelmetWithTracker } from '@ndla/tracker';
 import polyglot from '../../i18n';
 import LinkPager from '../../common/pager/LinkPager';
 import SearchForm from './LearningPathSearchForm';
@@ -25,6 +25,8 @@ import {
   getLearningPathSearchResult,
   getLearningPathSearchTotalCount,
 } from './learningPathSearchSelectors';
+import { LocationShape } from '../../shapes';
+import { getLocale } from '../../locale/localeSelectors';
 
 class LearningPathSearch extends React.Component {
   static mapDispatchToProps = {
@@ -57,6 +59,7 @@ class LearningPathSearch extends React.Component {
     const {
       learningPaths,
       lastPage,
+      locale,
       location: { pathname, search },
       pushRoute,
     } = this.props;
@@ -120,7 +123,7 @@ class LearningPathSearch extends React.Component {
             />
           </div>
         </OneColumn>
-        <Footer />
+        <Footer locale={locale} />
       </Wrapper>
     );
   }
@@ -129,12 +132,10 @@ class LearningPathSearch extends React.Component {
 LearningPathSearch.propTypes = {
   localSearchLearningPaths: PropTypes.func.isRequired,
   learningPaths: PropTypes.arrayOf(PropTypes.object).isRequired,
-  location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired,
-    search: PropTypes.string.isRequired,
-  }),
+  location: LocationShape,
   lastPage: PropTypes.number.isRequired,
   pushRoute: PropTypes.func.isRequired,
+  locale: PropTypes.string.isRequired,
   match: PropTypes.object.isRequired,
 };
 
@@ -148,6 +149,7 @@ const mapStateToProps = (state, props) => {
     {},
     {
       lastPage,
+      locale: getLocale(state),
       learningPaths: getLearningPathSearchResult(state),
     },
   );

@@ -39,7 +39,10 @@ export const SiteNav = ({
       <ul className="site-nav_list">
         <li className="site-nav_item">
           <Link
-            to="/minside"
+            to={{
+              pathname: '/minside',
+              search: '?openModal=true',
+            }}
             className="site-nav_link"
             onClick={() => localCloseSidebars()}
             data-cy="sitenav-create-path">

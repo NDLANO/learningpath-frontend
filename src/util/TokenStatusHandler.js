@@ -6,10 +6,6 @@
  *
  */
 
-/* eslint-disable no-unused-vars */
-import * as sessionActions from '../session/sessionActions';
-/* eslint-enable */
-
 const TokenStatusHandler = (function Singleton() {
   let instance;
 

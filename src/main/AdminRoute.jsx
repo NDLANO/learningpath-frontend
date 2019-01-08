@@ -5,6 +5,7 @@ import { Redirect, Route } from 'react-router-dom';
 import { getScope } from '../util/jwtHelper';
 import { getAccessToken } from '../sources/localStorage';
 import config from '../config';
+import { LocationShape } from '../shapes';
 
 const AdminRoute = ({
   authenticated,
@@ -33,7 +34,7 @@ AdminRoute.propTypes = {
   component: PropTypes.func.isRequired,
   authenticated: PropTypes.bool.isRequired,
   isAdmin: PropTypes.bool.isRequired,
-  location: PropTypes.object.isRequired,
+  location: LocationShape.isRequired,
 };
 
 const mapStateToProps = state =>

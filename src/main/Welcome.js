@@ -12,12 +12,13 @@ import { connect } from 'react-redux';
 import { routerActions } from 'react-router-redux';
 import { Link } from 'react-router-dom';
 import isEmpty from 'lodash/isEmpty';
-import { HelmetWithTracker } from 'ndla-tracker';
+import { HelmetWithTracker } from '@ndla/tracker';
 import queryString from 'query-string';
 import Logo from '../common/Logo';
 import polyglot from '../i18n';
 import Masthead from '../common/Masthead';
 import { Wrapper, OneColumn, Footer } from '../common/Layout';
+import { getLocale } from '../locale/localeSelectors';
 
 class Welcome extends Component {
   constructor(props) {
@@ -39,6 +40,7 @@ class Welcome extends Component {
   }
 
   render() {
+    const { locale } = this.props;
     return (
       <Wrapper>
         <HelmetWithTracker title={polyglot.t('htmlTitles.welcomePage')} />
@@ -98,7 +100,7 @@ class Welcome extends Component {
             </div>
           </div>
         </OneColumn>
-        <Footer />
+        <Footer locale={locale} />
       </Wrapper>
     );
   }
@@ -106,13 +108,18 @@ class Welcome extends Component {
 
 Welcome.propTypes = {
   pushRoute: PropTypes.func.isRequired,
+  locale: PropTypes.string.isRequired,
 };
 
 const mapDispatchToProps = {
   pushRoute: routerActions.push,
 };
 
+const mapStateToProps = state => ({
+  locale: getLocale(state),
+});
+
 export default connect(
-  state => state,
+  mapStateToProps,
   mapDispatchToProps,
 )(Welcome);

@@ -21,3 +21,15 @@ export const CopyrightObjectShape = PropTypes.shape({
     url: PropTypes.string,
   }),
 });
+
+export const LocationShape = PropTypes.shape({
+  pathname: PropTypes.string,
+  hash: PropTypes.string,
+  search: PropTypes.string,
+});
+
+export const HistoryShape = PropTypes.shape({
+  push: PropTypes.func.isRequired,
+  go: PropTypes.func.isRequired,
+  location: LocationShape,
+});

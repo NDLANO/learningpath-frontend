@@ -8,7 +8,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+
+import SafeLink from '@ndla/ui/lib/common/SafeLink';
 import classNames from 'classnames';
 import polyglot from '../i18n';
 import withCloseSidebars from './withCloseSidebars';
@@ -23,9 +25,9 @@ function Logo(props) {
 
   return (
     <div className={rootClasses}>
-      <Link to="/" className="logo_link" onClick={closeSidebars}>
+      <SafeLink to="/" className="logo_link" onClick={closeSidebars}>
         {polyglot.t('logo.altText')}
-      </Link>
+      </SafeLink>
     </div>
   );
 }

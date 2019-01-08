@@ -26,6 +26,11 @@ const phrases = {
     createLearningPathStep: `Create learning path step${titleTemplate}`,
     sortLearningPathSteps: `Sort or delete learning path steps${titleTemplate}`,
   },
+  errorPage: {
+    title: 'Ops, something went wrong',
+    subTitle: 'Sorry, something went wrong.',
+    imageAlt: 'Something went wrong.',
+  },
   askNDLA: 'Ask NDLA',
   searchForm: {
     placeholder: 'Search learning paths',

@@ -13,7 +13,7 @@ import {
   locationOrigin,
   ndlaPersonalClientId,
   auth0Domain,
-} from '../sources/helpers';
+} from '../sources/apiConstants';
 import { getTokenExpireAt } from '../util/jwtHelper';
 import { fetchNewSystemToken } from '../sources/tokens';
 import { saveAccessToken } from '../sources/localStorage';

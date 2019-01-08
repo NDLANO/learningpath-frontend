@@ -9,7 +9,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { HelmetWithTracker } from 'ndla-tracker';
+import { HelmetWithTracker } from '@ndla/tracker';
 import { updateLearningPathsStatus } from '../learningPath/learningPathActions';
 import polyglot from '../i18n';
 import Masthead from '../common/Masthead';
@@ -21,6 +21,7 @@ import SelectSortTiles from '../learningPath/tile/SelectSortTiles';
 import AdminRejectedMessageForm from './AdminRejectedMessageForm';
 import AdminLearningPaths from './AdminLearningPaths';
 import { sortPaths } from '../util/sortUtil';
+import { getLocale } from '../locale/localeSelectors';
 
 const getLearningPathsWithOwner = (learningPaths, users) =>
   learningPaths.map(learningPath => ({
@@ -163,6 +164,7 @@ export class Admin extends React.Component {
   }
 
   render() {
+    const { locale } = this.props;
     const {
       learningPaths,
       sortKey,
@@ -211,7 +213,7 @@ export class Admin extends React.Component {
             />
           </div>
         </OneColumn>
-        <Footer />
+        <Footer locale={locale} />
         <AdminRejectedMessageForm
           message={recjectMessage}
           onSubmit={this.onRejectSubmit}
@@ -226,6 +228,7 @@ export class Admin extends React.Component {
 
 Admin.propTypes = {
   updatePathStatus: PropTypes.func.isRequired,
+  locale: PropTypes.string.isRequired,
 };
 
 Admin.contextTypes = {
@@ -236,7 +239,11 @@ const mapDispatchToProps = {
   updatePathStatus: updateLearningPathsStatus,
 };
 
+const mapStateToProps = state => ({
+  locale: getLocale(state),
+});
+
 export default connect(
-  undefined,
+  mapStateToProps,
   mapDispatchToProps,
 )(Admin);

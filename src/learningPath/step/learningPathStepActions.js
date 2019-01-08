@@ -11,6 +11,7 @@ import { routerActions } from 'react-router-redux';
 import get from 'lodash/get';
 
 import { applicationError, addMessage } from '../../messages/messagesActions';
+// eslint-disable-next-line import/no-cycle
 import { fetchLearningPath } from '../learningPathActions';
 import {
   updateStep,

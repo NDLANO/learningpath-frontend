@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - '8'
+  - '10'
 cache:
   yarn: true
   directories:
@@ -9,7 +9,7 @@ cache:
     - '.eslintcache'
     - node_modules
 script:
-  - yarn test
+  - yarn check-all
   - yarn build
   - yarn e2e-ci
 

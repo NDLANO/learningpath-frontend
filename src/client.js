@@ -10,10 +10,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
-import { configureTracker } from 'ndla-tracker';
+import { configureTracker } from '@ndla/tracker';
 import createHistory from 'history/createBrowserHistory';
-import ErrorReporter from 'ndla-error-reporter';
+import ErrorReporter from '@ndla/error-reporter';
 import isEmpty from 'lodash/isEmpty';
+import { hydrate } from 'emotion';
 import TokenStatusHandler from './util/TokenStatusHandler';
 import { configureLocale, isValidLocale } from './locale/configureLocale';
 import configureStore from './configureStore';
@@ -24,7 +25,6 @@ import {
 } from './sources/localStorage';
 
 import { getTokenExpireAt } from './util/jwtHelper';
-import config from './config';
 
 function generateBasename(path) {
   if (isValidLocale(path)) {
@@ -32,11 +32,15 @@ function generateBasename(path) {
   }
   return undefined;
 }
+const {
+  DATA: { config, ids },
+} = window;
 
 const paths = window.location.pathname.split('/');
 const path = paths.length > 2 ? paths[1] : '/';
 const locale = paths.length > 2 && isValidLocale(paths[1]) ? paths[1] : 'nb';
 
+hydrate(ids);
 configureLocale(locale);
 const basename = generateBasename(path);
 

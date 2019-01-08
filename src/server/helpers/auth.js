@@ -7,7 +7,7 @@
  */
 
 import 'isomorphic-fetch';
-import config, { getEnvironmentVariabel } from '../config';
+import config, { getEnvironmentVariabel } from '../../config';
 
 const url = `${config.auth0Url}/oauth/token`;
 
