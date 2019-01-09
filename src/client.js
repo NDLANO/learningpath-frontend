@@ -102,3 +102,7 @@ renderOrHydrate(
   </Provider>,
   document.getElementById('app-container'),
 );
+
+if (module.hot) {
+  module.hot.accept();
+}

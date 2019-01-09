@@ -44,6 +44,8 @@ module.exports = {
 
     if (!dev) {
       appConfig.devtool = 'source-map';
+    } else {
+      appConfig.devtool = 'cheap-module-source-map';
     }
     return appConfig;
   },
