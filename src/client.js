@@ -11,7 +11,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import { configureTracker } from '@ndla/tracker';
-import createHistory from 'history/createBrowserHistory';
 import ErrorReporter from '@ndla/error-reporter';
 import isEmpty from 'lodash/isEmpty';
 import { hydrate } from 'emotion';
@@ -25,6 +24,7 @@ import {
 } from './sources/localStorage';
 
 import { getTokenExpireAt } from './util/jwtHelper';
+import { createHistory } from './history';
 
 function generateBasename(path) {
   if (isValidLocale(path)) {
@@ -44,7 +44,7 @@ hydrate(ids);
 configureLocale(locale);
 const basename = generateBasename(path);
 
-const browserHistory = basename ? createHistory({ basename }) : createHistory();
+const browserHistory = createHistory(basename);
 
 const emptyState = {
   learningPathStep: {},
@@ -94,15 +94,26 @@ configureTracker({
 
 const renderOrHydrate = disableSSR ? ReactDOM.render : ReactDOM.hydrate;
 
-renderOrHydrate(
-  <Provider store={store} locale={locale}>
-    <Router history={browserHistory}>
-      <App />
-    </Router>
-  </Provider>,
-  document.getElementById('app-container'),
-);
+const render = Component =>
+  renderOrHydrate(
+    <Provider store={store} locale={locale}>
+      <Router history={browserHistory}>
+        <Component />
+      </Router>
+    </Provider>,
+    document.getElementById('app-container'),
+  );
+
+render(App);
 
 if (module.hot) {
-  module.hot.accept();
+  module.hot.accept('./main/App.js', () => {
+    render(App);
+  });
+
+  // Enable Webpack hot module replacement for reducers
+  module.hot.accept('./reducers', () => {
+    const nextRootReducer = require('./reducers');
+    store.replaceReducer(nextRootReducer);
+  });
 }
