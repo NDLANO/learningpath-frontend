@@ -15,4 +15,6 @@ export function getTokenExpireAt(token) {
 
 export const decodeToken = accessToken => decode(accessToken);
 
-export const getScope = accessToken => decodeToken(accessToken).scope || [];
+export const getScope = accessToken => {
+  return decodeToken(accessToken).scope || [];
+};

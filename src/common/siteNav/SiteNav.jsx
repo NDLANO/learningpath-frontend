@@ -99,7 +99,7 @@ const mapStateToProps = state => {
       ? decodeToken(token)['https://ndla.no/user_name']
       : '',
     isAdmin: state.authenticated
-      ? getScope(token).includes(`learningpath-${config.environment}:admin`)
+      ? getScope(token).includes(`learningpath:admin`)
       : false,
   });
 };

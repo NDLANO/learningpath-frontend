@@ -132,8 +132,7 @@ app.get(
       query: { ownerIds },
     } = req;
 
-    const isAdmin =
-      user && user.scope.includes(`learningpath-${config.environment}:admin`);
+    const isAdmin = user && user.scope.includes(`learningpath:admin`);
 
     if (!isAdmin) {
       res
