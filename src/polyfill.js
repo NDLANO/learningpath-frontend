@@ -10,5 +10,5 @@ import '@ndla/polyfill';
 
 // Svg use polyfill is not included in @ndla/polyfill since it is only used in learningpath.
 // In the future learningpath should use @ndla/icons
-import 'svg4everybody';
-window.svg4everybody();
+import svg4everybody from 'svg4everybody';
+svg4everybody();

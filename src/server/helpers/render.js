@@ -12,7 +12,6 @@ import defined from 'defined';
 import { OK, MOVED_PERMANENTLY } from 'http-status';
 import Helmet from 'react-helmet';
 import { extractCritical } from 'emotion-server';
-import getConditionalClassnames from './getConditionalClassnames';
 import Document from './Document';
 import config from '../../config';
 
@@ -33,15 +32,7 @@ export function renderPage(Page, assets, state = {}) {
 }
 
 export async function renderHtml(req, html, context, props) {
-  const userAgentString = req.headers['user-agent'];
-  const className = getConditionalClassnames(userAgentString);
-  const doc = renderToStaticMarkup(
-    <Document
-      className={className}
-      userAgentString={userAgentString}
-      {...props}
-    />,
-  );
+  const doc = renderToStaticMarkup(<Document {...props} />);
 
   if (context.url) {
     return {
