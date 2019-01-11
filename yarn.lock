@@ -899,10 +899,10 @@
     "@ndla/core" "^0.4.5"
     "@ndla/util" "^0.3.1"
 
-"@ndla/polyfill@0.1.3":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@ndla/polyfill/-/polyfill-0.1.3.tgz#c8672fe35eff3a78bef19d22dd6b540527fcd7e2"
-  integrity sha512-MTFWmYC0wyEKA5pQl03/FIvLAuIwqsmPG5e40INfVcDoQ6rOmRkI3Z89Fac3GzJDsH6eelY25+um2WFYPtO9bA==
+"@ndla/polyfill@0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@ndla/polyfill/-/polyfill-0.1.4.tgz#266a90b706c0596319b9b57cc013004baefd49bf"
+  integrity sha512-1klZ8AgByrlnaU6a3gygiBkDFdjkyHyNpyM+TNJgjFcuB65Ds39KfJK0D8+8xt19RSZMGBTHDcXvqkiqc5htyA==
   dependencies:
     details-polyfill "^1.1.0"
     react-app-polyfill "^0.1.3"
@@ -4479,29 +4479,22 @@ escodegen@~1.9.0:
   optionalDependencies:
     source-map "~0.6.1"
 
-eslint-config-ndla@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/eslint-config-ndla/-/eslint-config-ndla-1.0.2.tgz#78f902abaa4c2cab97e58590646bf1e960fd1b69"
-  integrity sha512-+iY87gRqiOMA4lqAGSrmJjUSIzZU1xBvsceMY5+vVIBV6TvC/wo1uzPit1wXXRwOV823SQ/GuIRWoe/6FM5JYA==
+eslint-config-ndla@1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/eslint-config-ndla/-/eslint-config-ndla-1.0.3.tgz#4ccc082433b76b3e4d79bd38866b4911b5643b7b"
+  integrity sha512-qkdPCo3MGbb7acrjUjlVSNvieO4uMoaTMdU7VGZ8/IuFnMHjO3vCZZyevBvQ6T09j/63Hkf8pBMBMKaeupFymA==
   dependencies:
     babel-eslint "9.x"
-    eslint-config-react-app "^3.0.5"
+    eslint-config-react-app "^3.0.6"
     eslint-plugin-flowtype "2.x"
     eslint-plugin-import "^2.13.0"
     eslint-plugin-jsx-a11y "^6.1.2"
-    eslint-plugin-react "^7.10.0"
+    eslint-plugin-react "^7.12.3"
 
-eslint-config-react-app@^3.0.3:
+eslint-config-react-app@^3.0.3, eslint-config-react-app@^3.0.6:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/eslint-config-react-app/-/eslint-config-react-app-3.0.6.tgz#addcae1359235941e95f3c96970b7ac8552e1130"
   integrity sha512-VL5rA1EBZv7f9toc9x71or7nr4jRmwCH4V9JKB9DFVaTLOLI9+vjWLgQLjMu3xR9iUT80dty86RbCfNaKyrFFg==
-  dependencies:
-    confusing-browser-globals "^1.0.5"
-
-eslint-config-react-app@^3.0.5:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/eslint-config-react-app/-/eslint-config-react-app-3.0.5.tgz#d199088ab486d7ccc56d40dedcb1482b01934fb2"
-  integrity sha512-GjPuy0pbaCkl4+9wm8p0xpl/x/AGFy3wKuju3WNVefDNDDu8T6Ap1OFMDDJbYnOAI+4jfyAE3VT06lAYcJVpdw==
   dependencies:
     confusing-browser-globals "^1.0.5"
 
@@ -4583,16 +4576,7 @@ eslint-plugin-jsx-a11y@^6.1.2:
     has "^1.0.3"
     jsx-ast-utils "^2.0.1"
 
-eslint-plugin-react@^7.10.0:
-  version "7.10.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.10.0.tgz#af5c1fef31c4704db02098f9be18202993828b50"
-  dependencies:
-    doctrine "^2.1.0"
-    has "^1.0.3"
-    jsx-ast-utils "^2.0.1"
-    prop-types "^15.6.2"
-
-eslint-plugin-react@^7.11.1:
+eslint-plugin-react@^7.11.1, eslint-plugin-react@^7.12.3:
   version "7.12.3"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.12.3.tgz#b9ca4cd7cd3f5d927db418a1950366a12d4568fd"
   integrity sha512-WTIA3cS8OzkPeCi4KWuPmjR33lgG9r9Y/7RmnLTRw08MZKgAfnK/n3BO4X0S67MPkVLazdfCNT/XWqcDu4BLTA==
