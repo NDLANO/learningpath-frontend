@@ -899,10 +899,10 @@
     "@ndla/core" "^0.4.5"
     "@ndla/util" "^0.3.1"
 
-"@ndla/polyfill@0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@ndla/polyfill/-/polyfill-0.1.4.tgz#266a90b706c0596319b9b57cc013004baefd49bf"
-  integrity sha512-1klZ8AgByrlnaU6a3gygiBkDFdjkyHyNpyM+TNJgjFcuB65Ds39KfJK0D8+8xt19RSZMGBTHDcXvqkiqc5htyA==
+"@ndla/polyfill@0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@ndla/polyfill/-/polyfill-0.1.5.tgz#b5cacb97c7526b8a94dd58d7019934874a0d50cd"
+  integrity sha512-m0b0ZWI2OY8zIvZMu60JS54TNJigK5WG7ouG2X9ANw/t/UG9OjK9nHmgqmF83a9dDerqqr3OFSnV+Pr8hJ87eA==
   dependencies:
     details-polyfill "^1.1.0"
     react-app-polyfill "^0.1.3"
