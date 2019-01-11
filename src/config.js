@@ -27,7 +27,7 @@ const activatedForEnvironment = (config, defaultValue) => {
 
 const ndlaFrontendDomain = activatedForEnvironment(
   {
-    local: 'http://api-gateway.ndla-local:30017',
+    local: 'https://ndla.no',
     prod: 'https://ndla.no',
   },
   `https://ndla-frontend.${environment}.api.ndla.no`,
@@ -35,7 +35,7 @@ const ndlaFrontendDomain = activatedForEnvironment(
 
 const apiDomain = activatedForEnvironment(
   {
-    local: 'http://api-gateway.ndla-local',
+    local: 'https://api.ndla.no',
     prod: 'https://api.ndla.no',
   },
   `https://${environment}.api.ndla.no`,
