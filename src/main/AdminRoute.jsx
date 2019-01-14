@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 import { getScope } from '../util/jwtHelper';
 import { getAccessToken } from '../sources/localStorage';
-import config from '../config';
 import { LocationShape } from '../shapes';
 
 const AdminRoute = ({
@@ -40,9 +39,7 @@ AdminRoute.propTypes = {
 const mapStateToProps = state =>
   Object.assign({}, state, {
     isAdmin: state.authenticated
-      ? getScope(getAccessToken()).includes(
-          `learningpath-${config.environment}:admin`,
-        )
+      ? getScope(getAccessToken()).includes(`learningpath:admin`)
       : false,
   });
 
