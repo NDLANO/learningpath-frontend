@@ -20,8 +20,6 @@ import { closeSidebars } from '../sidebarActions';
 import { getAccessToken } from '../../sources/localStorage';
 import { decodeToken, getScope } from '../../util/jwtHelper';
 
-import config from '../../config';
-
 export const SiteNav = ({
   authenticated,
   userName,

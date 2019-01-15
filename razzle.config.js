@@ -1,8 +1,15 @@
 const { modifyRule } = require('razzle-config-utils');
 const webpack = require('webpack'); // eslint-disable-line import/no-extraneous-dependencies
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const addEntry = require('./razzle-add-entry-plugin');
 
 module.exports = {
+  plugins: [
+    addEntry({
+      entry: './src/polyfill',
+      name: 'polyfill',
+    }),
+  ],
   modify(config, { target, dev }) {
     const appConfig = config;
 
@@ -44,6 +51,8 @@ module.exports = {
 
     if (!dev) {
       appConfig.devtool = 'source-map';
+    } else {
+      appConfig.devtool = 'cheap-module-source-map';
     }
     return appConfig;
   },

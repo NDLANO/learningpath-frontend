@@ -24,7 +24,8 @@ const assets = require(process.env.RAZZLE_ASSETS_MANIFEST); //eslint-disable-lin
 
 const getAssets = () => ({
   css: assets.client.css ? assets.client.css : undefined,
-  js: assets.client.js ? [assets.client.js] : [],
+  js: assets.client.js ? [{ src: assets.client.js }] : [],
+  polyfill: { src: assets.polyfill.js },
 });
 
 async function doRender(req, res, token) {

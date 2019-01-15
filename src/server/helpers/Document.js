@@ -10,40 +10,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
-import useragent from 'useragent';
+import ScriptLoader from '@ndla/polyfill/lib/ScriptLoader';
 import config from '../../config';
-import {
-  SvgPolyfillScript,
-  SvgPolyfillScriptInitalization,
-} from './svgPolyfill';
 import { GoogleTagMangerNoScript, GoogleTagMangerScript } from './Gtm';
 import HotjarScript from './Hotjar';
 
 const Document = props => {
-  const { className, state, userAgentString, assets, css, data } = props;
+  const { state, assets, css, data } = props;
   const head = Helmet.rewind();
   const { locale } = state;
 
   return (
-    <html lang={locale} className={className}>
+    <html lang={locale}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         {head.title.toComponent()}
         {head.meta.toComponent()}
-        {useragent.parse(userAgentString).family === 'IE' && (
-          <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"
-            defer
-            async
-          />
-        )}
         <GoogleTagMangerScript />
         {config.gaTrackingId && (
           <script async src="https://www.google-analytics.com/analytics.js" />
         )}
-        <SvgPolyfillScript className={className} />
         {css && <style dangerouslySetInnerHTML={{ __html: css }} />}
         {assets.css &&
           assets.css && (
@@ -79,17 +67,8 @@ const Document = props => {
             __html: `window.DATA = ${serialize(data)}; `,
           }}
         />
-        {assets.js.map(js => (
-          <script
-            key={js}
-            type="text/javascript"
-            src={js}
-            defer
-            crossOrigin={(process.env.NODE_ENV !== 'production').toString()}
-          />
-        ))}
+        <ScriptLoader polyfill={assets.polyfill} scripts={assets.js} />
         <HotjarScript />
-        <SvgPolyfillScriptInitalization className={className} />
       </body>
     </html>
   );
@@ -97,13 +76,18 @@ const Document = props => {
 
 Document.propTypes = {
   data: PropTypes.object.isRequired,
-  className: PropTypes.string.isRequired,
   css: PropTypes.string.isRequired,
   state: PropTypes.object.isRequired,
-  userAgentString: PropTypes.string.isRequired,
   assets: PropTypes.shape({
+    polyfill: PropTypes.shape({
+      src: PropTypes.string.isRequired,
+    }),
     css: PropTypes.string,
-    js: PropTypes.array.isRequired,
+    js: PropTypes.arrayOf(
+      PropTypes.shape({
+        src: PropTypes.string.isRequired,
+      }),
+    ),
   }).isRequired,
 };
 
