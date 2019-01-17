@@ -40,7 +40,7 @@
 }
 
 .step-nav_item:not(.step-nav_item--bottom_border):last-child .step-nav_line {
-  border-left: 6px solid gray(186);
+  border-left: 7px solid gray(186);
   margin-left: 12px;
   padding-left: 31px;
   margin-top: -25px;
