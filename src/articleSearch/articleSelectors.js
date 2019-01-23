@@ -28,7 +28,14 @@ export const getArticleResultFromState = state => {
     ...item,
     introduction: convertFieldWithFallback(item, 'introduction', ''),
     title: convertFieldWithFallback(item, 'title', ''),
-    thumbnail: `/placeholder.png`,
+    thumbnail:
+      item.metaImage && item.metaImage.url
+        ? item.metaImage.url
+        : `/placeholder.png`,
+    thumbnailAlt:
+      item.metaImage && item.metaImage.alt
+        ? item.metaImage.alt
+        : convertFieldWithFallback(item, 'title', ''),
     showUrl: false,
   }));
 };

@@ -341,6 +341,7 @@ const phrases = {
       noResults: 'No results found',
       useInPath: 'Use in learningpath',
       preview: 'Preiview',
+      error: 'This resource can not be used.',
     },
     preview: {
       title: 'Preview for oembed',

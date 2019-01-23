@@ -20,20 +20,24 @@ const EmbedSearchResult = ({ item, onPreviewClick, addEmbedResult }) => {
   });
   return (
     <div className={rootClass}>
-      <EmbedSearchResultImage thumbnail={item.thumbnail} title={item.title} />
+      <EmbedSearchResultImage
+        thumbnail={item.thumbnail}
+        thumbnailAlt={item.thumbnailAlt}
+        title={item.title}
+      />
       <div className="embed-search_result-information">
         <h3 className="embed-search_result-title">{item.title}</h3>
-        {item.showUrl ? (
+        {item.showUrl && (
           <a href={item.link} target="_blank" rel="noopener noreferrer">
             {item.link}
           </a>
-        ) : (
-          ''
         )}
         <p>{item.introduction}</p>
-        <span className="error_message error_message--red">
-          {item.disable ? 'Denne resursen kan ikke brukes.' : ''}
-        </span>
+        {item.disable && (
+          <span className="error_message error_message--red">
+            {polyglot.t('embedSearch.results.error')}
+          </span>
+        )}
         <div>
           <button
             type="button"
