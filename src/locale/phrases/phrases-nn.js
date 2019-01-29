@@ -342,7 +342,7 @@ const phrases = {
       noResults: 'Ingen resultat',
       useInPath: 'Bruk i læringsstien',
       preview: 'Forhåndvis',
-      error: 'Denne resursen kan ikkje brukast.',
+      error: 'Denne ressursen kan ikkje brukast.',
     },
     preview: {
       title: 'Forhåndsvisning av oembed',
