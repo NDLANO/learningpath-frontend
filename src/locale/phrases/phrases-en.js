@@ -309,7 +309,7 @@ const phrases = {
       PUBLISHED: 'Learningpath will be accesible by search and url.',
       PRIVATE: 'Only you can see the learningpath.',
       SUBMITTED:
-        'Learningpath will be accesible by search and url after approval by an admin.',
+        'Learningpath will be accesible by search and url.',
     },
   },
   validation: {
