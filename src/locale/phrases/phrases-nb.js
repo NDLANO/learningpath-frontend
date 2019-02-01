@@ -309,7 +309,7 @@ const phrases = {
       PUBLISHED: 'Læringsstien vil være tilgjenglig både ved søk og url.',
       PRIVATE: 'Bare du kan se denne læringsstien',
       SUBMITTED:
-        'Læringsstien vil være offentlig ved url og søk etter at en adminstrator har godkjent læringsstien',
+        'Læringsstien vil være publisert offentlig med egen url, og kan dukke opp i søk',
     },
   },
   validation: {
