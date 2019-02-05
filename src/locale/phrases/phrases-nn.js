@@ -307,7 +307,7 @@ const phrases = {
       PUBLISHED: 'Læringsstien vil være tilgjenglig både ved søk og url.',
       PRIVATE: 'Berre du kan sjå denne læringsstien.',
       SUBMITTED:
-        'Læringsstien vil være offentleg ved url og søk etter at ein adminstrator har godkjent læringsstien',
+        'Læringsstien vil ha ein offentleg url, og kan dukke opp i søk',
     },
   },
   htmlTitleTemplates: {
