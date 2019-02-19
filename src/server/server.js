@@ -94,7 +94,7 @@ async function handleRequest(req, res, route) {
 
 app.get('/robots.txt', (req, res) => {
   if (req.hostname === 'stier.ndla.no') {
-    res.sendFile('robots.txt', { root: './src/server/' });
+    res.sendFile('robots.txt', { root: './build/' });
   } else {
     res.type('text/plain');
     res.send('User-agent: *\nDisallow: /');
