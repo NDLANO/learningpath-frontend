@@ -16,6 +16,11 @@
       "headers": { "cache-control": "s-maxage=86400" },
       "dest": "build/public/static/$1"
     },
+    {
+      "src": "/(.*(png|gif|jpg|ico|svg))",
+      "headers": { "cache-control": "s-maxage=86400" },
+      "dest": "build/public/$1"
+    },
     { "src": "/(.*)", "dest": "/build/server.js" }
   ],
   "env": {
