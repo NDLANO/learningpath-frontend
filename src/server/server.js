@@ -55,6 +55,8 @@ app.use(
   }),
 );
 
+app.enable('trust proxy');
+
 async function sendInternalServerError(req, res) {
   if (res.getHeader('Content-Type') === 'application/json') {
     res.status(INTERNAL_SERVER_ERROR).json('Internal server error');
