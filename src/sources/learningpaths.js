@@ -6,13 +6,13 @@
  *
  */
 
-import 'isomorphic-fetch';
 import queryString from 'query-string';
 import cloneDeep from 'lodash/cloneDeep';
 import map from 'lodash/map';
 import assureSequenceOrder from '../util/assureSequenceOrder';
-import { fetchAuth } from './fetchAuth';
+import fetch from './fetch';
 import {
+  partialFetch,
   fetchAuthorized,
   postAuthorized,
   putAuthorized,
@@ -22,8 +22,11 @@ import {
   apiResourceUrl,
 } from './helpers';
 
+const baseUrl = apiResourceUrl('/learningpath-api/v2/learningpaths');
+// Need to use fetchAuthorized incase the learningpath it private
 const fetchPath = fetchAuthorized('/learningpath-api/v2/learningpaths/:pathId');
 
+// Need to use fetchAuthorized incase the step it private
 const fetchPathStep = fetchAuthorized(
   '/learningpath-api/v2/learningpaths/:pathId/learningsteps/:stepId',
 );
@@ -32,17 +35,14 @@ const fetchMyPaths = fetchAuthorized(
   '/learningpath-api/v2/learningpaths/mine/',
 );
 
-const fetchPathsWithStatus = fetchAuthorized(
+const fetchPathsWithStatus = partialFetch(
   '/learningpath-api/v2/learningpaths/status/:learningPathStatus',
 );
 
-const fetchPathTags = fetchAuthorized(
-  '/learningpath-api/v2/learningpaths/tags/',
-);
+const fetchPathTags = partialFetch('/learningpath-api/v2/learningpaths/tags/');
 
-const fetchPathContributors = fetchAuthorized(
-  '/learningpath-api/v2/learningpaths/contributors/',
-);
+const fetchPathContributors = () =>
+  fetch(`${baseUrl}/contributors/`).then(resolveJsonOrRejectWithError);
 
 const fetchPathLicenses = filter => {
   let url = apiResourceUrl('/learningpath-api/v2/learningpaths/licenses/');
@@ -50,7 +50,7 @@ const fetchPathLicenses = filter => {
     const query = { filter };
     url += `?${queryString.stringify(query)}`;
   }
-  return fetchAuth(url).then(resolveJsonOrRejectWithError);
+  return fetch(url).then(resolveJsonOrRejectWithError);
 };
 
 const postLearningPath = postAuthorized('/learningpath-api/v2/learningpaths/');
@@ -120,13 +120,11 @@ const updateStatus = ({ pathId }, body) =>
 export const activateDeletedPath = ({ pathId, status }) =>
   putLearningPathStatus({ pathId }, { status });
 
-const learningPathsUrl = apiResourceUrl('/learningpath-api/v2/learningpaths');
-
 const updateSeqNo = ({ pathId, stepId }, body) =>
   putSequenceNumber({ pathId, stepId }, body);
 
 const fetchPaths = (query, locale) => {
-  let url = learningPathsUrl;
+  let url = baseUrl;
   if (query) {
     const q = cloneDeep(query);
     if (q.pageSize !== undefined) {
@@ -140,14 +138,14 @@ const fetchPaths = (query, locale) => {
     q.fallback = true;
     url += `?${queryString.stringify(q)}`;
   }
-  return fetchAuth(url).then(resolveJsonOrRejectWithError);
+  return fetch(url).then(resolveJsonOrRejectWithError);
 };
 
 const oembedUrl = apiResourceUrl('/oembed-proxy/v1/oembed');
 const fetchOembedUrl = query => {
   let url = oembedUrl;
   url += `?${queryString.stringify(query)}`;
-  return fetchAuth(url).then(resolveJsonOrRejectWithError);
+  return fetch(url).then(resolveJsonOrRejectWithError);
 };
 
 export {
