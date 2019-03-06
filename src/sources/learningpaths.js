@@ -12,7 +12,6 @@ import map from 'lodash/map';
 import assureSequenceOrder from '../util/assureSequenceOrder';
 import fetch from './fetch';
 import {
-  partialFetch,
   fetchAuthorized,
   postAuthorized,
   putAuthorized,
@@ -35,11 +34,14 @@ const fetchMyPaths = fetchAuthorized(
   '/learningpath-api/v2/learningpaths/mine/',
 );
 
-const fetchPathsWithStatus = partialFetch(
+const fetchPathsWithStatus = fetchAuthorized(
   '/learningpath-api/v2/learningpaths/status/:learningPathStatus',
 );
 
-const fetchPathTags = partialFetch('/learningpath-api/v2/learningpaths/tags/');
+const fetchPathTags = (_, locale) =>
+  fetch(`${baseUrl}/tags/?language=${locale}&fallback=true`).then(
+    resolveJsonOrRejectWithError,
+  );
 
 const fetchPathContributors = () =>
   fetch(`${baseUrl}/contributors/`).then(resolveJsonOrRejectWithError);

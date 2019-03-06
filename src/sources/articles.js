@@ -9,15 +9,9 @@
 import queryString from 'query-string';
 import cloneDeep from 'lodash/cloneDeep';
 import fetch from './fetch';
-import {
-  resolveJsonOrRejectWithError,
-  apiResourceUrl,
-  partialFetch,
-} from './helpers';
+import { resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';
 
 const articleBaseUrl = apiResourceUrl('/article-api/v2/articles');
-
-const fetchArticle = partialFetch('/article-api/v2/articles/:articleId');
 
 const fetchArticles = (query, locale) => {
   let url = articleBaseUrl;
@@ -37,4 +31,4 @@ const fetchArticles = (query, locale) => {
   return fetch(url).then(resolveJsonOrRejectWithError);
 };
 
-export { fetchArticle, fetchArticles };
+export { fetchArticles };

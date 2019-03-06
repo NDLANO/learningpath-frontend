@@ -40,16 +40,6 @@ export function ApiError(message, res = {}, json) {
 ApiError.prototype = Object.create(Error.prototype);
 ApiError.prototype.constructor = ApiError;
 
-export function partialFetch(path, method = 'GET') {
-  const url = params => apiResourceUrl(formatUrl(path, params));
-  return (params = {}, language) => {
-    const query = language ? `?language=${language}&fallback=true` : '';
-    return fetch(`${url(params)}${query}`, { method }).then(
-      resolveJsonOrRejectWithError,
-    );
-  };
-}
-
 export function fetchAuthorized(path, method = 'GET') {
   const url = params => apiResourceUrl(formatUrl(path, params));
   return (params = {}, language) => {
