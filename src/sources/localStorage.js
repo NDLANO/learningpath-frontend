@@ -21,6 +21,12 @@ export const saveAccessToken = ({ token, expires, authenticated }) => {
   storage.setItem('isAuthenticated', authenticated);
 };
 
+export function removeAccessToken() {
+  storage.removeItem('learningpath_access_token');
+  storage.removeItem('learningpath_access_token_expires_at');
+  storage.removeItem('isAuthenticated');
+}
+
 const isValid = accessToken => {
   try {
     decode(accessToken);

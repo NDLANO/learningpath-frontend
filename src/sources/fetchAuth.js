@@ -12,7 +12,7 @@ import { getAccessToken, getAccessTokenExpires } from './localStorage';
 
 export const authorizationHeader = token => `Bearer ${token}`;
 
-export const fetchAuth = (url, options = {}) => {
+export const fetchAuth = async (url, options = {}) => {
   if (process.env.NODE_ENV === 'unittest') {
     return fetch(url, {
       ...options,
@@ -29,6 +29,7 @@ export const fetchAuth = (url, options = {}) => {
     ...options.headers,
     Authorization: authorizationHeader(getAccessToken()),
   };
+
   if (process.env.BUILD_TARGET === 'server') {
     return fetch(url, { ...options, headers });
   }

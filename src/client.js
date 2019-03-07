@@ -12,18 +12,13 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import { configureTracker } from '@ndla/tracker';
 import ErrorReporter from '@ndla/error-reporter';
-import isEmpty from 'lodash/isEmpty';
 import { hydrate } from 'emotion';
 import TokenStatusHandler from './util/TokenStatusHandler';
 import { configureLocale, isValidLocale } from './locale/configureLocale';
 import configureStore from './configureStore';
 import App from './main/App';
-import {
-  saveAccessToken,
-  getSessionFromLocalStorage,
-} from './sources/localStorage';
+import { getSessionFromLocalStorage } from './sources/localStorage';
 
-import { getTokenExpireAt } from './util/jwtHelper';
 import { createHistory } from './history';
 
 function generateBasename(path) {
@@ -53,19 +48,7 @@ const emptyState = {
   locale,
 };
 
-const tokenStoredOnServer =
-  !isEmpty(window.initialState) &&
-  window.initialState.accessToken &&
-  window.initialState.accessToken.token;
-
-const { token, authenticated } = getSessionFromLocalStorage();
-
-if (!token && tokenStoredOnServer) {
-  saveAccessToken({
-    token: tokenStoredOnServer,
-    expires: getTokenExpireAt(tokenStoredOnServer),
-  });
-}
+const { authenticated } = getSessionFromLocalStorage();
 
 const initialState = {
   ...emptyState,

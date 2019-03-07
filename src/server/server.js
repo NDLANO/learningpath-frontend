@@ -79,10 +79,8 @@ function sendResponse(res, data, status = OK) {
 
 async function handleRequest(req, res, route) {
   try {
-    const token = await getToken();
-    // storeAccessToken(token.access_token);
     try {
-      const { data, status } = await route(req, res, token);
+      const { data, status } = await route(req, res);
       sendResponse(res, data, status);
     } catch (err) {
       errorLogger.error(err);
@@ -155,16 +153,6 @@ app.get(
 
 app.get('/login/silent-callback', (req, res) => {
   res.send('<!doctype html>\n' + Auth0SilentCallback); // eslint-disable-line
-});
-
-app.get('/get_token', async (req, res) => {
-  try {
-    const token = await getToken('ndla_system');
-    res.send(token);
-  } catch (err) {
-    errorLogger.error(err);
-    sendInternalServerError(req, res);
-  }
 });
 
 app.post('/csp-report', (req, res) => {

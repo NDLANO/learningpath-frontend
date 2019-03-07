@@ -15,9 +15,7 @@ import {
   auth0Domain,
 } from '../sources/apiConstants';
 import { getTokenExpireAt } from '../util/jwtHelper';
-import { fetchNewSystemToken } from '../sources/tokens';
-import { saveAccessToken } from '../sources/localStorage';
-import { applicationError } from '../messages/messagesActions';
+import { saveAccessToken, removeAccessToken } from '../sources/localStorage';
 
 export const setAuthenticated = createAction('SET_AUTHENTICATED');
 
@@ -53,32 +51,24 @@ export function loginPersonalAuth(type) {
 }
 
 export function logoutPersonalAuth(federated = undefined) {
-  return dispatch =>
-    fetchNewSystemToken()
-      .then(token => {
-        const storedTokenInfo = {
-          token: token.access_token,
-          expiresAt: getTokenExpireAt(token.access_token),
-        };
-        saveAccessToken({
-          token: token.access_token,
-          expires: getTokenExpireAt(token.access_token),
-          authenticated: false,
-        });
-        dispatch(setAuthenticated(false));
-        auth.logout({
-          returnTo: `${locationOrigin}/`,
-          client_id: ndlaPersonalClientId,
-          federated,
-        });
-        return storedTokenInfo;
-      })
-      .catch(err => dispatch(applicationError(err)));
+  return dispatch => {
+    return new Promise((resolve, reject) => {
+      dispatch(setAuthenticated(false));
+      removeAccessToken();
+      auth.logout({
+        returnTo: `${locationOrigin}/`,
+        client_id: ndlaPersonalClientId,
+        federated,
+      });
+
+      resolve();
+    });
+  };
 }
 
 export function renewPersonalAuth() {
   return dispatch =>
-    new Promise(resolve => {
+    new Promise((resolve, reject) => {
       auth.renewAuth(
         {
           redirectUri: `${locationOrigin}/login/silent-callback`,
@@ -99,38 +89,17 @@ export function renewPersonalAuth() {
             dispatch(setAuthenticated(true));
             resolve(storedTokenInfo);
           } else {
-            dispatch(logoutPersonalAuth()).then(token => resolve(token));
+            dispatch(logoutPersonalAuth());
           }
         },
       );
     });
 }
 
-export function renewSystemAuth() {
-  return dispatch =>
-    fetchNewSystemToken().then(token => {
-      const storedTokenInfo = {
-        token: token.access_token,
-        expiresAt: getTokenExpireAt(token.access_token),
-      };
-      saveAccessToken({
-        token: token.access_token,
-        expires: getTokenExpireAt(token.access_token),
-        authenticated: false,
-      });
-
-      dispatch(setAuthenticated(false));
-      return storedTokenInfo;
-    });
-}
-
 export function renewAuth() {
-  return (dispatch, getState) =>
-    new Promise(resolve => {
-      if (getState().authenticated) {
-        dispatch(renewPersonalAuth()).then(token => resolve(token));
-      } else {
-        dispatch(renewSystemAuth()).then(token => resolve(token));
-      }
+  return (dispatch, getState) => {
+    return new Promise(resolve => {
+      dispatch(renewPersonalAuth()).then(token => resolve(token));
     });
+  };
 }

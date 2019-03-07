@@ -20,20 +20,17 @@ import {
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-const accessToken = '12345678';
 const tags = [
   { language: 'nb', tags: ['norsk', 'norge'] },
   { language: 'en', tags: ['norwegian', 'norway'] },
 ];
 
 test('actions/fetchLearningPathTags', done => {
-  const apiMock = nock('http://ndla-api', {
-    headers: { Authorization: `Bearer ${accessToken}` },
-  })
-    .get('/learningpath-api/v2/learningpaths/tags/')
+  const apiMock = nock('http://ndla-api')
+    .get('/learningpath-api/v2/learningpaths/tags/?language=nb&fallback=true')
     .reply(200, tags);
 
-  const store = mockStore({ accessToken });
+  const store = mockStore({ locale: 'nb' });
 
   store
     .dispatch(fetchLearningPathTags())
@@ -46,13 +43,11 @@ test('actions/fetchLearningPathTags', done => {
 });
 
 test('actions/fetchLearningPathTags access denied', done => {
-  const apiMock = nock('http://ndla-api', {
-    headers: { Authorization: `Bearer ${accessToken}` },
-  })
-    .get('/learningpath-api/v2/learningpaths/tags/')
+  const apiMock = nock('http://ndla-api')
+    .get('/learningpath-api/v2/learningpaths/tags/?language=nb&fallback=true')
     .reply(403, { message: 'Invalid' });
 
-  const store = mockStore({ accessToken });
+  const store = mockStore({ locale: 'nb' });
 
   store
     .dispatch(fetchLearningPathTags())

@@ -8,7 +8,6 @@
 
 import formatUrl from '../util/formatUrlUtil';
 import { fetchAuth } from './fetchAuth';
-import fetch from './fetch';
 import {
   resolveJsonOrRejectWithError,
   createErrorPayload,
