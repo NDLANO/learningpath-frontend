@@ -8,7 +8,7 @@
 
 import * as actions from '../session/sessionActions';
 import TokenStatusHandler from '../util/TokenStatusHandler';
-import { getAccessToken, getAccessTokenExpires } from './localStorage';
+import { getPersonalToken, getPersonalTokenExpires } from './localStorage';
 
 export const authorizationHeader = token => `Bearer ${token}`;
 
@@ -27,14 +27,14 @@ export const fetchAuth = async (url, options = {}) => {
 
   const headers = {
     ...options.headers,
-    Authorization: authorizationHeader(getAccessToken()),
+    Authorization: authorizationHeader(getPersonalToken()),
   };
 
   if (process.env.BUILD_TARGET === 'server') {
     return fetch(url, { ...options, headers });
   }
 
-  if (new Date().getTime() >= getAccessTokenExpires()) {
+  if (new Date().getTime() >= getPersonalTokenExpires()) {
     const dispatch = tokenStatusHandler.getDispatch();
     return dispatch(actions.renewAuth()).then(newToken =>
       fetch(url, {

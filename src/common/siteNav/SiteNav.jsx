@@ -17,7 +17,7 @@ import SiteNavAdmin from './SiteNavAdmin';
 import SiteNavMyPage from './SiteNavMyPage';
 import SiteNavSessionAction from './SiteNavSessionAction';
 import { closeSidebars } from '../sidebarActions';
-import { getAccessToken } from '../../sources/localStorage';
+import { getPersonalToken } from '../../sources/localStorage';
 import { decodeToken, getScope } from '../../util/jwtHelper';
 
 export const SiteNav = ({
@@ -91,7 +91,7 @@ SiteNav.defaultProps = {
 };
 
 const mapStateToProps = state => {
-  const token = getAccessToken();
+  const token = getPersonalToken();
   return Object.assign({}, state, {
     username: state.authenticated
       ? decodeToken(token)['https://ndla.no/user_name']

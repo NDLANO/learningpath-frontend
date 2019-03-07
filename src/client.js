@@ -17,7 +17,7 @@ import TokenStatusHandler from './util/TokenStatusHandler';
 import { configureLocale, isValidLocale } from './locale/configureLocale';
 import configureStore from './configureStore';
 import App from './main/App';
-import { getSessionFromLocalStorage } from './sources/localStorage';
+import { isUserAuthenticated } from './sources/localStorage';
 
 import { createHistory } from './history';
 
@@ -48,11 +48,11 @@ const emptyState = {
   locale,
 };
 
-const { authenticated } = getSessionFromLocalStorage();
+const authenticated = isUserAuthenticated();
 
 const initialState = {
   ...emptyState,
-  authenticated: authenticated === 'true',
+  authenticated,
 };
 
 const store = configureStore(initialState, browserHistory);

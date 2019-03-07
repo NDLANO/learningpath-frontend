@@ -15,7 +15,10 @@ import {
   auth0Domain,
 } from '../sources/apiConstants';
 import { getTokenExpireAt } from '../util/jwtHelper';
-import { saveAccessToken, removeAccessToken } from '../sources/localStorage';
+import {
+  savePersonalToken,
+  removePersonalToken,
+} from '../sources/localStorage';
 
 export const setAuthenticated = createAction('SET_AUTHENTICATED');
 
@@ -31,10 +34,9 @@ export function parseHash(hash) {
   return dispatch => {
     auth.parseHash({ hash, _idTokenVerification: false }, (err, authResult) => {
       if (authResult && authResult.accessToken) {
-        saveAccessToken({
+        savePersonalToken({
           token: authResult.accessToken,
           expires: getTokenExpireAt(authResult.accessToken),
-          authenticated: true,
         });
 
         dispatch(setAuthenticated(true));
@@ -54,7 +56,7 @@ export function logoutPersonalAuth(federated = undefined) {
   return dispatch => {
     return new Promise((resolve, reject) => {
       dispatch(setAuthenticated(false));
-      removeAccessToken();
+      removePersonalToken();
       auth.logout({
         returnTo: `${locationOrigin}/`,
         client_id: ndlaPersonalClientId,
@@ -80,12 +82,10 @@ export function renewPersonalAuth() {
               token: authResult.accessToken,
               expiresAt: getTokenExpireAt(authResult.accessToken),
             };
-            saveAccessToken({
+            savePersonalToken({
               token: authResult.accessToken,
               expires: getTokenExpireAt(authResult.accessToken),
-              authenticated: true,
             });
-
             dispatch(setAuthenticated(true));
             resolve(storedTokenInfo);
           } else {
