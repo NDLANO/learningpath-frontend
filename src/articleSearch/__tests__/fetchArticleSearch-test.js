@@ -19,7 +19,6 @@ import {
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-const accessToken = '123345678';
 const query = {
   textQuery: 'hei',
   page: 1,
@@ -78,24 +77,19 @@ const expectedValue = {
 };
 
 test('actions/fetchArticleSearch', done => {
-  const apiMock = nock('http://ndla-api', {
-    headers: { Authorization: `Bearer ${accessToken}` },
-  })
+  const apiMock = nock('http://ndla-api')
     .get('/article-api/v2/articles')
     .query({ query: 'hei', 'page-size': 10, page: 1, language: 'nb' })
     .reply(200, { ...apiResponse.result });
 
   const taxonomyMocks = apiResponse.result.results.map(item =>
-    nock('http://ndla-api', {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    })
+    nock('http://ndla-api')
       .get('/taxonomy/v1/queries/resources')
       .query({ contentURI: `urn:article:${item.id}`, language: 'nb' })
       .reply(200, [{ path: '/resource:1/subject:2/something:3' }]),
   );
 
   const store = mockStore({
-    accessToken,
     embedSearch: { ndla: { result: {} } },
   });
 

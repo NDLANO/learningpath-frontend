@@ -10,7 +10,6 @@ import defined from 'defined';
 import config from '../config';
 
 const NDLA_API_URL = config.ndlaApiUrl;
-const NDLA_ACCESS_TOKEN = config.accessToken;
 const AUTH0_DOMAIN = config.auth0Domain;
 const NDLA_PERSONAL_CLIENT_ID = config.ndlaPersonalClientId;
 
@@ -52,13 +51,6 @@ export const auth0Domain = (() => {
     return 'http://auth-ndla';
   }
   return AUTH0_DOMAIN;
-})();
-
-export const accessToken = (() => {
-  if (process.env.NODE_ENV === 'unittest') {
-    return 'ndlatestapikey';
-  }
-  return NDLA_ACCESS_TOKEN;
 })();
 
 export const apiBaseUrl = (() => {
