@@ -13,6 +13,7 @@ import { Router } from 'react-router-dom';
 import { configureTracker } from '@ndla/tracker';
 import ErrorReporter from '@ndla/error-reporter';
 import { hydrate } from 'emotion';
+import isEmpty from 'lodash/isEmpty';
 import TokenStatusHandler from './util/TokenStatusHandler';
 import { configureLocale, isValidLocale } from './locale/configureLocale';
 import configureStore from './configureStore';
@@ -41,19 +42,22 @@ const basename = generateBasename(path);
 
 const browserHistory = createHistory(basename);
 
+const authenticated = isUserAuthenticated();
+
 const emptyState = {
   learningPathStep: {},
   learningPaths: [],
   messages: [],
   locale,
-};
-
-const authenticated = isUserAuthenticated();
-
-const initialState = {
-  ...emptyState,
   authenticated,
 };
+
+const initialState = !isEmpty(window.initialState)
+  ? {
+      ...window.initialState,
+      authenticated,
+    }
+  : emptyState;
 
 const store = configureStore(initialState, browserHistory);
 
