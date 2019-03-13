@@ -55,7 +55,7 @@ export const Footer = ({ locale }) => (
     <p className="footer_text">
       <span className="footer_editor">
         {polyglot.t('footer.footerEditiorInChief')}
-        <strong>Christer Gundersen</strong>
+        <strong>Sigurd Trageton</strong>
       </span>
       <span className="footer_editor">
         {polyglot.t('footer.footerManagingEditor')}{' '}
