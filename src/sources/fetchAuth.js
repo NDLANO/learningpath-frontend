@@ -34,7 +34,7 @@ export const fetchAuth = async (url, options = {}) => {
     return fetch(url, { ...options, headers });
   }
 
-  if (new Date().getTime() >= getPersonalTokenExpires()) {
+  if (getPersonalToken() && new Date().getTime() >= getPersonalTokenExpires()) {
     const dispatch = tokenStatusHandler.getDispatch();
     return dispatch(actions.renewAuth()).then(newToken =>
       fetch(url, {
