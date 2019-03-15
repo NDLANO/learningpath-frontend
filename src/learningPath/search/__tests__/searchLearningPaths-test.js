@@ -17,12 +17,9 @@ import {
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
-const accessToken = '12345678';
 
 test('actions/searchLearningPaths', done => {
-  const apiMock = nock('http://ndla-api', {
-    headers: { Authorization: `Bearer ${accessToken}` },
-  })
+  const apiMock = nock('http://ndla-api')
     .get('/learningpath-api/v2/learningpaths')
     .reply(200, {
       totalCount: 2,
@@ -31,7 +28,7 @@ test('actions/searchLearningPaths', done => {
       results: [{ id: '123' }, { id: '456' }],
     });
 
-  const store = mockStore({ accessToken });
+  const store = mockStore({});
 
   store
     .dispatch(searchLearningPaths())
@@ -49,9 +46,7 @@ test('actions/searchLearningPaths', done => {
 });
 
 test('actions/searchLearningPaths with query', done => {
-  const apiMock = nock('http://ndla-api', {
-    headers: { Authorization: `Bearer ${accessToken}` },
-  })
+  const apiMock = nock('http://ndla-api')
     .get('/learningpath-api/v2/learningpaths')
     .query({
       query: 'foobar',
@@ -75,7 +70,6 @@ test('actions/searchLearningPaths with query', done => {
       page: 4,
       pageSize: 15, // OBS! not page-size
     },
-    accessToken,
   };
 
   const store = mockStore(initialState);
@@ -102,9 +96,7 @@ test('actions/searchLearningPaths with query without search term', done => {
   const pageSize = 10;
   const sort = '-relevance';
 
-  const apiMock = nock('http://ndla-api', {
-    headers: { Authorization: `Bearer ${accessToken}` },
-  })
+  const apiMock = nock('http://ndla-api')
     .get('/learningpath-api/v2/learningpaths')
     .query({
       language: 'nb',
@@ -122,7 +114,6 @@ test('actions/searchLearningPaths with query without search term', done => {
 
   const initialState = {
     learningPathQuery: { sort, page, pageSize, query: '' },
-    accessToken,
   };
 
   const store = mockStore(initialState);

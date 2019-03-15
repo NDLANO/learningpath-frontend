@@ -12,13 +12,13 @@ const Auth0SilentCallback = `
   <html lang="no">
     <head />
     <body>
-      <script src="https://cdn.auth0.com/js/auth0/9.3.2/auth0.min.js"></script>
+      <script src="https://cdn.auth0.com/js/auth0/9.10.0/auth0.min.js"></script>
       <script type="text/javascript">
         var webAuth = new auth0.WebAuth({
           domain: '${config.auth0Domain}',
           clientID: '${config.ndlaPersonalClientId}'
         });
-        var result = webAuth.parseHash(window.location.hash, function(err, data) {
+        var result = webAuth.parseHash({ hash: window.location.hash }, function(err, data) {
           parent.postMessage(err || data, window.location.origin);
         });
       </script>

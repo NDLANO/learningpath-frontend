@@ -17,8 +17,10 @@ export default function configureStore(initialState, history) {
   const middleware = routerMiddleware(history);
   const createFinalStore = compose(
     applyMiddleware(thunkMiddleware, errorReporter, middleware),
-    process.env.BUILD_TARGET === 'client' && window && window.devToolsExtension
-      ? window.devToolsExtension()
+    process.env.BUILD_TARGET === 'client' &&
+    window &&
+    window.__REDUX_DEVTOOLS_EXTENSION__
+      ? window.__REDUX_DEVTOOLS_EXTENSION__()
       : f => f,
   )(createStore);
 

@@ -16,8 +16,9 @@ import LabeledIcon from '../LabeledIcon';
 import SiteNavAdmin from './SiteNavAdmin';
 import SiteNavMyPage from './SiteNavMyPage';
 import SiteNavSessionAction from './SiteNavSessionAction';
+import OnlyRenderOnClient from '../OnlyRenderOnClient';
 import { closeSidebars } from '../sidebarActions';
-import { getAccessToken } from '../../sources/localStorage';
+import { getPersonalToken } from '../../sources/localStorage';
 import { decodeToken, getScope } from '../../util/jwtHelper';
 
 export const SiteNav = ({
@@ -58,20 +59,22 @@ export const SiteNav = ({
             <LabeledIcon.Search labelText={polyglot.t('siteNav.search')} />
           </Link>
         </li>
-        <SiteNavAdmin
-          isAdmin={isAdmin}
-          authenticated={authenticated}
-          localCloseSidebars={localCloseSidebars}
-        />
-        <SiteNavMyPage
-          authenticated={authenticated}
-          localCloseSidebars={localCloseSidebars}
-        />
-        <SiteNavSessionAction
-          authenticated={authenticated}
-          userName={userName}
-          localCloseSidebars={localCloseSidebars}
-        />
+        <OnlyRenderOnClient>
+          <SiteNavAdmin
+            isAdmin={isAdmin}
+            authenticated={authenticated}
+            localCloseSidebars={localCloseSidebars}
+          />
+          <SiteNavMyPage
+            authenticated={authenticated}
+            localCloseSidebars={localCloseSidebars}
+          />
+          <SiteNavSessionAction
+            authenticated={authenticated}
+            userName={userName}
+            localCloseSidebars={localCloseSidebars}
+          />
+        </OnlyRenderOnClient>
       </ul>
     </div>
   );
@@ -91,7 +94,7 @@ SiteNav.defaultProps = {
 };
 
 const mapStateToProps = state => {
-  const token = getAccessToken();
+  const token = getPersonalToken();
   return Object.assign({}, state, {
     username: state.authenticated
       ? decodeToken(token)['https://ndla.no/user_name']

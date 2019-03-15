@@ -14,8 +14,6 @@ import App from '../../main/App';
 import config from '../../config';
 import configureStore from '../../configureStore';
 import { serverRoutes } from '../serverRoutes';
-import TokenStatusHandler from '../../util/TokenStatusHandler';
-import { getTokenExpireAt } from '../../util/jwtHelper';
 import prefetchData from '../helpers/prefetchData';
 import { getLocaleInfoFromPath } from '../../locale/configureLocale';
 import { renderHtml, renderPage } from '../helpers/render';
@@ -28,20 +26,15 @@ const getAssets = () => ({
   polyfill: { src: assets.polyfill.js },
 });
 
-async function doRender(req, res, token) {
+async function doRender(req, res) {
   const { locale, basepath, basename } = getLocaleInfoFromPath(req.path);
 
   // const locale = getHtmlLang(paths[1]);
   const match = serverRoutes.find(r => matchPath(basepath, r));
   // eslint-disable-next-line no-underscore-dangle
-  const storedTokenInfo = {
-    token: token.access_token,
-    expiresAt: getTokenExpireAt(token.access_token),
-  };
 
   if (config.disableSSR || match.notFound) {
     const { html, ...docProps } = renderPage('', getAssets(), {
-      accessToken: storedTokenInfo,
       locale,
     });
     return {
@@ -52,7 +45,6 @@ async function doRender(req, res, token) {
   }
 
   const store = configureStore({ locale });
-  TokenStatusHandler.getInstance({ store });
   const context = {};
 
   const Page = (

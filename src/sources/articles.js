@@ -6,19 +6,12 @@
  *
  */
 
-import 'isomorphic-fetch';
 import queryString from 'query-string';
 import cloneDeep from 'lodash/cloneDeep';
-import { fetchAuth } from './fetchAuth';
-import {
-  resolveJsonOrRejectWithError,
-  apiResourceUrl,
-  fetchAuthorized,
-} from './helpers';
+import fetch from './fetch';
+import { resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';
 
 const articleBaseUrl = apiResourceUrl('/article-api/v2/articles');
-
-const fetchArticle = fetchAuthorized('/article-api/v2/articles/:articleId');
 
 const fetchArticles = (query, locale) => {
   let url = articleBaseUrl;
@@ -35,7 +28,7 @@ const fetchArticles = (query, locale) => {
 
     url += `?${queryString.stringify(q)}`;
   }
-  return fetchAuth(url).then(resolveJsonOrRejectWithError);
+  return fetch(url).then(resolveJsonOrRejectWithError);
 };
 
-export { fetchArticle, fetchArticles };
+export { fetchArticles };

@@ -12,18 +12,14 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import { configureTracker } from '@ndla/tracker';
 import ErrorReporter from '@ndla/error-reporter';
-import isEmpty from 'lodash/isEmpty';
 import { hydrate } from 'emotion';
+import isEmpty from 'lodash/isEmpty';
 import TokenStatusHandler from './util/TokenStatusHandler';
 import { configureLocale, isValidLocale } from './locale/configureLocale';
 import configureStore from './configureStore';
 import App from './main/App';
-import {
-  saveAccessToken,
-  getSessionFromLocalStorage,
-} from './sources/localStorage';
+import { isUserAuthenticated } from './sources/localStorage';
 
-import { getTokenExpireAt } from './util/jwtHelper';
 import { createHistory } from './history';
 
 function generateBasename(path) {
@@ -46,31 +42,22 @@ const basename = generateBasename(path);
 
 const browserHistory = createHistory(basename);
 
+const authenticated = isUserAuthenticated();
+
 const emptyState = {
   learningPathStep: {},
   learningPaths: [],
   messages: [],
   locale,
+  authenticated,
 };
 
-const tokenStoredOnServer =
-  !isEmpty(window.initialState) &&
-  window.initialState.accessToken &&
-  window.initialState.accessToken.token;
-
-const { token, authenticated } = getSessionFromLocalStorage();
-
-if (!token && tokenStoredOnServer) {
-  saveAccessToken({
-    token: tokenStoredOnServer,
-    expires: getTokenExpireAt(tokenStoredOnServer),
-  });
-}
-
-const initialState = {
-  ...emptyState,
-  authenticated: authenticated === 'true',
-};
+const initialState = !isEmpty(window.initialState)
+  ? {
+      ...window.initialState,
+      authenticated,
+    }
+  : emptyState;
 
 const store = configureStore(initialState, browserHistory);
 

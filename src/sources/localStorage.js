@@ -7,37 +7,21 @@
  */
 
 import storage from 'local-storage-fallback';
-import decode from 'jwt-decode';
 
-export const getAccessToken = () =>
-  storage.getItem('learningpath_access_token');
-export const getAccessTokenExpires = () =>
-  storage.getItem('learningpath_access_token_expires_at');
-export const getIsAuthenticated = () => storage.getItem('isAuthenticated');
+export const getPersonalToken = () =>
+  storage.getItem('learningpath_personal_token');
+export const getPersonalTokenExpires = () =>
+  storage.getItem('learningpath_personal_token_expires_at');
 
-export const saveAccessToken = ({ token, expires, authenticated }) => {
-  storage.setItem('learningpath_access_token', token);
-  storage.setItem('learningpath_access_token_expires_at', expires);
-  storage.setItem('isAuthenticated', authenticated);
+export const savePersonalToken = ({ token, expires, authenticated }) => {
+  storage.setItem('learningpath_personal_token', token);
+  storage.setItem('learningpath_personal_token_expires_at', expires);
 };
 
-const isValid = accessToken => {
-  try {
-    decode(accessToken);
-    return true;
-  } catch (e) {
-    return false;
-  }
-};
+export function removePersonalToken() {
+  storage.removeItem('learningpath_personal_token');
+  storage.removeItem('learningpath_personal_token_expires_at');
+}
 
-export const getSessionFromLocalStorage = () => {
-  const token = getAccessToken();
-  if (!isValid(token)) {
-    return {};
-  }
-  return {
-    token,
-    expires: getAccessTokenExpires(),
-    authenticated: getIsAuthenticated(),
-  };
-};
+export const isUserAuthenticated = () =>
+  storage.getItem('learningpath_personal_token') !== null;

@@ -6,7 +6,6 @@
  *
  */
 
-import 'isomorphic-fetch';
 import formatUrl from '../util/formatUrlUtil';
 import { fetchAuth } from './fetchAuth';
 import {

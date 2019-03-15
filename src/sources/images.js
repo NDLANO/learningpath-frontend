@@ -6,10 +6,9 @@
  *
  */
 
-import 'isomorphic-fetch';
 import queryString from 'query-string';
 import formatUrl from '../util/formatUrlUtil';
-import { fetchAuth } from './fetchAuth';
+import fetch from './fetch';
 
 import { resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';
 
@@ -18,15 +17,15 @@ const imagesUrl = apiResourceUrl('/image-api/v2/images');
 const fetchImages = (query = { 'page-size': 16, page: 1 }) => {
   let url = imagesUrl;
   url += `?${queryString.stringify(query)}`;
-  return fetchAuth(url).then(resolveJsonOrRejectWithError);
+  return fetch(url).then(resolveJsonOrRejectWithError);
 };
 const fetchImage = imageId => {
   const url = apiResourceUrl(
     formatUrl('/image-api/v2/images/:imageId', { imageId }),
   );
-  return fetchAuth(url).then(resolveJsonOrRejectWithError);
+  return fetch(url).then(resolveJsonOrRejectWithError);
 };
 const fetchImageWithMetaUrl = url =>
-  fetchAuth(url).then(resolveJsonOrRejectWithError);
+  fetch(url).then(resolveJsonOrRejectWithError);
 
 export { fetchImages, fetchImage, fetchImageWithMetaUrl };
