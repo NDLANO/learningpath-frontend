@@ -110,6 +110,14 @@ test('actions/createLearningPath access denied', done => {
             'http://ndla-api/learningpath-api/v2/learningpaths/',
           ),
         ),
+        {
+          payload: {
+            message: 'Du har ikke tilgang til dette akkurat nå',
+            severity: 'danger',
+            timeToLive: 10000,
+          },
+          type: 'ADD_MESSAGE',
+        },
       ]);
       expect(() => apiMock.done()).not.toThrow();
       done();

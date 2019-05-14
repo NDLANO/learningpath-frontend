@@ -127,7 +127,7 @@ export function createLearningPath(learningPath) {
         })
         .catch(err => {
           dispatch(applicationError(err));
-          if(err.status === 403) {
+          if (err.status === 403) {
             dispatch(
               addMessage({
                 message: polyglot.t('createLearningPath.notAllowed'),
@@ -165,7 +165,7 @@ export function updateLearningPath(
         })
         .catch(err => {
           dispatch(applicationError(err));
-          if(err.status === 403) {
+          if (err.status === 403) {
             dispatch(
               addMessage({
                 message: polyglot.t('updateLearningPath.notAllowed'),
@@ -230,7 +230,7 @@ function updateLPStatus(pathId, status, redirectUrl, setStatus, rejectMessage) {
       })
       .catch(err => {
         dispatch(applicationError(err));
-        if(err.status === 403) {
+        if (err.status === 403) {
           dispatch(
             addMessage({
               message: polyglot.t('updateLearningPath.notAllowed'),
@@ -286,7 +286,7 @@ export function copyLearningPath(learningPath, locale) {
         })
         .catch(err => {
           dispatch(applicationError(err));
-          if(err.status === 403) {
+          if (err.status === 403) {
             dispatch(
               addMessage({
                 message: polyglot.t('copyLearningPath.notAllowed'),

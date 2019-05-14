@@ -133,7 +133,7 @@ export function updateLearningPathStep(pathId, stepId, learningPathStep) {
       })
       .catch(err => {
         dispatch(applicationError(err));
-        if(err.status === 403) {
+        if (err.status === 403) {
           dispatch(
             addMessage({
               message: polyglot.t('updateLearningPath.notAllowed'),
@@ -161,7 +161,7 @@ export function createLearningPathStep(pathId, learningPathStep) {
       })
       .catch(err => {
         dispatch(applicationError(err));
-        if(err.status === 403) {
+        if (err.status === 403) {
           dispatch(
             addMessage({
               message: polyglot.t('updateLearningPath.notAllowed'),
