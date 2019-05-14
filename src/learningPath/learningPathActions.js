@@ -127,6 +127,15 @@ export function createLearningPath(learningPath) {
         })
         .catch(err => {
           dispatch(applicationError(err));
+          if(err.status === 403) {
+            dispatch(
+              addMessage({
+                message: polyglot.t('createLearningPath.notAllowed'),
+                severity: 'danger',
+                timeToLive: 10000,
+              }),
+            );
+          }
           reject();
         }),
     );
@@ -156,6 +165,15 @@ export function updateLearningPath(
         })
         .catch(err => {
           dispatch(applicationError(err));
+          if(err.status === 403) {
+            dispatch(
+              addMessage({
+                message: polyglot.t('updateLearningPath.notAllowed'),
+                severity: 'danger',
+                timeToLive: 10000,
+              }),
+            );
+          }
           reject();
         }),
     );
@@ -210,7 +228,18 @@ function updateLPStatus(pathId, status, redirectUrl, setStatus, rejectMessage) {
           );
         }
       })
-      .catch(err => dispatch(applicationError(err)));
+      .catch(err => {
+        dispatch(applicationError(err));
+        if(err.status === 403) {
+          dispatch(
+            addMessage({
+              message: polyglot.t('updateLearningPath.notAllowed'),
+              severity: 'danger',
+              timeToLive: 10000,
+            }),
+          );
+        }
+      });
 }
 
 export function updateLearningPathsStatus(
@@ -257,6 +286,15 @@ export function copyLearningPath(learningPath, locale) {
         })
         .catch(err => {
           dispatch(applicationError(err));
+          if(err.status === 403) {
+            dispatch(
+              addMessage({
+                message: polyglot.t('copyLearningPath.notAllowed'),
+                severity: 'danger',
+                timeToLive: 10000,
+              }),
+            );
+          }
           reject();
         }),
     );

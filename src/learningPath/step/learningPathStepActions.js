@@ -131,7 +131,18 @@ export function updateLearningPathStep(pathId, stepId, learningPathStep) {
           }),
         );
       })
-      .catch(err => dispatch(applicationError(err)));
+      .catch(err => {
+        dispatch(applicationError(err));
+        if(err.status === 403) {
+          dispatch(
+            addMessage({
+              message: polyglot.t('updateLearningPath.notAllowed'),
+              severity: 'danger',
+              timeToLive: 10000,
+            }),
+          );
+        }
+      });
 }
 
 export function createLearningPathStep(pathId, learningPathStep) {
@@ -148,7 +159,18 @@ export function createLearningPathStep(pathId, learningPathStep) {
           }),
         );
       })
-      .catch(err => dispatch(applicationError(err)));
+      .catch(err => {
+        dispatch(applicationError(err));
+        if(err.status === 403) {
+          dispatch(
+            addMessage({
+              message: polyglot.t('updateLearningPath.notAllowed'),
+              severity: 'danger',
+              timeToLive: 10000,
+            }),
+          );
+        }
+      });
 }
 
 export function activateDeletedLearningPathStep(pathId, stepId) {
