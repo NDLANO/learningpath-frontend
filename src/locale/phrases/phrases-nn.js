@@ -263,6 +263,7 @@ const phrases = {
     descriptionPlaceholder: 'Skriv ei kort skildring av læringsstien.',
     descriptionMaxLength: 'Maks 150 teikn.',
     createButton: 'Opprett ny læringssti',
+    notAllowed: 'Du har ikkje tilgang til dette akkurat no.',
   },
   copyLearningPath: {
     makeCopy: 'Lag kopi',
@@ -273,6 +274,7 @@ const phrases = {
     copyTitle: 'Kopier ein annan sin læringssti',
     copy: 'KOPI: ',
     copiedMessage: 'Læringssti kopiert.',
+    notAllowed: 'Du har ikkje tilgang til dette akkurat no.',
   },
   learningPathStep: {
     messages: {
@@ -285,6 +287,7 @@ const phrases = {
   },
   updateLearningPath: {
     updatedMsg: 'Lagra OK',
+    notAllowed: 'Du har ikkje tilgang til dette akkurat no.',
   },
   tagInput: {
     createOption: 'Opprett ny tagg',

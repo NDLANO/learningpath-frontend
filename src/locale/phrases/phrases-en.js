@@ -266,6 +266,7 @@ const phrases = {
     descriptionPlaceholder: 'Write a short description for the learning path.',
     descriptionMaxLength: 'Max 150 characters.',
     createButton: 'Create new learning path',
+    notAllowed: 'You do not have access to this operation at the moment.',
   },
   copyLearningPath: {
     makeCopy: 'Make copy',
@@ -276,6 +277,7 @@ const phrases = {
     copyTitle: "Copy another's learning paths",
     copy: 'COPY: ',
     copiedMessage: 'Learning path was copied.',
+    notAllowed: 'You do not have access to this operation at the moment.',
   },
   learningPathStep: {
     messages: {
@@ -288,6 +290,7 @@ const phrases = {
   },
   updateLearningPath: {
     updatedMsg: 'Saved OK',
+    notAllowed: 'You do not have access to this operation at the moment.',
   },
   tagInput: {
     createOption: 'Create new tag',
