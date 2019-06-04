@@ -57,10 +57,6 @@ export const Footer = ({ locale }) => (
         {polyglot.t('footer.footerEditiorInChief')}
         <strong>Sigurd Trageton</strong>
       </span>
-      <span className="footer_editor">
-        {polyglot.t('footer.footerManagingEditor')}{' '}
-        <strong>Pål Frønsdal</strong>
-      </span>
     </p>
     {config.zendeskWidgetKey && (
       <ZendeskButton
