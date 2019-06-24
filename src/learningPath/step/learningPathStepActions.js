@@ -51,7 +51,9 @@ export function fetchOembed(query) {
   return (dispatch, getState) =>
     new Promise(resolve => {
       const clonedObject = {
-        html: `<iframe src="${query.url}"/>`,
+        html: `<iframe src="${query.url}" aria-label="${query.url}" title="${
+          query.url
+        }" />`,
         url: query.url,
         embedType: query.embedType,
         language: getState().locale,

@@ -35,11 +35,10 @@ class LTISearch extends React.Component {
       this.props.addEmbedResult(evt, decodeURIComponent(evt.data.params.url));
     }
   }
-
   render() {
     return (
       <div id="ltiiframewrapper" className="lti-iframe_wrapper">
-        <iframe id="ltiiframe" title="LTI Search" />
+        <iframe id="ltiiframe" title="LTI Search" aria-label="LTI Search" />
       </div>
     );
   }
