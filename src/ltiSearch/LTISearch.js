@@ -39,7 +39,7 @@ class LTISearch extends React.Component {
   render() {
     return (
       <div id="ltiiframewrapper" className="lti-iframe_wrapper">
-        <iframe id="ltiiframe" title="LTI Search" />
+        <iframe id="ltiiframe" title="LTI Search" aria-label="LTI Search" />
       </div>
     );
   }
