@@ -24,10 +24,6 @@
     "test-ci": "cross-env BABEL_ENV=test NODE_ENV=unittest jest --maxWorkers=4 --ci",
     "tdd": "cross-env BABEL_ENV=test NODE_ENV=unittest jest --watch"
   },
-  "engines": {
-    "node": ">=8.0.0",
-    "npm": ">=5.0.0"
-  },
   "devDependencies": {
     "@ndla/scripts": "0.7.3",
     "chalk": "2.4.1",
