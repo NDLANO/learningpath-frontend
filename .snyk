@@ -1,0 +1,22 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-450202:
+    - lodash:
+        patched: '2019-07-03T22:01:14.313Z'
+    - '@ndla/ui > @ndla/tabs > lodash':
+        patched: '2019-07-03T22:01:14.313Z'
+    - razzle > webpack-dev-server-speedy > http-proxy-middleware > lodash:
+        patched: '2019-07-03T22:01:14.313Z'
+    - razzle > jest > jest-cli > jest-environment-jsdom > jsdom > request-promise-native > request-promise-core > lodash:
+        patched: '2019-07-03T22:01:14.313Z'
+    - razzle > jest > jest-cli > jest-config > jest-environment-jsdom > jsdom > request-promise-native > request-promise-core > lodash:
+        patched: '2019-07-03T22:01:14.313Z'
+    - razzle > jest > jest-cli > jest-runtime > jest-config > jest-environment-jsdom > jsdom > request-promise-native > request-promise-core > lodash:
+        patched: '2019-07-03T22:01:14.313Z'
+    - razzle > jest > jest-cli > jest-runner > jest-config > jest-environment-jsdom > jsdom > request-promise-native > request-promise-core > lodash:
+        patched: '2019-07-03T22:01:14.313Z'
+    - razzle > jest > jest-cli > jest-runner > jest-runtime > jest-config > jest-environment-jsdom > jsdom > request-promise-native > request-promise-core > lodash:
+        patched: '2019-07-03T22:01:14.313Z'
