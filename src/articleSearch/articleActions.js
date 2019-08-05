@@ -34,7 +34,7 @@ export function fetchArticleSearch(query, language) {
           return {
             ...item,
             link:
-              resource.length > 0
+              resource.length > 0 && resource[0].path
                 ? `${ndlaFrontendUrl}/subjects${resource[0].path}`
                 : `${ndlaFrontendUrl}/article/${item.id}`, // TODO: Find a better way to use taxonomy paths.
           };
