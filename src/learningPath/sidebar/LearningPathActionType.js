@@ -23,27 +23,26 @@ const LearningPathActionType = ({
     'cta-link cta-link--primary-outline cta-link--block': true,
     'learningpath-action-type_button': hasChangeStatusButton,
   });
-  if (learningPath.canEdit) {
-    return (
-      <Link
-        className={buttonClassName}
-        to={`/learningpaths/${learningPath.id}/edit`}
-        onClick={() => localCloseSidebars()}>
-        {polyglot.t('editPage.edit')}
-      </Link>
-    );
-  }
-  if (authenticated) {
-    return (
-      <button
-        type="button"
-        className="cta-link cta-link--primary-outline cta-link--block copy-learningpath_button"
-        onClick={onCopyLearningPathClick}>
-        {polyglot.t('copyLearningPath.createCopy')}
-      </button>
-    );
-  }
-  return null;
+  return (
+    <React.Fragment>
+      {learningPath.canEdit && (
+        <Link
+          className={buttonClassName}
+          to={`/learningpaths/${learningPath.id}/edit`}
+          onClick={() => localCloseSidebars()}>
+          {polyglot.t('editPage.edit')}
+        </Link>
+      )}
+      {authenticated && (
+        <button
+          type="button"
+          className="cta-link cta-link--primary-outline cta-link--block copy-learningpath_button"
+          onClick={onCopyLearningPathClick}>
+          {polyglot.t('copyLearningPath.createCopy')}
+        </button>
+      )}
+    </React.Fragment>
+  );
 };
 
 LearningPathActionType.propTypes = {

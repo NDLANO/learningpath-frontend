@@ -49,6 +49,7 @@ export function parseHash(hash) {
 export function loginPersonalAuth(type) {
   auth.authorize({
     connection: type,
+    prompt: 'login',
   });
 }
 
