@@ -43,14 +43,19 @@ export async function getToken(audience = 'ndla_system') {
 export const getUsers = (managementToken, ownerIds) => {
   const query = ownerIds
     .split(',')
-    .map(ownerId => `app_metadata.ndla_id:"${ownerId}"`)
+    .map(ownerId => `"${ownerId}"`)
     .join(' OR ');
 
-  return fetch(`${config.auth0Url}/api/v2/users?q=${query}`, {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${managementToken.access_token}`,
+  return fetch(
+    `${
+      config.auth0Url
+    }/api/v2/users?q=app_metadata.ndla_id:(${query})&per_page=100`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${managementToken.access_token}`,
+      },
+      json: true,
     },
-    json: true,
-  }).then(res => res.json());
+  ).then(res => res.json());
 };
