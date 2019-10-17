@@ -53,6 +53,7 @@ const pinterestActivated = activatedForEnvironment(
 const gaTrackingId = activatedForEnvironment(
   {
     prod: 'UA-9036010-26',
+    ff: 'UA-9036010-26',
   },
   `UA-9036010-29`,
 );
@@ -60,6 +61,8 @@ const gaTrackingId = activatedForEnvironment(
 const getAuth0Hostname = () => {
   switch (process.env.NDLA_ENVIRONMENT) {
     case 'prod':
+      return 'ndla.eu.auth0.com';
+    case 'ff':
       return 'ndla.eu.auth0.com';
     case 'staging':
       return 'ndla-staging.eu.auth0.com';
