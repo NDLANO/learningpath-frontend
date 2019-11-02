@@ -117,7 +117,7 @@
     "svg4everybody": "^2.1.9",
     "tracekit": "^0.4.5",
     "warning": "4.0.1",
-    "webpack-bundle-analyzer": "2.13.1",
+    "webpack-bundle-analyzer": "3.3.2",
     "yamlparser": "0.0.2"
   },
   "repository": {
