@@ -70,13 +70,9 @@ class LearningPathStep extends React.Component {
 
   static getDimensions(props) {
     const { learningPath, learningPathStep } = props;
-    const position =
-      learningPath.learningsteps.length === learningPathStep.seqNo + 1
-        ? 'Siste'
-        : learningPathStep.seqNo;
     const dimensions = {
       13: learningPath.learningsteps.length,
-      14: position,
+      14: learningPathStep.seqNo + 1,
     };
     return {
       ga: convertToGaOrGtmDimension(dimensions, 'ga'),
