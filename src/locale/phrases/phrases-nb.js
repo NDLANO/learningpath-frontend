@@ -89,9 +89,9 @@ const phrases = {
     newBtn: 'Opprett ny læringssti',
     rejectedMessageAlert: {
       message:
-        'Læringssti med tittel %{title} ble avist. Se medling for begrunnelse: %{message}',
+        'Læringssti med tittel %{title} ble avist. Se melding for begrunnelse: %{message}',
       action: 'Slett melding',
-      messageRemoved: 'Medling slettet for sti med tittel: %{title}',
+      messageRemoved: 'Melding slettet for sti med tittel: %{title}',
     },
   },
   tilePage: {
