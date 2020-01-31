@@ -30,7 +30,7 @@ const ndlaFrontendDomain = activatedForEnvironment(
     local: 'http://api-gateway.ndla-local:30017',
     prod: 'https://ndla.no',
   },
-  `https://ndla-frontend.${environment}.api.ndla.no`,
+  `https://${environment}.ndla.no`,
 );
 
 const apiDomain = activatedForEnvironment(
@@ -38,7 +38,7 @@ const apiDomain = activatedForEnvironment(
     local: 'http://api-gateway.ndla-local',
     prod: 'https://api.ndla.no',
   },
-  `https://${environment}.api.ndla.no`,
+  `https://api.${environment}.ndla.no`,
 );
 
 const ltiActivated = activatedForEnvironment(
