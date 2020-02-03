@@ -17,7 +17,7 @@
     "lint-css": "stylelint style/**/*.css",
     "lint-es": "eslint  --max-warnings=0 --cache --cache-location '.eslintcache/' --ext .js --ext .jsx src",
     "now-start": "NODE_ENV=production NOW=true node build/server",
-    "start": "razzle start",
+    "start": "razzle start  --inspect --inspect-port 9230",
     "start-without-ssr": "cross-env DISABLE_SSR=true razzle start",
     "start-prod": "cross-env NODE_ENV=production node build/server",
     "test": "cross-env BABEL_ENV=test NODE_ENV=unittest jest",
