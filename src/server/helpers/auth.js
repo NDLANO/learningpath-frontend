@@ -7,20 +7,20 @@
  */
 
 import 'isomorphic-fetch';
-import config, { getEnvironmentVariabel } from '../../config';
+import config, { getEnvironmentVariable } from '../../config';
 
 const url = `${config.auth0Url}/oauth/token`;
 
 function getClientSecret() {
-  if (getEnvironmentVariabel('NOW') === 'true') {
+  if (getEnvironmentVariable('NOW') === 'true') {
     // We need to base64 encode the secret in now
     const buffer = Buffer.from(
-      getEnvironmentVariabel('NDLA_LEARNING_PATH_CLIENT_SECRET'),
+      getEnvironmentVariable('NDLA_LEARNING_PATH_CLIENT_SECRET'),
       'base64',
     );
     return buffer.toString('ascii');
   }
-  return getEnvironmentVariabel('NDLA_LEARNING_PATH_CLIENT_SECRET');
+  return getEnvironmentVariable('NDLA_LEARNING_PATH_CLIENT_SECRET');
 }
 
 export async function getToken(audience = 'ndla_system') {
@@ -31,7 +31,7 @@ export async function getToken(audience = 'ndla_system') {
     },
     body: JSON.stringify({
       grant_type: 'client_credentials',
-      client_id: getEnvironmentVariabel('NDLA_LEARNING_PATH_CLIENT_ID'),
+      client_id: getEnvironmentVariable('NDLA_LEARNING_PATH_CLIENT_ID'),
       client_secret: getClientSecret(),
       audience,
     }),
@@ -40,22 +40,37 @@ export async function getToken(audience = 'ndla_system') {
   return response.json();
 }
 
-export const getUsers = (managementToken, ownerIds) => {
-  const query = ownerIds
-    .split(',')
-    .map(ownerId => `"${ownerId}"`)
-    .join(' OR ');
+const chunk = (owners, size) => {
+  const chunks = [];
+  let index = 0;
+  while (index < owners.length) {
+    chunks.push(owners.slice(index, size + index));
+    index += size;
+  }
+  return chunks;
+};
 
-  return fetch(
-    `${
-      config.auth0Url
-    }/api/v2/users?q=app_metadata.ndla_id:(${query})&per_page=100`,
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${managementToken.access_token}`,
+export const getUsers = async (managementToken, ownerIds) => {
+  const owners = ownerIds.split(',');
+  const chunks = chunk(owners, 100);
+
+  let requests = [];
+  chunks.forEach(chunk => {
+    const query = chunk.map(ownerId => `"${ownerId}"`).join('OR');
+    const result = fetch(
+      `${
+        config.auth0Url
+      }/api/v2/users?q=app_metadata.ndla_id:(${query})&per_page=100&search-engine=v3&include_totals=true`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${managementToken.access_token}`,
+        },
+        json: true,
       },
-      json: true,
-    },
-  ).then(res => res.json());
+    ).then(res => res.json());
+    requests.push(result);
+  });
+  const results = await Promise.all(requests);
+  return results.reduce((acc, res) => [...acc, ...res.users], []);
 };

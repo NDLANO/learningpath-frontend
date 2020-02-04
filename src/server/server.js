@@ -21,7 +21,7 @@ import {
   MOVED_PERMANENTLY,
   TEMPORARY_REDIRECT,
 } from 'http-status';
-import config, { getEnvironmentVariabel } from '../config';
+import config, { getEnvironmentVariable } from '../config';
 import { getToken, getUsers } from './helpers/auth';
 import Auth0SilentCallback from './helpers/Auth0SilentCallback';
 import contentSecurityPolicy from './contentSecurityPolicy';
@@ -110,7 +110,7 @@ app.get(
   requestProxy({
     url: `${config.pinterestApiUrl}*`,
     query: {
-      access_token: getEnvironmentVariabel('PINTEREST_ACCESS_TOKEN'),
+      access_token: getEnvironmentVariable('PINTEREST_ACCESS_TOKEN'),
     },
   }),
 );
