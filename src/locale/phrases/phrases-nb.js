@@ -119,7 +119,7 @@ const phrases = {
   pathDropDown: {
     PRIVATE: {
       unlist: 'Lenkedelt',
-      submit: 'Publiser',
+      submit: 'Be NDLA om publisering',
     },
     PUBLISHED: {
       unpublish: 'Gjør til kladd',
@@ -127,12 +127,12 @@ const phrases = {
     },
     UNLISTED: {
       unpublish: 'Gjør til kladd',
-      submit: 'Publiser',
+      submit: 'Be NDLA om publisering',
     },
     SUBMITTED: {
       unpublish: 'Gjør til kladd',
       unlist: 'Lenkedelt',
-      publish: 'Publisert',
+      publish: 'Publiser',
     },
     delete: 'Slett',
     makeCopy: 'Lag kopi',
