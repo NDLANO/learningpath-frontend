@@ -303,7 +303,7 @@ const phrases = {
       'Oppdatert status til lenkedelt. Dette betyr at den er tilgjenglig via url, men ikkje søk.',
     PUBLISHED: 'Opdatert status til offentleg.',
     PRIVATE: 'Oppdatert status til kladd.',
-    SUBMITTED: 'Oppdatert status til publisert.',
+    SUBMITTED: 'Sendt til NDLA for godkjenning.',
     consequence: {
       UNLISTED:
         'Læringsstien vil være tilgjengleg ved bruk av url, men ikkje ved søk',
