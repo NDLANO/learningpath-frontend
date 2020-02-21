@@ -11,12 +11,14 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import get from 'lodash/get';
 
-export const urlIsProductionNDLA = url => /^(http|https):\/\/ndla.no/.test(url);
-export const urlIsTestNDLA = url =>
-  /^(http|https):\/\/ndla-frontend.([a-zA-Z]+.)api.ndla.no/.test(url);
-
+export const urlIsNDLAApiUrl = url =>
+  /^(http|https):\/\/(ndla-frontend|www).([a-zA-Z]+.)?api.ndla.no/.test(url);
+export const urlIsNDLAEnvUrl = url =>
+  /^(http|https):\/\/(www.)?([a-zA-Z]+.)?ndla.no/.test(url);
 export const urlIsLocalNdla = url =>
   /^http:\/\/proxy.ndla-local:30017/.test(url);
+export const urlIsNDLAUrl = url =>
+  urlIsNDLAApiUrl(url) || urlIsNDLAEnvUrl(url) || urlIsLocalNdla(url);
 
 export default class Oembed extends React.Component {
   constructor(props) {
@@ -50,7 +52,7 @@ export default class Oembed extends React.Component {
   }
 
   handleIframeResizing({ oembedContent: { url } }) {
-    if (urlIsProductionNDLA(url) || urlIsTestNDLA(url) || urlIsLocalNdla(url)) {
+    if (urlIsNDLAUrl(url)) {
       this.setState({ isNDLAResource: true }, this.enableIframeMessageListener);
     } else {
       this.setState(

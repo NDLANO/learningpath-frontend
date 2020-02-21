@@ -6,16 +6,16 @@
  *
  */
 
-export const getEnvironmentVariabel = (key, fallback = undefined) => {
+export const getEnvironmentVariable = (key, fallback = undefined) => {
   const env = 'env';
-  const variabel = process[env][key]; // Hack to prevent DefinePlugin replacing process.env
-  return variabel || fallback;
+  const variable = process[env][key]; // Hack to prevent DefinePlugin replacing process.env
+  return variable || fallback;
 };
 
-const environment = getEnvironmentVariabel('NDLA_ENVIRONMENT', 'test');
+const environment = getEnvironmentVariable('NDLA_ENVIRONMENT', 'test');
 const hotjarSiteID =
   environment === 'staging'
-    ? getEnvironmentVariabel('HOTJAR_LEARNINGPATH_SITE_ID')
+    ? getEnvironmentVariable('HOTJAR_LEARNINGPATH_SITE_ID')
     : undefined;
 
 const activatedForEnvironment = (config, defaultValue) => {
@@ -30,7 +30,7 @@ const ndlaFrontendDomain = activatedForEnvironment(
     local: 'http://api-gateway.ndla-local:30017',
     prod: 'https://ndla.no',
   },
-  `https://ndla-frontend.${environment}.api.ndla.no`,
+  `https://${environment}.ndla.no`,
 );
 
 const apiDomain = activatedForEnvironment(
@@ -38,7 +38,7 @@ const apiDomain = activatedForEnvironment(
     local: 'http://api-gateway.ndla-local',
     prod: 'https://api.ndla.no',
   },
-  `https://${environment}.api.ndla.no`,
+  `https://api.${environment}.ndla.no`,
 );
 
 const ltiActivated = activatedForEnvironment(
@@ -72,40 +72,40 @@ const getAuth0Hostname = () => {
 };
 
 const config = {
-  componentName: getEnvironmentVariabel(
+  componentName: getEnvironmentVariable(
     'npm_package_name',
     'learningpath-frontend',
   ),
   environment,
-  host: getEnvironmentVariabel('LEARINGPATH_HOST', 'localhost'),
-  port: getEnvironmentVariabel('LEARINGPATH_PORT', '3000'),
-  redirectPort: getEnvironmentVariabel('LEARNINGPATH_REDIRECT_PORT', '3001'),
-  googleTagManagerId: getEnvironmentVariabel('NDLA_GOOGLE_TAG_MANAGER_ID'),
+  host: getEnvironmentVariable('LEARINGPATH_HOST', 'localhost'),
+  port: getEnvironmentVariable('LEARINGPATH_PORT', '3000'),
+  redirectPort: getEnvironmentVariable('LEARNINGPATH_REDIRECT_PORT', '3001'),
+  googleTagManagerId: getEnvironmentVariable('NDLA_GOOGLE_TAG_MANAGER_ID'),
   gaTrackingId,
   hotjarSiteID,
   ndlaFrontendDomain,
-  ndlaApiUrl: getEnvironmentVariabel('NDLA_API_URL', apiDomain),
-  googleSearchEngineId: getEnvironmentVariabel('NDLA_GOOGLE_SEARCH_ENGINE_ID'),
-  googleApiKey: getEnvironmentVariabel('NDLA_GOOGLE_API_KEY'),
-  googleApiUrl: getEnvironmentVariabel(
+  ndlaApiUrl: getEnvironmentVariable('NDLA_API_URL', apiDomain),
+  googleSearchEngineId: getEnvironmentVariable('NDLA_GOOGLE_SEARCH_ENGINE_ID'),
+  googleApiKey: getEnvironmentVariable('NDLA_GOOGLE_API_KEY'),
+  googleApiUrl: getEnvironmentVariable(
     'NDLA_GOOGLE_API_URL',
     'https://www.googleapis.com',
   ),
-  logEnvironment: getEnvironmentVariabel('NDLA_ENVIRONMENT', 'local'),
-  logglyApiKey: getEnvironmentVariabel('LOGGLY_API_KEY'),
-  pinterestApiUrl: getEnvironmentVariabel(
+  logEnvironment: getEnvironmentVariable('NDLA_ENVIRONMENT', 'local'),
+  logglyApiKey: getEnvironmentVariable('LOGGLY_API_KEY'),
+  pinterestApiUrl: getEnvironmentVariable(
     'PINTEREST_API_URL',
     'https://api.pinterest.com/v1/',
   ),
   pinterestEnabled:
-    getEnvironmentVariabel('PINTEREST_ACCESS_TOKEN') !== undefined &&
+    getEnvironmentVariable('PINTEREST_ACCESS_TOKEN') !== undefined &&
     pinterestActivated,
   ltiActivated,
-  ndlaPersonalClientId: getEnvironmentVariabel('NDLA_PERSONAL_CLIENT_ID', ''),
+  ndlaPersonalClientId: getEnvironmentVariable('NDLA_PERSONAL_CLIENT_ID', ''),
   auth0Domain: getAuth0Hostname(),
   auth0Url: `https://${getAuth0Hostname()}`,
-  disableSSR: getEnvironmentVariabel('DISABLE_SSR', false),
-  zendeskWidgetKey: getEnvironmentVariabel('NDLA_ZENDESK_WIDGET_KEY'),
+  disableSSR: getEnvironmentVariable('DISABLE_SSR', false),
+  zendeskWidgetKey: getEnvironmentVariable('NDLA_ZENDESK_WIDGET_KEY'),
   app: {
     title: 'NDLA Læringsstier',
     head: {
@@ -113,7 +113,7 @@ const config = {
     },
   },
 
-  isProduction: getEnvironmentVariabel('NODE_ENV') === 'production',
+  isProduction: getEnvironmentVariable('NODE_ENV') === 'production',
 };
 
 export function getUniversalConfig() {
