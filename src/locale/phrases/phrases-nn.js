@@ -111,28 +111,28 @@ const phrases = {
       statusValue: {
         PRIVATE: 'Kladd',
         PUBLISHED: 'Offentleg',
-        UNLISTED: 'Privat',
-        SUBMITTED: 'Til offentleggjering',
+        UNLISTED: 'Lenkedelt',
+        SUBMITTED: 'Publisert',
       },
     },
   },
   pathDropDown: {
     PRIVATE: {
-      unlist: 'Gjør privat',
-      submit: 'Til offentleggjering',
+      unlist: 'Lenkedelt',
+      submit: 'Be NDLA om publisering',
     },
     PUBLISHED: {
-      unpublish: 'Gjør til kladd',
-      unlist: 'Gjør privat',
+      unpublish: 'Gjer til kladd',
+      unlist: 'Lenkedelt',
     },
     UNLISTED: {
-      unpublish: 'Gjør til kladd',
-      submit: 'Til offentleggjering',
+      unpublish: 'Gjer til kladd',
+      submit: 'Be NDLA om publisering',
     },
     SUBMITTED: {
-      unpublish: 'Gjør til kladd',
-      unlist: 'Gjør privat',
-      publish: 'Offentleggjer',
+      unpublish: 'Gjer til kladd',
+      unlist: 'Lenkedelt',
+      publish: 'Publiser',
     },
     delete: 'Slett',
     makeCopy: 'Lag kopi',
@@ -300,10 +300,10 @@ const phrases = {
   },
   updateLearningPathStatus: {
     UNLISTED:
-      'Oppdatert status til privat. Dette betyr at den er tilgjenglig via url, men ikkje søk.',
+      'Oppdatert status til lenkedelt. Dette betyr at den er tilgjenglig via url, men ikkje søk.',
     PUBLISHED: 'Opdatert status til offentleg.',
     PRIVATE: 'Oppdatert status til kladd.',
-    SUBMITTED: 'Oppdatert status til til offentleggjering.',
+    SUBMITTED: 'Sendt til NDLA for godkjenning.',
     consequence: {
       UNLISTED:
         'Læringsstien vil være tilgjengleg ved bruk av url, men ikkje ved søk',
