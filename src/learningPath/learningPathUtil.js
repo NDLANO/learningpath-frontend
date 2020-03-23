@@ -36,13 +36,13 @@ export const convertLearningPath = learningPath => ({
 export const learningPathStatusFromStatus = status => {
   switch (status) {
     case statusPrivate.status:
-      return statusSubmitted;
+      return statusUnlisted;
     case statusUnlisted.status:
       return statusSubmitted;
     case statusPublished.status:
       return statusPrivate;
     case statusSubmitted.status:
-      return statusUnlisted;
+      return statusPrivate;
     default:
       return statusPrivate;
   }

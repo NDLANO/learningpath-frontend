@@ -71,12 +71,12 @@ const phrases = {
   adminPage: {
     pageHeader: 'Adminpanel',
     noPaths: {
-      submitted: 'Det finnes ingen læringsstier med status til publisering.',
-      unlisted: 'Det finnes ingen læringsstier med status til privat.',
+      submitted: 'Det finnes ingen læringsstier bedt om offentliggjøring.',
+      unlisted: 'Det finnes ingen læringsstier med status lenkedelt.',
     },
     statusHeader: {
-      submitted: 'Læringsstier til publisering',
-      unlisted: 'Læringsstier med status privat',
+      submitted: 'Læringsstier bedt om offentliggjøring',
+      unlisted: 'Læringsstier med status lenkedelt',
     },
     rejectedPathMessage: {
       message: 'Tilbakemelding på avvist læringssti',
@@ -111,27 +111,27 @@ const phrases = {
       statusValue: {
         PRIVATE: 'Kladd',
         PUBLISHED: 'Offentlig',
-        UNLISTED: 'Privat',
-        SUBMITTED: 'Publisert',
+        UNLISTED: 'Lenkedelt',
+        SUBMITTED: 'Bedt om offentliggjøring',
       },
     },
   },
   pathDropDown: {
     PRIVATE: {
-      unlist: 'Lenkedelt',
-      submit: 'Be NDLA om publisering',
+      unlist: 'Gjør lenkedelt',
+      submit: 'Be NDLA om offentliggjøring',
     },
     PUBLISHED: {
       unpublish: 'Gjør til kladd',
-      unlist: 'Lenkedelt',
+      unlist: 'Gjør lenkedelt',
     },
     UNLISTED: {
       unpublish: 'Gjør til kladd',
-      submit: 'Be NDLA om publisering',
+      submit: 'Be NDLA om offentliggjøring',
     },
     SUBMITTED: {
       unpublish: 'Gjør til kladd',
-      unlist: 'Lenkedelt',
+      unlist: 'Gjør lenkedelt',
       publish: 'Publiser',
     },
     delete: 'Slett',
@@ -305,14 +305,14 @@ const phrases = {
       'Oppdatert status til lenkedelt. Dette betyr at den er tilgjenglig via url, men ikke søk.',
     PUBLISHED: 'Opdatert status til offentlig.',
     PRIVATE: 'Oppdatert status til kladd.',
-    SUBMITTED: 'Sendt til NDLA for godkjenning.',
+    SUBMITTED: 'Sendt til NDLA for offentliggjøring.',
     consequence: {
       UNLISTED:
         'Læringsstien vil være tilgjenglig ved bruk av url, men ikke ved søk',
       PUBLISHED: 'Læringsstien vil være tilgjenglig både ved søk og url.',
-      PRIVATE: 'Bare du kan se denne læringsstien',
+      PRIVATE: 'Bare forfatteren kan se denne læringsstien',
       SUBMITTED:
-        'Læringsstien vil være publisert offentlig med egen url, og kan dukke opp i søk',
+        'Læringsstien vil være tilgjenglig ved bruk av url, og i søk dersom den blir offentliggjort.',
     },
   },
   validation: {
