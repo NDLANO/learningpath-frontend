@@ -10,6 +10,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
+import polyglot from '../../i18n';
 import formatDate from '../../util/formatDate';
 import formatDuration from '../../util/formatDuration';
 import { closeSidebars } from '../../common/sidebarActions';
@@ -18,6 +19,7 @@ import LearningPathTitle from './LearningPathTitle';
 import LearningPathActionType from './LearningPathActionType';
 import { getLearningPath } from '../learningPathSelectors';
 import LearningPathContributors from './LearningPathContributors';
+import ActionToolTip from '../../myPage/ActionToolTip';
 
 class LearningPathGeneralInfo extends React.Component {
   constructor() {
@@ -63,6 +65,16 @@ class LearningPathGeneralInfo extends React.Component {
           </div>
           <div className="learningpath-general-info_b">
             <div className={borderBoxClassName}>
+              {authenticated &&
+                learningPath.canEdit && (
+                  <ActionToolTip status={learningPath.status}>
+                    <div className="border-box">
+                      {polyglot.t(
+                        `tilePage.path.statusValue.${learningPath.status}`,
+                      )}
+                    </div>
+                  </ActionToolTip>
+                )}
               <div className="border-box">
                 <LabeledIcon.Today
                   labelText={formatDate(learningPath.lastUpdated, lang)}

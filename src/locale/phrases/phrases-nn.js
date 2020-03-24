@@ -71,16 +71,16 @@ const phrases = {
   adminPage: {
     pageHeader: 'Adminpanel',
     noPaths: {
-      submitted: 'Det finnes ingen læringsstiar med status til publisering.',
-      unlisted: 'Det finnes ingen læringsstiar med status til privat.',
+      submitted: 'Det finnes ingen læringsstiar bedt om offentleggjering.',
+      unlisted: 'Det finnes ingen læringsstiar med status lenkedelt.',
     },
     statusHeader: {
-      submitted: 'Læringsstiar til publisering',
-      unlisted: 'Læringsstiar med status privat',
+      submitted: 'Læringsstiar bedt om offentleggjering',
+      unlisted: 'Læringsstiar med status lenkedelt',
     },
     rejectedPathMessage: {
       message: 'Tilbakemelding på avvist læringssti',
-      placeholder: 'Forklar kvifor læringsstia ikkje ble godkjent',
+      placeholder: 'Forklar kvifor læringsstia ikkje ble offentleggjort',
       button: 'Send melding og endre status',
     },
   },
@@ -112,26 +112,26 @@ const phrases = {
         PRIVATE: 'Kladd',
         PUBLISHED: 'Offentleg',
         UNLISTED: 'Lenkedelt',
-        SUBMITTED: 'Publisert',
+        SUBMITTED: 'Bedt om offentleggjering',
       },
     },
   },
   pathDropDown: {
     PRIVATE: {
-      unlist: 'Lenkedelt',
-      submit: 'Be NDLA om publisering',
+      unlist: 'Gjer lenkedelt',
+      submit: 'Be NDLA om offentleggjering',
     },
     PUBLISHED: {
       unpublish: 'Gjer til kladd',
-      unlist: 'Lenkedelt',
+      unlist: 'Gjer lenkedelt',
     },
     UNLISTED: {
       unpublish: 'Gjer til kladd',
-      submit: 'Be NDLA om publisering',
+      submit: 'Be NDLA om offentleggjering',
     },
     SUBMITTED: {
       unpublish: 'Gjer til kladd',
-      unlist: 'Lenkedelt',
+      unlist: 'Gjer lenkedelt',
       publish: 'Publiser',
     },
     delete: 'Slett',
@@ -303,14 +303,14 @@ const phrases = {
       'Oppdatert status til lenkedelt. Dette betyr at den er tilgjenglig via url, men ikkje søk.',
     PUBLISHED: 'Opdatert status til offentleg.',
     PRIVATE: 'Oppdatert status til kladd.',
-    SUBMITTED: 'Sendt til NDLA for godkjenning.',
+    SUBMITTED: 'Sendt til NDLA for offentleggjering.',
     consequence: {
       UNLISTED:
         'Læringsstien vil være tilgjengleg ved bruk av url, men ikkje ved søk',
       PUBLISHED: 'Læringsstien vil være tilgjenglig både ved søk og url.',
-      PRIVATE: 'Berre du kan sjå denne læringsstien.',
+      PRIVATE: 'Berre forfattaren kan sjå denne læringsstien.',
       SUBMITTED:
-        'Læringsstien vil ha ein offentleg url, og kan dukke opp i søk',
+        'Læringsstien vil være tilgjengleg ved bruk av url, og i søk dersom den vert offentleggjort.',
     },
   },
   htmlTitleTemplates: {

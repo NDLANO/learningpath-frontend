@@ -218,6 +218,7 @@ function updateLPStatus(pathId, status, redirectUrl, setStatus, rejectMessage) {
         dispatch(
           addMessage({
             message: polyglot.t(`updateLearningPathStatus.${status}`),
+            timeToLive: 3000,
           }),
         );
         if (redirectUrl) {

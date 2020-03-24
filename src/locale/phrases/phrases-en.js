@@ -117,12 +117,12 @@ const phrases = {
   },
   pathDropDown: {
     PRIVATE: {
-      unlist: 'Make private',
+      unlist: 'Make unlisted',
       submit: 'Make public',
     },
     PUBLISHED: {
       unpublish: 'Make draft',
-      unlist: 'Make private',
+      unlist: 'Make unlisted',
     },
     UNLISTED: {
       unpublish: 'Make draft',
@@ -130,7 +130,7 @@ const phrases = {
     },
     SUBMITTED: {
       unpublish: 'Make draft',
-      unlist: 'Make private',
+      unlist: 'Make unlisted',
       publish: 'Publish',
     },
     delete: 'Delete',
@@ -310,7 +310,7 @@ const phrases = {
     consequence: {
       UNLISTED: 'Learningpath will only be accesible by the url.',
       PUBLISHED: 'Learningpath will be accesible by search and url.',
-      PRIVATE: 'Only you can see the learningpath.',
+      PRIVATE: 'Only the author can see the learningpath.',
       SUBMITTED:
         'Learningpath will be accessible by url, and in search when approved.',
     },
