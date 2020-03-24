@@ -80,7 +80,7 @@ const phrases = {
     },
     rejectedPathMessage: {
       message: 'Tilbakemelding på avvist læringssti',
-      placeholder: 'Forklar hvorfor læringssti ikke ble godkjent',
+      placeholder: 'Forklar hvorfor læringssti ikke ble offentliggjort',
       button: 'Send melding og endre status',
     },
   },
