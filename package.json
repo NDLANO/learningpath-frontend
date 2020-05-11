@@ -73,7 +73,7 @@
     "express-jwt": "5.3.1",
     "express-request-proxy": "2.2.0",
     "form-data": "^2.3.2",
-    "helmet": "^3.13.0",
+    "helmet": "^3.21.3",
     "history": "^4.7.2",
     "hoist-non-react-statics": "3.0.1",
     "http-status": "1.2.0",
