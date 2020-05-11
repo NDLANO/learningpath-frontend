@@ -60,8 +60,6 @@ const phrases = {
   },
   logoutSession: {
     title: 'Logout',
-    or: 'or',
-    logoutWholeSession: 'Logout from all services',
     logutLearningpathSite: 'Logout from learningpaths',
   },
   logo: {
