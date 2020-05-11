@@ -61,8 +61,6 @@ const phrases = {
       ', og jeg gir mitt samtykke til at NDLA bruker min personlige informasjon.',
   },
   logoutSession: {
-    or: 'eller',
-    logoutWholeSession: 'Logg helt ut av alle tjenester',
     logutLearningpathSite: 'Logg ut av læringssti',
   },
   logo: {
