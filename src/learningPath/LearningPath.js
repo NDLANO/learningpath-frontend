@@ -198,7 +198,8 @@ export class LearningPath extends Component {
         <Helmet title={this.constructor.getDocumentTitle(this.props)} />
         <Masthead
           changeStatusButton={changeStatusButton}
-          sortableTableOfContentButton={sortableTableOfContentButton}>
+          sortableTableOfContentButton={sortableTableOfContentButton}
+          showSelectLocale>
           <div className="masthead_button masthead_button--left">
             <Icon.MoreVert />
             <span>Læringssti</span>
