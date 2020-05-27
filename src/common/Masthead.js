@@ -31,6 +31,7 @@ export function Masthead(props) {
     openLeft,
     children,
     logo,
+    showSelectLocale,
   } = props;
   const leftNavButtonClicked = () => {
     if (isLeftSideBarOpen) {
@@ -97,7 +98,7 @@ export function Masthead(props) {
         <div className={collapseClassName(isRightSidebarOpen)}>
           <div className="masthead_left--desktop">{logo}</div>
           <div className="masthead_right--desktop">
-            <SiteNav />
+            <SiteNav showSelectLocale={showSelectLocale} />
           </div>
         </div>
       </div>
@@ -119,6 +120,7 @@ Masthead.propTypes = {
   localCloseSidebars: PropTypes.func.isRequired,
   openLeft: PropTypes.func.isRequired,
   openRight: PropTypes.func.isRequired,
+  showSelectLocale: PropTypes.bool,
 };
 
 const mapStateToProps = (state, ownProps) =>

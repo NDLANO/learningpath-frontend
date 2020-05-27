@@ -20,6 +20,7 @@ import OnlyRenderOnClient from '../OnlyRenderOnClient';
 import { closeSidebars } from '../sidebarActions';
 import { getPersonalToken } from '../../sources/localStorage';
 import { decodeToken, getScope } from '../../util/jwtHelper';
+import SelectLocale from '../../locale/SelectLocale';
 
 export const SiteNav = ({
   authenticated,
@@ -27,6 +28,7 @@ export const SiteNav = ({
   cssModifier,
   localCloseSidebars,
   isAdmin,
+  showSelectLocale,
 }) => {
   const rootClasses = classNames({
     'site-nav': true,
@@ -36,6 +38,12 @@ export const SiteNav = ({
   return (
     <div className={rootClasses}>
       <ul className="site-nav_list">
+        {showSelectLocale && (
+          <SelectLocale
+            id="language-select"
+            className="footer_language-select"
+          />
+        )}
         <li className="site-nav_item">
           <Link
             to={{
@@ -86,6 +94,7 @@ SiteNav.propTypes = {
   localCloseSidebars: PropTypes.func.isRequired,
   cssModifier: PropTypes.string,
   isAdmin: PropTypes.bool.isRequired,
+  showSelectLocale: PropTypes.bool,
 };
 
 SiteNav.defaultProps = {
