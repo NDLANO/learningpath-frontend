@@ -8,6 +8,7 @@
  */
 
 import React from 'react';
+import { StaticRouter } from 'react-router';
 import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
 import ErrorPage from '../ErrorPage';
@@ -21,7 +22,9 @@ test('ErrorPage renderers correctly', () => {
   const store = configureStore({ locale: 'nb' });
   const component = renderer.create(
     <Provider store={store} locale="nb">
-      <ErrorPage locale="nb" />
+      <StaticRouter>
+        <ErrorPage locale="nb" />
+      </StaticRouter>
     </Provider>,
   );
 
