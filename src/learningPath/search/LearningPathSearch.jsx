@@ -43,7 +43,7 @@ class LearningPathSearch extends React.Component {
     return localSearchLearningPaths(queryWithSort);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     LearningPathSearch.fetchData(this.props);
   }
 

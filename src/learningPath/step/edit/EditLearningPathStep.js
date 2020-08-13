@@ -41,7 +41,7 @@ export const saveStepObject = (step, values, language) =>
   });
 
 class EditLearningPathStep extends Component {
-  componentWillMount() {
+  componentDidMount() {
     const {
       authenticated,
       localIfAuthenticated,

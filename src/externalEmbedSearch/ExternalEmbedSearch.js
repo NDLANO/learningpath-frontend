@@ -31,7 +31,7 @@ class ExternalEmbedSearch extends React.Component {
     this.handleTextQueryChange = this.handleTextQueryChange.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (this.state.filter.type === 'oembed') {
       this.props.localFetchEmbedSearch(
         Object.assign({}, this.props.query, {

@@ -26,7 +26,7 @@ class SortLearningPathSteps extends Component {
     this.state = { learningsteps: [] };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (this.props.learningPath) {
       this.setState({ learningsteps: this.props.learningPath.learningsteps });
     }

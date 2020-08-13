@@ -15,7 +15,7 @@ import { parseHash } from './sessionActions';
 import { LocationShape } from '../shapes';
 
 export class SessionInitializer extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const {
       localParseHash,
       location: { hash },

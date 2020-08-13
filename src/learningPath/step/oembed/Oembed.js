@@ -33,11 +33,11 @@ export default class Oembed extends React.Component {
     this.handleScrollTo = this.handleScrollTo.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.handleIframeResizing(this.props);
   }
 
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     if (this.props.oembedContent.url !== props.oembedContent.url) {
       this.handleIframeResizing(props);
     }
