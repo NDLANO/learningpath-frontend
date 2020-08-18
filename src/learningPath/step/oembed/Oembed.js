@@ -37,9 +37,9 @@ export default class Oembed extends React.Component {
     this.handleIframeResizing(this.props);
   }
 
-  UNSAFE_componentWillReceiveProps(props) {
-    if (this.props.oembedContent.url !== props.oembedContent.url) {
-      this.handleIframeResizing(props);
+  componentDidUpdate(prevProps) {
+    if (this.props.oembedContent.url !== prevProps.oembedContent.url) {
+      this.handleIframeResizing(prevProps);
     }
   }
 
