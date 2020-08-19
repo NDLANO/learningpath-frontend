@@ -35,7 +35,7 @@ export default class DescriptionHTMLEditor extends React.Component {
     this.handleDescriptionBlur = this.handleDescriptionBlur.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.setEditorContentStateFromHTML(this.props.input.value);
   }
 

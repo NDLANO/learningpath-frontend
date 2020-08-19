@@ -48,7 +48,7 @@ class LearningPathStep extends React.Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     LearningPathStep.fetchData(this.props);
   }
 

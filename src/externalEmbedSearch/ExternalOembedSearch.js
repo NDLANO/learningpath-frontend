@@ -34,7 +34,7 @@ class ExternalOembedSearch extends React.Component {
     this.onPreviewClose = this.onPreviewClose.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.localFetchEmbedSearch(this.props.query);
   }
 

@@ -9,7 +9,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getLicenseByAbbreviation } from '@ndla/licenses/lib/licenses';
-import LicenseByline from '@ndla/ui/lib/LicenseByline';
+import { LicenseByline } from '@ndla/licenses';
 import LearningPathContributors from '../sidebar/LearningPathContributors';
 import polyglot from '../../i18n';
 import { CopyrightObjectShape } from '../../shapes';

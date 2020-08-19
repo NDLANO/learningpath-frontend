@@ -39,7 +39,7 @@ class ArticleSearch extends React.Component {
     this.onImageLightboxClose = this.onImageLightboxClose.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.articleSearch(this.props.query, this.props.language);
   }
 

@@ -10,7 +10,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // import { Link } from 'react-router-dom';
 
-import SafeLink from '@ndla/ui/lib/common/SafeLink';
+import SafeLink from '@ndla/safelink';
 import classNames from 'classnames';
 import polyglot from '../i18n';
 import withCloseSidebars from './withCloseSidebars';
