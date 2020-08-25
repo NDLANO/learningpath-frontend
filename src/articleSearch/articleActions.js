@@ -18,7 +18,7 @@ import { getNumberOfArticlePages } from './articleSelectors';
 
 const ndlaFrontendUrl = config.ndlaFrontendDomain;
 
-export function fetchArticleSearch(query, language) {
+export function fetchArticleSearch(query, language, isNdla = false) {
   const ndlaQuery = {
     query: query.textQuery,
     page: query.page,
@@ -27,7 +27,7 @@ export function fetchArticleSearch(query, language) {
   };
   return async (dispatch, getState) => {
     try {
-      const result = await fetchArticles(ndlaQuery);
+      const result = await fetchArticles(ndlaQuery, language, isNdla);
       const newItems = await Promise.all(
         result.results.map(async item => {
           const resource = await fetchResource(item.id);

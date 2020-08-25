@@ -9,12 +9,17 @@
 import queryString from 'query-string';
 import cloneDeep from 'lodash/cloneDeep';
 import fetch from './fetch';
+import { fetchAuth } from './fetchAuth';
 import { resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';
 
-const articleBaseUrl = apiResourceUrl('/article-api/v2/articles');
+const articleBaseUrl = isNdla => {
+  const baseUrl = apiResourceUrl('/search-api/v1/search');
+  return isNdla ? `${baseUrl}/editorial/` : baseUrl;
+};
 
-const fetchArticles = (query, locale) => {
-  let url = articleBaseUrl;
+const fetchArticles = (query, locale, isNdla) => {
+  let url = articleBaseUrl(isNdla);
+  const fetchFunc = isNdla ? fetchAuth : fetch;
   if (query) {
     const q = cloneDeep(query);
     if (q.pageSize !== undefined) {
@@ -25,10 +30,11 @@ const fetchArticles = (query, locale) => {
       delete q.query;
     }
     q.language = locale || 'nb';
+    q['context-types'] = 'topic-article,standard';
 
     url += `?${queryString.stringify(q)}`;
   }
-  return fetch(url).then(resolveJsonOrRejectWithError);
+  return fetchFunc(url).then(resolveJsonOrRejectWithError);
 };
 
 export { fetchArticles };
