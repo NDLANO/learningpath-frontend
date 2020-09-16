@@ -9,6 +9,7 @@
 import formatUrl from '../util/formatUrlUtil';
 import { fetchAuth } from './fetchAuth';
 import {
+  resolveJsonIgnoreOembedFailureOrRejectWithError,
   resolveJsonOrRejectWithError,
   createErrorPayload,
 } from './resolveJsonOrRejectWithError';
@@ -19,6 +20,7 @@ export {
   createErrorPayload,
   apiBaseUrl,
   resolveJsonOrRejectWithError,
+  resolveJsonIgnoreOembedFailureOrRejectWithError,
 };
 
 export function apiResourceUrl(path) {

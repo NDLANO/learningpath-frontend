@@ -43,3 +43,25 @@ export function resolveJsonOrRejectWithError(res) {
       .then(reject);
   });
 }
+
+export function resolveJsonIgnoreOembedFailureOrRejectWithError(res) {
+  return new Promise((resolve, reject) => {
+    if (res.ok) {
+      return res.status === 204 ? resolve() : resolve(res.json());
+    }
+    if (res.status === 502) {
+      const json = res.json();
+      if (json?.startsWith('Received error 404')) {
+        // Hack to allow usage of unpublished articles as learningsteps.
+        resolve({});
+      }
+      reject();
+    }
+    return res
+      .json()
+      .then(json =>
+        createErrorPayload(res, defined(json.message, res.statusText), json),
+      )
+      .then(reject);
+  });
+}

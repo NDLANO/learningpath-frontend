@@ -1,4 +1,4 @@
 {
   "presets": ["razzle/babel"],
-  "plugins": ["emotion"]
+  "plugins": ["emotion", "@babel/plugin-proposal-optional-chaining"]
 }

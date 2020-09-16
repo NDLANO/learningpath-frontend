@@ -111,6 +111,7 @@ export default class OneLineEditor extends React.Component {
 OneLineEditor.propTypes = {
   input: PropTypes.shape({
     onChange: PropTypes.func.isRequired,
+    onBlur: PropTypes.func,
     value: PropTypes.string.isRequired,
   }).isRequired,
   placeholder: PropTypes.string,
