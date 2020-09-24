@@ -37,7 +37,7 @@ export function resolveJsonOrRejectWithError(res) {
     }
     return res
       .json()
-      .then((json) =>
+      .then(json =>
         createErrorPayload(res, defined(json.message, res.statusText), json),
       )
       .then(reject);
@@ -55,7 +55,7 @@ export function resolveJsonIgnoreOembedFailureOrRejectWithError(res) {
     }
     return res
       .json()
-      .then((json) =>
+      .then(json =>
         createErrorPayload(res, defined(json.message, res.statusText), json),
       )
       .then(reject);
