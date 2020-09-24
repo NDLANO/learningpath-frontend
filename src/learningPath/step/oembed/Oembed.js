@@ -95,13 +95,15 @@ export default class Oembed extends React.Component {
   handleIframeMessages(event) {
     const iframe = this.getIframeDOM();
     /* Needed to enforce content to stay within iframe on Safari iOS */
-    iframe.setAttribute('scrolling', 'no');
+    if (iframe) {
+      iframe.setAttribute('scrolling', 'no');
+    }
 
     if (
       !this.state.listeningToMessages ||
       !event ||
       !event.data ||
-      iframe.contentWindow !== event.source
+      iframe?.contentWindow !== event.source
     ) {
       return;
     }

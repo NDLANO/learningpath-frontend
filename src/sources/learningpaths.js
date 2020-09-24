@@ -18,6 +18,7 @@ import {
   patchAuthorized,
   deleteAuthorized,
   resolveJsonOrRejectWithError,
+  resolveJsonIgnoreOembedFailureOrRejectWithError,
   apiResourceUrl,
 } from './helpers';
 
@@ -147,7 +148,7 @@ const oembedUrl = apiResourceUrl('/oembed-proxy/v1/oembed');
 const fetchOembedUrl = query => {
   let url = oembedUrl;
   url += `?${queryString.stringify(query)}`;
-  return fetch(url).then(resolveJsonOrRejectWithError);
+  return fetch(url).then(resolveJsonIgnoreOembedFailureOrRejectWithError);
 };
 
 export {

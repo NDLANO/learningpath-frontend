@@ -74,6 +74,7 @@ LearningPathTile.propTypes = {
     duration: PropTypes.number,
     status: PropTypes.string,
     description: PropTypes.string,
+    owner: PropTypes.string,
   }).isRequired,
   dropdown: PropTypes.node,
 };

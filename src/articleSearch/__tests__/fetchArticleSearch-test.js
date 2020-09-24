@@ -75,8 +75,14 @@ const expectedValue = {
 
 test('actions/fetchArticleSearch', done => {
   const apiMock = nock('http://ndla-api')
-    .get('/article-api/v2/articles')
-    .query({ query: 'hei', 'page-size': 10, page: 1, language: 'nb' })
+    .get('/search-api/v1/search')
+    .query({
+      query: 'hei',
+      'page-size': 10,
+      page: 1,
+      language: 'nb',
+      'context-types': 'topic-article,standard',
+    })
     .reply(200, { ...apiResponse.result });
 
   const taxonomyMocks = apiResponse.result.results.map(item =>

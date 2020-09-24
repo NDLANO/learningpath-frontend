@@ -22,6 +22,8 @@ import polyglot from '../i18n';
 import { fetchArticleSearch } from './articleActions';
 import { getArticleResultFromState } from './articleSelectors';
 import { getLocale } from '../locale/localeSelectors';
+import { getScope } from '../util/jwtHelper';
+import { getPersonalToken } from '../sources/localStorage';
 
 const searchType = 'ndla';
 
@@ -40,7 +42,11 @@ class ArticleSearch extends React.Component {
   }
 
   componentDidMount() {
-    this.props.articleSearch(this.props.query, this.props.language);
+    this.props.articleSearch(
+      this.props.query,
+      this.props.language,
+      this.props.isNdla,
+    );
   }
 
   onImageLightboxClose() {
@@ -72,6 +78,7 @@ class ArticleSearch extends React.Component {
       display,
       articleSearch,
       language,
+      isNdla,
     } = this.props;
     const containerClass = {
       'embed-search_container': true,
@@ -85,14 +92,14 @@ class ArticleSearch extends React.Component {
           <EmbedSearchForm
             query={query}
             handleTextQueryChange={this.handleTextQueryChange}
-            localFetchEmbedSearch={q => articleSearch(q, language)}
+            localFetchEmbedSearch={q => articleSearch(q, language, isNdla)}
             textQuery={this.state.textQuery}
           />
           <EmbedSearchResults
             items={results}
             onPreviewClick={this.previewOembed}
             addEmbedResult={this.addEmbedResult}
-            pagerAction={q => articleSearch(q, language)}
+            pagerAction={q => articleSearch(q, language, isNdla)}
             query={query}
           />
           <EmbedSearchPreview
@@ -117,6 +124,7 @@ ArticleSearch.propTypes = {
   localChangeEmbedSearchQuery: PropTypes.func.isRequired,
   display: PropTypes.bool.isRequired,
   language: PropTypes.string.isRequired,
+  isNdla: PropTypes.bool.isRequired,
   toggleNdlaDisplay: PropTypes.func.isRequired,
 };
 
@@ -133,6 +141,9 @@ const mapStateToProps = state =>
     query: getEmbedQueryFromState(state, searchType),
     oembedPreview: getOembedContentFromState(state, searchType),
     language: getLocale(state),
+    isNdla: state.authenticated
+      ? getScope(getPersonalToken()).includes(`learningpath:write`)
+      : false,
   });
 
 export default connect(
