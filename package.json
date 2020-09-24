@@ -25,10 +25,8 @@
     "tdd": "cross-env BABEL_ENV=test NODE_ENV=unittest jest --watch"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-optional-chaining": "^7.8.3",
     "@ndla/scripts": "^0.7.4",
     "chalk": "2.4.1",
-    "cross-env": "5.2.0",
     "cypress": "3.0.3",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
@@ -49,6 +47,7 @@
     "stylelint-config-standard": "18.2.0"
   },
   "dependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.8.3",
     "@emotion/core": "^10.0.9",
     "@emotion/styled": "^10.0.9",
     "@ndla/error-reporter": "^0.4.9",
@@ -67,6 +66,7 @@
     "bunyan": "1.8.12",
     "classnames": "2.2.6",
     "compression": "1.7.3",
+    "cross-env": "5.2.0",
     "date-fns": "^1.29.0",
     "defined": "1.0.0",
     "draft-convert": "^2.1.4",
@@ -116,6 +116,7 @@
     "redux-thunk": "2.3.0",
     "request": "2.88.0",
     "reselect": "^3.0.1",
+    "resolve": "^1.17.0",
     "serialize-javascript": "2.1.1",
     "source-map-support": "^0.5.6",
     "svg4everybody": "^2.1.9",
