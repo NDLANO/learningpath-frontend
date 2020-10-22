@@ -4,7 +4,6 @@ import NotFound from '../main/NotFound';
 import Forbidden from '../main/Forbidden';
 import LearningPathSearch from '../learningPath/search/LearningPathSearch';
 import LearningPath from '../learningPath/LearningPath';
-import LearningPathStep from '../learningPath/step/LearningPathStep';
 
 export const serverRoutes = [
   {
@@ -21,16 +20,6 @@ export const serverRoutes = [
     path: '/learningpaths',
     exact: true,
     component: LearningPathSearch,
-  },
-  {
-    path: '/learningpaths/:pathId/step/:stepId',
-    exact: true,
-    component: LearningPathStep,
-  },
-  {
-    path: '/learningpaths/:pathId/step/:stepId',
-    exact: true,
-    component: LearningPath,
   },
   {
     path: '/learningpaths/:pathId',
