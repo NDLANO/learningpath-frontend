@@ -52,7 +52,7 @@ const chunk = (owners, size) => {
 
 export const getUsers = async (managementToken, ownerIds) => {
   const owners = ownerIds.split(',');
-  const chunks = chunk(owners, 100);
+  const chunks = chunk(owners, 50);
 
   let requests = [];
   chunks.forEach(chunk => {
@@ -60,7 +60,7 @@ export const getUsers = async (managementToken, ownerIds) => {
     const result = fetch(
       `${
         config.auth0Url
-      }/api/v2/users?q=app_metadata.ndla_id:(${query})&per_page=100&search-engine=v3&include_totals=true`,
+      }/api/v2/users?q=app_metadata.ndla_id:(${query})&per_page=50&search-engine=v3&include_totals=true`,
       {
         headers: {
           'Content-Type': 'application/json',
