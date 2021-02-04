@@ -10,6 +10,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Switch, Route, withRouter } from 'react-router-dom';
+import { css, Global } from '@emotion/core';
 import { getLocale } from '../locale/localeSelectors';
 import { getMessages } from '../messages/messagesSelectors';
 import Alerts from '../messages/Alerts';
@@ -53,6 +54,14 @@ export class App extends React.Component {
     }
     return (
       <div className="page-container">
+        <Global
+          styles={css`
+            /* Hide default launcher so that we can provide our own. */
+            iframe#launcher {
+              display: none;
+            }
+          `}
+        />
         <Switch>
           <Route exact path="/" component={Welcome} />
           <Route exact path="/login" component={LoginProviders} />
