@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { routerActions } from 'react-router-redux';
 import classNames from 'classnames';
+import { css, Global } from '@emotion/core';
 import { withTracker } from '@ndla/tracker';
 import LearningPathGeneralInfo from './sidebar/LearningPathGeneralInfo';
 import LearningPathToC from './sidebar/LearningPathToC';
@@ -195,6 +196,14 @@ export class LearningPath extends Component {
 
     return (
       <div className="wrapper">
+        <Global
+          styles={css`
+            /* Hide default launcher so that we can provide our own. */
+            iframe#launcher {
+              display: none;
+            }
+          `}
+        />
         <Helmet title={this.constructor.getDocumentTitle(this.props)} />
         <Masthead
           changeStatusButton={changeStatusButton}
