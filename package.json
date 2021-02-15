@@ -9,7 +9,7 @@
     "e2e": "cypress open",
     "e2e-use-fixtures": "cross-env CYPRESS_USE_FIXTURES=true cypress open",
     "e2e-record-fixtures": "cross-env CYPRESS_RECORD_FIXTURES=true cypress open",
-    "e2e-ci": "cross-env CYPRESS_USE_FIXTURES=true cypress run",
+    "e2e-ci": "cross-env CYPRESS_USE_FIXTURES=true cypress run --record",
     "pree2e-ci": "cross-env NDLA_ENVIRONMENT=mock NODE_ENV=production node build/server &",
     "format": "node prettier.js write",
     "format-check": "node prettier.js lint",
