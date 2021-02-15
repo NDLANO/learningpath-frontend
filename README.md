@@ -1,6 +1,6 @@
 # NDLA Learningpath front-end
 
-[![Build Status](https://travis-ci.org/NDLANO/learningpath-frontend.svg?branch=master)](https://travis-ci.org/NDLANO/learningpath-frontend)
+![CI](https://github.com/NDLANO/learningpath-frontend/workflows/CI/badge.svg)
 
 The front-end code powering [https://stier.ndla.no](https://stier.ndla.no).
 

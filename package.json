@@ -25,7 +25,7 @@
     "tdd": "cross-env BABEL_ENV=test NODE_ENV=unittest jest --watch"
   },
   "devDependencies": {
-    "@ndla/scripts": "^0.7.4",
+    "@ndla/scripts": "^0.7.6",
     "chalk": "2.4.1",
     "cypress": "3.0.3",
     "enzyme": "^3.8.0",
