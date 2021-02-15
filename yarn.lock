@@ -1487,10 +1487,10 @@
   resolved "https://registry.yarnpkg.com/@ndla/safelink/-/safelink-0.0.6.tgz#dc23ced900abdc5a8caf6179e539ef1bc5ae0eeb"
   integrity sha512-UmssoklaH3Alkw7sIsK8njiF+DmriwhKQUTNP/BvC26QSKJo0ETFXfBB/8Y74mglUcpM64vNz0p//a+lHkJw7g==
 
-"@ndla/scripts@^0.7.4":
-  version "0.7.4"
-  resolved "https://registry.yarnpkg.com/@ndla/scripts/-/scripts-0.7.4.tgz#87c71967e1df6887eda7e0c4975570b68ac02ba3"
-  integrity sha512-bcjFlB6MykrPsfM8+QzoBO5kehscHvgwWJSiVzHEfaotkBoSUvBBicQlPwuqEPCYCSI/itCCKety2lEM6aXt/w==
+"@ndla/scripts@^0.7.6":
+  version "0.7.6"
+  resolved "https://registry.yarnpkg.com/@ndla/scripts/-/scripts-0.7.6.tgz#a29eea4222d50a273ca3ea01bb9950e25552d766"
+  integrity sha512-P0vCg1mMmJL71Idi99YB8kqqXRGkfMxf0CcB/Qc+fFMUEKNCjpJo6+Icd0bE/gYGh6bYtnNXdsXLz9h9nE8E3w==
   dependencies:
     cross-spawn "^6.0.5"
     cross-spawn-promise "^0.10.1"
