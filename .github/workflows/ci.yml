@@ -44,7 +44,8 @@ jobs:
             **/node_modules
             .eslintcache
             ~/.npm
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+            ~/.cache/Cypress
+          key: ${{ runner.os }}-deps-${{ hashFiles('**/yarn.lock') }}
       - name: "Install"
         run: yarn install --frozen-lockfile
       - name: "Check-all"
