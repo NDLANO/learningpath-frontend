@@ -14,6 +14,12 @@ env:
   GH_PR_NUMBER: ${{ github.event.number }}
   GH_PR_REPO: ${{ github.event.pull_request.head.repo.full_name }}
   GH_PR_SHA: ${{ github.event.pull_request.head.sha }}
+  CYPRESS_NDLA_END_TO_END_TESTING_CLIENT_ID: ${{ secrets.OPEN_PUBLIC_TEST_CLIENT_ID }}
+  CYPRESS_NDLA_END_TO_END_TESTING_CLIENT_SECRET: ${{ secrets.OPEN_PUBLIC_TEST_CLIENT_SECRET }}
+  CYPRESS_NDLA_END_TO_END_TESTING_AUDIENCE: "ndla_system"
+  CYPRESS_NDLA_END_TO_END_TESTING_GRANT_TYPE: "client_credentials"
+  NDLA_LEARNING_PATH_CLIENT_ID: ${{ secrets.NDLA_LEARNINGPATH_CLIENT_ID }}
+  NDLA_LEARNING_PATH_CLIENT_SECRET: ${{ secrets.NDLA_LEARNINGPATH_CLIENT_SECRET }}
 jobs:
   unit_tests:
     name: "Unit tests"
