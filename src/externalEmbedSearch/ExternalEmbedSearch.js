@@ -32,7 +32,10 @@ class ExternalEmbedSearch extends React.Component {
   }
 
   componentDidMount() {
-    if (this.state.filter.type === 'oembed') {
+    if (
+      this.state.filter.type === 'oembed' ||
+      this.state.filter.type === 'iframe'
+    ) {
       this.props.localFetchEmbedSearch(
         Object.assign({}, this.props.query, {
           page: 1,
@@ -47,7 +50,7 @@ class ExternalEmbedSearch extends React.Component {
   onFilterChange(evt, filter) {
     evt.preventDefault();
     this.setState({ filter, textQuery: '' });
-    if (filter.type === 'oembed') {
+    if (filter.type === 'oembed' || filter.type === 'iframe') {
       this.props.localFetchEmbedSearch(
         Object.assign({}, this.props.query, {
           page: 1,

@@ -34,7 +34,7 @@ export const createEmptyLearningPathStep = createAction(
 export const setOembedObject = createAction('SET_OEMBED_OBJECT');
 
 export function fetchOembed(query) {
-  if (query.embedType === 'oembed') {
+  if (query.embedType === 'oembed' || query.embedType === 'iframe') {
     return (dispatch, getState) =>
       fetchOembedUrl(query)
         .then(object => {
