@@ -16,7 +16,7 @@ export const urlIsNDLAApiUrl = url =>
 export const urlIsNDLAEnvUrl = url =>
   /^(http|https):\/\/(www.)?([a-zA-Z]+.)?ndla.no/.test(url);
 export const urlIsLocalNdla = url =>
-  /^http:\/\/proxy.ndla-local:30017/.test(url);
+  /^http:\/\/(proxy.ndla-local|localhost):30017/.test(url);
 export const urlIsNDLAUrl = url =>
   urlIsNDLAApiUrl(url) || urlIsNDLAEnvUrl(url) || urlIsLocalNdla(url);
 
@@ -133,7 +133,8 @@ export default class Oembed extends React.Component {
             'learning-step_embed': true,
             'learning-step--without-dimensions': this.state.isNDLAResource,
             'learning-step_lti': embedType === 'lti',
-            'learning-step_oembed': embedType === 'oembed',
+            'learning-step_oembed':
+              embedType === 'oembed' || embedType === 'iframe',
           })}
           dangerouslySetInnerHTML={{ __html: html }}
           ref={iframeDiv => {
