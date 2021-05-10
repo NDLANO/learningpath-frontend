@@ -71,12 +71,26 @@ const getAuth0Hostname = () => {
   }
 };
 
+const editorialFrontendDomain = () => {
+  switch (process.env.NDLA_ENVIRONMENT) {
+    case 'local':
+      return 'http://localhost:30019';
+    case 'prod':
+      return 'https://ed.ndla.no';
+    case 'staging':
+      return 'https://ed.staging.ndla.no';
+    default:
+      return `https://ed.test.ndla.no`;
+  }
+};
+
 const config = {
   componentName: getEnvironmentVariable(
     'npm_package_name',
     'learningpath-frontend',
   ),
   environment,
+  editorialFrontendDomain: editorialFrontendDomain(),
   host: getEnvironmentVariable('LEARINGPATH_HOST', 'localhost'),
   port: getEnvironmentVariable('LEARINGPATH_PORT', '3000'),
   redirectPort: getEnvironmentVariable('LEARNINGPATH_REDIRECT_PORT', '3001'),

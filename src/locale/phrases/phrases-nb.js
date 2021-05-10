@@ -170,6 +170,7 @@ const phrases = {
     isBasedOnPath: 'en annen læringssti',
     showIsBasedOn: 'Vis basert på',
     hideIsBasedOn: 'Skjul basert på',
+    editInEditorial: 'Rediger læringssteget i editorial',
     copyright: {
       license: 'Lisens',
       contributors: 'Forfattere',

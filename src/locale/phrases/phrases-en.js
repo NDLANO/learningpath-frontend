@@ -169,6 +169,7 @@ const phrases = {
     isBasedOnPath: 'another learningpath',
     showIsBasedOn: 'Show is based on',
     hideIsBasedOn: 'Hide is based on',
+    editInEditorial: 'Edit this learning path in editorial',
     copyright: {
       license: 'License',
       contributors: 'Authors',
