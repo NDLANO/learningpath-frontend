@@ -7,6 +7,7 @@
  */
 
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import SafeLink from '@ndla/safelink';
 import Tooltip from '@ndla/tooltip';
@@ -15,18 +16,20 @@ import LearningPathStepLicense from './LearningPathStepLicense';
 import { CopyrightObjectShape } from '../../shapes';
 import config from '../../config';
 import polyglot from '../../i18n';
+import { getPersonalToken } from '../../sources/localStorage';
+import { getScope } from '../../util/jwtHelper';
 
 const LearningPathStepInformation = ({
   learningPathStep,
   copyright,
   stepTitle,
+  hasNdlaWriteAcces
 }) => {
   const isNDLAArticleIframeUrl = url =>
     /^http(s)?:\/\/((.*)\.)?ndla.no\/((.*)\/)?article-iframe\/\d*/.test(url);
   const embedUrl = learningPathStep?.embedUrl?.url || '';
 
   const linkToEd = (url, id) => {
-    // TODO usikker på denne,
     if (url.includes('topic')) {
       return `${
         config.editorialFrontendDomain
@@ -56,7 +59,7 @@ const LearningPathStepInformation = ({
   return (
     <div className="learning-step">
       {learningPathStep.showTitle ? <h1>{stepTitle}</h1> : null}
-      {isNDLAArticleIframeUrl(embedUrl) && <EditorialLinkButton />}
+      {(isNDLAArticleIframeUrl(embedUrl) && hasNdlaWriteAcces) && <EditorialLinkButton />}
       {learningPathStep.description ? (
         <div className="learning-step_licence-description">
           <LearningPathStepLicense
@@ -78,6 +81,16 @@ LearningPathStepInformation.propTypes = {
   learningPathStep: PropTypes.object.isRequired,
   stepTitle: PropTypes.string,
   copyright: CopyrightObjectShape,
+  hasNdlaWriteAcces: PropTypes.bool.isRequired,
 };
 
-export default LearningPathStepInformation;
+const mapStateToProps = state => {
+  const token = getPersonalToken();
+  return Object.assign({}, state, {
+    hasNdlaWriteAcces: state.authenticated
+      ? getScope(token).includes(`drafts:write`)
+      : false,
+  });
+};
+
+export default connect(mapStateToProps)(LearningPathStepInformation);
