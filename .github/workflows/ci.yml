@@ -30,7 +30,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '10'
-      - uses: cypress-io/github-action@v2
       - name: "Login to ECR repo"
         run: RES=$(aws sts assume-role --role-arn $CI_RELEASE_ROLE --role-session-name github-actions-ecr-login)
           AWS_ACCESS_KEY_ID=$(echo $RES | jq -r .Credentials.AccessKeyId)
