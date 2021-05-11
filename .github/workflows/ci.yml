@@ -53,8 +53,8 @@ jobs:
       - name: "Build"
         run: yarn build
       - name: "e2e-ci"
-        run: yarn e2e-ci
         uses: cypress-io/github-action@v2
+        run: yarn e2e-ci
       - name: "Deploy now build"
         run: yarn ndla-scripts now-github
         continue-on-error: true
