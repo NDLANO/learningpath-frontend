@@ -23,7 +23,7 @@ const LearningPathStepInformation = ({
   learningPathStep,
   copyright,
   stepTitle,
-  hasNdlaWriteAcces
+  hasNdlaWriteAcces,
 }) => {
   const isNDLAArticleIframeUrl = url =>
     /^http(s)?:\/\/((.*)\.)?ndla.no\/((.*)\/)?article-iframe\/\d*/.test(url);
@@ -59,7 +59,8 @@ const LearningPathStepInformation = ({
   return (
     <div className="learning-step">
       {learningPathStep.showTitle ? <h1>{stepTitle}</h1> : null}
-      {(isNDLAArticleIframeUrl(embedUrl) && hasNdlaWriteAcces) && <EditorialLinkButton />}
+      {isNDLAArticleIframeUrl(embedUrl) &&
+        hasNdlaWriteAcces && <EditorialLinkButton />}
       {learningPathStep.description ? (
         <div className="learning-step_licence-description">
           <LearningPathStepLicense
