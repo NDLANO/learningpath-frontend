@@ -30,6 +30,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '10'
+      - uses: cypress-io/github-action@v2
       - name: "Login to ECR repo"
         run: RES=$(aws sts assume-role --role-arn $CI_RELEASE_ROLE --role-session-name github-actions-ecr-login)
           AWS_ACCESS_KEY_ID=$(echo $RES | jq -r .Credentials.AccessKeyId)
@@ -53,7 +54,6 @@ jobs:
       - name: "Build"
         run: yarn build
       - name: "e2e-ci"
-        uses: cypress-io/github-action@v2
         run: yarn e2e-ci
       - name: "Deploy now build"
         run: yarn ndla-scripts now-github
