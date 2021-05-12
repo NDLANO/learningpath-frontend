@@ -23,7 +23,7 @@ env:
 jobs:
   release:
     name: "Release and push to registry"
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -36,9 +36,6 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-      - uses: olafurpg/setup-scala@v10
-        with:
-          java-version: adopt@1.11
       - name: "Login to ECR repo"
         run: RES=$(aws sts assume-role --role-arn $CI_RELEASE_ROLE --role-session-name github-actions-ecr-login)
           AWS_ACCESS_KEY_ID=$(echo $RES | jq -r .Credentials.AccessKeyId)

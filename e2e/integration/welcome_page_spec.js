@@ -5,7 +5,7 @@ import { visitOptions } from '../support';
 describe('Welcome page', () => {
   describe('No session welcome page', () => {
     beforeEach(() => {
-      cy.visit('http://localhost:3000', visitOptions);
+      cy.visit('/', visitOptions);
     });
 
     it('should search for Norge in the welcome page search field', () => {
@@ -74,7 +74,7 @@ describe('Welcome page', () => {
     beforeEach(() => {
       const options = {
         method: 'POST',
-        url: 'https://ndla.eu.auth0.com/oauth/token',
+        url: 'https://ndla-test.eu.auth0.com/oauth/token',
         body: {
           client_id: Cypress.env('NDLA_END_TO_END_TESTING_CLIENT_ID'),
           client_secret: Cypress.env('NDLA_END_TO_END_TESTING_CLIENT_SECRET'),
@@ -104,7 +104,7 @@ describe('Welcome page', () => {
               response: {},
             });
           });
-          cy.visit('http://localhost:3000', visitOptions);
+          cy.visit('/', visitOptions);
         });
     });
 
