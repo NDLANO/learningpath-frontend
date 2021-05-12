@@ -7,6 +7,9 @@
   "supportFile": "e2e/support/index.js",
   "screenshotsFolder": "e2e/screenshots",
   "videosFolder": "e2e/videos",
+  "experimentalFetchPolyfill": true,
+  "viewportWidth": 1820,
+  "viewportHeight": 1280,
   "chromeWebSecurity": false,
   "video": false
 }

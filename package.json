@@ -6,10 +6,10 @@
     "build": "razzle build",
     "postbuild": "cp build/assets.json build/public/assets.json",
     "check-all": "yarn lint && yarn test-ci",
-    "e2e": "cypress open",
-    "e2e-use-fixtures": "cross-env CYPRESS_USE_FIXTURES=true cypress open",
-    "e2e-record-fixtures": "cross-env CYPRESS_RECORD_FIXTURES=true cypress open",
-    "e2e-ci": "cross-env CYPRESS_USE_FIXTURES=true cypress run --record",
+    "e2e": "cross-env NODE_ENV=development cypress open",
+    "e2e-use-fixtures": "cross-env NODE_ENV=development CYPRESS_USE_FIXTURES=true cypress open",
+    "e2e-record-fixtures": "cross-env NODE_ENV=development CYPRESS_RECORD_FIXTURES=true cypress open",
+    "e2e-ci": "cross-env NODE_ENV=test CYPRESS_USE_FIXTURES=true cypress run --record",
     "pree2e-ci": "cross-env NDLA_ENVIRONMENT=mock NODE_ENV=production node build/server &",
     "format": "node prettier.js write",
     "format-check": "node prettier.js lint",
@@ -24,10 +24,14 @@
     "test-ci": "cross-env BABEL_ENV=test NODE_ENV=unittest jest --maxWorkers=4 --ci",
     "tdd": "cross-env BABEL_ENV=test NODE_ENV=unittest jest --watch"
   },
+  "engines": {
+    "node": ">=14.16.0",
+    "npm": ">=5.3.0"
+  },
   "devDependencies": {
     "@ndla/scripts": "^0.7.6",
     "chalk": "2.4.1",
-    "cypress": "3.0.3",
+    "cypress": "^7.3.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
     "eslint": "^5.14.1",
