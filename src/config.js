@@ -77,8 +77,10 @@ const editorialFrontendDomain = () => {
       return 'http://localhost:30019';
     case 'prod':
       return 'https://ed.ndla.no';
+    case 'staging':
+      return 'https://ed.staging.ndla.no';
     default:
-      return `https://ed.${process.env.NDLA_ENVIRONMENT}.ndla.no`;
+      return 'https://ed.test.ndla.no';
   }
 };
 
