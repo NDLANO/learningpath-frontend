@@ -17,8 +17,10 @@ import LearningPathStepInformation from './LearningPathStepInformation';
 import LearningPathStepPrevNext from './LearningPathStepPrevNext';
 import { getLearningPathStep } from './learningPathStepSelectors';
 import polyglot from '../../i18n';
+import { getPersonalToken } from '../../sources/localStorage';
 import { convertToGaOrGtmDimension } from '../../util/trackingUtil';
 import { CopyrightObjectShape } from '../../shapes';
+import { getScope } from '../../util/jwtHelper';
 
 class LearningPathStep extends React.Component {
   static mapDispatchToProps = {
@@ -86,7 +88,7 @@ class LearningPathStep extends React.Component {
   }
 
   render() {
-    const { learningPathStep, copyright } = this.props;
+    const { learningPathStep, copyright, hasNdlaWriteAccess } = this.props;
     const { lang } = this.context;
     const oembedContent = learningPathStep.oembed;
     return (
@@ -100,6 +102,7 @@ class LearningPathStep extends React.Component {
               copyright={copyright}
               learningPathStep={learningPathStep}
               stepTitle={learningPathStep.title}
+              hasNdlaWriteAccess={hasNdlaWriteAccess}
             />
             {oembedContent ? <Oembed oembedContent={oembedContent} /> : ''}
           </div>
@@ -111,6 +114,7 @@ class LearningPathStep extends React.Component {
 
 LearningPathStep.propTypes = {
   authenticated: PropTypes.bool.isRequired,
+  hasNdlaWriteAccess: PropTypes.bool,
   learningPathStep: PropTypes.object.isRequired,
   localFetchLearningPathStep: PropTypes.func.isRequired,
   copyright: CopyrightObjectShape,
@@ -126,11 +130,14 @@ LearningPathStep.contextTypes = {
   lang: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = state =>
-  Object.assign({}, state, {
+const mapStateToProps = state => {
+  const token = getPersonalToken();
+  return Object.assign({}, state, {
     authenticated: state.authenticated,
+    hasNdlaWriteAccess: getScope(token).includes('learningpath:write'),
     learningPathStep: getLearningPathStep(state),
   });
+};
 
 export default connect(
   mapStateToProps,

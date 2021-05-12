@@ -7,7 +7,6 @@
  */
 
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import SafeLink from '@ndla/safelink';
 import Tooltip from '@ndla/tooltip';
@@ -16,18 +15,17 @@ import LearningPathStepLicense from './LearningPathStepLicense';
 import { CopyrightObjectShape } from '../../shapes';
 import config from '../../config';
 import polyglot from '../../i18n';
-import { getPersonalToken } from '../../sources/localStorage';
-import { getScope } from '../../util/jwtHelper';
 
 const LearningPathStepInformation = ({
   learningPathStep,
   copyright,
   stepTitle,
-  hasNdlaWriteAcces,
+  hasNdlaWriteAccess,
 }) => {
   const isNDLAArticleIframeUrl = url =>
     /^http(s)?:\/\/((.*)\.)?ndla.no\/((.*)\/)?article-iframe\/\d*/.test(url);
   const embedUrl = learningPathStep?.embedUrl?.url || '';
+  const baseUrl = embedUrl.split('?')[0];
 
   const linkToEd = (url, id) => {
     if (url.includes('topic')) {
@@ -42,9 +40,9 @@ const LearningPathStepInformation = ({
   };
 
   const EditorialLinkButton = () => {
-    const splittedHref = embedUrl.split('/');
+    const splittedHref = baseUrl.split('/');
     const articleId = splittedHref.pop();
-    const edLink = linkToEd(embedUrl, articleId);
+    const edLink = linkToEd(baseUrl, articleId);
 
     return (
       <Tooltip tooltip={polyglot.t('learningPath.editInEditorial')}>
@@ -59,8 +57,8 @@ const LearningPathStepInformation = ({
   return (
     <div className="learning-step">
       {learningPathStep.showTitle ? <h1>{stepTitle}</h1> : null}
-      {isNDLAArticleIframeUrl(embedUrl) &&
-        hasNdlaWriteAcces && <EditorialLinkButton />}
+      {isNDLAArticleIframeUrl(baseUrl) &&
+        hasNdlaWriteAccess && <EditorialLinkButton />}
       {learningPathStep.description ? (
         <div className="learning-step_licence-description">
           <LearningPathStepLicense
@@ -82,16 +80,7 @@ LearningPathStepInformation.propTypes = {
   learningPathStep: PropTypes.object.isRequired,
   stepTitle: PropTypes.string,
   copyright: CopyrightObjectShape,
-  hasNdlaWriteAcces: PropTypes.bool.isRequired,
+  hasNdlaWriteAccess: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => {
-  const token = getPersonalToken();
-  return Object.assign({}, state, {
-    hasNdlaWriteAcces: state.authenticated
-      ? getScope(token).includes(`drafts:write`)
-      : false,
-  });
-};
-
-export default connect(mapStateToProps)(LearningPathStepInformation);
+export default LearningPathStepInformation;
