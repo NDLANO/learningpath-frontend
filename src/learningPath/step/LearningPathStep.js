@@ -17,7 +17,10 @@ import LearningPathStepInformation from './LearningPathStepInformation';
 import LearningPathStepPrevNext from './LearningPathStepPrevNext';
 import { getLearningPathStep } from './learningPathStepSelectors';
 import polyglot from '../../i18n';
-import { getPersonalToken } from '../../sources/localStorage';
+import {
+  getPersonalToken,
+  isUserAuthenticated,
+} from '../../sources/localStorage';
 import { convertToGaOrGtmDimension } from '../../util/trackingUtil';
 import { CopyrightObjectShape } from '../../shapes';
 import { getScope } from '../../util/jwtHelper';
@@ -131,10 +134,14 @@ LearningPathStep.contextTypes = {
 };
 
 const mapStateToProps = state => {
-  const token = getPersonalToken();
+  let hasNdlaWriteAccess = false;
+  if (isUserAuthenticated()) {
+    const token = getPersonalToken();
+    hasNdlaWriteAccess = getScope(token).includes('learningpath:write');
+  }
   return Object.assign({}, state, {
     authenticated: state.authenticated,
-    hasNdlaWriteAccess: getScope(token).includes('learningpath:write'),
+    hasNdlaWriteAccess: hasNdlaWriteAccess,
     learningPathStep: getLearningPathStep(state),
   });
 };
