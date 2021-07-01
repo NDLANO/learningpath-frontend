@@ -23,6 +23,7 @@ exports[`ErrorPage renderers correctly 1`] = `
               className="logo_link"
               href="/"
               onClick={[Function]}
+              tabIndex={0}
             >
               Nasjonal digital læringsarena
             </a>
