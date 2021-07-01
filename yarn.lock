@@ -1432,6 +1432,16 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
+"@ndla/article-scripts@^0.6.4":
+  version "0.6.4"
+  resolved "https://registry.yarnpkg.com/@ndla/article-scripts/-/article-scripts-0.6.4.tgz#df649a166ee8de3a01fce41470651f9f9d9fd027"
+  integrity sha512-VyVPKD+D88i1coJU6Fhf+C+L4NvYk5BJ5KdP7JZemQ0VSrfJAAu+MvCXp7zttdL/UpaUhKjba3bNYsFL34rktg==
+  dependencies:
+    "@ndla/util" "^0.4.7"
+    focus-trap "^4.0.2"
+    jump.js "^1.0.2"
+    lodash "^4.17.20"
+
 "@ndla/button@^0.3.56":
   version "0.3.56"
   resolved "https://registry.yarnpkg.com/@ndla/button/-/button-0.3.56.tgz#0142498d7e3836ef5aa1aa363d6fbf1405b6bed7"

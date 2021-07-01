@@ -54,6 +54,7 @@
     "@babel/plugin-proposal-optional-chaining": "^7.8.3",
     "@emotion/core": "^10.0.9",
     "@emotion/styled": "^10.0.9",
+    "@ndla/article-scripts": "^0.6.4",
     "@ndla/error-reporter": "^0.4.17",
     "@ndla/icons": "^0.7.7",
     "@ndla/licenses": "^0.6.51",
