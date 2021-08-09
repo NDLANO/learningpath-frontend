@@ -53,34 +53,27 @@ const pinterestActivated = activatedForEnvironment(
 const gaTrackingId = activatedForEnvironment(
   {
     prod: 'UA-9036010-26',
-    ff: 'UA-9036010-26',
   },
   `UA-9036010-29`,
 );
 
 const getAuth0Hostname = () => {
-  switch (process.env.NDLA_ENVIRONMENT) {
+  switch (environment) {
     case 'prod':
       return 'ndla.eu.auth0.com';
-    case 'ff':
-      return 'ndla.eu.auth0.com';
-    case 'staging':
-      return 'ndla-staging.eu.auth0.com';
     default:
-      return 'ndla-test.eu.auth0.com';
+      return `ndla-${environment}.eu.auth0.com`;
   }
 };
 
 const editorialFrontendDomain = () => {
-  switch (process.env.NDLA_ENVIRONMENT) {
+  switch (environment) {
     case 'local':
       return 'http://localhost:30019';
     case 'prod':
       return 'https://ed.ndla.no';
-    case 'staging':
-      return 'https://ed.staging.ndla.no';
     default:
-      return 'https://ed.test.ndla.no';
+      return `https://ed.${environment}.ndla.no`;
   }
 };
 
@@ -90,14 +83,20 @@ const config = {
     'learningpath-frontend',
   ),
   environment,
-  editorialFrontendDomain: editorialFrontendDomain(),
+  editorialFrontendDomain: getEnvironmentVariable(
+    'EDITORIAL_FRONTEND_DOMAIN',
+    editorialFrontendDomain(),
+  ),
   host: getEnvironmentVariable('LEARINGPATH_HOST', 'localhost'),
   port: getEnvironmentVariable('LEARINGPATH_PORT', '3000'),
   redirectPort: getEnvironmentVariable('LEARNINGPATH_REDIRECT_PORT', '3001'),
   googleTagManagerId: getEnvironmentVariable('NDLA_GOOGLE_TAG_MANAGER_ID'),
-  gaTrackingId,
-  hotjarSiteID,
-  ndlaFrontendDomain,
+  gaTrackingId: getEnvironmentVariable('GA_TRACKING_ID', gaTrackingId),
+  hotjarSiteID: getEnvironmentVariable('HOTJAR_SITE_ID', hotjarSiteID),
+  ndlaFrontendDomain: getEnvironmentVariable(
+    'FRONTEND_DOMAIN',
+    ndlaFrontendDomain,
+  ),
   ndlaApiUrl: getEnvironmentVariable('NDLA_API_URL', apiDomain),
   googleSearchEngineId: getEnvironmentVariable('NDLA_GOOGLE_SEARCH_ENGINE_ID'),
   googleApiKey: getEnvironmentVariable('NDLA_GOOGLE_API_KEY'),
@@ -114,10 +113,9 @@ const config = {
   pinterestEnabled:
     getEnvironmentVariable('PINTEREST_ACCESS_TOKEN') !== undefined &&
     pinterestActivated,
-  ltiActivated,
+  ltiActivated: getEnvironmentVariable('LTI_ACTIVATED', ltiActivated),
   ndlaPersonalClientId: getEnvironmentVariable('NDLA_PERSONAL_CLIENT_ID', ''),
-  auth0Domain: getAuth0Hostname(),
-  auth0Url: `https://${getAuth0Hostname()}`,
+  auth0Domain: getEnvironmentVariable('AUTH0_DOMAIN', getAuth0Hostname()),
   disableSSR: getEnvironmentVariable('DISABLE_SSR', false),
   zendeskWidgetKey: getEnvironmentVariable('NDLA_ZENDESK_WIDGET_KEY'),
   app: {
