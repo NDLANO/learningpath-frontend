@@ -9,7 +9,7 @@
 import 'isomorphic-fetch';
 import config, { getEnvironmentVariable } from '../../config';
 
-const url = `${config.auth0Url}/oauth/token`;
+const url = `https://${config.auth0Domain}/oauth/token`;
 
 function getClientSecret() {
   if (getEnvironmentVariable('NOW') === 'true') {
@@ -58,8 +58,8 @@ export const getUsers = async (managementToken, ownerIds) => {
   chunks.forEach(chunk => {
     const query = chunk.map(ownerId => `"${ownerId}"`).join('OR');
     const result = fetch(
-      `${
-        config.auth0Url
+      `https://${
+        config.auth0Domain
       }/api/v2/users?q=app_metadata.ndla_id:(${query})&per_page=50&search-engine=v3&include_totals=true`,
       {
         headers: {
