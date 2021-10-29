@@ -22,7 +22,9 @@
     "start-prod": "cross-env NODE_ENV=production node build/server",
     "test": "cross-env BABEL_ENV=test NODE_ENV=unittest jest",
     "test-ci": "cross-env BABEL_ENV=test NODE_ENV=unittest jest --maxWorkers=4 --ci",
-    "tdd": "cross-env BABEL_ENV=test NODE_ENV=unittest jest --watch"
+    "tdd": "cross-env BABEL_ENV=test NODE_ENV=unittest jest --watch",
+    "prepare": "yarn run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "engines": {
     "node": ">=14.16.0",
@@ -127,7 +129,8 @@
     "tracekit": "^0.4.5",
     "warning": "4.0.1",
     "webpack-bundle-analyzer": "3.3.2",
-    "yamlparser": "0.0.2"
+    "yamlparser": "0.0.2",
+    "@snyk/protect": "latest"
   },
   "repository": {
     "type": "git",
@@ -138,5 +141,6 @@
   },
   "homepage": "https://github.com/NDLANO/learningpath-frontend",
   "author": "ndla@knowit.no",
-  "license": "GPL-3.0"
+  "license": "GPL-3.0",
+  "snyk": true
 }
