@@ -18,6 +18,7 @@ import Logo from '../common/Logo';
 import polyglot from '../i18n';
 import Masthead from '../common/Masthead';
 import { Wrapper, OneColumn, Footer } from '../common/Layout';
+import { Matomo } from '../common/Matomo';
 import { getLocale } from '../locale/localeSelectors';
 
 class Welcome extends Component {
@@ -101,6 +102,7 @@ class Welcome extends Component {
           </div>
         </OneColumn>
         <Footer locale={locale} />
+        <Matomo />
       </Wrapper>
     );
   }

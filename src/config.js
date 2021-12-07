@@ -77,6 +77,17 @@ const editorialFrontendDomain = () => {
   }
 };
 
+export const matomoDomain = () => {
+  switch (environment) {
+    case 'dev':
+      return 'https://analytics.test.ndla.no/';
+    case 'prod':
+      return 'https://analytics.ndla.no/';
+    default:
+      return `https://analytics.${environment}.ndla.no/`;
+  }
+};
+
 const config = {
   componentName: getEnvironmentVariable(
     'npm_package_name',
@@ -124,7 +135,8 @@ const config = {
       meta: [{ property: 'og:site_name', content: 'NDLA Læringsstier' }],
     },
   },
-
+  matomoUrl: getEnvironmentVariable('MATOMO_URL', matomoDomain()),
+  matomoSiteId: getEnvironmentVariable('MATOMO_SITE_ID', ''),
   isProduction: getEnvironmentVariable('NODE_ENV') === 'production',
 };
 
