@@ -10,6 +10,7 @@ const connectSrc = (() => {
   const defaultConnectSrc = [
     "'self'",
     'ws://*.hotjar.com wss://*.hotjar.com',
+    'http://api-gateway.ndla-local',
     'https://*.hotjar.com',
     'https://*.hotjar.com:*',
     'https://www.google-analytics.com',
@@ -40,6 +41,7 @@ const scriptSrc = (() => {
     "'unsafe-eval'",
     'ws://*.hotjar.com',
     'wss://*.hotjar.com',
+    'http://api-gateway.ndla-local',
     'https://*.hotjar.com',
     'https://*.ndla.no',
     'https://*.zendesk.com',
@@ -83,6 +85,7 @@ const contentSecurityPolicy = {
     ],
     imgSrc: [
       "'self'",
+      'http://api-gateway.ndla-local',
       'https://*.hotjar.com',
       'https://*.zopim.com',
       'https://*.ndla.no',
