@@ -43,6 +43,10 @@ jobs:
           AWS_SECRET_ACCESS_KEY=$(echo $RES | jq -r .Credentials.SecretAccessKey)
           AWS_SESSION_TOKEN=$(echo $RES | jq -r .Credentials.SessionToken)
           aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin $NDLA_AWS_ECR_REPO
+      - name: "Setup ~/bin directory"
+        run: |
+         mkdir -p /home/runner/bin
+         echo "/home/runner/bin" >> $GITHUB_PATH
       - name: "Login to dockerhub"
         run: echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_USERNAME --password-stdin
       - name: "Cache pip"
