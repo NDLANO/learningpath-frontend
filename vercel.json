@@ -12,11 +12,11 @@
   "rewrites": [
     {
       "source": "/static/(.*)",
-      "destination": "build/public/static/"
+      "destination": "build/public/static"
     },
     {
       "source": "/(.*).(png|gif|jpg|ico|svg)",
-      "destination": "build/public/"
+      "destination": "build/public"
     },
     {
       "source": "/(.*)",
