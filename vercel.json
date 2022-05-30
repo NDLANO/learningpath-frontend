@@ -5,7 +5,7 @@
       "destination": "build/public/static/$1"
     },
     {
-      "source": "/(.*(png|gif|jpg|ico|svg))",
+      "source": "/(.*).(png|gif|jpg|ico|svg)",
       "destination": "build/public/$1"
     },
     {
