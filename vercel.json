@@ -1,4 +1,14 @@
 {
+  "builds": [
+    {
+      "src": "build/public/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "build/server.js",
+      "use": "@vercel/node"
+    }
+  ],
   "rewrites": [
     {
       "source": "/static/(.*)",
