@@ -20,7 +20,7 @@
   width: 100%;
   padding-left: 100%;
   overflow: hidden;
-  background: url('/static/logo.png') no-repeat;
+  background: url('/logo.png') no-repeat;
   background-size: contain;
   vertical-align: top;
 
@@ -34,7 +34,7 @@
   width: 90px;
 
   & .logo_link {
-    background-image: url('/static/ndla-logo-white.png');
+    background-image: url('/ndla-logo-white.png');
   }
 
   & .logo_link:any-link {
