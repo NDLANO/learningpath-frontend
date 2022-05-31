@@ -12,7 +12,7 @@ const imageSource = pagemap => {
   if (pagemap && pagemap.cse_thumbnail && pagemap.cse_thumbnail.length > 0) {
     return pagemap.cse_thumbnail[0].src;
   }
-  return `/placeholder.png`;
+  return `/static/placeholder.png`;
 };
 
 const getTotalResultsFromState = (state, type) => {

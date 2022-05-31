@@ -51,7 +51,7 @@ export default class SearchResult extends Component {
         <img
           className="search-result_img"
           role="presentation"
-          src="/placeholder.png"
+          src="/static/placeholder.png"
           alt="placeholder"
         />
       );

@@ -15,10 +15,6 @@
       "destination": "build/public/static"
     },
     {
-      "source": "/(.*).(png|gif|jpg|ico|svg)",
-      "destination": "build/public"
-    },
-    {
       "source": "/(.*)",
       "destination": "/build/server.js"
     }
