@@ -12,7 +12,7 @@
   "rewrites": [
     {
       "source": "/static/(.*)",
-      "destination": "build/public/static"
+      "destination": "build/public/static/$1"
     },
     {
       "source": "/(.*)",
