@@ -57,7 +57,7 @@
     "@ndla/button": "^2.4.1",
     "@ndla/error-reporter": "^1.0.6",
     "@ndla/icons": "^1.8.1",
-    "@ndla/licenses": "^1.0.7",
+    "@ndla/licenses": "^5.0.0",
     "@ndla/polyfill": "^0.1.15",
     "@ndla/safelink": "^1.0.5",
     "@ndla/tracker": "^0.5.0",
