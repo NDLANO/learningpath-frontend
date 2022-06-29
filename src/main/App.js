@@ -6,6 +6,7 @@
  *
  */
 
+import '../style/index.css';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -29,7 +30,6 @@ import LearningPathContainer from '../learningPath/LearningPathContainer';
 import LoginFailure from '../session/LoginFailure';
 import SessionInitializer from '../session/SessionInitializer';
 import ErrorPage from '../errorPage/ErrorPage';
-import '../style/index.css';
 
 export class App extends React.Component {
   constructor(props) {
