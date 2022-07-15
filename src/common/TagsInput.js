@@ -42,8 +42,7 @@ class TagsInput extends Component {
       if (input.value.includes(tag)) {
         return;
       }
-      input.value.push(tag);
-      input.onChange(input.value);
+      input.onChange(input.value.concat(tag));
     };
 
     const handleSearch = searchTerm => {
