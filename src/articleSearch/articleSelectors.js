@@ -31,7 +31,7 @@ export const getArticleResultFromState = state => {
     thumbnail:
       item.metaImage && item.metaImage.url
         ? item.metaImage.url
-        : `/placeholder.png`,
+        : `/static/placeholder.png`,
     thumbnailAlt:
       item.metaImage && item.metaImage.alt
         ? item.metaImage.alt

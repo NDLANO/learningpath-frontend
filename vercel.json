@@ -1,5 +1,4 @@
 {
-  "version": 2,
   "builds": [
     {
       "src": "build/public/**",
@@ -10,18 +9,35 @@
       "use": "@vercel/node"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/static/(.*)",
-      "headers": { "cache-control": "s-maxage=86400" },
-      "dest": "build/public/static/$1"
+      "source": "/static/(.*)",
+      "destination": "build/public/static/$1"
     },
     {
-      "src": "/(.*(png|gif|jpg|ico|svg))",
-      "headers": { "cache-control": "s-maxage=86400" },
-      "dest": "build/public/$1"
+      "source": "/(.*)",
+      "destination": "/build/server.js"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/static/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "s-maxage=86400"
+        }
+      ]
     },
-    { "src": "/(.*)", "dest": "/build/server.js" }
+    {
+      "source": "/(.*).(png|gif|jpg|ico|svg)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "s-maxage=86400"
+        }
+      ]
+    }
   ],
   "env": {
     "NDLA_LEARNING_PATH_CLIENT_ID": "@ndla_learning_path_client_id",
