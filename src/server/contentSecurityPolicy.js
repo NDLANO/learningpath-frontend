@@ -22,6 +22,7 @@ const connectSrc = (() => {
     'https://*.ndla.no',
     'https://logs-01.loggly.com',
     'https://www.googleapis.com',
+    'https://*.clarity.ms',
   ];
   if (process.env.NODE_ENV === 'development') {
     return [
@@ -57,6 +58,7 @@ const scriptSrc = (() => {
     'https://s.ytimg.com',
     'https://cdn.auth0.com',
     'https://tagmanager.google.com',
+    'https://*.clarity.ms',
   ];
 
   if (process.env.NODE_ENV === 'development') {
@@ -82,6 +84,7 @@ const contentSecurityPolicy = {
       'https://*.zopim.com',
       'https://fonts.googleapis.com',
       'https://fonts.gstatic.com',
+      'https://*.clarity.ms',
       'data:',
     ],
     imgSrc: [
@@ -93,11 +96,12 @@ const contentSecurityPolicy = {
       'https://*.google-analytics.com',
       'https://*.analytics.google.com',
       'https://stats.g.doubleclick.net',
+      'https://*.clarity.ms',
       'data: https://i.ytimg.com https://pi.tedcdn.com https://*.ndlap3.seria.net https://*.gstatic.com',
     ],
     connectSrc,
     frameSrc: ['*'],
-    childSrc: ['https://*.hotjar.com'],
+    childSrc: ['https://*.hotjar.com', 'https://*.clarity.ms'],
     objectSrc: ["'none'"],
     reportUri: '/csp-report',
   },
