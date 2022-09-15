@@ -4,6 +4,9 @@ const webpack = require('webpack'); // eslint-disable-line import/no-extraneous-
 module.exports = {
   plugins: [],
   modifyWebpackConfig({ env: { target, dev }, webpackConfig: appConfig }) {
+    // Razzle/CRA breaks the build on webpack warnings. Disable CI env to circumvent the check.
+    process.env.CI = 'false';
+
     const addEntry = options => {
       if (target === 'web') {
         if (dev) {
@@ -43,8 +46,6 @@ module.exports = {
       // It triggers a couple of «Critical dependency: the request of a dependency is an
       // expression warning» which we can safely ignore.
       appConfig.externals = [];
-      // Razzle/CRA breaks the build on webpack warnings. Disable CI env to circumvent the check.
-      process.env.CI = 'false';
     }
 
     if (!dev) {
