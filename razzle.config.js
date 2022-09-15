@@ -44,7 +44,7 @@ module.exports = {
       // expression warning» which we can safely ignore.
       appConfig.externals = [];
       // Razzle/CRA breaks the build on webpack warnings. Disable CI env to circumvent the check.
-      process.env.CI = false;
+      process.env.CI = 'false';
     }
 
     if (!dev) {
