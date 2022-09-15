@@ -17,10 +17,10 @@ exports[`ErrorPage renderers correctly 1`] = `
           className="masthead_left--desktop"
         >
           <div
-            className="logo un-button"
+            className="un-button emotion-2 emotion-3"
           >
             <a
-              className="logo_link"
+              className="emotion-0 emotion-1"
               href="/"
               onClick={[Function]}
               tabIndex={0}
@@ -119,7 +119,7 @@ exports[`ErrorPage renderers correctly 1`] = `
       </span>
     </p>
     <button
-      className="emotion-0 emotion-1"
+      className="emotion-4 emotion-5"
       disabled={false}
       id="zendeskButton"
       onClick={[Function]}

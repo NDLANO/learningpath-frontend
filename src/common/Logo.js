@@ -8,33 +8,70 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
-
 import SafeLink from '@ndla/safelink';
-import classNames from 'classnames';
+import { css } from '@emotion/core';
+import styled from '@emotion/styled';
 import polyglot from '../i18n';
 import withCloseSidebars from './withCloseSidebars';
 
+const onDark = css`
+  height: 30px;
+  width: 90px;
+
+  & a {
+    background-image: url('/ndla-logo-white.png');
+  }
+
+  &:any-link {
+    color: white;
+  }
+`;
+
+const StyledDiv = styled.div`
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  height: 40px;
+  width: 150px;
+  ${props => {
+    if (props.onDark) {
+      return onDark;
+    }
+    return '';
+  }};
+`;
+
+const StyledSafeLink = styled(SafeLink)`
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  padding-left: 100%;
+  overflow: hidden;
+  background: url('/logo.png') no-repeat;
+  background-size: contain;
+  vertical-align: top;
+
+  &:any-link {
+    text-decoration: none;
+  }
+`;
+
 function Logo(props) {
-  const { cssModifier, closeSidebars } = props;
-  const rootClasses = classNames({
-    logo: true,
-    'un-button': true,
-    [`logo--${cssModifier}`]: cssModifier,
-  });
+  const { closeSidebars, onDark } = props;
 
   return (
-    <div className={rootClasses}>
-      <SafeLink to="/" className="logo_link" onClick={closeSidebars}>
+    <StyledDiv className="un-button" onDark={onDark}>
+      <StyledSafeLink to="/" onClick={closeSidebars}>
         {polyglot.t('logo.altText')}
-      </SafeLink>
-    </div>
+      </StyledSafeLink>
+    </StyledDiv>
   );
 }
 
 Logo.propTypes = {
   cssModifier: PropTypes.string,
   closeSidebars: PropTypes.func.isRequired,
+  onDark: PropTypes.bool,
 };
 
 export default withCloseSidebars(Logo);
