@@ -12,3 +12,5 @@ jsconfig.json
 /e2e/screenshots
 yarn-error.log
 .vscode
+/cache
+.vercel

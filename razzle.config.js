@@ -1,37 +1,38 @@
 const { modifyRule } = require('razzle-config-utils');
 const webpack = require('webpack'); // eslint-disable-line import/no-extraneous-dependencies
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const addEntry = require('./razzle-add-entry-plugin');
 
 module.exports = {
-  plugins: [
-    addEntry({
-      entry: './src/polyfill',
-      name: 'polyfill',
-    }),
-  ],
-  modify(config, { target, dev }) {
-    const appConfig = config;
+  plugins: [],
+  modifyWebpackConfig({ env: { target, dev }, webpackConfig: appConfig }) {
+    // Razzle/CRA breaks the build on webpack warnings. Disable CI env to circumvent the check.
+    process.env.CI = 'false';
+
+    const addEntry = options => {
+      if (target === 'web') {
+        if (dev) {
+          appConfig.entry[options.name] = [
+            appConfig.entry.client[0], // hot reloading
+            options.entry,
+          ];
+        } else {
+          appConfig.entry[options.name] = [options.entry];
+        }
+      }
+    };
 
     modifyRule(appConfig, { test: /\.css$/ }, rule => {
       rule.use.push({ loader: 'postcss-loader' });
     });
 
-    appConfig.module.rules.shift(); // remove eslint-loader
+    addEntry({ entry: './src/polyfill', name: 'polyfill' });
+
     if (target === 'web') {
       appConfig.output.filename = dev
         ? 'static/js/[name].js'
         : 'static/js/[name].[hash:8].js';
 
       if (!dev) {
-        appConfig.plugins.push(
-          new BundleAnalyzerPlugin({
-            analyzerMode: 'static',
-            openAnalyzer: false,
-            reportFilename: 'bundle-analyzer-report.html',
-          }),
-          new webpack.optimize.ModuleConcatenationPlugin(),
-        );
+        appConfig.optimization.concatenateModules = true;
       } else {
         appConfig.entry.injectCss = ['./src/style/index.css'];
       }
@@ -45,8 +46,6 @@ module.exports = {
       // It triggers a couple of «Critical dependency: the request of a dependency is an
       // expression warning» which we can safely ignore.
       appConfig.externals = [];
-      // Razzle/CRA breaks the build on webpack warnings. Disable CI env to circumvent the check.
-      process.env.CI = false;
     }
 
     if (!dev) {
@@ -54,6 +53,7 @@ module.exports = {
     } else {
       appConfig.devtool = 'cheap-module-source-map';
     }
+
     return appConfig;
   },
 };
