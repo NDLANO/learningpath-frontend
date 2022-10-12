@@ -14,7 +14,7 @@ import { availableLocales } from './localeConstants';
 import { getLocale } from './localeSelectors';
 
 const SelectLocale = props => {
-  const { locale } = props;
+  const { locale, id } = props;
   const handleChange = newLocale => {
     const { pathname, search } = window.location;
     const basePath = pathname.startsWith(`/${locale}/`)
@@ -33,6 +33,7 @@ const SelectLocale = props => {
       onChange={evt => {
         handleChange(evt.target.value);
       }}
+      id={id}
       value={locale}
       data-cy="select-locale">
       {availableLocales.map(l => (
@@ -46,6 +47,7 @@ const SelectLocale = props => {
 
 SelectLocale.propTypes = {
   locale: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({

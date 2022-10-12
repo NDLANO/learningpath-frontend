@@ -68,6 +68,7 @@ exports[`ErrorPage renderers correctly 1`] = `
       </label>
       <select
         data-cy="select-locale"
+        id="language-select"
         onChange={[Function]}
         value="nb"
       >
