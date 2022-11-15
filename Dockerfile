@@ -28,10 +28,9 @@ FROM node:16.17-alpine
 RUN apk add py-pip jq && pip install awscli
 COPY run-learningpath-frontend.sh /
 
-RUN npm install pm2 -g
 WORKDIR /home/app/learningpath-frontend
 COPY --from=builder /home/app/learningpath-frontend/build build
 
 ENV NODE_ENV=production
 
-CMD ["/run-learningpath-frontend.sh", "pm2-runtime -i max build/server.js '|' bunyan"]
+CMD ["/run-learningpath-frontend.sh", "node build/server.js '|' bunyan"]
