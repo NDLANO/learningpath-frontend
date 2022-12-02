@@ -27,12 +27,28 @@
 
 .step-nav_item {
   margin: 0;
-  background: linear-gradient(to right, transparent 0, transparent 44px, gray(186) 0, gray(186) 51px, transparent 10px, transparent 100%);
+  background: linear-gradient(
+    to right,
+    transparent 0,
+    transparent 44px,
+    #bababa 0,
+    #bababa 51px,
+    transparent 10px,
+    transparent 100%
+  );
 }
 
 .step-nav_item:first-child .step-nav_item--active {
   margin: 0;
-  background: linear-gradient(to right, transparent 0, transparent 44px, gray(186) 0, gray(186) 51px, transparent 10px, transparent 100%);
+  background: linear-gradient(
+    to right,
+    transparent 0,
+    transparent 44px,
+    #bababa 0,
+    #bababa 51px,
+    transparent 10px,
+    transparent 100%
+  );
 }
 
 .step-nav_item:not(.step-nav_item--bottom_border):last-child {
@@ -47,7 +63,8 @@
   height: 20px;
 }
 
-.step-nav_item--active:not(.step-nav_item--bottom_border):last-child .step-nav_line {
+.step-nav_item--active:not(.step-nav_item--bottom_border):last-child
+  .step-nav_line {
   border-left: 6px solid var(--blue-1);
 }
 
@@ -126,20 +143,37 @@
 
 .step-nav_item--active .step-nav_link:hover {
   color: var(--blue-1);
-  background: linear-gradient(to right, transparent 0, transparent 45px, var(--blue-1) 0, var(--blue-1) 50px, transparent 10px, transparent 100%);
+  background: linear-gradient(
+    to right,
+    transparent 0,
+    transparent 45px,
+    var(--blue-1) 0,
+    var(--blue-1) 50px,
+    transparent 10px,
+    transparent 100%
+  );
   background-color: var(--gray-12);
 }
 
 .step-nav_item--active .step-nav_link:any-link {
   color: var(--blue-1);
   font-weight: 500;
-  background: linear-gradient(to right, transparent 0, transparent 45px, var(--blue-1) 0, var(--blue-1) 50px, transparent 10px, transparent 100%);
+  background: linear-gradient(
+    to right,
+    transparent 0,
+    transparent 45px,
+    var(--blue-1) 0,
+    var(--blue-1) 50px,
+    transparent 10px,
+    transparent 100%
+  );
   background-color: var(--gray-12);
   border-top: 1px solid var(--gray-7);
   border-bottom: 1px solid var(--gray-7);
 }
 
-.step-nav_item--active:not(.step-nav_item--bottom_border):last-child .step-nav_link:any-link {
+.step-nav_item--active:not(.step-nav_item--bottom_border):last-child
+  .step-nav_link:any-link {
   background: none;
   color: var(--blue-1);
   background-color: var(--gray-12);
