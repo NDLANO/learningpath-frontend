@@ -115,8 +115,8 @@
 }
 
 .learning-step-form_show_license_info:hover {
-  color: color(var(--gray-6) blackness(+ 20%));
-  background-color: color(var(--gray-11) blackness(+ 20%));
+  color: color-mod(var(--gray-6) blackness(+ 20%));
+  background-color: color-mod(var(--gray-11) blackness(+ 20%));
 }
 
 .learning-step-form_show_license_info--active {
@@ -125,7 +125,7 @@
 }
 
 .learning-step-form_show_license_info--active:hover {
-  background-color: color(var(--blue-1) blackness(+ 20%));
+  background-color: color-mod(var(--blue-1) blackness(+ 20%));
 }
 
 .learning-step-form_show-title {
@@ -133,8 +133,8 @@
 }
 
 .learning-step-form_show-title:hover {
-  color: color(var(--gray-6) blackness(+ 20%));
-  background-color: color(var(--gray-11) blackness(+ 20%));
+  color: color-mod(var(--gray-6) blackness(+ 20%));
+  background-color: color-mod(var(--gray-11) blackness(+ 20%));
 }
 
 .learning-step-form_show-title--active {
@@ -143,7 +143,7 @@
 }
 
 .learning-step-form_show-title--active:hover {
-  background-color: color(var(--blue-1) blackness(+ 20%));
+  background-color: color-mod(var(--blue-1) blackness(+ 20%));
 }
 
 .learning-step-embed_group {

@@ -28,7 +28,7 @@ a:any-link {
 
 a:hover,
 a:active {
-  color: color(var(--blue-1) blackness(+ 30%));
+  color: color-mod(var(--blue-1) blackness(+ 30%));
 }
 
 p {

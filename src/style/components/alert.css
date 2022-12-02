@@ -19,8 +19,8 @@
 }
 
 .alert--success {
-  border-color: color(var(--green-1) lightness(+ 20%));
-  color: color(var(--gray-1) blend(var(--green-1) 35%));
+  border-color: color-mod(var(--green-1) lightness(+ 20%));
+  color: color-mod(var(--gray-1) blend(var(--green-1) 35%));
 }
 
 .alert--info {
@@ -28,13 +28,13 @@
 }
 
 .alert--warning {
-  border-color: color(var(--yellow-1) lightness(+ 0%));
-  color: color(var(--gray-1) blend(var(--yellow-1) 35%));
+  border-color: color-mod(var(--yellow-1) lightness(+ 0%));
+  color: color-mod(var(--gray-1) blend(var(--yellow-1) 35%));
 }
 
 .alert--danger {
-  border-color: color(var(--red-1) lightness(+ 15%));
-  color: color(var(--gray-1) blend(var(--red-1) 35%));
+  border-color: color-mod(var(--red-1) lightness(+ 15%));
+  color: color-mod(var(--gray-1) blend(var(--red-1) 35%));
 }
 
 .alert_msg {

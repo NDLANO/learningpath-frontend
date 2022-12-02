@@ -23,8 +23,8 @@
 
 .cta-link:hover,
 .cta-link:active {
-  background-color: color(var(--blue-1) lightness(+ 20%));
-  border: 1px solid var(--blue-1) lightness(+ 20%);
+  background-color: color-mod(var(--blue-1) lightness(+ 20%));
+  border: 1px solid color-mod(var(--blue-1) lightness(+ 20%));
 }
 
 .cta-link--secondary:any-link {
@@ -64,7 +64,7 @@
 
 .cta-link--scale:hover {
   box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
-  background-color: color(var(--blue-1) blackness(+ 20%));
+  background-color: color-mod(var(--blue-1) blackness(+ 20%));
   transform: scale(1.03);
 }
 
@@ -76,7 +76,7 @@
 
 .cta-link--gl:hover,
 .cta-link--gl:active {
-  background-color: color(#f44336 blackness(+ 20%));
+  background-color: color-mod(#f44336 blackness(+ 20%));
   border: none;
 }
 
@@ -88,7 +88,7 @@
 
 .cta-link--fb:hover,
 .cta-link--fb:active {
-  background-color: color(#3b5998 blackness(+ 20%));
+  background-color: color-mod(#3b5998 blackness(+ 20%));
   border: none;
 }
 
@@ -100,7 +100,7 @@
 
 .cta-link--tw:hover,
 .cta-link--tw:active {
-  background-color: color(#0084b4 blackness(+ 20%));
+  background-color: color-mod(#0084b4 blackness(+ 20%));
   border: none;
 }
 
@@ -136,7 +136,7 @@
 }
 
 .cta-link-seconday-action:any-link:hover {
-  background-color: color(var(--blue-1) blackness(+ 20%));
+  background-color: color-mod(var(--blue-1) blackness(+20%));
 }
 
 .cta-link--underline,
@@ -151,7 +151,7 @@
 
 .cta-link--primary:hover,
 .cta-link--primary:any-link:hover {
-  color: color(var(--blue-1) blackness(+ 20%));
+  color: color-mod(var(--blue-1) blackness(+ 20%));
 }
 
 .cta-link--primary-outline,

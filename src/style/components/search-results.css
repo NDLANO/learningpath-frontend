@@ -37,7 +37,7 @@
 }
 
 .search-result:hover {
-  background: color(var(--blue-1) a(5%));
+  background: color-mod(var(--blue-1) a(5%));
 }
 
 .search-result_img {

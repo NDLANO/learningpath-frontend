@@ -175,7 +175,7 @@ div:not(.frontpage-masthead) > .masthead_wrapper {
 
     &:hover,
     &.active {
-      background-color: color(var(--blue-1) lightness(+ 60%));
+      background-color: color-mod(var(--blue-1) lightness(+ 60%));
     }
   }
 
