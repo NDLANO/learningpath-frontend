@@ -20,7 +20,7 @@ button,
 }
 
 .button:hover {
-  background-color: color(var(--gray-3) blackness(+ 100%));
+  background-color: color-mod(var(--gray-3) blackness(+ 100%));
 }
 
 button[disabled] {
@@ -78,7 +78,7 @@ fieldset[disabled] .button {
 }
 
 .button--primary:hover {
-  background-color: color(var(--blue-1) blackness(+ 20%));
+  background-color: color-mod(var(--blue-1) blackness(+ 20%));
 }
 
 .button--round {
@@ -112,5 +112,5 @@ fieldset[disabled] .button {
 }
 
 .button--secondary:hover {
-  background-color: color(var(--blue-1) blackness(+ 20%));
+  background-color: color-mod(var(--blue-1) blackness(+ 20%));
 }

@@ -192,7 +192,7 @@
 
 .learningpath-general-info_is-basedon-button:hover,
 .learningpath-general-info_is-basedon-button:focus {
-  color: color(var(--blue-1) blackness(+ 20%));
+  color: color-mod(var(--blue-1) blackness(+ 20%));
 }
 
 .learningpath-general-info_title button {

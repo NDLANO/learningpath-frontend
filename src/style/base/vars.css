@@ -7,18 +7,18 @@
  */
 
 :root {
-  --gray-1: gray(34);
-  --gray-2: gray(68);
-  --gray-3: gray(92);
-  --gray-4: gray(102);
-  --gray-5: gray(121);
-  --gray-6: gray(136);
-  --gray-7: gray(216);
-  --gray-8: gray(221);
-  --gray-9: gray(230);
-  --gray-10: gray(234);
-  --gray-11: gray(238);
-  --gray-12: gray(248);
+  --gray-1: #222;
+  --gray-2: #444;
+  --gray-3: #5c6c5c;
+  --gray-4: #666;
+  --gray-5: #797979;
+  --gray-6: #888;
+  --gray-7: #d8d8d8;
+  --gray-8: #ddd;
+  --gray-9: #e6e6e6;
+  --gray-10: #eaeaea;
+  --gray-11: #eee;
+  --gray-12: #f8f8f8;
   --blue-1: #20588f;
   --blue-2: #3a72a9;
   --blue-3: #538bc2;
@@ -40,26 +40,89 @@
 }
 
 /* stylelint-disable */
-.color-ex { padding: 5px; margin: 0; }
-.color-ex--gray-1  { color: color(var(--gray-1)  contrast(50%)); background-color: var(--gray-1); }
-.color-ex--gray-2  { color: color(var(--gray-2)  contrast(50%)); background-color: var(--gray-2); }
-.color-ex--gray-3  { color: color(var(--gray-3)  contrast(50%)); background-color: var(--gray-3); }
-.color-ex--gray-4  { color: color(var(--gray-4)  contrast(50%)); background-color: var(--gray-4); }
-.color-ex--gray-5  { color: color(var(--gray-5)  contrast(50%)); background-color: var(--gray-5); }
-.color-ex--gray-6  { color: color(var(--gray-6)  contrast(50%)); background-color: var(--gray-6); }
-.color-ex--gray-7  { color: color(var(--gray-7)  contrast(50%)); background-color: var(--gray-7); }
-.color-ex--gray-8  { color: color(var(--gray-8)  contrast(50%)); background-color: var(--gray-8); }
-.color-ex--gray-9  { color: color(var(--gray-9)  contrast(50%)); background-color: var(--gray-9); }
-.color-ex--gray-10 { color: color(var(--gray-10) contrast(50%)); background-color: var(--gray-10); }
-.color-ex--gray-11 { color: color(var(--gray-11) contrast(50%)); background-color: var(--gray-11); }
-.color-ex--gray-12 { color: color(var(--gray-12) contrast(50%)); background-color: var(--gray-12); }
+.color-ex {
+  padding: 5px;
+  margin: 0;
+}
+.color-ex--gray-1 {
+  color: color-mod(var(--gray-1) contrast(50%));
+  background-color: var(--gray-1);
+}
+.color-ex--gray-2 {
+  color: color-mod(var(--gray-2) contrast(50%));
+  background-color: var(--gray-2);
+}
+.color-ex--gray-3 {
+  color: color-mod(var(--gray-3) contrast(50%));
+  background-color: var(--gray-3);
+}
+.color-ex--gray-4 {
+  color: color-mod(var(--gray-4) contrast(50%));
+  background-color: var(--gray-4);
+}
+.color-ex--gray-5 {
+  color: color-mod(var(--gray-5) contrast(50%));
+  background-color: var(--gray-5);
+}
+.color-ex--gray-6 {
+  color: color-mod(var(--gray-6) contrast(50%));
+  background-color: var(--gray-6);
+}
+.color-ex--gray-7 {
+  color: color-mod(var(--gray-7) contrast(50%));
+  background-color: var(--gray-7);
+}
+.color-ex--gray-8 {
+  color: color-mod(var(--gray-8) contrast(50%));
+  background-color: var(--gray-8);
+}
+.color-ex--gray-9 {
+  color: color-mod(var(--gray-9) contrast(50%));
+  background-color: var(--gray-9);
+}
+.color-ex--gray-10 {
+  color: color-mod(var(--gray-10) contrast(50%));
+  background-color: var(--gray-10);
+}
+.color-ex--gray-11 {
+  color: color-mod(var(--gray-11) contrast(50%));
+  background-color: var(--gray-11);
+}
+.color-ex--gray-12 {
+  color: color-mod(var(--gray-12) contrast(50%));
+  background-color: var(--gray-12);
+}
 
-.color-ex--blue-1  { color: color(var(--blue-1)  contrast(50%)); background-color: var(--blue-1); }
-.color-ex--blue-2  { color: color(var(--blue-2)  contrast(50%)); background-color: var(--blue-2); }
-.color-ex--blue-3  { color: color(var(--blue-3)  contrast(50%)); background-color: var(--blue-3); }
-.color-ex--blue-4  { color: color(var(--blue-4)  contrast(50%)); background-color: var(--blue-4); }
-.color-ex--blue-5  { color: color(var(--blue-5)  contrast(50%)); background-color: var(--blue-5); }
-.color-ex--red-1   { color: color(var(--red-1)  contrast(50%)); background-color: var(--red-1); }
-.color-ex--yellow-1 { color: color(var(--yellow-1)  contrast(50%)); background-color: var(--yellow-1); }
-.color-ex--green-1  { color: color(var(--green-1)  contrast(50%)); background-color: var(--green-1); }
+.color-ex--blue-1 {
+  color: color-mod(var(--blue-1) contrast(50%));
+  background-color: var(--blue-1);
+}
+.color-ex--blue-2 {
+  color: color-mod(var(--blue-2) contrast(50%));
+  background-color: var(--blue-2);
+}
+.color-ex--blue-3 {
+  color: color-mod(var(--blue-3) contrast(50%));
+  background-color: var(--blue-3);
+}
+.color-ex--blue-4 {
+  color: color-mod(var(--blue-4) contrast(50%));
+  background-color: var(--blue-4);
+}
+.color-ex--blue-5 {
+  color: color-mod(var(--blue-5) contrast(50%));
+  background-color: var(--blue-5);
+}
+.color-ex--red-1 {
+  color: color-mod(var(--red-1) contrast(50%));
+  background-color: var(--red-1);
+}
+.color-ex--yellow-1 {
+  color: color-mod(var(--yellow-1) contrast(50%));
+  background-color: var(--yellow-1);
+}
+.color-ex--green-1 {
+  color: color-mod(var(--green-1) contrast(50%));
+  background-color: var(--green-1);
+}
 /* stylelint-enable */
