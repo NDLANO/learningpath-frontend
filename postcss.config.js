@@ -10,6 +10,7 @@ const postcssPresetEnv = require('postcss-preset-env');
 const postcssNested = require('postcss-nested');
 const postcssFocus = require('postcss-focus');
 const postcssColorMod = require('postcss-color-mod-function');
+const postcssCustomMedia = require('postcss-custom-media');
 const postcssImport = require('postcss-import');
 
 module.exports = {
@@ -18,6 +19,7 @@ module.exports = {
       glob: true,
     }),
     postcssColorMod(),
+    postcssCustomMedia(),
     postcssFocus(), // Add a :focus to every :hover
     postcssNested(),
     postcssPresetEnv(),

@@ -22,6 +22,7 @@ const connectSrc = (() => {
     'https://*.ndla.no',
     'https://logs-01.loggly.com',
     'https://www.googleapis.com',
+    'https://stats.g.doubleclick.net',
     'https://*.clarity.ms',
   ];
   if (process.env.NODE_ENV === 'development') {

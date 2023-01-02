@@ -46,6 +46,7 @@
     "nodemon": "1.18.3",
     "postcss": "8.4.19",
     "postcss-color-mod-function": "3.0.3",
+    "postcss-custom-media": "^9.0.1",
     "postcss-focus": "^5.0.1",
     "postcss-import": "^15.0.0",
     "postcss-loader": "^4.0.0",
