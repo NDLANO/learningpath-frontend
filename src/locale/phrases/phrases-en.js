@@ -250,6 +250,8 @@ const phrases = {
     footerEditiorInChief: 'Editor in chief: ',
     footerManagingEditor: 'Managing editor: ',
     selectLanguage: 'Choose language (språk): ',
+    privacy: 'Privacy statement',
+    cookies: 'Statement about cookies',
   },
   duration: {
     zero: 'Unknown length',

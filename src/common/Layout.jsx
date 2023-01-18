@@ -52,12 +52,25 @@ export const Footer = ({ locale }) => (
       </li>
     </ul>
     <div className="footer_ruler" />
-    <p className="footer_text">
-      <span className="footer_editor">
-        {polyglot.t('footer.footerEditiorInChief')}
-        <strong>Sigurd Trageton</strong>
-      </span>
-    </p>
+    <div className="footer_info_wrapper">
+      <p className="footer_text">
+        <span className="footer_editor">
+          {polyglot.t('footer.footerEditiorInChief')}
+          <strong>Sigurd Trageton</strong>
+        </span>
+      </p>
+      <p className="footer_text">{polyglot.t('footer.footerInfo')}</p>
+      <div className="footer_about_links">
+        <a href="https://om.ndla.no/gdpr" className="footer_link">
+          {polyglot.t('footer.privacy')}
+        </a>
+        <span aria-hidden={true}>|</span>
+        <a href="https://om.ndla.no/cookies" className="footer_link">
+          {polyglot.t('footer.cookies')}
+        </a>
+      </div>
+    </div>
+    <div className="footer_about_links" />
     {config.zendeskWidgetKey && (
       <ZendeskButton
         locale={locale}
@@ -66,7 +79,6 @@ export const Footer = ({ locale }) => (
         {polyglot.t('askNDLA')}
       </ZendeskButton>
     )}
-    <p className="footer_text">{polyglot.t('footer.footerInfo')}</p>
   </footer>
 );
 

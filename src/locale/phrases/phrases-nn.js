@@ -247,6 +247,8 @@ const phrases = {
     footerEditiorInChief: 'Ansvarleg redaktør: ',
     footerManagingEditor: 'Utgåveansvarleg: ',
     selectLanguage: 'Vel språk (language): ',
+    privacy: 'Personvernerklæring',
+    cookies: 'Erklæring om informasjonskapslar',
   },
   duration: {
     zero: 'Ukjent lengd',
