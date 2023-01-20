@@ -107,18 +107,51 @@ exports[`ErrorPage renderers correctly 1`] = `
     <div
       className="footer_ruler"
     />
-    <p
-      className="footer_text"
+    <div
+      className="footer_info_wrapper"
     >
-      <span
-        className="footer_editor"
+      <p
+        className="footer_text"
       >
-        Ansvarlig redaktør: 
-        <strong>
-          Sigurd Trageton
-        </strong>
-      </span>
-    </p>
+        <span
+          className="footer_editor"
+        >
+          Ansvarlig redaktør: 
+          <strong>
+            Sigurd Trageton
+          </strong>
+        </span>
+      </p>
+      <p
+        className="footer_text"
+      >
+        Nettstedet er utarbeidet av NDLA som åpen kildekode.
+      </p>
+      <div
+        className="footer_about_links"
+      >
+        <a
+          className="footer_link"
+          href="https://om.ndla.no/gdpr"
+        >
+          Personvernerklæring
+        </a>
+        <span
+          aria-hidden={true}
+        >
+          |
+        </span>
+        <a
+          className="footer_link"
+          href="https://om.ndla.no/cookies"
+        >
+          Erklæring om informasjonskapsler
+        </a>
+      </div>
+    </div>
+    <div
+      className="footer_about_links"
+    />
     <button
       className="emotion-4 emotion-5"
       disabled={false}
@@ -133,11 +166,6 @@ exports[`ErrorPage renderers correctly 1`] = `
     >
       Spør NDLA
     </button>
-    <p
-      className="footer_text"
-    >
-      Nettstedet er utarbeidet av NDLA som åpen kildekode.
-    </p>
   </footer>
 </div>
 `;
