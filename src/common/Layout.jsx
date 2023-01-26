@@ -68,6 +68,12 @@ export const Footer = ({ locale }) => (
         <a href="https://om.ndla.no/cookies" className="footer_link">
           {polyglot.t('footer.cookies')}
         </a>
+        <span aria-hidden={true}>|</span>
+        <a
+          href="https://uustatus.no/nn/erklaringer/publisert/057e3661-555c-4b30-8d8c-fcd8e1bd9f5b"
+          className="footer_link">
+          {polyglot.t('footer.accessibility')}
+        </a>
       </div>
     </div>
     <div className="footer_about_links" />

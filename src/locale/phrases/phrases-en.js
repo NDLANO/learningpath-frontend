@@ -252,6 +252,7 @@ const phrases = {
     selectLanguage: 'Choose language (språk): ',
     privacy: 'Privacy statement',
     cookies: 'Statement about cookies',
+    accessibility: 'Accessibility statement',
   },
   duration: {
     zero: 'Unknown length',
