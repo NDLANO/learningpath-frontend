@@ -147,6 +147,17 @@ exports[`ErrorPage renderers correctly 1`] = `
         >
           Erklæring om informasjonskapsler
         </a>
+        <span
+          aria-hidden={true}
+        >
+          |
+        </span>
+        <a
+          className="footer_link"
+          href="https://uustatus.no/nn/erklaringer/publisert/057e3661-555c-4b30-8d8c-fcd8e1bd9f5b"
+        >
+          Tilgjengelighetserklæring
+        </a>
       </div>
     </div>
     <div

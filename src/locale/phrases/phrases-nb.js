@@ -251,6 +251,7 @@ const phrases = {
     selectLanguage: 'Velg språk (language): ',
     privacy: 'Personvernerklæring',
     cookies: 'Erklæring om informasjonskapsler',
+    accessibility: 'Tilgjengelighetserklæring',
   },
   duration: {
     zero: 'Ukjent lengde',
