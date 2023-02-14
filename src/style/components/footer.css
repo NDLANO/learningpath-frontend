@@ -76,7 +76,23 @@
 
 .footer_about_links {
   display: flex;
-  gap: 1em;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 720px) {
+  .footer_link {
+    padding: 0 1em;
+  }
+
+  .footer_about_links {
+    flex-direction: row;
+  }
+
+  .footer_about_links > .footer_link:not(:last-child) {
+    border-right: 1px solid var(--gray-1);
+  }
 }
 
 @media (--xlarge-viewport) {
