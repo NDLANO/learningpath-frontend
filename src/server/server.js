@@ -6,6 +6,8 @@
  *
  */
 
+import 'isomorphic-fetch';
+import queryString from 'query-string';
 import express from 'express';
 import helmet from 'helmet';
 import requestProxy from 'express-request-proxy';
@@ -27,6 +29,7 @@ import Auth0SilentCallback from './helpers/Auth0SilentCallback';
 import contentSecurityPolicy from './contentSecurityPolicy';
 import errorLogger from '../util/logger';
 import { errorRoute, defaultRoute } from './routes';
+import { resolveJsonOrRejectWithError } from '../sources/resolveJsonOrRejectWithError';
 
 const app = express();
 const allowedBodyContentTypes = ['application/csp-report', 'application/json'];
@@ -91,6 +94,50 @@ async function handleRequest(req, res, route) {
     await sendInternalServerError(req, res);
   }
 }
+
+const GOOGLE_API_URL = config.googleApiUrl;
+const GOOGLE_API_KEY = getEnvironmentVariable('NDLA_GOOGLE_API_KEY');
+const GOOGLE_SEARCH_ENGINE_ID = config.googleSearchEngineId;
+
+const apiEmbedUrl = (() => {
+  if (process.env.NODE_ENV === 'unittest') {
+    return 'http://google-api';
+  }
+  return GOOGLE_API_URL;
+})();
+
+const apiEmbedKey = (() => {
+  if (process.env.NODE_ENV === 'unittest') {
+    return 'googlekey';
+  }
+  return GOOGLE_API_KEY;
+})();
+
+const apiEmbedEngingeId = (() => {
+  if (process.env.NODE_ENV === 'unittest') {
+    return 'googleEngingeId';
+  }
+  return GOOGLE_SEARCH_ENGINE_ID;
+})();
+
+const apiEmbedResourceUrl = path => apiEmbedUrl + path;
+
+const customSearchUrl = apiEmbedResourceUrl('/customsearch/v1/');
+
+app.get('/customsearch/', async (req, res) => {
+  const { q, start } = req.query;
+  const params = {
+    key: apiEmbedKey,
+    cx: apiEmbedEngingeId,
+    q,
+    start,
+  };
+  const response = await fetch(
+    `${customSearchUrl}?${queryString.stringify(params)}`,
+  ).then(resolveJsonOrRejectWithError);
+
+  return res.send(response);
+});
 
 app.get('/robots.txt', (req, res) => {
   if (req.hostname === 'stier.ndla.no') {
