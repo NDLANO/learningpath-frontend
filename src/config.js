@@ -99,7 +99,6 @@ const config = {
   ),
   ndlaApiUrl: getEnvironmentVariable('NDLA_API_URL', apiDomain),
   googleSearchEngineId: getEnvironmentVariable('NDLA_GOOGLE_SEARCH_ENGINE_ID'),
-  googleApiKey: getEnvironmentVariable('NDLA_GOOGLE_API_KEY'),
   googleApiUrl: getEnvironmentVariable(
     'NDLA_GOOGLE_API_URL',
     'https://www.googleapis.com',
