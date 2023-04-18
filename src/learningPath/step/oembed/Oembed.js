@@ -9,7 +9,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import get from 'lodash/get';
 
 export const urlIsNDLAApiUrl = url =>
   /^(http|https):\/\/(ndla-frontend|www).([a-zA-Z]+.)?api.ndla.no/.test(url);
@@ -25,12 +24,7 @@ export default class Oembed extends React.Component {
     super(props);
     this.state = {
       isNDLAResource: false,
-      listeningToMessages: false,
     };
-
-    this.handleIframeMessages = this.handleIframeMessages.bind(this);
-    this.handleResize = this.handleResize.bind(this);
-    this.handleScrollTo = this.handleScrollTo.bind(this);
   }
 
   componentDidMount() {
@@ -43,80 +37,11 @@ export default class Oembed extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    this.disableIframeMessageListener();
-  }
-
-  getIframeDOM() {
-    return this.iframeDiv.children[0];
-  }
-
   handleIframeResizing({ oembedContent: { url } }) {
     if (urlIsNDLAUrl(url)) {
-      this.setState({ isNDLAResource: true }, this.enableIframeMessageListener);
+      this.setState({ isNDLAResource: true });
     } else {
-      this.setState(
-        { isNDLAResource: false },
-        this.disableIframeMessageListener,
-      );
-    }
-  }
-
-  enableIframeMessageListener() {
-    if (!this.state.listeningToMessages) {
-      window.addEventListener('message', this.handleIframeMessages);
-      this.setState({ listeningToMessages: true });
-    }
-  }
-
-  disableIframeMessageListener() {
-    window.removeEventListener('message', this.handleIframeMessages);
-    this.setState({ listeningToMessages: false });
-  }
-
-  handleScrollTo(evt) {
-    const iframe = this.getIframeDOM();
-    const rect = iframe.getBoundingClientRect();
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-    const top = evt.data.top + rect.top + scrollTop;
-    window.scroll({ top });
-  }
-
-  handleResize(evt) {
-    if (!evt.data.height) {
-      return;
-    }
-    const iframe = this.getIframeDOM();
-    const newHeight = parseInt(get(evt, 'data.height', 0), 10);
-    iframe.style.height = `${newHeight}px`; // eslint-disable-line no-param-reassign
-  }
-
-  handleIframeMessages(event) {
-    const iframe = this.getIframeDOM();
-    /* Needed to enforce content to stay within iframe on Safari iOS */
-    if (iframe) {
-      iframe.setAttribute('scrolling', 'no');
-    }
-
-    if (
-      !this.state.listeningToMessages ||
-      !event ||
-      !event.data ||
-      iframe?.contentWindow !== event.source
-    ) {
-      return;
-    }
-
-    switch (event.data.event) {
-      case 'resize':
-        this.handleResize(event);
-        break;
-      case 'scrollTo':
-        this.handleScrollTo(event);
-        break;
-      default:
-        break;
+      this.setState({ isNDLAResource: false });
     }
   }
 
