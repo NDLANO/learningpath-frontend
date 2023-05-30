@@ -11,7 +11,6 @@ import PropTypes from 'prop-types';
 import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
 import ScriptLoader from '@ndla/polyfill/lib/ScriptLoader';
-import config from '../../config';
 import { GoogleTagMangerNoScript, GoogleTagMangerScript } from './Gtm';
 import HotjarScript from './Hotjar';
 
@@ -29,9 +28,6 @@ const Document = props => {
         {head.title.toComponent()}
         {head.meta.toComponent()}
         <GoogleTagMangerScript />
-        {config.gaTrackingId && (
-          <script async src="https://www.google-analytics.com/analytics.js" />
-        )}
         {css && <style dangerouslySetInnerHTML={{ __html: css }} />}
         {assets.css &&
           assets.css && (

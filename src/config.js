@@ -50,13 +50,6 @@ const pinterestActivated = activatedForEnvironment(
   false,
 );
 
-const gaTrackingId = activatedForEnvironment(
-  {
-    prod: 'UA-9036010-26',
-  },
-  `UA-9036010-29`,
-);
-
 const getAuth0Hostname = () => {
   switch (environment) {
     case 'prod':
@@ -91,7 +84,6 @@ const config = {
   port: getEnvironmentVariable('LEARINGPATH_PORT', '3000'),
   redirectPort: getEnvironmentVariable('LEARNINGPATH_REDIRECT_PORT', '3001'),
   googleTagManagerId: getEnvironmentVariable('NDLA_GOOGLE_TAG_MANAGER_ID'),
-  gaTrackingId: getEnvironmentVariable('GA_TRACKING_ID', gaTrackingId),
   hotjarSiteID: getEnvironmentVariable('HOTJAR_SITE_ID', hotjarSiteID),
   ndlaFrontendDomain: getEnvironmentVariable(
     'FRONTEND_DOMAIN',
