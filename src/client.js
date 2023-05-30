@@ -75,7 +75,7 @@ TokenStatusHandler.getInstance({ store });
 
 configureTracker({
   listen: browserHistory.listen,
-  gaTrackingId: config.gaTrackingId,
+  gaTrackingId: undefined,
   googleTagManagerId: config.googleTagManagerId,
 });
 
