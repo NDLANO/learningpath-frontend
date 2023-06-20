@@ -179,7 +179,7 @@ app.get(
       query: { ownerIds },
     } = req;
 
-    const isAdmin = user && user.scope.includes(`learningpath:admin`);
+    const isAdmin = user && user.permissions.includes(`learningpath:admin`);
 
     if (!isAdmin) {
       res
