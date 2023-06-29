@@ -30,6 +30,7 @@
     "NDLA_GOOGLE_SEARCH_ENGINE_ID": "@ndla_google_search_engine_id",
     "NDLA_PERSONAL_CLIENT_ID": "@ndla_personal_client_id",
     "NDLA_ZENDESK_WIDGET_KEY": "@ndla_zendesk_widget_key",
-    "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "IS_VERCEL": "true"
   }
 }

@@ -9,8 +9,8 @@
 import 'isomorphic-fetch';
 import queryString from 'query-string';
 import express from 'express';
+import proxy from 'express-http-proxy';
 import helmet from 'helmet';
-import requestProxy from 'express-request-proxy';
 import bodyParser from 'body-parser';
 import jwt from 'express-jwt';
 import jwksRsa from 'jwks-rsa';
@@ -40,7 +40,10 @@ app.use(
   }),
 );
 
-app.use(compression());
+if (!config.isVercel) {
+  app.use(compression());
+}
+
 app.use(
   express.static(process.env.RAZZLE_PUBLIC_DIR, {
     maxAge: 1000 * 60 * 60 * 24 * 365, // One year
@@ -152,12 +155,14 @@ app.get('/health', (req, res) => {
   res.status(OK).send('Health check OK');
 });
 
-app.get(
-  '/pinterest-proxy/*',
-  requestProxy({
-    url: `${config.pinterestApiUrl}*`,
-    query: {
-      access_token: getEnvironmentVariable('PINTEREST_ACCESS_TOKEN'),
+app.use(
+  '/pintrest-proxy/*',
+  proxy(config.pinterestApiUrl, {
+    proxyReqOptDecorator: function(proxyReqOpts, _srcReq) {
+      proxyReqOpts.headers['Authorization'] = `Bearer ${getEnvironmentVariable(
+        'PINTEREST_ACCESS_TOKEN',
+      )}`;
+      return proxyReqOpts;
     },
   }),
 );

@@ -118,6 +118,7 @@ const config = {
   matomoUrl: getEnvironmentVariable('MATOMO_URL', 'https://tall.ndla.no/'),
   matomoSiteId: getEnvironmentVariable('MATOMO_SITE_ID', ''),
   isProduction: getEnvironmentVariable('NODE_ENV') === 'production',
+  isVercel: getEnvironmentVariable('IS_VERCEL') === 'true',
 };
 
 export function getUniversalConfig() {
