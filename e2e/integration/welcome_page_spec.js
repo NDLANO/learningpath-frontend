@@ -1,6 +1,7 @@
 import { getTokenExpireAt } from '../../src/util/jwtHelper';
 import { savePersonalToken } from '../../src/sources/localStorage';
 import { visitOptions } from '../support';
+import { setToken } from '../support/auth';
 
 describe('Welcome page', () => {
   describe('No session welcome page', () => {
@@ -72,40 +73,22 @@ describe('Welcome page', () => {
 
   describe('Session welcome page', () => {
     beforeEach(() => {
-      const options = {
-        method: 'POST',
-        url: 'https://ndla-test.eu.auth0.com/oauth/token',
-        body: {
-          client_id: Cypress.env('NDLA_END_TO_END_TESTING_CLIENT_ID'),
-          client_secret: Cypress.env('NDLA_END_TO_END_TESTING_CLIENT_SECRET'),
-          grant_type: Cypress.env('NDLA_END_TO_END_TESTING_GRANT_TYPE'),
-          audience: Cypress.env('NDLA_END_TO_END_TESTING_AUDIENCE'),
-        },
-      };
-      cy.request(options)
-        .then(res => {
-          savePersonalToken({
-            token: res.body.access_token,
-            expires: getTokenExpireAt(res.body.access_token),
-          });
-        })
-        .then(() => {
-          cy.fixture('mineLearningpaths.json').then(learningPaths => {
-            cy.server();
-            cy.route({
-              method: 'GET',
-              url: '**/mine/',
-              response: learningPaths,
-            }).as('getMineLearningPaths');
-            cy.route({
-              method: 'OPTIONS',
-              url: '**/mine/',
-              status: 204,
-              response: {},
-            });
-          });
-          cy.visit('/', visitOptions);
+      setToken();
+      cy.fixture('mineLearningpaths.json').then(learningPaths => {
+        cy.server();
+        cy.route({
+          method: 'GET',
+          url: '**/mine/',
+          response: learningPaths,
+        }).as('getMineLearningPaths');
+        cy.route({
+          method: 'OPTIONS',
+          url: '**/mine/',
+          status: 204,
+          response: {},
         });
+      });
+      cy.visit('/', visitOptions);
     });
 
     it('should access /minside when create new learning path', () => {
