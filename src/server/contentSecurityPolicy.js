@@ -9,10 +9,7 @@
 const connectSrc = (() => {
   const defaultConnectSrc = [
     "'self'",
-    'ws://*.hotjar.com wss://*.hotjar.com',
     'http://api-gateway.ndla-local',
-    'https://*.hotjar.com',
-    'https://*.hotjar.com:*',
     'https://*.google-analytics.com',
     'https://*.analytics.google.com',
     'wss://*.zopim.com',
@@ -42,10 +39,7 @@ const scriptSrc = (() => {
     "'self'",
     "'unsafe-inline'",
     "'unsafe-eval'",
-    'ws://*.hotjar.com',
-    'wss://*.hotjar.com',
     'http://api-gateway.ndla-local',
-    'https://*.hotjar.com',
     'https://*.ndla.no',
     'https://*.zendesk.com',
     'https://static.zdassets.com',
@@ -81,7 +75,6 @@ const contentSecurityPolicy = {
     ],
     fontSrc: [
       "'self'",
-      'https://*.hotjar.com',
       'https://*.zopim.com',
       'https://fonts.googleapis.com',
       'https://fonts.gstatic.com',
@@ -91,7 +84,6 @@ const contentSecurityPolicy = {
     imgSrc: [
       "'self'",
       'http://api-gateway.ndla-local',
-      'https://*.hotjar.com',
       'https://*.zopim.com',
       'https://*.ndla.no',
       'https://*.google-analytics.com',
@@ -102,7 +94,7 @@ const contentSecurityPolicy = {
     ],
     connectSrc,
     frameSrc: ['*'],
-    childSrc: ['https://*.hotjar.com', 'https://*.clarity.ms'],
+    childSrc: ['https://*.clarity.ms'],
     objectSrc: ["'none'"],
     reportUri: '/csp-report',
   },

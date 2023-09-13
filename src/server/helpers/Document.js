@@ -12,7 +12,6 @@ import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
 import ScriptLoader from '@ndla/polyfill/lib/ScriptLoader';
 import { GoogleTagMangerNoScript, GoogleTagMangerScript } from './Gtm';
-import HotjarScript from './Hotjar';
 
 const Document = props => {
   const { state, assets, css, data } = props;
@@ -64,7 +63,6 @@ const Document = props => {
           }}
         />
         <ScriptLoader polyfill={assets.polyfill} scripts={assets.js} />
-        <HotjarScript />
       </body>
     </html>
   );
