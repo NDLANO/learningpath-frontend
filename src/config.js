@@ -13,10 +13,6 @@ export const getEnvironmentVariable = (key, fallback = undefined) => {
 };
 
 const environment = getEnvironmentVariable('NDLA_ENVIRONMENT', 'test');
-const hotjarSiteID =
-  environment === 'staging'
-    ? getEnvironmentVariable('HOTJAR_LEARNINGPATH_SITE_ID')
-    : undefined;
 
 const activatedForEnvironment = (config, defaultValue) => {
   if (config[environment] !== undefined) {
@@ -84,7 +80,6 @@ const config = {
   port: getEnvironmentVariable('LEARINGPATH_PORT', '3000'),
   redirectPort: getEnvironmentVariable('LEARNINGPATH_REDIRECT_PORT', '3001'),
   googleTagManagerId: getEnvironmentVariable('NDLA_GOOGLE_TAG_MANAGER_ID'),
-  hotjarSiteID: getEnvironmentVariable('HOTJAR_SITE_ID', hotjarSiteID),
   ndlaFrontendDomain: getEnvironmentVariable(
     'FRONTEND_DOMAIN',
     ndlaFrontendDomain,

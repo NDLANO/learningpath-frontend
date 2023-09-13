@@ -33,7 +33,6 @@ class SiteNavSessionAction extends React.Component {
             onClick={() => localCloseSidebars()}
             data-cy="sitenav-logout">
             <LabeledIcon.Exit
-              hotjarMasked
               labelText={polyglot.t('siteNav.logout', { name: userName })}
             />
           </Link>
