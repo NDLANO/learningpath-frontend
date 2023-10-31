@@ -87,7 +87,7 @@ test('actions/fetchArticleSearch', done => {
 
   const taxonomyMocks = apiResponse.result.results.map(item =>
     nock('http://ndla-api')
-      .get('/taxonomy/v1/queries/resources')
+      .get('/taxonomy/v1/nodes')
       .query({ contentURI: `urn:article:${item.id}`, language: 'nb' })
       .reply(200, [{ path: '/resource:1/subject:2/something:3' }]),
   );

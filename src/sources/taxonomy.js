@@ -5,5 +5,5 @@ const baseUrl = apiResourceUrl('/taxonomy/v1');
 
 export const fetchResource = articleId =>
   fetch(
-    `${baseUrl}/queries/resources?contentURI=urn:article:${articleId}&language=nb`,
+    `${baseUrl}/nodes?contentURI=urn:article:${articleId}&language=nb`,
   ).then(resolveJsonOrRejectWithError);
