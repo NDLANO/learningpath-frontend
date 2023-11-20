@@ -23,7 +23,7 @@ RUN yarn run build
 RUN mv $APP_PATH/src/server/robots.txt $APP_PATH/build/robots.txt
 
 ### Run stage
-FROM node:18.15-alpine
+FROM node:18.18.1-alpine
 
 RUN apk add py-pip jq && pip install awscli
 COPY run-learningpath-frontend.sh /
