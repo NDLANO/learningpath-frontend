@@ -25,8 +25,8 @@
     "tdd": "cross-env BABEL_ENV=test NODE_ENV=unittest jest --watch"
   },
   "engines": {
-    "node": ">=18.15.0",
-    "npm": ">=5.3.0"
+    "node": ">=20.9.0",
+    "npm": ">=9.0.0"
   },
   "devDependencies": {
     "@ndla/scripts": "^1.0.1",
