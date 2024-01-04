@@ -6,13 +6,13 @@
  *
  */
 
-import { sortPaths } from '../sortUtil';
-import { translatedLearningPaths } from '../../common/__tests__/translatedMockData';
+import { sortPaths } from "../sortUtil";
+import { translatedLearningPaths } from "../../common/__tests__/translatedMockData";
 
-test('util/sortUtil sortPaths', () => {
-  expect(sortPaths(translatedLearningPaths, 'status')).toMatchSnapshot();
-  expect(sortPaths(translatedLearningPaths, 'title')).toMatchSnapshot();
-  expect(sortPaths(translatedLearningPaths, 'lastUpdated')).toMatchSnapshot();
-  expect(sortPaths(translatedLearningPaths, '-lastUpdated')).toMatchSnapshot();
-  expect(sortPaths(translatedLearningPaths, 'duration')).toMatchSnapshot();
+test("util/sortUtil sortPaths", () => {
+  expect(sortPaths(translatedLearningPaths, "status")).toMatchSnapshot();
+  expect(sortPaths(translatedLearningPaths, "title")).toMatchSnapshot();
+  expect(sortPaths(translatedLearningPaths, "lastUpdated")).toMatchSnapshot();
+  expect(sortPaths(translatedLearningPaths, "-lastUpdated")).toMatchSnapshot();
+  expect(sortPaths(translatedLearningPaths, "duration")).toMatchSnapshot();
 });

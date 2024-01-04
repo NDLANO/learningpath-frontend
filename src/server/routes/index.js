@@ -6,5 +6,5 @@
  *
  */
 
-export { errorRoute } from './errorRoute';
-export { defaultRoute } from './defaultRoute';
+export { errorRoute } from "./errorRoute";
+export { defaultRoute } from "./defaultRoute";

@@ -6,10 +6,10 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-const InputField = props => {
+const InputField = (props) => {
   const {
     input,
     label,
@@ -19,7 +19,7 @@ const InputField = props => {
     maxLength,
     meta: { touched, error },
   } = props;
-  const inputClassName = touched && error ? 'input--alert' : '';
+  const inputClassName = touched && error ? "input--alert" : "";
   return (
     <div>
       <label className={labelClassName} htmlFor={input.name}>
@@ -31,12 +31,9 @@ const InputField = props => {
         type={type}
         className={inputClassName}
         maxLength={maxLength}
-        data-cy={props['data-cy']}
+        data-cy={props["data-cy"]}
       />
-      {touched &&
-        error && (
-          <span className="error_message error_message--red">{error}</span>
-        )}
+      {touched && error && <span className="error_message error_message--red">{error}</span>}
     </div>
   );
 };
@@ -48,11 +45,11 @@ InputField.propTypes = {
   labelClassName: PropTypes.string,
   placeholder: PropTypes.string,
   maxLength: PropTypes.string,
-  'data-cy': PropTypes.string,
+  "data-cy": PropTypes.string,
 };
 InputField.defaultProps = {
-  type: 'text',
-  placeholder: '',
-  labelClassName: '',
+  type: "text",
+  placeholder: "",
+  labelClassName: "",
 };
 export default InputField;

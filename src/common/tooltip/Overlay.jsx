@@ -6,15 +6,15 @@
  *
  */
 
-import React, { cloneElement } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import BaseOverlay from 'react-overlays/lib/Overlay';
-import { PLACEMENTS } from './constants';
+import React, { cloneElement } from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import BaseOverlay from "react-overlays/lib/Overlay";
+import { PLACEMENTS } from "./constants";
 
 const Overlay = ({ children, ...props }) => {
   const child = cloneElement(children, {
-    className: classNames(children.props.className, 'in'),
+    className: classNames(children.props.className, "in"),
   });
 
   return <BaseOverlay {...props}>{child}</BaseOverlay>;

@@ -6,21 +6,20 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import OneLineEditor from './OneLineEditor';
-import polyglot from '../../i18n';
+import React from "react";
+import PropTypes from "prop-types";
+import OneLineEditor from "./OneLineEditor";
+import polyglot from "../../i18n";
 
 export default function DescriptionEditor({ value, onChange, lang }) {
-  const handleChange = newValue =>
-    onChange({ description: newValue, language: lang });
+  const handleChange = (newValue) => onChange({ description: newValue, language: lang });
   return (
     <div>
       <OneLineEditor
         onChange={handleChange}
-        value={value || ''}
+        value={value || ""}
         maxlength={150}
-        placeholder={polyglot.t('editPage.shortDescriptionPlaceholder')}
+        placeholder={polyglot.t("editPage.shortDescriptionPlaceholder")}
       />
       <div className="editor_input-underline" />
     </div>

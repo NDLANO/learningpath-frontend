@@ -7,10 +7,9 @@
  */
 
 export function scaleImage(imageUrl) {
-  if (process.env.BUILD_TARGET === 'server') {
+  if (process.env.BUILD_TARGET === "server") {
     return `${imageUrl}?width=400`;
   }
-  const newImageWidth =
-    window.innerWidth > 400 ? window.innerWidth / 4 : window.innerWidth;
+  const newImageWidth = window.innerWidth > 400 ? window.innerWidth / 4 : window.innerWidth;
   return `${imageUrl}?width=${newImageWidth}`;
 }

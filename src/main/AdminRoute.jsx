@@ -1,26 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Redirect, Route } from 'react-router-dom';
-import { getScope } from '../util/jwtHelper';
-import { getPersonalToken } from '../sources/localStorage';
-import { LocationShape } from '../shapes';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Redirect, Route } from "react-router-dom";
+import { getScope } from "../util/jwtHelper";
+import { getPersonalToken } from "../sources/localStorage";
+import { LocationShape } from "../shapes";
 
-const AdminRoute = ({
-  authenticated,
-  isAdmin,
-  component: Component,
-  ...rest
-}) => (
+const AdminRoute = ({ authenticated, isAdmin, component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={props =>
+    render={(props) =>
       authenticated && isAdmin ? (
         <Component {...props} />
       ) : (
         <Redirect
           to={{
-            pathname: '/forbidden',
+            pathname: "/forbidden",
             state: { from: props.location },
           }}
         />
@@ -36,11 +31,9 @@ AdminRoute.propTypes = {
   location: LocationShape.isRequired,
 };
 
-const mapStateToProps = state =>
+const mapStateToProps = (state) =>
   Object.assign({}, state, {
-    isAdmin: state.authenticated
-      ? getScope(getPersonalToken()).includes(`learningpath:admin`)
-      : false,
+    isAdmin: state.authenticated ? getScope(getPersonalToken()).includes(`learningpath:admin`) : false,
   });
 
 export default connect(mapStateToProps)(AdminRoute);

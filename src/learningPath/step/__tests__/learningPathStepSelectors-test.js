@@ -6,42 +6,32 @@
  *
  */
 
-import {
-  oembedPreview,
-  learningStep,
-} from '../../../common/__tests__/mockData';
-import {
-  getLearningPathStep,
-  getI18NEmbedContent,
-} from '../learningPathStepSelectors';
-import {
-  translatedLearningStep,
-  nbOembedContent,
-  enOembedContent,
-} from '../../../common/__tests__/translatedMockData';
+import { oembedPreview, learningStep } from "../../../common/__tests__/mockData";
+import { getLearningPathStep, getI18NEmbedContent } from "../learningPathStepSelectors";
+import { translatedLearningStep, nbOembedContent, enOembedContent } from "../../../common/__tests__/translatedMockData";
 
-test('selectors/getLearningPathStep', () => {
+test("selectors/getLearningPathStep", () => {
   const state = {
     learningPathStep: learningStep,
-    locale: 'nb',
+    locale: "nb",
   };
 
   expect(getLearningPathStep(state)).toEqual(translatedLearningStep);
 });
 
-test('selectors/getI18NEmbedContent norwegian', () => {
+test("selectors/getI18NEmbedContent norwegian", () => {
   const state = {
     oembedPreview,
-    locale: 'nb',
+    locale: "nb",
   };
 
   expect(getI18NEmbedContent(state)).toEqual(nbOembedContent);
 });
 
-test('selectors/getI18NEmbedContent english', () => {
+test("selectors/getI18NEmbedContent english", () => {
   const state = {
     oembedPreview,
-    locale: 'en',
+    locale: "en",
   };
 
   expect(getI18NEmbedContent(state)).toEqual(enOembedContent);

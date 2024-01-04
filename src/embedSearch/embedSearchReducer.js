@@ -6,15 +6,15 @@
  *
  */
 
-import { handleActions } from 'redux-actions';
-import cloneDeep from 'lodash/cloneDeep';
+import { handleActions } from "redux-actions";
+import cloneDeep from "lodash/cloneDeep";
 
 const initialState = {
   ndla: {
     query: {
-      textQuery: '',
+      textQuery: "",
       page: 1,
-      'page-size': 10,
+      "page-size": 10,
       numberOfPages: 1,
     },
     oembedContent: {},
@@ -23,8 +23,8 @@ const initialState = {
   external: {
     query: {
       start: 1,
-      textQuery: '',
-      filter: { key: 'more:youtube', name: 'Youtube', type: 'oembed' },
+      textQuery: "",
+      filter: { key: "more:youtube", name: "Youtube", type: "oembed" },
       page: 1,
       numberOfPages: 1,
     },
@@ -47,8 +47,7 @@ export default handleActions(
     SET_EMBED_PREVIEW: {
       next(state, action) {
         const nextState = cloneDeep(state);
-        nextState[action.payload.type].oembedContent =
-          action.payload.oembedContent;
+        nextState[action.payload.type].oembedContent = action.payload.oembedContent;
         return nextState;
       },
       throw(state) {

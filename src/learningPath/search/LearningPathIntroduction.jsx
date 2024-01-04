@@ -6,11 +6,11 @@
  *
  */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import Icon from '../../common/Icon';
-import polyglot from '../../i18n';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import Icon from "../../common/Icon";
+import polyglot from "../../i18n";
 
 export default class SearchResult extends Component {
   constructor(props) {
@@ -25,35 +25,28 @@ export default class SearchResult extends Component {
     if (!path.introduction) {
       return null;
     }
-    const onClickShowIntroduction = evt => {
+    const onClickShowIntroduction = (evt) => {
       evt.preventDefault();
-      this.setState(prevState => ({
+      this.setState((prevState) => ({
         showIntroduction: !prevState.showIntroduction,
       }));
     };
 
     const introductionClassName = () =>
       classNames({
-        'search-result_introduction': true,
-        'search-result_introduction--open': this.state.showIntroduction,
+        "search-result_introduction": true,
+        "search-result_introduction--open": this.state.showIntroduction,
       });
     const introductionButtonText = this.state.showIntroduction
-      ? polyglot.t('searchForm.hideIntroduction')
-      : polyglot.t('searchForm.showIntroduction');
+      ? polyglot.t("searchForm.hideIntroduction")
+      : polyglot.t("searchForm.showIntroduction");
     // path.introduction && path.introduction.length > 0 ?
     return (
       <div>
-        <button
-          type="button"
-          className="un-button show-introduction_button"
-          onClick={onClickShowIntroduction}>
-          {introductionButtonText}{' '}
-          {this.state.showIntroduction ? <Icon.ArrowUp /> : <Icon.ArrowDown />}
+        <button type="button" className="un-button show-introduction_button" onClick={onClickShowIntroduction}>
+          {introductionButtonText} {this.state.showIntroduction ? <Icon.ArrowUp /> : <Icon.ArrowDown />}
         </button>
-        <div
-          className={introductionClassName()}
-          dangerouslySetInnerHTML={{ __html: path.introduction }}
-        />
+        <div className={introductionClassName()} dangerouslySetInnerHTML={{ __html: path.introduction }} />
       </div>
     );
   }

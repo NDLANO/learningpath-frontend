@@ -6,19 +6,19 @@
  *
  */
 
-import { createAction } from 'redux-actions';
-import { fetchPins } from '../sources/pinterestApi';
-import { addMessage } from '../messages/messagesActions';
-import polyglot from '../i18n';
+import { createAction } from "redux-actions";
+import { fetchPins } from "../sources/pinterestApi";
+import { addMessage } from "../messages/messagesActions";
+import polyglot from "../i18n";
 
-export const setPins = createAction('SET_PINS');
-export const setFetchingPins = createAction('SET_FETCHING_PINS');
-export const removePins = createAction('REMOVE_PINS');
+export const setPins = createAction("SET_PINS");
+export const setFetchingPins = createAction("SET_FETCHING_PINS");
+export const removePins = createAction("REMOVE_PINS");
 
 export function fetchPinterestPins(username, boardName) {
-  return dispatch =>
+  return (dispatch) =>
     fetchPins(username, boardName)
-      .then(pins => {
+      .then((pins) => {
         dispatch(setPins(pins.data));
         dispatch(setFetchingPins(false));
       })
@@ -26,9 +26,9 @@ export function fetchPinterestPins(username, boardName) {
         dispatch(setFetchingPins(false));
         dispatch(
           addMessage({
-            message: polyglot.t('pinterest.error'),
+            message: polyglot.t("pinterest.error"),
             timeToLive: 7000,
-            severity: 'danger',
+            severity: "danger",
           }),
         );
       });

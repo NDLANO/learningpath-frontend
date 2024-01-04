@@ -6,11 +6,11 @@
  *
  */
 
-import './raf-polyfill';
+import "./raf-polyfill";
 
 /* eslint-disable import/first */
-import { configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { configure } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
 
 /* eslint-enable import/first */
 

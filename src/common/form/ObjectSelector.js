@@ -6,10 +6,10 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-const ObjectSelector = props => {
+const ObjectSelector = (props) => {
   const {
     options,
     labelKey,
@@ -18,21 +18,19 @@ const ObjectSelector = props => {
     disabled,
     ...rest
   } = props;
-  const parse = event =>
-    options.find(option => option[idKey] === event.target.value);
+  const parse = (event) => options.find((option) => option[idKey] === event.target.value);
 
   return (
     <div>
       <select
-        onBlur={event => onBlur(parse(event))}
-        onChange={event => onChange(parse(event))}
+        onBlur={(event) => onBlur(parse(event))}
+        onChange={(event) => onChange(parse(event))}
         value={value[idKey]}
         disabled={disabled}
-        {...rest.input}>
-        {options.map(option => (
-          <option
-            key={option[idKey] ? option[idKey] : 'undefined'}
-            value={option[idKey]}>
+        {...rest.input}
+      >
+        {options.map((option) => (
+          <option key={option[idKey] ? option[idKey] : "undefined"} value={option[idKey]}>
             {option[labelKey]}
           </option>
         ))}

@@ -6,9 +6,9 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import Icon from './Icon';
+import React from "react";
+import PropTypes from "prop-types";
+import Icon from "./Icon";
 
 export default class Lightbox extends React.Component {
   constructor(props) {
@@ -35,10 +35,7 @@ export default class Lightbox extends React.Component {
     return this.state.display ? (
       <div className="lightbox">
         <div className="lightbox_content" style={style}>
-          <button
-            type="button"
-            className="un-button close-dialog"
-            onClick={this.onCloseButtonClick}>
+          <button type="button" className="un-button close-dialog" onClick={this.onCloseButtonClick}>
             <Icon.Clear />
           </button>
           {children}

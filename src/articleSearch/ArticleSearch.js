@@ -6,26 +6,23 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import classNames from 'classnames';
-import EmbedSearchForm from '../embedSearch/EmbedSearchForm';
-import * as actions from '../embedSearch/embedSearchActions';
-import EmbedSearchResults from '../embedSearch/EmbedSearchResults';
-import EmbedSearchPreview from '../embedSearch/EmbedSearchPreview';
-import {
-  getEmbedQueryFromState,
-  getOembedContentFromState,
-} from '../embedSearch/embedSearchSelectors';
-import polyglot from '../i18n';
-import { fetchArticleSearch } from './articleActions';
-import { getArticleResultFromState } from './articleSelectors';
-import { getLocale } from '../locale/localeSelectors';
-import { getScope } from '../util/jwtHelper';
-import { getPersonalToken } from '../sources/localStorage';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import classNames from "classnames";
+import EmbedSearchForm from "../embedSearch/EmbedSearchForm";
+import * as actions from "../embedSearch/embedSearchActions";
+import EmbedSearchResults from "../embedSearch/EmbedSearchResults";
+import EmbedSearchPreview from "../embedSearch/EmbedSearchPreview";
+import { getEmbedQueryFromState, getOembedContentFromState } from "../embedSearch/embedSearchSelectors";
+import polyglot from "../i18n";
+import { fetchArticleSearch } from "./articleActions";
+import { getArticleResultFromState } from "./articleSelectors";
+import { getLocale } from "../locale/localeSelectors";
+import { getScope } from "../util/jwtHelper";
+import { getPersonalToken } from "../sources/localStorage";
 
-const searchType = 'ndla';
+const searchType = "ndla";
 
 class ArticleSearch extends React.Component {
   constructor(props) {
@@ -42,11 +39,7 @@ class ArticleSearch extends React.Component {
   }
 
   componentDidMount() {
-    this.props.articleSearch(
-      this.props.query,
-      this.props.language,
-      this.props.isNdla,
-    );
+    this.props.articleSearch(this.props.query, this.props.language, this.props.isNdla);
   }
 
   onImageLightboxClose() {
@@ -62,7 +55,7 @@ class ArticleSearch extends React.Component {
 
   addEmbedResult(evt, url) {
     evt.preventDefault();
-    this.props.urlOnBlur(url, 'oembed');
+    this.props.urlOnBlur(url, "oembed");
     this.props.toggleNdlaDisplay(evt);
   }
 
@@ -71,35 +64,27 @@ class ArticleSearch extends React.Component {
   }
 
   render() {
-    const {
-      results,
-      oembedPreview,
-      query,
-      display,
-      articleSearch,
-      language,
-      isNdla,
-    } = this.props;
+    const { results, oembedPreview, query, display, articleSearch, language, isNdla } = this.props;
     const containerClass = {
-      'embed-search_container': true,
-      'embed-search_container--active': display,
+      "embed-search_container": true,
+      "embed-search_container--active": display,
     };
 
     return (
       <div>
         <div className={classNames(containerClass)}>
-          <h4>{polyglot.t('embedSearch.form.ndlaTitle')}</h4>
+          <h4>{polyglot.t("embedSearch.form.ndlaTitle")}</h4>
           <EmbedSearchForm
             query={query}
             handleTextQueryChange={this.handleTextQueryChange}
-            localFetchEmbedSearch={q => articleSearch(q, language, isNdla)}
+            localFetchEmbedSearch={(q) => articleSearch(q, language, isNdla)}
             textQuery={this.state.textQuery}
           />
           <EmbedSearchResults
             items={results}
             onPreviewClick={this.previewOembed}
             addEmbedResult={this.addEmbedResult}
-            pagerAction={q => articleSearch(q, language, isNdla)}
+            pagerAction={(q) => articleSearch(q, language, isNdla)}
             query={query}
           />
           <EmbedSearchPreview
@@ -135,18 +120,13 @@ const mapDispatchToProps = {
   articleSearch: fetchArticleSearch,
 };
 
-const mapStateToProps = state =>
+const mapStateToProps = (state) =>
   Object.assign({}, state, {
     results: getArticleResultFromState(state),
     query: getEmbedQueryFromState(state, searchType),
     oembedPreview: getOembedContentFromState(state, searchType),
     language: getLocale(state),
-    isNdla: state.authenticated
-      ? getScope(getPersonalToken()).includes(`learningpath:write`)
-      : false,
+    isNdla: state.authenticated ? getScope(getPersonalToken()).includes(`learningpath:write`) : false,
   });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ArticleSearch);
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleSearch);

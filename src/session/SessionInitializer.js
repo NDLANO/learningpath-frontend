@@ -6,13 +6,13 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import Helmet from 'react-helmet';
-import polyglot from '../i18n';
-import { parseHash } from './sessionActions';
-import { LocationShape } from '../shapes';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import Helmet from "react-helmet";
+import polyglot from "../i18n";
+import { parseHash } from "./sessionActions";
+import { LocationShape } from "../shapes";
 
 export class SessionInitializer extends React.Component {
   componentDidMount() {
@@ -26,7 +26,7 @@ export class SessionInitializer extends React.Component {
   render() {
     return (
       <div>
-        <Helmet title={polyglot.t('htmlTitles.sessionInitializer')} />
+        <Helmet title={polyglot.t("htmlTitles.sessionInitializer")} />
       </div>
     );
   }
@@ -40,7 +40,4 @@ SessionInitializer.propTypes = {
 const mapDispatchToProps = {
   localParseHash: parseHash,
 };
-export default connect(
-  state => state,
-  mapDispatchToProps,
-)(SessionInitializer);
+export default connect((state) => state, mapDispatchToProps)(SessionInitializer);

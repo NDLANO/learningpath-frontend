@@ -6,17 +6,17 @@
  *
  */
 
-import { createAction } from 'redux-actions';
-import { fetchPathTags } from '../../../sources/learningpaths';
-import { applicationError } from '../../../messages/messagesActions';
+import { createAction } from "redux-actions";
+import { fetchPathTags } from "../../../sources/learningpaths";
+import { applicationError } from "../../../messages/messagesActions";
 
-export const setLearningPathTags = createAction('SET_LEARNING_PATH_TAGS');
+export const setLearningPathTags = createAction("SET_LEARNING_PATH_TAGS");
 
 export function fetchLearningPathTags() {
   return (dispatch, getState) =>
     fetchPathTags({}, getState().locale)
-      .then(tags => dispatch(setLearningPathTags(tags)))
-      .catch(err => dispatch(applicationError(err)));
+      .then((tags) => dispatch(setLearningPathTags(tags)))
+      .catch((err) => dispatch(applicationError(err)));
 }
 
 export function fetchLearningPathTagsIfNeeded() {

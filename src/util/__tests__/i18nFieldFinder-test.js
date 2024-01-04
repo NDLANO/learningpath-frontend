@@ -6,34 +6,34 @@
  *
  */
 
-import { oembedContentI18N } from '../i18nFieldFinder';
+import { oembedContentI18N } from "../i18nFieldFinder";
 
-test('util/i18nFieldFinder oembedContentI18N', () => {
-  expect(typeof oembedContentI18N).toBe('function');
+test("util/i18nFieldFinder oembedContentI18N", () => {
+  expect(typeof oembedContentI18N).toBe("function");
 
   const learningPathStep = {
     embedUrl: [
       {
-        url: 'http://example.com/sv',
+        url: "http://example.com/sv",
         html: '<iframe src="http://example.com/sv">',
         width: 500,
-        language: 'sv',
+        language: "sv",
       },
       {
-        url: 'http://example.com',
+        url: "http://example.com",
         html: '<iframe src="http://example.com">',
         width: 500,
-        language: 'nb',
+        language: "nb",
       },
     ],
   };
 
-  expect(oembedContentI18N(learningPathStep, 'nb')).toEqual({
-    url: 'http://example.com',
+  expect(oembedContentI18N(learningPathStep, "nb")).toEqual({
+    url: "http://example.com",
     html: '<iframe src="http://example.com">',
     width: 500,
-    language: 'nb',
+    language: "nb",
   });
 
-  expect(oembedContentI18N(learningPathStep, 'eo')).toBeFalsy();
+  expect(oembedContentI18N(learningPathStep, "eo")).toBeFalsy();
 });

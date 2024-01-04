@@ -6,26 +6,23 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
 
-import Icon from '../../common/Icon';
+import Icon from "../../common/Icon";
 
-export default function LearningPathStepIcon({
-  learningPathStepType,
-  isCircle,
-}) {
-  const iconClassName = type => {
+export default function LearningPathStepIcon({ learningPathStepType, isCircle }) {
+  const iconClassName = (type) => {
     switch (type) {
-      case 'INTRODUCTION':
-      case 'TEXT':
-      case 'TASK':
-      case 'SUMMARY':
+      case "INTRODUCTION":
+      case "TEXT":
+      case "TASK":
+      case "SUMMARY":
         return <Icon.TypeText />;
-      case 'MULTIMEDIA':
+      case "MULTIMEDIA":
         return <Icon.TypeMedia />;
-      case 'QUIZ':
+      case "QUIZ":
         return <Icon.TypeQuiz />;
       default:
         return <Icon.TypeText />;
@@ -34,12 +31,10 @@ export default function LearningPathStepIcon({
 
   const divClassName = () =>
     classNames({
-      'step-nav_circle': isCircle,
+      "step-nav_circle": isCircle,
     });
 
-  return (
-    <div className={divClassName()}>{iconClassName(learningPathStepType)}</div>
-  );
+  return <div className={divClassName()}>{iconClassName(learningPathStepType)}</div>;
 }
 
 LearningPathStepIcon.propTypes = {

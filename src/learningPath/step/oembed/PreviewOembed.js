@@ -6,12 +6,12 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import isEmpty from 'lodash/isEmpty';
-import polyglot from '../../../i18n';
-import Oembed from './Oembed';
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import isEmpty from "lodash/isEmpty";
+import polyglot from "../../../i18n";
+import Oembed from "./Oembed";
 
 export default class PreviewOembed extends React.Component {
   constructor(props) {
@@ -39,17 +39,12 @@ export default class PreviewOembed extends React.Component {
     }
     const frameClasses = classNames({
       learningsource__frame: true,
-      'learningsource__frame--hidden': !this.state.previewOembed,
+      "learningsource__frame--hidden": !this.state.previewOembed,
     });
 
     const previewButton = !this.state.previewOembed ? (
-      <button
-        type="button"
-        className="un-button learningsource__expand"
-        onClick={this.onPreviewClick}>
-        <span className="button button--outline">
-          {polyglot.t('editPathStep.previewOembed')}
-        </span>
+      <button type="button" className="un-button learningsource__expand" onClick={this.onPreviewClick}>
+        <span className="button button--outline">{polyglot.t("editPathStep.previewOembed")}</span>
       </button>
     ) : null;
 

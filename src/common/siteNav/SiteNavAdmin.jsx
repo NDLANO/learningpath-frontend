@@ -6,25 +6,21 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import polyglot from '../../i18n';
-import LabeledIcon from '../LabeledIcon';
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import polyglot from "../../i18n";
+import LabeledIcon from "../LabeledIcon";
 
 const SiteNavAdmin = ({ authenticated, isAdmin, localCloseSidebars }) => {
-  if (!authenticated || !isAdmin || process.env.BUILD_TARGET === 'server') {
+  if (!authenticated || !isAdmin || process.env.BUILD_TARGET === "server") {
     return null;
   }
 
   return (
     <li className="site-nav_item">
-      <Link
-        to="/admin"
-        className="site-nav_link"
-        onClick={() => localCloseSidebars()}
-        data-cy="sitenav-find-paths">
-        <LabeledIcon.Person labelText={polyglot.t('siteNav.admin')} />
+      <Link to="/admin" className="site-nav_link" onClick={() => localCloseSidebars()} data-cy="sitenav-find-paths">
+        <LabeledIcon.Person labelText={polyglot.t("siteNav.admin")} />
       </Link>
     </li>
   );

@@ -6,53 +6,47 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import Icon from '../Icon';
-import StyleButton from './StyleButton';
+import React from "react";
+import PropTypes from "prop-types";
+import Icon from "../Icon";
+import StyleButton from "./StyleButton";
 
 const STYLES = [
-  { label: 'Bold', style: 'BOLD', isInline: true, icon: <Icon.Bold /> },
-  { label: 'Italic', style: 'ITALIC', isInline: true, icon: <Icon.Italic /> },
+  { label: "Bold", style: "BOLD", isInline: true, icon: <Icon.Bold /> },
+  { label: "Italic", style: "ITALIC", isInline: true, icon: <Icon.Italic /> },
   {
-    label: 'Underline',
-    style: 'UNDERLINE',
+    label: "Underline",
+    style: "UNDERLINE",
     isInline: true,
     icon: <Icon.Underline />,
   },
   {
-    label: 'UL',
-    style: 'unordered-list-item',
+    label: "UL",
+    style: "unordered-list-item",
     isInline: false,
     icon: <Icon.Bulleted />,
   },
   {
-    label: 'OL',
-    style: 'ordered-list-item',
+    label: "OL",
+    style: "ordered-list-item",
     isInline: false,
     icon: <Icon.Numbered />,
   },
 ];
 
-const StyleControls = props => {
+const StyleControls = (props) => {
   const { editorState } = props;
   const selection = editorState.getSelection();
-  const blockType = editorState
-    .getCurrentContent()
-    .getBlockForKey(selection.getStartKey())
-    .getType();
+  const blockType = editorState.getCurrentContent().getBlockForKey(selection.getStartKey()).getType();
 
   const currentInlineStyle = editorState.getCurrentInlineStyle();
 
   return (
     <ul className="textformat-menu">
-      {STYLES.map(type => (
+      {STYLES.map((type) => (
         <StyleButton
           key={type.label}
-          active={
-            (type.isInline && currentInlineStyle.has(type.style)) ||
-            (!type.isInline && type.style === blockType)
-          }
+          active={(type.isInline && currentInlineStyle.has(type.style)) || (!type.isInline && type.style === blockType)}
           label={type.label}
           onToggle={type.isInline ? props.onToggleInline : props.onToggleBlock}
           style={type.style}

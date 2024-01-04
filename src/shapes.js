@@ -6,7 +6,7 @@
  *
  */
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 export const CopyrightObjectShape = PropTypes.shape({
   contributors: PropTypes.arrayOf(

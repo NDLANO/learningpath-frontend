@@ -6,14 +6,14 @@
  *
  */
 
-import formatUrl from '../util/formatUrlUtil';
-import { fetchAuth } from './fetchAuth';
+import formatUrl from "../util/formatUrlUtil";
+import { fetchAuth } from "./fetchAuth";
 import {
   resolveJsonIgnoreOembedFailureOrRejectWithError,
   resolveJsonOrRejectWithError,
   createErrorPayload,
-} from './resolveJsonOrRejectWithError';
-import { apiBaseUrl, locationOrigin } from './apiConstants';
+} from "./resolveJsonOrRejectWithError";
+import { apiBaseUrl, locationOrigin } from "./apiConstants";
 
 export {
   locationOrigin,
@@ -28,7 +28,7 @@ export function apiResourceUrl(path) {
 }
 
 export function ApiError(message, res = {}, json) {
-  this.name = 'ApiError';
+  this.name = "ApiError";
   this.message = message;
   this.url = res.url;
   this.status = res.status;
@@ -41,50 +41,48 @@ export function ApiError(message, res = {}, json) {
 ApiError.prototype = Object.create(Error.prototype);
 ApiError.prototype.constructor = ApiError;
 
-export function fetchAuthorized(path, method = 'GET') {
-  const url = params => apiResourceUrl(formatUrl(path, params));
+export function fetchAuthorized(path, method = "GET") {
+  const url = (params) => apiResourceUrl(formatUrl(path, params));
   return (params = {}, language) => {
-    const query = language ? `?language=${language}&fallback=true` : '';
-    return fetchAuth(`${url(params)}${query}`, { method }).then(
-      resolveJsonOrRejectWithError,
-    );
+    const query = language ? `?language=${language}&fallback=true` : "";
+    return fetchAuth(`${url(params)}${query}`, { method }).then(resolveJsonOrRejectWithError);
   };
 }
 
 export function postAuthorized(path) {
-  const url = params => apiResourceUrl(formatUrl(path, params));
+  const url = (params) => apiResourceUrl(formatUrl(path, params));
 
   return (params = {}, body) =>
     fetchAuth(url(params), {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(body),
     }).then(resolveJsonOrRejectWithError);
 }
 
 export function putAuthorized(path) {
-  const url = params => apiResourceUrl(formatUrl(path, params));
+  const url = (params) => apiResourceUrl(formatUrl(path, params));
 
   return (params = {}, body) =>
     fetchAuth(url(params), {
-      method: 'PUT',
+      method: "PUT",
       body: JSON.stringify(body),
     }).then(resolveJsonOrRejectWithError);
 }
 
 export function patchAuthorized(path) {
-  const url = params => apiResourceUrl(formatUrl(path, params));
+  const url = (params) => apiResourceUrl(formatUrl(path, params));
 
   return (params = {}, body) =>
     fetchAuth(url(params), {
-      method: 'PATCH',
+      method: "PATCH",
       body: JSON.stringify(body),
     }).then(resolveJsonOrRejectWithError);
 }
 
 export function deleteAuthorized(path) {
-  const url = params => apiResourceUrl(formatUrl(path, params));
+  const url = (params) => apiResourceUrl(formatUrl(path, params));
   return (params = {}) =>
     fetchAuth(url(params), {
-      method: 'DELETE',
+      method: "DELETE",
     });
 }

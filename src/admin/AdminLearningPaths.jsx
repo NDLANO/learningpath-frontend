@@ -6,30 +6,18 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import AdminDropdown from './AdminDropdown';
-import LearningPathTile from '../learningPath/tile/LearningPathTile';
+import React from "react";
+import PropTypes from "prop-types";
+import AdminDropdown from "./AdminDropdown";
+import LearningPathTile from "../learningPath/tile/LearningPathTile";
 
-const AdminLearningPaths = ({
-  learningPaths,
-  onDropDownSelect,
-  noPathsText,
-}) => {
+const AdminLearningPaths = ({ learningPaths, onDropDownSelect, noPathsText }) => {
   if (learningPaths.length === 0) {
     return <p>{noPathsText}</p>;
   }
-  return learningPaths.map(learningPath => {
-    const dropdown = (
-      <AdminDropdown onSelect={onDropDownSelect} learningPath={learningPath} />
-    );
-    return (
-      <LearningPathTile
-        key={learningPath.id}
-        dropdown={dropdown}
-        learningPath={learningPath}
-      />
-    );
+  return learningPaths.map((learningPath) => {
+    const dropdown = <AdminDropdown onSelect={onDropDownSelect} learningPath={learningPath} />;
+    return <LearningPathTile key={learningPath.id} dropdown={dropdown} learningPath={learningPath} />;
   });
 };
 AdminLearningPaths.propTypes = {

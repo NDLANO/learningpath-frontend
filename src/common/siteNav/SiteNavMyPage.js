@@ -6,11 +6,11 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import polyglot from '../../i18n';
-import LabeledIcon from '../LabeledIcon';
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import polyglot from "../../i18n";
+import LabeledIcon from "../LabeledIcon";
 
 class SiteNavMyPage extends React.Component {
   constructor() {
@@ -30,12 +30,8 @@ class SiteNavMyPage extends React.Component {
 
     return (
       <li className="site-nav_item">
-        <Link
-          to="/minside"
-          data-cy="sitenav-my-page"
-          className="site-nav_link"
-          onClick={() => localCloseSidebars()}>
-          <LabeledIcon.Apps labelText={polyglot.t('siteNav.myPage')} />
+        <Link to="/minside" data-cy="sitenav-my-page" className="site-nav_link" onClick={() => localCloseSidebars()}>
+          <LabeledIcon.Apps labelText={polyglot.t("siteNav.myPage")} />
         </Link>
       </li>
     );

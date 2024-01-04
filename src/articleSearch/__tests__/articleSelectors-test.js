@@ -6,10 +6,7 @@
  *
  */
 
-import {
-  getArticleResultFromState,
-  getNumberOfArticlePages,
-} from '../articleSelectors';
+import { getArticleResultFromState, getNumberOfArticlePages } from "../articleSelectors";
 
 const state = {
   embedSearch: {
@@ -18,20 +15,20 @@ const state = {
         results: [
           {
             id: 1,
-            title: { title: 'Test', language: 'nb' },
-            introduction: { introduction: 'Test', language: 'nb' },
+            title: { title: "Test", language: "nb" },
+            introduction: { introduction: "Test", language: "nb" },
             disabled: false,
           },
           {
             id: 2,
-            title: { title: 'Test3', language: 'nb' },
-            introduction: { introduction: 'Test3', language: 'nb' },
+            title: { title: "Test3", language: "nb" },
+            introduction: { introduction: "Test3", language: "nb" },
             disabled: false,
           },
           {
             id: 3,
-            title: { title: 'Test2', language: 'nb' },
-            introduction: { introduction: 'Test2', language: 'nb' },
+            title: { title: "Test2", language: "nb" },
+            introduction: { introduction: "Test2", language: "nb" },
             disabled: false,
           },
         ],
@@ -42,10 +39,10 @@ const state = {
   },
 };
 
-test('selectors/getArticleResultFromState', () => {
+test("selectors/getArticleResultFromState", () => {
   expect(getArticleResultFromState(state)).toMatchSnapshot();
 });
 
-test('selectors/getNumberOfArticlePages', () => {
+test("selectors/getNumberOfArticlePages", () => {
   expect(getNumberOfArticlePages(state)).toEqual(1);
 });

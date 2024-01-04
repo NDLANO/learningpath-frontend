@@ -6,8 +6,8 @@
  *
  */
 
-import { handleActions } from 'redux-actions';
-import cloneDeep from 'lodash/cloneDeep';
+import { handleActions } from "redux-actions";
+import cloneDeep from "lodash/cloneDeep";
 
 const initialState = {
   results: [],
@@ -18,15 +18,13 @@ export default handleActions(
   {
     SET_LEARNING_PATH_SEARCH_RESULTS: {
       next: (state, action) => action.payload,
-      throw: state => state,
+      throw: (state) => state,
     },
     SET_LEARNING_PATH_BASED_ON: {
       next: (state, action) => {
         const nextState = cloneDeep(state);
         const { results } = nextState;
-        const index = nextState.results.findIndex(
-          path => path.id === action.payload.pathId,
-        );
+        const index = nextState.results.findIndex((path) => path.id === action.payload.pathId);
         const updatedResults = [
           ...results.slice(0, index),
           {
@@ -38,7 +36,7 @@ export default handleActions(
         nextState.results = updatedResults;
         return nextState;
       },
-      throw: state => state,
+      throw: (state) => state,
     },
   },
   initialState,

@@ -6,25 +6,21 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import EmbedSearchResultImage from './EmbedSearchResultImage';
-import Icon from '../common/Icon';
-import polyglot from '../i18n';
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import EmbedSearchResultImage from "./EmbedSearchResultImage";
+import Icon from "../common/Icon";
+import polyglot from "../i18n";
 
 const EmbedSearchResult = ({ item, onPreviewClick, addEmbedResult }) => {
   const rootClass = classNames({
-    'embed-search_result': true,
-    'embed-search_result--disabled': item.disable,
+    "embed-search_result": true,
+    "embed-search_result--disabled": item.disable,
   });
   return (
     <div className={rootClass}>
-      <EmbedSearchResultImage
-        thumbnail={item.thumbnail}
-        thumbnailAlt={item.thumbnailAlt}
-        title={item.title}
-      />
+      <EmbedSearchResultImage thumbnail={item.thumbnail} thumbnailAlt={item.thumbnailAlt} title={item.title} />
       <div className="embed-search_result-information">
         <h3 className="embed-search_result-title">{item.title}</h3>
         {item.showUrl && (
@@ -34,26 +30,26 @@ const EmbedSearchResult = ({ item, onPreviewClick, addEmbedResult }) => {
         )}
         <p>{item.introduction}</p>
         {item.disable && (
-          <span className="error_message error_message--red">
-            {polyglot.t('embedSearch.results.error')}
-          </span>
+          <span className="error_message error_message--red">{polyglot.t("embedSearch.results.error")}</span>
         )}
         <div>
           <button
             type="button"
-            onClick={evt => addEmbedResult(evt, item.link)}
+            onClick={(evt) => addEmbedResult(evt, item.link)}
             className="un-button google-custom-search_add-button"
-            disabled={item.disable}>
+            disabled={item.disable}
+          >
             <Icon.Add />
-            {polyglot.t('embedSearch.results.useInPath')}
+            {polyglot.t("embedSearch.results.useInPath")}
           </button>
           <button
             type="button"
-            onClick={evt => onPreviewClick(evt, item)}
+            onClick={(evt) => onPreviewClick(evt, item)}
             className="un-button embed-search_preview-button"
-            disabled={item.disable}>
+            disabled={item.disable}
+          >
             <Icon.RemoveRedEye />
-            {polyglot.t('embedSearch.results.preview')}
+            {polyglot.t("embedSearch.results.preview")}
           </button>
         </div>
       </div>

@@ -6,29 +6,27 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { SortableContainer } from 'react-sortable-hoc';
-import SortableItem from './SortableItem';
+import React from "react";
+import PropTypes from "prop-types";
+import { SortableContainer } from "react-sortable-hoc";
+import SortableItem from "./SortableItem";
 
-const SortableLearningStepList = SortableContainer(
-  ({ learningsteps, learningPathId, deleteStep }) => (
-    <div className="sortable">
-      <div className="sortable_list">
-        {learningsteps.map((step, i) => (
-          <SortableItem
-            key={step.id}
-            index={i}
-            placeholderClassName="sortable_placeholder"
-            step={step}
-            learningPathId={learningPathId}
-            deleteStep={deleteStep}
-          />
-        ))}
-      </div>
+const SortableLearningStepList = SortableContainer(({ learningsteps, learningPathId, deleteStep }) => (
+  <div className="sortable">
+    <div className="sortable_list">
+      {learningsteps.map((step, i) => (
+        <SortableItem
+          key={step.id}
+          index={i}
+          placeholderClassName="sortable_placeholder"
+          step={step}
+          learningPathId={learningPathId}
+          deleteStep={deleteStep}
+        />
+      ))}
     </div>
-  ),
-);
+  </div>
+));
 
 SortableLearningStepList.propTypes = {
   learningsteps: PropTypes.array,

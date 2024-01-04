@@ -6,10 +6,10 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { getLearningPath } from '../learningPathSelectors';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getLearningPath } from "../learningPathSelectors";
 
 const LearningPathSummary = ({ learningPath }) => {
   if (!learningPath) {
@@ -33,7 +33,7 @@ LearningPathSummary.propTypes = {
   learningPath: PropTypes.object,
 };
 
-const mapStateToProps = state =>
+const mapStateToProps = (state) =>
   Object.assign({}, state, {
     learningPath: getLearningPath(state),
   });

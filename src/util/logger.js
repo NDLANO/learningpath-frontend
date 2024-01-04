@@ -8,13 +8,13 @@
 
 // N.B! don't import this on the client!
 
-const bunyan = require('bunyan');
-require('source-map-support').install();
+const bunyan = require("bunyan");
+require("source-map-support").install();
 
 let log;
 
 if (!log) {
-  log = bunyan.createLogger({ name: 'learningpath-frontend' });
+  log = bunyan.createLogger({ name: "learningpath-frontend" });
 }
 
 log.logAndReturnValue = (level, msg, value) => {

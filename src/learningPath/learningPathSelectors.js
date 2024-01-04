@@ -6,26 +6,22 @@
  *
  */
 
-import { createSelector } from 'reselect';
-import { convertLearningPath } from './learningPathUtil';
-import { convertFieldWithFallback } from '../util/convertFieldWithFallback';
+import { createSelector } from "reselect";
+import { convertLearningPath } from "./learningPathUtil";
+import { convertFieldWithFallback } from "../util/convertFieldWithFallback";
 
-export const getLearningPathFromState = state => state.learningPath;
+export const getLearningPathFromState = (state) => state.learningPath;
 
-export const getLearningPath = createSelector(
-  [getLearningPathFromState],
-  learningPath => convertLearningPath(learningPath),
+export const getLearningPath = createSelector([getLearningPathFromState], (learningPath) =>
+  convertLearningPath(learningPath),
 );
 
-export const getLearningPathSteps = createSelector(
-  [getLearningPathFromState],
-  learningPath => {
-    if (learningPath.learningsteps) {
-      return learningPath.learningsteps.map(step => ({
-        ...step,
-        title: convertFieldWithFallback(step, 'title', ''),
-      }));
-    }
-    return [];
-  },
-);
+export const getLearningPathSteps = createSelector([getLearningPathFromState], (learningPath) => {
+  if (learningPath.learningsteps) {
+    return learningPath.learningsteps.map((step) => ({
+      ...step,
+      title: convertFieldWithFallback(step, "title", ""),
+    }));
+  }
+  return [];
+});

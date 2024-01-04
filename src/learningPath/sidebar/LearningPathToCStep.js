@@ -6,42 +6,34 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import classNames from 'classnames';
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import classNames from "classnames";
 
-import last from 'lodash/last';
-import LearningPathStepIcon from '../step/LearningPathStepIcon';
-import Icon from '../../common/Icon';
+import last from "lodash/last";
+import LearningPathStepIcon from "../step/LearningPathStepIcon";
+import Icon from "../../common/Icon";
 
-const LearningPathToCStep = props => {
+const LearningPathToCStep = (props) => {
   const { learningPath, activeStepId, localCloseSidebars, step, steps } = props;
   const base = `/learningpaths/${learningPath.id}`;
-  const itemClassName = stepId =>
+  const itemClassName = (stepId) =>
     classNames({
-      'step-nav_item': true,
-      'step-nav_item--active': activeStepId ? activeStepId === stepId : false,
-      'step-nav_item--bottom_border': step !== last(steps),
+      "step-nav_item": true,
+      "step-nav_item--active": activeStepId ? activeStepId === stepId : false,
+      "step-nav_item--bottom_border": step !== last(steps),
     });
-  const isActiveAndCanEdit =
-    activeStepId === step.id.toString() && learningPath.canEdit;
-  const linkUrl = isActiveAndCanEdit
-    ? `${base}/step/${step.id}/edit`
-    : `${base}/step/${step.id}`;
+  const isActiveAndCanEdit = activeStepId === step.id.toString() && learningPath.canEdit;
+  const linkUrl = isActiveAndCanEdit ? `${base}/step/${step.id}/edit` : `${base}/step/${step.id}`;
   return (
     <li className={itemClassName(`${step.id}`)}>
-      <Link
-        to={linkUrl}
-        className="step-nav_link"
-        onClick={() => localCloseSidebars()}>
-        {steps.length > 1 ? <div className="step-nav_line" /> : ''}
+      <Link to={linkUrl} className="step-nav_link" onClick={() => localCloseSidebars()}>
+        {steps.length > 1 ? <div className="step-nav_line" /> : ""}
         <LearningPathStepIcon learningPathStepType={step.type} isCircle />
         <div className="step-nav_title">
-          <div className={isActiveAndCanEdit ? 'step-nav_title_can_edit' : ''}>
-            {step.title}
-          </div>
-          {isActiveAndCanEdit ? <Icon.Create /> : ''}
+          <div className={isActiveAndCanEdit ? "step-nav_title_can_edit" : ""}>{step.title}</div>
+          {isActiveAndCanEdit ? <Icon.Create /> : ""}
         </div>
       </Link>
     </li>
@@ -57,7 +49,7 @@ LearningPathToCStep.propTypes = {
 };
 
 LearningPathToCStep.defaultProps = {
-  activeStepId: '',
+  activeStepId: "",
 };
 
 export default LearningPathToCStep;

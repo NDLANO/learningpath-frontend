@@ -6,24 +6,23 @@
  *
  */
 
-import polyglot from '../i18n';
+import polyglot from "../i18n";
 
-const isEmpty = value => {
+const isEmpty = (value) => {
   if (value && value.embedType) {
     // handle embed url with embed types
-    return value.url === undefined || value.url === null || value.url === '';
+    return value.url === undefined || value.url === null || value.url === "";
   }
   if (value && value.hasText) {
     // handle draf-js ContentState
     return !value.hasText();
   }
-  return value === undefined || value === null || value === '';
+  return value === undefined || value === null || value === "";
 };
-const join = rules => (value, data) =>
-  rules.map(rule => rule(value, data)).filter(error => !!error)[0];
+const join = (rules) => (value, data) => rules.map((rule) => rule(value, data)).filter((error) => !!error)[0];
 
-export function required(msgKey = 'validation.required') {
-  return value => {
+export function required(msgKey = "validation.required") {
+  return (value) => {
     if (isEmpty(value)) {
       return polyglot.t(msgKey);
     }
@@ -31,20 +30,10 @@ export function required(msgKey = 'validation.required') {
   };
 }
 
-export function licenseExistsIfDescriptionExists(
-  msgKey,
-  descriptionField,
-  licenseField,
-) {
+export function licenseExistsIfDescriptionExists(msgKey, descriptionField, licenseField) {
   return (value, data) => {
-    const license =
-      data[licenseField] && data[licenseField].license
-        ? data[licenseField].license
-        : '';
-    if (
-      isEmpty(data[descriptionField]) ||
-      (!isEmpty(data[descriptionField]) && !isEmpty(license))
-    ) {
+    const license = data[licenseField] && data[licenseField].license ? data[licenseField].license : "";
+    if (isEmpty(data[descriptionField]) || (!isEmpty(data[descriptionField]) && !isEmpty(license))) {
       return null;
     }
     return polyglot.t(msgKey);
@@ -53,15 +42,15 @@ export function licenseExistsIfDescriptionExists(
 
 export function oneOfIsRequired(msgKey, ...fields) {
   return (value, data) => {
-    if (fields.some(field => !isEmpty(data[field]))) {
+    if (fields.some((field) => !isEmpty(data[field]))) {
       return null;
     }
     return polyglot.t(msgKey);
   };
 }
 
-export function minLength(min, msgKey = 'validation.min') {
-  return value => {
+export function minLength(min, msgKey = "validation.min") {
+  return (value) => {
     if (!isEmpty(value) && value.length < min) {
       return polyglot.t(msgKey, { min });
     }
@@ -69,8 +58,8 @@ export function minLength(min, msgKey = 'validation.min') {
   };
 }
 
-export function maxLength(max, msgKey = 'validation.max') {
-  return value => {
+export function maxLength(max, msgKey = "validation.max") {
+  return (value) => {
     if (!isEmpty(value) && value.length > max) {
       return polyglot.t(msgKey, { max });
     }
@@ -78,8 +67,8 @@ export function maxLength(max, msgKey = 'validation.max') {
   };
 }
 
-export function integer(msgKey = 'validation.integer') {
-  return value => {
+export function integer(msgKey = "validation.integer") {
+  return (value) => {
     if (!Number.isInteger(Number(value))) {
       return polyglot.t(msgKey);
     }
@@ -90,7 +79,7 @@ export function integer(msgKey = 'validation.integer') {
 export function createValidator(rules) {
   return (data = {}) => {
     const errors = {};
-    Object.keys(rules).forEach(key => {
+    Object.keys(rules).forEach((key) => {
       const rule = join([].concat(rules[key])); // concat enables both functions and arrays of functions
       const error = rule(data[key], data);
       if (error) {

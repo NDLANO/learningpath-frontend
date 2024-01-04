@@ -6,30 +6,30 @@
  *
  */
 
-import '../style/index.css';
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Switch, Route, withRouter } from 'react-router-dom';
-import { css, Global } from '@emotion/core';
-import { getLocale } from '../locale/localeSelectors';
-import { getMessages } from '../messages/messagesSelectors';
-import Alerts from '../messages/Alerts';
-import ScrollToTop from './ScrollToTop';
-import Welcome from './Welcome';
-import PrivateRoute from './PrivateRoute';
-import AdminRoute from './AdminRoute';
-import NotFound from './NotFound';
-import Forbidden from './Forbidden';
-import MyPage from '../myPage/MyPage';
-import Admin from '../admin/Admin';
-import LTIEmbedded from '../ltiSearch/LTIEmbedded';
-import LoginProviders from '../session/LoginProviders';
-import LogoutSession from '../session/LogoutSession';
-import LearningPathContainer from '../learningPath/LearningPathContainer';
-import LoginFailure from '../session/LoginFailure';
-import SessionInitializer from '../session/SessionInitializer';
-import ErrorPage from '../errorPage/ErrorPage';
+import "../style/index.css";
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Switch, Route, withRouter } from "react-router-dom";
+import { css, Global } from "@emotion/core";
+import { getLocale } from "../locale/localeSelectors";
+import { getMessages } from "../messages/messagesSelectors";
+import Alerts from "../messages/Alerts";
+import ScrollToTop from "./ScrollToTop";
+import Welcome from "./Welcome";
+import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import NotFound from "./NotFound";
+import Forbidden from "./Forbidden";
+import MyPage from "../myPage/MyPage";
+import Admin from "../admin/Admin";
+import LTIEmbedded from "../ltiSearch/LTIEmbedded";
+import LoginProviders from "../session/LoginProviders";
+import LogoutSession from "../session/LogoutSession";
+import LearningPathContainer from "../learningPath/LearningPathContainer";
+import LoginFailure from "../session/LoginFailure";
+import SessionInitializer from "../session/SessionInitializer";
+import ErrorPage from "../errorPage/ErrorPage";
 
 export class App extends React.Component {
   constructor(props) {
@@ -69,10 +69,7 @@ export class App extends React.Component {
           <Route exact path="/login/failure" component={LoginFailure} />
           <Route path="/logout" component={LogoutSession} />
           <PrivateRoute path="/minside" component={MyPage} />
-          <PrivateRoute
-            path="/lti/:pathId/step/:stepId"
-            component={LTIEmbedded}
-          />
+          <PrivateRoute path="/lti/:pathId/step/:stepId" component={LTIEmbedded} />
           <PrivateRoute path="/lti/:pathId/step/new" component={LTIEmbedded} />
           <Route path="/learningpaths" component={LearningPathContainer} />
           <AdminRoute path="/admin" component={Admin} />
@@ -97,7 +94,7 @@ App.childContextTypes = {
   lang: PropTypes.string,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   locale: getLocale(state),
   messages: getMessages(state),
 });

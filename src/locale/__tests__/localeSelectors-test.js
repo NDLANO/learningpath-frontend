@@ -6,12 +6,12 @@
  *
  */
 
-import { getLocale } from '../localeSelectors';
+import { getLocale } from "../localeSelectors";
 
-test('localeSelectors', () => {
+test("localeSelectors", () => {
   const state = {
-    locale: 'nb',
+    locale: "nb",
   };
 
-  expect(getLocale(state)).toBe('nb');
+  expect(getLocale(state)).toBe("nb");
 });

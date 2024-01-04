@@ -6,10 +6,10 @@
  *
  */
 
-import defined from 'defined';
+import defined from "defined";
 
 export function ApiError(message, res = {}, json) {
-  this.name = 'ApiError';
+  this.name = "ApiError";
   this.message = message;
   this.url = res.url;
   this.status = res.status;
@@ -23,11 +23,7 @@ ApiError.prototype = Object.create(Error.prototype);
 ApiError.prototype.constructor = ApiError;
 
 export function createErrorPayload(res, message, json) {
-  return new ApiError(
-    `${res.status} ${message} ${json.code} ${json.description}`,
-    res,
-    json,
-  );
+  return new ApiError(`${res.status} ${message} ${json.code} ${json.description}`, res, json);
 }
 
 export function resolveJsonOrRejectWithError(res) {
@@ -37,9 +33,7 @@ export function resolveJsonOrRejectWithError(res) {
     }
     return res
       .json()
-      .then(json =>
-        createErrorPayload(res, defined(json.message, res.statusText), json),
-      )
+      .then((json) => createErrorPayload(res, defined(json.message, res.statusText), json))
       .then(reject);
   });
 }
@@ -55,9 +49,7 @@ export function resolveJsonIgnoreOembedFailureOrRejectWithError(res) {
     }
     return res
       .json()
-      .then(json =>
-        createErrorPayload(res, defined(json.message, res.statusText), json),
-      )
+      .then((json) => createErrorPayload(res, defined(json.message, res.statusText), json))
       .then(reject);
   });
 }

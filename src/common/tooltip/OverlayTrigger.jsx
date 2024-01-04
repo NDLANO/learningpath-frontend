@@ -6,12 +6,12 @@
  *
  */
 
-import React, { Component, cloneElement } from 'react';
-import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import createChainedFunction from 'react-overlays/lib/utils/createChainedFunction';
-import Overlay from './Overlay';
-import { PLACEMENTS } from './constants';
+import React, { Component, cloneElement } from "react";
+import PropTypes from "prop-types";
+import ReactDOM from "react-dom";
+import createChainedFunction from "react-overlays/lib/utils/createChainedFunction";
+import Overlay from "./Overlay";
+import { PLACEMENTS } from "./constants";
 
 class OverlayTrigger extends Component {
   constructor(args) {
@@ -24,7 +24,7 @@ class OverlayTrigger extends Component {
   }
 
   componentDidMount() {
-    this.mountNode = document.createElement('div');
+    this.mountNode = document.createElement("div");
     this.renderOverlay();
   }
 
@@ -66,11 +66,7 @@ class OverlayTrigger extends Component {
   }
 
   renderOverlay() {
-    ReactDOM.unstable_renderSubtreeIntoContainer(
-      this,
-      this.overlay,
-      this.mountNode,
-    );
+    ReactDOM.unstable_renderSubtreeIntoContainer(this, this.overlay, this.mountNode);
   }
 
   // TODO: Currently we ignore the trigger prop
@@ -85,17 +81,11 @@ class OverlayTrigger extends Component {
     this.overlay = this.getOverlay();
 
     const props = {
-      onMouseOver: createChainedFunction(
-        this.handleShow,
-        triggerProps.onMouseOver,
-      ),
-      onMouseOut: createChainedFunction(
-        this.handleHide,
-        triggerProps.onMouseOut,
-      ),
+      onMouseOver: createChainedFunction(this.handleShow, triggerProps.onMouseOver),
+      onMouseOut: createChainedFunction(this.handleHide, triggerProps.onMouseOut),
       onFocus: createChainedFunction(this.handleShow, triggerProps.onFocus),
       onBlur: createChainedFunction(this.handleHide, triggerProps.onBlur),
-      'aria-describedby': this.props.overlay.props.id,
+      "aria-describedby": this.props.overlay.props.id,
     };
 
     return cloneElement(trigger, props);
@@ -107,15 +97,15 @@ OverlayTrigger.propTypes = {
   overlay: PropTypes.node.isRequired,
   placement: PropTypes.oneOf(PLACEMENTS),
   trigger: PropTypes.oneOfType([
-    PropTypes.oneOf(['click', 'hover', 'focus']),
-    PropTypes.arrayOf(PropTypes.oneOf(['click', 'hover', 'focus'])),
+    PropTypes.oneOf(["click", "hover", "focus"]),
+    PropTypes.arrayOf(PropTypes.oneOf(["click", "hover", "focus"])),
   ]),
 };
 
 // hover only doesn't play well with touch and keyboard only users.
 // So always use hover and focus together!
 OverlayTrigger.defaultProps = {
-  trigger: ['hover', 'focus'],
+  trigger: ["hover", "focus"],
 };
 
 export default OverlayTrigger;

@@ -6,45 +6,30 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import PreviewImage from './PreviewImage';
-import { scaleImage } from '../util/imageScaler';
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import PreviewImage from "./PreviewImage";
+import { scaleImage } from "../util/imageScaler";
 
-export default function ImageSearch({
-  image,
-  onImageClick,
-  selectedImage,
-  onSaveImage,
-}) {
+export default function ImageSearch({ image, onImageClick, selectedImage, onSaveImage }) {
   const activeClassName = () =>
     classNames({
-      'image_list-item': true,
-      'image_list-item--active': selectedImage.id === image.id,
+      "image_list-item": true,
+      "image_list-item--active": selectedImage.id === image.id,
     });
-  const alttext = image.altText ? image.altText.alttext : '';
+  const alttext = image.altText ? image.altText.alttext : "";
   return (
     <div key={image.id} className={activeClassName()}>
       <div className="image_list-item-inner">
-        <button
-          type="button"
-          className="un-button"
-          onClick={evt => onImageClick(evt, image)}>
-          <img
-            role="presentation"
-            src={scaleImage(image.previewUrl)}
-            alt={alttext}
-          />
+        <button type="button" className="un-button" onClick={(evt) => onImageClick(evt, image)}>
+          <img role="presentation" src={scaleImage(image.previewUrl)} alt={alttext} />
         </button>
       </div>
       {selectedImage.id === image.id ? (
-        <PreviewImage
-          image={selectedImage}
-          onSaveImage={evt => onSaveImage(evt, selectedImage)}
-        />
+        <PreviewImage image={selectedImage} onSaveImage={(evt) => onSaveImage(evt, selectedImage)} />
       ) : (
-        ''
+        ""
       )}
     </div>
   );

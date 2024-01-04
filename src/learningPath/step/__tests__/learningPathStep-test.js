@@ -6,48 +6,37 @@
  *
  */
 
-import reducer from '../learningPathStepReducer';
+import reducer from "../learningPathStepReducer";
 
-const payload = { id: '123' };
+const payload = { id: "123" };
 
-test('reducers/learningPathStep', () => {
-  expect(JSON.stringify(reducer(undefined, {}))).toBe('{}');
+test("reducers/learningPathStep", () => {
+  expect(JSON.stringify(reducer(undefined, {}))).toBe("{}");
 
-  expect(
-    reducer(undefined, { type: 'SET_LEARNING_PATH_STEP', payload }),
-  ).toEqual({ id: '123' });
+  expect(reducer(undefined, { type: "SET_LEARNING_PATH_STEP", payload })).toEqual({ id: "123" });
 
-  expect(
-    reducer({ id: 'abc' }, { type: 'SET_LEARNING_PATH_STEP', payload }),
-  ).toEqual({ id: '123' });
+  expect(reducer({ id: "abc" }, { type: "SET_LEARNING_PATH_STEP", payload })).toEqual({ id: "123" });
 
-  expect(
-    reducer({ id: 'abc' }, { type: 'DO_NOT_SET_LEARNING_PATH_STEP', payload }),
-  ).toEqual({ id: 'abc' });
+  expect(reducer({ id: "abc" }, { type: "DO_NOT_SET_LEARNING_PATH_STEP", payload })).toEqual({ id: "abc" });
 
   expect(
     reducer(
-      { id: 'abc' },
+      { id: "abc" },
       {
-        type: 'SET_LEARNING_PATH_STEP',
-        payload: new Error('fail'),
+        type: "SET_LEARNING_PATH_STEP",
+        payload: new Error("fail"),
         error: true,
       },
     ),
-  ).toEqual({ id: 'abc' });
+  ).toEqual({ id: "abc" });
 
-  expect(reducer(undefined, { type: 'SET_OEMBED_OBJECT', payload })).toEqual({
-    oembed: { id: '123' },
+  expect(reducer(undefined, { type: "SET_OEMBED_OBJECT", payload })).toEqual({
+    oembed: { id: "123" },
   });
 
-  expect(
-    reducer({ id: 'abc' }, { type: 'SET_OEMBED_OBJECT', payload }),
-  ).toEqual({ id: 'abc', oembed: { id: '123' } });
+  expect(reducer({ id: "abc" }, { type: "SET_OEMBED_OBJECT", payload })).toEqual({ id: "abc", oembed: { id: "123" } });
 
-  expect(
-    reducer(
-      { id: 'abc' },
-      { type: 'SET_OEMBED_OBJECT', payload: new Error('fail'), error: true },
-    ),
-  ).toEqual({ id: 'abc' });
+  expect(reducer({ id: "abc" }, { type: "SET_OEMBED_OBJECT", payload: new Error("fail"), error: true })).toEqual({
+    id: "abc",
+  });
 });

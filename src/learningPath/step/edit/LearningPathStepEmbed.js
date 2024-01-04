@@ -6,13 +6,13 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import ArticleSearch from '../../../articleSearch/ArticleSearch';
-import ExternalEmbedSearch from '../../../externalEmbedSearch/ExternalEmbedSearch';
-import * as actions from '../../../embedSearch/embedSearchActions';
-import polyglot from '../../../i18n';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import ArticleSearch from "../../../articleSearch/ArticleSearch";
+import ExternalEmbedSearch from "../../../externalEmbedSearch/ExternalEmbedSearch";
+import * as actions from "../../../embedSearch/embedSearchActions";
+import polyglot from "../../../i18n";
 
 class LearningPathStepEmbed extends React.Component {
   constructor(props) {
@@ -23,9 +23,7 @@ class LearningPathStepEmbed extends React.Component {
     };
     this.handleExternalDisplayOpen = this.handleExternalDisplayOpen.bind(this);
 
-    this.handleExternalDisplayClose = this.handleExternalDisplayClose.bind(
-      this,
-    );
+    this.handleExternalDisplayClose = this.handleExternalDisplayClose.bind(this);
     this.toggleNdlaDisplay = this.toggleNdlaDisplay.bind(this);
   }
 
@@ -35,13 +33,13 @@ class LearningPathStepEmbed extends React.Component {
   }
 
   handleExternalDisplayClose() {
-    this.props.removeOembed({ type: 'external' });
+    this.props.removeOembed({ type: "external" });
     this.setState({ external: false });
   }
 
   toggleNdlaDisplay(evt) {
     evt.preventDefault();
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       ndla: !prevState.ndla,
     }));
   }
@@ -51,17 +49,11 @@ class LearningPathStepEmbed extends React.Component {
     return (
       <div className="learning-step-embed_group">
         <div className="button-group button-group--square button-group--block">
-          <button
-            type="button"
-            className="button--primary-outline"
-            onClick={this.toggleNdlaDisplay}>
-            {polyglot.t('embedSearch.ndlaButton')}
+          <button type="button" className="button--primary-outline" onClick={this.toggleNdlaDisplay}>
+            {polyglot.t("embedSearch.ndlaButton")}
           </button>
-          <button
-            type="button"
-            className="button--primary-outline"
-            onClick={this.handleExternalDisplayOpen}>
-            {polyglot.t('embedSearch.externalButton')}
+          <button type="button" className="button--primary-outline" onClick={this.handleExternalDisplayOpen}>
+            {polyglot.t("embedSearch.externalButton")}
           </button>
         </div>
         <ExternalEmbedSearch
@@ -91,7 +83,4 @@ LearningPathStepEmbed.propTypes = {
   removeOembed: PropTypes.func.isRequired,
 };
 
-export default connect(
-  state => state,
-  mapDispatchToProps,
-)(LearningPathStepEmbed);
+export default connect((state) => state, mapDispatchToProps)(LearningPathStepEmbed);

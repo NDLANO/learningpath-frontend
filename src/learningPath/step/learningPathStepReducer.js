@@ -6,8 +6,8 @@
  *
  */
 
-import { handleActions } from 'redux-actions';
-import cloneDeep from 'lodash/cloneDeep';
+import { handleActions } from "redux-actions";
+import cloneDeep from "lodash/cloneDeep";
 
 const intitalState = {};
 export default handleActions(
@@ -44,8 +44,8 @@ export default handleActions(
           title: {},
           description: {},
           embedUrl: {},
-          type: 'TEXT',
-          license: '',
+          type: "TEXT",
+          license: "",
         };
       },
       throw(state) {

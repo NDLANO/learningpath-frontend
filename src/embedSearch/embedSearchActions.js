@@ -6,16 +6,16 @@
  *
  */
 
-import { createAction } from 'redux-actions';
-import { applicationError } from '../messages/messagesActions';
-import { fetchGoogleContent } from '../sources/embedSearch';
-import { fetchOembedUrl } from '../sources/learningpaths';
-import { getNumberOfPages } from './embedSearchSelectors';
+import { createAction } from "redux-actions";
+import { applicationError } from "../messages/messagesActions";
+import { fetchGoogleContent } from "../sources/embedSearch";
+import { fetchOembedUrl } from "../sources/learningpaths";
+import { getNumberOfPages } from "./embedSearchSelectors";
 
-export const setEmbedPreview = createAction('SET_EMBED_PREVIEW');
-export const setEmbedResults = createAction('SET_EMBED_RESULTS');
-export const removeEmbedPreview = createAction('REMOVE_EMBED_PREVIEW');
-export const changeEmbedSearchQuery = createAction('CHANGE_EMBED_SEARCH_QUERY');
+export const setEmbedPreview = createAction("SET_EMBED_PREVIEW");
+export const setEmbedResults = createAction("SET_EMBED_RESULTS");
+export const removeEmbedPreview = createAction("REMOVE_EMBED_PREVIEW");
+export const changeEmbedSearchQuery = createAction("CHANGE_EMBED_SEARCH_QUERY");
 
 function fetchEmbedSearch(query, type) {
   return async (dispatch, getState) => {
@@ -33,17 +33,17 @@ function fetchEmbedSearch(query, type) {
 }
 
 export function fetchExternalEmbedSearch(query) {
-  return fetchEmbedSearch(query, 'external');
+  return fetchEmbedSearch(query, "external");
 }
 
 export function fetchNdlaEmbedSearch(query) {
-  return fetchEmbedSearch(query, 'ndla');
+  return fetchEmbedSearch(query, "ndla");
 }
 
 function fetchOembed(url, lang, type) {
-  return dispatch =>
+  return (dispatch) =>
     fetchOembedUrl({ url })
-      .then(oembed => {
+      .then((oembed) => {
         dispatch(
           setEmbedPreview({
             type,
@@ -51,18 +51,16 @@ function fetchOembed(url, lang, type) {
           }),
         );
       })
-      .catch(err => {
-        dispatch(
-          setEmbedPreview({ type, oembedContent: { error: true, url } }),
-        );
+      .catch((err) => {
+        dispatch(setEmbedPreview({ type, oembedContent: { error: true, url } }));
         dispatch(applicationError(err));
       });
 }
 
 export function fetchExternalOembed(url, lang) {
-  return fetchOembed(url, lang, 'external');
+  return fetchOembed(url, lang, "external");
 }
 
 export function fetchNdlaOembed(url, lang) {
-  return fetchOembed(url, lang, 'ndla');
+  return fetchOembed(url, lang, "ndla");
 }

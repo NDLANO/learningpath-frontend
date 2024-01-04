@@ -6,20 +6,20 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import BEMHelper from 'react-bem-helper';
-import polyglot from '../../i18n';
-import formatDate from '../../util/formatDate';
-import formatDuration from '../../util/formatDuration';
-import Icon from '../../common/Icon';
-import TileUserInformation from './TileUserInformation';
-import ActionToolTip from '../../myPage/ActionToolTip';
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import BEMHelper from "react-bem-helper";
+import polyglot from "../../i18n";
+import formatDate from "../../util/formatDate";
+import formatDuration from "../../util/formatDuration";
+import Icon from "../../common/Icon";
+import TileUserInformation from "./TileUserInformation";
+import ActionToolTip from "../../myPage/ActionToolTip";
 
 const classes = new BEMHelper({
-  name: 'tile',
-  prefix: 'c-',
+  name: "tile",
+  prefix: "c-",
 });
 
 const LearningPathTile = ({ learningPath, dropdown }, { lang }) => {
@@ -27,37 +27,29 @@ const LearningPathTile = ({ learningPath, dropdown }, { lang }) => {
   const lastUpdated = formatDate(learningPath.lastUpdated, lang);
   return (
     <div {...classes()}>
-      <div {...classes('header')}>
-        <div {...classes('date')}>{lastUpdated}</div>
-        <div {...classes('context-menu')}>{dropdown}</div>
+      <div {...classes("header")}>
+        <div {...classes("date")}>{lastUpdated}</div>
+        <div {...classes("context-menu")}>{dropdown}</div>
       </div>
-      <Link
-        {...classes('body')}
-        to={`/learningpaths/${learningPath.id}/first-step`}>
-        <h3 {...classes('title')}>{learningPath.title}</h3>
+      <Link {...classes("body")} to={`/learningpaths/${learningPath.id}/first-step`}>
+        <h3 {...classes("title")}>{learningPath.title}</h3>
         <p>{learningPath.description}</p>
       </Link>
-      <div {...classes('footer')}>
-        <div {...classes('property')}>
-          <div {...classes('propterty-icon')}>
+      <div {...classes("footer")}>
+        <div {...classes("property")}>
+          <div {...classes("propterty-icon")}>
             <Icon.Duration />
           </div>
-          <p {...classes('property-description')}>
-            {polyglot.t('tilePage.path.duration')}
-          </p>
+          <p {...classes("property-description")}>{polyglot.t("tilePage.path.duration")}</p>
           <p>{duration}</p>
         </div>
         <ActionToolTip status={learningPath.status}>
-          <div {...classes('property')}>
-            <div {...classes('propterty-icon')}>
+          <div {...classes("property")}>
+            <div {...classes("propterty-icon")}>
               <Icon.Visibility />
             </div>
-            <p {...classes('property-description')}>
-              {polyglot.t('tilePage.path.status')}
-            </p>
-            <p>
-              {polyglot.t(`tilePage.path.statusValue.${learningPath.status}`)}
-            </p>
+            <p {...classes("property-description")}>{polyglot.t("tilePage.path.status")}</p>
+            <p>{polyglot.t(`tilePage.path.statusValue.${learningPath.status}`)}</p>
           </div>
         </ActionToolTip>
         <TileUserInformation owner={learningPath.owner} />

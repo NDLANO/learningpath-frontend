@@ -6,18 +6,18 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import ExternalEmbedSearchFilter from './ExternalEmbedSearchFilter';
-import ExternalEmbedSearchContainer from './ExternalEmbedSearchContainer';
-import Lightbox from '../common/Lightbox';
-import * as actions from '../embedSearch/embedSearchActions';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import ExternalEmbedSearchFilter from "./ExternalEmbedSearchFilter";
+import ExternalEmbedSearchContainer from "./ExternalEmbedSearchContainer";
+import Lightbox from "../common/Lightbox";
+import * as actions from "../embedSearch/embedSearchActions";
 import {
   getEmbedResultFromState,
   getEmbedQueryFromState,
   getOembedContentFromState,
-} from '../embedSearch/embedSearchSelectors';
+} from "../embedSearch/embedSearchSelectors";
 
 class ExternalEmbedSearch extends React.Component {
   constructor(props) {
@@ -32,16 +32,13 @@ class ExternalEmbedSearch extends React.Component {
   }
 
   componentDidMount() {
-    if (
-      this.state.filter.type === 'oembed' ||
-      this.state.filter.type === 'iframe'
-    ) {
+    if (this.state.filter.type === "oembed" || this.state.filter.type === "iframe") {
       this.props.localFetchEmbedSearch(
         Object.assign({}, this.props.query, {
           page: 1,
           start: 1,
           filter: this.state.filter,
-          textQuery: '',
+          textQuery: "",
         }),
       );
     }
@@ -49,14 +46,14 @@ class ExternalEmbedSearch extends React.Component {
 
   onFilterChange(evt, filter) {
     evt.preventDefault();
-    this.setState({ filter, textQuery: '' });
-    if (filter.type === 'oembed' || filter.type === 'iframe') {
+    this.setState({ filter, textQuery: "" });
+    if (filter.type === "oembed" || filter.type === "iframe") {
       this.props.localFetchEmbedSearch(
         Object.assign({}, this.props.query, {
           page: 1,
           start: 1,
           filter,
-          textQuery: '',
+          textQuery: "",
         }),
       );
     }
@@ -106,18 +103,15 @@ ExternalEmbedSearch.propTypes = {
   handleDisplayClose: PropTypes.func.isRequired,
   display: PropTypes.bool.isRequired,
 };
-const mapStateToProps = state =>
+const mapStateToProps = (state) =>
   Object.assign({}, state, {
-    result: getEmbedResultFromState(state, 'external'),
-    query: getEmbedQueryFromState(state, 'external'),
-    oembedPreview: getOembedContentFromState(state, 'external'),
+    result: getEmbedResultFromState(state, "external"),
+    query: getEmbedQueryFromState(state, "external"),
+    oembedPreview: getOembedContentFromState(state, "external"),
   });
 const mapDispatchToProps = {
   localFetchEmbedSearch: actions.fetchExternalEmbedSearch,
   removeOembed: actions.removeEmbedPreview,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ExternalEmbedSearch);
+export default connect(mapStateToProps, mapDispatchToProps)(ExternalEmbedSearch);

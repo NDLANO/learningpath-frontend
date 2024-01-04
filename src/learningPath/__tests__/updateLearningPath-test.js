@@ -6,23 +6,23 @@
  *
  */
 
-import configureStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
-import nock from 'nock';
-import { routerActions } from 'react-router-redux';
-import payload403invalid from '../../actions/__tests__/payload403invalid';
-import { testError } from '../../common/__tests__/testError';
-import { applicationError, addMessage } from '../../messages/messagesActions';
-import { updateLearningPath, setLearningPath } from '../learningPathActions';
+import configureStore from "redux-mock-store";
+import thunk from "redux-thunk";
+import nock from "nock";
+import { routerActions } from "react-router-redux";
+import payload403invalid from "../../actions/__tests__/payload403invalid";
+import { testError } from "../../common/__tests__/testError";
+import { applicationError, addMessage } from "../../messages/messagesActions";
+import { updateLearningPath, setLearningPath } from "../learningPathActions";
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-const accessToken = '12345678';
+const accessToken = "12345678";
 const pathId = 123;
 
-test('actions/updateLearningPath', done => {
-  const patchPathApi = nock('http://ndla-api', {
+test("actions/updateLearningPath", (done) => {
+  const patchPathApi = nock("http://ndla-api", {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
     .patch(`/learningpath-api/v2/learningpaths/${pathId}`, {
@@ -42,7 +42,7 @@ test('actions/updateLearningPath', done => {
     )
     .then(() => {
       expect(store.getActions()).toEqual([
-        addMessage({ message: 'Lagret OK' }),
+        addMessage({ message: "Lagret OK" }),
         setLearningPath({
           id: pathId,
           isResponse: true,
@@ -55,8 +55,8 @@ test('actions/updateLearningPath', done => {
     .catch(testError);
 });
 
-test('actions/updateLearningPath with redirect', done => {
-  const patchPathApi = nock('http://ndla-api', {
+test("actions/updateLearningPath with redirect", (done) => {
+  const patchPathApi = nock("http://ndla-api", {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
     .patch(`/learningpath-api/v2/learningpaths/${pathId}`, { id: pathId })
@@ -65,50 +65,44 @@ test('actions/updateLearningPath with redirect', done => {
   const store = mockStore({ accessToken });
 
   store
-    .dispatch(updateLearningPath(pathId, { id: pathId }, '/goto/dev/null'))
+    .dispatch(updateLearningPath(pathId, { id: pathId }, "/goto/dev/null"))
     .then(() => {
       const actual = store.getActions();
 
       expect(actual.length).toBe(3);
-      expect(actual[2]).toEqual(
-        routerActions.push({ pathname: '/goto/dev/null' }),
-      );
+      expect(actual[2]).toEqual(routerActions.push({ pathname: "/goto/dev/null" }));
       expect(() => patchPathApi.done()).not.toThrow();
       done();
     })
     .catch(testError);
 });
 
-test('actions/updateLearningPath access denied', done => {
-  const apiMock = nock('http://ndla-api:80', {
+test("actions/updateLearningPath access denied", (done) => {
+  const apiMock = nock("http://ndla-api:80", {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
     .patch(`/learningpath-api/v2/learningpaths/${pathId}`, {
       id: pathId,
-      foo: 'bar',
+      foo: "bar",
     })
-    .reply(403, { message: 'Invalid' });
+    .reply(403, { message: "Invalid" });
 
   const store = mockStore({ accessToken });
   store
-    .dispatch(updateLearningPath(pathId, { id: pathId, foo: 'bar' }))
+    .dispatch(updateLearningPath(pathId, { id: pathId, foo: "bar" }))
     .then(() => {
-      testError('Should have failed');
+      testError("Should have failed");
     })
     .catch(() => {
       expect(store.getActions()).toEqual([
-        applicationError(
-          payload403invalid(
-            `http://ndla-api/learningpath-api/v2/learningpaths/${pathId}`,
-          ),
-        ),
+        applicationError(payload403invalid(`http://ndla-api/learningpath-api/v2/learningpaths/${pathId}`)),
         {
           payload: {
-            message: 'Du har ikke tilgang til dette akkurat nå',
-            severity: 'danger',
+            message: "Du har ikke tilgang til dette akkurat nå",
+            severity: "danger",
             timeToLive: 10000,
           },
-          type: 'ADD_MESSAGE',
+          type: "ADD_MESSAGE",
         },
       ]);
       expect(() => apiMock.done()).not.toThrow();

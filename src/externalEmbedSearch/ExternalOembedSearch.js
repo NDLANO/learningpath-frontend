@@ -6,22 +6,22 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import EmbedSearchForm from '../embedSearch/EmbedSearchForm';
-import * as actions from '../embedSearch/embedSearchActions';
-import ExternalOembedPreview from './ExternalOembedPreview';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import EmbedSearchForm from "../embedSearch/EmbedSearchForm";
+import * as actions from "../embedSearch/embedSearchActions";
+import ExternalOembedPreview from "./ExternalOembedPreview";
 import {
   getEmbedResultFromState,
   getEmbedQueryFromState,
   getOembedContentFromState,
-} from '../embedSearch/embedSearchSelectors';
-import polyglot from '../i18n';
-import EmbedSearchResult from '../embedSearch/EmbedSearchResult';
-import EmbedSearchPager from '../embedSearch/EmbedSearchPager';
+} from "../embedSearch/embedSearchSelectors";
+import polyglot from "../i18n";
+import EmbedSearchResult from "../embedSearch/EmbedSearchResult";
+import EmbedSearchPager from "../embedSearch/EmbedSearchPager";
 
-const searchType = 'external';
+const searchType = "external";
 
 class ExternalOembedSearch extends React.Component {
   constructor(props) {
@@ -40,7 +40,7 @@ class ExternalOembedSearch extends React.Component {
 
   onPreviewClose(evt) {
     evt.preventDefault();
-    this.props.removeOembed({ type: 'external' });
+    this.props.removeOembed({ type: "external" });
     this.setState({ oembedDisplay: false });
   }
 
@@ -51,15 +51,8 @@ class ExternalOembedSearch extends React.Component {
   }
 
   render() {
-    const {
-      results,
-      localFetchEmbedSearch,
-      oembedPreview,
-      query,
-      addEmbedResult,
-      handleTextQueryChange,
-      textQuery,
-    } = this.props;
+    const { results, localFetchEmbedSearch, oembedPreview, query, addEmbedResult, handleTextQueryChange, textQuery } =
+      this.props;
     const oembed = oembedPreview ? (
       <ExternalOembedPreview
         oembedPreview={oembedPreview}
@@ -67,12 +60,12 @@ class ExternalOembedSearch extends React.Component {
         onPreviewboxClose={this.onPreviewClose}
       />
     ) : (
-      ''
+      ""
     );
     const emptyResult = results.length === 0;
     return (
       <div className="embed-search_container embed-search_container--active">
-        <h4>{polyglot.t('embedSearch.form.externalTitle')}</h4>
+        <h4>{polyglot.t("embedSearch.form.externalTitle")}</h4>
         <EmbedSearchForm
           query={query}
           handleTextQueryChange={handleTextQueryChange}
@@ -83,18 +76,14 @@ class ExternalOembedSearch extends React.Component {
 
         <div className="embed-search_results">
           {!emptyResult ? (
-            results.map(item => (
+            results.map((item) => (
               <div key={item.id}>
-                <EmbedSearchResult
-                  item={item}
-                  onPreviewClick={this.previewOembed}
-                  addEmbedResult={addEmbedResult}
-                />
-                {oembedPreview && oembedPreview.url === item.link ? oembed : ''}
+                <EmbedSearchResult item={item} onPreviewClick={this.previewOembed} addEmbedResult={addEmbedResult} />
+                {oembedPreview && oembedPreview.url === item.link ? oembed : ""}
               </div>
             ))
           ) : (
-            <p>{polyglot.t('embedSearch.results.noResults')}</p>
+            <p>{polyglot.t("embedSearch.results.noResults")}</p>
           )}
           <EmbedSearchPager query={query} pagerAction={localFetchEmbedSearch} />
         </div>
@@ -127,14 +116,11 @@ const mapDispatchToProps = {
   localChangeEmbedSearchQuery: actions.changeEmbedSearchQuery,
 };
 
-const mapStateToProps = state =>
+const mapStateToProps = (state) =>
   Object.assign({}, state, {
     results: getEmbedResultFromState(state, searchType),
     query: getEmbedQueryFromState(state, searchType),
     oembedPreview: getOembedContentFromState(state, searchType),
   });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ExternalOembedSearch);
+export default connect(mapStateToProps, mapDispatchToProps)(ExternalOembedSearch);

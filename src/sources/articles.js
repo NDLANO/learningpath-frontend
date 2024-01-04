@@ -6,14 +6,14 @@
  *
  */
 
-import queryString from 'query-string';
-import cloneDeep from 'lodash/cloneDeep';
-import fetch from './fetch';
-import { fetchAuth } from './fetchAuth';
-import { resolveJsonOrRejectWithError, apiResourceUrl } from './helpers';
+import queryString from "query-string";
+import cloneDeep from "lodash/cloneDeep";
+import fetch from "./fetch";
+import { fetchAuth } from "./fetchAuth";
+import { resolveJsonOrRejectWithError, apiResourceUrl } from "./helpers";
 
-const articleBaseUrl = isNdla => {
-  const baseUrl = apiResourceUrl('/search-api/v1/search');
+const articleBaseUrl = (isNdla) => {
+  const baseUrl = apiResourceUrl("/search-api/v1/search");
   return isNdla ? `${baseUrl}/editorial/` : baseUrl;
 };
 
@@ -23,14 +23,14 @@ const fetchArticles = (query, locale, isNdla) => {
   if (query) {
     const q = cloneDeep(query);
     if (q.pageSize !== undefined) {
-      q['page-size'] = q.pageSize;
+      q["page-size"] = q.pageSize;
       delete q.pageSize;
     }
-    if (q.query === '') {
+    if (q.query === "") {
       delete q.query;
     }
-    q.language = locale || 'nb';
-    q['context-types'] = 'topic-article,standard';
+    q.language = locale || "nb";
+    q["context-types"] = "topic-article,standard";
 
     url += `?${queryString.stringify(q)}`;
   }

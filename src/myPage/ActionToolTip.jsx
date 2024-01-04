@@ -6,17 +6,15 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import Tooltip from '../common/tooltip/Tooltip';
-import OverlayTrigger from '../common/tooltip/OverlayTrigger';
-import polyglot from '../i18n';
+import React from "react";
+import PropTypes from "prop-types";
+import Tooltip from "../common/tooltip/Tooltip";
+import OverlayTrigger from "../common/tooltip/OverlayTrigger";
+import polyglot from "../i18n";
 
 const ActionToolTip = ({ status, children }) => {
   const tooltip = (
-    <Tooltip id="showLicenseInfoTooltip">
-      {polyglot.t(`updateLearningPathStatus.consequence.${status}`)}
-    </Tooltip>
+    <Tooltip id="showLicenseInfoTooltip">{polyglot.t(`updateLearningPathStatus.consequence.${status}`)}</Tooltip>
   );
   return (
     <OverlayTrigger placement="right" overlay={tooltip}>

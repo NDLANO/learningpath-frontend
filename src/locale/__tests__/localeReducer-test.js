@@ -6,10 +6,10 @@
  *
  */
 
-import reducer from '../localeReducer';
+import reducer from "../localeReducer";
 
-test('reducers/locale', () => {
-  expect(reducer(undefined, {})).toBe('nb');
+test("reducers/locale", () => {
+  expect(reducer(undefined, {})).toBe("nb");
 
-  expect(reducer(undefined, { type: 'SET_LOCALE', payload: 'en' })).toBe('en');
+  expect(reducer(undefined, { type: "SET_LOCALE", payload: "en" })).toBe("en");
 });

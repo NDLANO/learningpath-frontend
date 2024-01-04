@@ -6,35 +6,29 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import BEMHelper from 'react-bem-helper';
-import Lightbox from '../common/Lightbox';
-import polyglot from '../i18n';
+import React from "react";
+import PropTypes from "prop-types";
+import BEMHelper from "react-bem-helper";
+import Lightbox from "../common/Lightbox";
+import polyglot from "../i18n";
 
 const classes = new BEMHelper({
-  name: 'admin',
-  prefix: 'c-',
+  name: "admin",
+  prefix: "c-",
 });
 
-const AdminRejectedMessageForm = ({
-  show,
-  onClose,
-  onChange,
-  onSubmit,
-  message,
-}) => (
+const AdminRejectedMessageForm = ({ show, onClose, onChange, onSubmit, message }) => (
   <Lightbox display={show} onClose={onClose}>
-    <h3>{polyglot.t('adminPage.rejectedPathMessage.message')}</h3>
-    <form onSubmit={onSubmit} {...classes('message-form')}>
+    <h3>{polyglot.t("adminPage.rejectedPathMessage.message")}</h3>
+    <form onSubmit={onSubmit} {...classes("message-form")}>
       <textarea
-        placeholder={polyglot.t('adminPage.rejectedPathMessage.placeholder')}
+        placeholder={polyglot.t("adminPage.rejectedPathMessage.placeholder")}
         value={message}
         rows="10"
         onChange={onChange}
       />
       <input
-        value={polyglot.t('adminPage.rejectedPathMessage.button')}
+        value={polyglot.t("adminPage.rejectedPathMessage.button")}
         className="button button--primary button--block"
         type="submit"
       />

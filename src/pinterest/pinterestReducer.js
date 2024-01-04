@@ -6,8 +6,8 @@
  *
  */
 
-import { handleActions } from 'redux-actions';
-import cloneDeep from 'lodash/cloneDeep';
+import { handleActions } from "redux-actions";
+import cloneDeep from "lodash/cloneDeep";
 
 const initalState = { pins: [], fetchingPins: false };
 
@@ -19,7 +19,7 @@ export default handleActions(
         nextState.pins = action.payload;
         return nextState;
       },
-      throw: state => state,
+      throw: (state) => state,
     },
     SET_FETCHING_PINS: {
       next(state, action) {
@@ -27,7 +27,7 @@ export default handleActions(
         nextState.fetchingPins = action.payload;
         return nextState;
       },
-      throw: state => state,
+      throw: (state) => state,
     },
     REMOVE_PINS: () => initalState,
   },

@@ -6,13 +6,13 @@
  *
  */
 
-import nb from './phrases/phrases-nb';
-import nn from './phrases/phrases-nn';
-import en from './phrases/phrases-en';
+import nb from "./phrases/phrases-nb";
+import nn from "./phrases/phrases-nn";
+import en from "./phrases/phrases-en";
 
-export const NB = { name: 'Bokmål', abbreviation: 'nb', phrases: nb };
-export const NN = { name: 'Nynorsk', abbreviation: 'nn', phrases: nn };
-export const EN = { name: 'English', abbreviation: 'en', phrases: en };
+export const NB = { name: "Bokmål", abbreviation: "nb", phrases: nb };
+export const NN = { name: "Nynorsk", abbreviation: "nn", phrases: nn };
+export const EN = { name: "English", abbreviation: "en", phrases: en };
 
 export const availableLocales = [NB, NN, EN];
 export const preferdLocales = [NB, NN, EN];

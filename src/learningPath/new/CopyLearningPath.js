@@ -6,26 +6,20 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import polyglot from '../../i18n';
+import React from "react";
+import PropTypes from "prop-types";
+import polyglot from "../../i18n";
 
 export default function CopyLearningPath({ onClose, onCopy }) {
   return (
     <div className="copy_learning-path">
-      <h2>{polyglot.t('copyLearningPath.copyTitle')}</h2>
-      <p>{polyglot.t('copyLearningPath.copyText')}</p>
-      <button
-        type="button"
-        className="button button-copy_abort"
-        onClick={onClose}>
-        {polyglot.t('copyLearningPath.abortCopy')}
+      <h2>{polyglot.t("copyLearningPath.copyTitle")}</h2>
+      <p>{polyglot.t("copyLearningPath.copyText")}</p>
+      <button type="button" className="button button-copy_abort" onClick={onClose}>
+        {polyglot.t("copyLearningPath.abortCopy")}
       </button>
-      <button
-        type="button"
-        className="button button-copy_save"
-        onClick={onCopy}>
-        {polyglot.t('copyLearningPath.createCopy')}
+      <button type="button" className="button button-copy_save" onClick={onCopy}>
+        {polyglot.t("copyLearningPath.createCopy")}
       </button>
     </div>
   );

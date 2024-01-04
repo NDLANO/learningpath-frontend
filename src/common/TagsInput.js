@@ -6,11 +6,11 @@
  *
  */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Multiselect from 'react-widgets/lib/Multiselect';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import Multiselect from "react-widgets/lib/Multiselect";
 
-import polyglot from '../i18n';
+import polyglot from "../i18n";
 
 class TagsInput extends Component {
   constructor() {
@@ -22,30 +22,30 @@ class TagsInput extends Component {
     const { tagOptions, input } = this.props;
 
     const messages = {
-      createOption: props => (
+      createOption: (props) => (
         <span>
-          <b>{`"${props.searchTerm}"`}</b> {polyglot.t('tagInput.createOption')}
+          <b>{`"${props.searchTerm}"`}</b> {polyglot.t("tagInput.createOption")}
         </span>
       ),
-      emptyFilter: polyglot.t('tagInput.emptyFilter'),
-      emptyList: polyglot.t('tagInput.emptyList'),
+      emptyFilter: polyglot.t("tagInput.emptyFilter"),
+      emptyList: polyglot.t("tagInput.emptyList"),
     };
 
-    if (typeof value === 'string') {
+    if (typeof value === "string") {
       // Handle redux form values witch are initialized as strings
       return null;
     }
 
     const { open } = this.state;
 
-    const handleAdd = tag => {
+    const handleAdd = (tag) => {
       if (input.value.includes(tag)) {
         return;
       }
       input.onChange(input.value.concat(tag));
     };
 
-    const handleSearch = searchTerm => {
+    const handleSearch = (searchTerm) => {
       this.setState({ open: searchTerm.length > 2 });
     };
 

@@ -6,25 +6,21 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import polyglot from '../../i18n';
-import { updateLearningPathStatus } from '../learningPathActions';
-import { closeSidebars } from '../../common/sidebarActions';
-import { getLearningPath } from '../learningPathSelectors';
-import { learningPathStatusFromStatus } from '../learningPathUtil';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import polyglot from "../../i18n";
+import { updateLearningPathStatus } from "../learningPathActions";
+import { closeSidebars } from "../../common/sidebarActions";
+import { getLearningPath } from "../learningPathSelectors";
+import { learningPathStatusFromStatus } from "../learningPathUtil";
 
-export const LearningPathToCButtons = ({
-  learningPath,
-  updatePathStatus,
-  localCloseSidebars,
-}) => {
+export const LearningPathToCButtons = ({ learningPath, updatePathStatus, localCloseSidebars }) => {
   if (!learningPath.canEdit) {
     return null;
   }
 
-  const publishAction = status => evt => {
+  const publishAction = (status) => (evt) => {
     evt.preventDefault();
     if (status.status !== learningPath.status) {
       updatePathStatus(learningPath.id, status.status).then(localCloseSidebars);
@@ -37,7 +33,8 @@ export const LearningPathToCButtons = ({
         type="button"
         key={status.status}
         className="button--primary-outline cta-link--block"
-        onClick={publishAction(status)}>
+        onClick={publishAction(status)}
+      >
         {polyglot.t(`pathDropDown.${learningPath.status}.${status.action}`)}
       </button>
     </div>
@@ -50,7 +47,7 @@ LearningPathToCButtons.propTypes = {
   localCloseSidebars: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state =>
+const mapStateToProps = (state) =>
   Object.assign({}, state, {
     learningPath: getLearningPath(state),
   });
@@ -60,7 +57,4 @@ const mapDispatchToProps = {
   localCloseSidebars: closeSidebars,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(LearningPathToCButtons);
+export default connect(mapStateToProps, mapDispatchToProps)(LearningPathToCButtons);

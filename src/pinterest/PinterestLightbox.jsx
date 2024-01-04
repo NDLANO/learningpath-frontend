@@ -6,16 +6,16 @@
  *
  */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import PinterestImport from './PinterestImport';
-import Lightbox from '../common/Lightbox';
-import * as learningPathStepActions from '../learningPath/step/learningPathStepActions';
-import * as pinterestActions from './pinterestActions';
-import { getPins } from './pinterestSelectors';
-import { getLocale } from '../locale/localeSelectors';
-import config from '../config';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import PinterestImport from "./PinterestImport";
+import Lightbox from "../common/Lightbox";
+import * as learningPathStepActions from "../learningPath/step/learningPathStepActions";
+import * as pinterestActions from "./pinterestActions";
+import { getPins } from "./pinterestSelectors";
+import { getLocale } from "../locale/localeSelectors";
+import config from "../config";
 
 const PINTEREST_ENABLED = config.pinterestEnabled;
 
@@ -23,9 +23,7 @@ class PinterestLightbox extends Component {
   constructor(props) {
     super(props);
     this.handleBoardNameSubmit = this.handleBoardNameSubmit.bind(this);
-    this.handleCreateLearningPathStep = this.handleCreateLearningPathStep.bind(
-      this,
-    );
+    this.handleCreateLearningPathStep = this.handleCreateLearningPathStep.bind(this);
   }
 
   handleBoardNameSubmit(username, boardName) {
@@ -34,21 +32,15 @@ class PinterestLightbox extends Component {
   }
 
   handleCreateLearningPathStep(pinId, title, url) {
-    const {
-      createLearningPathStep,
-      pins,
-      localSetPins,
-      learningPath,
-      locale: language,
-    } = this.props;
+    const { createLearningPathStep, pins, localSetPins, learningPath, locale: language } = this.props;
     createLearningPathStep(learningPath.id, {
-      type: 'TEXT',
+      type: "TEXT",
       showTitle: true,
       title,
       language,
-      embedUrl: { url, embedType: 'oembed' },
+      embedUrl: { url, embedType: "oembed" },
     }).then(() => {
-      localSetPins(pins.filter(pin => pin.id !== pinId));
+      localSetPins(pins.filter((pin) => pin.id !== pinId));
     });
   }
 
@@ -60,10 +52,7 @@ class PinterestLightbox extends Component {
     return (
       <div className="pinterest-lightbox_container">
         <div className="big-lightbox_wrapper big-lightbox_wrapper--scroll">
-          <Lightbox
-            display={showLightBox}
-            width="800px"
-            onClose={toggleLightBox}>
+          <Lightbox display={showLightBox} width="800px" onClose={toggleLightBox}>
             <PinterestImport
               handleCreateLearningPathStep={this.handleCreateLearningPathStep}
               handleBoardNameSubmit={this.handleBoardNameSubmit}
@@ -98,12 +87,9 @@ const mapDispatchToProps = {
   localRemovePins: pinterestActions.removePins,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   locale: getLocale(state),
   pins: getPins(state),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(PinterestLightbox);
+export default connect(mapStateToProps, mapDispatchToProps)(PinterestLightbox);

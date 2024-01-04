@@ -6,31 +6,31 @@
  *
  */
 
-import { isFSA } from 'flux-standard-action';
-import { setEmbedResults } from '../embedSearchActions';
+import { isFSA } from "flux-standard-action";
+import { setEmbedResults } from "../embedSearchActions";
 
 const results = {
   queries: {
     request: [{ totalResults: 20 }],
-    items: [{ id: 1, title: 'hei' }],
+    items: [{ id: 1, title: "hei" }],
   },
 };
-test('actions/setEmbedResults', () => {
+test("actions/setEmbedResults", () => {
   const actual = setEmbedResults(results);
 
   expect(isFSA(actual)).toBeTruthy();
 
-  expect(actual.type).toBe('SET_EMBED_RESULTS');
+  expect(actual.type).toBe("SET_EMBED_RESULTS");
   expect(actual.payload).toEqual(results);
   expect(actual.error).toBeFalsy();
 });
 
-test('actions/setEmbedResults with error', () => {
-  const actual = setEmbedResults(new Error('fail!'));
+test("actions/setEmbedResults with error", () => {
+  const actual = setEmbedResults(new Error("fail!"));
 
   expect(isFSA(actual)).toBeTruthy();
 
-  expect(actual.type).toBe('SET_EMBED_RESULTS');
-  expect(actual.payload.message).toBe('fail!');
+  expect(actual.type).toBe("SET_EMBED_RESULTS");
+  expect(actual.payload.message).toBe("fail!");
   expect(actual.error).toBeTruthy();
 });

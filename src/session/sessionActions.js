@@ -6,32 +6,25 @@
  *
  */
 
-import { createAction } from 'redux-actions';
-import auth0 from 'auth0-js';
-import { routerActions } from 'react-router-redux';
-import {
-  locationOrigin,
-  ndlaPersonalClientId,
-  auth0Domain,
-} from '../sources/apiConstants';
-import { getTokenExpireAt } from '../util/jwtHelper';
-import {
-  savePersonalToken,
-  removePersonalToken,
-} from '../sources/localStorage';
+import { createAction } from "redux-actions";
+import auth0 from "auth0-js";
+import { routerActions } from "react-router-redux";
+import { locationOrigin, ndlaPersonalClientId, auth0Domain } from "../sources/apiConstants";
+import { getTokenExpireAt } from "../util/jwtHelper";
+import { savePersonalToken, removePersonalToken } from "../sources/localStorage";
 
-export const setAuthenticated = createAction('SET_AUTHENTICATED');
+export const setAuthenticated = createAction("SET_AUTHENTICATED");
 
 const auth = new auth0.WebAuth({
-  clientID: ndlaPersonalClientId || '',
-  domain: auth0Domain || '',
-  responseType: 'token',
+  clientID: ndlaPersonalClientId || "",
+  domain: auth0Domain || "",
+  responseType: "token",
   redirectUri: `${locationOrigin}/login/success`,
-  audience: 'ndla_system',
+  audience: "ndla_system",
 });
 
 export function parseHash(hash) {
-  return dispatch => {
+  return (dispatch) => {
     auth.parseHash({ hash, _idTokenVerification: false }, (err, authResult) => {
       if (authResult && authResult.accessToken) {
         savePersonalToken({
@@ -40,7 +33,7 @@ export function parseHash(hash) {
         });
 
         dispatch(setAuthenticated(true));
-        dispatch(routerActions.replace('/minside'));
+        dispatch(routerActions.replace("/minside"));
       }
     });
   };
@@ -49,12 +42,12 @@ export function parseHash(hash) {
 export function loginPersonalAuth(type) {
   auth.authorize({
     connection: type,
-    prompt: 'login',
+    prompt: "login",
   });
 }
 
 export function logoutPersonalAuth(federated = undefined) {
-  return dispatch => {
+  return (dispatch) => {
     return new Promise((resolve, reject) => {
       dispatch(setAuthenticated(false));
       removePersonalToken();
@@ -70,7 +63,7 @@ export function logoutPersonalAuth(federated = undefined) {
 }
 
 export function renewPersonalAuth() {
-  return dispatch =>
+  return (dispatch) =>
     new Promise((resolve, reject) => {
       auth.renewAuth(
         {
@@ -99,8 +92,8 @@ export function renewPersonalAuth() {
 
 export function renewAuth() {
   return (dispatch, getState) => {
-    return new Promise(resolve => {
-      dispatch(renewPersonalAuth()).then(token => resolve(token));
+    return new Promise((resolve) => {
+      dispatch(renewPersonalAuth()).then((token) => resolve(token));
     });
   };
 }

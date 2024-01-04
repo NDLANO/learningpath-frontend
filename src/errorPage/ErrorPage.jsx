@@ -6,11 +6,11 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Wrapper, OneColumn, Footer } from '../common/Layout';
-import Logo from '../common/Logo';
-import { DefaultErrorMessage } from './DefaultErrorMessage';
+import React from "react";
+import PropTypes from "prop-types";
+import { Wrapper, OneColumn, Footer } from "../common/Layout";
+import Logo from "../common/Logo";
+import { DefaultErrorMessage } from "./DefaultErrorMessage";
 
 const ErrorPage = ({ locale }) => (
   <Wrapper>

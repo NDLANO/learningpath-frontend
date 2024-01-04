@@ -6,20 +6,20 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import SafeLink from '@ndla/safelink';
-import { css } from '@emotion/core';
-import styled from '@emotion/styled';
-import polyglot from '../i18n';
-import withCloseSidebars from './withCloseSidebars';
+import React from "react";
+import PropTypes from "prop-types";
+import SafeLink from "@ndla/safelink";
+import { css } from "@emotion/core";
+import styled from "@emotion/styled";
+import polyglot from "../i18n";
+import withCloseSidebars from "./withCloseSidebars";
 
 const onDark = css`
   height: 30px;
   width: 90px;
 
   & a {
-    background-image: url('/ndla-logo-white.png');
+    background-image: url("/ndla-logo-white.png");
   }
 
   &:any-link {
@@ -33,11 +33,11 @@ const StyledDiv = styled.div`
   padding: 0;
   height: 40px;
   width: 150px;
-  ${props => {
+  ${(props) => {
     if (props.onDark) {
       return onDark;
     }
-    return '';
+    return "";
   }};
 `;
 
@@ -47,7 +47,7 @@ const StyledSafeLink = styled(SafeLink)`
   width: 100%;
   padding-left: 100%;
   overflow: hidden;
-  background: url('/logo.png') no-repeat;
+  background: url("/logo.png") no-repeat;
   background-size: contain;
   vertical-align: top;
 
@@ -62,7 +62,7 @@ function Logo(props) {
   return (
     <StyledDiv className="un-button" onDark={onDark}>
       <StyledSafeLink to="/" onClick={closeSidebars}>
-        {polyglot.t('logo.altText')}
+        {polyglot.t("logo.altText")}
       </StyledSafeLink>
     </StyledDiv>
   );

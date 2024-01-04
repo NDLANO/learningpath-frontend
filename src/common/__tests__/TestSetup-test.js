@@ -10,10 +10,10 @@
  * @jest-environment jsdom
  */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { shallow, mount, render } from 'enzyme';
-import { locationOrigin, apiBaseUrl } from '../../sources/apiConstants';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { shallow, mount, render } from "enzyme";
+import { locationOrigin, apiBaseUrl } from "../../sources/apiConstants";
 
 class Selfie extends Component {
   componentDidMount() {}
@@ -24,21 +24,21 @@ class Selfie extends Component {
 }
 
 Selfie.propTypes = { foo: PropTypes.string };
-Selfie.defaultProps = { foo: 'default bar' };
+Selfie.defaultProps = { foo: "default bar" };
 
-test('components/TestSetup selftest - unit test mocking', () => {
-  expect(locationOrigin).toBe('http://ndla-frontend');
-  expect(apiBaseUrl).toBe('http://ndla-api');
+test("components/TestSetup selftest - unit test mocking", () => {
+  expect(locationOrigin).toBe("http://ndla-frontend");
+  expect(apiBaseUrl).toBe("http://ndla-api");
 });
 
-test('components/TestSetup selftest - Enzyme shallow rendering', () => {
+test("components/TestSetup selftest - Enzyme shallow rendering", () => {
   expect(() => shallow(<Selfie />)).not.toThrow();
 });
 
-test('components/TestSetup selftest - Enzyme full dom rendering', () => {
+test("components/TestSetup selftest - Enzyme full dom rendering", () => {
   expect(() => mount(<Selfie />)).not.toThrow();
 });
 
-test('components/TestSetup selftest - Enzyme static rendering', () => {
+test("components/TestSetup selftest - Enzyme static rendering", () => {
   expect(() => render(<Selfie />)).not.toThrow();
 });

@@ -6,23 +6,19 @@
  *
  */
 
-import React from 'react';
-import { shallow } from 'enzyme';
+import React from "react";
+import { shallow } from "enzyme";
 
-import { translatedLearningStep } from '../../../common/__tests__/translatedMockData';
+import { translatedLearningStep } from "../../../common/__tests__/translatedMockData";
 
-import LearningPathStepIcon from '../LearningPathStepIcon';
+import LearningPathStepIcon from "../LearningPathStepIcon";
 
-test('component/LearningPathStepIcon', () => {
+test("component/LearningPathStepIcon", () => {
   const component = shallow(
-    <LearningPathStepIcon
-      learningPathStep={translatedLearningStep}
-      learningPathStepType="INTRODUCTION"
-      isCircle
-    />,
+    <LearningPathStepIcon learningPathStep={translatedLearningStep} learningPathStepType="INTRODUCTION" isCircle />,
   );
 
-  const iconNode = component.find('.step-nav_circle');
+  const iconNode = component.find(".step-nav_circle");
 
   expect(iconNode.length).toBe(1);
 });

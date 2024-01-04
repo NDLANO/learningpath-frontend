@@ -6,24 +6,24 @@
  *
  */
 
-import React from 'react';
-import { shallow } from 'enzyme';
+import React from "react";
+import { shallow } from "enzyme";
 
-import Lightbox from '../Lightbox';
+import Lightbox from "../Lightbox";
 
-test('component/Lightbox', () => {
+test("component/Lightbox", () => {
   const component = shallow(
     <Lightbox display onClose={() => {}}>
       <h1>enlighted!</h1>
     </Lightbox>,
   );
-  expect(component.hasClass('lightbox')).toBeTruthy();
+  expect(component.hasClass("lightbox")).toBeTruthy();
 
-  const contentContainer = component.find('.lightbox_content');
+  const contentContainer = component.find(".lightbox_content");
   expect(contentContainer.length).toBe(1);
 
   expect(contentContainer.children().length).toBe(2);
 
   const content = contentContainer.children().at(1);
-  expect(content.html()).toBe('<h1>enlighted!</h1>');
+  expect(content.html()).toBe("<h1>enlighted!</h1>");
 });

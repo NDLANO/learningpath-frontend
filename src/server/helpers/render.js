@@ -6,14 +6,14 @@
  *
  */
 
-import React from 'react';
-import { renderToString, renderToStaticMarkup } from 'react-dom/server';
-import defined from 'defined';
-import { OK, MOVED_PERMANENTLY } from 'http-status';
-import Helmet from 'react-helmet';
-import { extractCritical } from 'emotion-server';
-import Document from './Document';
-import config from '../../config';
+import React from "react";
+import { renderToString, renderToStaticMarkup } from "react-dom/server";
+import defined from "defined";
+import { OK, MOVED_PERMANENTLY } from "http-status";
+import Helmet from "react-helmet";
+import { extractCritical } from "emotion-server";
+import Document from "./Document";
+import config from "../../config";
 
 export function renderPage(Page, assets, state = {}) {
   const { html, ids, css } = extractCritical(renderToString(Page));
@@ -47,6 +47,6 @@ export async function renderHtml(req, html, context, props) {
 
   return {
     status,
-    data: `<!doctype html>${doc.replace('REPLACE_ME', html)}`,
+    data: `<!doctype html>${doc.replace("REPLACE_ME", html)}`,
   };
 }

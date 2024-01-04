@@ -6,8 +6,8 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 export class OnlyRenderOnClient extends React.Component {
   constructor(props) {

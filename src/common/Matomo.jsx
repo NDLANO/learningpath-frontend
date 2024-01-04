@@ -6,18 +6,13 @@
  *
  */
 
-import React from 'react';
-import { MatomoTracker } from '@ndla/tracker';
-import config from '../config';
+import React from "react";
+import { MatomoTracker } from "@ndla/tracker";
+import config from "../config";
 
 export const Matomo = () => {
   if (config.matomoSiteId) {
-    return (
-      <MatomoTracker
-        siteId={config.matomoSiteId}
-        trackerUrl={config.matomoUrl}
-      />
-    );
+    return <MatomoTracker siteId={config.matomoSiteId} trackerUrl={config.matomoUrl} />;
   }
   return null;
 };

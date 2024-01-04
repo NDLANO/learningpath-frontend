@@ -6,33 +6,33 @@
  *
  */
 
-import { isFSA } from 'flux-standard-action';
+import { isFSA } from "flux-standard-action";
 
-import { setLearningPathContributors } from '../learningPathContributorsActions';
+import { setLearningPathContributors } from "../learningPathContributorsActions";
 
-test('actions/setLearningPathContributors', () => {
+test("actions/setLearningPathContributors", () => {
   const actual = setLearningPathContributors([
-    { type: 'Forfatter', name: 'Christian' },
-    { type: 'Forfatter', name: 'Sebastian' },
+    { type: "Forfatter", name: "Christian" },
+    { type: "Forfatter", name: "Sebastian" },
   ]);
 
   expect(isFSA(actual)).toBeTruthy();
 
-  expect(actual.type).toBe('SET_LEARNING_PATH_CONTRIBUTORS');
+  expect(actual.type).toBe("SET_LEARNING_PATH_CONTRIBUTORS");
   expect(actual.payload).toBeTruthy();
   expect(actual.payload).toEqual([
-    { type: 'Forfatter', name: 'Christian' },
-    { type: 'Forfatter', name: 'Sebastian' },
+    { type: "Forfatter", name: "Christian" },
+    { type: "Forfatter", name: "Sebastian" },
   ]);
   expect(actual.error).toBeFalsy();
 });
 
-test('actions/setLearningPathContributors with error', () => {
-  const actual = setLearningPathContributors(new Error('fail!'));
+test("actions/setLearningPathContributors with error", () => {
+  const actual = setLearningPathContributors(new Error("fail!"));
 
   expect(isFSA(actual)).toBeTruthy();
 
-  expect(actual.type).toBe('SET_LEARNING_PATH_CONTRIBUTORS');
-  expect(actual.payload.message).toBe('fail!');
+  expect(actual.type).toBe("SET_LEARNING_PATH_CONTRIBUTORS");
+  expect(actual.payload.message).toBe("fail!");
   expect(actual.error).toBeTruthy();
 });

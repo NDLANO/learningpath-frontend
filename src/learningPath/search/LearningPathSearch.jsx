@@ -6,40 +6,35 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import defined from 'defined';
-import { connect } from 'react-redux';
-import queryString from 'query-string';
-import { routerActions } from 'react-router-redux';
-import upperFirst from 'lodash/upperFirst';
-import { HelmetWithTracker } from '@ndla/tracker';
-import polyglot from '../../i18n';
-import LinkPager from '../../common/pager/LinkPager';
-import SearchForm from './LearningPathSearchForm';
-import SearchResult from './LearningPathSearchResult';
-import Masthead from '../../common/Masthead';
-import { searchLearningPaths } from './learningPathSearchActions';
-import { Wrapper, OneColumn, Footer } from '../../common/Layout';
-import {
-  getLearningPathSearchResult,
-  getLearningPathSearchTotalCount,
-} from './learningPathSearchSelectors';
-import { LocationShape } from '../../shapes';
-import { getLocale } from '../../locale/localeSelectors';
+import React from "react";
+import PropTypes from "prop-types";
+import defined from "defined";
+import { connect } from "react-redux";
+import queryString from "query-string";
+import { routerActions } from "react-router-redux";
+import upperFirst from "lodash/upperFirst";
+import { HelmetWithTracker } from "@ndla/tracker";
+import polyglot from "../../i18n";
+import LinkPager from "../../common/pager/LinkPager";
+import SearchForm from "./LearningPathSearchForm";
+import SearchResult from "./LearningPathSearchResult";
+import Masthead from "../../common/Masthead";
+import { searchLearningPaths } from "./learningPathSearchActions";
+import { Wrapper, OneColumn, Footer } from "../../common/Layout";
+import { getLearningPathSearchResult, getLearningPathSearchTotalCount } from "./learningPathSearchSelectors";
+import { LocationShape } from "../../shapes";
+import { getLocale } from "../../locale/localeSelectors";
 
 class LearningPathSearch extends React.Component {
   static mapDispatchToProps = {
     localSearchLearningPaths: searchLearningPaths,
-    pushRoute: route => routerActions.push(route),
+    pushRoute: (route) => routerActions.push(route),
   };
 
   static fetchData(props) {
     const { localSearchLearningPaths, location } = props;
     const query = queryString.parse(location.search);
-    const queryWithSort = query.sort
-      ? query
-      : { ...query, sort: '-lastUpdated' };
+    const queryWithSort = query.sort ? query : { ...query, sort: "-lastUpdated" };
     return localSearchLearningPaths(queryWithSort);
   }
 
@@ -49,9 +44,7 @@ class LearningPathSearch extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.location.search !== nextProps.location.search) {
-      this.props.localSearchLearningPaths(
-        queryString.parse(nextProps.location.search),
-      );
+      this.props.localSearchLearningPaths(queryString.parse(nextProps.location.search));
     }
   }
 
@@ -65,48 +58,31 @@ class LearningPathSearch extends React.Component {
     } = this.props;
     const query = queryString.parse(search);
     const page = query.page ? parseInt(query.page, 10) : 1;
-    const navigateTo = q => {
+    const navigateTo = (q) => {
       pushRoute({ pathname, search: `?${queryString.stringify(q)}` });
     };
 
-    const submitSearchQuery = (q, sort) =>
-      navigateTo(
-        Object.assign({}, query, { query: q, page: 1, tag: '', sort }),
-      );
+    const submitSearchQuery = (q, sort) => navigateTo(Object.assign({}, query, { query: q, page: 1, tag: "", sort }));
 
-    const changeSortOrder = sort =>
-      navigateTo(Object.assign({}, query, { sort }));
+    const changeSortOrder = (sort) => navigateTo(Object.assign({}, query, { sort }));
 
-    const changeSearchTag = tag =>
-      navigateTo(Object.assign({}, query, { tag, page: 1 }));
+    const changeSearchTag = (tag) => navigateTo(Object.assign({}, query, { tag, page: 1 }));
 
-    const acitveTagTitle = query.tag ? (
-      <h1 className="search-results_active-tag">{upperFirst(query.tag)}</h1>
-    ) : (
-      ''
-    );
+    const acitveTagTitle = query.tag ? <h1 className="search-results_active-tag">{upperFirst(query.tag)}</h1> : "";
 
-    const queryWithSort = query.sort
-      ? query
-      : { ...query, sort: '-lastUpdated' };
+    const queryWithSort = query.sort ? query : { ...query, sort: "-lastUpdated" };
 
     return (
       <Wrapper>
-        <HelmetWithTracker
-          title={polyglot.t('htmlTitles.learningPathSearch')}
-        />
+        <HelmetWithTracker title={polyglot.t("htmlTitles.learningPathSearch")} />
         <OneColumn className="one-colum--white-bg">
           <Masthead />
           <div className="page-header">
-            <SearchForm
-              {...query}
-              onSortOrderChange={changeSortOrder}
-              onSearchQuerySubmit={submitSearchQuery}
-            />
+            <SearchForm {...query} onSortOrderChange={changeSortOrder} onSearchQuerySubmit={submitSearchQuery} />
           </div>
           <div className="search-results">
             {acitveTagTitle}
-            {learningPaths.map(path => (
+            {learningPaths.map((path) => (
               <SearchResult
                 key={path.id}
                 path={path}
@@ -115,12 +91,7 @@ class LearningPathSearch extends React.Component {
                 query={query}
               />
             ))}
-            <LinkPager
-              page={page}
-              lastPage={lastPage}
-              query={queryWithSort}
-              pathName="/learningpaths"
-            />
+            <LinkPager page={page} lastPage={lastPage} query={queryWithSort} pathName="/learningpaths" />
           </div>
         </OneColumn>
         <Footer locale={locale} />
@@ -141,10 +112,8 @@ LearningPathSearch.propTypes = {
 
 const mapStateToProps = (state, props) => {
   const query = queryString.parse(props.location.search);
-  const pageSize = defined(query.pageSize, '10');
-  const lastPage = Math.ceil(
-    getLearningPathSearchTotalCount(state) / parseInt(pageSize, 10),
-  );
+  const pageSize = defined(query.pageSize, "10");
+  const lastPage = Math.ceil(getLearningPathSearchTotalCount(state) / parseInt(pageSize, 10));
   return Object.assign(
     {},
     {
@@ -155,7 +124,4 @@ const mapStateToProps = (state, props) => {
   );
 };
 
-export default connect(
-  mapStateToProps,
-  LearningPathSearch.mapDispatchToProps,
-)(LearningPathSearch);
+export default connect(mapStateToProps, LearningPathSearch.mapDispatchToProps)(LearningPathSearch);

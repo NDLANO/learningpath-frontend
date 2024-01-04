@@ -6,32 +6,29 @@
  *
  */
 
-import 'isomorphic-fetch';
-import config, { getEnvironmentVariable } from '../../config';
+import "isomorphic-fetch";
+import config, { getEnvironmentVariable } from "../../config";
 
 const url = `https://${config.auth0Domain}/oauth/token`;
 
 function getClientSecret() {
-  if (getEnvironmentVariable('NOW') === 'true') {
+  if (getEnvironmentVariable("NOW") === "true") {
     // We need to base64 encode the secret in now
-    const buffer = Buffer.from(
-      getEnvironmentVariable('NDLA_LEARNING_PATH_CLIENT_SECRET'),
-      'base64',
-    );
-    return buffer.toString('ascii');
+    const buffer = Buffer.from(getEnvironmentVariable("NDLA_LEARNING_PATH_CLIENT_SECRET"), "base64");
+    return buffer.toString("ascii");
   }
-  return getEnvironmentVariable('NDLA_LEARNING_PATH_CLIENT_SECRET');
+  return getEnvironmentVariable("NDLA_LEARNING_PATH_CLIENT_SECRET");
 }
 
-export async function getToken(audience = 'ndla_system') {
+export async function getToken(audience = "ndla_system") {
   const response = await fetch(url, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      grant_type: 'client_credentials',
-      client_id: getEnvironmentVariable('NDLA_LEARNING_PATH_CLIENT_ID'),
+      grant_type: "client_credentials",
+      client_id: getEnvironmentVariable("NDLA_LEARNING_PATH_CLIENT_ID"),
       client_secret: getClientSecret(),
       audience,
     }),
@@ -51,24 +48,22 @@ const chunk = (owners, size) => {
 };
 
 export const getUsers = async (managementToken, ownerIds) => {
-  const owners = ownerIds.split(',');
+  const owners = ownerIds.split(",");
   const chunks = chunk(owners, 50);
 
   let requests = [];
-  chunks.forEach(chunk => {
-    const query = chunk.map(ownerId => `"${ownerId}"`).join('OR');
+  chunks.forEach((chunk) => {
+    const query = chunk.map((ownerId) => `"${ownerId}"`).join("OR");
     const result = fetch(
-      `https://${
-        config.auth0Domain
-      }/api/v2/users?q=app_metadata.ndla_id:(${query})&per_page=50&search-engine=v3&include_totals=true`,
+      `https://${config.auth0Domain}/api/v2/users?q=app_metadata.ndla_id:(${query})&per_page=50&search-engine=v3&include_totals=true`,
       {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${managementToken.access_token}`,
         },
         json: true,
       },
-    ).then(res => res.json());
+    ).then((res) => res.json());
     requests.push(result);
   });
   const results = await Promise.all(requests);

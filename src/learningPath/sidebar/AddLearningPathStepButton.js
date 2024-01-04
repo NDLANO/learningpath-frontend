@@ -6,17 +6,14 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import polyglot from '../../i18n';
-import { closeSidebars } from '../../common/sidebarActions';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import polyglot from "../../i18n";
+import { closeSidebars } from "../../common/sidebarActions";
 
-export function AddLearningPathStepButton({
-  learningPath,
-  localCloseSidebars,
-}) {
+export function AddLearningPathStepButton({ learningPath, localCloseSidebars }) {
   if (!learningPath.canEdit) {
     return null;
   }
@@ -27,9 +24,10 @@ export function AddLearningPathStepButton({
       <Link
         to={newStepTarget}
         className="add-learningpath-step_button cta-link cta-link--block cta-link--secondary"
-        onClick={() => localCloseSidebars()}>
+        onClick={() => localCloseSidebars()}
+      >
         <div className="plus-sign--circle">+</div>
-        {polyglot.t('editPage.addStepBtn')}
+        {polyglot.t("editPage.addStepBtn")}
       </Link>
     </div>
   );
@@ -44,7 +42,4 @@ const mapDispatchToProps = {
   localCloseSidebars: closeSidebars,
 };
 
-export default connect(
-  state => state,
-  mapDispatchToProps,
-)(AddLearningPathStepButton);
+export default connect((state) => state, mapDispatchToProps)(AddLearningPathStepButton);
