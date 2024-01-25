@@ -6,14 +6,14 @@
  *
  */
 
-import reducer from '../learningPathSearchReducer';
+import reducer from "../learningPathSearchReducer";
 
-test('reducers/learningPathSearch query', () => {
+test("reducers/learningPathSearch query", () => {
   expect(reducer(undefined, {})).toEqual({ results: [], totalCount: 1 });
 
   expect(
     reducer(undefined, {
-      type: 'SET_LEARNING_PATH_SEARCH_RESULTS',
+      type: "SET_LEARNING_PATH_SEARCH_RESULTS",
       payload: { results: [1, 2, 3], totalCount: 30 },
     }),
   ).toEqual({ results: [1, 2, 3], totalCount: 30 });

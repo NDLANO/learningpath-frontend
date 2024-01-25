@@ -6,46 +6,35 @@
  *
  */
 
-import configureStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
-import nock from 'nock';
-import { routerActions } from 'react-router-redux';
-import payload403invalid from '../../../actions/__tests__/payload403invalid';
-import { testError } from '../../../common/__tests__/testError';
-import {
-  applicationError,
-  addMessage,
-} from '../../../messages/messagesActions';
-import {
-  setLearningPathStep,
-  updateLearningPathStep,
-} from '../learningPathStepActions';
+import configureStore from "redux-mock-store";
+import thunk from "redux-thunk";
+import nock from "nock";
+import { routerActions } from "react-router-redux";
+import payload403invalid from "../../../actions/__tests__/payload403invalid";
+import { testError } from "../../../common/__tests__/testError";
+import { applicationError, addMessage } from "../../../messages/messagesActions";
+import { setLearningPathStep, updateLearningPathStep } from "../learningPathStepActions";
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-const accessToken = '12345678';
+const accessToken = "12345678";
 const pathId = 123;
 const stepId = 321;
 
-test('actions/updateLearningPathStep', done => {
+test("actions/updateLearningPathStep", (done) => {
   const learningStep = {
-    title: [{ language: 'nb', title: 'Goat' }],
-    description: [{ language: 'nb', description: 'this is a description' }],
-    embedUrl: [
-      { language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY' },
-    ],
+    title: [{ language: "nb", title: "Goat" }],
+    description: [{ language: "nb", description: "this is a description" }],
+    embedUrl: [{ language: "nb", url: "https://www.youtube.com/watch?v=ggB33d0BLcY" }],
   };
 
   const learningStepReply = Object.assign({}, learningStep, { id: stepId });
 
-  const patchPathStepApi = nock('http://ndla-api', {
+  const patchPathStepApi = nock("http://ndla-api", {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .patch(
-      `/learningpath-api/v2/learningpaths/${pathId}/learningsteps/${stepId}`,
-      learningStep,
-    )
+    .patch(`/learningpath-api/v2/learningpaths/${pathId}/learningsteps/${stepId}`, learningStep)
     .reply(200, learningStepReply);
 
   const store = mockStore({ accessToken });
@@ -54,7 +43,7 @@ test('actions/updateLearningPathStep', done => {
     .dispatch(updateLearningPathStep(pathId, stepId, learningStep))
     .then(() => {
       expect(store.getActions()).toEqual([
-        addMessage({ message: 'Lagret OK' }),
+        addMessage({ message: "Lagret OK" }),
         setLearningPathStep(learningStepReply),
         routerActions.push({
           pathname: `/learningpaths/${pathId}/step/${stepId}`,
@@ -66,23 +55,18 @@ test('actions/updateLearningPathStep', done => {
     .catch(testError);
 });
 
-test('actions/updateLearningPathStep access denied', done => {
+test("actions/updateLearningPathStep access denied", (done) => {
   const learningStep = {
-    title: [{ language: 'nb', title: 'Goat' }],
-    description: [{ language: 'nb', description: 'this is a description' }],
-    embedUrl: [
-      { language: 'nb', url: 'https://www.youtube.com/watch?v=ggB33d0BLcY' },
-    ],
+    title: [{ language: "nb", title: "Goat" }],
+    description: [{ language: "nb", description: "this is a description" }],
+    embedUrl: [{ language: "nb", url: "https://www.youtube.com/watch?v=ggB33d0BLcY" }],
   };
 
-  const apiMock = nock('http://ndla-api', {
+  const apiMock = nock("http://ndla-api", {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
-    .patch(
-      `/learningpath-api/v2/learningpaths/${pathId}/learningsteps/${stepId}`,
-      learningStep,
-    )
-    .reply(403, { message: 'Invalid' });
+    .patch(`/learningpath-api/v2/learningpaths/${pathId}/learningsteps/${stepId}`, learningStep)
+    .reply(403, { message: "Invalid" });
 
   const store = mockStore({ accessToken });
 
@@ -91,17 +75,15 @@ test('actions/updateLearningPathStep access denied', done => {
     .then(() => {
       expect(store.getActions()).toEqual([
         applicationError(
-          payload403invalid(
-            `http://ndla-api/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`,
-          ),
+          payload403invalid(`http://ndla-api/learningpath-api/v1/learningpaths/${pathId}/learningsteps/${stepId}`),
         ),
         {
           payload: {
-            message: 'Du har ikke tilgang til dette akkurat nå',
-            severity: 'danger',
+            message: "Du har ikke tilgang til dette akkurat nå",
+            severity: "danger",
             timeToLive: 10000,
           },
-          type: 'ADD_MESSAGE',
+          type: "ADD_MESSAGE",
         },
       ]);
       expect(() => apiMock.done()).not.toThrow();

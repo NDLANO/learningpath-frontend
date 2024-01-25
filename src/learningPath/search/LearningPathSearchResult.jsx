@@ -6,17 +6,17 @@
  *
  */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import classNames from 'classnames';
-import LabeledIcon from '../../common/LabeledIcon';
-import formatDate from '../../util/formatDate';
-import formatDuration from '../../util/formatDuration';
-import LearningPathIntroduction from './LearningPathIntroduction';
-import IsBasedOn from '../../common/IsBasedOn';
-import LearningPathContributors from '../sidebar/LearningPathContributors';
-import { scaleImage } from '../../util/imageScaler';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import classNames from "classnames";
+import LabeledIcon from "../../common/LabeledIcon";
+import formatDate from "../../util/formatDate";
+import formatDuration from "../../util/formatDuration";
+import LearningPathIntroduction from "./LearningPathIntroduction";
+import IsBasedOn from "../../common/IsBasedOn";
+import LearningPathContributors from "../sidebar/LearningPathContributors";
+import { scaleImage } from "../../util/imageScaler";
 
 export default class SearchResult extends Component {
   constructor(props) {
@@ -47,14 +47,7 @@ export default class SearchResult extends Component {
           />
         );
       }
-      return (
-        <img
-          className="search-result_img"
-          role="presentation"
-          src="/placeholder.png"
-          alt="placeholder"
-        />
-      );
+      return <img className="search-result_img" role="presentation" src="/placeholder.png" alt="placeholder" />;
     };
 
     const { tags } = path;
@@ -65,32 +58,24 @@ export default class SearchResult extends Component {
       });
     };
 
-    const tagsClassName = tag =>
+    const tagsClassName = (tag) =>
       classNames({
         tag_item: true,
-        'un-button': true,
-        'tag_item--active': query.tag === tag,
+        "un-button": true,
+        "tag_item--active": query.tag === tag,
       });
 
     return (
       <div className="search-result">
-        <Link
-          to={`/learningpaths/${path.id}/first-step`}
-          className="search-result_img_container">
+        <Link to={`/learningpaths/${path.id}/first-step`} className="search-result_img_container">
           {image()}
         </Link>
         <div className="border-box_wrapper">
           <div className="border-box border-box--block">
-            <LabeledIcon.Today
-              labelText={formatDate(path.lastUpdated, lang)}
-              tagName="time"
-            />
+            <LabeledIcon.Today labelText={formatDate(path.lastUpdated, lang)} tagName="time" />
           </div>
           <div className="border-box border-box--block">
-            <LabeledIcon.QueryBuilder
-              labelText={formatDuration(path.duration, lang)}
-              tagName="time"
-            />
+            <LabeledIcon.QueryBuilder labelText={formatDuration(path.duration, lang)} tagName="time" />
           </div>
         </div>
         <div className="search-result_bd">
@@ -100,21 +85,20 @@ export default class SearchResult extends Component {
           <div className="search-result_meta">
             <LearningPathContributors copyright={path.copyright} />
           </div>
-          <Link
-            to={`/learningpaths/${path.id}/first-step`}
-            className="search-result_description">
+          <Link to={`/learningpaths/${path.id}/first-step`} className="search-result_description">
             {path.description}
           </Link>
           <LearningPathIntroduction path={path} />
-          {path.isBasedOn ? <IsBasedOn path={path} /> : ''}
+          {path.isBasedOn ? <IsBasedOn path={path} /> : ""}
           <div>
-            {tags.map(tag => (
+            {tags.map((tag) => (
               <button
                 type="button"
                 key={tag}
                 className={tagsClassName(tag)}
-                onClick={evt => onTagClick(evt, tag)}
-                href="#">{`#${tag}`}</button>
+                onClick={(evt) => onTagClick(evt, tag)}
+                href="#"
+              >{`#${tag}`}</button>
             ))}
           </div>
         </div>

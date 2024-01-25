@@ -6,11 +6,11 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
 
-const TextAreaField = props => {
+const TextAreaField = (props) => {
   const {
     input,
     disableVerticalResize,
@@ -27,9 +27,9 @@ const TextAreaField = props => {
 
   const inputClassName = classNames({
     textarea: true,
-    'input--alert': touched && error,
-    'textarea--resize-vertical': disableVerticalResize,
-    'textarea--resize-horizontal': disableHorizontalResize,
+    "input--alert": touched && error,
+    "textarea--resize-vertical": disableVerticalResize,
+    "textarea--resize-horizontal": disableHorizontalResize,
   });
 
   return (
@@ -45,12 +45,9 @@ const TextAreaField = props => {
         placeholder={placeholder}
         type={type}
         className={inputClassName}
-        data-cy={props['data-cy']}
+        data-cy={props["data-cy"]}
       />
-      {touched &&
-        error && (
-          <span className="error_message error_message--red">{error}</span>
-        )}
+      {touched && error && <span className="error_message error_message--red">{error}</span>}
     </div>
   );
 };
@@ -66,15 +63,15 @@ TextAreaField.propTypes = {
   maxLength: PropTypes.string,
   disableVerticalResize: PropTypes.bool,
   disableHorizontalResize: PropTypes.bool,
-  'data-cy': PropTypes.string,
+  "data-cy": PropTypes.string,
 };
 TextAreaField.defaultProps = {
-  type: 'text',
-  placeholder: '',
-  labelClassName: '',
-  label: '',
-  rows: '4',
-  cols: '50',
+  type: "text",
+  placeholder: "",
+  labelClassName: "",
+  label: "",
+  rows: "4",
+  cols: "50",
   disableVerticalResize: false,
   disableHorizontalResize: false,
 };

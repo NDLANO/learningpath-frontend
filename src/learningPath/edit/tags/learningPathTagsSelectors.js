@@ -6,12 +6,9 @@
  *
  */
 
-import { createSelector } from 'reselect';
-import defined from 'defined';
+import { createSelector } from "reselect";
+import defined from "defined";
 
-const getLearningPathTagsFromState = state => state.learningPathTags.all;
+const getLearningPathTagsFromState = (state) => state.learningPathTags.all;
 
-export const getLearningPathTags = createSelector(
-  [getLearningPathTagsFromState],
-  tags => defined(tags.tags, []),
-);
+export const getLearningPathTags = createSelector([getLearningPathTagsFromState], (tags) => defined(tags.tags, []));

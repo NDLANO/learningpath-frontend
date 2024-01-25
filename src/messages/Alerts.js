@@ -6,12 +6,12 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
 
-import Icon from '../common/Icon';
-import { timeoutMessage, clearMessage } from './messagesActions';
+import Icon from "../common/Icon";
+import { timeoutMessage, clearMessage } from "./messagesActions";
 
 export const Action = ({ title, onClick }) => (
   <button type="button" onClick={onClick} className="un-button alert_action">
@@ -30,20 +30,15 @@ export const Alert = ({ message, dispatch }) => {
     dispatch(clearMessage(message.id));
   };
 
-  const severity = message.severity ? message.severity : 'info';
+  const severity = message.severity ? message.severity : "info";
 
   return (
     <div className={`alert alert--${severity}`}>
       <div className="alert_msg">{message.message}</div>
-      <button
-        type="button"
-        className="alert_dismiss un-button"
-        onClick={() => dispatch(clearMessage(message.id))}>
+      <button type="button" className="alert_dismiss un-button" onClick={() => dispatch(clearMessage(message.id))}>
         <Icon.Clear />
       </button>
-      {message.action ? (
-        <Action title={message.action.title} onClick={onClick} />
-      ) : null}
+      {message.action ? <Action title={message.action.title} onClick={onClick} /> : null}
     </div>
   );
 };
@@ -57,17 +52,15 @@ Alert.propTypes = {
 export const Alerts = ({ dispatch, messages }) => {
   const isHidden = messages.length === 0;
   const overlayClasses = classNames({
-    'alert-overlay': true,
-    'alert-overlay--hidden': isHidden,
+    "alert-overlay": true,
+    "alert-overlay--hidden": isHidden,
   });
 
-  messages
-    .filter(m => m.timeToLive > 0)
-    .forEach(item => dispatch(timeoutMessage(item)));
+  messages.filter((m) => m.timeToLive > 0).forEach((item) => dispatch(timeoutMessage(item)));
 
   return (
     <div className={overlayClasses}>
-      {messages.map(message => (
+      {messages.map((message) => (
         <Alert key={message.id} dispatch={dispatch} message={message} />
       ))}
     </div>

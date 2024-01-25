@@ -6,17 +6,17 @@
  *
  */
 
-import React from 'react';
-import { Provider } from 'react-redux';
-import { StaticRouter } from 'react-router';
-import { matchPath } from 'react-router-dom';
-import App from '../../main/App';
-import config from '../../config';
-import configureStore from '../../configureStore';
-import { serverRoutes } from '../serverRoutes';
-import prefetchData from '../helpers/prefetchData';
-import { getLocaleInfoFromPath } from '../../locale/configureLocale';
-import { renderHtml, renderPage } from '../helpers/render';
+import React from "react";
+import { Provider } from "react-redux";
+import { StaticRouter } from "react-router";
+import { matchPath } from "react-router-dom";
+import App from "../../main/App";
+import config from "../../config";
+import configureStore from "../../configureStore";
+import { serverRoutes } from "../serverRoutes";
+import prefetchData from "../helpers/prefetchData";
+import { getLocaleInfoFromPath } from "../../locale/configureLocale";
+import { renderHtml, renderPage } from "../helpers/render";
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST); //eslint-disable-line
 
@@ -30,11 +30,11 @@ async function doRender(req, res) {
   const { locale, basepath, basename } = getLocaleInfoFromPath(req.path);
 
   // const locale = getHtmlLang(paths[1]);
-  const match = serverRoutes.find(r => matchPath(basepath, r));
+  const match = serverRoutes.find((r) => matchPath(basepath, r));
   // eslint-disable-next-line no-underscore-dangle
 
   if (config.disableSSR || match.notFound) {
-    const { html, ...docProps } = renderPage('', getAssets(), {
+    const { html, ...docProps } = renderPage("", getAssets(), {
       locale,
     });
     return {

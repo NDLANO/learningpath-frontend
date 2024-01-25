@@ -6,26 +6,26 @@
  *
  */
 
-import { isFSA } from 'flux-standard-action';
-import { setLearningPathStep } from '../learningPathStepActions';
+import { isFSA } from "flux-standard-action";
+import { setLearningPathStep } from "../learningPathStepActions";
 
-test('actions/setLearningPathStep', () => {
-  const actual = setLearningPathStep({ id: '12345' });
+test("actions/setLearningPathStep", () => {
+  const actual = setLearningPathStep({ id: "12345" });
 
   expect(isFSA(actual)).toBeTruthy();
 
-  expect(actual.type).toBe('SET_LEARNING_PATH_STEP');
+  expect(actual.type).toBe("SET_LEARNING_PATH_STEP");
   expect(actual.payload).toBeTruthy();
-  expect(actual.payload).toEqual({ id: '12345' });
+  expect(actual.payload).toEqual({ id: "12345" });
   expect(actual.error).toBeFalsy();
 });
 
-test('actions/setLearningPathStep with error', () => {
-  const actual = setLearningPathStep(new Error('fail!'));
+test("actions/setLearningPathStep with error", () => {
+  const actual = setLearningPathStep(new Error("fail!"));
 
   expect(isFSA(actual)).toBeTruthy();
 
-  expect(actual.type).toBe('SET_LEARNING_PATH_STEP');
-  expect(actual.payload.message).toBe('fail!');
+  expect(actual.type).toBe("SET_LEARNING_PATH_STEP");
+  expect(actual.payload.message).toBe("fail!");
   expect(actual.error).toBeTruthy();
 });

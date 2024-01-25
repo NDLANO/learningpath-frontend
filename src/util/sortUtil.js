@@ -6,22 +6,22 @@
  *
  */
 
-import sortBy from 'lodash/sortBy';
-import reverse from 'lodash/reverse';
+import sortBy from "lodash/sortBy";
+import reverse from "lodash/reverse";
 
 export const sortPaths = (paths, field) => {
   switch (field) {
-    case 'title':
-      return sortBy(paths, p => p.title);
+    case "title":
+      return sortBy(paths, (p) => p.title);
 
-    case 'lastUpdated':
+    case "lastUpdated":
       return sortBy(paths, field);
 
-    case '-lastUpdated':
-      return reverse(sortBy(paths, 'lastUpdated'));
+    case "-lastUpdated":
+      return reverse(sortBy(paths, "lastUpdated"));
 
-    case 'status':
-      return reverse(sortBy(paths, 'status'));
+    case "status":
+      return reverse(sortBy(paths, "status"));
 
     default:
       return sortBy(paths, field);

@@ -6,18 +6,18 @@
  *
  */
 
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { HelmetWithTracker } from '@ndla/tracker';
-import polyglot from '../i18n';
+import React from "react";
+import { Link } from "react-router-dom";
+import { HelmetWithTracker } from "@ndla/tracker";
+import polyglot from "../i18n";
 
 export default function Forbidden() {
   return (
     <div className="status-response_container">
-      <HelmetWithTracker title={polyglot.t('htmlTitles.forbidden')} />
-      <h2>403: {polyglot.t('htmlStatus.forbidden.description')}</h2>
+      <HelmetWithTracker title={polyglot.t("htmlTitles.forbidden")} />
+      <h2>403: {polyglot.t("htmlStatus.forbidden.description")}</h2>
       <Link to="/" className="cta-link--primary">
-        {polyglot.t('htmlStatus.backToFrontpage')}
+        {polyglot.t("htmlStatus.backToFrontpage")}
       </Link>
     </div>
   );

@@ -6,16 +6,16 @@
  *
  */
 
-import React from 'react';
-import { shallow } from 'enzyme';
-import LoginProviders from '../LoginProviders';
+import React from "react";
+import { shallow } from "enzyme";
+import LoginProviders from "../LoginProviders";
 
-test('component/LoginProviders', () => {
-  const component = shallow(<LoginProviders match={{ url: '' }} />);
+test("component/LoginProviders", () => {
+  const component = shallow(<LoginProviders match={{ url: "" }} />);
 
-  const buttons = component.find('.cta-link');
+  const buttons = component.find(".cta-link");
 
   expect(buttons.length).toBe(2);
 
-  expect(buttons.map(n => n.text())).toEqual(['Google', 'Facebook']);
+  expect(buttons.map((n) => n.text())).toEqual(["Google", "Facebook"]);
 });

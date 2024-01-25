@@ -6,22 +6,22 @@
  *
  */
 
-import React from 'react';
-import { shallow } from 'enzyme';
-import noop from 'lodash/noop';
-import configureStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
+import React from "react";
+import { shallow } from "enzyme";
+import noop from "lodash/noop";
+import configureStore from "redux-mock-store";
+import thunk from "redux-thunk";
 
-import { translatedLearningPath } from '../../../common/__tests__/translatedMockData';
-import { learningPath } from '../../../common/__tests__/mockData';
-import LearningPathGeneralInfo from '../LearningPathGeneralInfo';
+import { translatedLearningPath } from "../../../common/__tests__/translatedMockData";
+import { learningPath } from "../../../common/__tests__/mockData";
+import LearningPathGeneralInfo from "../LearningPathGeneralInfo";
 
 const Foo = () => <div />;
 const Bar = () => <div />;
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
-test('component/LearningPathGeneralInfo', () => {
+test("component/LearningPathGeneralInfo", () => {
   expect(
     shallow(
       <LearningPathGeneralInfo
@@ -35,7 +35,7 @@ test('component/LearningPathGeneralInfo', () => {
           localCloseSidebars: noop,
         })}
       />,
-      { context: { lang: 'nb' } },
+      { context: { lang: "nb" } },
     )
       .dive()
       .find(Foo).length,

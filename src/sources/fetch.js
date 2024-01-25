@@ -6,7 +6,7 @@
  *
  */
 
-import 'isomorphic-fetch';
+import "isomorphic-fetch";
 
 // Make it easy to add common options (i.e. headers) later
 // by wrapping fetch

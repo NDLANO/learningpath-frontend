@@ -6,21 +6,15 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import ImageSearchForm from './ImageSearchForm';
-import ImageSearchResult from './ImageSearchResult';
-import ButtonPager from '../common/pager/ButtonPager';
-import { changeImageSearchQuery, setSavedImage } from './imageActions';
-import {
-  getSelectedImage,
-  getImageSearchQuery,
-  getResults,
-  getLastPage,
-  getTotalCount,
-} from './imageSelectors';
-import config from '../config';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import ImageSearchForm from "./ImageSearchForm";
+import ImageSearchResult from "./ImageSearchResult";
+import ButtonPager from "../common/pager/ButtonPager";
+import { changeImageSearchQuery, setSavedImage } from "./imageActions";
+import { getSelectedImage, getImageSearchQuery, getResults, getLastPage, getTotalCount } from "./imageSelectors";
+import config from "../config";
 
 export function Images(props) {
   const {
@@ -50,7 +44,7 @@ export function Images(props) {
     evt.preventDefault();
     localFetchImages(q, false);
   };
-  const base = '/image-api/v2/images';
+  const base = "/image-api/v2/images";
 
   const onSaveImage = (evt, image) => {
     closeLightBox();
@@ -68,7 +62,7 @@ export function Images(props) {
           totalCount={totalCount}
         />
         <div className="image_list">
-          {images.map(image => (
+          {images.map((image) => (
             <ImageSearchResult
               key={image.id}
               image={image}
@@ -107,7 +101,7 @@ Images.contextTypes = {
   lang: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = state =>
+const mapStateToProps = (state) =>
   Object.assign({}, state, {
     images: getResults(state),
     selectedImage: getSelectedImage(state),
@@ -120,7 +114,4 @@ const mapDispatchToProps = {
   localChangeImageSearchQuery: changeImageSearchQuery,
   localSetSavedImage: setSavedImage,
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Images);
+export default connect(mapStateToProps, mapDispatchToProps)(Images);

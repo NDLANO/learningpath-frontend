@@ -6,12 +6,12 @@
  *
  */
 
-import { convertFieldWithFallback } from '../util/convertFieldWithFallback';
+import { convertFieldWithFallback } from "../util/convertFieldWithFallback";
 
-const statusPrivate = { status: 'PRIVATE', action: 'unpublish' };
-const statusPublished = { status: 'PUBLISHED', action: 'publish', admin: true };
-const statusSubmitted = { status: 'SUBMITTED', action: 'submit' };
-const statusUnlisted = { status: 'UNLISTED', action: 'unlist' };
+const statusPrivate = { status: "PRIVATE", action: "unpublish" };
+const statusPublished = { status: "PUBLISHED", action: "publish", admin: true };
+const statusSubmitted = { status: "SUBMITTED", action: "submit" };
+const statusUnlisted = { status: "UNLISTED", action: "unlist" };
 
 export const learningPathStatuses = {
   PRIVATE: [statusUnlisted, statusSubmitted],
@@ -20,20 +20,20 @@ export const learningPathStatuses = {
   SUBMITTED: [statusPrivate, statusUnlisted, statusPublished],
 };
 
-export const convertLearningPath = learningPath => ({
+export const convertLearningPath = (learningPath) => ({
   ...learningPath,
-  title: convertFieldWithFallback(learningPath, 'title', ''),
-  description: convertFieldWithFallback(learningPath, 'description', ''),
+  title: convertFieldWithFallback(learningPath, "title", ""),
+  description: convertFieldWithFallback(learningPath, "description", ""),
   learningsteps: learningPath.learningsteps
-    ? learningPath.learningsteps.map(step => ({
+    ? learningPath.learningsteps.map((step) => ({
         ...step,
-        title: convertFieldWithFallback(step, 'title', ''),
+        title: convertFieldWithFallback(step, "title", ""),
       }))
     : [],
-  tags: convertFieldWithFallback(learningPath, 'tags', []),
+  tags: convertFieldWithFallback(learningPath, "tags", []),
 });
 
-export const learningPathStatusFromStatus = status => {
+export const learningPathStatusFromStatus = (status) => {
   switch (status) {
     case statusPrivate.status:
       return statusUnlisted;

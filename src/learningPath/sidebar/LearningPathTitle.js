@@ -6,32 +6,25 @@
  *
  */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import IsBasedOn from '../../common/IsBasedOn';
-import polyglot from '../../i18n';
-import Icon from '../../common/Icon';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import IsBasedOn from "../../common/IsBasedOn";
+import polyglot from "../../i18n";
+import Icon from "../../common/Icon";
 
-const ClickableLearningPathTitle = ({
-  learningPath,
-  onShowToggle,
-  showTitle,
-}) => {
+const ClickableLearningPathTitle = ({ learningPath, onShowToggle, showTitle }) => {
   if (learningPath.title.length < 30) {
     return <h3>{learningPath.title}</h3>;
   }
   const titleClassName = classNames({
-    'learningpath-general-info_title': true,
-    'learningpath-general-info_title--open': showTitle,
+    "learningpath-general-info_title": true,
+    "learningpath-general-info_title--open": showTitle,
   });
 
   return (
     <div className={titleClassName}>
-      <button
-        type="button"
-        className="un-button"
-        onClick={() => onShowToggle('showTitle')}>
+      <button type="button" className="un-button" onClick={() => onShowToggle("showTitle")}>
         <h3>{learningPath.title}</h3>
       </button>
     </div>
@@ -55,7 +48,7 @@ class LearningPathTitle extends Component {
   }
 
   onShowToggle(name) {
-    this.setState(prevState => ({ [name]: !prevState[name] }));
+    this.setState((prevState) => ({ [name]: !prevState[name] }));
   }
 
   render() {
@@ -65,8 +58,8 @@ class LearningPathTitle extends Component {
     }
 
     const isBasedOnClassName = classNames({
-      'learningpath-general-info_is-basedon': true,
-      'learningpath-general-info_is-basedon--open': this.state.showIsBasedOn,
+      "learningpath-general-info_is-basedon": true,
+      "learningpath-general-info_is-basedon--open": this.state.showIsBasedOn,
     });
 
     return (
@@ -81,10 +74,11 @@ class LearningPathTitle extends Component {
             <button
               type="button"
               className="un-button learningpath-general-info_is-basedon-button"
-              onClick={() => this.onShowToggle('showIsBasedOn')}>
+              onClick={() => this.onShowToggle("showIsBasedOn")}
+            >
               {this.state.showIsBasedOn
-                ? polyglot.t('learningPath.hideIsBasedOn')
-                : polyglot.t('learningPath.showIsBasedOn')}
+                ? polyglot.t("learningPath.hideIsBasedOn")
+                : polyglot.t("learningPath.showIsBasedOn")}
               {this.state.showIsBasedOn ? <Icon.ArrowUp /> : <Icon.ArrowDown />}
             </button>
             <div className={isBasedOnClassName}>
@@ -92,7 +86,7 @@ class LearningPathTitle extends Component {
             </div>
           </div>
         ) : (
-          ''
+          ""
         )}
       </div>
     );

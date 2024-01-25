@@ -6,36 +6,32 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import BEMHelper from 'react-bem-helper';
-import polyglot from '../../i18n';
-import Icon from '../../common/Icon';
+import React from "react";
+import PropTypes from "prop-types";
+import BEMHelper from "react-bem-helper";
+import polyglot from "../../i18n";
+import Icon from "../../common/Icon";
 
 const classes = new BEMHelper({
-  name: 'tile',
-  prefix: 'c-',
+  name: "tile",
+  prefix: "c-",
 });
 
 const TileUserInformation = ({ owner }) =>
   owner ? (
     <React.Fragment>
-      <div {...classes('property')}>
-        <div {...classes('propterty-icon')}>
+      <div {...classes("property")}>
+        <div {...classes("propterty-icon")}>
           <Icon.Person />
         </div>
-        <p {...classes('property-description')}>
-          {polyglot.t('tilePage.path.owner.name')}
-        </p>
+        <p {...classes("property-description")}>{polyglot.t("tilePage.path.owner.name")}</p>
         <p>{owner.name}</p>
       </div>
-      <div {...classes('property')}>
-        <div {...classes('propterty-icon')}>
+      <div {...classes("property")}>
+        <div {...classes("propterty-icon")}>
           <Icon.Person />
         </div>
-        <p {...classes('property-description')}>
-          {polyglot.t('tilePage.path.owner.email')}
-        </p>
+        <p {...classes("property-description")}>{polyglot.t("tilePage.path.owner.email")}</p>
         <p>{owner.email}</p>
       </div>
     </React.Fragment>

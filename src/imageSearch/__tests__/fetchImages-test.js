@@ -6,31 +6,27 @@
  *
  */
 
-import configureStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
-import nock from 'nock';
-import { testError } from '../../common/__tests__/testError';
-import {
-  fetchLearningPathImages,
-  setImages,
-  changeImageSearchQuery,
-} from '../imageActions';
-import payload403invalid from '../../actions/__tests__/payload403invalid';
+import configureStore from "redux-mock-store";
+import thunk from "redux-thunk";
+import nock from "nock";
+import { testError } from "../../common/__tests__/testError";
+import { fetchLearningPathImages, setImages, changeImageSearchQuery } from "../imageActions";
+import payload403invalid from "../../actions/__tests__/payload403invalid";
 
-import { applicationError } from '../../messages/messagesActions';
+import { applicationError } from "../../messages/messagesActions";
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-test('actions/fetchImages', done => {
-  const apiMock = nock('http://ndla-api')
-    .get('/image-api/v2/images')
+test("actions/fetchImages", (done) => {
+  const apiMock = nock("http://ndla-api")
+    .get("/image-api/v2/images")
     .query({ page: 3, pageSize: 25 })
     .reply(200, {
       totalCount: 2,
       page: 3,
       pageSize: 25,
-      results: [{ id: '123' }, { id: '456' }],
+      results: [{ id: "123" }, { id: "456" }],
     });
   const store = mockStore({});
 
@@ -42,7 +38,7 @@ test('actions/fetchImages', done => {
           totalCount: 2,
           page: 3,
           pageSize: 25,
-          results: [{ id: '123' }, { id: '456' }],
+          results: [{ id: "123" }, { id: "456" }],
         }),
         changeImageSearchQuery({ page: 3, pageSize: 25 }),
       ]);
@@ -52,11 +48,11 @@ test('actions/fetchImages', done => {
     .catch(testError);
 });
 
-test('actions/fetchImages with url access denied', done => {
-  const apiMock = nock('http://ndla-api')
-    .get('/image-api/v2/images')
+test("actions/fetchImages with url access denied", (done) => {
+  const apiMock = nock("http://ndla-api")
+    .get("/image-api/v2/images")
     .query({ page: 3, pageSize: 25 })
-    .reply(403, { message: 'Invalid' });
+    .reply(403, { message: "Invalid" });
 
   const store = mockStore();
 
@@ -64,11 +60,7 @@ test('actions/fetchImages with url access denied', done => {
     .dispatch(fetchLearningPathImages({ page: 3, pageSize: 25 }))
     .then(() => {
       expect(store.getActions()).toEqual([
-        applicationError(
-          payload403invalid(
-            'http://ndla-api/image-api/v2/images?page=3&pageSize=25',
-          ),
-        ),
+        applicationError(payload403invalid("http://ndla-api/image-api/v2/images?page=3&pageSize=25")),
       ]);
       expect(() => apiMock.done()).not.toThrow();
       done();

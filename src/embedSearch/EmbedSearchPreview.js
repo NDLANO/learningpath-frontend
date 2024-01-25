@@ -6,22 +6,18 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import Lightbox from '../common/Lightbox';
-import Oembed from '../learningPath/step/oembed/Oembed';
-import polyglot from '../i18n';
+import React from "react";
+import PropTypes from "prop-types";
+import Lightbox from "../common/Lightbox";
+import Oembed from "../learningPath/step/oembed/Oembed";
+import polyglot from "../i18n";
 
-const EmbedSearchPreview = ({
-  oembedPreview,
-  oembedDisplay,
-  onImageLightboxClose,
-}) => (
+const EmbedSearchPreview = ({ oembedPreview, oembedDisplay, onImageLightboxClose }) => (
   <div className="big-lightbox_wrapper big-lightbox_wrapper--scroll big-lightbox_wrapper--center">
     <Lightbox display={oembedDisplay} onClose={onImageLightboxClose}>
-      <h2>{polyglot.t('embedSearch.preview.title')}</h2>
+      <h2>{polyglot.t("embedSearch.preview.title")}</h2>
       {oembedPreview.error ? (
-        <p>{polyglot.t('embedSearch.preview.error')}</p>
+        <p>{polyglot.t("embedSearch.preview.error")}</p>
       ) : (
         <Oembed oembedContent={oembedPreview} embedType="oembed" />
       )}

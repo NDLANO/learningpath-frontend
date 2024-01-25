@@ -6,21 +6,18 @@
  *
  */
 
-import { connect } from 'react-redux';
-import get from 'lodash/get';
-import assign from 'lodash/assign';
-import EditLearningPathStep, {
-  mapStateToProps,
-  mapDispatchToProps,
-} from '../edit/EditLearningPathStep';
-import * as actions from '../learningPathStepActions';
-import ifAuthenticated from '../../../util/ifAuthenticated';
+import { connect } from "react-redux";
+import get from "lodash/get";
+import assign from "lodash/assign";
+import EditLearningPathStep, { mapStateToProps, mapDispatchToProps } from "../edit/EditLearningPathStep";
+import * as actions from "../learningPathStepActions";
+import ifAuthenticated from "../../../util/ifAuthenticated";
 
-const extendMapStateToProps = state =>
+const extendMapStateToProps = (state) =>
   assign({}, mapStateToProps, {
-    step: get(state, 'learningPathStep', {}),
+    step: get(state, "learningPathStep", {}),
     learningPathId: state.learningPath.id,
-    licenses: get(state, 'learningPathLicenses.all', []),
+    licenses: get(state, "learningPathLicenses.all", []),
   });
 
 const extendMapDispatchToProps = assign({}, mapDispatchToProps, {
@@ -28,7 +25,4 @@ const extendMapDispatchToProps = assign({}, mapDispatchToProps, {
   localCreateEmptyLearningPathStep: actions.createEmptyLearningPathStep,
 });
 
-export default connect(
-  extendMapStateToProps,
-  extendMapDispatchToProps,
-)(EditLearningPathStep);
+export default connect(extendMapStateToProps, extendMapDispatchToProps)(EditLearningPathStep);

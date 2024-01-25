@@ -6,35 +6,35 @@
  *
  */
 
-import { isFSA } from 'flux-standard-action';
-import { setImages } from '../imageActions';
+import { isFSA } from "flux-standard-action";
+import { setImages } from "../imageActions";
 
-test('actions/setImages', () => {
+test("actions/setImages", () => {
   const actual = setImages({
     page: 1,
-    'page-size': 16,
+    "page-size": 16,
     totalCount: 2,
-    results: [{ id: '12345' }, { id: '67890' }],
+    results: [{ id: "12345" }, { id: "67890" }],
   });
 
   expect(isFSA(actual)).toBeTruthy();
 
-  expect(actual.type).toBe('SET_IMAGES');
+  expect(actual.type).toBe("SET_IMAGES");
   expect(actual.payload).toEqual({
     page: 1,
-    'page-size': 16,
+    "page-size": 16,
     totalCount: 2,
-    results: [{ id: '12345' }, { id: '67890' }],
+    results: [{ id: "12345" }, { id: "67890" }],
   });
   expect(actual.error).toBeFalsy();
 });
 
-test('actions/setImages with error', () => {
-  const actual = setImages(new Error('fail!'));
+test("actions/setImages with error", () => {
+  const actual = setImages(new Error("fail!"));
 
   expect(isFSA(actual)).toBeTruthy();
 
-  expect(actual.type).toBe('SET_IMAGES');
-  expect(actual.payload.message).toBe('fail!');
+  expect(actual.type).toBe("SET_IMAGES");
+  expect(actual.payload.message).toBe("fail!");
   expect(actual.error).toBeTruthy();
 });

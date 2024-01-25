@@ -6,21 +6,18 @@
  *
  */
 
-import configureStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
-import nock from 'nock';
-import { testError } from '../../common/__tests__/testError';
-import { fetchArticleSearch } from '../articleActions';
-import {
-  setEmbedResults,
-  changeEmbedSearchQuery,
-} from '../../embedSearch/embedSearchActions';
+import configureStore from "redux-mock-store";
+import thunk from "redux-thunk";
+import nock from "nock";
+import { testError } from "../../common/__tests__/testError";
+import { fetchArticleSearch } from "../articleActions";
+import { setEmbedResults, changeEmbedSearchQuery } from "../../embedSearch/embedSearchActions";
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
 const query = {
-  textQuery: 'hei',
+  textQuery: "hei",
   page: 1,
 };
 
@@ -29,18 +26,18 @@ const apiResponse = {
     results: [
       {
         id: 1,
-        title: { title: 'Test', language: 'nb' },
-        introduction: { introduction: 'Test', language: 'nb' },
+        title: { title: "Test", language: "nb" },
+        introduction: { introduction: "Test", language: "nb" },
       },
       {
         id: 2,
-        title: { title: 'Test3', language: 'nb' },
-        introduction: { introduction: 'Test3', language: 'nb' },
+        title: { title: "Test3", language: "nb" },
+        introduction: { introduction: "Test3", language: "nb" },
       },
       {
         id: 3,
-        title: { title: 'Test2', language: 'nb' },
-        introduction: { introduction: 'Test2', language: 'nb' },
+        title: { title: "Test2", language: "nb" },
+        introduction: { introduction: "Test2", language: "nb" },
       },
     ],
     totalCount: 3,
@@ -52,44 +49,44 @@ const expectedValue = {
   results: [
     {
       id: 1,
-      title: { title: 'Test', language: 'nb' },
-      introduction: { introduction: 'Test', language: 'nb' },
-      link: 'https://test.ndla.no/subjects/resource:1/subject:2/something:3',
+      title: { title: "Test", language: "nb" },
+      introduction: { introduction: "Test", language: "nb" },
+      link: "https://test.ndla.no/subjects/resource:1/subject:2/something:3",
     },
     {
       id: 2,
-      title: { title: 'Test3', language: 'nb' },
-      introduction: { introduction: 'Test3', language: 'nb' },
-      link: 'https://test.ndla.no/subjects/resource:1/subject:2/something:3',
+      title: { title: "Test3", language: "nb" },
+      introduction: { introduction: "Test3", language: "nb" },
+      link: "https://test.ndla.no/subjects/resource:1/subject:2/something:3",
     },
     {
       id: 3,
-      title: { title: 'Test2', language: 'nb' },
-      introduction: { introduction: 'Test2', language: 'nb' },
-      link: 'https://test.ndla.no/subjects/resource:1/subject:2/something:3',
+      title: { title: "Test2", language: "nb" },
+      introduction: { introduction: "Test2", language: "nb" },
+      link: "https://test.ndla.no/subjects/resource:1/subject:2/something:3",
     },
   ],
   totalCount: 3,
   pageSize: 10,
 };
 
-test('actions/fetchArticleSearch', done => {
-  const apiMock = nock('http://ndla-api')
-    .get('/search-api/v1/search')
+test("actions/fetchArticleSearch", (done) => {
+  const apiMock = nock("http://ndla-api")
+    .get("/search-api/v1/search")
     .query({
-      query: 'hei',
-      'page-size': 10,
+      query: "hei",
+      "page-size": 10,
       page: 1,
-      language: 'nb',
-      'context-types': 'topic-article,standard',
+      language: "nb",
+      "context-types": "topic-article,standard",
     })
     .reply(200, { ...apiResponse.result });
 
-  const taxonomyMocks = apiResponse.result.results.map(item =>
-    nock('http://ndla-api')
-      .get('/taxonomy/v1/nodes')
-      .query({ contentURI: `urn:article:${item.id}`, language: 'nb' })
-      .reply(200, [{ path: '/resource:1/subject:2/something:3' }]),
+  const taxonomyMocks = apiResponse.result.results.map((item) =>
+    nock("http://ndla-api")
+      .get("/taxonomy/v1/nodes")
+      .query({ contentURI: `urn:article:${item.id}`, language: "nb" })
+      .reply(200, [{ path: "/resource:1/subject:2/something:3" }]),
   );
 
   const store = mockStore({
@@ -97,24 +94,24 @@ test('actions/fetchArticleSearch', done => {
   });
 
   store
-    .dispatch(fetchArticleSearch(query, 'nb'))
+    .dispatch(fetchArticleSearch(query, "nb"))
     .then(() => {
       expect(store.getActions()).toEqual([
         setEmbedResults({
-          type: 'ndla',
+          type: "ndla",
           result: expectedValue,
         }),
         changeEmbedSearchQuery({
           query: {
-            textQuery: 'hei',
+            textQuery: "hei",
             page: 1,
             numberOfPages: 1,
           },
-          type: 'ndla',
+          type: "ndla",
         }),
       ]);
       expect(() => apiMock.done()).not.toThrow();
-      taxonomyMocks.map(mock => expect(() => mock.done()).not.toThrow());
+      taxonomyMocks.map((mock) => expect(() => mock.done()).not.toThrow());
       done();
     })
     .catch(testError);

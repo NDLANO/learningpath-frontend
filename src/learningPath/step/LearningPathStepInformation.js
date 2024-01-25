@@ -6,49 +6,39 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import SafeLink from '@ndla/safelink';
-import Tooltip from '@ndla/tooltip';
-import { Link as LinkIcon } from '@ndla/icons/common';
-import LearningPathStepLicense from './LearningPathStepLicense';
-import { CopyrightObjectShape } from '../../shapes';
-import config from '../../config';
-import polyglot from '../../i18n';
+import React from "react";
+import PropTypes from "prop-types";
+import SafeLink from "@ndla/safelink";
+import Tooltip from "@ndla/tooltip";
+import { Link as LinkIcon } from "@ndla/icons/common";
+import LearningPathStepLicense from "./LearningPathStepLicense";
+import { CopyrightObjectShape } from "../../shapes";
+import config from "../../config";
+import polyglot from "../../i18n";
 
-const LearningPathStepInformation = ({
-  learningPathStep,
-  copyright,
-  stepTitle,
-  hasNdlaWriteAccess,
-}) => {
-  const isNDLAArticleIframeUrl = url =>
-    /^http(s)?:\/\/((.*)\.)?ndla.no\/((.*)\/)?article-iframe\/\d*/.test(url);
-  const embedUrl = learningPathStep?.embedUrl?.url || '';
-  const baseUrl = embedUrl.split('?')[0];
+const LearningPathStepInformation = ({ learningPathStep, copyright, stepTitle, hasNdlaWriteAccess }) => {
+  const isNDLAArticleIframeUrl = (url) => /^http(s)?:\/\/((.*)\.)?ndla.no\/((.*)\/)?article-iframe\/\d*/.test(url);
+  const embedUrl = learningPathStep?.embedUrl?.url || "";
+  const baseUrl = embedUrl.split("?")[0];
 
   const linkToEd = (url, id) => {
-    if (url.includes('topic')) {
-      return `${
-        config.editorialFrontendDomain
-      }/subject-matter/topic-article/${id}/edit/nb`;
+    if (url.includes("topic")) {
+      return `${config.editorialFrontendDomain}/subject-matter/topic-article/${id}/edit/nb`;
     } else {
-      return `${
-        config.editorialFrontendDomain
-      }/subject-matter/learning-resource/${id}/edit/`;
+      return `${config.editorialFrontendDomain}/subject-matter/learning-resource/${id}/edit/`;
     }
   };
 
   const EditorialLinkButton = () => {
-    const splittedHref = baseUrl.split('/');
+    const splittedHref = baseUrl.split("/");
     const articleId = splittedHref.pop();
     const edLink = linkToEd(baseUrl, articleId);
 
     return (
-      <Tooltip tooltip={polyglot.t('learningPath.editInEditorial')}>
-        <LinkIcon />{' '}
+      <Tooltip tooltip={polyglot.t("learningPath.editInEditorial")}>
+        <LinkIcon />{" "}
         <SafeLink to={edLink} target="_blank">
-          {polyglot.t('learningPath.editInEditorial')}
+          {polyglot.t("learningPath.editInEditorial")}
         </SafeLink>
       </Tooltip>
     );
@@ -57,20 +47,14 @@ const LearningPathStepInformation = ({
   return (
     <div className="learning-step">
       {learningPathStep.showTitle ? <h1>{stepTitle}</h1> : null}
-      {isNDLAArticleIframeUrl(baseUrl) &&
-        hasNdlaWriteAccess && <EditorialLinkButton />}
+      {isNDLAArticleIframeUrl(baseUrl) && hasNdlaWriteAccess && <EditorialLinkButton />}
       {learningPathStep.description ? (
         <div className="learning-step_licence-description">
-          <LearningPathStepLicense
-            copyright={copyright}
-            learningPathStep={learningPathStep}
-          />
-          <div
-            dangerouslySetInnerHTML={{ __html: learningPathStep.description }}
-          />
+          <LearningPathStepLicense copyright={copyright} learningPathStep={learningPathStep} />
+          <div dangerouslySetInnerHTML={{ __html: learningPathStep.description }} />
         </div>
       ) : (
-        ''
+        ""
       )}
     </div>
   );

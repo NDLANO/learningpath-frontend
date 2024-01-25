@@ -6,17 +6,17 @@
  *
  */
 
-import { handleActions } from 'redux-actions';
-import cloneDeep from 'lodash/cloneDeep';
+import { handleActions } from "redux-actions";
+import cloneDeep from "lodash/cloneDeep";
 
 const initialState = {
   images: [],
   selectedImage: {},
   savedImage: {},
   imageSearchQuery: {
-    query: '',
+    query: "",
     page: 1,
-    'page-size': 16,
+    "page-size": 16,
   },
 };
 export default handleActions(
@@ -54,11 +54,7 @@ export default handleActions(
     CHANGE_IMAGE_SEARCH_QUERY: {
       next(state, action) {
         const nextState = cloneDeep(state);
-        nextState.imageSearchQuery = Object.assign(
-          {},
-          state.imageSearchQuery,
-          action.payload,
-        ); // action.payload;
+        nextState.imageSearchQuery = Object.assign({}, state.imageSearchQuery, action.payload); // action.payload;
         return nextState;
       },
       throw(state) {

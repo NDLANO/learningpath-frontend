@@ -6,12 +6,12 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Icon from '../../common/Icon';
-import polyglot from '../../i18n';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import Icon from "../../common/Icon";
+import polyglot from "../../i18n";
 
 export function SortLearningStepsButton({ learningPath }) {
   if (!learningPath.canEdit) {
@@ -24,7 +24,7 @@ export function SortLearningStepsButton({ learningPath }) {
     <div>
       <Link className="sort-steps_button" to={target}>
         <Icon.ImportExport />
-        {polyglot.t('sortSteps.sortOrDelete')}
+        {polyglot.t("sortSteps.sortOrDelete")}
       </Link>
     </div>
   );
@@ -34,4 +34,4 @@ SortLearningStepsButton.propTypes = {
   learningPath: PropTypes.object.isRequired,
 };
 
-export default connect(state => state)(SortLearningStepsButton);
+export default connect((state) => state)(SortLearningStepsButton);

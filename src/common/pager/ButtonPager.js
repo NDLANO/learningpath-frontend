@@ -6,53 +6,47 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import Icon from '../Icon';
+import React from "react";
+import PropTypes from "prop-types";
+import Icon from "../Icon";
 
-import { stepNumbers } from './PagerUtil';
+import { stepNumbers } from "./PagerUtil";
 
 export default function ButtonPager(props) {
   const { page, lastPage, query, pagerAction } = props;
   const steps = stepNumbers(page, lastPage);
 
-  const queryToPage = pageNumber =>
-    Object.assign({}, query, { page: pageNumber });
+  const queryToPage = (pageNumber) => Object.assign({}, query, { page: pageNumber });
 
-  const handleClickToPage = pageNumber => evt => {
+  const handleClickToPage = (pageNumber) => (evt) => {
     evt.preventDefault();
     pagerAction(queryToPage(pageNumber));
   };
 
-  const pageLinks = steps.map(n => {
+  const pageLinks = steps.map((n) => {
     if (n === page) {
       return (
-        <span
-          key={n}
-          className="search-stepper_step search-stepper_step--active">
+        <span key={n} className="search-stepper_step search-stepper_step--active">
           {n}
         </span>
       );
     }
     return (
-      <button
-        key={n}
-        type="button"
-        className="search-stepper_step"
-        onClick={handleClickToPage(n)}>
+      <button key={n} type="button" className="search-stepper_step" onClick={handleClickToPage(n)}>
         {n}
       </button>
     );
   });
-  let prevPageLink = '';
-  let nextPageLink = '';
+  let prevPageLink = "";
+  let nextPageLink = "";
 
   if (steps[0] < page) {
     prevPageLink = (
       <button
         type="button"
         className="search-stepper_step search-stepper_step--back"
-        onClick={handleClickToPage(page - 1)}>
+        onClick={handleClickToPage(page - 1)}
+      >
         <Icon.Back />
       </button>
     );
@@ -63,7 +57,8 @@ export default function ButtonPager(props) {
       <button
         type="button"
         className="search-stepper_step search-stepper_step--forward"
-        onClick={handleClickToPage(page + 1)}>
+        onClick={handleClickToPage(page + 1)}
+      >
         <Icon.Forward />
       </button>
     );

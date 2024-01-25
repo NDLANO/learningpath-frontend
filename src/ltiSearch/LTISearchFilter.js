@@ -6,20 +6,20 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
 
 class LTISearchFilter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      filter: 'khan_academy',
+      filter: "khan_academy",
       filters: [
-        { key: 'khan_academy', name: 'Khan Academy' },
-        { key: 'youtube', name: 'Youtube' },
-        { key: 'quizlet', name: 'Quizlet' },
-        { key: 'youtube_ted_ed', name: 'Ted' },
+        { key: "khan_academy", name: "Khan Academy" },
+        { key: "youtube", name: "Youtube" },
+        { key: "quizlet", name: "Quizlet" },
+        { key: "youtube_ted_ed", name: "Ted" },
       ],
     };
 
@@ -31,7 +31,7 @@ class LTISearchFilter extends React.Component {
     const returnUrl = stepId
       ? `${window.location.origin}/lti/${learningPathId}/step/${stepId}`
       : `${window.location.origin}/lti/${learningPathId}/step/new`;
-    const query = { key: 'khan_academy', returnUrl };
+    const query = { key: "khan_academy", returnUrl };
     this.props.onFilterClick(query);
   }
 
@@ -47,21 +47,22 @@ class LTISearchFilter extends React.Component {
   }
 
   render() {
-    const filterClass = filter =>
+    const filterClass = (filter) =>
       classNames({
-        'un-button': true,
-        'lti-search_form-filter ': true,
-        'lti-search_form-filter--active': this.state.filter === filter,
+        "un-button": true,
+        "lti-search_form-filter ": true,
+        "lti-search_form-filter--active": this.state.filter === filter,
       });
 
     return (
       <div className="lti-search_form-filters">
-        {this.state.filters.map(filter => (
+        {this.state.filters.map((filter) => (
           <button
             type="button"
             key={filter.key}
             className={filterClass(filter.key)}
-            onClick={evt => this.handleLTIFilterChange(evt, filter)}>
+            onClick={(evt) => this.handleLTIFilterChange(evt, filter)}
+          >
             {filter.name}
           </button>
         ))}

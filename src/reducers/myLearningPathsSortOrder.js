@@ -6,9 +6,9 @@
  *
  */
 
-import { handleActions } from 'redux-actions';
+import { handleActions } from "redux-actions";
 
-const DEFAULT = 'title';
+const DEFAULT = "title";
 
 export default handleActions(
   {

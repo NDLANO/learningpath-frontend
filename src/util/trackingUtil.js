@@ -8,18 +8,18 @@
 
 export const getDimensionsCodes = {
   13: {
-    ga: 'dimension13',
-    gtm: 'CustDimStiLengde',
+    ga: "dimension13",
+    gtm: "CustDimStiLengde",
   },
   14: {
-    ga: 'dimension14',
-    gtm: 'CustDimStiSteg',
+    ga: "dimension14",
+    gtm: "CustDimStiSteg",
   },
 };
 
 export const convertToGaOrGtmDimension = (dimensions, type) => {
   const newDimensions = {};
-  Object.keys(dimensions).forEach(key => {
+  Object.keys(dimensions).forEach((key) => {
     Object.assign(newDimensions, {
       [getDimensionsCodes[key][type]]: dimensions[key],
     });

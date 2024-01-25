@@ -6,21 +6,17 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import classNames from 'classnames';
-import get from 'lodash/get';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import classNames from "classnames";
+import get from "lodash/get";
 
-import Logo from './Logo';
-import SiteNav from './siteNav/SiteNav';
-import Icon from './Icon';
+import Logo from "./Logo";
+import SiteNav from "./siteNav/SiteNav";
+import Icon from "./Icon";
 
-import {
-  closeSidebars,
-  openLeftSidebar,
-  openRightSidebar,
-} from './sidebarActions';
+import { closeSidebars, openLeftSidebar, openRightSidebar } from "./sidebarActions";
 
 export function Masthead(props) {
   const {
@@ -51,27 +47,23 @@ export function Masthead(props) {
     classNames({
       active: isActive,
       masthead_button: true,
-      'un-button': true,
-      'masthead_button--right': !isLeft,
-      'masthead_button--left': isLeft,
+      "un-button": true,
+      "masthead_button--right": !isLeft,
+      "masthead_button--left": isLeft,
     });
 
-  const collapseClassName = isOpen =>
+  const collapseClassName = (isOpen) =>
     classNames({
-      'masthead--desktop': true,
-      'sidebar--collapsed': !isOpen,
-      'sidebar--open': isOpen,
+      "masthead--desktop": true,
+      "sidebar--collapsed": !isOpen,
+      "sidebar--open": isOpen,
     });
 
   const mastheadPageOverlay =
     isLeftSideBarOpen || isRightSidebarOpen ? (
-      <button
-        type="button"
-        className="masthead_page-overlay"
-        onClick={() => localCloseSidebars()}
-      />
+      <button type="button" className="masthead_page-overlay" onClick={() => localCloseSidebars()} />
     ) : (
-      ''
+      ""
     );
 
   const cloneChildren = children
@@ -90,7 +82,8 @@ export function Masthead(props) {
           <button
             type="button"
             className={activeButtonClassName(false, isRightSidebarOpen)}
-            onClick={() => rightNavButtonClicked()}>
+            onClick={() => rightNavButtonClicked()}
+          >
             <Icon.Menu />
             <span>Meny</span>
           </button>
@@ -126,10 +119,10 @@ Masthead.propTypes = {
 const mapStateToProps = (state, ownProps) =>
   Object.assign({}, state, {
     learningPath: state.learningPath,
-    changeStatusButton: get(ownProps, 'changeStatusButton', null),
-    isLeftSideBarOpen: get(state, 'sidebar.isLeftSideBarOpen', false),
-    isRightSidebarOpen: get(state, 'sidebar.isRightSidebarOpen', false),
-    logo: get(ownProps, 'logo', <Logo />),
+    changeStatusButton: get(ownProps, "changeStatusButton", null),
+    isLeftSideBarOpen: get(state, "sidebar.isLeftSideBarOpen", false),
+    isRightSidebarOpen: get(state, "sidebar.isRightSidebarOpen", false),
+    logo: get(ownProps, "logo", <Logo />),
   });
 const mapDispatchToProps = {
   localCloseSidebars: closeSidebars,
@@ -137,7 +130,4 @@ const mapDispatchToProps = {
   openRight: openRightSidebar,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Masthead);
+export default connect(mapStateToProps, mapDispatchToProps)(Masthead);

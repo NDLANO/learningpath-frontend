@@ -6,67 +6,56 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { reduxForm, reset, Field } from 'redux-form';
-import polyglot from '../../i18n';
-import InputField from '../../common/form/InputField';
-import TextAreaField from '../../common/form/TextAreaField';
-import { createValidator, required } from '../../util/validation';
+import React from "react";
+import PropTypes from "prop-types";
+import { reduxForm, reset, Field } from "redux-form";
+import polyglot from "../../i18n";
+import InputField from "../../common/form/InputField";
+import TextAreaField from "../../common/form/TextAreaField";
+import { createValidator, required } from "../../util/validation";
 
 class CreateLearningPath extends React.Component {
   componentWillUnmount() {
     const { dispatch } = this.props;
-    dispatch(reset('create-learning-path'));
+    dispatch(reset("create-learning-path"));
   }
 
   render() {
     const { submitting, handleSubmit, valid } = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        <h1>{polyglot.t('createLearningPath.createNew')}</h1>
+        <h1>{polyglot.t("createLearningPath.createNew")}</h1>
         <div>
           <Field
             name="title"
             id="title"
             type="text"
             component={InputField}
-            label={polyglot.t('createLearningPath.title')}
+            label={polyglot.t("createLearningPath.title")}
             maxLength="75"
             data-cy="create-path-input-title"
           />
-          <p className="learning-path_input-information">
-            {polyglot.t('createLearningPath.titleMaxLength')}
-          </p>
+          <p className="learning-path_input-information">{polyglot.t("createLearningPath.titleMaxLength")}</p>
         </div>
         <div>
-          <label htmlFor="description">
-            {polyglot.t('createLearningPath.description')}
-          </label>
+          <label htmlFor="description">{polyglot.t("createLearningPath.description")}</label>
           <Field
             id="description"
             rows="4"
             cols="50"
             name="description"
-            placeholder={polyglot.t(
-              'createLearningPath.descriptionPlaceholder',
-            )}
+            placeholder={polyglot.t("createLearningPath.descriptionPlaceholder")}
             maxLength="150"
             className="textarea"
             component={TextAreaField}
             disableVerticalResize
             data-cy="create-path-input-description"
           />
-          <p className="learning-path_input-information">
-            {polyglot.t('createLearningPath.descriptionMaxLength')}
-          </p>
+          <p className="learning-path_input-information">{polyglot.t("createLearningPath.descriptionMaxLength")}</p>
         </div>
         <br />
-        <button
-          className="button cta-link cta-link--block"
-          disabled={submitting || !valid}
-          type="submit">
-          {polyglot.t('createLearningPath.createButton')}
+        <button className="button cta-link cta-link--block" disabled={submitting || !valid} type="submit">
+          {polyglot.t("createLearningPath.createButton")}
         </button>
       </form>
     );
@@ -74,8 +63,8 @@ class CreateLearningPath extends React.Component {
 }
 
 const validate = createValidator({
-  title: required('errors.title'),
-  description: required('errors.description'),
+  title: required("errors.title"),
+  description: required("errors.description"),
 });
 
 CreateLearningPath.propTypes = {
@@ -86,6 +75,6 @@ CreateLearningPath.propTypes = {
 };
 
 export default reduxForm({
-  form: 'create-learning-path',
+  form: "create-learning-path",
   validate,
 })(CreateLearningPath);

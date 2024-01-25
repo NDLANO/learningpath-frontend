@@ -6,56 +6,49 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import defined from 'defined';
-import { Link } from 'react-router-dom';
-import isInteger from 'lodash/isInteger';
-import { reduxForm, Field } from 'redux-form';
-import LabeledIcon from '../../common/LabeledIcon';
-import TagsInput from '../../common/TagsInput';
-import InputField from '../../common/form/InputField';
-import LearningPathDescription from './LearningPathDescription';
-import Contributors from './copyright/Contributors';
-import polyglot from '../../i18n';
-import LearningPathDuration from './LearningPathDuration';
-import LearningPathImage from './LearningPathImage';
-import SubmitButton from '../../common/buttons/SubmitButton';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import defined from "defined";
+import { Link } from "react-router-dom";
+import isInteger from "lodash/isInteger";
+import { reduxForm, Field } from "redux-form";
+import LabeledIcon from "../../common/LabeledIcon";
+import TagsInput from "../../common/TagsInput";
+import InputField from "../../common/form/InputField";
+import LearningPathDescription from "./LearningPathDescription";
+import Contributors from "./copyright/Contributors";
+import polyglot from "../../i18n";
+import LearningPathDuration from "./LearningPathDuration";
+import LearningPathImage from "./LearningPathImage";
+import SubmitButton from "../../common/buttons/SubmitButton";
 
-const formName = 'edit-learning-path';
-const validate = values => {
+const formName = "edit-learning-path";
+const validate = (values) => {
   const errors = {};
   if (!values.description) {
-    errors.description = polyglot.t('errors.description');
+    errors.description = polyglot.t("errors.description");
   }
 
   if (!values.title) {
-    errors.title = polyglot.t('errors.title');
+    errors.title = polyglot.t("errors.title");
   }
   if (!values.duration) {
-    errors.duration = polyglot.t('errors.duration');
+    errors.duration = polyglot.t("errors.duration");
   } else if (!values.duration && !Number.isNaN(values.duration)) {
-    errors.duration = polyglot.t('errors.duration');
+    errors.duration = polyglot.t("errors.duration");
   } else if (values.duration <= 0) {
-    errors.duration = polyglot.t('errors.durationMinus');
-  } else if (
-    values.duration &&
-    Number.isNaN(values.duration.replace(/,/g, '.')) &&
-    Number.isNaN(values.duration)
-  ) {
-    errors.duration = polyglot.t('errors.durationNaN');
-  } else if (
-    values.duration &&
-    !/^\d+(\.|,)?\d{0,2}$/.test(values.duration.toString())
-  ) {
-    errors.duration = polyglot.t('errors.durationDecimals');
+    errors.duration = polyglot.t("errors.durationMinus");
+  } else if (values.duration && Number.isNaN(values.duration.replace(/,/g, ".")) && Number.isNaN(values.duration)) {
+    errors.duration = polyglot.t("errors.durationNaN");
+  } else if (values.duration && !/^\d+(\.|,)?\d{0,2}$/.test(values.duration.toString())) {
+    errors.duration = polyglot.t("errors.durationDecimals");
   }
   return errors;
 };
 
-const LearningPathForm = props => {
+const LearningPathForm = (props) => {
   const {
     tagOptions,
     contributorOptions,
@@ -69,11 +62,11 @@ const LearningPathForm = props => {
     formValues,
   } = props;
 
-  const learningPathTitle = defined(formValues.title, '');
+  const learningPathTitle = defined(formValues.title, "");
   return (
     <form className="learning-path-form" onSubmit={handleSubmit}>
       <div className="learning-path_hd">
-        <h1>{polyglot.t('learningPath.pageName')}</h1>
+        <h1>{polyglot.t("learningPath.pageName")}</h1>
         <div className="learning-path-input learning-path-input__title">
           <Field
             name="title"
@@ -81,13 +74,11 @@ const LearningPathForm = props => {
             component={InputField}
             type="text"
             lang={lang}
-            label={polyglot.t('learningPath.title')}
+            label={polyglot.t("learningPath.title")}
             labelClassName="label--medium-bold label--medium"
             maxLength="75"
           />
-          <p className="learning-path_input-information">
-            {polyglot.t('createLearningPath.titleMaxLength')}
-          </p>
+          <p className="learning-path_input-information">{polyglot.t("createLearningPath.titleMaxLength")}</p>
         </div>
       </div>
 
@@ -105,35 +96,22 @@ const LearningPathForm = props => {
         />
 
         <div className="learning-path-duration">
-          <label
-            htmlFor="duration"
-            className="label--medium-bold  label--medium">
-            {polyglot.t('learningPath.duration')}
+          <label htmlFor="duration" className="label--medium-bold  label--medium">
+            {polyglot.t("learningPath.duration")}
           </label>
-          <Field
-            name="duration"
-            component={LearningPathDuration}
-            id="duration"
-          />
+          <Field name="duration" component={LearningPathDuration} id="duration" />
         </div>
 
         <div className="learning-path-tags">
           <label htmlFor="tags" className="label--medium-bold  label--medium">
-            {polyglot.t('learningPath.tags')}
+            {polyglot.t("learningPath.tags")}
           </label>
-          <Field
-            name="tags"
-            component={TagsInput}
-            id="tags"
-            tagOptions={tagOptions}
-          />
+          <Field name="tags" component={TagsInput} id="tags" tagOptions={tagOptions} />
         </div>
 
         <div className="learningPath-contributors">
-          <label
-            htmlFor="license"
-            className="label--medium-bold  label--medium">
-            {polyglot.t('learningPath.copyright.contributors')}
+          <label htmlFor="license" className="label--medium-bold  label--medium">
+            {polyglot.t("learningPath.copyright.contributors")}
           </label>
           <Field
             name="contributors"
@@ -145,17 +123,11 @@ const LearningPathForm = props => {
 
         <div className="block-container_fixed block-container_fixed--bottom--right">
           <div className="button-group">
-            <Link
-              to={`/learningpaths/${learningPath.id}`}
-              className="button button--secondary">
-              <LabeledIcon.Clear labelText={polyglot.t('editPage.cancelBtn')} />
+            <Link to={`/learningpaths/${learningPath.id}`} className="button button--secondary">
+              <LabeledIcon.Clear labelText={polyglot.t("editPage.cancelBtn")} />
             </Link>
-            <SubmitButton
-              disabled={submitting || !valid}
-              className="button button--primary">
-              <LabeledIcon.Save
-                labelText={polyglot.t('editPage.savePathBtn')}
-              />
+            <SubmitButton disabled={submitting || !valid} className="button button--primary">
+              <LabeledIcon.Save labelText={polyglot.t("editPage.savePathBtn")} />
             </SubmitButton>
           </div>
         </div>
@@ -178,7 +150,7 @@ LearningPathForm.propTypes = {
   formValues: PropTypes.object.isRequired,
 };
 
-const convertedDuration = value => {
+const convertedDuration = (value) => {
   if (!value) {
     return undefined;
   }
@@ -192,22 +164,17 @@ const mapStateToProps = (state, props) => ({
     description: props.learningPath.description,
     duration: convertedDuration(props.learningPath.duration),
     tags: props.learningPath.tags,
-    coverPhotoMetaUrl: props.learningPath.coverPhoto
-      ? props.learningPath.coverPhoto.metaUrl
-      : '',
+    coverPhotoMetaUrl: props.learningPath.coverPhoto ? props.learningPath.coverPhoto.metaUrl : "",
     license:
       props.learningPath.copyright && props.learningPath.copyright.license
-        ? defined(props.learningPath.copyright.license, '')
-        : '',
+        ? defined(props.learningPath.copyright.license, "")
+        : "",
     contributors:
       props.learningPath.copyright && props.learningPath.copyright.contributors
         ? props.learningPath.copyright.contributors
         : [],
   },
-  formValues:
-    state.form[formName] && state.form[formName].values
-      ? state.form[formName].values
-      : {},
+  formValues: state.form[formName] && state.form[formName].values ? state.form[formName].values : {},
 });
 
 export default compose(

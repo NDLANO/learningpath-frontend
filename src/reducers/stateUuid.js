@@ -6,14 +6,14 @@
  *
  */
 
-import { handleActions } from 'redux-actions';
-import { uuid } from '@ndla/util';
+import { handleActions } from "redux-actions";
+import { uuid } from "@ndla/util";
 
 export default handleActions(
   {
     SET_STATE_UUID: {
       next: (state, action) => action.payload,
-      throw: state => state,
+      throw: (state) => state,
     },
   },
   uuid(),

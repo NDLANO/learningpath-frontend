@@ -6,37 +6,33 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import createHistory from 'history/createBrowserHistory';
-import { availableLocales } from './localeConstants';
-import { getLocale } from './localeSelectors';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import createHistory from "history/createBrowserHistory";
+import { availableLocales } from "./localeConstants";
+import { getLocale } from "./localeSelectors";
 
-const SelectLocale = props => {
+const SelectLocale = (props) => {
   const { locale, id } = props;
-  const handleChange = newLocale => {
+  const handleChange = (newLocale) => {
     const { pathname, search } = window.location;
-    const basePath = pathname.startsWith(`/${locale}/`)
-      ? pathname.replace(`/${locale}/`, '/')
-      : pathname;
-    const newPath =
-      newLocale === 'nb'
-        ? `${basePath}${search}`
-        : `/${newLocale}${basePath}${search}`;
+    const basePath = pathname.startsWith(`/${locale}/`) ? pathname.replace(`/${locale}/`, "/") : pathname;
+    const newPath = newLocale === "nb" ? `${basePath}${search}` : `/${newLocale}${basePath}${search}`;
     createHistory().push(newPath); // Need create new history or else basename is included
     window.location.reload();
   };
 
   return (
     <select
-      onChange={evt => {
+      onChange={(evt) => {
         handleChange(evt.target.value);
       }}
       id={id}
       value={locale}
-      data-cy="select-locale">
-      {availableLocales.map(l => (
+      data-cy="select-locale"
+    >
+      {availableLocales.map((l) => (
         <option key={l.abbreviation} value={l.abbreviation}>
           {l.name}
         </option>
@@ -50,7 +46,7 @@ SelectLocale.propTypes = {
   id: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   locale: getLocale(state),
 });
 

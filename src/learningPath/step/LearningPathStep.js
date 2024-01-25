@@ -6,24 +6,21 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import Helmet from 'react-helmet';
-import { withTracker } from '@ndla/tracker';
-import Oembed from './oembed/Oembed';
-import { fetchLearningPathStep } from './learningPathStepActions';
-import LearningPathStepInformation from './LearningPathStepInformation';
-import LearningPathStepPrevNext from './LearningPathStepPrevNext';
-import { getLearningPathStep } from './learningPathStepSelectors';
-import polyglot from '../../i18n';
-import {
-  getPersonalToken,
-  isUserAuthenticated,
-} from '../../sources/localStorage';
-import { convertToGaOrGtmDimension } from '../../util/trackingUtil';
-import { CopyrightObjectShape } from '../../shapes';
-import { getScope } from '../../util/jwtHelper';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import Helmet from "react-helmet";
+import { withTracker } from "@ndla/tracker";
+import Oembed from "./oembed/Oembed";
+import { fetchLearningPathStep } from "./learningPathStepActions";
+import LearningPathStepInformation from "./LearningPathStepInformation";
+import LearningPathStepPrevNext from "./LearningPathStepPrevNext";
+import { getLearningPathStep } from "./learningPathStepSelectors";
+import polyglot from "../../i18n";
+import { getPersonalToken, isUserAuthenticated } from "../../sources/localStorage";
+import { convertToGaOrGtmDimension } from "../../util/trackingUtil";
+import { CopyrightObjectShape } from "../../shapes";
+import { getScope } from "../../util/jwtHelper";
 
 class LearningPathStep extends React.Component {
   static mapDispatchToProps = {
@@ -65,9 +62,8 @@ class LearningPathStep extends React.Component {
       },
     } = nextProps;
     if (
-      process.env.BUILD_TARGET === 'client' &&
-      (this.props.match.params.stepId !== stepId ||
-        this.props.match.params.pathId !== pathId)
+      process.env.BUILD_TARGET === "client" &&
+      (this.props.match.params.stepId !== stepId || this.props.match.params.pathId !== pathId)
     ) {
       localFetchLearningPathStep(pathId, stepId);
     }
@@ -80,14 +76,14 @@ class LearningPathStep extends React.Component {
       14: learningPathStep.seqNo + 1,
     };
     return {
-      ga: convertToGaOrGtmDimension(dimensions, 'ga'),
-      gtm: convertToGaOrGtmDimension(dimensions, 'gtm'),
+      ga: convertToGaOrGtmDimension(dimensions, "ga"),
+      gtm: convertToGaOrGtmDimension(dimensions, "gtm"),
     };
   }
 
   static getDocumentTitle(props) {
     const { learningPathStep } = props;
-    return learningPathStep.title + polyglot.t('htmlTitles.titleTemplate');
+    return learningPathStep.title + polyglot.t("htmlTitles.titleTemplate");
   }
 
   render() {
@@ -95,10 +91,8 @@ class LearningPathStep extends React.Component {
     const { lang } = this.context;
     const oembedContent = learningPathStep.oembed;
     return (
-      <div className={oembedContent ? 'learning-step--header' : null}>
-        <LearningPathStepPrevNext
-          currentStepId={learningPathStep.id}
-          lang={lang}>
+      <div className={oembedContent ? "learning-step--header" : null}>
+        <LearningPathStepPrevNext currentStepId={learningPathStep.id} lang={lang}>
           <div className="two-column_content--wide">
             <Helmet title={this.constructor.getDocumentTitle(this.props)} />
             <LearningPathStepInformation
@@ -107,7 +101,7 @@ class LearningPathStep extends React.Component {
               stepTitle={learningPathStep.title}
               hasNdlaWriteAccess={hasNdlaWriteAccess}
             />
-            {oembedContent ? <Oembed oembedContent={oembedContent} /> : ''}
+            {oembedContent ? <Oembed oembedContent={oembedContent} /> : ""}
           </div>
         </LearningPathStepPrevNext>
       </div>
@@ -133,11 +127,11 @@ LearningPathStep.contextTypes = {
   lang: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   let hasNdlaWriteAccess = false;
   if (isUserAuthenticated()) {
     const token = getPersonalToken();
-    hasNdlaWriteAccess = getScope(token).includes('learningpath:write');
+    hasNdlaWriteAccess = getScope(token).includes("learningpath:write");
   }
   return Object.assign({}, state, {
     authenticated: state.authenticated,
@@ -146,7 +140,4 @@ const mapStateToProps = state => {
   });
 };
 
-export default connect(
-  mapStateToProps,
-  LearningPathStep.mapDispatchToProps,
-)(withTracker(LearningPathStep));
+export default connect(mapStateToProps, LearningPathStep.mapDispatchToProps)(withTracker(LearningPathStep));

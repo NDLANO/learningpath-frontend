@@ -6,13 +6,13 @@
  *
  */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import polyglot from '../i18n';
-import Icon from '../common/Icon';
-import { learningPathStatuses } from '../learningPath/learningPathUtil';
-import ActionToolTip from './ActionToolTip';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import polyglot from "../i18n";
+import Icon from "../common/Icon";
+import { learningPathStatuses } from "../learningPath/learningPathUtil";
+import ActionToolTip from "./ActionToolTip";
 
 export default class LearningPathDropdown extends Component {
   constructor(props) {
@@ -23,13 +23,13 @@ export default class LearningPathDropdown extends Component {
     };
   }
 
-  makeOnClick = actionType => evt => {
+  makeOnClick = (actionType) => (evt) => {
     const { learningPath, onSelect } = this.props;
     evt.preventDefault();
     onSelect(actionType, learningPath);
   };
 
-  publishAction = status => evt => {
+  publishAction = (status) => (evt) => {
     const { learningPath, onSelect } = this.props;
     evt.preventDefault();
     if (status.status !== learningPath.status) {
@@ -37,21 +37,21 @@ export default class LearningPathDropdown extends Component {
     }
   };
 
-  dropDownMenuItemClassName = status => {
+  dropDownMenuItemClassName = (status) => {
     const { learningPath } = this.props;
     return classNames({
-      'dropdown-menu_item': true,
+      "dropdown-menu_item": true,
       active: learningPath.status === status,
     });
   };
 
   handleDropDownOnClick = () => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       displayDropDown: !prevState.displayDropDown,
     }));
   };
 
-  handleDropDownOnMouseEvents = displayDropDown => {
+  handleDropDownOnMouseEvents = (displayDropDown) => {
     this.setState({ displayDropDown });
   };
 
@@ -59,51 +59,37 @@ export default class LearningPathDropdown extends Component {
     const { learningPath } = this.props;
 
     const dropDownMenuItemsClassName = classNames({
-      'dropdown-menu_items': true,
-      'dropdown-menu_items_show': this.state.displayDropDown,
+      "dropdown-menu_items": true,
+      "dropdown-menu_items_show": this.state.displayDropDown,
     });
 
     return (
       <div
         className="dropdown-menu"
         onMouseEnter={() => this.handleDropDownOnMouseEvents(true)}
-        onMouseLeave={() => this.handleDropDownOnMouseEvents(false)}>
-        <button
-          type="button"
-          className="un-button dropdown-menu_icon"
-          onClick={() => this.handleDropDownOnClick()}>
+        onMouseLeave={() => this.handleDropDownOnMouseEvents(false)}
+      >
+        <button type="button" className="un-button dropdown-menu_icon" onClick={() => this.handleDropDownOnClick()}>
           <Icon.MoreVert />
         </button>
         <ul className={dropDownMenuItemsClassName}>
           <li className="dropdown-menu_item">
-            <button
-              type="button"
-              className="un-button dropdown-menu_link"
-              onClick={this.makeOnClick('makecopy')}>
-              <Icon.ContentCopy /> {polyglot.t('pathDropDown.makeCopy')}
+            <button type="button" className="un-button dropdown-menu_link" onClick={this.makeOnClick("makecopy")}>
+              <Icon.ContentCopy /> {polyglot.t("pathDropDown.makeCopy")}
             </button>
           </li>
-          {learningPathStatuses[learningPath.status].map(status => (
+          {learningPathStatuses[learningPath.status].map((status) => (
             <ActionToolTip status={status.status} key={status.action}>
               <li className={this.dropDownMenuItemClassName(status.status)}>
-                <button
-                  type="button"
-                  className="un-button dropdown-menu_link"
-                  onClick={this.publishAction(status)}>
-                  <Icon.Input />{' '}
-                  {polyglot.t(
-                    `pathDropDown.${learningPath.status}.${status.action}`,
-                  )}
+                <button type="button" className="un-button dropdown-menu_link" onClick={this.publishAction(status)}>
+                  <Icon.Input /> {polyglot.t(`pathDropDown.${learningPath.status}.${status.action}`)}
                 </button>
               </li>
             </ActionToolTip>
           ))}
           <li className="dropdown-menu_item">
-            <button
-              type="button"
-              className="un-button dropdown-menu_link"
-              onClick={this.makeOnClick('delete')}>
-              <Icon.Delete /> {polyglot.t('pathDropDown.delete')}
+            <button type="button" className="un-button dropdown-menu_link" onClick={this.makeOnClick("delete")}>
+              <Icon.Delete /> {polyglot.t("pathDropDown.delete")}
             </button>
           </li>
         </ul>

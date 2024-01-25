@@ -6,23 +6,23 @@
  *
  */
 
-import React from 'react';
-import polyglot from '../i18n';
+import React from "react";
+import polyglot from "../i18n";
 
 class LTIEmbedded extends React.Component {
   componentDidMount() {
     if (window.location.search) {
       const params = window.location.search
         .substr(1)
-        .split('&')
-        .map(param => param.split('='))
+        .split("&")
+        .map((param) => param.split("="))
         .reduce((obj, cur) => {
           const newObj = obj;
           const cur1 = cur[1];
           newObj[cur[0]] = cur1;
           return newObj;
         }, {});
-      const obj = { params, type: 'ltiParams' };
+      const obj = { params, type: "ltiParams" };
       window.parent.postMessage(obj, window.location.href);
     }
   }
@@ -30,7 +30,7 @@ class LTIEmbedded extends React.Component {
   render() {
     return (
       <div className="embed-search_form-filters">
-        <p>{polyglot.t('ltiSearch.ltiAdded')}</p>
+        <p>{polyglot.t("ltiSearch.ltiAdded")}</p>
       </div>
     );
   }

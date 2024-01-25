@@ -6,19 +6,15 @@
  *
  */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { arrayMove } from 'react-sortable-hoc';
-import { connect } from 'react-redux';
-import { HelmetWithTracker } from '@ndla/tracker';
-import SortableLearningStepList from './SortableLearningStepList';
-import { getLearningPath } from '../../learningPathSelectors';
-import {
-  updateStepSequenceNumber,
-  deleteLearningPathStep,
-  sortLearningPathSteps,
-} from '../learningPathStepActions';
-import polyglot from '../../../i18n';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { arrayMove } from "react-sortable-hoc";
+import { connect } from "react-redux";
+import { HelmetWithTracker } from "@ndla/tracker";
+import SortableLearningStepList from "./SortableLearningStepList";
+import { getLearningPath } from "../../learningPathSelectors";
+import { updateStepSequenceNumber, deleteLearningPathStep, sortLearningPathSteps } from "../learningPathStepActions";
+import polyglot from "../../../i18n";
 
 class SortLearningPathSteps extends Component {
   constructor() {
@@ -38,42 +34,29 @@ class SortLearningPathSteps extends Component {
     if (
       learningPath &&
       nextLearningPath &&
-      learningPath.learningsteps.length !==
-        nextLearningPath.learningsteps.length
+      learningPath.learningsteps.length !== nextLearningPath.learningsteps.length
     ) {
       this.setState({ learningsteps: nextLearningPath.learningsteps });
     }
   }
 
-  onSortEnd = indexes => {
-    const {
-      sortSteps,
-      localUpdateStepSequenceNumber,
-      learningPath,
-    } = this.props;
+  onSortEnd = (indexes) => {
+    const { sortSteps, localUpdateStepSequenceNumber, learningPath } = this.props;
     const { learningsteps } = learningPath;
     const step = learningsteps[indexes.oldIndex];
 
     if (step && indexes.oldIndex !== indexes.newIndex) {
-      const sorted = arrayMove(
-        learningsteps,
-        indexes.oldIndex,
-        indexes.newIndex,
-      );
+      const sorted = arrayMove(learningsteps, indexes.oldIndex, indexes.newIndex);
       this.setState({ learningsteps: sorted });
       sortSteps(sorted);
       localUpdateStepSequenceNumber(learningPath.id, step.id, indexes.newIndex);
     }
   };
 
-  shouldCancelStart = e => {
+  shouldCancelStart = (e) => {
     // Iterates through each target from an event on click to check if it was button click or not. Cancels drag action if it was a click on a button.
-    for (
-      let { target } = e;
-      target !== this.contentDiv;
-      target = target.parentElement
-    ) {
-      if (target && target.tagName.toLowerCase() === 'button') {
+    for (let { target } = e; target !== this.contentDiv; target = target.parentElement) {
+      if (target && target.tagName.toLowerCase() === "button") {
         return true;
       }
     }
@@ -84,12 +67,11 @@ class SortLearningPathSteps extends Component {
     const { learningPath, deleteStep } = this.props;
     return (
       <div
-        ref={contentDiv => {
+        ref={(contentDiv) => {
           this.contentDiv = contentDiv;
-        }}>
-        <HelmetWithTracker
-          title={polyglot.t('htmlTitles.sortLearningPathSteps')}
-        />
+        }}
+      >
+        <HelmetWithTracker title={polyglot.t("htmlTitles.sortLearningPathSteps")} />
         {learningPath && learningPath.learningsteps && learningPath.id ? (
           <SortableLearningStepList
             learningPathId={learningPath.id}
@@ -111,7 +93,7 @@ SortLearningPathSteps.propTypes = {
   sortSteps: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state =>
+const mapStateToProps = (state) =>
   Object.assign({}, state, {
     learningPath: getLearningPath(state),
   });
@@ -122,7 +104,4 @@ const mapDispatchToProps = {
   sortSteps: sortLearningPathSteps,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(SortLearningPathSteps);
+export default connect(mapStateToProps, mapDispatchToProps)(SortLearningPathSteps);

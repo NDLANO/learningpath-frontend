@@ -6,10 +6,10 @@
  *
  */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Multiselect from 'react-widgets/lib/Multiselect';
-import polyglot from '../../../i18n';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import Multiselect from "react-widgets/lib/Multiselect";
+import polyglot from "../../../i18n";
 
 class Contributors extends Component {
   constructor() {
@@ -20,33 +20,32 @@ class Contributors extends Component {
   render() {
     const { input, contributorOptions } = this.props;
 
-    if (typeof value === 'string') {
+    if (typeof value === "string") {
       // Handle redux form values witch are initialized as strings
       return null;
     }
 
     const messages = {
-      createOption: props => (
+      createOption: (props) => (
         <span>
-          <b>{`"${props.searchTerm}"`}</b>{' '}
-          {polyglot.t('copyrightInput.createOption')}
+          <b>{`"${props.searchTerm}"`}</b> {polyglot.t("copyrightInput.createOption")}
         </span>
       ),
-      emptyFilter: polyglot.t('copyrightInput.emptyFilter'),
-      emptyList: '',
+      emptyFilter: polyglot.t("copyrightInput.emptyFilter"),
+      emptyList: "",
     };
 
     const { open } = this.state;
 
-    const handleAdd = contributor => {
+    const handleAdd = (contributor) => {
       if (input.value.includes(contributor)) {
         return;
       }
-      input.value.push(Object.assign({ name: contributor, type: 'Forfatter' }));
+      input.value.push(Object.assign({ name: contributor, type: "Forfatter" }));
       input.onChange(input.value);
     };
 
-    const handleSearch = searchTerm => {
+    const handleSearch = (searchTerm) => {
       this.setState({ open: searchTerm.length > 2 });
     };
 

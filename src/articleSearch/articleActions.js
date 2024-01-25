@@ -6,15 +6,12 @@
  *
  */
 
-import { applicationError } from '../messages/messagesActions';
-import { fetchArticles } from '../sources/articles';
-import { fetchResource } from '../sources/taxonomy';
-import config from '../config';
-import {
-  changeEmbedSearchQuery,
-  setEmbedResults,
-} from '../embedSearch/embedSearchActions';
-import { getNumberOfArticlePages } from './articleSelectors';
+import { applicationError } from "../messages/messagesActions";
+import { fetchArticles } from "../sources/articles";
+import { fetchResource } from "../sources/taxonomy";
+import config from "../config";
+import { changeEmbedSearchQuery, setEmbedResults } from "../embedSearch/embedSearchActions";
+import { getNumberOfArticlePages } from "./articleSelectors";
 
 const ndlaFrontendUrl = config.ndlaFrontendDomain;
 
@@ -22,14 +19,14 @@ export function fetchArticleSearch(query, language, isNdla = false) {
   const ndlaQuery = {
     query: query.textQuery,
     page: query.page,
-    'page-size': 10,
+    "page-size": 10,
     language,
   };
   return async (dispatch, getState) => {
     try {
       const result = await fetchArticles(ndlaQuery, language, isNdla);
       const newItems = await Promise.all(
-        result.results.map(async item => {
+        result.results.map(async (item) => {
           const resource = await fetchResource(item.id);
           return {
             ...item,
@@ -42,14 +39,14 @@ export function fetchArticleSearch(query, language, isNdla = false) {
       );
       await dispatch(
         setEmbedResults({
-          type: 'ndla',
+          type: "ndla",
           result: { ...result, results: newItems },
         }),
       );
       const updatedQuery = Object.assign({}, query, {
         numberOfPages: getNumberOfArticlePages(getState()),
       });
-      dispatch(changeEmbedSearchQuery({ type: 'ndla', query: updatedQuery }));
+      dispatch(changeEmbedSearchQuery({ type: "ndla", query: updatedQuery }));
     } catch (err) {
       dispatch(applicationError(err));
     }

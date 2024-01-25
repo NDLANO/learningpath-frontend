@@ -6,28 +6,23 @@
  *
  */
 
-import { learningPath } from '../../common/__tests__/mockData';
-import {
-  getLearningPath,
-  getLearningPathSteps,
-} from '../learningPathSelectors';
-import { translatedLearningPath } from '../../common/__tests__/translatedMockData';
+import { learningPath } from "../../common/__tests__/mockData";
+import { getLearningPath, getLearningPathSteps } from "../learningPathSelectors";
+import { translatedLearningPath } from "../../common/__tests__/translatedMockData";
 
-test('selectors/getLearningPath', () => {
+test("selectors/getLearningPath", () => {
   const state = {
     learningPath,
-    locale: 'nb',
+    locale: "nb",
   };
 
   expect(getLearningPath(state)).toEqual(translatedLearningPath);
 });
 
-test('selectors/getLearningPathSteps', () => {
+test("selectors/getLearningPathSteps", () => {
   const state = {
     learningPath,
-    locale: 'nb',
+    locale: "nb",
   };
-  expect(getLearningPathSteps(state)).toEqual(
-    translatedLearningPath.learningsteps,
-  );
+  expect(getLearningPathSteps(state)).toEqual(translatedLearningPath.learningsteps);
 });

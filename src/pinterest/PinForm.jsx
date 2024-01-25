@@ -6,10 +6,10 @@
  *
  */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import polyglot from '../i18n';
-import { transformHttpToHttps } from '../util/urlTransformer';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import polyglot from "../i18n";
+import { transformHttpToHttps } from "../util/urlTransformer";
 
 class PinForm extends Component {
   constructor(props) {
@@ -29,11 +29,7 @@ class PinForm extends Component {
     evt.preventDefault();
     const { onCreateLearningPathStep, pin } = this.props;
     const { title } = this.state;
-    onCreateLearningPathStep(
-      pin.id,
-      title,
-      transformHttpToHttps(pin.original_link),
-    );
+    onCreateLearningPathStep(pin.id, title, transformHttpToHttps(pin.original_link));
   }
 
   render() {
@@ -42,23 +38,17 @@ class PinForm extends Component {
     return (
       <div className="pin-container">
         <form onSubmit={this.handleSubmit}>
-          <input
-            id="title"
-            type="text"
-            onChange={this.handleTitleChange}
-            value={title}
-          />
-          <button
-            className="button--primary-outline cta-link--block pinterest_button"
-            type="submit">
-            {polyglot.t('pinterest.pinForm.create')}
+          <input id="title" type="text" onChange={this.handleTitleChange} value={title} />
+          <button className="button--primary-outline cta-link--block pinterest_button" type="submit">
+            {polyglot.t("pinterest.pinForm.create")}
           </button>
           <a
             className="button--primary-outline cta-link--block pinterest_button"
             target="_blank"
             rel="noopener noreferrer"
-            href={transformHttpToHttps(pin.original_link)}>
-            {polyglot.t('pinterest.pinForm.viewSource')}
+            href={transformHttpToHttps(pin.original_link)}
+          >
+            {polyglot.t("pinterest.pinForm.viewSource")}
           </a>
         </form>
       </div>

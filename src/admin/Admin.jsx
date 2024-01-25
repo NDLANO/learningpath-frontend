@@ -6,29 +6,27 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { HelmetWithTracker } from '@ndla/tracker';
-import { updateLearningPathsStatus } from '../learningPath/learningPathActions';
-import polyglot from '../i18n';
-import Masthead from '../common/Masthead';
-import { Wrapper, OneColumn, Footer } from '../common/Layout';
-import { fetchPathsWithStatus } from '../sources/learningpaths';
-import { fetchOwners } from '../sources/fetchOwners';
-import { convertLearningPath } from '../learningPath/learningPathUtil';
-import SelectSortTiles from '../learningPath/tile/SelectSortTiles';
-import AdminRejectedMessageForm from './AdminRejectedMessageForm';
-import AdminLearningPaths from './AdminLearningPaths';
-import { sortPaths } from '../util/sortUtil';
-import { getLocale } from '../locale/localeSelectors';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { HelmetWithTracker } from "@ndla/tracker";
+import { updateLearningPathsStatus } from "../learningPath/learningPathActions";
+import polyglot from "../i18n";
+import Masthead from "../common/Masthead";
+import { Wrapper, OneColumn, Footer } from "../common/Layout";
+import { fetchPathsWithStatus } from "../sources/learningpaths";
+import { fetchOwners } from "../sources/fetchOwners";
+import { convertLearningPath } from "../learningPath/learningPathUtil";
+import SelectSortTiles from "../learningPath/tile/SelectSortTiles";
+import AdminRejectedMessageForm from "./AdminRejectedMessageForm";
+import AdminLearningPaths from "./AdminLearningPaths";
+import { sortPaths } from "../util/sortUtil";
+import { getLocale } from "../locale/localeSelectors";
 
 const getLearningPathsWithOwner = (learningPaths, users) =>
-  learningPaths.map(learningPath => ({
+  learningPaths.map((learningPath) => ({
     ...convertLearningPath(learningPath),
-    owner: users.find(
-      user => user.app_metadata.ndla_id === learningPath.ownerId,
-    ),
+    owner: users.find((user) => user.app_metadata.ndla_id === learningPath.ownerId),
   }));
 
 export class Admin extends React.Component {
@@ -37,8 +35,8 @@ export class Admin extends React.Component {
 
     this.state = {
       sortKey: {
-        SUBMITTED: 'title',
-        UNLISTED: 'title',
+        SUBMITTED: "title",
+        UNLISTED: "title",
       },
       learningPaths: {
         SUBMITTED: [],
@@ -46,7 +44,7 @@ export class Admin extends React.Component {
       },
       showMessageLightbox: false,
       learningPathChanged: undefined,
-      recjectMessage: '',
+      recjectMessage: "",
     };
     this.onDropDownSelect = this.onDropDownSelect.bind(this);
     this.setSortKey = this.setSortKey.bind(this);
@@ -54,9 +52,7 @@ export class Admin extends React.Component {
     this.onRejectSubmit = this.onRejectSubmit.bind(this);
     this.onMessageChange = this.onMessageChange.bind(this);
     this.onLightboxClose = this.onLightboxClose.bind(this);
-    this.updateStatusAndFetchLearningPaths = this.updateStatusAndFetchLearningPaths.bind(
-      this,
-    );
+    this.updateStatusAndFetchLearningPaths = this.updateStatusAndFetchLearningPaths.bind(this);
     this.fetchAllLearningPaths = this.fetchAllLearningPaths.bind(this);
   }
 
@@ -66,20 +62,20 @@ export class Admin extends React.Component {
 
   onDropDownSelect(actionType, learningPath) {
     switch (actionType) {
-      case 'unlist':
-        this.onRejectLearningPath(learningPath, 'UNLISTED');
+      case "unlist":
+        this.onRejectLearningPath(learningPath, "UNLISTED");
         break;
-      case 'publish':
-        this.updateStatusAndFetchLearningPaths(learningPath.id, 'PUBLISHED');
+      case "publish":
+        this.updateStatusAndFetchLearningPaths(learningPath.id, "PUBLISHED");
         break;
-      case 'submit':
-        this.updateStatusAndFetchLearningPaths(learningPath.id, 'SUBMITTED');
+      case "submit":
+        this.updateStatusAndFetchLearningPaths(learningPath.id, "SUBMITTED");
         break;
-      case 'unpublish':
-        if (learningPath.status === 'SUBMITTED') {
-          this.onRejectLearningPath(learningPath, 'PRIVATE');
+      case "unpublish":
+        if (learningPath.status === "SUBMITTED") {
+          this.onRejectLearningPath(learningPath, "PRIVATE");
         } else {
-          this.updateStatusAndFetchLearningPaths(learningPath.id, 'PRIVATE');
+          this.updateStatusAndFetchLearningPaths(learningPath.id, "PRIVATE");
         }
         break;
       default:
@@ -87,7 +83,7 @@ export class Admin extends React.Component {
   }
 
   onRejectLearningPath(learningPath, newStatus) {
-    if (learningPath.status === 'SUBMITTED') {
+    if (learningPath.status === "SUBMITTED") {
       this.setState({
         showMessageLightbox: true,
         learningPathChanged: { id: learningPath.id, status: newStatus },
@@ -105,7 +101,7 @@ export class Admin extends React.Component {
       learningPathChanged.id,
       learningPathChanged.status,
       recjectMessage,
-      'SUBMITTED',
+      "SUBMITTED",
     );
   }
 
@@ -117,12 +113,12 @@ export class Admin extends React.Component {
     this.setState({
       showMessageLightbox: false,
       learningPathChanged: undefined,
-      recjectMessage: '',
+      recjectMessage: "",
     });
   }
 
   setSortKey(statusType, value) {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       sortKey: { ...prevState.sortKey, [statusType]: value },
       learningPaths: {
         ...prevState.learningPaths,
@@ -133,26 +129,18 @@ export class Admin extends React.Component {
 
   async fetchAllLearningPaths() {
     const submittedLearningPaths = await fetchPathsWithStatus({
-      learningPathStatus: 'SUBMITTED',
+      learningPathStatus: "SUBMITTED",
     });
     const unlistedLearningPaths = await fetchPathsWithStatus({
-      learningPathStatus: 'UNLISTED',
+      learningPathStatus: "UNLISTED",
     });
 
-    const ownerIds = [...submittedLearningPaths, ...unlistedLearningPaths].map(
-      learningPath => learningPath.ownerId,
-    );
+    const ownerIds = [...submittedLearningPaths, ...unlistedLearningPaths].map((learningPath) => learningPath.ownerId);
     const users = await fetchOwners(ownerIds);
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       learningPaths: {
-        SUBMITTED: sortPaths(
-          getLearningPathsWithOwner(submittedLearningPaths, users),
-          prevState.sortKey.SUBMITTED,
-        ),
-        UNLISTED: sortPaths(
-          getLearningPathsWithOwner(unlistedLearningPaths, users),
-          prevState.sortKey.UNLISTED,
-        ),
+        SUBMITTED: sortPaths(getLearningPathsWithOwner(submittedLearningPaths, users), prevState.sortKey.SUBMITTED),
+        UNLISTED: sortPaths(getLearningPathsWithOwner(unlistedLearningPaths, users), prevState.sortKey.UNLISTED),
       },
     }));
   }
@@ -165,51 +153,44 @@ export class Admin extends React.Component {
 
   render() {
     const { locale } = this.props;
-    const {
-      learningPaths,
-      sortKey,
-      recjectMessage,
-      showMessageLightbox,
-    } = this.state;
+    const { learningPaths, sortKey, recjectMessage, showMessageLightbox } = this.state;
 
     return (
       <Wrapper>
         <OneColumn>
-          <HelmetWithTracker title={polyglot.t('htmlTitles.adminPage')} />
+          <HelmetWithTracker title={polyglot.t("htmlTitles.adminPage")} />
           <Masthead />
           <div className="page-header page-header--admin">
-            <h2 className="page-header_name">
-              {polyglot.t('adminPage.pageHeader')}
-            </h2>
+            <h2 className="page-header_name">{polyglot.t("adminPage.pageHeader")}</h2>
           </div>
 
           <div className="tiles-header">
-            <h2>{polyglot.t('adminPage.statusHeader.submitted')}</h2>
+            <h2>{polyglot.t("adminPage.statusHeader.submitted")}</h2>
             <SelectSortTiles
               sortKey={sortKey.SUBMITTED}
-              onChange={evt => this.setSortKey('SUBMITTED', evt.target.value)}
+              onChange={(evt) => this.setSortKey("SUBMITTED", evt.target.value)}
             />
           </div>
           <div className="tiles">
             <AdminLearningPaths
               learningPaths={learningPaths.SUBMITTED}
               onDropDownSelect={this.onDropDownSelect}
-              noPathsText={polyglot.t('adminPage.noPaths.submitted')}
+              noPathsText={polyglot.t("adminPage.noPaths.submitted")}
             />
           </div>
 
           <div className="tiles-header">
-            <h2>{polyglot.t('adminPage.statusHeader.unlisted')}</h2>
+            <h2>{polyglot.t("adminPage.statusHeader.unlisted")}</h2>
             <SelectSortTiles
               sortKey={sortKey.UNLISTED}
-              onChange={evt => this.setSortKey('UNLISTED', evt.target.value)}
+              onChange={(evt) => this.setSortKey("UNLISTED", evt.target.value)}
             />
           </div>
           <div className="tiles">
             <AdminLearningPaths
               learningPaths={learningPaths.UNLISTED}
               onDropDownSelect={this.onDropDownSelect}
-              noPathsText={polyglot.t('adminPage.noPaths.unlisted')}
+              noPathsText={polyglot.t("adminPage.noPaths.unlisted")}
             />
           </div>
         </OneColumn>
@@ -239,11 +220,8 @@ const mapDispatchToProps = {
   updatePathStatus: updateLearningPathsStatus,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   locale: getLocale(state),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Admin);
+export default connect(mapStateToProps, mapDispatchToProps)(Admin);

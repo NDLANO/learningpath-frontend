@@ -6,10 +6,10 @@
  *
  */
 
-import React from 'react';
-import { SortableElement } from 'react-sortable-hoc';
-import PropTypes from 'prop-types';
-import Icon from '../../../common/Icon';
+import React from "react";
+import { SortableElement } from "react-sortable-hoc";
+import PropTypes from "prop-types";
+import Icon from "../../../common/Icon";
 
 const SortableItem = SortableElement(({ deleteStep, step, learningPathId }) => (
   <div className="sortable_item">
@@ -19,10 +19,7 @@ const SortableItem = SortableElement(({ deleteStep, step, learningPathId }) => (
       </div>
       <div className="sortable_title">{step.title}</div>
       <div className="sortable_action">
-        <button
-          type="button"
-          onClick={() => deleteStep(learningPathId, step.id, step.title)}
-          className="un-button">
+        <button type="button" onClick={() => deleteStep(learningPathId, step.id, step.title)} className="un-button">
           <Icon.Clear className="icon--m" />
         </button>
       </div>

@@ -6,14 +6,14 @@
  *
  */
 
-import React from 'react';
-import { Provider } from 'react-redux';
-import { INTERNAL_SERVER_ERROR } from 'http-status';
-import ErrorPage from '../../errorPage/ErrorPage';
-import { getLocaleInfoFromPath } from '../../locale/configureLocale';
-import { renderHtml, renderPage } from '../helpers/render';
-import configureStore from '../../configureStore';
-import { configureLocale } from '../../locale/configureLocale';
+import React from "react";
+import { Provider } from "react-redux";
+import { INTERNAL_SERVER_ERROR } from "http-status";
+import ErrorPage from "../../errorPage/ErrorPage";
+import { getLocaleInfoFromPath } from "../../locale/configureLocale";
+import { renderHtml, renderPage } from "../helpers/render";
+import configureStore from "../../configureStore";
+import { configureLocale } from "../../locale/configureLocale";
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST); //eslint-disable-line
 

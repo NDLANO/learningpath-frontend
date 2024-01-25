@@ -6,18 +6,18 @@
  *
  */
 
-import { isFSA } from 'flux-standard-action';
-import { clearMessage, timeoutMessage } from '../messagesActions';
+import { isFSA } from "flux-standard-action";
+import { clearMessage, timeoutMessage } from "../messagesActions";
 
-test('actions/timeoutMessage', () => {
+test("actions/timeoutMessage", () => {
   const message = {
     id: 123,
-    message: 'All went well',
-    severity: 'success',
+    message: "All went well",
+    severity: "success",
     timeToLive: 500,
   };
 
-  timeoutMessage(message)(actual => {
+  timeoutMessage(message)((actual) => {
     expect(isFSA(actual)).toBeTruthy();
     expect(actual).toEqual(clearMessage(message.id));
     // done();

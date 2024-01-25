@@ -6,17 +6,17 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
 
 const StyleButton = ({ active, icon, style, onToggle }) => {
-  const handleToggle = e => {
+  const handleToggle = (e) => {
     e.preventDefault();
     onToggle(style);
   };
-  const className = classNames(['texformat-menu-item'], {
-    ' texformat-menu-item__selected': active,
+  const className = classNames(["texformat-menu-item"], {
+    " texformat-menu-item__selected": active,
   });
 
   return (

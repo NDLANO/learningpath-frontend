@@ -6,18 +6,16 @@
  *
  */
 
-import 'isomorphic-fetch';
-import queryString from 'query-string';
-import { resolveJsonOrRejectWithError } from './helpers';
+import "isomorphic-fetch";
+import queryString from "query-string";
+import { resolveJsonOrRejectWithError } from "./helpers";
 
-const fetchGoogleContent = query => {
+const fetchGoogleContent = (query) => {
   const params = {
     q: `${query.textQuery} ${query.filter.key}`,
     start: query.start ? query.start : undefined,
   };
-  return fetch(`/customsearch/?${queryString.stringify(params)}`).then(
-    resolveJsonOrRejectWithError,
-  );
+  return fetch(`/customsearch/?${queryString.stringify(params)}`).then(resolveJsonOrRejectWithError);
 };
 
 export { fetchGoogleContent };

@@ -6,13 +6,13 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import defined from 'defined';
-import { connect } from 'react-redux';
-import { closeSidebars } from '../../common/sidebarActions';
-import LearningPathToCStep from './LearningPathToCStep';
-import { getLearningPath } from '../learningPathSelectors';
+import React from "react";
+import PropTypes from "prop-types";
+import defined from "defined";
+import { connect } from "react-redux";
+import { closeSidebars } from "../../common/sidebarActions";
+import LearningPathToCStep from "./LearningPathToCStep";
+import { getLearningPath } from "../learningPathSelectors";
 
 export function LearningPathToC(props) {
   const { learningPath, activeStepId, localCloseSidebars } = props;
@@ -21,7 +21,7 @@ export function LearningPathToC(props) {
     <div>
       <div className="step-nav">
         <ul className="step-nav_list">
-          {steps.map(step => (
+          {steps.map((step) => (
             <LearningPathToCStep
               key={step.id}
               step={step}
@@ -48,10 +48,10 @@ LearningPathToC.contextTypes = {
 };
 
 LearningPathToC.defaultProps = {
-  activeStepId: '',
+  activeStepId: "",
 };
 
-const mapStateToProps = state =>
+const mapStateToProps = (state) =>
   Object.assign({}, state, {
     learningPath: getLearningPath(state),
   });
@@ -60,7 +60,4 @@ const mapDispatchToProps = {
   localCloseSidebars: closeSidebars,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(LearningPathToC);
+export default connect(mapStateToProps, mapDispatchToProps)(LearningPathToC);

@@ -6,11 +6,11 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import polyglot from '../../i18n';
-import LabeledIcon from '../LabeledIcon';
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import polyglot from "../../i18n";
+import LabeledIcon from "../LabeledIcon";
 
 class SiteNavSessionAction extends React.Component {
   constructor() {
@@ -27,26 +27,16 @@ class SiteNavSessionAction extends React.Component {
     if (authenticated && this.state.isClient) {
       return (
         <li className="site-nav_item">
-          <Link
-            to="/logout"
-            className="site-nav_link"
-            onClick={() => localCloseSidebars()}
-            data-cy="sitenav-logout">
-            <LabeledIcon.Exit
-              labelText={polyglot.t('siteNav.logout', { name: userName })}
-            />
+          <Link to="/logout" className="site-nav_link" onClick={() => localCloseSidebars()} data-cy="sitenav-logout">
+            <LabeledIcon.Exit labelText={polyglot.t("siteNav.logout", { name: userName })} />
           </Link>
         </li>
       );
     }
     return (
       <li className="site-nav_item">
-        <Link
-          to="/login"
-          className="site-nav_link"
-          onClick={() => localCloseSidebars()}
-          data-cy="sitenav-login">
-          <LabeledIcon.Exit labelText={polyglot.t('siteNav.login')} />
+        <Link to="/login" className="site-nav_link" onClick={() => localCloseSidebars()} data-cy="sitenav-login">
+          <LabeledIcon.Exit labelText={polyglot.t("siteNav.login")} />
         </Link>
       </li>
     );
@@ -61,7 +51,7 @@ SiteNavSessionAction.propTypes = {
 
 SiteNavSessionAction.defaultProps = {
   authenticated: false,
-  userName: '',
+  userName: "",
 };
 
 export default SiteNavSessionAction;

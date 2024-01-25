@@ -6,32 +6,32 @@
  *
  */
 
-import { isFSA } from 'flux-standard-action';
-import { changeEmbedSearchQuery } from '../embedSearchActions';
+import { isFSA } from "flux-standard-action";
+import { changeEmbedSearchQuery } from "../embedSearchActions";
 
 const query = {
-  textQuery: 'hei',
+  textQuery: "hei",
   page: 1,
   start: 1,
-  filter: '',
+  filter: "",
 };
 
-test('actions/changeEmbedSearchQuery', () => {
+test("actions/changeEmbedSearchQuery", () => {
   const actual = changeEmbedSearchQuery(query);
 
   expect(isFSA(actual)).toBeTruthy();
 
-  expect(actual.type).toBe('CHANGE_EMBED_SEARCH_QUERY');
+  expect(actual.type).toBe("CHANGE_EMBED_SEARCH_QUERY");
   expect(actual.payload).toEqual(query);
   expect(actual.error).toBeFalsy();
 });
 
-test('actions/changeEmbedSearchQuery with error', () => {
-  const actual = changeEmbedSearchQuery(new Error('fail!'));
+test("actions/changeEmbedSearchQuery with error", () => {
+  const actual = changeEmbedSearchQuery(new Error("fail!"));
 
   expect(isFSA(actual)).toBeTruthy();
 
-  expect(actual.type).toBe('CHANGE_EMBED_SEARCH_QUERY');
-  expect(actual.payload.message).toBe('fail!');
+  expect(actual.type).toBe("CHANGE_EMBED_SEARCH_QUERY");
+  expect(actual.payload.message).toBe("fail!");
   expect(actual.error).toBeTruthy();
 });

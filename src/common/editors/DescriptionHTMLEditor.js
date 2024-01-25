@@ -6,15 +6,15 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Editor, EditorState, RichUtils } from 'draft-js';
-import classNames from 'classnames';
-import { convertFromHTML } from 'draft-convert';
-import Icon from '../Icon';
-import polyglot from '../../i18n';
-import StyleControls from './StyleControls';
-import { convertDraftJsToHtml } from '../../util/convertDraftJsStateToHtml';
+import React from "react";
+import PropTypes from "prop-types";
+import { Editor, EditorState, RichUtils } from "draft-js";
+import classNames from "classnames";
+import { convertFromHTML } from "draft-convert";
+import Icon from "../Icon";
+import polyglot from "../../i18n";
+import StyleControls from "./StyleControls";
+import { convertDraftJsToHtml } from "../../util/convertDraftJsStateToHtml";
 
 export default class DescriptionHTMLEditor extends React.Component {
   constructor(props) {
@@ -56,7 +56,7 @@ export default class DescriptionHTMLEditor extends React.Component {
 
   handleDescriptionChange(editorState) {
     this.setState(
-      prevState => ({
+      (prevState) => ({
         editorState,
         previousHasText: prevState.editorState.getCurrentContent().hasText(),
       }),
@@ -77,15 +77,11 @@ export default class DescriptionHTMLEditor extends React.Component {
   }
 
   toggleBlockType(blockType) {
-    this.handleDescriptionChange(
-      RichUtils.toggleBlockType(this.state.editorState, blockType),
-    );
+    this.handleDescriptionChange(RichUtils.toggleBlockType(this.state.editorState, blockType));
   }
 
   toggleInlineStyle(inlineStyle) {
-    this.handleDescriptionChange(
-      RichUtils.toggleInlineStyle(this.state.editorState, inlineStyle),
-    );
+    this.handleDescriptionChange(RichUtils.toggleInlineStyle(this.state.editorState, inlineStyle));
   }
 
   render() {
@@ -95,16 +91,11 @@ export default class DescriptionHTMLEditor extends React.Component {
 
     // If the user changes block type before entering any text, we can
     // either style the placeholder or hide it. Let's just hide it now.
-    const commentAboveApplies =
-      !contentState.hasText() &&
-      contentState
-        .getBlockMap()
-        .first()
-        .getType() !== 'unstyled';
+    const commentAboveApplies = !contentState.hasText() && contentState.getBlockMap().first().getType() !== "unstyled";
 
     const className = classNames({
-      'RichEditor-editor learning-step-form_input learning-step-form_paragraph': true,
-      'RichEditor-hidePlaceholder': commentAboveApplies,
+      "RichEditor-editor learning-step-form_input learning-step-form_paragraph": true,
+      "RichEditor-hidePlaceholder": commentAboveApplies,
     });
 
     return (
@@ -131,7 +122,7 @@ export default class DescriptionHTMLEditor extends React.Component {
                 onChange={this.handleDescriptionChange}
                 onBlur={this.handleDescriptionBlur}
                 placeholder={this.props.placeholder}
-                ref={editor => {
+                ref={(editor) => {
                   this.editor = editor;
                 }}
                 spellCheck
@@ -155,5 +146,5 @@ DescriptionHTMLEditor.propTypes = {
 };
 
 DescriptionHTMLEditor.defaultProps = {
-  placeholder: polyglot.t('editPathStep.stepDescriptionPlaceholder'),
+  placeholder: polyglot.t("editPathStep.stepDescriptionPlaceholder"),
 };

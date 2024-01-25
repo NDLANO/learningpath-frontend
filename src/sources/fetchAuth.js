@@ -6,19 +6,19 @@
  *
  */
 
-import * as actions from '../session/sessionActions';
-import TokenStatusHandler from '../util/TokenStatusHandler';
-import { getPersonalToken, getPersonalTokenExpires } from './localStorage';
+import * as actions from "../session/sessionActions";
+import TokenStatusHandler from "../util/TokenStatusHandler";
+import { getPersonalToken, getPersonalTokenExpires } from "./localStorage";
 
-export const authorizationHeader = token => `Bearer ${token}`;
+export const authorizationHeader = (token) => `Bearer ${token}`;
 
 export const fetchAuth = async (url, options = {}) => {
-  if (process.env.NODE_ENV === 'unittest') {
+  if (process.env.NODE_ENV === "unittest") {
     return fetch(url, {
       ...options,
       headers: {
         ...options.headers,
-        Authorization: authorizationHeader('12345678'),
+        Authorization: authorizationHeader("12345678"),
       },
     });
   }
@@ -30,13 +30,13 @@ export const fetchAuth = async (url, options = {}) => {
     Authorization: authorizationHeader(getPersonalToken()),
   };
 
-  if (process.env.BUILD_TARGET === 'server') {
+  if (process.env.BUILD_TARGET === "server") {
     return fetch(url, { ...options, headers });
   }
 
   if (getPersonalToken() && new Date().getTime() >= getPersonalTokenExpires()) {
     const dispatch = tokenStatusHandler.getDispatch();
-    return dispatch(actions.renewAuth()).then(newToken =>
+    return dispatch(actions.renewAuth()).then((newToken) =>
       fetch(url, {
         ...options,
         headers: {

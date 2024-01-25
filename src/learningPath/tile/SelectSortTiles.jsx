@@ -6,16 +6,16 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import polyglot from '../../i18n';
+import React from "react";
+import PropTypes from "prop-types";
+import polyglot from "../../i18n";
 
 const SelectSortTiles = ({ sortKey, onChange, className }) => (
   <select className={className} value={sortKey} onChange={onChange}>
-    <option value="title">{polyglot.t('tilePage.order.title')}</option>
-    <option value="-lastUpdated">{polyglot.t('tilePage.order.newest')}</option>
-    <option value="lastUpdated">{polyglot.t('tilePage.order.oldest')}</option>
-    <option value="status">{polyglot.t('tilePage.order.status')}</option>
+    <option value="title">{polyglot.t("tilePage.order.title")}</option>
+    <option value="-lastUpdated">{polyglot.t("tilePage.order.newest")}</option>
+    <option value="lastUpdated">{polyglot.t("tilePage.order.oldest")}</option>
+    <option value="status">{polyglot.t("tilePage.order.status")}</option>
   </select>
 );
 

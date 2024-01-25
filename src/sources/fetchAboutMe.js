@@ -6,8 +6,8 @@
  *
  */
 
-import { fetchAuthorized } from './helpers';
+import { fetchAuthorized } from "./helpers";
 
-const fetchAboutMe = fetchAuthorized('/auth/me');
+const fetchAboutMe = fetchAuthorized("/auth/me");
 
 export default fetchAboutMe;

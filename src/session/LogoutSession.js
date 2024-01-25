@@ -6,13 +6,13 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { HelmetWithTracker } from '@ndla/tracker';
-import * as actions from './sessionActions';
-import polyglot from '../i18n';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { HelmetWithTracker } from "@ndla/tracker";
+import * as actions from "./sessionActions";
+import polyglot from "../i18n";
 
 export class LogoutSession extends React.Component {
   constructor() {
@@ -35,12 +35,13 @@ export class LogoutSession extends React.Component {
 
     return (
       <div className="one-column one-column--narrow logout-container one-column--text-centered">
-        <HelmetWithTracker title={polyglot.t('htmlTitles.logoutSession')} />
+        <HelmetWithTracker title={polyglot.t("htmlTitles.logoutSession")} />
         <button
           type="button"
           className="button--primary-outline cta-link--block"
-          onClick={() => this.handleLogoutClick()}>
-          {polyglot.t('logoutSession.logutLearningpathSite')}
+          onClick={() => this.handleLogoutClick()}
+        >
+          {polyglot.t("logoutSession.logutLearningpathSite")}
         </button>
       </div>
     );
@@ -56,7 +57,4 @@ const mapDispatchToProps = {
   localLogout: actions.logoutPersonalAuth,
 };
 
-export default connect(
-  state => state,
-  mapDispatchToProps,
-)(LogoutSession);
+export default connect((state) => state, mapDispatchToProps)(LogoutSession);

@@ -6,12 +6,12 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Icon from '../../../common/Icon';
-import polyglot from '../../../i18n';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import Icon from "../../../common/Icon";
+import polyglot from "../../../i18n";
 
 export function SortLearningStepsSaveButton({ learningPath }) {
   if (!learningPath.canEdit) {
@@ -20,11 +20,9 @@ export function SortLearningStepsSaveButton({ learningPath }) {
 
   return (
     <div>
-      <Link
-        className="sort-steps_button_save"
-        to={`/learningpaths/${learningPath.id}`}>
+      <Link className="sort-steps_button_save" to={`/learningpaths/${learningPath.id}`}>
         <Icon.Save />
-        {polyglot.t('sortSteps.finish')}
+        {polyglot.t("sortSteps.finish")}
       </Link>
     </div>
   );
@@ -34,4 +32,4 @@ SortLearningStepsSaveButton.propTypes = {
   learningPath: PropTypes.object.isRequired,
 };
 
-export default connect(state => state)(SortLearningStepsSaveButton);
+export default connect((state) => state)(SortLearningStepsSaveButton);

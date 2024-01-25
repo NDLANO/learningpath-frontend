@@ -6,12 +6,12 @@
  *
  */
 
-import { handleActions } from 'redux-actions';
-import cloneDeep from 'lodash/cloneDeep';
-import get from 'lodash/get';
-import assign from 'lodash/assign';
-import findIndex from 'lodash/findIndex';
-import assureSequenceOrder from '../util/assureSequenceOrder';
+import { handleActions } from "redux-actions";
+import cloneDeep from "lodash/cloneDeep";
+import get from "lodash/get";
+import assign from "lodash/assign";
+import findIndex from "lodash/findIndex";
+import assureSequenceOrder from "../util/assureSequenceOrder";
 
 export const initialState = {};
 
@@ -31,8 +31,8 @@ export default handleActions(
     UPDATE_LEARNING_PATH_STEP: {
       next(state, action) {
         const nextState = cloneDeep(state);
-        const steps = get(nextState, 'learningsteps', []);
-        const index = findIndex(steps, ['seqNo', action.payload.seqNo]);
+        const steps = get(nextState, "learningsteps", []);
+        const index = findIndex(steps, ["seqNo", action.payload.seqNo]);
 
         if (index === -1) {
           steps.push(action.payload);
@@ -80,7 +80,7 @@ export default handleActions(
         nextState.status = status;
         return nextState;
       },
-      throw: state => state,
+      throw: (state) => state,
     },
 
     UPDATE_LEARNING_PATH_REVISION: {
@@ -90,7 +90,7 @@ export default handleActions(
         nextState.revision = revision;
         return nextState;
       },
-      throw: state => state,
+      throw: (state) => state,
     },
 
     LOGOUT: () => ({}),

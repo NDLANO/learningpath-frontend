@@ -6,27 +6,15 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import LTISearch from '../ltiSearch/LTISearch';
-import ExternalOembedSearch from './ExternalOembedSearch';
+import React from "react";
+import PropTypes from "prop-types";
+import LTISearch from "../ltiSearch/LTISearch";
+import ExternalOembedSearch from "./ExternalOembedSearch";
 
-const ExternalEmbedSearchContainer = props => {
-  const {
-    currentFilter,
-    learningPathId,
-    addEmbedResult,
-    handleTextQueryChange,
-    textQuery,
-  } = props;
-  if (currentFilter.type === 'lti') {
-    return (
-      <LTISearch
-        filter={currentFilter}
-        addEmbedResult={addEmbedResult}
-        learningPathId={learningPathId}
-      />
-    );
+const ExternalEmbedSearchContainer = (props) => {
+  const { currentFilter, learningPathId, addEmbedResult, handleTextQueryChange, textQuery } = props;
+  if (currentFilter.type === "lti") {
+    return <LTISearch filter={currentFilter} addEmbedResult={addEmbedResult} learningPathId={learningPathId} />;
   }
   return (
     <ExternalOembedSearch

@@ -6,6 +6,6 @@
  *
  */
 
-export const getFetchingPins = state => state.pinterest.fetchingPins;
+export const getFetchingPins = (state) => state.pinterest.fetchingPins;
 
-export const getPins = state => state.pinterest.pins;
+export const getPins = (state) => state.pinterest.pins;

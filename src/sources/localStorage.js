@@ -6,22 +6,19 @@
  *
  */
 
-import storage from 'local-storage-fallback';
+import storage from "local-storage-fallback";
 
-export const getPersonalToken = () =>
-  storage.getItem('learningpath_personal_token');
-export const getPersonalTokenExpires = () =>
-  storage.getItem('learningpath_personal_token_expires_at');
+export const getPersonalToken = () => storage.getItem("learningpath_personal_token");
+export const getPersonalTokenExpires = () => storage.getItem("learningpath_personal_token_expires_at");
 
 export const savePersonalToken = ({ token, expires, authenticated }) => {
-  storage.setItem('learningpath_personal_token', token);
-  storage.setItem('learningpath_personal_token_expires_at', expires);
+  storage.setItem("learningpath_personal_token", token);
+  storage.setItem("learningpath_personal_token_expires_at", expires);
 };
 
 export function removePersonalToken() {
-  storage.removeItem('learningpath_personal_token');
-  storage.removeItem('learningpath_personal_token_expires_at');
+  storage.removeItem("learningpath_personal_token");
+  storage.removeItem("learningpath_personal_token_expires_at");
 }
 
-export const isUserAuthenticated = () =>
-  storage.getItem('learningpath_personal_token') !== null;
+export const isUserAuthenticated = () => storage.getItem("learningpath_personal_token") !== null;

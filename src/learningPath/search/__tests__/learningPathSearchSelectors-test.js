@@ -6,16 +6,16 @@
  *
  */
 
-import { learningPaths } from '../../../common/__tests__/mockData';
-import { getLearningPathSearchResult } from '../learningPathSearchSelectors';
-import { translatedLearningPaths } from '../../../common/__tests__/translatedMockData';
+import { learningPaths } from "../../../common/__tests__/mockData";
+import { getLearningPathSearchResult } from "../learningPathSearchSelectors";
+import { translatedLearningPaths } from "../../../common/__tests__/translatedMockData";
 
-test('selectors/getLearningPathSearchResult', () => {
+test("selectors/getLearningPathSearchResult", () => {
   const state = {
     learningPathSearch: {
       results: learningPaths,
     },
-    locale: 'nb',
+    locale: "nb",
   };
 
   expect(getLearningPathSearchResult(state)).toEqual(translatedLearningPaths);

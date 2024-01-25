@@ -6,10 +6,10 @@
  *
  */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import isEmpty from 'lodash/isEmpty';
-import polyglot from '../i18n';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import isEmpty from "lodash/isEmpty";
+import polyglot from "../i18n";
 
 class PinterestBoardForm extends Component {
   constructor(props) {
@@ -32,8 +32,7 @@ class PinterestBoardForm extends Component {
   }
 
   render() {
-    const disabledButton =
-      isEmpty(this.state.boardName) || isEmpty(this.state.username);
+    const disabledButton = isEmpty(this.state.boardName) || isEmpty(this.state.username);
     return (
       <form onSubmit={this.handleSubmit} className="pinterest-search-form">
         <input
@@ -41,24 +40,23 @@ class PinterestBoardForm extends Component {
           onChange={this.handleQueryChange}
           value={this.state.username}
           name="username"
-          placeholder={polyglot.t('pinterest.form.usernamePlaceholder')}
+          placeholder={polyglot.t("pinterest.form.usernamePlaceholder")}
         />
         <input
           type="text"
           onChange={this.handleQueryChange}
           value={this.state.boardName}
           name="boardName"
-          placeholder={polyglot.t('pinterest.form.boardPlaceholder')}
+          placeholder={polyglot.t("pinterest.form.boardPlaceholder")}
         />
         <button
           type="submit"
           className="button button--primary-outline cta-link--block pinterest_button"
-          disabled={disabledButton}>
-          {polyglot.t('pinterest.form.submit')}
+          disabled={disabledButton}
+        >
+          {polyglot.t("pinterest.form.submit")}
         </button>
-        <p className="learning-path_input-information">
-          {polyglot.t('pinterest.form.requiredFields')}
-        </p>
+        <p className="learning-path_input-information">{polyglot.t("pinterest.form.requiredFields")}</p>
       </form>
     );
   }
@@ -71,8 +69,8 @@ PinterestBoardForm.propTypes = {
 };
 
 PinterestBoardForm.defaultProps = {
-  boardName: '',
-  username: '',
+  boardName: "",
+  username: "",
 };
 
 export default PinterestBoardForm;

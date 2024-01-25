@@ -6,18 +6,14 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
 
-export const urlIsNDLAApiUrl = url =>
-  /^(http|https):\/\/(ndla-frontend|www).([a-zA-Z]+.)?api.ndla.no/.test(url);
-export const urlIsNDLAEnvUrl = url =>
-  /^(http|https):\/\/(www.)?([a-zA-Z]+.)?ndla.no/.test(url);
-export const urlIsLocalNdla = url =>
-  /^http:\/\/(proxy.ndla-local|localhost):30017/.test(url);
-export const urlIsNDLAUrl = url =>
-  urlIsNDLAApiUrl(url) || urlIsNDLAEnvUrl(url) || urlIsLocalNdla(url);
+export const urlIsNDLAApiUrl = (url) => /^(http|https):\/\/(ndla-frontend|www).([a-zA-Z]+.)?api.ndla.no/.test(url);
+export const urlIsNDLAEnvUrl = (url) => /^(http|https):\/\/(www.)?([a-zA-Z]+.)?ndla.no/.test(url);
+export const urlIsLocalNdla = (url) => /^http:\/\/(proxy.ndla-local|localhost):30017/.test(url);
+export const urlIsNDLAUrl = (url) => urlIsNDLAApiUrl(url) || urlIsNDLAEnvUrl(url) || urlIsLocalNdla(url);
 
 export default class Oembed extends React.Component {
   constructor(props) {
@@ -54,15 +50,14 @@ export default class Oembed extends React.Component {
       <div>
         <div
           className={classNames({
-            'learning-step': true,
-            'learning-step_embed': true,
-            'learning-step--without-dimensions': this.state.isNDLAResource,
-            'learning-step_lti': embedType === 'lti',
-            'learning-step_oembed':
-              embedType === 'oembed' || embedType === 'iframe',
+            "learning-step": true,
+            "learning-step_embed": true,
+            "learning-step--without-dimensions": this.state.isNDLAResource,
+            "learning-step_lti": embedType === "lti",
+            "learning-step_oembed": embedType === "oembed" || embedType === "iframe",
           })}
           dangerouslySetInnerHTML={{ __html: html }}
-          ref={iframeDiv => {
+          ref={(iframeDiv) => {
             this.iframeDiv = iframeDiv;
           }}
         />

@@ -6,16 +6,14 @@
  *
  */
 
-import createBrowserHistory from 'history/createBrowserHistory';
+import createBrowserHistory from "history/createBrowserHistory";
 
 export function createHistory(basename) {
   // avoid recreating history on HMR
   if (window.browserHistory) {
     return window.browserHistory;
   }
-  const browserHistory = basename
-    ? createBrowserHistory({ basename })
-    : createBrowserHistory();
+  const browserHistory = basename ? createBrowserHistory({ basename }) : createBrowserHistory();
 
   window.browserHistory = browserHistory;
   return browserHistory;

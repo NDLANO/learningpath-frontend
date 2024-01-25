@@ -6,10 +6,10 @@
  *
  */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import isEmpty from 'lodash/isEmpty';
-import polyglot from '../../i18n';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import isEmpty from "lodash/isEmpty";
+import polyglot from "../../i18n";
 
 export default class SearchForm extends Component {
   constructor(props) {
@@ -31,7 +31,7 @@ export default class SearchForm extends Component {
 
   handleQueryChange(evt) {
     if (isEmpty(this.state.query)) {
-      this.setState({ sort: '-relevance' });
+      this.setState({ sort: "-relevance" });
     }
     this.setState({ query: evt.target.value });
   }
@@ -49,33 +49,20 @@ export default class SearchForm extends Component {
           className="search-form_query"
           onChange={this.handleQueryChange}
           value={this.state.query}
-          placeholder={polyglot.t('searchForm.placeholder')}
+          placeholder={polyglot.t("searchForm.placeholder")}
         />
-        <input
-          type="submit"
-          className="search-form_btn"
-          value={polyglot.t('searchForm.btn')}
-        />
+        <input type="submit" className="search-form_btn" value={polyglot.t("searchForm.btn")} />
         <select
           className="search-form_sort-order select--gray-border"
           onChange={this.handleSortChange}
-          value={this.state.sort}>
-          <option value="-relevance">
-            {polyglot.t('searchForm.order.relevance')}
-          </option>
-          <option value="-lastUpdated">
-            {polyglot.t('searchForm.order.newest')}
-          </option>
-          <option value="lastUpdated">
-            {polyglot.t('searchForm.order.oldest')}
-          </option>
-          <option value="-duration">
-            {polyglot.t('searchForm.order.longest')}
-          </option>
-          <option value="duration">
-            {polyglot.t('searchForm.order.shortest')}
-          </option>
-          <option value="title">{polyglot.t('searchForm.order.title')}</option>
+          value={this.state.sort}
+        >
+          <option value="-relevance">{polyglot.t("searchForm.order.relevance")}</option>
+          <option value="-lastUpdated">{polyglot.t("searchForm.order.newest")}</option>
+          <option value="lastUpdated">{polyglot.t("searchForm.order.oldest")}</option>
+          <option value="-duration">{polyglot.t("searchForm.order.longest")}</option>
+          <option value="duration">{polyglot.t("searchForm.order.shortest")}</option>
+          <option value="title">{polyglot.t("searchForm.order.title")}</option>
         </select>
       </form>
     );
@@ -90,6 +77,6 @@ SearchForm.propTypes = {
 };
 
 SearchForm.defaultProps = {
-  sort: '-lastUpdated',
-  query: '',
+  sort: "-lastUpdated",
+  query: "",
 };

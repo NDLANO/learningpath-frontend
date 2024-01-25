@@ -6,28 +6,22 @@
  *
  */
 
-import { createSelector } from 'reselect';
-import { convertFieldWithFallback } from '../../util/convertFieldWithFallback';
+import { createSelector } from "reselect";
+import { convertFieldWithFallback } from "../../util/convertFieldWithFallback";
 
-import { oembedContentI18N } from '../../util/i18nFieldFinder';
-import { getLocale } from '../../locale/localeSelectors';
+import { oembedContentI18N } from "../../util/i18nFieldFinder";
+import { getLocale } from "../../locale/localeSelectors";
 
-const getLearningPathStepFromState = state => state.learningPathStep;
+const getLearningPathStepFromState = (state) => state.learningPathStep;
 
-const getEmbedContentFromState = state => state.oembedPreview.oembedContent;
+const getEmbedContentFromState = (state) => state.oembedPreview.oembedContent;
 
-export const getI18NEmbedContent = createSelector(
-  [getEmbedContentFromState, getLocale],
-  (embedContent, lang) => ({
-    ...oembedContentI18N({ embedUrl: embedContent }, lang),
-  }),
-);
+export const getI18NEmbedContent = createSelector([getEmbedContentFromState, getLocale], (embedContent, lang) => ({
+  ...oembedContentI18N({ embedUrl: embedContent }, lang),
+}));
 
-export const getLearningPathStep = createSelector(
-  [getLearningPathStepFromState],
-  learningPathStep => ({
-    ...learningPathStep,
-    title: convertFieldWithFallback(learningPathStep, 'title', ''),
-    description: convertFieldWithFallback(learningPathStep, 'description', ''),
-  }),
-);
+export const getLearningPathStep = createSelector([getLearningPathStepFromState], (learningPathStep) => ({
+  ...learningPathStep,
+  title: convertFieldWithFallback(learningPathStep, "title", ""),
+  description: convertFieldWithFallback(learningPathStep, "description", ""),
+}));

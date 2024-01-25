@@ -6,9 +6,9 @@
  *
  */
 
-import nock from 'nock';
+import nock from "nock";
 
-export const testError = err => {
+export const testError = (err) => {
   console.error(err); // eslint-disable-line
   nock.cleanAll();
 };

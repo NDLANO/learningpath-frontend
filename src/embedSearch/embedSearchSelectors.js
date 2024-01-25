@@ -6,9 +6,9 @@
  *
  */
 
-import { createSelector } from 'reselect';
+import { createSelector } from "reselect";
 
-const imageSource = pagemap => {
+const imageSource = (pagemap) => {
   if (pagemap && pagemap.cse_thumbnail && pagemap.cse_thumbnail.length > 0) {
     return pagemap.cse_thumbnail[0].src;
   }
@@ -17,23 +17,18 @@ const imageSource = pagemap => {
 
 const getTotalResultsFromState = (state, type) => {
   const { result } = state.embedSearch[type];
-  return result.queries.request
-    ? result.queries.request[0].totalResults
-    : undefined;
+  return result.queries.request ? result.queries.request[0].totalResults : undefined;
 };
 
-export const getNumberOfPages = createSelector(
-  [getTotalResultsFromState],
-  totalResults => {
-    const numberOfPages = totalResults ? Math.ceil(totalResults / 10) : 1;
-    return numberOfPages > 10 ? 10 : numberOfPages;
-  },
-);
+export const getNumberOfPages = createSelector([getTotalResultsFromState], (totalResults) => {
+  const numberOfPages = totalResults ? Math.ceil(totalResults / 10) : 1;
+  return numberOfPages > 10 ? 10 : numberOfPages;
+});
 
 export const getEmbedResultFromState = (state, type) => {
   const { result } = state.embedSearch[type];
   return result && result.items
-    ? result.items.map(item => ({
+    ? result.items.map((item) => ({
         id: item.cacheId,
         title: item.title,
         link: item.link,
@@ -44,8 +39,6 @@ export const getEmbedResultFromState = (state, type) => {
     : [];
 };
 
-export const getEmbedQueryFromState = (state, type) =>
-  state.embedSearch[type].query;
+export const getEmbedQueryFromState = (state, type) => state.embedSearch[type].query;
 
-export const getOembedContentFromState = (state, type) =>
-  state.embedSearch[type].oembedContent;
+export const getOembedContentFromState = (state, type) => state.embedSearch[type].oembedContent;

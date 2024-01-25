@@ -6,27 +6,25 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import isEmpty from 'lodash/isEmpty';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import isEmpty from "lodash/isEmpty";
 
-import ImageSearch from '../../imageSearch/ImageSearch';
-import Lightbox from '../../common/Lightbox';
-import polyglot from '../../i18n';
-import Button from '../../common/buttons/Button';
-import { getSavedImage } from '../../imageSearch/imageSelectors';
+import ImageSearch from "../../imageSearch/ImageSearch";
+import Lightbox from "../../common/Lightbox";
+import polyglot from "../../i18n";
+import Button from "../../common/buttons/Button";
+import { getSavedImage } from "../../imageSearch/imageSelectors";
 
-const ChoseImage = props => {
+const ChoseImage = (props) => {
   const { onImageLightboxOpen } = props;
   return (
     <div>
       <Button className="button button--primary" onClick={onImageLightboxOpen}>
-        {polyglot.t('learningPath.image.searchAndChose')}
+        {polyglot.t("learningPath.image.searchAndChose")}
       </Button>
-      <p className="learning-path_input-information">
-        {polyglot.t('learningPath.image.imageInformation')}
-      </p>
+      <p className="learning-path_input-information">{polyglot.t("learningPath.image.imageInformation")}</p>
     </div>
   );
 };
@@ -34,7 +32,7 @@ ChoseImage.propTypes = {
   onImageLightboxOpen: PropTypes.func.isRequired,
 };
 
-const ChangeImage = props => {
+const ChangeImage = (props) => {
   const { onImageLightboxOpen, savedImage } = props;
 
   const authors = savedImage.copyright.creators
@@ -43,25 +41,17 @@ const ChangeImage = props => {
   return (
     <div>
       <div className="image-preview_image">
-        <img
-          role="presentation"
-          src={savedImage.imageUrl}
-          alt={savedImage.alttext}
-        />
-        <p className="learning-path_input-information">
-          {polyglot.t('learningPath.image.imageInformation')}
-        </p>
+        <img role="presentation" src={savedImage.imageUrl} alt={savedImage.alttext} />
+        <p className="learning-path_input-information">{polyglot.t("learningPath.image.imageInformation")}</p>
       </div>
       <div className="image-preview_information">
         <h2 className="image-preview_title">{savedImage.title}</h2>
         <div className="image-prieview_copyright-author">
-          <b>{polyglot.t('learningPath.image.authors')}</b>
-          <span>{authors.map(author => author.name).join(', ')}</span>
+          <b>{polyglot.t("learningPath.image.authors")}</b>
+          <span>{authors.map((author) => author.name).join(", ")}</span>
         </div>
-        <Button
-          className="button button--primary"
-          onClick={onImageLightboxOpen}>
-          {polyglot.t('learningPath.image.changeImage')}
+        <Button className="button button--primary" onClick={onImageLightboxOpen}>
+          {polyglot.t("learningPath.image.changeImage")}
         </Button>
       </div>
     </div>
@@ -93,36 +83,26 @@ class LearningPathImage extends React.Component {
     const onImageLightboxClose = () => {
       this.setState({ displayImages: false });
     };
-    const onImageLightboxOpen = evt => {
+    const onImageLightboxOpen = (evt) => {
       evt.preventDefault();
-      localFetchImages(
-        { query: learningPathTitle, 'page-size': 16, page: 1 },
-        true,
-      );
+      localFetchImages({ query: learningPathTitle, "page-size": 16, page: 1 }, true);
       this.setState({ displayImages: true });
     };
 
     return (
       <div>
         <div className="learning-path-image">
-          <label
-            htmlFor="changeImage"
-            className="label--medium-bold label--medium">
-            {polyglot.t('learningPath.image.title')}
+          <label htmlFor="changeImage" className="label--medium-bold label--medium">
+            {polyglot.t("learningPath.image.title")}
           </label>
           {savedImage && savedImage.id && !isEmpty(savedImage) ? (
-            <ChangeImage
-              onImageLightboxOpen={onImageLightboxOpen}
-              savedImage={savedImage}
-            />
+            <ChangeImage onImageLightboxOpen={onImageLightboxOpen} savedImage={savedImage} />
           ) : (
             <ChoseImage onImageLightboxOpen={onImageLightboxOpen} />
           )}
         </div>
         <div className="big-lightbox_wrapper big-lightbox_wrapper--scroll">
-          <Lightbox
-            display={this.state.displayImages}
-            onClose={onImageLightboxClose}>
+          <Lightbox display={this.state.displayImages} onClose={onImageLightboxClose}>
             <ImageSearch
               id="coverPhotoMetaUrl"
               onChange={onChange}
@@ -147,7 +127,7 @@ LearningPathImage.propTypes = {
   savedImage: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state =>
+const mapStateToProps = (state) =>
   Object.assign({}, state, {
     savedImage: state.imageSearch ? getSavedImage(state) : undefined,
   });

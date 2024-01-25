@@ -6,23 +6,20 @@
  *
  */
 
-import { createSelector } from 'reselect';
-import { convertFieldWithFallback } from '../util/convertFieldWithFallback';
-import { sortPaths } from '../util/sortUtil';
+import { createSelector } from "reselect";
+import { convertFieldWithFallback } from "../util/convertFieldWithFallback";
+import { sortPaths } from "../util/sortUtil";
 
-const getLearningPathsFromState = state => state.learningPaths;
-export const getSortKey = state => state.myLearningPathsSortOrder || 'title';
+const getLearningPathsFromState = (state) => state.learningPaths;
+export const getSortKey = (state) => state.myLearningPathsSortOrder || "title";
 
-export const getLearningPaths = createSelector(
-  [getLearningPathsFromState, getSortKey],
-  (learningPaths, sortKey) => {
-    const newLearningPaths = learningPaths.map(learningPath => ({
-      ...learningPath,
-      title: convertFieldWithFallback(learningPath, 'title', ''),
-      description: convertFieldWithFallback(learningPath, 'description', ''),
-      introduction: convertFieldWithFallback(learningPath, 'introduction', ''),
-      tags: convertFieldWithFallback(learningPath, 'tags', []),
-    }));
-    return sortPaths(newLearningPaths, sortKey);
-  },
-);
+export const getLearningPaths = createSelector([getLearningPathsFromState, getSortKey], (learningPaths, sortKey) => {
+  const newLearningPaths = learningPaths.map((learningPath) => ({
+    ...learningPath,
+    title: convertFieldWithFallback(learningPath, "title", ""),
+    description: convertFieldWithFallback(learningPath, "description", ""),
+    introduction: convertFieldWithFallback(learningPath, "introduction", ""),
+    tags: convertFieldWithFallback(learningPath, "tags", []),
+  }));
+  return sortPaths(newLearningPaths, sortKey);
+});

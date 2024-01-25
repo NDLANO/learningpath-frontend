@@ -6,13 +6,13 @@
  *
  */
 
-import { createAction } from 'redux-actions';
-import { routerActions } from 'react-router-redux';
-import get from 'lodash/get';
+import { createAction } from "redux-actions";
+import { routerActions } from "react-router-redux";
+import get from "lodash/get";
 
-import { applicationError, addMessage } from '../../messages/messagesActions';
+import { applicationError, addMessage } from "../../messages/messagesActions";
 // eslint-disable-next-line import/no-cycle
-import { fetchLearningPath } from '../learningPathActions';
+import { fetchLearningPath } from "../learningPathActions";
 import {
   updateStep,
   createStep,
@@ -21,23 +21,21 @@ import {
   updateSeqNo,
   activateDeletedStep,
   fetchOembedUrl,
-} from '../../sources/learningpaths';
-import { setOembedPreview } from './edit/validateOembedActions';
-import polyglot from '../../i18n';
-import redirectAction from '../../util/redirectAction';
+} from "../../sources/learningpaths";
+import { setOembedPreview } from "./edit/validateOembedActions";
+import polyglot from "../../i18n";
+import redirectAction from "../../util/redirectAction";
 
-export const setLearningPathStep = createAction('SET_LEARNING_PATH_STEP');
-export const sortLearningPathSteps = createAction('SORT_LEARNING_PATH_STEPS');
-export const createEmptyLearningPathStep = createAction(
-  'CREATE_EMPTY_LEARNING_PATH_STEP',
-);
-export const setOembedObject = createAction('SET_OEMBED_OBJECT');
+export const setLearningPathStep = createAction("SET_LEARNING_PATH_STEP");
+export const sortLearningPathSteps = createAction("SORT_LEARNING_PATH_STEPS");
+export const createEmptyLearningPathStep = createAction("CREATE_EMPTY_LEARNING_PATH_STEP");
+export const setOembedObject = createAction("SET_OEMBED_OBJECT");
 
 export function fetchOembed(query) {
-  if (query.embedType === 'oembed') {
+  if (query.embedType === "oembed") {
     return (dispatch, getState) =>
       fetchOembedUrl(query)
-        .then(object => {
+        .then((object) => {
           const clonedObject = Object.assign({}, object, {
             url: query.url,
             embedType: query.embedType,
@@ -46,14 +44,12 @@ export function fetchOembed(query) {
           dispatch(setOembedObject(clonedObject));
           dispatch(setOembedPreview(clonedObject));
         })
-        .catch(err => dispatch(applicationError(err)));
+        .catch((err) => dispatch(applicationError(err)));
   }
   return (dispatch, getState) =>
-    new Promise(resolve => {
+    new Promise((resolve) => {
       const clonedObject = {
-        html: `<iframe src="${query.url}" aria-label="${query.url}" title="${
-          query.url
-        }" />`,
+        html: `<iframe src="${query.url}" aria-label="${query.url}" title="${query.url}" />`,
         url: query.url,
         embedType: query.embedType,
         language: getState().locale,
@@ -68,7 +64,7 @@ function canAccessLearningPathStep(pathId, step, isEdit = false, dispatch) {
   if (isEdit && !step.canEdit) {
     dispatch(
       routerActions.push({
-        pathname: '/forbidden',
+        pathname: "/forbidden",
       }),
     );
   }
@@ -78,10 +74,8 @@ export function fetchLearningPathStep(pathId, stepId, isEdit = false) {
   return (dispatch, getState) => {
     const { learningPath, locale } = getState();
 
-    if (get(learningPath, 'id') === pathId) {
-      const step = get(learningPath, 'learningsteps', []).find(
-        s => s.id === stepId,
-      );
+    if (get(learningPath, "id") === pathId) {
+      const step = get(learningPath, "learningsteps", []).find((s) => s.id === stepId);
       if (step) {
         dispatch(setLearningPathStep(step));
         canAccessLearningPathStep(pathId, step, isEdit, dispatch);
@@ -89,15 +83,14 @@ export function fetchLearningPathStep(pathId, stepId, isEdit = false) {
     }
 
     return fetchPathStep({ pathId, stepId }, locale)
-      .then(step => {
+      .then((step) => {
         dispatch(setLearningPathStep(step));
         canAccessLearningPathStep(pathId, step, isEdit, dispatch);
         return step;
       })
-      .then(step => {
+      .then((step) => {
         if (step.embedUrl && step.embedUrl.url) {
-          const innerWidth =
-            process.env.BUILD_TARGET === 'server' ? 1000 : window.innerWidth;
+          const innerWidth = process.env.BUILD_TARGET === "server" ? 1000 : window.innerWidth;
           return dispatch(
             fetchOembed({
               url: step.embedUrl.url,
@@ -108,9 +101,9 @@ export function fetchLearningPathStep(pathId, stepId, isEdit = false) {
         }
         return {};
       })
-      .catch(err => {
+      .catch((err) => {
         if (err.status === 404) {
-          return dispatch(redirectAction('push', err, '/notfound'));
+          return dispatch(redirectAction("push", err, "/notfound"));
         }
         dispatch(applicationError(err));
         return err;
@@ -119,12 +112,10 @@ export function fetchLearningPathStep(pathId, stepId, isEdit = false) {
 }
 
 export function updateLearningPathStep(pathId, stepId, learningPathStep) {
-  return dispatch =>
+  return (dispatch) =>
     updateStep({ pathId, stepId }, learningPathStep)
-      .then(lpspath => {
-        dispatch(
-          addMessage({ message: polyglot.t('updateLearningPath.updatedMsg') }),
-        );
+      .then((lpspath) => {
+        dispatch(addMessage({ message: polyglot.t("updateLearningPath.updatedMsg") }));
         dispatch(setLearningPathStep(lpspath));
         dispatch(fetchLearningPath(pathId));
         dispatch(
@@ -133,13 +124,13 @@ export function updateLearningPathStep(pathId, stepId, learningPathStep) {
           }),
         );
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch(applicationError(err));
         if (err.status === 403) {
           dispatch(
             addMessage({
-              message: polyglot.t('updateLearningPath.notAllowed'),
-              severity: 'danger',
+              message: polyglot.t("updateLearningPath.notAllowed"),
+              severity: "danger",
               timeToLive: 10000,
             }),
           );
@@ -148,12 +139,10 @@ export function updateLearningPathStep(pathId, stepId, learningPathStep) {
 }
 
 export function createLearningPathStep(pathId, learningPathStep) {
-  return dispatch =>
+  return (dispatch) =>
     createStep({ pathId }, learningPathStep)
-      .then(lpspath => {
-        dispatch(
-          addMessage({ message: polyglot.t('updateLearningPath.updatedMsg') }),
-        );
+      .then((lpspath) => {
+        dispatch(addMessage({ message: polyglot.t("updateLearningPath.updatedMsg") }));
         dispatch(fetchLearningPath(pathId));
         dispatch(
           routerActions.push({
@@ -161,13 +150,13 @@ export function createLearningPathStep(pathId, learningPathStep) {
           }),
         );
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch(applicationError(err));
         if (err.status === 403) {
           dispatch(
             addMessage({
-              message: polyglot.t('updateLearningPath.notAllowed'),
-              severity: 'danger',
+              message: polyglot.t("updateLearningPath.notAllowed"),
+              severity: "danger",
               timeToLive: 10000,
             }),
           );
@@ -176,27 +165,23 @@ export function createLearningPathStep(pathId, learningPathStep) {
 }
 
 export function activateDeletedLearningPathStep(pathId, stepId) {
-  return dispatch =>
-    activateDeletedStep({ pathId, stepId }).then(() =>
-      dispatch(fetchLearningPath(pathId)),
-    );
+  return (dispatch) => activateDeletedStep({ pathId, stepId }).then(() => dispatch(fetchLearningPath(pathId)));
 }
 
 export function deleteLearningPathStep(pathId, stepId, stepTitle) {
-  return dispatch =>
+  return (dispatch) =>
     deleteStep({ pathId, stepId })
       .then(() =>
         dispatch(
           addMessage({
-            message: polyglot.t('learningPathStep.messages.delete.title', {
+            message: polyglot.t("learningPathStep.messages.delete.title", {
               stepTitle,
             }),
             timeToLive: 7000,
-            severity: 'info',
+            severity: "info",
             action: {
-              title: polyglot.t('learningPathStep.messages.delete.action'),
-              onClick: () =>
-                dispatch(activateDeletedLearningPathStep(pathId, stepId)),
+              title: polyglot.t("learningPathStep.messages.delete.action"),
+              onClick: () => dispatch(activateDeletedLearningPathStep(pathId, stepId)),
             },
           }),
         ),
@@ -205,12 +190,12 @@ export function deleteLearningPathStep(pathId, stepId, stepTitle) {
 }
 
 export function updateStepSequenceNumber(pathId, stepId, seqNo) {
-  return dispatch =>
+  return (dispatch) =>
     updateSeqNo({ pathId, stepId }, { seqNo })
       .then(() => {
         dispatch(fetchLearningPath(pathId));
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch(applicationError(err));
       });
 }

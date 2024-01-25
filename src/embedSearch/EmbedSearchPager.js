@@ -6,12 +6,12 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import ButtonPager from '../common/pager/ButtonPager';
+import React from "react";
+import PropTypes from "prop-types";
+import ButtonPager from "../common/pager/ButtonPager";
 
 const EmbedSearchPager = ({ query, pagerAction }) => {
-  const onPagerButtonClicked = q => {
+  const onPagerButtonClicked = (q) => {
     if (query.start) {
       const nextIndex = query.start + (q.page - query.page) * 10;
       pagerAction(Object.assign({}, q, { start: nextIndex }));
@@ -20,12 +20,7 @@ const EmbedSearchPager = ({ query, pagerAction }) => {
     }
   };
   return (
-    <ButtonPager
-      page={query.page}
-      lastPage={query.numberOfPages}
-      query={query}
-      pagerAction={onPagerButtonClicked}
-    />
+    <ButtonPager page={query.page} lastPage={query.numberOfPages} query={query} pagerAction={onPagerButtonClicked} />
   );
 };
 EmbedSearchPager.propTypes = {

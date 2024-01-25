@@ -6,13 +6,13 @@
  *
  */
 
-import { bindActionCreators } from 'redux';
-import { matchPath } from 'react-router-dom';
-import { serverRoutes } from '../serverRoutes';
+import { bindActionCreators } from "redux";
+import { matchPath } from "react-router-dom";
+import { serverRoutes } from "../serverRoutes";
 
 export default function prefetchData(req, dispatch) {
   const promises = [];
-  serverRoutes.forEach(route => {
+  serverRoutes.forEach((route) => {
     const match = matchPath(req.url, route);
     if (match && route.component.fetchData) {
       promises.push(

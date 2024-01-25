@@ -6,29 +6,26 @@
  *
  */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import get from 'lodash/get';
-import isEmpty from 'lodash/isEmpty';
-import { Redirect } from 'react-router-dom';
-import { HelmetWithTracker } from '@ndla/tracker';
-import LearningPathForm from './LearningPathForm';
-import { fetchLearningPathTagsIfNeeded } from './tags/learningPathTagsActions';
-import { fetchLearningPathContributorsIfNeeded } from './copyright/learningPathContributorsActions';
-import { getLearningPathTags } from './tags/learningPathTagsSelectors';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import get from "lodash/get";
+import isEmpty from "lodash/isEmpty";
+import { Redirect } from "react-router-dom";
+import { HelmetWithTracker } from "@ndla/tracker";
+import LearningPathForm from "./LearningPathForm";
+import { fetchLearningPathTagsIfNeeded } from "./tags/learningPathTagsActions";
+import { fetchLearningPathContributorsIfNeeded } from "./copyright/learningPathContributorsActions";
+import { getLearningPathTags } from "./tags/learningPathTagsSelectors";
 import {
   fetchLearningPathImages,
   fetchLearningPathImage,
   fetchLearningPathImageWithMetaUrl,
-} from '../../imageSearch/imageActions';
-import { updateLearningPath } from '../learningPathActions';
-import {
-  getLearningPath,
-  getLearningPathSteps,
-} from '../learningPathSelectors';
-import { getLocale } from '../../locale/localeSelectors';
-import polyglot from '../../i18n';
+} from "../../imageSearch/imageActions";
+import { updateLearningPath } from "../learningPathActions";
+import { getLearningPath, getLearningPathSteps } from "../learningPathSelectors";
+import { getLocale } from "../../locale/localeSelectors";
+import polyglot from "../../i18n";
 
 class EditLearningPath extends Component {
   componentDidMount() {
@@ -56,33 +53,28 @@ class EditLearningPath extends Component {
       return <Redirect to="/forbidden" />;
     }
 
-    const handleSubmit = values =>
+    const handleSubmit = (values) =>
       localUpdateLearningPath(learningPath.id, {
         title: values.title,
         description: values.description,
         language,
         revision: learningPath.revision,
-        duration: values.duration.replace(/,/g, '.') * 60,
+        duration: values.duration.replace(/,/g, ".") * 60,
         tags: values.tags,
         copyright: {
           license: {
-            license: 'CC-BY-SA-4.0',
-            description:
-              'Creative Commons Attribution-ShareAlike 4.0 International',
-            url: 'https://creativecommons.org/licenses/by-sa/4.0/',
+            license: "CC-BY-SA-4.0",
+            description: "Creative Commons Attribution-ShareAlike 4.0 International",
+            url: "https://creativecommons.org/licenses/by-sa/4.0/",
           },
-          contributors: !isEmpty(values.contributors)
-            ? values.contributors
-            : undefined,
+          contributors: !isEmpty(values.contributors) ? values.contributors : undefined,
         },
-        coverPhotoMetaUrl: !isEmpty(values.coverPhotoMetaUrl)
-          ? values.coverPhotoMetaUrl
-          : undefined,
+        coverPhotoMetaUrl: !isEmpty(values.coverPhotoMetaUrl) ? values.coverPhotoMetaUrl : undefined,
       });
 
     return (
       <div className="two-column_content">
-        <HelmetWithTracker title={polyglot.t('htmlTitles.editLearningPath')} />
+        <HelmetWithTracker title={polyglot.t("htmlTitles.editLearningPath")} />
         <LearningPathForm
           learningPath={learningPath}
           tagOptions={tags}
@@ -111,13 +103,13 @@ EditLearningPath.propTypes = {
   fetchLearningPathContributors: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state =>
+const mapStateToProps = (state) =>
   Object.assign({}, state, {
     learningPath: getLearningPath(state),
     learningSteps: getLearningPathSteps(state),
     tags: getLearningPathTags(state),
-    contributors: get(state, 'learningPathContributors.all', []),
-    licenses: get(state, 'learningPathLicenses.creativeCommonLicenses.all', []),
+    contributors: get(state, "learningPathContributors.all", []),
+    licenses: get(state, "learningPathLicenses.creativeCommonLicenses.all", []),
     lang: getLocale(state),
   });
 
@@ -130,7 +122,4 @@ const mapDispatchToProps = {
   localFetchImageWithMetaUrl: fetchLearningPathImageWithMetaUrl,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(EditLearningPath);
+export default connect(mapStateToProps, mapDispatchToProps)(EditLearningPath);

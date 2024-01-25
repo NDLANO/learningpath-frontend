@@ -6,30 +6,24 @@
  *
  */
 
-import reducer from '../authenticated';
+import reducer from "../authenticated";
 
-test('reducers/authenticated', () => {
+test("reducers/authenticated", () => {
   expect(reducer(undefined, {})).toBe(false);
 
-  expect(reducer(undefined, { type: 'SET_AUTHENTICATED', payload: true })).toBe(
-    true,
-  );
+  expect(reducer(undefined, { type: "SET_AUTHENTICATED", payload: true })).toBe(true);
 
-  expect(reducer(true, { type: 'SET_AUTHENTICATED', payload: false })).toBe(
-    false,
-  );
+  expect(reducer(true, { type: "SET_AUTHENTICATED", payload: false })).toBe(false);
 
-  expect(
-    reducer(true, { type: 'DO_NOT_SET_AUTHENTICATED', payload: false }),
-  ).toBe(true);
+  expect(reducer(true, { type: "DO_NOT_SET_AUTHENTICATED", payload: false })).toBe(true);
 
   expect(
     reducer(true, {
-      type: 'SET_AUTHENTICATED',
-      payload: new Error('foobar'),
+      type: "SET_AUTHENTICATED",
+      payload: new Error("foobar"),
       error: true,
     }),
   ).toBe(true);
 
-  expect(reducer(true, { type: 'LOGOUT' })).toBe(false);
+  expect(reducer(true, { type: "LOGOUT" })).toBe(false);
 });

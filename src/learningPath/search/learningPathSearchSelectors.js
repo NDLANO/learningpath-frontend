@@ -6,27 +6,23 @@
  *
  */
 
-import { createSelector } from 'reselect';
-import { convertFieldWithFallback } from '../../util/convertFieldWithFallback';
+import { createSelector } from "reselect";
+import { convertFieldWithFallback } from "../../util/convertFieldWithFallback";
 
-const getLearningPathSearchResultFromState = state =>
-  state.learningPathSearch.results;
-const getLearningPathSearchTotalCountFromState = state =>
-  state.learningPathSearch.totalCount;
+const getLearningPathSearchResultFromState = (state) => state.learningPathSearch.results;
+const getLearningPathSearchTotalCountFromState = (state) => state.learningPathSearch.totalCount;
 
-export const getLearningPathSearchResult = createSelector(
-  [getLearningPathSearchResultFromState],
-  results =>
-    results.map(result => ({
-      ...result,
-      title: convertFieldWithFallback(result, 'title', ''),
-      description: convertFieldWithFallback(result, 'description', ''),
-      introduction: convertFieldWithFallback(result, 'introduction', ''),
-      tags: convertFieldWithFallback(result, 'tags', []),
-    })),
+export const getLearningPathSearchResult = createSelector([getLearningPathSearchResultFromState], (results) =>
+  results.map((result) => ({
+    ...result,
+    title: convertFieldWithFallback(result, "title", ""),
+    description: convertFieldWithFallback(result, "description", ""),
+    introduction: convertFieldWithFallback(result, "introduction", ""),
+    tags: convertFieldWithFallback(result, "tags", []),
+  })),
 );
 
 export const getLearningPathSearchTotalCount = createSelector(
   [getLearningPathSearchTotalCountFromState],
-  totalCount => totalCount,
+  (totalCount) => totalCount,
 );

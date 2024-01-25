@@ -6,31 +6,28 @@
  *
  */
 
-import queryString from 'query-string';
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import queryString from "query-string";
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
-import Icon from '../Icon';
-import { stepNumbers } from './PagerUtil';
+import Icon from "../Icon";
+import { stepNumbers } from "./PagerUtil";
 
 export default function LinkPager(props) {
   const { page, lastPage, query } = props;
   const steps = stepNumbers(page, lastPage);
 
-  const queryToPage = pageNumber =>
-    Object.assign({}, query, { page: pageNumber });
-  const linkToPage = pageNumber => ({
-    pathname: '/learningpaths',
+  const queryToPage = (pageNumber) => Object.assign({}, query, { page: pageNumber });
+  const linkToPage = (pageNumber) => ({
+    pathname: "/learningpaths",
     search: `?${queryString.stringify(queryToPage(pageNumber))}`,
   });
 
-  const pageLinks = steps.map(n => {
+  const pageLinks = steps.map((n) => {
     if (n === page) {
       return (
-        <span
-          key={n}
-          className="search-stepper_step search-stepper_step--active">
+        <span key={n} className="search-stepper_step search-stepper_step--active">
           {n}
         </span>
       );
@@ -41,14 +38,12 @@ export default function LinkPager(props) {
       </Link>
     );
   });
-  let prevPageLink = '';
-  let nextPageLink = '';
+  let prevPageLink = "";
+  let nextPageLink = "";
 
   if (steps[0] < page) {
     prevPageLink = (
-      <Link
-        className="search-stepper_step search-stepper_step--back"
-        to={linkToPage(page - 1)}>
+      <Link className="search-stepper_step search-stepper_step--back" to={linkToPage(page - 1)}>
         <Icon.Back />
       </Link>
     );
@@ -56,9 +51,7 @@ export default function LinkPager(props) {
 
   if (page < lastPage) {
     nextPageLink = (
-      <Link
-        className="search-stepper_step search-stepper_step--forward"
-        to={linkToPage(page + 1)}>
+      <Link className="search-stepper_step search-stepper_step--forward" to={linkToPage(page + 1)}>
         <Icon.Forward />
       </Link>
     );

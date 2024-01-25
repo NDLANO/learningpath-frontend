@@ -6,133 +6,133 @@
  *
  */
 
-import { saveStepObject } from '../EditLearningPathStep';
+import { saveStepObject } from "../EditLearningPathStep";
 
 const stepWithId = {
   id: 1,
-  title: 'Old title',
-  description: 'Old description',
-  someOtherField: 'test',
+  title: "Old title",
+  description: "Old description",
+  someOtherField: "test",
 };
 
 const stepWithoutId = {
-  title: 'No id title',
-  description: 'No id description',
-  someOtherField: 'test',
+  title: "No id title",
+  description: "No id description",
+  someOtherField: "test",
 };
 
-test('util/saveStepObject description and embedUrl with step id', () => {
+test("util/saveStepObject description and embedUrl with step id", () => {
   const values = {
-    title: 'Test',
-    description: 'test',
+    title: "Test",
+    description: "test",
     license: {
-      license: 'by-sa',
-      description: 'test',
+      license: "by-sa",
+      description: "test",
     },
     showTitle: false,
     url: {
-      embedType: 'oembed',
-      url: 'https://ndla.no/id/3',
+      embedType: "oembed",
+      url: "https://ndla.no/id/3",
     },
   };
 
-  expect(typeof saveStepObject).toBe('function');
-  expect(saveStepObject(stepWithId, values, 'nb')).toMatchSnapshot();
+  expect(typeof saveStepObject).toBe("function");
+  expect(saveStepObject(stepWithId, values, "nb")).toMatchSnapshot();
 });
 
-test('util/saveStepObject only description with step id', () => {
+test("util/saveStepObject only description with step id", () => {
   const values = {
-    title: 'Test',
-    description: 'test',
+    title: "Test",
+    description: "test",
     license: {
-      license: 'by-sa',
-      description: 'test',
+      license: "by-sa",
+      description: "test",
     },
     showTitle: false,
     url: {
-      embedType: 'oembed',
-      url: '',
+      embedType: "oembed",
+      url: "",
     },
   };
 
-  expect(typeof saveStepObject).toBe('function');
-  expect(saveStepObject(stepWithId, values, 'nb')).toMatchSnapshot();
+  expect(typeof saveStepObject).toBe("function");
+  expect(saveStepObject(stepWithId, values, "nb")).toMatchSnapshot();
 });
 
-test('util/saveStepObject only url with step id', () => {
+test("util/saveStepObject only url with step id", () => {
   const values = {
-    title: 'Test',
-    description: '',
+    title: "Test",
+    description: "",
     license: {
-      license: 'by-sa',
-      description: 'test',
+      license: "by-sa",
+      description: "test",
     },
     showTitle: false,
     url: {
-      embedType: 'oembed',
-      url: 'https://ndla.no/id/3',
+      embedType: "oembed",
+      url: "https://ndla.no/id/3",
     },
   };
 
-  expect(typeof saveStepObject).toBe('function');
-  expect(saveStepObject(stepWithId, values, 'nb')).toMatchSnapshot();
+  expect(typeof saveStepObject).toBe("function");
+  expect(saveStepObject(stepWithId, values, "nb")).toMatchSnapshot();
 });
 
 // formatFormFieldsUtil
 
-test('util/saveStepObject description and embedUrl with no step id', () => {
+test("util/saveStepObject description and embedUrl with no step id", () => {
   const values = {
-    title: 'Test',
-    description: 'test',
+    title: "Test",
+    description: "test",
     license: {
-      license: 'by-sa',
-      description: 'test',
+      license: "by-sa",
+      description: "test",
     },
     showTitle: false,
     url: {
-      embedType: 'oembed',
-      url: 'https://ndla.no/id/3',
+      embedType: "oembed",
+      url: "https://ndla.no/id/3",
     },
   };
 
-  expect(typeof saveStepObject).toBe('function');
-  expect(saveStepObject(stepWithoutId, values, 'nb')).toMatchSnapshot();
+  expect(typeof saveStepObject).toBe("function");
+  expect(saveStepObject(stepWithoutId, values, "nb")).toMatchSnapshot();
 });
 
-test('util/saveStepObject only description with no step id', () => {
+test("util/saveStepObject only description with no step id", () => {
   const values = {
-    title: 'Test',
-    description: 'test',
+    title: "Test",
+    description: "test",
     license: {
-      license: 'by-sa',
-      description: 'test',
+      license: "by-sa",
+      description: "test",
     },
     showTitle: false,
     url: {
-      embedType: 'oembed',
-      url: '',
+      embedType: "oembed",
+      url: "",
     },
   };
 
-  expect(typeof saveStepObject).toBe('function');
-  expect(saveStepObject(stepWithoutId, values, 'nb')).toMatchSnapshot();
+  expect(typeof saveStepObject).toBe("function");
+  expect(saveStepObject(stepWithoutId, values, "nb")).toMatchSnapshot();
 });
 
-test('util/saveStepObject only url with no step id', () => {
+test("util/saveStepObject only url with no step id", () => {
   const values = {
-    title: 'Test',
-    description: '',
+    title: "Test",
+    description: "",
     license: {
-      license: 'by-sa',
-      description: 'test',
+      license: "by-sa",
+      description: "test",
     },
     showTitle: false,
     url: {
-      embedType: 'oembed',
-      url: 'https://ndla.no/id/3',
+      embedType: "oembed",
+      url: "https://ndla.no/id/3",
     },
   };
 
-  expect(typeof saveStepObject).toBe('function');
-  expect(saveStepObject(stepWithoutId, values, 'nb')).toMatchSnapshot();
+  expect(typeof saveStepObject).toBe("function");
+  expect(saveStepObject(stepWithoutId, values, "nb")).toMatchSnapshot();
 });

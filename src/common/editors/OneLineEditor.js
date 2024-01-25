@@ -6,10 +6,10 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Editor, EditorState, ContentState } from 'draft-js';
-import polyglot from '../../i18n';
+import React from "react";
+import PropTypes from "prop-types";
+import { Editor, EditorState, ContentState } from "draft-js";
+import polyglot from "../../i18n";
 
 export default class OneLineEditor extends React.Component {
   constructor(props) {
@@ -22,7 +22,7 @@ export default class OneLineEditor extends React.Component {
       maxlength,
     } = props;
 
-    this.onChange = editorState =>
+    this.onChange = (editorState) =>
       this.setState({ editorState }, () => {
         const newValue = editorState.getCurrentContent().getPlainText();
         onChange(newValue);
@@ -38,9 +38,7 @@ export default class OneLineEditor extends React.Component {
 
     if (maxlength >= 0) {
       this.handleBeforeInput = () => {
-        const plainText = this.state.editorState
-          .getCurrentContent()
-          .getPlainText();
+        const plainText = this.state.editorState.getCurrentContent().getPlainText();
         return plainText.length >= maxlength;
       };
     }
@@ -57,19 +55,14 @@ export default class OneLineEditor extends React.Component {
 
   // Needed for titles sat by the embed picker
   componentWillReceiveProps(nextProps) {
-    if (
-      !this.state.editorState.getSelection().getHasFocus() &&
-      nextProps.input.value !== this.props.input.value
-    ) {
+    if (!this.state.editorState.getSelection().getHasFocus() && nextProps.input.value !== this.props.input.value) {
       this.updateEditorContentStateFromText(nextProps.input.value);
     }
   }
 
   updateEditorContentStateFromText(text) {
     if (text !== undefined) {
-      const editorState = EditorState.createWithContent(
-        ContentState.createFromText(text),
-      );
+      const editorState = EditorState.createWithContent(ContentState.createFromText(text));
       this.setState({ editorState });
     }
   }
@@ -92,17 +85,12 @@ export default class OneLineEditor extends React.Component {
             handlePastedText={this.handlePastedText}
             handleReturn={this.handleReturn}
             placeholder={placeholder}
-            ref={editor => {
+            ref={(editor) => {
               this.editor = editor;
             }}
           />
         </div>
-        {meta.touched &&
-          meta.error && (
-            <span className="error_message error_message--red">
-              {meta.error}
-            </span>
-          )}
+        {meta.touched && meta.error && <span className="error_message error_message--red">{meta.error}</span>}
       </div>
     );
   }
@@ -121,7 +109,7 @@ OneLineEditor.propTypes = {
 };
 
 OneLineEditor.defaultProps = {
-  placeholder: polyglot.t('editPage.oneLineEditorDefaultPlaceholder'),
+  placeholder: polyglot.t("editPage.oneLineEditorDefaultPlaceholder"),
   maxlength: -1,
-  wrapperClassName: '',
+  wrapperClassName: "",
 };
