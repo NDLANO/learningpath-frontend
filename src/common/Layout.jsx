@@ -52,10 +52,10 @@ export const Footer = ({ locale }) => (
       </p>
       <p className="footer_text">{polyglot.t("footer.footerInfo")}</p>
       <div className="footer_about_links">
-        <a href="https://om.ndla.no/gdpr" className="footer_link">
+        <a href="https://ndla.no/article/personvernerklaering" className="footer_link">
           {polyglot.t("footer.privacy")}
         </a>
-        <a href="https://om.ndla.no/cookies" className="footer_link">
+        <a href="https://ndla.no/article/erklaering-for-informasjonskapsler" className="footer_link">
           {polyglot.t("footer.cookies")}
         </a>
         <a

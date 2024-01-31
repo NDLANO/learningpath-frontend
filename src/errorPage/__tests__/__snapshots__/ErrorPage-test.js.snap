@@ -132,13 +132,13 @@ exports[`ErrorPage renderers correctly 1`] = `
       >
         <a
           className="footer_link"
-          href="https://om.ndla.no/gdpr"
+          href="https://ndla.no/article/personvernerklaering"
         >
           Personvernerklæring
         </a>
         <a
           className="footer_link"
-          href="https://om.ndla.no/cookies"
+          href="https://ndla.no/article/erklaering-for-informasjonskapsler"
         >
           Erklæring om informasjonskapsler
         </a>
