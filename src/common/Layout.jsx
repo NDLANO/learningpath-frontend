@@ -37,7 +37,7 @@ export const Footer = ({ locale }) => (
     </form>
     <ul className="footer_list footer--bold">
       <li className="footer_item">
-        <a href="https://om.ndla.no/" className="footer_link" data-cy="footer-about-ndla">
+        <a href="https://ndla.no/about/om-ndla" className="footer_link" data-cy="footer-about-ndla">
           {polyglot.t("footer.aboutNDLA")}
         </a>
       </li>

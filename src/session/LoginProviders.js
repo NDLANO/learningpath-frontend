@@ -40,7 +40,7 @@ const LoginProviders = () => (
     </div>
     <p className="privacy-text">
       {polyglot.t("loginProviders.privacyFirstPart")}
-      <a target="_blank" rel="noopener noreferrer" href="https://om.ndla.no/samtykke">
+      <a target="_blank" rel="noopener noreferrer" href="https://ndla.no/article/personvernerklaering">
         {polyglot.t("loginProviders.privacyLinkText")}
       </a>
       {polyglot.t("loginProviders.privacySecondPart")}
