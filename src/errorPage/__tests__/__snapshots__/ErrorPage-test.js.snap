@@ -98,7 +98,7 @@ exports[`ErrorPage renderers correctly 1`] = `
         <a
           className="footer_link"
           data-cy="footer-about-ndla"
-          href="https://om.ndla.no/"
+          href="https://ndla.no/about/om-ndla/"
         >
           Om NDLA
         </a>
