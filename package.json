@@ -29,7 +29,7 @@
     "npm": ">=9.0.0"
   },
   "devDependencies": {
-    "@ndla/scripts": "^1.0.1",
+    "@ndla/scripts": "^2.1.2",
     "babel-preset-razzle": "^4.2.17",
     "chalk": "2.4.1",
     "cypress": "^7.3.0",
