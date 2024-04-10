@@ -27,15 +27,6 @@ const LoginProviders = () => (
             Google
           </button>
         </li>
-        <li className="vertical-menu_item">
-          <button
-            type="button"
-            onClick={() => loginPersonalAuth("facebook")}
-            className="un-button cta-link cta-link--block cta-link--fb"
-          >
-            Facebook
-          </button>
-        </li>
       </ul>
     </div>
     <p className="privacy-text">
