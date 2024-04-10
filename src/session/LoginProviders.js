@@ -6,6 +6,7 @@
  *
  */
 
+import parse from "html-react-parser";
 import React from "react";
 import { HelmetWithTracker } from "@ndla/tracker";
 import polyglot from "../i18n";
@@ -31,7 +32,7 @@ const LoginProviders = () => (
     </div>
     <div className="privacy-text">
       <h4 className="privacy-text">{polyglot.t("loginProviders.missingFacebook.title")}</h4>
-      <p className="privacy-text">{polyglot.t("loginProviders.missingFacebook.description")}</p>
+      <p className="privacy-text">{parse(polyglot.t("loginProviders.missingFacebook.description"))}</p>
     </div>
     <p className="privacy-text">
       {polyglot.t("loginProviders.privacyFirstPart")}

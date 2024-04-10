@@ -60,7 +60,7 @@ const phrases = {
     missingFacebook: {
       title: "Savner du Facebook-pålogging?",
       description:
-        "Pålogging med Facebook er fjernet på grunn av lite bruk. Du kan fremdeles logge inn med Google og få tilgang til læringsstiene dine, så lenge du bruker samme epostadresse som tidligere. Google-konto med egen adresse kan opprettes gratis på google.com.",
+        "Pålogging med Facebook er fjernet på grunn av lav bruk. Du kan fremdeles logge inn med Google og få tilgang til dine læringsstier, så lenge du bruker samme epostadresse som tidligere. Du kan opprette en gratis Google-konto med <strong>din eksisterende</strong> e-postadresse på google.com.",
     },
   },
   logoutSession: {
