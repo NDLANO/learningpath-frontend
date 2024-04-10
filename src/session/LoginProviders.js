@@ -29,6 +29,10 @@ const LoginProviders = () => (
         </li>
       </ul>
     </div>
+    <div className="privacy-text">
+      <h4 className="privacy-text">{polyglot.t("loginProviders.missingFacebook.title")}</h4>
+      <p className="privacy-text">{polyglot.t("loginProviders.missingFacebook.description")}</p>
+    </div>
     <p className="privacy-text">
       {polyglot.t("loginProviders.privacyFirstPart")}
       <a target="_blank" rel="noopener noreferrer" href="https://ndla.no/article/personvernerklaering">
