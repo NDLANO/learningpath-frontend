@@ -15,7 +15,7 @@ test("component/LoginProviders", () => {
 
   const buttons = component.find(".cta-link");
 
-  expect(buttons.length).toBe(2);
+  expect(buttons.length).toBe(1);
 
-  expect(buttons.map((n) => n.text())).toEqual(["Google", "Facebook"]);
+  expect(buttons.map((n) => n.text())).toEqual(["Google"]);
 });

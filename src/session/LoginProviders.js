@@ -6,6 +6,7 @@
  *
  */
 
+import parse from "html-react-parser";
 import React from "react";
 import { HelmetWithTracker } from "@ndla/tracker";
 import polyglot from "../i18n";
@@ -27,16 +28,11 @@ const LoginProviders = () => (
             Google
           </button>
         </li>
-        <li className="vertical-menu_item">
-          <button
-            type="button"
-            onClick={() => loginPersonalAuth("facebook")}
-            className="un-button cta-link cta-link--block cta-link--fb"
-          >
-            Facebook
-          </button>
-        </li>
       </ul>
+    </div>
+    <div className="privacy-text">
+      <h4 className="privacy-text">{polyglot.t("loginProviders.missingFacebook.title")}</h4>
+      <p className="privacy-text">{parse(polyglot.t("loginProviders.missingFacebook.description"))}</p>
     </div>
     <p className="privacy-text">
       {polyglot.t("loginProviders.privacyFirstPart")}

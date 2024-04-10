@@ -57,6 +57,11 @@ const phrases = {
     privacyFirstPart: "Ved å logge på denne tjenesten aksepterer jeg herved vilkårene i NDLAs ",
     privacyLinkText: "personvernpolicy",
     privacySecondPart: ", og jeg gir mitt samtykke til at NDLA bruker min personlige informasjon.",
+    missingFacebook: {
+      title: "Savner du Facebook-pålogging?",
+      description:
+        "Pålogging med Facebook er fjernet på grunn av lav bruk. Du kan fremdeles logge inn med Google og få tilgang til dine læringsstier, så lenge du bruker samme epostadresse som tidligere. Du kan opprette en gratis Google-konto med <strong>din eksisterende</strong> e-postadresse på google.com.",
+    },
   },
   logoutSession: {
     logutLearningpathSite: "Logg ut av læringssti",

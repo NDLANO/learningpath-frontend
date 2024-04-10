@@ -55,6 +55,11 @@ const phrases = {
     privacyFirstPart: "By signing in to this service I am hereby accepting the principles in the NDLA ",
     privacyLinkText: "privacy policy",
     privacySecondPart: " and I am giving my consent to NDLA’s use of my personal information.",
+    missingFacebook: {
+      title: "Do you miss Facebook login?",
+      description:
+        "Login with Facebook is removed because of low usage. You can still log in with Google to access your learningpaths, as long as you use the same email address as before. You can create a free Google account with <strong>your existing</strong> email address at google.com.",
+    },
   },
   logoutSession: {
     title: "Logout",
