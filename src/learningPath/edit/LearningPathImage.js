@@ -41,7 +41,7 @@ const ChangeImage = (props) => {
   return (
     <div>
       <div className="image-preview_image">
-        <img role="presentation" src={savedImage.imageUrl} alt={savedImage.alttext} />
+        <img role="presentation" src={savedImage.imageUrl ?? savedImage.image.imageUrl} alt={savedImage.alttext} />
         <p className="learning-path_input-information">{polyglot.t("learningPath.image.imageInformation")}</p>
       </div>
       <div className="image-preview_information">
