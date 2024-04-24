@@ -16,6 +16,7 @@ import Lightbox from "../../common/Lightbox";
 import polyglot from "../../i18n";
 import Button from "../../common/buttons/Button";
 import { getSavedImage } from "../../imageSearch/imageSelectors";
+import { scaleImage } from "../../util/imageScaler";
 
 const ChoseImage = (props) => {
   const { onImageLightboxOpen } = props;
@@ -41,7 +42,11 @@ const ChangeImage = (props) => {
   return (
     <div>
       <div className="image-preview_image">
-        <img role="presentation" src={savedImage.imageUrl ?? savedImage.image.imageUrl} alt={savedImage.alttext} />
+        <img
+          role="presentation"
+          src={scaleImage(savedImage.imageUrl ?? savedImage.image.imageUrl)}
+          alt={savedImage.alttext}
+        />
         <p className="learning-path_input-information">{polyglot.t("learningPath.image.imageInformation")}</p>
       </div>
       <div className="image-preview_information">
