@@ -55,7 +55,7 @@ export class MyPage extends React.Component {
       description: values.description,
       tags: [],
       language,
-      duration: 1,
+      duration: 60,
       coverPhoto: { url: "", metaUrl: "" },
       copyright: {
         license: {
