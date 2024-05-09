@@ -1,4 +1,4 @@
-FROM node:20.11-alpine3.18 as builder
+FROM node:20.12-alpine3.18 as builder
 
 ENV HOME=/home/app
 ENV APP_PATH=$HOME/learningpath-frontend
@@ -23,7 +23,7 @@ RUN yarn run build
 RUN mv $APP_PATH/src/server/robots.txt $APP_PATH/build/robots.txt
 
 ### Run stage
-FROM node:20.11-alpine3.18
+FROM node:20.12-alpine3.18
 
 RUN apk add py-pip jq && pip install awscli
 COPY run-learningpath-frontend.sh /
