@@ -82,7 +82,7 @@
     "@ndla/zendesk": "^0.2.44",
     "auth0-js": "9.13.2",
     "babel-plugin-emotion": "^9.2.11",
-    "body-parser": "1.18.3",
+    "body-parser": "1.19.2",
     "bunyan": "1.8.12",
     "classnames": "2.2.6",
     "compression": "1.7.3",
