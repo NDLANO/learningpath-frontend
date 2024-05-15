@@ -12,8 +12,8 @@ import express from "express";
 import proxy from "express-http-proxy";
 import helmet from "helmet";
 import bodyParser from "body-parser";
-import jwt from "express-jwt";
-import jwksRsa from "jwks-rsa";
+import { expressjwt as jwt } from "express-jwt";
+import { expressJwtSecret } from "jwks-rsa";
 import compression from "compression";
 import {
   OK,
@@ -168,7 +168,7 @@ app.use(
 app.get(
   "/get_owners",
   jwt({
-    secret: jwksRsa.expressJwtSecret({
+    secret: expressJwtSecret({
       cache: true,
       jwksUri: `https://${config.auth0Domain}/.well-known/jwks.json`,
     }),
@@ -178,11 +178,11 @@ app.get(
   }),
   async (req, res) => {
     const {
-      user,
+      auth,
       query: { ownerIds },
     } = req;
 
-    const isAdmin = user && user.permissions.includes(`learningpath:admin`);
+    const isAdmin = auth && auth.permissions.includes(`learningpath:admin`);
 
     if (!isAdmin) {
       res.status(FORBIDDEN).json({ status: FORBIDDEN, text: "No access allowed" });
