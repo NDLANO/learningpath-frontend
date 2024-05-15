@@ -178,11 +178,11 @@ app.get(
   }),
   async (req, res) => {
     const {
-      user,
+      auth,
       query: { ownerIds },
     } = req;
 
-    const isAdmin = user && user.permissions.includes(`learningpath:admin`);
+    const isAdmin = auth && auth.permissions.includes(`learningpath:admin`);
 
     if (!isAdmin) {
       res.status(FORBIDDEN).json({ status: FORBIDDEN, text: "No access allowed" });
