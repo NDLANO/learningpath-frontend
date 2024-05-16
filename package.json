@@ -93,7 +93,7 @@
     "draft-js": "0.11.7",
     "emotion": "^9.2.10",
     "emotion-server": "^9.2.12",
-    "express": "^4.17.3",
+    "express": "4.19.2",
     "express-http-proxy": "1.6.3",
     "express-jwt": "8.4.1",
     "focus-trap-react": "^8.9.2",
