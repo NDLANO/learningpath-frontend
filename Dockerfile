@@ -4,11 +4,14 @@ ENV HOME=/home/app
 ENV APP_PATH=$HOME/learningpath-frontend
 
 # Copy necessary files for installing dependencies
-COPY yarn.lock package.json $APP_PATH/
+COPY yarn.lock package.json .yarnrc.yml $APP_PATH/
+
+# Enable yarn
+RUN corepack enable
 
 # Run yarn before src copy to enable better layer caching
 WORKDIR $APP_PATH
-RUN yarn
+RUN yarn install --immutable
 
 # Copy necessary source files for server and client build
 COPY .babelrc .eslintrc razzle.config.js razzle-add-entry-plugin.js postcss.config.js $APP_PATH/
