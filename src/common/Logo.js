@@ -16,7 +16,7 @@ import withCloseSidebars from "./withCloseSidebars";
 
 const onDark = css`
   & a {
-    background-image: url("/ndla-logo-white.png");
+    background-image: url("/ndla-logo-white.svg");
   }
   &:any-link {
     color: white;
@@ -43,7 +43,7 @@ const StyledSafeLink = styled(SafeLink)`
   width: 100%;
   padding-left: 100%;
   overflow: hidden;
-  background: url("/logo.png") no-repeat;
+  background: url("/logo.svg") no-repeat;
   background-size: contain;
   vertical-align: top;
 
