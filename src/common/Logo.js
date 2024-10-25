@@ -15,13 +15,9 @@ import polyglot from "../i18n";
 import withCloseSidebars from "./withCloseSidebars";
 
 const onDark = css`
-  height: 30px;
-  width: 90px;
-
   & a {
     background-image: url("/ndla-logo-white.png");
   }
-
   &:any-link {
     color: white;
   }
@@ -31,7 +27,7 @@ const StyledDiv = styled.div`
   display: inline-block;
   margin: 0;
   padding: 0;
-  height: 40px;
+  height: 50px;
   width: 150px;
   ${(props) => {
     if (props.onDark) {
