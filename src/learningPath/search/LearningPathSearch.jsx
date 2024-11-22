@@ -62,7 +62,7 @@ class LearningPathSearch extends React.Component {
       pushRoute({ pathname, search: `?${queryString.stringify(q)}` });
     };
 
-    const submitSearchQuery = (q, sort) => navigateTo(Object.assign({}, query, { query: q, page: 1, tag: "", sort }));
+    const submitSearchQuery = (q, sort) => navigateTo(Object.assign({}, query, { query: q, page: 1, sort }));
 
     const changeSortOrder = (sort) => navigateTo(Object.assign({}, query, { sort }));
 
