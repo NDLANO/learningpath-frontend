@@ -11,12 +11,11 @@ import thunkMiddleware from "redux-thunk";
 import { routerMiddleware } from "react-router-redux";
 
 import reducers from "./reducers";
-import { errorReporter } from "./middleware";
 
 export default function configureStore(initialState, history) {
   const middleware = routerMiddleware(history);
   const createFinalStore = compose(
-    applyMiddleware(thunkMiddleware, errorReporter, middleware),
+    applyMiddleware(thunkMiddleware, middleware),
     process.env.BUILD_TARGET === "client" && window && window.__REDUX_DEVTOOLS_EXTENSION__
       ? window.__REDUX_DEVTOOLS_EXTENSION__()
       : (f) => f,
