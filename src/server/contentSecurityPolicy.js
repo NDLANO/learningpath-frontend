@@ -17,7 +17,6 @@ const connectSrc = (() => {
     "https://ekr.zdassets.com",
     "https://*.zopim.com",
     "https://*.ndla.no",
-    "https://logs-01.loggly.com",
     "https://www.googleapis.com",
     "https://stats.g.doubleclick.net",
     "https://*.clarity.ms",

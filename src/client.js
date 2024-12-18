@@ -11,7 +11,6 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { Router } from "react-router-dom";
 import { configureTracker } from "@ndla/tracker";
-import ErrorReporter from "@ndla/error-reporter";
 import { hydrate } from "emotion";
 import isEmpty from "lodash/isEmpty";
 import TokenStatusHandler from "./util/TokenStatusHandler";
@@ -61,15 +60,7 @@ const initialState = !isEmpty(window.initialState)
 
 const store = configureStore(initialState, browserHistory);
 
-const { logglyApiKey, logEnvironment, componentName, disableSSR } = config;
-
-window.errorReporter = ErrorReporter.getInstance({
-  store,
-  logglyApiKey,
-  environment: logEnvironment,
-  componentName,
-  ignoreUrls: [],
-});
+const { disableSSR } = config;
 
 TokenStatusHandler.getInstance({ store });
 

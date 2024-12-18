@@ -72,8 +72,6 @@ const config = {
   ndlaApiUrl: getEnvironmentVariable("NDLA_API_URL", apiDomain),
   googleSearchEngineId: getEnvironmentVariable("NDLA_GOOGLE_SEARCH_ENGINE_ID"),
   googleApiUrl: getEnvironmentVariable("NDLA_GOOGLE_API_URL", "https://www.googleapis.com"),
-  logEnvironment: getEnvironmentVariable("NDLA_ENVIRONMENT", "local"),
-  logglyApiKey: getEnvironmentVariable("LOGGLY_API_KEY"),
   pinterestApiUrl: getEnvironmentVariable("PINTEREST_API_URL", "https://api.pinterest.com/v1/"),
   pinterestEnabled: getEnvironmentVariable("PINTEREST_ACCESS_TOKEN") !== undefined && pinterestActivated,
   ltiActivated: getEnvironmentVariable("LTI_ACTIVATED", ltiActivated),
