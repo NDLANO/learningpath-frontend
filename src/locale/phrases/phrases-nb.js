@@ -153,6 +153,13 @@ const phrases = {
       Stier kan også tilpasses ulike læringssituasjoner. Læringstier kan bygges opp fra bunnen av,
       men læringsstoff kan også fjernes eller legges til eksisterende læringstier.
       Ressurser hentes enkelt inn fra NDLA og andre steder på nett.`,
+    alert: {
+      content1: "Muligheten for å opprette nye læringsstier skal snart integreres i ",
+      content2: ". Lagring/endring av læringsstier på ",
+      content3:
+        " er derfor stengt, og i løpet av februar 2025 vil siden avvikles. Ta kontakt via “Spør NDLA” hvis du har spørsmål, eller ønsker å videreføre dine opprettede læringsstier.",
+      myNdla: "MinNDLA",
+    },
   },
   learningPath: {
     pageName: "Læringstidetaljer",
