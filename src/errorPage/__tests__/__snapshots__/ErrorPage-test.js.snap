@@ -5,6 +5,27 @@ exports[`ErrorPage renderers correctly 1`] = `
   className="wrapper"
 >
   <div
+    className="alert-banner"
+  >
+    Muligheten for å opprette nye læringsstier skal snart integreres i 
+    <a
+      href="undefined/minndla"
+      rel="noreferrer"
+      target="_blank"
+    >
+      MinNDLA
+    </a>
+    . Lagring/endring av læringsstier på 
+    <a
+      href="https://stier.ndla.no"
+      rel="noreferrer"
+      target="_blank"
+    >
+      stier.ndla.no
+    </a>
+     er derfor stengt, og i løpet av februar 2025 vil siden avvikles. Ta kontakt via “Spør NDLA” hvis du har spørsmål, eller ønsker å videreføre dine opprettede læringsstier.
+  </div>
+  <div
     className="one-column"
   >
     <div

@@ -13,10 +13,6 @@
   background-color: white;
 }
 
-div:not(.frontpage-masthead) > .masthead_wrapper > .masthead {
-  position: fixed;
-}
-
 div:not(.frontpage-masthead) > .masthead_wrapper {
   margin-bottom: 85px;
 }

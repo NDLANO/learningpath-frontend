@@ -13,7 +13,23 @@ import polyglot from "../i18n";
 import SelectLocale from "../locale/SelectLocale";
 import config from "../config";
 
-export const Wrapper = ({ children }) => <div className="wrapper">{children}</div>;
+const myNdlaUrl = `${config.ndlaFrontendDomain}/minndla`;
+export const Wrapper = ({ children }) => (
+  <div className="wrapper">
+    <div className="alert-banner">
+      {polyglot.t("welcomePage.alert.content1")}
+      <a href={myNdlaUrl} target="_blank" rel="noreferrer">
+        {polyglot.t("welcomePage.alert.myNdla")}
+      </a>
+      {polyglot.t("welcomePage.alert.content2")}
+      <a href="https://stier.ndla.no" target="_blank" rel="noreferrer">
+        stier.ndla.no
+      </a>
+      {polyglot.t("welcomePage.alert.content3")}
+    </div>
+    {children}
+  </div>
+);
 export const OneColumn = ({ children, className }) => (
   <div className={className ? `one-column ${className}` : "one-column"}>{children}</div>
 );
