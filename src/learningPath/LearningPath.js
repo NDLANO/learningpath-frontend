@@ -19,6 +19,7 @@ import LearningPathToC from "./sidebar/LearningPathToC";
 import Lightbox from "../common/Lightbox";
 import PrivateRoute from "../main/PrivateRoute";
 import CopyLearningPath from "./new/CopyLearningPath";
+import { Wrapper } from "../common/Layout";
 import Masthead from "../common/Masthead";
 import Icon from "../common/Icon";
 import SortLearningStepsButton from "./sidebar/SortLearningStepsButton";
@@ -185,7 +186,7 @@ export class LearningPath extends Component {
     const { copyright } = learningPath;
 
     return (
-      <div className="wrapper">
+      <Wrapper>
         <Helmet title={this.constructor.getDocumentTitle(this.props)} />
         <Masthead
           changeStatusButton={changeStatusButton}
@@ -230,7 +231,7 @@ export class LearningPath extends Component {
             </Switch>
           </main>
         </div>
-      </div>
+      </Wrapper>
     );
   }
 }
