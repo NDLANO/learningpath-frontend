@@ -13,10 +13,6 @@
   background-color: white;
 }
 
-div:not(.frontpage-masthead) > .masthead_wrapper > .masthead {
-  position: fixed;
-}
-
 div:not(.frontpage-masthead) > .masthead_wrapper {
   margin-bottom: 85px;
 }
@@ -54,7 +50,7 @@ div:not(.frontpage-masthead) > .masthead_wrapper {
   position: fixed;
   width: 330px;
   height: 100%;
-  top: 0;
+  top: 85px;
   padding-top: 85px;
   display: flex;
 }

@@ -20,7 +20,6 @@ import Masthead from "../common/Masthead";
 import { Wrapper, OneColumn, Footer } from "../common/Layout";
 import { Matomo } from "../common/Matomo";
 import { getLocale } from "../locale/localeSelectors";
-import config from "../config";
 
 class Welcome extends Component {
   constructor(props) {
@@ -43,22 +42,10 @@ class Welcome extends Component {
 
   render() {
     const { locale } = this.props;
-    const myNdlaUrl = `${config.ndlaFrontendDomain}/minndla`;
     return (
       <Wrapper>
         <HelmetWithTracker title={polyglot.t("htmlTitles.welcomePage")} />
         <OneColumn>
-          <div className="alert-banner">
-            {polyglot.t("welcomePage.alert.content1")}
-            <a href={myNdlaUrl} target="_blank" rel="noreferrer">
-              {polyglot.t("welcomePage.alert.myNdla")}
-            </a>
-            {polyglot.t("welcomePage.alert.content2")}
-            <a href="https://stier.ndla.no" target="_blank" rel="noreferrer">
-              stier.ndla.no
-            </a>
-            {polyglot.t("welcomePage.alert.content3")}
-          </div>
           <div className="frontpage-masthead">
             <Masthead logo={<Logo onDark={true} />} />
           </div>
