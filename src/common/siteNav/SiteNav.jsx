@@ -9,10 +9,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import classNames from "classnames";
-import polyglot from "../../i18n";
-import LabeledIcon from "../LabeledIcon";
 import SiteNavAdmin from "./SiteNavAdmin";
 import SiteNavMyPage from "./SiteNavMyPage";
 import SiteNavSessionAction from "./SiteNavSessionAction";
@@ -32,29 +29,6 @@ export const SiteNav = ({ authenticated, userName, cssModifier, localCloseSideba
     <div className={rootClasses}>
       <ul className="site-nav_list">
         {showSelectLocale && <SelectLocale id="language-select" className="footer_language-select" />}
-        <li className="site-nav_item">
-          <Link
-            to={{
-              pathname: "/minside",
-              search: "?openModal=true",
-            }}
-            className="site-nav_link"
-            onClick={() => localCloseSidebars()}
-            data-cy="sitenav-create-path"
-          >
-            <LabeledIcon.Add labelText={polyglot.t("siteNav.createLearningPath")} />
-          </Link>
-        </li>
-        <li className="site-nav_item">
-          <Link
-            to="/learningpaths"
-            className="site-nav_link"
-            onClick={() => localCloseSidebars()}
-            data-cy="sitenav-find-paths"
-          >
-            <LabeledIcon.Search labelText={polyglot.t("siteNav.search")} />
-          </Link>
-        </li>
         <OnlyRenderOnClient>
           <SiteNavAdmin isAdmin={isAdmin} authenticated={authenticated} localCloseSidebars={localCloseSidebars} />
           <SiteNavMyPage authenticated={authenticated} localCloseSidebars={localCloseSidebars} />

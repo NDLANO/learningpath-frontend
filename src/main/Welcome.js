@@ -10,7 +10,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { routerActions } from "react-router-redux";
-import { Link } from "react-router-dom";
 import isEmpty from "lodash/isEmpty";
 import { HelmetWithTracker } from "@ndla/tracker";
 import queryString from "query-string";
@@ -69,7 +68,6 @@ class Welcome extends Component {
             <h3 className="hero_title" data-cy="welcomepage-title2">
               {polyglot.t("welcomePage.title2")}
             </h3>
-
             <form onSubmit={this.handleSubmit} className="search-form search-form--on-dark">
               <input
                 type="text"
@@ -83,24 +81,6 @@ class Welcome extends Component {
                 {polyglot.t("welcomePage.searchBtn")}
               </button>
             </form>
-
-            <a href="#feature" className="hero_link cta-link cta-link--negative" data-cy="feature-link">
-              {polyglot.t("welcomePage.explanationBtn")}
-            </a>
-            <Link
-              to="/minside"
-              className="hero_link cta-link cta-link-secondary cta-link--secondary-negative"
-              data-cy="mypage-link"
-            >
-              {polyglot.t("welcomePage.newBtn")} »
-            </Link>
-          </div>
-          <div className="infoblock">
-            <img src="/learningpath.jpg" alt="Placeholder" className="infoblock_img frontpage-intro_img" />
-            <div className="infoblock_text">
-              <h2 id="feature">{polyglot.t("welcomePage.feature1Title")}</h2>
-              <p>{polyglot.t("welcomePage.feature1Content")}</p>
-            </div>
           </div>
         </OneColumn>
         <Footer locale={locale} />
