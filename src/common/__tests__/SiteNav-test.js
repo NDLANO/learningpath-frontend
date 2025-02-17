@@ -16,18 +16,13 @@ import SiteNavMyPage from "../siteNav/SiteNavMyPage";
 
 test("component/SiteNav learningpaths", () => {
   const navLinks = shallow(<SiteNav authenticated={false} localCloseSidebars={noop} isAdmin={false} />).find(Link);
-  expect(navLinks.length).toBe(2);
-  expect(navLinks.at(0).props().to).toEqual({
-    pathname: "/minside",
-    search: "?openModal=true",
-  });
-  expect(navLinks.at(1).props().to).toBe("/learningpaths");
+  expect(navLinks.length).toBe(0);
 });
 
 test("component/SiteNavSessionAction not authenticated", () => {
   const navLinks = shallow(<SiteNavSessionAction authenticated={false} localCloseSidebars={noop} />).find(Link);
   expect(navLinks.length).toBe(1);
-  expect(navLinks.at(0).props().to).toBe("/login");
+  expect(navLinks.at(0).props().to).toBe("/minside");
 });
 
 test("component/SiteNavSessionAction authenticated", () => {
