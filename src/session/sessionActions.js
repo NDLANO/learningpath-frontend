@@ -39,17 +39,17 @@ export function parseHash(hash) {
           });
 
           dispatch(setAuthenticated(true));
-          dispatch(routerActions.replace("/minside"));
+          dispatch(routerActions.replace(authResult.state || "/minside"));
         }
       }
     });
   };
 }
 
-export function loginPersonalAuth(type) {
+export function loginPersonalAuth(path) {
   auth.authorize({
-    connection: type,
     prompt: "login",
+    state: path,
   });
 }
 

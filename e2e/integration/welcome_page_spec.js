@@ -32,7 +32,7 @@ describe("Welcome page", () => {
     it("should go to /minside when login link is clicked", () => {
       cy.get("[data-cy=sitenav-login]").click();
       cy.location().should((location) => {
-        expect(location.pathname).to.eq("/minside");
+        expect(location.pathname).to.eq("/u/login");
       });
     });
   });

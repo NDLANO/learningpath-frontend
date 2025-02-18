@@ -5,16 +5,16 @@ import { Route } from "react-router-dom";
 import { LocationShape } from "../shapes";
 import { loginPersonalAuth } from "../session/sessionActions";
 
-const PrivateRoute = ({ authenticated, component: Component, ...rest }) => {
+const PrivateRoute = ({ authenticated, location, component: Component, ...rest }) => {
   if (!authenticated) {
-    loginPersonalAuth();
+    loginPersonalAuth(location.pathname);
   }
   return <Route {...rest} render={(props) => (authenticated ? <Component {...props} /> : null)} />;
 };
 
 PrivateRoute.propTypes = {
-  component: PropTypes.func.isRequired,
   authenticated: PropTypes.bool.isRequired,
+  component: PropTypes.func.isRequired,
   location: LocationShape.isRequired,
 };
 
