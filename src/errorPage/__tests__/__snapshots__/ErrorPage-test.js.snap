@@ -108,6 +108,16 @@ exports[`ErrorPage renderers correctly 1`] = `
         >
           English
         </option>
+        <option
+          value="sma"
+        >
+          Åarjelsaemien
+        </option>
+        <option
+          value="se"
+        >
+          Davvisámegiella
+        </option>
       </select>
     </form>
     <ul
