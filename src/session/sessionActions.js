@@ -10,7 +10,7 @@ import { createAction } from "redux-actions";
 import auth0 from "auth0-js";
 import { routerActions } from "react-router-redux";
 import { locationOrigin, ndlaPersonalClientId, auth0Domain } from "../sources/apiConstants";
-import { getTokenExpireAt } from "../util/jwtHelper";
+import { getScope, getTokenExpireAt } from "../util/jwtHelper";
 import { savePersonalToken, removePersonalToken } from "../sources/localStorage";
 
 export const setAuthenticated = createAction("SET_AUTHENTICATED");
@@ -27,22 +27,29 @@ export function parseHash(hash) {
   return (dispatch) => {
     auth.parseHash({ hash, _idTokenVerification: false }, (err, authResult) => {
       if (authResult && authResult.accessToken) {
-        savePersonalToken({
-          token: authResult.accessToken,
-          expires: getTokenExpireAt(authResult.accessToken),
-        });
+        const permissions = getScope(authResult.accessToken);
+        // Prevent login if user has no permissions
+        if (permissions.length === 0) {
+          dispatch(setAuthenticated(false));
+          dispatch(routerActions.replace("/forbidden"));
+        } else {
+          savePersonalToken({
+            token: authResult.accessToken,
+            expires: getTokenExpireAt(authResult.accessToken),
+          });
 
-        dispatch(setAuthenticated(true));
-        dispatch(routerActions.replace("/minside"));
+          dispatch(setAuthenticated(true));
+          dispatch(routerActions.replace(authResult.state || "/minside"));
+        }
       }
     });
   };
 }
 
-export function loginPersonalAuth(type) {
+export function loginPersonalAuth(path) {
   auth.authorize({
-    connection: type,
     prompt: "login",
+    state: path,
   });
 }
 

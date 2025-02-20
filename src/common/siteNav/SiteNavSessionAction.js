@@ -35,7 +35,7 @@ class SiteNavSessionAction extends React.Component {
     }
     return (
       <li className="site-nav_item">
-        <Link to="/login" className="site-nav_link" onClick={() => localCloseSidebars()} data-cy="sitenav-login">
+        <Link to="/minside" className="site-nav_link" onClick={() => localCloseSidebars()} data-cy="sitenav-login">
           <LabeledIcon.Exit labelText={polyglot.t("siteNav.login")} />
         </Link>
       </li>

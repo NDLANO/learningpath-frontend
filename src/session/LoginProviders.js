@@ -21,7 +21,7 @@ const LoginProviders = () => (
         <li className="vertical-menu_item">
           <button
             type="button"
-            onClick={() => loginPersonalAuth("google-oauth2")}
+            onClick={() => loginPersonalAuth()}
             className="un-button cta-link cta-link--block cta-link--gl"
             data-cy="login-google-button"
           >
