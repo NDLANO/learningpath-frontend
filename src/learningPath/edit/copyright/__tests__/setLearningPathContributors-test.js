@@ -12,8 +12,8 @@ import { setLearningPathContributors } from "../learningPathContributorsActions"
 
 test("actions/setLearningPathContributors", () => {
   const actual = setLearningPathContributors([
-    { type: "Forfatter", name: "Christian" },
-    { type: "Forfatter", name: "Sebastian" },
+    { type: "writer", name: "Christian" },
+    { type: "writer", name: "Sebastian" },
   ]);
 
   expect(isFSA(actual)).toBeTruthy();
@@ -21,8 +21,8 @@ test("actions/setLearningPathContributors", () => {
   expect(actual.type).toBe("SET_LEARNING_PATH_CONTRIBUTORS");
   expect(actual.payload).toBeTruthy();
   expect(actual.payload).toEqual([
-    { type: "Forfatter", name: "Christian" },
-    { type: "Forfatter", name: "Sebastian" },
+    { type: "writer", name: "Christian" },
+    { type: "writer", name: "Sebastian" },
   ]);
   expect(actual.error).toBeFalsy();
 });

@@ -19,8 +19,8 @@ const mockStore = configureStore(middleware);
 
 const accessToken = "12345678";
 const contributors = [
-  { type: "Forfatter", name: "Christian" },
-  { type: "Forfatter", name: "Sebastian" },
+  { type: "writer", name: "Christian" },
+  { type: "writer", name: "Sebastian" },
 ];
 
 test("actions/fetchLearningPathContributors", (done) => {

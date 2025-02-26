@@ -27,7 +27,7 @@ const learningPaths = [
     metaUrl: "http://api.test.ndla.no/learningpaths/1",
     duration: 1080,
     status: "PUBLISHED",
-    author: { type: "Forfatter", name: "Snurre Sprett" },
+    author: { type: "writer", name: "Snurre Sprett" },
     lastUpdated: new Date("2015-03-07T14:00:00+01:00"),
   },
   {
@@ -50,7 +50,7 @@ const learningPaths = [
     metaUrl: "http://api.test.ndla.no/learningpaths/2",
     duration: 45,
     status: "PRIVATE",
-    author: { type: "Forfatter", name: "Kaptein Sabeltann" },
+    author: { type: "writer", name: "Kaptein Sabeltann" },
     lastUpdated: new Date("2016-02-01T12:00:00+01:00"),
   },
 ];
@@ -102,7 +102,7 @@ const learningPath = {
     language: "nb",
   },
   author: {
-    type: "Forfatter",
+    type: "writer",
     name: "KristoferForfatter",
   },
 };
@@ -183,7 +183,7 @@ const learningPathNotEditable = {
     language: "nb",
   },
   author: {
-    type: "Forfatter",
+    type: "writer",
     name: "KristoferForfatter",
   },
 };

@@ -182,7 +182,7 @@ const phrases = {
     editInEditorial: "Rediger læringssteg-artikkelen i ed",
     copyright: {
       license: "Lisens",
-      contributors: "Forfattere",
+      contributors: "writer",
     },
     image: {
       title: "Illustrerende bilde",
