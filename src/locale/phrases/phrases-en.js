@@ -213,7 +213,7 @@ const phrases = {
     publish: "Publish",
   },
   editPathStep: {
-    urlLabel: "Paste link (URL) from ndla.no or youtube.com",
+    urlLabel: "Paste link (URL) from ndla.no",
     mediatype: {
       introduction: "Introduction",
       text: "Text",

@@ -52,7 +52,7 @@ class LearningPathStepEmbed extends React.Component {
           <button type="button" className="button--primary-outline" onClick={this.toggleNdlaDisplay}>
             {polyglot.t("embedSearch.ndlaButton")}
           </button>
-          <button type="button" className="button--primary-outline" onClick={this.handleExternalDisplayOpen}>
+          <button type="button" className="button--primary-outline" onClick={this.handleExternalDisplayOpen} disabled>
             {polyglot.t("embedSearch.externalButton")}
           </button>
         </div>
