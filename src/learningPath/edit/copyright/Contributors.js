@@ -41,7 +41,7 @@ class Contributors extends Component {
       if (input.value.includes(contributor)) {
         return;
       }
-      input.value.push(Object.assign({ name: contributor, type: "Forfatter" }));
+      input.value.push(Object.assign({ name: contributor, type: "writer" }));
       input.onChange(input.value);
     };
 

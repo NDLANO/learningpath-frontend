@@ -10,39 +10,27 @@
       "language": "nb"
     },
     "introduction": {
-      "introduction": "<p>N&aring;r du er ferdig med denne l&aelig;ringsstien, skal du kunne<\/p>    <ul>   <li>kjenne igjen egenskaper ved ulike reklamesjangre<\/li>   <li>forst&aring; sammenhengen mellom reklamesjangre og formater<\/li>   <li>kjenne til hvordan reklamebransjen jobber med &aring; tilpasse reklame til ulike kanaler og formater<\/li>   <li>kunne bruke denne kunnskapen i eget arbeid<\/li>  <\/ul>",
+      "introduction": "<p>N&aring;r du er ferdig med denne l&aelig;ringsstien, skal du kunne</p>    <ul>   <li>kjenne igjen egenskaper ved ulike reklamesjangre</li>   <li>forst&aring; sammenhengen mellom reklamesjangre og formater</li>   <li>kjenne til hvordan reklamebransjen jobber med &aring; tilpasse reklame til ulike kanaler og formater</li>   <li>kunne bruke denne kunnskapen i eget arbeid</li>  </ul>",
       "language": "nb"
     },
-    "metaUrl": "https:\/\/test.api.ndla.no\/learningpath-api\/v2\/learningpaths\/265",
-    "coverPhotoUrl": "https:\/\/test.api.ndla.no\/image-api\/raw\/annonser_akvariet_21_.jpg",
+    "metaUrl": "https://test.api.ndla.no/learningpath-api/v2/learningpaths/265",
+    "coverPhotoUrl": "https://test.api.ndla.no/image-api/raw/annonser_akvariet_21_.jpg",
     "duration": 120,
     "status": "PRIVATE",
     "lastUpdated": "2017-10-23T14:00:07Z",
     "tags": {
-      "tags": [
-        "formater",
-        "reklame",
-        "sjanger"
-      ],
+      "tags": ["formater", "reklame", "sjanger"],
       "language": "nb"
     },
     "copyright": {
       "license": {
         "license": "by-sa",
         "description": "Creative Commons Attribution-ShareAlike 2.0 Generic",
-        "url": "https:\/\/creativecommons.org\/licenses\/by-sa\/2.0\/"
+        "url": "https://creativecommons.org/licenses/by-sa/2.0/"
       },
-      "contributors": [
-
-      ]
+      "contributors": []
     },
-    "supportedLanguages": [
-      "unknown",
-      "nb",
-      "nn",
-      "en",
-      "se"
-    ]
+    "supportedLanguages": ["unknown", "nb", "nn", "en", "se"]
   },
   {
     "id": 2,
@@ -58,45 +46,40 @@
       "introduction": "",
       "language": "nb"
     },
-    "metaUrl": "https:\/\/test.api.ndla.no\/learningpath-api\/v2\/learningpaths\/340",
+    "metaUrl": "https://test.api.ndla.no/learningpath-api/v2/learningpaths/340",
     "duration": 1,
     "status": "PRIVATE",
     "lastUpdated": "2017-10-24T08:22:01Z",
     "tags": {
-      "tags": [
-        "dffdd",
-        "eee"
-      ],
+      "tags": ["dffdd", "eee"],
       "language": "nb"
     },
     "copyright": {
       "license": {
         "license": "by-sa",
         "description": "Creative Commons Attribution-ShareAlike 2.0 Generic",
-        "url": "https:\/\/creativecommons.org\/licenses\/by-sa\/2.0\/"
+        "url": "https://creativecommons.org/licenses/by-sa/2.0/"
       },
       "contributors": [
         {
-          "type": "Forfatter",
+          "type": "writer",
           "name": "Test testesen"
         },
         {
-          "type": "Forfatter",
+          "type": "writer",
           "name": "Jens Nordmann"
         },
         {
-          "type": "Forfatter",
+          "type": "writer",
           "name": "Kari"
         },
         {
-          "type": "Forfatter",
+          "type": "writer",
           "name": "Hans"
         }
       ]
     },
-    "supportedLanguages": [
-      "nb"
-    ],
+    "supportedLanguages": ["nb"],
     "isBasedOn": 1
   },
   {
@@ -110,37 +93,26 @@
       "language": "nb"
     },
     "introduction": {
-      "introduction": "<p>Dette er en intro<\/p>    <ul>   <li>Hva en test er<\/li>   <li>hva en test 2 er<\/li>   <li>og teste<\/li>   <li>skrive kode<\/li>  <\/ul>",
+      "introduction": "<p>Dette er en intro</p>    <ul>   <li>Hva en test er</li>   <li>hva en test 2 er</li>   <li>og teste</li>   <li>skrive kode</li>  </ul>",
       "language": "nb"
     },
-    "metaUrl": "https:\/\/test.api.ndla.no\/learningpath-api\/v2\/learningpaths\/795",
-    "coverPhotoUrl": "https:\/\/test.api.ndla.no\/image-api\/raw\/tb334a38.jpg",
+    "metaUrl": "https://test.api.ndla.no/learningpath-api/v2/learningpaths/795",
+    "coverPhotoUrl": "https://test.api.ndla.no/image-api/raw/tb334a38.jpg",
     "duration": 120,
     "status": "PRIVATE",
     "lastUpdated": "2018-02-05T12:02:33Z",
     "tags": {
-      "tags": [
-        "journalistikk",
-        "kildebruk",
-        "kildekritikk"
-      ],
+      "tags": ["journalistikk", "kildebruk", "kildekritikk"],
       "language": "nb"
     },
     "copyright": {
       "license": {
         "license": "by-sa",
         "description": "Creative Commons Attribution-ShareAlike 2.0 Generic",
-        "url": "https:\/\/creativecommons.org\/licenses\/by-sa\/2.0\/"
+        "url": "https://creativecommons.org/licenses/by-sa/2.0/"
       },
-      "contributors": [
-
-      ]
+      "contributors": []
     },
-    "supportedLanguages": [
-      "unknown",
-      "nb",
-      "nn",
-      "en"
-    ]
+    "supportedLanguages": ["unknown", "nb", "nn", "en"]
   }
 ]
