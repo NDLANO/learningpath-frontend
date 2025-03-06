@@ -214,7 +214,7 @@ const phrases = {
     publish: "Publiser",
   },
   editPathStep: {
-    urlLabel: "Lim inn lenke (URL) fra ndla.no eller youtube.com",
+    urlLabel: "Lim inn lenke (URL) fra ndla.no",
     mediatype: {
       introduction: "Introduksjon",
       text: "Tekst",
