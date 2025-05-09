@@ -8,6 +8,7 @@
 
 import React from "react";
 import { Provider } from "react-redux";
+import { StaticRouter } from "react-router";
 import { INTERNAL_SERVER_ERROR } from "http-status";
 import ErrorPage from "../../errorPage/ErrorPage";
 import { getLocaleInfoFromPath } from "../../locale/configureLocale";
@@ -30,7 +31,9 @@ async function doRenderError(req, status = INTERNAL_SERVER_ERROR) {
   const context = { status };
   const Page = (
     <Provider store={store} locale={locale}>
-      <ErrorPage locale={locale} />
+      <StaticRouter>
+        <ErrorPage locale={locale} />
+      </StaticRouter>
     </Provider>
   );
 
