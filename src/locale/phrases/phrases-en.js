@@ -152,13 +152,6 @@ const phrases = {
       Paths can also be adapted to different learning situations. Learning paths can be built up from scratch,
       but learning material can also be removed or added to existing learning paths.
       Resources are obtained easily from NDLA and elsewhere online.`,
-    alert: {
-      content1: "The ability to create new learning paths will soon be integrated into ",
-      content2: ". Saving/editing learning paths on ",
-      content3:
-        " is therefore disabled, and during February 2025, the site will be discontinued. Contact us via “Ask NDLA” if you have questions or wish to continue your created learning paths.",
-      myNdla: "MyNDLA",
-    },
   },
   learningPath: {
     pageName: "Learning path details",

@@ -153,13 +153,6 @@ const phrases = {
       Stiar kan og tilpassast ulike læringssituasjonar. Læringstiar kan byggjast opp fra botn av,
       men læringsstoff kan også leggjast til eller trekkjast frå eksisterande læringstiar.
       Ressursar kan enkelt bli henta inn frå NDLA og andre stadar på nett.`,
-    alert: {
-      content1: "Moglegheita for å opprette nye læringsstiar skal snart integrerast i ",
-      content2: ". Lagring/endring av læringsstiar på ",
-      content3:
-        " er derfor stengd, og i løpet av februar 2025 vil sida bli avvikla. Ta kontakt via “Spør NDLA” om du har spørsmål, eller ønskjer å vidareføre dei læringsstiane du har oppretta.",
-      myNdla: "MinNDLA",
-    },
   },
   learningPath: {
     pageName: "Læringstidetaljar",
