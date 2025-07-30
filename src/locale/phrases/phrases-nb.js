@@ -175,7 +175,7 @@ const phrases = {
     editInEditorial: "Rediger læringssteg-artikkelen i ed",
     copyright: {
       license: "Lisens",
-      contributors: "writer",
+      contributors: "Forfattere",
     },
     image: {
       title: "Illustrerende bilde",
