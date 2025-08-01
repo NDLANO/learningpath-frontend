@@ -43,9 +43,9 @@ const pinterestActivated = activatedForEnvironment({ test: true, local: true }, 
 const getAuth0Hostname = () => {
   switch (environment) {
     case "prod":
-      return "ndla.eu.auth0.com";
+      return "login.ndla.no";
     default:
-      return `ndla-${environment}.eu.auth0.com`;
+      return `login.${environment}.ndla.no`;
   }
 };
 
