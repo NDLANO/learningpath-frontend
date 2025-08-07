@@ -15,7 +15,7 @@ const Auth0SilentCallback = `
       <script src="https://cdn.auth0.com/js/auth0/9.10.0/auth0.min.js"></script>
       <script type="text/javascript">
         var webAuth = new auth0.WebAuth({
-          domain: '${config.auth0Domain}',
+          domain: '${config.auth0BrowserDomain}',
           clientID: '${config.ndlaPersonalClientId}'
         });
         var result = webAuth.parseHash({ hash: window.location.hash }, function(err, data) {
