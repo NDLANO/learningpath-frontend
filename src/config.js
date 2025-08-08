@@ -40,13 +40,11 @@ const apiDomain = activatedForEnvironment(
 const ltiActivated = activatedForEnvironment({ test: true, local: true }, false);
 const pinterestActivated = activatedForEnvironment({ test: true, local: true }, false);
 
-const getAuth0Hostname = () => {
-  switch (environment) {
-    case "prod":
-      return "ndla.eu.auth0.com";
-    default:
-      return `ndla-${environment}.eu.auth0.com`;
+const getAuth0Hostname = (prettyUrl = false) => {
+  if (prettyUrl) {
+    return `login.${environment}.ndla.no`.replace(".prod", "");
   }
+  return `ndla-${environment}.eu.auth0.com`.replace("-prod", "");
 };
 
 const editorialFrontendDomain = () => {
@@ -79,6 +77,10 @@ const config = {
   ltiActivated: getEnvironmentVariable("LTI_ACTIVATED", ltiActivated),
   ndlaPersonalClientId: getEnvironmentVariable("NDLA_PERSONAL_CLIENT_ID", ""),
   auth0Domain: getEnvironmentVariable("AUTH0_DOMAIN", getAuth0Hostname()),
+  auth0BrowserDomain: getEnvironmentVariable(
+    "AUTH0_CUSTOM_DOMAIN",
+    getAuth0Hostname(getEnvironmentVariable("AUTH0_CUSTOM_DOMAIN_ENABLED", false)),
+  ),
   disableSSR: getEnvironmentVariable("DISABLE_SSR", false),
   zendeskWidgetKey: getEnvironmentVariable("NDLA_ZENDESK_WIDGET_KEY"),
   app: {
