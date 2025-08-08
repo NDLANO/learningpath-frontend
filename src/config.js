@@ -77,7 +77,10 @@ const config = {
   ltiActivated: getEnvironmentVariable("LTI_ACTIVATED", ltiActivated),
   ndlaPersonalClientId: getEnvironmentVariable("NDLA_PERSONAL_CLIENT_ID", ""),
   auth0Domain: getEnvironmentVariable("AUTH0_DOMAIN", getAuth0Hostname()),
-  auth0BrowserDomain: getEnvironmentVariable("AUTH0_DOMAIN", getAuth0Hostname(true)),
+  auth0BrowserDomain: getEnvironmentVariable(
+    "AUTH0_CUSTOM_DOMAIN",
+    getAuth0Hostname(getEnvironmentVariable("AUTH0_CUSTOM_DOMAIN_ENABLED", false)),
+  ),
   disableSSR: getEnvironmentVariable("DISABLE_SSR", false),
   zendeskWidgetKey: getEnvironmentVariable("NDLA_ZENDESK_WIDGET_KEY"),
   app: {
