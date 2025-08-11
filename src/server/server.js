@@ -173,7 +173,7 @@ app.get(
       jwksUri: `https://${config.auth0Domain}/.well-known/jwks.json`,
     }),
     audience: "ndla_system",
-    issuer: `https://${config.auth0Domain}/`,
+    issuer: `https://${config.auth0BrowserDomain}/`,
     algorithms: ["RS256"],
   }),
   async (req, res) => {

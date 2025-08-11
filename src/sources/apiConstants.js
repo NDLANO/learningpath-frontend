@@ -10,7 +10,7 @@ import defined from "defined";
 import config from "../config";
 
 const NDLA_API_URL = config.ndlaApiUrl;
-const AUTH0_DOMAIN = config.auth0Domain;
+const AUTH0_DOMAIN = config.auth0BrowserDomain;
 const NDLA_PERSONAL_CLIENT_ID = config.ndlaPersonalClientId;
 
 /* if (process.env.NODE_ENV === 'unittest') {
